@@ -16,3 +16,15 @@ tmp
 .yardoc
 _yardoc
 doc/
+
+
+db/sphinx
+.idea
+.DS_Store
+**/.DS_Store
+log/*
+tmp/**/*
+config/development.sphinx.conf
+db/schema.rb
+rerun.txt
+GeoIP.dat
