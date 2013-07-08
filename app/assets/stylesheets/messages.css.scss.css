@@ -1,0 +1,865 @@
+/*   Contact Pages   */
+
+
+body {
+
+  text-shadow: none;
+}
+
+.osc, h1, h2, h3, h4, h5 {
+  font-family: 'Open Sans Condensed',sans-serif;
+}
+
+
+#contact-wrap h3 {
+  color: #212A31;
+  font-size: 30px;
+  line-height: 1;
+  margin-bottom: 15px;
+
+
+}
+
+#contact-wrap {
+  padding: 30px;
+}
+#contact-wrap #tabs {
+  display: block;
+  height: 31px;
+}
+#contact-wrap #tabs li {
+  float: left;
+  margin-right: 3px;
+}
+#contact-wrap #tabs li a {
+  display: block;
+  height: 30px;
+  line-height: 30px;
+  border: 1px solid #0e0e0e;
+  border-bottom: none;
+  padding: 0 11px;
+  font-weight: bold;
+  color: white;
+  font-size: 1.17em;
+  background: url(image_path('contact-tab-bg.png')) 0 0 repeat-x;
+}
+* html #contact-wrap #tabs li a {
+  width: 10px;
+  white-space: nowrap;
+}
+
+
+#contact-wrap #tabs li a:hover {
+  text-decoration: none;
+}
+
+
+#contact-wrap #tabs li a.active {
+  background-position: 0 100%;
+  color: #323232;
+}
+#contact-wrap #tabs li a.active:hover {
+  cursor: default;
+}
+
+
+
+/*   Contacts   */
+
+#contact-wrap #messages #table_message table {
+  width: 812px;
+}
+#contact-wrap #messages #ids {
+  width: 55px;
+}
+#contact-wrap #messages #cats {
+  width: 455px;
+}
+#contact-wrap #messages #date {
+  width: 105px;
+}
+#contact-wrap #messages #date2 {
+  width: 70px;
+}
+#contact-wrap #messages #response {
+  width: 95px;
+}
+#contact-wrap #messages #details {
+  width: 60px;
+}
+#contact-wrap #messages #amount {
+  width: 70px;
+}
+#contact-wrap #messages #reason {
+  width: 200px;
+}
+#contact-wrap #messages #comm {
+  width: 200px;
+}
+#contact-wrap #messages #account {
+  width: 200px;
+}
+#contact-wrap #messages #delete {
+  /*width: 50px;*/
+}
+
+#contact-wrap #messages #table_message th {
+  height: 26px;
+  padding: 0 8px;
+  background: #e4e5e6;
+  font-size: 1.17em;
+}
+#contact-wrap #messages #table_message td {
+  padding: 6px 8px 2px;
+  border-bottom: 1px solid #0e0e0e;
+}
+#contact-wrap #messages tr.new {
+  font-weight: bold;
+}
+#contact-wrap #messages .center {
+  text-align: center;
+}
+.modal-window-wrap {
+  width: 100%;
+  height: 100%;
+  background: url(image_path('modal-wrap-bg.png'));
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.modal-window {
+  width: 580px;
+
+  position: absolute;
+  top: 175px;
+  left: 50%;
+  background: url(image_path('modal-window-bg.png')) 0 0 no-repeat;
+  margin-left: -290px;
+}
+.modal-window-content {
+  width: 546px;
+  margin: 15px 0 0 19px;
+  height: 305px;
+  overflow: auto;
+}
+.modal-window-content h3 {
+  font-size: 1.5em;
+  text-align: center;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #6e6e6e;
+}
+.modal-window-content h3 span {
+  font-weight: normal;
+}
+.modal-window-content .content {
+  text-align: left;
+  line-height: 1.5em;
+  padding: 10px 0 20px;
+}
+.modal-window-end {
+  height: 36px;
+  line-height: 32px;
+  text-align: left;
+  background: url(image_path('modal-window-end-bg.png')) 0 0 no-repeat;
+  padding-left: 19px;
+}
+.modal-window-end a {
+  color: #ff4b00;
+  font-weight: bold;
+}
+.modal-window-end a.like-btn {
+  float: right;
+  width: 56px;
+  height: 10px;
+  display: block;
+  margin: 11px 15px 0 0;
+  background: url(image_path('modal-fermer-btn.png')) 0 0 no-repeat;
+}
+* html .modal-window-end a.like-btn {
+  line-height: 10px;
+}
+
+
+.modal-window-end a.like-btn:hover {
+  background-position: 0 100%;
+}
+
+
+/*   FAQ   */
+
+#contact-wrap #faq-nav {
+  width: 262px;
+  display: block;
+  float: left;
+}
+#contact-wrap #faq-nav li {
+  margin-bottom: 3px;
+}
+#contact-wrap #faq-nav li a {
+  padding: 3px 3px 3px 23px;
+  display: block;
+  font-size:  1.08em;
+  color: #59595a;
+  background: #e4e5e6 url(image_path('faq-nav-arrow.gif')) 6px 4px no-repeat;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+* html #contact-wrap #faq-nav li a {
+  height: 10px;
+}
+
+
+#contact-wrap #faq-nav li a:hover {
+  text-decoration: none;
+  color: black;
+}
+
+
+#contact-wrap #faq-nav li a.active {
+  color: #ff4b00;
+  background: #ffffff url(image_path('faq-nav-arrow-active.gif')) 6px 6px no-repeat;
+}
+#contact-wrap #faq-nav li ul {
+  margin-left: 23px;
+}
+#contact-wrap #faq-nav li li a {
+  text-transform: none;
+  font-size: 1em;
+  padding-left: 0;
+  font-weight: normal;
+  background: transparent;
+}
+#contact-wrap #faq-nav li li a:hover {
+  color: #ff4b00;
+}
+#contact-wrap .faq-answer {
+  float: right;
+  width:470px;
+  padding-bottom:  14px;
+  background: url(image_path('faq-answers-shadow.gif')) 0 100% no-repeat;
+}
+#contact-wrap .faq-answer h3 {
+  font-size: 1.17em;
+  color: #000000;
+  margin-bottom: 6px;
+}
+#contact-wrap .faq-answer .box {
+  padding: 12px;
+  border: 1px solid #98978b;
+  background: #deded8;
+  font-weight: 1.17em;
+  line-height: 1.33em;
+}
+
+/*   Nous Contacteur Page   */
+
+
+#contact-wrap #contact form {
+/*  float: right;
+width: 363px;
+height: 463px;
+background: url(image_path('contact-form-bg.jpg')) 0 0 no-repeat;
+padding: 5px 25px 40px 25px;
+font-size: 1.17em;*/
+}
+#contact-wrap #contact label {
+  margin-bottom: 10px;
+}
+
+#contact-wrap #contact  {
+
+  padding: 3px 2px 0;
+  height: 24px;
+
+  border-top: none;
+  margin-bottom: 10px;
+}
+
+#contact-wrap #contact input {
+  border: 1px solid #29333B;
+  height:20px;
+}
+
+
+#contact-wrap #contact select {
+  font-size: 0.89em;
+
+}
+#contact-wrap #contact button {
+  /*float: left;*/
+  display: block;
+  width: 137px;
+  height: 27px;
+  background: url(image_path('button_contact.png')) 0 0 no-repeat;
+  border: none;
+  clear: both;
+  font-weight: bold;
+  color: white;
+}
+
+
+
+
+
+#contact-wrap #contact ul {
+  float: left;
+  width: 330px;
+}
+#contact-wrap #contact li {
+  margin-bottom: 5px;
+  font-size: 1.17em;
+  color: #29333B;
+}
+#contact-wrap #contact li a {
+  color:#A3C41B;
+}
+.adult #contact-wrap #contact li a {
+  color: #BD1F83;
+}
+
+
+#contact-wrap #contact li h4 {
+  font-size: 1.14em;
+  font-weight: bold;
+}
+#contact-wrap #contact li#phone {
+
+  padding-left: 30px;
+  min-height: 59px;
+  height: auto !important;
+  height: 59px;
+}
+#contact-wrap .private #contact li {
+
+  padding-left: 0px !important;
+}
+#contact-wrap #contact li#phone h4 {
+  font-size: 1.14em;
+}
+#contact-wrap #contact li#mail {
+  padding-left: 30px;
+  min-height: 45px;
+  height: auto !important;
+  height: 59px;
+  padding-top: 14px;
+}
+#contact-wrap #contact li#fax {
+  padding-left: 30px;
+  min-height: 45px;
+  height: auto !important;
+  height: 59px;
+  padding-top: 14px;
+}
+#contact-wrap #contact li#courrier {
+  padding-left: 30px;
+  min-height: 45px;
+  height: auto !important;
+  height: 59px;
+  padding-top: 14px;
+}
+#contact-wrap #contact li#social {
+  padding: 20px 0 0 30px;
+}
+#contact-wrap #contact li#social a {
+  background-position: 10px 12px;
+  background-repeat: no-repeat;
+  color: #29333B;
+  display: block;
+  float: left;
+  font-size: 0.86em;
+  padding-top: 59px;
+  position: relative;
+  text-align: center;
+  width: 60px;
+}
+#contact-wrap #contact li#social a:hover {
+  text-decoration: underline;
+
+}
+
+
+#contact-wrap #contact li#social a#fb {
+  background-image: url(image_path('facebook_icon.png'));
+}
+#contact-wrap #contact li#social a#tw {
+  background-image: url(image_path('twitter_icon.png'));
+}
+
+
+/*   Questions Page   */
+
+
+#contact-wrap #question label.active {
+  font-weight: bold;
+  color: #ff4b00;
+}
+#contact-wrap #question label input {
+  margin: 0;
+  vertical-align: middle;
+}
+#contact-wrap #question p {
+  padding: 0;
+  margin: 5px 0;
+}
+#contact-wrap textarea {
+  padding: 2px;
+  width: 800px;
+  height: 140px;
+  border: 1px solid #000000;
+  background: white;
+}
+
+#contact-wrap #question button:hover {
+  text-decoration:underline;
+}
+#messages a {
+  color:#000;
+}
+
+.form_dates.hours {
+  padding:0px;
+
+
+}
+
+.errorExplanation {
+  color:#e78c15 !important;
+  font-size:1.1em !important; 
+  text-shadow:0 0 0 #000000;
+  background:url(image_path('attention_icon.png')) no-repeat;
+  min-height:33px;
+  padding-left:50px;
+}
+.errorExplanation p{
+  margin:0;
+}
+.errorExplanation li{
+  color:#e78c15 !important;
+  font-size:0.9em !important; 
+  margin:0 !important;
+}
+#contact-wrap.urgent {
+  margin:18px auto;
+  padding:0;
+  width:859px;
+}
+#contact-wrap.urgent #tabs-content {
+  min-height: 80px;
+}
+#titles-wrap.urgent {
+  background:url(image_path('content-bg-wishlist.gif')) repeat-y scroll 0 0 transparent;
+  padding:18px 24px 5px 20px;
+  position:relative;
+  font-size: 14px;
+}
+#titles-wrap.urgent {
+  margin:25px 25px 0;
+}
+.dialog_dvdpost
+{
+  /*background : #f0f0f0;*/
+  width:420px;
+  /*margin: 20px 0 20px 40px;*/
+  padding: 10px 10px;
+
+}
+.dialog_customer
+{
+  /*background : #f0f0f0;*/
+  width:420px;
+  margin: 20px 0;
+  padding: 10px 20px;
+
+}
+#back_message
+{
+  float:right;
+  margin: 12px 120px 0 0;
+
+}
+a#back_message
+{
+  color:#505050;
+}
+#new_ticket p a
+{
+  color: #FF4B00;
+}
+.open {
+  color:#666666;
+  font-weight:lighter;
+}
+
+
+.close {
+  color:#000000;
+  font-weight:bold;
+}
+#messages .open a {
+  color:#666666;
+  font-weight:lighter;
+}
+
+#messages {
+  width:812px;
+
+
+}
+
+
+#header_messages {
+  background-color:#1f1e1e;
+  color:#FFFFFF;
+  padding-left:10px;
+  text-align:left;
+  padding-bottom:5px;
+  width:802px;
+
+}
+#header_messages a
+{
+  color: #fff;
+}
+#header_messages h3 {
+  color:#FFFFFF;
+  font-size:21px;
+  padding-top:10px;
+  padding-bottom:5px;
+
+}
+
+#header_messages a.select_view {
+  color:#FF4c00 !important;
+}
+
+
+.bysort_message {
+  float: left;
+  font-size: 11px;
+  font-weight:lighter;
+  padding: 3px 10px 0 0;
+}
+
+#messages #bysort {
+  padding: 0 0 5px;
+}
+.dvdpostmessage {
+  background-color:#fff;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border:#666666 1px solid;
+
+}
+
+.customessage{
+  background-color:#c7c3c3;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+}
+
+.dvdpostmessage .avatar{
+
+  float:left;
+  padding:6px;}
+
+  .avatar_message {
+    float: left;
+    padding: 10px;
+    width: 60px;
+  }
+
+  #messages button {
+    background: url(image_path('message_button.png')) no-repeat scroll 0 0 transparent;
+    border: medium none;
+    color: white;
+    cursor: pointer;
+    display: block;
+    font-size: 15px;
+    height: 31px;
+    margin: 5px 0 0 701px;
+    text-shadow: 1px 1px 1px #555555;
+    width: 110px;
+  }
+
+  #messages button:hover {
+    background: url(image_path('message_button.png')) no-repeat scroll 0 -35px transparent;
+
+  }
+  .who_message { font-size:14px;
+    color:#000000;
+    text-align:left;
+
+  }
+
+  .who_message_big { font-size:16px;
+    font-weight:bold;color:#000000;
+    text-align:left;
+
+  }
+  .message_text {
+    float: right;
+    margin-right: 24px;
+    width: 706px;
+    padding-bottom:10px;
+  }
+  .message_text_long {
+    margin: 0 auto;
+    min-width: 706px;
+  }
+
+
+
+/****/
+
+
+#contact-wrap #tabs-content {
+  background: none repeat scroll 0 0 #FFFFFF;
+  border: 1px solid #0E0E0E;
+  height: auto !important;
+  min-height: 475px;
+  padding: 20px 25px;
+}
+#contact-wrap #tabs-content.public {
+  padding: 0;
+  border: 0;
+}
+#contact-wrap #tabs-content.public #question {
+  float: left;
+  padding-left: 100px;
+  padding-top: 7px;
+  width: 450px;
+
+}
+#contact-wrap .private #tabs-content.public #question {
+  width: 500px;
+  padding-left: 10px;
+
+}
+#contact-wrap #tabs-content .form {
+  background: url(image_path('tab-content-bg.png')) repeat-x scroll 0 0 #C3D1DB;
+  border: 0 none;
+  margin-top: 10px;
+  width: 380px;
+}
+#contact-wrap .private #tabs-content .form {
+  width: 500px;
+}
+#contact-wrap #question {
+  color:#212429;
+  font-size: 1.08em;
+}
+
+#field_form {
+  padding:10px;
+
+}
+
+#question {
+
+  text-align:left;
+  width:611px;
+}
+
+.date{
+  float:left;
+}
+
+.hours{
+  float:right;
+}
+
+.form{
+  border: #535353 1px solid;
+  width:611px;
+  padding:10px;
+
+}
+
+#contact-wrap #question h4 {
+  font-size: 1.30em;
+  font-weight: bold;
+
+
+}
+.form_dates {
+  height: 42px;
+  margin: 0 !important;
+  padding-top: 10px;
+  width: 330px;
+}
+
+
+#question a.btn {
+  background: url(image_path('button.png')) no-repeat scroll 0 0 transparent;
+  color: white;
+  display: block;
+  font-size: 1.09em;
+  height: 34px;
+  line-height: 34px;
+  margin: 0 0 4px 1px;
+  text-align: center;
+  text-shadow: 1px 1px 1px #999999;
+  width: 122px;
+}
+
+#question a.btn:hover {
+  background: url(image_path('button.png')) no-repeat scroll 0 -35px transparent;
+  text-decoration:none;
+
+}
+#field_form .fieldWithErrors
+{
+  display: inline-table;
+  margin: 0 !important;
+}
+.reason_label
+{
+  font-weight: bold;
+}
+#phone
+{
+  margin:8px 0 0 0!important;
+}
+
+a.btn_new_message {
+  background: url(image_path('bt_message.png')) no-repeat scroll 0 0 transparent;
+  color: #282828;
+  font-family:Arial, Helvetica, sans-serif;
+  display: block;
+  height: 28px;
+  font-size:12px;
+  line-height: 22px;
+  margin: 0 0 4px 1px;
+  text-decoration:none;
+  text-align: center;
+  font-weight:bold;
+  width: 137px;
+}	
+a.btn_new_message:hover {
+  background: url(image_path('bt_message.png')) no-repeat scroll 0 -30px transparent;
+  text-decoration: none;
+}
+#message_title {
+  color: #282828;
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+  border-bottom:#000000 1px solid;
+
+}
+
+.message_title {
+  font-size: 15px;
+  font-weight: bold;
+
+
+}
+.sujet {  font-size: 14px;}
+
+.content_message {width:586px;}
+
+
+
+.content_message a.btn {
+  background: url(image_path('button.png')) no-repeat scroll 0 0 transparent;
+  color: white;
+  display: block;
+  font-size: 1.09em;
+  height: 34px;
+  line-height: 34px;
+  margin: 0 0 4px 1px;
+  text-align: center;
+  text-shadow: 1px 1px 1px #999999;
+  width: 122px;
+  float:right;
+}
+
+.content_message a.btn:hover {
+  background: url(image_path('button.png')) no-repeat scroll 0 -35px transparent;
+  text-decoration: none;
+}
+
+.content_message a.btn_cancel {
+  background: url(image_path('button-bw.png')) no-repeat scroll 0 0 transparent;
+  color: white;
+  display: block;
+  font-size: 1.09em;
+  height: 34px;
+  line-height: 34px;
+  margin: 0 0 4px 1px;
+  text-align: center;
+  text-shadow: 1px 1px 1px #999999;
+  width: 122px;
+  float:right;
+}
+
+.content_message a.btn_cancel:hover {
+  background: url(image_path('button-bw.png')) no-repeat scroll 0 -35px transparent;
+  text-decoration: none;
+}
+#message_textarea
+{
+  width:580px;
+}
+.btn_all_message {
+  background: #f0f0f0;
+  border: 1px solid #333333;
+  color: #282828;
+  display: block;
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  height: 28px;
+  line-height: 22px;
+  margin: 0 0 4px 1px;
+  text-align: center;
+  text-decoration: none;
+  width: 250px;
+  padding: 6px 0 0 0;
+}
+a.btn_all_message:hover {
+  background: #a0a0a0;
+  text-decoration: none;
+}
+.header_review{ 
+  height: 85px;
+  padding: 0px 5px 0 0px;
+  width: 922px;
+}
+.critiqueur_area
+{
+  margin: 0 0 0 40px;
+} 
+.critiqueur_area #title.reviews {
+  color: #fa3216;
+  text-align:left;
+  margin: 20px 0 0 0px;
+
+}
+
+.header_review .pen 
+{
+  margin-top: 16px;
+}
+.header_review .avatar {
+  float: left;
+  margin-right: 4px;
+}
+.filter
+{
+  color: #454545;
+  float:right;
+  margin:-20px 0 0 0;
+}
+.filter a
+{
+  color: #454545;
+}
+#phone_request_hour
+{
+  margin:4px 0 0 0;
+}

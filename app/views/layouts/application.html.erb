@@ -1,14 +1,47 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
 <html>
-<head>
-  <title>Moovies</title>
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-
-<%= yield %>
-
-</body>
+  <head>
+    <title>
+      <%= h yield(:title).blank? ? t('.title') : yield(:title) %>
+    </title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+  	<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700' rel='stylesheet' type='text/css' />
+	  <%= javascript_include_tag "application" %>
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body id="<%= yield :body_id %>" class="<%= params[:kind] %> <%= current_customer ? :private : :public %>">
+    <% if flash[:notice] %>
+		<div class='flash_message'>
+      <div class="notice">
+        <%= flash[:notice] %>
+      </div>
+		</div>
+    <% end %>
+    <% if flash[:error] %>
+		<div class='flash_message'>
+      <div class="flash_error">
+        <%= flash[:error] %>
+      </div>
+		</div>
+    <% end %>
+    <% if current_customer && current_customer.suspended? %>
+    <div id='p_suspended'>
+      <ul id='suspended'>
+        <li><%= current_customer.suspended_notification %></li>
+      </ul>
+    </div>
+    <% end %>
+    <%= render(:partial => 'layouts/header') %>
+    <div class="container clearfix">
+      <%= yield %>
+    </div>
+    <!--   ==============   FOOTER   ==============   -->
+    <div id="footer" >
+      <div class="wrap">
+      </div>
+    </div>
+       <!--   ==============   END FOOTER   ==============   -->
+    
+  </body>
 </html>

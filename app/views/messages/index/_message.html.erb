@@ -1,0 +1,24 @@
+<% if message.message_tickets.first %>
+<% unread = !message.message_tickets.first.user_id.nil? && message.message_tickets.first.is_read == false %>
+<tr class="<%= unread ? 'close' : 'open' %>">
+  <td><%= message.id %> </td>
+  <td align="left">
+    <%= image_tag "enveloppe_#{ unread  ? 'close' : 'open'}.gif", :align => :absmiddle %>
+    <%= link_to message_path(:id => message.to_param), :class => 'show' do %>
+      <% if message.title %>
+        <%= h message.title %>
+      <% else %>
+        <%= h (t("message.show.category_#{message.category_ticket_id}")) if message.category_ticket %>
+      <% end %>
+    <% end %>
+  </td>
+  <td> <%= message.created_at.strftime("%d/%m/%Y") %> </td>
+  <% unless params[:filter] == Ticket.filter[:archive] %>
+  <td class="center">
+    <label>
+      <%= check_box_tag 'checkbox', message_path(:id => message.to_param), false, :class => 'trash', :id => nil %>
+    </label>
+  </td>
+  <% end %>
+</tr>
+<% end %>
