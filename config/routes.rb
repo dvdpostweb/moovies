@@ -1,7 +1,15 @@
 Moovies::Application.routes.draw do
-  devise_for :users
-  root :to => 'home#index'
 
+  root :to => 'home#index'
+  scope '(:locale)', :locale => /en|fr|nl/ do
+    root :to => 'home#index'
+    devise_for :customers
+    resources :customers
+    resources :messages
+    resources :phone_requests, :only => [:new, :create]
+    get 'faq', :to => 'messages#faq'
+    match 'info/:page_name' => 'info#index', :as => :info 
+  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

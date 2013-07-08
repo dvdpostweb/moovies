@@ -1,0 +1,50 @@
+<div id="wrap_login">
+  <div id="header_login"> 
+    <ul id="lang">
+      <li> <%= link_to t('.home').upcase, root_path %> </li>
+      <li><%= switch_locale_link I18n.locale.to_s.upcase, {:class => 'active'} %></li>
+      <% [:fr, :nl, :en].each do |locale| %>
+        <%= content_tag :li, switch_locale_link(locale) unless locale.to_s == I18n.locale.to_s %>
+      <% end %>
+    </ul>
+    
+  </div>
+  <div id="login_content_bg">
+    <div id="login_content" align="center">
+      
+        <h1> <%= link_to 'DVDPost - Online DVD rental', root_path, :class => 'like-btn' %> </h1>
+      
+      <div id="title"><%= t '.title' %></div>
+      <div class="signup_forms" align="center">
+        <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+        <p class="inputs_codes">
+          <%= t '.email_label' %>:<br />
+          <%= f.text_field :email, :class => 'inputs_codes', :size => '35', :tye => 'text' %>
+        </p>
+        <p class="inputs_codes" align="center">
+          <%= t '.pass_label' %>:<br />
+          <%= f.password_field :password, :class => 'inputs_codes', :size => '35', :maxlength => '40'%>
+        </p>
+        
+        <% if devise_mapping.rememberable? -%>
+          <p class="check_login">
+            <p>
+              <%= f.check_box :remember_me, :checked => true %>
+              <%= f.label :remember_me, t('.remember_me') %>
+            </p>
+          </p>
+        <% end -%>
+        <% if alert && !alert.empty?%>
+          <p align="center" class="wrong"><%= t('.warning') %> <%= t('.alert')%></p>
+        <% end %>
+        <p align="center" class="button_login">
+          <%= f.submit t('.connect'), :id => 'submit_button' %>
+        </p>
+      <% end %>
+      </div>
+      <p class="check_login">
+        <%= render "devise/shared/links" %>
+      </p>
+    </div>
+  </div>
+</div>
