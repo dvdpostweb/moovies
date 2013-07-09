@@ -33,14 +33,6 @@ module MessagesHelper
     end
   end
 
-  def config_dialog(user_id)
-    if user_id
-      {:class => 'dvdpostmessage', :image => 'avatar_dvdpost.gif', :title => 'dvdpost'}
-    else
-      {:class => 'customessage', :image => get_avatar(current_customer), :title => 'customer'}
-    end
-  end
-
   def replace_variables(body, variables)
     extracts = variables.split(';;;')
     extracts.collect do |extract|
@@ -50,7 +42,7 @@ module MessagesHelper
       raw[1] = '' if !raw[1]
       body = body.gsub(r, raw[1]) 
     end
-    body
+    body.html_safe
   end
 
   def get_data(variable ,variables)

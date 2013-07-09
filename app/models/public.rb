@@ -1,7 +1,7 @@
 class Public < ActiveRecord::Base
-  set_table_name :public
+  self.table_name = :public
 
-  set_primary_key :public_id
+  self.primary_key = :public_id
 
   alias_attribute :description, :public_name
 

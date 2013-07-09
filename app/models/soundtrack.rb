@@ -1,8 +1,8 @@
 class Soundtrack < ActiveRecord::Base
 
-  set_table_name :products_soundtracks
+  self.table_name = :products_soundtracks
 
-  set_primary_key :soundtracks_id
+  self.primary_key = :soundtracks_id
 
   alias_attribute :name, :soundtracks_description
 

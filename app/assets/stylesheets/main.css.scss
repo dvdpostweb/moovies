@@ -17,8 +17,7 @@ html, body{
 body {
   color: #4a5863;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 12px;
-  
+  font-size: 1.2em;  
 }
 .osc, h1, h2, h3, h4, h5 {
   font-family: 'Open Sans Condensed', sans-serif;
@@ -76,7 +75,9 @@ textarea {
   height: 0;
   line-height: 0;
 }
-
+#wrap {
+background: white;
+}
 #wrap {
   margin: 0 auto 100px;
   text-align: left;
@@ -87,13 +88,6 @@ box-shadow: 0px 0px 45px #000000;
 }
 #hp.normal #wrap {
 background: #c3d1db url(image_path('rc-bg.gif')) 100% 0 repeat-y;
-}
-
-
-.container {}
-
-.container ul, .container ol, .container dl {
-  margin-bottom: 18px;
 }
 
 
@@ -164,6 +158,16 @@ width:101px;
   width: 970px;
   margin: 0 auto;
   text-align: right;
+}
+#lang .wrap a {
+    color: #212A31;
+    font-size: 13px;
+    font-weight: bold;
+    margin-left: 20px;
+    padding-left: 27px;
+    padding-top: 5px;
+    text-align: center;
+    text-transform: uppercase;
 }
 #login {
     background: url(image_path('login_button.png')) no-repeat scroll 0 0 transparent;

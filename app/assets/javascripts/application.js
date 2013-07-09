@@ -6,3 +6,19 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require facebox
+$(function() {
+  $('.facebox').on('click', function() {
+    item = $(this);
+    url = item.attr('href')
+    jQuery.facebox(function() {
+      $.ajax({
+        url: url,
+        dataType: 'html',
+        type: 'GET',
+        success: function(data) { jQuery.facebox(data); }
+      });
+    });
+    return false;
+  });
+});

@@ -1,7 +1,7 @@
 class Language < ActiveRecord::Base
-  set_table_name :products_languages
+  self.table_name = :products_languages
 
-  set_primary_key :languages_id
+  self.primary_key = :languages_id
 
   alias_attribute :name, :languages_description
 

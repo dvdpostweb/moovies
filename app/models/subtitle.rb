@@ -1,8 +1,8 @@
 class Subtitle < ActiveRecord::Base
 
-  set_table_name :products_undertitles
+  self.table_name = :products_undertitles
 
-  set_primary_key :undertitles_id
+  self.primary_key = :undertitles_id
 
   alias_attribute :name, :undertitles_description
 

@@ -2,7 +2,7 @@ class Review < ActiveRecord::Base
   cattr_reader :per_page
   @@per_page = 3
 
-  set_primary_key :reviews_id
+  self.primary_key = :reviews_id
 
   alias_attribute :created_at,    :date_added
   alias_attribute :text,          :reviews_text
@@ -21,7 +21,7 @@ class Review < ActiveRecord::Base
   validates_inclusion_of :rating, :in => 0..5
 
   belongs_to :customer, :foreign_key => :customers_id
-  belongs_to :customer_attribute, :foreign_key => :customers_id, :primary_key => :customer_id
+  belongs_to :customer_attribute, :foreign_key => :customers_id, :self.primary_key =ry_key => :customer_id
   
   belongs_to :product, :foreign_key => :products_id
 

@@ -1,5 +1,5 @@
 class Category < ActiveRecord::Base
-  set_primary_key :categories_id
+  self.primary_key = :categories_id
 
   belongs_to :parent, :class_name => 'Category', :foreign_key => :parent_id
   has_many :descriptions, :class_name => 'CategoryDescription', :foreign_key => :categories_id

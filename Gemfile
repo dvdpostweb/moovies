@@ -9,7 +9,15 @@ gem 'mysql2'
 
 gem 'json'
 gem 'will_paginate'
-
+gem 'i18n-active_record',
+      :git => 'git://github.com/svenfuchs/i18n-active_record.git',
+      :require => 'i18n/active_record'
+gem "memcache-client", "~> 1.8.5"
+gem 'orderedhash'
+group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+end 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

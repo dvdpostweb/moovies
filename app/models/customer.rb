@@ -3,7 +3,7 @@ class Customer < ActiveRecord::Base
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
 
-  set_primary_key :customers_id
+  self.primary_key = :customers_id
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable

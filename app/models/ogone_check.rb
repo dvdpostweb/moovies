@@ -1,5 +1,5 @@
 class OgoneCheck < ActiveRecord::Base
-  set_table_name :ogone_check
+  self.table_name = :ogone_check
   
   alias_attribute :product_id, :products_id
   
