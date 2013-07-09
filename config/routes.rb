@@ -6,6 +6,10 @@ Moovies::Application.routes.draw do
     devise_for :customers
     resources :customers
     resources :messages
+    resources :tickets do
+      resources :message_tickets, :only => [:create]
+    end
+    
     resources :phone_requests, :only => [:new, :create]
     get 'faq', :to => 'messages#faq'
     match 'info/:page_name' => 'info#index', :as => :info 

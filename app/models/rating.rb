@@ -1,7 +1,7 @@
 class Rating < ActiveRecord::Base
-  set_table_name :products_rating
+  self.table_name = :products_rating
 
-  set_primary_key :products_rating_id
+  self.primary_key = :products_rating_id
 
   alias_attribute :updated_at, :products_rating_date
   alias_attribute :type,       :rating_type

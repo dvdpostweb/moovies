@@ -4,9 +4,9 @@ class Ticket < ActiveRecord::Base
   belongs_to :customer, :foreign_key => :customers_id
 
   def self.filter
-    filter = Hash.new
-    filter[:archive] = 'archive'
-    filter[:archive] = 'current'
+    filter = OrderedHash.new
+    filter.push(:archive, 'archive')
+    filter.push(:current, 'current')
     filter
   end  
 

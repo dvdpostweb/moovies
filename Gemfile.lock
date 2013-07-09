@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/svenfuchs/i18n-active_record.git
+  revision: b631b05a96d578b6c01c4751cc1a0ba8a84406af
+  specs:
+    i18n-active_record (0.0.2)
+      i18n (>= 0.5.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -34,7 +41,13 @@ GEM
       json
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
+    better_errors (0.9.0)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
     builder (3.0.4)
+    coderay (1.0.9)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -42,6 +55,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    debug_inspector (0.0.2)
     devise (2.2.4)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -62,9 +76,11 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    memcache-client (1.8.5)
     mime-types (1.23)
     multi_json (1.7.7)
     mysql2 (0.3.11)
+    orderedhash (0.0.6)
     orm_adapter (0.4.0)
     polyglot (0.3.3)
     rack (1.4.5)
@@ -133,12 +149,17 @@ PLATFORMS
 
 DEPENDENCIES
   airbrake (~> 3.1.12)
+  better_errors
+  binding_of_caller
   coffee-rails
   devise
   execjs
+  i18n-active_record!
   jquery-rails
   json
+  memcache-client (~> 1.8.5)
   mysql2
+  orderedhash
   rails (= 3.2.13)
   rspec-rails (>= 2.0.1)
   sass-rails

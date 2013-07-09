@@ -1,8 +1,8 @@
 class Studio < ActiveRecord::Base
 
-  set_primary_key :studio_id
+  self.primary_key = :studio_id
 
-  set_table_name :studio
+  self.table_name = :studio
 
   alias_attribute :name, :studio_name
 

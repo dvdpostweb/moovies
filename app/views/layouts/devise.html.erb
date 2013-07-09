@@ -9,6 +9,22 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-<%= yield %>
+  <div id="wrap_login">
+    <div id="header_login"> 
+      <ul id="lang">
+        <li> <%= link_to t('.home').upcase, root_path %> </li>
+        <li><%= switch_locale_link I18n.locale.to_s.upcase, {:class => 'active'} %></li>
+        <% [:fr, :nl, :en].each do |locale| %>
+          <%= content_tag :li, switch_locale_link(locale) unless locale.to_s == I18n.locale.to_s %>
+        <% end %>
+      </ul>
+    </div>
+    <div id="login_content_bg">
+      <div id="login_content" align="center">
+        <h1> <%= link_to 'Plush - Online DVD rental', root_path, :class => 'like-btn' %> </h1>
+        <%= yield %>
+      </div>
+    </div>
+  </div>  
 </body>
 </html>

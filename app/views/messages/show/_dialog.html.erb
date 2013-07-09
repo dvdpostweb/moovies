@@ -3,12 +3,8 @@
 <% if product_id %>
   <% product = Product.find(product_id)%>
 <% end %>
-<% config = config_dialog(dialog.user_id)%>
   <div class="<%= config[:class] %>">
     <% if email.short? %>
-      <div class="avatar_message">
-        <%= image_tag config[:image], :class => :avatar, :width => 54 %>
-      </div>
       <div class="message_text">
     <% else %>
       <div class="message_text_long">

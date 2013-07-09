@@ -1,6 +1,9 @@
 # Additional translations at https://github.com/plataformatec/devise/wiki/I18n
 
 en:
+  layouts:
+    devise:
+      home: Home
   devise:
     confirmations:
       confirmed: "Your account was successfully confirmed. You are now signed in."
@@ -58,6 +61,9 @@ en:
         one: "1 error prohibited this %{resource} from being saved:"
         other: "%{count} errors prohibited this %{resource} from being saved:"
 fr:
+  layouts:
+    devise:
+      home: Accueil
   devise:
     sessions:
       new:
@@ -75,6 +81,9 @@ fr:
         warning: Votre mot de passe ou votre login est incorrect.
         remember_me: Se souvenir de moi
 nl:
+  layouts:
+    devise:
+      home: Home
   devise:
     sessions:
       new:
