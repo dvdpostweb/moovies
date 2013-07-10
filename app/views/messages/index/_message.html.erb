@@ -16,7 +16,7 @@
   <% unless params[:filter] == Ticket.filter[:archive] %>
   <td class="center">
     <label>
-      <%= check_box_tag 'checkbox', message_path(:id => message.to_param), false, :class => 'trash', :id => nil %>
+      <%= link_to image_tag('trash-icon.png'),  message_path(:id => message.to_param), :data => { :confirm => t('.are_you_sure', :default => 'are you sure?') }, :method => :delete %>
     </label>
   </td>
   <% end %>

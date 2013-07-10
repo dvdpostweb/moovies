@@ -7,9 +7,8 @@ class MessagesController < ApplicationController
       message.update_attribute(:is_read, true)
     end
     
-    respond_to do |format|
-      format.html {}
-      format.js {render :layout => false}
+    if request.xhr?
+      render :layout => false
     end
   end
 
@@ -24,12 +23,9 @@ class MessagesController < ApplicationController
 
   def new
     @message = Ticket.new
-    respond_to do |format|
-      format.html
-      format.js do 
-        @hide = 1
-        render :layout => false
-      end
+    if request.xhr?
+      @hide = 1;
+      render :layout => false
     end
   end
 
@@ -42,7 +38,7 @@ class MessagesController < ApplicationController
         variable += params[:add_on]
       end
       
-      @message = MessageTicket.new(:ticket => @ticket, :mail_id => DVDPost.email[:message_free], :data => variable)
+      @message = MessageTicket.new(:ticket => @ticket, :mail_id => Moovies.email[:message_free], :data => variable)
       if @message.save
         flash[:notice] = t 'message.create.message_sent' #"Message sent successfully"
       
@@ -59,6 +55,7 @@ class MessagesController < ApplicationController
       end
     else
       flash[:error] = t 'message.create.message_not_sent' # "Message not sent successfully"
+      
       respond_to do |format|
         format.html {redirect_to messages_path}
         format.js {@error = true}

@@ -7,6 +7,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require facebox
+//= require messages
 $(function() {
   $('.facebox').on('click', function() {
     item = $(this);
