@@ -42,4 +42,6 @@ end
 gem "devise"
 gem "airbrake", "~> 3.1.12"
 gem "jquery-rails"
+gem 'jquery-ui-rails'
+gem 'dynamic_form'
 gem "rspec-rails", ">= 2.0.1", :group => [:development, :test]
