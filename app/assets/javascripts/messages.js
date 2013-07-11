@@ -41,8 +41,7 @@ $(function() {
      setTimeout(function() { $("#reply").parent().html("<p align='rigth'><img src='/images/ajax-loader.gif' /></p>"); }, 500);
   })
   $('#sort_combo').change(function() {sort_change()});
-  /*$(".datepicker").datepicker({
-    disabled: true,
+  $(".datepicker").datepicker({
     showButtonPanel: false,
     firstDay: 1,
     dateFormat: 'dd-mm-yy',
@@ -113,7 +112,7 @@ $(function() {
         })
       }
     },
-    minDate: new Date()});*/
+    minDate: new Date()});
   
 });
 var options = {}

@@ -21,5 +21,17 @@ module Moovies
       })
     end
 
+    def fb_url
+      HashWithIndifferentAccess.new.merge({
+        :fr => "http://www.facebook.com/",
+        :nl => "http://www.facebook.com/",
+        :en => "http://www.facebook.com/"
+      })
+    end
+    
+    def twitter_url
+      "http://twitter.com/"
+    end
+
   end
 end
