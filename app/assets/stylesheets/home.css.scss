@@ -11,7 +11,7 @@
 
 #slider-wrap {
 	background: none repeat-y scroll 100% 0 white !important;
-	padding: 14px 0 1px 14px;
+	padding: 20px;
 }
 
 
@@ -192,16 +192,18 @@ a.plus-btn {
 	padding-bottom: 7px;
 }
 #services-wrap .wrap {
-    border: 1px solid #C4C4C0;
-    color: #29333B;
-    float: left;
-    font-size: 14px;
-    height: 236px;
-    margin-left: 14px;
-    padding-left: 14px;
-    padding-right: 14px;
-    width: 193px;
+  border:1px solid #C4C4C0;
+  color:#29333B;
+  float:left;
+  font-size:14px;
+  height:236px;
+  margin-left:19px;
+  padding-left:14px;
+  padding-right:9px;
+  width:194px;
 }
+
+
 
 #services-wrap h3 {
     font-family: 'Open Sans Condensed',sans-serif;
@@ -220,15 +222,15 @@ a.plus-btn {
     padding-top: 10px;
 }
 #services-wrap li a {
-    background: url("/assets/play.gif") no-repeat scroll 0 4px transparent;
-    color: #A3C41B;
-    font-size: 20px;
+    background: url("/assets/play.gif") no-repeat scroll 0 5px transparent;
+    color: #98d321;
+    font-size: 22px;
     font-weight: bold;
     padding-left: 27px;
 }
 #news.wrap h3 {
     background: url("/assets/icon_news.gif") no-repeat scroll 3px -11px transparent;
-    height: 57px;
+    height: 55px;
     padding-left: 30px;
 }
 #news.wrap input[type="text"] {
@@ -243,20 +245,17 @@ a.plus-btn {
 
 #news.wrap input[type="submit"] {
 	border: medium none;
-	color: #A3C41B;
+	color:  #98d321;
 	font-family: 'Open Sans Condensed',sans-serif;
 	font-size: 22px;
 	font-weight: bold;
 	padding-left: 27px;
-	padding-top: 0;
-    background: url("/assets/play.gif") no-repeat scroll 0 4px transparent;
+
+    background: url("/assets/play.gif") no-repeat scroll 0 5px transparent;
 }
 
 
-#new-infinity-wrap, #new-alacarte-wrap {
-	margin-left: 14px;
-	margin-right: 14px;	
-}
+
 
 #new-alacarte-wrap {
 	clear:both;
@@ -269,11 +268,24 @@ a.plus-btn {
 	padding-bottom:10px;
 
 }
+#new-infinity-wrap h2 span{
+	color:#98d321;
+font-weight: bold;
+
+
+}
+
+#new-alacarte-wrap h2 span{
+	color:#66cccc;
+	font-weight: bold;
+
+
+}
 
 
 #new-infinity-wrap li, #new-alacarte-wrap li {
     float: left;
-    margin: 6px;
+    margin: 5px;
 }
 
 #image_promo h1{
@@ -289,7 +301,7 @@ a.plus-btn {
     text-align: center;
 }
 #image_promo span{
-color: #A3C41B;
+color:  #98d321;
 
 	
 	

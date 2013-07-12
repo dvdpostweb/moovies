@@ -16,8 +16,8 @@
 		</ul>
 	
 	</li>
-    <li><a href="#">Prix</a></li>
-    <li><a href="#">Comment ca fonctionne?</a></li>
+    <li><a href="#">Abonnements</a></li>
+    
     <li><a href="#">Mon compte</a>
 		<ul id="account" class="dropdown" style="">
 		<li>
@@ -31,5 +31,13 @@
 	
 	</li>
     <li><a href="#">+18</a></li>
+<li><a href="#">Contact</a></li>
 
 </ul>
+<form method="post" id="search" action="/fr/search_filters">
+  <div style="margin:0;padding:0;display:inline">
+    <input type="hidden" value="JKK9rVJaYd+pTqqX++XT9UfSKBom0eSB5KXdQbdYobs=" name="authenticity_token">
+  </div>
+  <input type="text" value="Rechercher" name="search" id="search-field" class="search-field">
+  <input type="submit" value="search" name="commit" id="search-btn">
+  <div id="search_text" style="display:none">Rechercher</div>
