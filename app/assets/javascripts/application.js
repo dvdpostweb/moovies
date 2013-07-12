@@ -6,7 +6,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.ui.datepicker
+//= require jquery.ui.datepicker-fr
 //= require facebox
+//= require messages
 $(function() {
   $('.facebox').on('click', function() {
     item = $(this);

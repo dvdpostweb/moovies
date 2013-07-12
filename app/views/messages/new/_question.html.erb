@@ -14,7 +14,7 @@
           <%= text_area_tag 'message',(text.nil? ? nil : text), :cols => 72, :rows => 9,  :id => :message_textarea %>
         </p>
         <p align='right'>
-          <% content_tag :button, :type => :submit, :id => :new_message_btn do %>
+          <%= content_tag :button, :type => :submit, :id => :new_message_btn do %>
             <%= t '.send' %>
           <% end %>
         </p>
