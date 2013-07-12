@@ -33,5 +33,13 @@ module Moovies
       "http://twitter.com/"
     end
 
+    def product_kinds
+      HashWithIndifferentAccess.new.merge({
+        :normal => 'DVD_NORM',
+        :adult => 'DVD_ADULT',
+        :subscription => 'ABO'
+      })
+    end
+
   end
 end
