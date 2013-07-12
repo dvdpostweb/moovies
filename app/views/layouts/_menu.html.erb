@@ -1,7 +1,7 @@
 <ul id="nav" class="osc">
    <!-- <li><%= link_to t('layouts.header.home'), root_path(), {:id => 'nav1', :class => ((params[:controller] == 'home') ? 'active': '')} %></li> -->
- <li><a href="#" class="active">Catalogue</a>
-		<ul id="catalogue" class="dropdown" style="">
+   <li><a href="#" class="active" id='catalogue_menu'>Catalogue</a>
+		<ul id="catalogue" class="dropdown" style="display:none">
 		<li>
 		<a href="#">Illimité</a>
 		</li>
@@ -18,8 +18,8 @@
 	</li>
     <li><a href="#">Prix</a></li>
     <li><a href="#">Comment ca fonctionne?</a></li>
-    <li><a href="#">Mon compte</a>
-		<ul id="account" class="dropdown" style="">
+    <li><a href="#" id="account_menu">Mon compte</a>
+		<ul id="account" class="dropdown" style="display:none">
 		<li>
 		<a href="#">Ma playlist</a>
 		</li>
