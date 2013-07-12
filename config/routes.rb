@@ -9,7 +9,7 @@ Moovies::Application.routes.draw do
     resources :tickets do
       resources :message_tickets, :only => [:create]
     end
-    
+    resources :products, :only => [:show, :index]
     resources :phone_requests, :only => [:new, :create]
     get 'faq', :to => 'messages#faq'
     match 'info/:page_name' => 'info#index', :as => :info 
