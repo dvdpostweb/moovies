@@ -107,42 +107,6 @@ input[type="button"]::-moz-focus-inner,
 input[type="submit"]::-moz-focus-inner,
 input[type="file"] > input[type="button"]::-moz-focus-inner {border:0;padding:0;margin:0;}
 
-a.ajouter {
-background-position: -192px -160px;
-display: block;
-height: 26px;
-line-height: 21px;
-padding-left: 33px;
-color: white;
-font-weight: bold;
-font-size: 14px;
-background-image: url(image_path('sprite.png'));
-background-repeat: no-repeat;
-text-align: left;
-width:101px;
-}
-a.regarder {
-background-position: -352px -160px;
-display: block;
-height: 23px;
-line-height: 21px;
-padding-left: 33px;
-color: white;
-font-weight: bold;
-font-size: 14px;
-background-image: url(image_path('sprite.png'));
-background-repeat: no-repeat;
-text-align: left;
-width:101px;
-}
-.adult a.ajouter, .adult a.regarder {
-  color: white;
-  text-decoration: none;
-}
-.adult a.ajouter:hover, .adult a.regarder:hover {
-  color: white;
-  text-decoration: underline !important;
-}
 
 /*   ============   HEADER   ============   */
 
@@ -210,13 +174,13 @@ width:101px;
 }
 #header h1 {
   float: left;
-  margin: 21px 0 0 20px;
+  margin: 0 0 0 20px;
   height: 39px;
 }
 #header h1 a {
-  width: 224px;
-  background: url(image_path('logo.png'));
-  height: 39px;
+    background: url("/assets/logo.png") repeat scroll 0 0 transparent;
+    height: 86px;
+    width: 224px;
 }
 #nav {
   float: left;
@@ -231,7 +195,6 @@ width:101px;
 #nav a {
   color: #7d8891;
   font-size: 20px;
-  text-transform: uppercase;
 }
 #nav a.active {
   color: #fff;
@@ -435,7 +398,7 @@ border-radius: 4px;
   display: inline;
   float: left;
   position: relative;
-  width: 690px;
+  width: 970px;
 }
 
 
@@ -601,21 +564,21 @@ width: 145px;
 #add_to_vod:hover {
 background: url(image_path('vodbtn.png')) no-repeat scroll 0 -35px transparent;
 }
+
 #subscribe-wrap {
-  background: #AECB3B url(image_path('green-bg-rc.gif')) 100% 0 repeat-y;
-  overflow: hidden;
-  height: 95px;
+    background: none repeat scroll 0 0 #A2C419;
+    clear: both;
+    height: 175px;
+    margin: 40px 20px 20px;
 }
 #subscribe-wrap .wrap {
-  float: left;
-  width: 610px;
-  padding: 12px 0 14px 30px;
-  background: url(image_path('green-shadow.gif')) 0 0 repeat-x;
-  overflow: hidden;
+    float: left;
+    padding: 12px 0 14px 30px;
+    width: 610px;
 }
 #subscribe-wrap h3 {
   float: left;
-  width: 405px;
+  width: 700px;
   color: white;
   font-weight: bold;
   font-size: 30px;
@@ -666,40 +629,8 @@ background: url(image_path('vodbtn.png')) no-repeat scroll 0 -35px transparent;
   text-decoration: none;
 }
 
-#services-wrap {
-  overflow: hidden;
-  background: url(image_path('slider-bg.gif')) repeat-y 100% 0 #FFFFFF;
-  padding-bottom: 7px;
-}
-#services-wrap .wrap {
-  float: left;
-  width: 250px;
-  margin-left: 30px;
-  padding-right: 40px;
-  font-size: 14px;
-  color: #29333b;
-}
 
-#services-wrap h3 {
-  font-size: 18px;
-  margin-bottom: 15px;
-}
-#services-wrap p {
-  margin-bottom: 7px;
-}
-#services-wrap ul {
-  margin-bottom: 0;
-}
-#services-wrap li {
-  margin-bottom: 10px;
-}
-#services-wrap li a {
-  font-weight: bold;
-  font-size: 14px;
-  color: #a3c41b;
-  padding-left: 22px;
-  background: url(image_path('sprite.png')) -608px 0 no-repeat;
-}
+
 #p_suspended
 {
   padding: 9px 0 1px 38px;
@@ -754,3 +685,77 @@ width: 450px;
 }
 .smaller
 {font-size:12px}
+
+
+#watch {
+    background-image: url("/assets/button_streaming.gif");
+    background-position: 0 0;
+    background-repeat: no-repeat no-repeat;
+    color: white;
+    display: block;
+    font-size: 19px;
+    font-weight: bold;
+    height: 32px;
+    line-height: 30px;
+    text-align: center;
+    width: 145px;
+}
+
+#new-alacarte-wrap #watch {
+    
+    font-size: 14px;
+    font-weight: bold;
+    height: 32px;
+    line-height: 30px;
+
+}
+
+
+#add {
+    background-image: url("/assets/button_add.gif");
+    background-position: 0 0;
+    background-repeat: no-repeat no-repeat;
+    color: white;
+    display: block;
+    font-size: 19px;
+    font-weight: bold;
+    height: 32px;
+    line-height: 30px;
+    text-align: center;
+    width: 145px;
+}
+
+
+ul.dropdown li {
+  border-bottom-color:#7D8891;
+  border-bottom-style:solid;
+  border-bottom-width:1px;
+  margin-left:10px !important;
+  width:120px;
+}
+.dropdown {
+    background-image: url("/assets/bg_subcats.png");
+    height: 65px;
+    left: 599px;
+    padding: 10px;
+    position: absolute;
+    top: 64%;
+    width: 137px;
+    z-index: 2012;
+}
+
+#nav #catalogue {
+    height: 96px;
+    left: 255px;
+    position: absolute;
+    top: 64%;
+    z-index: 2012;
+}
+
+#nav #account  {
+  
+    left: 599px;
+    position: absolute;
+    top: 64%;
+    z-index: 2012;
+}
