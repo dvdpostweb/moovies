@@ -6,11 +6,11 @@ class Category < ActiveRecord::Base
   has_and_belongs_to_many :products, :join_table => :products_to_categories, :foreign_key => :categories_id, :association_foreign_key => :products_id
   has_many :children, :class_name => 'Category', :foreign_key => :parent_id
 
-  scope :by_kind, lambda {|kind| {where(:categories_type => DVDPost.product_kinds[kind])}
+  scope :by_kind, lambda {|kind| where(:categories_type => Moovies.product_kinds[kind])}
   scope :movies, where(:product_type => 'Movie')
   scope :roots, where(:parent_id => 0)
   scope :visible_on_homepage, where(:show_home => 'YES')
-  scope :active, where(:active => 'YES')
+  scope :active, lambda {|kind| where(:active => kind == :adult ? ['YES','NO'] :'YES')}
   scope :remove_themes, where('categories_id != 105')
   scope :hetero, where('categories_id != 76')
   scope :vod, where(:vod => true)

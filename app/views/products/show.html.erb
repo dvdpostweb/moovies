@@ -1,2 +1,152 @@
 <!--   ==============   MAIN CONTENT   ==============   -->
+<div id='fb-root'></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/fr_FR/all.js#xfbml=1&appId=254486224617136";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<script type="text/javascript">
+window.fbAsyncInit=function() {
+
+  FB.init({
+				appId : "254486224617136",
+				status : true,
+				cookie : true
+			});
+
+			function postToFeed(text, image, locale, id, name, caption) {
+
+				// calling the API ...
+				var obj = {
+					method : 'feed',
+					link : 'http://public.dvdpost.com/'+locale+'/products/'+id,
+					picture : image,
+					name : name,
+					caption : caption,
+					description : text,
+				};
+
+				function callback(response) {
+					/*alert("Post ID: " + response['post_id']);*/
+				}
+
+
+				FB.ui(obj, callback);
+			}
+}
+</script>
+
 <div id="maincontent">
+  <div class="ttl-wrap">
+    <div class="ttl osc">
+      <h2><%= "#{@product_title} (#{@product.year})" %></h2>
+      <h3><%= @product.categories.active(params[:kind]).collect{|category| link_to category.name, category_products_path(:category_id => category)}.join(', ').html_safe %></h3>
+    </div>
+    <div id="votes-wrap">
+      <div id="votes">
+        <span class="osc"><%= "(#{@product.rating_count} #{t('.count')})".html_safe %></span>
+        <div class="stars" id="rating-stars-<%= @product.to_param %>" product_id ="<%= @product.to_param %>">
+          <%= render :partial => 'products/rating', :locals => {:product => @product, :background => @rating_color, :size => :long, :source => @source, :response_id => @response_id} %>
+        </div>
+        <div id="uninterested"><%= render :partial => 'products/show/seen_uninterested', :locals => {:product => @product, :source => @source, :response_id => @response_id} if ENV['HOST_OK'] == "0" %></div>
+      </div>
+    </div><!-- #votes-wrap -->
+  </div><!-- .ttl-wrap -->
+  <div id="film-info">
+    <div id="film-img-wrap" class="vod">
+      <%= product_image_tag @product_image, :width => 180, :alt => "#{@product_title} (#{@product.year})" %>
+      <%= content_tag(:span, '', :class => 'new') if @product.is_new? %>
+    </div>
+    <div id="film-descr">
+    <h3>
+      <%= t '.synopsis' %>
+    </h3>
+    <p><%= @product_description.text %></p>
+
+    <% actors = @product.actors.collect{|actor| link_to actor.name, actor_products_path(:actor_id => actor.to_param) }.join(', ').html_safe %>
+    <% if actors.size > 0 %>
+    <div id="actors">
+      <h3><%= t '.actors' %></h3>
+      <%= actors %>
+    </div>
+    <% end %>
+    <% if @product.studio && @product.adult? %>
+    <div id="studio">
+      <h3><%= t('.studio') %></h3>
+      <%= link_to @product.studio.name, studio_products_path(:studio_id => @product.studio.to_param)%>
+    </div>
+    <% end %>
+    <% if @product.director && !@product.adult? %>
+    <div id="directors" class="<%= I18n.locale.to_s %>">
+      <h3><%= t('.directed_by') %></h3>
+      <%= link_to @product.director.name, director_products_path(:director_id => @product.director.to_param) %>
+    </div>
+    <% end %>
+    <div id="btns-wrap" class="osc">
+      
+          <% if @trailer %>
+             <%= link_to(t('.trailer'), product_trailer_path(:product_id => @product.to_param, :source => @source, :response_id => @response_id), {:class => 'trailer', :id => 'trailer', :target => :_blank}) %>
+          <% end %>
+      <div class="clearfix"></div>
+      </div>
+    </div>
+    <div id="fb">
+      <% unless @product.adult? %>
+        <div class="fb-like" data-send="false" data-width="450" data-show-faces="false" data-action="recommend"></div>
+      <% end %>
+    </div>    
+    
+    <div id="thumbs-wrap">
+      <h3><%= t '.photo' %></h3>
+      <div>
+        <%= render :partial => 'products/show/preview', :locals => {:product => @product, :type => params[:kind], :source => @source, :response_id => @response_id} %>
+      </div>
+    </div>
+  </div><!-- #film-info -->
+  <div id="formats">
+    <table border="0">
+      <tr>
+        <th width="145"><%= t '.format_available' %></th>
+        <th width="90"><%= t'.audio' %></th>
+        <th width="90"><%= t '.subtitles' %></th>
+        <th width="47"><%= t '.audience' %></th>
+        <th width="52"><%= t '.duration' %></th>
+        <th width="68"><%= t '.picture' %></th>
+        <th width="45"><%= t '.sound' %></th>
+        <th width="92"><%= t '.country' %></th>
+      </tr>
+      <tr>
+        <td>
+        </td>
+        <td></td>
+        <td></td>
+        <td><span class="dark osc"><%=  @product.public.name %></span></td>
+        <td><%= "#{@product.runtime} #{t '.minutes'}" %></td>
+        <td><%= @product.picture_format.name if @product.picture_format %></td>
+        <td><%= @product.soundtracks.collect{|soundtrack| soundtrack.name}.join(', ') %></td>
+        <td><%= @product.country.name %></td>
+      </tr>
+    </table>
+    <div id="festival">
+      <%= render :partial => 'products/show/awards', :locals => {:product => @product , :size => 'small'} %>
+    </div>
+  </div><!-- #formats -->
+   <div id="rented-wrap">
+    <%= render :partial => 'products/show/recommendations', :locals => { :rating_color => @rating_color, :products => @recommendations, :recommendation_nb_page => @recommendation_nb_page, :recommendation_page => @recommendation_page, :recommendation_response_id => @recommendation_response_id } if @recommendations && @recommendations.size > 0 %>
+    <%= render :partial => 'products/show/critics', :locals => {:product => @product, :reviews_count => @reviews_count, :reviews => @reviews, :review_sort => @review_sort, :product_title => @product_title, :chronicle => @chronicle, :source => @source, :response_id => @response_id} %>
+  </div><!-- #rented-wrap-->
+</div>
+<!--   ==============   END MAIN CONTENT   ==============   -->
+<%= render :partial => 'products/left_column', :locals => {:filter => @filter} %>
+<% if params[:add].to_i == 1 %>
+  <% submit_id = "p_#{@product.to_param}_#{rand(10)}"%>
+  <div id='add_p' style='display:none' class='action_face'><%= new_product_wishlist_item_path(:product_id => @product.to_param, :source => @source, :submit_id => submit_id, :text => :long, :load_color => :normal) %></div>
+<% end %>
+<% if params[:review].to_i == 1 %>
+  <div id='review' style='display:none' class='action_face'><%= new_product_review_path(:product_id => @product.to_param) %></div>
+<% end %>
+<% if params[:trailer].to_i == 1 && @product.trailer? %>
+  <div id='rating' style='display:none' class='action_face'><%= product_trailer_path(:product_id => @product.to_param, :source => @source, :response_id => @response_id) %></div>
+<% end %>

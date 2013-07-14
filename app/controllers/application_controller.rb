@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :set_locale
+  before_filter :get_wishlist_source
   layout :layout_by_resource
 
   protected
@@ -22,9 +23,18 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def get_wishlist_source
+    @wishlist_source = {}
+    wl_source = WishlistSource.find(:all)
+    wl_source.each do |item|
+      @wishlist_source[item.name.downcase.to_sym] = item.to_param
+    end
+  end
+
   private
 
   def extract_locale_from_accept_language_header
     request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
   end
+  
 end

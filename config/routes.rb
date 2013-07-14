@@ -4,12 +4,21 @@ Moovies::Application.routes.draw do
   scope '(:locale)', :locale => /en|fr|nl/ do
     root :to => 'home#index'
     devise_for :customers
-    resources :customers
+    resources :customers do
+      resources :reviews, :only => [:index]
+    end
     resources :messages
     resources :tickets do
       resources :message_tickets, :only => [:create]
     end
-    resources :products
+    resources :products, :only => [:index, :show]
+    concern :productable do
+      resources :products, :only => :index
+    end
+    resources :categories, :only => [:index], concerns: :productable
+    resources :actors, :only => [:index], concerns: :productable
+    resources :directors, :only => [], concerns: :productable
+    resources :studios, :only => [:index], concerns: :productable
     resources :phone_requests, :only => [:new, :create]
     get 'faq', :to => 'messages#faq'
     match 'info/:page_name' => 'info#index', :as => :info

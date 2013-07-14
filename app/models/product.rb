@@ -24,8 +24,8 @@ class Product < ActiveRecord::Base
   belongs_to :director, :foreign_key => :products_directors_id
   belongs_to :studio, :foreign_key => :products_studio
   belongs_to :country, :class_name => 'ProductCountry', :foreign_key => :products_countries_id
-  belongs_to :picture_format, :foreign_key => :products_picture_format, :conditions => {:language_id => Moovise.languages[I18n.locale.to_s]}
-  has_one :public, :primary_key => :products_public, :foreign_key => :public_id, :conditions => {:language_id => Moovise.languages[I18n.locale.to_s]}
+  belongs_to :picture_format, :foreign_key => :products_picture_format, :conditions => {:language_id => Moovies.languages[I18n.locale.to_s]}
+  has_one :public, :primary_key => :products_public, :foreign_key => :public_id, :conditions => {:language_id => Moovies.languages[I18n.locale.to_s]}
   has_many :descriptions, :class_name => 'ProductDescription', :foreign_key => :products_id
   has_many :ratings, :foreign_key => :products_id
   has_many :reviews, :foreign_key => :products_id
@@ -217,7 +217,7 @@ class Product < ActiveRecord::Base
   def recommendations(kind)
     begin
       # external service call can't be allowed to crash the app
-      recommendation_ids = DVDPost.product_linked_recommendations(self, kind, I18n.locale)
+      recommendation_ids = Moovies.product_linked_recommendations(self, kind, I18n.locale)
     rescue => e
       logger.error("Failed to retrieve recommendations: #{e.message}")
     end
@@ -237,7 +237,7 @@ class Product < ActiveRecord::Base
   def recommendations_new(kind, customer_id, type)
     begin
       # external service call can't be allowed to crash the app
-      recommendation_ids = DVDPost.product_linked_recommendations_new(self, kind, customer_id, type)
+      recommendation_ids = Moovies.product_linked_recommendations_new(self, kind, customer_id, type)
     rescue => e
       logger.error("Failed to retrieve recommendations: #{e.message}")
     end
@@ -258,7 +258,7 @@ class Product < ActiveRecord::Base
     recommendation_ids = recommendations.collect(&:recommendation_id)
     if recommendation_ids && !recommendation_ids.empty?
       if kind == :normal
-        Product.search(:max_matches => 200, :per_page => 8, :page => pa).available.by_products_id(recommendation_ids).with_speaker(DVDPost.product_languages[I18n.locale.to_s])
+        Product.search(:max_matches => 200, :per_page => 8, :page => pa).available.by_products_id(recommendation_ids).with_speaker(Moovies.product_languages[I18n.locale.to_s])
       else
         if categories.find_by_categories_id([76,72])
           Product.available.gay.by_products_id(recommendation_ids)
@@ -302,25 +302,25 @@ class Product < ActiveRecord::Base
 
   def image
     if desc = description
-      if products_type == DVDPost.product_kinds[:adult]
-        File.join(DVDPost.imagesx_path, desc.image)  if !desc.image.blank?
+      if products_type == Moovies.product_kinds[:adult]
+        File.join(Moovies.imagesx_path, desc.image)  if !desc.image.blank?
       else
-        File.join(DVDPost.images_path, desc.image) if !desc.image.blank?
+        File.join(Moovies.images_path, desc.image) if !desc.image.blank?
       end
     end
   end
 
   def image_detail
-    File.join(DVDPost.images_path, 'products', "#{id}.jpg")
+    File.join(Moovies.images_path, 'products', "#{id}.jpg")
   end
 
   def description_data(full = false)
     if desc = description
       title = desc.title
-      if products_type == DVDPost.product_kinds[:adult]
-        image = File.join(DVDPost.imagesx_path, desc.image)  if !desc.image.blank?
+      if products_type == Moovies.product_kinds[:adult]
+        image = File.join(Moovies.imagesx_path, desc.image)  if !desc.image.blank?
       else
-        image =  File.join(DVDPost.images_path, desc.image) if !desc.image.blank?
+        image =  File.join(Moovies.images_path, desc.image) if !desc.image.blank?
       end
       if full
         description = desc
@@ -338,37 +338,34 @@ class Product < ActiveRecord::Base
   
   def preview_image(id, kind)
     if kind == :adult
-      File.join(DVDPost.imagesx_preview_path, "#{products_model}#{id}.jpg")
+      File.join(Moovies.imagesx_preview_path, "#{products_model}#{id}.jpg")
     else
-      File.join(DVDPost.images_preview_path, "#{imdb_id}_#{id}.jpg")
+      File.join(Moovies.images_preview_path, "#{imdb_id}_#{id}.jpg")
     end
   end
 
   def trailer_image(kind)
     if kind == :adult
-      File.join(DVDPost.imagesx_trailer_path, "#{id}.jpg")
+      File.join(Moovies.imagesx_trailer_path, "#{id}.jpg")
     else
-      File.join(DVDPost.images_trailer_path, "#{id}.jpg")
+      File.join(Moovies.images_trailer_path, "#{id}.jpg")
     end
   end
 
   def banner_image(kind)
     if kind == :adult
-      File.join(DVDPost.imagesx_banner_path, "#{id}.jpg")
+      File.join(Moovies.imagesx_banner_path, "#{id}.jpg")
     else
-      File.join(DVDPost.images_banner_path, "#{id}.jpg")
+      File.join(Moovies.images_banner_path, "#{id}.jpg")
     end
   end
 
-  def rating(customer=nil)
+  def rating(customer = nil)
     if customer && customer.has_rated?(self)
-      if imdb_id > 0 && rate = ratings_imdb.by_customer(customer).first
-        rate.value.to_i * 2
-      else
-        ratings.by_customer(customer).first.value.to_i * 2
-      end
+      {:rating => ratings.by_customer(customer).first.value.to_i * 2, :customer => true}
     else
-      rating_count == 0 ? 0 : ((rating_users.to_f / rating_count) * 2).round
+      rating = rating_count == 0 ? 0 : ((rating_users.to_f / rating_count) * 2).round
+      {:rating => rating, :customer => false}
     end
   end
 
@@ -383,39 +380,11 @@ class Product < ActiveRecord::Base
   end
 
   def is_new?
-    availability > 0 && created_at < Time.now && available_at && available_at > 3.months.ago && products_next == 0
-  end
-
-  def dvdposts_choice?
-    products_dvdpostchoice == 1
-  end
-
-  def dvd?
-    media == DVDPost.product_types[:dvd]
-  end
-
-  def bluray?
-    media == DVDPost.product_types[:bluray]
-  end
-
-  def bluray3d?
-    media == DVDPost.product_types[:bluray3d]
-  end
-
-  def bluray3d2d?
-    media == DVDPost.product_types[:bluray3d2d]
-  end
-
-  def vod?
-    media == DVDPost.product_types[:vod]
+    created_at < Time.now && available_at && available_at > 3.months.ago && products_next == 0
   end
 
   def series?
     products_series_id != 0
-  end
-
-  def available_to_sale?
-    quantity_to_sale > 0 && ProductList.shop.status.by_language(DVDPost.product_languages[I18n.locale]).first && ProductList.shop.status.by_language(DVDPost.product_languages[I18n.locale]).first.products.include?(self)
   end
 
   def in_streaming_or_soon?
@@ -433,7 +402,6 @@ class Product < ActiveRecord::Base
       streaming_products.available.count > 0
     end  
   end
-
 
   def views_increment(desc)
     # Dirty raw sql.
