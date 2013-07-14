@@ -45,3 +45,5 @@ gem "jquery-rails"
 gem 'jquery-ui-rails'
 gem 'dynamic_form'
 gem "rspec-rails", ">= 2.0.1", :group => [:development, :test]
+gem "friendly_id", "~> 4.0.9"
+gem "routing_concerns", "~> 0.1.0"

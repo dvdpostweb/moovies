@@ -30,8 +30,8 @@ class Review < ActiveRecord::Base
   default_scope :order => '(customers_best_rating - customers_bad_rating ) DESC, customers_best_rating desc, date_added DESC'
   scope :ordered, lambda {|sorted| {:order => "#{sorted} DESC, (customers_best_rating - customers_bad_rating ) DESC, customers_best_rating DESC"}}
   scope :approved, where(:reviews_check => true)
-  scope :by_language, lambda {|language| where(:languages_id => DVDPost.product_languages[language])}
-  scope :by_imdb_id, lambda {|imdb_id| where => ['products.imdb_id = ?',  imdb_id])}
+  scope :by_language, lambda {|language| where(:languages_id => Moovies.languages[language])}
+  scope :by_imdb_id, lambda {|imdb_id| where('products.imdb_id = ?',  imdb_id)}
   scope :by_customer_id, lambda {|customer_id| where( :customers_id => customer_id )}
   
   def self.sort

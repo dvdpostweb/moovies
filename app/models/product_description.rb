@@ -11,7 +11,7 @@ class ProductDescription < ActiveRecord::Base
 
   belongs_to :product
 
-  scope :by_language, lambda {|language| {where(:language_id => Moovies.languages[language])
+  scope :by_language, lambda {|language| where(:language_id => Moovies.languages[language])}
 
   
   def self.seo

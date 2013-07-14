@@ -1,5 +1,44 @@
 module Moovies
   class << self
+    def images_path
+      'http://www.dvdpost.be/images'
+    end
+
+    def imagesx_path
+      'http://www.dvdpost.be/imagesx'
+    end
+
+    def imagesx_preview_path
+      'http://www.dvdpost.be/imagesx/screenshots'
+    end
+
+    def images_preview_path
+      'http://www.dvdpost.be/images/screenshots'
+    end
+
+    def imagesx_trailer_path
+      'http://www.dvdpost.be/imagesx/trailers'
+    end
+
+    def images_trailer_path
+      'http://www.dvdpost.be/images/trailers'
+    end
+
+    def imagesx_banner_path
+      'http://www.dvdpost.be/imagesx/banners'
+    end
+
+    def images_banner_path
+      'http://www.dvdpost.be/images/banners'
+    end
+
+    def images_carousel_path
+      "#{images_path}/landings"
+    end
+
+    def images_carousel_adult_path
+      "#{imagesx_path}/landings"
+    end
 
     def languages
       HashWithIndifferentAccess.new.merge({
@@ -28,7 +67,7 @@ module Moovies
         :en => "http://www.facebook.com/"
       })
     end
-    
+
     def twitter_url
       "http://twitter.com/"
     end
@@ -41,5 +80,20 @@ module Moovies
       })
     end
 
+    def product_publics
+      HashWithIndifferentAccess.new.merge({
+        'all' => 1,
+        '6' => 5,
+        '10' => 6,
+        '12' => 2,
+        '14' => 7,
+        '16' => 3,
+        '18' => 4
+      })
+    end
+
+    def local_product_publics
+      product_publics.invert
+    end
   end
 end
