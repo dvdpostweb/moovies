@@ -4,6 +4,7 @@ class Review < ActiveRecord::Base
 
   self.primary_key = :reviews_id
 
+  attr_accessible :customers_id, :customers_name, :products_id, :languages_id, :rating, :text
   alias_attribute :created_at,    :date_added
   alias_attribute :text,          :reviews_text
   alias_attribute :rating,        :reviews_rating
@@ -27,8 +28,7 @@ class Review < ActiveRecord::Base
 
   has_many :review_ratings, :foreign_key => :reviews_id
 
-  default_scope :order => '(customers_best_rating - customers_bad_rating ) DESC, customers_best_rating desc, date_added DESC'
-  scope :ordered, lambda {|sorted| {:order => "#{sorted} DESC, (customers_best_rating - customers_bad_rating ) DESC, customers_best_rating DESC"}}
+  scope :ordered, lambda {|sorted| {:order => sorted}}
   scope :approved, where(:reviews_check => true)
   scope :by_language, lambda {|language| where(:languages_id => Moovies.languages[language])}
   scope :by_imdb_id, lambda {|imdb_id| where('products.imdb_id = ?',  imdb_id)}
@@ -76,7 +76,7 @@ class Review < ActiveRecord::Base
   end
 
   def set_defaults
-    self.customers_name = customer.first_name
+    self.customers_name = customer.nickname.nil? ? customer.first_name : customer.nickname
   end
 
   def set_created_at

@@ -41,7 +41,6 @@
         <%= render :partial => 'products/show/seen_uninterested', :locals => {:product => product, :source => source, :response_id => @response_id} if current_customer %>
       </div>
       <ul class="btns osc">
-        <li><%= render :partial => 'products/wishlist', :locals => {:product => product, :text => :short, :source => source, :response_id => nil} %></li>
         <li><%= render :partial => 'products/streaming',  :locals => {:product => product, :text => :short, :source => source, :response_id => nil} if product_streaming %></li>
         <% if product.trailer? %>
           <li>

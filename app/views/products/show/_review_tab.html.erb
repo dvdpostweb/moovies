@@ -5,7 +5,7 @@
     <% if current_customer %>
       <p>
         <%= t 'products.show.no_review' %>
-        <%= link_to "#{t('products.show.be_the_first')} #{product_title}!", new_product_review_path(:product_id => product.to_param, :source => source, :response_id => response_id), :id => 'add_new_review' %>
+        <%= link_to "#{t('products.show.be_the_first')} #{product_title}!", new_product_review_path(:product_id => product.to_param, :source => source, :response_id => response_id), :id => 'add_new_review', :class => :facebox %>
       </p>
       <% end %>
   <% end %>

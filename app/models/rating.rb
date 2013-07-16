@@ -17,7 +17,7 @@ class Rating < ActiveRecord::Base
   belongs_to :customer, :foreign_key => :customers_id
   belongs_to :product, :foreign_key => :products_id
 
-  scope :by_customer, lambda {|customer| {where(:customers_id => customer.to_param)}
+  scope :by_customer, lambda {|customer| where(:customers_id => customer.to_param)}
 
   private
   def set_defaults

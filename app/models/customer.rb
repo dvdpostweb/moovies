@@ -51,7 +51,6 @@ class Customer < ActiveRecord::Base
   has_many :uninterested_products, :through => :uninteresteds, :source => :product, :uniq => true
   has_many :messages, :foreign_key => :customers_id
   has_many :tickets
-  has_many :compensations, :foreign_key => :customers_id
   has_many :addresses, :foreign_key => :customers_id
   has_many :payment, :foreign_key => :customers_id
   has_many :subscriptions, :foreign_key => :customerid, :conditions => {:action => [1, 6, 8]}, :order => 'date DESC', :limit => 1
@@ -67,26 +66,10 @@ class Customer < ActiveRecord::Base
   has_and_belongs_to_many :seen_products, :class_name => 'Product', :join_table => :products_seen, :uniq => true
   #to do has_and_belongs_to_many :roles, :uniq => true
 
-  def self.credit_action
-    credit = OrderedHash.new
-    credit.push(:vod, 1)
-    credit.push(:vod_more_ip, 2)
-
-    credit
-  end
-
     def email_change
       if self.email != self.new_email
         self.is_email_valid = 1
       end
-    end
-
-    def clear_pwd_empty?
-      clear_pwd.nil? || clear_pwd.blank?
-    end
-
-    def encrypt_password
-      self.password= Digest::MD5.hexdigest(clear_pwd)
     end
 
     def self.find_by_email(args)
@@ -103,20 +86,9 @@ class Customer < ActiveRecord::Base
         list = tokens.collect(&:imdb_id).join(',')
         vod_seen = !list.empty? ? Product.group_by_imdb.normal_available.by_imdb_ids([list]) : nil
       end
-      return_product = return_products(kind)
       tokens = get_all_tokens(kind, :old)
       rated = rated_products
-      p = vod_seen ?  return_product + vod_seen + seen - rated :  return_product + seen - rated
-
-    end
-
-    def return_products(kind)
-      o = orders.return.all(:select => 'orders_products.products_id as orders_id', :joins => :order_product)
-      if kind == :adult
-        Product.adult_available.find_all_by_products_id(o)
-      else
-        Product.normal_available.find_all_by_products_id(o)
-      end
+      p = vod_seen ? vod_seen + seen - rated : seen - rated
     end
 
     def has_rated?(product)
@@ -152,21 +124,6 @@ class Customer < ActiveRecord::Base
       else
         I18n.t('customer.holidays_suspended', :date => suspensions.holidays.last.date_end.strftime('%d/%m/%Y'))
       end
-    end
-
-    def authenticated?(provided_password)
-      hash_password, salt = password.split(':')
-      result = Digest::MD5.hexdigest("#{salt}#{provided_password}")
-      return hash_password == result
-    end
-
-    def self.authenticate(email, password)
-      return nil      unless customer = find_by_email(email)
-      return customer if     customer.authenticated?(password)
-    end
-
-    def has_role?(role)
-      roles.include?(role)
     end
 
     def name
@@ -240,15 +197,6 @@ class Customer < ActiveRecord::Base
       pop = popular_vod - hidden_products
     end
 
-    def update_dvd_at_home!(operator, product)
-      attribute = if product.kind == DVDPost.product_kinds[:adult]
-        :customers_abo_dvd_home_adult
-      else
-        :customers_abo_dvd_home_norm
-      end
-      operator == :increment ? increment!(attribute) : decrement!(attribute)
-    end
-
     def newsletter!(type,value)
       if type == 'newsletter_parnter'
         update_attribute(:newsletter_parnter, value)
@@ -257,55 +205,23 @@ class Customer < ActiveRecord::Base
       end
     end
 
-    def rotation_dvd!(type,value)
-      if type == 'adult'
-        if normal_count > 0
-          update_attribute(:adult_count, (adult_count + value))
-          update_attribute(:normal_count, (normal_count - value))
-          abo_history(Subscription.action[:add_rotation_adult])
-        end
-      else
-        if adult_count > 0
-          update_attribute(:normal_count, (normal_count + value))
-          update_attribute(:adult_count, (adult_count - value))
-          abo_history(Subscription.action[:add_rotation_normal])
-        end
-      end
-    end
-
-    def credit_empty?
-      (credits == 0 || (new_price? && customers_abo_dvd_remain == 0 && customers_abo_dvd_credit <= 3 && customer_attribute.only_vod == false)) && suspension_status == 0 && subscription_type && subscription_type.credits > 0 && subscription_expiration_date && subscription_expiration_date.to_date != Time.now.to_date && abo_active?
-    end
-
-    def new_price?
-      subscription_type.qty_dvd_max >= 0 if subscription_type
-    end
-
-    def svod?
-      subscription_type.credits == 10000 if subscription_type
-    end
-
-    def next_new_price?
-      next_subscription_type.qty_dvd_max >= 0 if subscription_type
-    end
-
     def suspended?
       suspension_status != 0
     end
 
     def locale
-      loc = DVDPost.customer_languages.invert[language]
+      loc = Moovies.customer_languages.invert[language]
       loc.to_sym if loc
     end
 
     def locale=(new_locale)
-      language_id = DVDPost.customer_languages[new_locale] || DVDPost.customer_languages[:fr]
+      language_id = Moovies.customer_languages[new_locale] || Moovies.customer_languages[:fr]
       update_attribute(:customers_language, language_id)
     end
 
     def update_locale(new_locale)
       new_locale ||= locale
-      update_attribute(:customers_language, (DVDPost.customer_languages[new_locale] || :fr))
+      update_attribute(:customers_language, (Moovies.customer_languages[new_locale] || :fr))
       locale = new_locale.blank? ? :fr : new_locale
     end
 
@@ -503,29 +419,18 @@ class Customer < ActiveRecord::Base
     end
 
     def get_all_tokens_id(kind = nil, imdb_id = 0)
-      if imdb_id > 0
-        tokens.available(DVDPost.hours[kind].hours.ago.localtime, Time.now).find_all_by_imdb_id(imdb_id).collect(&:imdb_id)
-      else
-        tokens.available(DVDPost.hours[kind].hours.ago.localtime, Time.now).collect(&:imdb_id)
-      end  
+      tokens.available(48.hours.ago.localtime, Time.now).find_all_by_imdb_id(imdb_id).collect(&:imdb_id)
     end
 
     def get_all_tokens(kind = nil, type = nil, page = 1)
-      #if type == :old
-      #  if kind == :adult
-      #    tokens.expired(48.hours.ago.localtime).ordered_old.all(:joins => :products, :group => :imdb_id,  :conditions => {:products => {:products_type => DVDPost.product_kinds[:adult]}}).paginate(:per_page => 20, :page => page)
-      #  else kind == :normal
-      #    tokens.expired(48.hours.ago.localtime).ordered_old.all(:joins => :products, :group => :imdb_id, :conditions => {:products => {:products_type => DVDPost.product_kinds[:normal]}}).paginate(:per_page => 24, :page => page)
-      #  end
-      #else
-      #  if kind == :adult
-      #    tokens.available(DVDPost.hours[:adult].hours.ago.localtime, Time.now).ordered.all(:joins => {:streaming_products, :products}, :group => :imdb_id, :conditions => { :streaming_products => { :available => 1 }, :products => {:products_type => DVDPost.product_kinds[:adult]}})
-      #  elsif kind == :normal
-      #    tokens.available(DVDPost.hours[:normal].hours.ago.localtime, Time.now).ordered.all(:joins => {:streaming_products, :products}, :group => :imdb_id, :conditions => { :streaming_products => { :available => 1 }, :products => {:products_type => DVDPost.product_kinds[:normal]}})
-      #  else
-      #    tokens.available(2.days.ago.localtime, Time.now).ordered.all(:joins => :streaming_products, :group => :imdb_id, :conditions => { :streaming_products => { :available => 1 }})
-      #end
-      nil
+      if type == :old
+        tokens.expired(48.hours.ago.localtime).ordered_old.joins(:products).where(:products => {:products_type => Moovies.product_kinds[kind]}).group(:imdb_id).paginate(:per_page => 20, :page => page)
+      else
+        if !kind.nil?
+          tokens.available(48.hours.ago.localtime, Time.now).ordered.joins(:streaming_products, :products).where(:streaming_products => { :available => 1 }, :products => {:products_type => Moovies.product_kinds[kind]}).group(:imdb_id)
+        else
+          tokens.available(48.hours.ago.localtime, Time.now).ordered.joins(:streaming_products, :products).where(:streaming_products => { :available => 1 }).group(:imdb_id)
+        end
       end
     end
 
@@ -760,6 +665,6 @@ class Customer < ActiveRecord::Base
         logger.error("customer have a problem with credit customer_id : #{to_param} action: #{action} action type: #{action_type} quantity: #{quantity}")
         logger.error(e.backtrace)
       end
-
+    end
   
 end

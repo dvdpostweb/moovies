@@ -4,13 +4,13 @@
 <% del = delimiter_present == 1 ? "<span>#{image_tag "delimiter.gif"}</span>" : "" %>
 <% delimiter = (seen || uninterrested) ? "<br />" : del  %>
 <% if seen %>
-  <%= t '.already_seen' %>
+  <%= t '.already_seen'.html_safe %>
 <% else %>
   <%= link_to t('.already_link'), product_seen_path(:product_id => product, :delimiter_present => delimiter_present, :source => source, :response_id => response_id) %>
 <% end %>
-<%= delimiter %>
+<%= delimiter.html_safe  %>
 <% if uninterrested %>
-  <%= t '.not_interested' %>
+  <%= t '.not_interested'.html_safe %>
 <% else %>
     <%= link_to t('.not_interested_link'), product_uninterested_path(:product_id => product, :delimiter_present => delimiter_present, :source => source, :response_id => response_id) %>
 <% end %>

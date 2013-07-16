@@ -117,7 +117,7 @@ class ProductsController < ApplicationController
     #to do user_agent = UserAgent.parse(request.user_agent)
     @tokens = current_customer.get_all_tokens_id(params[:kind], @product.imdb_id) if current_customer
     #to do @filter = get_current_filter({})
-    unless request.format.js?
+    unless request.xhr?
       #to do @trailer =  @product.trailer?
       data = @product.description_data(true)
       @product_title = data[:title]
@@ -125,34 +125,19 @@ class ProductsController < ApplicationController
       @product_description =  data[:description]
       @product.views_increment(@product_description)
       @categories = @product.categories
-      @already_seen = current_customer.assigned_products.include?(@product) if current_customer
       @token = current_customer ? current_customer.get_token(@product.imdb_id) : nil
       @collections = Collection.by_size.random if params[:kind] == :adult
     end
     @response_id = params[:response_id]
     
-    if !request.format.js? || (request.format.js? && (params[:reviews_page] || params[:sort]))
-      if params[:sort]
-        sort = Review.sort2[params[:sort].to_sym]
-        @review_sort = params[:sort].to_sym
-        cookies[:review_sort] = { :value => params[:sort], :expires => 1.year.from_now }
-      else
-        if cookies[:review_sort]
-          sort =  Review.sort2[cookies[:review_sort].to_sym]
-          @review_sort = cookies[:review_sort].to_sym
-        else
-          sort =  Review.sort2[:date]
-          @review_sort = :date
-        end
-      end
-      if sort != Review.sort2[:interesting]
-        @reviews = @product.reviews.approved.ordered(sort).by_language(I18n.locale).includes([:product, :customer]).paginate(:page => params[:reviews_page], :per_page => 3)
-      else
-        @reviews = @product.reviews.approved.by_language(I18n.locale).includes([:product, :customer]).paginate(:page => params[:reviews_page], :per_page => 3)
-      end
+    if !request.xhr? || (request.xhr? && (params[:reviews_page] || params[:sort]))
+      reviews_data = view_context.get_reviews()
+      @reviews = reviews_data[:reviews]
+      @review_sort = reviews_data[:review_sort]
       @reviews_count = @reviews.total_entries
     end
-    if !request.format.js? || (request.format.js? && params[:recommendation_page])
+
+    if !request.xhr? || (request.xhr? && params[:recommendation_page])
       #product_recommendations = @product.recommendations(params[:kind])
       customer_id = current_customer ? current_customer.id : 0
       r_type = params[:r_type].to_i || 1
@@ -170,21 +155,17 @@ class ProductsController < ApplicationController
       @recommendation_nb_page = @recommendations.total_pages
       end
     end
-    respond_to do |format|
-      
-      format.html do
-        #if  params[:response_id]
-        #  Customer.send_evidence('RecClick', @product.to_param, current_customer, request, {:response_id => params[:response_id], :segment1 => @source, :formFactor => format_text(@browser), :rule => @source})
-        #end
-        #Customer.send_evidence('ViewItemPage', @product.to_param, current_customer, request, {:response_id => params[:response_id], :segment1 => @source, :formFactor => format_text(@browser), :rule => @source})
+    if request.xhr?
+      if params[:reviews_page] || params[:sort]
+        render :partial => 'products/show/reviews', :locals => {:product => @product, :reviews_count => @reviews_count, :reviews => @reviews, :review_sort => @review_sort, :source => @source, :response_id => @source}
+      elsif params[:recommendation_page]
+        render :partial => 'products/show/recommendations', :locals => { :rating_color => @rating_color, :recommendation_nb_page => @recommendation_nb_page, :recommendation_page => @recommendation_page, :products => @recommendations, :recommendation_response_id => @recommendation_response_id}
       end
-      format.js {
-        if params[:reviews_page] || params[:sort]
-          render :partial => 'products/show/reviews', :locals => {:product => @product, :reviews_count => @reviews_count, :reviews => @reviews, :review_sort => @review_sort, :source => @source, :response_id => @source}
-        elsif params[:recommendation_page]
-          render :partial => 'products/show/recommendations', :locals => { :rating_color => @rating_color, :recommendation_nb_page => @recommendation_nb_page, :recommendation_page => @recommendation_page, :products => @recommendations, :recommendation_response_id => @recommendation_response_id}
-        end
-      }
+    else
+      #if  params[:response_id]
+      #  Customer.send_evidence('RecClick', @product.to_param, current_customer, request, {:response_id => params[:response_id], :segment1 => @source, :formFactor => view_context.format_text(@browser), :rule => @source})
+      #end
+      #Customer.send_evidence('ViewItemPage', @product.to_param, current_customer, request, {:response_id => params[:response_id], :segment1 => @source, :formFactor => view_context.format_text(@browser), :rule => @source})
     end
   end
 
@@ -193,12 +174,13 @@ class ProductsController < ApplicationController
       delimiter_present = params[:delimiter_present] || 0
       delimiter_present = delimiter_present.to_i
       @product.uninterested_customers << current_customer
-      Customer.send_evidence('NotInterestedItem', @product.to_param, current_customer, request, {:response_id => params[:response_id], :segment1 => @source, :formFactor => format_text(@browser), :rule => @source})
-      expiration_recommendation_cache()
+      Customer.send_evidence('NotInterestedItem', @product.to_param, current_customer, request, {:response_id => params[:response_id], :segment1 => @source, :formFactor => view_context.format_text(@browser), :rule => @source})
+      #expiration_recommendation_cache()
     end
-    respond_to do |format|
-      format.html {redirect_to product_path(:id => @product.to_param, :source => @source)}
-      format.js   {render :partial => 'products/show/seen_uninterested', :locals => {:product => @product, :delimiter_present => delimiter_present, :source => @source, :response_id => params[:response_id]}}
+    if request.xhr?
+      render :partial => 'products/show/seen_uninterested', :locals => {:product => @product, :delimiter_present => delimiter_present, :source => @source, :response_id => params[:response_id]}
+    else
+      redirect_to product_path(:id => @product.to_param, :source => @source)
     end
   end
 
@@ -206,11 +188,12 @@ class ProductsController < ApplicationController
     @product.seen_customers << current_customer
     delimiter_present = params[:delimiter_present] || 0
     delimiter_present = delimiter_present.to_i
-    Customer.send_evidence('AlreadySeen', @product.to_param, current_customer, request, {:response_id => params[:response_id], :segment1 => @source, :formFactor => format_text(@browser), :rule => @source})
-    expiration_recommendation_cache()
-    respond_to do |format|
-      format.html {redirect_to product_path(:id => @product.to_param, :source => @source)}
-      format.js   {render :partial => 'products/show/seen_uninterested', :locals => {:product => @product, :delimiter_present => delimiter_present, :source => @source, :response_id => params[:response_id]}}
+    Customer.send_evidence('AlreadySeen', @product.to_param, current_customer, request, {:response_id => params[:response_id], :segment1 => @source, :formFactor => view_context.format_text(@browser), :rule => @source})
+    #expiration_recommendation_cache()
+    if request.xhr?
+      render :partial => 'products/show/seen_uninterested', :locals => {:product => @product, :delimiter_present => delimiter_present, :source => @source, :response_id => params[:response_id]}
+    else
+      redirect_to product_path(:id => @product.to_param, :source => @source)
     end
   end
 
@@ -232,7 +215,7 @@ class ProductsController < ApplicationController
     else
         trailers = @product.trailers.by_language(I18n.locale).paginate(:per_page => 1, :page => params[:trailer_page])
     end
-    Customer.send_evidence('ViewTrailer', @product.to_param, current_customer, request, {:response_id => params[:response_id], :segment1 => @source, :formFactor => format_text(@browser), :rule => @source})
+    Customer.send_evidence('ViewTrailer', @product.to_param, current_customer, request, {:response_id => params[:response_id], :segment1 => @source, :formFactor => view_context.format_text(@browser), :rule => @source})
     respond_to do |format|
       format.js   {
         if trailer.class.name == 'StreamingTrailer'

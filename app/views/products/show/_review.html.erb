@@ -1,8 +1,3 @@
-<% if params[:kind] == :adult %>
-  <% reviews_count = review.customer.reviews.approved.joins(:product, :conditions => { :products => {:products_status => [-2,0,1]}}).count %>
-<% else %>
-  <% reviews_count = review.customer.reviews.approved.joins(:product).where('products_type = ?  and products_status in(?)', Moovies.product_kinds[params[:kind]], [-2,0,1]).count %>
-<% end %>
 <div class="movie-ttl">
   	<h3>
         <a href="<%= customer_reviews_path(:customer_id => review.customers_id) %>"><%= review.customer.nickname %></a>
@@ -18,7 +13,7 @@
         <%= link_to t('.all_critics'), customer_reviews_path(:customer_id => review.customers_id), :class => :all_critics  %>
       </div>
       <strong style="clear: both;"><%= t '.rating' %> :</strong> 
-      <span class="stars"><%= product_review_stars(review, params[:kind]) %></span>
+      <span class="stars"><%= product_review_stars(review, params[:kind]).html_safe %></span>
     </div>
     <p> 
       <strong><%= t '.critic' %> :</strong> 
