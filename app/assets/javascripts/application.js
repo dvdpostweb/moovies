@@ -180,6 +180,26 @@ $(function() {
        image.attr('src','/assets/'+image.attr('name'));
      }
    });
+   $('body').delegate('.trailer', 'click', function(){
+     url = $(this).attr('href');
+     jQuery.facebox(function() {
+       $.ajax({
+           url: url,
+           dataType: 'html',
+           type: 'GET',
+           success: function(data) 
+           { 
+             set_page(url)
+             var regex = new RegExp(".*/products/([0-9]*).*");
+             res = regex.exec(url)
+             send_event('Movie', 'ViewTrailer', res[1],'')
+
+             jQuery.facebox(data); 
+           }
+         });
+     });
+     return false;
+   });
    
 });
 function querySt(hu ,ji) {

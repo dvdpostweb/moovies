@@ -7,7 +7,7 @@ class StreamingTrailer < ActiveRecord::Base
   scope :prefered_audio, lambda {|language_id| where(:language_id => language_id)}
   scope :sub_nil, lambda {|language_id| where(:subtitle_id => nil)}
   
-  scope :prefered_subtitle, lambda {|subtitle_id| where('subtitle_id = ? and language_id <> ?', subtitle_id, subtitle_id ])}
+  scope :prefered_subtitle, lambda {|subtitle_id| where('subtitle_id = ? and language_id <> ?', subtitle_id, subtitle_id)}
   scope :not_prefered, lambda {|language_id| where("language_id != :language_id and (subtitle_id != :language_id or subtitle_id is null)", {:language_id => language_id})}
   
   def self.get_best_version(imdb_id, local)
