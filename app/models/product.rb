@@ -33,6 +33,9 @@ class Product < ActiveRecord::Base
   has_many :uninterested_customers, :through => :uninteresteds, :source => :customer, :uniq => true
   has_many :streaming_products, :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => {:available => 1}
   has_many :tokens, :foreign_key => :imdb_id, :primary_key => :imdb_id
+  has_many :streaming_trailers, :foreign_key => :imdb_id, :primary_key => :imdb_id
+  has_many :tokens_trailers, :foreign_key => :imdb_id, :primary_key => :imdb_id
+  
   #has_many :recommendations
   has_many :recommendations_products, :through => :recommendations, :source => :product
   has_and_belongs_to_many :actors, :join_table => :products_to_actors, :foreign_key => :products_id, :association_foreign_key => :actors_id
@@ -567,4 +570,13 @@ class Product < ActiveRecord::Base
     end
     return ''
   end
+
+  def trailer?
+    ((Rails.env == "production" ? streaming_trailers.available.count > 0 : streaming_trailers.available_beta.count > 0) && tokens_trailers.available.first )
+  end
+
+  def trailer_streaming?
+    ((Rails.env == "production" ? streaming_trailers.available.count > 0 : streaming_trailers.available_beta.count > 0) && tokens_trailers.available.first )
+  end
+
 end

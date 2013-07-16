@@ -6,20 +6,19 @@
 <% audio_title = version.languages.by_language(I18n.locale).first.name %>
 
 <tr>
-	<td width="<%= mobile_request? ? 200 : 435 %>">
+	<td width="<%= 435 %>">
 	  <p class="select_version">
 	     <%= t 'streaming_products.show.kinds_alpha.audio_title' %> 
-	    <img align="absmiddle" src="/images/sound_icon.gif" alt="icon sons">: 
-	    <strong><%= audio_title %></strong><%= mobile_request? ? "<br />" : "|" %> 
+	    <%= image_tag 'sound_icon.gif', :align => :absmiddle, :alt => 'icon sons' %>
+	    <strong><%= audio_title %></strong>|
 	    <%= t 'streaming_products.show.kinds_alpha.sub_title' %>
-	    <img align="absmiddle" src="/images/subtitles_icon.gif" alt="icon sous-titres">: 
+	    <%= image_tag 'subtitles_icon.gif', :align => :absmiddle, :alt => 'icon subtitle' %>
 	    <strong><%= sub_title.capitalize %></strong>
-  	  <% "(en cours...)" if current_trailer == version %>
 	  </p>
 	</td>
-	<td width="<%= mobile_request? ? 150 : 261 %>">
+	<td width="<%= 261 %>">
 	  <p>
-	    <%= link_to "<strong>#{t('.launch')}</strong>", product_trailer_path(:streamin_trailer_id => version.id, :format => :js), :class => "btn_play  qualityvod #{current_trailer == version ? :current : :other}" %>
+	    <%= link_to "<strong>#{t('.launch')}</strong>".html_safe, product_trailer_path(:streamin_trailer_id => version.id), :class => "btn_play  qualityvod #{current_trailer == version ? :current : :other}" %>
 	  </p>
 	</td>
 </tr>

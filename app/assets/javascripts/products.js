@@ -134,5 +134,26 @@ $(function() {
     img.src = url;
     set_page(url)
   }
+  /***trailer ***/
+  $('body').delegate(".linkallversions a", "click", function() {
+    html_item = $(this);
+    content = html_item.html();
+    html_item.html("Loading...");
+    root_item = $('#content_trailer');
+    
+    set_page(html_item.attr('href'))
+    $.ajax({dataType: 'html',
+      url: html_item.attr('href'),
+      type: 'GET',
+      data: {},
+      success: function(data) {
+        root_item.html(data);
+      },
+      error: function() {
+        html_item.html(content);
+      }
+    });
+    return false;
+  });
 });
 

@@ -118,7 +118,8 @@ class ProductsController < ApplicationController
     @tokens = current_customer.get_all_tokens_id(params[:kind], @product.imdb_id) if current_customer
     #to do @filter = get_current_filter({})
     unless request.xhr?
-      #to do @trailer =  @product.trailer?
+      @trailer =  @product.trailer?
+      Rails.logger.debug { "@@@#{@trailer.inspect}" }
       data = @product.description_data(true)
       @product_title = data[:title]
       @product_image = data[:image]
@@ -216,27 +217,25 @@ class ProductsController < ApplicationController
         trailers = @product.trailers.by_language(I18n.locale).paginate(:per_page => 1, :page => params[:trailer_page])
     end
     Customer.send_evidence('ViewTrailer', @product.to_param, current_customer, request, {:response_id => params[:response_id], :segment1 => @source, :formFactor => view_context.format_text(@browser), :rule => @source})
-    respond_to do |format|
-      format.js   {
-        if trailer.class.name == 'StreamingTrailer'
-          render :partial => 'products/trailer', :locals => {:trailer => trailer, :trailers => trailers}
-        elsif trailers.first
-          render :partial => 'products/trailer', :locals => {:trailer => trailers.first, :trailers => trailers}
-        else
-          render :text => 'error'
+    if request.xhr?
+      if trailer.class.name == 'StreamingTrailer'
+        Rails.logger.debug { "@@@" }
+        render :partial => 'products/trailer', :locals => {:trailer => trailer, :trailers => trailers}
+      elsif trailers.first
+        render :partial => 'products/trailer', :locals => {:trailer => trailers.first, :trailers => trailers}
+      else
+        render :text => 'error'
+      end
+    else
+      @trailer = trailers
+      if trailers.first && trailers.first.url
+        redirect_to trailers.first.url
+      elsif trailers.first
+        if 1==0 #to do mobile_request?
+            render :partial => 'products/trailer', :locals => {:trailer => trailers.first, :trailers => trailers}, :layout => 'application'
         end
-      }
-      format.html do
-        @trailer = trailers
-        if trailers.first && trailers.first.url
-          redirect_to trailers.first.url
-        elsif trailers.first
-          if mobile_request?
-              render :partial => 'products/trailer', :locals => {:trailer => trailers.first, :trailers => trailers}, :layout => 'application'
-          end
-        else
-          redirect_to product_path(:id => @product.to_param, :source => @source)
-        end
+      else
+        redirect_to product_path(:id => @product.to_param, :source => @source)
       end
     end
   end

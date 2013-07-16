@@ -110,5 +110,10 @@ module Moovies
         :en => 3
       })
     end
+
+    def streaming_url
+      "vod.dvdpost.be"
+    end
+    
   end
 end
