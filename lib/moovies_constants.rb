@@ -95,5 +95,20 @@ module Moovies
     def local_product_publics
       product_publics.invert
     end
+
+    def hours
+      HashWithIndifferentAccess.new.merge({
+        :adult => 48,
+        :normal => 48,
+      })
+    end
+
+    def customer_languages
+      HashWithIndifferentAccess.new.merge({
+        :fr => 1,
+        :nl => 2,
+        :en => 3
+      })
+    end
   end
 end

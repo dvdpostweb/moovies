@@ -337,27 +337,18 @@ class Product < ActiveRecord::Base
   end
   
   def preview_image(id, kind)
-    if kind == :adult
-      File.join(Moovies.imagesx_preview_path, "#{products_model}#{id}.jpg")
-    else
-      File.join(Moovies.images_preview_path, "#{imdb_id}_#{id}.jpg")
-    end
+    path = kind == :adult ? Moovies.imagesx_preview_path : Moovies.images_preview_path
+    File.join(path,'small', "#{imdb_id}_#{id}.jpg")
   end
 
   def trailer_image(kind)
-    if kind == :adult
-      File.join(Moovies.imagesx_trailer_path, "#{id}.jpg")
-    else
-      File.join(Moovies.images_trailer_path, "#{id}.jpg")
-    end
+    path = kind == :adult ? Moovies.imagesx_trailer_path : Moovies.images_trailer_path
+    File.join(path, "#{id}.jpg")
   end
 
   def banner_image(kind)
-    if kind == :adult
-      File.join(Moovies.imagesx_banner_path, "#{id}.jpg")
-    else
-      File.join(Moovies.images_banner_path, "#{id}.jpg")
-    end
+    path = kind == :adult ? Moovies.imagesx_banner_path : Moovies.images_banner_path
+    File.join(path, "#{id}.jpg")
   end
 
   def rating(customer = nil)
@@ -380,7 +371,7 @@ class Product < ActiveRecord::Base
   end
 
   def is_new?
-    created_at < Time.now && available_at && available_at > 3.months.ago && products_next == 0
+    created_at < Time.now && available_at && available_at > 3.months.ago
   end
 
   def series?

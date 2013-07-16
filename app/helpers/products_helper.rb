@@ -1,4 +1,27 @@
 module ProductsHelper
+
+  def get_reviews()
+    if params[:sort]
+      sort = Review.sort2[params[:sort].to_sym]
+      review_sort = params[:sort].to_sym
+      cookies[:review_sort] = { :value => params[:sort], :expires => 1.year.from_now }
+    else
+      if cookies[:review_sort]
+        sort =  Review.sort2[cookies[:review_sort].to_sym]
+        review_sort = cookies[:review_sort].to_sym
+      else
+        sort =  Review.sort2[:date]
+        review_sort = :date
+      end
+    end
+    if sort != Review.sort2[:interesting]
+      reviews = @product.reviews.approved.ordered("#{sort} DESC, (customers_best_rating - customers_bad_rating ) DESC, customers_best_rating DESC").by_language(I18n.locale).includes([:product, :customer]).paginate(:page => params[:reviews_page], :per_page => 3)
+    else
+      reviews = @product.reviews.approved.ordered("(customers_best_rating - customers_bad_rating ) DESC, customers_best_rating desc, date_added DESC").by_language(I18n.locale).includes([:product, :customer]).paginate(:page => params[:reviews_page], :per_page => 3)
+    end
+    {:review_sort => review_sort, :reviews =>reviews }
+  end
+
   def hide_wishlist_if_seen
     session[:indicator_stored] || !current_customer ? javascript_tag("$('#indicator-tips').hide();") : ''
   end
@@ -86,10 +109,10 @@ module ProductsHelper
   end
 
   def rating_review_image_links(product, replace=nil)
-    links = []
+    links = ''
     5.times do |i|
       i += 1
-      links << rating_review_image_link(product, i, replace)
+      links += rating_review_image_link(product, i, replace)
     end
     links
   end
@@ -160,7 +183,7 @@ module ProductsHelper
     s = size == :long || size == 'long' ? '19x19' : '12x12'
     image = image_tag(image_name, :class => class_name, :id => "star_#{product.id}_#{value}", :name => image_name, :size => s)
     
-    if current_customer && class_name == 'star' && !mobile_request?
+    if current_customer && class_name == 'star'
       link_to(image, product_rating_path(:product_id => product, :value => value, :background => background, :size => size, :replace => replace, :recommendation => recommendation, :response_id => response_id, :source => source))
     else
       image
@@ -537,4 +560,5 @@ module ProductsHelper
       end
     end
   end
+
 end

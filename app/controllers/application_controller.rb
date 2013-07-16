@@ -1,7 +1,10 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  helper :all
   before_filter :set_locale
   before_filter :get_wishlist_source
+  before_filter :set_browser
+  
   layout :layout_by_resource
 
   protected
@@ -21,6 +24,7 @@ class ApplicationController < ActionController::Base
     else
       I18n.locale = :fr
     end
+    current_customer.update_locale(locale) if current_customer
   end
 
   def get_wishlist_source
@@ -29,6 +33,10 @@ class ApplicationController < ActionController::Base
     wl_source.each do |item|
       @wishlist_source[item.name.downcase.to_sym] = item.to_param
     end
+  end
+
+  def set_browser
+    @browser = 'empty'
   end
 
   private
