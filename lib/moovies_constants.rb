@@ -114,6 +114,13 @@ module Moovies
     def streaming_url
       "vod.dvdpost.be"
     end
+
+    def actor_kinds
+      HashWithIndifferentAccess.new.merge({
+        :normal => 'DVD_NORM',
+        :adult => 'DVD_ADULT'
+      })
+    end
     
   end
 end

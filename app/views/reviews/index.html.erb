@@ -2,16 +2,12 @@
   <div class="reviews" id="title">
   <% reviews_count = @reviews_count %>
   <% if reviews_count > 1 %>
-    <%= t('.critics', :nickname =>  @customer.customer_attribute.nickname, :count => reviews_count) %>
+    <%= t('.critics', :nickname =>  @customer.nickname, :count => reviews_count, :default => "les %{count} critiques de %{nickname}") %>
   <% else %>
-    <%= t('.critic', :nickname =>  @customer.customer_attribute.nickname, :count => reviews_count) %>
+    <%= t('.critic', :nickname =>  @customer.nickname, :count => reviews_count, :default => "les %{count} critiques de %{nickname}") %>
   <% end %>
   </div>
   
-  <div class="header_review">
-    <%= image_tag(get_avatar(@customer), :alt => 'user-thumb', :title => 'user-thumb', :width => 85) %>
-    <%= customer_awards(@customer, @customer.customer_attribute.points) %>
-  </div>
   <div class="clear"></div>
 
 
