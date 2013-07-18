@@ -30,7 +30,7 @@
   cursor: default;
 }
 
-.tab-container .panel-container {
+#film-details .tab-container .panel-container {
   background: #6c7b89 url(image_path('tabs-film-bg.png')) 0 0 repeat-x;
   min-height: 202px;
   padding: 20px 20px 12px;
@@ -39,11 +39,11 @@
   color: #1b2228;
 }
 
-.tab-container {
+#film-details .tab-container {
   margin: 0 -20px;
 }
 
-.panel-container .thumb {
+#film-details .panel-container .thumb {
   display: block;
   float: left;
   margin-right: 12px;
@@ -53,15 +53,15 @@
   overflow: hidden;
 }
 
-.panel-container .vote {
+#film-details .panel-container .vote {
   margin-bottom: 10px;
 }
 
-.panel-container .vote img {
+#film-details .panel-container .vote img {
   margin-right: 6px;
 }
 
-.panel-container a.more {
+#film-details .panel-container a.more {
   font-weight: bold;
   color: #a3c41b;
 }

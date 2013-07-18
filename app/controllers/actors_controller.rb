@@ -1,5 +1,6 @@
 class ActorsController < ApplicationController
   def index
+    @body_id = 'actors'
     #require_dependency "#{Rails.root}/app/models/actor.rb"
     if !params[:letter]
       fragment_name = session[:sexuality] == 1 ? "actors_x_gay_hash" : "actors_x_hetero_hash"
