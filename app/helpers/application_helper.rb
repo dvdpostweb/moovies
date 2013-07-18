@@ -39,4 +39,35 @@ module ApplicationHelper
     nil
   end
 
+  def get_current_filter(options = {})
+    if cookies[:filter_id]
+      current_filter = SearchFilter.get_filter(cookies[:filter_id])
+      unless current_filter.to_param
+        current_customer.customer_attribute.update_attributes(:filter_id => nil) if current_customer
+        cookies.delete :filter_id
+      end
+      if !options.empty?
+        current_filter.update_with_defaults(options)
+      end
+    else
+      if current_customer && current_customer.customer_attribute.filter_id
+        cookies[:filter_id] = { :value => current_customer.customer_attribute.filter_id, :expires => 1.year.from_now }
+        current_filter = SearchFilter.get_filter(current_customer.customer_attribute.filter_id)
+        unless current_filter.to_param
+          current_customer.customer_attribute.update_attributes(:filter_id => nil) if current_customer
+          cookies.delete :filter_id
+        end
+        if !options.empty?
+          current_filter.update_with_defaults(options)
+        end
+      else
+        current_filter = SearchFilter.get_filter(nil)
+        current_filter.update_with_defaults(options)
+        cookies[:filter_id] = { :value => current_filter.to_param, :expires => 1.year.from_now }
+        current_customer.customer_attribute.update_attributes(:filter_id => current_filter.to_param) if current_customer
+      end
+    end
+    current_filter
+  end
+
 end

@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   helper :all
   before_filter :set_locale
   before_filter :get_wishlist_source
-  before_filter :set_browser
+  before_filter :init
   
   layout :layout_by_resource
 
@@ -35,8 +35,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def set_browser
+  def init
     @browser = 'empty'
+    params[:kind] = params[:kind].to_sym
   end
 
   private

@@ -22,7 +22,7 @@ class Token < ActiveRecord::Base
     Token.recent(2.days.ago.localtime, Time.now).each do |token|
       filename = token.streaming_products.alpha.first.filename
       puts filename
-      token_string = DVDPost.generate_token_from_alpha(filename, :normal)
+      token_string = Moovies.generate_token_from_alpha(filename, :normal)
       puts token_string
       token.update_attribute(:token, token_string)
     end
