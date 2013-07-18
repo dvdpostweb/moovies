@@ -6,7 +6,7 @@ class Customer < ActiveRecord::Base
   self.primary_key = :customers_id
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   alias_attribute :abo_active,                   :customers_abo
   alias_attribute :last_name,                    :customers_lastname

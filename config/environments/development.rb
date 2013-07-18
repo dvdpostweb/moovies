@@ -30,5 +30,9 @@ Moovies::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
   config.i18n.available_locales = [:fr, :nl, :en]
-  config.secret_token = '4a0da00283de30200da69abbc3802f03b4bd63d0531baaec85b9bd3d3e83e2f204e538cd9445c0ec292cbb0382fe6673fe34ab401d8b7d4f788e84e1eab4027b'  
+  config.secret_token = '4a0da00283de30200da69abbc3802f03b4bd63d0531baaec85b9bd3d3e83e2f204e538cd9445c0ec292cbb0382fe6673fe34ab401d8b7d4f788e84e1eab4027b'
+  config.action_mailer.default_url_options = {
+        :host => 'localhost:3000',
+        :only_path => false
+  }
 end

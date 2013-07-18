@@ -127,7 +127,6 @@ class ProductsController < ApplicationController
       @product.views_increment(@product_description)
       @categories = @product.categories
       @token = current_customer ? current_customer.get_token(@product.imdb_id) : nil
-      @collections = Collection.by_size.random if params[:kind] == :adult
     end
     @response_id = params[:response_id]
     
