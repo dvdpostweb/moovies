@@ -5,11 +5,16 @@ nl:
       not_found: "is niet gevonden"
       already_confirmed: "is reeds bevestigd"
       not_locked: "is niet gesloten"
-      not_saved: "is niet opgeslagen"
+      not_saved:
         one: "Kon %{resource} niet opslaan:"
         other: "Kon %{resource} niet opslaan:"
 
   devise:
+    shared:
+      links:
+        sign_up: 'Sign up'
+        forget_password: 'Wachtwoord vergeten?'
+        no_confirmation: "Heeft u geen instructies ontvangen?"
     failure:
       already_authenticated: 'U bent al ingelogd.'
       unauthenticated: 'U dient zich in te loggen of u in te schrijven.'
@@ -37,6 +42,15 @@ nl:
       signed_in: 'U bent succesvol ingelogd.'
       signed_out: 'U bent succesvol uitgelogd.'
     passwords:
+      new:
+        forgot_pass: Password forgotten?
+        sent: "Ontvang instructies om uw wachtwoord te resetten"
+        email: email
+      edit:          
+        change_pass: 'Change your password'
+        pass: "New password"
+        confirm_pass: "Confirm new password"
+        sent: "Change"
       send_instructions: 'U ontvangt via e-mail instructies om uw wachtwoord te resetten.'
       send_paranoid_instructions: 'Indien uw e-mail adres zich in onze database bevindt, ontvangt u via e-mail instructies om uw wachtwoord te resetten.'
       updated: 'Uw wachtwoord is gewijzigd. U bent nu ingelogd.'
@@ -65,5 +79,10 @@ nl:
         subject: 'Bevestiging e-mailadres'
       reset_password_instructions:
         subject: 'Wachtwoord resetten'
+        change_pass: 'Change my password'
+        Hello: Hello
+        description: Someone has requested a link to change your password. You can do this through the link below.
+        alert1: "If you didn't request this, please ignore this email."
+        alert2: "Your password won't change until you access the link above and create a new one."
       unlock_instructions:
         subject: 'Account deblokkeren'
