@@ -1,19 +1,45 @@
 Moovies::Application.routes.draw do
 
   root :to => 'home#index'
-  scope '(:locale)', :locale => /en|fr|nl/ do
+  scope '(:locale)/(:kind)', :locale => /en|fr|nl/, :kind => /normal|adult/, :defaults => {:kind => "normal"} do
     root :to => 'home#index'
     devise_for :customers
-    resources :customers
+    resources :customers do
+      resources :reviews, :only => [:index]
+    end
+    resources :reviews, :only => :show do
+      resource :review_rating, :only => :create
+    end
     resources :messages
     resources :tickets do
       resources :message_tickets, :only => [:create]
     end
-    resources :products, :only => [:show, :index]
+    resources :products, :only => [:index, :show] do
+      resource :rating, :only => :create
+      resources :reviews, :only => [:new, :create]
+      resources :tokens, :only => [:new, :create]
+      match 'step' => 'products#step'
+      match 'awards'=> 'products#awards'
+      match 'seen' => 'products#seen'
+      match 'trailer' => 'products#trailer'
+      match 'uninterested' => 'products#uninterested'
+    end
+
+    concern :productable do
+      resources :products, :only => :index
+    end
+
+    resources :categories, :only => [:index], concerns: :productable
+    resources :actors, :only => [:index], concerns: :productable
+    resources :directors, :only => [], concerns: :productable
+    resources :studios, :only => [:index], concerns: :productable
     resources :phone_requests, :only => [:new, :create]
     get 'faq', :to => 'messages#faq'
     match 'info/:page_name' => 'info#index', :as => :info
     match 'steps/:page_name' => 'steps#index', :as => :step
+    resources :watchlists, :as => :vod_wishlists
+    get 'display_vod', :to => 'watchlists#display_vod'
+    
   end
   # The priority is based upon order of creation:
   # first created -> highest priority.

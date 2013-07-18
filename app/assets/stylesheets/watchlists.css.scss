@@ -1,0 +1,270 @@
+#faq-intro-wrap {
+background: url(image_path('bg_faq.jpg')) no-repeat;
+height: 407px;
+}
+#faq-intro-wrap.fr {
+background: url(image_path('bg_faq_fr.jpg')) no-repeat -46px 70px;;
+}
+#faq-intro-wrap.nl {
+background: url(image_path('bg_faq_nl.jpg')) no-repeat -46px 70px;;
+}
+#faq-intro-wrap.en {
+background: url(image_path('bg_faq_en.jpg')) no-repeat -46px 70px;;
+}
+
+#faq-intro-wrap h2 {
+font-size: 2em;
+margin-bottom: 15px;
+border:none;
+text-indent:0px;
+margin-left:24px;
+}
+#faq-intro-wrap h2 {
+color: #85B91A;
+font-size: 24px;
+text-transform: uppercase;
+padding-top: 14px;
+}
+.adult #faq-intro-wrap h2 {
+  color: #BD1F83;
+}
+#faq-intro-wrap h2 span {
+color: #191E23;
+font-size: 24px;
+font-weight: lighter;
+}
+#faq-intro-wrap h3 {
+  color: #191E23;
+  font-size: 21px;
+  padding-left: 564px;
+  text-align: center;
+  text-transform: uppercase;
+  padding-top: 285px;
+  font-family: Arial,Helvetica,sans-serif !important;
+  font-weight: bold;
+}
+#faq-intro-wrap h3 a {
+color: #85B91A;
+font-size: 14px;
+text-decoration: underline;
+text-transform: none;
+}
+.adult #faq-intro-wrap h3 a {
+  color: #BD1F83;
+}
+#faq-intro-wrap h3 span {
+color: #191E23;
+font-size: 20px;
+text-transform: uppercase;
+font-weight: lighter;
+}
+#faq-intro-wrap p
+{
+  margin-top: 10px;
+}
+#faq-intro-wrap p a {
+  background: url(image_path('play.png')) no-repeat scroll 0 -3px transparent;
+  line-height: 7px;
+  margin-left: 100px;
+  padding-left: 25px;
+}
+.gallery a.regarder {
+background-position: -352px -32px;
+width:69px;
+padding-left:26px;
+}
+a.louer
+{
+  width: 107px;
+  background: url(image_path('sprite.png')) -493px -256px;
+  margin:2px 0 0 0
+}
+#on-way-nav {
+display: block;
+text-align: right;
+position: absolute;
+right: 0;
+}
+#on-way-nav li a {
+color: #FF4B00;
+}
+#mywhishlist h2 {
+padding: 28px 0 4px;
+text-indent: 24px;
+color: #FF3200;
+font-size: 1.33em;
+border-bottom: 1px solid #9E9FA2;
+font-family: Arial,Helvetica,sans-serif !important;
+}
+#in-progress{
+position: relative;
+}
+#ready, #coming{
+position: relative;
+}
+.list-show-by{
+position: absolute;
+right: 10px;
+top: -32px;
+}
+.list-show-by .gallery{
+display: inline-block;
+width: 11px;
+height: 11px;
+background: url(image_path('list-show-by.png')) no-repeat right bottom;
+text-indent: -10000px; 
+vertical-align: middle;
+}
+.list-show-by .gallery.selected, .list-show-by .gallery:hover{
+background: url(image_path('list-show-by.png')) no-repeat right top;
+}
+.list-show-by .list{
+display: inline-block;
+width: 11px;
+height: 11px;
+background: url(image_path('list-show-by.png')) no-repeat left bottom;
+text-indent: -10000px; 
+vertical-align: middle;
+margin: 0 2px 0 8px;
+}
+.list-show-by .list.selected, .list-show-by .list:hover{
+background: url(image_path('list-show-by.png')) no-repeat left top;
+}
+#in-progress .status, #ready .status, #coming .status{
+text-align: right;
+}
+#in-progress .status .time-remaining{
+display: block;
+/*background: url(image_path('time-remaining.png')) no-repeat;*/
+padding: 0 30px;
+color: #191E23;
+float: left;
+}
+
+#ready .status .alert{
+display: block;
+font-weight: normal;
+color: #ff3200;
+float: left;
+}
+#ready .status .pay-per-view{
+display: block;
+padding: 0 6px;
+height: 16px;
+margin: 5px 0 0;
+font-weight: normal;
+color: white;
+background: #27C182;
+float: left;
+text-transform: uppercase;
+line-height: 16px;
+}
+
+#ready .status .streaming_btn, #ready .streaming_btn_replay, #in-progress .status .streaming_btn_replay {
+display: inline-block;
+width: 91px;
+height: 15px;
+line-height:15px;
+color: #fff;
+font-size:10px;
+font-weight: bold;
+text-transform: uppercase;
+background: url(image_path('watch-vod.png')) no-repeat;
+vertical-align: middle;
+margin: 0 12px 0 0;
+text-align: center;
+}
+#ready.gallery .status .streaming_btn, #ready.gallery .streaming_btn_replay, .gallery .streaming_btn_replay {
+  margin: 0 !important;
+}
+.gallery .title
+{
+  line-height: 15px !important;
+}
+#in-progress .status .streaming_btn_replay
+{
+  margin: 6px 26px 0 0;
+  
+}
+#ready .status .rent{
+display: inline-block;
+width: 91px;
+height: 15px;
+line-height:15px;
+color: #fff;
+font-size:10px;
+font-weight: bold;
+text-transform: uppercase;
+background: url(image_path('rent-vod.png')) no-repeat;
+vertical-align: middle;
+margin: 0 12px 0 0;
+text-align: center;
+}
+#ready .status .trash{
+display: inline-block;
+float: none;
+width: auto;
+vertical-align: middle;
+margin: 0;
+}
+#coming .status .trash{
+display: inline-block;
+float: none;
+width: auto;
+margin: 5px 0 0;
+}
+#coming .status .alert{
+display: block;
+font-weight: normal;
+color: #4f4f4f;
+float: left;
+}
+.vod .title{
+  padding-left: 29px;
+  padding-top: 7px;
+  width: 494px;
+  background: none;
+  font-size: 14px;
+  font-weight: bold;
+  height: 22px;
+}
+.vod .title a {
+  color: #454545;
+}
+#coming .vod .title a {
+  color: #7d7d7d;
+}
+.title-info {
+  clear: both;
+}
+
+.title-info p {
+  background: transparent;
+  font-size: 0.92em;
+  margin: 0;
+  padding-bottom: 5px;
+  padding-left: 62px;
+  padding-top: 3px;
+}
+
+.title-info .title {
+  background: transparent;
+}
+ #mywhishlist .vod {
+border-bottom: 1px solid #9E9FA2;
+}
+.wishlist_remove {
+background: url(image_path('trash-icon.png')) no-repeat scroll 0 0 transparent;
+border: 0 none;
+cursor: pointer;
+height: 15px;
+text-indent: -999em;
+width: 11px;
+}
+.box .status {
+width: 351px;
+}
+.box .availability, .box .status {
+float: left;
+width: 158px;
+}

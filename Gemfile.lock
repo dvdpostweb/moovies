@@ -66,9 +66,13 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    friendly_id (4.0.9)
     hike (1.2.3)
     i18n (0.6.1)
+    innertube (1.0.2)
     journey (1.0.4)
+    jquery-form-rails (1.0.1)
+      jquery-rails
     jquery-rails (3.0.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
@@ -81,9 +85,10 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     memcache-client (1.8.5)
+    middleware (0.1.0)
     mime-types (1.23)
     multi_json (1.7.7)
-    mysql2 (0.3.11)
+    mysql2 (0.3.12b5)
     orderedhash (0.0.6)
     orm_adapter (0.4.0)
     polyglot (0.3.3)
@@ -112,6 +117,11 @@ GEM
     rake (10.1.0)
     rdoc (3.12.2)
       json (~> 1.4)
+    riddle (1.5.7)
+    routing_concerns (0.1.0)
+      actionpack (>= 3.2.0)
+      activemodel (>= 3.2.0)
+      railties (>= 3.2.0)
     rspec-core (2.14.2)
     rspec-expectations (2.14.0)
       diff-lcs (>= 1.1.3, < 2.0)
@@ -135,6 +145,12 @@ GEM
       tilt (~> 1.1, != 1.3.0)
     therubyracer (0.10.0)
       libv8 (~> 3.3.10)
+    thinking-sphinx (3.0.4)
+      activerecord (>= 3.1.0)
+      builder (>= 2.1.2)
+      innertube (>= 1.0.2)
+      middleware (>= 0.1.0)
+      riddle (>= 1.5.7)
     thor (0.18.1)
     tilt (1.4.1)
     treetop (1.4.14)
@@ -159,16 +175,20 @@ DEPENDENCIES
   devise
   dynamic_form
   execjs
+  friendly_id (~> 4.0.9)
   i18n-active_record!
+  jquery-form-rails
   jquery-rails
   jquery-ui-rails
   json
   memcache-client (~> 1.8.5)
-  mysql2
+  mysql2 (= 0.3.12b5)
   orderedhash
   rails (= 3.2.13)
+  routing_concerns (~> 0.1.0)
   rspec-rails (>= 2.0.1)
   sass-rails
   therubyracer (= 0.10.0)
+  thinking-sphinx
   uglifier
   will_paginate

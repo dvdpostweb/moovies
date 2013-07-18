@@ -6,7 +6,7 @@ class Category < ActiveRecord::Base
   has_and_belongs_to_many :products, :join_table => :products_to_categories, :foreign_key => :categories_id, :association_foreign_key => :products_id
   has_many :children, :class_name => 'Category', :foreign_key => :parent_id
 
-  scope :by_kind, lambda {|kind| {where(:categories_type => DVDPost.product_kinds[kind])}
+  scope :by_kind, lambda {|kind| where(:categories_type => Moovies.product_kinds[kind])}
   scope :movies, where(:product_type => 'Movie')
   scope :roots, where(:parent_id => 0)
   scope :visible_on_homepage, where(:show_home => 'YES')
@@ -29,11 +29,11 @@ class Category < ActiveRecord::Base
   end
 
   def image
-    File.join(DVDPost.images_path, "categories", "#{id}.jpg")
+    File.join(Moovies.images_path, "categories", "#{id}.jpg")
   end
 
   def image_vod
-    File.join(DVDPost.images_path, "categories", "#{id}_vod.jpg")
+    File.join(Moovies.images_path, "categories", "#{id}_vod.jpg")
   end
 
 end

@@ -1,0 +1,8 @@
+<% if @div %>
+  $('#<%= @div %>').remove();
+<% else %>
+  <% if @product %>
+  $("#<%= @submit_id %>").replaceWith('<%= escape_javascript render :partial => 'products/vod_list', :locals => {:product => @product, :source => params[:source], :response_id => params[:response_id]} %>')
+  <% end %>
+<% end %>
+jQuery(document).trigger('close.facebox');
