@@ -121,6 +121,23 @@ module Moovies
         :adult => 'DVD_ADULT'
       })
     end
+
+    def generate_token_from_alpha(filename, kind, test)
+      if kind == :adult
+        time = 432000
+      else
+        time = 172800
+      end
+      
+      url = "http://wesecure.alphanetworks.be/Webservice?method=createToken&key=acac0d12ed9061049880bf68f20519e65aa8ecb7&filename=#{filename}&lifetime=#{time}&simultIp=1&test=#{test}"
+      data = open(url, :http_basic_authentication => ["dvdpost", "sup3rnov4$$"])
+      node = Hpricot(data).search('//createtoken')
+      if node.at('status').innerHTML == 'success'
+        node.at('response').innerHTML
+      else
+        false
+      end
+    end
     
   end
 end
