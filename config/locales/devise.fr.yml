@@ -10,6 +10,11 @@ fr:
         other: "%{count} erreurs ont empêché ce(tte) %{resource} d'être sauvegardé(e) :"
 
   devise:
+    shared:
+      links:
+        sign_up: 'Sign up'
+        forget_password: 'Vous avez oublié votre mot de passe?'
+        no_confirmation: "Vous n'avez pas reçu les instructions de confirmation?"
     failure:
       already_authenticated: "Vous êtes déjà connecté !"
       unauthenticated: "Vous devez vous connecter ou vous inscrire pour continuer."
@@ -20,6 +25,8 @@ fr:
       timeout: "Votre session est expirée, veuillez vous reconnecter pour continuer."
       inactive: "Votre compte n'est pas encore activé."
     sessions:
+      signed_in: "Connecté."
+      signed_out: "Déconnecté."
       new:
         home: Accueil
         help: Aide
@@ -34,9 +41,16 @@ fr:
         connect: Connectez-vous
         warning: Votre mot de passe ou votre login est incorrect.
         remember_me: Se souvenir de moi
-      signed_in: "Connecté."
-      signed_out: "Déconnecté."
     passwords:
+      new:
+        forgot_pass: 'Vous avez oublié votre mot de passe?'
+        sent: "Envoyez-moi les instructions de réinitialisation de mot de passe"
+        email: Adresse e-mail
+      edit:
+        change_pass: 'Changez votre mot de passe'
+        pass: "Nouveau password"
+        confirm_pass: "Confirmation du mot de passe"
+        sent: "Changer"
       send_instructions: 'Vous allez recevoir les instructions de réinitialisation du mot de passe dans quelques instants'
       updated: 'Votre mot de passe a été édité avec succès, vous êtes maintenant connecté'
       updated_not_active: 'Votre mot de passe a été changé avec succès.'
@@ -66,5 +80,10 @@ fr:
         subject: "Instructions de confirmation"
       reset_password_instructions:
         subject: "Instructions pour changer le mot de passe"
+        change_pass: 'Changer mon mot de passe'
+        Hello: Bonjour
+        description: Quelqu'un a demandé un changement de mot de passe. Vous pouvez le faire via le lien ci-dessous.
+        alert1: "Si vous n'avez pas demandé ce changement, s'il vous plaît ignorer ce message."
+        alert2: "Your password won't change until you access the link above and create a new one."
       unlock_instructions:
         subject: "Instructions pour déverrouiller le compte"

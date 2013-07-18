@@ -1,8 +1,6 @@
 <div id="top" class="<%= "promo" if !current_customer && cookies['url_promo'] %>">
   <div class="wrap">
     <% if current_customer %>
-    <% Rails.logger.debug { "@@@#{params.inspect}" }%>
-    <% Rails.logger.debug { "@@@#{params[:locale]}" }%>
       <%= link_to t('.compte'), customer_path(:id => current_customer) %>
       <%= "#{link_to t('.logout'), destroy_customer_session_path, :id => :logout, :method => :delete} <span>(#{current_customer.email})</span>".html_safe %>
     <% else %>
