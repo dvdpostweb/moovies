@@ -1,4 +1,6 @@
 class WatchlistsController < ApplicationController
+  before_filter :authenticate_customer!
+
   def index
     @body_id = "mywhishlist"
     @tokens = current_customer.get_all_tokens_id(params[:kind])
