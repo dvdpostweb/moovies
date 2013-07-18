@@ -58,7 +58,7 @@ module ApplicationHelper
         current_filter.update_with_defaults(options)
       end
     else
-      if current_customer && current_customer.customer_attribute.filter_id
+      if current_customer && current_customer.filter_id
         cookies[:filter_id] = { :value => current_customer.customer_attribute.filter_id, :expires => 1.year.from_now }
         current_filter = SearchFilter.get_filter(current_customer.customer_attribute.filter_id)
         unless current_filter.to_param
@@ -72,7 +72,7 @@ module ApplicationHelper
         current_filter = SearchFilter.get_filter(nil)
         current_filter.update_with_defaults(options)
         cookies[:filter_id] = { :value => current_filter.to_param, :expires => 1.year.from_now }
-        current_customer.customer_attribute.update_attributes(:filter_id => current_filter.to_param) if current_customer
+        current_customer.update_attributes(:filter_id => current_filter.to_param) if current_customer
       end
     end
     current_filter

@@ -34,15 +34,12 @@ p#filter a:hover, p#filter a.active {
 /****/
 
 
-.container { background: #fff;}
-.container2 { padding: 0 0 0 45px; background: #fff;}
-.container ul, .container ol, .container dl {
+#actors .container { background: #fff;}
+#actors .container2 { padding: 0 0 0 45px; background: #fff;}
+#actors  .container ul, .container ol, .container dl {
     line-height: 1.4em;
 }
-body {
-  text-shadow: none;
-}
-p {
+#actors p {
     line-height: 1.4em;
     margin-bottom: 18px;
 }
@@ -50,7 +47,7 @@ h1, h2, h3, h4, h5, h6, form, fieldset, p {
     margin: 0;
     padding: 0;
 }
-#wrap {
+#actors #wrap {
     text-align: left;
 }
 /*   Search Studio   */
@@ -289,10 +286,10 @@ ul#search-performers li li a.star {
 {
   color: #666;
 }
-#maincontent {
+#actors #maincontent {
   float: right;
 }
-.container
+#actors .container
 {
   background: #C3D1DB url(image_path('lc-bg.gif')) 0 0 repeat-y;  
 }

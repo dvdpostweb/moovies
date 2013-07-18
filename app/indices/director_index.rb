@@ -1,4 +1,4 @@
-define_index do
+ThinkingSphinx::Index.define :director, :with => :active_record do
   indexes directors_name,                 :as => :directors_name, :sortable => true
 
   set_property :enable_star => true
