@@ -15,8 +15,8 @@ class Token < ActiveRecord::Base
   scope :recent, lambda {|from, to| where(:updated_at=> from..to)}
   scope :by_imdb_id, lambda {|imdb_id| where(:imdb_id=> imdb_id)}
   
-  scope :ordered, :order => 'updated_at asc'
-  scope :ordered_old, :order => 'updated_at desc'
+  scope :ordered, :order => 'tokens.updated_at asc'
+  scope :ordered_old, :order => 'tokens.updated_at desc'
 
   def self.regen
     Token.recent(2.days.ago.localtime, Time.now).each do |token|

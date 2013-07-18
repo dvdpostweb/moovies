@@ -424,12 +424,12 @@ class Customer < ActiveRecord::Base
 
     def get_all_tokens(kind = nil, type = nil, page = 1)
       if type == :old
-        tokens.expired(48.hours.ago.localtime).ordered_old.joins(:products).where(:products => {:products_type => Moovies.product_kinds[kind]}).group(:imdb_id).paginate(:per_page => 20, :page => page)
+        tokens.expired(48.hours.ago.localtime).ordered_old.joins(:products).where(:products => {:products_type => Moovies.product_kinds[kind]}).paginate(:per_page => 20, :page => page)
       else
         if !kind.nil?
-          tokens.available(48.hours.ago.localtime, Time.now).ordered.joins(:streaming_products, :products).where(:streaming_products => { :available => 1 }, :products => {:products_type => Moovies.product_kinds[kind]}).group(:imdb_id)
+          tokens.available(48.hours.ago.localtime, Time.now).ordered.joins(:streaming_products, :products).where(:streaming_products => { :available => 1 }, :products => {:products_type => Moovies.product_kinds[kind]})
         else
-          tokens.available(48.hours.ago.localtime, Time.now).ordered.joins(:streaming_products, :products).where(:streaming_products => { :available => 1 }).group(:imdb_id)
+          tokens.available(48.hours.ago.localtime, Time.now).ordered.joins(:streaming_products, :products).where(:streaming_products => { :available => 1 })
         end
       end
     end

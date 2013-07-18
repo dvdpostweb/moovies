@@ -119,7 +119,6 @@ class ProductsController < ApplicationController
     #to do @filter = get_current_filter({})
     unless request.xhr?
       @trailer =  @product.trailer?
-      Rails.logger.debug { "@@@#{@trailer.inspect}" }
       data = @product.description_data(true)
       @product_title = data[:title]
       @product_image = data[:image]
@@ -219,7 +218,6 @@ class ProductsController < ApplicationController
     Customer.send_evidence('ViewTrailer', @product.to_param, current_customer, request, {:response_id => params[:response_id], :segment1 => @source, :formFactor => view_context.format_text(@browser), :rule => @source})
     if request.xhr?
       if trailer.class.name == 'StreamingTrailer'
-        Rails.logger.debug { "@@@" }
         render :partial => 'products/trailer', :locals => {:trailer => trailer, :trailers => trailers}
       elsif trailers.first
         render :partial => 'products/trailer', :locals => {:trailer => trailers.first, :trailers => trailers}
