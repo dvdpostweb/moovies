@@ -1,0 +1,88 @@
+nl:
+  errors:
+    messages:
+      expired: "is verlopen, gelieve een nieuwe aan te vragen"
+      not_found: "is niet gevonden"
+      already_confirmed: "is reeds bevestigd"
+      not_locked: "is niet gesloten"
+      not_saved:
+        one: "Kon %{resource} niet opslaan:"
+        other: "Kon %{resource} niet opslaan:"
+
+  devise:
+    shared:
+      links:
+        sign_up: 'Sign up'
+        forget_password: 'Wachtwoord vergeten?'
+        no_confirmation: "Heeft u geen instructies ontvangen?"
+    failure:
+      already_authenticated: 'U bent al ingelogd.'
+      unauthenticated: 'U dient zich in te loggen of u in te schrijven.'
+      unconfirmed: 'U dient eerst uw account te bevestigen.'
+      locked: 'Uw account is geblokkeerd.'
+      invalid: 'Ongeldig e-mail of wachtwoord.'
+      invalid_token: 'Ongeldig authenticiteit token.'
+      timeout: 'Uw sessie is verlopen, gelieve opnieuw in te loggen.'
+      inactive: 'Uw account is nog niet geactiveerd.'
+    sessions:
+      new:
+        home: Home
+        help: Help
+        en: English
+        fr: Français
+        nl: Nederlands
+        title: 'Welkom, log u hier in'
+        email_label: E-mailadres
+        pass_label: Wachtwoord
+        forgot_pass: Wachtwoord vergeten?
+        click_here: Klik hier
+        connect: Meld u aan
+        warning: Dit is geen geldig e-mailadres en/of wachtwoord
+        remember_me: Vergeet me niet
+      signed_in: 'U bent succesvol ingelogd.'
+      signed_out: 'U bent succesvol uitgelogd.'
+    passwords:
+      new:
+        forgot_pass: Password forgotten?
+        sent: "Ontvang instructies om uw wachtwoord te resetten"
+        email: email
+      edit:          
+        change_pass: 'Change your password'
+        pass: "New password"
+        confirm_pass: "Confirm new password"
+        sent: "Change"
+      send_instructions: 'U ontvangt via e-mail instructies om uw wachtwoord te resetten.'
+      send_paranoid_instructions: 'Indien uw e-mail adres zich in onze database bevindt, ontvangt u via e-mail instructies om uw wachtwoord te resetten.'
+      updated: 'Uw wachtwoord is gewijzigd. U bent nu ingelogd.'
+      updated_not_active: 'Uw wachtwoord is gewijzigd.'
+    confirmations:
+      send_instructions: 'U ontvangt via e-mail instructies om uw account te activeren.'
+      send_paranoid_instructions: 'Indien uw e-mail adres zich in onze database bevindt,ontvangt u via e-mail instructies om uw account te activeren.'
+      confirmed: 'Uw account is geactiveerd.'
+    registrations:
+      signed_up_but_unconfirmed: 'U ontvangt via e-mail instructies om uw account te activeren.'
+      signed_up_but_inactive: 'U bent inschreven maar u kan niet automatisch ingelogd worden omdat uw account nog niet geactiveerd is.'
+      signed_up_but_locked: 'U bent inschreven maar u kan niet automatisch ingelogd worden omdat uw account geblokkeerd is.'
+      signed_up: 'U bent inschreven.'
+      update_needs_confirmation: 'U heeft uw e-mailadres succesvol gewijzigd, maar u dient het nieuwe e-mail adres te bevestigen. Controleer uw e-mail en klik op de link in de e-mail om uw e-mailadres te bevestigen.'
+      updated: 'Uw account gegevens zijn opgeslagen.'
+      destroyed: 'Uw account is verwijderd, hopelijk tot ziens!'
+    unlocks:
+      send_instructions: 'U ontvangt via e-mail instructies om uw account te deblokkeren.'
+      unlocked: 'U account is niet meer geblokkeerd. U kan weer inloggen.'
+      send_paranoid_instructions: 'Indien uw e-mail adres zich in onze database bevindt, ontvangt u via e-mail instructies om uw account te deblokkeren.'
+    omniauth_callbacks:
+      success: 'Successvol aangemeld met uw %{kind} account.'
+      failure: 'Kon u niet aanmelden met uw %{kind} account, omdat "%{reason}".'
+    mailer:
+      confirmation_instructions:
+        subject: 'Bevestiging e-mailadres'
+      reset_password_instructions:
+        subject: 'Wachtwoord resetten'
+        change_pass: 'Change my password'
+        Hello: Hello
+        description: Someone has requested a link to change your password. You can do this through the link below.
+        alert1: "If you didn't request this, please ignore this email."
+        alert2: "Your password won't change until you access the link above and create a new one."
+      unlock_instructions:
+        subject: 'Account deblokkeren'
