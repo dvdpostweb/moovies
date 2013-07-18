@@ -389,12 +389,13 @@ class Product < ActiveRecord::Base
     end
   end
 
-  def streaming?
-    if Rails.env == "pre_production"
-      streaming_products.count > 0
-    else
-      streaming_products.available.count > 0
-    end  
+  def streaming?(kind =  :normal, country_id = 21)      
+    sql = streaming_products
+    unless Rails.env == "pre_production"
+      sql = sql.available.country('BE')
+    end
+    sql = sql.first
+    sql
   end
 
   def views_increment(desc)

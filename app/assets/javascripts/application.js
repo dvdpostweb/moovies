@@ -14,6 +14,7 @@
 //= require messages
 //= require reviews
 //= require products
+//= require actors
 $(function() {
   $('.facebox').on('click', function() {
     item = $(this);
@@ -113,7 +114,7 @@ $(function() {
      return false;
    });
    
-   $('body').delegate(".star", "click", function() {
+   $('body').delegate(".stars .star", "click", function() {
      url = $(this).parent().attr('href');
      html_item = $(this).parent().parent();
      content = html_item.html();
@@ -155,7 +156,7 @@ $(function() {
      return false;
    });
 
-   $('body').delegate(".star", "mouseover", function(){
+   $('body').delegate(".stars .star", "mouseover", function(){
      data = $(this).attr('id').replace('star_','').split('_');
      product_id = data[0];
      rating_value = data[1];
@@ -172,7 +173,7 @@ $(function() {
      }
    });
 
-    $('body').delegate(".star","mouseout", function() {
+    $('body').delegate(".stars .star","mouseout", function() {
      product_id = $(this).attr('id').replace('star_','').split('_')[0];
      for(var i=1; i<=5; i++)
      {

@@ -10,7 +10,7 @@ class Category < ActiveRecord::Base
   scope :movies, where(:product_type => 'Movie')
   scope :roots, where(:parent_id => 0)
   scope :visible_on_homepage, where(:show_home => 'YES')
-  scope :active, lambda {|kind| where(:active => kind == :adult ? ['YES','NO'] :'YES')}
+  scope :active, where(:active => 'YES')
   scope :remove_themes, where('categories_id != 105')
   scope :hetero, where('categories_id != 76')
   scope :vod, where(:vod => true)
@@ -29,11 +29,11 @@ class Category < ActiveRecord::Base
   end
 
   def image
-    File.join(DVDPost.images_path, "categories", "#{id}.jpg")
+    File.join(Moovies.images_path, "categories", "#{id}.jpg")
   end
 
   def image_vod
-    File.join(DVDPost.images_path, "categories", "#{id}_vod.jpg")
+    File.join(Moovies.images_path, "categories", "#{id}_vod.jpg")
   end
 
 end

@@ -12,15 +12,15 @@ class StreamingTrailer < ActiveRecord::Base
   
   def self.get_best_version(imdb_id, local)
     if Rails.env == "production"
-      streaming = available.prefered_audio(DVDPost.customer_languages[local]).sub_nil.find_by_imdb_id(imdb_id)
+      streaming = available.prefered_audio(Moovies.languages[local]).sub_nil.find_by_imdb_id(imdb_id)
       if streaming.nil?
-        streaming = available.prefered_audio(DVDPost.customer_languages[local]).find_by_imdb_id(imdb_id)
+        streaming = available.prefered_audio(Moovies.languages[local]).find_by_imdb_id(imdb_id)
       end
       if streaming.nil?
-        streaming = available.prefered_subtitle(DVDPost.customer_languages[local]).find_by_imdb_id(imdb_id)
+        streaming = available.prefered_subtitle(Moovies.languages[local]).find_by_imdb_id(imdb_id)
       end
       if streaming.nil?
-        streaming = available.prefered_audio(DVDPost.customer_languages[:en]).find_by_imdb_id(imdb_id)
+        streaming = available.prefered_audio(Moovies.languages[:en]).find_by_imdb_id(imdb_id)
       end
       if streaming.nil?
         streaming = available.find_by_imdb_id(imdb_id)
