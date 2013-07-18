@@ -52,17 +52,18 @@ html, body {
 	width: 380px;
 	color:#29323b;
 }
-#header_login {
-	font-size: 12px;
-	height: 28px;
-	position: relative;
-	text-align: right;
-	width: 100%;
-	padding-bottom: 20px;
-	z-index: 10;
+#login_content_bg {
+    background: none repeat scroll 0 0 #212A31;
+    box-shadow: 0 0 45px #000000;
+    color: #393939;
+    font-size: 16px;
+    font-weight: lighter;
+    height: 100%;
+    padding-bottom: 6px;
+    width: 380px;
 }
 #login_content {
-	padding-top: 10px;
+
 	width: 380px;
 }
 .signup_forms p {
@@ -73,14 +74,14 @@ html, body {
 	width: 100%;
 }
 #login_content h1 {
-	background-attachment: scroll;
-	background-color: transparent;
-	background-image: url(image_path('logo.png'));
-	background-position: center center;
-	background-repeat: no-repeat;
-	display: block;
-	height: 86px;
-	text-align: center;
+    background-attachment: scroll;
+    background-color: transparent;
+    background-image: url("/assets/logo.png");
+    background-position: 107px 0;
+    background-repeat: no-repeat;
+    display: block;
+    height: 86px;
+    text-align: center;
 }
 .like-btn {
 	display: inline-block;
@@ -98,6 +99,13 @@ html, body {
 	color: #FFFFFF;
 	font-size: 13px;
 	text-align: center;
+}
+
+.check_login a {
+    color: #FFFFFF;
+    font-size: 13px;
+    text-align: center;
+text-decoration:underline;
 }
 .link_forget {
 	color: #A3C41B;
