@@ -1,24 +1,24 @@
 nl:
   errors:
     messages:
-      expired: "is verlopen, vraag een nieuwe aan"
-      not_found: "niet gevonden"
+      expired: "is verlopen, gelieve een nieuwe aan te vragen"
+      not_found: "is niet gevonden"
       already_confirmed: "is reeds bevestigd"
       not_locked: "is niet gesloten"
-      not_saved:
-        one: "Kon de %{resource} niet opslaan:"
-        other: "Kon de %{resource} niet opslaan:"
+      not_saved: "is niet opgeslagen"
+        one: "Kon %{resource} niet opslaan:"
+        other: "Kon %{resource} niet opslaan:"
 
   devise:
     failure:
-      already_authenticated: 'Je bent al ingelogd.'
-      unauthenticated: 'Je dient in te loggen of je in te schrijven.'
-      unconfirmed: 'Je dient eerst je account te bevestigen.'
-      locked: 'Je account is gelocked.'
+      already_authenticated: 'U bent al ingelogd.'
+      unauthenticated: 'U dient zich in te loggen of u in te schrijven.'
+      unconfirmed: 'U dient eerst uw account te bevestigen.'
+      locked: 'Uw account is geblokkeerd.'
       invalid: 'Ongeldig e-mail of wachtwoord.'
-      invalid_token: 'Invalide authenticiteit token.'
-      timeout: 'Je sessie is verlopen, log a.u.b. opnieuw in.'
-      inactive: 'Je account is nog niet geactiveerd.'
+      invalid_token: 'Ongeldig authenticiteit token.'
+      timeout: 'Uw sessie is verlopen, gelieve opnieuw in te loggen.'
+      inactive: 'Uw account is nog niet geactiveerd.'
     sessions:
       new:
         home: Home
@@ -26,44 +26,44 @@ nl:
         en: English
         fr: Français
         nl: Nederlands
-        title: 'Welkom, log je hier in'
+        title: 'Welkom, log u hier in'
         email_label: E-mailadres
-        pass_label: Paswoord
-        forgot_pass: Paswoord vergeten?
+        pass_label: Wachtwoord
+        forgot_pass: Wachtwoord vergeten?
         click_here: Klik hier
         connect: Meld u aan
-        warning: Dit is geen geldig e-mailadres en/of paswoord
+        warning: Dit is geen geldig e-mailadres en/of wachtwoord
         remember_me: Vergeet me niet
-      signed_in: 'Je bent succesvol ingelogd.'
-      signed_out: 'Je bent succesvol uitgelogd.'
+      signed_in: 'U bent succesvol ingelogd.'
+      signed_out: 'U bent succesvol uitgelogd.'
     passwords:
-      send_instructions: 'Je ontvangt via e-mail instructies hoe je je wachtwoord moet resetten.'
-      send_paranoid_instructions: 'Als je e-mailadres bestaat in de database, ontvang je via e-mail instructies hoe je je wachtwoord moet resetten.'
-      updated: 'Je wachtwoord is gewijzigd. Je bent nu ingelogd.'
-      updated_not_active: 'Je wachtwoord is gewijzigd.'
+      send_instructions: 'U ontvangt via e-mail instructies om uw wachtwoord te resetten.'
+      send_paranoid_instructions: 'Indien uw e-mail adres zich in onze database bevindt, ontvangt u via e-mail instructies om uw wachtwoord te resetten.'
+      updated: 'Uw wachtwoord is gewijzigd. U bent nu ingelogd.'
+      updated_not_active: 'Uw wachtwoord is gewijzigd.'
     confirmations:
-      send_instructions: 'Je ontvangt via e-mail instructies hoe je je account kan bevestigen.'
-      send_paranoid_instructions: 'Als je e-mailadres bestaat in de database, ontvang je via e-mail instructies hoe je je account kan bevestigen.'
-      confirmed: 'Je account is bevestigd.'
+      send_instructions: 'U ontvangt via e-mail instructies om uw account te activeren.'
+      send_paranoid_instructions: 'Indien uw e-mail adres zich in onze database bevindt,ontvangt u via e-mail instructies om uw account te activeren.'
+      confirmed: 'Uw account is geactiveerd.'
     registrations:
-      signed_up_but_unconfirmed: 'Je ontvangt via e-mail instructies hoe je je account kunt activeren.'
-      signed_up_but_inactive: 'Je bent inschreven. Je kon alleen niet automatisch ingelogd worden omdat je account nog niet geactoveerd is.'
-      signed_up_but_locked: 'Je bent inschreven. Je kon alleen niet automatisch ingelogd worden omdat je account geblokkeerd is.'
-      signed_up: 'Je bent inschreven.'
-      update_needs_confirmation: 'Je hebt je e-mailadres succesvol gewijzigd, maar we moeten je nieuwe mailadres nog verifiëren. Controleer je e-mail en klik op de link in de mail om je mailadres te verifiëren.'
-      updated: 'Je account gegevens zijn opgeslagen.'
-      destroyed: 'Je account is verwijderd, wellicht tot ziens!'
+      signed_up_but_unconfirmed: 'U ontvangt via e-mail instructies om uw account te activeren.'
+      signed_up_but_inactive: 'U bent inschreven maar u kan niet automatisch ingelogd worden omdat uw account nog niet geactiveerd is.'
+      signed_up_but_locked: 'U bent inschreven maar u kan niet automatisch ingelogd worden omdat uw account geblokkeerd is.'
+      signed_up: 'U bent inschreven.'
+      update_needs_confirmation: 'U heeft uw e-mailadres succesvol gewijzigd, maar u dient het nieuwe e-mail adres te bevestigen. Controleer uw e-mail en klik op de link in de e-mail om uw e-mailadres te bevestigen.'
+      updated: 'Uw account gegevens zijn opgeslagen.'
+      destroyed: 'Uw account is verwijderd, hopelijk tot ziens!'
     unlocks:
-      send_instructions: 'Je ontvangt via e-mail instructies hoe je je account kan unlocken.'
-      unlocked: 'Je account is ge-unlocked. Je kan nu weer inloggen.'
-      send_paranoid_instructions: 'Als je e-mailadres bestaat in de database, ontvang je via e-mail instructies hoe je je account kan unlocken.'
+      send_instructions: 'U ontvangt via e-mail instructies om uw account te deblokkeren.'
+      unlocked: 'U account is niet meer geblokkeerd. U kan weer inloggen.'
+      send_paranoid_instructions: 'Indien uw e-mail adres zich in onze database bevindt, ontvangt u via e-mail instructies om uw account te deblokkeren.'
     omniauth_callbacks:
-      success: 'Successvol aangemeld met je %{kind} account.'
-      failure: 'Kon je niet aanmelden met je %{kind} account, omdat "%{reason}".'
+      success: 'Successvol aangemeld met uw %{kind} account.'
+      failure: 'Kon u niet aanmelden met uw %{kind} account, omdat "%{reason}".'
     mailer:
       confirmation_instructions:
-        subject: 'Bevestiging mailadres'
+        subject: 'Bevestiging e-mailadres'
       reset_password_instructions:
         subject: 'Wachtwoord resetten'
       unlock_instructions:
-        subject: 'Unlock instructies'
+        subject: 'Account deblokkeren'
