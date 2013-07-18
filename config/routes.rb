@@ -9,10 +9,11 @@ Moovies::Application.routes.draw do
     resources :tickets do
       resources :message_tickets, :only => [:create]
     end
-    
+    resources :products, :only => [:show, :index]
     resources :phone_requests, :only => [:new, :create]
     get 'faq', :to => 'messages#faq'
-    match 'info/:page_name' => 'info#index', :as => :info 
+    match 'info/:page_name' => 'info#index', :as => :info
+    match 'steps/:page_name' => 'steps#index', :as => :step
   end
   # The priority is based upon order of creation:
   # first created -> highest priority.

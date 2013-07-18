@@ -24,4 +24,12 @@ $(function() {
     });
     return false;
   });
+  $('#catalogue_menu, #account_menu').on('mouseover',function(){
+    id = $(this).attr('id').replace('_menu','')
+    $('#'+id).show()
+  })
+  $('.dropdown').on('mouseleave',function(){
+    id = $(this).attr('id').replace('_menu','')
+    $('#'+id).hide()
+  })
 });
