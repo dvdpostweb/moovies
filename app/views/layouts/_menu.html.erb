@@ -19,12 +19,12 @@
 	<li><a href="#">Abonnements</a></li>
 	<li><a href="#" id="account_menu">Mon compte</a>
 		<ul id="account" class="dropdown" style="display:none">
-			<li>
-				<a href="#">Ma playlist</a>
-			</li>
-			<li>
-				<a href="#">Mes infos</a>
-			</li>
+		<li>
+		  <%= link_to t('.watchlist', :default => 'Ma playlist'), vod_wishlists_path %>
+		</li>
+		<li>
+		<a href="#">Mes infos</a>
+		</li>
 		</ul>
 
 

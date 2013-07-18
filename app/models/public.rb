@@ -8,7 +8,7 @@ class Public < ActiveRecord::Base
   belongs_to :product
 
   def name
-    DVDPost.local_product_publics[to_param.to_i]
+    Moovies.local_product_publics[to_param.to_i]
   end
 
   def image
@@ -18,10 +18,10 @@ class Public < ActiveRecord::Base
   def self.legacy_age_ids(min, max)
     ages = []
     if max.to_i == 0
-      ages << DVDPost.product_publics[:all]
+      ages << Moovies.product_publics[:all]
     else
-      ages << DVDPost.product_publics.keys.collect do |age|
-        DVDPost.product_publics[age] if age != :all && age.to_i.between?(min.to_i, max.to_i)
+      ages << v.product_publics.keys.collect do |age|
+        Moovies.product_publics[age] if age != :all && age.to_i.between?(min.to_i, max.to_i)
       end
     end  
     ages.flatten.uniq.compact

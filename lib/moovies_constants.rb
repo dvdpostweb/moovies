@@ -1,5 +1,44 @@
 module Moovies
   class << self
+    def images_path
+      'http://www.dvdpost.be/images'
+    end
+
+    def imagesx_path
+      'http://www.dvdpost.be/imagesx'
+    end
+
+    def imagesx_preview_path
+      'http://www.dvdpost.be/imagesx/screenshots'
+    end
+
+    def images_preview_path
+      'http://www.dvdpost.be/images/screenshots'
+    end
+
+    def imagesx_trailer_path
+      'http://www.dvdpost.be/imagesx/trailers'
+    end
+
+    def images_trailer_path
+      'http://www.dvdpost.be/images/trailers'
+    end
+
+    def imagesx_banner_path
+      'http://www.dvdpost.be/imagesx/banners'
+    end
+
+    def images_banner_path
+      'http://www.dvdpost.be/images/banners'
+    end
+
+    def images_carousel_path
+      "#{images_path}/landings"
+    end
+
+    def images_carousel_adult_path
+      "#{imagesx_path}/landings"
+    end
 
     def languages
       HashWithIndifferentAccess.new.merge({
@@ -28,10 +67,77 @@ module Moovies
         :en => "http://www.facebook.com/"
       })
     end
-    
+
     def twitter_url
       "http://twitter.com/"
     end
 
+    def product_kinds
+      HashWithIndifferentAccess.new.merge({
+        :normal => 'DVD_NORM',
+        :adult => 'DVD_ADULT',
+        :subscription => 'ABO'
+      })
+    end
+
+    def product_publics
+      HashWithIndifferentAccess.new.merge({
+        'all' => 1,
+        '6' => 5,
+        '10' => 6,
+        '12' => 2,
+        '14' => 7,
+        '16' => 3,
+        '18' => 4
+      })
+    end
+
+    def local_product_publics
+      product_publics.invert
+    end
+
+    def hours
+      HashWithIndifferentAccess.new.merge({
+        :adult => 48,
+        :normal => 48,
+      })
+    end
+
+    def customer_languages
+      HashWithIndifferentAccess.new.merge({
+        :fr => 1,
+        :nl => 2,
+        :en => 3
+      })
+    end
+
+    def streaming_url
+      "vod.dvdpost.be"
+    end
+
+    def actor_kinds
+      HashWithIndifferentAccess.new.merge({
+        :normal => 'DVD_NORM',
+        :adult => 'DVD_ADULT'
+      })
+    end
+
+    def generate_token_from_alpha(filename, kind, test)
+      if kind == :adult
+        time = 432000
+      else
+        time = 172800
+      end
+      
+      url = "http://wesecure.alphanetworks.be/Webservice?method=createToken&key=acac0d12ed9061049880bf68f20519e65aa8ecb7&filename=#{filename}&lifetime=#{time}&simultIp=1&test=#{test}"
+      data = open(url, :http_basic_authentication => ["dvdpost", "sup3rnov4$$"])
+      node = Hpricot(data).search('//createtoken')
+      if node.at('status').innerHTML == 'success'
+        node.at('response').innerHTML
+      else
+        false
+      end
+    end
+    
   end
 end

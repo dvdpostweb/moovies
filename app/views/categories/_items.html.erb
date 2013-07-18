@@ -1,0 +1,25 @@
+<% Rails.logger.debug { "@@@#{categories.inspect}" }%>
+<% Rails.logger.debug { "@@@#{categories.class}" }%>
+<% if 1==1 || categories.count > 0 %>
+<li id="numbers"> 
+  <span class="letter"><%= letter == 0 ? "0-9" : letter.upcase %></span>
+  <ol>
+    <% categories.collect do |category| %>
+      <li>
+        <%= link_to "#{category.name}", category_products_path(:category_id => category.to_param, :filter => params[:filter]), :class => "studios", :id => "#{letter}_#{category.to_param}" %>
+        <% children = category.children %>
+        <% if children.count > 0 %>
+        <ul>
+          <% children.active.movies.vod.collect do |category| %>
+            <li>
+              &nbsp;&nbsp;&bull; <%= link_to "#{category.name}", category_products_path(:category_id => category.to_param, :filter => params[:filter]), :class => "studios", :id => "#{letter}_#{category.to_param}" %>
+            </li>
+          <% end %>
+        </ul>
+        <% end %>
+      </li>
+    <% end %>
+  </ol>
+
+</li>
+<% end %>

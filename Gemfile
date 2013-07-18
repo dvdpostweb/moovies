@@ -5,8 +5,7 @@ gem 'rails', '3.2.13'
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2'
-
+gem 'mysql2',          '0.3.12b5'
 gem 'json'
 gem 'will_paginate'
 gem 'i18n-active_record',
@@ -45,3 +44,7 @@ gem "jquery-rails"
 gem 'jquery-ui-rails'
 gem 'dynamic_form'
 gem "rspec-rails", ">= 2.0.1", :group => [:development, :test]
+gem "friendly_id", "~> 4.0.9"
+gem "routing_concerns", "~> 0.1.0"
+gem 'jquery-form-rails'
+gem 'thinking-sphinx'

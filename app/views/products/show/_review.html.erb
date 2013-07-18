@@ -1,0 +1,26 @@
+<div class="movie-ttl">
+  	<h3>
+        <a href="<%= customer_reviews_path(:customer_id => review.customers_id) %>"><%= review.customer.nickname %></a>
+      <span class="publish">
+        <%= "#{t '.published_on'} #{review.created_at.strftime("%d/%m/%Y")}" %>
+      </span>
+    </h3>
+  </div>
+<li>
+  <div class="content">
+    <div class="critic"> 
+      <div class="name">
+        <%= link_to t('.all_critics'), customer_reviews_path(:customer_id => review.customers_id), :class => :all_critics  %>
+      </div>
+      <strong style="clear: both;"><%= t '.rating' %> :</strong> 
+      <span class="stars"><%= product_review_stars(review, params[:kind]).html_safe %></span>
+    </div>
+    <p> 
+      <strong><%= t '.critic' %> :</strong> 
+      <%= review.text %>
+    </p>
+    <div class="relevant">
+      <%= render :partial => 'reviews/index/critics_new', :locals => {:review => review} %>
+    </div>
+  </div>
+</li>

@@ -1,0 +1,19 @@
+<div id="maincontent">
+<h2 class="ttl"><%= t(".categories_vod")  %></h2>
+
+<% if params[:kind] == :normal %>
+<ul id="categories">
+  <%= render :partial => '/categories/item', :collection =>  @categories %>
+</ul>
+<% else %>
+    <%= render :partial => "/actors/menu_adult" %>
+    <ul id="search-studio" class="search-categories">
+      <%= render :partial => '/categories/items', :locals => { :categories => @categories[0], :letter => 0} %>
+
+      <% ('a'..'z').each do |l|  %>
+        <%= render :partial => '/categories/items', :locals => { :categories => @categories[l], :letter => l} %>
+      <% end %>
+    </ul>
+<% end %>
+</div>
+<%= render :partial => "products/left_column", :locals => {:filter => @filter} %>
