@@ -1,43 +1,42 @@
 <ul id="nav" class="osc">
-   <!-- <li><%= link_to t('layouts.header.home'), root_path(), {:id => 'nav1', :class => ((params[:controller] == 'home') ? 'active': '')} %></li> -->
- <li><a href="#" class="active">Catalogue</a>
-		<ul id="catalogue" class="dropdown" style="">
-		<li>
-		<a href="#">Illimité</a>
-		</li>
-		<li>
-		<a href="#">A la carte</a>
-		</li>
-		
-		<li>
-		<a href="#">	Enfants
-		</a>
-		</li>
+	<!-- <li><%= link_to t('layouts.header.home'), root_path(), {:id => 'nav1', :class => ((params[:controller] == 'home') ? 'active': '')} %></li> -->
+	<li><a href="#" class="active" id='catalogue_menu'>Catalogue</a>
+		<ul id="catalogue" class="dropdown" style="display:none">
+			<li>
+				<a href="#">Illimité</a>
+			</li>
+			<li>
+				<a href="#">A la carte</a>
+			</li>
+
+			<li>
+				<a href="#">	Enfants
+				</a>
+			</li>
 		</ul>
-	
+
 	</li>
-    <li><a href="#">Abonnements</a></li>
-    
-    <li><a href="#">Mon compte</a>
-		<ul id="account" class="dropdown" style="">
-		<li>
-		<a href="#">Ma playlist</a>
-		</li>
-		<li>
-		<a href="#">Mes infos</a>
-		</li>
+	<li><a href="#">Abonnements</a></li>
+	<li><a href="#" id="account_menu">Mon compte</a>
+		<ul id="account" class="dropdown" style="display:none">
+			<li>
+				<a href="#">Ma playlist</a>
+			</li>
+			<li>
+				<a href="#">Mes infos</a>
+			</li>
 		</ul>
-	
-	
+
+
 	</li>
-    <li><a href="#">+18</a></li>
-<li><a href="#">Contact</a></li>
+	<li><a href="#">+18</a></li>
+	<li><a href="#">Contact</a></li>
 
 </ul>
 <form method="post" id="search" action="/fr/search_filters">
-  <div style="margin:0;padding:0;display:inline">
-    <input type="hidden" value="JKK9rVJaYd+pTqqX++XT9UfSKBom0eSB5KXdQbdYobs=" name="authenticity_token">
-  </div>
-  <input type="text" value="Rechercher" name="search" id="search-field" class="search-field">
-  <input type="submit" value="search" name="commit" id="search-btn">
-  <div id="search_text" style="display:none">Rechercher</div>
+	<div style="margin:0;padding:0;display:inline">
+		<input type="hidden" value="JKK9rVJaYd+pTqqX++XT9UfSKBom0eSB5KXdQbdYobs=" name="authenticity_token">
+	</div>
+	<input type="text" value="Rechercher" name="search" id="search-field" class="search-field">
+	<input type="submit" value="search" name="commit" id="search-btn">
+	<div id="search_text" style="display:none">Rechercher</div>

@@ -45,7 +45,7 @@ html, body {
 	padding-bottom: 20px;
 }
 .signup_forms {
-	background-color: #DBE1E4;
+	background-color: #fff;
 	margin-top: 10px;
 	padding-top:10px;
 	padding-bottom:10px;
@@ -79,7 +79,7 @@ html, body {
 	background-position: center center;
 	background-repeat: no-repeat;
 	display: block;
-	height: 34px;
+	height: 86px;
 	text-align: center;
 }
 .like-btn {
@@ -105,9 +105,16 @@ html, body {
 	font-size: 13px;
 }
 #submit_button {
-	background: url(image_path('devise/button_login_squared.png')) repeat scroll 0 0 transparent;
-	border-style: none;
-	color: white;
+	background-image: -moz-linear-gradient(center top , #ACD341, #88BD32);
+    background-repeat: repeat-x;
+    border: 1px solid #7EA613;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.8) inset;
+    color: #FFFFFF;
+    font-size: 15px;
+    padding: 5px;
+    text-shadow: 0 -1px 0 #72942A;
+
 	cursor: pointer;
 	font-size: 18px;
 	height: 39px;

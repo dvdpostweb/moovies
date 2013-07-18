@@ -719,10 +719,7 @@ a#back_message
 {
   font-weight: bold;
 }
-#phone
-{
-  margin:8px 0 0 0!important;
-}
+
 
 a.btn_new_message {
   background: url(image_path('bt_message.png')) no-repeat scroll 0 0 transparent;

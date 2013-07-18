@@ -48,7 +48,7 @@
         </div>
         <div class="hours">
           <strong>  <%= t '.time_slots' %> </strong>
-          <div><%= f.collection_select(:hour, PhoneRequest.time_slots, :last, :first, {:include_blank => true}) %></div>
+          <div><%= f.select :hour, PhoneRequest.time_slots %></div>
         </div>
       </div>
     </div>

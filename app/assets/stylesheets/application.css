@@ -9,5 +9,7 @@
  //= require facebox
  //= require home
  //= require featurelist
- *= require jquery.ui.all
+ //= require jquery.ui.datepicker
+ //= require steps
+ 
 */

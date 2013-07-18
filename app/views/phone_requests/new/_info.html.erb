@@ -5,26 +5,26 @@
 		  <%= t '.email.text' %>
 		  <%= mail_to "info@dvdpost.be" %>
 		<% else %>
-		  <%= link_to t('.private_message'), new_message_path(), :id => 'new_message' %>
+		  <%= link_to t('.private_message'), new_message_path(), :id => 'new_message', :class => 'facebox' %>
 		<% end %>
 	</li>
 	<li id="phone">
 		<h4>
 			<%= t '.phone.title' %>
 		</h4>
-		<%= t '.phone.text' %>
+		<%= t('.phone.text').html_safe  %>
 	</li>
 	<li id="fax">
 		<h4>
 			<%= t '.fax.title' %>
 		</h4>
-		<%= t '.fax.text' %>
+		<%= t('.fax.text').html_safe %>
 	</li>
 	<li id="courrier">
 		<h4>
 			<%= t '.snail.title' %>
 		</h4>
-		 <%= t '.snail.text' %> 
+		 <%= t('.snail.text').html_safe %> 
 	</li>
 	<li id="social">
 		<h4><%= t '.media' %></h4>
