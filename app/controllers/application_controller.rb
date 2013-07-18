@@ -10,8 +10,8 @@ class ApplicationController < ActionController::Base
   protected
 
   def layout_by_resource
-    if devise_controller?
-      "devise"
+    if devise_controller? and params[:controller] != 'devise/registrations'
+      "devise_layout"
     else
       "application"
     end
