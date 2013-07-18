@@ -8,7 +8,8 @@ class ReviewsController < ApplicationController
     else
       sort = Review.sort[:date]
     end
-    @reviews = Review.by_customer_id(params[:customer_id]).approved.ordered(sort).joins(:product).where(:products => {:products_type => DVDPost.product_kinds[params[:kind]], :products_status => [-2,0,1]}).paginate(:page => params[:page], :per_page => 10)
+    Rails.logger.debug { "@@@#{sort}" }
+    @reviews = Review.by_customer_id(params[:customer_id]).approved.ordered("#{sort} DESC, (customers_best_rating - customers_bad_rating ) DESC, customers_best_rating DESC").joins(:product).where(:products => {:products_type => Moovies.product_kinds[params[:kind]], :products_status => [-2,0,1]}).paginate(:page => params[:page], :per_page => 10)
     @reviews_count =  @reviews.total_entries
     
     @customer = Customer.find(params[:customer_id])

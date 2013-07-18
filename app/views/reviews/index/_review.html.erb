@@ -1,14 +1,13 @@
 <% path = product_path(:id => review.product.to_param, :source => source) %>
 <% product = review.product %>
 <% product_title = review.product.title %>
-<% product_streaming = product.streaming?(params[:kind], session[:country_id]) %>
-<% media = product.vod? ? 'vod' : product_media_id(product.media) %>
+<% "ok" #to do product_streaming = product.streaming?(params[:kind], session[:country_id]) %>
 <div class="movie-wrap">
 	<div class="movie-ttl">
   	<h3>
       <%= link_to product_title, path %> 
       <span class="publish">
-        (<%= "#{t '.published_on'} #{review.created_at.strftime("%d/%m/%Y")}" %>)
+        (<%= "#{t '.published_on', :default => 'published on'} #{review.created_at.strftime("%d/%m/%Y")}" %>)
       </span>
     </h3>
       <div class="stars vote" id="rating-stars-<%= review.product.to_param %>" product_id="<%= review.product.to_param %>">
@@ -19,7 +18,7 @@
   	<div class="movie-descr">
     	<p>
         <b><%= t '.rating' %> : </b>
-        <span class="stars"><%= product_review_stars(review, params[:kind]) %></span>
+        <span class="stars"><%= product_review_stars(review, params[:kind]).html_safe %></span>
       </p>
 
       <p>
@@ -30,10 +29,10 @@
         <%= render :partial => 'reviews/index/critics_new', :locals => {:review => review} %>
       </p>
       <div class="thumb-wrap">
-        <% link_to path, :class => :cover, :alt => product_title do %>
-          <%= product_image_tag product.image, :width => 62, :height => 95 %>
+        <%= link_to path, :class => :cover, :alt => product_title do %>
+          <%= product_image_tag product.image, :width => 72, :height => 108 %>
         <% end %>
-        <span class="<%= media %> osc"><%= media %></span>
+        <span class="vod osc">vod</span>
       </div>
     </div>  
     <div class="oters">
@@ -41,7 +40,7 @@
         <%= render :partial => 'products/show/seen_uninterested', :locals => {:product => product, :source => source, :response_id => @response_id} if current_customer %>
       </div>
       <ul class="btns osc">
-        <li><%= render :partial => 'products/streaming',  :locals => {:product => product, :text => :short, :source => source, :response_id => nil} if product_streaming %></li>
+        <li><%= "VOD btn#to do" %></li>
         <% if product.trailer? %>
           <li>
             <%= link_to(t('.trailer'), product_trailer_path(:product_id => product.to_param, :source => source), :class => 'trailer', :target => :_blank) %>
