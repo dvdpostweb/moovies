@@ -5,7 +5,9 @@
 
   width: 267px;
 }
-
+.container {
+  padding-bottom: 14px;
+}
 #step_container {
     float: left;
    
@@ -95,7 +97,9 @@ width: 200px;
     font-size: 14px;
     padding: 14px;
 }
-
+.step_1.fr {
+    background: url("/assets/fr/steps.jpg") no-repeat scroll -5px 0px transparent;
+}
 .step_2.fr {
     background: url("/assets/fr/steps.jpg") no-repeat scroll -5px -102px transparent;
 }
@@ -168,15 +172,16 @@ width: 200px;
     background: url("/assets/lock.gif") no-repeat scroll 0 0 transparent;
     border: 1px solid #81919F;
     color: #81919F;
-    float: left;
+    float: right;
     height: 33px;
-    padding-left: 45px;
+    margin-right: 21px;
+    padding-left: 47px;
     padding-top: 19px;
     width: 187px;
 }
 
 .choice {
-    float: right;
+    float: left;
     font-size: 11px;
     line-height: 28px;
     padding-bottom: 20px;
@@ -192,4 +197,22 @@ width: 200px;
 	
 	float:right;
 		width:200px;
+}
+
+.labelstep label{
+	width: 155px;
+	display: inline-block;
+}
+.labelstep input {
+    border: 1px solid #A6AAAD;
+    font-size: 11px;
+    height: 16px;
+    line-height: 25px;
+    width: 250px;
+}
+
+.labelstep {
+	padding:10px;
+	
+
 }
