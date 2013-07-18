@@ -37,6 +37,9 @@ Moovies::Application.routes.draw do
     get 'faq', :to => 'messages#faq'
     match 'info/:page_name' => 'info#index', :as => :info
     match 'steps/:page_name' => 'steps#index', :as => :step
+    resources :watchlists, :as => :vod_wishlists
+    get 'display_vod', :to => 'watchlists#display_vod'
+    
   end
   # The priority is based upon order of creation:
   # first created -> highest priority.

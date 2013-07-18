@@ -155,5 +155,10 @@ $(function() {
     });
     return false;
   });
+  $('body').delegate('.streaming_add_list, .streaming_remove_list', "click", function(){
+     $(this).parent().ajaxSubmit({dataType: 'script'});
+     $(this).parent().html("<div class='load2'><img src='/assets/ajax-loader.gif' /></div>")
+     return false; // prevent default behaviour
+   });
 });
 

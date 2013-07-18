@@ -85,6 +85,7 @@ window.fbAsyncInit=function() {
     </div>
     <% end %>
     <div id="btns-wrap" class="osc">
+          <%= render :partial => 'products/vod_list',  :locals => {:product => @product, :source => @source, :response_id => @response_id} %>
       
           <% if @trailer %>
              <%= link_to(t('.trailer'), product_trailer_path(:product_id => @product.to_param, :source => @source, :response_id => @response_id), {:class => 'trailer', :id => 'trailer', :target => :_blank}) %>

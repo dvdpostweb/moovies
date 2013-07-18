@@ -579,4 +579,15 @@ class Product < ActiveRecord::Base
     ((Rails.env == "production" ? streaming_trailers.available.count > 0 : streaming_trailers.available_beta.count > 0) && tokens_trailers.available.first )
   end
 
+  def self.country_short_name(country_id)
+    case country_id
+      when 131
+        'LU'
+      when 161
+        'NL'
+      else
+        'BE'
+    end
+  end
+
 end
