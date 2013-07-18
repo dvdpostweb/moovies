@@ -1,7 +1,7 @@
 Moovies::Application.routes.draw do
 
   root :to => 'home#index'
-  scope '(:locale)/(:kind)', :locale => /en|fr|nl/, :kind => /normal|adult/, :defaults => {:kind => "normal"} do
+  scope ':locale/(:kind)', :locale => /en|fr|nl/, :kind => /normal|adult/ do
     root :to => 'home#index'
     devise_for :customers
     resources :customers do
@@ -38,7 +38,7 @@ Moovies::Application.routes.draw do
     match 'info/:page_name' => 'info#index', :as => :info
     match 'steps/:page_name' => 'steps#index', :as => :step
     resources :watchlists, :as => :vod_wishlists
-    get 'display_vod', :to => 'watchlists#display_vod'
+    get 'watchlists#display_vod', :controller => :watchlists, :action => :display_vod, :conditions => {:method => :get}
     
   end
   # The priority is based upon order of creation:

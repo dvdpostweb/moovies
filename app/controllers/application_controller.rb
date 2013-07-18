@@ -7,6 +7,15 @@ class ApplicationController < ActionController::Base
   
   layout :layout_by_resource
 
+  def default_url_options
+    if params[:kind] == :normal
+      { :locale => I18n.locale }
+    else
+      { :locale => I18n.locale, :kind => params[:kind] }
+    end
+  end
+
+
   protected
 
   def layout_by_resource
@@ -37,7 +46,11 @@ class ApplicationController < ActionController::Base
 
   def init
     @browser = 'empty'
-    params[:kind] = params[:kind].to_sym
+    params[:kind] = params[:kind] ? params[:kind].to_sym : :normal
+    if params[:locale].nil?
+      params[:locale] = I18n.locale
+    end
+    
   end
 
   private
