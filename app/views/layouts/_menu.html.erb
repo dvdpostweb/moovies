@@ -23,7 +23,7 @@
 		  <%= link_to t('.watchlist', :default => 'Ma playlist'), vod_wishlists_path %>
 		</li>
 		<li>
-		<a href="#">Mes infos</a>
+		<%= link_to t('.infos'), current_customer ? customer_path(:id => current_customer) : customers_path %>
 		</li>
 		</ul>
 

@@ -1,0 +1,165 @@
+<div id="droite">
+  <div id="title">
+    <strong><%= t '.title' %></strong>
+  </div>
+  
+  <div id="content_droite">
+    <table cellpadding="1" cellspacing="0" border="0" width="352">
+      <%= render :partial => 'customers/show/new_pricing' %>
+      <tr>
+        <td colspan="2" align="left">
+          <% if customer.actived? && customer.subscription %>
+            <ul>
+              <li class="links">
+                <% if !current_customer.is_freetest? %>
+                  <strong><%= link_to t('.modify_abo'), edit_customer_subscription_path(:customer_id => current_customer.to_param), :class => 'renew' %></strong>
+                <% end %>
+                <%= link_to t('.suspend_abo'), new_customer_suspension_path(:customer_id => current_customer.to_param), :class => 'suppendre' if current_customer.suspension_status == 0 %>
+              </li>
+            </ul>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2"><div class="ligne"></div></td>
+      </tr>
+      <tr>
+        <td colspan="2" height="10"></td>
+      </tr>
+      <% stream_count = 0 %>
+      <% streaming_available.each do |stream| %>
+        <% if stream.products.first.kind == DVDPost.product_kinds[:normal] || (stream.products.first.kind == DVDPost.product_kinds[:adult] && stream.updated_at > 12.hours.ago.localtime) %>
+          <% stream_count = stream_count + 1 %>
+        <% end %>
+      <% end %>
+      <% if streaming_access? && stream_count > 0 %>
+        <tr>
+          <th colspan="2" class="rotation">
+            <%= t '.streaming_available' %> :
+            <span>
+            
+              <%= stream_count %> <%= stream_count > 1 ? t('.movies') : t('.movie') %>
+            </span>
+          </th>
+        </tr>
+        <% streaming_available.each do |stream| %>
+          <% if stream.products.first.kind == DVDPost.product_kinds[:normal] || (stream.products.first.kind == DVDPost.product_kinds[:adult] && stream.updated_at > 12.hours.ago.localtime) %>
+          <tr>
+            <td align="left"  class="transit"><%= link_to truncate(product_assigned_title(stream.products.first), :length => 30), product_streaming_path(stream) %></td>
+            <td align="right"  class="transit"><% stream.created_at.strftime("%d/%m/%Y") %>
+              <%= "#{time_left(stream, params[:kind])}" %></td>
+          </tr>
+          <% end %>
+        <% end %>
+      <% end %>
+      <tr>
+        <td colspan="2"><div class="ligne"></div></td>
+      </tr>
+      <tr>
+        <td align="right" class="adresse"><strong><%= t '.date_abo' %></strong></td>
+        <td align="left" class="adresse">
+          <%= customer.subscription.created_at.strftime("%d/%m/%Y") if customer.actived? && customer.subscription %>
+        </td>
+      </tr>
+      <tr>
+        <td align="right"><strong><%= t '.date_end_abo' %></strong></td>
+        <td align="left">
+          <%= customer.subscription_expiration_date.strftime("%d/%m/%Y") if customer.subscription_expiration_date %>
+        </td>
+      </tr>
+      <tr>
+        <td align="right"><strong><%= t '.type_abo' %></strong></td>
+        <td align="left"><%= t(".#{customer.subscription_payment_method.name.downcase}") if customer.subscription_payment_method %></td>
+      </tr>
+      <tr>
+        <td colspan='2'>
+          <% if customer.actived? %>
+            <ul>
+              <li class='link_payment'>
+                <% if current_customer.payment_method == 1 %>
+                  <%= link_to t('.ogone_payment_method_change'), edit_customer_payment_methods_path(:customer_id => current_customer.to_param, :type => :credit_card_modification) %>
+                  <span><%= image_tag 'delimiter.gif' %></span>
+                <% end %>
+                <%= link_to t('.payment_method_change'), edit_customer_payment_methods_path(:customer_id => current_customer.to_param) %>
+              </li>
+            </ul>
+          <% end %>
+        </td>  
+      </tr>
+    </table>
+  </div>
+<% if params[:kind] == :adult %>
+  <div id="content_droite">
+    <table cellpadding="0" cellspacing="0" border="0" width="352" class="adult">
+      <tbody>
+      <tr>
+        <td colspan="2">
+          <div id="info_abo">
+            <h3><%= t '.adult_title' %></h3>
+            <h4><%= t '.rotation_title' %></h4>
+            <%= render :partial => 'customers/show/rotation', :locals => {:customer => customer} if params[:kind] == :adult %>
+          </div>
+        </td>
+      </tr>
+      <% if 1==0 #to do %>
+
+      <tr>
+        <td colspan="2"><div class="ligne"></div></td>
+      </tr>
+
+      <tr>
+        <td colspan="2" id="info_abo"><h4><%= t('.svod_adult') %> :</h4></td>
+      </tr>
+
+
+      <tr>
+        <td colspan="2">
+          <table cellspacing="0" cellpadding="0" class="svod">
+          <tbody>
+            <tr>
+              <td width="270">
+                <strong><%= t '.svod_question' %></strong>
+              </td>
+              <td width="170" valign="top">
+                <% if current_customer.svod_adult == 0 %>
+                 <span class="check-off"><span></span>
+                   <%= t '.yes' %>
+                 </span>
+                 <span class="check"><span></span>
+                  <%= t '.no' %>
+                 </span>
+                <% else %>
+                  <span class="check"><span></span>
+                     <%= t '.yes' %>
+                  </span>
+                  <span class="check-off"><span></span>
+                    <%= t '.no' %>
+                  </span>
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <%= link_to t("home.index.wishlist_adult.svod_adult_btn_#{current_customer.svod_adult}"), customers_svod_path %>
+              </td>
+            </tr>
+            <% if current_customer.svod_adult > 0 %>
+              <tr>
+                <td colspan="2"><%= t "home.index.wishlist_adult.svod_adult_status_#{current_customer.svod_adult}", :next_reconduction_at => next_reconduction_at(current_customer) %></td>
+
+              </tr>
+            <% end %><% end %>
+
+          </tbody></table></td>
+        </tr>
+
+      </tbody></table>
+    </div>
+<% end %>
+  
+  <p></p>
+</div>
+<div class="end"></div>
+<div style="display:none" id="rotation"><%= t '.rotation' %></div>
+<div style="display:none" id="only_vod_confirm"><%= t '.only_vod_confirm' %></div>
+<div style="display:none" id="remove_only_vod_confirm"><%= t '.remove_only_vod_confirm' %></div>

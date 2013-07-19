@@ -200,7 +200,7 @@ width: 200px;
 }
 
 .labelstep label{
-	width: 155px;
+	width: 200px;
 	display: inline-block;
 }
 .labelstep input {
@@ -209,10 +209,25 @@ width: 200px;
     height: 16px;
     line-height: 25px;
     width: 250px;
+    vertical-align: top;
 }
 
 .labelstep {
 	padding:10px;
-	
-
+}
+.field_with_errors
+{
+  display:inline-block;
+  vertical-align: top;
+}
+#error_explanation li
+{
+  color: #900;
+  list-style-type: circle;
+  margin: 0 0 5px 25px;
+}
+#error_explanation li a
+{
+  color: #900;
+  text-decoration: underline;
 }

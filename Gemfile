@@ -16,6 +16,9 @@ gem 'orderedhash'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'quiet_assets'
+  gem 'thin'
+  gem 'spring'
 end 
 # Gems used only for assets and not required
 # in production environments by default.

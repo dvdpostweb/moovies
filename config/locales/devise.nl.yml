@@ -56,10 +56,41 @@ nl:
       updated: 'Uw wachtwoord is gewijzigd. U bent nu ingelogd.'
       updated_not_active: 'Uw wachtwoord is gewijzigd.'
     confirmations:
+      new:
+        title: Resend confirmation instructions
+        email: email
+        setn: Resend confirmation instructions
       send_instructions: 'U ontvangt via e-mail instructies om uw account te activeren.'
       send_paranoid_instructions: 'Indien uw e-mail adres zich in onze database bevindt,ontvangt u via e-mail instructies om uw account te activeren.'
       confirmed: 'Uw account is geactiveerd.'
     registrations:
+      new:
+        title: 'Créez votre compte:'
+        email: 'Adresse e-mail:'
+        password: 'Mot de passe:'
+        confirmation_pass: "Confirmation du mot de passe"
+        newsletter: 'Je souhaite être informé des nouveautés et promotions DVDPost.'
+        newsletter_partner: 'Je souhaite être informé des promotions de la part des partenaires de DVDPost.'
+        sign_up: 'SIGN UP'
+      faq1:  
+        garantie: 'VOS GARANTIES:'
+        catalogue: 'Catalogue illimité'
+        catalogue_description: "Accédez à une sélection de xxxx films par mois en illimité et ce pour le prix d'un seul ticket de cinéma."
+        sans_engagement: 'Sans engagement'
+        sans_engagement_description: 'Vous pouvez arrêter votre abonnement quand vous voulez. Il suffit de contacter notre service client par téléphone, au <strong>numéro gratuit 0800/95 990</strong> ou au  <strong>numéro payant 0032 2 5036811</strong> pour les appels effectués hors de la Belgique, au plus tard un jour avant la prolongation mensuelle de votre abonnement.'
+        securised: '100% sécurisé'
+        securised_description: 'Toutes les informations que vous nous communiquez, comme par exemple les informations de paiement, sont encryptées et protégées'
+      edit:
+        title: Edit
+        email: email
+        waiting: 'Currently waiting confirmation for:'
+        current_pass: Current password
+        warning_current_pass: (we need your current password to confirm your changes)
+        warning_new_pass: (leave blank if you don't want to change it)
+        pass: New password
+        confirmation: Confirm new password
+        back: Back
+        update: Update
       signed_up_but_unconfirmed: 'U ontvangt via e-mail instructies om uw account te activeren.'
       signed_up_but_inactive: 'U bent inschreven maar u kan niet automatisch ingelogd worden omdat uw account nog niet geactiveerd is.'
       signed_up_but_locked: 'U bent inschreven maar u kan niet automatisch ingelogd worden omdat uw account geblokkeerd is.'
@@ -77,6 +108,10 @@ nl:
     mailer:
       confirmation_instructions:
         subject: 'Bevestiging e-mailadres'
+        welcome: "Welcome"
+        description: 'You can confirm your account email through the link below:'
+        subject: "Confirmation instructions"
+        sent: 'Confirm my account'
       reset_password_instructions:
         subject: 'Wachtwoord resetten'
         change_pass: 'Change my password'
