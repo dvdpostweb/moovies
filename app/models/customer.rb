@@ -1,6 +1,6 @@
 class Customer < ActiveRecord::Base
   # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable,
+  # :token_authenticatable
   # :lockable, :timeoutable and :omniauthable
 
   self.primary_key = :customers_id
