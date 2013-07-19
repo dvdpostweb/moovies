@@ -3,7 +3,7 @@ Moovies::Application.routes.draw do
   root :to => 'home#index'
   scope ':locale/(:kind)', :locale => /en|fr|nl/, :kind => /normal|adult/ do
     root :to => 'home#index'
-    devise_for :customers
+    devise_for :customers, :controllers => { :registrations => "customers/registrations" }
     resources :customers do
       resources :reviews, :only => [:index]
     end
