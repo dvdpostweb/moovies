@@ -19,7 +19,7 @@
           </p>
         <% end -%>
         <% if alert && !alert.empty?%>
-          <p align="center" class="wrong"><%= t('.warning') %> </p>
+          <p align="center" class="wrong"><%= alert %> </p>
         <% end %>
         <p align="center" class="button_login">
           <%= f.submit t('.connect'), :id => 'submit_button' %>
