@@ -15,6 +15,7 @@
 //= require reviews
 //= require products
 //= require actors
+//= require customers
 $(function() {
   $('.facebox').on('click', function() {
     item = $(this);

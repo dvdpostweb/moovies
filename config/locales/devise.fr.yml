@@ -17,8 +17,10 @@ fr:
     attributes:
       customer:
         email: "Cette email"  
-        password: "Le mot de passe"  
-
+        password: "Le mot de passe"
+        last_name: "Le nom de famille"
+        first_name: "Le prénom"
+        phone: "Le Téléphone"
   devise:
     shared:
       links:

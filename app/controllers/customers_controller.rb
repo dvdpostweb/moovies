@@ -35,30 +35,18 @@ class CustomersController < ApplicationController
       params[:customer][:birthday] = "#{params[:date][:year]}-#{params[:date][:month]}-#{params[:date][:day]}"
     end
     if @customer.update_attributes(params[:customer])
-      respond_to do |format|
-        format.html do
-          flash[:notice] = t(:customer_modify)
-          if current_customer.customers_registration_step != 100 && current_customer.customers_registration_step != 95
-            current_customer.update_attribute(:customers_registration_step, 33)
-          end
-          redirect_to customer_path
-        end
-        format.js
+      flash[:notice] = t(:customer_modify)
+      
+      if request.xhr?
+        render :layout => false
+      else
+        redirect_to customer_path
       end
     else
-      respond_to do |format|
-        format.html do
-          if current_customer.customers_registration_step.to_i == 31
-            @countries = Country.all
-            params[:id] = 2
-            render :template => "/steps/show"
-          else
-            render :action => :edit
-          end
-        end
-        format.js do
-          render :action => :edit, :layout => false
-        end
+      if request.xhr?
+        render :action => :edit, :layout => false
+      else
+        render :layout => false
       end
     end
   end
