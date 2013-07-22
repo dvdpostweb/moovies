@@ -23,13 +23,15 @@
 		  <%= link_to t('.watchlist', :default => 'Ma playlist'), vod_wishlists_path %>
 		</li>
 		<li>
-		<a href="#">Mes infos</a>
+		<%= link_to t('.infos'), current_customer ? customer_path(:id => current_customer) : customers_path %>
 		</li>
 		</ul>
 
 
 	</li>
-	<li><a href="#">+18</a></li>
+	<li>
+	  <%= link_to t('.+18'), root_path(:kind => :aldult)%>
+	</li>
 	<li><a href="#">Contact</a></li>
 
 </ul>
@@ -37,7 +39,7 @@
 	<div style="margin:0;padding:0;display:inline">
 		<input type="hidden" value="JKK9rVJaYd+pTqqX++XT9UfSKBom0eSB5KXdQbdYobs=" name="authenticity_token">
 	</div>
-	<input type="text" value="Rechercher" name="search" id="search-field" class="search-field">
+	<input type="text" value="<%= @search %>" name="search" id="search-field" class="search-field">
 	<input type="submit" value="search" name="commit" id="search-btn">
 	<div id="search_text" style="display:none">Rechercher</div>
 </form>

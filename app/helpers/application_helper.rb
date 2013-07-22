@@ -77,5 +77,51 @@ module ApplicationHelper
     end
     current_filter
   end
-
+  def redirect_after_registration(path = nil)
+    #if current_customer
+    #  if current_customer.customers_registration_step.to_i == 31
+    #    if (params['controller'] == 'steps' && params[:id].to_i == 2) || (params[:controller] == 'customers' && params[:action] == 'update')
+    #    else
+    #      redirect_to step_path(:id => 2)
+    #    end
+    #  elsif current_customer.customers_registration_step.to_i == 21
+    #    if (params['controller'] == 'steps' && params[:id].to_i == 1)
+    #    else
+    #      redirect_to step_path(:id => 1)
+    #    end
+    #  elsif current_customer.customers_registration_step.to_i == 33
+    #    if (params['controller'] == 'steps' && params[:id].to_i == 3) || (params[:controller] == 'ogones' && params[:action] == 'show')
+    #    else
+    #      redirect_to step_path(:id => 3)
+    #    end
+    #  elsif current_customer.customers_registration_step.to_i == 90
+    #    if (params['controller'] == 'steps' && params[:id].to_i == 5) || (params['controller'] == 'steps' && params[:id].to_i == 1 && params[:action] == 'update')
+    #    else
+    #      redirect_to step_path(:id => 5)
+    #    end
+    #  elsif params[:controller] == 'steps' && params[:id].to_i != 4 && (current_customer.customers_registration_step.to_i == 100 || current_customer.customers_registration_step.to_i == 95)
+    #    redirect_to root_path
+    #  elsif current_customer.customers_registration_step.to_i != 100  && current_customer.customers_registration_step.to_i != 95
+    #    redirect_to php_path
+    #  elsif path
+    #    redirect_to path
+    #  end
+    #end
+  
+    #if current_customer
+    #  if current_customer.customers_registration_step.to_i == 80
+    #    if params[:controller] != 'shops' && params[:controller] != 'shopping_carts' && params[:controller] != 'shopping_orders' && !(params[:controller] == 'info' && params[:page_name] == 'buy') && !(params[:controller] == 'info' && params[:page_name] == 'withdrawal_period') && params[:controller] != 'phone_requests' && params[:action] != 'validation'
+    #      redirect_to shop_path(:locale => params[:locale], :kind => :normal) and return
+    #    end
+    #  elsif current_customer.customers_registration_step.to_i == 90
+    #    redirect_to customers_path #to do php_path("step_member_choice.php")
+    #  elsif current_customer.customers_registration_step.to_i != 100  && current_customer.customers_registration_step.to_i != 95
+    #    redirect_to customer_path
+    #  end
+    #end
+  end
+  
+  def streaming_access?
+    true
+  end
 end

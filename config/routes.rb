@@ -5,6 +5,16 @@ Moovies::Application.routes.draw do
     root :to => 'home#index'
     devise_for :customers, :controllers => { :registrations => "customers/registrations" }
     resources :customers do
+      match 'newsletter' => 'customers#newsletter', :only => [:update]
+      #mail_copy 'mail_copy', :controller => :customers, :action => :mail_copy, :only => [:update]
+      #newsletters_x 'newsletters_x', :controller => :customers, :action => :newsletters_x, :only => [:update]
+      #newsletter_x 'newsletter_x', :controller => :customers, :action => :newsletter_x, :conditions => {:method => :get}
+      #sexuality 'sexuality', :controller => :customers, :action => :sexuality, :only => [:update]
+      resource 'addresses', :only => [:edit, :update, :create]
+      resource 'suspension', :only => [:new, :create, :destroy]
+      resource 'promotion', :only => [:show, :edit]
+      resource :payment_methods, :only => [:edit, :update, :show]
+      
       resources :reviews, :only => [:index]
     end
     resources :reviews, :only => :show do
