@@ -33,6 +33,7 @@
       <tr>
         <td align="right" valign="top" class="adresse"><strong><%= t '.address' %></strong></td>
         <td align="left" valign="top" class="adresse">
+          <% Rails.logger.debug { "@@@#{customer.address}" }%>
           <% if customer.address %>
           <%= customer.address.name %><br/>
           <%= customer.address.street %><br/>

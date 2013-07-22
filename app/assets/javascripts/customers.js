@@ -12,5 +12,23 @@ $(function() {
       $('.content').html(responseText);
     }
   }
+  $("#moncompte").delegate(".suppendre_newsletter, .suppendre_newsletter_parnter", "click", function() {
+    url = $(this).attr('href');
+    html_item = $(this).parent();
+    content = html_item.html();
+    html_item.html("<div style='height:20px'><img src='/assets/ajax-loader.gif'/></div>");
+    $.ajax({dataType: 'html',
+      url: url,
+      type: 'POST',
+      data: {},
+      success: function(data) {
+        item = html_item.html(data);
+      },
+      error: function() {
+        html_item.html(content);
+      }
+    });
+    return false;
+  });
   
 });

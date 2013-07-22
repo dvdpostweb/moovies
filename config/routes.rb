@@ -6,7 +6,6 @@ Moovies::Application.routes.draw do
     devise_for :customers, :controllers => { :registrations => "customers/registrations" }
     resources :customers do
       match 'newsletter' => 'customers#newsletter', :only => [:update]
-      #newsletter 'newsletter', :controller => :customers, :action => :newsletter, :only => [:update]
       #mail_copy 'mail_copy', :controller => :customers, :action => :mail_copy, :only => [:update]
       #newsletters_x 'newsletters_x', :controller => :customers, :action => :newsletters_x, :only => [:update]
       #newsletter_x 'newsletter_x', :controller => :customers, :action => :newsletter_x, :conditions => {:method => :get}
