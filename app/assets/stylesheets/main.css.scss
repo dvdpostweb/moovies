@@ -238,12 +238,12 @@ color: #bd1f83;
 
 /*   ============   LEFT COLUMN   ============   */
 
-#leftcolumn{
-  float: left;
-  position: relative;
-  width: 270px;
+#leftcolumn {
+    float: left;
+    margin-left: 14px;
+    position: relative;
+    width: 200px;
 }
-
 
 #leftcolumn .btns {
   margin-bottom: 22px;
@@ -265,36 +265,40 @@ color: #bd1f83;
 }
 #leftcolumn h3.ttl {
   height: 34px;
-  font-size: 20px;
+  font-size: 23px;
   padding-left: 17px;
- 
+  margin-top: 10px;
  
   line-height: 32px;
 }
 
 #leftcolumn h3.ttl.infinity {
-	 color: #98D321;
-	    font-weight: bold;
-	 border-bottom: 1px solid #98D321;
+	background:#98D321;
+	 color:#fff;
+
+	
 	}
 	
 	
 	#leftcolumn h3.ttl.alacarte {
-		  color: #66CCCC;
-		    font-weight: bold;
-			 border-bottom: 1px solid #66CCCC;
+		background:#66CCCC;
+		  color: #fff;
+	
+
 		}
 		
 		#leftcolumn h3.ttl.adult {
-			  color: #993399;
-			    font-weight: bold;
-				 border-bottom: 1px solid #993399;
+			background:#993399;
+			  color: #fff;
+			  
+			
 			}
 			
 				#leftcolumn h3.ttl.kids {
-					  color: #a7d8f6;
-					    font-weight: bold;
-						 border-bottom: 1px solid #a7d8f6;
+							background:#79bfef;
+					  color: #fff;
+					  
+					
 					}
 	
 	
@@ -309,9 +313,80 @@ color: #bd1f83;
   display: block;
   padding: 8px 5px 8px 28px;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 15px;
 }
 
+/*   ============   FILTERS   ============   */
+#products_index #filters {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #9f9e98;
+    border-radius: 4px 4px 4px 4px;
+    color: #bfbeba;
+    line-height: 27px;
+    margin-top: 30px;
+    padding: 0 32px 0 5px;
+    width: 162px;
+}
+#filters .submit  {
+	
+	  background-color:#9ECA3B;
+	  background-repeat:repeat no-repeat;
+	  border:1px solid #7EA613;
+	  border-bottom-left-radius:4px;
+	  border-bottom-right-radius:4px;
+	  border-top-left-radius:4px;
+	  border-top-right-radius:4px;
+	  box-shadow:rgba(255, 255, 255, 0.796875) 0 1px 1px inset;
+	  color:#FFFFFF;
+	  font-size:16px;
+	  padding:5px;
+	  text-shadow:#72942A 0 -1px 0;
+	  width:120px;
+	height:28px;
+	 margin: 12px 0 12px 30px;
+	}
+
+
+
+#filters ul#main {
+   
+
+    padding: 4px 1px 5px;
+    width: 178px;
+}
+
+
+
+#filters h3 {
+    background: url("/assets/search.png") no-repeat scroll 0 8px transparent;
+    color: #9f9e98;
+    font-size: 1.75em;
+    height: 18px;
+    line-height: 24px;
+    padding: 8px 13px;
+    text-align: center;
+    width: 180px;
+}
+
+#filters li a {
+    background: url("/assets/filters-arrows.png") no-repeat scroll 5px 2px transparent;
+    border-bottom: 1px solid #9f9e98;
+    color: #9f9e98;
+    display: block;
+    font-size: 1.17em;
+    font-weight: bold;
+    height: 24px;
+    line-height: 24px;
+    margin-top: 7px;
+    padding-left: 30px;
+    text-decoration: none;
+}
+
+#filters li.open a {
+    background: url("/assets/filters-arrows.png") no-repeat scroll 4px -18px transparent;
+}
+
+.li_submit
 /*   ============   RIGHT COLUMN   ============   */
 
 #rightcolumn{
@@ -428,7 +503,13 @@ border-radius: 4px;
 }
 
 
-
+#products_index #maincontent {
+    display: inline;
+    float: left;
+    margin-right: 14px;
+    position: relative;
+    width: 700px;
+}
 
 /*   ============   FOOTER   ============   */
 
@@ -744,6 +825,18 @@ padding-left:28px;
 
 }
 
+#alacarte{
+    background-image: url("/assets/button_streamingppv.gif");
+    font-size: 14px;
+    font-weight: bold;
+    height: 32px;
+    line-height: 30px;
+    padding-left: 28px;
+    text-align: left;
+    width: 145px;
+color:#fff;
+}
+
 
 #add {
     background-image: url("/assets/button_add.gif");
@@ -791,4 +884,20 @@ ul.dropdown li {
     position: absolute;
     top: 64%;
     z-index: 2012;
+}
+
+#products_index .movie-descr {
+    float: left;
+    min-height: 106px;
+    padding: 0 8px 0 117px;
+    position: relative;
+    width: 358px;
+}
+
+#products_index #subscribe-wrap {
+    background: none repeat scroll 0 0 #98D321;
+    clear: both;
+    height: 175px;
+    margin: 14px;
+    width: 936px;
 }
