@@ -33,7 +33,6 @@
       <tr>
         <td align="right" valign="top" class="adresse"><strong><%= t '.address' %></strong></td>
         <td align="left" valign="top" class="adresse">
-          <% Rails.logger.debug { "@@@#{customer.address}" }%>
           <% if customer.address %>
           <%= customer.address.name %><br/>
           <%= customer.address.street %><br/>
@@ -64,7 +63,11 @@
       </tr>
       <tr>
         <td align="right"><strong><%= t '.critiques' %></strong></td>
-        <td align="left"><%= @review_count %> (<%= link_to t('.see_all'), customer_reviews_path(:customer_id => current_customer.to_param), :class => :modif %>)</td>
+        <td align="left"><%= @review_count %> 
+          <% if @review_count > 0 %>
+          (<%= link_to t('.see_all'), customer_reviews_path(:customer_id => current_customer.to_param), :class => :modif %>)
+          <% end %>
+        </td>
       </tr>
       <tr>
         <td colspan="2"><div class="ligne"></div></td>

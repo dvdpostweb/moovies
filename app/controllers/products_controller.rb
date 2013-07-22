@@ -4,10 +4,22 @@ class ProductsController < ApplicationController
 
   def index
     @body_id = 'products_index'
-    #@filter = view_context.get_current_filter({})
-    #if params[:endless]
-    #  cookies.permanent[:endless] = params[:endless]
-    #end
+    @filter = view_context.get_current_filter({})
+    if params['actor_id']
+      @actor = Actor.find(params['actor_id'])
+      params['actor_id'] = @actor.id
+    end
+    if params['director_id']
+      @director = Director.find(params['director_id'])
+      params['director_id'] = @director.id
+    end
+    new_params = session[:sexuality] == 0 ? params.merge(:per_page => 20, :country_id => session[:country_id], :hetero => 1) : params.merge(:per_page => 20, :country_id => session[:country_id])
+    
+    @products = Product.filter(@filter, new_params)
+    @target = cookies[:endless] == 'active' ? '_blank' : '_self'
+    if params[:endless]
+      cookies.permanent[:endless] = params[:endless]
+    end
     #if params[:search] == t('products.left_column.search')
     #  params.delete(:search)
     #else
@@ -16,15 +28,7 @@ class ProductsController < ApplicationController
     #    params[:search] = sub_str.gsub(/\//,'').gsub(/"/,' ').gsub(/\(/,' ').gsub(/\)/,' ')
     #  end
     #end
-    #if params['actor_id']
-    #  @actor = Actor.find(params['actor_id'])
-    #  params['actor_id'] = @actor.id
-    #end
-    #if params['director_id']
-    #  @director = Director.find(params['director_id'])
-    #  params['director_id'] = @director.id
-    #end
-    #@tokens = current_customer.get_all_tokens_id(params[:kind]) if current_customer
+    @tokens = current_customer.get_all_tokens_id(params[:kind]) if current_customer
     #
     #if params[:category_id]
     #  filter = get_current_filter
@@ -97,7 +101,6 @@ class ProductsController < ApplicationController
     #    end
     #  end
     #  
-    #  @source = WishlistItem.wishlist_source(params, @wishlist_source)
     #  @jacket_mode = Product.get_jacket_mode(params)
     ##end
     #respond_to do |format|

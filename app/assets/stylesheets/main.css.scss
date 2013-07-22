@@ -499,7 +499,7 @@ border-radius: 4px;
     float: left;
     margin-left: 14px;
     position: relative;
-    width: 970px;
+    width: 740px;
 }
 
 
@@ -880,10 +880,10 @@ ul.dropdown li {
 }
 
 #nav #account {
-    left: 471px;
-    position: absolute;
-    top: 64%;
-    z-index: 2012;
+  left: -37px;
+  position: absolute;
+  top: 28px;
+  z-index: 2012;
 }
 
 #products_index .movie-descr {
@@ -900,4 +900,8 @@ ul.dropdown li {
     height: 175px;
     margin: 14px;
     width: 936px;
+}
+#menu_account_li
+{
+  position:relative;
 }

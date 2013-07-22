@@ -7,7 +7,7 @@
       <%= hidden_field_tag :source, source %>
       <%= hidden_field_tag :response_id, response_id %>
       
-      <%= submit_tag t('.drop'), :class => 'btn_remove_form streaming_remove_list', :id => "add-to-vod", :style => 'border:0px;cursor:pointer' %>
+      <%= submit_tag t('.drop'), :class => 'btn_remove_form streaming_remove_list', :id => "add", :style => 'border:0px;cursor:pointer' %>
     <% end %>
   <% else %>
     <%= form_for :vod_wishlist, :url => vod_wishlists_path() do |f| %>
@@ -22,7 +22,7 @@
       
       <% class_name = next_status ? 'reserver_btn reserve' : 'streaming_soon_btn'  %>
       
-      <%= submit_tag text, :class => "#{class_name} streaming_add_list", :id => "add-to-vod", :style => 'border:0px;cursor:pointer' %>
+      <%= submit_tag text, :class => "#{class_name} streaming_add_list", :id => "add", :style => 'border:0px;cursor:pointer' %>
     <% end %>
     <%= "#{t 'wishlist_items.new.available'} #{StreamingProduct.date_available(product.imdb_id, Product.country_short_name(session[:country_id]))}" if @force_reserve %>
     
@@ -30,5 +30,5 @@
 </div>
 <% else %>
   <% text = text || :long %>
-  <%= link_to streaming_btn_title(:add, text), product_step_path(:product_id => product, :media => 'vod'), :class => "streaming_btn streaming_soon_btn", :id => "add-to-vod" %>
+  <%= link_to streaming_btn_title(:add, text), product_step_path(:product_id => product, :media => 'vod'), :class => "streaming_btn streaming_soon_btn", :id => "add" %>
 <% end %>
