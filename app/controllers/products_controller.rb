@@ -127,7 +127,6 @@ class ProductsController < ApplicationController
       @product_title = data[:title]
       @product_image = data[:image]
       @product_description =  data[:description]
-      @product.views_increment(@product_description)
       @categories = @product.categories
       @token = current_customer ? current_customer.get_token(@product.imdb_id) : nil
     end
