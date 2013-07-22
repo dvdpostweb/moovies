@@ -48,8 +48,8 @@ Moovies::Application.routes.draw do
     match 'info/:page_name' => 'info#index', :as => :info
     match 'steps/:page_name' => 'steps#index', :as => :step
     resources :watchlists, :as => :vod_wishlists
-    get 'watchlists#display_vod', :controller => :watchlists, :action => :display_vod, :conditions => {:method => :get}
-    
+    match 'display_vod' => 'watchlists#display_vod'
+    resources :search_filters, :only => [:create, :destroy]
   end
   # The priority is based upon order of creation:
   # first created -> highest priority.

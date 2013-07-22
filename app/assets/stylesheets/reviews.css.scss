@@ -29,7 +29,8 @@ a.ajouter,a.regarder  {
   margin:0 auto;
 }
 .movie-descr {
-width: 650px;
+width: 600px;
+padding: 0 8px 0 120px;
 }
 p
 {
@@ -55,4 +56,9 @@ margin: 0 5px 0 -8px;
 }
 .critique p {
 height: 20px;
+}
+.movie-content {
+overflow: hidden;
+padding: 12px 0 20px 10px;
+min-height: 150px;
 }

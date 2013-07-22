@@ -51,3 +51,5 @@ gem "friendly_id", "~> 4.0.9"
 gem "routing_concerns", "~> 0.1.0"
 gem 'jquery-form-rails'
 gem 'thinking-sphinx'
+gem "composite_primary_keys", "~> 5.0.13"
+gem "truncate_html", "~> 0.9.2"

@@ -71,93 +71,9 @@
         <td align="right"><strong><%= t '.type_abo' %></strong></td>
         <td align="left"><%= t(".#{customer.subscription_payment_method.name.downcase}") if customer.subscription_payment_method %></td>
       </tr>
-      <tr>
-        <td colspan='2'>
-          <% if customer.actived? %>
-            <ul>
-              <li class='link_payment'>
-                <% if current_customer.payment_method == 1 %>
-                  <%= link_to t('.ogone_payment_method_change'), edit_customer_payment_methods_path(:customer_id => current_customer.to_param, :type => :credit_card_modification) %>
-                  <span><%= image_tag 'delimiter.gif' %></span>
-                <% end %>
-                <%= link_to t('.payment_method_change'), edit_customer_payment_methods_path(:customer_id => current_customer.to_param) %>
-              </li>
-            </ul>
-          <% end %>
-        </td>  
-      </tr>
     </table>
   </div>
-<% if params[:kind] == :adult %>
-  <div id="content_droite">
-    <table cellpadding="0" cellspacing="0" border="0" width="352" class="adult">
-      <tbody>
-      <tr>
-        <td colspan="2">
-          <div id="info_abo">
-            <h3><%= t '.adult_title' %></h3>
-            <h4><%= t '.rotation_title' %></h4>
-            <%= render :partial => 'customers/show/rotation', :locals => {:customer => customer} if params[:kind] == :adult %>
-          </div>
-        </td>
-      </tr>
-      <% if 1==0 #to do %>
-
-      <tr>
-        <td colspan="2"><div class="ligne"></div></td>
-      </tr>
-
-      <tr>
-        <td colspan="2" id="info_abo"><h4><%= t('.svod_adult') %> :</h4></td>
-      </tr>
-
-
-      <tr>
-        <td colspan="2">
-          <table cellspacing="0" cellpadding="0" class="svod">
-          <tbody>
-            <tr>
-              <td width="270">
-                <strong><%= t '.svod_question' %></strong>
-              </td>
-              <td width="170" valign="top">
-                <% if current_customer.svod_adult == 0 %>
-                 <span class="check-off"><span></span>
-                   <%= t '.yes' %>
-                 </span>
-                 <span class="check"><span></span>
-                  <%= t '.no' %>
-                 </span>
-                <% else %>
-                  <span class="check"><span></span>
-                     <%= t '.yes' %>
-                  </span>
-                  <span class="check-off"><span></span>
-                    <%= t '.no' %>
-                  </span>
-                <% end %>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="2">
-                <%= link_to t("home.index.wishlist_adult.svod_adult_btn_#{current_customer.svod_adult}"), customers_svod_path %>
-              </td>
-            </tr>
-            <% if current_customer.svod_adult > 0 %>
-              <tr>
-                <td colspan="2"><%= t "home.index.wishlist_adult.svod_adult_status_#{current_customer.svod_adult}", :next_reconduction_at => next_reconduction_at(current_customer) %></td>
-
-              </tr>
-            <% end %><% end %>
-
-          </tbody></table></td>
-        </tr>
-
-      </tbody></table>
-    </div>
-<% end %>
   
-  <p></p>
 </div>
 <div class="end"></div>
 <div style="display:none" id="rotation"><%= t '.rotation' %></div>

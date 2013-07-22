@@ -326,18 +326,18 @@ module ProductsHelper
   end
 
   def streaming_audio_bublles(product, vod_next = false)
-    content=[]
-    country=[]
+    content=''
+    country=''
     bubble = vod_next ? StreamingProduct.not_yet_available.find_all_by_imdb_id(product.imdb_id) : StreamingProduct.available.find_all_by_imdb_id(product.imdb_id)
-    content << bubble.collect{
+    bubble.collect{
     |product|
       if product.language.by_language(I18n.locale).first && product.language.by_language(I18n.locale).first.short
         lang = product.language.by_language(I18n.locale).first
         short = lang.short
         name = lang.name
         if !country.include?(short)
-          country << short
-          content_tag(:li, short.upcase, :class => "left red osc", :alt => name, :title => name) 
+          country += short
+          content += content_tag(:li, short.upcase, :class => "left red osc", :alt => name, :title => name) 
         end
       end
     }
@@ -345,10 +345,10 @@ module ProductsHelper
   end
 
   def streaming_subtitle_bublles(product, vod_next = false)
-    content=[]
-    country=[]
+    content=''
+    country=''
     bubble = vod_next ? StreamingProduct.not_yet_available.find_all_by_imdb_id(product.imdb_id) : StreamingProduct.available.find_all_by_imdb_id(product.imdb_id)
-    content << bubble.collect {
+    bubble.collect {
     |product|
       if product.subtitle.by_language(I18n.locale).first && product.subtitle.by_language(I18n.locale).first.short
         lang = product.subtitle.by_language(I18n.locale).first
@@ -356,14 +356,14 @@ module ProductsHelper
         name = lang.name
         
         if !country.include?(short)
-          country << short
+          country += short
           if short.include?('_m')
             short = short.slice(0..1)
             class_undertitle = class_bubble(short, :special)
           else
             class_undertitle = class_bubble(short, :classic)
           end
-          content_tag(:li, short.upcase, :class => "left gray osc #{class_undertitle}", :alt => name, :title => name)
+          content += content_tag(:li, short.upcase, :class => "left gray osc #{class_undertitle}", :alt => name, :title => name)
         end
       end
     }
@@ -371,14 +371,7 @@ module ProductsHelper
   end
 
   def bubbles(product)
-    if params[:view_mode] == 'streaming' || params[:vod] == 'vod' || params[:filter] == 'vod'
-      "#{streaming_audio_bublles(product)} #{streaming_subtitle_bublles(product)}"
-    else
-      audio_bubble = audio_bubbles(product, 0)
-      subtitle_bubble = subtitle_bubbles(product, 0)
-      separator = '' #(audio_bubble[:hide] == true || subtitle_bubble[:hide] == true ) ? '<div style="clear:both"></div>': ''
-      "#{audio_bubble[:audio]} #{separator} #{subtitle_bubble[:sub]}"
-    end
+    "#{streaming_audio_bublles(product)} #{streaming_subtitle_bublles(product)}"
   end
 
   def product_review_stars(review, kind)

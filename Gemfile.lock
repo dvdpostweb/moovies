@@ -55,6 +55,8 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    composite_primary_keys (5.0.13)
+      activerecord (~> 3.2.0, >= 3.2.9)
     daemons (1.1.9)
     debug_inspector (0.0.2)
     devise (2.2.4)
@@ -165,6 +167,7 @@ GEM
     treetop (1.4.14)
       polyglot
       polyglot (>= 0.3.1)
+    truncate_html (0.9.2)
     tzinfo (0.3.37)
     uglifier (2.1.1)
       execjs (>= 0.3.0)
@@ -181,6 +184,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   coffee-rails
+  composite_primary_keys (~> 5.0.13)
   devise
   dynamic_form
   execjs
@@ -202,5 +206,6 @@ DEPENDENCIES
   therubyracer (= 0.10.0)
   thin
   thinking-sphinx
+  truncate_html (~> 0.9.2)
   uglifier
   will_paginate

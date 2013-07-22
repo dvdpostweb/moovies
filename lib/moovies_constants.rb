@@ -139,5 +139,14 @@ module Moovies
       end
     end
     
+    def packages
+      HashWithIndifferentAccess.new.merge({
+        :infinite => 1,
+        :tvod => 2,
+        :kid => 3,
+        :adult_infinite => 4,
+        :adult_svod => 5
+      })
+    end
   end
 end
