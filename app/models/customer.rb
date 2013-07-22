@@ -26,14 +26,17 @@ class Customer < ActiveRecord::Base
   alias_attribute :next_abo_type_id,             :customers_next_abo_type
   alias_attribute :promo_type,                   :activation_discount_code_type
   alias_attribute :promo_id,                     :activation_discount_code_id
-  alias_attribute :payment_method,               :customers_abo_payment_method
+  validates_length_of :first_name, :minimum => 2
+  validates_length_of :last_name, :minimum => 2
+  validates_format_of :phone, :with => /^(\+)?[0-9 \-\/.]+$/, :on => :update
+  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
+  validates_uniqueness_of :email, :case_sensitive => false
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
-
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :newsletter, :newsletter_parnter, :last_name, :first_name, :language, :address_id, :phone, :birthday, :gender, :abo_type_id, :customers_abo_type, :auto_stop, :customers_abo_auto_stop_next_reconduction, :next_abo_type_id, :customers_next_abo_type, :promo_type, :activation_discount_code_type, :promo_id, :nickname
   belongs_to :subscription_type, :foreign_key => :customers_abo_type
   belongs_to :next_subscription_type, :class_name => 'SubscriptionType', :foreign_key => :customers_next_abo_type
-  belongs_to :address, :foreign_key => :customers_id, :primary_key => :customers_id, :conditions => {:address_book_id => '#{address_id}'} # Nasty hack for composite keys: http://gem-session.com/2010/03/using-dynamic-has_many-conditions-to-save-nested-forms-within-a-scope
+  belongs_to :address, :foreign_key => :customers_id, :primary_key => :customers_id
   belongs_to :subscription_payment_method, :foreign_key => :customers_abo_payment_method
   belongs_to :discount, :foreign_key => :activation_discount_code_id
   belongs_to :activation, :foreign_key => :activation_discount_code_id
@@ -70,10 +73,6 @@ class Customer < ActiveRecord::Base
       if self.email != self.new_email
         self.is_email_valid = 1
       end
-    end
-
-    def self.find_by_email(args)
-      self.find_by_customers_email_address(args)
     end
 
     def not_rated_products(kind)
