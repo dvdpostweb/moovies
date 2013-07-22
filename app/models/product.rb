@@ -22,6 +22,7 @@ class Product < ActiveRecord::Base
   alias_attribute :price_sale,      :products_sale_price
   
   belongs_to :director, :foreign_key => :products_directors_id
+  belongs_to :package
   belongs_to :studio, :foreign_key => :products_studio
   belongs_to :country, :class_name => 'ProductCountry', :foreign_key => :products_countries_id
   belongs_to :picture_format, :foreign_key => :products_picture_format, :conditions => {:language_id => Moovies.languages[I18n.locale.to_s]}
@@ -56,7 +57,6 @@ class Product < ActiveRecord::Base
   sphinx_scope(:by_actor)                 {|actor|            {:with =>       {:actors_id => actor.to_param}}}
   sphinx_scope(:by_audience)              {|min, max|         {:with =>       {:audience => Public.legacy_age_ids(min, max)}}}
   sphinx_scope(:by_category)              {|category|         {:with =>       {:category_id => category.to_param}}}
-  sphinx_scope(:by_collection)            {|collection|       {:with =>       {:collection_id => collection.to_param}}}
   sphinx_scope(:hetero)                   {{:without =>       {:category_id => [76, 72]}}}
   sphinx_scope(:gay)                      {{:with =>          {:category_id => [76, 72]}}}
   sphinx_scope(:by_country)               {|country|          {:with =>       {:country_id => country.to_param}}}
@@ -80,42 +80,21 @@ class Product < ActiveRecord::Base
   sphinx_scope(:with_languages)           {|language_ids|     {:with =>       {:language_ids => language_ids}}}
   sphinx_scope(:with_subtitles)           {|subtitle_ids|     {:with =>       {:subtitle_ids => subtitle_ids}}}
   sphinx_scope(:with_speaker)             {|speaker_ids|      {:with =>       {:speaker => speaker_ids}}}
-  sphinx_scope(:available)                {{:without =>       {:status => [99]}}}
-  sphinx_scope(:dvdpost_choice)           {{:with =>          {:dvdpost_choice => 1}}}
+  sphinx_scope(:available)                {{:without =>       {:status => 99}}}
   sphinx_scope(:recent)                   {{:without =>       {:availability => 0}, :with => {:available_at => 2.months.ago..Time.now.end_of_day, :next => 0}}}
   sphinx_scope(:new_vod)                  {|country|          {:conditions =>    {:new_vod => country}}}
-  sphinx_scope(:cinema)                   {{:with =>          {:in_cinema_now => 1, :next => 1}}}
   sphinx_scope(:soon)                     {{:with =>          {:in_cinema_now => 0, :next => 1}}}
-  sphinx_scope(:dvd_soon)                 {{:with =>          {:in_cinema_now => 0, :next => 1}}}
   sphinx_scope(:vod_soon)                 {{:with =>          {:vod_next => 1}}}
   sphinx_scope(:not_soon)                 {{:with =>          {:vod_next => 0}}}
   sphinx_scope(:vod_soon_lux)             {{:with =>          {:vod_next_lux => 1}}}
   sphinx_scope(:not_soon_lux)             {{:with =>          {:vod_next_lux => 0}}}
   sphinx_scope(:vod_soon_nl)              {{:with =>          {:vod_next_nl => 1}}}
   sphinx_scope(:not_soon_nl)              {{:with =>          {:vod_next_nl => 0}}}
-  sphinx_scope(:streaming)                {|country|          {:without =>       {:streaming_imdb_id => 0}, :country => {:streaming_available => country}}}
+  sphinx_scope(:by_package)                  {|package_id|       {:with =>          {:package_id => package_id}}}
   sphinx_scope(:random)                   {{:order =>         '@random'}}
-  sphinx_scope(:popular_new)              {{:with =>          {:popular => 1}}}
-  sphinx_scope(:highlight_best_fr)        {{:with =>          {:highlight_best_fr => 1..100}}}
-  sphinx_scope(:highlight_best_nl)        {{:with =>          {:highlight_best_nl => 1..100}}}
-  sphinx_scope(:highlight_best_en)        {{:with =>          {:highlight_best_en => 1..100}}}
-  sphinx_scope(:highlight_best_vod_be_fr) {{:with =>          {:highlight_best_vod_be_fr => 1..100}}}
-  sphinx_scope(:highlight_best_vod_be_nl) {{:with =>          {:highlight_best_vod_be_nl => 1..100}}}
-  sphinx_scope(:highlight_best_vod_be_en) {{:with =>          {:highlight_best_vod_be_en => 1..100}}}
-  sphinx_scope(:highlight_best_vod_lu_fr) {{:with =>          {:highlight_best_vod_lu_fr => 1..100}}}
-  sphinx_scope(:highlight_best_vod_lu_nl) {{:with =>          {:highlight_best_vod_lu_nl => 1..100}}}
-  sphinx_scope(:highlight_best_vod_lu_en) {{:with =>          {:highlight_best_vod_lu_en => 1..100}}}
-  sphinx_scope(:highlight_best_vod_nl_fr) {{:with =>          {:highlight_best_vod_nl_fr => 1..100}}}
-  sphinx_scope(:highlight_best_vod_nl_nl) {{:with =>          {:highlight_best_vod_nl_nl => 1..100}}}
-  sphinx_scope(:highlight_best_vod_nl_en) {{:with =>          {:highlight_best_vod_nl_en => 1..100}}}
-  sphinx_scope(:popular)                  {{:with =>          {:available_at => 8.months.ago..2.months.ago, :rating => 3.0..5.0, :series_id => 0, :in_stock => 3..1000}}}
-  sphinx_scope(:not_recent)               {{:with =>          {:next => 0}}}
-  sphinx_scope(:by_serie)                 {|serie_id|         {:with => {:series_id => serie_id}}}
-  sphinx_scope(:ppv)                      {{:with =>          {:is_ppv => 1}}}
   sphinx_scope(:by_new)                   {{:with =>          {:year => 2.years.ago.year..Date.today.year, :next => 0, :available_at => 3.months.ago..Time.now.end_of_day}}}
   sphinx_scope(:order)                    {|order, sort_mode| {:order => order, :sort_mode => sort_mode}}
   sphinx_scope(:group)                    {|group,sort|       {:group_by => group, :group_function => :attr, :group_clause   => sort}}
-                                          
   sphinx_scope(:limit)                    {|limit|            {:limit => limit}}
 
   def self.list_sort
@@ -132,156 +111,35 @@ class Product < ActiveRecord::Base
   end
   
   def self.filter(filter, options={}, exact=nil)
-    Rails.logger.debug { "@@@#{options.inspect}" }
-    if options[:exact]
-      products = search_clean_exact(options[:search], {:page => options[:page], :per_page => options[:per_page], :limit => options[:limit]})
-    else
-      products = search_clean(options[:search], {:page => options[:page], :per_page => options[:per_page], :limit => options[:limit]})
-    end
-    #products = products.exclude_products_id([exact.collect(&:products_id)]) if exact
-    #products = products.by_products_list(options[:list_id]) if options[:list_id] && !options[:list_id].blank?
+    products = Product.by_kind(options[:kind]).available
+    products = products.exclude_products_id([exact.collect(&:products_id)]) if exact
+    products = products.by_products_list(options[:list_id]) if options[:list_id] && !options[:list_id].blank?
     products = products.by_actor(options[:actor_id]) if options[:actor_id]
-    #products = products.by_category(options[:category_id]) if options[:category_id]
-    #products = products.by_collection(options[:collection_id]) if options[:collection_id]
-    #products = products.hetero if options[:hetero] && (options[:category_id] && (options[:category_id].to_i != 76 && options[:category_id].to_i != 72) )
-    #products = products.by_director(options[:director_id]) if options[:director_id]
-    #products = products.by_imdb_id(options[:imdb_id]) if options[:imdb_id]
-    #
-    #if options[:studio_id]
-    #  if options[:filter] == "vod" && options[:kind] == :normal
-    #    products = products.by_streaming_studio(options[:studio_id]) 
-    #  else
-    #    products = products.by_studio(options[:studio_id]) 
-    #  end
-    #end
-    #products = products.by_audience(filter.audience_min, filter.audience_max) if filter.audience? && options[:kind] == :normal
-    #products = products.by_country(filter.country_id) if filter.country_id?
-    #products = products.by_special_media([2,4,5]) if options[:filter] && options[:filter] == "vod"
-    #products = products.by_special_media([1,2]) if options[:filter] && options[:filter] == "dvd"
-    #products = products.by_special_media([3,4,7]) if options[:filter] && options[:filter] == "bluray"
-    #products = products.by_special_media([6,7]) if options[:filter] && options[:filter] == "bluray3d"
-    #
-    #if filter.media? && options[:kind] == :normal && options[:view_mode] != "streaming" && options[:filter] != "vod"
-    #  
-    #  medias = filter.media.dup
-    #  media_i = Array.new
-    #  if medias.include?(:dvd)
-    #    if medias.include?(:bluray)
-    #      if medias.include?(:streaming)
-    #        media_i = [1,2,3,4,5,7]
-    #      else
-    #        media_i = [1,2,3,4,7]
-    #      end
-    #    elsif medias.include?(:streaming)
-    #      media_i = [1,2,5]
-    #    else
-    #      media_i = [1,2]
-    #    end
-    #  elsif medias.include?(:bluray)
-    #    if medias.include?(:streaming)
-    #      media_i = [2,3,4,5,7]
-    #    else
-    #      media_i = [3,4,7]
-    #    end
-    #  elsif medias.include?(:streaming)
-    #    media_i = [2,4,5,7]
-    #  end
-    #  if medias.include?(:bluray3d)
-    #    media_i.push([6,7])
-    #  end
-    #  products = products.by_special_media(media_i)
-    #end
-    #products = products.by_ratings(filter.rating_min.to_f, filter.rating_max.to_f) if filter.rating?
-    #products = products.by_period(filter.year_min, filter.year_max) if filter.year?
-    #if filter.audio?
-    #  products = products.with_languages(filter.audio)
-    #else
-    #  products = products.with_languages(options[:audio]) if options[:audio] 
-    #end
-    #if filter.subtitles?
-    #  products = products.with_subtitles(filter.subtitles) 
-    #else
-    #  products = products.with_subtitles(options[:subtitles]) if options[:subtitles] 
-    #end
-    #products = products.dvdpost_choice if filter.dvdpost_choice?
-    #if options[:not_soon]
-    #  products = products.not_soon 
-    #end
-    #if options[:view_mode]
-    #  products = case options[:view_mode].to_sym
-    #  when :recent
-    #    products.recent
-    #  when :vod_recent
-    #    products.new_vod
-    #  when :soon
-    #    products.soon
-    #  when :vod_soon
-    #    products.vod_soon
-    #  when :cinema
-    #    products.cinema
-    #  when :streaming
-    #    products = products.by_special_media([2,4,5])
-    #  when :weekly_streaming
-    #    products.weekly_streaming
-    #  when :popular_streaming
-    #      products.streaming.limit(10)
-    #  when :recommended
-    #    recom = products.by_recommended_ids(filter.recommended_ids).with_speaker(options[:language]).limit(50)
-    #    recom
-    #  when :popular
-    #    products.popular_new.limit(800)
-    #  else
-    #    products
-    #  end
-    #end
-    #if options[:sort] && options[:sort].to_sym == :new
-    #  products = products.not_recent
-    #end
-    #if options[:kind] == :adult
-    #  products = products.by_kind(:adult).available
-    #else
-    #  products = products.by_kind(:normal).available
-    #end
-    #
-    #if options[:list_id] && !options[:list_id].blank?
-    #  sort = sort_by("special_order asc", options)
-    #elsif options[:search] && !options[:search].blank?
-    #  sort = sort_by("default_order desc, in_stock DESC", options)
-    #elsif options[:view_mode] && options[:view_mode].to_sym == :streaming
-    #  sort = sort_by("streaming_id desc", options)
-    #elsif options[:view_mode] && options[:view_mode].to_sym == :vod_recent
-    #  sort = sort_by("available_order desc", options)
-    #elsif options[:view_mode] && options[:view_mode].to_sym == :vod_soon
-    #  sort = sort_by("streaming_id desc", options)
-    #elsif options[:view_mode] && options[:view_mode].to_sym == :popular_streaming
-    #  sort = sort_by("count_tokens desc, streaming_id desc", options)
-    #elsif options[:view_mode] && options[:view_mode].to_sym == :popular
-    #  sort = sort_by("available_at DESC, rating desc", options)
-    #elsif options[:view_mode] && (options[:view_mode].to_sym == :recent || options[:view_mode].to_sym == :weekly_streaming || options[:view_mode].to_sym == :soon)
-    #  sort = sort_by("available_at desc", options)
-    #elsif options[:view_mode] && options[:view_mode].to_sym == :cinema
-    #  sort = sort_by("created_at desc", options)
-    #elsif options[:filter] && options[:filter].to_sym == :vod
-    #  sort = sort_by("streaming_id desc", options)
-    #else
-    #  sort = sort_by("default_order desc, in_stock DESC", options)
-    #end
-    #if sort !=""
-    #  if (options[:view_mode] && (options[:view_mode].to_sym == :streaming || options[:view_mode].to_sym == :popular_streaming || options[:view_mode].to_sym == :weekly_streaming)) || (options[:filter] && options[:filter].to_sym == :vod)
-    #    products = products.group('imdb_id', sort)
-    #  else
-    #    products = products.order(sort, :extended)
-    #  end
-    #else
-    #  if options[:filter] && options[:filter].to_sym == :vod
-    #     products = products.group('imdb_id', "streaming_id desc")
-    #  end
-    #end
-    #if options[:limit]
-  #    products = products.limit(options[:limit])
-    #end
+    products = products.by_category(options[:category_id]) if options[:category_id]
+    products = products.by_collection(options[:collection_id]) if options[:collection_id]
+    products = products.hetero if options[:hetero] && (options[:category_id] && (options[:category_id].to_i != 76 && options[:category_id].to_i != 72) )
+    products = products.by_director(options[:director_id]) if options[:director_id]
+    products = products.by_imdb_id(options[:imdb_id]) if options[:imdb_id]
+    products = options[:kind] == :normal ? products.by_studio(options[:studio_id]) : products.by_streaming_studio(options[:studio_id]) if options[:studio_id]
+    products = products.by_audience(filter.audience_min, filter.audience_max) if filter.audience? && options[:kind] == :normal
+    products = products.by_country(filter.country_id) if filter.country_id?
+    products = products.by_ratings(filter.rating_min.to_f, filter.rating_max.to_f) if filter.rating?
+    products = products.by_period(filter.year_min, filter.year_max) if filter.year?
+    products = products.with_languages(options[:audio] ? options[:audio] : filter.audio) if filter.audio?
+    products = products.with_subtitles(options[:subtitles]? options[:subtitles] : filter.subtitles) if filter.subtitles?
+    products = products.by_package(options[:package_id]) if options[:package_id]
+    ##to do?
+    products = products.not_soon if options[:not_soon]
+    products = products.get_view_mode(options) if options[:view_mode]
+    sort = get_sort(options)
+    products = products.order(sort, :extended)
+    if options[:exact]
+      products = search_clean_exact(products, options[:search], {:page => options[:page], :per_page => options[:per_page], :limit => options[:limit]})
+    else
+      products = search_clean(products, options[:search], {:page => options[:page], :per_page => options[:per_page], :limit => options[:limit]})
+    end
+    
     products
-    # products = products.sphinx_order('listed_products.order asc', :asc) if params[:top_id] && !params[:top_id].empty?
   end
 
   def recommendations(kind)
@@ -464,71 +322,29 @@ class Product < ActiveRecord::Base
     sql = sql.first
     sql
   end
-
-  def views_increment(desc)
-    # Dirty raw sql.
-    # This could be fixed with composite_primary_keys but version 2.3.5.1 breaks all other associations.
-  end
-
   
-  def self.sort_by(default, options={})
-    if options[:sort]
-      type =
-      if options[:sort] == 'alpha_az'
-        "descriptions_title_#{I18n.locale} asc"
-      elsif options[:sort] == 'alpha_za'
-        "descriptions_title_#{I18n.locale} desc"
-      elsif options[:sort] == 'rating'
-        "rating desc, in_stock DESC"
-      elsif options[:sort] == 'token'
-        "count_tokens desc, streaming_id desc"
-      elsif options[:sort] == 'token_month'
-        "count_tokens_month desc, streaming_id desc"
-      elsif options[:sort] == 'most_viewed'
-        "most_viewed desc"
-      elsif options[:sort] == 'most_viewed_last_year'
-        "most_viewed_last_year desc"
-      elsif options[:sort] == 'new'
-        "available_at DESC, rating desc"
-      elsif options[:sort] == 'recent1'
-        "default_order desc"
-      elsif options[:sort] == 'recent2'
-        "in_stock desc"
-      elsif options[:sort] == 'recent3'
-        "default_order desc, in_stock desc"
-      else
-        default
-      end
-    else
-      default
-    end
-  end
-
-  def self.search_clean(query_string, options={})
+  def self.search_clean(products, query_string, options={})
     qs = []
     if query_string
       qs = query_string.split.collect do |word|
         "*#{replace_specials(word)}*".gsub(/[-_]/, ' ')
-      end
+      end  
+      search = "@descriptions_title #{query_string}" unless search.empty?
+    else
+      search = ''
     end
-    query_string = qs.join(' ')
-    query_string = "@descriptions_title #{query_string}" if !query_string.empty?
     page = options[:page] || 1
-    #to do 
     limit = options[:limit] ? options[:limit].to_i : "1000"
     per_page = options[:per_page] || self.per_page
-    self.search(query_string, :max_matches => limit, :per_page => per_page, :page => page)
+    products.search(search, :max_matches => limit, :per_page => per_page, :page => page)
   end
 
   def self.search_clean_exact(query_string, options={})
     qs = []
-    if query_string
-      qs = query_string.split.collect do |word|
-        replace_specials(word).gsub(/[-_]/, ' ')
-      end
+    qs = query_string.split.collect do |word|
+      replace_specials(word).gsub(/[-_]/, ' ')
     end
-    query_string = qs.join(' ')
-    query_string = "@descriptions_title ^#{query_string}$"
+    query_string = "@descriptions_title ^#{qs.join(' ')}$"
     page = 1
     limit = options[:limit] ? options[:limit].to_i : "1000"
     per_page = 20
@@ -590,40 +406,6 @@ class Product < ActiveRecord::Base
     products_type == Moovies.product_kinds[:adult]
   end
 
-  def title_test
-    if imdb_id >0
-      title_db = products_title.upcase
-      puts title_db
-      title_imdb =  open "http://www.imdb.com/title/tt#{imdb_id}/" do |data|  p=/(.*)(\(.*\))/;       title = Hpricot(data).search('//h1').text.gsub(p, "\\1"); title.gsub(/\n/,'')  end
-      title_imdb = CGI.unescapeHTML(title_imdb).upcase
-      if title_db == title_imdb
-        puts 'ok'
-      else
-        puts " not ok #{title_db} <==> #{title_imdb}"
-      end
-    end
-    return ''
-  end
-
-  def self.title_test
-    
-    Product.normal_available.each do |product|
-      if product.imdb_id >0
-        
-        title_db = product.products_title.upcase
-        #puts title_db
-        title_imdb =  open "http://www.imdb.com/title/tt#{product.imdb_id}/" do |data|  p=/(.*)(\(.*\))/;       title = Hpricot(data).search('//h1').text.gsub(p, "\\1"); title.gsub(/\n/,'')  end
-        title_imdb = CGI.unescapeHTML(title_imdb).upcase
-        if title_db == title_imdb
-          #puts 'ok'
-        else
-          puts " not ok #{title_db} <==> #{title_imdb}"
-        end
-      end
-    end
-    return ''
-  end
-
   def trailer?
     ((Rails.env == "production" ? streaming_trailers.available.count > 0 : streaming_trailers.available_beta.count > 0) && tokens_trailers.available.first )
   end
@@ -642,5 +424,61 @@ class Product < ActiveRecord::Base
         'BE'
     end
   end
+  
+  def self.get_view_mode(options)
+    case options[:view_mode].to_sym
+    when :recent
+      products.recent
+    when :vod_recent
+      products.new_vod
+    when :soon
+      products.soon
+    when :vod_soon
+      products.vod_soon
+    else
+      products
+    end
+  end
 
+  def self.get_sort(options)
+    if options[:sort]
+      if options[:sort] == 'alpha_az'
+        "descriptions_title_#{I18n.locale} asc"
+      elsif options[:sort] == 'alpha_za'
+        "descriptions_title_#{I18n.locale} desc"
+      elsif options[:sort] == 'rating'
+        "rating desc, in_stock DESC"
+      elsif options[:sort] == 'token'
+        "count_tokens desc, streaming_id desc"
+      elsif options[:sort] == 'token_month'
+        "count_tokens_month desc, streaming_id desc"
+      elsif options[:sort] == 'most_viewed'
+        "most_viewed desc"
+      elsif options[:sort] == 'most_viewed_last_year'
+        "most_viewed_last_year desc"
+      elsif options[:sort] == 'new'
+        "available_at DESC, rating desc"
+      elsif options[:sort] == 'recent1'
+        "default_order desc"
+      elsif options[:sort] == 'recent2'
+        "in_stock desc"
+      elsif options[:sort] == 'recent3'
+        "default_order desc, in_stock desc"
+      else
+        "default_order desc"
+      end
+    else
+      if options[:list_id] && !options[:list_id].blank?
+        "special_order asc"
+      elsif options[:search] && !options[:search].blank?
+        "default_order desc, in_stock DESC"
+      elsif options[:view_mode] && options[:view_mode].to_sym == :vod_recent
+        "available_order desc"
+      elsif options[:view_mode] && options[:view_mode].to_sym == :vod_soon
+        "streaming_id desc"
+      else
+        "default_order desc"
+      end
+    end
+  end
 end
