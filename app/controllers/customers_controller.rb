@@ -59,33 +59,10 @@ class CustomersController < ApplicationController
     else
       data = @customer.newsletter_parnter
     end
-    respond_to do |format|
-      format.html do
-        redirect_to customer_path(:id => current_customer.to_param)
-      end
-      format.js {render :partial => 'customers/show/active', :locals => {:active => data, :type => params[:type]}}
-    end
-  end
-
-  def mail_copy
-    @customer = current_customer
-    @customer.customer_attribute.update_attribute(:mail_copy, params[:value])
-    respond_to do |format|
-      format.html do
-        redirect_to customer_path(:id => current_customer.to_param)
-      end
-      format.js {render :partial => 'customers/show/mail_copy', :locals => {:mail_copy => @customer.customer_attribute.mail_copy}}
-    end
-  end
-  
-  def only_vod
-    @customer = current_customer
-    @customer.customer_attribute.update_attribute(:only_vod, params[:value])
-    respond_to do |format|
-      format.html do
-        redirect_to customer_path(:id => current_customer.to_param)
-      end
-      format.js {render :partial => 'customers/show/only_vod', :locals => {:only_vod => @customer.customer_attribute.only_vod}}
+    if request.xhr?
+      render :partial => 'customers/show/active', :locals => {:active => data, :type => params[:type]}
+    else
+      redirect_to customer_path(:id => current_customer.to_param)
     end
   end
   

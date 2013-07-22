@@ -9,7 +9,6 @@
 //= require jquery.form
 
 //= require jquery.ui.datepicker
-//= require jquery.ui.datepicker-fr
 //= require facebox
 //= require messages
 //= require reviews
@@ -202,6 +201,17 @@ $(function() {
      });
      return false;
    });
+  $('#search-field').on('focus', function(){
+    if($('#search-field').attr('value') == '<%= I18n.t('layouts.header.explore') %>'){
+      $('#search-field').attr('value', '');
+    }
+  });
+
+  $('#search-field').on('blur', function(){
+    if($('#search-field').attr('value') == ''){
+      $('#search-field').val('<%= I18n.t('layouts.header.explore') %>');
+    }
+  });
    
 });
 function querySt(hu ,ji) {
