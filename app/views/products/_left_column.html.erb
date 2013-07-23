@@ -8,7 +8,9 @@
     <h3 class="ttl infinity">Plush Infinite</h3>
     <ul class="nav osc">
       <li class="list"><a href="#" class="">Derniers ajouts</a></li><li class="list"><a href="#"  class="">	Plus regardés</a></li><li class="list"><a href="#"  class="">	Dernière chance
-      </a></li><li class="list"><a href="#"  class="">Prochainement</a></li><li class="list"><a href="#"  class="">Genre</a></li><li class="list"><a href="#"  class="">Tout le catalogue</a></li>
+      </a></li><li class="list"><a href="#"  class="">Prochainement</a></li>
+      <li class="list"><%= link_to t('.categories'), categories_path(:package => Moovies.packages.invert[1]) %></li>
+      <li class="list"><%= link_to t('.all'), products_path(:package => Moovies.packages.invert[1]) %></li>
     </ul>
 
     <h3 class="ttl alacarte">Plush à la carte

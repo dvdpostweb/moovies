@@ -160,5 +160,31 @@ $(function() {
      $(this).parent().html("<div class='load2'><img src='/assets/ajax-loader.gif' /></div>")
      return false; // prevent default behaviour
    });
+   $('#toTop').on('click', function(){
+     goToByScroll('top')
+   });
+   if ($('#products_index #pagination.active').length) {
+       $(window).scroll(function() {
+         var url;
+         url = $('#cl #pagination .next_page').attr('href');
+         if ($(window).scrollTop() < 500)
+         {
+           $('#toTop').fadeOut('slow')
+         }
+         else
+         {
+           $('#toTop').fadeIn('slow')
+         }
+         if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 1200) {
+           set_page(url)
+           $('#pagination').html("<img src='/assets/loading.gif' />");
+           return $.getScript(url);
+         }
+       });
+       return $(window).scroll();
+   }
 });
 
+function goToByScroll(id){
+  $('html,body').animate({scrollTop: $("#"+id).offset().top},'slow');
+}

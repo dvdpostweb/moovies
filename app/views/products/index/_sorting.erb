@@ -1,0 +1,14 @@
+<div class="bysort">
+  <div class="bysort_title"><%= t '.title'%> : </div>
+  <div class="bysort_choice">
+    <% var = params[:sort].to_sym %>
+    <% form_for(:product, :url => request.fullpath, :html => { :method => :get, :id => :sort_form  } ) do |f| %>
+      <% request.query_parameters.each do |key,value| %>
+        
+        <%= hidden_field_tag(key, value) if key != 'sort' %>
+      <% end %>
+      <%= select_tag(:sort, options_for_select(sort_collection_for_select, var), { :onchange => '$("#sort_form").submit()'}) %>
+    <% end %>
+  </div>
+  <div style="clear:both"></div>
+</div>

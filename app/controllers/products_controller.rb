@@ -6,15 +6,14 @@ class ProductsController < ApplicationController
     @body_id = 'products_index'
     @filter = view_context.get_current_filter({})
     if params['actor_id']
-      @actor = Actor.find(params['actor_id'])
-      params['actor_id'] = @actor.id
+      @people = Actor.find(params['actor_id'])
+      params['actor_id'] = @people.id
     end
     if params['director_id']
-      @director = Director.find(params['director_id'])
-      params['director_id'] = @director.id
+      @people = Director.find(params['director_id'])
+      params['director_id'] = @people.id
     end
-    new_params = session[:sexuality] == 0 ? params.merge(:per_page => 3, :country_id => session[:country_id], :hetero => 1) : params.merge(:per_page => 3, :country_id => session[:country_id])
-    Rails.logger.debug { "@@@#{new_params.inspect}" }
+    new_params = session[:sexuality] == 0 ? params.merge(:per_page => 15, :country_id => session[:country_id], :hetero => 1) : params.merge(:per_page => 15, :country_id => session[:country_id])
     @products = Product.filter(@filter, new_params)
     @target = cookies[:endless] == 'active' ? '_blank' : '_self'
     if params[:endless]
@@ -30,27 +29,10 @@ class ProductsController < ApplicationController
     #end
     @tokens = current_customer.get_all_tokens_id(params[:kind]) if current_customer
     #
-    #if params[:category_id]
-    #  filter = get_current_filter
-    #  if params[:category_id] && streaming_access? && (params[:view_mode] != "streaming" && params[:filter] != "vod")
-    #    if current_customer
-    #      @popular = current_customer.streaming(filter, {:category_id => params[:category_id], :country_id => session[:country_id]}).paginate(:per_page => 6, :page => params[:popular_streaming_page])
-    #      @papular_page = params[:popular_streaming_page] || 1
-    #      @papular_nb_page = @popular.total_pages
-    #    else
-    #      @popular = nil
-    #    end
-    #  else
-    #    @popular = nil
-    #  end      
-    #  if params[:category_id].to_i == 76 && current_customer
-    #    current_customer.customer_attribute.update_attribute(:sexuality, 1)
-    #    session[:sexuality] = 1
-    #  end
-    #end
     #if params[:sort].nil?
     #  params[:sort] = 'normal'
     #end
+    #to do 
     #@rating_color = params[:kind] == :adult ? :pink : :white
     #@countries = ProductCountry.visible.order
     #@collections = Category.by_size.random
@@ -64,56 +46,8 @@ class ProductsController < ApplicationController
     #    Search.create(:name => params[:search], :kind => DVDPost.search_kinds[kind])
     #  end
     #  
-    #  if session[:sexuality] == 0
-    #    new_params = params.merge(:hetero => 1) 
-    #  else
-    #    new_params = params
-    #  end
-    #  new_params = new_params.merge(:per_page => item_per_page, :country_id => session[:country_id])
-    #  @products = 
-    #  if params[:view_mode] == 'recommended'
-    #    if(session[:sort] != params[:sort])
-    #      expiration_recommendation_cache()
-    #    end
-    #    session[:sort]=params[:sort] 
-    #    retrieve_recommendations(params[:page], params.merge(:per_page => item_per_page, :kind => params[:kind], :language => DVDPost.product_languages[I18n.locale.to_s]))
-    #  else
-    #    
-    #    if @exact_products && @exact_products.size > 0
-    #      Product.filter(@filter, new_params, @exact_products)
-    #    else
-    #      Product.filter(@filter, new_params)
-    #    end
-    #  end
-    #  @products_count = @products ? @products.count : 0
-    #  if params[:search] && !params[:search].empty?
-    #    if params[:type].nil? &&  @products_count == 0 && @exact_products.count == 0
-    #      if @actors_count > 0
-    #        params[:type] = 'actors'
-    #      elsif @directors_count > 0
-    #         params[:type] = 'directors'
-    #      end 
-    #    end
-    #    if params[:type] == 'actors'
-    #      @actors = Actor.search_clean(params[:search], params[:kind], params[:actors_page], false)
-    #    elsif params[:type] == 'directors'
-    #      @directors = Director.search_clean(params[:search], params[:directors_page], false)
-    #    end
-    #  end
-    #  
     #  @jacket_mode = Product.get_jacket_mode(params)
     ##end
-    #respond_to do |format|
-    #  format.html
-    #  format.js {
-    #    if params[:popular_streaming_page]
-    #      render :partial => 'products/index/streaming', :locals => {:products => @popular, :product_page => @papular_page, :product_nb_page => @papular_nb_page}
-    #    elsif params[:recommendation_page]
-    #      render :partial => 'home/index/recommendations', :locals => {:products => retrieve_recommendations(params[:recommendation_page], {:per_page => 8, :kind => params[:kind], :language => DVDPost.product_languages[I18n.locale.to_s]})}  
-    #    end
-    #  
-    #  }
-    #end  
   end
 
   def show

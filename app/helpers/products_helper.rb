@@ -530,16 +530,21 @@ module ProductsHelper
       date = Date.parse(people.birth_at)
       str = "<b>#{t '.birth_at'} :</b> #{date.strftime('%d/%m/%Y') }"
       str += " #{t '.at'} #{people.birth_place}<br>" if people.birth_place
+      str.html_safe
+    else
+      ''
     end
-    str
+    
   end
 
   def human_death(people)
     if people.death_at
       str = "<b>#{t '.death_at'} :</b> #{people.death_at.strftime('%d/%m/%Y') }"
       str += " #{t '.at'} #{people.death_place}<br>" if people.death_place
+      str.html_safe
+    else
+      ''
     end
-    str
   end
 
   def category(product, cat)

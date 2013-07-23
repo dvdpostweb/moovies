@@ -94,7 +94,8 @@ ThinkingSphinx::Index.define :product, :with => :active_record do
 
   has "case 
   when  products_status = -1 then 99
-  else products_status end", :type => :integer, :as => :status
+  when  products_status = -2 then 98
+  else products_status end", :type => :integer, :as => :state
   set_property :enable_star => true
   set_property :min_prefix_len => 3
   set_property :charset_type => 'sbcs'
