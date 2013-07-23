@@ -13,8 +13,8 @@ class ProductsController < ApplicationController
       @director = Director.find(params['director_id'])
       params['director_id'] = @director.id
     end
-    new_params = session[:sexuality] == 0 ? params.merge(:per_page => 20, :country_id => session[:country_id], :hetero => 1) : params.merge(:per_page => 20, :country_id => session[:country_id])
-    
+    new_params = session[:sexuality] == 0 ? params.merge(:per_page => 3, :country_id => session[:country_id], :hetero => 1) : params.merge(:per_page => 3, :country_id => session[:country_id])
+    Rails.logger.debug { "@@@#{new_params.inspect}" }
     @products = Product.filter(@filter, new_params)
     @target = cookies[:endless] == 'active' ? '_blank' : '_self'
     if params[:endless]
