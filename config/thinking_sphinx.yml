@@ -1,0 +1,33 @@
+development:
+  port: 7444
+  searchd_log_file: "log/searchd.log"
+  query_log_file: "log/searchd_query.log"
+  pid_file: "log/searchd.pid"
+  max_matches: 100000
+  mem_limit: 128M
+test:
+  port: 7444
+  pid_file: log/searchd.pid
+  searchd_log_file: "log/searchd.log"
+  query_log_file: "log/searchd_query.log"
+  pid_file: "log/searchd.pid"
+  max_matches: 100000
+  mem_limit: 128M
+staging:
+  port: 4444
+  pid_file: /home/webapps/plush/staging/shared/tmp/searchd.pid
+  searchd_file_path: /home/webapps/plush/staging/shared/db/sphinx  
+  max_matches: 10000
+  mem_limit: 128M
+pre_production:
+  port: 3444
+  pid_file: /home/webapps/plush/pre_production/shared/tmp/searchd.pid
+  searchd_file_path: /home/webapps/plush/pre_production/shared/db/sphinx  
+  max_matches: 10000
+  mem_limit: 128M
+production:
+  port: 2444
+  pid_file: /home/webapps/plush/production/shared/tmp/searchd.pid
+  searchd_file_path: /home/webapps/plush/production/shared/db/sphinx  
+  max_matches: 10000
+  mem_limit: 128M

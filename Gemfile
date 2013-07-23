@@ -53,3 +53,5 @@ gem 'jquery-form-rails'
 gem 'thinking-sphinx'
 gem "composite_primary_keys", "~> 5.0.13"
 gem "truncate_html", "~> 0.9.2"
+gem "capistrano", "~> 2.15.5"
+gem "capistrano-ext"
