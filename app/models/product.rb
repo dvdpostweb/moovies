@@ -52,50 +52,57 @@ class Product < ActiveRecord::Base
   scope :by_imdb_ids, lambda {|imdb| where("imdb_id in (#{imdb})")}
   scope :ordered, :order => 'products_id desc'
   scope :group_by_imdb, :group => 'imdb_id'
-  sphinx_scope(:by_products_id)           {|products_id|      {:with =>       {:id => products_id}}}
-  sphinx_scope(:exclude_products_id)      {|products_id|      {:without =>    {:id => products_id}}}
-  sphinx_scope(:by_actor)                 {|actor|            {:with =>       {:actors_id => actor.to_param}}}
-  sphinx_scope(:by_audience)              {|min, max|         {:with =>       {:audience => Public.legacy_age_ids(min, max)}}}
-  sphinx_scope(:by_category)              {|category|         {:with =>       {:category_id => category.to_param}}}
-  sphinx_scope(:hetero)                   {{:without =>       {:category_id => [76, 72]}}}
-  sphinx_scope(:gay)                      {{:with =>          {:category_id => [76, 72]}}}
-  sphinx_scope(:by_country)               {|country|          {:with =>       {:country_id => country.to_param}}}
-  sphinx_scope(:by_director)              {|director|         {:with =>       {:director_id => director.to_param}}}
-  sphinx_scope(:by_studio)                {|studio|           {:with =>       {:studio_id => studio.to_param}}}
-  sphinx_scope(:by_streaming_studio)      {|studio|           {:with =>       {:streaming_studio_id => studio.to_param}}}
-  sphinx_scope(:by_imdb_id)               {|imdb_id|          {:with =>       {:imdb_id => imdb_id}}}
-  sphinx_scope(:by_language)              {|language|         {:order =>      language.to_s == 'fr' ? :french : :dutch, :sort_mode => :desc}}
-  sphinx_scope(:by_kind)                  {|kind|             {:conditions => {:products_type => Moovies.product_kinds[kind]}}}
-  sphinx_scope(:by_media)                 {|media|            {:conditions => {:products_media => media}}}
-  sphinx_scope(:by_special_media_be)      {|media|            {:with =>       {:special_media_be => media}}}
-  sphinx_scope(:by_special_media_lu)      {|media|            {:with =>       {:special_media_lu => media}}}
-  sphinx_scope(:by_special_media_nl)      {|media|            {:with =>       {:special_media_nl => media}}}
-  sphinx_scope(:remove_wrong_be)          {|media|            {:without =>    {:special_media_be => media}}}
-  sphinx_scope(:remove_wrong_lu)          {|media|            {:without =>    {:special_media_lu => media}}}
-  sphinx_scope(:remove_wrong_nl)          {|media|            {:without =>    {:special_media_nl => media}}}
-  sphinx_scope(:by_period)                {|min, max|         {:with =>       {:year => min..max}}}
-  sphinx_scope(:by_products_list)         {|product_list|     {:with =>       {:products_list_ids => product_list.to_param}}}
-  sphinx_scope(:by_ratings)               {|min, max|         {:with =>       {:rating => min..max}}}
-  sphinx_scope(:by_recommended_ids)       {|recommended_ids|  {:with =>       {:id => recommended_ids}}}
-  sphinx_scope(:with_languages)           {|language_ids|     {:with =>       {:language_ids => language_ids}}}
-  sphinx_scope(:with_subtitles)           {|subtitle_ids|     {:with =>       {:subtitle_ids => subtitle_ids}}}
-  sphinx_scope(:with_speaker)             {|speaker_ids|      {:with =>       {:speaker => speaker_ids}}}
-  sphinx_scope(:available)                {{:without =>       {:status => 99}}}
-  sphinx_scope(:recent)                   {{:without =>       {:availability => 0}, :with => {:available_at => 2.months.ago..Time.now.end_of_day, :next => 0}}}
-  sphinx_scope(:new_vod)                  {|country|          {:conditions =>    {:new_vod => country}}}
-  sphinx_scope(:soon)                     {{:with =>          {:in_cinema_now => 0, :next => 1}}}
-  sphinx_scope(:vod_soon)                 {{:with =>          {:vod_next => 1}}}
-  sphinx_scope(:not_soon)                 {{:with =>          {:vod_next => 0}}}
-  sphinx_scope(:vod_soon_lux)             {{:with =>          {:vod_next_lux => 1}}}
-  sphinx_scope(:not_soon_lux)             {{:with =>          {:vod_next_lux => 0}}}
-  sphinx_scope(:vod_soon_nl)              {{:with =>          {:vod_next_nl => 1}}}
-  sphinx_scope(:not_soon_nl)              {{:with =>          {:vod_next_nl => 0}}}
-  sphinx_scope(:by_package)                  {|package_id|       {:with =>          {:package_id => package_id}}}
-  sphinx_scope(:random)                   {{:order =>         '@random'}}
-  sphinx_scope(:by_new)                   {{:with =>          {:year => 2.years.ago.year..Date.today.year, :next => 0, :available_at => 3.months.ago..Time.now.end_of_day}}}
-  sphinx_scope(:order)                    {|order, sort_mode| {:order => order, :sort_mode => sort_mode}}
-  sphinx_scope(:group)                    {|group,sort|       {:group_by => group, :group_function => :attr, :group_clause   => sort}}
-  sphinx_scope(:limit)                    {|limit|            {:limit => limit}}
+  
+  sphinx_scope(:by_package_id) { |package|
+    {:with => {:package_id => package}}
+  }
+  sphinx_scope(:by_director) { |director|
+    {:conditions => {:director_name => director}}
+  }
+  #sphinx_scope(:by_products_id)           {|products_id|      {:with =>       {:id => products_id}}}
+  #sphinx_scope(:exclude_products_id)      {|products_id|      {:without =>    {:id => products_id}}}
+  #sphinx_scope(:by_actor)                 {|actor|            {:with =>       {:actors_id => actor.to_param}}}
+  #sphinx_scope(:by_audience)              {|min, max|         {:with =>       {:audience => Public.legacy_age_ids(min, max)}}}
+  #sphinx_scope(:by_category)              {|category|         {:with =>       {:category_id => category.to_param}}}
+  #sphinx_scope(:hetero)                   {{:without =>       {:category_id => [76, 72]}}}
+  #sphinx_scope(:gay)                      {{:with =>          {:category_id => [76, 72]}}}
+  #sphinx_scope(:by_country)               {|country|          {:with =>       {:country_id => country.to_param}}}
+  #sphinx_scope(:by_director)              do |director|         {:with =>       {:director_id => director.to_param}} end
+  #sphinx_scope(:by_studio)                {|studio|           {:with =>       {:studio_id => studio.to_param}}}
+  #sphinx_scope(:by_streaming_studio)      {|studio|           {:with =>       {:streaming_studio_id => studio.to_param}}}
+  #sphinx_scope(:by_imdb_id)               {|imdb_id|          {:with =>       {:imdb_id => imdb_id}}}
+  #sphinx_scope(:by_language)              {|language|         {:order =>      language.to_s == 'fr' ? :french : :dutch, :sort_mode => :desc}}
+  #sphinx_scope(:by_kind)                  {|kind|             {:conditions => {:products_type => Moovies.product_kinds[kind]}}}
+  #sphinx_scope(:by_media)                 {|media|            {:conditions => {:products_media => media}}}
+  #sphinx_scope(:by_special_media_be)      {|media|            {:with =>       {:special_media_be => media}}}
+  #sphinx_scope(:by_special_media_lu)      {|media|            {:with =>       {:special_media_lu => media}}}
+  #sphinx_scope(:by_special_media_nl)      {|media|            {:with =>       {:special_media_nl => media}}}
+  #sphinx_scope(:remove_wrong_be)          {|media|            {:without =>    {:special_media_be => media}}}
+  #sphinx_scope(:remove_wrong_lu)          {|media|            {:without =>    {:special_media_lu => media}}}
+  #sphinx_scope(:remove_wrong_nl)          {|media|            {:without =>    {:special_media_nl => media}}}
+  #sphinx_scope(:by_period)                {|min, max|         {:with =>       {:year => min..max}}}
+  #sphinx_scope(:by_products_list)         {|product_list|     {:with =>       {:products_list_ids => product_list.to_param}}}
+  #sphinx_scope(:by_ratings)               {|min, max|         {:with =>       {:rating => min..max}}}
+  #sphinx_scope(:by_recommended_ids)       {|recommended_ids|  {:with =>       {:id => recommended_ids}}}
+  #sphinx_scope(:with_languages)           {|language_ids|     {:with =>       {:language_ids => language_ids}}}
+  #sphinx_scope(:with_subtitles)           {|subtitle_ids|     {:with =>       {:subtitle_ids => subtitle_ids}}}
+  #sphinx_scope(:with_speaker)             {|speaker_ids|      {:with =>       {:speaker => speaker_ids}}}
+  #sphinx_scope(:available)                {{:without =>       {:status => 99}}}
+  #sphinx_scope(:recent)                   {{:without =>       {:availability => 0}, :with => {:available_at => 2.months.ago..Time.now.end_of_day, :next => 0}}}
+  #sphinx_scope(:new_vod)                  {|country|          {:conditions =>    {:new_vod => country}}}
+  #sphinx_scope(:soon)                     {{:with =>          {:in_cinema_now => 0, :next => 1}}}
+  #sphinx_scope(:vod_soon)                 {{:with =>          {:vod_next => 1}}}
+  #sphinx_scope(:not_soon)                 {{:with =>          {:vod_next => 0}}}
+  #sphinx_scope(:vod_soon_lux)             {{:with =>          {:vod_next_lux => 1}}}
+  #sphinx_scope(:not_soon_lux)             {{:with =>          {:vod_next_lux => 0}}}
+  #sphinx_scope(:vod_soon_nl)              {{:with =>          {:vod_next_nl => 1}}}
+  #sphinx_scope(:not_soon_nl)              {{:with =>          {:vod_next_nl => 0}}}
+  #sphinx_scope(:by_package)               do |package_id|       {:with =>          {:package_id => package_id}} end 
+  #sphinx_scope(:random)                   {{:order =>         '@random'}}
+  #sphinx_scope(:by_new)                   {{:with =>          {:year => 2.years.ago.year..Date.today.year, :next => 0, :available_at => 3.months.ago..Time.now.end_of_day}}}
+  #sphinx_scope(:order)                    {|order, sort_mode| {:order => order, :sort_mode => sort_mode}}
+  #sphinx_scope(:group)                    {|group,sort|       {:group_by => group, :group_function => :attr, :group_clause   => sort}}
+  #sphinx_scope(:limit)                    {|limit|            {:limit => limit}}
 
   def self.list_sort
      sort = OrderedHash.new
