@@ -1,0 +1,24 @@
+  <% if params[:kind] == :adult %>
+    <% if people.image_active %>
+      <% 3.times do |i| %>
+        <% i += 1 %>
+        <%= image_tag people.image(i), :width => 150 %>
+      <% end %>
+    <% end %>
+  <% else %>
+  <div class="detail-box">
+    <div class="people">
+      <%= image_tag people.image(0), :height => 193 %>
+    </div>
+    <div class="detail-text" align="justify">
+      <div id="title"><%= people.name %></div>
+      <p><em><%= people.class.to_s == 'Actor' ? t('products.index.actor') : t('products.index.director') %></em><br></p>
+      <div id="detail">
+        <%= human_birth(people) %>
+        <%= human_death(people) %>
+      </div>
+    </div>
+  </div>
+  <div style="clear:both"></div>
+  <br />
+  <% end %>

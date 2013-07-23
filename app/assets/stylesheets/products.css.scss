@@ -686,7 +686,7 @@ visibility: hidden;
   text-align: center;
   background: url(image_path('tab-content-div.gif')) 0 0 repeat-x;
 }
-.content #pagination a, .content #pagination span.current{
+.content #pagination a, .content #pagination .current{
   display: inline-block;
   line-height: 23px;
   padding: 0 7px;
@@ -705,9 +705,10 @@ visibility: hidden;
    text-shadow: 1px 1px 1px #dce3e9;
    vertical-align: top;
    border:0;
+   font-style: normal;
 }
 
-.content #pagination a:hover, .content  #pagination span.current {
+.content #pagination a:hover, .content  #pagination .current {
   background-position: 0 0;
   color: #323a40;
   text-shadow: 1px 1px 1px #fff;
@@ -715,6 +716,8 @@ visibility: hidden;
   -webkit-box-shadow: 1px 1px 1px #52585c;
   box-shadow: 1px 1px 1px #52585c;
   text-decoration: none;
+  font-style: normal;
+  
 }
 
 .content #pagination span.gap {
@@ -1141,28 +1144,24 @@ overflow: visible;
   text-align: center;
   background: url(image_path('tab-content-div.gif')) 0 0 repeat-x;
 }
-#pagination a, #pagination span.current{
+#pagination a, #pagination .current{
   display: inline-block;
   line-height: 23px;
   padding: 0 7px;
   min-width: 10px;
   font-weight: bold;
-  
- 
-   margin: 0 2px 0 1px;
-   font-size: 14px;
-
-   color: #6f7980;
-
-   vertical-align: top;
-   border:0;
+  margin: 0 2px 0 1px;
+  font-size: 14px;
+  color: #6f7980;
+  vertical-align: top;
+  border:0;
+  font-style: normal;
 }
 
-#pagination a:hover, #pagination span.current {
-
+#pagination a:hover, #pagination .current {
   color: #323a40;
- 
   text-decoration: none;
+  font-style: normal;
 }
 
 #pagination span.gap {
@@ -1218,7 +1217,7 @@ font-weight: bold;
 }
 .stars img {
     display: inline-block;
-    margin: 8px 2px 2px;
+    padding: 8px 2px 2px;
 }
 .subtitle_hide, .audio_hide {
 display: none !important;

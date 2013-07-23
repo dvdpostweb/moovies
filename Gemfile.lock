@@ -1,4 +1,17 @@
 GIT
+  remote: git://github.com/pat/thinking-sphinx.git
+  revision: c26b796c1ecf1c77984ea993daf069df711a3b69
+  ref: c26b796c1e
+  branch: master
+  specs:
+    thinking-sphinx (3.0.4)
+      activerecord (>= 3.1.0)
+      builder (>= 2.1.2)
+      innertube (>= 1.0.2)
+      middleware (>= 0.1.0)
+      riddle (>= 1.5.7)
+
+GIT
   remote: git://github.com/svenfuchs/i18n-active_record.git
   revision: b631b05a96d578b6c01c4751cc1a0ba8a84406af
   specs:
@@ -172,12 +185,6 @@ GEM
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
       rack (>= 1.0.0)
-    thinking-sphinx (3.0.4)
-      activerecord (>= 3.1.0)
-      builder (>= 2.1.2)
-      innertube (>= 1.0.2)
-      middleware (>= 0.1.0)
-      riddle (>= 1.5.7)
     thor (0.18.1)
     tilt (1.4.1)
     treetop (1.4.14)
@@ -223,7 +230,7 @@ DEPENDENCIES
   spring
   therubyracer (= 0.10.0)
   thin
-  thinking-sphinx
+  thinking-sphinx (~> 3.0.4)!
   truncate_html (~> 0.9.2)
   uglifier
   will_paginate

@@ -1,8 +1,9 @@
 <div id="maincontent">
 <h2 class="ttl"><%= t(".categories_vod")  %></h2>
-
 <% if params[:kind] == :normal %>
 <ul id="categories">
+  <% Rails.logger.debug { "@@@#{params[:kind]}" }%>
+  
   <%= render :partial => '/categories/item', :collection =>  @categories %>
 </ul>
 <% else %>

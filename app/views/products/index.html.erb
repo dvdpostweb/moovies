@@ -10,6 +10,8 @@
 <!--   ==============   MAIN CONTENT   ==============   -->
 <div id="maincontent" >
   <h2 class="ttl">Tous les films</h2>
+  <%= render :partial => 'products/index/image', :locals => {:people => @people} if @people %>
+  <%= render :partial => 'layouts/filters', :locals => {:filter => @filter }%>
   <!--   ==============   MOVIES   ==============   -->
   <a href="/fr/products?endless=deactive&amp;sort=normal" class="endless">Désactiver la pagination automatique</a>
   <div id="products">
@@ -33,12 +35,10 @@
     <%= render :partial => 'products/index/movie_details', :collection => @products %>
   </div>
   <div id='pagination_content'>
-    <div class="products-pagination osc active" id="pagination">
-      <span class="disabled prev_page">«</span> <span class="current">1</span> <a href="/fr/products?page=2&amp;sort=normal" rel="next">2</a> <a href="/fr/products?page=3&amp;sort=normal">3</a> <a href="/fr/products?page=4&amp;sort=normal">4</a> <a href="/fr/products?page=5&amp;sort=normal">5</a> <a href="/fr/products?page=6&amp;sort=normal">6</a> <a href="/fr/products?page=7&amp;sort=normal">7</a> <a href="/fr/products?page=8&amp;sort=normal">8</a> <a href="/fr/products?page=9&amp;sort=normal">9</a> <span class="gap">&hellip;</span> <a href="/fr/products?page=1383&amp;sort=normal">1383</a> <a href="/fr/products?page=1384&amp;sort=normal">1384</a> <a href="/fr/products?page=2&amp;sort=normal" class="next_page" rel="next">»</a>
-    </div>
+      <%= render :partial => '/products/index/pagination' %>
   </div>
   <!--   ==============   END MOVIES   ==============   -->
 </div>
 <%= render :partial => 'products/left_column' %>
-<div id="toTop" style="display: block;">Haut de la page</div>
+<div id="toTop" style="display: block;"><%= t('.back') %></div>
   <!--   ==============   END MAIN CONTENT   ==============   --> 

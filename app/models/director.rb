@@ -43,22 +43,4 @@ class Director < ActiveRecord::Base
   def self.replace_specials(str)
     str.removeaccents
   end
-
-  def human_birth
-    if birth_at
-      #to do
-      str = "<b>Ne(e) le :</b> #{birth_at.strftime('%d/%m/%Y') } #{}"
-      str += " a #{birth_place}<br>" if birth_place
-    end
-    str
-  end
-
-  def human_death
-    if death_at
-      str = "<b>decede(e) le :</b> #{death_at.strftime('%d/%m/%Y') }"
-      str += " a #{death_place}<br>" if death_place
-    end
-    str
-  end
-
 end
