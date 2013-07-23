@@ -1,7 +1,7 @@
 class Product < ActiveRecord::Base
   include ThinkingSphinx::Scopes
   cattr_reader :per_page
-  @@per_page = 20
+  @@per_page = 3
   self.primary_key = :products_id
   
   alias_attribute :availability,    :products_availability
@@ -111,12 +111,10 @@ class Product < ActiveRecord::Base
   end
   
   def self.filter(filter, options={}, exact=nil)
-    products = Product.by_kind(options[:kind]).available
+    products = Product
     products = products.exclude_products_id([exact.collect(&:products_id)]) if exact
-    products = products.by_products_list(options[:list_id]) if options[:list_id] && !options[:list_id].blank?
     products = products.by_actor(options[:actor_id]) if options[:actor_id]
     products = products.by_category(options[:category_id]) if options[:category_id]
-    products = products.by_collection(options[:collection_id]) if options[:collection_id]
     products = products.hetero if options[:hetero] && (options[:category_id] && (options[:category_id].to_i != 76 && options[:category_id].to_i != 72) )
     products = products.by_director(options[:director_id]) if options[:director_id]
     products = products.by_imdb_id(options[:imdb_id]) if options[:imdb_id]
@@ -127,12 +125,13 @@ class Product < ActiveRecord::Base
     products = products.by_period(filter.year_min, filter.year_max) if filter.year?
     products = products.with_languages(options[:audio] ? options[:audio] : filter.audio) if filter.audio?
     products = products.with_subtitles(options[:subtitles]? options[:subtitles] : filter.subtitles) if filter.subtitles?
-    products = products.by_package(options[:package_id]) if options[:package_id]
+    products = products.by_package(options[:package_id]) 
     ##to do?
     products = products.not_soon if options[:not_soon]
     products = products.get_view_mode(options) if options[:view_mode]
     sort = get_sort(options)
-    products = products.order(sort, :extended)
+    #to do
+    #products = products.order(sort, :extended)
     if options[:exact]
       products = search_clean_exact(products, options[:search], {:page => options[:page], :per_page => options[:per_page], :limit => options[:limit]})
     else
@@ -336,6 +335,7 @@ class Product < ActiveRecord::Base
     page = options[:page] || 1
     limit = options[:limit] ? options[:limit].to_i : "1000"
     per_page = options[:per_page] || self.per_page
+    Rails.logger.debug { "@@@#{per_page}" }
     products.search(search, :max_matches => limit, :per_page => per_page, :page => page)
   end
 
