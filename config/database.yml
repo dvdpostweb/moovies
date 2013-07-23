@@ -19,6 +19,14 @@ development:
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
+staging:
+  adapter: mysql2
+  encoding: utf8
+  database: plush_staging
+  username: webuser
+  password: 3gallfir-
+  host: 192.168.100.204
+  port: 3306
 test:
   adapter: mysql2
   encoding: utf8
