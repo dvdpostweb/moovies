@@ -27,7 +27,7 @@ set :keep_releases, 5
 #	Servers
 #############################################################
 
-set :user, "dvdpostapp"
+set :user, "plush"
 set :domain, "94.139.62.122"
 set :port, 22012
 server domain, :app, :web
