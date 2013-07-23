@@ -29,6 +29,7 @@ set :keep_releases, 5
 
 set :user, "dvdpostapp"
 set :domain, "94.139.62.122"
+set :port, 22012
 server domain, :app, :web
 role :db, domain, :primary => true
 
@@ -38,7 +39,7 @@ role :db, domain, :primary => true
 
 set :scm, :git
 set :branch, "master"
-set :scm_user, 'dvdpost'
+set :scm_user, 'it@dvdpost.be'
 set :scm_passphrase, "[y'|\E7U158]9*"
 set :repository, "git@github.com:dvdpost/moovies.git"
 set :deploy_via, :remote_cache
