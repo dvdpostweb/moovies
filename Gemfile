@@ -23,13 +23,13 @@ end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails'
   gem 'coffee-rails'
   gem 'uglifier'
   gem 'execjs'
-  gem 'therubyracer', '0.10.0' 
+  gem 'therubyracer', '0.11.4' 
 end
 
+gem 'sass-rails'
 
 
 # Use unicorn as the web server
@@ -40,7 +40,6 @@ end
 
 # To use debugger
 # gem 'ruby-debug'
-
 gem "devise"
 gem "airbrake", "~> 3.1.12"
 gem "jquery-rails"
