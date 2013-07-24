@@ -26,7 +26,7 @@ group :assets do
   gem 'coffee-rails'
   gem 'uglifier'
   gem 'execjs'
-  gem 'therubyracer', '0.11.4' 
+  gem 'therubyracer', '0.10.0' 
 end
 
 gem 'sass-rails'
