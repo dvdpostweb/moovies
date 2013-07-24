@@ -335,7 +335,6 @@ class Product < ActiveRecord::Base
     page = options[:page] || 1
     limit = options[:limit] ? options[:limit].to_i : "1000"
     per_page = options[:per_page] || self.per_page
-    Rails.logger.debug { "@@@#{per_page}" }
     products.search(search, :max_matches => limit, :per_page => per_page, :page => page)
   end
 

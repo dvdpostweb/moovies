@@ -130,4 +130,5 @@ module ApplicationHelper
   def streaming_access?
     true
   end
+
 end

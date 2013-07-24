@@ -1,7 +1,7 @@
 <!--   ==============   LEFT COLUMN   ==============   -->
 <div id="leftcolumn">
   <h3 class="ttl infinity menu"><%= t '.unlimited' %></h3>
-  <ul class="nav osc" style='display: <%= params[:package] == Moovies.packages.invert[1] ? 'block' : 'none' %>'>
+  <ul class="nav osc" style='display: <%= params[:package] == Moovies.packages.invert[1] || params[:package].nil? ? 'block' : 'none' %>'>
     <li class="list"><a href="#" class="">Derniers ajouts</a></li><li class="list"><a href="#"  class="">	Plus regardés</a></li><li class="list"><a href="#"  class="">	Dernière chance
     </a></li><li class="list"><a href="#"  class="">Prochainement</a></li>
     <li class="list"><%= link_to t('.categories'), categories_path(:package => Moovies.packages.invert[1]) %></li>
