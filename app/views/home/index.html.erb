@@ -21,9 +21,9 @@
     <center>
       <a href="#"> <img width="200" height="95" src="/assets/infinity.gif" alt="info abo"> </a>
     </center>
-    • <%= t '.unlinmited' %><br />
-    • <%= t '.unlinmited' %><br />
-    • <%= t '.unlinmited' %>
+    • <%= t '.unlinmited1' %><br />
+    • <%= t '.unlinmited2' %><br />
+    • <%= t '.unlinmited3' %>
     <ul class="osc">
       <li> <a href="#"><%= t '.discover' %></a></li>
     </ul>
@@ -82,11 +82,10 @@
   <!--   ==============   MAIN CONTENT   ==============   -->
   <div id="maincontent" >
     <div id="new-infinity-wrap">
-      <h2>Nouveautés <span>Plush Infini</span> </h2>
-      
+      <h2><%= t('.unlimited_new').html_safe %></h2>
       <div class="tab-container">
         <ul>
-          <%= render :partial => 'products/detail', :collection => @new_svod %>
+          <%= render :partial => 'products/detail', :collection => @new_svod, :locals => {:content => :svod} %>
         </ul>
 
 
@@ -94,21 +93,20 @@
     </div>
 
     <div id="new-alacarte-wrap">
-      <h2>Nouveautés <span>Plush à la carte</span> </h2>
+      <h2><%= t('.tvod_new').html_safe %></h2>
       <div class="tab-container">
         <ul>
-          <%= render :partial => 'products/detail', :collection => @new_tvod %>
+          <%= render :partial => 'products/detail', :collection => @new_tvod, :locals => {:content => :tvod} %>
         </ul>
       </div>
     </div>
     <div class="clear"></div>
     <div id="subscribe-wrap">
       <div class="wrap" style="">
-        <h3>Regardez votre premier film dès aujourd'hui!</h3>
-        <img width="450" height="118" src="/assets/fr/prices.png" alt="">
-
+        <h3><%= t('.watch_now') %></h3>
+        <%= image_tag "#{I18n.locale}/prices.png", :size => '450x118' %>
       </div>
-      <div id="try_it"> <a class="essaigratuit osc btn" href="#">Essayez maintenant</a> <div id="engagement">SANS ENGAGEMENT</div></div>
+      <div id="try_it"> <a class="essaigratuit osc btn" href="#"><%= t('try2') %></a> <div id="engagement"><%= t('.try2_text') %></div></div>
 
     </div>
     <div class="clear"></div>

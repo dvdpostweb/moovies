@@ -13,10 +13,7 @@
     <div id="header_login"> 
       <ul id="lang">
         <li> <%= link_to t('.home').upcase, root_path %> </li>
-        <li><%= switch_locale_link I18n.locale.to_s.upcase, {:class => 'active'} %></li>
-        <% [:fr, :nl, :en].each do |locale| %>
-          <%= content_tag :li, switch_locale_link(locale) unless locale.to_s == I18n.locale.to_s %>
-        <% end %>
+        <li><%= switch_locale_link(params) %></li>
       </ul>
     </div>
     <% if flash[:notice] %>
