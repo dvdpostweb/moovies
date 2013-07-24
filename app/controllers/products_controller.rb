@@ -19,6 +19,7 @@ class ProductsController < ApplicationController
     if params[:endless]
       cookies.permanent[:endless] = params[:endless]
     end
+    @countries = ProductCountry.visible.order
     #if params[:search] == t('products.left_column.search')
     #  params.delete(:search)
     #else
@@ -34,7 +35,7 @@ class ProductsController < ApplicationController
     #end
     #to do 
     #@rating_color = params[:kind] == :adult ? :pink : :white
-    #@countries = ProductCountry.visible.order
+    #
     #@collections = Category.by_size.random
     ##unless request.format.js?
     #  item_per_page =  20
@@ -48,6 +49,10 @@ class ProductsController < ApplicationController
     #  
     #  @jacket_mode = Product.get_jacket_mode(params)
     ##end
+    if request.xhr?
+      render :layout => false
+    end
+      
   end
 
   def show
