@@ -39,6 +39,6 @@
   </div>
   <!--   ==============   END MOVIES   ==============   -->
 </div>
-<%= render :partial => 'products/left_column' %>
+<%= render :partial => 'products/left_column', :locals => {:filter => @filter, :countries => @countries} %>
 <div id="toTop" style="display: block;"><%= t('.back') %></div>
   <!--   ==============   END MAIN CONTENT   ==============   --> 
