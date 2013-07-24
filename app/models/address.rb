@@ -44,7 +44,6 @@ class Address < ActiveRecord::Base
 
   private
    def set_default
-     Rails.logger.debug { "@@@#{self.inspect}" }
      self.address_book_id = self.customer.addresses.count > 0 ? self.customer.addresses.maximum(:address_book_id) + 1 : 1
      self.gender = self.customer.gender if self.gender.nil? || self.gender.empty?
      self.entry_country_id = self.customer.address ? self.customer.address.entry_country_id : 21
