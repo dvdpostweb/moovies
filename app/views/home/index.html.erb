@@ -1,136 +1,119 @@
 <div id="slider-wrap">
-	<div id="image_promo">
-		<h1>Découvrez le premier <strong><span>service VOD illimitée</span></strong> de Belgique!</h1>
-		<h2>Autant que vous voulez, ou que vous voulez, quand vous voulez</h2>
+  <div id="image_promo">
+    <h1><%= t('.title').html_safe %></h1>
+    <h2><%= t '.slogan' %></h2>
 
-		<ul id="output">
-			<li>
+    <ul id="output">
+      <li>
+        <div id="try_it"> <a class="essaigratuit osc btn" href="#"><%= t '.try' %></a> <div id="engagement"><%= t '.try_text' %></div></div>
+        <a href="#">
+          <%= image_tag "#{I18n.locale}/bg_infinity.jpg", :size => '932x328' %>
+        </a> 
+      </li>
+    </ul>
+  </div>
+</div>
+<!-- #slider-wrap -->
+<!-- Services -->
+<div id="services-wrap">
+  <div class="wrap" id="vod-ppv">
+    <h3><%= t '.unlinmited' %></h3>
+    <center>
+      <a href="#"> <img width="200" height="95" src="/assets/infinity.gif" alt="info abo"> </a>
+    </center>
+    • <%= t '.unlinmited' %><br />
+    • <%= t '.unlinmited' %><br />
+    • <%= t '.unlinmited' %>
+    <ul class="osc">
+      <li> <a href="#"><%= t '.discover' %></a></li>
+    </ul>
+  </div>
+  <div class="wrap" id="alacarte">
+    <h3><%= t '.tvod' %></h3>
+    <center>
+      <a href="#"><img width="200" height="95" src="/assets/alacarte.gif" alt="info vod"> </a>
+    </center>
+    • <%= t '.tvod1' %><br />
+    • <%= t '.tvod2' %><br />
+    • <%= t '.tvod3' %>
+    <ul class="osc">
+      <li> <a href="#"><%= t '.discover' %></a> </li>
+    </ul>
+  </div>
+  <div class="wrap" id="apps">
+    <h3><%= t '.multi' %></h3>
+    <center>
+      <a href="#"> <img width="200" height="95" src="/assets/icon_plateforme.gif" alt="info vod"> </a>
+    </center>
+    • <%= t '.multi1' %><br />
+    • <%= t '.multi2' %><br />
+    • <%= t '.multi3' %>
+    <ul class="osc">
+      <li> <a href="#"><%= t '.discover' %></a> </li>
+    </ul>
+  </div>
+  <div class="wrap" id="news">
+    <h3><%= t '.newsletter' %></h3>
 
+    <form method="post" id="new_public_newsletter" class="new_public_newsletter" action="/fr/public_newsletters">
+      <div style="margin:0;padding:0;display:inline">
+        <input type="hidden" value="JKK9rVJaYd+pTqqX++XT9UfSKBom0eSB5KXdQbdYobs=" name="authenticity_token">
+      </div>
+      <center>
+        <input type="hidden" value="1" name="public_newsletter[language_id]" id="public_newsletter_language_id">
+        <input type="hidden" name="promo" id="promo">
+        <input type="text" value="Philippe@gmail.com" size="30" name="public_newsletter[email]" id="public_newsletter_email">
+      </center>
+      • <%= t '.newsletter' %><br />
 
-				<div id="try_it"> <a class="essaigratuit osc btn" href="#">Essayez maintenant</a> <div id="engagement">SANS ENGAGEMENT</div></div>
-				<a href="#"><img width="932" height="328" src="/assets/fr/bg_infinity.jpg" alt=""></a> </li>
-			</ul>
-		</div>
-	</div>
-	<!-- #slider-wrap -->
-	<!-- Services -->
-	<div id="services-wrap">
-		<div class="wrap" id="vod-ppv">
-			<h3>Plush Infini</h3>
-			<center>
-				<a href="#"> <img width="200" height="95" src="/assets/infinity.gif" alt="info abo"> </a>
-			</center>
-			• 900 films disponibles<br />
-			• Nouveautés chaque mois<br />
-			• Seulement 9,95€/mois
-			<ul class="osc">
-				<li> <a href="#">Je découvre</a> </li>
-			</ul>
-		</div>
-		<div class="wrap" id="alacarte">
-			<h3>Plush à la carte</h3>
-			<center>
-				<a href="#"><img width="200" height="95" src="/assets/alacarte.gif" alt="info vod"> </a>
-			</center>
+      • <%= t '.newsletter' %><br />
+      • <%= t '.newsletter' %><br />
 
-			• 2000 films disponibles<br />
-			• Nouveautés chaque semaine<br />
-			• Seulement 3,45€/film
-			<ul class="osc">
-				<li> <a href="#">Je découvre</a> </li>
-			</ul>
-		</div>
-		<div class="wrap" id="apps">
-			<h3>Multi-Plateforme</h3>
-			<center>
-				<a href="#"> <img width="200" height="95" src="/assets/icon_plateforme.gif" alt="info vod"> </a>
-			</center>
-			• Ordinateur<br />
-			• Tablettes & Smartphones<br />
-			• TV & Smart TV
-			<ul class="osc">
-				<li> <a href="#">Je découvre</a> </li>
-			</ul>
-		</div>
-		<div class="wrap" id="news">
-			<h3>Newsletters</h3>
-
-			<form method="post" id="new_public_newsletter" class="new_public_newsletter" action="/fr/public_newsletters">
-				<div style="margin:0;padding:0;display:inline">
-					<input type="hidden" value="JKK9rVJaYd+pTqqX++XT9UfSKBom0eSB5KXdQbdYobs=" name="authenticity_token">
-				</div>
-				<center>
-					<input type="hidden" value="1" name="public_newsletter[language_id]" id="public_newsletter_language_id">
-					<input type="hidden" name="promo" id="promo">
-					<input type="text" value="Philippe@gmail.com" size="30" name="public_newsletter[email]" id="public_newsletter_email">
-				</center>
-				• Promotions exceptionnelles<br />
-
-				• Nouvelles sorties<br />
-				• Nouvelles fonctionnalités<br />
-
-				<ul class="osc">
-					<li>
-						<input type="submit" value="Je valide" name="commit" id="newsletter_input">
-					</li>
-				</ul>
-			</form>
-		</div>
-	</div>
-	<!-- #services-wrap -->
-	<div class="container clearfix" >
-		<!--   ==============   MAIN CONTENT   ==============   -->
-		<div id="maincontent" >
-			<div id="new-infinity-wrap">
-				<h2>Nouveautés <span>Plush Infini</span> </h2>
-				<div class="tab-container">
-
-
-					<ul >
-						<li > <a href="#"> <img width="145" src="http://www.dvdpost.be/images/dvd/fast&amp;furious4bfr.jpg" alt="Fast and Furious 4 (2009)"> </a><br /><a href="#" id="watch" title="Regarder en streaming">Regarder</a><br />
-							<a href="#" id="add" title="Ajouter à ma liste VOD">Ajouter</a></li>
-							<li > <a href="#"> <img width="145" src="http://www.dvdpost.be/images/dvd/harrypotter6bfr.jpg" alt="Harry Potter et le Prince de Sang Mêlé (2009)"> </a><br />
-								<a href="#" id="watch" title="Regarder en streaming">Regarder</a><br /><a href="#" id="add" title="Ajouter à ma liste VOD">Ajouter</a> </li>
-								<li > <a href="#"> <img width="145" src="http://www.dvdpost.be/images/dvd/xmenoriginswolverinebfr.jpg" alt="X-Men Origins: Wolverine (2009)"> </a><br /><a href="#" id="watch" title="Regarder en streaming">Regarder</a> <br /><a href="#" id="add" title="Ajouter à ma liste VOD">Ajouter</a> </li>
-								<li > <a href="#"> <img width="145" src="http://www.dvdpost.be/images/dvd/startreklefilmbfr.jpg" alt="Star Trek (2009)"> </a><br /><a href="#" id="watch" title="Regarder en streaming">Regarder</a> <br /> <a href="#" id="add" title="Ajouter à ma liste VOD">Ajouter</a></li>
-								<li class="jcarousel-item jcarousel-item-horizontal"> <a href="#"> <img width="145"  src="http://www.dvdpost.be/images/dvd/largowinchbfr.jpg" alt="Largo Winch: Le Film (2008)"> </a><br /><a href="#" id="watch" title="Regarder en streaming">Regarder</a><br /> <a href="#" id="add" title="Ajouter à ma liste VOD">Ajouter</a> </li>
-								<li > <a href="#"> <img width="145"  src="http://www.dvdpost.be/images/dvd/transformers2bfr.jpg" alt="Transformers 2: La Revanche (2009)"> </a> <br /><a href="#" id="watch" title="Regarder en streaming">Regarder</a><br /> <a href="#" id="add" title="Ajouter à ma liste VOD">Ajouter</a></li>
-							</ul>
+      <ul class="osc">
+        <li>
+          <input type="submit" value="<%= t '.valid' %>" name="commit" id="newsletter_input">
+        </li>
+      </ul>
+    </form>
+  </div>
+</div>
+<!-- #services-wrap -->
+<div class="container clearfix" >
+  <!--   ==============   MAIN CONTENT   ==============   -->
+  <div id="maincontent" >
+    <div id="new-infinity-wrap">
+      <h2>Nouveautés <span>Plush Infini</span> </h2>
+      
+      <div class="tab-container">
+        <ul>
+          <%= render :partial => 'products/detail', :collection => @new_svod %>
+        </ul>
 
 
-						</div>
-					</div>
+      </div>
+    </div>
 
-					<div id="new-alacarte-wrap">
-						<h2>Nouveautés <span>Plush à la carte</span> </h2>
-						<div class="tab-container">
+    <div id="new-alacarte-wrap">
+      <h2>Nouveautés <span>Plush à la carte</span> </h2>
+      <div class="tab-container">
+        <ul>
+          <%= render :partial => 'products/detail', :collection => @new_tvod %>
+        </ul>
+      </div>
+    </div>
+    <div class="clear"></div>
+    <div id="subscribe-wrap">
+      <div class="wrap" style="">
+        <h3>Regardez votre premier film dès aujourd'hui!</h3>
+        <img width="450" height="118" src="/assets/fr/prices.png" alt="">
 
+      </div>
+      <div id="try_it"> <a class="essaigratuit osc btn" href="#">Essayez maintenant</a> <div id="engagement">SANS ENGAGEMENT</div></div>
 
-							<ul>
-								<li > <a href="#"> <img width="145" src="http://www.dvdpost.be/images/dvd/fast&amp;furious4bfr.jpg" alt="Fast and Furious 4 (2009)"> </a><br /> <a href="#" id="watch" title="Regarder en streaming">Regarder: 3,49 €</a>  <br /><a href="#" id="add" title="Ajouter à ma liste VOD">Ajouter</a></li>
-								<li> <a href="#"> <img width="145" src="http://www.dvdpost.be/images/dvd/harrypotter6bfr.jpg" alt="Harry Potter et le Prince de Sang Mêlé (2009)"> </a> <br /><a href="#" id="watch" title="Regarder en streaming">Regarder: 3,49 €</a> <br /> <a href="#" id="add" title="Ajouter à ma liste VOD">Ajouter</a></li>
-								<li > <a href="#"> <img width="145" src="http://www.dvdpost.be/images/dvd/xmenoriginswolverinebfr.jpg" alt="X-Men Origins: Wolverine (2009)"> </a> <br /><a href="#" id="watch" title="Regarder en streaming">Regarder: 3,49 €</a><br /> <a href="#" id="add" title="Ajouter à ma liste VOD">Ajouter</a></li>
-								<li > <a href="#"> <img width="145" src="http://www.dvdpost.be/images/dvd/startreklefilmbfr.jpg" alt="Star Trek (2009)"> </a><br /> <a href="#" id="watch" title="Regarder en streaming">Regarder: 3,49 €</a> <br /><a href="#" id="add" title="Ajouter à ma liste VOD">Ajouter</a></li>
-								<li> <a href="#"> <img width="145"  src="http://www.dvdpost.be/images/dvd/largowinchbfr.jpg" alt="Largo Winch: Le Film (2008)"> </a> <br /><a href="#" id="watch" title="Regarder en streaming">Regarder: 3,49 €</a> <br /><a href="#" id="add" title="Ajouter à ma liste VOD">Ajouter</a></li>
-								<li> <a href="#"> <img width="145"  src="http://www.dvdpost.be/images/dvd/transformers2bfr.jpg" alt="Transformers 2: La Revanche (2009)"> </a><br /> <a href="#" id="watch" title="Regarder en streaming">Regarder: 3,49 €</a> <br /><a href="#" id="add" title="Ajouter à ma liste VOD">Ajouter</a></li>
-							</ul>
-
-
-						</div>
-					</div>
-					<div class="clear"></div>
-					<div id="subscribe-wrap">
-						<div class="wrap" style="">
-							<h3>Regardez votre premier film dès aujourd'hui!</h3>
-						<img width="450" height="118" src="/assets/fr/prices.png" alt="">
-
-						</div>
-						<div id="try_it"> <a class="essaigratuit osc btn" href="#">Essayez maintenant</a> <div id="engagement">SANS ENGAGEMENT</div></div>
-
-					</div>
-					<div class="clear"></div>
-				</div>
-			</div>
-		</div>
-		<!--   ==============   END MAIN CONTENT   ==============   -->
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
+</div>
+<!--   ==============   END MAIN CONTENT   ==============   -->
 
