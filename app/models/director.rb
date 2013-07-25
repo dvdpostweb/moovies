@@ -15,7 +15,7 @@ class Director < ActiveRecord::Base
     if image_active
       File.join(Moovies.images_path, "directors", "#{id}.jpg")
     else
-      '/images/no_picture.jpg'
+      '/assets/no_picture.jpg'
     end
   end
   
