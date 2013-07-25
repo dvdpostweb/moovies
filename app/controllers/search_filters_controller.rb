@@ -12,10 +12,10 @@ class SearchFiltersController < ApplicationController
   end
 
   def destroy
-    filter = get_current_filter({})
+    filter = view_context.get_current_filter({})
     if filter
       filter.destroy
-      current_customer.customer_attribute.update_attributes(:filter_id => nil) if current_customer
+      current_customer.update_attributes(:filter_id => nil) if current_customer
       cookies.delete :filter_id
     end
     redirect_back_or(products_path)

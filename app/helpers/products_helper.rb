@@ -327,18 +327,12 @@ module ProductsHelper
 
   def streaming_audio_bublles(product, vod_next = false)
     content=''
-    country=''
-    bubble = vod_next ? StreamingProduct.not_yet_available.find_all_by_imdb_id(product.imdb_id) : StreamingProduct.available.find_all_by_imdb_id(product.imdb_id)
+    bubble = vod_next ? StreamingProduct.not_yet_available.where(:imdb_id => product.imdb_id).group('language_id') : StreamingProduct.available.where(:imdb_id => product.imdb_id).group('language_id')
     bubble.collect{
     |product|
-      if product.language.by_language(I18n.locale).first && product.language.by_language(I18n.locale).first.short
-        lang = product.language.by_language(I18n.locale).first
-        short = lang.short
-        name = lang.name
-        if !country.include?(short)
-          country += short
-          content += content_tag(:li, short.upcase, :class => "left red osc", :alt => name, :title => name) 
-        end
+      lang = product.language.by_language(I18n.locale).first
+      if lang && lang.short
+        content += content_tag(:li, lang.short.upcase, :class => "left red osc", :alt => lang.name, :title => lang.name) 
       end
     }
     content
@@ -346,25 +340,20 @@ module ProductsHelper
 
   def streaming_subtitle_bublles(product, vod_next = false)
     content=''
-    country=''
-    bubble = vod_next ? StreamingProduct.not_yet_available.find_all_by_imdb_id(product.imdb_id) : StreamingProduct.available.find_all_by_imdb_id(product.imdb_id)
+    bubble = vod_next ? StreamingProduct.not_yet_available.where(:imdb_id => product.imdb_id).group('subtitle_id') : StreamingProduct.available.where(:imdb_id => product.imdb_id).group('subtitle_id')
     bubble.collect {
     |product|
-      if product.subtitle.by_language(I18n.locale).first && product.subtitle.by_language(I18n.locale).first.short
-        lang = product.subtitle.by_language(I18n.locale).first
+      lang = product.subtitle.by_language(I18n.locale).first
+      if lang && lang.short
         short = lang.short
         name = lang.name
-        
-        if !country.include?(short)
-          country += short
-          if short.include?('_m')
-            short = short.slice(0..1)
-            class_undertitle = class_bubble(short, :special)
-          else
-            class_undertitle = class_bubble(short, :classic)
-          end
-          content += content_tag(:li, short.upcase, :class => "left gray osc #{class_undertitle}", :alt => name, :title => name)
+        if short.include?('_m')
+          short = short.slice(0..1)
+          class_undertitle = class_bubble(short, :special)
+        else
+          class_undertitle = class_bubble(short, :classic)
         end
+        content += content_tag(:li, short.upcase, :class => "left gray osc #{class_undertitle}", :alt => name, :title => name)
       end
     }
     content
