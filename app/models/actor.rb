@@ -59,11 +59,7 @@ class Actor < ActiveRecord::Base
     end
     page = page || 1
     query_string = qs.join(' ')
-    if count
-      self.search_count(query_string, :max_matches => 1000, :order => :actors_name, :match_mode => :extended, :with => {:kind_int => Moovies.actor_kinds_int[kind]})
-    else
-      self.search.by_kind_int(kind).search(query_string, :per_page => 40, :page => page, :max_matches => 1000, :order => :actors_name, :match_mode => :extended)
-    end
+    self.search.by_kind_int(kind).search(query_string, :per_page => 1000, :page => page, :max_matches => 1000, :order => :actors_name, :match_mode => :extended)
   end
   
   def self.replace_specials(str)

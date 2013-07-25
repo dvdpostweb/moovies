@@ -35,7 +35,7 @@ class Director < ActiveRecord::Base
     end
     query_string = qs.join(' ')
     page = page || 1
-    self.search.search(query_string, :max_matches => 1000, :per_page => 40, :page => page, :order => :directors_name, :match_mode => :extended)
+    self.search.search(query_string, :max_matches => 1000, :per_page => 1000, :page => page, :order => :directors_name, :match_mode => :extended)
   end
   
   def self.replace_specials(str)
