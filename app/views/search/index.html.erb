@@ -20,7 +20,7 @@
     <%= 'empty' if @active.nil? %>
   </div>
   <div id='pagination_content'>
-      <%= render :partial => '/products/index/pagination', :locals => {:item => @item} unless @active.nil? %>
+      <%= render :partial => '/products/index/pagination', :locals => {:item => @item} if @active == 'products' %>
   </div>
   <!--   ==============   END MOVIES   ==============   -->
 </div>
