@@ -6,6 +6,24 @@ class SearchController < ApplicationController
     @products = Product.filter(@filter, new_params)
     @directors = params[:kind] == :normal ?  Director.search_clean(params[:search], params[:page]) : 0
     @actors = Actor.search_clean(params[:search], params[:kind], params[:page])
-    @countries = ProductCountry.visible.order    
+    @countries = ProductCountry.visible.order
+    if params[:type].nil?
+      if @products.count > 0
+        @active = 'products'
+      elsif @actors.count > 0
+        @active = 'actors'
+      else @directors.count > 0
+        @active = 'directors'
+      end
+    else
+      @active = params[:type]
+    end
+    if @active == 'products'
+      @item = @products
+    elsif @active == 'actors'
+      @item = @actors
+    elsif @active == 'directors'
+      @item = @directors
+    end
   end
 end

@@ -1,12 +1,3 @@
-<div class="osc fr" id="subscribe-wrap">
-  <div class="wrap"><h3><%= t('.promo_title').html_safe %></h3>
-    <div id="promo"><%= t('.promo') %></div>
-  </div>
-  <div id="subscribe">
-    <a class="btn" href="http://www.dvdpost.be/step1.php?language=fr"><%= t('.abo') %></a>
-    <p><%= t('.abo_text')%></p>
-  </div>
-</div>
 <!--   ==============   MAIN CONTENT   ==============   -->
 <div id="maincontent" >
   <h2 class="ttl">Tous les films</h2>
@@ -24,7 +15,7 @@
     <%= render :partial => 'products/index/movie_details', :collection => @products, :locals => {:target => @target} %>
   </div>
   <div id='pagination_content'>
-      <%= render :partial => '/products/index/pagination' %>
+      <%= render :partial => '/products/index/pagination', :locals => {:item => @products} %>
   </div>
   <!--   ==============   END MOVIES   ==============   -->
 </div>
