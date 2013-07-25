@@ -57,7 +57,7 @@ module ApplicationHelper
     if cookies[:filter_id]
       current_filter = SearchFilter.get_filter(cookies[:filter_id])
       unless current_filter.to_param
-        current_customer.customer_attribute.update_attributes(:filter_id => nil) if current_customer
+        current_customer.update_attributes(:filter_id => nil) if current_customer
         cookies.delete :filter_id
       end
       if !options.empty?
@@ -65,10 +65,10 @@ module ApplicationHelper
       end
     else
       if current_customer && current_customer.filter_id
-        cookies[:filter_id] = { :value => current_customer.customer_attribute.filter_id, :expires => 1.year.from_now }
-        current_filter = SearchFilter.get_filter(current_customer.customer_attribute.filter_id)
+        cookies[:filter_id] = { :value => current_customer.filter_id, :expires => 1.year.from_now }
+        current_filter = SearchFilter.get_filter(current_customer.filter_id)
         unless current_filter.to_param
-          current_customer.customer_attribute.update_attributes(:filter_id => nil) if current_customer
+          current_customer.update_attributes(:filter_id => nil) if current_customer
           cookies.delete :filter_id
         end
         if !options.empty?

@@ -453,23 +453,6 @@ class Customer < ActiveRecord::Base
       !actions.reconduction_ealier.recent.blank?
     end
 
-    def reconduction_now
-      update_attribute(:auto_stop, 0)
-      update_attribute(:subscription_expiration_date, Time.now().localtime.to_s(:db))
-      customer_attribute.update_attribute(:credits_already_recieved, 1)
-      abo_history(Subscription.action[:reconduction_ealier])
-
-      manage_credits(next_subscription_type, 15)
-    end
-
-    def manage_credits(subscription, action)
-      if subscription.qty_dvd_max != -1
-        init_credits(subscription, action)
-      else
-        add_credit(subscription.credits, action)
-      end
-    end
-
     def abo_history(action, new_abo_type = 0)
       Subscription.create(:customer_id => self.to_param, :Action => action, :Date => Time.now().to_s(:db), :product_id => (new_abo_type.to_i > 0 ? new_abo_type : self.abo_type_id), :site => 1, :payment_method => subscription_payment_method.name.upcase)
     end
@@ -490,59 +473,15 @@ class Customer < ActiveRecord::Base
       abo_active == 1 
     end
 
-    def inducator_close(status)
-      build_customer_attribute unless customer_attribute
-      customer_attribute.update_attribute(:list_indicator_close, status)
-    end
-
-    def bluray_owner(status)
-      build_customer_attribute unless customer_attribute
-      customer_attribute.update_attribute(:bluray_owner, status)
-    end
-
     def display_vod(status)
-      build_customer_attribute unless customer_attribute
-      customer_attribute.update_attribute(:display_vod, status)
+      #to do ? 
+      update_attribute(:display_vod, status)
     end
 
-    def last_login(kind)
-      build_customer_attribute unless customer_attribute
-      if kind == :normal
-        init = (customer_attribute && customer_attribute.number_of_logins ? customer_attribute.number_of_logins : 0)
-        customer_attribute.update_attributes(:number_of_logins  =>  (init + 1), :last_login_at => Time.now.to_s(:db) )
-      else
-        init = (customer_attribute && customer_attribute.number_of_logins_x ? customer_attribute.number_of_logins_x : 0)
-        customer_attribute.update_attributes(:number_of_logins_x  =>  (init + 1), :last_login_at => Time.now.to_s(:db) )
-      end
-    end
-
-    def credit_per_month
-      if subscription_type
-          subscription_type.credits
-      else
-        notify_hoptoad()
-        '0'
-      end
-    end
-
-    def dvd_max_per_month
-      if subscription_type
-        subscription_type.qty_dvd_max
-      end
-    end
 
     def price_per_month 
       if subscription_type
         subscription_type.product.price
-      else
-        notify_hoptoad()
-        '0'
-      end
-    end
-
-    def next_credit_per_month
-      if next_subscription_type
-        next_subscription_type.credits
       else
         notify_hoptoad()
         '0'

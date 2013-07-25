@@ -20,33 +20,16 @@ class ProductsController < ApplicationController
       cookies.permanent[:endless] = params[:endless]
     end
     @countries = ProductCountry.visible.order
-    #if params[:search] == t('products.left_column.search')
-    #  params.delete(:search)
-    #else
-    #  if params[:search]
-    #    sub_str = params[:search].to_s
-    #    params[:search] = sub_str.gsub(/\//,'').gsub(/"/,' ').gsub(/\(/,' ').gsub(/\)/,' ')
-    #  end
-    #end
     @tokens = current_customer.get_all_tokens_id(params[:kind]) if current_customer
+    @rating_color = params[:kind] == :adult ? :pink : :white
     #
     #if params[:sort].nil?
     #  params[:sort] = 'normal'
     #end
     #to do 
-    #@rating_color = params[:kind] == :adult ? :pink : :white
     #
     #@collections = Category.by_size.random
     ##unless request.format.js?
-    #  item_per_page =  20
-    #  if params[:search] && !params[:search].empty?
-    #    @exact_products = Product.filter(@filter, params.merge(:exact => 1, :countr_id => session[:country_id]))
-    #    @directors_count = params[:kind] == :normal ?  Director.search_clean(params[:search], 0, true) : 0
-    #    @actors_count = Actor.search_clean(params[:search], params[:kind], 0, true)
-    #    kind = params[:kind]
-    #    Search.create(:name => params[:search], :kind => DVDPost.search_kinds[kind])
-    #  end
-    #  
     #  @jacket_mode = Product.get_jacket_mode(params)
     ##end
     if request.xhr?
