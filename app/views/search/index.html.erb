@@ -1,6 +1,24 @@
-index
-count<%= @actors.count %>
-<br />
-count<%= @directors.count %>
-<br />
-count<%= @products.count %>
+<div id="maincontent" >
+  <h2 class="ttl">Tous les films</h2>
+  <%= render :partial => 'layouts/filters', :locals => {:filter => @filter }%>
+  <ul class="etabs osc content-tabs">
+    <%= "<li class='tab'>#{link_to t('.films')  , url_for(params.merge(:type => nil, :page => nil, :actors_page => nil, :directors_page => nil)), :class => (params[:type].nil? ? 'active' : '')}</li>".html_safe if @products.count > 0 || (@exact_products && @exact_products.size > 0) %>
+    <%= "<li class='tab'>#{link_to t('.directors'), url_for(params.merge(:type => 'directors', :page => nil, :actors_page => nil, :directors_page => nil)), :class => (params[:type] == 'directors' ? 'active' : '')}</li>".html_safe if @directors.count > 0 %> 
+    <%= "<li class='tab'>#{link_to t('.actors'), url_for(params.merge(:type => 'actors', :page => nil, :actors_page => nil, :directors_page => nil)), :class => (params[:type] == 'actors' ? 'br active' : 'br')}</li>".html_safe if @actors.count > 0 %> 
+  </ul>
+<% if cookies[:endless] == 'deactive' %>
+  <%= link_to t('.endless_active'), params.merge(:endless => 'active'), :class => "endless" %>
+<% else %>
+  <%= link_to t('.endless_deactive'), params.merge(:endless => 'deactive'), :class => "endless" %>
+<% end %>
+  <div id="products">
+    <%= render :partial => 'products/index/sorting' %>
+    <%= render :partial => 'products/index/movie_details', :collection => @products, :locals => {:target => @target} %>
+  </div>
+  <div id='pagination_content'>
+      <%= render :partial => '/products/index/pagination' %>
+  </div>
+  <!--   ==============   END MOVIES   ==============   -->
+</div>
+<%= render :partial => 'products/left_column', :locals => {:filter => @filter, :countries => @countries} %>
+<div id="toTop"><%= t('.back') %></div>

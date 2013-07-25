@@ -329,7 +329,7 @@ class Product < ActiveRecord::Base
       qs = query_string.split.collect do |word|
         "*#{replace_specials(word)}*"
       end  
-      search = "@descriptions_title #{query_string}" unless search.empty?
+      search = "@descriptions_title #{query_string}" unless query_string.empty?
     else
       search = ''
     end

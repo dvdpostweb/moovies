@@ -26,11 +26,11 @@ class Customer < ActiveRecord::Base
   alias_attribute :next_abo_type_id,             :customers_next_abo_type
   alias_attribute :promo_type,                   :activation_discount_code_type
   alias_attribute :promo_id,                     :activation_discount_code_id
-  validates_length_of :first_name, :minimum => 2
-  validates_length_of :last_name, :minimum => 2
+  validates_length_of :first_name, :minimum => 2, :on => :update
+  validates_length_of :last_name, :minimum => 2, :on => :update
   validates_format_of :phone, :with => /^(\+)?[0-9 \-\/.]+$/, :on => :update
-  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
-  validates_uniqueness_of :email, :case_sensitive => false
+  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :update
+  validates_uniqueness_of :email, :case_sensitive => false, :on => :update
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :newsletter, :newsletter_parnter, :last_name, :first_name, :language, :address_id, :phone, :birthday, :gender, :abo_type_id, :customers_abo_type, :auto_stop, :customers_abo_auto_stop_next_reconduction, :next_abo_type_id, :customers_next_abo_type, :promo_type, :activation_discount_code_type, :promo_id, :nickname
