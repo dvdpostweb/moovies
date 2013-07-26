@@ -20,7 +20,7 @@ class Public < ActiveRecord::Base
     if max.to_i == 0
       ages << Moovies.product_publics[:all]
     else
-      ages << v.product_publics.keys.collect do |age|
+      ages << Moovies.product_publics.keys.collect do |age|
         Moovies.product_publics[age] if age != :all && age.to_i.between?(min.to_i, max.to_i)
       end
     end  

@@ -15,7 +15,7 @@ class Director < ActiveRecord::Base
     if image_active
       File.join(Moovies.images_path, "directors", "#{id}.jpg")
     else
-      '/images/no_picture.jpg'
+      '/assets/no_picture.jpg'
     end
   end
   
@@ -28,19 +28,18 @@ class Director < ActiveRecord::Base
   def self.search_clean(query_string, page = 0, count = false)
     qs = []
     if query_string
+      query_string = query_string.gsub(/[_-]/, ' ').gsub(/["\(\)]/, ' ').gsub(/[@$!^\/\\|]/, '')
       qs = query_string.split.collect do |word|
-        "*#{replace_specials(word)}*".gsub(/[-_]/, ' ').gsub(/[$!^]/, '')
+        "*#{replace_specials(word)}*"
       end
     end
     query_string = qs.join(' ')
-    if count
-      self.search.search_count(query_string.gsub(/[-_]/, ' '), :max_matches => 1000, :order => :directors_name, :match_mode => :extended)
-    else
-      self.search.search(query_string.gsub(/[-_]/, ' '), :max_matches => 1000, :per_page => 40, :page => page, :order => :directors_name, :match_mode => :extended)
-    end
+    page = page || 1
+    self.search.search(query_string, :max_matches => 1000, :per_page => 1000, :page => page, :order => :directors_name, :match_mode => :extended)
   end
   
   def self.replace_specials(str)
-    str.removeaccents
+    #str.removeaccents
+    str.mb_chars.normalize(:kd).gsub(/[^\x00-\x7F]/n, '').to_s
   end
 end

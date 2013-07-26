@@ -6,7 +6,7 @@
 <% path = product_path(:id => product.to_param, :source => @source, :response_id => @response_id) %>
 <div class="movie-wrap">
   <div class="movie-ttl">
-    <h3><%= link_to product_title, path %></h3>
+    <h3><%= link_to product_title, path, :target => target %></h3>
     <div class="stars vote" id="rating-stars-<%= product.id %>" product_id="<%= product.id %>">
       <%= render :partial => 'products/rating', :locals => {:product => product, :background => :white, :size => :long, :source => @source, :response_id => @response_id} %>
     </div>
@@ -24,9 +24,10 @@
         <% end %>
       </div>
       <p><%= truncate_html(product_description.text, :length => 300) %></p>
-      <%= link_to(t('.more'), path, :target => @target, :class => 'osc') %>
+      
+      <%= link_to(t('.more'), path, :target => target, :class => 'osc') %>
       <div class="thumb-wrap">
-        <%= link_to path, :target => @target, :class => :cover, :alt => product_title do %>
+        <%= link_to path, :target => target, :class => :cover, :alt => product_title do %>
           <%= product_image_tag product_image, :width => 100 %>
         <% end %>
       </div>

@@ -143,9 +143,28 @@ module Moovies
       HashWithIndifferentAccess.new.merge({
         :infinite => 1,
         :tvod => 2,
-        :kid => 3,
+        :kids => 3,
         :adult_infinite => 4,
         :adult_svod => 5
+      })
+    end
+
+    def product_publics
+      HashWithIndifferentAccess.new.merge({
+        'all' => 1,
+        '6' => 5,
+        '10' => 6,
+        '12' => 2,
+        '14' => 7,
+        '16' => 3,
+        '18' => 4
+      })
+    end
+
+    def actor_kinds_int
+      HashWithIndifferentAccess.new.merge({
+        :normal => 1,
+        :adult => 0
       })
     end
   end

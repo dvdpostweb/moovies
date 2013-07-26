@@ -48,7 +48,6 @@ $(function() {
   }
   img.src = $('#image_1').attr('src');
   }
-  
   $('#uninterested a').click(function() {
     url = $(this).attr('href')
      var regex = new RegExp('.*/products/([0-9]*)/([^?]*)');
@@ -69,7 +68,6 @@ $(function() {
     url = url.replace('screenshots/small/', 'screenshots/big/')
     open_image(url)
   });
-  
   $(window).keydown(function(e){
     if ($('#big_image').is(":visible"))
     {
@@ -165,8 +163,8 @@ $(function() {
    });
    if ($('#products_index #pagination.active').length) {
        $(window).scroll(function() {
-         var url;
-         url = $('#cl #pagination .next_page').attr('href');
+         var path;
+         path = $('#products_index #pagination .next_page').attr('href');
          if ($(window).scrollTop() < 500)
          {
            $('#toTop').fadeOut('slow')
@@ -175,14 +173,56 @@ $(function() {
          {
            $('#toTop').fadeIn('slow')
          }
-         if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 1200) {
-           set_page(url)
+         if (path && $(window).scrollTop() > $(document).height() - $(window).height() - 1200) {
+           set_page(path)
            $('#pagination').html("<img src='/assets/loading.gif' />");
-           return $.getScript(url);
+           console.log(path)
+           return $.ajax({url: path, dataType: 'script'});
          }
        });
-       return $(window).scroll();
+       /*return $(window).scroll();*/
    }
+  $('.menu').on('click', function(){
+    if(!$(this).next('.nav').is(':visible'))
+    {
+      $('.nav').hide('fast')
+      $(this).next('.nav').show('fast')
+    }
+  });
+  
+  if($('#filters').html())
+  {
+    $("#filters ul li a").on("click", function() {
+      console.log('ok')
+      $(this).parent().toggleClass('open');
+      $(this).parent().children("div").toggle();
+      return false;
+    });
+    audience_slider_values = {'0': 0, '10': 1, '12': 2, '16': 3, '18': 4};
+    $("#audience-slider-range").slider({
+      range: true,
+      min: 0,
+      max: 4,
+      values: [audience_slider_values[$("#search_filter_audience_min").val()], audience_slider_values[$("#search_filter_audience_max").val()]],
+      step: 1,
+      slide: function(event, ui) {
+        actual_audience_values = {'0': 0, '1': 10, '2': 12, '3': 16, '4': 18};
+        $("#search_filter_audience_min").val(actual_audience_values[ui.values[0]]);
+        $("#search_filter_audience_max").val(actual_audience_values[ui.values[1]]);
+      }
+    });
+    $("#ratings-slider-range").slider({
+      range: true,
+      min: 0,
+      max: 5,
+      values: [$("#search_filter_rating_min").val(),$("#search_filter_rating_max").val()],
+      step: 1,
+      slide: function(event, ui) {
+        $("#search_filter_rating_min").val(ui.values[0]);
+        $("#search_filter_rating_max").val(ui.values[1]);
+      }
+    });
+  }
 });
 
 function goToByScroll(id){
