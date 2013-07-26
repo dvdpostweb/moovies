@@ -28,5 +28,8 @@ class SearchController < ApplicationController
     elsif @active == 'directors'
       @item = @directors
     end
+    Rails.logger.debug { "@@@#{@active}" }
+    Rails.logger.debug { "@@@#{@products.count}" }
+    
   end
 end
