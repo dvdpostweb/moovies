@@ -161,6 +161,11 @@ module Moovies
       })
     end
 
-
+    def actor_kinds_int
+      HashWithIndifferentAccess.new.merge({
+        :normal => 1,
+        :adult => 0
+      })
+    end
   end
 end
