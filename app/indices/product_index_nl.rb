@@ -1,4 +1,4 @@
-ThinkingSphinx::Index.define :product, :with => :active_record, :name => 'product_be' do
+ThinkingSphinx::Index.define :product, :with => :active_record, :name => 'product_nl' do
   indexes products_type
   indexes actors.actors_name,                 :as => :actors_name
   indexes director.directors_name,            :as => :director_name
@@ -24,7 +24,7 @@ ThinkingSphinx::Index.define :product, :with => :active_record, :name => 'produc
   has studio(:studio_id),         :as => :studio_id
   
   has 'cast((cast((rating_users/rating_count)*2 AS SIGNED)/2) as decimal(2,1))', :type => :float, :as => :rating
-  has streaming_products_be(:imdb_id), :as => :streaming_imdb_id
+  has streaming_products_nl(:imdb_id), :as => :streaming_imdb_id
   
   #has "min(streaming_products.id)", :type => :integer, :as => :streaming_id
   #has "concat(GROUP_CONCAT(DISTINCT IFNULL(`products_languages`.`languages_id`, '0') SEPARATOR ','),',', GROUP_CONCAT(DISTINCT IFNULL(`products_undertitles`.`undertitles_id`, '0') SEPARATOR ','))", :type => :multi, :as => :speaker
