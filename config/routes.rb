@@ -51,6 +51,8 @@ Moovies::Application.routes.draw do
     match 'display_vod' => 'watchlists#display_vod'
     resources :search_filters, :only => [:create, :destroy]
     match 'search/(:search)' => 'search#index', :as => :search
+    resources :streaming_products, :only => [:show], :requirements => { :id => /\d+/ }
+    match 'streaming_products/faq', :to => 'streaming_products#faq'
   end
   # The priority is based upon order of creation:
   # first created -> highest priority.

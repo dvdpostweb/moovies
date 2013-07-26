@@ -1,7 +1,7 @@
 class CategoriesController < ApplicationController
   def index
     query = Category.roots.movies.vod.by_kind(params[:kind])
-    filter = view_context.get_current_filter({})
+    @filter = view_context.get_current_filter({})
     @countries = ProductCountry.visible.order
     @categories = OrderedHash.new()
     if params[:kind] == :adult
