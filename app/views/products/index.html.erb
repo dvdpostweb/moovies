@@ -1,44 +1,24 @@
-<div class="osc fr" id="subscribe-wrap">
-  <div class="wrap"><h3><span>200 films en illimité</span><br /> + accès à un catalogue à la carte</h3>
-    <div id="promo">0,79€ le premier mois, puis 9,95€ par mois</span></span></div>
-  </div>
-  <div id="subscribe">
-    <a class="btn" href="http://www.dvdpost.be/step1.php?language=fr">Abonnez-vous</a>
-    <p>SANS ENGAGEMENT</p>
-  </div>
-</div>
 <!--   ==============   MAIN CONTENT   ==============   -->
 <div id="maincontent" >
   <h2 class="ttl">Tous les films</h2>
   <%= render :partial => 'products/index/image', :locals => {:people => @people} if @people %>
   <%= render :partial => 'layouts/filters', :locals => {:filter => @filter }%>
   <!--   ==============   MOVIES   ==============   -->
-  <a href="/fr/products?endless=deactive&amp;sort=normal" class="endless">Désactiver la pagination automatique</a>
+  <% kind = params[:kind] == :normal ? nil : params[:kind] %>
+  <% if cookies[:endless] == 'deactive' %>
+    <%= link_to t('.endless_active'), params.merge(:endless => 'active', :kind => kind), :class => "endless" %>
+  <% else %>
+    <%= link_to t('.endless_deactive'), params.merge(:endless => 'deactive', :kind => kind), :class => "endless" %>
+  <% end %>
   <div id="products">
-    <div class="bysort">
-      <div class="bysort_title">Trier par : </div>
-      <div class="bysort_choice">
-        <form action="/fr/products" id="sort_form" method="get">
-          <select id="sort" name="sort" onchange="$(&quot;#sort_form&quot;).submit()"><option value="normal" selected="selected">Sans tri</option>
-            <option value="alpha_az">A-&gt;Z</option>
-            <option value="alpha_za">Z-&gt;A </option>
-            <option value="rating">Cotations</option>
-            <option value="most_viewed">Les plus visionnés</option>
-            <option value="most_viewed_last_year">Les plus visionnés (1 an)</option>
-            <option value="new">Nouveautés</option>
-            <option value="production_year">Année de production</option>
-          </select>
-        </form>
-      </div>
-      <div style="clear:both"></div>
-    </div>
-    <%= render :partial => 'products/index/movie_details', :collection => @products %>
+    <%= render :partial => 'products/index/sorting' %>
+    <%= render :partial => 'products/index/movie_details', :collection => @products, :locals => {:target => @target} %>
   </div>
   <div id='pagination_content'>
-      <%= render :partial => '/products/index/pagination' %>
+      <%= render :partial => '/products/index/pagination', :locals => {:item => @products} %>
   </div>
   <!--   ==============   END MOVIES   ==============   -->
 </div>
-<%= render :partial => 'products/left_column' %>
-<div id="toTop" style="display: block;"><%= t('.back') %></div>
+<%= render :partial => 'products/left_column', :locals => {:filter => @filter, :countries => @countries} %>
+<div id="toTop"><%= t('.back') %></div>
   <!--   ==============   END MAIN CONTENT   ==============   --> 

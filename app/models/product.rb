@@ -33,6 +33,8 @@ class Product < ActiveRecord::Base
   has_many :uninteresteds, :foreign_key => :products_id
   has_many :uninterested_customers, :through => :uninteresteds, :source => :customer, :uniq => true
   has_many :streaming_products, :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => {:available => 1}
+  has_many :streaming_products_be, :class_name => 'StreamingProduct', :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => {:available => 1, :country => 'BE'}
+  has_many :streaming_products_nl, :class_name => 'StreamingProduct', :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => {:available => 1, :country => 'NL'}
   has_many :tokens, :foreign_key => :imdb_id, :primary_key => :imdb_id
   has_many :streaming_trailers, :foreign_key => :imdb_id, :primary_key => :imdb_id
   has_many :tokens_trailers, :foreign_key => :imdb_id, :primary_key => :imdb_id
@@ -66,13 +68,6 @@ class Product < ActiveRecord::Base
   sphinx_scope(:by_imdb_id)               {|imdb_id|          {:with =>       {:imdb_id => imdb_id}}}
   sphinx_scope(:by_language)              {|language|         {:order =>      language.to_s == 'fr' ? :french : :dutch, :sort_mode => :desc}}
   sphinx_scope(:by_kind)                  {|kind|             {:conditions => {:products_type => Moovies.product_kinds[kind]}}}
-  sphinx_scope(:by_media)                 {|media|            {:conditions => {:products_media => media}}}
-  sphinx_scope(:by_special_media_be)      {|media|            {:with =>       {:special_media_be => media}}}
-  sphinx_scope(:by_special_media_lu)      {|media|            {:with =>       {:special_media_lu => media}}}
-  sphinx_scope(:by_special_media_nl)      {|media|            {:with =>       {:special_media_nl => media}}}
-  sphinx_scope(:remove_wrong_be)          {|media|            {:without =>    {:special_media_be => media}}}
-  sphinx_scope(:remove_wrong_lu)          {|media|            {:without =>    {:special_media_lu => media}}}
-  sphinx_scope(:remove_wrong_nl)          {|media|            {:without =>    {:special_media_nl => media}}}
   sphinx_scope(:by_period)                {|min, max|         {:with =>       {:year => min..max}}}
   sphinx_scope(:by_products_list)         {|product_list|     {:with =>       {:products_list_ids => product_list.to_param}}}
   sphinx_scope(:by_ratings)               {|min, max|         {:with =>       {:rating => min..max}}}
@@ -325,24 +320,25 @@ class Product < ActiveRecord::Base
   def self.search_clean(products, query_string, options={})
     qs = []
     if query_string
+      query_string = query_string.gsub(/[_-]/, ' ').gsub(/["\(\)]/, ' ').gsub(/[@$!^\/\\|]/, '')
       qs = query_string.split.collect do |word|
-        "*#{replace_specials(word)}*".gsub(/[-_]/, ' ')
+        "*#{replace_specials(word)}*"
       end  
-      search = "@descriptions_title #{query_string}" unless search.empty?
+      search = "@descriptions_title #{query_string}" unless query_string.empty?
     else
       search = ''
     end
     page = options[:page] || 1
     limit = options[:limit] ? options[:limit].to_i : "1000"
     per_page = options[:per_page] || self.per_page
-    Rails.logger.debug { "@@@#{per_page}" }
     products.search(search, :max_matches => limit, :per_page => per_page, :page => page)
   end
 
-  def self.search_clean_exact(query_string, options={})
+  def self.search_clean_exact(query_string, options={}, count = false)
     qs = []
+    query_string = query_string.gsub(/[_-]/, ' ').gsub(/["\(\)]/, ' ').gsub(/[@$!^\/\\|]/, '')
     qs = query_string.split.collect do |word|
-      replace_specials(word).gsub(/[-_]/, ' ')
+      replace_specials(word)
     end
     query_string = "@descriptions_title ^#{qs.join(' ')}$"
     page = 1

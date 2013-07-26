@@ -1,0 +1,7 @@
+<li>
+  <%= link_to image_tag(detail.image, :width => 145, :height => 217), product_path(:id => detail) %>
+  <br />
+  <a href="#" id="watch" title="Regarder en streaming"><%= content == :tvod ? t('tvod_watch', :price => '3.45') : t('.watch') %></a>
+  <br />
+  <a href="#" id="add" title="Ajouter à ma liste VOD"><%= t '.add' %></a>
+</li>

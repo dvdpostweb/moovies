@@ -52,20 +52,18 @@ class Actor < ActiveRecord::Base
   def self.search_clean(query_string, kind, page = 0 ,count = false)
     qs = []
     if query_string
+     query_string = query_string.gsub(/[_-]/, ' ').gsub(/["\(\)]/, ' ').gsub(/[@$!^\/\\|]/, '')
       qs = query_string.split.collect do |word|
-        "*#{replace_specials(word)}*".gsub(/[-_]/, ' ').gsub(/[$!^]/, '')
+        "*#{replace_specials(word)}*"
       end
     end
+    page = page || 1
     query_string = qs.join(' ')
-    if count
-      self.search.by_kind_int(kind).search_count(query_string.gsub(/[-_]/, ' '), :max_matches => 1000, :order => :actors_name, :match_mode => :extended)
-    else
-      self.search.by_kind_int(kind).search(query_string.gsub(/[-_]/, ' '), :per_page => 40, :page => page, :max_matches => 1000, :order => :actors_name, :match_mode => :extended)
-    end
+    self.search.by_kind_int(kind).search(query_string, :per_page => 1000, :page => page, :max_matches => 1000, :order => :actors_name, :match_mode => :extended)
   end
   
   def self.replace_specials(str)
-    str.removeaccents
+    str.mb_chars.normalize(:kd).gsub(/[^\x00-\x7F]/n, '').to_s
   end
   
 end

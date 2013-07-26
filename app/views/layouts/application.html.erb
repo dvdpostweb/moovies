@@ -22,6 +22,17 @@
     <% end %>
     <%= render(:partial => 'layouts/header') %>
     <div class="container clearfix">
+      <% if !current_customer && params[:controller] != 'home' %>
+      <div class="osc fr" id="subscribe-wrap">
+        <div class="wrap"><h3><%= t('.promo_title').html_safe %></h3>
+          <div id="promo"><%= t('.promo') %></div>
+        </div>
+        <div id="subscribe">
+          <a class="btn" href="http://www.dvdpost.be/step1.php?language=fr"><%= t('.abo') %></a>
+          <p><%= t('.abo_text')%></p>
+        </div>
+      </div>
+      <% end %>
       <%= yield %>
     </div>
     <!--   ==============   FOOTER   ==============   -->
