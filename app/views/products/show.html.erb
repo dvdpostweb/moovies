@@ -46,59 +46,187 @@ window.fbAsyncInit=function() {
     </div>
     <div id="votes-wrap">
       <div id="votes">
-        <span class="osc"><%= "(#{@product.rating_count} #{t('.count')})".html_safe %></span>
+        
         <div class="stars" id="rating-stars-<%= @product.to_param %>" product_id ="<%= @product.to_param %>">
           <%= render :partial => 'products/rating', :locals => {:product => @product, :background => @rating_color, :size => :long, :source => @source, :response_id => @response_id} %>
         </div>
+<span class="osc"><%= "(#{@product.rating_count} #{t('.count')})".html_safe %></span>
+
         <div id="uninterested"><%= render :partial => 'products/show/seen_uninterested', :locals => {:product => @product, :source => @source, :response_id => @response_id} if current_customer %></div>
       </div>
     </div><!-- #votes-wrap -->
   </div><!-- .ttl-wrap -->
   <div id="film-info">
-    <div id="film-img-wrap" class="vod">
+    <div id="film-img-wrap">
       <%= product_image_tag @product_image, :width => 180, :alt => "#{@product_title} (#{@product.year})" %>
       <%= content_tag(:span, '', :class => 'new') if @product.is_new? %>
     </div>
     <div id="film-descr">
+	
+		<% actors = @product.actors.collect{|actor| link_to actor.name, actor_products_path(:actor_id => actor.to_param) }.join(', ').html_safe %>
+	    <% if actors.size > 0 %>
+	    <div id="actors">
+	      <h3><%= t '.actors' %></h3>
+	      <%= actors %>
+	    </div>
+	    <% end %>
+	    <% if @product.studio && @product.adult? %>
+	    <div id="studio">
+	      <h3><%= t('.studio') %></h3>
+	      <%= link_to @product.studio.name, studio_products_path(:studio_id => @product.studio.to_param)%>
+	    </div>
+	    <% end %>
+	    <% if @product.director && !@product.adult? %>
+	    <div id="directors" class="<%= I18n.locale.to_s %>">
+	      <h3><%= t('.directed_by') %></h3>
+	      <%= link_to @product.director.name, director_products_path(:director_id => @product.director.to_param) %>
+	    </div>
+	    <% end %>
+	
+		<div id="country">
+	      <h3><%= t '.country' %></h3>
+	<%= @product.country.name %>
+	    </div>
+	<div id="audience">
+	<h3><%= t '.audience' %></h3>
+	<span class="dark osc"><%=  @product.public.name %></span>
+	</div>
+			<div id="duration">
+		      <h3><%= t '.duration' %></h3>
+	<%= "#{@product.runtime} #{t '.minutes'}" %>
+		    </div>
+				<div id="picture">
+			      <h3><%= t '.picture' %></h3>
+		<%= @product.picture_format.name if @product.picture_format %>
+			    </div>
+				<div id="sound">
+			      <h3><%= t '.sound' %></h3>
+<%= @product.soundtracks.collect{|soundtrack| soundtrack.name}.join(', ') %>
+			    </div>
+
+		
+	       
+		 <div id="festival">
+			    <h3>Récompenses</h3>
+			
+		      <%= render :partial => 'products/show/awards', :locals => {:product => @product , :size => 'small'} %>
+		    </div>
+	
+
+
+
+
+    
+    </div>
+       <div class="clearfix"></div>
+
+	
     <h3>
       <%= t '.synopsis' %>
     </h3>
+
     <p><%= @product_description.text %></p>
 
-    <% actors = @product.actors.collect{|actor| link_to actor.name, actor_products_path(:actor_id => actor.to_param) }.join(', ').html_safe %>
-    <% if actors.size > 0 %>
-    <div id="actors">
-      <h3><%= t '.actors' %></h3>
-      <%= actors %>
-    </div>
-    <% end %>
-    <% if @product.studio && @product.adult? %>
-    <div id="studio">
-      <h3><%= t('.studio') %></h3>
-      <%= link_to @product.studio.name, studio_products_path(:studio_id => @product.studio.to_param)%>
-    </div>
-    <% end %>
-    <% if @product.director && !@product.adult? %>
-    <div id="directors" class="<%= I18n.locale.to_s %>">
-      <h3><%= t('.directed_by') %></h3>
-      <%= link_to @product.director.name, director_products_path(:director_id => @product.director.to_param) %>
-    </div>
-    <% end %>
+    
     <div id="btns-wrap" class="osc">
+	
+	<a title="Regarder en streaming" id="watch" href="#">Regarder</a>
           <%= render :partial => 'products/vod_list',  :locals => {:product => @product, :source => @source, :response_id => @response_id} %>
       
           <% if @trailer %>
              <%= link_to(t('.trailer'), product_trailer_path(:product_id => @product.to_param, :source => @source, :response_id => @response_id), {:class => 'trailer', :id => 'trailer', :target => :_blank}) %>
           <% end %>
       <div class="clearfix"></div>
+
       </div>
-    </div>
-    <div id="fb">
-      <% unless @product.adult? %>
-        <div class="fb-like" data-send="false" data-width="450" data-show-faces="false" data-action="recommend"></div>
-      <% end %>
-    </div>    
-    
+
+	<div id="formats">
+
+		<h3><%= t '.format_available' %></h3>
+	    <table border="0" cellpadding="0" cellspacing="0">
+	      <tr>
+
+	        <td width="90"><%= t'.audio' %></td>
+	        <td width="90"><%= t '.subtitles' %></td>
+	<td></td>
+		<td></td>
+
+	      </tr>
+	      <tr>
+	        <td>EN
+	        </td>
+	        <td>FR</td>
+	        <td><a title="Regarder en streaming" id="watch" href="#">Regarder</a> <br/>
+		          <%= render :partial => 'products/vod_list',  :locals => {:product => @product, :source => @source, :response_id => @response_id} %></td>
+		<td class="goalacarte">Passe <span><strong>A la carte</strong></span> dans 20 jours</td>
+	      </tr>
+	
+		   <tr>
+		        <td>EN
+		        </td>
+		        <td>NL</td>
+		        <td>Disponible dans 15 jours</td>
+			<td></td>
+		      </tr>
+	    </table>
+	
+		 <table border="0" cellpadding="0" cellspacing="0">
+		      <tr>
+
+		        <td width="90"><%= t'.audio' %></td>
+		        <td width="90"><%= t '.subtitles' %></td>
+		<td></td>
+			<td></td>
+
+		      </tr>
+		      <tr>
+		        <td>EN
+		        </td>
+		        <td>FR</td>
+		        <td><a href="#"><a href="#" id="watch" title="Regarder en streaming">Regarder: 3,49 €</a><br/>
+			          <%= render :partial => 'products/vod_list',  :locals => {:product => @product, :source => @source, :response_id => @response_id} %></td>
+			<td class="noavailable"><span><strong>Plus disponible</strong></span> dans 20 jours</td>
+		      </tr>
+
+			   <tr>
+			        <td>EN
+			        </td>
+			        <td>NL</td>
+			        <td>Disponible dans 15 jours</td>
+				<td></td>
+			      </tr>
+		    </table>
+		
+		
+			 <table border="0" cellpadding="0" cellspacing="0">
+			      <tr>
+
+			        <td width="90"><%= t'.audio' %></td>
+			        <td width="90"><%= t '.subtitles' %></td>
+			<td></td>
+				<td></td>
+
+			      </tr>
+			      <tr>
+			        <td>EN
+			        </td>
+			        <td>FR</td>
+			        <td><a href="#"><a href="#" id="watch" title="Regarder en streaming">Regarder: 3,49 €</a><br/>
+				          <%= render :partial => 'products/vod_list',  :locals => {:product => @product, :source => @source, :response_id => @response_id} %></td>
+			<td class="goinfinite">Disponible dans <span><strong>Plush infinite</strong></span> dans 20 jours</td>
+			      </tr>
+
+				   <tr>
+				        <td>EN
+				        </td>
+				        <td>NL</td>
+				        <td>Disponible dans 15 jours</td>
+					<td></td>
+				      </tr>
+			    </table>
+			
+
+	  </div><!-- #formats -->
     <div id="thumbs-wrap">
       <h3><%= t '.photo' %></h3>
       <div>
@@ -106,34 +234,7 @@ window.fbAsyncInit=function() {
       </div>
     </div>
   </div><!-- #film-info -->
-  <div id="formats">
-    <table border="0">
-      <tr>
-        <th width="145"><%= t '.format_available' %></th>
-        <th width="90"><%= t'.audio' %></th>
-        <th width="90"><%= t '.subtitles' %></th>
-        <th width="47"><%= t '.audience' %></th>
-        <th width="52"><%= t '.duration' %></th>
-        <th width="68"><%= t '.picture' %></th>
-        <th width="45"><%= t '.sound' %></th>
-        <th width="92"><%= t '.country' %></th>
-      </tr>
-      <tr>
-        <td>
-        </td>
-        <td></td>
-        <td></td>
-        <td><span class="dark osc"><%=  @product.public.name %></span></td>
-        <td><%= "#{@product.runtime} #{t '.minutes'}" %></td>
-        <td><%= @product.picture_format.name if @product.picture_format %></td>
-        <td><%= @product.soundtracks.collect{|soundtrack| soundtrack.name}.join(', ') %></td>
-        <td><%= @product.country.name %></td>
-      </tr>
-    </table>
-    <div id="festival">
-      <%= render :partial => 'products/show/awards', :locals => {:product => @product , :size => 'small'} %>
-    </div>
-  </div><!-- #formats -->
+  
    <div id="rented-wrap">
     <%= render :partial => 'products/show/recommendations', :locals => { :rating_color => @rating_color, :products => @recommendations, :recommendation_nb_page => @recommendation_nb_page, :recommendation_page => @recommendation_page, :recommendation_response_id => @recommendation_response_id } if @recommendations && @recommendations.size > 0 %>
     <%= render :partial => 'products/show/critics', :locals => {:product => @product, :reviews_count => @reviews_count, :reviews => @reviews, :review_sort => @review_sort, :product_title => @product_title, :chronicle => @chronicle, :source => @source, :response_id => @response_id} %>
