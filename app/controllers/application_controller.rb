@@ -50,7 +50,6 @@ class ApplicationController < ActionController::Base
     if params[:locale].nil?
       params[:locale] = I18n.locale
     end
-    @search = t('layouts.header.explore')
   end
 
   private

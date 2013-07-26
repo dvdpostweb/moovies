@@ -23,7 +23,7 @@
     </center>
     • <%= t '.unlinmited1' %><br />
     • <%= t '.unlinmited2' %><br />
-    • <%= t '.unlinmited3' %>
+    • <%= raw t '.unlinmited3' %>
     <ul class="osc">
       <li> <a href="#"><%= t '.discover' %></a></li>
     </ul>
@@ -35,7 +35,7 @@
     </center>
     • <%= t '.tvod1' %><br />
     • <%= t '.tvod2' %><br />
-    • <%= t '.tvod3' %>
+    • <%= raw t '.tvod3' %>
     <ul class="osc">
       <li> <a href="#"><%= t '.discover' %></a> </li>
     </ul>
@@ -47,7 +47,7 @@
     </center>
     • <%= t '.multi1' %><br />
     • <%= t '.multi2' %><br />
-    • <%= t '.multi3' %>
+    • <%= raw t '.multi3' %>
     <ul class="osc">
       <li> <a href="#"><%= t '.discover' %></a> </li>
     </ul>
@@ -64,10 +64,9 @@
         <input type="hidden" name="promo" id="promo">
         <input type="text" value="Philippe@gmail.com" size="30" name="public_newsletter[email]" id="public_newsletter_email">
       </center>
-      • <%= t '.newsletter' %><br />
-
-      • <%= t '.newsletter' %><br />
-      • <%= t '.newsletter' %><br />
+      • <%= t '.newsletter1' %><br />
+      • <%= t '.newsletter2' %><br />
+      • <%= raw t '.newsletter3' %><br />
 
       <ul class="osc">
         <li>
@@ -106,7 +105,7 @@
         <h3><%= t('.watch_now') %></h3>
         <%= image_tag "#{I18n.locale}/prices.png", :size => '450x118' %>
       </div>
-      <div id="try_it"> <a class="essaigratuit osc btn" href="#"><%= t('try2') %></a> <div id="engagement"><%= t('.try2_text') %></div></div>
+      <div id="try_it"> <a class="essaigratuit osc btn" href="#"><%= t('.try2') %></a> <div id="engagement"><%= t('.try2_text') %></div></div>
 
     </div>
     <div class="clear"></div>

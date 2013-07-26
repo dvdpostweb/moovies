@@ -320,10 +320,11 @@ class Product < ActiveRecord::Base
   def self.search_clean(products, query_string, options={})
     qs = []
     if query_string
+      query_string = query_string.gsub(/[_-]/, ' ').gsub(/["\(\)]/, ' ').gsub(/[@$!^\/\\|]/, '')
       qs = query_string.split.collect do |word|
-        "*#{replace_specials(word)}*".gsub(/[-_]/, ' ')
+        "*#{replace_specials(word)}*"
       end  
-      search = "@descriptions_title #{query_string}" unless search.empty?
+      search = "@descriptions_title #{query_string}" unless query_string.empty?
     else
       search = ''
     end
@@ -333,10 +334,11 @@ class Product < ActiveRecord::Base
     products.search(search, :max_matches => limit, :per_page => per_page, :page => page)
   end
 
-  def self.search_clean_exact(query_string, options={})
+  def self.search_clean_exact(query_string, options={}, count = false)
     qs = []
+    query_string = query_string.gsub(/[_-]/, ' ').gsub(/["\(\)]/, ' ').gsub(/[@$!^\/\\|]/, '')
     qs = query_string.split.collect do |word|
-      replace_specials(word).gsub(/[-_]/, ' ')
+      replace_specials(word)
     end
     query_string = "@descriptions_title ^#{qs.join(' ')}$"
     page = 1
