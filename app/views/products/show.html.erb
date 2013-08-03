@@ -72,9 +72,10 @@ window.fbAsyncInit=function() {
       <%= actors %>
     </div>
     <% end %>
-    <% if @product.studio && @product.adult? %>
+    <% if @product.adult? && @product.studio %>
     <div id="studio">
       <h3><%= t('.studio') %></h3>
+      <% Rails.logger.debug { "@@@#{@product.studio.inspect}" }%>
       <%= link_to @product.studio.name, studio_products_path(:studio_id => @product.studio.to_param)%>
     </div>
     <% end %>
@@ -127,7 +128,7 @@ window.fbAsyncInit=function() {
         <td><%= "#{@product.runtime} #{t '.minutes'}" %></td>
         <td><%= @product.picture_format.name if @product.picture_format %></td>
         <td><%= @product.soundtracks.collect{|soundtrack| soundtrack.name}.join(', ') %></td>
-        <td><%= @product.country.name %></td>
+        <td><%= @product.country.name if @product.country %></td>
       </tr>
     </table>
     <div id="festival">
@@ -140,7 +141,7 @@ window.fbAsyncInit=function() {
   </div><!-- #rented-wrap-->
 </div>
 <!--   ==============   END MAIN CONTENT   ==============   -->
-<%= render :partial => 'products/left_column', :locals => {:filter => @filter} %>
+<%= render :partial => 'products/left_column', :locals => {:filter => @filter, :countries => @countries} %>
 <% if params[:add].to_i == 1 %>
   <% submit_id = "p_#{@product.to_param}_#{rand(10)}"%>
   <div id='add_p' style='display:none' class='action_face'><%= new_product_wishlist_item_path(:product_id => @product.to_param, :source => @source, :submit_id => submit_id, :text => :long, :load_color => :normal) %></div>

@@ -1,4 +1,4 @@
-<%= form_for :search_filter, {:url => search_filters_path(:package => params[:package], :list_id => params[:list_id], :category_id => params[:category_id], :actor_id => params[:actor_id], :director_id => params[:director_id], :filter => params[:filter], :studio_id => params[:studio_id])} do |f| %>
+<%= form_for filter, :url => search_filters_path(:package => params[:package], :list_id => params[:list_id], :category_id => params[:category_id], :actor_id => params[:actor_id], :director_id => params[:director_id], :filter => params[:filter], :studio_id => params[:studio_id], :kind => params[:kind]), :html => {:method => :put} do |f| %>
 <div id="filters">
   <h3>
     <%= t '.refine' %>
@@ -42,7 +42,7 @@
           <%= f.hidden_field :rating_min, :value => filter.rating_min || 0 %>
           <%= f.hidden_field :rating_max, :value => filter.rating_max || 5 %>
           <ul id="ratings_labels">
-            <% ['0', '1', '2', '3', '4', '5'].collect do |rating| %>
+            <% ['1', '2', '3', '4', '5'].collect do |rating| %>
               <li><%= rating %></li>
             <% end %>
           </ul>

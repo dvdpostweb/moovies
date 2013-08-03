@@ -141,11 +141,11 @@ module Moovies
     
     def packages
       HashWithIndifferentAccess.new.merge({
-        :infinite => 1,
+        :unlimited => 1,
         :tvod => 2,
         :kids => 3,
-        :adult_infinite => 4,
-        :adult_svod => 5
+        :adult_unlimited => 4,
+        :adult_tvod => 5
       })
     end
 
@@ -165,6 +165,13 @@ module Moovies
       HashWithIndifferentAccess.new.merge({
         :normal => 1,
         :adult => 0
+      })
+    end
+
+    def right
+      HashWithIndifferentAccess.new.merge({
+        :be => 'products_be_core',
+        :lu => 'products_lu_core'
       })
     end
   end
