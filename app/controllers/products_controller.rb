@@ -42,6 +42,7 @@ class ProductsController < ApplicationController
     @body_id = "film-details"
     #to do user_agent = UserAgent.parse(request.user_agent)
     @tokens = current_customer.get_all_tokens_id(params[:kind], @product.imdb_id) if current_customer
+    @countries = ProductCountry.visible.order
     #to do @filter = get_current_filter({})
     unless request.xhr?
       @trailer =  @product.trailer?

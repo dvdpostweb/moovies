@@ -21,12 +21,13 @@
 #   * 1.0.1 : October 29 2008
 #               First public revision - Jonathan Grenier (jgrenier@techniconseils.ca)
 #
-
-class String
+module String_class
+  class << self
   # The extended characters map used by removeaccents. The accented characters 
   # are coded here using their numerical equivalent to sidestep encoding issues.
   # These correspond to ISO-8859-1 encoding.
-  ACCENTS_MAPPING = {
+  def accents_mapping
+     {
     'E' => [200,201,202,203],
     'e' => [232,233,234,235],
     'A' => [192,193,194,195,196,197],
@@ -48,14 +49,14 @@ class String
     'OE' => [188],
     'oe' => [189]
   }
+  end
   
   
   # Remove the accents from the string. Uses String::ACCENTS_MAPPING as the source map.
-  def removeaccents    
-    str = String.new(self)
-    String::ACCENTS_MAPPING.each {|letter,accents|
+  def removeaccents(str)    
+    self.accents_mapping.each {|letter,accents|
       packed = accents.pack('U*')
-      rxp = Regexp.new("[#{packed}]", nil, 'U')
+      rxp = Regexp.new("[#{packed}]", nil)
       str.gsub!(rxp, letter)
     }
     
@@ -72,14 +73,15 @@ class String
   # * :downcase => call downcase on the string (defaults to true)
   # * :convert_spaces => Convert space to underscore (defaults to false)
   # * :regexp => The regexp matching characters that will be converting to an empty string (defaults to /[^-_A-Za-z0-9]/)
-  def urlize(options = {})
+  def urlize(str, options = {})
     options[:downcase] ||= true
     options[:convert_spaces] ||= false
     options[:regexp] ||= /[^-_A-Za-z0-9]/
     
-    str = self.strip.removeaccents
+    str = str.strip.removeaccents
     str.downcase! if options[:downcase]
     str.gsub!(/\ /,'_') if options[:convert_spaces]
     str.gsub(options[:regexp], '')
   end
+end
 end

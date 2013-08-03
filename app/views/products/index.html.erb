@@ -4,11 +4,10 @@
   <%= render :partial => 'products/index/image', :locals => {:people => @people} if @people %>
   <%= render :partial => 'layouts/filters', :locals => {:filter => @filter }%>
   <!--   ==============   MOVIES   ==============   -->
-  <% kind = params[:kind] == :normal ? nil : params[:kind] %>
   <% if cookies[:endless] == 'deactive' %>
-    <%= link_to t('.endless_active'), params.merge(:endless => 'active', :kind => kind), :class => "endless" %>
+    <%= link_to t('.endless_active'), params.merge(:endless => 'active', :kind => (params[:kind] == :normal ? nil : params[:kind])), :class => "endless" %>
   <% else %>
-    <%= link_to t('.endless_deactive'), params.merge(:endless => 'deactive', :kind => kind), :class => "endless" %>
+    <%= link_to t('.endless_deactive'), params.merge(:endless => 'deactive', :kind => (params[:kind] == :normal ? nil : params[:kind])), :class => "endless" %>
   <% end %>
   <div id="products">
     <%= render :partial => 'products/index/sorting' %>

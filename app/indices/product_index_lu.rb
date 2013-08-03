@@ -1,4 +1,4 @@
-ThinkingSphinx::Index.define :product, :with => :active_record, :name => 'product_nl' do
+ThinkingSphinx::Index.define :product, :with => :active_record, :name => 'product_lu' do
   indexes products_type
   indexes actors.actors_name,                 :as => :actors_name
   indexes director.directors_name,            :as => :director_name
@@ -8,7 +8,7 @@ ThinkingSphinx::Index.define :product, :with => :active_record, :name => 'produc
   has products_countries_id,      :as => :country_id
   has products_date_available,    :as => :available_at
   has products_date_added,        :as => :created_at
-  has products_id,                :as => :id
+  has products_id,                :as => :product_id
   has "CAST(vod_next AS SIGNED)", :type => :integer, :as => :vod_next
   has "CAST(vod_next_lux AS SIGNED)", :type => :integer, :as => :vod_next_lux
   has "CAST(vod_next_nl AS SIGNED)", :type => :integer, :as => :vod_next_nl
@@ -24,7 +24,9 @@ ThinkingSphinx::Index.define :product, :with => :active_record, :name => 'produc
   has studio(:studio_id),         :as => :studio_id
   
   has 'cast((cast((rating_users/rating_count)*2 AS SIGNED)/2) as decimal(2,1))', :type => :float, :as => :rating
-  has streaming_products_nl(:imdb_id), :as => :streaming_imdb_id
+  has streaming_products_lu(:imdb_id), :as => :streaming_imdb_id
+  has streaming_products_be(:language_id), :as => :language_ids
+  has streaming_products_be(:subtitle_id), :as => :subtitle_ids
   
   #has "min(streaming_products.id)", :type => :integer, :as => :streaming_id
   #has "concat(GROUP_CONCAT(DISTINCT IFNULL(`products_languages`.`languages_id`, '0') SEPARATOR ','),',', GROUP_CONCAT(DISTINCT IFNULL(`products_undertitles`.`undertitles_id`, '0') SEPARATOR ','))", :type => :multi, :as => :speaker
@@ -91,11 +93,6 @@ ThinkingSphinx::Index.define :product, :with => :active_record, :name => 'produc
   #has 'concat(if(products_quantity>0 or (  select count(*) > 0 from products p
   #      join streaming_products on streaming_products.imdb_id = p.imdb_id
   #      where  ((country="NL" and streaming_products.status = "online_test_ok" and ((streaming_products.available_from <= date(now()) and streaming_products.expire_at >= date(now())) or (streaming_products.available_backcatalogue_from <= date(now()) and streaming_products.expire_backcatalogue_at >= date(now()))) and available = 1) or p.vod_next_nl=1 or streaming_products.imdb_id is null)  and p.products_id =  products.products_id),1,0),date_format(products_date_available,"%Y%m%d"))', :type => :integer, :as => :default_order_nl
-
-  has "case 
-  when  products_status = -1 then 99
-  when  products_status = -2 then 98
-  else products_status end", :type => :integer, :as => :state
   set_property :enable_star => true
   set_property :min_prefix_len => 3
   set_property :charset_type => 'sbcs'
