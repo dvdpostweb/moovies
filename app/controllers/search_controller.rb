@@ -15,12 +15,13 @@ class SearchController < ApplicationController
         @active = 'products'
       elsif @actors.count > 0
         @active = 'actors'
-      else @directors.count > 0
+      else @directors != 0 && @directors.count > 0
         @active = 'directors'
       end
     else
       @active = params[:type]
     end
+    Rails.logger.debug { "@@@#{@active}" }
     if @active == 'products'
       @item = @products
     elsif @active == 'actors'
@@ -28,8 +29,6 @@ class SearchController < ApplicationController
     elsif @active == 'directors'
       @item = @directors
     end
-    Rails.logger.debug { "@@@#{@active}" }
-    Rails.logger.debug { "@@@#{@products.count}" }
     
   end
 end
