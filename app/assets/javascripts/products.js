@@ -176,7 +176,6 @@ $(function() {
          if (path && $(window).scrollTop() > $(document).height() - $(window).height() - 1200) {
            set_page(path)
            $('#pagination').html("<img src='/assets/loading.gif' />");
-           console.log(path)
            return $.ajax({url: path, dataType: 'script'});
          }
        });
@@ -193,7 +192,6 @@ $(function() {
   if($('#filters').html())
   {
     $("#filters ul li a").on("click", function() {
-      console.log('ok')
       $(this).parent().toggleClass('open');
       $(this).parent().children("div").toggle();
       return false;
@@ -213,7 +211,7 @@ $(function() {
     });
     $("#ratings-slider-range").slider({
       range: true,
-      min: 0,
+      min: 1,
       max: 5,
       values: [$("#search_filter_rating_min").val(),$("#search_filter_rating_max").val()],
       step: 1,
