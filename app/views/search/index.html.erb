@@ -14,7 +14,6 @@
 
   <div id="products">
     <%= render :partial => 'products/index/sorting' if @active == 'products' %>
-    <% Rails.logger.debug { "@@@#{@target.class}" }%>
     <%= render :partial => 'products/index/movie_details', :collection => @products, :locals => {:target => @target} if @active == 'products' %>
     <%= render :partial => 'products/index/peoples', :locals => {:people => @actors} if @active == 'actors'  %>
     <%= render :partial => 'products/index/peoples', :locals => {:people => @directors} if @active == 'directors'  %>

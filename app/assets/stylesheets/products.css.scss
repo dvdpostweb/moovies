@@ -1589,6 +1589,10 @@ ul#audience_labels li, ul#year_labels li, ul#ratings_labels li {
   color: #687597;
   background: none;
 }
+ul#ratings_labels
+{
+	padding: 4px 0 4px 5px;
+}
 ul#audience_labels li {
   width: 23px;
 }
@@ -1601,9 +1605,13 @@ ul#year_labels li {
   padding: 0;
 }
 ul#ratings_labels li {
-  width: 29px;
-  padding: 0;
+	width: 4px;
+	padding: 0 36px 0 0;
+	text-align: left;
 }
+ul#ratings_labels li:last-child {
+	padding: 0;
+}	
 #filters li label {
   color: #5c6377;
   cursor: pointer;

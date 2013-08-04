@@ -39,7 +39,7 @@
       <li class="ratings<%= ' open' if filter.rating? %>">
         <%= link_to t('.ratings'), products_path(:rating => 1) %>
         <div id="ratings-slider" <%= "style=display:none" unless filter.rating? %>>
-          <%= f.hidden_field :rating_min, :value => filter.rating_min || 0 %>
+          <%= f.hidden_field :rating_min, :value => filter.rating_min || 1 %>
           <%= f.hidden_field :rating_max, :value => filter.rating_max || 5 %>
           <ul id="ratings_labels">
             <% ['1', '2', '3', '4', '5'].collect do |rating| %>

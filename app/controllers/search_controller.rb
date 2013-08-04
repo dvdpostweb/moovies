@@ -21,7 +21,6 @@ class SearchController < ApplicationController
     else
       @active = params[:type]
     end
-    Rails.logger.debug { "@@@#{@active}" }
     if @active == 'products'
       @item = @products
     elsif @active == 'actors'
