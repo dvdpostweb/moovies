@@ -49,7 +49,7 @@ Moovies::Application.routes.draw do
     match 'steps/:page_name' => 'steps#index', :as => :step
     resources :watchlists, :as => :vod_wishlists
     match 'display_vod' => 'watchlists#display_vod'
-    resources :search_filters, :only => [:create, :destroy]
+    resource :search_filters, :only => [:update, :destroy]
     match 'search/(:search)' => 'search#index', :as => :search
     resources :streaming_products, :only => [:show], :requirements => { :id => /\d+/ }
     match 'streaming_products/faq', :to => 'streaming_products#faq'

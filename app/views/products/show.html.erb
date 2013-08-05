@@ -127,7 +127,6 @@ window.fbAsyncInit=function() {
 
     <p><%= @product_description.text %></p>
 
-    
     <div id="btns-wrap" class="osc">
 	
 	<a title="Regarder en streaming" id="watch" href="#">Regarder</a>
@@ -234,14 +233,13 @@ window.fbAsyncInit=function() {
       </div>
     </div>
   </div><!-- #film-info -->
-  
    <div id="rented-wrap">
     <%= render :partial => 'products/show/recommendations', :locals => { :rating_color => @rating_color, :products => @recommendations, :recommendation_nb_page => @recommendation_nb_page, :recommendation_page => @recommendation_page, :recommendation_response_id => @recommendation_response_id } if @recommendations && @recommendations.size > 0 %>
     <%= render :partial => 'products/show/critics', :locals => {:product => @product, :reviews_count => @reviews_count, :reviews => @reviews, :review_sort => @review_sort, :product_title => @product_title, :chronicle => @chronicle, :source => @source, :response_id => @response_id} %>
   </div><!-- #rented-wrap-->
 </div>
 <!--   ==============   END MAIN CONTENT   ==============   -->
-<%= render :partial => 'products/left_column', :locals => {:filter => @filter} %>
+<%= render :partial => 'products/left_column', :locals => {:filter => @filter, :countries => @countries} %>
 <% if params[:add].to_i == 1 %>
   <% submit_id = "p_#{@product.to_param}_#{rand(10)}"%>
   <div id='add_p' style='display:none' class='action_face'><%= new_product_wishlist_item_path(:product_id => @product.to_param, :source => @source, :submit_id => submit_id, :text => :long, :load_color => :normal) %></div>
