@@ -1,18 +1,20 @@
 /*** menu actors ***/
 #options {
   font-size: 1.50em;
-  font-weight: bold;
   margin-bottom: 10px;
   position: relative;
-  color :#201F20;
+  color :#9F9E98;
   margin:10px;
 }
 #options a, p#letters a, ul#search-studio li li a, ul#search-performers li li a, p#filter a {
   text-decoration: none;
+    color: #9F9E98;
 }
 #options a:hover, #options a.active, p#letters a:hover, ul#search-studio li li a:hover, ul#search-performers li li a:hover,
 p#filter a:hover, p#filter a.active {
-  color: #e2007c;
+  color: #993399;
+   text-decoration: underline;
+   
 }
 #options a.right {
   font-size: 0.61em;
@@ -56,9 +58,10 @@ h1, h2, h3, h4, h5, h6, form, fieldset, p {
 p#letters {
   text-align: center;
   font-size: 1.5em;
-  color: #999999;
-  font-weight: bold;
+  color: #9F9E98;
 }
+
+
 ul#search-studio, ul#search-performers {
   list-style: none;
   padding-top: 15px;
@@ -85,8 +88,8 @@ ul.search-categories li
   min-height: 100px !important;
 }
 ul#search-performers li {
-  width: 175px;
-  padding-left: 115px;
+  width: 115px;
+  padding-left: 111px;
   position: relative;
   margin: 0 5px 5px 0;
   display: inline-block;
@@ -105,14 +108,14 @@ ul#search-studio li .letter {
   font-weight: bold;
   font-size: 2.50em;
   text-align: right;
-  color: #000;
+  color: #9F9E98;
   line-height:19px;
 }
 
 ul#search-performers li .letter {
 font-weight: bold;
   font-size: 2.50em;
-  color: #000;
+  color: #9F9E98;
   display: block;
   margin-left: -115px;
   line-height:19px;
@@ -158,9 +161,7 @@ ul#search-performers li ol.big
 *+html ul#search-performers li ol {
     padding-top: 0;
 }
-ul#search-performers li ol {
-  margin-bottom: 10px;
-}
+
 
 
 ul#search-studio li li, ul#search-performers li li {
@@ -198,11 +199,9 @@ ul#search-performers li .thumb {
   position: absolute;
   top: 25px;
   left: 0;
-  padding: 4px;
-  background: #fff;
-  -moz-box-shadow:2px 2px 2px #7f7f7f;
--webkit-box-shadow:2px 2px 2px #7f7f7f;
-box-shadow:2px 2px 2px #7f7f7f;
+  
+
+ 
 }
 *+html ul#search-performers li .thumb  {
   top: 35px;
@@ -291,5 +290,4 @@ ul#search-performers li li a.star {
 }
 #actors .container
 {
-  background: #C3D1DB url(image_path('lc-bg.gif')) 0 0 repeat-y;  
 }

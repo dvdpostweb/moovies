@@ -1,5 +1,6 @@
 class StudiosController < ApplicationController
   def index
+    @body_id = 'studios'
     @filter = view_context.get_current_filter({})
     @countries = ProductCountry.visible.order
     @studios = Studio.by_kind(params[:kind]).ordered
