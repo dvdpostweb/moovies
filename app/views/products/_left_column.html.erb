@@ -1,19 +1,48 @@
 <!--   ==============   LEFT COLUMN   ==============   -->
 <div id="leftcolumn">
+  <% if params[:kind] == :normal %>
   <h3 class="ttl infinity menu"><%= t '.unlimited' %></h3>
   <ul class="nav osc" style='display: <%= params[:package] == Moovies.packages.invert[1] || params[:package].nil? ? 'block' : 'none' %>'>
-    <li class="list"><a href="#" class="">Derniers ajouts</a></li><li class="list"><a href="#"  class="">	Plus regardés</a></li><li class="list"><a href="#"  class="">	Dernière chance
-    </a></li><li class="list"><a href="#"  class="">Prochainement</a></li>
-    <li class="list"><%= link_to t('.categories'), categories_path(:package => Moovies.packages.invert[1]) %></li>
-    <li class="list"><%= link_to t('.all'), products_path(:package => Moovies.packages.invert[1]) %></li>
+    <li class="list"><%= link_to t('.svod_last_added'), products_path(:package => Moovies.packages.invert[1], :view_mode => :svod_last_added) %></li>
+    <li class="list"><%= link_to t('.svod_most_viewed'), products_path(:package => Moovies.packages.invert[1], :view_mode => :most_viewed) %></li>
+    <li class="list"><%= link_to t('.svod_last_chance'), products_path(:package => Moovies.packages.invert[1], :view_mode => :svod_last_chance) %></li>
+    <li class="list"><%= link_to t('.svod_soon'), products_path(:package => Moovies.packages.invert[1], :view_mode => :svod_soon) %></li>
+    <li class="list"><%= link_to t('.svod_categories'), categories_path(:package => Moovies.packages.invert[1]) %></li>
+    <li class="list"><%= link_to t('.svod_all'), products_path(:package => Moovies.packages.invert[1]) %></li>
   </ul>
   <h3 class="ttl alacarte menu"><%= t '.tvod' %></h3>
   <ul class="nav osc" style='display: <%= params[:package] == Moovies.packages.invert[2] ? 'block' : 'none' %>'>
-    <li class="list"><a href="#" class="">Derniers ajouts</a></li><li class="list"><a href="#"  class="">	Plus regardés</a></li><li class="list"><a href="#"  class="">	Dernière chance
-    </a></li><li class="list"><a href="#"  class="">Prochainement</a></li><li class="list"><a href="#"  class="">Genre</a></li><li class="list"><a href="#"  class="">Tout le catalogue</a></li>
+    <li class="list"><%= link_to t('.tvod_last_added'), products_path(:package => Moovies.packages.invert[2], :view_mode => :tvod_last_added) %></li>
+    <li class="list"><%= link_to t('.tvod_most_viewed'), products_path(:package => Moovies.packages.invert[2], :view_mode => :most_viewed) %></li>
+    <li class="list"><%= link_to t('.tvod_last_chance'), products_path(:package => Moovies.packages.invert[2], :view_mode => :tvod_last_chance) %></li>
+    <li class="list"><%= link_to t('.tvod_soon'), products_path(:package => Moovies.packages.invert[2], :view_mode => :tvod_soon) %></li>
+    <li class="list"><%= link_to t('.tvod_categories'), categories_path(:package => Moovies.packages.invert[2]) %></li>
+    <li class="list"><%= link_to t('.tvod_all'), products_path(:package => Moovies.packages.invert[2]) %></li>
   </ul>
   <%= link_to t('.kids'), products_path(:package => Moovies.packages[:kids]), :class => "ttl kids" %>
-  <%= link_to t('.adult'), products_path(:kind => :adult, :package => Moovies.packages[:adult_infinite]), :class => "ttl adult" %>
+  <%= link_to t('.adult'), products_path(:kind => :adult, :package => Moovies.packages.invert[5]), :class => "ttl adult" %>
+  <% else %>
+  <%= link_to t('.classic_svod'), products_path(:kind => :normal, :package => Moovies.packages.invert[1]), :class => "ttl infinity" %>
+  <h3 class="ttl adult menu"><%= t '.adult_unlimited' %></h3>
+  <ul class="nav osc" style='display: <%= params[:package] == Moovies.packages.invert[4] || params[:package].nil? ? 'block' : 'none' %>'>
+    <li class="list"><%= link_to t('.svod_last_added'), products_path(:package => Moovies.packages.invert[4], :view_mode => :svod_last_added) %></li>
+    <li class="list"><%= link_to t('.svod_most_viewed'), products_path(:package => Moovies.packages.invert[4], :view_mode => :most_viewed) %></li>
+    <li class="list"><%= link_to t('.svod_last_chance'), products_path(:package => Moovies.packages.invert[4], :view_mode => :svod_last_chance) %></li>
+    <li class="list"><%= link_to t('.svod_soon'), products_path(:package => Moovies.packages.invert[4], :view_mode => :svod_soon) %></li>
+    <li class="list"><%= link_to t('.svod_categories'), categories_path(:package => Moovies.packages.invert[4]) %></li>
+    <li class="list"><%= link_to t('.svod_all'), products_path(:package => Moovies.packages.invert[4]) %></li>
+  </ul>
+  <h3 class="ttl adult alacarte menu"><%= t '.adult_tvod' %></h3>
+  <ul class="nav osc" style='display: <%= params[:package] == Moovies.packages.invert[5] ? 'block' : 'none' %>'>
+    <li class="list"><%= link_to t('.tvod_last_added'), products_path(:package => Moovies.packages.invert[5], :view_mode => :tvod_last_added) %></li>
+    <li class="list"><%= link_to t('.tvod_most_viewed'), products_path(:package => Moovies.packages.invert[5], :view_mode => :most_viewed) %></li>
+    <li class="list"><%= link_to t('.tvod_last_chance'), products_path(:package => Moovies.packages.invert[5], :view_mode => :tvod_last_chance) %></li>
+    <li class="list"><%= link_to t('.tvod_soon'), products_path(:package => Moovies.packages.invert[5], :view_mode => :tvod_soon) %></li>
+    <li class="list"><%= link_to t('.tvod_categories'), categories_path(:package => Moovies.packages.invert[5]) %></li>
+    <li class="list"><%= link_to t('.tvod_all'), products_path(:package => Moovies.packages.invert[5]) %></li>
+  </ul>
+  
+  <% end %>
   <%= render :partial => 'products/index/filters', :locals => {:countries => countries, :filter => filter} if (params[:action] == 'index' && params[:controller] != 'studios') %>
 </div>
   <!--   ==============   END LEFT COLUMN   ==============   -->

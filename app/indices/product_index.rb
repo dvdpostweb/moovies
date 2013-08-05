@@ -1,14 +1,11 @@
 ThinkingSphinx::Index.define :product, :with => :active_record, :name => 'product_be' do
   indexes products_type
-  indexes actors.actors_name,                 :as => :actors_name
-  indexes director.directors_name,            :as => :director_name
-  indexes studio.studio_name,                 :as => :studio_name
-  indexes descriptions.products_name,         :as => :descriptions_title
+  indexes descriptions.products_name,         :as => :descriptions_title, :sortage => true
   
   has products_countries_id,      :as => :country_id
   has products_date_available,    :as => :available_at
   has products_date_added,        :as => :created_at
-  has products_id,                :as => :id
+  has products_id,                :as => :product_id
   has "CAST(vod_next AS SIGNED)", :type => :integer, :as => :vod_next
   has "CAST(vod_next_lux AS SIGNED)", :type => :integer, :as => :vod_next_lux
   has "CAST(vod_next_nl AS SIGNED)", :type => :integer, :as => :vod_next_nl
@@ -25,7 +22,20 @@ ThinkingSphinx::Index.define :product, :with => :active_record, :name => 'produc
   
   has 'cast((cast((rating_users/rating_count)*2 AS SIGNED)/2) as decimal(2,1))', :type => :float, :as => :rating
   has streaming_products_be(:imdb_id), :as => :streaming_imdb_id
-  
+  has streaming_products_be(:language_id), :as => :language_ids
+  has streaming_products_be(:subtitle_id), :as => :subtitle_ids
+  #to do
+  has "ifnull(concat('2',replace(if(min(vod_online_bes_products.expire_at) > date(now()),min(vod_online_bes_products.available_from),null),'-','')),ifnull(concat('2',replace(min(vod_online_bes_products.available_backcatalogue_from), '-','')), ifnull(concat('1',replace(if(min(streaming_products.expire_at) > date(now()),min(streaming_products.available_from),null), '-','')),concat('1',replace(min(streaming_products.available_backcatalogue_from), '-','')))))", :type => :integer, :as => :streaming_available_at_order
+  has "ifnull(if(min(vod_online_bes_products.expire_at) > date(now()),min(vod_online_bes_products.available_from),null),ifnull(min(vod_online_bes_products.available_backcatalogue_from), ifnull(if(min(streaming_products.expire_at) > date(now()),min(streaming_products.available_from),null),min(streaming_products.available_backcatalogue_from))))", :type => :timestamp, :as => :streaming_available_at
+  has vod_online_be(:imdb_id), :as => :imdb_id_online
+  has "(select count(*) c from tokens where tokens.imdb_id = products.imdb_id and (datediff(now(),created_at) < 8))", :type => :integer, :as => :count_tokens
+  has "(select start_at svod_start from products p left join svod_dates sd on sd.imdb_id = p.imdb_id and (start_at > now() or end_at> now()) where p.imdb_id = products.imdb_id order by sd.start_at limit 1)", :as => :svod_start, :type => :timestamp
+  has "(select end_at svod_end from products p left join svod_dates sd on sd.imdb_id = p.imdb_id and (start_at > now() or end_at> now())  where p.imdb_id =products.imdb_id order by sd.start_at limit 1)", :as => :svod_end, :type => :timestamp
+  has "(select ifnull(end_at,ifnull((select end_at from svod_dates where imdb_id=products.imdb_id and svod_dates.start_at < date(now()) order by start_at desc limit 1),if(expire_at >= date(now()) and available_from <=date(now()),min(available_from),min(available_backcatalogue_from)))) svod_start from products p join `streaming_products` sp on p.imdb_id = sp.imdb_id and available =1 and status  in ('uploaded','soon','online_test_ok') and country ='BE' left join svod_dates sd on sd.imdb_id = p.imdb_id and ( start_at <= date(now()) and end_at>= date(now())) where p.imdb_id = products.imdb_id order by sd.start_at limit 1)", :as => :tvod_start, :type => :timestamp
+  has "(select if(end_at,null,ifnull((select start_at from svod_dates where imdb_id= products.imdb_id and svod_dates.start_at > date(now()) order by start_at desc limit 1),if(expire_at >= date(now()) and available_from <=date(now()) and DATEDIFF(available_backcatalogue_from,expire_at) > 6 ,min(expire_at),min(expire_backcatalogue_at)))) svod_end from products p join `streaming_products` sp on p.imdb_id = sp.imdb_id and available =1 and status  in ('uploaded','soon','online_test_ok') and country ='BE' left join svod_dates sd on sd.imdb_id = p.imdb_id and ( start_at <= date(now()) and end_at>= date(now())) where p.imdb_id = products.imdb_id order by sd.start_at limit 1)", :as => :tvod_end, :type => :timestamp
+  #has descriptions_fr.products_name,         :as => :descriptions_title_fr, :sortage => true
+  #has descriptions_nl.products_name,         :as => :descriptions_title_nl, :sortage => true
+  #has descriptions_en.products_name,         :as => :descriptions_title_en, :sortage => true
   #has "min(streaming_products.id)", :type => :integer, :as => :streaming_id
   #has "concat(GROUP_CONCAT(DISTINCT IFNULL(`products_languages`.`languages_id`, '0') SEPARATOR ','),',', GROUP_CONCAT(DISTINCT IFNULL(`products_undertitles`.`undertitles_id`, '0') SEPARATOR ','))", :type => :multi, :as => :speaker
   #to do
@@ -34,9 +44,9 @@ ThinkingSphinx::Index.define :product, :with => :active_record, :name => 'produc
   #has 'cast((SELECT count(*) FROM `wishlist_assigned` wa WHERE wa.products_id = products.products_id and date_assigned > date_sub(now(), INTERVAL 1 MONTH) group by wa.products_id) AS SIGNED)', :type => :integer, :as => :most_viewed
   #has 'cast((SELECT count(*) FROM `wishlist_assigned` wa WHERE wa.products_id = products.products_id and date_assigned > date_sub(now(), INTERVAL 1 YEAR) group by wa.products_id) AS SIGNED)', :type => :integer, :as => :most_viewed_last_year
   #
-  #has "(select products_name AS products_name_ord from products_description pd where  language_id = 1 and pd.products_id = products.products_id)", :type => :string, :as => :descriptions_title_fr, :sortable => true
-  #has "(select products_name AS products_name_ord from products_description pd where  language_id = 2 and pd.products_id = products.products_id)", :type => :string, :as => :descriptions_title_nl, :sortable => true
-  #has "(select products_name AS products_name_ord from products_description pd where  language_id = 3 and pd.products_id = products.products_id)", :type => :string, :as => :descriptions_title_en, :sortable => true
+  has "(select products_name AS products_name_ord from products_description pd where  language_id = 1 and pd.products_id = products.products_id)", :type => :string, :as => :descriptions_title_fr, :sortable => true
+  has "(select products_name AS products_name_ord from products_description pd where  language_id = 2 and pd.products_id = products.products_id)", :type => :string, :as => :descriptions_title_nl, :sortable => true
+  has "(select products_name AS products_name_ord from products_description pd where  language_id = 3 and pd.products_id = products.products_id)", :type => :string, :as => :descriptions_title_en, :sortable => true
   #
   #has "(select case 
   #        when (products_media = 'DVD' and streaming_products.imdb_id is not null) or (products_media = 'DVD' and vod_next = 1) then 2
@@ -91,15 +101,11 @@ ThinkingSphinx::Index.define :product, :with => :active_record, :name => 'produc
   #has 'concat(if(products_quantity>0 or (  select count(*) > 0 from products p
   #      join streaming_products on streaming_products.imdb_id = p.imdb_id
   #      where  ((country="NL" and streaming_products.status = "online_test_ok" and ((streaming_products.available_from <= date(now()) and streaming_products.expire_at >= date(now())) or (streaming_products.available_backcatalogue_from <= date(now()) and streaming_products.expire_backcatalogue_at >= date(now()))) and available = 1) or p.vod_next_nl=1 or streaming_products.imdb_id is null)  and p.products_id =  products.products_id),1,0),date_format(products_date_available,"%Y%m%d"))', :type => :integer, :as => :default_order_nl
-
-  has "case 
-  when  products_status = -1 then 99
-  when  products_status = -2 then 98
-  else products_status end", :type => :integer, :as => :state
+  
   set_property :enable_star => true
   set_property :min_prefix_len => 3
-  set_property :charset_type => 'sbcs'
-  set_property :charset_table => "0..9, A..Z->a..z, a..z, U+C0->a, U+C1->a, U+C2->a, U+C3->a, U+C4->a, U+C5->a, U+C6->a, U+C7->c, U+E7->c, U+C8->e, U+C9->e, U+CA->e, U+CB->e, U+CC->i, U+CD->i, U+CE->i, U+CF->i, U+D0->d, U+D1->n, U+D2->o, U+D3->o, U+D4->o, U+D5->o, U+D6->o, U+D8->o, U+D9->u, U+DA->u, U+DB->u, U+DC->u, U+DD->y, U+DE->t, U+DF->s, U+E0->a, U+E1->a, U+E2->a, U+E3->a, U+E4->a, U+E5->a, U+E6->a, U+E7->c, U+E7->c, U+E8->e, U+E9->e, U+EA->e, U+EB->e, U+EC->i, U+ED->i, U+EE->i, U+EF->i, U+F0->d, U+F1->n, U+F2->o, U+F3->o, U+F4->o, U+F5->o, U+F6->o, U+F8->o, U+F9->u, U+FA->u, U+FB->u, U+FC->u, U+FD->y, U+FE->t, U+FF->s,"
+  set_property :charset_type => 'utf-8'
+  #set_property :charset_table => "0..9, A..Z->a..z, a..z, U+C0->a, U+C1->a, U+C2->a, U+C3->a, U+C4->a, U+C5->a, U+C6->a, U+C7->c, U+E7->c, U+C8->e, U+C9->e, U+CA->e, U+CB->e, U+CC->i, U+CD->i, U+CE->i, U+CF->i, U+D0->d, U+D1->n, U+D2->o, U+D3->o, U+D4->o, U+D5->o, U+D6->o, U+D8->o, U+D9->u, U+DA->u, U+DB->u, U+DC->u, U+DD->y, U+DE->t, U+DF->s, U+E0->a, U+E1->a, U+E2->a, U+E3->a, U+E4->a, U+E5->a, U+E6->a, U+E7->c, U+E7->c, U+E8->e, U+E9->e, U+EA->e, U+EB->e, U+EC->i, U+ED->i, U+EE->i, U+EF->i, U+F0->d, U+F1->n, U+F2->o, U+F3->o, U+F4->o, U+F5->o, U+F6->o, U+F8->o, U+F9->u, U+FA->u, U+FB->u, U+FC->u, U+FD->y, U+FE->t, U+FF->s,"
   set_property :ignore_chars => "U+AD"
-  set_property :field_weights => {:descriptions_title => 10, :actors_name => 5, :director_name => 5, :studio_name => 4}
+  set_property :field_weights => {:descriptions_title => 10}
 end
