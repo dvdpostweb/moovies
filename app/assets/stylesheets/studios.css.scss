@@ -1,0 +1,110 @@
+#studios #maincontent {
+    float: right;
+     width: 713px;
+}
+
+
+#maincontent h2.ttl {
+    background: none repeat scroll 0 0 white;
+    font-size: 45px;
+    padding: 0 20px;
+}
+#maincontent {
+    float: right;
+}
+
+.osc, h1, h2, h3, h4, h5 {
+    font-family: 'Open Sans Condensed',sans-serif !important;
+}
+.center .studios {
+    background: none repeat scroll 0 0 white;
+    float: left;
+    height: 158px;
+    margin: 10px 10px 0 0;
+    padding: 0 14px 0 0;
+    width: 148px;
+}
+.center {
+    margin: 0 0 10px 10px;
+}
+.distributors {
+    border: 1px solid #9F9E98;
+    display: block;
+    height: 100px;
+    margin: 2px 0;
+    overflow: hidden;
+    width: 162px;
+}
+
+
+.distributors img:hover {
+    position: relative;
+    top: 0px;
+}
+
+.distributors img {
+    position: relative;
+    top: -100px;
+}
+.name {
+    font-size: 15px;
+}
+.name a {
+    font-size: 15px;
+    color:#9F9E98;
+}
+.center .more {
+    display: block;
+    text-align: right;
+    width: 164px;
+}
+p#letters {
+    color: #999999;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+}
+ul#search-studio {
+    list-style: none outside none;
+    margin: 0 -5px 0 0;
+    padding-top: 15px;
+}
+ul#search-studio li {
+    display: inline-block;
+    margin: 0 5px 5px 0;
+    min-height: 260px;
+    padding-left: 50px;
+    position: relative;
+    vertical-align: top;
+    width: 150px;
+}
+ul#search-studio li .letter {
+    color: black;
+    font-size: 2.5em;
+    font-weight: bold;
+    left: 0;
+    line-height: 19px;
+    position: absolute;
+    text-align: right;
+    top: 0;
+    width: 45px;
+}
+ul#search-studio li li, ul#search-performers li li {
+    line-height: normal;
+    margin: 0 0 5px;
+    min-height: 0 !important;
+    padding: 0;
+}
+#options a:hover, #options a.active, p#letters a:hover, ul#search-studio li li a:hover, ul#search-performers li li a:hover, p#filter a:hover, p#filter a.active {
+    color: #993399;
+     text-decoration: underline;
+}
+#options a, p#letters a, ul#search-studio li li a, ul#search-performers li li a, p#filter a {
+    text-decoration: none;
+}
+ul#search-studio li a.more, ul#search-performers a.more {
+    background: url("../images/link-arrow.gif") no-repeat scroll 0 0 transparent;
+    clear: both;
+    display: block;
+    padding-left: 16px;
+}

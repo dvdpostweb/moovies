@@ -1,6 +1,6 @@
 <% if filter && filter.used? %>
   <div id="filtered_content">
-    <div id="filter_title"><%= image_tag 'icon_filtres.gif' %> <%= t '.active' %></div>
+    <div id="filter_title"> <%= t '.active' %></div>
 
     <ul id="filtered" class="clearfix">
       <% if filter.media? && params[:kind] == :normal %>

@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
   def index
+    @body_id='categories'
     query = Category.roots.movies.vod.by_kind(params[:kind])
     @filter = view_context.get_current_filter({})
     @countries = ProductCountry.visible.order

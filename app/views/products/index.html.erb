@@ -1,8 +1,9 @@
 <!--   ==============   MAIN CONTENT   ==============   -->
 <div id="maincontent" >
+	<%= render :partial => 'layouts/filters', :locals => {:filter => @filter }%>
   <h2 class="ttl">Tous les films</h2>
   <%= render :partial => 'products/index/image', :locals => {:people => @people} if @people %>
-  <%= render :partial => 'layouts/filters', :locals => {:filter => @filter }%>
+  
   <!--   ==============   MOVIES   ==============   -->
   <% kind = params[:kind] == :normal ? nil : params[:kind] %>
   <% if cookies[:endless] == 'deactive' %>
