@@ -27,10 +27,10 @@ group :assets do
   gem 'uglifier'
   gem 'execjs'
   gem 'therubyracer', '0.10.0'
-  gem 'compass-rails'
 end
 
 gem 'sass-rails'
+gem 'compass-rails'
 
 
 # Use unicorn as the web server
