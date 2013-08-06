@@ -70,29 +70,29 @@ width: 200px;
 }
 
 #faq-info-wrap .infinity {
-    background: url("/assets/icon_infinity_step.gif") no-repeat scroll 12px -8px transparent;
+    background: url(image_path('icon_infinity_step.gif')) no-repeat scroll 12px -8px transparent;
 }
 
 #faq-info-wrap .plateform {
-    background: url("/assets/icon_plateform_step.gif") no-repeat scroll 12px 0 transparent;
+    background: url(image_path('icon_plateform_step.gif')) no-repeat scroll 12px 0 transparent;
 }
 
 #faq-info-wrap .engagement {
-    background: url("/assets/icon_engagement_step.gif") no-repeat scroll 12px -1px transparent;
+    background: url(image_path('icon_engagement_step.gif')) no-repeat scroll 12px -1px transparent;
     padding-top: 9px;
 }
 
 #faq-info-wrap .security {
-    background: url("/assets/icon_security_step.gif") no-repeat scroll 12px -1px transparent;
+    background: url(image_path('icon_security_step.gif')) no-repeat scroll 12px -1px transparent;
     padding-top: 9px;
 }
 #faq-info-wrap .cinema {
-    background: url("/assets/icon_ticket_step.gif") no-repeat scroll 12px -1px transparent;
+    background: url(image_path('icon_ticket_step.gif')) no-repeat scroll 12px -1px transparent;
     padding-top: 9px;
 }
 
 #faq-info-wrap .new {
-    background: url("/assets/icon_new_step.gif") no-repeat scroll 12px 0 transparent;
+    background: url(image_path('icon_new_step.gif')) no-repeat scroll 12px 0 transparent;
 }
 
 
@@ -103,13 +103,13 @@ width: 200px;
     padding: 14px;
 }
 .step_1.fr {
-    background: url("/assets/fr/steps.jpg") no-repeat scroll -5px 0px transparent;
+    background: url(image_path('fr/steps.jpg')) no-repeat scroll -5px 0px transparent;
 }
 .step_2.fr {
-    background: url("/assets/fr/steps.jpg") no-repeat scroll -5px -102px transparent;
+    background: url(image_path('fr/steps.jpg')) no-repeat scroll -5px -102px transparent;
 }
 .step_3.fr {
-    background: url("/assets/fr/steps.jpg") no-repeat scroll -5px -207px transparent;
+    background: url(image_path('fr/steps.jpg')) no-repeat scroll -5px -207px transparent;
 }
 .step {
     height: 56px;
@@ -153,11 +153,11 @@ width: 200px;
     width: 139px;
 }
 .step1_input_error, .step_input_error {
-    background: url("/assets/red-tick.png") no-repeat scroll left center transparent;
+    background: url(image_path('red-tick.png')) no-repeat scroll left center transparent;
 }
 
 .step1_input_ok, .step_input_ok {
-    background: url("/assets/green-tick.png") no-repeat scroll left center transparent;
+    background: url(image_path('green-tick.png')) no-repeat scroll left center transparent;
 }
 
 .padding_button td, .padding_button td img {
@@ -174,7 +174,7 @@ width: 200px;
 
 
 .securitypaiment {
-    background: url("/assets/lock.gif") no-repeat scroll 0 0 transparent;
+    background: url(image_path('lock.gif')) no-repeat scroll 0 0 transparent;
     border: 1px solid #81919F;
     color: #81919F;
     float: right;

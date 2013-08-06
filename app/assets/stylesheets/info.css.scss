@@ -3,6 +3,9 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import "compass/css3/images";
 
+/***************/
+/*   abo page  */
+/***************/
 #prices{
   padding:14px;
    color: #767672;
@@ -76,13 +79,12 @@ font-weight: bold;
 #prices .barre-gris {
     line-height: 32px;
 color: #3E3D40;
-    text-decoration: line-through;
 }
 
 
 #prices .barre-gris .cents {
-    font-size: 20px;
-      font-weight: normal;
+  font-size: 20px;
+  font-weight: normal;
 
 }
 
@@ -111,7 +113,7 @@ color: #3E3D40;
 }
 
 #prices .abo_infos li {
-    background-image: url("/assets/bullets_ok.png");
+    background-image: url(image_path('bullets_ok.png'));
     background-position: 0 0;
     background-repeat: no-repeat no-repeat;
     font-size: 17px;
@@ -135,7 +137,7 @@ color: #3E3D40;
 }
 
 #prices .tickets {
-    background-image: url("/assets/tickets_prices.png");
+    background-image: url(image_path('tickets_prices.png'));
     background-position: 0 0;
     background-repeat: no-repeat no-repeat;
     color: #3E3D40;
@@ -146,7 +148,7 @@ color: #3E3D40;
     padding-left: 83px;
 }
 #prices .adult_dvd{
-    background-image: url("/assets/tickets_prices.png");
+    background-image: url(image_path('tickets_prices.png'));
     background-position: 0 0;
     background-repeat: no-repeat no-repeat;
     color: #3E3D40;
@@ -157,7 +159,7 @@ color: #3E3D40;
     padding-left: 83px;
 }
 #prices .kids_dvd {
-    background-image: url("/assets/tickets_prices.png");
+    background-image: url(image_path('tickets_prices.png'));
     background-position: 0 0;
     background-repeat: no-repeat no-repeat;
     color: #3E3D40;
@@ -185,7 +187,7 @@ color: #3E3D40;
 }
 
 #prices #adult .abo_infos li {
-        background-image: url("/assets/bullets_ok_adult.png");
+        background-image: url(image_path('bullets_ok_adult.png'));
 
 }
 
@@ -265,14 +267,14 @@ color: #3E3D40;
 }
 
 
-#prices .green-tick { background-image: url("/assets/green-tick.png");
+#prices .green-tick { background-image: url(image_path('green-tick.png'));
     background-position: 46px 11px;
   background-repeat: no-repeat;
   
   
 }
 
-#prices .red-tick { background-image: url("/assets/red-tick.png");
+#prices .red-tick { background-image: url(image_path('red-tick.png'));
   background-position: 46px 11px;
   background-repeat: no-repeat;
   
@@ -329,3 +331,5 @@ color: #3E3D40;
     text-transform: uppercase;
     width: 130px;
 }
+
+/****abo page */

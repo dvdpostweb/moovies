@@ -21,7 +21,7 @@
 	line-height: 39px;
 	float: right;
 	margin: 0 8px 25px 0;
-	background: url(/assets/sprite.png) 0 0 no-repeat;
+	background: url(image_path('sprite.png')) 0 0 no-repeat;
 	text-align: center;
 	color: #fff;
 	text-transform: uppercase;
@@ -29,7 +29,7 @@
 	font-weight: bold;
 }
 #user-info-wrap {
-	background: #f0f3f5 url(/assets/user-info-bg.gif) 100% 0 repeat-y;
+	background: #f0f3f5 url(image_path('user-info-bg.gif')) 100% 0 repeat-y;
 	overflow: hidden;
 	padding-bottom: 15px;
 }
@@ -46,14 +46,14 @@
 	color: #a3c41b;
 	font-size: 14px;
 	padding-left: 23px;
-	background: url(/assets/sprite.png) -608px 0 no-repeat;
+	background: url(image_path('sprite.png')) -608px 0 no-repeat;
 }
 
 
 #user-info {
 	width: 620px;
 	padding: 20px 0 0 20px;
-	background: url(/assets/user-info-top-bg.gif) 0 0 repeat-x;
+	background: url(image_path('user-info-top-bg.gif')) 0 0 repeat-x;
 	float: left;
 }
 #user-info .left {
@@ -163,7 +163,7 @@ p.intro {
 	font-size: 14px;
 	color: #fff;
 	font-weight: bold;
-	background: url(/assets/sprite.png) -352px 0 no-repeat;
+	background: url(image_path('sprite.png')) -352px 0 no-repeat;
 }
 .comm-reaction a.ajouter {
 	margin-bottom: 3px;
@@ -180,7 +180,7 @@ a.plus-btn {
 	font-weight: bold;
 	font-size: 18px;
 	color: #96a1aa;
-	background: url(/assets/plus-btn.png) 0 0 no-repeat;
+	background: url(image_path('plus-btn.png')) 0 0 no-repeat;
 }
 
 
@@ -220,14 +220,14 @@ a.plus-btn {
     padding-top: 10px;
 }
 #services-wrap li a {
-    background: url("/assets/play.gif") no-repeat scroll 0 5px transparent;
+    background: url(image_path('play.gif')) no-repeat scroll 0 5px transparent;
     color: #98d321;
     font-size: 22px;
     font-weight: bold;
     padding-left: 27px;
 }
 #news.wrap h3 {
-    background: url("/assets/icon_news.gif") no-repeat scroll 3px -11px transparent;
+    background: url(image_path('icon_news.gif')) no-repeat scroll 3px -11px transparent;
     height: 55px;
     padding-left: 30px;
 }
@@ -249,7 +249,7 @@ a.plus-btn {
 	font-weight: bold;
 	padding-left: 27px;
 
-    background: url("/assets/play.gif") no-repeat scroll 0 5px transparent;
+    background: url(image_path('play.gif')) no-repeat scroll 0 5px transparent;
 }
 
 

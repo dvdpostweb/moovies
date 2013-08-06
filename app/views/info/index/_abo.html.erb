@@ -1,268 +1,180 @@
-<%= t '.title' %>
-abo page
 <div id ="prices">
-<h2>Découvrez la VOD illimitée avec <span>Plush Infinite</span></h2>
-<div class="abo_prices">
+  <h2><%= t '.unlimited'.html_safe %></h2>
+  <div class="abo_prices">
+    <div class="big_price">
+      <a href="#">
+        <span class="unite"> 0</span><span class="cents">,79</span>€ <%= t '.first_month' %>
+        <span class="normal_price"><%= t '.instead_of' %> <span class="barre-gris"><span class="unite">9</span><span class="cents">,95</span>€</span></span>
+      </a>
+    </div>
+    <div class="tickets"><%= t '.unlimited_text'.html_safe %></div>
+    <div class="subscribe" align="center"><a class="btn" href="#"><%= t('.try_now') %> </a></div>
+  </div>
+  <div class="abo_infos">
+    <h3><%= t('.discover_unlimited').html_safe %></h3>
+    <ul>
+      <li><strong><%= t('.discover_unlimited_desc1').html_safe %></strong></li>
+      <li><%= t('.discover_unlimited_desc2').html_safe %></li>
+      <li><%= t('.discover_unlimited_desc3').html_safe %></li>
+    </ul>
+    <div class="price_slogan">Autant que vous voulez, ou que vous voulez, quand vous voulez</div>
+  </div>
+  <div class="clearfix"></div>
+  <h2>Envie de gâter les enfants? Choisissez <span>Plush</span> + <span class="kid">Kids</span> Unlimited</h2>
+  <div class="abo_prices">
+    <div class="big_price">
+      <a href="#">
+        <span class="unite">1</span><span class="cents">,79</span>€ le premier mois
+        <span class="normal_price">au lieu de <span class="barre-gris"><span class="unite">14</span><span class="cents">,95</span>€</span></span>
+      </a>
+    </div>
 
-	<div class="big_price">
+    <div class="kids_dvd">xxx films et séries enfants en illimité pour moins que le prix d'un DVD</div>
+    <div class="subscribe" align="center"><a class="btn" href="#"><%= t('.try_now') %> </a></div>
+  </div>
+  <div class="abo_infos">
+    <h3>Découvrez <span>Plush</span> + <span class="kid">Kids</span> Unlimited</h3>
+    <ul>
+      <li><strong>200 films disponibles en illimité</strong></li>
+      <li>Accès à un catalogue de films à la carte</li>
+      <li>Nouveaux titres chaque semaines</li>
+      <li><span class="kid">150 séries tv pour enfants en illimité</span></li>
+    </ul>
+    <div class="price_slogan">Autant que vous voulez, ou que vous voulez, quand vous voulez</div>
+  </div>
+  <div class="clearfix"></div>
+  <p class="link_adult"><a href="#"> Afficher les abonnements qui donnent accès au contenu 18+</a></p>
 
-		<a href="#">
-										
-										<span class="unite"> 0</span><span class="cents">,79</span>€ le premier mois
-										<span class="normal_price">au lieu de <span class="barre-gris"><span class="unite">9</span><span class="cents">,95</span>€</span></span>
-								
-									</a></div>
-	
-	
+  <h2>Découvrez la VOD adulte illimitée avec <span class="adult">Plush 18+</span> Unlimited</h2>
+  <div id="adult">
+    <div class="abo_prices">
+      <div class="big_price"><a href="#"><span class="unite">19€</span><span class="cents">,95</span>€/mois</a></div>
+      <div class="adult_dvd">xxx films en illimité pour le prix d'un DVD XXX</div>
+      <div class="subscribe" align="center"><a class="btn" href="#"><%= t('.try_now') %></a></div>
+    </div>
+    <div class="abo_infos">
+      <h3>Découvrez <span class="adult">Plush 18+</span> Unlimited</h3>
+      <ul>
+        <li>	<strong>200 films 18+ disponibles en illimité</strong></li>
+        <li>200 films 18+ disponibles en illimité</li>
+        <li>De nouveaux titres disponibles chaque mois
+        </li>
+      </ul>
+      <div class="price_slogan">Autant que vous voulez, ou que vous voulez, quand vous voulez</div>
+    </div>
+  </div>
+  <div id="package_container">
+    <div class="main_pack_sec">
+      <div class="pack_head">
+        <h3> Envie de plus?</h3>
+      </div>
+      <div class="main_price_table">
+        <div class="list_sec">
+          <ul>
+            <li><a href="#"><span>Catalogue films classique en illimité</span><em></em></a></li>
+            <li><a href="#"><span>Accès aux catalogue films classique à la carte </span><em></em></a></li>
+            <li><a href="#"><span>Accès aux catalogue films adult à la carte</span><em></em></a></li>
+            <li><a href="#"><span>Catalogue films Adults <br/>en illimité</span><em></em></a></li>
+            <li><a href="#"><span>Catalogue series enfants <br/>en illimité</span><em></em></a></li>
+          </ul>
+        </div>
+        <div class="right_price_table">
+          <div class="basic_package">
+            <div class="head">
+              <span class="plush">Plush</span> <br/>Unlimited
+            </div>
+            <div class="prices_bg">
+              <span>9,95€<small>/mois</small></span>
+            </div>
+            <div class="price_sec">
+              <ul>
+                <li class="green-tick"></li>
+                <li class="green-tick"></li>
+                <li class="green-tick"></li>
+                <li class="red-tick"></li>
+                <li class="red-tick"></li>
+              </ul>
+            </div>
+            <div class="price_sign" align="center"><a class="btn" href="#"><%= t('.try_now') %></a></div>
+          </div>
+          <div class="basic_package">
+            <div class="head">
+              <span class="plush">Plush</span> & <span class="kid">Kids</span> Unlimited
+            </div>
+            <div class="prices_bg">
+              <a class="val_banner" href="#"></a>
+              <span>14,95€<small>/mois</small></span>
+            </div>
+            <div class="price_sec color">
+              <ul>
+                <li class="green-tick"></li>
+                <li class="green-tick"></li>
+                <li class="green-tick"></li>
+                <li class="red-tick"></li>
+                <li class="green-tick"></li>
+              </ul>
+            </div>
+            <div class="price_sign" align="center"><a class="btn" href="#"><%= t('.try_now') %></a></div>
+          </div>
+          <div class="basic_package">
+            <div class="head">
+              <span><span class="adult">18+ </span><br/>Unlimited</span>
+            </div>
+            <div class="prices_bg">
+              <span>19,95€<small>/mois</small></span>
+            </div>
+            <div class="price_sec">
+              <ul>
+                <li class="red-tick"></li>
+                <li class="red-tick"></li>
+                <li class="green-tick"></li>
+                <li class="green-tick"></li>
+                <li class="red-tick"></li>
+              </ul>
+            </div>
+            <div class="price_sign" align="center"><a class="btn" href="#"><%= t('.try_now') %></a></div>
+          </div>
 
-<div class="tickets">xxx films en illimité pour le prix<br/>
-	 d'un ticket de cinéma</div>
+          <div class="basic_package">
+            <div class="head">
+              <span class="plush">Plush</span> & <span class="adult">18+ </span>Unlimited 
+            </div>
+            <div class="prices_bg">
+              <span>28,95€<small>/mois</small></span>
+            </div>
+            <div class="price_sec">
+              <ul>
+                <li class="green-tick"></li>
+                <li class="green-tick"></li>
+                <li class="green-tick"></li>
+                <li class="green-tick"></li>
+                <li class="green-tick"></li>
+              </ul>
+            </div>
+            <div class="price_sign" align="center"><a class="btn" href="#"><%= t('.try_now') %> </a></div>
+          </div>
 
-<div class="subscribe" align="center"><a class="btn" href="#">
-	Essayez maintenant </a></div>
+          <div class="basic_package">
+            <div class="head">
+              <span class="plush">Plush</span> & <span class="kid">Kids </span> & <span class="adult">18+</span> Unlimited 
+            </div>
+            <div class="prices_bg">
+              <span>31,95€<small>/mois</small></span>
+            </div>
+            <div class="price_sec">
+              <ul>
+                <li><%= image_tag 'green-tick.png'%></li>
+                <li><%= image_tag 'green-tick.png'%></li>
+                <li><%= image_tag 'green-tick.png'%></li>
+                <li><%= image_tag 'green-tick.png'%></li>
+                <li><%= image_tag 'green-tick.png'%></li>
+              </ul>
+            </div>
+            <div class="price_sign" align="center"><a class="btn" href="#"><%= t('.try_now') %> </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<div class="abo_infos">
-	<h3>Découvrez <span>Plush Unlimited</span></h3>
-
-<ul>
-	<li>	<strong>200 films disponibles en illimité</strong></li>
-<li>Accès à un catalogue de films à la carte</li>
-<li>Nouveaux titres chaque semaines</li>
-</ul>
-
-
-<div class="price_slogan">Autant que vous voulez, ou que vous voulez, quand vous voulez</div>
-</div>
-<div class="clearfix"></div>
-<h2>Envie de gâter les enfants? Choisissez <span>Plush</span> + <span class="kid">Kids</span> Unlimited</h2>
-<div class="abo_prices">
-<div class="big_price">
-	
-	<a href="#">
-									<span class="unite"> 1</span><span class="cents">,79</span>€ le premier mois
-										<span class="normal_price">au lieu de <span class="barre-gris"><span class="unite">14</span><span class="cents">,95</span>€</span></span>
-									
-						
-								</a></div>
-
-<div class="kids_dvd">xxx films et séries enfants en illimité pour moins que le prix d'un DVD</div>
-<div class="subscribe" align="center"><a class="btn" href="#">
-	Essayez maintenant </a></div>
-</div>
-<div class="abo_infos">
-<h3>Découvrez <span>Plush</span> + <span class="kid">Kids</span> Unlimited</h3>
-
-<ul>
-<li>	<strong>200 films disponibles en illimité</strong></li>
-<li>Accès à un catalogue de films à la carte</li>
-<li>Nouveaux titres chaque semaines</li>
-<li><span class="kid">150 séries tv pour enfants en illimité</span></li>
-</ul>
-<div class="price_slogan">Autant que vous voulez, ou que vous voulez, quand vous voulez</div>
-</div>
-<div class="clearfix"></div>
-	<p class="link_adult"><a href="#"> Afficher les abonnements qui donnent accès au contenu 18+</a></p>
-	
-	<h2>Découvrez la VOD adulte illimitée avec <span class="adult">Plush 18+</span> Unlimited</h2>
-	<div id="adult">
-	<div class="abo_prices">
-	<div class="big_price">
-
-		<a href="#">
-										<span class="unite">19€</span><span class="cents">,95</span>€/mois
-											
-
-
-									</a></div>
-
-	<div class="adult_dvd">xxx films en illimité pour le prix d'un DVD XXX
-	</div>
-	<div class="subscribe" align="center"><a class="btn" href="#">
-		Essayez maintenant </a></div>
-	</div>
-	<div class="abo_infos">
-	<h3>Découvrez <span class="adult">Plush 18+</span> Unlimited</h3>
-
-	<ul>
-	<li>	<strong>200 films 18+ disponibles en illimité</strong></li>
-	<li>200 films 18+ disponibles en illimité</li>
-	<li>De nouveaux titres disponibles chaque mois
-	</li>
-	</ul>
-	<div class="price_slogan">Autant que vous voulez, ou que vous voulez, quand vous voulez</div>
-	</div>
-	</div>
-	
-	<div id="package_container">
-	                
-	                    <div class="main_pack_sec">
-	                    
-	                        <div class="pack_head">
-	                            <h3> Envie de plus?</h3>
-	                          
-	                        </div>
-	                      
-
-	                     
-	                        <div class="main_price_table">
-	                            <div class="list_sec">
-	                                <ul>
-	                                    <li>
-	                                        <a href="#"><span>Catalogue films classique en illimité</span><em></em></a>
-	                                    </li>
-	                                    <li>
-	                                        <a href="#"><span>Accès aux catalogue films classique à la carte </span><em></em></a>
-	                                    </li>
-	                                    <li>
-	                                        <a href="#"><span>Accès aux catalogue films adult à la carte
-										 </span><em></em></a>
-	                                    </li>
-	                                    <li>
-	                                        <a href="#"><span>Catalogue films Adults <br/>en illimité
-											</span><em></em></a>
-	                                    </li>
-	                                    <li>
-	                                        <a href="#"><span>Catalogue series enfants <br/>en illimité
-											</span><em></em></a>
-	                                    </li>
-	                                    
-	                                </ul>
-	                            </div>
-	                            <div class="right_price_table">
-	                                <div class="basic_package">
-	                                    <div class="head">
-	                                 <span class="plush">Plush</span> <br/>
-		Unlimited
-										
-	                                    </div>
-	                                    <div class="prices_bg">
-	                                        <span>9,95€<small>/mois</small></span>
-	                                    </div>
-	                                    <div class="price_sec">
-	                                        <ul>
-	                                           	 <ul>
-			                                            <li class="green-tick"></li>
-			                                         <li class="green-tick"></li>
-			                                          <li class="green-tick"></li>
-			                                     <li class="red-tick"></li>
-			                                          <li class="red-tick"></li>
-
-			                                        </ul>
-	                                        </ul>
-	                                    </div>
-	                                   	<div class="price_sign" align="center"><a class="btn" href="#">
-												Essayez maintenant </a>
-	                                    </div>
-	                                </div>
-	                                <div class="basic_package">
-	                                    <div class="head">
-	                                 <span class="plush">Plush</span> & <span class="kid">Kids</span> Unlimited
-										
-	                                    </div>
-	                                    <div class="prices_bg">
-	                                        <a class="val_banner" href="#"></a>
-	                                        <span>14,95€<small>/mois</small></span>
-	                                    </div>
-	                                    <div class="price_sec color">
-	                                        <ul>
-	                                           	 <ul>	   <li class="green-tick"></li>
-			                                         <li class="green-tick"></li>
-			                                          <li class="green-tick"></li>
-			                                     <li class="red-tick"></li>
-			                                            <li class="green-tick"></li>
-			                                            
-
-			                                        </ul>
-	                                        </ul>
-	                                    </div>
-	                                    <div class="price_sign" align="center"><a class="btn" href="#">
-												Essayez maintenant </a>
-	                                    </div>
-	                                </div>
-	                                <div class="basic_package">
-	                                    <div class="head">
-	                                        <span><span class="adult">18+ </span><br/>
-		Unlimited</span>
-	                                    </div>
-	                                    <div class="prices_bg">
-	                                        <span>19,95€<small>/mois</small></span>
-	                                    </div>
-	                                    <div class="price_sec">
-	                                        <ul>
-	                                             <ul>
-		
-		
-			                                           	 <ul>	    <li class="red-tick"></li>
-					                                       <li class="red-tick"></li>
-					                                          <li class="green-tick"></li>
-					 <li class="green-tick"></li>
-					                                     <li class="red-tick"></li>
-					                                           
-					
-			                                            
-
-			                                        </ul>
-	                                        </ul>
-	                                    </div>
-	                                    <div class="price_sign" align="center"><a class="btn" href="#">
-												Essayez maintenant </a>
-	                                    </div>
-	                                </div>
-	
-									<div class="basic_package">
-	                                    <div class="head">
-	                                         <span class="plush">Plush</span> & <span class="adult">18+ </span>Unlimited 
-	                                    </div>
-	                                    <div class="prices_bg">
-	                                        <span>28,95€<small>/mois</small></span>
-	                                    </div>
-	                                    <div class="price_sec">
-	                                        <ul>
-	                                             <ul>
-			                                           <li class="green-tick"></li>
-			                                         <li class="green-tick"></li>
-			                                          <li class="green-tick"></li>
-			                                 <li class="green-tick"></li>
-			                                       <li class="green-tick"></li>
-													 
-
-			                                        </ul>
-	                                        </ul>
-	                                    </div>
-	                                    <div class="price_sign" align="center"><a class="btn" href="#">
-												Essayez maintenant </a>
-	                                    </div>
-	                                </div>
-	
-									<div class="basic_package">
-	                                    <div class="head">
-	                                        <span class="plush">Plush</span> & <span class="kid">Kids </span>
-											 & <span class="adult">18+</span> Unlimited 
-	                                    </div>
-	                                    <div class="prices_bg">
-	                                        <span>31,95€<small>/mois</small></span>
-	                                    </div>
-	                                    <div class="price_sec">
-	                                        <ul>
-	                                            <li><img src="/assets/green-tick.png"></li>
-	                                            <li><img src="/assets/green-tick.png"></li>
-	                                           <li><img src="/assets/green-tick.png"></li>
-	                                      <li><img src="/assets/green-tick.png"></li>
-	                                          <li><img src="/assets/green-tick.png"></li>
-	                                            
-	                                        </ul>
-	                                    </div>
-	                                   	<div class="price_sign" align="center"><a class="btn" href="#">
-												Essayez maintenant </a>
-	                                    </div>
-	                                </div>
-	                            </div>
-	                        </div>
-	                      
-	                       
-
-	                    </div>
-	                   
-	                </div>
-</div>
-

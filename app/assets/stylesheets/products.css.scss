@@ -211,7 +211,7 @@
 }
 
 #btns-wrap a#trailer {
-  background-image: url("/assets/button_trailer.png");
+  background-image: url(image_path('button_trailer.png'));
      background-repeat: no-repeat;
      color: #C3C4C0;
      display: block;
@@ -1022,17 +1022,17 @@
   padding:0;
 }
 .oters .lang li.dark {
-  background: url("/assets/public.png") repeat scroll 1px 35px transparent;
+  background: url(image_path('public.png')) repeat scroll 1px 35px transparent;
   height: 40px;
   width: 40px;
 }
 .oters .lang li.red {
-  background: url("/assets/audio.png") repeat scroll 1px 33px transparent;
+  background: url(image_path('audio.png')) repeat scroll 1px 33px transparent;
   height: 40px;
   width: 40px;
 }
 .oters .lang li.gray {
-  background: url("/assets/sub_titles.png") repeat scroll 0 33px transparent;
+  background: url(image_path('sub_titles.png')) repeat scroll 0 33px transparent;
   color: #C3C4C0;
   height: 40px;
   width: 40px;
@@ -1192,7 +1192,7 @@ ul.grid li {
   display: none !important;
 }
 .oters .lang li.audio_more, .oters .lang li.subtitle_more {
-background: url(/assets/plus.png);
+background: url(image_path("plus.png"));
 width: 16px;
 height: 16px;
 float: left;
@@ -1204,7 +1204,7 @@ margin: 4px 0 0;
 
 #filter_title {
   
- background: url("/assets/search.png") no-repeat scroll 0 4px transparent;     color: #9F9E98;
+ background: url(image_path('search.png')) no-repeat scroll 0 4px transparent;     color: #9F9E98;
      font-size: 1.6em;
      height: 18px;
      line-height: 24px;

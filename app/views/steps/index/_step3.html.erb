@@ -1,104 +1,120 @@
 
-    <div id="step_wrap">
-      <div id="step_container">
-	<div class="step_form">
-        <div class="step_3 step fr" align="center"></div>
-        
-        <h3>Votre abonnement:</h3>
+<div id="step_wrap">
+  <div id="step_container">
+    <div class="step_form">
+      <div class="step_3 step fr" align="center"></div>
+
+      <h3>Votre abonnement:</h3>
 
 
-		<table width="400" height="55" cellspacing="0" cellpadding="0" border="0" bgcolor="#FFFFFF" style="margin-bottom:10px;color:#212A31;">
-		<tbody><tr>
-		<td style="padding-left:10px; ">Abonnement choisi: </td>
-		<td style="padding-right:10px;padding-left:10px; ">Plush Infinite à 9,95€/mois
-		</td>
-		</tr>
-	
-
-		<tr>
-		<td style="padding-left:10px;"><strong>Votre promotion:</strong> </td>
-		<td style="padding-right:10px;padding-left:10px; "><strong>Plush infinite à 0,79€ le premier mois
-		</strong></td>
-		</tr>
-		</tbody></table>
-		<h3>Moyen de Paiement:</h3>
-			<div class="choice">
-				<table>
-					<tr>
-						<td>	<input type="radio" value="ogonevisa" name="payment" id="visa"></td>
-							<td align="center" valign="middle"><img src="/assets/visa_icon.png"><p>Visa</p></td>
-								<td><input type="radio" value="ogonemaster" name="payment" id="master"></td>
-									<td align="center" valign="middle"><img src="/assets/master_card_icon.png"><p>Master Card </p> </td>
-										<td><input type="radio" value="ogoneamex" name="payment" id="amex"></td>
-										<td align="center" valign="middle"><img src="/assets/american-express_icon.png"><p>American Express</p></td>
+      <table width="400" height="55" cellspacing="0" cellpadding="0" border="0" bgcolor="#FFFFFF" style="margin-bottom:10px;color:#212A31;">
+        <tbody><tr>
+          <td style="padding-left:10px; ">Abonnement choisi: </td>
+          <td style="padding-right:10px;padding-left:10px; ">Plush Infinite à 9,95€/mois
+          </td>
+        </tr>
 
 
-					</tr>
-					</table>
+        <tr>
+          <td style="padding-left:10px;"><strong>Votre promotion:</strong> </td>
+          <td style="padding-right:10px;padding-left:10px; "><strong>Plush infinite à 0,79€ le premier mois
+          </strong></td>
+        </tr>
+      </tbody></table>
+      <h3>Moyen de Paiement:</h3>
+      <div class="choice">
+        <table>
+          <tr>
+            <td>	
+              <input type="radio" value="ogonevisa" name="payment" id="visa">
+            </td>
+            <td align="center" valign="middle">
+              <%= image_tag "visa_icon.png" %><p>Visa</p>
+            </td>
+            <td><input type="radio" value="ogonemaster" name="payment" id="master"></td>
+            <td align="center" valign="middle">
+              <%= image_tag "master_card_icon.png" %>
+              <p>Master Card </p>
+            </td>
+            <td>
+              <input type="radio" value="ogoneamex" name="payment" id="amex">
+            </td>
+            <td align="center" valign="middle">
+              <%= image_tag "american-express_icon.png" %>
+              <p>American Express</p>
+            </td>
+          </tr>
+        </table>
 
-	</div>
-		<div class="securitypaiment">Paiement sécurisé en ligne</div>
-	 <div class="clearfix"></div>
-          	<table cellpadding="2" class="padding_button">
-				<tr>
-					<td>
-						<a class="sub_black_link2" href="/logoff.php">Retour</a>
-					</td>
-					<td>
-						&nbsp;<img  src="/assets/bg-top-nav-sep.png"/>&nbsp;
-					</td>
-					<td>
-						<input type="submit" name ="sent" value= "CONFIRMER" class="promo_button" />
-					</td>
-				</tr>
-			</table>
-   </div>
-        <p align="center" style="padding-top:15px;"><a href=""><img src="/assets/fr/info_tel.jpg" border="0" /></a></p>
-     
       </div>
-
-
-      <div class="faq-container">
-        <h3>VOS GARANTIES:
-		
-		</h3>
-        <div id="faq-info-wrap" class="infinity">
-        
-          
-
-		<div id="faq-info-wrap" class="cinema">
-            <h4> Catalogue illimité
-			</h4>
-            <div class="clearfix">
-              <p >Accédez à une sélection de xxxx films par mois en illimité et ce pour le prix d'un seul ticket de cinéma. </p>
-
-            </div>
-
-          <div id="faq-info-wrap" class="engagement ">
-            <h4> Sans engagement
-			</h4>
-            <div class="clearfix">
-              <p >	Vous pouvez arrêter votre abonnement quand vous voulez. Il suffit de contacter notre service client par téléphone, au <strong>numéro gratuit 0800/95 990</strong> ou au  <strong>numéro payant 0032 2 5036811</strong> pour les appels effectués hors de la Belgique, au plus tard un jour avant la prolongation mensuelle de votre abonnement. 
-			 </p>
-             
-            </div>
-          </div>
-          <div id="faq-info-wrap" class="security">
-            <h4>100% sécurisé</h4>
-            <div class="clearfix">
-              <p>	Toutes les informations que vous nous communiquez, comme par exemple les informations de paiement, sont encryptées et protégées
-			 </p>
-            </div>
-          </div>
-          
-          
-          
-     
-        </div>
-      </div>
+      <div class="securitypaiment">Paiement sécurisé en ligne</div>
       <div class="clearfix"></div>
-
+      <table cellpadding="2" class="padding_button">
+        <tr>
+          <td>
+            <a class="sub_black_link2" href="/logoff.php">Retour</a>
+          </td>
+          <td>
+            &nbsp;
+            <%= image_tag "bg-top-nav-sep.png" %>
+            &nbsp;
+          </td>
+          <td>
+            <input type="submit" name ="sent" value= "CONFIRMER" class="promo_button" />
+          </td>
+        </tr>
+      </table>
     </div>
+    <p align="center" style="padding-top:15px;">
+      <a href="">
+        <%= image_tag("#{I18n.locale}/info_tel.jpg") %>
+      </a>
+    </p>
+
   </div>
+
+
+  <div class="faq-container">
+    <h3>VOS GARANTIES:
+
+    </h3>
+    <div id="faq-info-wrap" class="infinity">
+
+
+
+      <div id="faq-info-wrap" class="cinema">
+        <h4> Catalogue illimité
+        </h4>
+        <div class="clearfix">
+          <p >Accédez à une sélection de xxxx films par mois en illimité et ce pour le prix d'un seul ticket de cinéma. </p>
+
+        </div>
+
+        <div id="faq-info-wrap" class="engagement ">
+          <h4> Sans engagement
+          </h4>
+          <div class="clearfix">
+            <p >	Vous pouvez arrêter votre abonnement quand vous voulez. Il suffit de contacter notre service client par téléphone, au <strong>numéro gratuit 0800/95 990</strong> ou au  <strong>numéro payant 0032 2 5036811</strong> pour les appels effectués hors de la Belgique, au plus tard un jour avant la prolongation mensuelle de votre abonnement. 
+            </p>
+
+          </div>
+        </div>
+        <div id="faq-info-wrap" class="security">
+          <h4>100% sécurisé</h4>
+          <div class="clearfix">
+            <p>	Toutes les informations que vous nous communiquez, comme par exemple les informations de paiement, sont encryptées et protégées
+            </p>
+          </div>
+        </div>
+
+
+
+
+      </div>
+    </div>
+    <div class="clearfix"></div>
+
+  </div>
+</div>
 
 
