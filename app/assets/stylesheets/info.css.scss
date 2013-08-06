@@ -260,10 +260,9 @@ color: #3E3D40;
     height: 61px;
     text-align: center;
 }
-#prices .list_sec ul li a span {
+#prices .list_sec ul li a {
     color: #767672;
     float: left;
-  
 }
 
 
@@ -331,5 +330,8 @@ color: #3E3D40;
     text-transform: uppercase;
     width: 130px;
 }
-
+.link_adult
+{
+	cursor:pointer;
+}
 /****abo page */
