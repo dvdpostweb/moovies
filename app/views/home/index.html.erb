@@ -19,7 +19,9 @@
   <div class="wrap" id="vod-ppv">
     <h3><%= t '.unlinmited' %></h3>
     <center>
-      <a href="#"> <img width="200" height="95" src="/assets/infinity.gif" alt="info abo"> </a>
+      <a href="#">
+        <%= image_tag "infinity.gif", :size => '200x95' %>
+      </a>
     </center>
     • <%= t '.unlinmited1' %><br />
     • <%= t '.unlinmited2' %><br />
@@ -31,7 +33,7 @@
   <div class="wrap" id="alacarte">
     <h3><%= t '.tvod' %></h3>
     <center>
-      <a href="#"><img width="200" height="95" src="/assets/alacarte.gif" alt="info vod"> </a>
+      <a href="#"><%= image_tag "alacarte.gif", :size => '200x95' %></a>
     </center>
     • <%= t '.tvod1' %><br />
     • <%= t '.tvod2' %><br />
@@ -43,7 +45,7 @@
   <div class="wrap" id="apps">
     <h3><%= t '.multi' %></h3>
     <center>
-      <a href="#"> <img width="200" height="95" src="/assets/icon_plateforme.gif" alt="info vod"> </a>
+      <a href="#"><%= image_tag "icon_plateforme.gif", :size => '200x95' %></a>
     </center>
     • <%= t '.multi1' %><br />
     • <%= t '.multi2' %><br />

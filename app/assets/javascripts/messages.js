@@ -32,13 +32,13 @@ $(function() {
      $('#new_message_btn').attr("disabled", "disabled"); 
      $('#new_ticket').submit();
      
-     setTimeout(function() { $("#new_message_btn").parent().html("<div style='height:34px'><img src='/images/ajax-loader.gif' /></div>"); }, 500);
+     setTimeout(function() { $("#new_message_btn").parent().html("<div style='height:34px'><img src='/assets/ajax-loader.gif' /></div>"); }, 500);
   })
   $("#reply").on("click", function() {
      $('#reply').attr("disabled", "disabled"); 
      $('#new_reply').submit();
      
-     setTimeout(function() { $("#reply").parent().html("<p align='rigth'><img src='/images/ajax-loader.gif' /></p>"); }, 500);
+     setTimeout(function() { $("#reply").parent().html("<p align='rigth'><img src='/assets/ajax-loader.gif' /></p>"); }, 500);
   })
   $('#sort_combo').change(function() {sort_change()});
   $(".datepicker").datepicker({

@@ -103,7 +103,7 @@ ul#search-studio li li, ul#search-performers li li {
     text-decoration: none;
 }
 ul#search-studio li a.more, ul#search-performers a.more {
-    background: url("../images/link-arrow.gif") no-repeat scroll 0 0 transparent;
+    background: url(image_path("link-arrow.gif")) no-repeat scroll 0 0 transparent;
     clear: both;
     display: block;
     padding-left: 16px;

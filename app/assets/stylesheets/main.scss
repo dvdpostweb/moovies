@@ -170,7 +170,7 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {border:0;padding:0;
 	height: 39px;
 }
 #header h1 a {
-	background: url("/assets/logo.png") repeat scroll 0 0 transparent;
+	background: url(image_path('logo.png')) repeat scroll 0 0 transparent;
 	height: 86px;
 	width: 224px;
 }
@@ -278,7 +278,7 @@ a#nav7
 
 
 #filters h3 {
-    background: url("/assets/search.png") no-repeat scroll 0 8px transparent;
+    background: url(image_path('search.png')) no-repeat scroll 0 8px transparent;
     color: #9F9E98;
     font-size: 1.6em;
     height: 18px;
@@ -289,7 +289,7 @@ a#nav7
 }
 
 #filters li a {
-	background: url("/assets/filters-arrows.png") no-repeat scroll 5px 2px transparent;
+	background: url(image_path('filters-arrows.png')) no-repeat scroll 5px 2px transparent;
 	border-bottom: 1px solid #9f9e98;
 	color: #9f9e98;
 	display: block;
@@ -303,7 +303,7 @@ a#nav7
 }
 
 #filters li.open a {
-	background: url("/assets/filters-arrows.png") no-repeat scroll 4px -18px transparent;
+	background: url(image_path('filters-arrows.png')) no-repeat scroll 4px -18px transparent;
 }
 
 .li_submit
@@ -567,7 +567,7 @@ div.flash_error {
 	vertical-align: top;
 }
 #add_to_vod {
-	background: url(image_path('vodbtn.png"')) repeat scroll 0 -2px transparent;
+	background: url(image_path('vodbtn.png')) repeat scroll 0 -2px transparent;
 	border-style: hidden;
 	color: white;
 	cursor: pointer;
@@ -714,7 +714,7 @@ div.flash_error {
 
 
 #watch {
-	background-image: url("/assets/button_streaming.gif");
+	background-image: url(image_path('button_streaming.gif'));
 	background-position: 0 0;
 	background-repeat: no-repeat no-repeat;
 	color: white;
@@ -728,7 +728,7 @@ div.flash_error {
 }
 
 #new-alacarte-wrap #watch {
-	background-image: url("/assets/button_streamingppv.gif");
+	background-image: url(image_path('button_streamingppv.gif'));
 	font-size: 14px;
 	font-weight: bold;
 	height: 32px;
@@ -740,7 +740,7 @@ div.flash_error {
 }
 /*
 #alacarte{
-background-image: url("/assets/button_streamingppv.gif");
+background-image: url(image_path('button_streamingppv.gif"'));
 font-size: 14px;
 font-weight: bold;
 height: 32px;
@@ -753,7 +753,7 @@ color:#fff;
 
 
 #add {
-	background-image: url("/assets/button_add.gif");
+	background-image: url(image_path('button_add.gif'));
 	background-position: 0 0;
 	background-repeat: no-repeat no-repeat;
 	color: white;
@@ -775,7 +775,7 @@ ul.dropdown li {
 	width:120px;
 }
 .dropdown {
-	background-image: url("/assets/bg_subcats.png");
+	background-image: url(image_path('bg_subcats.png'));
 	height: 65px;
 	left: 599px;
 	padding: 10px;
