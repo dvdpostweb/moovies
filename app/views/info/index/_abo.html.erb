@@ -3,8 +3,8 @@
   <div class="abo_prices">
     <div class="big_price">
       <a href="#">
-        <span class="unite"> 0</span><span class="cents">,79</span>€ <%= t '.first_month' %>
-        <span class="normal_price"><%= t '.instead_of' %> <span class="barre-gris"><span class="unite">9</span><span class="cents">,95</span>€</span></span>
+        <%= float_html(@discount_unlimited.promo_price) %>€ <%= t '.first_month' %>
+        <span class="normal_price"><%= t '.instead_of' %> <span class="barre-gris"><%= float_html(@discount_unlimited.subscription_type.product.price) %>€</span></span>
       </a>
     </div>
     <div class="tickets"><%= t '.unlimited_text'.html_safe %></div>
@@ -13,78 +13,77 @@
   <div class="abo_infos">
     <h3><%= t('.discover_unlimited').html_safe %></h3>
     <ul>
-      <li><strong><%= t('.discover_unlimited_desc1').html_safe %></strong></li>
-      <li><%= t('.discover_unlimited_desc2').html_safe %></li>
-      <li><%= t('.discover_unlimited_desc3').html_safe %></li>
+      <li><strong><%= t('.discover_unlimited_desc1') %></strong></li>
+      <li><%= t('.discover_unlimited_desc2') %></li>
+      <li><%= t('.discover_unlimited_desc3') %></li>
     </ul>
-    <div class="price_slogan">Autant que vous voulez, ou que vous voulez, quand vous voulez</div>
+    <div class="price_slogan"><%= t('.price_slogan') %></div>
   </div>
   <div class="clearfix"></div>
-  <h2>Envie de gâter les enfants? Choisissez <span>Plush</span> + <span class="kid">Kids</span> Unlimited</h2>
+  <h2><%= t('.kid') %></h2>
   <div class="abo_prices">
     <div class="big_price">
       <a href="#">
-        <span class="unite">1</span><span class="cents">,79</span>€ le premier mois
-        <span class="normal_price">au lieu de <span class="barre-gris"><span class="unite">14</span><span class="cents">,95</span>€</span></span>
+        <%= float_html('1.79') %>€ <%= t '.first_month' %>
+        <span class="normal_price"><%= t '.instead_of' %> <span class="barre-gris"><%= float_html('14.95') %>€</span></span>
       </a>
     </div>
 
-    <div class="kids_dvd">xxx films et séries enfants en illimité pour moins que le prix d'un DVD</div>
+    <div class="kids_dvd"><%= t '.kid_text'.html_safe %></div>
     <div class="subscribe" align="center"><a class="btn" href="#"><%= t('.try_now') %> </a></div>
   </div>
   <div class="abo_infos">
-    <h3>Découvrez <span>Plush</span> + <span class="kid">Kids</span> Unlimited</h3>
+    <h3><%= t '.discover_kid'.html_safe %></h3>
     <ul>
-      <li><strong>200 films disponibles en illimité</strong></li>
-      <li>Accès à un catalogue de films à la carte</li>
-      <li>Nouveaux titres chaque semaines</li>
-      <li><span class="kid">150 séries tv pour enfants en illimité</span></li>
+      <li><strong><%= t('.discover_kid_desc1') %></strong></li>
+      <li><%= t('.discover_kid_desc2') %></li>
+      <li><%= t('.discover_kid_desc3') %></li>
+      <li><span class="kid"><%= t('.discover_kid_desc4') %></span></li>
     </ul>
-    <div class="price_slogan">Autant que vous voulez, ou que vous voulez, quand vous voulez</div>
+    <div class="price_slogan"><%= t('.price_slogan') %></div>
   </div>
   <div class="clearfix"></div>
-  <p class="link_adult"><a href="#"> Afficher les abonnements qui donnent accès au contenu 18+</a></p>
-
-  <h2>Découvrez la VOD adulte illimitée avec <span class="adult">Plush 18+</span> Unlimited</h2>
-  <div id="adult">
+  <p class="link_adult"><%= t('.show_adult') %></p>
+  <div id="tab_adult" style="display:none">
+    <h2><%= t('.adult'.html_safe) %></h2>
+    <div id="adult">
     <div class="abo_prices">
-      <div class="big_price"><a href="#"><span class="unite">19€</span><span class="cents">,95</span>€/mois</a></div>
-      <div class="adult_dvd">xxx films en illimité pour le prix d'un DVD XXX</div>
+      <div class="big_price"><a href="#"><%= float_html('19.95') %>€<%= t('per_month') %></a></div>
+      <div class="adult_dvd"><%= t('.adult_text') %></div>
       <div class="subscribe" align="center"><a class="btn" href="#"><%= t('.try_now') %></a></div>
     </div>
     <div class="abo_infos">
-      <h3>Découvrez <span class="adult">Plush 18+</span> Unlimited</h3>
+      <h3><%= t('.discover_adult') %></h3>
       <ul>
-        <li>	<strong>200 films 18+ disponibles en illimité</strong></li>
-        <li>200 films 18+ disponibles en illimité</li>
-        <li>De nouveaux titres disponibles chaque mois
-        </li>
+        <li><strong><%= t('.discover_adult_desc1') %></strong></li>
+        <li><%= t('.discover_adult_desc2') %></li>
+        <li><%= t('.discover_adult_desc3') %></li>
       </ul>
-      <div class="price_slogan">Autant que vous voulez, ou que vous voulez, quand vous voulez</div>
+      <div class="price_slogan"><%= t('.price_slogan') %></div>
     </div>
   </div>
-  <div id="package_container">
+    <div id="package_container">
     <div class="main_pack_sec">
       <div class="pack_head">
-        <h3> Envie de plus?</h3>
+        <h3><%= t('.more') %></h3>
       </div>
       <div class="main_price_table">
         <div class="list_sec">
           <ul>
-            <li><a href="#"><span>Catalogue films classique en illimité</span><em></em></a></li>
-            <li><a href="#"><span>Accès aux catalogue films classique à la carte </span><em></em></a></li>
-            <li><a href="#"><span>Accès aux catalogue films adult à la carte</span><em></em></a></li>
-            <li><a href="#"><span>Catalogue films Adults <br/>en illimité</span><em></em></a></li>
-            <li><a href="#"><span>Catalogue series enfants <br/>en illimité</span><em></em></a></li>
+            <li><%= link_to t('.cat_svod'), products_path(:package => Moovies.packages.invert[1], :kind => nil) %></li>
+            <li><%= link_to t('.cat_tvod'), products_path(:package => Moovies.packages.invert[2], :kind => nil) %></li>
+            <li><%= link_to t('.cat_kid'), products_path(:package => Moovies.packages.invert[3], :kind => nil) %></li>
+            <li><%= link_to t('.cat_svod_adult'), products_path(:package => Moovies.packages.invert[4], :kind => :adult) %></li>
+            <li><%= link_to t('.cat_tvod_adult'), products_path(:package => Moovies.packages.invert[5], :kind => :adult) %></li>
           </ul>
         </div>
         <div class="right_price_table">
           <div class="basic_package">
             <div class="head">
-              <span class="plush">Plush</span> <br/>Unlimited
+              <span class="plush">Plush</span> & <%= t('.tab_unlimited').html_safe %>
             </div>
             <div class="prices_bg">
-              <span>9,95€<small>/mois</small></span>
+              <span>9,95€<small><%= t('.per_month') %></small></span>
             </div>
             <div class="price_sec">
               <ul>
@@ -99,11 +98,11 @@
           </div>
           <div class="basic_package">
             <div class="head">
-              <span class="plush">Plush</span> & <span class="kid">Kids</span> Unlimited
+              <span class="plush">Plush</span> & <%= t('.tab_kid').html_safe %>
             </div>
             <div class="prices_bg">
               <a class="val_banner" href="#"></a>
-              <span>14,95€<small>/mois</small></span>
+              <span>14,95€<small><%= t('.per_month') %></small></span>
             </div>
             <div class="price_sec color">
               <ul>
@@ -118,10 +117,10 @@
           </div>
           <div class="basic_package">
             <div class="head">
-              <span><span class="adult">18+ </span><br/>Unlimited</span>
+              <span><%= t('.tab_adult_only').html_safe %></span>
             </div>
             <div class="prices_bg">
-              <span>19,95€<small>/mois</small></span>
+              <span>19,95€<small><%= t('.per_month') %></small></span>
             </div>
             <div class="price_sec">
               <ul>
@@ -137,10 +136,10 @@
 
           <div class="basic_package">
             <div class="head">
-              <span class="plush">Plush</span> & <span class="adult">18+ </span>Unlimited 
+              <span class="plush">Plush</span> & <%= t('.tab_adult').html_safe %>
             </div>
             <div class="prices_bg">
-              <span>28,95€<small>/mois</small></span>
+              <span>28,95€<small><%= t('.per_month') %></small></span>
             </div>
             <div class="price_sec">
               <ul>
@@ -148,7 +147,7 @@
                 <li class="green-tick"></li>
                 <li class="green-tick"></li>
                 <li class="green-tick"></li>
-                <li class="green-tick"></li>
+                <li class="red-tick"></li>
               </ul>
             </div>
             <div class="price_sign" align="center"><a class="btn" href="#"><%= t('.try_now') %> </a></div>
@@ -156,18 +155,18 @@
 
           <div class="basic_package">
             <div class="head">
-              <span class="plush">Plush</span> & <span class="kid">Kids </span> & <span class="adult">18+</span> Unlimited 
+              <span class="plush">Plush</span> & <%= t('.tab_all').html_safe %> 
             </div>
             <div class="prices_bg">
-              <span>31,95€<small>/mois</small></span>
+              <span>31,95€<small><%= t('.per_month') %></small></span>
             </div>
             <div class="price_sec">
               <ul>
-                <li><%= image_tag 'green-tick.png'%></li>
-                <li><%= image_tag 'green-tick.png'%></li>
-                <li><%= image_tag 'green-tick.png'%></li>
-                <li><%= image_tag 'green-tick.png'%></li>
-                <li><%= image_tag 'green-tick.png'%></li>
+                <li class="green-tick"></li>
+                <li class="green-tick"></li>
+                <li class="green-tick"></li>
+                <li class="green-tick"></li>
+                <li class="green-tick"></li>
               </ul>
             </div>
             <div class="price_sign" align="center"><a class="btn" href="#"><%= t('.try_now') %> </a>
@@ -176,5 +175,6 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
 </div>
