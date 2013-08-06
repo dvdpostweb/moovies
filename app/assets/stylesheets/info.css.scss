@@ -1,3 +1,331 @@
 // Place all the styles related to the info controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "compass/css3/images";
+
+#prices{
+  padding:14px;
+   color: #767672;
+   font-size:14px;
+  
+}
+
+#prices .abo_prices{
+ float:left;
+ border: 1px solid #C4C4C0;
+ width:440px;
+ padding:10px 10px 20px 10px;
+   margin-bottom:30px;
+}
+
+#prices .abo_infos {
+    border: 1px solid #C4C4C0;
+    float: right;
+    margin-bottom: 30px;
+    min-height: 182px;
+    padding: 10px;
+    width: 440px;
+}
+
+#prices h2 span, #prices h3 span{
+  color:#98D321;
+font-weight: bold;
+}
+
+#prices span.kid {
+  color:#79BFEF;
+     font-weight: bold;
+}
+#prices span.plush {
+  color:#98D321;
+     font-weight: bold;
+}
+#prices span.adult{
+  color:#993399;
+     font-weight: bold;
+}
+#prices h2{
+  font-size:32px;
+     padding-bottom: 8px;
+}
+#prices h3 {
+    font-size: 23px;
+    padding-bottom: 4px;
+}
+
+#prices .unite {
+    font-size: 52px;
+    font-weight: bold;
+}
+#prices .cents {
+    font-size: 44px;
+    line-height: 12px;
+      font-weight: bold;
+}
+
+#prices .big_price a {
+    color:#98D321;
+   	font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 26px;
+    outline: medium none;
+    text-decoration: none;
+}
+#prices .big_price{
+  margin-top:-10px;
+}
+#prices .barre-gris {
+    line-height: 32px;
+color: #3E3D40;
+    text-decoration: line-through;
+}
+
+
+#prices .barre-gris .cents {
+    font-size: 20px;
+      font-weight: normal;
+
+}
+
+#prices .barre-gris .unite {
+    font-size: 24px;
+    font-weight: normal;
+}
+#prices .subscribe a.btn {
+    background-color: #D55023; 
+    @include filter-gradient(#EE8419, #E26417, vertical);
+    @include background-image(linear-gradient(top, #EE8419 0%,#E26417 100%));
+    border: 1px solid #D55023;
+    border-radius: 4px 4px 4px 4px;
+    bottom: 18px;
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.8) inset;
+    color: white;
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    height: 43px;
+    line-height: 47px;
+    text-align: center;
+    text-shadow: 0 -1px 0 #D83C14;
+    text-transform: uppercase;
+    width: 251px;
+}
+
+#prices .abo_infos li {
+    background-image: url("/assets/bullets_ok.png");
+    background-position: 0 0;
+    background-repeat: no-repeat no-repeat;
+    font-size: 17px;
+    height: 26px;
+    line-height: 27px;
+    padding-left: 32px;
+}
+
+
+
+#prices .abo_infos p {
+  padding-top:10px;
+    padding-bottom:10px;
+    font-size: 18px;
+}
+#prices .normal_price {
+    color: #3E3D40;
+    font-size: 22px;
+    font-weight: normal;
+    padding-left: 5px;
+}
+
+#prices .tickets {
+    background-image: url("/assets/tickets_prices.png");
+    background-position: 0 0;
+    background-repeat: no-repeat no-repeat;
+    color: #3E3D40;
+    font-size: 18px;
+    font-weight: normal;
+    height: 66px;
+    line-height: 22px;
+    padding-left: 83px;
+}
+#prices .adult_dvd{
+    background-image: url("/assets/tickets_prices.png");
+    background-position: 0 0;
+    background-repeat: no-repeat no-repeat;
+    color: #3E3D40;
+    font-size: 18px;
+    font-weight: normal;
+    height: 66px;
+    line-height: 22px;
+    padding-left: 83px;
+}
+#prices .kids_dvd {
+    background-image: url("/assets/tickets_prices.png");
+    background-position: 0 0;
+    background-repeat: no-repeat no-repeat;
+    color: #3E3D40;
+    font-size: 18px;
+    font-weight: normal;
+    height: 85px;
+    line-height: 22px;
+    padding-left: 83px;
+}
+
+#prices .price_slogan {
+    font-size: 17px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    padding-top: 10px;
+   
+}
+#prices .link_adult a {
+     font-weight: bold;
+     text-decoration:underline;
+     font-size:16px;
+  
+
+   
+}
+
+#prices #adult .abo_infos li {
+        background-image: url("/assets/bullets_ok_adult.png");
+
+}
+
+#prices #adult  .big_price a {
+      color:#993399;
+    
+}
+
+#prices .prices_bg span {
+  font-family: 'Open Sans Condensed', sans-serif;
+ 	
+    color: #767672;
+    float: left;
+    font-size: 32px;
+
+  
+    text-align: center;
+    width: 100%;
+}
+#prices .prices_bg {
+    
+    float: left;
+    height: 50px;
+    text-align: center;
+    width: 100%;
+}
+
+#prices .price_sec ul li {
+    border-bottom: 1px solid #CECEBC;
+    float: left;
+    height: 41px;
+    padding: 2px 0 8px;
+    text-align: center;
+    width: 100%;
+}
+#prices .list_sec ul {
+    float: left;
+    list-style: none outside none;
+    width: 100%;
+}
+
+#prices .price_sec ul li em {
+    display: block;
+    line-height: 20px;
+    padding-top: 6px;
+}
+#prices .price_sec {
+    float: left;
+    padding: 0 6px;
+    width: 124px;
+}
+#prices .list_sec {
+    display: inline;
+    float: left;
+    margin: 113px 0 0;
+    width: 160px;
+}
+#prices .list_sec ul li {
+    border-bottom: 1px solid #ABAB99;
+    float: left;
+    height: 33px;
+    padding: 9px 0;
+    width: 100%;
+}
+#prices .head {
+    border-bottom: 2px solid #CECEBC;
+    display: block;
+    font-family: "Open Sans Condensed",sans-serif;
+    font-size: 20px;
+    height: 61px;
+    text-align: center;
+}
+#prices .list_sec ul li a span {
+    color: #767672;
+    float: left;
+  
+}
+
+
+#prices .green-tick { background-image: url("/assets/green-tick.png");
+    background-position: 46px 11px;
+  background-repeat: no-repeat;
+  
+  
+}
+
+#prices .red-tick { background-image: url("/assets/red-tick.png");
+  background-position: 46px 11px;
+  background-repeat: no-repeat;
+  
+  
+}
+#prices .main_price_table, .basic_package, .head, .price_sign input.submit {
+    border-radius: 3px 3px 3px 3px;
+    position: relative;
+}
+#prices .main_price_table {
+    display: inline;
+    float: left;
+    margin-top: 16px;
+    position: relative;
+    width: 100%;
+}
+#prices .main_pack_sec {
+    float: left;
+    width: 100%;
+}
+
+
+
+#prices .basic_package {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #9F9E98;
+    border-radius: 4px 4px 4px 4px;
+    display: inline;
+    float: left;
+    height: auto !important;
+    margin-left: 10px;
+    width: 144px;
+}
+
+#prices .price_sign a.btn {
+    background-color: #D55023; 
+    @include filter-gradient(#EE8419, #E26417, vertical);
+    @include background-image(linear-gradient(top, #EE8419 0%,#E26417 100%));
+    
+    border: 1px solid #D55023;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.8) inset;
+    color: white;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: bold;
+    height: 34px;
+    line-height: 15px;
+    margin-bottom: 12px;
+    margin-top: 12px;
+    padding-top: 8px;
+    text-align: center;
+    text-shadow: 0 -1px 0 #D83C14;
+    text-transform: uppercase;
+    width: 130px;
+}

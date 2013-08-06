@@ -1,3 +1,6 @@
+@import "compass/css3/images";
+
+
 .faq-container {
     
     border: 1px solid #98D321;
@@ -22,8 +25,10 @@
 
 
 #step_wrap .promo_button {
-    background-color: #9ECA3B;
-    background-image: -moz-linear-gradient(center top , #ACD341, #88BD32);
+    background-color: #9ECA3B; 
+    @include filter-gradient(#ACD341, #88BD32, vertical);
+    @include background-image(linear-gradient(top, #ACD341 0%,#88BD32 100%));
+    
     background-repeat: repeat-x;
     border: 1px solid #7EA613;
     border-radius: 4px 4px 4px 4px;
