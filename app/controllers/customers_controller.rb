@@ -41,7 +41,7 @@ class CustomersController < ApplicationController
       if request.xhr?
         render :action => :edit, :layout => false
       else
-        render :layout => false
+        render :template => "steps/index", :locals => {:page_name => 'step2'}
       end
     end
   end

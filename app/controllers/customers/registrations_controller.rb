@@ -16,10 +16,6 @@ class Customers::RegistrationsController < Devise::RegistrationsController
     super
   end
 
-  def create
-    
-    super
-  end
   protected
 
   def after_inactive_sign_up_path_for(resource)
