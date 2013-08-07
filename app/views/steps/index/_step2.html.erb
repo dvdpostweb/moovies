@@ -79,20 +79,19 @@
 
               <tr>
                 <td align="right">
-                  <span class="explain_text">Code Postal <span class="asterisk_step">*</span></span>
+                  <span class="explain_text"><%= t('.zip') %> <span class="asterisk_step">*</span></span>
                 </td>
                 <td>
-                  <input class="new_step_input" type="text" autocomplete="off" name="postcode" id="postcode" value="">
+                  <%= af.text_field :postal_code, :class => :new_step_input %>
                 </td>
                 <td align="left" class="explain_text">
                   <div id='check_zip' class="step_input_ok"><div id="text"></div> </div>
                 </td>
               </tr>
               <tr>
-                <td align="right"><span class="explain_text">Commune <span class="asterisk_step">*</span></span></td>
+                <td align="right"><span class="explain_text"><%= t('.city') %> <span class="asterisk_step">*</span></span></td>
                 <td>
-
-                  <input class="new_step_input" type="text" name="city" id="city" value="">
+                  <%= af.text_field :city, :class => :new_step_input %>
                 </td>
                 <td align="left" class="explain_text">
                   <div id='check_city' class=""><div id="text"></div> </div>
@@ -100,12 +99,10 @@
               </tr>
               <tr height="45">
                 <td align="right">
-                  <span class="explain_text">Pays <span class="asterisk_step">*</span></span>
+                  <span class="explain_text"><%= t('.country') %> <span class="asterisk_step">*</span></span>
                 </td>
                 <td>
-                  <select class="new_step_select"  name="country" id="country" >
-                    <option value="21" selected="selected">Belgique</option><option value="124" >Luxembourg</option><option value="150" >Pays-bas</option>        
-                  </select>
+                  <%= af.select :entry_country_id, @countries.collect{|country| [country.name, country.id]}, :class => :new_step_select %>
                 </td>
                 <td align="right" class="explain_text">
                   <div id='check_country' class=""><div id="text"></div> </div>
@@ -114,10 +111,10 @@
               <% end %>
               <tr>
                 <td align="right">
-                  <span class="explain_text">Téléphone</span>
+                  <span class="explain_text"><%= t('.phone')%></span>
                 </td>
                 <td>
-                  <input class="new_step_input" type="text" autocomplete="off" name="phone" id="phone" value="">
+                  <%= f.text_field :phone, :class => :new_step_input %>
                 </td>
                 <td align="left" class="explain_text">
                   <div id='check_phone' class="step_input_error"><div id="text">Insérez un numéro correct</div> </div>
@@ -125,12 +122,15 @@
               </tr>               
               <tr>
                 <td>&nbsp;</td>
-                <td  class="asterisk_explain_step" colspan="2">*Champs requis</td>
+                <td  class="asterisk_explain_step" colspan="2">*<%= t('.require') %></td>
               </tr>
               <tr>
                 <td></td>
                 <td colspan="2" align="left">
-                  <p><INPUT type="checkbox"  name="conditions" value='1'><a class="blue_link smaller" href="http://public.dvdpost.com/fr/info/conditions" target="new">J'ai lu et accepté les conditions générales de vente <br /></a></p>
+                  <p><INPUT type="checkbox"  name="conditions" value='1'>
+                    <%= link_to t('.conditions'), root_path, :class => "blue_link, smaller" %>
+                    <br />
+                  </p>
                 </td>
               </tr>
               <tr> 
@@ -140,7 +140,7 @@
               <tr>
                 <td></td>
                 <td colspan='2'>
-                  <input type="submit" name ="sent" value= "CONFIRMER" class="promo_button" />
+                  <input type="submit" name ="sent" value= "<%= t('.confirm') %>" class="promo_button" />
                 </td>
               </tr>
             </table>
