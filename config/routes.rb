@@ -3,7 +3,7 @@ Moovies::Application.routes.draw do
   root :to => 'home#index'
   scope ':locale/(:kind)', :locale => /en|fr|nl/, :kind => /normal|adult/ do
     root :to => 'home#index'
-    devise_for :customers, :controllers => { :registrations => "customers/registrations" }
+    devise_for :customers, :controllers => { :registrations => "customers/registrations", :confirmations => "customers/confirmations" }
     resources :customers do
       match 'newsletter' => 'customers#newsletter', :only => [:update]
       #mail_copy 'mail_copy', :controller => :customers, :action => :mail_copy, :only => [:update]
