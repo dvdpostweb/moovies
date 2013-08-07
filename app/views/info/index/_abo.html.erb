@@ -20,6 +20,7 @@
     <div class="price_slogan"><%= t('.price_slogan') %></div>
   </div>
   <div class="clearfix"></div>
+  <% if @kid_visible %>
   <h2><%= t('.kid') %></h2>
   <div class="abo_prices">
     <div class="big_price">
@@ -42,6 +43,7 @@
     </ul>
     <div class="price_slogan"><%= t('.price_slogan') %></div>
   </div>
+  <% end %>
   <div class="clearfix"></div>
   <p class="link_adult"><%= t('.show_adult') %></p>
   <div id="tab_adult" style="display:none">
@@ -67,6 +69,7 @@
       <div class="price_slogan"><%= t('.price_slogan') %></div>
     </div>
   </div>
+  
     <div id="package_container">
     <div class="main_pack_sec">
       <div class="pack_head">
@@ -77,7 +80,7 @@
           <ul>
             <li><%= link_to t('.cat_svod'), products_path(:package => Moovies.packages.invert[1], :kind => nil) %></li>
             <li><%= link_to t('.cat_tvod'), products_path(:package => Moovies.packages.invert[2], :kind => nil) %></li>
-            <li><%= link_to t('.cat_kid'), products_path(:package => Moovies.packages.invert[3], :kind => nil) %></li>
+            <% if @kid_visible %><li><%= link_to t('.cat_kid'), products_path(:package => Moovies.packages.invert[3], :kind => nil) %></li> <% end %>
             <li><%= link_to t('.cat_svod_adult'), products_path(:package => Moovies.packages.invert[4], :kind => :adult) %></li>
             <li><%= link_to t('.cat_tvod_adult'), products_path(:package => Moovies.packages.invert[5], :kind => :adult) %></li>
           </ul>
@@ -94,13 +97,14 @@
               <ul>
                 <li class="green-tick"></li>
                 <li class="green-tick"></li>
-                <li class="green-tick"></li>
+                <% if @kid_visible %><li class="green-tick"></li><% end %>
                 <li class="red-tick"></li>
                 <li class="red-tick"></li>
               </ul>
             </div>
             <div class="price_sign" align="center"><%= link_to t('.try_now'), new_customer_registration_path(:code => @discount_svod.name), :class => "btn" %></div>
           </div>
+          <% if @kid_visible %>
           <div class="basic_package">
             <div class="head">
               <span class="plush">Plush</span> & <%= t('.tab_kid').html_safe %>
@@ -120,6 +124,7 @@
             </div>
             <div class="price_sign" align="center"><%= link_to t('.try_now'), new_customer_registration_path(:code => @discount_kids.name), :class => "btn" %></div>
           </div>
+          <% end %>
           <div class="basic_package">
             <div class="head">
               <span><%= t('.tab_adult_only').html_safe %></span>
@@ -131,7 +136,7 @@
               <ul>
                 <li class="red-tick"></li>
                 <li class="red-tick"></li>
-                <li class="green-tick"></li>
+                <% if @kid_visible %><li class="green-tick"></li><% end %>
                 <li class="green-tick"></li>
                 <li class="red-tick"></li>
               </ul>
@@ -150,7 +155,7 @@
               <ul>
                 <li class="green-tick"></li>
                 <li class="green-tick"></li>
-                <li class="green-tick"></li>
+                <% if @kid_visible %><li class="green-tick"></li><% end %>
                 <li class="green-tick"></li>
                 <li class="red-tick"></li>
               </ul>
@@ -169,7 +174,7 @@
               <ul>
                 <li class="green-tick"></li>
                 <li class="green-tick"></li>
-                <li class="green-tick"></li>
+                <% if @kid_visible %><li class="green-tick"></li><% end %>
                 <li class="green-tick"></li>
                 <li class="green-tick"></li>
               </ul>
