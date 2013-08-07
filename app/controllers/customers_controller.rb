@@ -12,24 +12,22 @@ class CustomersController < ApplicationController
   end
 
   def edit
-    current_customer.build_address
-    
     if request.xhr?
       render :layout => false
     end
   end
 
   def update
+    current_customer.build_address unless current_customer.address
+    
     if params[:customer][:address_attributes]
+      Rails.logger.debug { "@@@ici" }
       params[:customer][:address_attributes][:first_name] = params[:customer][:first_name]
       params[:customer][:address_attributes][:last_name] = params[:customer][:last_name]
       params[:customer][:address_attributes][:gender] = params[:customer][:gender]
       params[:customer][:address_attributes][:customers_id] = current_customer.to_param
     end
     @customer = current_customer
-    if params[:customer][:birthday]
-      params[:customer][:birthday] = "#{params[:date][:year]}-#{params[:date][:month]}-#{params[:date][:day]}"
-    end
     if @customer.update_attributes(params[:customer])
       flash[:notice] = t(:customer_modify)
       
@@ -38,7 +36,8 @@ class CustomersController < ApplicationController
       else
         redirect_to customer_path
       end
-    else
+    else  
+      @countries = Country.all
       if request.xhr?
         render :action => :edit, :layout => false
       else
