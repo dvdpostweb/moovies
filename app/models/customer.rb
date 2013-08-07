@@ -33,7 +33,8 @@ class Customer < ActiveRecord::Base
   validates_uniqueness_of :email, :case_sensitive => false, :on => :update
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :newsletter, :newsletter_parnter, :last_name, :first_name, :language, :address_id, :phone, :birthday, :gender, :abo_type_id, :customers_abo_type, :auto_stop, :customers_abo_auto_stop_next_reconduction, :next_abo_type_id, :customers_next_abo_type, :promo_type, :activation_discount_code_type, :promo_id, :nickname
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :newsletter, :newsletter_parnter, :last_name, :first_name, :language, :address_id, :phone, :birthday, :gender, :abo_type_id, :customers_abo_type, :auto_stop, :customers_abo_auto_stop_next_reconduction, :next_abo_type_id, :customers_next_abo_type, :promo_type, :activation_discount_code_type, :promo_id, :nickname, :code
+  attr_writer :code
   belongs_to :subscription_type, :foreign_key => :customers_abo_type
   belongs_to :next_subscription_type, :class_name => 'SubscriptionType', :foreign_key => :customers_next_abo_type
   belongs_to :address, :foreign_key => :customers_id, :foreign_key => [:customers_id, :customers_default_address_id]
@@ -68,7 +69,24 @@ class Customer < ActiveRecord::Base
 
   has_and_belongs_to_many :seen_products, :class_name => 'Product', :join_table => :products_seen, :uniq => true
   #to do has_and_belongs_to_many :roles, :uniq => true
-
+  def code=(code)
+    @discount = Discount.by_name(code).available.first
+    @activation = Activation.by_name(code).available.first
+    if @discount.nil? && @activation.nil?
+      @discount = Discount.by_name(Moovies.discount["svod_fr"]).first
+    end
+    if @discount
+      self.promo_type = 'D'
+      self.promo_id = @discount.id
+      self.abo_type_id = @discount.abo_type_id
+      self.next_abo_type_id = @discount.next_abo_type_id
+    elsif @activation
+      self.promo_type = 'A'
+      self.promo_id = @discount.id
+      self.abo_type_id = @activation.abo_type_id
+      self.next_abo_type_id = @activation.next_abo_type_id
+    end
+  end
     def email_change
       if self.email != self.new_email
         self.is_email_valid = 1
