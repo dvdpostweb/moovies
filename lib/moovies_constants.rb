@@ -174,5 +174,25 @@ module Moovies
         :lu => 'products_lu_core'
       })
     end
+
+    def discount
+     HashWithIndifferentAccess.new.merge({
+       :svod_fr => 1,
+       :svod_nl => 2,
+       :svod_en => 3,
+       :kid_fr => 4,
+       :kid_nl => 5,
+       :kid_en => 6,
+       :adult_fr => 7,
+       :adult_nl => 8,
+       :adult_en => 9,
+       :classic_adult_fr => 9,
+       :classic_adult_nl => 9,
+       :classic_adult_en => 9,
+       :all_fr => 9,
+       :all_nl => 9,
+       :all_en => 9,
+      })
+    end
   end
 end
