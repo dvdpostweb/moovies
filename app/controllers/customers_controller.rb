@@ -12,7 +12,8 @@ class CustomersController < ApplicationController
   end
 
   def edit
-    @customer = current_customer
+    current_customer.build_address
+    
     if request.xhr?
       render :layout => false
     end
