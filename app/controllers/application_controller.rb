@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_locale
   before_filter :get_wishlist_source
   before_filter :init
+  before_filter :redirect_after_registration
   
   layout :layout_by_resource
 
@@ -15,6 +16,30 @@ class ApplicationController < ActionController::Base
     end
   end
 
+
+  def redirect_after_registration(path = nil)
+    if current_customer && current_customer.step != 100
+      if current_customer.step.to_i == 31
+        if (params['controller'] == 'steps' && params[:page_name] == 'step2') || (params[:controller] == 'customers' && params[:action] == 'update')
+        else
+          redirect_to step_path(:page_name => 'step2')
+        end
+      elsif current_customer.step.to_i == 33
+        if (params['controller'] == 'steps' && params[:page_name] == 'step3') || (params[:controller] == 'ogones' && params[:action] == 'show')
+        else
+          redirect_to step_path(:page_name => 'step3')
+        end
+      elsif current_customer.step.to_i == 90
+        #to do 
+        #if (params['controller'] == 'steps' && params[:page_name].to_i == 5) || (params['controller'] == 'steps' && params[:id].to_i == 1 && params[:action] == 'update')
+        #else
+        #  redirect_to step_path(:id => 5)
+        #end
+      elsif path
+        redirect_to path
+      end
+    end
+  end
 
   protected
 

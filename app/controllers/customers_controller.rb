@@ -21,7 +21,6 @@ class CustomersController < ApplicationController
     current_customer.build_address unless current_customer.address
     
     if params[:customer][:address_attributes]
-      Rails.logger.debug { "@@@ici" }
       params[:customer][:address_attributes][:first_name] = params[:customer][:first_name]
       params[:customer][:address_attributes][:last_name] = params[:customer][:last_name]
       params[:customer][:address_attributes][:gender] = params[:customer][:gender]
@@ -30,18 +29,24 @@ class CustomersController < ApplicationController
     @customer = current_customer
     if @customer.update_attributes(params[:customer])
       flash[:notice] = t(:customer_modify)
-      
+      if current_customer.step == 31
+        current_customer.update_column(:customers_registration_step, 33)
+      end
       if request.xhr?
         render :layout => false
       else
-        redirect_to customer_path
+        redirect_after_registration(customer_path)
       end
     else  
       @countries = Country.all
       if request.xhr?
         render :action => :edit, :layout => false
       else
-        render :template => "steps/index", :locals => {:page_name => 'step2'}
+        if current_customer.step == 31
+          render :template => "steps/index", :locals => {:page_name => 'step2'}
+        elsif current_customer.step == 33
+          render :template => "steps/index", :locals => {:page_name => 'step3'}
+        end
       end
     end
   end
