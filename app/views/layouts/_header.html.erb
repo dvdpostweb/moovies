@@ -36,7 +36,7 @@
   <!--   ==============   HEADER   ==============   -->
   <div id="header" >
     <h1>
-      <%= link_to t('.tagline'), root_path(:logo => 1), :class => 'f-btn' %>
+      <%= link_to t('.tagline'), params[:kind] == :adult ? products_path(:kind => :adult, :package => Moovies.packages.invert[5]) : root_path, :class => 'f-btn' %>
     </h1>
     <%= render :partial => 'layouts/menu' %>
   </div>

@@ -38,7 +38,7 @@ class Customer < ActiveRecord::Base
   attr_writer :code
   belongs_to :subscription_type, :foreign_key => :customers_abo_type
   belongs_to :next_subscription_type, :class_name => 'SubscriptionType', :foreign_key => :customers_next_abo_type
-  belongs_to :address, :foreign_key => :customers_id, :foreign_key => [:customers_id, :customers_default_address_id]
+  belongs_to :address, :foreign_key => [:customers_id, :customers_default_address_id]
   belongs_to :subscription_payment_method, :foreign_key => :customers_abo_payment_method
   belongs_to :discount, :foreign_key => :activation_discount_code_id
   belongs_to :activation, :foreign_key => :activation_discount_code_id

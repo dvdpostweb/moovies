@@ -1,6 +1,6 @@
 class Address < ActiveRecord::Base
   self.table_name = :address_book
-  self.primary_keys = [:customers_id, :address_book_id]
+  self.primary_keys = :customers_id, :address_book_id
 
   before_save :replace_semicolon
   before_create :set_default

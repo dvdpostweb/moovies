@@ -162,7 +162,7 @@
             </div>
             <div class="price_sign" align="center"><%= link_to t('.try_now'), new_customer_registration_path(:code => @discount_classic_adult.name), :class => "btn" %></div>
           </div>
-
+          <% if @kid_visible %>
           <div class="basic_package">
             <div class="head">
               <span class="plush">Plush</span> & <%= t('.tab_all').html_safe %> 
@@ -182,6 +182,7 @@
             <div class="price_sign" align="center"><%= link_to t('.try_now'), new_customer_registration_path(:code => @discount_all.name), :class => "btn" %></a>
             </div>
           </div>
+          <% end %>
         </div>
       </div>
     </div>

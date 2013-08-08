@@ -69,6 +69,7 @@ GEM
     capistrano-ext (1.2.1)
       capistrano (>= 1.0.0)
     chunky_png (1.2.8)
+    client_side_validations (3.2.5)
     coderay (1.0.9)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -216,6 +217,7 @@ DEPENDENCIES
   binding_of_caller
   capistrano (~> 2.15.5)
   capistrano-ext
+  client_side_validations
   coffee-rails
   compass-rails
   composite_primary_keys (~> 5.0.13)

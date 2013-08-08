@@ -19,7 +19,9 @@
     <li class="list"><%= link_to t('.tvod_categories'), categories_path(:package => Moovies.packages.invert[2]) %></li>
     <li class="list"><%= link_to t('.tvod_all'), products_path(:package => Moovies.packages.invert[2]) %></li>
   </ul>
+  <% if @kid_visible %>
   <%= link_to t('.kids'), products_path(:package => Moovies.packages[:kids]), :class => "ttl kids" %>
+  <% end %>
   <%= link_to t('.adult'), products_path(:kind => :adult, :package => Moovies.packages.invert[5]), :class => "ttl adult" %>
   <% else %>
   <%= link_to t('.classic_svod'), products_path(:kind => :normal, :package => Moovies.packages.invert[1]), :class => "ttl infinity" %>
