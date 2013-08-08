@@ -3,13 +3,13 @@
     <div class="step_form">
       <div class="step_2 step fr" align="center"></div>
       <h3><%= t('title') %></h3>
+      <%= form_for(current_customer, :url => customer_path(:id => current_customer.to_param), :id => :form_account, :html => {:method => :put, id: 'edit_customer' }, :validate => true) do |f| %>
       <table width="630" border="0" cellspacing="0" cellpadding="0" class="form_step">
-        <%= form_for(current_customer, :url => customer_path(:id => current_customer.to_param), :id => :form_account, :html => {:method => :put}) do |f| %>
           <fieldset>
             <table class='step2form' cellpadding="2" cellspacing="0" border="0" align="center" width="100%">
               <tr>
                 <td colspan="3">
-                  <%= error_messages_for :customer %>
+                   <%= error_messages_for :customer %>
                 </td>
               </tr>
               <tr>
@@ -22,7 +22,7 @@
               </tr>
               <tr>
                 <td align="right">
-                  <span class="explain_text"><%= t '.first_name' %> <span class="asterisk_step">*</span></span>							
+                  <span class="explain_text"><%= f.label :first_name %> <span class="asterisk_step">*</span></span>							
                 </td>
                 <td>
                   <%= f.text_field :first_name, :class => :new_step_input %>
@@ -107,7 +107,8 @@
                 <td align="right" class="explain_text">
                   <div id='check_country' class=""><div id="text"></div> </div>
                 </td>
-              </tr>  
+              </tr>
+              <%= af.hidden_field :id, :value => af.object.id %>
               <% end %>
               <tr>
                 <td align="right">
@@ -144,10 +145,9 @@
                 </td>
               </tr>
             </table>
-
           </fieldset>
-        <% end %>
       </table>
+      <% end %>
     </div>
     <p align="center" style="padding-top:15px;">
       <a href="">
