@@ -3,24 +3,32 @@ $(function() {
 		$('#tab_adult').toggle()
 	})
 	$('#step2 #customer_customers_dob_3i').on('change', birth_change)
+	$('#step2 #customer_customers_dob_2i').on('change', birth_change)
+	$('#step2 #customer_customers_dob_1i').on('change', birth_change)
+	$('#step2 #edit_customer').on('submit', function (){
+	  i
+	})
 	function birth_change(event)
   {
-  	if($('#step2 #customer_customers_dob_3i').val() || $('#step2 #customer_customers_dob_2i').val()  || $('#step2 #customer_customers_dob_1i').val() )
+  	if($('#step2 #customer_customers_dob_3i').val() == '' || $('#step2 #customer_customers_dob_2i').val() == '' || $('#step2 #customer_customers_dob_1i').val()== '' )
   	{
-  	  
+  	  $(this).parent().children('.message').html($('#date_invalid').html())
+  	  $(this).parent().addClass('field_with_errors2')
   	}
   	else
   	{
-  	  age = calcul_age($('#day').attr('value')+'/'+$('#month').attr('value')+'/'+$('#year').attr('value'))
+  	  date = $('#step2 #customer_customers_dob_3i').val()+'/'+$('#step2 #customer_customers_dob_2i').val()+'/'+$('#step2 #customer_customers_dob_1i').val()
+  	  age = calcul_age(date)
+  	  
   	  if (age >= 18)
   	  {
-  		  $('#check_birthday').addClass('step_input_ok').removeClass('step_input_error');
-  		  $('#check_birthday').children('div').html(' ');
+  		  $(this).parent().children('.message').html('')
+  		  $(this).parent().removeClass('field_with_errors2')
   	  }
   	  else
   	  {
-  	    $('#check_birthday').addClass('step_input_error').removeClass('step_input_ok');
-    		$('#check_birthday').children('div').html($('#error_minor').html());
+  	    $(this).parent().children('.message').html($('#date_kid').html())
+  	    $(this).parent().addClass('field_with_errors2')
   	  }
   	}
   }

@@ -41,7 +41,10 @@
                   <span class="explain_text"><%= t('birthday') %> <span class="asterisk_step">*</span></span>
                 </td>
                 <td>
+                  <div>
                   <%= f.date_select :customers_dob, :start_year => 18.years.ago.year, :end_year => 100.years.ago.year, use_month_numbers: true, prompt: { day: t('.day'), month: t('.month'), year: t('.year') }, :order => [:day, :month, :year] %>
+                  <label for="customer_birthday" class="message"></label>
+                  </div>
                 </td>
               </tr>
               <%= f.fields_for :address do |af| %>
@@ -124,3 +127,5 @@
   </div>
   <%= render :partial => 'devise/registrations/faq2' %>
 </div>
+<div style="display:none" id ='date_invalid'><%= t('.date_invalid') %></div>
+<div style="display:none" id ='date_kid'><%= t('.date_kid') %></div>
