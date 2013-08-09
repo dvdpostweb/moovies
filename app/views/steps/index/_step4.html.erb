@@ -1,32 +1,16 @@
 <div class="container clearfix">
-    <div id="step_wrap">
-
-	<div class="step_form">
-        
-        
-        <h3>Félicitations, votre compte est activé!</h3>
-<p>		Vous allez recevoir un email de confirmation d'ici peu. </p>
-
-	<p>		Nous vous souhaitons beaucoup de bons moments cinéma!  </p>
-
-
-	<div class="catalogue_promo"> 
-<input type="submit" name ="sent" value= "Accéder au catalogue" class="promo_button" />	
-		</div>
-		<div class="vod_faq"><input type="submit" name ="sent" value= "Comment fonctionne la VOD" class="promo_button" />
-		
-		</div>
-		
-          
-          
-          
-     
-        </div>
- 
-      <div class="clearfix"></div>
-
- 
+  <div id="step_wrap">
+    <div class="step_form">
+      <h3><%= t('.congrats') %></h3>
+      <p><%= t('.desc1') %></p>
+      <p><%= t('.desc2') %></p>
+      <div class="catalogue_promo"> 
+        <%= link_to t('.catalogue'), products_path(:package => Moovies.packages.invert[2]), :class => :promo_button %>
+      </div>
+      <div class="vod_faq">
+        <%= link_to t('.vod_faq'), root_path, :class => :promo_button %>
+      </div>
+    </div>
+    <div class="clearfix"></div>
   </div>
-
-
 </div>

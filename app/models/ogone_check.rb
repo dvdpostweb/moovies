@@ -4,7 +4,7 @@ class OgoneCheck < ActiveRecord::Base
   alias_attribute :product_id, :products_id
   
   belongs_to :customer, :foreign_key => :customers_id
-  belongs_to :product_abo, :foreign_key => :products_id
+  belongs_to :subscription_type, :foreign_key => :products_id
   belongs_to :product, :foreign_key => :products_id
   
 end
