@@ -98,7 +98,7 @@
               <tr>
                 <td></td>
                 <td align="left">
-                  <p><INPUT type="checkbox"  name="conditions" value='1'>
+                  <p><INPUT type="checkbox"  name="conditions" id ='condition'>
                     <%= link_to t('.conditions'), root_path, :class => "blue_link, smaller" %>
                     <br />
                   </p>
@@ -129,3 +129,4 @@
 </div>
 <div style="display:none" id ='date_invalid'><%= t('.date_invalid') %></div>
 <div style="display:none" id ='date_kid'><%= t('.date_kid') %></div>
+<div style="display:none" id ='promotions_alert'><%= t('.conditions') %></div>
