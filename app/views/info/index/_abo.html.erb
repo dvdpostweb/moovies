@@ -1,5 +1,5 @@
 <div id ="prices">
-  <h2><%= t '.unlimited'.html_safe %></h2>
+  <h2><%= raw t '.unlimited' %></h2>
   <div class="abo_prices">
     <div class="big_price">
       <%= link_to new_customer_registration_path(:code => @discount_svod.name) do %>
@@ -21,7 +21,7 @@
   </div>
   <div class="clearfix"></div>
   <% if @kid_visible %>
-  <h2><%= t('.kid') %></h2>
+  <h2><%= raw t('.kid') %></h2>
   <div class="abo_prices">
     <div class="big_price">
       <%= link_to new_customer_registration_path(:code => @discount_kids.name) do %>
@@ -34,12 +34,12 @@
     <div class="subscribe" align="center"><%= link_to t('.try_now'), new_customer_registration_path(:code => @discount_kids.name), :class => "btn" %></div>
   </div>
   <div class="abo_infos">
-    <h3><%= t '.discover_kid'.html_safe %></h3>
+    <h3><%= raw t '.discover_kid' %></h3>
     <ul>
-      <li><strong><%= t('.discover_kid_desc1') %></strong></li>
-      <li><%= t('.discover_kid_desc2') %></li>
-      <li><%= t('.discover_kid_desc3') %></li>
-      <li><span class="kid"><%= t('.discover_kid_desc4') %></span></li>
+      <li><strong><%= t('.discover_unlimited_desc1') %></strong></li>
+      <li><%= t('.discover_unlimited_desc2') %></li>
+      <li><%= t('.discover_unlimited_desc3') %></li>
+      <li><span class="kid"><%= t('.discover_kid_desc') %></span></li>
     </ul>
     <div class="price_slogan"><%= t('.price_slogan') %></div>
   </div>
@@ -47,7 +47,7 @@
   <div class="clearfix"></div>
   <p class="link_adult"><%= t('.show_adult') %></p>
   <div id="tab_adult" style="display:none">
-    <h2><%= t('.adult'.html_safe) %></h2>
+    <h2><%= raw t('.adult') %></h2>
     <div id="adult">
     <div class="abo_prices">
       <div class="big_price">
@@ -60,7 +60,7 @@
       <div class="subscribe" align="center"><%= link_to t('.try_now'), new_customer_registration_path(:code => @discount_adult.name), :class => "btn" %></div>
     </div>
     <div class="abo_infos">
-      <h3><%= t('.discover_adult') %></h3>
+      <h3><%= raw t('.discover_adult') %></h3>
       <ul>
         <li><strong><%= t('.discover_adult_desc1') %></strong></li>
         <li><%= t('.discover_adult_desc2') %></li>
