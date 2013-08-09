@@ -31,6 +31,7 @@ class Customer < ActiveRecord::Base
   validates_length_of :last_name, :minimum => 2, :on => :update
   validates_format_of :phone, :with => /^(\+)?[0-9 \-\/.]+$/, :on => :update
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :update
+  validates :birthday,  :date => { :after => 100.years.ago, :before => 18.years.ago}
   validates_uniqueness_of :email, :case_sensitive => false, :on => :update
 
   # Setup accessible (or protected) attributes for your model

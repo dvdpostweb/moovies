@@ -1,6 +1,7 @@
 class StepsController < ApplicationController
   before_filter :authenticate_customer!, :unless => :confirmation?
   def index
+    @body_id = params[:page_name]
     if params[:page_name] == 'step2'
       current_customer.build_address unless current_customer.address
       @countries = Country.all

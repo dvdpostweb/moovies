@@ -14,11 +14,10 @@
               </tr>
               <tr>
                 <td align="right" width="150"><span class="explain_text"><%= t('.gender')%><span class="asterisk_step">*</span></span></td>
-                <td align="left" class="explain_text_gender" width='160'>
+                <td align="left" class="explain_text_gender" width='480'>
                   <span><%= f.radio_button :gender, 'f' %><%= t '.miss' %></span>
                   <span><%= f.radio_button :gender, 'm' %><%= t '.mister' %></span>
                 </td>
-                <td align="left" class="explain_text" width='210'></td>
               </tr>
               <tr>
                 <td align="right">
@@ -26,9 +25,6 @@
                 </td>
                 <td>
                   <%= f.text_field :first_name, :class => :new_step_input %>
-                </td>
-                <td align="left" class="explain_text">
-                  <div id='check_firsname' class=""><div id="text"></div> </div>
                 </td>
               </tr>
               <tr>
@@ -38,19 +34,14 @@
                 <td>
                   <%= f.text_field :last_name, :class => :new_step_input %>
                 </td>
-                <td align="left" class="explain_text">
-                  <div id='check_lastname' class=""><div id="text"></div> </div>
-                </td>
+                
               </tr>
               <tr height='45'>
                 <td align="right">
-                  <span class="explain_text">Date de naissance <span class="asterisk_step">*</span></span>
+                  <span class="explain_text"><%= t('birthday') %> <span class="asterisk_step">*</span></span>
                 </td>
                 <td>
                   <%= f.date_select :customers_dob, :start_year => 18.years.ago.year, :end_year => 100.years.ago.year, use_month_numbers: true, prompt: { day: t('.day'), month: t('.month'), year: t('.year') }, :order => [:day, :month, :year] %>
-                </td>
-                <td align="left" class="explain_text">
-                  <div id='check_birthday' class=""><div id="text"></div> </div>
                 </td>
               </tr>
               <%= f.fields_for :address do |af| %>
@@ -61,22 +52,7 @@
                 <td>
                   <%= af.text_field :street, :class => "new_step_input" %>
                 </td>
-                <td align="left" class="explain_text">
-                  <div id='check_street' class=""><div id="text"></div> </div>
-                </td>
               </tr>
-              <tr>
-                <td align="right">
-                  <span class="explain_text">numéro<span class="asterisk_step">*</span></span>
-                </td>
-                <td>
-                  <input class="new_step_input" type="text" autocomplete="off" name="street_address" id="street_address" value="">
-                </td>
-                <td align="left" class="explain_text">
-                  <div id='check_street' class=""><div id="text"></div> </div>
-                </td>
-              </tr>
-
               <tr>
                 <td align="right">
                   <span class="explain_text"><%= t('.zip') %> <span class="asterisk_step">*</span></span>
@@ -84,17 +60,11 @@
                 <td>
                   <%= af.text_field :postal_code, :class => :new_step_input %>
                 </td>
-                <td align="left" class="explain_text">
-                  <div id='check_zip' class="step_input_ok"><div id="text"></div> </div>
-                </td>
               </tr>
               <tr>
                 <td align="right"><span class="explain_text"><%= t('.city') %> <span class="asterisk_step">*</span></span></td>
                 <td>
                   <%= af.text_field :city, :class => :new_step_input %>
-                </td>
-                <td align="left" class="explain_text">
-                  <div id='check_city' class=""><div id="text"></div> </div>
                 </td>
               </tr>
               <tr height="45">
@@ -117,17 +87,14 @@
                 <td>
                   <%= f.text_field :phone, :class => :new_step_input %>
                 </td>
-                <td align="left" class="explain_text">
-                  <div id='check_phone' class="step_input_error"><div id="text">Insérez un numéro correct</div> </div>
-                </td>
               </tr>               
               <tr>
                 <td>&nbsp;</td>
-                <td  class="asterisk_explain_step" colspan="2">*<%= t('.require') %></td>
+                <td  class="asterisk_explain_step">*<%= t('.require') %></td>
               </tr>
               <tr>
                 <td></td>
-                <td colspan="2" align="left">
+                <td align="left">
                   <p><INPUT type="checkbox"  name="conditions" value='1'>
                     <%= link_to t('.conditions'), root_path, :class => "blue_link, smaller" %>
                     <br />
@@ -136,7 +103,7 @@
               </tr>
               <tr> 
                 <td></td>
-                <td colspan="2" class="subscription_payement_footer"><div id='check_payment' class=""><div id="text"><br /></div></div></td>
+                <td class="subscription_payement_footer"><div id='check_payment' class=""><div id="text"><br /></div></div></td>
               </tr>
               <tr>
                 <td></td>

@@ -19,7 +19,7 @@ class Address < ActiveRecord::Base
   validates_length_of :first_name, :minimum => 2
   validates_length_of :last_name, :minimum => 2
   validates_length_of :street, :minimum => 5
-  validates_length_of :postal_code, :minimum => 4
+  validates_length_of :postal_code, :minimum => 4, :maximum => 7
   validates_length_of :city, :minimum => 1
 
   def replace_semicolon
