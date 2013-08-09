@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
 
 
   def redirect_after_registration(path = nil)
-    if current_customer && current_customer.step != 100 &&  params[:controller] != 'devise/sessions'
+    if current_customer && current_customer.step != 100 && params[:controller] != 'devise/sessions' && params[:controller] != 'payment_methods'
       if current_customer.step.to_i == 31
         if (params['controller'] == 'steps' && params[:page_name] == 'step2') || (params[:controller] == 'customers' && params[:action] == 'update')
         else

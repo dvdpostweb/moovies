@@ -6,6 +6,11 @@ class StepsController < ApplicationController
       @countries = Country.all
     end
   end
+
+  def update
+    
+  end
+
   protected
   def confirmation?
     params[:page_name] == 'confirm'
