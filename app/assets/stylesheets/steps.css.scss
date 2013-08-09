@@ -219,10 +219,16 @@ width: 200px;
 .labelstep {
 	padding:10px;
 }
-.field_with_errors
+.field_with_errors, .field_with_errors2
 {
   display:inline-block;
   vertical-align: top;
+}
+.field_with_errors .message,.field_with_errors1 .message
+{
+  padding: 0 6px;
+  font-size: 12px;
+  color: #900;
 }
 #error_explanation li
 {
