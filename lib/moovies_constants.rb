@@ -186,12 +186,12 @@ module Moovies
        :adult_fr => 7,
        :adult_nl => 8,
        :adult_en => 9,
-       :classic_adult_fr => 9,
-       :classic_adult_nl => 9,
-       :classic_adult_en => 9,
-       :all_fr => 9,
-       :all_nl => 9,
-       :all_en => 9,
+       :classic_adult_fr => 11,
+       :classic_adult_nl => 12,
+       :classic_adult_en => 13,
+       :all_fr => 14,
+       :all_nl => 15,
+       :all_en => 16,
       })
     end
   end
