@@ -71,7 +71,7 @@ class ApplicationController < ActionController::Base
 
   def init
     @browser = 'empty'
-    @kid_visible = true
+    @kid_visible = false
     params[:kind] = params[:kind] ? params[:kind].to_sym : :normal
     if params[:locale].nil?
       params[:locale] = I18n.locale
