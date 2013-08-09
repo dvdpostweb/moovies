@@ -87,6 +87,8 @@ GEM
     composite_primary_keys (5.0.13)
       activerecord (~> 3.2.0, >= 3.2.9)
     daemons (1.1.9)
+    date_validator (0.7.0)
+      activemodel (>= 3)
     debug_inspector (0.0.2)
     devise (2.2.4)
       bcrypt-ruby (~> 3.0)
@@ -221,6 +223,7 @@ DEPENDENCIES
   coffee-rails
   compass-rails
   composite_primary_keys (~> 5.0.13)
+  date_validator
   devise
   dynamic_form
   execjs

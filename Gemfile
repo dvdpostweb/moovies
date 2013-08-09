@@ -59,3 +59,4 @@ gem "truncate_html", "~> 0.9.2"
 gem "capistrano", "~> 2.15.5"
 gem "capistrano-ext"
 gem "client_side_validations"
+gem 'date_validator'

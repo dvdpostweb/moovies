@@ -15,6 +15,9 @@ class Discount < ActiveRecord::Base
   alias_attribute :abo_type_id, :listing_products_allowed
   alias_attribute :next_abo_type_id, :next_abo_type
   alias_attribute :auto_stop, :abo_auto_stop_next_reconduction
+  alias_attribute :promo_text_fr, :discount_text_fr
+  alias_attribute :promo_text_nl, :discount_text_nl
+  alias_attribute :promo_text_en, :discount_text_en
   
   scope :by_name, lambda {|name| where(:discount_code => name)}
   scope :available, lambda { where('(discount_validityto > ? or discount_validityto is null) and discount_status = 1', Time.now.to_s(:db))}
@@ -46,6 +49,10 @@ class Discount < ActiveRecord::Base
           price = abo_price - self.value
       end
     price.to_f
+  end
+
+  def text(locale)
+    eval "promo_text_#{locale}"
   end
 
 end

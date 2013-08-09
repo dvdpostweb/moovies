@@ -12,6 +12,10 @@ class Activation < ActiveRecord::Base
   alias_attribute :next_abo_type_id, :next_abo_type
   alias_attribute :auto_stop, :abo_auto_stop_next_reconduction
   alias_attribute :created_at, :activation_date
+  alias_attribute :promo_text_fr, :activation_text_fr
+  alias_attribute :promo_text_nl, :activation_text_nl
+  alias_attribute :promo_text_en, :activation_text_en
+  
   
   scope :by_name, lambda {|name| where(:activation_code => name)}
   scope :available, lambda {where('(activation_code_validto_date > ? or activation_code_validto_date is null) and customers_id = 0', Time.now.to_s(:db))}
@@ -26,4 +30,9 @@ class Activation < ActiveRecord::Base
       duration_value.year.from_now.localtime
     end
   end
+
+  def text(locale)
+    eval "promo_text_#{locale}"
+  end
+
 end
