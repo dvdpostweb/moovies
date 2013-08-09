@@ -6,7 +6,11 @@ $(function() {
 	$('#step2 #customer_customers_dob_2i').on('change', birth_change)
 	$('#step2 #customer_customers_dob_1i').on('change', birth_change)
 	$('#step2 #edit_customer').on('submit', function (){
-	  i
+	  if(!$('#condition').is(':checked'))
+	  {
+	    alert($('#promotions_alert').html())
+	    return false
+	  }
 	})
 	function birth_change(event)
   {
