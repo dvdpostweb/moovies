@@ -1,13 +1,13 @@
 class OgonesController < ApplicationController
   def create
-    @ogone = OgoneCheck.find_by_orderid(params[:order_id])
+    @ogone = OgoneCheck.find_by_orderid(params[:orderID])
     customer = @ogone.customer
     if customer.actived?
     else
       
-      @ogone = OgoneCheck.find_by_orderid(params[:order_id])
+      @ogone = OgoneCheck.find_by_orderid(params[:orderID])
       @product_abo = @ogone.subscription_type
-      customer.update_columns( :ogone_owner => customer.name, :ogone_exp_date => params[:ed], :ogone_card_no => params[:cardno], :ogone_card_type => params[:brand])
+      customer.update_columns( :ogone_owner => params[:CN], :ogone_exp_date => params[:ED], :ogone_card_no => params[:CARDNO], :ogone_card_type => params[:BRAND])
       case @ogone.context
         when 'new_discount'
           if @ogone.discount_code_id > 0
