@@ -111,6 +111,25 @@ width: 200px;
 .step_3.fr {
     background: url(image_path('fr/steps.jpg')) no-repeat scroll -5px -207px transparent;
 }
+.step_1.nl {
+    background: url(image_path('nl/steps.jpg')) no-repeat scroll -5px 0px transparent;
+}
+.step_2.nl {
+    background: url(image_path('nl/steps.jpg')) no-repeat scroll -5px -102px transparent;
+}
+.step_3.nl {
+    background: url(image_path('nl/steps.jpg')) no-repeat scroll -5px -207px transparent;
+}
+.step_1.nl {
+    background: url(image_path('en/steps.jpg')) no-repeat scroll -5px 0px transparent;
+}
+.step_2.nl {
+    background: url(image_path('en/steps.jpg')) no-repeat scroll -5px -102px transparent;
+}
+.step_3.nl {
+    background: url(image_path('en/steps.jpg')) no-repeat scroll -5px -207px transparent;
+}
+
 .step {
     height: 56px;
 }

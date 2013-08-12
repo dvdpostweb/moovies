@@ -10,8 +10,8 @@ class OgonesController < ApplicationController
       customer.update_attributes( :ogone_owner => params[:CN], :ogone_exp_date => params[:ED], :ogone_card_no => params[:CARDNO], :ogone_card_type => params[:BRAND])
       case @ogone.context
         when 'new_discount'
-          if current_customer.promo_id > 0
-            @discount = Discount.find(current_customer.promo_id)
+          if customer.promo_id > 0
+            @discount = Discount.find(customer.promo_id)
             action = Subscription.action[:creation_with_discount]
             DiscountUse.create(:discount_code_id => @ogone.discount_code_id, :customer_id => customer.to_param, :discount_use_date => Time.now.localtime)
             #@discount.update_attributes(:discount_limit => @discount.discount_limit - 1)

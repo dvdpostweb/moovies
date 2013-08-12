@@ -3,7 +3,7 @@
   <div id="step_container">
     <div class="step_form">
       <%= form_for(:customer, :url => customer_payment_methods_path(:customer_id => current_customer.to_param), :html => { :method => :put }) do |f| %>
-      <div class="step_3 step fr" align="center"></div>
+      <div class="step_3 step <%= I18n.locale %>" align="center"></div>
 
       <h3><%= t('.subscription') %></h3>
 
