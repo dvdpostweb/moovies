@@ -1,17 +1,19 @@
 class OgonesController < ApplicationController
   def create
-    if current_customer.actived?
+    @ogone = OgoneCheck.find_by_orderid(params[:order_id])
+    customer = @ogone.customer
+    if customer.actived?
     else
       
       @ogone = OgoneCheck.find_by_orderid(params[:order_id])
       @product_abo = @ogone.subscription_type
-      current_customer.update_columns( :ogone_owner => current_customer.name, :ogone_exp_date => params[:ed], :ogone_card_no => params[:cardno], :ogone_card_type => params[:brand])
+      customer.update_columns( :ogone_owner => customer.name, :ogone_exp_date => params[:ed], :ogone_card_no => params[:cardno], :ogone_card_type => params[:brand])
       case @ogone.context
         when 'new_discount'
           if @ogone.discount_code_id > 0
             @discount = Discount.find(@ogone.discount_code_id)
             action = Subscription.action[:creation_with_discount]
-            DiscountUse.create(:discount_code_id => @ogone.discount_code_id, :customer_id => current_customer.to_param, :discount_use_date => Time.now.localtime)
+            DiscountUse.create(:discount_code_id => @ogone.discount_code_id, :customer_id => customer.to_param, :discount_use_date => Time.now.localtime)
             #@discount.update_attributes(:discount_limit => @discount.discount_limit - 1)
             duration = @discount.duration
             auto_stop = @discount.auto_stop
@@ -26,7 +28,7 @@ class OgonesController < ApplicationController
           price = @discount.subscription_type.price
           if price > 0
             abo_action = 7
-            current_customer.payment.create(:payment_method => 1, :abo_id => current_customer.abo_type_id, :amount => price, :payment_status => 2, :created_at => Time.now.localtime, :last_modified => Time.now.localtime)
+            customer.payment.create(:payment_method => 1, :abo_id => customer.abo_type_id, :amount => price, :payment_status => 2, :created_at => Time.now.localtime, :last_modified => Time.now.localtime)
           else
             abo_action = 17
           end
@@ -38,38 +40,38 @@ class OgonesController < ApplicationController
           auto_stop = activation.auto_stop
           recurring = 0
         	abo_action = 17
-          activation.update_attributes(:created_at => Time.now.localtime.to_s(:db), :customers_id => current_customer.to_param)
+          activation.update_attributes(:created_at => Time.now.localtime.to_s(:db), :customers_id => customer.to_param)
       end
-      current_customer.update_columns(:customers_abo => 1, :customers_registration_step => 100,:customers_abo_payment_method => 1, :subscription_expiration_date => duration, :auto_stop => auto_stop, :customers_abo_discount_recurring_to_date => recurring)
-      current_customer.abo_history(action, current_customer.next_abo_type_id)
-      current_customer.abo_history(abo_action, current_customer.next_abo_type_id)
+      customer.update_columns(:customers_abo => 1, :customers_registration_step => 100,:customers_abo_payment_method => 1, :subscription_expiration_date => duration, :auto_stop => auto_stop, :customers_abo_discount_recurring_to_date => recurring)
+      customer.abo_history(action, customer.next_abo_type_id)
+      customer.abo_history(abo_action, customer.next_abo_type_id)
       #@ogone.product(:products_quantity => @ogone.product.products_quantity - 1)
-      if current_customer.gender == 'm' 
+      if customer.gender == 'm' 
         gender = t('mails.gender_male')
       else
         gender = t('mails.gender_female')
       end
       
       options = {
-        "\\$\\$\\$customers_name\\$\\$\\$" => "#{current_customer.first_name.capitalize} #{current_customer.last_name.capitalize}", 
-        "\\$\\$\\$email\\$\\$\\$" => "#{current_customer.email}",
+        "\\$\\$\\$customers_name\\$\\$\\$" => "#{customer.first_name.capitalize} #{customer.last_name.capitalize}", 
+        "\\$\\$\\$email\\$\\$\\$" => "#{customer.email}",
         "\\$\\$\\$gender_simple\\$\\$\\$" => gender,
-        "\\$\\$\\$promotion\\$\\$\\$" => promotion(current_customer)[:promo],
+        "\\$\\$\\$promotion\\$\\$\\$" => promotion(customer)[:promo],
         "\\$\\$\\$final_price\\$\\$\\$" => price
         }
       #to do 
       #send_message(DVDPost.email[:welcome], options)
       
-      #sponsor = Sponsorship.find_by_son_id(current_customer.to_param)
+      #sponsor = Sponsorship.find_by_son_id(customer.to_param)
       #unless sponsor
-      #  sponsor_email = SponsorshipEmail.find_by_email(current_customer.email)
+      #  sponsor_email = SponsorshipEmail.find_by_email(customer.email)
       #  if sponsor_email
       #    father = Customer.find(sponsor_email.customers_id)
       #    if father.actived?
-      #      Sponsorship.create(:created_at => Time.now.localtime, :father_id => father.to_param, :son_id => current_customer.to_param , :points => 0)
+      #      Sponsorship.create(:created_at => Time.now.localtime, :father_id => father.to_param, :son_id => customer.to_param , :points => 0)
       #      options = {
       #        "\\$\\$\\$godfather_name\\$\\$\\$" => "#{father.first_name.capitalize} #{father.last_name.capitalize}", 
-      #        "\\$\\$\\$son_name\\$\\$\\$" => "#{current_customer.first_name.capitalize} #{current_customer.last_name.capitalize}",
+      #        "\\$\\$\\$son_name\\$\\$\\$" => "#{customer.first_name.capitalize} #{customer.last_name.capitalize}",
       #        "\\$\\$\\$godfather_point\\$\\$\\$" => father.inviation_points
       #        }
       #        send_message(DVDPost.email[:sponsorships_son], options, father)
