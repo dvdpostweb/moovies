@@ -26,6 +26,7 @@ class PaymentMethodsController < ApplicationController
     @com= t 'payment_methods.ogone'
     internal_com = 'ogone_change'
     @url_back = url_for(:controller => 'steps', :action => :index, :page_name => 'step3', :only_path => false, :protocol => 'http')
+    @url_ok = url_for(:controller => 'ogones', :action => :create, :only_path => false, :protocol => 'http')
     OgoneCheck.create(:orderid => @order_id, :amount => (@price*100).to_i, :customers_id => current_customer.to_param, :context => internal_com, :site => 1)
     @hash = Digest::SHA1.hexdigest("#{@order_id}#{(@price*100).to_i}EURdvdpostogonetest#{current_customer.to_param}#{@com}KILLBILL1$metropolis")
   end
