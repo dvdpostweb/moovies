@@ -38,7 +38,7 @@
               </tr>
               <tr height='45'>
                 <td align="right">
-                  <span class="explain_text"><%= t('birthday') %> <span class="asterisk_step">*</span></span>
+                  <span class="explain_text"><%= t('.birthday') %> <span class="asterisk_step">*</span></span>
                 </td>
                 <td>
                   <div>
@@ -50,7 +50,7 @@
               <%= f.fields_for :address do |af| %>
               <tr>
                 <td align="right">
-                  <span class="explain_text">rue <span class="asterisk_step">*</span></span>
+                  <span class="explain_text"><%= t('.street') %> <span class="asterisk_step">*</span></span>
                 </td>
                 <td>
                   <%= af.text_field :street, :class => "new_step_input" %>
