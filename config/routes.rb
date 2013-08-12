@@ -1,6 +1,7 @@
 Moovies::Application.routes.draw do
 
   root :to => 'home#index'
+  resource :ogone, :only => [:create]
   scope ':locale/(:kind)', :locale => /en|fr|nl/, :kind => /normal|adult/ do
     root :to => 'home#index'
     devise_for :customers, :controllers => { :registrations => "customers/registrations", :confirmations => "customers/confirmations" }
@@ -16,6 +17,7 @@ Moovies::Application.routes.draw do
       resource :payment_methods, :only => [:edit, :update, :show]
       resources :reviews, :only => [:index]
     end
+    
     resources :reviews, :only => :show do
       resource :review_rating, :only => :create
     end
