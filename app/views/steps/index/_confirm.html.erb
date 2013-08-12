@@ -1,0 +1,16 @@
+<div class="container clearfix">
+  <div id="step_wrap">
+    <div id="step_container">
+      <div class="step_form">
+        <div class="step_1 step fr" align="center"></div>
+        <h3><%= t('.title') %></h3>
+        <p><%= t('.description').html_safe %></p>
+      </div>
+      <p align="center" style="padding-top:15px;">
+        <%= image_tag "#{I18n.locale}/info_tel.jpg" %>
+      </p>
+    </div>
+
+  <%= render :partial => 'devise/registrations/faq1' %>
+  </div>
+</div>
