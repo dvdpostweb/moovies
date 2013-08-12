@@ -52,13 +52,13 @@ class OgonesController < ApplicationController
         gender = t('mails.gender_female')
       end
       
-      options = {
-        "\\$\\$\\$customers_name\\$\\$\\$" => "#{customer.first_name.capitalize} #{customer.last_name.capitalize}", 
-        "\\$\\$\\$email\\$\\$\\$" => "#{customer.email}",
-        "\\$\\$\\$gender_simple\\$\\$\\$" => gender,
-        "\\$\\$\\$promotion\\$\\$\\$" => promotion(customer)[:promo],
-        "\\$\\$\\$final_price\\$\\$\\$" => price
-        }
+      #options = {
+      #  "\\$\\$\\$customers_name\\$\\$\\$" => "#{customer.first_name.capitalize} #{customer.last_name.capitalize}", 
+      #  "\\$\\$\\$email\\$\\$\\$" => "#{customer.email}",
+      #  "\\$\\$\\$gender_simple\\$\\$\\$" => gender,
+      #  "\\$\\$\\$promotion\\$\\$\\$" => promotion(customer)[:promo],
+      #  "\\$\\$\\$final_price\\$\\$\\$" => price
+      #  }
       #to do 
       #send_message(DVDPost.email[:welcome], options)
       
