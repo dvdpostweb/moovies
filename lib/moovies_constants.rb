@@ -192,6 +192,12 @@ module Moovies
        :all_fr => 14,
        :all_nl => 15,
        :all_en => 16,
+       :hp_top_fr => 17,
+       :hp_top_nl => 18,
+       :hp_top_en => 19,
+       :hp_bottom_fr => 20,
+       :hp_bottom_nl => 21,
+       :hp_bottom_en => 22,
       })
     end
   end

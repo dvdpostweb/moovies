@@ -77,22 +77,6 @@ fr:
       send_paranoid_instructions: 'Si votre e-mail existe dans notre base de données, vous allez bientôt recevoir un e-mail contenant les instructions de confirmation de votre compte.'
       confirmed: 'Votre compte a été validé, vous êtes maintenant connecté'
     registrations:
-      new:
-        title: 'Créez votre compte:'
-        email: 'Adresse e-mail:'
-        password: 'Mot de passe<br />(8 caractères minimum):'
-        confirmation_pass: "Confirmation du mot de passe:"
-        newsletter: 'Je souhaite être informé des nouveautés et promotions DVDPost.'
-        newsletter_partner: 'Je souhaite être informé des promotions de la part des partenaires de DVDPost.'
-        sign_up: 'CONFIRMER'
-      faq1:  
-        garantie: 'VOS GARANTIES:'
-        catalogue: 'Catalogue illimité'
-        catalogue_description: "Accédez à une sélection de xxxx films par mois en illimité et ce pour le prix d'un seul ticket de cinéma."
-        sans_engagement: 'Sans engagement'
-        sans_engagement_description: 'Vous pouvez arrêter votre abonnement quand vous voulez. Il suffit de contacter notre service client par téléphone, au <strong>numéro gratuit 0800/95 990</strong> ou au  <strong>numéro payant 0032 2 5036811</strong> pour les appels effectués hors de la Belgique, au plus tard un jour avant la prolongation mensuelle de votre abonnement.'
-        securised: '100% sécurisé'
-        securised_description: 'Toutes les informations que vous nous communiquez, comme par exemple les informations de paiement, sont encryptées et protégées'
       edit:
         title: Edit
         email: email
