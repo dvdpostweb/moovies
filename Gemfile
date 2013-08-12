@@ -60,3 +60,4 @@ gem "capistrano", "~> 2.15.5"
 gem "capistrano-ext"
 gem "client_side_validations"
 gem 'date_validator'
+gem 'whenever', :require => false

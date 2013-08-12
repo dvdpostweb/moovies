@@ -17,7 +17,7 @@ Moovies::Application.routes.draw do
       resource :payment_methods, :only => [:edit, :update, :show]
       resources :reviews, :only => [:index]
     end
-    
+    resources :public_newsletters, :only => [:new, :create]
     resources :reviews, :only => :show do
       resource :review_rating, :only => :create
     end

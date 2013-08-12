@@ -5,10 +5,11 @@
 
     <ul id="output">
       <li>
-        <div id="try_it"> <a class="essaigratuit osc btn" href="#"><%= t '.try' %></a> <div id="engagement"><%= t '.try_text' %></div></div>
-        <a href="#">
-          <%= image_tag "#{I18n.locale}/bg_infinity.jpg", :size => '932x328' %>
-        </a> 
+        <div id="try_it">
+          <%= link_to t('.try'), new_customer_registration_path(:code => @discount_top.name), :class => 'essaigratuit osc btn' %> 
+          <div id="engagement"><%= t '.try_text' %></div>
+        </div>
+        <%= link_to image_tag("#{I18n.locale}/bg_infinity.jpg", :size => '932x328'), new_customer_registration_path(:code => @discount_top.name) %>
       </li>
     </ul>
   </div>
@@ -57,25 +58,23 @@
   <div class="wrap" id="news">
     <h3><%= t '.newsletter' %></h3>
 
-    <form method="post" id="new_public_newsletter" class="new_public_newsletter" action="/fr/public_newsletters">
-      <div style="margin:0;padding:0;display:inline">
-        <input type="hidden" value="JKK9rVJaYd+pTqqX++XT9UfSKBom0eSB5KXdQbdYobs=" name="authenticity_token">
-      </div>
-      <center>
-        <input type="hidden" value="1" name="public_newsletter[language_id]" id="public_newsletter_language_id">
-        <input type="hidden" name="promo" id="promo">
-        <input type="text" value="Philippe@gmail.com" size="30" name="public_newsletter[email]" id="public_newsletter_email">
-      </center>
-      • <%= t '.newsletter1' %><br />
-      • <%= t '.newsletter2' %><br />
-      • <%= raw t '.newsletter3' %><br />
-
-      <ul class="osc">
-        <li>
-          <input type="submit" value="<%= t '.valid' %>" name="commit" id="newsletter_input">
-        </li>
-      </ul>
-    </form>
+    <%= form_for @newsletter do |f| %>
+    <center>
+        <%= f.error_messages :header_message => "", :message => "", :header_tag => :h3 %>
+        <%= f.hidden_field :language_id, :value => Moovies.customer_languages[I18n.locale] %>
+        <%= hidden_field_tag :promo, params[:code] %>
+        <%= f.text_field :email, :size => 30, :value => 'Philippe@gmail.com' %>
+    </center>
+    • <%= t '.newsletter1' %><br />
+    • <%= t '.newsletter2' %><br />
+    • <%= raw t '.newsletter3' %><br />
+    <ul class="osc">
+      <li>
+        <%= submit_tag t('.valid', :default => 'JE valide'), :id => 'newsletter_input' %>
+      </li>
+    </ul>
+    <% end %>
+    
   </div>
 </div>
 <!-- #services-wrap -->
@@ -107,7 +106,7 @@
         <h3><%= t('.watch_now') %></h3>
         <%= image_tag "#{I18n.locale}/prices.png", :size => '450x118' %>
       </div>
-      <div id="try_it"> <a class="essaigratuit osc btn" href="#"><%= t('.try2') %></a> <div id="engagement"><%= t('.try2_text') %></div></div>
+      <div id="try_it"><%= link_to t('.try2'), new_customer_registration_path(:code => @discount_bottom.name), :class => 'essaigratuit osc btn' %> <div id="engagement"><%= t('.try2_text') %></div></div>
 
     </div>
     <div class="clear"></div>
