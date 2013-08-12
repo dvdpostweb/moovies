@@ -5,5 +5,4 @@ ActionMailer::Base.smtp_settings = {
   :authentication       => "none",  
   :enable_starttls_auto => false  
 }
-ActionMailer::Base.default_url_options[:host] = "localhost:3000"  
 ActionMailer::Base.default :from => 'info@dvdpost.be'
