@@ -4,7 +4,7 @@ class Address < ActiveRecord::Base
 
   before_save :replace_semicolon
   before_create :set_default
-  attr_accessible :first_name, :last_name, :street, :postal_code, :city, :country_id, :customers_id, :entry_country_id, :entry_gender, :address_book_id, :customer
+  attr_accessible :first_name, :last_name, :street, :postal_code, :city, :country_id, :customers_id, :entry_country_id, :entry_gender, :address_book_id, :customer, :gender
   belongs_to :customer, :foreign_key => :customers_id
   alias_attribute :first_name, :entry_firstname
   alias_attribute :last_name, :entry_lastname
