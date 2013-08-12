@@ -7,7 +7,7 @@ class OgonesController < ApplicationController
       
       @ogone = OgoneCheck.find_by_orderid(params[:orderID])
       @product_abo = @ogone.subscription_type
-      customer.update_columns( :ogone_owner => params[:CN], :ogone_exp_date => params[:ED], :ogone_card_no => params[:CARDNO], :ogone_card_type => params[:BRAND])
+      customer.update_attributes( :ogone_owner => params[:CN], :ogone_exp_date => params[:ED], :ogone_card_no => params[:CARDNO], :ogone_card_type => params[:BRAND])
       case @ogone.context
         when 'new_discount'
           if @ogone.discount_code_id > 0
@@ -42,7 +42,7 @@ class OgonesController < ApplicationController
         	abo_action = 17
           activation.update_attributes(:created_at => Time.now.localtime.to_s(:db), :customers_id => customer.to_param)
       end
-      customer.update_columns(:customers_abo => 1, :customers_registration_step => 100,:customers_abo_payment_method => 1, :subscription_expiration_date => duration, :auto_stop => auto_stop, :customers_abo_discount_recurring_to_date => recurring)
+      customer.update_attributes(:customers_abo => 1, :customers_registration_step => 100,:customers_abo_payment_method => 1, :subscription_expiration_date => duration, :auto_stop => auto_stop, :customers_abo_discount_recurring_to_date => recurring)
       customer.abo_history(action, customer.next_abo_type_id)
       customer.abo_history(abo_action, customer.next_abo_type_id)
       #@ogone.product(:products_quantity => @ogone.product.products_quantity - 1)
