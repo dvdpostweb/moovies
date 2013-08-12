@@ -11,7 +11,7 @@ class OgonesController < ApplicationController
       case @ogone.context
         when 'new_discount'
           if @ogone.discount_code_id > 0
-            @discount = Discount.find(@ogone.discount_code_id)
+            @discount = Discount.find(current_customer.promo_id)
             action = Subscription.action[:creation_with_discount]
             DiscountUse.create(:discount_code_id => @ogone.discount_code_id, :customer_id => customer.to_param, :discount_use_date => Time.now.localtime)
             #@discount.update_attributes(:discount_limit => @discount.discount_limit - 1)
@@ -25,7 +25,7 @@ class OgonesController < ApplicationController
             recurring = nil
           end
           
-          price = @discount.subscription_type.price
+          price = @discount.promo_price
           if price > 0
             abo_action = 7
             customer.payment.create(:payment_method => 1, :abo_id => customer.abo_type_id, :amount => price, :payment_status => 2, :created_at => Time.now.localtime, :last_modified => Time.now.localtime)
@@ -33,7 +33,7 @@ class OgonesController < ApplicationController
             abo_action = 17
           end
         when 'new_activation'
-          activation = Activation.find(@ogone.activation_code_id)
+          activation = Activation.find(current_customer.promo_id)
           action = Subscription.action[:creation_with_activation]
           price = 0
           duration = activation.duration
