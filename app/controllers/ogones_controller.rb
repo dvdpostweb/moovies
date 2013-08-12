@@ -1,5 +1,5 @@
 class OgonesController < ApplicationController
-  def show
+  def create
     if current_customer.actived?
     else
       
