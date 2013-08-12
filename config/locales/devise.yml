@@ -73,22 +73,6 @@ en:
         confirmation: Confirm new password
         back: Back
         update: Update
-      new:
-        title: 'Créez votre compte:'
-        email: 'Adresse e-mail:'
-        password: 'Mot de passe:'
-        confirmation_pass: "Confirmation du mot de passe"
-        newsletter: 'Je souhaite être informé des nouveautés et promotions DVDPost.'
-        newsletter_partner: 'Je souhaite être informé des promotions de la part des partenaires de DVDPost.'
-        sign_up: 'SIGN UP'
-      faq1:  
-        garantie: 'VOS GARANTIES:'
-        catalogue: 'Catalogue illimité'
-        catalogue_description: "Accédez à une sélection de xxxx films par mois en illimité et ce pour le prix d'un seul ticket de cinéma."
-        sans_engagement: 'Sans engagement'
-        sans_engagement_description: 'Vous pouvez arrêter votre abonnement quand vous voulez. Il suffit de contacter notre service client par téléphone, au <strong>numéro gratuit 0800/95 990</strong> ou au  <strong>numéro payant 0032 2 5036811</strong> pour les appels effectués hors de la Belgique, au plus tard un jour avant la prolongation mensuelle de votre abonnement.'
-        securised: '100% sécurisé'
-        securised_description: 'Toutes les informations que vous nous communiquez, comme par exemple les informations de paiement, sont encryptées et protégées'
       destroyed: "Bye! Your account was successfully cancelled. We hope to see you again soon."
       signed_up: "Welcome! You have signed up successfully."
       signed_up_but_inactive: "You have signed up successfully. However, we could not sign you in because your account is not yet activated."

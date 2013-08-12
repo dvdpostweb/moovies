@@ -23,14 +23,14 @@
     <% end %>
     <%= render(:partial => 'layouts/header') %>
     <div class="container clearfix">
-      <% if !current_customer && (params[:controller] != 'home' && params[:controller] != 'customers/registrations' && params[:controller] != 'steps') %>
+      <% if !current_customer && (params[:controller] != 'home' && params[:controller] != 'customers/registrations' && params[:controller] != 'steps' && params[:page_name] != 'abo') %>
       <div class="osc fr" id="subscribe-wrap">
         <div class="wrap"><h3><%= t('.promo_title').html_safe %></h3>
           <div id="promo"><%= t('.promo') %></div>
         </div>
         <div id="subscribe">
           <a class="btn" href="http://www.dvdpost.be/step1.php?language=fr"><%= t('.abo') %></a>
-          <p><%= t('.abo_text')%></p>
+          <p><%= t('.abo_text') %></p>
         </div>
       </div>
       <% end %>
