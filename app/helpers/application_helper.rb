@@ -130,5 +130,12 @@ module ApplicationHelper
   def streaming_access?
     true
   end
+  
+  def twitter_url
+    'http://twitter.com'
+  end
 
+  def facebook_url(locale)
+    'http://facebook.com'
+  end
 end

@@ -23,7 +23,7 @@
     <% end %>
     <%= render(:partial => 'layouts/header') %>
     <div class="container clearfix">
-      <% if !current_customer && (params[:controller] != 'home' && params[:controller] != 'customers/registrations' && params[:controller] != 'steps' && params[:page_name] != 'abo') %>
+      <% if 1==0 && !current_customer && (params[:controller] != 'home' && params[:controller] != 'customers/registrations' && params[:controller] != 'steps' && params[:page_name] != 'abo') %>
       <div class="osc fr" id="subscribe-wrap">
         <div class="wrap"><h3><%= t('.promo_title').html_safe %></h3>
           <div id="promo"><%= t('.promo') %></div>
@@ -36,9 +36,41 @@
       <% end %>
       <%= yield %>
     </div>
+    </div>
     <!--   ==============   FOOTER   ==============   -->
     <div id="footer" >
       <div class="wrap">
+        <% unless @hide_footer %>
+        <ul>
+          <li><h4><%= t '.explore' %></h4></li>
+          <li><%= link_to t('layouts.header.home'), root_path %></li>
+          <li><%= link_to t('layouts.header.explore'), products_path(:package => Moovies.packages.invert[params[:kind] == :normal ? 2 : 5]) %></li>
+          <% if current_customer %>
+            <li><%= link_to t('layouts.header.wishlist'), vod_wishlists_path %></li>
+            <li><%= link_to t('layouts.menu.contact'), messages_path %></li>
+          <% else %>
+            <li><%= link_to t('layouts.header.price'), info_path(:page_name => 'price') %></li>
+            <li><%= link_to t('layouts.menu.contact'), new_phone_request_path() %></li>
+          <% end %>
+        </ul>
+        <ul>
+          <li><h4><%= t '.follow' %></h4></li>
+          <li><%= link_to "Facebook", facebook_url(I18n.locale) %></li>
+          <li><%= link_to "Twitter", twitter_url %></li>
+        </ul>
+        <ul>
+          <li><h4><%= t '.how' %></h4></li>
+          <li><%= link_to t('.contact'), new_phone_request_path %></li>
+          <li><%= link_to t('.vod'), info_path(:page_name => :vod) %></li>
+          <li><%= link_to t('.faq'), faq_path %></li>
+        </ul>
+        <ul>
+          <li><h4><%= t '.about' %></h4></li>
+          <li><%= link_to t('.who'), info_path(:page_name => 'whoweare') %></li>
+          <li><%= link_to t('.privacy'), info_path(:page_name => 'privacy') %></li>
+          <li><%= link_to t('.conditions'), info_path(:page_name => 'conditions') %></li>
+        </ul>
+        <% end %>
       </div>
     </div>
        <!--   ==============   END FOOTER   ==============   -->
