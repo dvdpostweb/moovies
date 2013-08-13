@@ -16,7 +16,7 @@ fr:
   activerecord:
     attributes:
       customer:
-        email: "Cette email"  
+        email: "Cet e-mail"  
         password: "Le mot de passe"
         last_name: "Le nom de famille"
         first_name: "Le prénom"
@@ -24,15 +24,15 @@ fr:
   devise:
     shared:
       links:
-        sign_up: 'Sign up'
+        sign_up: 'Inscrivez-vous'
         forget_password: 'Vous avez oublié votre mot de passe?'
         no_confirmation: "Vous n'avez pas reçu les instructions de confirmation?"
     failure:
-      already_authenticated: "Vous êtes déjà connecté !"
+      already_authenticated: "Vous êtes déjà connecté!"
       unauthenticated: "Vous devez vous connecter ou vous inscrire pour continuer."
       unconfirmed: "Vous devez valider votre compte pour continuer."
       locked: "Votre compte est verrouillé."
-      invalid: "Email ou mot de passe incorrect."
+      invalid: "E-mail ou mot de passe incorrect."
       invalid_token: "Jeton d'authentification incorrect."
       timeout: "Votre session est expirée, veuillez vous reconnecter pour continuer."
       inactive: "Votre compte n'est pas encore activé."
@@ -60,14 +60,14 @@ fr:
         email: Adresse e-mail
       edit:
         change_pass: 'Changez votre mot de passe'
-        pass: "Nouveau password"
+        pass: "Nouveau mot de passe"
         confirm_pass: "Confirmation du mot de passe"
         sent: "Changer"
       send_instructions: 'Vous allez recevoir les instructions de réinitialisation du mot de passe dans quelques instants'
       updated: 'Votre mot de passe a été édité avec succès, vous êtes maintenant connecté'
       updated_not_active: 'Votre mot de passe a été changé avec succès.'
       send_paranoid_instructions: "Si votre e-mail existe dans notre base de données, vous allez recevoir un lien de réinitialisation par e-mail"
-      no_token: "Vous ne pouvez accéder à cette page sans passer par un e-mail de réinitialisation de mot de passe. Si vous êtes passé par un e-mail de ce type, assurez-vous d'utiliser l'URL complète."
+      no_token: "Vous ne pouvez pas accéder à cette page sans passer par un e-mail de réinitialisation de mot de passe. Si vous êtes passé par un e-mail de ce type, assurez-vous d'utiliser l'URL complète."
     confirmations:
       new:
         title: Resend confirmation instructions
