@@ -35,4 +35,5 @@ Moovies::Application.configure do
         :host => 'localhost:3000',
         :only_path => false
   }
+  ENV['HOST_URL'] = 'localhost:3000'
 end
