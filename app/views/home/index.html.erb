@@ -28,7 +28,7 @@
     • <%= t '.unlinmited2' %><br />
     • <%= raw t '.unlinmited3' %>
     <ul class="osc">
-      <li> <a href="#"><%= t '.discover' %></a></li>
+      <li><%= link_to t('.discover'), products_path(:package => Moovies.packages.invert[1], :kind => nil) %></li>
     </ul>
   </div>
   <div class="wrap" id="alacarte">
@@ -40,7 +40,7 @@
     • <%= t '.tvod2' %><br />
     • <%= raw t '.tvod3' %>
     <ul class="osc">
-      <li> <a href="#"><%= t '.discover' %></a> </li>
+      <li><%= link_to t('.discover'), products_path(:package => Moovies.packages.invert[2], :kind => nil) %> </li>
     </ul>
   </div>
   <div class="wrap" id="apps">
