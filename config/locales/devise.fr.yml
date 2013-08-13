@@ -4,10 +4,10 @@ fr:
       expired: "a expiré, merci d'en faire une nouvelle demande"
       not_found: "n'a pas été trouvé(e)"
       already_confirmed: "a déjà été validé(e)"
-      not_locked: "n'était pas verrouillé(e)"
-      not_saved:
-        one: ""
-        other: ""
+      not_locked: "n'est pas verrouillé(e)"
+      not_saved: 
+        one: "N'a pas sauvegardé %{resource}"
+        other: "N'a pas sauvegardé %{resource}"
       taken: "est déjà pris, <a href='/fr/customers/sign_in'>identifiez-vous ici</a>"
       invalid: "n'est pas correct"
       blank: 'ne peux pas être vide'
@@ -71,24 +71,24 @@ fr:
       no_token: "Vous ne pouvez pas accéder à cette page sans passer par un e-mail de réinitialisation de mot de passe. Si vous êtes passé par un e-mail de ce type, assurez-vous d'utiliser l'URL complète."
     confirmations:
       new:
-        title: Resend confirmation instructions
-        email: email
-        setn: Resend confirmation instructions
+        title: Renvoyer les informations de confirmation
+        email: Adresse e-mail
+        setn: Renvoyer les informations de confirmation
       send_instructions: 'Vous allez recevoir les instructions nécessaires à la confirmation de votre compte dans quelques minutes'
       send_paranoid_instructions: 'Si votre e-mail existe dans notre base de données, vous allez bientôt recevoir un e-mail contenant les instructions de confirmation de votre compte.'
       confirmed: 'Votre compte a été validé, vous êtes maintenant connecté'
     registrations:
       edit:
-        title: Edit
-        email: email
-        waiting: 'Currently waiting confirmation for:'
-        current_pass: Current password
-        warning_current_pass: (we need your current password to confirm your changes)
-        warning_new_pass: (leave blank if you don't want to change it)
-        pass: New password
-        confirmation: Confirm new password
-        back: Back
-        update: Update
+        title: Editez
+        email: Adresse e-mail
+        waiting: 'En attente de confirmation der:'
+        current_pass: Mot de passe actuel
+        warning_current_pass: (nous avons besoin de votre mot de passe actuel pour sauvegarder vos changements)
+        warning_new_pass: (laissez vide si vous ne souhaitez pas changer)
+        pass: NNouveau mot de passe
+        confirmation: Confirmez le nouveau mot de passe
+        back: Retour
+        update: Modifier
       signed_up: 'Bienvenu, vous êtes connecté'
       signed_up_but_unconfirmed: 'Un message contenant un lien de confirmation a été envoyé à votre adresse email. Ouvrez ce lien pour activer votre compte.'
       signed_up_but_inactive: "Vous êtes bien enregistré. Vous ne pouvez cependant pas vous connecter car votre compte n'est pas encore activé."
@@ -106,16 +106,15 @@ fr:
     mailer:
       confirmation_instructions:
         subject: "Instructions de confirmation"
-        welcome: "Welcome"
-        description: 'You can confirm your account email through the link below:'
-        subject: "Confirmation instructions"
-        sent: 'Confirm my account'
+        welcome: "Bienvenu"
+        description: 'Vous pouvez confirmer votre adresse e-mail avec le lien suivant:'
+        sent: 'Confirmer mon adresse e-mail'
       reset_password_instructions:
         subject: "Instructions pour changer le mot de passe"
         change_pass: 'Changer mon mot de passe'
         Hello: Bonjour
         description: Quelqu'un a demandé un changement de mot de passe. Vous pouvez le faire via le lien ci-dessous.
         alert1: "Si vous n'avez pas demandé ce changement, s'il vous plaît ignorer ce message."
-        alert2: "Your password won't change until you access the link above and create a new one."
+        alert2: "Votre mot de passe sera uniquement modifié si vous utilisez le lien pour créer un nouveau mot de passe."
       unlock_instructions:
         subject: "Instructions pour déverrouiller le compte"
