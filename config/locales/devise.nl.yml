@@ -4,22 +4,35 @@ nl:
       expired: "is verlopen, gelieve een nieuwe aan te vragen"
       not_found: "is niet gevonden"
       already_confirmed: "is reeds bevestigd"
-      not_locked: "is niet gesloten"
-      not_saved:
+      not_locked: "is niet vergrendeld"
+      not_saved: 
         one: "Kon %{resource} niet opslaan:"
         other: "Kon %{resource} niet opslaan:"
-
+      taken: "bestaal al, <a href='/nl/customers/sign_in'>log hier in</a>"
+      invalid: "is niet correct"
+      blank: 'mag niet leeg zijn'
+      too_short: "is te kort (minimum %{count} karakters)"
+      too_long: "is te lang (maximum %{count} karakters)"
+      confirmation: "komt niet overeen met de bevestiging"
+  activerecord:
+    attributes:
+      customer:
+        email: "Deze e-mail"  
+        password: "Het wachtwoord"
+        last_name: "De naam"
+        first_name: "De voornaam"
+        phone: "Het telefoonnummer"
   devise:
     shared:
       links:
-        sign_up: 'Sign up'
+        sign_up: 'Schrijf u in'
         forget_password: 'Wachtwoord vergeten?'
-        no_confirmation: "Heeft u geen instructies ontvangen?"
+        no_confirmation: "Heeft u geen bevestigingsinstructies ontvangen?"
     failure:
       already_authenticated: 'U bent al ingelogd.'
-      unauthenticated: 'U dient zich in te loggen of u in te schrijven.'
+      unauthenticated: 'U dient zich in te loggen of in te schrijven om verder te gaan.'
       unconfirmed: 'U dient eerst uw account te bevestigen.'
-      locked: 'Uw account is geblokkeerd.'
+      locked: 'Uw account is vergrendeld.'
       invalid: 'Ongeldig e-mail of wachtwoord.'
       invalid_token: 'Ongeldig authenticiteit token.'
       timeout: 'Uw sessie is verlopen, gelieve opnieuw in te loggen.'
@@ -39,42 +52,42 @@ nl:
         connect: Meld u aan
         warning: Dit is geen geldig e-mailadres en/of wachtwoord
         remember_me: Vergeet me niet
-      signed_in: 'U bent succesvol ingelogd.'
-      signed_out: 'U bent succesvol uitgelogd.'
+      signed_in: 'U bent succesvol aangemeld.'
+      signed_out: 'U bent succesvol uitgemeld.'
     passwords:
       new:
-        forgot_pass: Password forgotten?
-        sent: "Ontvang instructies om uw wachtwoord te resetten"
-        email: email
+        forgot_pass: Wachtwoord vergeten?
+        sent: "Ontvang instructies om uw wachtwoord opnieuw in te stellen"
+        email: E-mail adres
       edit:          
-        change_pass: 'Change your password'
-        pass: "New password"
-        confirm_pass: "Confirm new password"
-        sent: "Change"
-      send_instructions: 'U ontvangt via e-mail instructies om uw wachtwoord te resetten.'
+        change_pass: 'Wijzig uw wachtwoord'
+        pass: "Niew wachtwoord"
+        confirm_pass: "Bevestig uw wachtwoord"
+        sent: "Wijzig"
+      send_instructions: 'U ontvangt via e-mail instructies om uw wachtwoord opnieuw in te stellen.'
       send_paranoid_instructions: 'Indien uw e-mail adres zich in onze database bevindt, ontvangt u via e-mail instructies om uw wachtwoord te resetten.'
-      updated: 'Uw wachtwoord is gewijzigd. U bent nu ingelogd.'
+      updated: 'Uw wachtwoord is gewijzigd. U bent nu aangemeld.'
       updated_not_active: 'Uw wachtwoord is gewijzigd.'
     confirmations:
       new:
-        title: Resend confirmation instructions
-        email: email
-        setn: Resend confirmation instructions
+        title: Ontvang de bevestigingsinstructies opnieuw
+        email: E-mail adres
+        setn: Ontvang de bevestigingsinstructies opnieuw
       send_instructions: 'U ontvangt via e-mail instructies om uw account te activeren.'
       send_paranoid_instructions: 'Indien uw e-mail adres zich in onze database bevindt,ontvangt u via e-mail instructies om uw account te activeren.'
       confirmed: 'Uw account is geactiveerd.'
     registrations:
       edit:
-        title: Edit
-        email: email
-        waiting: 'Currently waiting confirmation for:'
-        current_pass: Current password
-        warning_current_pass: (we need your current password to confirm your changes)
-        warning_new_pass: (leave blank if you don't want to change it)
-        pass: New password
-        confirmation: Confirm new password
-        back: Back
-        update: Update
+        title: Wijzig
+        email: E-mail adres
+        waiting: 'In afwachting van bevestiging van:'
+        current_pass: Huidig wachtwoord
+        warning_current_pass: (We hebben uw huidig wachtwoord nodig om uw aanpassingen op te slaan)
+        warning_new_pass: (leeglaten indien u niets wilt wijzigen)
+        pass: Nieuw wachtwoord
+        confirmation: Bevestig nieuw wachtwoord
+        back: Terug
+        update: Wijzig
       signed_up_but_unconfirmed: 'U ontvangt via e-mail instructies om uw account te activeren.'
       signed_up_but_inactive: 'U bent inschreven maar u kan niet automatisch ingelogd worden omdat uw account nog niet geactiveerd is.'
       signed_up_but_locked: 'U bent inschreven maar u kan niet automatisch ingelogd worden omdat uw account geblokkeerd is.'
@@ -92,16 +105,15 @@ nl:
     mailer:
       confirmation_instructions:
         subject: 'Bevestiging e-mailadres'
-        welcome: "Welcome"
-        description: 'You can confirm your account email through the link below:'
-        subject: "Confirmation instructions"
-        sent: 'Confirm my account'
+        welcome: "Welkom"
+        description: 'U kan uw e-mail adres bevestigen door middel van de volgende link:'
+        sent: 'Bevestig uw e-mail adres'
       reset_password_instructions:
-        subject: 'Wachtwoord resetten'
-        change_pass: 'Change my password'
-        Hello: Hello
-        description: Someone has requested a link to change your password. You can do this through the link below.
-        alert1: "If you didn't request this, please ignore this email."
-        alert2: "Your password won't change until you access the link above and create a new one."
+        subject: 'Wachtwoord wijzigen'
+        change_pass: 'Wijzig mijn wachtwoord'
+        Hello: Hallo
+        description: Iemand heeft een aanvraag ingediend voor het wijzigen van uw wachtwoord.
+        alert1: "Indien u deze aanvraag niet heeft uitgevoerd kan u deze e-mail negeren."
+        alert2: "Uw wachtwoord wordt niet gewijzigd tot u de link volgt en een nieuw wachtwoord ingeeft."
       unlock_instructions:
-        subject: 'Account deblokkeren'
+        subject: 'Account ontgrendelen'
