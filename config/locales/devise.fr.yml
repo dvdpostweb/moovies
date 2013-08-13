@@ -12,6 +12,7 @@ fr:
       invalid: "n'est pas correct"
       blank: 'ne peux pas être vide'
       too_short: "est trop court (au moins %{count} caractères)"
+      too_long: "est trop long (maximum %{count} caractères)"
       confirmation: "ne correspond pas à la confirmation"
   activerecord:
     attributes:
