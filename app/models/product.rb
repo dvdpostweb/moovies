@@ -496,4 +496,18 @@ class Product < ActiveRecord::Base
       end
     end
   end
+  def self.get_product_home
+    HomeProduct.destroy_all
+    ['tvod', 'svod'].each do |type|
+      [1,2,3].each do |locale_id|
+        ['be'].each do |country|
+          products = Product.search(:max_matches => 6, :indices => ["product_#{country}_core"]).by_language(locale_id).order("#{type}_start desc, streaming_available_at_order DESC")
+          products = type == 'svod' ? products.svod_last_added : products.tvod_last_added
+          products.each do |p|
+            HomeProduct.create(:product_id => p.id, :country => country, :locale_id => locale_id, :kind => type)
+          end
+        end
+      end
+    end
+  end
 end
