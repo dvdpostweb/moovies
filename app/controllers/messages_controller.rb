@@ -1,5 +1,5 @@
 class MessagesController < ApplicationController
-  before_filter :authenticate_customer!
+  before_filter :authenticate_customer!, :unless => :faq? 
 
   def show
     @message = current_customer.tickets.find(params[:id])
@@ -78,5 +78,10 @@ class MessagesController < ApplicationController
 
   def urgent
     @offline_request = current_customer.payment.recovery
+  end
+
+  protected
+  def faq?
+    params[:action] == 'faq'
   end
 end

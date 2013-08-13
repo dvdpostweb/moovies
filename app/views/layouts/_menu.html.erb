@@ -29,6 +29,7 @@
 </ul>
 <%= form_for :search, {:url => search_path(), :html => {:id => 'search', :method => :get}} do |f| %>
   <div align='center' class='search'>
+    <div style='display:none' id='search_init'><%= t 'layouts.menu.search' %></div>
     <%= text_field_tag :search, (params[:search] || t('.search')), {:id => 'search-field', :class => "search-field"} %>
     <%= submit_tag 'search', :id => 'search-btn' %>
   </div>

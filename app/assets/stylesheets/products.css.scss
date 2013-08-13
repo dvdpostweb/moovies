@@ -1627,3 +1627,10 @@ ul#ratings_labels li:last-child {
 #filters li label input {
   vertical-align: middle;
 }
+#products_index .movie-descr {
+	float: left;
+	min-height: 106px;
+	padding: 0 8px 0 117px;
+	position: relative;
+	width: 358px;
+}
