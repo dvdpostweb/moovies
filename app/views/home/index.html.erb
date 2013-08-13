@@ -40,7 +40,7 @@
     • <%= t '.tvod2' %><br />
     • <%= raw t '.tvod3' %>
     <ul class="osc">
-      <li><%= link_to t('.discover'), products_path(:package => Moovies.packages.invert[2], :kind => nil) %> </li>
+      <li><%= link_to t('.discover'), products_path(:package => Moovies.packages.invert[2], :kind => nil) %></li>
     </ul>
   </div>
   <div class="wrap" id="apps">
@@ -52,7 +52,7 @@
     • <%= t '.multi2' %><br />
     • <%= raw t '.multi3' %>
     <ul class="osc">
-      <li> <a href="#"><%= t '.discover' %></a> </li>
+      <li><%= link_to t('.discover'), info_path(:page_name => :vod) %></li>
     </ul>
   </div>
   <div class="wrap" id="news">
@@ -111,7 +111,6 @@
     </div>
     <div class="clear"></div>
   </div>
-</div>
 </div>
 <!--   ==============   END MAIN CONTENT   ==============   -->
 

@@ -1,6 +1,8 @@
 class Customers::RegistrationsController < Devise::RegistrationsController
   
   def new
+    @hide_footer = true
+    @hide_menu = true
     if params[:code] || cookies[:code]
       code = params[:code] || cookies[:code]
       @discount = Discount.by_name(code).available.first
