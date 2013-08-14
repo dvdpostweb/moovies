@@ -9,7 +9,8 @@ Moovies::Application.configure do
   config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
-  config.serve_static_assets = false
+  #to do
+  config.serve_static_assets = true
 
   # Compress JavaScripts and CSS
   config.assets.compress = true
@@ -43,7 +44,7 @@ Moovies::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  # config.assets.precompile += %w( search.js )
+  config.assets.precompile += %w( jquery.ui.datepicker-fr.js jquery.ui.datepicker-nl.js jquery.ui.datepicker-en.js login.css)
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
@@ -57,4 +58,12 @@ Moovies::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+
+  config.cache_store = :mem_cache_store, 'binga:11211'
+  config.i18n_cache_store = ActiveSupport::Cache.lookup_store(:mem_cache_store, 'binga:11211', :namespace => "production")
+  config.action_mailer.default_url_options = { 
+    :host => "www.plush.be",
+    :only_path => false
+  }
+
 end

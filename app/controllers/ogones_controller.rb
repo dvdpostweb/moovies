@@ -1,4 +1,5 @@
 class OgonesController < ApplicationController
+  skip_before_filter  :verify_authenticity_token
   def create
     @ogone = OgoneCheck.find_by_orderid(params[:orderID])
     customer = @ogone.customer

@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
   before_filter :redirect_after_registration
   
   layout :layout_by_resource
+  
+  def handle_unverified_request
+    raise ActionController::InvalidAuthenticityToken
+  end
 
   def default_url_options
     if params[:kind] == :normal
