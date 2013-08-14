@@ -45,5 +45,4 @@ Moovies::Application.configure do
 
   config.cache_store = :mem_cache_store, '192.168.100.206:11211'
   config.i18n_cache_store = ActiveSupport::Cache.lookup_store(:mem_cache_store, '192.168.100.206:11211', :namespace => "staging")
-  ENV['HOST_URL'] = 'staging.plush.be'
 end

@@ -28,7 +28,7 @@ pre_production:
   mem_limit: 128M
 production:
   mysql41: 9318
-  pid_file: /home/webapps/plush/pre_production/shared/tmp/searchd.pid
-  indices_location: /home/webapps/plush/pre_production/shared/db/sphinx
+  pid_file: /home/webapps/plush/production/shared/tmp/searchd.pid
+  indices_location: /home/webapps/plush/production/shared/db/sphinx
   max_matches: 1000
   mem_limit: 128M
