@@ -1,7 +1,7 @@
 <!--   ==============   MAIN CONTENT   ==============   -->
 <div id="maincontent" >
 	<%= render :partial => 'layouts/filters', :locals => {:filter => @filter }%>
-  <h2 class="ttl">Tous les films</h2>
+  <h2 class="ttl"><%= products_index_title %></h2>
   <%= render :partial => 'products/index/image', :locals => {:people => @people} if @people %>
   
   <!--   ==============   MOVIES   ==============   -->
