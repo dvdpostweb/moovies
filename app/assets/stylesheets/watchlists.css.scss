@@ -80,10 +80,10 @@ a.louer
   margin:2px 0 0 0
 }
 #on-way-nav {
-display: block;
-text-align: right;
-position: absolute;
-right: 0;
+	display: block;
+	text-align: right;
+	right: 0;
+	padding-right: 20px;
 }
 #on-way-nav li a {
 color: #FF4B00;
@@ -201,11 +201,11 @@ margin: 0 12px 0 0;
 text-align: center;
 }
 #ready .status .trash{
-display: inline-block;
-float: none;
-width: auto;
-vertical-align: middle;
-margin: 0;
+	display: inline-block;
+	float: left;
+	width: auto;
+	vertical-align: middle;
+	margin-top: 7px;
 }
 #coming .status .trash{
 display: inline-block;
@@ -220,13 +220,15 @@ color: #4f4f4f;
 float: left;
 }
 .vod .title{
-  padding-left: 29px;
-  padding-top: 7px;
-  width: 494px;
-  background: none;
-  font-size: 14px;
-  font-weight: bold;
-  height: 22px;
+	padding-left: 29px;
+	padding-top: 7px;
+	width: 494px;
+	background: none;
+	font-size: 14px;
+	font-weight: bold;
+	height: 22px;
+	float: left;
+	padding-top: 12px;
 }
 .vod .title a {
   color: #454545;
@@ -262,7 +264,10 @@ text-indent: -999em;
 width: 11px;
 }
 .box .status {
-width: 351px;
+	float: right;
+	padding-right: 10px;
+	padding-top: 3px;
+	padding-bottom: 3px;
 }
 .box .availability, .box .status {
 float: left;
