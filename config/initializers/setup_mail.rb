@@ -1,8 +1,10 @@
 ActionMailer::Base.smtp_settings = {  
-  :address              => "mail.dvdpost.local",  
-  :port                 => 25,  
-  :domain               => "dvdpost.be",  
-  :authentication       => "none",  
-  :enable_starttls_auto => false  
+  :address              => "smtp-auth.Register.be", 
+  :port                 => 1025,
+  :domain               => "plush.be",
+  :authentication       => "login",
+  :user_name            => "info@plush.be",
+  :password             => "fireball18",
+  :enable_starttls_auto => true
 }
-ActionMailer::Base.default :from => 'info@dvdpost.be'
+ActionMailer::Base.default :from => 'info@plush.be'

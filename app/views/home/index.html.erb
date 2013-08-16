@@ -101,6 +101,7 @@
       </div>
     </div>
     <div class="clear"></div>
+    <% unless current_customer %>
     <div id="subscribe-wrap">
       <div class="wrap" style="">
         <h3><%= t('.watch_now') %></h3>
@@ -109,6 +110,7 @@
       <div id="try_it"><%= link_to t('.try2'), new_customer_registration_path(:code => @discount_bottom.name), :class => 'essaigratuit osc btn' %> <div id="engagement"><%= t('.try2_text') %></div></div>
 
     </div>
+    <% end %>
     <div class="clear"></div>
   </div>
 </div>
