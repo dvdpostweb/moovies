@@ -3,7 +3,7 @@
 		<h4><%= t '.email.title' %></h4>
 		<% if !current_customer %>
 		  <%= t '.email.text' %>
-		  <%= mail_to "info@dvdpost.be" %>
+		  <%= mail_to "info@plush.be" %>
 		<% else %>
 		  <%= link_to t('.private_message'), new_message_path(), :id => 'new_message', :class => 'facebox' %>
 		<% end %>
