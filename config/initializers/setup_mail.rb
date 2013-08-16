@@ -1,4 +1,5 @@
 ActionMailer::Base.smtp_settings = {  
+  :openssl_verify_mode  => OpenSSL::SSL::VERIFY_NONE,
   :address              => "smtp-auth.Register.be", 
   :port                 => 1025,
   :domain               => "plush.be",
