@@ -9,8 +9,9 @@
   </tr>
   <tr>
     <td bgcolor="#ffffff" width="20"></td>
-    <td bgcolor="#ffffff" ><font color="#2c3841" ><p>Félicitation, votre compte <%= @email %> a bien été créé.</p><p>Pour accéder à notre catalogue de films il suffit d'activer votre compte en cliquant le lien <a href="<%= confirmation_url(@resource, :confirmation_token => @resource.confirmation_token, :locale => I18n.locale) %>" target="_blank" style="color:  rgb(152, 211, 33); text-decoration: none;"><strong>ici</strong></a> et en suivant les indications </p>
-      <p>Activez votre compte dés maintenant et découvrez </p></font></td>
+    <td bgcolor="#ffffff" ><font color="#2c3841" ><p><%= t('.grats', :email => @email) %></p>
+      <p><% t('.desc1') %></p>
+      <p><% t('.desc2') %></p></font></td>
       <td bgcolor="#ffffff" width="20"></td>
     </tr>
     <tr height="20">
@@ -30,22 +31,19 @@
           </tr>
           <tr>
             <td width="132" valign="top" align="center">
-              la première offre VOD illimitée de Belgique
+              <% t('.slogan1') %>
             </td>
 
             <td width="132" valign="top" align="center">
-              un large catalogue <br />
-              de films illimité et<br />
-              à la carte
+              <% t('.slogan2').html_safe %>
             </td>
 
             <td width="132" valign="top" align="center">
-              un service<br />
-              multi-plateforme 
+              <% t('.slogan3').html_safe %>
             </td>
 
             <td width="132" valign="top" align="center">
-              des nouveautés chaque semaine 
+              <% t('.slogan4') %>
             </td>
 
           </tr>
@@ -66,43 +64,6 @@
       <td bgcolor="#ffffff" ></td>
       <td bgcolor="#ffffff" width="20"></td>
     </tr>
-
-    <tr>
-      <td bgcolor="#ffffff" width="20"></td>
-      <td bgcolor="#ffffff" ><table cellpadding="0" cellspacing="0" align="center">
-        <tr>
-          <td bgcolor="#2c3841" height="2" colspan="15"></td>
-        </tr>
-        <tr>
-          <td  height="5" colspan="15"></td>
-        </tr>
-        <tr>
-          <td width="10"></td>
-          <td style="font-size:13px; text-transform:uppercase; font-family:Arial, Helvetica, sans-serif;">Suivez-nous sur</td>
-          <td width="10"></td>
-          <td><a href="#" target="_blank"><img src="<%= image_url "mails/facebook.png" %>" border="0" align="absmiddle"  alt="Facebook" /></a></td>
-          <td width="10"></td>
-          <td><a href="#" target="_blank"><img src="<%= image_url "mails/twitter.png" %>" border="0" align="absmiddle"  alt="Twitter" /></a></td>
-          <td width="10"></td>
-          <td><a href="#" target="_blank"><img src="<%= image_url "mails/google.png" %>" border="0" align="absmiddle"  alt="Google+" /></a></td>
-          <td width="10"></td>
-          <td><a href="#" target="_blank"><img src="<%= image_url "mails/pinterest.png" %>" border="0" align="absmiddle" alt="pinterest"></a></td>
-          <td width="20"></td>
-          <td style="font-size:13px; text-transform:uppercase; font-family:Arial, Helvetica, sans-serif;" class="screenonly">Partagez ce mail sur</td>
-          <td width="10" class="screenonly"></td>
-          <td class="screenonly"><a href="" target="_blank"><img src="<%= image_url "mails/emailer.jpg" %>" border="0" align="absmiddle" alt="facebook, twitter,..."></a></td>
-          <td width="10"></td>
-        </tr>
-        <tr>
-          <td height="5" colspan="15"></td>
-        </tr>
-        <tr>
-          <td bgcolor="#2c3841" height="2" colspan="15"></td>
-        </tr>
-      </table>
-    </td>
-    <td bgcolor="#ffffff" width="20"></td>
-  </tr>
   <tr height="16">
     <td colspan="3" bgcolor="#ffffff" ></td>
   </tr>
