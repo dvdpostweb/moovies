@@ -12,6 +12,7 @@ class CustomersController < ApplicationController
   end
 
   def edit
+    @customer = current_customer
     if request.xhr?
       render :layout => false
     end
