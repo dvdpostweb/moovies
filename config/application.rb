@@ -58,6 +58,10 @@ module Moovies
     config.autoload_paths += %W(#{config.root}/lib)
     config.to_prepare do
       Devise::Mailer.layout "email" # email.haml or email.erb
+      Devise::Mailer.helper "application"
+    end
+    config.to_prepare do
+      ActionMailer::Base.helper "application"
     end
   end
 end
