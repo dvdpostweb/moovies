@@ -36,8 +36,9 @@ class Product < ActiveRecord::Base
   has_many :uninteresteds, :foreign_key => :products_id
   has_many :uninterested_customers, :through => :uninteresteds, :source => :customer, :uniq => true
   has_many :streaming_products_be, :class_name => 'StreamingProduct', :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "streaming_products.available = 1 and streaming_products.country ='BE' and streaming_products.status in ('online_test_ok', 'soon', 'uploaded','to_upload') and (streaming_products.expire_backcatalogue_at is null or streaming_products.expire_backcatalogue_at > now())"
-  has_many :vod_online_be, :class_name => 'StreamingProduct', :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "streaming_products.available = 1 and streaming_products.country ='BE' and streaming_products.status = 'online_test_ok' and ((streaming_products.available_from <= date(now()) and streaming_products.expire_at >= date(now())) or (streaming_products.available_backcatalogue_from <= date(now()) and streaming_products.expire_backcatalogue_at >= date(now())))"
   has_many :streaming_products_lu, :class_name => 'StreamingProduct', :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "streaming_products.available = 1 and streaming_products.country ='LU' and streaming_products.status in ('online_test_ok', 'soon', 'to_upload','uploaded') and (streaming_products.expire_backcatalogue_at is null or streaming_products.expire_backcatalogue_at > now())"
+  has_many :vod_online_be, :class_name => 'StreamingProduct', :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "streaming_products.available = 1 and streaming_products.country ='BE' and streaming_products.status = 'online_test_ok' and ((streaming_products.available_from <= date(now()) and streaming_products.expire_at >= date(now())) or (streaming_products.available_backcatalogue_from <= date(now()) and streaming_products.expire_backcatalogue_at >= date(now())))"
+  has_many :vod_online_lu, :class_name => 'StreamingProduct', :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "streaming_products.available = 1 and streaming_products.country ='lu' and streaming_products.status = 'online_test_ok' and ((streaming_products.available_from <= date(now()) and streaming_products.expire_at >= date(now())) or (streaming_products.available_backcatalogue_from <= date(now()) and streaming_products.expire_backcatalogue_at >= date(now())))"
   has_many :tokens, :foreign_key => :imdb_id, :primary_key => :imdb_id
   has_many :streaming_trailers, :foreign_key => :imdb_id, :primary_key => :imdb_id
   has_many :tokens_trailers, :foreign_key => :imdb_id, :primary_key => :imdb_id
@@ -110,6 +111,10 @@ class Product < ActiveRecord::Base
   end
   
   def self.filter(filter, options={}, exact=nil)
+    if options[:package].nil?
+      id = options[:kind] == :normal ? 1 : 4
+      options[:package] = Moovies.packages.invert[id]
+    end
     products = Product.by_kind(options[:kind]).by_right()
     products = products.exclude_products_id([exact.collect(&:products_id)]) if exact
     products = products.by_actor(options[:actor_id]) if options[:actor_id]
@@ -127,13 +132,8 @@ class Product < ActiveRecord::Base
     products = products.by_package(Moovies.packages[options[:package]]) if options[:package] && (options[:view_mode] != 'svod_soon' && options[:view_mode] != 'tvod_soon')
     products = self.get_view_mode(products, options) if options[:view_mode]
     sort = get_sort(options)
-    #to do
     products = products.order(sort, :extended) if sort != ''
-    if options[:exact]
-      products = search_clean_exact(products, options[:search], {:page => options[:page], :per_page => options[:per_page], :limit => options[:limit]})
-    else
-      products = search_clean(products, options[:search], {:page => options[:page], :per_page => options[:per_page], :limit => options[:limit]})
-    end
+    products = search_clean(products, options[:search], {:page => options[:page], :per_page => options[:per_page], :limit => options[:limit], :country_id => options[:country_id]})
     
     products
   end
@@ -310,7 +310,8 @@ class Product < ActiveRecord::Base
     end
   end
 
-  def streaming?(kind =  :normal, country_id = 21)      
+  def streaming?(kind =  :normal, country_id = 21)
+    #to do
     sql = streaming_products
     unless Rails.env == "pre_production"
       sql = sql.available.country('BE')
@@ -333,20 +334,16 @@ class Product < ActiveRecord::Base
     page = options[:page] || 1
     limit = options[:limit] ? options[:limit].to_i : "1000"
     per_page = options[:per_page] || self.per_page
-    products.search(search, :max_matches => limit, :per_page => per_page, :page => page, :indices => ['product_be_core'])
-  end
-
-  def self.search_clean_exact(query_string, options={}, count = false)
-    qs = []
-    query_string = query_string.gsub(/[_-]/, ' ').gsub(/["\(\)]/, ' ').gsub(/[@$!^\/\\|]/, '')
-    qs = query_string.split.collect do |word|
-      replace_specials(word)
+    name = 
+    case options[:country_id] 
+      when 131 
+        'nl' 
+      when 161 
+        'lu' 
+      else 
+        'be' 
     end
-    query_string = "@descriptions_title ^#{qs.join(' ')}$"
-    page = 1
-    limit = options[:limit] ? options[:limit].to_i : "1000"
-    per_page = 20
-    self.search(query_string, :max_matches => limit, :per_page => per_page, :page => page)
+    products.search(search, :max_matches => limit, :per_page => per_page, :page => page, :indices => ["product_#{name}_core"])
   end
 
   def self.replace_specials(str)

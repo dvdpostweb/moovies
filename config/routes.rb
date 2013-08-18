@@ -47,7 +47,7 @@ Moovies::Application.routes.draw do
     resources :phone_requests, :only => [:new, :create]
     get 'faq', :to => 'messages#faq'
     match 'info/:page_name' => 'info#index', :as => :info
-    match 'steps/:page_name' => 'steps#index', :as => :step
+    resources :steps, :show => [:index, :update]
     resources :watchlists, :as => :vod_wishlists
     match 'display_vod' => 'watchlists#display_vod'
     resource :search_filters, :only => [:update, :destroy]

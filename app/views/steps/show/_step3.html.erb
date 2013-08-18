@@ -49,7 +49,7 @@
       <table cellpadding="2" class="padding_button">
         <tr>
           <td>
-            <a class="sub_black_link2" href="/logoff.php"><%= t '.back' %></a>
+            <%= link_to t('.back'), url_for, :method => :put, :class => :sub_black_link2 %>
           </td>
           <td>
             &nbsp;

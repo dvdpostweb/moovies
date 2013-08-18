@@ -11,14 +11,8 @@ class WatchlistsController < ApplicationController
       @token_list = current_customer.get_all_tokens(params[:kind])
     end
     @list = current_customer.vod_wishlists.joins({:products => :descriptions}, :streaming_products).select('distinct vod_wishlists.*').order('products_description.products_name').where("products_description.language_id = :language and streaming_products.available = 1 and streaming_products.status = 'online_test_ok' and products_status != -1 and products_type = :type and ((available_from <= :now and expire_at >= :now) or (available_backcatalogue_from <= :now and expire_backcatalogue_at >= :now)) and country = :country", {:language => Moovies.languages[I18n.locale], :type => Moovies.product_kinds[params[:kind]], :now => Time.now().localtime.to_s(:db), :country => Product.country_short_name(session[:country_id])})
-    if session[:country_id] == 161
-      country_filter = "vod_next_nl = 1 and"
-    elsif session[:country_id] == 131
-      country_filter = "vod_next_lux = 1 and"
-    else
-      country_filter = "vod_next = 1 and"
-    end
-    @soon_list = current_customer.vod_wishlists.joins({:products => :descriptions}).select('distinct vod_wishlists.*').order('products_description.products_name').where("products_description.language_id = :language and #{country_filter} products_status != -1 and products_type = :type", {:language => Moovies.languages[I18n.locale], :type => Moovies.product_kinds[params[:kind]], :media => :vod})
+    list_id = @list.count > 0 ? @list.collect(&:id).join(',') : 0
+    @soon_list = current_customer.vod_wishlists.joins({:products => :descriptions}).select('distinct vod_wishlists.*').order('products_description.products_name').where("products_description.language_id = :language and products_status != -1 and products_type = :type and vod_wishlists.id not in(:remove)", {:language => Moovies.languages[I18n.locale], :type => Moovies.product_kinds[params[:kind]], :remove => list_id})
     @display_vod = 0 #to do 
   end
 

@@ -201,4 +201,12 @@ module Moovies
       })
     end
   end
+  def geo_country_name
+    HashWithIndifferentAccess.new.merge({
+     22 => 'be',
+     131 => 'nl',
+     161 => 'lu',
+     0 => 'be'
+    })
+  end
 end
