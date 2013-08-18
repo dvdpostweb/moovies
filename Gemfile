@@ -61,3 +61,4 @@ gem "capistrano-ext"
 gem "client_side_validations"
 gem 'date_validator'
 gem 'whenever', :require => false
+gem 'geoip'

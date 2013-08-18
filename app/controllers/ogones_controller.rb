@@ -80,6 +80,6 @@ class OgonesController < ApplicationController
       #  end
       #end  
     end
-    redirect_to step_path(:page_name => 'step4')
+    redirect_to step_path(:id => 'step4')
   end
 end

@@ -44,9 +44,9 @@ class CustomersController < ApplicationController
         render :action => :edit, :layout => false
       else
         if current_customer.step == 31
-          render :template => "steps/index", :locals => {:page_name => 'step2'}
+          render :template => "steps/index", :locals => {:id => 'step2'}
         elsif current_customer.step == 33
-          render :template => "steps/index", :locals => {:page_name => 'step3'}
+          render :template => "steps/index", :locals => {:id => 'step3'}
         end
       end
     end

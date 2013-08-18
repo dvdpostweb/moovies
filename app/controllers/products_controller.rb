@@ -43,6 +43,10 @@ class ProductsController < ApplicationController
     #to do user_agent = UserAgent.parse(request.user_agent)
     @tokens = current_customer.get_all_tokens_id(params[:kind], @product.imdb_id) if current_customer
     @countries = ProductCountry.visible.order
+    @svod_date = @product.svod_dates.current.order.first
+    Rails.logger.debug { "@@@#{@svod_date.inspect}" }
+    @type = view_context.get_type(@product, @svod_date)
+    
     #to do @filter = get_current_filter({})
     unless request.xhr?
       @trailer =  @product.trailer?
@@ -185,6 +189,7 @@ class ProductsController < ApplicationController
     @product_image = data[:image]
     @product_description =  data[:description]
   end
+
 private
   def find_product
     if !params[:recommendation].nil?

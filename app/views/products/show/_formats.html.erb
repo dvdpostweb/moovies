@@ -1,0 +1,21 @@
+<div id="formats">
+  <h3><%= t '.format_available' %></h3>
+
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td width="90"><%= t'.audio' %></td>
+      <td width="90"><%= t '.subtitles' %></td>
+      <td>type</td>
+      <td></td>
+    </tr>
+    <% #to do %>
+    <% product.streaming_products_be.each do |vod| %>
+    <tr>
+      <td><%= vod.language.by_language(I18n.locale).first.name %></td>
+      <td><%= vod.subtitle.by_language(I18n.locale).first ? vod.subtitle.by_language(I18n.locale).first.name : t('.no_subtitle') %></td>
+      <td><%= type %></td>
+      <%= get_vod_message(vod, svod_date) %>
+    </tr>
+    <% end %>
+  </table>
+</div><!-- #formats -->

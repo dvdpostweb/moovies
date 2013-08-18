@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 module ProductsHelper
 
   def get_reviews()
@@ -401,106 +403,6 @@ module ProductsHelper
     details
   end
 
-  def left_column_vod(params)
-    html_content = []
-    if params[:kind] == :normal && session[:country_id] != 161
-      html_content << content_tag(:li, :class => 'list new') do
-        link = link_to t('products.left_column.ppv'), products_path(:filter => :vod, :ppv => 1), :class => params[:filter] == "vod" && params[:ppv] == "1" ? :actived : ''
-        "#{link}<span>#{t('.new_cat')}</span>"
-      end
-    end
-    html_content << content_tag(:li, :class => :list) do
-      link_to t('products.left_column.rent'), products_path(:filter => :vod, :sort => :token_month, :limit => 40), :class => params[:filter] == "vod" && params[:sort] == "token_month" ? :actived : ''
-    end
-    if params[:kind] == :adult
-      html_content << content_tag(:li, :class => :list) do
-        link_to t('products.left_column.rating'), products_path(:sort => :rating, :limit => 50, :filter => :vod), :class => params[:highlight_best_vod] == "1" ? :actived : ''
-      end
-    else
-      html_content << content_tag(:li, :class => :list) do
-        link_to t('products.left_column.rating'), products_path(:highlight_best_vod => 1, :filter => :vod), :class => params[:highlight_best_vod] == "1" ? :actived : ''
-      end
-    end
-    if params[:kind] == :adult
-      list = ProductList.theme.by_kind(params[:kind].to_s).by_style(:vod).find_by_home_page(true)
-      html_content << content_tag(:li, :class => :list) do
-        link_to t('products.left_column.favorite'), list_products_path(:list_id => list.to_param), :class => params[:list_id].to_i == list.to_param ? :actived : ''
-      end
-    else
-      html_content << content_tag(:li, :class => :list) do
-        link_to t('products.left_column.favorite'), list_products_path(:list_id => DVDPost.favorite_vod[I18n.locale]), :class => params[:list_id].to_i == DVDPost.favorite_vod[I18n.locale] ? :actived : ''
-      end
-    end
-    html_content << content_tag(:li, :class => :list) do
-      link_to t('products.left_column.new'), products_path(:sort => :production_year_vod, :filter => :vod), :class => params[:filter] == "vod" && params[:sort] == 'production_year_vod' ? :actived : ''
-    end
-    html_content << content_tag(:li, :class => :list) do
-      link_to t('products.left_column.fresh_vod'), products_path(:view_mode => :vod_recent, :filter => :vod), :class => params[:filter] == "vod" && params[:view_mode] == "vod_recent" ? :actived : ''
-    end
-    html_content << content_tag(:li, :class => :list) do
-      link_to t('products.left_column.soon'), products_path(:view_mode => :vod_soon, :filter => :vod), :class => params[:filter] == "vod" && params[:view_mode] == "vod_soon" ? :actived : ''
-    end
-    html_content << content_tag(:li, :class => :list) do
-      link_to t('products.left_column.categorie'), categories_path(:filter => :vod), :class => params[:controller] == "categories" && params[:filter] == "vod" ? :actived : ''
-    end
-    html_content << content_tag(:li, :class => :list) do
-      link_to t('products.left_column.studio'), studios_path(:filter => :vod), :class => params[:controller] == "studios" && params[:filter] == "vod" && params[:id] != 804 ? :actived : ''
-    end
-    if params[:kind] == :normal
-      html_content << content_tag(:li, :class => :list) do
-        link_to t('products.left_column.univercine'), studio_products_path(:studio_id => 804, :filter => :vod), :class => params[:controller] == "studios" && params[:filter] == "vod" && params[:id] == 804 ? "actived" : ''
-      end
-    end
-    html_content << content_tag(:li, :class => :list) do
-      link_to t('products.left_column.all_catalogue'), products_path(:view_mode => :streaming), :class => params[:view_mode] == "streaming"  ? :actived : ''
-    end
-    
-  end
-
-  def left_column(params)
-    html_content = []
-    html_content << content_tag(:li, :class => :list) do
-      link_to t('products.left_column.rent'), products_path(:sort => :most_viewed, :limit => 40), :class => params[:filter] != "vod" && params[:sort] == "most_viewed" ? :actived : ''
-    end
-    if params[:kind] == :adult
-      html_content << content_tag(:li, :class => :list) do
-        link_to t('products.left_column.rating'), products_path(:sort => :rating, :limit => 50), :class => params[:highlight_best] == "1" ? :actived : ''
-      end
-    else
-      html_content << content_tag(:li, :class => :list) do
-        link_to t('products.left_column.rating'), products_path(:highlight_best => 1), :class => params[:highlight_best] == "1" ? :actived : ''
-      end
-    end
-    unless params[:kind] == :adult
-      html_content << content_tag(:li, :class => :list) do
-        link_to t('products.left_column.favorite'), list_products_path(:list_id => DVDPost.favorite_dvd[I18n.locale]), :class => params[:list_id].to_i == DVDPost.favorite_dvd[I18n.locale] ? :actived : ''
-      end
-    end
-    html_content << content_tag(:li, :class => :list) do
-      link_to t('products.left_column.new'), products_path(:sort => :production_year_all), :class => params[:sort] == 'production_year_all' ? :actived : ''
-    end
-    
-    html_content << content_tag(:li, :class => :list) do
-      link_to t('products.left_column.fresh'), products_path(:view_mode => :recent), :class => params[:filter] != "vod" && params[:view_mode] == "recent" ? :actived : ''
-    end
-    html_content << content_tag(:li, :class => :list) do
-      link_to t('products.left_column.soon'), products_path(:view_mode => :soon), :class => params[:filter] != "vod" && params[:view_mode] == "soon" ? :actived : ''
-    end
-    html_content << content_tag(:li, :class => :list) do
-      link_to t('products.left_column.cinema'), products_path(:view_mode => :cinema), :class => params[:view_mode] == "cinema" ? :actived : ''
-    end
-    html_content << content_tag(:li, :class => :list) do
-      link_to t('products.left_column.categorie'), categories_path(), :class => params[:controller] == "categories"  && params[:filter] != "vod" ? :actived : ''
-    end
-    if params[:kind] == :adult
-      html_content << content_tag(:li, :class => :list) do
-        link_to t('.performers'), actors_path()
-      end
-    end
-    html_content << content_tag(:li, :class => :list) do
-      link_to t('products.left_column.all_catalogue'), products_path(), :class => params[:view_mode].nil? && params[:filter].nil? && params[:limit].nil? && params[:controller] == 'products' ? :actived : ''
-    end
-  end
 
   def human_birth(people)
     if people.birth_at
@@ -543,4 +445,55 @@ module ProductsHelper
     options
   end
 
+  def menu_show(id, params, product)
+    if params[:controller] == 'products' && params[:action] == 'index'
+      if id == Moovies.packages[params[:package]] || ((id == 1 || id == 4) && params[:package].nil?)
+        "block"
+      else
+        "none"
+      end
+    elsif params[:controller] == 'products' && params[:action] == 'show'
+      if id == product.package_id
+        "block"
+      else
+        "none"
+      end
+    else
+      "block"
+    end
+  end
+
+  def get_type(product, svod_date)
+    if svod_date && svod_date.start_on <= Date.today
+      "SVOD"
+    else
+      "TVOD"
+    end
+  end
+
+  def get_vod_message(vod, svod_date)
+    if ((vod.available_from && vod.available_from <= Date.today && vod.expire_at >= Date.today) || (vod.available_backcatalogue_from <= Date.today && vod.expire_backcatalogue_at >= Date.today))
+      if svod_date && svod_date.start_on > Date.today && svod_date.start_on < Date.today+30.days
+        "<td class='goinfinite'>#{t('.soon_in_svod', :default => "Disponible dans <span><strong>Plush infinite</strong></span> dans %{days} jours", :days => (svod_date.start_on - Date.today).to_i).html_safe}</td>".html_safe
+      elsif svod_date && svod_date.end_on > Date.today && svod_date.end_on < Date.today+30.days
+        "<td class='goalacarte'>#{t('.soon_in_tvod', :default => "Passe <span>A la carte</span> dans %{days} jours", :days => (svod_date.end_on - Date.today).to_i).html_safe} #{vod.status}</td>".html_safe
+      elsif vod.expire_at && vod.expire_at > Date.today && vod.expire_at < Date.today+30.days
+        "<td class='noavailable'>#{t('.last_chance', :default => "<span><strong>Plus disponible</strong></span> dans %{days} jours", :days => (vod.expire_at - Date.today).to_i).html_safe}</td>".html_safe
+      elsif vod.expire_backcatalogue_at && vod.expire_backcatalogue_at > Date.today && vod.expire_backcatalogue_at < Date.today+30.days
+        "<td class='noavailable'>#{t('.last_chance', :default => "<span><strong>Plus disponible</strong></span> dans %{days} jours", :days => (vod.expire_backcatalogue_at - Date.today).to_i).html_safe}</td>".html_safe
+      else
+        "<td>#{t('.available')}</td>".html_safe
+      end
+    else
+      if vod.available_from && vod.available_from > Date.today
+        t('available_soon', :default => "<td>Disponible dans %{days} jours</td>", :days => (vod.available_from - Date.today).to_i).html_safe
+      elsif vod.available_backcatalogue_from && vod.available_backcatalogue_from > Date.today
+        t('available_soon', :default => "<td>Disponible dans %{days} jours</td>", :days => (vod.available_backcatalogue_from - Date.today).to_i).html_safe
+      elsif vod.expire_backcatalogue_at && vod.expire_backcatalogue_at < Date.today
+        t('not_available_anymore', :default => "<td>Plus disponible</td>").html_safe
+      else
+        t('soon', :default => "<td>Bientôt disponible</td>").html_safe
+      end
+    end
+  end
 end
