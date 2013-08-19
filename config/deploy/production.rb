@@ -11,7 +11,7 @@ set :default_environment, {
 #############################################################
 
 set :application, "moovies"
-set :deploy_to, "/home/webapps/plush/staging"
+set :deploy_to, "/home/webapps/plush/production"
 
 #############################################################
 #	Settings
@@ -63,16 +63,16 @@ namespace :deploy do
   end
 
 end
-namespace :deploy do
-  namespace :assets do
-    desc "Precompile assets on local machine and upload them to the server."
-    task :precompile, roles: :web, except: {no_release: true} do
-      run_locally "bundle exec rake assets:precompile"
-      find_servers_for_task(current_task).each do |server|
-        run_locally "rsync -vr --exclude='.DS_Store' public/assets #{user}@#{server.host}:#{shared_path}/"
-      end
-    end
-  end
-end
+#namespace :deploy do
+#  namespace :assets do
+#    desc "Precompile assets on local machine and upload them to the server."
+#    task :precompile, roles: :web, except: {no_release: true} do
+#      run_locally "bundle exec rake assets:precompile"
+#      find_servers_for_task(current_task).each do |server|
+#        run_locally "rsync -vr --exclude='.DS_Store' public/assets #{user}@#{server.host}:#{shared_path}/"
+#      end
+#    end
+#  end
+#end
 
 after "deploy:restart", "deploy:cleanup"
