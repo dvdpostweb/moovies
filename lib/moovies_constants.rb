@@ -209,4 +209,9 @@ module Moovies
      0 => 'be'
     })
   end
+
+  def super_user
+    []
+  end
+
 end

@@ -103,31 +103,6 @@ class Token < ActiveRecord::Base
     return token_status == Token.status[:ok] || token_status == Token.status[:ip_valid]
   end
 
-  def self.create_token(imdb_id, product, current_ip, streaming_product_id, kind, code)
-    #to do valid code
-    file = StreamingProduct.find(streaming_product_id)
-    begin
-      token_string = DVDPost.generate_token_from_alpha(file.filename, kind)
-    rescue => e
-      token_string = false
-    end
-    if token_string
-      token = Token.create(          
-        :code => code,          
-        :imdb_id     => imdb_id,          
-        :token       => token_string        
-      )
-      if token.id.blank?
-        return {:token => nil, :error => Token.error[:query_rollback]}
-      else
-        StreamingCode.find_by_name(code).update_attribute(:used_at, Time.now.localtime)
-        return {:token => token, :error => nil}
-      end
-    else
-      return {:token => nil, :error => Token.error[:generation_token_failed]}
-    end
-  end  
-
   private
   def generate_token
     if token.nil?
