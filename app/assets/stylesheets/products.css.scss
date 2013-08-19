@@ -1519,7 +1519,7 @@ text-align:center;
 }
 
 
-#leftcolumn h3.ttl.alacarte {
+#leftcolumn h3.ttl.alacarte_menu {
 	background:#66CCCC;
 	color: #fff;
 
@@ -1636,4 +1636,8 @@ ul#ratings_labels li:last-child {
 	padding: 0 8px 0 117px;
 	position: relative;
 	width: 358px;
+}
+#film-details .watch
+{
+	margin:4px 0;
 }

@@ -590,7 +590,11 @@ div.flash_error {
 	margin: 14px;
 	width: 942px;
 }
-
+#home #subscribe-wrap
+{
+	margin: 14px 0;
+	
+}
 #subscribe-wrap .wrap {
 	float: left;
 	padding: 12px 0 14px 30px;
@@ -727,17 +731,6 @@ div.flash_error {
 	width: 145px;
 }
 
-#new-alacarte-wrap .watch {
-	background-image: url(image_path('button_streamingppv.gif'));
-	font-size: 14px;
-	font-weight: bold;
-	height: 32px;
-	line-height: 30px;
-	width:118px;
-	padding-left:28px;
-	text-align:left;
-
-}
 
 .alacarte{
 background-image: url(image_path('button_streamingppv.gif'));
@@ -747,8 +740,10 @@ height: 32px;
 line-height: 30px;
 padding-left: 28px;
 text-align: left;
-width: 145px;
+width: 117px;
 color:#fff;
+
+display: block;
 }
 
 

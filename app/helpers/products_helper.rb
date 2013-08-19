@@ -472,7 +472,7 @@ module ProductsHelper
   end
 
   def get_vod_message(vod, svod_date, kind, package)
-    if vod.status = 'online_test_ok' && ((vod.available_from && vod.available_from <= Date.today && vod.expire_at >= Date.today) || (vod.available_backcatalogue_from <= Date.today && vod.expire_backcatalogue_at >= Date.today))
+    if vod.available?
       if svod_date && svod_date.start_on > Date.today && svod_date.start_on < Date.today+30.days
         "<td class='goinfinite'>#{t('.soon_in_svod_' + kind, :days => (svod_date.start_on - Date.today).to_i).html_safe}</td>".html_safe
       elsif svod_date && svod_date.end_on > Date.today && svod_date.end_on < Date.today+30.days

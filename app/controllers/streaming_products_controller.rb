@@ -2,8 +2,8 @@ class StreamingProductsController < ApplicationController
 
   def show
     @body_id = 'streaming'
-    @vod_create_token = General.find_by_CodeType('VOD_CREATE_TOKEN').value
-    @vod_disable = General.find_by_CodeType('VOD_ONLINE').value
+    @vod_create_token = "1"#General.find_by_CodeType('VOD_CREATE_TOKEN').value
+    @vod_disable = "1" #General.find_by_CodeType('VOD_ONLINE').value
     if Rails.env == 'production' 
       @product = Product.both_available.find_by_imdb_id(params[:id])
     else
@@ -63,7 +63,7 @@ class StreamingProductsController < ApplicationController
         end
       end
       format.js do
-        if streaming_access?
+        if view_context.streaming_access?
           streaming_version = StreamingProduct.find_by_id(params[:streaming_product_id])
           if ENV['HOST_OK'] == "1" || (!current_customer.suspended? && !Token.dvdpost_ip?(request.remote_ip) && !current_customer.super_user? && !(/^192(.*)/.match(request.remote_ip)))
             status = @token.nil? ? nil : @token.current_status(request.remote_ip)
