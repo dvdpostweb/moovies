@@ -14,7 +14,7 @@
 <% if params[:transit_or_history] == 'history' %>
 <h2><%= t '.history_list' %></h2>    	
 <div class="box<%= class_name %>" id="in-progress">
-  <%= render :partial => 'vod_wishlists/index/display', :locals => {:display_vod => @display_vod} unless mobile_request? %>
+  <%= render :partial => 'vod_wishlists/index/display', :locals => {:display_vod => @display_vod} %>
   <%= render :partial => path, :collection => @history_list, :locals => {:display_vod => @display_vod, :type => :history} %>
 </div>
 <%= will_paginate @history_list, :class => 'products-pagination2', :previous_label => '&nbsp;', :next_label => '&nbsp;' %>

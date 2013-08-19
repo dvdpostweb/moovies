@@ -10,7 +10,7 @@
     <li class="list"><%= link_to t('.svod_categories'), categories_path(:package => Moovies.packages.invert[1]) %></li>
     <li class="list"><%= link_to t('.svod_all'), products_path(:package => Moovies.packages.invert[1]) %></li>
   </ul>
-  <h3 class="ttl alacarte menu"><%= t '.tvod' %></h3>
+  <h3 class="ttl alacarte_menu menu"><%= t '.tvod' %></h3>
   <ul class="nav osc" style='display: <%= (@product && @product.package_id == 2) || params[:package] == Moovies.packages.invert[2] ? 'block' : 'none' %>'>
     <li class="list"><%= link_to t('.tvod_last_added'), products_path(:package => Moovies.packages.invert[2], :view_mode => :tvod_last_added) %></li>
     <li class="list"><%= link_to t('.tvod_most_viewed'), products_path(:package => Moovies.packages.invert[2], :view_mode => :most_viewed) %></li>

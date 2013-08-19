@@ -35,6 +35,7 @@ Moovies::Application.routes.draw do
       match 'trailer' => 'products#trailer'
       match 'uninterested' => 'products#uninterested'
       match 'action' => 'products#action'
+      match 'log' => 'products#log'
       
     end
 

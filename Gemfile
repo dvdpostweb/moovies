@@ -62,3 +62,4 @@ gem "client_side_validations"
 gem 'date_validator'
 gem 'whenever', :require => false
 gem 'geoip'
+gem 'hpricot', '~> 0.8.6'

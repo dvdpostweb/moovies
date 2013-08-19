@@ -32,7 +32,7 @@ $(function() {
     loader = 'loading.gif';
     $('.error').html('');
     $('#player').html('')
-    $('#presentation').html("<div style='height:389px'><div class='load'><img src='/images/"+loader+"'/></div></div>")
+    $('#presentation').html("<div style='height:389px'><div class='load'><img src='/assets/"+loader+"'/></div></div>")
     $(this).hide()
     $.ajax({
       dataType: 'html',
@@ -128,7 +128,7 @@ $(function() {
     if ($(this).attr('src').match(/black-star-/i)){
       loader = 'black-'+loader;
     }
-    html_item.html("<img src='/images/"+loader+"'/>");
+    html_item.html("<img src='/assets/"+loader+"'/>");
     $.ajax({dataType: 'html',
       url: url,
       type: 'POST',
@@ -173,7 +173,7 @@ $(function() {
       }else{
         full_image = image+'off';
       }
-      $('#star_'+product_id+"_"+i).attr('src', '/images/'+full_image+'.'+ext);
+      $('#star_'+product_id+"_"+i).attr('src', '/assets/'+full_image+'.'+ext);
     }
   });
 
@@ -182,7 +182,7 @@ $(function() {
     for(var i=1; i<=5; i++)
     {
       image = $('#star_'+product_id+'_'+i);
-      image.attr('src','/images/'+image.attr('name'));
+      image.attr('src','/assets/'+image.attr('name'));
     }
   });
   $("#report").on("click", function() {
@@ -252,7 +252,7 @@ $(function() {
   $("#all_versions").on("click", function() {
     html_item = $('#all_versions_data');
     content = html_item.html();
-    html_item.html("<div ><div style='margin: 0 auto; width:32px'><img src='/images/loading.gif'/></div></div>");
+    html_item.html("<div ><div style='margin: 0 auto; width:32px'><img src='/assets/loading.gif'/></div></div>");
     $.ajax({dataType: 'html',
       url: $(this).attr('href'),
       type: 'GET',

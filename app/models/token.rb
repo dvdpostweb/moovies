@@ -45,10 +45,10 @@ class Token < ActiveRecord::Base
   end
 
   def self.dvdpost_ip?(client_ip)
-    if client_ip == DVDPost.dvdpost_ip[:internal]
+    if client_ip == Moovies.dvdpost_ip[:internal]
       return true
     else
-      DVDPost.dvdpost_ip[:external].each do |external|
+      Moovies.dvdpost_ip[:external].each do |external|
         if client_ip == external
           return true
         end

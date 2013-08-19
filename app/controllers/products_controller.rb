@@ -44,7 +44,6 @@ class ProductsController < ApplicationController
     @tokens = current_customer.get_all_tokens_id(params[:kind], @product.imdb_id) if current_customer
     @countries = ProductCountry.visible.order
     @svod_date = @product.svod_dates.current.order.first
-    @type = view_context.get_type(@product, @svod_date)
     @vod_online
     #to do @filter = get_current_filter({})
     unless request.xhr?
@@ -191,6 +190,12 @@ class ProductsController < ApplicationController
 
   def action
     
+  end
+
+  def log
+    if request.xhr?
+      render :layout => false
+    end
   end
 
 private

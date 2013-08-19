@@ -1,4 +1,4 @@
-<% if !product.vod_online_be.empty? %>
+<% if !product.get_vod_online(session[:country_id]).empty? %>
   <% if product.svod_dates_online.first %>
     <% title = t('.watch_svod') %>
     <% class_name = "watch action_btn" %>

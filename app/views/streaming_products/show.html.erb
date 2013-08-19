@@ -1,6 +1,3 @@
-<% if @product.adult? && current_customer && current_customer.svod? && current_customer.svod_adult == 0 %>
-  <%= t('tokens.new.svod_adult') %>
-<% else %>
   <div  <%= @code && @code.white_label ? 'id="maincontent_no_border"' : 'id="maincontent"' %> >
     <div id="vod-wrap">
         <h2>
@@ -44,16 +41,15 @@
               <%= t 'streaming_products.show.kinds_alpha.reminder', :hours => 48 %>
             </p>
             <% end %>
+          <% else %>
+          ce n'est pas dans ton package
           <% end %>
-        
+        <% else %>
+        tu ne peux pas regarder de films durant la suspension de ton compte  
         <% end %>
         <div id="all_versions_data">
         
         </div>
-        <% if ENV['HOST_OK'] == "0" && current_customer.abo_active == 0 && current_customer.beta_test %>
-          <p align ="center"><%= link_to(image_tag("#{DVDPost.images_path}/free_movies/banner_relance_fr.jpg"), info_path(:page_name => :promotion)) %></p>
-        <% end %>
-        <% if @code.nil? || (@code && !@code.white_label) %>
         <div class="linkpc">
           <div class="icon_left">
             <%= image_tag 'icon_tv.gif', :align => :absmiddle, :alt => 'icon tv' %>
@@ -68,10 +64,8 @@
           <div class="clear"></div>
         </div>
       </div>
-      <% end %>
     </div>
     <div class="end"></div>
   </div>
   <div style="display:none" id="returnStatus"></div>
   <div style="display:none" id ="product_id"><%= @product.id %></di>
-<% end %>

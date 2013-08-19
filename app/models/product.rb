@@ -428,15 +428,25 @@ class Product < ActiveRecord::Base
   end
 
   def get_vod_online(country_id)
-     case country_id
+    case country_id
        when 131
          vod_online_lu
        when 161
          vod_online_nl
        else
          vod_online_be
-     end
-   end
+    end
+  end
+  def get_vod(country_id)
+    case country_id
+       when 131
+         streaming_products_lu
+       when 161
+         streaming_products_nl
+       else
+         streaming_products_be
+    end
+  end
   def self.get_view_mode(products, options)
     case options[:view_mode].to_sym
     when :recent
