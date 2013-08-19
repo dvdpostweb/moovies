@@ -16,7 +16,7 @@ class ActorsController < ApplicationController
           i = 0
           actors.collect do |actor|
             i += 1
-            count = 0 #to do Product.search.by_actor(actor.id).available.count
+            count = 0
             details[i] = {:actor => actor, :count => count}
           end
           @actors[l] = details
@@ -35,7 +35,7 @@ class ActorsController < ApplicationController
         i = 0
         actors.collect do |actor|
           i += 1
-          count = 0 #to do Product.search.by_actor(actor.id).available.count
+          count = 0
           details[i] = {:actor => actor, :count => count}
         end
         @actors[params[:letter]] = details

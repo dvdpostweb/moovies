@@ -371,14 +371,14 @@ class Customer < ActiveRecord::Base
 
   def create_token(imdb_id, product, current_ip, streaming_product_id, kind, source = 7)
     file = StreamingProduct.find(streaming_product_id)
-    if StreamingProductsFree.by_imdb_id(imdb_id).available.count > 0 || file.is_ppv
         begin
-          token_string = DVDPost.generate_token_from_alpha(file.filename, kind, false)
+          token_string = Moovies.generate_token_from_alpha(file.filename, kind, false)
         rescue => e
           token_string = false
         end
 
         if token_string
+          #to do
           token = file.is_ppv ? Token.create(:customer_id => id, :imdb_id => imdb_id, :token => token_string, :is_ppv => true, :ppv_price => file.ppv_price, :source_id => source, :country => file.country, :credits => file.credits, :kind => 'PPV') : Token.create(:customer_id => id, :imdb_id => imdb_id, :token => token_string, :source_id => source, :country => file.country, :credits => file.credits)
           if token.id.blank?
             return {:token => nil, :error => Token.error[:query_rollback]}
@@ -388,50 +388,6 @@ class Customer < ActiveRecord::Base
         else
           return {:token => nil, :error => Token.error[:generation_token_failed]}
         end
-    end
-
-    if credits >= file.credits || (product.adult? && svod_adult > 0 && file.studio_id == 147)
-      abo_process = AboProcess.today.last
-      if abo_process 
-        customer_abo_process = customer_abo_process_stats.find_by_aboprocess_id(abo_process.to_param)
-      end
-
-      if !abo_process || (customer_abo_process || abo_process.finished?)
-        begin
-          token_string = DVDPost.generate_token_from_alpha(file.filename, kind, false)
-        rescue => e
-          token_string = false
-        end
-        if token_string
-          kind = (svod_adult > 0 && file.studio_id == 147) ? "SVOD_ADULT" : "NORMAL"
-
-          Token.transaction do
-            token = Token.create(          
-              :customer_id => id,          
-              :imdb_id     => imdb_id,          
-              :token       => token_string,
-              :source_id   => source,
-              :country     => file.country,
-              :credits     => file.credits,
-              :kind        => kind
-            )
-            result_credit = (product.adult? && svod_adult > 0 && file.studio_id == 147) ? true : remove_credit(file.credits, 12)
-            if token.id.blank? || result_credit == false
-              error = Token.error[:query_rollback]
-              raise ActiveRecord::Rollback
-              return {:token => nil, :error => Token.error[:query_rollback]}
-            end
-            {:token => token, :error => nil}
-          end
-        else
-          return {:token => nil, :error => Token.error[:generation_token_failed]}
-        end
-      else
-        return {:token => nil, :error => Token.error[:abo_process_error]}
-      end
-    else
-      return {:token => nil, :error => Token.error[:not_enough_credit]}
-    end
   end
 
   def get_token(imdb_id)
@@ -541,7 +497,7 @@ class Customer < ActiveRecord::Base
   end
 
   def super_user?
-    DVDPost.dvdpost_super_user.each do |super_id| 
+    moovies.super_user.each do |super_id| 
       if to_param.to_i == super_id.to_i
         return true
       end

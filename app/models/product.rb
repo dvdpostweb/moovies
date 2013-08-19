@@ -28,9 +28,9 @@ class Product < ActiveRecord::Base
   belongs_to :picture_format, :foreign_key => :products_picture_format, :conditions => {:language_id => Moovies.languages[I18n.locale.to_s]}
   has_one :public, :primary_key => :products_public, :foreign_key => :public_id, :conditions => {:language_id => Moovies.languages[I18n.locale.to_s]}
   has_many :descriptions, :class_name => 'ProductDescription', :foreign_key => :products_id
-  has_many :descriptions_fr, :class_name => 'ProductDescription', :foreign_key => :products_id, :conditions => {:language_id => :fr}
-  has_many :descriptions_nl, :class_name => 'ProductDescription', :foreign_key => :products_id, :conditions => {:language_id => :nl}
-  has_many :descriptions_en, :class_name => 'ProductDescription', :foreign_key => :products_id, :conditions => {:language_id => :en}
+  has_many :descriptions_fr, :class_name => 'ProductDescription', :foreign_key => :products_id, :conditions => {:language_id => 1}
+  has_many :descriptions_nl, :class_name => 'ProductDescription', :foreign_key => :products_id, :conditions => {:language_id => 2}
+  has_many :descriptions_en, :class_name => 'ProductDescription', :foreign_key => :products_id, :conditions => {:language_id => 3}
   has_many :ratings, :foreign_key => :products_id
   has_many :reviews, :foreign_key => :products_id
   has_many :uninteresteds, :foreign_key => :products_id
@@ -40,9 +40,11 @@ class Product < ActiveRecord::Base
   has_many :vod_online_be, :class_name => 'StreamingProduct', :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "streaming_products.available = 1 and streaming_products.country ='BE' and streaming_products.status = 'online_test_ok' and ((streaming_products.available_from <= date(now()) and streaming_products.expire_at >= date(now())) or (streaming_products.available_backcatalogue_from <= date(now()) and streaming_products.expire_backcatalogue_at >= date(now())))"
   has_many :vod_online_lu, :class_name => 'StreamingProduct', :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "streaming_products.available = 1 and streaming_products.country ='lu' and streaming_products.status = 'online_test_ok' and ((streaming_products.available_from <= date(now()) and streaming_products.expire_at >= date(now())) or (streaming_products.available_backcatalogue_from <= date(now()) and streaming_products.expire_backcatalogue_at >= date(now())))"
   has_many :tokens, :foreign_key => :imdb_id, :primary_key => :imdb_id
-  has_many :streaming_trailers, :foreign_key => :imdb_id, :primary_key => :imdb_id
+  has_many :streaming_trailers, :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "available = 1 and status = 'online_test_ok'"
   has_many :tokens_trailers, :foreign_key => :imdb_id, :primary_key => :imdb_id
   has_many :svod_dates, :foreign_key => :imdb_id, :primary_key => :imdb_id
+  has_many :svod_dates_online, :class_name => 'SvodDate', :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "start_on <= date(now()) and end_on >= date(now())"
+  
   #has_many :recommendations
   has_many :recommendations_products, :through => :recommendations, :source => :product
   has_and_belongs_to_many :actors, :join_table => :products_to_actors, :foreign_key => :products_id, :association_foreign_key => :actors_id
@@ -194,7 +196,15 @@ class Product < ActiveRecord::Base
   end
 
   def description
-    descriptions.by_language(I18n.locale).first
+    case I18n.locale
+      when :nl
+        descriptions_nl.first
+      when :en
+        descriptions_en.first
+      else
+        descriptions_fr.first
+      end
+        
   end
 
   def to_param
@@ -337,13 +347,13 @@ class Product < ActiveRecord::Base
     name = 
     case options[:country_id] 
       when 131 
-        'nl' 
-      when 161 
         'lu' 
+      when 161 
+        'nl' 
       else 
         'be' 
     end
-    products.search(search, :max_matches => limit, :per_page => per_page, :page => page, :indices => ["product_#{name}_core"])
+    products.search(search, :max_matches => limit, :per_page => per_page, :page => page, :indices => ["product_#{name}_core"], :sql => {:include => ["vod_online_#{name}", :director, :actors, :public, :streaming_trailers, :tokens_trailers, "descriptions_#{I18n.locale}", :svod_dates_online]})
   end
 
   def self.replace_specials(str)
@@ -403,11 +413,7 @@ class Product < ActiveRecord::Base
   end
 
   def trailer?
-    ((Rails.env == "production" ? streaming_trailers.available.count > 0 : streaming_trailers.available_beta.count > 0) && tokens_trailers.available.first )
-  end
-
-  def trailer_streaming?
-    ((Rails.env == "production" ? streaming_trailers.available.count > 0 : streaming_trailers.available_beta.count > 0) && tokens_trailers.available.first )
+    ((Rails.env == "production" ? !streaming_trailers.empty? : !streaming_trailers.empty?) && !tokens_trailers.empty? )
   end
 
   def self.country_short_name(country_id)
@@ -420,7 +426,17 @@ class Product < ActiveRecord::Base
         'BE'
     end
   end
-  
+
+  def get_vod_online(country_id)
+     case country_id
+       when 131
+         vod_online_lu
+       when 161
+         vod_online_nl
+       else
+         vod_online_be
+     end
+   end
   def self.get_view_mode(products, options)
     case options[:view_mode].to_sym
     when :recent
