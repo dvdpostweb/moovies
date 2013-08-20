@@ -133,14 +133,7 @@ class Customer < ActiveRecord::Base
 
   def suspended_notification
     if payment_suspended?
-      case subscription_payment_method.to_param.to_i
-      when DVDPost.payment_methods[:credit_card]
-        I18n.t('customer.cc_paymet_alert')
-      when DVDPost.payment_methods[:domicilation]
-        I18n.t('customer.domiciliation_paymet_alert')
-      else
-        I18n.t('customer.other_paymet_alert')
-      end
+      I18n.t('customer.cc_paymet_alert')
     else
       I18n.t('customer.holidays_suspended', :date => suspensions.holidays.last.date_end.strftime('%d/%m/%Y'))
     end
