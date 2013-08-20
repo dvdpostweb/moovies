@@ -5,16 +5,17 @@
     <tr>
       <td width="90"><%= t'.audio' %></td>
       <td width="90"><%= t '.subtitles' %></td>
-      <td>type</td>
+      <td width="145"></td>
       <td></td>
     </tr>
-    <% #to do %>
-    <% product.streaming_products_be.each do |vod| %>
+    <% product.get_vod(session[:country]).each do |vod| %>
     <tr>
       <td><%= vod.language.by_language(I18n.locale).first.name %></td>
       <td><%= vod.subtitle.by_language(I18n.locale).first ? vod.subtitle.by_language(I18n.locale).first.name : t('.no_subtitle') %></td>
-      <td><%= type %></td>
-      <%= get_vod_message(vod, svod_date) %>
+      <td><%= render :partial => 'products/streaming',  :locals => {:product => product, :source => @source, :response_id => @response_id} if vod.available? %>
+        <%= render :partial => 'products/vod_list',  :locals => {:product => product, :source => @source, :response_id => @response_id} %>
+      </td>
+      <%= get_vod_message(vod, svod_date, params[:kind].to_s, Moovies.packages.invert[product.package_id]) %>
     </tr>
     <% end %>
   </table>

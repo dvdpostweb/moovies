@@ -34,11 +34,7 @@ class ApplicationController < ActionController::Base
           redirect_to step_path(:id => 'step3')
         end
       elsif current_customer.step.to_i == 90
-        #to do 
-        #if (params['controller'] == 'steps' && params[:id].to_i == 5) || (params['controller'] == 'steps' && params[:id].to_i == 1 && params[:action] == 'update')
-        #else
-        #  redirect_to step_path(:id => 5)
-        #end
+        redirect_to step_path(:id => 'old')
       elsif path
         redirect_to path
       end

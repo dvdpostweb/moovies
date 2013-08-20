@@ -9,7 +9,7 @@
   </tr>
   <tr>
     <td bgcolor="#ffffff" width="20"></td>
-    <td bgcolor="#ffffff" ><font color="#2c3841" ><p><%= t('.grats', :email => @email) %></p>
+    <td bgcolor="#ffffff" ><font color="#2c3841" ><p><%= t('.grats', :email => @email).html_safe %></p>
       <p><% t('.desc1') %></p>
       <p><% t('.desc2') %></p></font></td>
       <td bgcolor="#ffffff" width="20"></td>
@@ -31,19 +31,19 @@
           </tr>
           <tr>
             <td width="132" valign="top" align="center">
-              <% t('.slogan1') %>
+              <%= t('.slogan1').html_safe %>
             </td>
 
             <td width="132" valign="top" align="center">
-              <% t('.slogan2').html_safe %>
+              <%= t('.slogan2').html_safe %>
             </td>
 
             <td width="132" valign="top" align="center">
-              <% t('.slogan3').html_safe %>
+              <%= t('.slogan3').html_safe %>
             </td>
 
             <td width="132" valign="top" align="center">
-              <% t('.slogan4') %>
+              <%= t('.slogan4').html_safe %>
             </td>
 
           </tr>

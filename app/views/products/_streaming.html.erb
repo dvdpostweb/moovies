@@ -1,17 +1,10 @@
-<% text = text || :long %>
-<% if current_customer && ENV['HOST_OK'] == "0" %>
-  <% if @tokens.include?(product.imdb_id)%>
-    <%= link_to streaming_btn_title(:replay, text), streaming_product_path(:id => product.imdb_id), :class => "#{I18n.locale} regarder", :id => :watch, :title => t('.replay') %>
+<% if !product.get_vod_online(session[:country_id]).empty? %>
+  <% if product.svod_dates_online.first %>
+    <% title = t('.watch_svod') %>
+    <% class_name = "watch action_btn" %>
   <% else %>
-    <% ppv = product.streaming_products.available.first %>
-    <% if ppv && ppv.is_ppv %>
-      <%= link_to streaming_ppv_btn_title(:buy, text, ppv.ppv_price), new_product_token_path(:product_id => product.to_param, :imdb_id => product.imdb_id, :source => source, :response_id => response_id), :class => "streaming_action fr louer", :id => :louer, :title => t('.buy') %>
-    <%= link_to t('.ppv_about'), info_path(:page_name => :ppv), :id => 'about_ppv' if text == :long && params[:controller] == 'products'%>
-    <% else %>
-      <%= link_to streaming_btn_title(:buy, text), new_product_token_path(:product_id => product.to_param, :imdb_id => product.imdb_id, :source => source, :response_id => response_id), :class => "streaming_action fr regarder", :id => :watch, :title => t('.buy') %>
-    <% end %>
+    <% title = raw t('.watch_tvod', :price => product.get_vod_online(session[:country_id]).first.ppv_price) %>
+    <% class_name = "alacarte action_btn" %>
   <% end %>
-<% else %>
-<% path = product_step_path(:product_id => product, :media => 'vod') %>
-  <%= link_to streaming_btn_title(:buy, text), path, :class => "regarder", :id => :watch %>
+  <%= link_to  title, product_action_path(:product_id => product.to_param), :class => class_name %>
 <% end %>

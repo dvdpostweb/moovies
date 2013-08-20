@@ -19,7 +19,7 @@
 <input type="hidden" name="accepturl" value="<%= @url_ok %>">
 <input type="hidden" name="COM" value="<%= @com %>">
 <input type="hidden" name="TP" value="<%= 'http://www.dvdpost.be/'+@template_ogone %>">
-<input type="hidden" name="ALIAS" value="<%= current_customer.to_param %>">
+<input type="hidden" name="ALIAS" value="p<%= current_customer.to_param %>">
 <input type="hidden" name="ALIASUSAGE" value="<%= @com %>">
 <input type="hidden" name="SHASign" value="<%= @hash %>">
 <% if !@brand.nil? %>

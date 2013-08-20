@@ -1,5 +1,5 @@
 <div id="maincontent" >
-  <h2 class="ttl">Search</h2>
+  <h2 class="ttl"><%= t('.seach') %></h2>
   <%= render :partial => 'layouts/filters', :locals => {:filter => @filter }%>
   <ul class="etabs osc content-tabs">
     <%= "<li class='tab'>#{link_to t('.films'), url_for(params.merge(:type => nil, :page => nil, :kind => (params[:kind] == :normal ? nil : params[:kind]))), :class => (@active == 'products' ? 'active' : '')}</li>".html_safe if @products.count > 0 || (@exact_products && @exact_products.size > 0) %>

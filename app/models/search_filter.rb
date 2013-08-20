@@ -66,7 +66,6 @@ class SearchFilter < ActiveRecord::Base
     self.audio            = nil || options[:audio]
     self.subtitles        = nil || options[:subtitles]
     self.recommended_ids  = nil || options[:recommended_ids]
-    self.dvdpost_choice   = nil || options[:dvdpost_choice]
     save
   end
 end

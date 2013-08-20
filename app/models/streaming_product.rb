@@ -25,7 +25,9 @@ class StreamingProduct < ActiveRecord::Base
   scope :group_by_language, :group => 'language_id'
   scope :ordered, :order => 'quality asc'
 
-  
+  def available?
+    status = 'online_test_ok' && ((available_from && available_from <= Date.today && expire_at >= Date.today) || (available_backcatalogue_from <= Date.today && expire_backcatalogue_at >= Date.today))
+  end
   def self.get_prefered_streaming_by_imdb_id(imdb_id, local)
     if Rails.env == "production"
       streaming = available.prefered_audio(DVDPost.customer_languages[local]).find_all_by_imdb_id(imdb_id)
