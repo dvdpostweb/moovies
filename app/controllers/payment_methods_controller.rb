@@ -26,10 +26,10 @@ class PaymentMethodsController < ApplicationController
     end
     @brand = params[:brand] if params[:brand]
     @com= t 'payment_methods.ogone'
-    @alias = "ok"
+    @alias = "p#{current_customer.to_param}"
     @url_back = url_for(:controller => 'steps', :action => :show, :id => 'step3', :only_path => false, :protocol => 'http')
     @url_ok = url_for(:controller => 'steps', :action => :show, :id => 'step4', :only_path => false, :protocol => 'http')
     OgoneCheck.create(:orderid => @order_id, :amount => (@price*100).to_i, :customers_id => current_customer.to_param, :context => internal_com, :site => 1)
-    @hash = Digest::SHA1.hexdigest("#{@order_id}#{(@price*100).to_i}EUR#{Moovies.ogone_pspid[Rails.env]}#{current_customer.to_param}#{@com}#{Moovies.ogone_pass[Rails.env]}")
+    @hash = Digest::SHA1.hexdigest("#{@order_id}#{(@price*100).to_i}EUR#{Moovies.ogone_pspid[Rails.env]}#{@alias}#{@com}#{Moovies.ogone_pass[Rails.env]}")
   end
 end
