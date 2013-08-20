@@ -38,7 +38,7 @@ Moovies::Application.routes.draw do
       match 'log' => 'products#log'
       
     end
-
+    resources :promotions, :only => ['show', 'update']
     concern :productable do
       resources :products, :only => :index
     end
@@ -50,7 +50,7 @@ Moovies::Application.routes.draw do
     resources :phone_requests, :only => [:new, :create]
     get 'faq', :to => 'messages#faq'
     match 'info/:page_name' => 'info#index', :as => :info
-    resources :steps, :show => [:index, :update]
+    resources :steps, :only => [:show, :update]
     resources :watchlists, :as => :vod_wishlists
     match 'display_vod' => 'watchlists#display_vod'
     resource :search_filters, :only => [:update, :destroy]
@@ -62,7 +62,10 @@ Moovies::Application.routes.draw do
       
     end
     match 'streaming_products/faq', :to => 'streaming_products#faq'
+    match ':id' => "promotions#show"
   end
+  match ':id' => "promotions#show", defaults: { format: 'choose' }
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

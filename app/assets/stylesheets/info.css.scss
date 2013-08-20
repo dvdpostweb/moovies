@@ -356,7 +356,7 @@ width: 902px;
 }
 
 /***************/
-/*   abo page  */
+/*   vod page  */
 /***************/
 
 #content_info {
@@ -367,7 +367,7 @@ width: 902px;
 }
 
 #content_info .section.one a {
-  background: url("/assets/play.gif") no-repeat scroll -5px 0 transparent;
+  background: url(image_path('play.gif')) no-repeat scroll -5px 0 transparent;
       color: #98D321;
       font-size: 22px;
       font-weight: bold;
@@ -382,32 +382,32 @@ width: 902px;
 
 
 #content_info .section.one {
-    background-image: url("/assets/mac_pc_vod.jpg");
+    background-image: url(image_path('mac_pc_vod.jpg'));
     background-position: 673px -8px;
     background-repeat: no-repeat no-repeat;
     min-height: 160px;
 }
 
 #content_info .section.six {
-    background-image: url("/assets/playstation_vod.jpg");
+    background-image: url(image_path('playstation_vod.jpg'));
     background-position: 667px 19px;
     background-repeat: no-repeat no-repeat;
     min-height: 140px;
 }
 #content_info .section.five {
-    background-image: url("/assets/tv_vod.jpg");
+    background-image: url(image_path('tv_vod.jpg'));
     background-position: 683px 15px;
     background-repeat: no-repeat no-repeat;
     min-height: 160px;
 }
 #content_info .section.two {
-    background-image: url("/assets/smarttv_vod.jpg");
+    background-image: url(image_path('smarttv_vod.jpg'));
     background-position: 697px 10px;
     background-repeat: no-repeat no-repeat;
      min-height: 145px;
 }
 #content_info .section.three #apple {
-    background-image: url("/assets/apple_vod.jpg");
+    background-image: url(image_path('apple_vod.jpg'));
     background-position: 706px 7px;
     background-repeat: no-repeat no-repeat;
     min-height: 160px;
@@ -421,7 +421,7 @@ width: 902px;
         }
 
 #content_info .section.three #android {
-    background-image: url("/assets/android_vod.jpg");
+    background-image: url(image_path('android_vod.jpg'));
     background-position: 705px 22px;
     background-repeat: no-repeat no-repeat;
     border-top: 1px solid #ABAB99;
@@ -461,4 +461,8 @@ width: 902px;
   padding-bottom:10px;
 
   
+}
+#vod h1
+{
+  font-size: 32px;
 }

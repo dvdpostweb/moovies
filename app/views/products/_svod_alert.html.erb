@@ -1,4 +1,0 @@
-ce film est en tvod il vous coutera %{price} &euro;
-<%= t('.tvod_price'), :price => product.get_vod_online(session[:country_id]).first.ppv_price %>
-<br /><br />
-<%= link_to 'click ici, pour acceder au film', streaming_product_path(:id => product.imdb_id) %>
