@@ -26,7 +26,7 @@ class PaymentMethodsController < ApplicationController
     end
     @brand = params[:brand] if params[:brand]
     @com= t 'payment_methods.ogone'
-    
+    @alias = "ok"
     @url_back = url_for(:controller => 'steps', :action => :show, :id => 'step3', :only_path => false, :protocol => 'http')
     @url_ok = url_for(:controller => 'steps', :action => :show, :id => 'step4', :only_path => false, :protocol => 'http')
     OgoneCheck.create(:orderid => @order_id, :amount => (@price*100).to_i, :customers_id => current_customer.to_param, :context => internal_com, :site => 1)
