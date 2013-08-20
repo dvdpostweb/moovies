@@ -220,6 +220,30 @@ module Moovies
         :internal => '127.0.0.1'
       })
     end
+    
+    def ogone_pspid
+      HashWithIndifferentAccess.new.merge({
+        :development => 'dvdpostogonetest',
+        :staging => 'dvdpostogonetest',
+        :production => 'dvdpost'
+      })
+    end
+
+    def ogone_pass
+      HashWithIndifferentAccess.new.merge({
+        :development => 'KILLBILL1$metropolis',
+        :staging => 'KILLBILL1$metropolis',
+        :production => 'KILLBILL'
+      })
+    end
+
+    def ogone_url
+      HashWithIndifferentAccess.new.merge({
+        :development => 'test',
+        :staging => 'test',
+        :production => 'prod'
+      })
+    end
 
   end
 end

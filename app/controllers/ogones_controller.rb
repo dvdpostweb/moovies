@@ -29,10 +29,11 @@ class OgonesController < ApplicationController
           price = @discount.promo_price
           if price > 0
             abo_action = 7
-            customer.payment.create(:payment_method => 1, :abo_id => customer.abo_type_id, :amount => price, :payment_status => 2, :created_at => Time.now.localtime, :last_modified => Time.now.localtime)
           else
             abo_action = 17
           end
+          abo = customer.abo_history(abo_action, customer.next_abo_type_id)
+          customer.payment.create(:payment_method => 1, :abo_id => abo.id, :amount => price, :payment_status => 2, :created_at => Time.now.localtime, :last_modified => Time.now.localtime) if price > 0
         when 'new_activation'
           activation = Activation.find(current_customer.promo_id)
           action = Subscription.action[:creation_with_activation]

@@ -11,7 +11,7 @@ class PaymentMethodsController < ApplicationController
       @promo = Activation.find(current_customer.promo_id)
       internal_com = 'new_activation'
     end
-    @order_id = "#{current_customer.to_param}#{Time.now.strftime('%Y%m%d%H%M%S')}"
+    @order_id = "p#{current_customer.to_param}#{Time.now.strftime('%Y%m%d%H%M%S')}"
     @price = @promo.promo_price;
     case I18n.locale
     	when :fr
@@ -26,10 +26,10 @@ class PaymentMethodsController < ApplicationController
     end
     @brand = params[:brand] if params[:brand]
     @com= t 'payment_methods.ogone'
-    
-    @url_back = url_for(:controller => 'steps', :action => :index, :id => 'step3', :only_path => false, :protocol => 'http')
-    @url_ok = url_for(:controller => 'steps', :action => :index, :id => 'step4', :only_path => false, :protocol => 'http')
+    @alias = "p#{current_customer.to_param}"
+    @url_back = url_for(:controller => 'steps', :action => :show, :id => 'step3', :only_path => false, :protocol => 'http')
+    @url_ok = url_for(:controller => 'steps', :action => :show, :id => 'step4', :only_path => false, :protocol => 'http')
     OgoneCheck.create(:orderid => @order_id, :amount => (@price*100).to_i, :customers_id => current_customer.to_param, :context => internal_com, :site => 1)
-    @hash = Digest::SHA1.hexdigest("#{@order_id}#{(@price*100).to_i}EURdvdpostogonetest#{current_customer.to_param}#{@com}KILLBILL1$metropolis")
+    @hash = Digest::SHA1.hexdigest("#{@order_id}#{(@price*100).to_i}EURdvdpostogonetest#{@alias}#{@com}KILLBILL1$metropolis")
   end
 end
