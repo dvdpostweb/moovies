@@ -148,43 +148,6 @@ $(function() {
     return false;
   });
 
-  $(".stars .star, #cotez .star").on("mouseover", function(){
-    data = $(this).attr('id').replace('star_','').split('_');
-    product_id = data[0];
-    rating_value = data[1];
-
-    image = 'star-voted-';
-    if ($(this).attr('src').match(/black-star-(on|half|off)/i)){
-      image = 'black-'+image;
-    }
-    if ($(this).attr('src').match(/small-star-(on|half|off)/i)){
-      image = 'small-'+image;
-      ext = 'png'
-    }
-    else
-    {
-      ext = 'jpg'
-    }
-    
-    for(var i=1; i<=5; i++)
-    {
-      if(i <= rating_value){
-        full_image = image+'on';
-      }else{
-        full_image = image+'off';
-      }
-      $('#star_'+product_id+"_"+i).attr('src', '/assets/'+full_image+'.'+ext);
-    }
-  });
-
-  $(".stars .star, #cotez .star").on("mouseout", function() {
-    product_id = $(this).attr('id').replace('star_','').split('_')[0];
-    for(var i=1; i<=5; i++)
-    {
-      image = $('#star_'+product_id+'_'+i);
-      image.attr('src','/assets/'+image.attr('name'));
-    }
-  });
   $("#report").on("click", function() {
     url = $(this).attr('href');
     jQuery.facebox(function() {

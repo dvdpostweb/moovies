@@ -72,7 +72,7 @@ class ApplicationController < ActionController::Base
   end
 
   def init
-    @browser = 'empty'
+    @browser = Browser.new(:ua => request.user_agent, :accept_language => "en-us")
     @kid_visible = false
     params[:kind] = params[:kind] ? params[:kind].to_sym : :normal
     if params[:locale].nil?

@@ -63,3 +63,4 @@ gem 'date_validator'
 gem 'whenever', :require => false
 gem 'geoip'
 gem 'hpricot', '~> 0.8.6'
+gem "browser", '~> 0.2.0'
