@@ -11,7 +11,7 @@ class PaymentMethodsController < ApplicationController
       @promo = Activation.find(current_customer.promo_id)
       internal_com = 'new_activation'
     end
-    @order_id = "#{current_customer.to_param}#{Time.now.strftime('%Y%m%d%H%M%S')}"
+    @order_id = "p#{current_customer.to_param}#{Time.now.strftime('%Y%m%d%H%M%S')}"
     @price = @promo.promo_price;
     case I18n.locale
     	when :fr
