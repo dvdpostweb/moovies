@@ -7,7 +7,7 @@ class OgonesController < ApplicationController
     else
       
       @ogone = OgoneCheck.find_by_orderid(params[:orderID])
-      customer.update_attributes(:payment_method => 1, :ogone_owner => params[:CN], :ogone_exp_date => params[:ED], :ogone_card_no => params[:CARDNO], :ogone_card_type => params[:BRAND])
+      customer.update_attributes(:customers_abo_payment_method => 1, :ogone_owner => params[:CN], :ogone_exp_date => params[:ED], :ogone_card_no => params[:CARDNO], :ogone_card_type => params[:BRAND])
       case @ogone.context
         when 'new_discount'
           if customer.promo_id > 0
@@ -32,7 +32,7 @@ class OgonesController < ApplicationController
             abo_action = 17
           end
           abo = customer.abo_history(abo_action, customer.next_abo_type_id)
-          customer.payment.create( :abo_id => abo.id, :amount => price, :payment_status => 2, :created_at => Time.now.localtime, :last_modified => Time.now.localtime) if price > 0
+          customer.payment.create(:payment_method => 1, :abo_id => abo.id, :amount => price, :payment_status => 2, :created_at => Time.now.localtime, :last_modified => Time.now.localtime) if price > 0
         when 'new_activation'
           activation = Activation.find(current_customer.promo_id)
           action = Subscription.action[:creation_with_activation]
@@ -43,7 +43,7 @@ class OgonesController < ApplicationController
         	abo_action = 17
           activation.update_attributes(:created_at => Time.now.localtime.to_s(:db), :customers_id => customer.to_param)
       end
-      customer.update_attributes(:customers_abo => 1, :customers_registration_step => 100,:customers_abo_payment_method => 1, :subscription_expiration_date => duration, :auto_stop => auto_stop, :customers_abo_discount_recurring_to_date => recurring)
+      customer.update_attributes(:customers_abo => 1, :customers_registration_step => 100, :subscription_expiration_date => duration, :auto_stop => auto_stop, :customers_abo_discount_recurring_to_date => recurring)
       customer.abo_history(action, customer.next_abo_type_id)
       customer.abo_history(abo_action, customer.next_abo_type_id)
       #@ogone.product(:products_quantity => @ogone.product.products_quantity - 1)
