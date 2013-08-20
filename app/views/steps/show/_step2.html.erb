@@ -85,7 +85,7 @@
               <% end %>
               <tr>
                 <td align="right">
-                  <span class="explain_text"><%= t('.phone')%></span>
+                  <span class="explain_text"><%= t('.phone')%></span><span class="asterisk_step">*</span>
                 </td>
                 <td>
                   <%= f.text_field :phone, :class => :new_step_input %>
@@ -99,7 +99,7 @@
                 <td></td>
                 <td align="left">
                   <p><INPUT type="checkbox"  name="conditions" id ='condition'>
-                    <%= link_to t('.conditions'), root_path, :class => "blue_link, smaller" %>
+                    <%= link_to t('.conditions'), info_path(:page_name => :conditions), :class => "blue_link, smaller" %>
                     <br />
                   </p>
                 </td>
