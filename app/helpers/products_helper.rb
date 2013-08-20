@@ -471,28 +471,28 @@ module ProductsHelper
     end
   end
 
-  def get_vod_message(vod, svod_date)
-    if ((vod.available_from && vod.available_from <= Date.today && vod.expire_at >= Date.today) || (vod.available_backcatalogue_from <= Date.today && vod.expire_backcatalogue_at >= Date.today))
+  def get_vod_message(vod, svod_date, kind, package)
+    if vod.available?
       if svod_date && svod_date.start_on > Date.today && svod_date.start_on < Date.today+30.days
-        "<td class='goinfinite'>#{t('.soon_in_svod', :default => "Disponible dans <span><strong>Plush infinite</strong></span> dans %{days} jours", :days => (svod_date.start_on - Date.today).to_i).html_safe}</td>".html_safe
+        "<td class='goinfinite'>#{t('.soon_in_svod_' + kind, :days => (svod_date.start_on - Date.today).to_i).html_safe}</td>".html_safe
       elsif svod_date && svod_date.end_on > Date.today && svod_date.end_on < Date.today+30.days
-        "<td class='goalacarte'>#{t('.soon_in_tvod', :default => "Passe <span>A la carte</span> dans %{days} jours", :days => (svod_date.end_on - Date.today).to_i).html_safe} #{vod.status}</td>".html_safe
+        "<td class='goalacarte'>#{t('.soon_in_tvod', :days => (svod_date.end_on - Date.today).to_i).html_safe}</td>".html_safe
       elsif vod.expire_at && vod.expire_at > Date.today && vod.expire_at < Date.today+30.days
-        "<td class='noavailable'>#{t('.last_chance', :default => "<span><strong>Plus disponible</strong></span> dans %{days} jours", :days => (vod.expire_at - Date.today).to_i).html_safe}</td>".html_safe
+        "<td class='noavailable'>#{t('.last_chance', :days => (vod.expire_at - Date.today).to_i).html_safe}</td>".html_safe
       elsif vod.expire_backcatalogue_at && vod.expire_backcatalogue_at > Date.today && vod.expire_backcatalogue_at < Date.today+30.days
-        "<td class='noavailable'>#{t('.last_chance', :default => "<span><strong>Plus disponible</strong></span> dans %{days} jours", :days => (vod.expire_backcatalogue_at - Date.today).to_i).html_safe}</td>".html_safe
+        "<td class='noavailable'>#{t('.last_chance', :days => (vod.expire_backcatalogue_at - Date.today).to_i).html_safe}</td>".html_safe
       else
-        "<td>#{t('.available')}</td>".html_safe
+        "<td></td>".html_safe
       end
     else
       if vod.available_from && vod.available_from > Date.today
-        t('available_soon', :default => "<td>Disponible dans %{days} jours</td>", :days => (vod.available_from - Date.today).to_i).html_safe
+        "<td>#{t('.available_soon_'+ package.to_s, :days => (vod.available_from - Date.today).to_i).html_safe}".html_safe
       elsif vod.available_backcatalogue_from && vod.available_backcatalogue_from > Date.today
-        t('available_soon', :default => "<td>Disponible dans %{days} jours</td>", :days => (vod.available_backcatalogue_from - Date.today).to_i).html_safe
+        "<td>#{t('.available_soon_'+ package.to_s, :days => (vod.available_backcatalogue_from - Date.today).to_i).html_safe}</td>".html_safe
       elsif vod.expire_backcatalogue_at && vod.expire_backcatalogue_at < Date.today
-        t('not_available_anymore', :default => "<td>Plus disponible</td>").html_safe
+        "<td>#{t('.not_available_anymore').html_safe}</td>".html_safe
       else
-        t('soon', :default => "<td>Bientôt disponible</td>").html_safe
+        "<td>#{t('.soon').html_safe}</td>".html_safe
       end
     end
   end

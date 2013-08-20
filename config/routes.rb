@@ -34,6 +34,9 @@ Moovies::Application.routes.draw do
       match 'seen' => 'products#seen'
       match 'trailer' => 'products#trailer'
       match 'uninterested' => 'products#uninterested'
+      match 'action' => 'products#action'
+      match 'log' => 'products#log'
+      
     end
 
     concern :productable do
@@ -52,7 +55,12 @@ Moovies::Application.routes.draw do
     match 'display_vod' => 'watchlists#display_vod'
     resource :search_filters, :only => [:update, :destroy]
     match 'search/(:search)' => 'search#index', :as => :search
-    resources :streaming_products, :only => [:show], :requirements => { :id => /\d+/ }
+    resources :streaming_products, :only => [:show] do
+      match 'language' => 'streaming_products#language'
+      match 'subtitle' => 'streaming_products#subtitle'
+      match 'versions' => 'streaming_products#versions'
+      
+    end
     match 'streaming_products/faq', :to => 'streaming_products#faq'
   end
   # The priority is based upon order of creation:

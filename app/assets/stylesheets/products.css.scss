@@ -179,7 +179,7 @@
 #btns-wrap input:hover {
   text-decoration: underline;
 }
-#btns-wrap a#watch { 
+#btns-wrap a.watch { 
   float: left;
   margin-right:8px;
 }
@@ -1064,11 +1064,15 @@
   height: 32px;
   line-height: 32px;
   padding-left: 36px;
-  color: #C3C4C0;
   font-weight: bold;
-  font-size: 14px;
-  background-image: url(image_path('button_trailer.png'));
   background-repeat: no-repeat;
+}
+.oters .btns .trailer
+{
+background-image: url(image_path('button_trailer.png'));
+color: #C3C4C0;
+font-size: 14px;
+
 }
 .adult .oters .btns a,.adult .oters .btns input {
   background-image: url(image_path('sprite_adult.png')) !important;
@@ -1434,9 +1438,8 @@ text-align:center;
   text-align:left;
 
 }
-#products_index #watch {
+#products_index .watch {
   text-align:left;
-
 }
 
 
@@ -1516,7 +1519,7 @@ text-align:center;
 }
 
 
-#leftcolumn h3.ttl.alacarte {
+#leftcolumn h3.ttl.alacarte_menu {
 	background:#66CCCC;
 	color: #fff;
 
@@ -1633,4 +1636,8 @@ ul#ratings_labels li:last-child {
 	padding: 0 8px 0 117px;
 	position: relative;
 	width: 358px;
+}
+#film-details .watch
+{
+	margin:4px 0;
 }

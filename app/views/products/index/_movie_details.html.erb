@@ -14,9 +14,9 @@
   <div class="movie-content">
     <div class="movie-descr">
       <div class="cast">
-        <% if product.actors.count > 0  %>
+        <% if !product.actors.empty?  %>
         <h4><%= t '.actors' %></h4>
-        <p><%= product.actors.limit(8).collect{|actor| link_to actor.name, actor_products_path(:actor_id => actor.to_param)}.join(', ').html_safe %></p>
+        <p><%= product.actors.collect{|actor| link_to actor.name, actor_products_path(:actor_id => actor.to_param)}.join(', ').html_safe %></p>
         <% end %>
         <% if product.director && !product.adult? %>
           <h4><%= t '.director' %></h4>
@@ -44,7 +44,7 @@
       </div>
       <ul class="btns osc">
         <li>
-          <a title="Regarder en streaming" id="watch" href="#">Regarder</a>
+          <%= render :partial => 'products/streaming',  :locals => {:product => product, :source => @source, :response_id => @response_id} %>
         </li>
         <li>
           <%= render :partial => 'products/vod_list',  :locals => {:product => product, :source => @source, :response_id => @response_id} %>

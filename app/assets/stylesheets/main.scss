@@ -590,7 +590,11 @@ div.flash_error {
 	margin: 14px;
 	width: 942px;
 }
-
+#home #subscribe-wrap
+{
+	margin: 14px 0;
+	
+}
 #subscribe-wrap .wrap {
 	float: left;
 	padding: 12px 0 14px 30px;
@@ -713,7 +717,7 @@ div.flash_error {
 {font-size:12px}
 
 
-#watch {
+.watch {
 	background-image: url(image_path('button_streaming.gif'));
 	background-position: 0 0;
 	background-repeat: no-repeat no-repeat;
@@ -727,19 +731,8 @@ div.flash_error {
 	width: 145px;
 }
 
-#new-alacarte-wrap #watch {
-	background-image: url(image_path('button_streamingppv.gif'));
-	font-size: 14px;
-	font-weight: bold;
-	height: 32px;
-	line-height: 30px;
-	width:118px;
-	padding-left:28px;
-	text-align:left;
 
-}
-/*
-#alacarte{
+.alacarte{
 background-image: url(image_path('button_streamingppv.gif'));
 font-size: 14px;
 font-weight: bold;
@@ -747,9 +740,11 @@ height: 32px;
 line-height: 30px;
 padding-left: 28px;
 text-align: left;
-width: 145px;
+width: 117px;
 color:#fff;
-}*/
+
+display: block;
+}
 
 
 #add {
@@ -806,4 +801,15 @@ ul.dropdown li {
 }
 .container {
     margin-top: 14px;
+}
+.content #login
+{
+  color: #212A31;
+  font-size: 13px;
+  font-weight: bold;
+  margin-left: 0;
+  padding-left: 27px;
+  padding-top: 6px;
+  text-align: center;
+  text-transform: uppercase;
 }

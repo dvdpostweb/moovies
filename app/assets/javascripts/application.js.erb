@@ -19,6 +19,8 @@
 //= require info
 //= require rails.validations
 //= require home
+//= require streaming_products
+//= require jquery.cycle.all.min
 $(function() {
 	$("#checkout_confirmation").submit();
 	
@@ -227,6 +229,14 @@ $(function() {
       return false
     }
     
+  })
+  $('body').delegate('.action_btn', 'click', function (){
+    $.ajax({dataType: 'script',
+       url: $(this).attr('href'),
+       type: 'get',
+       data: {},
+    });
+    return false
   })
 });
 function querySt(hu ,ji) {

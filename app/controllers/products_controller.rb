@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
 
-  before_filter :find_product, :only => [:uninterested, :seen, :awards, :trailer, :show, :step]
+  before_filter :find_product, :except => [:index, :drop_cached]
 
   def index
     @body_id = 'products_index'
@@ -44,9 +44,7 @@ class ProductsController < ApplicationController
     @tokens = current_customer.get_all_tokens_id(params[:kind], @product.imdb_id) if current_customer
     @countries = ProductCountry.visible.order
     @svod_date = @product.svod_dates.current.order.first
-    Rails.logger.debug { "@@@#{@svod_date.inspect}" }
-    @type = view_context.get_type(@product, @svod_date)
-    
+    @vod_online
     #to do @filter = get_current_filter({})
     unless request.xhr?
       @trailer =  @product.trailer?
@@ -138,7 +136,7 @@ class ProductsController < ApplicationController
     if params[:streamin_trailer_id]
       trailers = Rails.env == "production" ? @product.streaming_trailers.available : @product.streaming_trailers.available_beta
       trailer = StreamingTrailer.find(params[:streamin_trailer_id])
-    elsif @product.trailer_streaming?
+    elsif @product.trailer?
       trailers = Rails.env == "production" ? @product.streaming_trailers.available : @product.streaming_trailers.available_beta
       trailer = StreamingTrailer.get_best_version(@product.imdb_id, I18n.locale)
     else
@@ -188,6 +186,16 @@ class ProductsController < ApplicationController
     @product_title = data[:title]
     @product_image = data[:image]
     @product_description =  data[:description]
+  end
+
+  def action
+    
+  end
+
+  def log
+    if request.xhr?
+      render :layout => false
+    end
   end
 
 private

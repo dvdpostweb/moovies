@@ -200,13 +200,26 @@ module Moovies
        :hp_bottom_en => 22,
       })
     end
-  end
-  def geo_country_name
-    HashWithIndifferentAccess.new.merge({
-     22 => 'be',
-     131 => 'nl',
-     161 => 'lu',
-     0 => 'be'
-    })
+
+    def geo_country_name
+      HashWithIndifferentAccess.new.merge({
+       22 => 'be',
+       131 => 'nl',
+       161 => 'lu',
+       0 => 'be'
+      })
+    end
+
+    def super_user
+      []
+    end
+
+    def dvdpost_ip
+      HashWithIndifferentAccess.new.merge({
+        :external => ['217.112.190.73', '217.112.190.101', '217.112.190.177', '217.112.190.178', '217.112.190.179', '217.112.190.180', '217.112.190.181', '217.112.190.182','217.112.190.100','217.112.185.121','109.88.0.197','109.88.0.198','194.78.222.212','213.181.46.204','109.88.0.199','91.183.57.165','87.65.39.92','94.139.62.121','94.139.62.120','94.139.62.123','94.139.62.122'],
+        :internal => '127.0.0.1'
+      })
+    end
+
   end
 end

@@ -116,15 +116,12 @@
       </h3>
       <p><%= @product_description.text %></p>
       <div id="btns-wrap" class="osc">
-        <a title="Regarder en streaming" id="watch" href="#">Regarder</a>
-        <%= render :partial => 'products/vod_list',  :locals => {:product => @product, :source => @source, :response_id => @response_id} %>
-
         <% if @trailer %>
         <%= link_to(t('.trailer'), product_trailer_path(:product_id => @product.to_param, :source => @source, :response_id => @response_id), {:class => 'trailer', :id => 'trailer', :target => :_blank}) %>
         <% end %>
         <div class="clearfix"></div>
       </div>
-      <%= render :partial => 'products/show/formats', :locals => {:product => @product, :type => @type, :svod_date => @svod_date}%>
+      <%= render :partial => 'products/show/formats', :locals => {:product => @product, :svod_date => @svod_date}%>
       <div id="thumbs-wrap">
         <h3><%= t '.photo' %></h3>
         <div>
