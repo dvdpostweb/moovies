@@ -42,10 +42,11 @@ class OgonesController < ApplicationController
           recurring = 0
         	abo_action = 17
           activation.update_attributes(:created_at => Time.now.localtime.to_s(:db), :customers_id => customer.to_param)
+          customer.abo_history(abo_action, customer.next_abo_type_id)
+          
       end
       customer.update_attributes(:customers_abo => 1, :customers_registration_step => 100, :subscription_expiration_date => duration, :auto_stop => auto_stop, :customers_abo_discount_recurring_to_date => recurring)
       customer.abo_history(action, customer.next_abo_type_id)
-      customer.abo_history(abo_action, customer.next_abo_type_id)
       
       if customer.gender == 'm' 
         gender = t('mails.gender_male')
