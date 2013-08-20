@@ -354,3 +354,111 @@ width: 902px;
   width: 942px;
   margin: 0 auto;
 }
+
+/***************/
+/*   abo page  */
+/***************/
+
+#content_info {
+  color: #767672;
+      font-size: 14px;
+
+
+}
+
+#content_info .section.one a {
+  background: url("/assets/play.gif") no-repeat scroll -5px 0 transparent;
+      color: #98D321;
+      font-size: 22px;
+      font-weight: bold;
+      padding-left: 27px;
+  
+}
+#content_info a {
+  text-decoration:underline;
+ 
+  
+}
+
+
+#content_info .section.one {
+    background-image: url("/assets/mac_pc_vod.jpg");
+    background-position: 673px -8px;
+    background-repeat: no-repeat no-repeat;
+    min-height: 160px;
+}
+
+#content_info .section.six {
+    background-image: url("/assets/playstation_vod.jpg");
+    background-position: 667px 19px;
+    background-repeat: no-repeat no-repeat;
+    min-height: 140px;
+}
+#content_info .section.five {
+    background-image: url("/assets/tv_vod.jpg");
+    background-position: 683px 15px;
+    background-repeat: no-repeat no-repeat;
+    min-height: 160px;
+}
+#content_info .section.two {
+    background-image: url("/assets/smarttv_vod.jpg");
+    background-position: 697px 10px;
+    background-repeat: no-repeat no-repeat;
+     min-height: 145px;
+}
+#content_info .section.three #apple {
+    background-image: url("/assets/apple_vod.jpg");
+    background-position: 706px 7px;
+    background-repeat: no-repeat no-repeat;
+    min-height: 160px;
+        padding-bottom: 30px;
+  
+}        
+
+#content_info .section.three #apple .device_infos{
+      
+                padding-top:55px;
+        }
+
+#content_info .section.three #android {
+    background-image: url("/assets/android_vod.jpg");
+    background-position: 705px 22px;
+    background-repeat: no-repeat no-repeat;
+    border-top: 1px solid #ABAB99;
+    min-height: 160px;
+    padding-top: 30px;
+}
+
+
+
+
+#content_info .section {
+  margin-top:20px;
+    padding:14px;
+     border: 1px solid #ABAB99;
+ 
+}
+
+#content_info .device_title {
+  
+  float:left;
+  
+}
+#content_info .device_infos {
+    float: right;
+    padding-right: 300px;
+    width: 400px;
+}
+
+#content_info h3 {
+  font-size: 22px;
+  padding-bottom:10px;
+
+  
+}
+
+#content_info p {
+  padding-bottom:10px;
+
+  
+}

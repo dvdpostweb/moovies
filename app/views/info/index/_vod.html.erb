@@ -1,4 +1,91 @@
 <div id="content_info">
   <div id="title"><strong><%= t '.title' %></strong> </div>
   <%= t('.info').html_safe %>
+  <h1>Regardez vos films où que vous soyez</h1>
+  <div class="section one">
+    <div class="device_title">
+      <h3>PC/MAC </h3>
+    </div>
+    <div class="device_infos">
+      <p> Vous pouvez regarder vos films à partir de n’importe quel ordinateur connecté à l’internet</p>
+      <p> <strong>Testez la VOD grâce à un extrait gratuit:</strong> La couleur en haut de l'extrait indique la qualité de votre connexion internet. Vert = bonne qualité, rouge = mauvaise qualité. Attention de tester pendant quelques minutes car le rouge est affiché standard et devient en suite vert selon votre connexion. </p>
+      <p><a href="#">Testez la VOD</a></p>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="section two">
+    <div class="device_title">
+      <h3>Smart TV </h3>
+      <img src="<%= image_path "smarttv_logo_vod.jpg" %>" />
+    </div>
+    <div class="device_infos">
+      <p> Découvre l’application Plush dans l’appstore des Samsung Smart TV fabriquées à partir de 2012.</p>
+      <p> <strong>L’application est en cours de développement pour d’autres marques de Smart TV</strong></p>
+    </div>
+  </div>
+  <div class="section three">
+    <div id="apple">
+      <div class="device_title">
+        <h3>Tablettes et Smartphones</h3>
+        
+        <img src="<%= image_path "apple_logo_vod.jpg" %>" />
+      </div>
+      <div class="device_infos">
+        <p> Les films peuvent être regardé sans problèmes via le site sur les iPads et iPhones</p>
+        <p><strong>Une application Apple est également en cours de développement</strong></p>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div id="android">
+      <div class="device_title">
+  
+        <img src="<%= image_path "android_logo_vod.jpg" %>" />
+      </div>
+      <div class="device_infos">
+        <p> Pour regarder les films sur une tablette ou un smartphone Android via le site il faut installer Flash. Nous ne pouvons malheureusement pas garantir que ceci fonctionnera pour tous les appareils Android. Cela dépend du modèle et du navigateur utilisés. </p>
+        <p>Nous conseillons d'essayer plusieurs navigateurs pour trouver celui qui fonctionne le mieux pour votre appareil. Vous pouvez tester la VOD sans utiliser de crédit à cet endroit</p>
+        <p><a href="#">Plus d’infos concernant l’instalation de flash</a> </p>
+        <div id="more_info_android">
+          <p>1- Vérifiez que votre téléphone soit connecté à internet</p>
+          <p>2- Ouvrez le menu "Paramètres" de votre appareil</p>
+          <p>3- Sélectionnez "Sécurité" (ou "Applications" pour des anciens modèles)</p>
+          <p>4- Cochez la case "Sources inconnues"</p>
+          <p>5- Appuyez sur "OK" pour confirmer votre sélection</p>
+          <p>6- Lancez votre navigateur</p>
+          <p>7- Allez sur la page <a href="#">http://helpx.adobe.com/flash-player/kb/archived-flash-player-versions.html</a></p>
+          <p>8- Sur cette page, descendez vers 'Flash Player for Android archives'</p>
+          <p>9- Sélectionnez la version de Flash Player compatible avec le système d'exploitation de votre appareil</p>
+          <p>10- Appuyez sur le lien de téléchargement. Le téléchargement commence automatiquement</p>
+          <p>11- Lorsque le téléchargement est fini, ouvrez vos notifications</p>
+          <p>12- Appuyez sur "install_flash_player.apk"</p>
+          <p>13- Appuyez sur "Installer"</p>
+          <p>14- Lorsque l'installation est finie, retournez dans vos paramètres et décocher l'option 'Sources inconnues'</p>
+          <p>15- Visitez www.plush.be depuis votre navigateur de base (Chrome ne reconnaît pas Flash) et la VOD devrait à présent fonctionner</p>
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>
+  <div class="section five">
+    <div class="device_title">
+      <h3>TV classiques</h3>
+    </div>
+    <div class="device_infos">
+      <p><strong>Via un câble</strong> </p>
+      <p> Connectez votre ordinateur à votre TV à l'aide d'un câble. </p>
+      <p><strong>Via Apple TV </strong> </p>
+      <p> Si vous avez une <strong>Apple TV</strong>, envoyez le film directement sur votre TV à partir de votre <strong>iPhone</strong> ou <strong>iPad</strong> avec <strong>AirPlay</strong></p>
+    </div>
+    <div class="clear"></div>
+  </div>
+  <div class="section six">
+    <div class="device_title">
+      <h3>Consoles </h3>
+      <img src="<%= image_path "playstation_logo_vod.jpg" %>"  />
+    </div>
+    <div class="device_infos">
+      <p> <strong>Une application PS3 et PS4 est en cours de développement. </strong></p>
+    </div>
+    <div class="clear"></div>
+  </div>
 </div>
