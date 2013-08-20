@@ -4,7 +4,7 @@
 		  <% if @product.svod_dates_online.first %>
 				window.location.href = '<%= streaming_product_path(:id => @product.imdb_id) %>'
 			<% else %>
-				jQuery.facebox('<%= escape_javascript(render(:partial => 'products/svod_alert', :locals => {:product => @product})) %>')
+				jQuery.facebox('<%= escape_javascript(render(:partial => 'products/tvod_alert', :locals => {:product => @product})) %>')
 			<% end %>
     <% else %>
       jQuery.facebox('<%= escape_javascript(render(:partial => 'products/wrong_package')) %>')
