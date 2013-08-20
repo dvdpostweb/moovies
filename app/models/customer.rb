@@ -405,13 +405,6 @@ class Customer < ActiveRecord::Base
 
   def remove_product_from_wishlist(imdb_id, current_ip)
     all = Product.find_all_by_imdb_id(imdb_id)
-    wl = wishlist_items.find_all_by_product_id(all)
-    unless wl.blank?
-      wl.each do |item|
-        item.destroy()
-        Customer.send_evidence('RemoveFromWishlist', item.to_param, self, current_ip)   
-      end
-    end
     if vod_wishlists && vod_wishlists.find_by_imdb_id(imdb_id)
       vod = vod_wishlists.find_by_imdb_id(imdb_id)
       vod_wishlists_histories.create(:imdb_id => vod.imdb_id, :source_id => vod.source_id, :added_at => vod.created_at)
@@ -490,7 +483,7 @@ class Customer < ActiveRecord::Base
   end
 
   def super_user?
-    moovies.super_user.each do |super_id| 
+    Moovies.super_user.each do |super_id| 
       if to_param.to_i == super_id.to_i
         return true
       end

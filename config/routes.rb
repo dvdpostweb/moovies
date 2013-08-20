@@ -62,6 +62,8 @@ Moovies::Application.routes.draw do
       
     end
     match 'streaming_products/faq', :to => 'streaming_products#faq'
+    match 'streaming_products/sample', :to => 'streaming_products#sample'
+    
     match ':id' => "promotions#show"
   end
   match ':id' => "promotions#show", defaults: { format: 'choose' }
