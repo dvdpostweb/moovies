@@ -46,6 +46,8 @@ class ApplicationController < ActionController::Base
   def layout_by_resource
     if devise_controller? and params[:controller] != 'customers/registrations'
       "devise_layout"
+    elsif params[:controller] == 'promotions'
+      'promotions'
     else
       "application"
     end
