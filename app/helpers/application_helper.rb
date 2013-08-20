@@ -37,25 +37,23 @@ module ApplicationHelper
   end
 
   def format_text(browser)
-    #to do
-    #if browser.windows?
-    #  "pc"
-    #elsif browser.mac?
-    #  "mac"
-    #elsif browser.iphone?
-    #  "iphone"
-    #elsif browser.ipad?
-    #  "ipad"
-    #elsif browser.ipod?
-    #  "ipod"
-    #elsif browser.tablet?
-    #  "tablet"
-    #elsif browser.mobile?
-    #  "mobile"
-    #else
-    #  "other"
-    #end
-    nil
+    if browser.windows?
+      "pc"
+    elsif browser.mac?
+      "mac"
+    elsif browser.iphone?
+      "iphone"
+    elsif browser.ipad?
+      "ipad"
+    elsif browser.ipod?
+      "ipod"
+    elsif browser.tablet?
+      "tablet"
+    elsif browser.mobile?
+      "mobile"
+    else
+      "other"
+    end
   end
 
   def get_current_filter(options = {})
