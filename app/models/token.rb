@@ -80,12 +80,7 @@ class Token < ActiveRecord::Base
   end
 
   def expired?
-    if products.first.kind == DVDPost.product_kinds[:adult]
-      hours_left = DVDPost.hours[:adult]
-    else
-      hours_left = DVDPost.hours[:normal]
-    end
-    updated_at < hours_left.hours.ago.localtime
+    updated_at < 48.hours.ago.localtime
   end
 
   def current_status(current_ip)

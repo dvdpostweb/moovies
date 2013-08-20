@@ -65,14 +65,12 @@ class StreamingProductsController < ApplicationController
       format.js do
         if view_context.streaming_access?
           streaming_version = StreamingProduct.find_by_id(params[:streaming_product_id])
-          if ENV['HOST_OK'] == "1" || (!current_customer.suspended? && !Token.dvdpost_ip?(request.remote_ip) && !current_customer.super_user? && !(/^192(.*)/.match(request.remote_ip)))
+          if (!current_customer.suspended? && !Token.dvdpost_ip?(request.remote_ip) && !current_customer.super_user? && !(/^192(.*)/.match(request.remote_ip)))
             status = @token.nil? ? nil : @token.current_status(request.remote_ip)
             streaming_version = StreamingProduct.find_by_id(params[:streaming_product_id])
             if !@token || status == Token.status[:expired]
-              if ENV['HOST_OK'] == "0"
+              if current_customer
                 creation = current_customer.create_token(params[:id], @product, request.remote_ip, params[:streaming_product_id], params[:kind], params[:source])
-              elsif ENV['HOST_OK'] == "1" && !params[:code].nil?
-                creation = Token.create_token(params[:id], @product, request.remote_ip, params[:streaming_product_id], params[:kind], params[:code], params[:source], :country => streaming_version.country, :credits => streaming_version.credits)
               else
                 creation = nil
               end
@@ -81,26 +79,26 @@ class StreamingProductsController < ApplicationController
                 error = creation[:error]
               
                 if current_customer && @token
-                  mail_id = DVDPost.email[:streaming_product]
+                  #mail_id = DVDPost.email[:streaming_product]
                   product_id = @product.id
                   if current_customer.gender == 'm' 
                     gender = t('mails.gender_male')
                   else
                     gender = t('mails.gender_female')
                   end
-                    movie_detail = DVDPost.mail_movie_detail(current_customer.to_param, @product.id)
-                    vod_selection = DVDPost.mail_vod_selection(current_customer.to_param, params[:kind])
-                    recommendation_dvd_to_dvd = DVDPost.mail_recommendation_dvd_to_dvd(current_customer.to_param, @product.id)
-                    options = 
-                    {
-                      "\\$\\$\\$customers_name\\$\\$\\$" => "#{current_customer.first_name.capitalize} #{current_customer.last_name.capitalize}",
-                      "\\$\\$\\$gender_simple\\$\\$\\$" => gender ,
-                      "\\$\\$\\$movie_details\\$\\$\\$" => movie_detail,
-                      "\\$\\$\\$selection_vod\\$\\$\\$" => vod_selection,
-                      "\\$\\$\\$date\\$\\$\\$" => Time.now.strftime('%d/%m/%Y'),
-                      "\\$\\$\\$recommendation_dvd_to_dvd\\$\\$\\$" => recommendation_dvd_to_dvd,
-                    }
-                    send_message(mail_id, options)
+                    #movie_detail = DVDPost.mail_movie_detail(current_customer.to_param, @product.id)
+                    #vod_selection = DVDPost.mail_vod_selection(current_customer.to_param, params[:kind])
+                    #recommendation_dvd_to_dvd = DVDPost.mail_recommendation_dvd_to_dvd(current_customer.to_param, @product.id)
+                    #options = 
+                    #{
+                    #  "\\$\\$\\$customers_name\\$\\$\\$" => "#{current_customer.first_name.capitalize} #{current_customer.last_name.capitalize}",
+                    #  "\\$\\$\\$gender_simple\\$\\$\\$" => gender ,
+                    #  "\\$\\$\\$movie_details\\$\\$\\$" => movie_detail,
+                    #  "\\$\\$\\$selection_vod\\$\\$\\$" => vod_selection,
+                    #  "\\$\\$\\$date\\$\\$\\$" => Time.now.strftime('%d/%m/%Y'),
+                    #  "\\$\\$\\$recommendation_dvd_to_dvd\\$\\$\\$" => recommendation_dvd_to_dvd,
+                    #}
+                    #send_message(mail_id, options)
                 
                 end
               end
