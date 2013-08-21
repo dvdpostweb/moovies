@@ -93,20 +93,6 @@ class CustomersController < ApplicationController
     redirect_to root_path
   end
 
-  def rotation_dvd
-    @customer = Customer.find(current_customer)
-    @customer.rotation_dvd!(params[:type],1)
-    respond_to do |format|
-      format.html do
-        redirect_to customer_path(:id => current_customer.to_param)
-      end
-      format.js {
-        @wishlist_adult_size = current_customer.wishlist_items.available.by_kind(:adult).current.include_products.count
-        render :partial => 'customers/show/rotation', :locals => {:customer => @customer}
-        }
-    end
-  end
-
   def unsubscribe
     if params[:type] == 'profile_part'
       customer = Customer.find_by_email(params[:email])

@@ -1,8 +1,4 @@
 $(function() {
-  function goToByScroll(id){
-    $('html,body').animate({scrollTop: $("#"+id).offset().top},'slow');
-  }
-  
   
   $('#fullscreenon_off').on("click", function() {
     FullscreenOnOff()
@@ -22,7 +18,6 @@ $(function() {
   })
   
   $('#streaming').delegate('.qualityvod', "click", function() {
-    alert('ok')
     url = $(this).attr('href')
     var regex = new RegExp(".*/products/([0-9]*).*");
     res = regex.exec(url)
@@ -68,20 +63,7 @@ $(function() {
   });
 
   response="#r1"
-  $('.q').on('click', function(){
-    id = $(this).attr('id');
-    try
-    {
-        $(response).hide();
-    }
-    catch(e)
-    {
-    }
-    response = "#" + id.replace('q', 'r');
-    $(response).show();
 
-    return false;
-  })
   function go(text)
   {
     jQuery.facebox(function() {
@@ -121,53 +103,8 @@ $(function() {
     });
     
   }
-  $(".stars .star, #cotez .star").on("click", function() {
-    url = $(this).parent().attr('href');
-    html_item = $(this).parent().parent();
-    content = html_item.html();
-    loader = 'ajax-loader.gif';
-    if ($(this).attr('src').match(/black-star-/i)){
-      loader = 'black-'+loader;
-    }
-    html_item.html("<img src='/assets/"+loader+"'/>");
-    $.ajax({dataType: 'html',
-      url: url,
-      type: 'POST',
-      data: {},
-      success: function(data) {
-        if (url.match(/replace=homepage/)){
-          html_item.parent().replaceWith(data);
-        }else{
-          html_item.html(data);
-        }
-        
-      },
-      error: function() {
-        html_item.html(content);
-      }
-    });
-    return false;
-  });
-
-  $("#report").on("click", function() {
-    url = $(this).attr('href');
-    jQuery.facebox(function() {
-      $.ajax({
-        url: url,
-        dataType: 'html',
-        type: 'GET',
-        success: function(data) { jQuery.facebox(data); }
-      });
-    });
-    
-    return false;
-  });
   
-  $("#cancel").on("click", function(){
-    $("body").trigger('close.facebox')
-    return false;
-  });
-  $("#more").on("click", function(){
+  $('#streaming').delegate("#more" ,"click", function(){
     $(".choose_color").show();
     $(".choose_empty").show();
     $(this).parent().parent().hide();
@@ -231,73 +168,12 @@ $(function() {
     });
     return false;
   });
-  $("#change_step2").on("click", function() {
+  $('#streaming').delegate("#change_step2", "click", function() {
     $container.cycle(0)
     return false;
   });
-  $("#change_step3").on("click", function() {
+  $('#streaming').delegate("#change_step3", "click", function() {
     $container.cycle(1)
-    return false;
-  });
-  $("#faq h3, #vod-info-wrap h3").on("click", function() {
-    
-    id = $(this).attr('id')
-    content = id.replace('-title', '')
-    here = $(this)
-    $("#"+content).slideToggle('slow', function() {
-        if($(this).is(':visible'))
-        {
-          $(here).removeClass('close')
-        }
-        else
-        {
-          $(here).addClass('close')
-        }
-      });
-    return false;
-  });
-  $(".more").on("click", function() {
-    
-    parent = $(this)
-    id = $(this).attr('id')
-    content = id.replace('-title-more', '')  
-    here_id = content+"-title"
-    here = $("#"+here_id)
-    $("#"+content).slideDown('slow', function() {
-      $(here).removeClass('close')
-    });
-    if($(this).hasClass("tab1") || $(this).hasClass("tab2") || $(this).hasClass("tab3"))
-    {
-      if($(this).hasClass("tab1"))
-      {
-        title = "#tab1-title"
-        id="#tab1"
-      }
-      else if($(this).hasClass("tab2"))
-      {
-        title = "#tab2-title"
-        id="#tab2"
-      }
-      else
-      {
-        title = "#tab3-title"
-        id="#tab3"
-      }
-      $('.available').removeClass('active')
-      $(title).addClass('active')
-      $('.carousel-wrap').hide()
-      $(id).show()
-    }
-    goToByScroll(here_id); //to do
-    return false;
-  });
-  $(".available").on("click", function() {
-    id = $(this).attr('id')
-    $('.available').removeClass('active')
-    $(this).addClass('active')
-    content = id.replace('-title', '')
-    $('.carousel-wrap').hide()
-    $("#"+content).show()
     return false;
   });
   //verimatrix
