@@ -248,12 +248,27 @@ module Moovies
     def streaming_url
       "vod.dvdpost.be"
     end
+    def token_sample
+      HashWithIndifferentAccess.new.merge({
+        :normal => '51b70da316f1e4.69742418',
+        :adult => '51b6f9964888b1.78963380'
+      })
+    end
+    def data_sample
+      HashWithIndifferentAccess.new.merge({
+        :normal => {:imdb_id =>1, :product_id => 197},
+        :adult => {:imdb_id =>2, :product_id => 127276}
+      })
+    end
+    
+    def hls_url(token, audio, sub)
+      "http://vod.dvdpost.be/#{token}_#{audio}_#{sub}.m3u8"
+    end
 
   end
 
-  def hls_url(token, audio, sub)
-    "http://vod.dvdpost.be/#{token}_#{audio}_#{sub}.m3u8"
-  end
+
+
 
 
 end

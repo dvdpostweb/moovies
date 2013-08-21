@@ -164,11 +164,7 @@ class StreamingProductsController < ApplicationController
   end
 
   def versions
-    if ENV['HOST_OK'] == "1"
-      token = Token.recent(2.week.ago.localtime, Time.now).is_public.by_imdb_id(params[:streaming_product_id]).find_by_code(params[:code]) if !params[:code].nil?
-    else
-      token = current_customer.get_token(params[:streaming_product_id])
-    end
+    token = current_customer.get_token(params[:streaming_product_id])
     token_valid = token.nil? ? false : token.validate?(request.remote_ip)
     if Rails.env == 'production' && token_valid == false
       @streaming_prefered = StreamingProduct.available.country(Product.country_short_name(session[:country_id])).find_all_by_imdb_id(params[:streaming_product_id], I18n.locale) 
@@ -181,18 +177,15 @@ class StreamingProductsController < ApplicationController
   end
 
   def sample
-    params[:id] = DVDPost.data_sample[params[:kind]][:imdb_id]
-    product_id = DVDPost.data_sample[params[:kind]][:product_id]
+    @body_id = 'streaming'
+    params[:id] = Moovies.data_sample[params[:kind]][:imdb_id]
+    product_id = Moovies.data_sample[params[:kind]][:product_id]
     @product = Product.find_by_products_id(product_id)
     @streaming_prefered = StreamingProduct.group_by_language.available.find_all_by_imdb_id(params[:id], I18n.locale)
-    @token_name = DVDPost.token_sample[params[:kind]]
-    respond_to do |format|
-      format.html do
-      end
-      format.js do
-         @streaming = StreamingProduct.find_by_id(params[:streaming_product_id])
-         render :layout => false
-      end
+    @token_name = Moovies.token_sample[params[:kind]]
+    if request.xhr?
+      @streaming = StreamingProduct.find_by_id(params[:streaming_product_id])
+      render :layout => false
     end
   end
 

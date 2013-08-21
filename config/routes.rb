@@ -55,14 +55,14 @@ Moovies::Application.routes.draw do
     match 'display_vod' => 'watchlists#display_vod'
     resource :search_filters, :only => [:update, :destroy]
     match 'search/(:search)' => 'search#index', :as => :search
+    match 'streaming_products/faq', :to => 'streaming_products#faq'
+    match 'streaming_products/sample', :to => 'streaming_products#sample'
     resources :streaming_products, :only => [:show] do
       match 'language' => 'streaming_products#language'
       match 'subtitle' => 'streaming_products#subtitle'
       match 'versions' => 'streaming_products#versions'
       
     end
-    match 'streaming_products/faq', :to => 'streaming_products#faq'
-    match 'streaming_products/sample', :to => 'streaming_products#sample'
     
     match ':id' => "promotions#show"
   end
