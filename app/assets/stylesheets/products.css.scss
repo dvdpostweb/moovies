@@ -148,7 +148,7 @@
   border: 2px solid #fff;
 }
 #film-img-wrap img{
-  max-width:180px;
+  max-width:162px;
 }
 
 
@@ -392,7 +392,7 @@
 }
 #uninterested
 {
-  width:162px;
+  width:180px;
 }
 #uninterested a:last-child
 {
@@ -1399,7 +1399,7 @@ text-align:center;
 }
 
 
-#film-details .linkallversions {
+.linkallversions {
   background-color: white;
   border: 1px solid #333;
   margin: 5px auto 0;
@@ -1407,7 +1407,7 @@ text-align:center;
   text-align: left;
   width: 678px;
 }
-#film-details .linkallversions a.btn_play {
+.linkallversions a.btn_play {
   background: url(image_path('vodslider-btn-bg-end-play-allversions.png')) no-repeat scroll 0 0 transparent;
   display: inline-block;
   height: 27px;
@@ -1418,7 +1418,7 @@ text-align:center;
   font-size:11px;
 }
 
-#film-details .linkallversions a.btn_play strong {
+.linkallversions a.btn_play strong {
   background: url(image_path('vod-slider-btn-bg-allversions.png ')) no-repeat scroll 100% 0 transparent;
   color: #FFFFFF;
   display: inline-block;
