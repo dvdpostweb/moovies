@@ -10,11 +10,7 @@ class StreamingProductsController < ApplicationController
       @product = Product.find_by_imdb_id(params[:id])
     end
     if @product
-      if ENV['HOST_OK'] == "1"
-        @token = Token.recent(2.week.ago.localtime, Time.now).is_public.by_imdb_id(@product.imdb_id).find_by_code(params[:code]) if !params[:code].nil?
-      else
-        @token = current_customer.get_token(@product.imdb_id)
-      end
+      @token = current_customer.get_token(@product.imdb_id)
     end
     @token_valid = @token.nil? ? false : @token.validate?(request.remote_ip)
     if Rails.env == 'production' && @token_valid == false

@@ -43,4 +43,19 @@ module StreamingProductsHelper
     end
   end
 
+  def message_error(error)
+    case error
+      when Token.error[:query_rollback] then
+        t('.rollback')
+      when Token.error[:customer_not_activated] then
+        t('.customer_not_activated')
+      when Token.error[:user_suspended] then
+        t('.customer_suspended')
+      when Token.error[:user_holidays_suspended] then
+        t('.user_holidays_suspended')
+      when Token.error[:generation_token_failed] then
+        t('.rollback')
+    end
+  end
+
 end

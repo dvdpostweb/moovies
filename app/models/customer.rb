@@ -242,126 +242,6 @@ class Customer < ActiveRecord::Base
     credit_histories.last
   end
 
-  def init_credits(subscription, action)
-    credit_paid = subscription.credits
-    dvd_remain = subscription.qty_dvd_max
-    Customer.transaction do
-      begin
-        self.update_attribute(:credits, credit_paid)
-        self.update_attribute(:customers_abo_dvd_remain, dvd_remain)
-        date_added = 2.hours.from_now.localtime.to_s(:db)
-        history = CreditHistory.create( :customers_id => to_param.to_i, :credit_paid => 0, :credit_free => 0, :user_modified => 55, :credit_action_id => action, :date_added => date_added, :quantity_paid => credit_paid, :abo_type => subscription.to_param)
-       rescue ActiveRecord::StatementInvalid 
-         notify_credit_hoptoad('init',action,credit_paid)
-         raise ActiveRecord::Rollback
-       end
-    end
-    return true
-  end
-
-  def add_credit(quantity, action)
-    credit_history = self.get_credits()
-    if credit_history
-      credit_free = credit_history.credit_free + credit_history.quantity_free
-    else
-      credit_free = 0
-    end
-
-    if credit_history
-      credit_paid = credit_history.credit_paid + credit_history.quantity_paid
-    else
-      credit_paid = 0
-    end
-    Customer.transaction do
-      begin
-        if new_price?
-          self.update_attribute(:credits, (self.credits + quantity))
-          self.update_attribute(:customers_abo_dvd_remain, (self.customers_abo_dvd_remain + quantity))
-        else
-          self.update_attribute(:credits, (self.credits + quantity))
-        end
-        date_added = 2.hours.from_now.localtime.to_s(:db)
-        history = CreditHistory.create( :customers_id => to_param.to_i, :credit_paid => credit_paid, :credit_free => credit_free, :user_modified => 55, :credit_action_id => action, :date_added => date_added, :quantity_free => quantity, :abo_type => abo_type_id)
-       rescue ActiveRecord::StatementInvalid 
-         notify_credit_hoptoad('add',action,quantity)
-         raise ActiveRecord::Rollback
-       end
-    end
-    return true
-  end
-
-  def insert_credits(credits, dvd_remain, action)
-    credit_history = self.get_credits()
-    if new_price? && credit_history
-      credit_free = credit_history.credit_free + credit_history.quantity_free
-    else
-      credit_free = 0
-    end
-    if new_price? && credit_history
-      credit_paid = credit_history.credit_paid + credit_history.quantity_paid
-    else
-      credit_paid = 0
-    end
-    Customer.transaction do
-      begin
-        if new_price?
-          self.update_attribute(:credits => credits)
-          self.update_attribute(:customers_abo_dvd_remain => dvd_remain)
-        else
-          credit = self.update_attribute(:credits, (self.credits + credits))
-        end
-        date_added = 2.hours.from_now.localtime.to_s(:db)
-        history = CreditHistory.create( :customers_id => to_param.to_i, :credit_paid => credit_paid, :credit_free => credit_free, :user_modified => 55, :credit_action_id => action, :date_added => date_added, :quantity_free => credits, :abo_type => abo_type_id)
-       rescue ActiveRecord::StatementInvalid 
-         notify_credit_hoptoad('add',action,quantity)
-         raise ActiveRecord::Rollback
-       end
-    end
-    return true
-  end
-
-  def remove_credit(quantity, action)
-    credit_history = self.get_credits()
-    if credit_history
-      credit_free = credit_history.credit_free + credit_history.quantity_free
-    else
-      credit_free = 0
-    end
-    if credit_history
-      credit_paid = credit_history.credit_paid + credit_history.quantity_paid
-    else
-      credit_paid = 0
-    end
-    status = true
-    if credit_free >= quantity
-      qt_free = quantity
-      qt_paid = 0
-    elsif credit_free + credits >= quantity
-      qt_paid = quantity - credit_free
-      qt_free = credit_free
-    elsif credits >= quantity 
-      qt_free = 0
-      qt_paid = quantity
-    else
-      status = false
-    end
-    if status == true
-      Customer.transaction do
-        begin
-          new_qty = (self.credits - quantity)
-          credit = self.update_attribute(:credits, new_qty)
-          history = CreditHistory.create( :customers_id => to_param.to_i, :credit_paid => credit_paid, :credit_free => credit_free, :user_modified => 55, :credit_action_id => action, :date_added => Time.now().localtime.to_s(:db), :quantity_free => (- qt_free), :quantity_paid => (- qt_paid), :abo_type => abo_type_id)
-        rescue ActiveRecord::StatementInvalid
-          notify_credit_hoptoad('remove',action,quantity)
-          raise ActiveRecord::Rollback
-        end
-      end
-      true 
-    else
-      false  
-    end
-  end
-
   def create_token(imdb_id, product, current_ip, streaming_product_id, kind, source = 7)
     file = StreamingProduct.find(streaming_product_id)
         begin
@@ -410,10 +290,6 @@ class Customer < ActiveRecord::Base
       vod_wishlists_histories.create(:imdb_id => vod.imdb_id, :source_id => vod.source_id, :added_at => vod.created_at)
       vod.destroy() 
     end
-  end
-
-  def recondutction_ealier?
-    !actions.reconduction_ealier.recent.blank?
   end
 
   def abo_history(action, new_abo_type = 0)
@@ -537,6 +413,9 @@ class Customer < ActiveRecord::Base
     tokens_products.exists?(product.imdb_id)
   end
 
+  def payable?
+    payment_method > 0
+  end
   private
   def convert_created_at
     begin
