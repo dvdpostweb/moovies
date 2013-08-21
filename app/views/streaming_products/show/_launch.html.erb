@@ -1,15 +1,15 @@
 <% audio_title = streaming.language.by_language(I18n.locale).first.name %>
 <% if sub = streaming.subtitles.by_language(I18n.locale).first %>
-  <% sub_title = "<strong>#{sub.name}</strong>" %>
+  <% sub_title = "<strong>#{sub.name}</strong>".html_safe %>
 <% else %>
-  <% sub_title = "<strong>#{t('streaming_products.show.kind.without_subtitle')}</strong>" %>
+  <% sub_title = "<strong>#{t('streaming_products.show.kind.without_subtitle')}</strong>".html_safe %>
 <% end%>
 <p class="choice_valided"><%= t 'streaming_products.show.kinds_alpha.audio_title' %> : <span class="selected"><%= audio_title %></span> | <%= link_to t('.change'), streaming_product_path(:id => streaming.imdb_id), :id => 'change_step2' %> </p>
 <p class="choice_valided"><%= t 'streaming_products.show.kinds_alpha.sub_title' %> : <span class="selected"><%= sub_title %></span> | <%= link_to t('.change'), streaming_product_path(:id => streaming.imdb_id), :id => 'change_step3' %> </p>
 <p class='audios'>
   <% if params[:sample] %>
-    <%= link_to "<strong>#{t('.launch')}</strong>", streaming_products_sample_path(:streaming_product_id => streaming.to_param), :class => 'btn_play  qualityvod' %>
+    <%= link_to "<strong>#{t('.launch')}</strong>".html_safe, streaming_products_sample_path(:streaming_product_id => streaming.to_param), :class => 'btn_play  qualityvod' %>
   <% else %>
-    <%= link_to "<strong>#{t('.launch')}</strong>", streaming_product_path(:id => @streaming.imdb_id, :streaming_product_id => streaming.to_param, :code => params[:code], :source => params[:source], :response_id => params[:response_id]), :class => 'btn_play  qualityvod' %>
+    <%= link_to "<strong>#{t('.launch')}</strong>".html_safe, streaming_product_path(:id => @streaming.imdb_id, :streaming_product_id => streaming.to_param, :code => params[:code], :source => params[:source], :response_id => params[:response_id]), :class => 'btn_play  qualityvod' %>
   <% end%>
 </p>
