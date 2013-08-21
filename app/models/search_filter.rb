@@ -51,7 +51,7 @@ class SearchFilter < ActiveRecord::Base
   end
 
   def used?
-    audience? || rating? || year? || media? || country_id? || dvdpost_choice? || audio? || subtitles?
+    audience? || rating? || year? || media? || country_id? || audio? || subtitles?
   end
 
   def update_with_defaults(options)
