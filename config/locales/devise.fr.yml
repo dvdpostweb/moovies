@@ -114,7 +114,7 @@ fr:
         change_pass: 'Changer mon mot de passe'
         Hello: Bonjour
         description: Quelqu'un a demandé un changement de mot de passe. Vous pouvez le faire via le lien ci-dessous.
-        alert1: "Si vous n'avez pas demandé ce changement, s'il vous plaît ignorer ce message."
+        alert1: "Si vous n'avez pas demandé ce changement, s'il vous plaît ignorez ce message."
         alert2: "Votre mot de passe sera uniquement modifié si vous utilisez le lien pour créer un nouveau mot de passe."
       unlock_instructions:
         subject: "Instructions pour déverrouiller le compte"
