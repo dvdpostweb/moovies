@@ -418,18 +418,18 @@ text-decoration:underline;
   width: 678px;
 }
 
-.linkallversions .icon_left {
+#streaming .linkallversions .icon_left {
   float: left;
 }
 
-.linkallversions .icon_right {
+#streaming .linkallversions .icon_right {
   float: right;
   padding-right: 100px;
 }
 
 
 
-.linkallversions a.btn_play {
+#streaming .linkallversions a.btn_play {
   background: url(image_path('vodslider-btn-bg-end-play-allversions.png')) no-repeat scroll 0 0 transparent;
   display: inline-block;
   height: 27px;
@@ -438,7 +438,7 @@ text-decoration:underline;
   width: auto;
 }
 
-.linkallversions a.btn_play strong {
+#streaming .linkallversions a.btn_play strong {
   background: url(image_path('vod-slider-btn-bg-allversions.png')) no-repeat scroll 100% 0 transparent;
   color: #FFFFFF;
   display: inline-block;
@@ -447,14 +447,14 @@ text-decoration:underline;
   padding-right: 15px;
   text-transform: uppercase;
 }
-.adult .linkallversions a.btn_play {
+#streaming.adult .linkallversions a.btn_play {
   background: url(image_path('vodslider-btn-bg-end-play-allversions_adult.png')) no-repeat scroll 0 0 transparent;
 }
-.adult .linkallversions a.btn_play strong {
+#streaming.adult .linkallversions a.btn_play strong {
   background: url(image_path('vod-slider-btn-bg-allversions_adult.png')) no-repeat scroll 100% 0 transparent;
 }
 
-.linkallversions  .select_version {
+#streaming .linkallversions  .select_version {
 color:#212830;
 font-size:16px;
 
