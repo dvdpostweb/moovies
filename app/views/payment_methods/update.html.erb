@@ -18,7 +18,7 @@
 <input type="hidden" name="catalogurl" value="<%= @url_back %>">
 <input type="hidden" name="accepturl" value="<%= @url_ok %>">
 <input type="hidden" name="COM" value="<%= @com %>">
-<input type="hidden" name="TP" value="<%= 'http://www.dvdpost.be/'+@template_ogone %>">
+<input type="hidden" name="TP" value="<%= @template_ogone %>">
 <input type="hidden" name="ALIAS" value="<%= @alias %>">
 <input type="hidden" name="ALIASUSAGE" value="<%= @com %>">
 <input type="hidden" name="SHASign" value="<%= @hash %>">
@@ -26,4 +26,5 @@
 <input type="hidden" name="PM" value="CreditCard">
 <input type="hidden" name="BRAND" value="<%= @brand %>">
 <% end %>
+
 </form>

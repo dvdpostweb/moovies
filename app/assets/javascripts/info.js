@@ -36,7 +36,10 @@ $(function() {
   	  }
   	}
   }
-  
+  $('#vod #vod_more').on('click', function(){
+    $('#more_info_android').toggle()
+    return false
+  })
 });
 
 function calcul_age(date_naissance){
