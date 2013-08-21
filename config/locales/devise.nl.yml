@@ -57,7 +57,7 @@ nl:
     passwords:
       new:
         forgot_pass: Wachtwoord vergeten?
-        sent: "Ontvang instructies om uw wachtwoord opnieuw in te stellen"
+        sent: "Verzend instructies"
         email: E-mail adres
       edit:          
         change_pass: 'Wijzig uw wachtwoord'
