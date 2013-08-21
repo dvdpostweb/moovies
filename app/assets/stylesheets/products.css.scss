@@ -192,10 +192,6 @@
   font-size: 13px;
   padding-left: 30px;
 }
-#film-details #btns-wrap a#trailer 
-{
-  float:left;
-}
 #btns-wrap input#add-to-vod, #btns-wrap .shop_action
 {
   width: 155px;
@@ -565,7 +561,9 @@
 .adult .tab-container .critique .name a {
   color: #e2007c;
 }
-
+#film-details .alacarte {
+margin: 4px 0;
+}
 .tab-container .critique .name span {
   margin: 0 7px;
   padding-top: 0 !important;
