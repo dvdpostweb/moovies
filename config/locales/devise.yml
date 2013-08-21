@@ -49,7 +49,7 @@ en:
     passwords:
       new:
         forgot_pass: Password forgotten?
-        sent: "Send me reset password instructions"
+        sent: "Send me instructions"
         email: email
       edit:
         change_pass: 'Change your password'
