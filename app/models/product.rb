@@ -113,7 +113,7 @@ class Product < ActiveRecord::Base
   end
   
   def self.filter(filter, options={}, exact=nil)
-    if options[:package].nil? && options[:controller] != 'search'
+    if options[:package].nil? && options[:controller] != 'search' && options[:concerns] != 'productable'
       id = options[:kind] == :normal ? 1 : 4
       options[:package] = Moovies.packages.invert[id]
     end
