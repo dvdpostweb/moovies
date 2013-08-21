@@ -59,8 +59,8 @@ class Token < ActiveRecord::Base
   
   def self.error
     error = OrderedHash.new
-    error.push(:abo_process_error, 1)
-    error.push(:not_enough_credit, 2)
+    error.push(:bad_package, 1)
+    error.push(:no_credit_card, 2)
     error.push(:query_rollback, 3)
     error.push(:user_suspended, 4)
     error.push(:generation_token_failed, 5)
@@ -86,9 +86,7 @@ class Token < ActiveRecord::Base
   def current_status(current_ip)
     
     return Token.status[:expired] if expired?
-    
-    current_ips = token_ips
-    return Token.status[:ok] if !current_ips.find_by_ip(current_ip).nil? || streaming_products.alpha.count > 0
+    return Token.status[:ok] if streaming_products.alpha.count > 0
     return Token.status[:ip_valid] if current_ips.count < count_ip 
     return Token.status[:ip_invalid]
   end
