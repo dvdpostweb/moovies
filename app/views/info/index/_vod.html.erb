@@ -39,13 +39,11 @@
       <div class="device_infos">
       <%= t('.tablet.android').html_safe %>
        
-        <p><a href="#"><%= t '.tablet.android.link' %></a> </p>
-        <div id="more_info_android">
-        <%= t('.tablet.android.more').html_safe %>
-          
-        <%= t('.tablet.android.app').html_safe %>
-          
+        <p><%= link_to t('.tablet.android.link'),url_for, :id => 'vod_more' %></p>
+        <div id="more_info_android" style="display:none">
+          <%= t('.tablet.android.more').html_safe %>
         </div>
+        <%= t('.tablet.android.app').html_safe %>
       </div>
       <div class="clear"></div>
     </div>
