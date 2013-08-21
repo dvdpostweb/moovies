@@ -81,6 +81,6 @@ class OgonesController < ApplicationController
       #  end
       #end  
     end
-    redirect_to step_path(:id => 'step4')
+    redirect_to step_path(:id => 'step4', :locale => I18n.locale)
   end
 end
