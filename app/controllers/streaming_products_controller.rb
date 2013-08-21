@@ -130,11 +130,7 @@ class StreamingProductsController < ApplicationController
   end
 
   def language
-    if ENV['HOST_OK'] == "1"
-      token = Token.recent(2.week.ago.localtime, Time.now).is_public.by_imdb_id(params[:streaming_product_id]).find_by_code(params[:code]) if !params[:code].nil?
-    else
-      token = current_customer.get_token(params[:streaming_product_id])
-    end
+    token = current_customer.get_token(params[:streaming_product_id]) if current_customer
     token_valid = token.nil? ? false : token.validate?(request.remote_ip)
     if Rails.env == 'production' && token_valid == false
       @streaming_subtitle = StreamingProduct.available.country(Product.country_short_name(session[:country_id])).by_language(params[:language_id]).find_all_by_imdb_id(params[:streaming_product_id])
@@ -147,11 +143,7 @@ class StreamingProductsController < ApplicationController
   end
 
   def subtitle
-    if ENV['HOST_OK'] == "1"
-      token = Token.recent(2.week.ago.localtime, Time.now).is_public.by_imdb_id(params[:streaming_product_id]).find_by_code(params[:code]) if !params[:code].nil?
-    else
-      token = current_customer.get_token(params[:streaming_product_id])
-    end
+    token = current_customer.get_token(params[:streaming_product_id]) if current_customer
     token_valid = token.nil? ? false : token.validate?(request.remote_ip)
     if Rails.env == 'production' && token_valid == false
       @streaming = StreamingProduct.available.find(params[:id])
@@ -164,7 +156,7 @@ class StreamingProductsController < ApplicationController
   end
 
   def versions
-    token = current_customer.get_token(params[:streaming_product_id])
+    token = current_customer.get_token(params[:streaming_product_id]) if current_customer
     token_valid = token.nil? ? false : token.validate?(request.remote_ip)
     if Rails.env == 'production' && token_valid == false
       @streaming_prefered = StreamingProduct.available.country(Product.country_short_name(session[:country_id])).find_all_by_imdb_id(params[:streaming_product_id], I18n.locale) 
