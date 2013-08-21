@@ -1,12 +1,12 @@
-<h2><%= t('.title', :default => 'Resend confirmation instructions') %></h2>
-
+<div id="title"><%= t('.title', :default => 'Resend confirmation instructions') %></div>
+<div class="signup_forms" align="center"> 
 <%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
   <%= devise_error_messages! %>
 
   <div><%= f.label :email, t('.email', :default => 'email') %><br />
   <%= f.email_field :email, :autofocus => true %></div>
 
-  <div><%= f.submit t('.sent') %></div>
+  <div><%= f.submit t('.sent'), :id => :submit_button %></div>
 <% end %>
-
+</div>
 <%= render "devise/shared/links" %>
