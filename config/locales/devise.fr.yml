@@ -57,7 +57,7 @@ fr:
     passwords:
       new:
         forgot_pass: 'Vous avez oublié votre mot de passe?'
-        sent: "Envoyez-moi les instructions de réinitialisation de mot de passe"
+        sent: "Envoyer les instructions"
         email: Adresse e-mail
       edit:
         change_pass: 'Changez votre mot de passe'
