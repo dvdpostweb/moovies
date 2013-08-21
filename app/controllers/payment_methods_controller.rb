@@ -16,13 +16,13 @@ class PaymentMethodsController < ApplicationController
     case I18n.locale
     	when :fr
     		@ogone_language = 'fr_FR'
-    		@template_ogone = 'Template_freetrial2FR.htm'
+    		@template_ogone = URI.join(root_url, 'template_fr.htm')
     	when :nl
     		@ogone_language = 'nl_NL';
-    		@template_ogone = 'Template_freetrial2NL.htm'
+    		@template_ogone = URI.join(root_url, 'template_nl.htm')
     	when :en
     		@ogone_language = 'en_US';
-    		@template_ogone = 'Template_freetrial2EN.htm'
+    		@template_ogone = URI.join(root_url, 'template_en.htm')
     end
     @brand = params[:brand] if params[:brand]
     @com= t 'payment_methods.ogone'

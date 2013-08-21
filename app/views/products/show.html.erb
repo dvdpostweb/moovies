@@ -89,7 +89,7 @@
         </div>
         <div id="audience">
           <h3><%= t '.audience' %></h3>
-          <span class="dark osc"><%=  @product.public.name %></span>
+          <%= @product.public.name %>
         </div>
         <div id="duration">
           <h3><%= t '.duration' %></h3>
@@ -103,7 +103,7 @@
           <h3><%= t '.sound' %></h3>
           <%= @product.soundtracks.collect{|soundtrack| soundtrack.name}.join(', ') %>
         </div>
-        <% if @product_description.products_awards %>
+        <% if !@product_description.products_awards.empty? %>
         <div id="festival">
           <h3><%= t('.awards') %></h3>
           <%= render :partial => 'products/show/awards', :locals => {:product => @product , :size => 'small'} %>
@@ -128,6 +128,7 @@
           <%= render :partial => 'products/show/preview', :locals => {:product => @product, :type => params[:kind], :source => @source, :response_id => @response_id} %>
         </div>
       </div>
+      <%= render :partial => 'products/show/critics', :locals => {:product => @product, :reviews_count => @reviews_count, :reviews => @reviews, :review_sort => @review_sort, :product_title => @product_title, :source => @source, :response_id => @response_id} %>
     </div><!-- #film-info -->
   </div>
   <!--   ==============   END MAIN CONTENT   ==============   -->
