@@ -63,10 +63,11 @@ Moovies::Application.routes.draw do
       match 'versions' => 'streaming_products#versions'
     end
     
-    match ':id' => "promotions#show"
+    get ':id' => "promotions#show", :as => :promotion_localize
+    post ':id' => "promotions#create", :as => :promotion_localize
   end
-  match ':id' => "promotions#show", defaults: { format: 'choose' }
-  
+  get ':id' => "promotions#show", defaults: { format: 'choose' }, :as => :promotion
+  post ':id' => "promotions#create", defaults: { format: 'choose' }, :as => :promotion
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

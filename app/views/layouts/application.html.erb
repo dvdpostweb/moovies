@@ -25,7 +25,7 @@
     <% end %>
     <%= render(:partial => 'layouts/header') %>
     <div class="container clearfix">
-      <% if !current_customer && (params[:controller] != 'home' && params[:controller] != 'customers/registrations' && params[:controller] != 'steps' && params[:page_name] != 'abo') %>
+      <% if !current_customer && (params[:controller] != 'home' && params[:controller] != 'customers/registrations' && params[:controller] != 'steps' && params[:page_name] != 'abo') and !(params[:controller] == 'promotions' and params[:id] == 'smarttv')%>
       <div class="osc fr" id="subscribe-wrap">
         <div class="wrap"><h3><%= t('.promo_title').html_safe %></h3>
           <div id="promo"><%= t('.promo') %></div>

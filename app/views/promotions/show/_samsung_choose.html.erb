@@ -6,9 +6,9 @@
     </div>
     <div class="choice_language">
       <h3>Choisissez votre langue - Kies uw taal</h3>
-      <div class="left" ><a href="#" class="button_languages">Fran&ccedil;ais</a>
+      <div class="left" ><%= link_to 'Fran&ccedil;ais'.html_safe, promotion_localize_path(:id => 'samsung', :locale => :fr),:class => "button_languages" %>
       </div>
-      <div class="right"> <a href="#" class="button_languages">Nederlands</a>
+      <div class="right"> <%= link_to 'Nederlands', promotion_localize_path(:id => 'samsung', :locale => :nl),:class => "button_languages" %>
         <div style="clear:both;"></div>
       </div>
     </div>
