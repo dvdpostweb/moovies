@@ -212,13 +212,8 @@ class Product < ActiveRecord::Base
   end
 
   def public_name
-    #to do
-    if ENV['HOST_OK'] == "1"
-      desc = descriptions.by_language(I18n.locale).first
-      desc && !desc.cached_name.nil? ? "#{id}-#{desc.cached_name}" : id
-    else
-      id
-    end
+    desc = descriptions.by_language(I18n.locale).first
+    desc && !desc.cached_name.nil? ? "#{id}-#{desc.cached_name}" : id
   end
 
   def title

@@ -24,7 +24,9 @@
   	<% if params[:kind] == :adult %>
   	  <li><%= link_to t('.classic'), root_path(:kind => nil), :id => :home %></li>
   	<% else %>
-  	  <li><%= link_to t('.+18'), products_path(:package => Moovies.packages.invert[4], :kind => :adult), :id => :adult %></li>
+  	  <% if cookies[:adult_hide] != "1" %>
+  	    <li><%= link_to t('.+18'), products_path(:package => Moovies.packages.invert[4], :kind => :adult), :id => :adult %></li>
+  	  <% end %>
   	<% end %>
   	<li><%= link_to t('.contact'), current_customer ? messages_path : new_phone_request_path, :id => :message %></li>
   </ul>
