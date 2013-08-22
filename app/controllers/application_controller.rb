@@ -46,8 +46,8 @@ class ApplicationController < ActionController::Base
   def layout_by_resource
     if devise_controller? and params[:controller] != 'customers/registrations'
       "devise_layout"
-    elsif params[:controller] == 'promotions'
-      'promotions'
+    elsif params[:controller] == 'promoti' and params[:id] != 'smarttv'
+      'promo'
     else
       "application"
     end
@@ -74,6 +74,8 @@ class ApplicationController < ActionController::Base
   def init
     @browser = Browser.new(:ua => request.user_agent, :accept_language => "en-us")
     @kid_visible = false
+    cookies.permanent[:adult_hide] = params[:all] if params[:all]
+    
     params[:kind] = params[:kind] ? params[:kind].to_sym : :normal
     if params[:locale].nil?
       params[:locale] = I18n.locale
