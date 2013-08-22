@@ -1,5 +1,8 @@
-code
-<form action="<%= new_customer_registration_path %>" method="get">
-  <input name ="code">
-  <input type="submit" value ="go" />
-</form>
+<div id="maincontent">
+  <h1><%= t('code') %></h1>
+  <%= "<div id='error'>#{t('.error')}</div>".html_safe if @error %>
+  <%= form_tag promotion_path(:id => params[:id], :locale => nil) do %>
+    <%= text_field_tag(:code, params[:code], :id => 'code_form') %><br />
+    <%= submit_tag(t('.valid'), :id => 'submit_button') %>
+  <% end %>
+</div>

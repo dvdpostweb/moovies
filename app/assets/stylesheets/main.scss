@@ -813,3 +813,35 @@ ul.dropdown li {
   text-align: center;
   text-transform: uppercase;
 }
+#smarttv_choose #maincontent {
+    margin-left: 14px;
+    width: 970px;
+}
+#smarttv_choose #submit_button {
+background-color: #9ECA3B;
+background-repeat: repeat no-repeat;
+border: 1px solid #7EA613;
+border-bottom-left-radius: 4px;
+border-bottom-right-radius: 4px;
+border-top-left-radius: 4px;
+border-top-right-radius: 4px;
+box-shadow: rgba(255, 255, 255, 0.79688) 0 1px 1px inset;
+color: white;
+font-size: 18px;
+padding: 5px;
+text-shadow: #72942A 0 -1px 0;
+width: 229px;
+height: 40px;
+margin-top: 10px;
+}
+#smarttv_choose #code_form
+{
+  font-size: 20px;
+  width: 225px;
+  height: 26px;
+}
+#smarttv_choose #error
+{
+  color: #900;
+  padding: 10px 0;
+}
