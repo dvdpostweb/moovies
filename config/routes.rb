@@ -61,7 +61,6 @@ Moovies::Application.routes.draw do
       match 'language' => 'streaming_products#language'
       match 'subtitle' => 'streaming_products#subtitle'
       match 'versions' => 'streaming_products#versions'
-      
     end
     
     match ':id' => "promotions#show"
