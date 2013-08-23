@@ -1,7 +1,9 @@
 <div id="wrap">
   <div id="header" >
-    <h1><a href="#" class="f-btn" style="">plush.be</a></h1>
-    <h2><a href="http://www.samsung.com/be" class="f-btn">http://www.samsung.com/be/</a></h2>
+    <h1>
+      <%= link_to 'plush.be', root_localize_path(), :class => 'f-btn' %>
+    </h1>
+    <h2><a href="http://www.samsung.com/be" class="f-btn">http://www.samsung.com/be</a></h2>
   </div>
   <div class="container clearfix">
     <div id="promo_content">
@@ -16,7 +18,10 @@
             <%= text_field_tag(:code, @code_samsung, :id => 'code3', :size => 20, :class => 'inputs_promo_code') %><br />
           </span>
         </div>
-        <p class="news"><input type="checkbox"  name="marketing" class="marketing3" value="YES">J'accepte les conditions de l'offre situées en-bas de cette page</p>
+        <p class="news">
+          <%= check_box_tag 'marketing', 1, @checked, :class => :marketing3, :id => 'mark' %>
+          J'accepte les conditions de l'offre situées en-bas de cette page
+        </p>
         <div class="garanties">
           <h4>Vos garanties</h4>
           <ul>
@@ -95,6 +100,7 @@
         <h2>Profitez gratuitement de<br><b>Plush Unlimited pendant 1 an</b>*</h2>
         <div align="center">Insérez le n° de série de votre TV<br><%= "<div id='error'>#{t('.error')}</div>".html_safe if @error %><%= text_field_tag(:code, @code_samsung, :id => 'code4', :size => 20, :class => 'inputs_promo_code') %></div>
         <p class="news_form">
+          <%= check_box_tag 'marketing', 1, @checked, :class => :marketing3, :id => 'mark2' %>
           J'accepte les conditions de l'offre situées en-bas de cette page
         </p>
         <div class="clearfix"></div>
