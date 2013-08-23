@@ -101,14 +101,7 @@
     <div class="clear"></div>
     <% unless current_customer %>
     <div id="subscribe-wrap">
-      <%= link_to image_tag("#{I18n.locale}/banner_promo_hp.jpg", :size => '942x188'), new_customer_registration_path(:code => @discount_top.name) %>
-      <!--   ============== 
-      <div class="wrap" style="">
-        <h3><%= t('.watch_now') %></h3>
-        <%= image_tag "#{I18n.locale}/prices.png", :size => '450x118' %>
-      </div>
-      <div id="try_it"><%= link_to t('.try2'), new_customer_registration_path(:code => @discount_bottom.name), :class => 'essaigratuit osc btn' %> <div id="engagement"><%= t('.try2_text') %></div></div>
- ==============   -->
+      <%= link_to image_tag("#{I18n.locale}/banner_promo_hp.jpg", :size => '942x188'), new_customer_registration_path(:code => @discount_bottom.name) %>
     </div>
     <% end %>
     <div class="clear"></div>

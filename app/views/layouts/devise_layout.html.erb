@@ -13,7 +13,7 @@
   <div id="wrap_login">
     <div id="header_login"> 
       <ul id="lang">
-        <li> <%= link_to t('.home').upcase, root_path %> </li>
+        <li> <%= link_to t('.home').upcase, root_localize_path %> </li>
         <li><%= switch_locale_link(params) %></li>
       </ul>
     </div>
@@ -34,7 +34,7 @@
     
     <div id="login_content_bg">
       <div id="login_content" align="center">
-        <h1> <%= link_to 'Plush - Online VOD rental', root_path, :class => 'like-btn' %> </h1>
+        <h1> <%= link_to 'Plush - Online VOD rental', root_localize_path, :class => 'like-btn' %> </h1>
         <%= yield %>
       </div>
     </div>

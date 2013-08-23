@@ -90,7 +90,7 @@ class CustomersController < ApplicationController
     @customer = current_customer
     @customer.update_attribute(:sexuality, params[:value])
     session[:sexuality] = params[:value].to_i
-    redirect_to root_path
+    redirect_to root_localize_path
   end
 
   def unsubscribe

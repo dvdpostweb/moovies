@@ -22,7 +22,7 @@
   		</ul>
   	</li>
   	<% if params[:kind] == :adult %>
-  	  <li><%= link_to t('.classic'), root_path(:kind => nil), :id => :home %></li>
+  	  <li><%= link_to t('.classic'), root_localize_path(:kind => nil), :id => :home %></li>
   	<% else %>
   	  <% if cookies[:adult_hide] != "1" %>
   	    <li><%= link_to t('.+18'), products_path(:package => Moovies.packages.invert[4], :kind => :adult), :id => :adult %></li>

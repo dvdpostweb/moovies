@@ -1,5 +1,6 @@
 class StepsController < ApplicationController
   before_filter :authenticate_customer!, :unless => :confirmation?
+  before_filter :promo
   def show
     @body_id = params[:id]
     if params[:id] == 'step2'
@@ -8,11 +9,6 @@ class StepsController < ApplicationController
       @hide_footer = true
       @hide_menu = true
     elsif params[:id] == 'step3'
-      if current_customer.promo_type == 'D'
-        @promo = Discount.find(current_customer.promo_id)
-      else
-        @promo = Activation.find(current_customer.promo_id)
-      end
       @hide_footer = true
       @hide_menu = true
     end
@@ -20,7 +16,13 @@ class StepsController < ApplicationController
 
   def update
     if params[:id] == 'step3'
-      current_customer.update_column(:customers_registration_step, 31)
+      if @promo.promo_price == 0
+        if params[:wpm] == "1"
+          current_customer.update_column(:customers_registration_step, 100)
+        end 
+      else
+        current_customer.update_column(:customers_registration_step, 31)
+      end
     end
     redirect_after_registration(customer_path)
   end
@@ -28,5 +30,15 @@ class StepsController < ApplicationController
   protected
   def confirmation?
     params[:id] == 'confirm'
+  end
+
+  def promo
+    if params[:id] == 'step3'
+      if current_customer.promo_type == 'D'
+        @promo = Discount.find(current_customer.promo_id)
+      else
+        @promo = Activation.find(current_customer.promo_id)
+      end
+    end
   end
 end
