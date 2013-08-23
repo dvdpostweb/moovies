@@ -11,8 +11,6 @@
           <td style="padding-left:10px; "><%= t('.abonement_choosen') %> </td>
           <td style="padding-right:10px;padding-left:10px; "><%= current_customer.subscription_type.description %> <%= t('.for') %> <%= number_to_currency(current_customer.subscription_type.price, :unit => '', :separator => ',') %>€ <%= t('.per_month') %></td>
         </tr>
-
-
         <tr>
           <td style="padding-left:10px;"><strong><%= t('.promotion') %></strong> </td>
           <td style="padding-right:10px;padding-left:10px; "><strong><%= @promo.text(I18n.locale).html_safe %></strong></td>
@@ -20,6 +18,11 @@
       </tbody></table>
       <h3><%= t('.payment') %></h3>
       <div class="choice">
+        <% if @promo.promo_price == 0 %>
+        <p>continue sans credit card <%= link_to 'go', step_path(:id => :step3, :wpm => 1), :method => :put %></p>
+        </tr>
+        <% end %>
+        
         <table>
           <tr>
             <td>	

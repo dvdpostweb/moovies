@@ -309,7 +309,7 @@ module ProductsHelper
     if current_customer
     li_style = selected_category ? 'display:none' : ''
       html_content << content_tag(:li, :class => :cat, :style => li_style) do
-        kind == :adult ? link_to( t('.full_categories'), categories_path(:view_mode => view_mode), :id => 'catx') : link_to( t('.category_x'), root_path(:kind => :adult), :id => 'catx')
+        kind == :adult ? link_to( t('.full_categories'), categories_path(:view_mode => view_mode), :id => 'catx') : link_to( t('.category_x'), root_localize_path(:kind => :adult), :id => 'catx')
       end
     end
     html_content
