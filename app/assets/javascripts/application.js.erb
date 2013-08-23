@@ -225,7 +225,7 @@ $(function() {
     }
   });
   $('#search').on('submit', function(){
-    if($('#search-field').val() == '' || $('#search-field').val() == '<%= I18n.t('layouts.menu.search') %>'){
+    if($('#search-field').val() == '' || $('#search-field').val() == $('#search_init').html()){
       return false
     }
     
