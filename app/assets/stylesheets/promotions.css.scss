@@ -1,4 +1,10 @@
-@import "compass/css3/images";
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ //= require reset
+ */
+ @import "compass/css3/images";
 
 .choice_language .button_languages {
   background-color: #D55023; 
@@ -45,7 +51,7 @@
 
 #header {
   background: none repeat scroll 0 0 #FFFFFF;
-  height: 56px;
+  height: 83px;
   position: relative;
   width: 100%;
 }
@@ -110,7 +116,7 @@ html, body{
   color: #FFFFFF;
   font-size: 48px;
   line-height: 49px;
-  padding-top: 20px;
+  padding-top: 13px;
   text-align: center;
 }
 
@@ -119,6 +125,7 @@ html, body{
   font-weight: bold;
   line-height: 28px;
   text-align: center;
+  margin: 50px 0 20px 0;
 }
 
 #promo_content h3 {
@@ -127,15 +134,13 @@ html, body{
 
 #promo_form p.news {
   font-size: 12px;
+  margin: 0 0 15px 0;
 }
 #promo_form span {
   color: #333333;
   font-size: 16px;
 }
 
-.container ul, .container ol, .container dl {
-  margin-bottom: 18px;
-}
 
 #promo_content #promo_form .garanties .engagement {
   background: url(image_path('promotions/no_shop.png')) no-repeat scroll 0 2px transparent;
@@ -184,7 +189,7 @@ html, body{
 }
 
 #promo_content #promo_form .avantages .film {
-  background: uurl(image_path('promotions/film.png')) no-repeat scroll 0 2px transparent;
+  background: url(image_path('promotions/film.png')) no-repeat scroll 0 2px transparent;
   height: 20px;
   line-height: 25px;
   padding-left: 30px;
@@ -209,16 +214,13 @@ html, body{
 }
 #samsung #promo_content {
   background: url(image_path('promotions/bg_samsung.jpg')) repeat scroll 0 0 transparent;
-  height: 647px;
+  height: 596px;
   margin: 0 auto;
   width: 970px;
 }
 
 #promo_form .inputs_promo_code {
   width: 180px;
-}
-.inputs_promo_code {
-  margin-bottom: -10px;
 }
 .inputs_promo_code {
   background: none no-repeat scroll right center white;
@@ -228,6 +230,7 @@ html, body{
   font-size: 20px;
   padding: 6px 29px 6px 6px;
   width: 226px;
+  margin: 10px 0;
 }
 #commentcamarche_content {
   font-size:12px;
@@ -239,6 +242,7 @@ html, body{
   font-size: 28px;
   font-weight: bold;
   text-transform: none;
+  margin: 10px 0;
 }
 #commentcamarche_content h3 {
   background: url(image_path('promotions/square.gif')) no-repeat scroll 0 12px transparent;
@@ -276,6 +280,7 @@ h1, h2, h3, h4, h5 {
   font-size: 30px;
   padding: 10px;
   text-shadow: 0 -1px 0 #D83C14;
+  margin: 8px 0 0;
 }
 
 #commentcamarche_content td.step1 {
@@ -333,3 +338,11 @@ ul {
   list-style: none outside none;
 }
 
+#promo_form h4
+{
+  margin: 0;
+}
+.news_form
+{
+  margin:5px 0;
+}
