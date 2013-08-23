@@ -1,7 +1,6 @@
 class Product < ActiveRecord::Base
   include ThinkingSphinx::Scopes
   cattr_reader :per_page
-  @@per_page = 3
   self.primary_key = :products_id
   
   alias_attribute :availability,    :products_availability
@@ -500,7 +499,7 @@ class Product < ActiveRecord::Base
       elsif options[:view_mode] && options[:view_mode] == 'tvod_last_chance'
         'tvod_end asc, streaming_available_at_order DESC, rating desc'
       elsif options[:view_mode] && options[:view_mode] == 'svod_soon'
-        'svod_start asc, streaming_available_at_order DES, rating descC'
+        'svod_start asc, streaming_available_at_order DES, rating desc'
       elsif options[:view_mode] && options[:view_mode] == 'svod_last_added'
         'svod_start desc, streaming_available_at_order DESC, rating desc'
       elsif options[:view_mode] && options[:view_mode] == 'svod_last_chance'
