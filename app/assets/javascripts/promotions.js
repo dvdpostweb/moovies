@@ -27,7 +27,6 @@ $(function() {
 			{
 				id_mark = '#mark2'
 			}
-			console.log(id_mark)
 			if(!$(id_mark).is(':checked'))
 			{
 				alert($('#text_error_conditions').html())

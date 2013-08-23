@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
           redirect_to step_path(:id => 'step2')
         end
       elsif current_customer.step.to_i == 33
-        if (params['controller'] == 'steps' && params[:id] == 'step3') || (params[:controller] == 'ogones' && params[:action] == 'show')
+        if (params['controller'] == 'steps' && params[:id] == 'step3') || (params[:controller] == 'ogones')
         else
           redirect_to step_path(:id => 'step3')
         end
