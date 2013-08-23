@@ -18,7 +18,7 @@
       </tbody></table>
       <h3><%= t('.payment') %></h3>
       <div class="choice">
-        <% if @promo.promo_price == 0 %>
+        <% if @promo.payable == 2 %>
         <div class="freetrial">
           - Si vous souhaitez <b>uniquement</b> profiter de la <b>VOD illimitée</b> offerte, vous pouvez finaliser l'inscription en <%= link_to t('.go'), ogone_path(:skip => 1), :method => :post %><br/><br/>- Si vous souhaitez avoir <b>la possibilité</b> de regarder des <b>films à la carte</b> également, renseignez vos coordonées de paiement 
         </div>
