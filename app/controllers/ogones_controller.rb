@@ -1,19 +1,40 @@
 class OgonesController < ApplicationController
   skip_before_filter  :verify_authenticity_token
   def create
-    @ogone = OgoneCheck.find_by_orderid(params[:orderID])
-    customer = @ogone.customer
+    if params[:skip]
+      customer = current_customer
+      if current_customer.promo_type == 'D'
+        @promo = Discount.find(current_customer.promo_id)
+        discount_code_id = @promo.id
+        context = 'new_discount'
+      else
+        @promo = Activation.find(current_customer.promo_id)
+        context = 'new_activation'
+      end
+      if @promo.promo_price > 0
+        return false
+      end
+    else
+      @ogone = OgoneCheck.find_by_orderid(params[:orderID])
+      customer = @ogone.customer
+      context = @ogone.context
+      if context == 'new_discount'
+        discount_code_id = @ogone.discount_code_id
+      end
+    end
     if customer.actived?
     else
+      if params[:skip]
+      else
+        customer.update_attributes(:customers_abo_payment_method => 1, :ogone_owner => params[:CN], :ogone_exp_date => params[:ED], :ogone_card_no => params[:CARDNO], :ogone_card_type => params[:BRAND])
+      end
       
-      @ogone = OgoneCheck.find_by_orderid(params[:orderID])
-      customer.update_attributes(:customers_abo_payment_method => 1, :ogone_owner => params[:CN], :ogone_exp_date => params[:ED], :ogone_card_no => params[:CARDNO], :ogone_card_type => params[:BRAND])
-      case @ogone.context
+      case context
         when 'new_discount'
           if customer.promo_id > 0
             @discount = Discount.find(customer.promo_id)
             action = Subscription.action[:creation_with_discount]
-            DiscountUse.create(:discount_code_id => @ogone.discount_code_id, :customer_id => customer.to_param, :discount_use_date => Time.now.localtime)
+            DiscountUse.create(:discount_code_id => discount_code_id, :customer_id => customer.to_param, :discount_use_date => Time.now.localtime)
             #@discount.update_attributes(:discount_limit => @discount.discount_limit - 1)
             duration = @discount.duration
             auto_stop = @discount.auto_stop

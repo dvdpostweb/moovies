@@ -16,13 +16,7 @@ class StepsController < ApplicationController
 
   def update
     if params[:id] == 'step3'
-      if @promo.promo_price == 0
-        if params[:wpm] == "1"
-          current_customer.update_column(:customers_registration_step, 100)
-        end 
-      else
-        current_customer.update_column(:customers_registration_step, 31)
-      end
+      current_customer.update_column(:customers_registration_step, 31)
     end
     redirect_after_registration(customer_path)
   end
