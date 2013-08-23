@@ -4,14 +4,30 @@ class PromotionsController < ApplicationController
   end
 
   def create
-    code = params[:code]
-    @discount = Discount.by_name(code).available.first
-    @activation = Activation.by_name(code).available.first
-    if @discount.nil? && @activation.nil?
-      @error = true
-      render :show
-    else
-      redirect_to new_customer_registration_path(:code => code)
+    if params[:id] == 'samsung'
+      if !params[:code].nil?
+        @code_samsung = params[:code]
+        if SamsungCode.available.find_by_code(@code_samsung)
+          cookies.permanent[:code] = 'SMSPSH'
+          
+          redirect_to new_customer_registration_path(:samsung => @code_samsung)
+        else
+          @error = true
+          render :show
+        end
+      else
+        render :show
+      end
+    else  
+      code = params[:code]
+      @discount = Discount.by_name(code).available.first
+      @activation = Activation.by_name(code).available.first
+      if @discount.nil? && @activation.nil?
+        @error = true
+        render :show
+      else
+        redirect_to new_customer_registration_path(:code => code)
+      end
     end
   end
   private
@@ -19,5 +35,7 @@ class PromotionsController < ApplicationController
     @partial = params[:id]
     @partial += "_#{params[:format]}" if params[:format]
     @body_id = @partial
+    @code_samsung = t('promotions.show.samsung.default')
+    
   end
 end

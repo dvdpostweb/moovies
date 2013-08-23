@@ -1,6 +1,3 @@
-<%= params[:locale] %>
-
-samsung
 <div id="wrap">
   <div id="header" >
     <h1><a href="#" class="f-btn" style="">plush.be</a></h1>
@@ -11,32 +8,34 @@ samsung
       <h1 style="color: #212A31;">Profitez grâce à Samsung<br/><font color="#98D321"><strong>d’un an Plush Unlimited gratuit*</strong></font></h1>
       <div id="promo_form">
         <h2>Regardez dès aujourd'hui <br />votre premier film!</h2>
-        <form name="verify_form" method="post" action="/activation_code_confirm.php" id="form_step">
-          <div align="center">
-            <input type='hidden' name='url' value='http://www.dvdpost.be/promotions/philips_fr?error=1'>
-            <input type="hidden" name="language" value="fr">
-           <span>Insérez le n° de série de votre TV <br /><input type="text" size="20" value="Numéro de série" class="inputs_promo_code" id="code3" name="code"></span>
-          </div>
-          <p class="news"><input type="checkbox"  name="marketing" class="marketing3" value="YES">J'accepte les conditions de l'offre situées en-bas de cette page</p>
-          <div class="garanties">
-            <h4>Vos garanties</h4>
-            <ul>
-              <li class="engagement">Sans engagement</li>
-              <li class="stop">Vous arrêtez quand <br />vous voulez</li>
-              <li class="security">100% sécurisé</li>
-            </ul>
-          </div>
-          <div class="avantages">
-            <h4>Vos avantages</h4>
-            <ul>
-              <li class="film">Large catalogue de films</li>
-              <li class="home">Louez les films sans quitter votre fauteuil</li>
-              <li class="platform">Multi-plateforme</li>
-            </ul>
-          </div>
-          <div style="clear:both;"></div>
-          <p style="padding-top:5px;"><input type="submit" border="0" align="absmiddle" id="submit_id3" class="promo_button" name="sent" value="Essayez gratuitement" /></p>
-        </form>
+        <%= form_tag promotion_localize_path(:id => params[:id]), :id => 'form_step' do %>
+        <div align="center">
+          <span>
+            Insérez le n° de série de votre TV <br />
+            <%= "<div id='error'>#{t('.error')}</div>".html_safe if @error %>
+            <%= text_field_tag(:code, @code_samsung, :id => 'code3', :size => 20, :class => 'inputs_promo_code') %><br />
+          </span>
+        </div>
+        <p class="news"><input type="checkbox"  name="marketing" class="marketing3" value="YES">J'accepte les conditions de l'offre situées en-bas de cette page</p>
+        <div class="garanties">
+          <h4>Vos garanties</h4>
+          <ul>
+            <li class="engagement">Sans engagement</li>
+            <li class="stop">Vous arrêtez quand <br />vous voulez</li>
+            <li class="security">100% sécurisé</li>
+          </ul>
+        </div>
+        <div class="avantages">
+          <h4>Vos avantages</h4>
+          <ul>
+            <li class="film">Large catalogue de films</li>
+            <li class="home">Louez les films sans quitter votre fauteuil</li>
+            <li class="platform">Multi-plateforme</li>
+          </ul>
+        </div>
+        <div style="clear:both;"></div>
+        <p style="padding-top:5px;"><input type="submit" border="0" align="absmiddle" id="submit_id3" class="promo_button" name="sent" value="Essayez gratuitement" /></p>
+        <% end %>
       </div>
     </div>
 
@@ -45,89 +44,71 @@ samsung
       <div class="promo_info">
         <table cellpadding="0" cellspacing="0" border="0">
           <tr id="promotions">
-            <td><img src="<%= image_path "/assets/promotions/compte_plush.jpg" %>" /></td>
-            <td><img src="<%= image_path "/assets/promotions/plush_appli.jpg" %>"style="padding-top:28px;" /></td>
-            <td><img src="<%= image_path "/assets/promotions/loggin_plush.jpg" %>" style="padding-top:28px;" /></td>
-            <td><img src="<%= image_path "/assets/promotions/choice_movies.jpg" %>" style="padding-top:14px;"/></td>
+            <td><%= image_tag 'promotions/compte_plush.jpg' %></td>
+            <td><%= image_tag "promotions/plush_appli.jpg",  :style => 'padding-top:28px;' %></td>
+            <td><%= image_tag "promotions/loggin_plush.jpg", :style => 'padding-top:28px;' %></td>
+            <td><%= image_tag "promotions/choice_movies.jpg", :style => 'padding-top:14px;' %></td>
           </tr>
           <tr id="dvd">
-            <td class="step1">Créez un compte Plush <br />
-              via cette page </td>
-              <td class="step2">Téléchargez l’application<br />
-                Plush </td>
-                <td class="step3">Logguez vous sur<br />
-                  l’application </td>
-                  <td class="step4">Choisissez un film <br />
-                    dans l’application</td>
-                  </tr>
-                </table>
-              </div>
-              <div id="commentcamarche_content">
-                <h2>Plush vous offre:</h2>
-                <h3>Un catalogue illimité</h3>
-                <table cellpadding="0" cellspacing="0" border="0">
-                  <tr id="vod">
-                    <td><img src="<%= image_path "/assets/promotions/fr/vod.jpg" %>" style="padding-left:20px;"/></td>
-                    <td><img src="<%= image_path "/assets/promotions/fr/streamingbutton.jpg" %>" style="padding-top:50px;"  /></td>
-                    <td><img src="<%= image_path "/assets/promotions/fr/icon_subtitles.gif" %>" style="padding-top:30px; padding-left:40px;" /></td>
-                    <td><img src="<%= image_path "/assets/promotions/tv_vod.jpg" %>"  style="padding-top:14px;" /></td>
-                  </tr>
-                  <tr id="vod">
-                    <td class="step1">Faites votre choix <br />
-                      parmi 400 films <br />
-                      disponible en illimité</td>
-                      <td class="step2">Cliquez sur <br />
-                        "Regarder"</td>
-                        <td class="step3">Sélectionnez la langue<br />
-                          et les sous-titres du film</td>
-                          <td class="step4">Profitez de votre film sans restrictions</td>
-                        </tr>
-                      </table>
-                      <h3>Un catalogue à la carte</h3>
-                      <table cellpadding="0" cellspacing="0" border="0">
-                        <tr id="dvd">
-                          <td><img src="<%= image_path "/assets/promotions/fr/vodppv.jpg" %>"style="padding-left:20px;"/></td>
-                          <td><img src="<%= image_path "/assets/promotions/fr/payperviewbutton.jpg" %>" style="padding-top:28px;" /></td>
-                          <td><img src="<%= image_path "/assets/promotions/fr/icon_subtitles.gif" %>" style="padding-top:30px; padding-left:40px;" /></td>
-                          <td><img src="<%= image_path "/assets/promotions/tv_vodppv.jpg" %>" style="padding-top:14px;"/></td>
-                        </tr>
-                        <tr id="dvd">
-                          <td class="step1">Faites votre choix <br />parmi plus de 1000 films<br /> à la carte</td>
-                            <td class="step2">Cliquez sur Regarder. <br />
-                              Votre carte est débitée <br />
-                              du frais de location</td>
-                              <td class="step3">Sélectionnez la langue<br />
-                                et les sous-titres du film</td>
-                                <td class="step4">Profitez pendant 48h<br />
-                                  de votre film !</td>
-                                </tr>
-                              </table>
-                            </div>
-                            <form name="verify_form" method="post" action="/activation_code_confirm.php" id="form_step2">
-                              <div id="area_promo">
-                                <h2>Profitez gratuitement de<br><b>Plush Unlimited pendant 1 an</b>*</h2>
-                                <p align="center">Insérez le n° de série de votre TV<br><input type='hidden' name='url' value='http://www.dvdpost.be/promotions/philips_fr?error=1'>
-                                  <input type="text" size="20" value="" class="inputs_promo_code" id="code4" name="code"></p>
-                                  <p class="news_form">
-                                    <input type="checkbox" name="marketing" class="marketing4" value="YES">
-                                    <input type="hidden" name="language" value="fr">
-                                    J'accepte les conditions de l'offre situées en-bas de cette page</p>
-                                    <div class="clearfix"></div>
-                                    <p align="center"><input type="submit" border="0" align="absmiddle" class="promo_button" id="submit_id4" name="sent" value="Essayez gratuitement"></p>
-                                  </div>
-                                </form>
-                                <p align="center"> <img src="<%= image_path "/assets/fr/info_tel.jpg" %>" /></p>
-                                <div id="promo_footer">*Offre r&eacute;serv&eacute;e aux personnes ayant achet&eacute; une Smart Tv Philips pendant la p&eacute;riode promotionnelle. <br/><br/>
-                                  Si vous &ecirc;tes d&eacute;j&agrave; client chez DVDPost, vous ne pourrez pas vous inscrire via cette landing. Merci de bien vouloir contacter notre service client au num&eacute;ro gratuit 0800/95 990 ou au num&eacute;ro payant 0032 2 5036811 pour les appels effectu&eacute;s hors de la Belgique pour profiter des VOD offertes. Dans ce cas-ci, les VOD seront uniquement valables jusqu'à la prochaine date de reconduction de votre abonnement. <br/><br/>
-                                  Les nouveaux clients qui s'inscrivent via cette landing avec le code promotionnel reçu de Philips recevront 20 cr&eacute;dits VOD qui restent valables 3 mois. 
-                                  Apr&egrave;s 3 mois l'abonnement est cl&ocirc;tur&eacute; automatiquement. Si vous souhaitez continuer &agrave; profiter de notre service VOD et d&eacute;couvrir notre service DVD/Blu-Ray, merci de contacter notre service client.</div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div style="display:none" id='text_error_conditions'>Merci de cocher la case "J'accepte les conditions de l'offre situées en-bas de cette page" avant de continuer l'inscription</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <td class="step1">Créez un compte Plush <br />via cette page</td>
+            <td class="step2">Téléchargez l’application<br />Plush</td>
+            <td class="step3">Logguez vous sur<br />l’application</td>
+            <td class="step4">Choisissez un film <br /> dans l’application</td>
+          </tr>
+        </table>
+      </div>
+      <div id="commentcamarche_content">
+        <h2>Plush vous offre:</h2>
+        <h3>Un catalogue illimité</h3>
+        <table cellpadding="0" cellspacing="0" border="0">
+          <tr id="vod">
+            <td><img src="<%= image_path "/assets/promotions/fr/vod.jpg" %>" style="padding-left:20px;"/></td>
+            <td><img src="<%= image_path "/assets/promotions/fr/streamingbutton.jpg" %>" style="padding-top:50px;"  /></td>
+            <td><img src="<%= image_path "/assets/promotions/fr/icon_subtitles.gif" %>" style="padding-top:30px; padding-left:40px;" /></td>
+            <td><img src="<%= image_path "/assets/promotions/tv_vod.jpg" %>"  style="padding-top:14px;" /></td>
+          </tr>
+          <tr id="vod">
+            <td class="step1">Faites votre choix <br />parmi 400 films <br />disponible en illimité</td>
+            <td class="step2">Cliquez sur <br />"Regarder"</td>
+            <td class="step3">Sélectionnez la langue<br />et les sous-titres du film</td>
+            <td class="step4">Profitez de votre film sans restrictions</td>
+          </tr>
+        </table>
+        <h3>Un catalogue à la carte</h3>
+        <table cellpadding="0" cellspacing="0" border="0">
+          <tr id="dvd">
+            <td><img src="<%= image_path "/assets/promotions/fr/vodppv.jpg" %>"style="padding-left:20px;"/></td>
+            <td><img src="<%= image_path "/assets/promotions/fr/payperviewbutton.jpg" %>" style="padding-top:28px;" /></td>
+            <td><img src="<%= image_path "/assets/promotions/fr/icon_subtitles.gif" %>" style="padding-top:30px; padding-left:40px;" /></td>
+            <td><img src="<%= image_path "/assets/promotions/tv_vodppv.jpg" %>" style="padding-top:14px;"/></td>
+          </tr>
+          <tr id="dvd">
+            <td class="step1">Faites votre choix <br />parmi plus de 1000 films<br /> à la carte</td>
+            <td class="step2">Cliquez sur Regarder. <br />Votre carte est débitée <br />du frais de location</td>
+            <td class="step3">Sélectionnez la langue<br />et les sous-titres du film</td>
+            <td class="step4">Profitez pendant 48h<br />de votre film !</td>
+          </tr>
+        </table>
+      </div>
+      <%= form_tag promotion_localize_path(:id => params[:id]), :id => 'form_step2' do %>
+      <div id="area_promo">
+        <h2>Profitez gratuitement de<br><b>Plush Unlimited pendant 1 an</b>*</h2>
+        <div align="center">Insérez le n° de série de votre TV<br><%= "<div id='error'>#{t('.error')}</div>".html_safe if @error %><%= text_field_tag(:code, @code_samsung, :id => 'code4', :size => 20, :class => 'inputs_promo_code') %></div>
+        <p class="news_form">
+          J'accepte les conditions de l'offre situées en-bas de cette page
+        </p>
+        <div class="clearfix"></div>
+        <p align="center"><input type="submit" border="0" align="absmiddle" class="promo_button" id="submit_id4" name="sent" value="Essayez gratuitement"></p>
+      </div>
+      <% end %>
+      <p align="center"><%= image_tag "/#{I18n.locale}/info_tel.jpg" %></p>
+      <div id="promo_footer">*Offre r&eacute;serv&eacute;e aux personnes ayant achet&eacute; une Smart Tv Philips pendant la p&eacute;riode promotionnelle. <br/><br/>
+        Si vous &ecirc;tes d&eacute;j&agrave; client chez DVDPost, vous ne pourrez pas vous inscrire via cette landing. Merci de bien vouloir contacter notre service client au num&eacute;ro gratuit 0800/95 990 ou au num&eacute;ro payant 0032 2 5036811 pour les appels effectu&eacute;s hors de la Belgique pour profiter des VOD offertes. Dans ce cas-ci, les VOD seront uniquement valables jusqu'à la prochaine date de reconduction de votre abonnement. <br/><br/>
+        Les nouveaux clients qui s'inscrivent via cette landing avec le code promotionnel reçu de Philips recevront 20 cr&eacute;dits VOD qui restent valables 3 mois. 
+        Apr&egrave;s 3 mois l'abonnement est cl&ocirc;tur&eacute; automatiquement. Si vous souhaitez continuer &agrave; profiter de notre service VOD et d&eacute;couvrir notre service DVD/Blu-Ray, merci de contacter notre service client.</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div style="display:none" id='text_error_conditions'>Merci de cocher la case "J'accepte les conditions de l'offre situées en-bas de cette page" avant de continuer l'inscription</div>
+<div id="default" style="display:none"><%= t '.default' %></div>
