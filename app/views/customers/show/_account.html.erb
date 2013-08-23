@@ -20,16 +20,7 @@
         <td align="right"><strong><%= t '.first_name' %></strong></td>
         <td align="left"><%= customer.first_name %></td>
       </tr>
-      <tr>
-        <td align="right" valign="top" class="adresse"></td>
-        <td align="right" valign="top" id="modif">
-          <ul>
-            <li class="links">
-              <%= link_to t('.customer_edit'), edit_customer_path(), :class => 'modification_account facebox' %>
-            </li>
-          </ul>
-        </td>
-      </tr>
+      
       <tr>
         <td align="right" valign="top" class="adresse"><strong><%= t '.address' %></strong></td>
         <td align="left" valign="top" class="adresse">
@@ -40,42 +31,43 @@
           <% end %>
         </td>
       </tr>
+       <tr>
+          <td align="right"><strong>N° de téléphone :</strong></td>
+          <td align="left"></td>
+        </tr>
       <tr>
         <td align="right" valign="top" class="adresse"></td>
         <td align="right" valign="top" id="modif">
           <ul>
             <li class="links">
-              <%= link_to t('.address_edit'), edit_customer_addresses_path(:customer_id => current_customer), :class => 'modification_address facebox' %>
+              <%= link_to t('.customer_edit'), edit_customer_path(), :class => 'modification_account facebox' %>
             </li>
           </ul>
         </td>
       </tr>
+    
       <tr>
         <td colspan="2"><div class="ligne"></div></td>
       </tr>
+        <tr>
+          <td align="right" class="adresse"><strong><%= t '.cotations' %></strong></td>
+          <td align="left" class="adresse"><%= customer.ratings.count %></td>
+        </tr>
+         <tr>
+            <td align="right"><strong><%= t '.critiques' %></strong></td>
+            <td align="left"><%= @review_count %> 
+              <% if @review_count > 0 %>
+              (<%= link_to t('.see_all'), customer_reviews_path(:customer_id => current_customer.to_param), :class => :modif %>)
+              <% end %>
+            </td>
+          </tr>
+          
       <%= render :partial => 'customers/show/nickname', :locals => { :customer => customer } %>
       <tr>
         <td colspan="2"><div class="ligne"></div></td>
       </tr>
-      <tr>
-        <td align="right" class="adresse"><strong><%= t '.cotations' %></strong></td>
-        <td align="left" class="adresse"><%= customer.ratings.count %></td>
-      </tr>
-      <tr>
-        <td align="right"><strong><%= t '.critiques' %></strong></td>
-        <td align="left"><%= @review_count %> 
-          <% if @review_count > 0 %>
-          (<%= link_to t('.see_all'), customer_reviews_path(:customer_id => current_customer.to_param), :class => :modif %>)
-          <% end %>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2"><div class="ligne"></div></td>
-      </tr>
-      <tr>
-        <td colspan="2"><div class="ligne"></div></td>
-      </tr>
       
+    
       <tr>
         <td align="right" class="adresse"><strong><%= t '.newsletters' %></strong></td>
         <td align="left" class="adresse">
@@ -86,6 +78,15 @@
       </tr>
       <tr>
         <td align="right"><strong><%= t '.newsletters_partner' %></strong></td>
+        <td align="left">
+          <div>
+          <%= render :partial => 'customers/show/active', :locals => {:active => customer.newsletter_parnter, :type => 'newsletter_parnter'} %>
+          </div>
+        </td>
+      </tr>
+      
+      <tr>
+        <td align="right"><strong>Newsletter adulte :</strong></td>
         <td align="left">
           <div>
           <%= render :partial => 'customers/show/active', :locals => {:active => customer.newsletter_parnter, :type => 'newsletter_parnter'} %>

@@ -149,16 +149,16 @@
   line-height: 22px;
   padding-left: 83px;
 }
-#prices .adult_dvd{
-  background-image: url(image_path('tickets_prices.png'));
-  background-position: 0 0;
-  background-repeat: no-repeat no-repeat;
-  color: #3E3D40;
-  font-size: 18px;
-  font-weight: normal;
-  height: 66px;
-  line-height: 22px;
-  padding-left: 83px;
+#prices .adult_dvd {
+    background-image: url("/assets/dvd_prices.png");
+    background-position: 0 0;
+    background-repeat: no-repeat no-repeat;
+    color: #3E3D40;
+    font-size: 18px;
+    font-weight: normal;
+    height: 66px;
+    line-height: 22px;
+    padding-left: 83px;
 }
 #prices .kids_dvd {
   background-image: url(image_path('tickets_prices.png'));
