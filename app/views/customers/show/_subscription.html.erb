@@ -4,9 +4,31 @@
   </div>
   
   <div id="content_droite">
-    <table cellpadding="1" cellspacing="0" border="0" width="352">
-      <%= render :partial => 'customers/show/new_pricing' %>
+    <table cellpadding="1" cellspacing="0" border="0">
+      
+
+     
       <tr>
+                <td width="203" align="right"><strong>Votre formule :</strong></td>
+        <td width="258" align="left">Plush unlimited</td>
+      </tr>
+      
+       <tr>
+          <td align="right" valign="top" class="adresse"></td>
+          <td align="right" valign="top" id="modif">
+            <ul>
+              <li class="links">
+                <a href="/fr/customers/151435/suspension/new" class="modification_address facebox">Suspendre mon abonnement</a>
+              </li>
+            </ul>
+          </td>
+        </tr>
+        
+      
+     
+     
+      <!--<%= render :partial => 'customers/show/new_pricing' %>
+        <tr>
         <td colspan="2" align="left">
           <% if customer.actived? && customer.subscription %>
             <ul>
@@ -54,7 +76,7 @@
       <% end %>
       <tr>
         <td colspan="2"><div class="ligne"></div></td>
-      </tr>
+      </tr>--> 
       <tr>
         <td align="right" class="adresse"><strong><%= t '.date_abo' %></strong></td>
         <td align="left" class="adresse">
@@ -68,14 +90,24 @@
         </td>
       </tr>
       <tr>
+                <td width="203" align="right"><strong>Films dans votre liste cinéma :</strong></td>
+        <td width="258" align="left">22</td>
+      </tr>
+      <tr>
+                <td width="203" align="right"><strong>Films dans votre liste Adulte :</strong></td>
+        <td width="258" align="left">22</td>
+      </tr>
+     <!-- <tr>
         <td align="right"><strong><%= t '.type_abo' %></strong></td>
         <td align="left"><%= t(".#{customer.subscription_payment_method.name.downcase}") if customer.subscription_payment_method %></td>
-      </tr>
+      </tr>--> 
     </table>
   </div>
-  
+  <p align="center"> <img src="<%= image_path "/assets/fr/info_tel.jpg" %>"  width="375"/></p>
 </div>
 <div class="end"></div>
 <div style="display:none" id="rotation"><%= t '.rotation' %></div>
 <div style="display:none" id="only_vod_confirm"><%= t '.only_vod_confirm' %></div>
 <div style="display:none" id="remove_only_vod_confirm"><%= t '.remove_only_vod_confirm' %></div>
+
+
