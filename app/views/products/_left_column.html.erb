@@ -24,7 +24,7 @@
   <% end %>
   <%= link_to t('.adult'), products_path(:kind => :adult, :package => Moovies.packages.invert[5]), :class => "ttl adult" %>
   <% else %>
-  <%= link_to t('.classic_svod'), products_path(:kind => :normal, :package => Moovies.packages.invert[1]), :class => "ttl infinity" %>
+  <%= link_to t('.classic_svod'), products_path(:kind => nil, :package => Moovies.packages.invert[1]), :class => "ttl infinity" %>
   <h3 class="ttl adult menu"><%= t '.adult_unlimited' %></h3>
   <ul class="nav osc" style='display: <%= (@product && @product.package_id == 4) || params[:package] == Moovies.packages.invert[4] || params[:package].nil? ? 'block' : 'none' %>'>
     <li class="list"><%= link_to t('.svod_last_added'), products_path(:package => Moovies.packages.invert[4], :view_mode => :svod_last_added) %></li>

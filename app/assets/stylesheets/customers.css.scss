@@ -44,9 +44,9 @@
   background-color:#FFF;
   font-size:13px;
   font-family:Arial, Helvetica, sans-serif;
-  padding:5px;
-  border: 1px solid #4A5863;
-  color:#4A5863;
+  padding:20px;
+ border: 1px solid #C4C4C0;
+   color:#4A5863;
   margin-bottom:30px;
 }
 
@@ -61,8 +61,8 @@
   background-color:#FFF;
   font-size:13px;
   font-family:Arial, Helvetica, sans-serif;
-  padding:5px;
-  border: 1px solid #4A5863;
+  padding:20px;
+  border: 1px solid #C4C4C0;
   color:#4A5863;
   margin-bottom:20px;
 }
@@ -113,6 +113,8 @@ li.links a {
 .ligne {
   background-color: #f7f7f7;
   height:5px;
+  margin-top:10px;
+    margin-bottom:10px;
 }
 
 .rotation { background-color:#ffe809;
@@ -146,9 +148,7 @@ li.links a {
 	   margin-leftpu: 6px;
     vertical-align: middle;
 }
-.adresse {
-  padding-top:10px !important;
-}
+
 .transit {
   padding-top:3px !important;
 }
