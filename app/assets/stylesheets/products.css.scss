@@ -1080,9 +1080,7 @@ color: #C3C4C0;
 font-size: 14px;
 
 }
-.adult .oters .btns a,.adult .oters .btns input {
-  background-image: url(image_path('sprite_adult.png')) !important;
-}
+
 .oters .btns input{
   font-family: 'Open Sans Condensed', sans-serif;
   width: 134px;
@@ -1530,6 +1528,25 @@ text-align:center;
 	color: #fff;
 
 
+}
+
+#leftcolumn h3.ttl.adult.alacarte_menu.menu {
+	background:#c36ec3;
+	color: #fff;
+	
+
+
+}
+
+.adult #leftcolumn a.ttl.infinity {
+	background:#98D321;
+	color: #fff;
+}
+
+
+#leftcolumn h3.ttl.adult.menu {
+	background:#993399;
+	color: #fff;
 }
 
 #leftcolumn a.ttl.adult {

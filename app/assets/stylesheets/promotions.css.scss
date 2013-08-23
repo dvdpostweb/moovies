@@ -1,0 +1,348 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ //= require reset
+ */
+ @import "compass/css3/images";
+
+.choice_language .button_languages {
+  background-color: #D55023; 
+  @include filter-gradient(#EE8419, #E26417, vertical);
+  @include background-image(linear-gradient(top, #EE8419 0%,#E26417 100%));
+
+  border: 1px solid #D55023;
+  border-radius: 4px 4px 4px 4px;
+  bottom: 18px;
+  box-shadow: 0 1px 1px rgba(255, 255, 255, 0.8) inset;
+  color: white;
+  display:inline-block;
+  font-size:25px;
+  height:29px;
+  line-height:20px;
+  margin-left:65px;
+  margin-top:120px;
+  padding:7px 0 0;
+  text-align:center;
+  text-shadow:#D83C14 0 -1px 0;
+  width:179px;
+
+}
+
+.choice_language  a {
+  text-decoration: none;
+}
+
+.choice_language .left {
+  float: left;
+}
+
+.choice_language .right {
+  padding-right: 55px;
+  float: right;
+}
+
+#samsung_choose .choice_language {
+  background-image: url(image_path('promotions/bg_l_samsung.jpg'));
+  background-position: 0px 0px;
+  background-repeat: no-repeat no-repeat;
+  height: 537px;
+}
+
+#header {
+  background: none repeat scroll 0 0 #FFFFFF;
+  height: 83px;
+  position: relative;
+  width: 100%;
+}
+
+
+#samsung_choose #header h2 a, #samsung #header h2 a {
+  background: url(image_path('promotions/logo_samsung.jpg')) repeat scroll 0 0 transparent;
+  height: 39px;
+  width: 224px;
+}
+
+#samsung_choose #header h1 a, #samsung #header h1 a {
+  background: url(image_path('promotions/logo_plush.png')) repeat scroll 0 -12px transparent;
+  height: 64px;
+  width: 152px;
+}
+#header h1 {
+  float: left;
+  height: 39px;
+  margin: 15px 0 0 20px;
+} 
+#header h2 {
+  float: left;
+  height: 42px;
+  margin: 24px 0 0 5px;
+}
+
+.choice_language h3 {
+  font-size: 28px;
+  font-family: 'Open Sans Condensed',sans-serif;
+  padding-top: 20px;
+  text-align: center;
+  color: #212A31;
+  font-weight: normal;
+}
+
+#wrap {
+  background: #ffffff;
+  box-shadow: 0 0 45px #000000;
+  margin: 0 auto 100px;
+  text-align: left;
+  width: 970px;
+
+}
+
+
+html, body{
+  background: #202c37 url(image-path("bg.jpg"));
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-size: 62.5%;
+  font-family: Arial,Helvetica,sans-serif;
+}
+.f-btn {
+  display: block;
+  outline: medium none;
+  text-indent: -999em;
+}
+
+#promo_content h1 {
+  color: #FFFFFF;
+  font-size: 48px;
+  line-height: 49px;
+  padding-top: 13px;
+  text-align: center;
+}
+
+#promo_content h2 {
+  font-size: 28px;
+  font-weight: bold;
+  line-height: 28px;
+  text-align: center;
+  margin: 50px 0 20px 0;
+}
+
+#promo_content h3 {
+  font-size: 20px;
+}
+
+#promo_form p.news {
+  font-size: 12px;
+  margin: 0 0 15px 0;
+}
+#promo_form span {
+  color: #333333;
+  font-size: 16px;
+}
+
+
+#promo_content #promo_form .garanties .engagement {
+  background: url(image_path('promotions/no_shop.png')) no-repeat scroll 0 2px transparent;
+  height: 20px;
+  padding-left: 30px;
+}
+
+#promo_content #promo_form .garanties .stop {
+  background: url(image_path('promotions/noengagement.png')) no-repeat scroll 0 12px transparent;
+  height: 20px;
+  padding-left: 30px;
+  padding-top: 10px;
+}
+
+#promo_content #promo_form .garanties .security {
+  background: url(image_path('promotions/lock.png')) no-repeat scroll 0 18px transparent;
+  padding-left: 30px;
+  padding-top: 23px;
+}
+
+#promo_content #promo_form .garanties {
+  color: #212A31;
+  float: left;
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 14px;
+  margin-left: 20px;
+  text-align: left;
+  width: 200px;
+}
+
+#promo_content #promo_form .avantages {
+  border-left: 1px solid #000000;
+  color: #212A31;
+  float: right;
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 14px;
+  margin-right: 20px;
+  padding-left: 20px;
+  text-align: left;
+  width: 200px;
+}
+
+#promo_content #promo_form h4 {
+  font-size: 26px;
+  padding-bottom: 5px;
+}
+
+#promo_content #promo_form .avantages .film {
+  background: url(image_path('promotions/film.png')) no-repeat scroll 0 2px transparent;
+  height: 20px;
+  line-height: 25px;
+  padding-left: 30px;
+}
+#promo_content #promo_form .avantages .home {
+  background: url(image_path('promotions/house.png')) no-repeat scroll 0 10px transparent;
+  height: 20px;
+  padding-left: 30px;
+  padding-top: 10px;
+}
+#promo_content #promo_form .avantages .platform {
+  background: url(image_path('promotions/ipad.png')) no-repeat scroll 0 19px transparent;
+  height: 20px;
+  padding-left: 30px;
+  padding-top: 23px;
+}
+
+#promo_content #promo_form {
+  padding-left: 40px;
+  width: 463px;
+  text-align: center;
+}
+#samsung #promo_content {
+  background: url(image_path('promotions/bg_samsung.jpg')) repeat scroll 0 0 transparent;
+  height: 596px;
+  margin: 0 auto;
+  width: 970px;
+}
+
+#promo_form .inputs_promo_code {
+  width: 180px;
+}
+.inputs_promo_code {
+  background: none no-repeat scroll right center white;
+  border: 1px solid #A6AAAD;
+  border-radius: 4px 4px 4px 4px;
+  color: #333333;
+  font-size: 20px;
+  padding: 6px 29px 6px 6px;
+  width: 226px;
+  margin: 10px 0;
+}
+#commentcamarche_content {
+  font-size:12px;
+  color: #29333B;
+  margin-right: 14px;
+  margin-left: 14px;
+}
+#commentcamarche_content h2 {
+  font-size: 28px;
+  font-weight: bold;
+  text-transform: none;
+  margin: 10px 0;
+}
+#commentcamarche_content h3 {
+  background: url(image_path('promotions/square.gif')) no-repeat scroll 0 12px transparent;
+  font-size: 24px;
+  padding-left: 20px;
+  text-transform: uppercase;
+}
+
+.promo_info {
+  border: 1px solid #9B9999;
+  margin: 5px 15px 5px 0;
+  padding: 8px 0 24px 8px;
+}
+
+h1, h2, h3, h4, h5 {
+  color: #212A31;
+  font-weight: normal;
+}
+.osc, h1, h2, h3, h4, h5 {
+  font-family: 'Open Sans Condensed',sans-serif;
+}
+.container ul, .container ol, .container dl {
+  margin-bottom: 18px;
+}
+
+#promo_content #promo_form .promo_button, #area_promo .promo_button {
+  background-color: #D55023; 
+  @include filter-gradient(#EE8419, #E26417, vertical);
+  @include background-image(linear-gradient(top, #EE8419 0%,#E26417 100%));
+
+  border: 1px solid #D55023;
+  border-radius: 4px 4px 4px 4px;
+  box-shadow: 0 1px 1px rgba(255, 255, 255, 0.8) inset;
+  color: #FFFFFF;
+  font-size: 30px;
+  padding: 10px;
+  text-shadow: 0 -1px 0 #D83C14;
+  margin: 8px 0 0;
+}
+
+#commentcamarche_content td.step1 {
+  background: url(image_path('promotions/1.gif')) no-repeat scroll 0 0 transparent;
+  height: 30px;
+  padding-left: 38px;
+  width: 200px;
+}
+
+#commentcamarche_content td.step2 {
+  background: url(image_path('promotions/2.gif')) no-repeat scroll 0 0 transparent;    height: 30px;
+  padding-left: 38px;
+  width: 200px;
+}
+#commentcamarche_content td.step3 {
+  background: url(image_path('promotions/3.gif')) no-repeat scroll 0 0 transparent;    height: 30px;
+  padding-left: 38px;
+  width: 200px;
+}
+#commentcamarche_content td.step4 {
+  background:url(image_path('promotions/4.gif')) no-repeat scroll 0 0 transparent;    height: 30px;
+  padding-left: 38px;
+  width: 200px;
+}
+
+#area_promo h2 {
+  font-size: 33px;
+  line-height: 33px;
+  padding-top: 10px;
+  text-align: center;
+}
+
+#area_promo p {
+  color: #333333;
+  font-size: 18px;
+  text-align: center;
+}
+
+#area_promo {
+  background: url(image_path('promotions/tab-content-bg.png')) repeat-x scroll 0 0 transparent;
+  height: 306px;
+  margin: 30px 14px 19px;
+}
+
+#promo_footer {
+  color: #212A31;
+  font-size: 12px;
+  margin-right: 14px;
+  margin-left: 14px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  text-align: justify;
+}
+ul {
+  list-style: none outside none;
+}
+
+#promo_form h4
+{
+  margin: 0;
+}
+.news_form
+{
+  margin:5px 0;
+}
