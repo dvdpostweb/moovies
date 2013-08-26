@@ -1,0 +1,19 @@
+<% path =  carousel_path(carousel) %>
+<% image = image_tag(carousel.image, :alt => carousel.title, :size => '932x328') %>
+
+<div id="image_promo">
+  <ul id="output">
+    <li>
+      <div class="caption osc">
+        <h2><%= carousel.title %></h2>
+        <h4>
+          <%= carousel.description %>
+        </h4>
+      </div>
+      <div id="try_it">
+        <a href="<%= path %>" class="essaigratuit osc btn"><%= carousel.link %></a>
+      </div>
+      <a href="<%= path %>"><%= image %></a>
+    </li>
+  </ul>
+</div>

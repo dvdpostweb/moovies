@@ -1,7 +1,45 @@
 #encoding: utf-8
 
 module ProductsHelper
-
+  def carousel_path(carousel)
+    case carousel.kind
+      when 'MOVIE'
+        product_path(:id => carousel.reference_id, :source => @wishlist_source[:carousel])
+      when 'OTHER'
+        info_path(:page_name => carousel.name)
+      when 'OLD_SITE'
+        remote_carousel_path(t(".url_#{carousel.id}"))
+      when 'DIRECTOR'
+        director_products_path(:director_id => carousel.reference_id)
+      when 'ACTOR'
+        actor_products_path(:actor_id => carousel.reference_id)
+      when 'CATEGORY'
+        category_products_path(:category_id => carousel.reference_id)
+      when 'CHRONICLE'
+        chronicle_path(:id => carousel.reference_id)
+      when 'STREAMING_PRODUCT'
+        streaming_product_path(:id => carousel.reference_id, :warning => 1)
+      when 'TRAILER'
+        product_trailer_path(:product_id => carousel.reference_id, :source => @wishlist_source[:recommendation_hp])
+      when 'THEME_EVENT'
+        theme = ThemesEvent.find(carousel.reference_id)
+        theme_path(:id => theme.to_param)
+      when 'SURVEY'
+        new_survey_customer_survey_path(:survey_id => carousel.reference_id)
+      when 'CONTEST'
+        contest_path(:id => carousel.reference_id)
+      when 'SHOP'
+        shop_path()
+      when 'STUDIO'
+         studio_products_path(:studio_id => carousel.reference_id)
+     when 'STUDIO_VOD'
+        studio_products_path(:studio_id => carousel.reference_id, :filter => :vod)
+      when 'SEARCH'
+        products_path(:search => carousel.reference_id)
+      when 'URL'
+        eval(t("home.index.carousel_item.url_#{carousel.id}"))
+      end
+  end
   def get_reviews()
     if params[:sort]
       sort = Review.sort2[params[:sort].to_sym]

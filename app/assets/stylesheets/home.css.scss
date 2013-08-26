@@ -295,8 +295,7 @@ font-weight: bold;
 #image_promo h2 {
     font-size: 32px;
     line-height: 28px;
-    padding-bottom: 20px;
-    text-align: center;
+    text-align: left;
 }
 #image_promo span{
 color:  #98d321;
@@ -348,4 +347,8 @@ color:  #98d321;
   width:185px;
   text-align:center;
   text-decoration: none
+}
+#image_promo
+{
+	margin:0 20px;
 }

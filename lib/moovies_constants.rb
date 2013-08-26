@@ -33,11 +33,11 @@ module Moovies
     end
 
     def images_carousel_path
-      "#{images_path}/landings"
+      "#{images_path}/landings_plush"
     end
 
     def images_carousel_adult_path
-      "#{imagesx_path}/landings"
+      "#{imagesx_path}/landings_plush"
     end
 
     def languages

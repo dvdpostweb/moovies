@@ -5,6 +5,7 @@ class HomeController < ApplicationController
     @new_tvod = HomeProduct.where(:country => 'be', :kind => :tvod, :locale_id => Moovies.languages[I18n.locale]).order('id asc').includes(:product)
     @discount_bottom = Discount.find(Moovies.discount["hp_bottom_#{I18n.locale}"])
     @newsletter = PublicNewsletter.new(params[:public_newsletter])
+    @carousel = Landing.by_language(I18n.locale).not_expirated.private.order_rand.limit(1).first if current_customer
   end
 
   def validation
