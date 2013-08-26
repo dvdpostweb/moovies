@@ -35,7 +35,7 @@ class ProductsController < ApplicationController
     @countries = ProductCountry.visible.order
     @svod_date = @product.svod_dates.current.order.first
     @vod_online
-    @filter = get_current_filter({})
+    #@filter = get_current_filter({})
     unless request.xhr?
       @trailer =  @product.trailer?
       data = @product.description_data(true)
