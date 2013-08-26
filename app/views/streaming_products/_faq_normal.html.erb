@@ -3,14 +3,9 @@
 <% link_adult = link_to t('.catalogue_adult'), products_path(:kind => :adult, :view_mode => :streaming) %>
 <% link2 = link_to t('.vod_wishlist'), vod_wishlists_path %>
 <% sample = link_to t('.sample'), streaming_products_sample_path %>
-<% link_app = link_to t('.app'), DVDPost.itunes_url(I18n.locale) %>
 <% img_app1 = link_to image_tag("ipad_3_little.jpg"), image_path("ipad_3_big.jpg"), :class => :face_img %>
 <% img_app2 = link_to image_tag("ipad_4_little.jpg"), image_path("ipad_4_big.jpg"), :class => :face_img %>
 <% link_connected = link_to t('.get_connected'), info_path(:page_name => :get_connected) %>
-<% link_appletv = link_to "Apple TV", DVDPost.appletv_url[I18n.locale] %>
-<% link_iphone = link_to "iPhone", DVDPost.iphone_url[I18n.locale] %>
-<% link_ipad = link_to "iPad", DVDPost.ipad_url[I18n.locale] %>
-<% link_airplay = link_to "AirPlay", DVDPost.airplay_url[I18n.locale] %>
 <div id="faq-content-wrap">
   <div id="faq-intro-wrap" class="<%= I18n.locale %>">
     <%= t '.intro', :link => link %>

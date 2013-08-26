@@ -73,7 +73,6 @@ class Customer < ActiveRecord::Base
   accepts_nested_attributes_for :address, :allow_destroy => true
 
   has_and_belongs_to_many :seen_products, :class_name => 'Product', :join_table => :products_seen, :uniq => true
-  #to do has_and_belongs_to_many :roles, :uniq => true
   def set_samsung
     if self.samsung
       samsung_code = SamsungCode.available.find_by_code(self.samsung)
@@ -328,7 +327,6 @@ class Customer < ActiveRecord::Base
   end
 
   def display_vod(status)
-    #to do ? 
     update_attribute(:display_vod, status)
   end
 

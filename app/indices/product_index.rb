@@ -24,7 +24,6 @@ ThinkingSphinx::Index.define :product, :with => :active_record, :name => 'produc
   has streaming_products_be(:imdb_id), :as => :streaming_imdb_id
   has streaming_products_be(:language_id), :as => :language_ids
   has streaming_products_be(:subtitle_id), :as => :subtitle_ids
-  #to do
   has "ifnull(concat('2',replace(if(min(vod_online_bes_products.expire_at) > date(now()),min(vod_online_bes_products.available_from),null),'-','')),ifnull(concat('2',replace(min(vod_online_bes_products.available_backcatalogue_from), '-','')), ifnull(concat('1',replace(if(min(streaming_products.expire_at) > date(now()),min(streaming_products.available_from),null), '-','')),concat('1',replace(min(streaming_products.available_backcatalogue_from), '-','')))))", :type => :integer, :as => :streaming_available_at_order
   has "ifnull(if(min(vod_online_bes_products.expire_at) > date(now()),min(vod_online_bes_products.available_from),null),ifnull(min(vod_online_bes_products.available_backcatalogue_from), ifnull(if(min(streaming_products.expire_at) > date(now()),min(streaming_products.available_from),null),min(streaming_products.available_backcatalogue_from))))", :type => :timestamp, :as => :streaming_available_at
   has vod_online_be(:imdb_id), :as => :imdb_id_online
@@ -41,7 +40,6 @@ ThinkingSphinx::Index.define :product, :with => :active_record, :name => 'produc
   #has descriptions_en.products_name,         :as => :descriptions_title_en, :sortage => true
   #has "min(streaming_products.id)", :type => :integer, :as => :streaming_id
   has "concat(GROUP_CONCAT(DISTINCT IFNULL(`vod_online_bes_products`.`language_id`, '0') SEPARATOR ','),',', GROUP_CONCAT(DISTINCT IFNULL(`vod_online_bes_products`.`subtitle_id`, '0') SEPARATOR ','))", :type => :integer, :multi => true, :as => :audio_sub
-  #to do
   #has "(select (ifnull(replace(available_from,'-',''),replace(available_backcatalogue_from, '-',''))) date_order from streaming_products where imdb_id = products.imdb_id and status = 'online_test_ok' and available = 1 and ((date(now())  >= date(available_backcatalogue_from) and date(now()) <= date(date_add(available_backcatalogue_from, interval 3 month)))or(date(now())  >= date(available_from) and date(now()) <= date(date_add(available_from, interval 3 month)))) limit 1)", :type => :integer, :as => :available_order
   #has "(select studio_id from streaming_products where imdb_id = products.imdb_id and status = 'online_test_ok' and available = 1 order by expire_backcatalogue_at asc limit 1)", :type => :integer, :as => :streaming_studio_id
   #has 'cast((SELECT count(*) FROM `wishlist_assigned` wa WHERE wa.products_id = products.products_id and date_assigned > date_sub(now(), INTERVAL 1 MONTH) group by wa.products_id) AS SIGNED)', :type => :integer, :as => :most_viewed
