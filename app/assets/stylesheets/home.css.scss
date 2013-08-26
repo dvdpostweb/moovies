@@ -316,3 +316,36 @@ color:  #98d321;
     position: inherit!important;
 
 }
+/***********************
+**    validation       *
+************************/
+
+#yes
+{
+  background: url(image_path('bouton_x.png'));
+  color:#FFFFFF;
+  display:block;
+  font-size:1.5em;
+  height:28px;
+  padding: 15px 0 0 35px;
+  width:180px;
+  text-align: center;
+  text-decoration: none;
+  margin: 10px 0 0 0
+}
+.nl#yes
+{
+  font-size: 1.2em;
+}
+#no
+{
+  background: url(image_path('boutonsmall_x.png')) -15px -5px;
+  color:#FFFFFF;
+  display:block;
+  font-size:1.2em;
+  height:28px;
+  padding: 13px 0 0 0;
+  width:185px;
+  text-align:center;
+  text-decoration: none
+}

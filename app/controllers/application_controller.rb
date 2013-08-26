@@ -2,10 +2,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper :all
   before_filter :set_locale
-  before_filter :get_wishlist_source
   before_filter :init
   before_filter :redirect_after_registration
-  
+  before_filter :get_wishlist_source
+  before_filter :validation_adult  
   layout :layout_by_resource
   
   def handle_unverified_request
@@ -109,6 +109,14 @@ class ApplicationController < ActionController::Base
     rescue => e
       logger.error("GeoIP error: #{message}")
       logger.error(e.backtrace)
+    end
+  end
+
+  def validation_adult
+    if params[:kind] == :adult && !session[:adult] && params['action'] != 'validation' && params['action'] != 'authenticate'
+      prefix = "http://"
+      session['current_uri'] = prefix + request.host_with_port + request.fullpath
+      redirect_to validation_path
     end
   end
   
