@@ -13,6 +13,17 @@ class Landing < ActiveRecord::Base
   scope :by_language, lambda {|language| where((language == :nl ? :actif_dutch : (language == :en ? :actif_english : :actif_french)) => "YES")}
   scope :by_language_beta, lambda {|language| where((language == :nl ? :actif_dutch : (language == :en ? :actif_english : :actif_french)) => ["BETA","YES"])}
 
+  def title(locale)
+    eval("title_#{locale}")
+  end
+
+  def description(locale)
+    eval("title_#{locale}")
+  end
+
+  def link(locale)
+    eval("link_#{locale}")
+  end
   def image
     File.join(Moovies.images_carousel_path, id.to_s+'.jpg')
   end

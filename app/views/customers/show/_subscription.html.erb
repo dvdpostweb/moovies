@@ -50,9 +50,7 @@
       </tr>
       <% stream_count = 0 %>
       <% streaming_available.each do |stream| %>
-        <% if stream.products.first.kind == DVDPost.product_kinds[:normal] || (stream.products.first.kind == DVDPost.product_kinds[:adult] && stream.updated_at > 12.hours.ago.localtime) %>
-          <% stream_count = stream_count + 1 %>
-        <% end %>
+      <% stream_count = stream_count + 1 %>
       <% end %>
       <% if streaming_access? && stream_count > 0 %>
         <tr>

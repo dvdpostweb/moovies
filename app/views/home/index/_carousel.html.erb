@@ -1,17 +1,17 @@
 <% path =  carousel_path(carousel) %>
-<% image = image_tag(carousel.image, :alt => carousel.title, :size => '932x328') %>
+<% image = image_tag(carousel.image, :alt => carousel.title(I18n.locale), :size => '932x328') %>
 
 <div id="image_promo">
   <ul id="output">
     <li>
       <div class="caption osc">
-        <h2><%= carousel.title %></h2>
+        <h2><%= carousel.title(I18n.locale) %></h2>
         <h4>
-          <%= carousel.description %>
+          <%= carousel.description(I18n.locale) %>
         </h4>
       </div>
       <div id="try_it">
-        <a href="<%= path %>" class="essaigratuit osc btn"><%= carousel.link %></a>
+        <a href="<%= path %>" class="essaigratuit osc btn"><%= carousel.link(I18n.locale) %></a>
       </div>
       <a href="<%= path %>"><%= image %></a>
     </li>
