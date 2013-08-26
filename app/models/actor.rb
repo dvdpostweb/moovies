@@ -23,8 +23,9 @@ class Actor < ActiveRecord::Base
   sphinx_scope(:group)              {|group,sort|       {:group_by => group, :group_function => :attr, :group_clause   => sort}}
   sphinx_scope(:limit)              {|limit|            {:limit => limit}}
   def top_actors
-    0 #to do ? 
+    0
   end
+
   def image(number = 1)
     if number > 0
       if image_active

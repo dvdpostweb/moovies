@@ -33,11 +33,6 @@
           <%= "de #{filter.rating_min} à #{filter.rating_max}" %>
         </li>
       <% end %>
-      <% if filter.dvdpost_choice? %>
-        <li>
-          <strong><%= t 'products.index.dvdpost_choice' %></strong>
-        </li>
-      <% end %>
       <% if filter.audio? %>
         <li>
           <strong><%= t 'products.index.audio' %></strong>

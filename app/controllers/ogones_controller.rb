@@ -74,7 +74,7 @@ class OgonesController < ApplicationController
       else
         gender = t('mails.gender_female')
       end
-      
+      #to do
       #options = {
       #  "\\$\\$\\$customers_name\\$\\$\\$" => "#{customer.first_name.capitalize} #{customer.last_name.capitalize}", 
       #  "\\$\\$\\$email\\$\\$\\$" => "#{customer.email}",

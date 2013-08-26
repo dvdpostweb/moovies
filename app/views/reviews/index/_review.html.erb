@@ -1,7 +1,6 @@
 <% path = product_path(:id => review.product.to_param, :source => source) %>
 <% product = review.product %>
 <% product_title = review.product.title %>
-<% "ok" #to do product_streaming = product.streaming?(params[:kind], session[:country_id]) %>
 <div class="movie-wrap">
 	<div class="movie-ttl">
   	<h3>
@@ -39,7 +38,12 @@
         <%= render :partial => 'products/show/seen_uninterested', :locals => {:product => product, :source => source, :response_id => @response_id} if current_customer %>
       </div>
       <ul class="btns osc">
-        <li><%= "VOD btn#to do" %></li>
+        <li>
+        <%= render :partial => 'products/streaming',  :locals => {:product => product, :source => @source, :response_id => @response_id} %>
+        <br />
+        <%= render :partial => 'products/vod_list',  :locals => {:product => product, :source => @source, :response_id => @response_id} %>
+        
+        </li>
         <% if product.trailer? %>
           <li>
             <%= link_to(t('.trailer'), product_trailer_path(:product_id => product.to_param, :source => source), :class => 'trailer', :target => :_blank) %>
