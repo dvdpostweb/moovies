@@ -1,0 +1,16 @@
+<div id="slider-wrap">
+  <div id="image_promo">
+    <h1><%= t('home.index.title').html_safe %></h1>
+    <h2><%= t 'home.index.slogan' %></h2>
+    <ul id="output">
+      <li>
+        <div id="try_it">
+          <%= link_to t('home.index.try'), new_customer_registration_path(:code => @discount_top.name), :class => 'essaigratuit osc btn' %> 
+          <div id="engagement"><%= t 'home.index.try_text' %></div>
+        </div>
+        <%= link_to image_tag("#{I18n.locale}/bg_infinity.jpg", :size => '932x328'), new_customer_registration_path(:code => @discount_top.name) %>
+      </li>
+    </ul>
+  </div>
+</div>
+<!-- #slider-wrap -->

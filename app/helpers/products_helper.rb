@@ -37,7 +37,7 @@ module ProductsHelper
       when 'SEARCH'
         products_path(:search => carousel.reference_id)
       when 'URL'
-        eval(t("home.index.carousel_item.url_#{carousel.id}"))
+        eval(carousel.reference_id)
       end
   end
   def get_reviews()
