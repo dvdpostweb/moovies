@@ -17,15 +17,14 @@
         </tr>
       </tbody></table>
       <h3><%= t('.payment') %></h3>
-      <div class="choice">
-        <% if @promo.payable == 2 %>
+      <% if @promo.payable == 2 %>
         <div class="freetrial">
         <%= t('.freetrial1').html_safe %>
            <%= link_to t('.go'), ogone_path(:skip => 1), :method => :post %><br/><br/><%= t('.freetrial2').html_safe %>
         </div>
-         
-        <% end %>
-        
+      <% end %>
+      
+      <div class="choice">
         <table>
           <tr>
             <td>	
