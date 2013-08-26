@@ -55,7 +55,7 @@
     </tr>
     <tr>
       <td bgcolor="#ffffff" width="20"></td>
-      <td bgcolor="#ffffff" align="center" ><p><a href="<%= confirmation_url(@resource, :confirmation_token => @resource.confirmation_token, :locale => I18n.locale) %>" target="_blank"  title="Activez votre compte"><img src="<%= image_url "mails/boutton_activer_#{I18n.locale}.gif" %>" width="257" height="70" alt="Activez votre compte" style="display: block; border: medium none; padding-bottom:15px; align:center;" /></a></p> 
+      <td bgcolor="#ffffff" align="center" ><p><a href="<%= confirmation_url(@resource, :confirmation_token => @resource.confirmation_token, :locale => I18n.locale) %>" target="_blank"  title="Activez votre compte"><img src="<%= image_url "mails/boutton_activer_#{I18n.locale}.gif" %>" width="257" height="70" alt="<%= t('.active') %>" style="display: block; border: medium none; padding-bottom:15px; align:center;" /></a></p> 
       </td>
       <td bgcolor="#ffffff" width="20"></td>
     </tr>

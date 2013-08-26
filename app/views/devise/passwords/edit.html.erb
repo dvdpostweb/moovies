@@ -1,16 +1,16 @@
-<h2><%= t '.change_pass' %></h2>
+<div id="title"><%= t '.change_pass' %></div>
+<div class="signup_forms" align="center">
+  <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
+    <%= devise_error_messages! %>
+    <%= f.hidden_field :reset_password_token %>
 
-<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
-  <%= devise_error_messages! %>
-  <%= f.hidden_field :reset_password_token %>
+    <div><%= f.label :password, t('.pass') %><br />
+    <%= f.password_field :password, :autofocus => true %></div>
 
-  <div><%= f.label :password, t('.pass') %><br />
-  <%= f.password_field :password, :autofocus => true %></div>
+    <div><%= f.label :password_confirmation, t('.confirm_pass') %><br />
+    <%= f.password_field :password_confirmation %></div>
 
-  <div><%= f.label :password_confirmation, t('.confirm_pass') %><br />
-  <%= f.password_field :password_confirmation %></div>
-
-  <div><%= f.submit t('.sent') %></div>
-<% end %>
-
+    <div><%= f.submit t('.sent'), :id => :submit_button %></div>
+  <% end %>
+</div>
 <%= render "devise/shared/links" %>
