@@ -16,11 +16,11 @@
               <p align="center"><%= link_to t('.under18'), root_localize_path(:kind => nil), :id => :no %></p>
       
                 <div id="movix_explain">
-                  <%= t('.warning') %>
+                  <%= t('.warning').html_safe %>
                 </div>
            
             </div>
-            <div class="footer" style="display: block;"> <a class="close" href="<%= root_path(:kind => :normal) %>"> CLOSE </a> </div></td>
+            <div class="footer" style="display: block;"> <a class="close" href="<%= root_localize_path(:kind => nil) %>"> CLOSE </a> </div></td>
           <td class="b"></td>
         </tr>
         <tr>
