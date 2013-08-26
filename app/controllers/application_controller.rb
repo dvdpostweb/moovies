@@ -54,7 +54,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_locale
-    if params[:controller] == 'ogones'
+    if params[:controller] != 'ogones'
       I18n.locale = params[:locale] || cookies[:locale] || extract_locale_from_accept_language_header || I18n.default_locale
       if I18n.available_locales.include?(I18n.locale)
         cookies.permanent[:locale] = I18n.locale 
