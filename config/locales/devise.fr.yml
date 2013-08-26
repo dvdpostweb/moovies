@@ -105,7 +105,7 @@ fr:
       failure: "Nous n'avons pas pu vous authentifier via %{kind} : '%{reason}'."
     mailer:
       confirmation_instructions:
-        subject: "Instructions de confirmation"
+        subject: "Plush : Complétez votre inscription"
         welcome: "Bienvenu"
         description: 'Vous pouvez confirmer votre adresse e-mail avec le lien suivant:'
         sent: 'Confirmer mon adresse e-mail'
