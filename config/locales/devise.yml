@@ -33,7 +33,7 @@ en:
         welcome: "Welcome"
         description: 'You can confirm your account email through the link below:'
         subject: "Confirmation instructions"
-        sent: 'Confirm my account'
+        sent: 'Plush: Complete your subscription'
       reset_password_instructions:
         subject: "Reset password instructions"
         change_pass: 'Change my password'
