@@ -104,7 +104,7 @@ nl:
       failure: 'Kon u niet aanmelden met uw %{kind} account, omdat "%{reason}".'
     mailer:
       confirmation_instructions:
-        subject: 'Bevestiging e-mailadres'
+        subject: 'Plush: Vervolledig uw inschrijving'
         welcome: "Welkom"
         description: 'U kan uw e-mail adres bevestigen door middel van de volgende link:'
         sent: 'Bevestig uw e-mail adres'
