@@ -14,7 +14,9 @@
   			<% end %>
   		</ul>
   	</li>
+  	<% unless current_customer %>
   	<li><%= link_to t('.abo'), info_path(:page_name => :abo), :id => 'abo' %></li>
+  	<% end %>
   	<li id='menu_account_li'><%= link_to t('.my_account'), current_customer ? customer_path(:id => current_customer) : customers_path, :id => 'account_menu', :class => params[:controller] == 'customers' || params[:controller] == 'watchlists' ? :active : :inactive %>
   		<ul id="account" class="dropdown" style="display:none">
   		<li><%= link_to t('.watchlist', :default => 'Ma playlist'), vod_wishlists_path, :class => params[:controller] == 'watchlists' ? :active : :inactive %></li>
