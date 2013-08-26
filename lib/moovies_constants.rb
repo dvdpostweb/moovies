@@ -250,7 +250,7 @@ module Moovies
     end
     def token_sample
       HashWithIndifferentAccess.new.merge({
-        :normal => '51b70da316f1e4.69742418',
+        :normal => '521b50542e6cb0.10995196',
         :adult => '51b6f9964888b1.78963380'
       })
     end
