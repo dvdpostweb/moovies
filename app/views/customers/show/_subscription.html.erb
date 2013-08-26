@@ -43,37 +43,6 @@
         </td>
       </tr>
       <tr>
-        <td colspan="2"><div class="ligne"></div></td>
-      </tr>
-      <tr>
-        <td colspan="2" height="10"></td>
-      </tr>
-      <% stream_count = 0 %>
-      <% streaming_available.each do |stream| %>
-      <% stream_count = stream_count + 1 %>
-      <% end %>
-      <% if streaming_access? && stream_count > 0 %>
-        <tr>
-          <th colspan="2" class="rotation">
-            <%= t '.streaming_available' %> :
-            <span>
-            
-              <%= stream_count %> <%= stream_count > 1 ? t('.movies') : t('.movie') %>
-            </span>
-          </th>
-        </tr>
-        <% streaming_available.each do |stream| %>
-          <tr>
-            <td align="left"  class="transit"><%= link_to truncate(product_assigned_title(stream.products.first), :length => 30), product_streaming_path(stream) %></td>
-            <td align="right"  class="transit"><% stream.created_at.strftime("%d/%m/%Y") %>
-              <%= "#{time_left(stream, params[:kind])}" %></td>
-          </tr>
-        <% end %>
-      <% end %>
-      <tr>
-        <td colspan="2"><div class="ligne"></div></td>
-      </tr>--> 
-      <tr>
         <td align="right" class="adresse"><strong><%= t '.date_abo' %></strong></td>
         <td align="left" class="adresse">
           <%= customer.subscription.created_at.strftime("%d/%m/%Y") if customer.actived? && customer.subscription %>
