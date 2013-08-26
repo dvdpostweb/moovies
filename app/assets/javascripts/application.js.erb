@@ -38,18 +38,15 @@ $(function() {
     return false;
   });
   $('#catalogue_menu, #account_menu').on('mouseover',function(){
-		console.log('show')
     $('.dropdown').hide()
     id = $(this).attr('id').replace('_menu','')
     $('#'+id).show()
   })
   $('.dropdown').on('mouseleave',function(){
-		console.log('hidedrop')
     id = $(this).attr('id').replace('_menu','')
     $('#'+id).hide()
   })
   $('#nav #abo, #nav #adult, #nav #message, #header h1').on('mouseover',function(){
-		console.log('other')
     $('.dropdown').hide()
   })
   $('body').delegate("#new_review .star", "mouseover", function(){

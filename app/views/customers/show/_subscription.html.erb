@@ -63,13 +63,11 @@
           </th>
         </tr>
         <% streaming_available.each do |stream| %>
-          <% if stream.products.first.kind == DVDPost.product_kinds[:normal] || (stream.products.first.kind == DVDPost.product_kinds[:adult] && stream.updated_at > 12.hours.ago.localtime) %>
           <tr>
             <td align="left"  class="transit"><%= link_to truncate(product_assigned_title(stream.products.first), :length => 30), product_streaming_path(stream) %></td>
             <td align="right"  class="transit"><% stream.created_at.strftime("%d/%m/%Y") %>
               <%= "#{time_left(stream, params[:kind])}" %></td>
           </tr>
-          <% end %>
         <% end %>
       <% end %>
       <tr>
