@@ -54,13 +54,15 @@ class ApplicationController < ActionController::Base
   end
 
   def set_locale
-    I18n.locale = params[:locale] || cookies[:locale] || extract_locale_from_accept_language_header || I18n.default_locale
-    if I18n.available_locales.include?(I18n.locale)
-      cookies.permanent[:locale] = I18n.locale 
-    else
-      I18n.locale = :fr
+    if params[:controller] == 'ogones'
+      I18n.locale = params[:locale] || cookies[:locale] || extract_locale_from_accept_language_header || I18n.default_locale
+      if I18n.available_locales.include?(I18n.locale)
+        cookies.permanent[:locale] = I18n.locale 
+      else
+        I18n.locale = :fr
+      end
+      current_customer.update_locale(locale) if current_customer
     end
-    current_customer.update_locale(locale) if current_customer
   end
 
   def get_wishlist_source
