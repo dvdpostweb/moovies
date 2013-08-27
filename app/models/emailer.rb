@@ -6,4 +6,11 @@ class Emailer < ActionMailer::Base
       @sent_on = sent_on
       @headers = {}
    end
+   
+   def welcome_email(user, subject, content, test)
+       @user = user
+       @email = test ? 'gs@dvdpost.be' : user.email
+       @content = content
+       mail(:to => @email, :subject => subject)
+     end
 end

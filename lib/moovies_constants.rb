@@ -268,7 +268,7 @@ module Moovies
     def email
       HashWithIndifferentAccess.new.merge({
         :message_free               => 578,
-        :welcome                    => 556,
+        :welcome                    => 606,
       })
     end
 
