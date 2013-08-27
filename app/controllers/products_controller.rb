@@ -22,16 +22,6 @@ class ProductsController < ApplicationController
     @countries = ProductCountry.visible.order
     @tokens = current_customer.get_all_tokens_id(params[:kind]) if current_customer
     @rating_color = params[:kind] == :adult ? :pink : :white
-    #
-    #if params[:sort].nil?
-    #  params[:sort] = 'normal'
-    #end
-    #to do 
-    #
-    #@collections = Category.by_size.random
-    ##unless request.format.js?
-    #  @jacket_mode = Product.get_jacket_mode(params)
-    ##end
     if request.xhr?
       render :layout => false
     end
@@ -45,7 +35,7 @@ class ProductsController < ApplicationController
     @countries = ProductCountry.visible.order
     @svod_date = @product.svod_dates.current.order.first
     @vod_online
-    #to do @filter = get_current_filter({})
+    #@filter = get_current_filter({})
     unless request.xhr?
       @trailer =  @product.trailer?
       data = @product.description_data(true)
@@ -155,10 +145,6 @@ class ProductsController < ApplicationController
       @trailer = trailers
       if trailers.first && trailers.first.url
         redirect_to trailers.first.url
-      elsif trailers.first
-        if 1==0 #to do mobile_request?
-            render :partial => 'products/trailer', :locals => {:trailer => trailers.first, :trailers => trailers}, :layout => 'application'
-        end
       else
         redirect_to product_path(:id => @product.to_param, :source => @source)
       end

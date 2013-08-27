@@ -724,7 +724,7 @@ div.flash_error {
 .adult .watch {
     background-image: url("/assets/button_streaming_adult.gif");
     background-position: 0 0;
-    background-repeat: no-repeat no-repeat;
+    background-repeat: no-repeat;
     color: white;
     display: block;
     font-size: 19px;
@@ -753,7 +753,7 @@ display: block;
 .watch {
 	background-image: url(image_path('button_streaming.gif'));
 	background-position: 0 0;
-	background-repeat: no-repeat no-repeat;
+	background-repeat: no-repeat;
 	color: white;
 	display: block;
 	font-size: 19px;
@@ -783,7 +783,7 @@ display: block;
 #add {
 	background-image: url(image_path('button_add.gif'));
 	background-position: 0 0;
-	background-repeat: no-repeat no-repeat;
+	background-repeat: no-repeat;
 	color: white;
 	display: block;
 	font-size: 19px;
@@ -798,7 +798,7 @@ display: block;
 #add.btn_remove_form {
 	background-image: url(image_path('button_delete.png'));
 	background-position: 0 0;
-	background-repeat: no-repeat no-repeat;
+	background-repeat: no-repeat;
 	color: white;
 	display: block;
 	font-size: 19px;

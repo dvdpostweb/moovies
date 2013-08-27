@@ -1,3 +1,3 @@
-<%= t('.tvod_price', :price => product.get_vod_online(session[:country_id]).first.ppv_price) %>
+<%= t('.tvod_price', :price => product.get_vod_online(session[:country_id]).first.ppv_price).html_safe %>
 <br /><br />
 <%= link_to t('.click_here'), streaming_product_path(:id => product.imdb_id), :id => 'streaming_btn' %>

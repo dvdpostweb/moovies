@@ -299,7 +299,7 @@ class Product < ActiveRecord::Base
   end
 
   def is_new?
-    false#to do created_at < Time.now && available_at && available_at > 3.months.ago
+    false
   end
 
   def series?
@@ -312,16 +312,6 @@ class Product < ActiveRecord::Base
     else
       streaming_products.available.count > 0 || vod_next
     end
-  end
-
-  def streaming?(kind =  :normal, country_id = 21)
-    #to do
-    sql = streaming_products
-    unless Rails.env == "pre_production"
-      sql = sql.available.country('BE')
-    end
-    sql = sql.first
-    sql
   end
   
   def self.search_clean(products, query_string, options={})

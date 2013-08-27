@@ -118,7 +118,7 @@
 #prices .abo_infos li {
   background-image: url(image_path('bullets_ok.png'));
   background-position: 0 0;
-  background-repeat: no-repeat no-repeat;
+  background-repeat: no-repeat;
   font-size: 17px;
   height: 26px;
   line-height: 27px;
@@ -141,7 +141,7 @@
 #prices .tickets {
   background-image: url(image_path('tickets_prices.png'));
   background-position: 0 0;
-  background-repeat: no-repeat no-repeat;
+  background-repeat: no-repeat;
   color: #3E3D40;
   font-size: 18px;
   font-weight: normal;
@@ -152,7 +152,7 @@
 #prices .adult_dvd {
     background-image: url("/assets/dvd_prices.png");
     background-position: 0 0;
-    background-repeat: no-repeat no-repeat;
+    background-repeat: no-repeat;
     color: #3E3D40;
     font-size: 18px;
     font-weight: normal;
@@ -163,7 +163,7 @@
 #prices .kids_dvd {
   background-image: url(image_path('tickets_prices.png'));
   background-position: 0 0;
-  background-repeat: no-repeat no-repeat;
+  background-repeat: no-repeat;
   color: #3E3D40;
   font-size: 18px;
   font-weight: normal;
@@ -384,32 +384,32 @@ width: 902px;
 #content_info .section.one {
     background-image: url(image_path('mac_pc_vod.jpg'));
     background-position: 673px -8px;
-    background-repeat: no-repeat no-repeat;
+    background-repeat: no-repeat;
     min-height: 160px;
 }
 
 #content_info .section.six {
     background-image: url(image_path('playstation_vod.jpg'));
     background-position: 667px 19px;
-    background-repeat: no-repeat no-repeat;
+    background-repeat: no-repeat;
     min-height: 140px;
 }
 #content_info .section.five {
     background-image: url(image_path('tv_vod.jpg'));
     background-position: 683px 15px;
-    background-repeat: no-repeat no-repeat;
+    background-repeat: no-repeat;
     min-height: 160px;
 }
 #content_info .section.two {
     background-image: url(image_path('smarttv_vod.jpg'));
     background-position: 697px 10px;
-    background-repeat: no-repeat no-repeat;
+    background-repeat: no-repeat;
      min-height: 145px;
 }
 #content_info .section.three #apple {
     background-image: url(image_path('apple_vod.jpg'));
     background-position: 706px 7px;
-    background-repeat: no-repeat no-repeat;
+    background-repeat: no-repeat;
     min-height: 160px;
         padding-bottom: 30px;
   
@@ -423,7 +423,7 @@ width: 902px;
 #content_info .section.three #android {
     background-image: url(image_path('android_vod.jpg'));
     background-position: 705px 22px;
-    background-repeat: no-repeat no-repeat;
+    background-repeat: no-repeat;
     border-top: 1px solid #ABAB99;
     min-height: 160px;
     padding-top: 30px;

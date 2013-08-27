@@ -11,14 +11,19 @@
           <td style="padding-left:10px; "><%= t('.abonement_choosen') %> </td>
           <td style="padding-right:10px;padding-left:10px; "><%= current_customer.subscription_type.description %> <%= t('.for') %> <%= number_to_currency(current_customer.subscription_type.price, :unit => '', :separator => ',') %>€ <%= t('.per_month') %></td>
         </tr>
-
-
         <tr>
           <td style="padding-left:10px;"><strong><%= t('.promotion') %></strong> </td>
           <td style="padding-right:10px;padding-left:10px; "><strong><%= @promo.text(I18n.locale).html_safe %></strong></td>
         </tr>
       </tbody></table>
       <h3><%= t('.payment') %></h3>
+      <% if @promo.payable == 2 %>
+        <div class="freetrial">
+        <%= t('.freetrial1').html_safe %>
+           <%= link_to t('.go'), ogone_path(:skip => 1), :method => :post %><br/><br/><%= t('.freetrial2').html_safe %>
+        </div>
+      <% end %>
+      
       <div class="choice">
         <table>
           <tr>

@@ -12,16 +12,16 @@ class PaymentMethodsController < ApplicationController
       internal_com = 'new_activation'
     end
     @order_id = "p#{current_customer.to_param}#{Time.now.strftime('%Y%m%d%H%M%S')}"
-    @price = @promo.promo_price;
+    @price = @promo.promo_price
     case I18n.locale
     	when :fr
     		@ogone_language = 'fr_FR'
     		@template_ogone = URI.join(root_url, 'template_fr.htm')
     	when :nl
-    		@ogone_language = 'nl_NL';
+    		@ogone_language = 'nl_NL'
     		@template_ogone = URI.join(root_url, 'template_nl.htm')
     	when :en
-    		@ogone_language = 'en_US';
+    		@ogone_language = 'en_US'
     		@template_ogone = URI.join(root_url, 'template_en.htm')
     end
     @brand = params[:brand] if params[:brand]

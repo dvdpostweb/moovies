@@ -1,20 +1,9 @@
-<div id="slider-wrap">
-  <div id="image_promo">
-    <h1><%= t('.title').html_safe %></h1>
-    <h2><%= t '.slogan' %></h2>
-
-    <ul id="output">
-      <li>
-        <div id="try_it">
-          <%= link_to t('.try'), new_customer_registration_path(:code => @discount_top.name), :class => 'essaigratuit osc btn' %> 
-          <div id="engagement"><%= t '.try_text' %></div>
-        </div>
-        <%= link_to image_tag("#{I18n.locale}/bg_infinity.jpg", :size => '932x328'), new_customer_registration_path(:code => @discount_top.name) %>
-      </li>
-    </ul>
-  </div>
-</div>
-<!-- #slider-wrap -->
+<% if current_customer %>
+  <!-- Tabs rotattor -->
+  <%= render :partial => 'home/index/carousel', :locals => {:carousel => @carousel} %>
+<% else %>
+  <%= render :partial => 'home/index/carousel_public' %>
+<% end %>
 <!-- Services -->
 <div id="services-wrap">
   <div class="wrap" id="vod-ppv">
@@ -101,14 +90,7 @@
     <div class="clear"></div>
     <% unless current_customer %>
     <div id="subscribe-wrap">
-      <%= link_to image_tag("#{I18n.locale}/banner_promo_hp.jpg", :size => '942x188'), new_customer_registration_path(:code => @discount_top.name) %>
-      <!--   ============== 
-      <div class="wrap" style="">
-        <h3><%= t('.watch_now') %></h3>
-        <%= image_tag "#{I18n.locale}/prices.png", :size => '450x118' %>
-      </div>
-      <div id="try_it"><%= link_to t('.try2'), new_customer_registration_path(:code => @discount_bottom.name), :class => 'essaigratuit osc btn' %> <div id="engagement"><%= t('.try2_text') %></div></div>
- ==============   -->
+      <%= link_to image_tag("#{I18n.locale}/banner_promo_hp.jpg", :size => '942x188'), new_customer_registration_path(:code => @discount_bottom.name) %>
     </div>
     <% end %>
     <div class="clear"></div>

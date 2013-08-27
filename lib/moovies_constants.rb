@@ -33,11 +33,11 @@ module Moovies
     end
 
     def images_carousel_path
-      "#{images_path}/landings"
+      "#{images_path}/landings_plush"
     end
 
     def images_carousel_adult_path
-      "#{imagesx_path}/landings"
+      "#{imagesx_path}/landings_plush"
     end
 
     def languages
@@ -250,13 +250,13 @@ module Moovies
     end
     def token_sample
       HashWithIndifferentAccess.new.merge({
-        :normal => '51b70da316f1e4.69742418',
+        :normal => '521b50542e6cb0.10995196',
         :adult => '51b6f9964888b1.78963380'
       })
     end
     def data_sample
       HashWithIndifferentAccess.new.merge({
-        :normal => {:imdb_id =>1, :product_id => 197},
+        :normal => {:imdb_id =>1, :product_id => 129769},
         :adult => {:imdb_id =>2, :product_id => 127276}
       })
     end
@@ -266,9 +266,5 @@ module Moovies
     end
 
   end
-
-
-
-
 
 end
