@@ -265,6 +265,13 @@ module Moovies
       "http://vod.dvdpost.be/#{token}_#{audio}_#{sub}.m3u8"
     end
 
+    def email
+      HashWithIndifferentAccess.new.merge({
+        :message_free               => 578,
+        :welcome                    => 556,
+      })
+    end
+
   end
 
 end
