@@ -3,6 +3,11 @@ class Customers::RegistrationsController < Devise::RegistrationsController
   def new
     @hide_footer = true
     @hide_menu = true
+    if params[:customer] && params[:customer][:samsung]
+      @samsung = params[:customer][:samsung]
+    elsif params[:samsung]
+      @samsung = params[:samsung]
+    end
     if params[:code] || cookies[:code]
       code = params[:code] || cookies[:code]
       @discount = Discount.by_name(code).available.first
@@ -18,6 +23,15 @@ class Customers::RegistrationsController < Devise::RegistrationsController
     super
   end
 
+  def create
+    Rails.logger.debug { "@@@#{params[:customer]}" }
+    if params[:customer] && params[:customer][:samsung]
+      @samsung = params[:customer][:samsung]
+    elsif params[:samsung]
+      @samsung = params[:samsung]
+    end
+    super
+  end
   protected
 
   def after_inactive_sign_up_path_for(resource)

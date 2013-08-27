@@ -6,6 +6,7 @@ class Customer < ActiveRecord::Base
   self.primary_key = :customers_id
   before_create :set_default
   after_save :set_samsung
+  before_save :get_code_from_samsung
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
@@ -73,36 +74,48 @@ class Customer < ActiveRecord::Base
   accepts_nested_attributes_for :address, :allow_destroy => true
 
   has_and_belongs_to_many :seen_products, :class_name => 'Product', :join_table => :products_seen, :uniq => true
+  def get_code_from_samsung
+    if self.samsung
+      samsung_code = SamsungCode.available.find_by_code(self.samsung)
+      if samsung_code
+        self.code = samsung_code.promotion
+      else
+        self.code = Moovies.discount["svod_fr"]
+      end
+    end
+  end
+
   def set_samsung
     if self.samsung
       samsung_code = SamsungCode.available.find_by_code(self.samsung)
       if samsung_code
         samsung_code.update_attributes(:customer_id => self.id, :used_at => Time.now())
+        self.code = samsung_code.promotion
       else
-        self.update_attribute(:promo_id => 1)
+        self.code = Moovies.discount["svod_fr"]
       end
     end
   end
     
   def code=(code)
-    @discount = Discount.by_name(code).available.first
-    @activation = Activation.by_name(code).available.first
-    if @discount.nil? && @activation.nil?
-      @discount = Discount.by_name(Moovies.discount["svod_fr"]).first
-    end
-    if @discount
-      self.promo_type = 'D'
-      self.promo_id = @discount.id
-      self.abo_type_id = @discount.abo_type_id
-      self.next_abo_type_id = @discount.next_abo_type_id
-      self.group_id = @discount.group_id
-    elsif @activation
-      self.promo_type = 'A'
-      self.promo_id = @discount.id
-      self.abo_type_id = @activation.abo_type_id
-      self.next_abo_type_id = @activation.next_abo_type_id
-      self.group_id = @activation.group_id
-    end
+      @discount = Discount.by_name(code).available.first
+      @activation = Activation.by_name(code).available.first
+      if @discount.nil? && @activation.nil?
+        @discount = Discount.by_name(Moovies.discount["svod_fr"]).first
+      end
+      if @discount
+        self.promo_type = 'D'
+        self.promo_id = @discount.id
+        self.abo_type_id = @discount.abo_type_id
+        self.next_abo_type_id = @discount.next_abo_type_id
+        self.group_id = @discount.group_id
+      elsif @activation
+        self.promo_type = 'A'
+        self.promo_id = @discount.id
+        self.abo_type_id = @activation.abo_type_id
+        self.next_abo_type_id = @activation.next_abo_type_id
+        self.group_id = @activation.group_id
+      end
   end
   def email_change
     if self.email != self.new_email
