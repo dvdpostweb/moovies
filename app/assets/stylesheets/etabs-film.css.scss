@@ -6,17 +6,17 @@
 
 .tab {
   float: left;
-  background: #eee;
+  background: #212A31;
   margin-right: 3px;
 }
 
 .tab a {
   display: block;
-  line-height: 39px;
+  line-height: 38px;
   padding: 0 20px;
   font-size: 24px;
   color: #afb7bf;
-  background: url(image_path('tabs-nav-film-bg.png')) 0 0 repeat-x;
+ 
 }
 
 .tab a:hover {
@@ -25,8 +25,9 @@
 }
 
 .tab a.active {
-  color: #fff;
-  background-position: 0 100%;
+  background-color:#fff;
+  border: 1px solid #212A31;
+   color: #212A31;
   cursor: default;
 }
 

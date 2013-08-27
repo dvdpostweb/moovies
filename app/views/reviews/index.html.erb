@@ -26,7 +26,7 @@
 <div id="titles-wrap" class="reviews customer_reviews">
   <div class="top"></div>
   
-    <%= render :partial => '/reviews/index/review', :collection => @reviews, :locals => {:source => @source} %>
+    <%= render :partial => 'reviews/index/review', :collection => @reviews, :locals => {:source => @source} %>
   <div class="end"></div>
 </div>
 <%= will_paginate @reviews, :class => 'products-pagination', :previous_label => '&nbsp;', :next_label => '&nbsp;' %>
