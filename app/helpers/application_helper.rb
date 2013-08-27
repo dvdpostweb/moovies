@@ -3,9 +3,9 @@ module ApplicationHelper
   def send_message(mail_id, options, customer_default = nil)
     customer = customer_default ? customer_default : current_customer
     mail_object = Email.by_language(I18n.locale).find(mail_id)
-    recipient = Rails.env != 'development' ? customer.email : 'gs@dvdpost.be'
-    if customer.customer_attribute.mail_copy || mail_object.force_copy
-      mail_history= MailHistory.create(:date => Time.now().to_s(:db), :customers_id => customer.to_param, :mail_messages_id => mail_id, :language_id => DVDPost.customer_languages[I18n.locale], :customers_email_address=> customer.email)
+    recipient = customer
+    if 1==1 || mail_object.force_copy
+      mail_history= MailHistory.create(:date => Time.now().to_s(:db), :customers_id => customer.to_param, :mail_messages_id => mail_id, :language_id => Moovies.customer_languages[I18n.locale], :customers_email_address=> customer.email)
       options["\\$\\$\\$mail_messages_sent_history_id\\$\\$\\$"] = mail_history.to_param
     else
       options["\\$\\$\\$mail_messages_sent_history_id\\$\\$\\$"] = 0
@@ -18,7 +18,7 @@ module ApplicationHelper
         subject = email_data_replace(mail_object.subject, options)
         message = email_data_replace(mail_object.body, options)
         mail_history.update_attributes(:lstvariable => list)
-        Emailer.deliver_send(recipient, subject, message)
+        Emailer.welcome_email(recipient, subject, message, Rails.env == 'development' ? true : false).deliver
       end
       @ticket = Ticket.new(:customer_id => customer.to_param, :category_ticket_id => mail_object.category_id)
       @ticket.save
@@ -28,6 +28,14 @@ module ApplicationHelper
         @message = MessageTicket.new(:ticket => @ticket, :mail_id => mail_id, :data => list, :user_id => 55)
       end
       @message.save
+  end
+
+  def email_data_replace(text,options)
+    options.each {|key, value| 
+      r = Regexp.new(key, true)
+      text = text.gsub(r, value.to_s)
+    }
+    text
   end
 
   def streaming_access?

@@ -82,9 +82,9 @@ class OgonesController < ApplicationController
         "\\$\\$\\$email\\$\\$\\$" => "#{customer.email}",
         "\\$\\$\\$gender_simple\\$\\$\\$" => gender,
         "\\$\\$\\$promotion\\$\\$\\$" => @promo.text(customer.locale).html_safe,
-        "\\$\\$\\$final_price\\$\\$\\$" => price
+        "\\$\\$\\$subscription\\$\\$\\$" => customer.subscription_type.description,
         }
-      send_message(Moovies.email[:welcome], options)
+      view_context.send_message(Moovies.email[:welcome], options)
       #to do 
       #sponsor = Sponsorship.find_by_son_id(customer.to_param)
       #unless sponsor
