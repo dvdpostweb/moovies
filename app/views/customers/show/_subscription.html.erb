@@ -4,26 +4,28 @@
   </div>
   
   <div id="content_droite">
-    <table cellpadding="1" cellspacing="0" border="0">
-      
-
-     
+    <table cellpadding="1" cellspacing="0" border="0" width="330">
       <tr>
-                <td width="360" align="right"><strong>Votre formule :</strong></td>
-        <td width="258" align="left">Plush unlimited</td>
+        <td width="200" align="right"><strong><%= t('.your_account') %>:</strong></td>
+        <td align="left"><%= customer.subscription_type.description %></td>
       </tr>
-      
-       <tr>
-         
-          <td align="right" valign="top" id="modif" colspan="2">
-            <ul>
-              <li class="links">
-                <a href="/fr/customers/151435/suspension/new" class="modification_address facebox">Suspendre mon abonnement</a>
-              </li>
-            </ul>
-          </td>
-        </tr>
-        
+      <tr>
+        <td align="right" valign="top" id="modif" colspan="2">
+          <ul>
+            <li class="links">
+              <%= link_to t('.suspend_abo'), new_customer_suspension_path(:customer_id => current_customer.to_param), :class => 'modification_address facebox' if current_customer.suspension_status == 0 %>
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td align="right"><strong><%= t('.count_classic') %> :</strong></td>
+        <td align="left"><%= @classic_count %> </td>
+      </tr>
+      <tr>
+        <td align="right"><strong><%= t('.count_adult')%> :</strong></td>
+        <td align="left"><%= @adult_count%></td>
+      </tr>
       
      
      
@@ -36,7 +38,7 @@
                 <% if 1 == 0 %>
                   <strong><%= link_to t('.modify_abo'), edit_customer_subscription_path(:customer_id => current_customer.to_param), :class => 'renew' %></strong>
                 <% end %>
-                <% link_to t('.suspend_abo'), new_customer_suspension_path(:customer_id => current_customer.to_param), :class => 'suppendre' if current_customer.suspension_status == 0 %>
+                
               </li>
             </ul>
           <% end %>
