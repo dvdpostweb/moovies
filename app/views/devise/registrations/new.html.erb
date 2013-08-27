@@ -6,8 +6,11 @@
         <h3><%= t('.title', :default => 'Créez votre compte:') %></h3>
         <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
         <%= devise_error_messages! %>
-        <%= cookies[:code] ? f.hidden_field(:code, :value => cookies[:code]) : f.hidden_field(:code, :value => Moovies.discount["svod_#{I18n.locale}"]) %>
-        <%= f.hidden_field(:samsung, :value => params[:samsung]) if params[:samsung] %>
+        <% if @samsung %>
+          <%= f.hidden_field(:samsung, :value => @samsung) %>
+        <% else %>
+          <%= cookies[:code] ? f.hidden_field(:code, :value => cookies[:code]) : f.hidden_field(:code, :value => Moovies.discount["svod_#{I18n.locale}"]) %>
+        <% end %>
         <%= f.hidden_field :language, :value => Moovies.customer_languages[I18n.locale] %>
         <div class="labelstep">
           <%= f.label :email, t('.email') %>
