@@ -83,6 +83,7 @@ class OgonesController < ApplicationController
         "\\$\\$\\$gender_simple\\$\\$\\$" => gender,
         "\\$\\$\\$promotion\\$\\$\\$" => @promo.text(customer.locale).html_safe,
         "\\$\\$\\$subscription\\$\\$\\$" => customer.subscription_type.description,
+        "\\$\\$\\$root_url\\$\\$\\$" => root_url(:locale => nil)
         }
       view_context.send_message(Moovies.email[:welcome], options)
       #to do 

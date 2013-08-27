@@ -2,6 +2,7 @@ Moovies::Application.routes.draw do
 
   root :to => 'home#index'
   resource :ogone, :only => [:create]
+  match 'flag' => 'home#flag'
   scope ':locale/(:kind)', :locale => /en|fr|nl/, :kind => /normal|adult/ do
     match "/" => 'home#index', :as => :root_localize
     match "validation" => 'home#validation'
