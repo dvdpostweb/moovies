@@ -13,11 +13,7 @@
 		</p>
 		<%= f.text_area :text, :class => 'input',:cols => 60, :rows => 10 %>
 	  <p class="critical_explain_footer">
-	     <%= t('.review_warning') %>
-	  </p>
-	  <p align="right">
-	    <input type="checkbox" name="facebook" id="facebook" />
-	    <%= image_tag 'logo-facebook.jpg', :class => :fb_class %> <%= t('.facebook_review')%>
+	     <%= t('.review_warning').html_safe %>
 	  </p>
 	  <p align="right">
 	    <%= f.submit t('.create'), :class => 'review_new', :id => :review_submit %>

@@ -24,7 +24,6 @@ class Customers::RegistrationsController < Devise::RegistrationsController
   end
 
   def create
-    Rails.logger.debug { "@@@#{params[:customer]}" }
     if params[:customer] && params[:customer][:samsung]
       @samsung = params[:customer][:samsung]
     elsif params[:samsung]
