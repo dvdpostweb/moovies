@@ -237,7 +237,7 @@
   padding: 0 0 2px 30px !important;
 }
 #thumbs-wrap h3 {
-  font-size: 16px;
+  font-size: 18px;
   margin-bottom: 10px;
 }
 
@@ -1350,7 +1350,7 @@ text-align:center;
 
 .bysort {
     margin: 0 0 0 471px;
-    padding: 0 0 5px;
+    padding: 0 0 11px;
     width: 233px;
 }
 
@@ -1374,10 +1374,12 @@ text-align:center;
   font-weight: bold;
 }
 .endless {
-  color: #4A5863;
-  display: block;
-  float: right;
-  margin: -22px 0 0 200px;
+    background: none repeat scroll 0 0 #212A31;
+    color: #FFFFFF;
+    display: block;
+    float: right;
+    margin: -31px 0 0 200px;
+    padding: 5px;
 }
 #products
 {
@@ -1386,6 +1388,9 @@ text-align:center;
 
 #products_index #products {
   clear: none;
+  border-top: 1px solid #212A31;
+  padding-top:12px;
+
 
 }
 #about_ppv
@@ -1468,6 +1473,27 @@ text-align:center;
 #fb
 {
 	clear:both;
+}
+
+#critics-wrap {
+    border: 1px solid #C4C4C0;
+    margin-top: 20px;
+    padding:10px;
+}
+
+#critics-wrap .tab a.active {
+    background-color: none;
+    border: none;
+    color: #212A31;
+    cursor: default;
+}
+
+#critics-wrap .tab a {
+    color: #AFB7BF;
+    display: block;
+    font-size: 18px;
+    line-height: 38px;
+    padding: 0 20px;
 }
 #leftcolumn h3
 {

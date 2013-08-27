@@ -20,7 +20,21 @@
         <td align="right"><strong><%= t '.first_name' %></strong></td>
         <td align="left"><%= customer.first_name %></td>
       </tr>
-      
+      <tr>
+         <td align="right"><strong><%= t '.phone' %> :</strong></td>
+         <td align="left"><%= customer.phone %></td>
+       </tr>
+     
+      <tr>
+        <td align="right" valign="top" class="adresse"></td>
+        <td align="right" valign="top" id="modif">
+          <ul>
+            <li class="links">
+               <%= link_to t('.customer_edit'), edit_customer_path(), :class => 'modification_account facebox' %>
+            </li>
+          </ul>
+        </td>
+      </tr>
       <tr>
         <td align="right" valign="top" class="adresse"><strong><%= t '.address' %></strong></td>
         <td align="left" valign="top" class="adresse">
@@ -31,16 +45,12 @@
           <% end %>
         </td>
       </tr>
-       <tr>
-          <td align="right"><strong>N° de téléphone :</strong></td>
-          <td align="left"></td>
-        </tr>
       <tr>
         <td align="right" valign="top" class="adresse"></td>
         <td align="right" valign="top" id="modif">
           <ul>
             <li class="links">
-              <%= link_to t('.customer_edit'), edit_customer_path(), :class => 'modification_account facebox' %>
+              <%= link_to t('.address_edit'), edit_customer_addresses_path(:customer_id => current_customer), :class => 'modification_address facebox' %>
             </li>
           </ul>
         </td>
