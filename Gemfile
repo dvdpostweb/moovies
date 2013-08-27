@@ -5,7 +5,7 @@ gem 'rails', '3.2.13'
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2',          '0.3.12b5'
+gem 'mysql2',          '0.3.13'
 gem 'json'
 gem 'will_paginate'
 gem 'i18n-active_record',
@@ -50,10 +50,7 @@ gem "rspec-rails", ">= 2.0.1", :group => [:development, :test]
 gem "friendly_id", "~> 4.0.9"
 gem "routing_concerns", "~> 0.1.0"
 gem 'jquery-form-rails'
-gem 'thinking-sphinx', '~> 3.0.4',
-  :git    => 'git://github.com/pat/thinking-sphinx.git',
-  :branch => 'master',
-  :ref    => 'c26b796c1e'
+gem 'thinking-sphinx', '3.0.5'
 gem "composite_primary_keys", "~> 5.0.13"
 gem "truncate_html", "~> 0.9.2"
 gem "capistrano", "~> 2.15.5"

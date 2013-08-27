@@ -16,7 +16,7 @@ ThinkingSphinx::Index.define :product, :with => :active_record, :name => 'produc
   has imdb_id
   has package_id
   has actors(:actors_id),         :as => :actors_id
-  has categories(:categories_id), :as => :category_id
+  has categories('DISTINCT categories.categories_id'), :as => :category_id, :type => :integer, :multi => true
   has director(:directors_id),    :as => :director_id
   has studio(:studio_id),         :as => :studio_id
   
