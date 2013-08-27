@@ -45,6 +45,15 @@ module MessagesHelper
     body.html_safe
   end
 
+  def config_dialog(user_id)
+    if user_id
+      {:class => 'plushmessage', :image => 'avatar_plush.gif', :title => 'dvdpost'}
+    else
+      {:class => 'customessage', :image => current_customer.gender == 'm' ? "avatar_m.gif" : "avatar_f.gif", :title => 'customer'}
+    end
+  end
+
+
   def get_data(variable ,variables)
     extracts = variables.split(';;;')
     extracts.collect do |extract|
