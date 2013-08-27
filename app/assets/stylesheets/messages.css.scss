@@ -545,7 +545,7 @@ a#back_message
 #messages #bysort {
   padding: 0 0 5px;
 }
-.dvdpostmessage {
+.plushmessage {
   background-color:#fff;
   margin-top: 20px;
   margin-bottom: 20px;
@@ -560,7 +560,7 @@ a#back_message
 
 }
 
-.dvdpostmessage .avatar{
+.plushmessage .avatar{
 
   float:left;
   padding:6px;}
@@ -593,11 +593,15 @@ a#back_message
     text-align:left;
 
   }
-
-  .who_message_big { font-size:16px;
+  .customessage p, .plushmessage p
+  {
+     margin: 1em 0;
+  }
+  .who_message_big { 
+    font-size:16px;
     font-weight:bold;color:#000000;
     text-align:left;
-
+   
   }
   .message_text {
     float: right;
@@ -859,4 +863,8 @@ a.btn_all_message:hover {
 #phone_request_hour
 {
   margin:4px 0 0 0;
+}
+.content_message p
+{
+  margin: 1em 0;
 }
