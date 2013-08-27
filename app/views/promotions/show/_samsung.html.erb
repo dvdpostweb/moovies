@@ -27,25 +27,25 @@
           <ul>
             <li class="engagement"><%= t('.engagement') %></li>
             <li class="stop"><%= t('.stop') %></li>
-            <li class="security"><%= t('.securite') %>100% sécurisé</li>
+            <li class="security"><%= t('.securite') %></li>
           </ul>
         </div>
         <div class="avantages">
-          <h4><%= t('.avantages') %>Vos avantages</h4>
+          <h4><%= t('.avantages') %></h4>
           <ul>
-            <li class="film"><%= t('.film') %>Large catalogue de films</li>
-            <li class="home"><%= t('.home') %>Louez les films sans quitter votre fauteuil</li>
-            <li class="platform"><%= t('.platform') %>Multi-plateforme</li>
+            <li class="film"><%= t('.film') %></li>
+            <li class="home"><%= t('.home') %></li>
+            <li class="platform"><%= t('.platform') %></li>
           </ul>
         </div>
         <div style="clear:both;"></div>
-        <p style="padding-top:5px;"><input type="submit" border="0" align="absmiddle" id="submit_id3" class="promo_button" name="sent" value="<%= t('.essayer') %>Essayez gratuitement" /></p>
+        <p style="padding-top:5px;"><input type="submit" border="0" align="absmiddle" id="submit_id3" class="promo_button" name="sent" value="<%= t('.essayer') %>" /></p>
         <% end %>
       </div>
     </div>
 
     <div id="commentcamarche_content">
-      <h2><%= t('.comment') %>Comment profiter de films sur votre Smart TV Samsung?</h2>
+      <h2><%= t('.comment') %></h2>
       <div class="promo_info">
         <table cellpadding="0" cellspacing="0" border="0">
           <tr id="promotions">
@@ -55,16 +55,16 @@
             <td><%= image_tag "promotions/choice_movies.jpg", :style => 'padding-top:14px;' %></td>
           </tr>
           <tr id="dvd">
-            <td class="step1"><%= t('.step1').html_safe %>Créez un compte Plush <br />via cette page</td>
-            <td class="step2"><%= t('.step2').html_safe %>Téléchargez l’application<br />Plush</td>
-            <td class="step3"><%= t('.step3').html_safe %>Logguez vous sur<br />l’application</td>
-            <td class="step4"><%= t('.step4').html_safe %>Choisissez un film <br /> dans l’application</td>
+            <td class="step1"><%= t('.step1').html_safe %></td>
+            <td class="step2"><%= t('.step2').html_safe %></td>
+            <td class="step3"><%= t('.step3').html_safe %></td>
+            <td class="step4"><%= t('.step4').html_safe %></td>
           </tr>
         </table>
       </div>
       <div id="commentcamarche_content">
-        <h2><%= t('.plush') %>Plush vous offre:</h2>
-        <h3><%= t('.illimite') %>Un catalogue illimité</h3>
+        <h2><%= t('.plush') %></h2>
+        <h3><%= t('.illimite') %></h3>
         <table cellpadding="0" cellspacing="0" border="0">
           <tr id="vod">
             <td><img src="<%= image_path "/assets/promotions/fr/vod.jpg" %>" style="padding-left:20px;"/></td>
@@ -73,13 +73,13 @@
             <td><img src="<%= image_path "/assets/promotions/tv_vod.jpg" %>"  style="padding-top:14px;" /></td>
           </tr>
           <tr id="vod">
-            <td class="step1"><%= t('.istep1').html_safe %>Faites votre choix <br />parmi 400 films <br />disponible en illimité</td>
-            <td class="step2"><%= t('.istep2').html_safe %>Cliquez sur <br />"Regarder"</td>
-            <td class="step3"><%= t('.istep3').html_safe %>Sélectionnez la langue<br />et les sous-titres du film</td>
-            <td class="step4"><%= t('.istep4').html_safe %>Profitez de votre film sans restrictions</td>
+            <td class="step1"><%= t('.istep1').html_safe %></td>
+            <td class="step2"><%= t('.istep2').html_safe %></td>
+            <td class="step3"><%= t('.istep3').html_safe %></td>
+            <td class="step4"><%= t('.istep4').html_safe %></td>
           </tr>
         </table>
-        <h3><%= t('.carte') %>Un catalogue à la carte</h3>
+        <h3><%= t('.carte') %></h3>
         <table cellpadding="0" cellspacing="0" border="0">
           <tr id="dvd">
             <td><img src="<%= image_path "/assets/promotions/fr/vodppv.jpg" %>"style="padding-left:20px;"/></td>
@@ -88,33 +88,30 @@
             <td><img src="<%= image_path "/assets/promotions/tv_vodppv.jpg" %>" style="padding-top:14px;"/></td>
           </tr>
           <tr id="dvd">
-            <td class="step1"><%= t('.astep1').html_safe %>Faites votre choix <br />parmi plus de 1000 films<br /> à la carte</td>
-            <td class="step2"><%= t('.astep2').html_safe %>Cliquez sur Regarder. <br />Votre carte est débitée <br />du frais de location</td>
-            <td class="step3"><%= t('.astep3').html_safe %>Sélectionnez la langue<br />et les sous-titres du film</td>
-            <td class="step4"><%= t('.astep4').html_safe %>Profitez pendant 48h<br />de votre film !</td>
+            <td class="step1"><%= t('.astep1').html_safe %></td>
+            <td class="step2"><%= t('.astep2').html_safe %></td>
+            <td class="step3"><%= t('.astep3').html_safe %></td>
+            <td class="step4"><%= t('.astep4').html_safe %></td>
           </tr>
         </table>
       </div>
       <%= form_tag promotion_localize_path(:id => params[:id]), :id => 'form_step2' do %>
       <div id="area_promo">
-        <h2><%= t('.promo').html_safe %>Profitez gratuitement de<br><b>Plush Unlimited pendant 1 an</b>*</h2>
+        <h2><%= t('.promo').html_safe %></h2>
         <div align="center"><%= t('.serie') %><br><%= "<div id='error'>#{t('.error')}</div>".html_safe if @error %><%= text_field_tag(:code, @code_samsung, :id => 'code4', :size => 20, :class => 'inputs_promo_code') %></div>
         <p class="news_form">
           <%= check_box_tag 'marketing', 1, @checked, :class => :marketing3, :id => 'mark2' %>
           <%= t('.accepteconditions') %>
         </p>
         <div class="clearfix"></div>
-        <p align="center"><input type="submit" border="0" align="absmiddle" class="promo_button" id="submit_id4" name="sent" value="Essayez gratuitement"></p>
+        <p align="center"><input type="submit" border="0" align="absmiddle" class="promo_button" id="submit_id4" name="sent" value="<%= t('.essayer') %>"></p>
       </div>
       <% end %>
       <p align="center"><%= image_tag "/#{I18n.locale}/info_tel.jpg" %></p>
-      <div id="promo_footer"><%= t('.conditions').html_safe %>*Offre r&eacute;serv&eacute;e aux personnes ayant achet&eacute; une Smart Tv Philips pendant la p&eacute;riode promotionnelle. <br/><br/>
-        Si vous &ecirc;tes d&eacute;j&agrave; client chez DVDPost, vous ne pourrez pas vous inscrire via cette landing. Merci de bien vouloir contacter notre service client au num&eacute;ro gratuit 0800/95 990 ou au num&eacute;ro payant 0032 2 5036811 pour les appels effectu&eacute;s hors de la Belgique pour profiter des VOD offertes. Dans ce cas-ci, les VOD seront uniquement valables jusqu'à la prochaine date de reconduction de votre abonnement. <br/><br/>
-        Les nouveaux clients qui s'inscrivent via cette landing avec le code promotionnel reçu de Philips recevront 20 cr&eacute;dits VOD qui restent valables 3 mois. 
-        Apr&egrave;s 3 mois l'abonnement est cl&ocirc;tur&eacute; automatiquement. Si vous souhaitez continuer &agrave; profiter de notre service VOD et d&eacute;couvrir notre service DVD/Blu-Ray, merci de contacter notre service client.</div>
+      <div id="promo_footer"><%= t('.conditions').html_safe %></div>
       </div>
     </div>
   </div>
 </div>
-<div style="display:none" id='text_error_conditions'><%= t('.error_conditions') %>Merci de cocher la case "J'accepte les conditions de l'offre situées en-bas de cette page" avant de continuer l'inscription</div>
+<div style="display:none" id='text_error_conditions'><%= t('.error_conditions') %></div>
 <div id="default" style="display:none"><%= t '.default' %></div>
