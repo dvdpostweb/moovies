@@ -33,6 +33,7 @@ class OgonesController < ApplicationController
         when 'new_discount'
           if customer.promo_id > 0
             @discount = Discount.find(customer.promo_id)
+            @promo = @discount
             action = Subscription.action[:creation_with_discount]
             DiscountUse.create(:discount_code_id => discount_code_id, :customer_id => customer.to_param, :discount_use_date => Time.now.localtime)
             #@discount.update_attributes(:discount_limit => @discount.discount_limit - 1)
@@ -56,6 +57,7 @@ class OgonesController < ApplicationController
           customer.payment.create(:payment_method => 1, :abo_id => abo.id, :amount => price, :payment_status => 2, :created_at => Time.now.localtime, :last_modified => Time.now.localtime) if price > 0
         when 'new_activation'
           activation = Activation.find(current_customer.promo_id)
+          @promo = activation
           action = Subscription.action[:creation_with_activation]
           price = 0
           duration = activation.duration
@@ -75,16 +77,15 @@ class OgonesController < ApplicationController
         gender = t('mails.gender_female')
       end
       #to do
-      #options = {
-      #  "\\$\\$\\$customers_name\\$\\$\\$" => "#{customer.first_name.capitalize} #{customer.last_name.capitalize}", 
-      #  "\\$\\$\\$email\\$\\$\\$" => "#{customer.email}",
-      #  "\\$\\$\\$gender_simple\\$\\$\\$" => gender,
-      #  "\\$\\$\\$promotion\\$\\$\\$" => promotion(customer)[:promo],
-      #  "\\$\\$\\$final_price\\$\\$\\$" => price
-      #  }
+      options = {
+        "\\$\\$\\$customers_name\\$\\$\\$" => "#{customer.first_name.capitalize} #{customer.last_name.capitalize}", 
+        "\\$\\$\\$email\\$\\$\\$" => "#{customer.email}",
+        "\\$\\$\\$gender_simple\\$\\$\\$" => gender,
+        "\\$\\$\\$promotion\\$\\$\\$" => @promo.text(customer.locale).html_safe,
+        "\\$\\$\\$final_price\\$\\$\\$" => price
+        }
+      send_message(Moovies.email[:welcome], options)
       #to do 
-      #send_message(DVDPost.email[:welcome], options)
-      
       #sponsor = Sponsorship.find_by_son_id(customer.to_param)
       #unless sponsor
       #  sponsor_email = SponsorshipEmail.find_by_email(customer.email)
