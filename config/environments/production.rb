@@ -9,7 +9,6 @@ Moovies::Application.configure do
   config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
-  #to do
   config.serve_static_assets = false
 
   # Compress JavaScripts and CSS
@@ -60,6 +59,7 @@ Moovies::Application.configure do
   config.active_support.deprecation = :notify
 
   config.cache_store = :mem_cache_store, '192.168.100.204:11211'
+  config.i18n.available_locales = [:fr, :nl, :en]
   config.i18n_cache_store = ActiveSupport::Cache.lookup_store(:mem_cache_store, '192.168.100.204:11211', :namespace => "production")
   config.action_mailer.default_url_options = { 
     :host => "www.plush.be",

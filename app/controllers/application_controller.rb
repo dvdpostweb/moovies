@@ -2,10 +2,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper :all
   before_filter :set_locale
-  before_filter :get_wishlist_source
   before_filter :init
   before_filter :redirect_after_registration
-  
+  before_filter :get_wishlist_source
+  before_filter :validation_adult  
   layout :layout_by_resource
   
   def handle_unverified_request
@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
           redirect_to step_path(:id => 'step2')
         end
       elsif current_customer.step.to_i == 33
-        if (params['controller'] == 'steps' && params[:id] == 'step3') || (params[:controller] == 'ogones' && params[:action] == 'show')
+        if (params['controller'] == 'steps' && params[:id] == 'step3') || (params[:controller] == 'ogones')
         else
           redirect_to step_path(:id => 'step3')
         end
@@ -54,13 +54,15 @@ class ApplicationController < ActionController::Base
   end
 
   def set_locale
-    I18n.locale = params[:locale] || cookies[:locale] || extract_locale_from_accept_language_header || I18n.default_locale
-    if I18n.available_locales.include?(I18n.locale)
-      cookies.permanent[:locale] = I18n.locale 
-    else
-      I18n.locale = :fr
+    if params[:controller] != 'ogones'
+      I18n.locale = params[:locale] || cookies[:locale] || extract_locale_from_accept_language_header || I18n.default_locale
+      if I18n.available_locales.include?(I18n.locale)
+        cookies.permanent[:locale] = I18n.locale 
+      else
+        I18n.locale = :fr
+      end
+      current_customer.update_locale(locale) if current_customer
     end
-    current_customer.update_locale(locale) if current_customer
   end
 
   def get_wishlist_source
@@ -75,7 +77,11 @@ class ApplicationController < ActionController::Base
     @browser = Browser.new(:ua => request.user_agent, :accept_language => "en-us")
     @kid_visible = false
     cookies.permanent[:adult_hide] = params[:all] if params[:all]
-    
+    if params[:kind] == :adult
+      @discount_top = Discount.find(Moovies.discount["hp_top_#{I18n.locale}"])
+    else
+      @discount_top = Discount.find(Moovies.discount["adult_#{I18n.locale}"])
+    end
     params[:kind] = params[:kind] ? params[:kind].to_sym : :normal
     if params[:locale].nil?
       params[:locale] = I18n.locale
@@ -109,6 +115,14 @@ class ApplicationController < ActionController::Base
     rescue => e
       logger.error("GeoIP error: #{message}")
       logger.error(e.backtrace)
+    end
+  end
+
+  def validation_adult
+    if params[:kind] == :adult && !session[:adult] && params['action'] != 'validation' && params['action'] != 'authenticate'
+      prefix = "http://"
+      session['current_uri'] = prefix + request.host_with_port + request.fullpath
+      redirect_to validation_path
     end
   end
   

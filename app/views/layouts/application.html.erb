@@ -26,14 +26,8 @@
     <%= render(:partial => 'layouts/header') %>
     <div class="container clearfix">
       <% if !current_customer && (params[:controller] != 'home' && params[:controller] != 'customers/registrations' && params[:controller] != 'steps' && params[:page_name] != 'abo') and !(params[:controller] == 'promotions' and params[:id] == 'smarttv')%>
-      <div class="osc fr" id="subscribe-wrap">
-        <div class="wrap"><h3><%= t('.promo_title').html_safe %></h3>
-          <div id="promo"><%= t('.promo') %></div>
-        </div>
-        <div id="subscribe">
-          <a class="btn" href="http://www.dvdpost.be/step1.php?language=fr"><%= t('.abo') %></a>
-          <p><%= t('.abo_text') %></p>
-        </div>
+      <div id="subscribe-wrap">
+        <%= link_to image_tag("#{I18n.locale}/banner_promo_hp#{params[:kind] == :adult ? '_adult' : ''}.jpg", :size => '942x188'), new_customer_registration_path(:code => @discount_top.name) %>
       </div>
       <% end %>
       <%= yield %>
@@ -45,7 +39,7 @@
         <% unless @hide_footer %>
         <ul>
           <li><h4><%= t '.explore' %></h4></li>
-          <li><%= link_to t('layouts.header.home'), root_path %></li>
+          <li><%= link_to t('layouts.header.home'), root_localize_path %></li>
           <li><%= link_to t('layouts.header.explore'), products_path(:package => Moovies.packages.invert[params[:kind] == :normal ? 1 : 4]) %></li>
           <% if current_customer %>
             <li><%= link_to t('layouts.header.wishlist'), vod_wishlists_path %></li>

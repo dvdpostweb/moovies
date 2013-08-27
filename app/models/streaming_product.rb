@@ -30,20 +30,20 @@ class StreamingProduct < ActiveRecord::Base
   end
   def self.get_prefered_streaming_by_imdb_id(imdb_id, local)
     if Rails.env == "production"
-      streaming = available.prefered_audio(DVDPost.customer_languages[local]).find_all_by_imdb_id(imdb_id)
-      streaming += available.prefered_subtitle(DVDPost.customer_languages[local]).find_all_by_imdb_id(imdb_id)
+      streaming = available.prefered_audio(Mooives.customer_languages[local]).find_all_by_imdb_id(imdb_id)
+      streaming += available.prefered_subtitle(Mooives.customer_languages[local]).find_all_by_imdb_id(imdb_id)
     else
-      streaming = available_beta.prefered_audio(DVDPost.customer_languages[local]).find_all_by_imdb_id(imdb_id)
-      streaming += available_beta.prefered_subtitle(DVDPost.customer_languages[local]).find_all_by_imdb_id(imdb_id)
+      streaming = available_beta.prefered_audio(Mooives.customer_languages[local]).find_all_by_imdb_id(imdb_id)
+      streaming += available_beta.prefered_subtitle(Mooives.customer_languages[local]).find_all_by_imdb_id(imdb_id)
     end
     streaming
   end
 
   def self.get_not_prefered_streaming_by_imdb_id(imdb_id, local)
     if Rails.env == "production"
-      streaming = available.not_prefered(DVDPost.customer_languages[local]).find_all_by_imdb_id(imdb_id)
+      streaming = available.not_prefered(Mooives.customer_languages[local]).find_all_by_imdb_id(imdb_id)
     else
-      streaming = available_beta.not_prefered(DVDPost.customer_languages[local]).find_all_by_imdb_id(imdb_id)
+      streaming = available_beta.not_prefered(Mooives.customer_languages[local]).find_all_by_imdb_id(imdb_id)
     end
     streaming
   end

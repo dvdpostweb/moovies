@@ -42,6 +42,7 @@ Moovies::Application.configure do
   }
   
   config.log_level = :debug
+  config.i18n.available_locales = [:fr, :nl, :en]
 
   config.cache_store = :mem_cache_store, '192.168.100.206:11211'
   config.i18n_cache_store = ActiveSupport::Cache.lookup_store(:mem_cache_store, '192.168.100.206:11211', :namespace => "staging")

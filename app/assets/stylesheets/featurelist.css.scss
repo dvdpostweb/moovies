@@ -5,6 +5,7 @@ ul#output {
   left: 0;
   position: relative;
   width: 620px;
+	margin:20px 0 0 0;
 }
 
 ul#output li {
@@ -108,4 +109,8 @@ ul#output #try_it #engagement {
   padding-right: 20px;
   padding-top: 50px;
   text-align: center;
+}
+#image_promo .caption h2
+{
+	text-align:left;
 }

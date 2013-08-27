@@ -3,7 +3,7 @@
     <% @faqs.each do |faq| %>
       <li>
         <a href="#" class='menu_faq'>
-         q <%= t(".cat_#{faq.to_param}") %>
+         <%= t(".cat_#{faq.to_param}") %>
         </a>
         <ul style='display:none'>
             <% faq.nb_questions.times do |i| %>          

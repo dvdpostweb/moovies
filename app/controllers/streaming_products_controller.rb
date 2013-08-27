@@ -82,6 +82,7 @@ class StreamingProductsController < ApplicationController
                   else
                     gender = t('mails.gender_female')
                   end
+                  #to do 
                     #movie_detail = DVDPost.mail_movie_detail(current_customer.to_param, @product.id)
                     #vod_selection = DVDPost.mail_vod_selection(current_customer.to_param, params[:kind])
                     #recommendation_dvd_to_dvd = DVDPost.mail_recommendation_dvd_to_dvd(current_customer.to_param, @product.id)
@@ -195,7 +196,7 @@ class StreamingProductsController < ApplicationController
     if code.nil?
       flash[:error] = error
       notify_country_error(current_customer.to_param, session[:country_id], params[:id], error)
-      redirect_to root_path
+      redirect_to root_localize_path
     else
       render :partial => '/streaming_products/show/error', :layout => true, :locals => {:error => error}
     end

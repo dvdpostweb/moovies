@@ -46,7 +46,7 @@ $(function() {
     id = $(this).attr('id').replace('_menu','')
     $('#'+id).hide()
   })
-  $('#abo, #adult, #message, #header h1').on('mouseover',function(){
+  $('#nav #abo, #nav #adult, #nav #message, #header h1').on('mouseover',function(){
     $('.dropdown').hide()
   })
   $('body').delegate("#new_review .star", "mouseover", function(){
