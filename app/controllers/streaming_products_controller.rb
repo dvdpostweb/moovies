@@ -166,7 +166,7 @@ class StreamingProductsController < ApplicationController
     else
       @streaming_prefered = StreamingProduct.available_beta.country(Product.country_short_name(session[:country_id])).alpha.find_all_by_imdb_id(params[:streaming_product_id], I18n.locale) 
     end
-    render :partial => '/streaming_products/show/versions', :locals => {:version => @streaming_prefered, :source => params[:source],  :response_id => params[:response_id]}
+    render :partial => 'streaming_products/show/versions', :locals => {:version => @streaming_prefered, :source => params[:source],  :response_id => params[:response_id]}
   end
 
   def sample
@@ -198,7 +198,7 @@ class StreamingProductsController < ApplicationController
       notify_country_error(current_customer.to_param, session[:country_id], params[:id], error)
       redirect_to root_localize_path
     else
-      render :partial => '/streaming_products/show/error', :layout => true, :locals => {:error => error}
+      render :partial => 'streaming_products/show/error', :layout => true, :locals => {:error => error}
     end
   end
 
