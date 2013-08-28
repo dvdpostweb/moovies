@@ -33,7 +33,7 @@ class StreamingProductsController < ApplicationController
       format.html do
         if @product
           if @vod_disable == "1" || Rails.env == "pre_production"
-            if view_context.streaming_access?
+            if view_context.streaming_access? && current_customer.actived? && current_customer.suspended? && current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s)
               if !@streaming_prefered.blank? || !@streaming_not_prefered.blank?
                 if @token_valid == false && @vod_create_token == "0" && Rails.env != "pre_production"
                   error = t('streaming_products.not_available.offline')
@@ -59,9 +59,9 @@ class StreamingProductsController < ApplicationController
         end
       end
       format.js do
-        if view_context.streaming_access?
+        if view_context.streaming_access? 
           streaming_version = StreamingProduct.find_by_id(params[:streaming_product_id])
-          if (!current_customer.suspended? && !Token.dvdpost_ip?(request.remote_ip) && !current_customer.super_user? && !(/^192(.*)/.match(request.remote_ip)))
+          if (!current_customer.suspended? && !Token.dvdpost_ip?(request.remote_ip) && !current_customer.super_user? && !(/^192(.*)/.match(request.remote_ip)) && current_customer.actived? && current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s))
             status = @token.nil? ? nil : @token.current_status(request.remote_ip)
             streaming_version = StreamingProduct.find_by_id(params[:streaming_product_id])
             if !@token || status == Token.status[:expired]
