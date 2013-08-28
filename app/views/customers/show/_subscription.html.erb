@@ -13,7 +13,7 @@
         <td align="right" valign="top" id="modif" colspan="2">
           <ul>
             <li class="links">
-              <%= link_to t('.suspend_abo'), new_customer_suspension_path(:customer_id => current_customer.to_param), :class => 'modification_address facebox' if current_customer.suspension_status == 0 %>
+              <% link_to t('.suspend_abo'), new_customer_suspension_path(:customer_id => current_customer.to_param), :class => 'modification_address facebox' if current_customer.suspension_status == 0 %>
             </li>
           </ul>
         </td>

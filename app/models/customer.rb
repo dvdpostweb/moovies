@@ -4,7 +4,6 @@ class Customer < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable
 
   self.primary_key = :customers_id
-  before_create :set_default
   after_save :set_samsung
   before_save :get_code_from_samsung
   devise :database_authenticatable, :registerable,
@@ -37,7 +36,7 @@ class Customer < ActiveRecord::Base
   validates_uniqueness_of :email, :case_sensitive => false, :on => :update
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :newsletter, :newsletter_parnter, :last_name, :first_name, :language, :address_id, :phone, :birthday, :gender, :abo_type_id, :customers_abo_type, :auto_stop, :customers_abo_auto_stop_next_reconduction, :next_abo_type_id, :customers_next_abo_type, :promo_type, :activation_discount_code_type, :promo_id, :nickname, :code, :customers_dob, :address_attributes, :step,:ogone_owner, :ogone_exp_date, :ogone_card_no, :ogone_card_type, :customers_abo_payment_method, :customers_abo, :customers_registration_step, :subscription_expiration_date, :auto_stop, :customers_abo_discount_recurring_to_date, :filter_id, :samsung
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :newsletter, :newsletter_parnter, :last_name, :first_name, :language, :address_id, :phone, :birthday, :gender, :abo_type_id, :customers_abo_type, :auto_stop, :customers_abo_auto_stop_next_reconduction, :next_abo_type_id, :customers_next_abo_type, :promo_type, :activation_discount_code_type, :promo_id, :nickname, :code, :customers_dob, :address_attributes, :step,:ogone_owner, :ogone_exp_date, :ogone_card_no, :ogone_card_type, :customers_abo_payment_method, :customers_abo, :customers_registration_step, :subscription_expiration_date, :auto_stop, :customers_abo_discount_recurring_to_date, :filter_id, :samsung, :new_email
   attr_writer :code
   attr_accessor :samsung
   
@@ -471,9 +470,5 @@ class Customer < ActiveRecord::Base
       logger.error("customer have a problem with credit customer_id : #{to_param} action: #{action} action type: #{action_type} quantity: #{quantity}")
       logger.error(e.backtrace)
     end
-  end
-  private
-   def set_default
-     self.nickname = self.first_name
   end
 end
