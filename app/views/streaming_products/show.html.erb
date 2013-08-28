@@ -8,7 +8,6 @@
         <% end %>
         <div class="clear"></div>
         <div id="presentation">
-          <%= "#to do <div class='prices'>#{t '.ppv', :price => @streaming.ppv_price}</div>" if @streaming.is_ppv %>
           <div id = 'image_vod'><%= product_image_tag @product.image, :alt => "#{@product.title} (#{@product.year})" %></div>
         </div>
         <div id='flow'>
@@ -23,7 +22,7 @@
                 <h3><%= t('.version_title') %></h3>
                 <div id="choice_new">
                   <div id="step1" class="step" style="width:696px;height:120px">
-                    <%= render :partial => 'streaming_products/show/audios', :locals => {:streaming => @streaming_prefered, :sample => false, :source => params[:source], :response_id => params[:response_id]} %>
+                    <%= render :partial => 'streaming_products/show/audios', :locals => {:streaming => @streaming_prefered, :sample => nil, :source => params[:source], :response_id => params[:response_id]} %>
                   </div>
                   <div id="step2" class="step">
                   </div>
@@ -37,8 +36,9 @@
                 </p>
             </div>
             <p class="intro_vod">
-              <% #to do only tvod %>
-              <%= t 'streaming_products.show.kinds_alpha.reminder', :hours => 48 %>
+              <% unless @product.svod? %>
+                <%= t 'streaming_products.show.kinds_alpha.reminder', :hours => 48 %>
+              <% end %>
             </p>
             <% end %>
           <% else %>

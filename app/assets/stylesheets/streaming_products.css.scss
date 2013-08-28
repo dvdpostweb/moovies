@@ -166,7 +166,7 @@
 .intro_vod {
       color: #21282F;
     font-size: 14px;
-    padding-left: 112px;
+    padding: 10px 0 10px 136px;
 		width: 696px;
 	
 }
@@ -186,7 +186,7 @@ text-transform:uppercase;
 font-size:16px;
 font-weight:bold;
 color: #21282F;
-padding-left:112px;
+padding-left:132px;
   
 
 
@@ -367,9 +367,8 @@ a#cancel {
 }
 
 .choice_question {
-
-    font-size: 16px;
-
+	font-size: 16px;
+	padding: 10px 0 0 0;
 }
 
 .choice_valided{
@@ -409,6 +408,7 @@ text-decoration:underline;
 .choice_question, .choice_valided, .audios, .subs
 {
   width:696px;
+padding:10px 0 0 0;
 }
 .linkallversions{
   background-color: #FFFFFF;
