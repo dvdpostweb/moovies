@@ -8,7 +8,6 @@ class PromotionsController < ApplicationController
       if !params[:code].nil?
         @code_samsung = params[:code]
         if SamsungCode.available.find_by_code(@code_samsung)
-          cookies.permanent[:code] = 'SMSPSH'
           redirect_to new_customer_registration_path(:samsung => @code_samsung)
         else
           @error = true

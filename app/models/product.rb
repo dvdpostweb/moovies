@@ -64,7 +64,7 @@ class Product < ActiveRecord::Base
   sphinx_scope(:exclude_products_id)      {|products_id|      {:without =>    {:product_id => products_id}}}
   sphinx_scope(:by_actor)                 {|actor|            {:with =>       {:actors_id => actor.to_param}}}
   sphinx_scope(:by_audience)              {|min, max|         {:with =>       {:audience => Public.legacy_age_ids(min, max)}}}
-  sphinx_scope(:by_category)              {|category|         {:with =>       {:category_id => category.to_param}}}
+  sphinx_scope(:by_category)              {|category|         {:with =>       {:category_id => category}}}
   sphinx_scope(:hetero)                   {{:without =>       {:category_id => [76, 72]}}}
   sphinx_scope(:gay)                      {{:with =>          {:category_id => [76, 72]}}}
   sphinx_scope(:by_country)               {|country|          {:with =>       {:country_id => country.to_param}}}
