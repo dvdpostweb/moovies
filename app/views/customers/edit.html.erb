@@ -107,19 +107,7 @@
         <span id='password'>
          &bull; &bull; &bull; &bull; &bull; &bull; 
         </span>
-        <%= link_to t('.change_password'), nil, :id => 'change_password' %>
-      </span>
-    </td>
-    <td class="explain_text" align="left">
-    </td>
-  </tr>
-  <tr id="password_confirmation" style="display:none">
-    <td align="right" class="identification" >
-      <strong><span class="explain_text"><%= t '.password_confirmation' %> :</span></strong>
-    </td>
-    <td>
-      <span align="left">
-        <%= f.password_field :clear_pwd_confirmation %>
+        <%= link_to t('.change_password'), edit_customer_registration_path, :id => 'change_password' %>
       </span>
     </td>
     <td class="explain_text" align="left">
