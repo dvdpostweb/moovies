@@ -79,7 +79,7 @@ fr:
       confirmed: 'Votre compte a été validé, vous êtes maintenant connecté'
     registrations:
       edit:
-        title: Editez
+        title: Modifiez votre mot de passe
         email: Adresse e-mail
         waiting: 'En attente de confirmation der:'
         current_pass: Mot de passe actuel
