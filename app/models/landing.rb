@@ -18,7 +18,7 @@ class Landing < ActiveRecord::Base
   end
 
   def description(locale)
-    eval("title_#{locale}")
+    eval("description_#{locale}")
   end
 
   def link(locale)
