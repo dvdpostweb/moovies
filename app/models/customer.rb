@@ -278,7 +278,7 @@ class Customer < ActiveRecord::Base
 
         if token_string
           #to do
-          token = file.is_ppv ? Token.create(:customer_id => id, :imdb_id => imdb_id, :token => token_string, :is_ppv => true, :ppv_price => file.ppv_price, :source_id => source, :country => file.country, :credits => file.credits, :kind => 'PPV') : Token.create(:customer_id => id, :imdb_id => imdb_id, :token => token_string, :source_id => source, :country => file.country, :credits => file.credits)
+          token = !file.svod? ? Token.create(:customer_id => id, :imdb_id => imdb_id, :token => token_string, :is_ppv => true, :ppv_price => file.ppv_price, :source_id => source, :country => file.country, :kind => 'PPV') : Token.create(:customer_id => id, :imdb_id => imdb_id, :token => token_string, :source_id => source, :country => file.country)
           if token.id.blank?
             return {:token => nil, :error => Token.error[:query_rollback]}
           else
