@@ -251,18 +251,25 @@ module Moovies
     def token_sample
       HashWithIndifferentAccess.new.merge({
         :normal => '521b50542e6cb0.10995196',
-        :adult => '51b6f9964888b1.78963380'
+        :adult => '521c9a5fb01455.20491543'
       })
     end
     def data_sample
       HashWithIndifferentAccess.new.merge({
         :normal => {:imdb_id =>1, :product_id => 129769},
-        :adult => {:imdb_id =>2, :product_id => 127276}
+        :adult => {:imdb_id =>2, :product_id => 130546}
       })
     end
     
     def hls_url(token, audio, sub)
       "http://vod.dvdpost.be/#{token}_#{audio}_#{sub}.m3u8"
+    end
+
+    def email
+      HashWithIndifferentAccess.new.merge({
+        :message_free               => 578,
+        :welcome                    => 606,
+      })
     end
 
   end

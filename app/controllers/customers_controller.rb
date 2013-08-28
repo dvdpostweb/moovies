@@ -8,7 +8,8 @@ class CustomersController < ApplicationController
     @customer = current_customer
     @streaming_available = current_customer.get_all_tokens
     @review_count = current_customer.reviews.approved.joins(:product).where(:products => {:products_type => Moovies.product_kinds[params[:kind]], :products_status => [-2,0,1]}).count
-   
+    @classic_count = current_customer.vod_wishlists.joins(:products, :streaming_products).where("streaming_products.available = 1 and products_status != -1 and products_type = :type and country = :country", {:type => Moovies.product_kinds[:normal], :country => Product.country_short_name(session[:country_id])}).count(:imdb_id, :distinct => true)
+    @adult_count = current_customer.vod_wishlists.joins(:products, :streaming_products).where("streaming_products.available = 1 and products_status != -1 and products_type = :type and country = :country", {:type => Moovies.product_kinds[:adult], :country => Product.country_short_name(session[:country_id])}).count(:imdb_id, :distinct => true)
   end
 
   def edit
@@ -20,16 +21,17 @@ class CustomersController < ApplicationController
 
   def update
     current_customer.build_address unless current_customer.address
-    
     if params[:customer][:address_attributes]
       params[:customer][:address_attributes][:first_name] = params[:customer][:first_name]
       params[:customer][:address_attributes][:last_name] = params[:customer][:last_name]
       params[:customer][:address_attributes][:gender] = params[:customer][:gender]
       params[:customer][:address_attributes][:customers_id] = current_customer.to_param
     end
+    params[:nickname] = params[:customer][:first_name] if current_customer.nickname.nil? && !params[:customer][:first_name].nil?
     @customer = current_customer
+    
     if @customer.update_attributes(params[:customer])
-      flash[:notice] = t(:customer_modify)
+      flash[:notice] = t(:customer_modify) if current_customer.step == 100
       if current_customer.step == 31
         current_customer.update_column(:customers_registration_step, 33)
       end

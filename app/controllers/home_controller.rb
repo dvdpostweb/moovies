@@ -22,4 +22,13 @@ class HomeController < ApplicationController
     end
   end
 
+  def flag
+    if !params['mail_id'].nil?
+      histo = MailHistory.find(params['mail_id'])
+      histo.update_attributes(:mail_opened => histo.mail_opened + 1, :mail_opened_date => Time.now)
+      MessageTicket.find_by_mail_history_id(params['mail_id']).update_attributes(:is_read => 1)
+    end
+    render :text => open('app/assets/images/blank.gif', "rb").read
+  end
+
 end

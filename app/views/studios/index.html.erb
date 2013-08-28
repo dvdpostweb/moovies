@@ -1,11 +1,11 @@
 <div id="maincontent">
   <h2 class="ttl"><%= t('.studio_vod') %></h2>
   <% if params[:kind] == :adult %>
-    <%= render :partial => "/actors/menu_#{params[:kind]}" %>
+    <%= render :partial => "actors/menu_#{params[:kind]}" %>
   <% end %>
  
   <div class='center'>
-    <%= render :partial => '/studios/index/studio_pict', :collection =>  @studios %>
+    <%= render :partial => 'studios/index/studio_pict', :collection =>  @studios %>
     <div class="clearfix"></div>
   </div>
 </div>
