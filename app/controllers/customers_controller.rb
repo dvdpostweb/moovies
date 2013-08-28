@@ -21,14 +21,15 @@ class CustomersController < ApplicationController
 
   def update
     current_customer.build_address unless current_customer.address
-    
     if params[:customer][:address_attributes]
       params[:customer][:address_attributes][:first_name] = params[:customer][:first_name]
       params[:customer][:address_attributes][:last_name] = params[:customer][:last_name]
       params[:customer][:address_attributes][:gender] = params[:customer][:gender]
       params[:customer][:address_attributes][:customers_id] = current_customer.to_param
     end
+    params[:nickname] = params[:customer][:first_name] if current_customer.nickname.nil? && !params[:customer][:first_name].nil?
     @customer = current_customer
+    
     if @customer.update_attributes(params[:customer])
       flash[:notice] = t(:customer_modify) if current_customer.step == 100
       if current_customer.step == 31
