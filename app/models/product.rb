@@ -503,6 +503,11 @@ class Product < ActiveRecord::Base
       end
     end
   end
+  
+  def svod?
+    !svod_dates.svod.empty?
+  end
+  
   def self.get_product_home
     HomeProduct.destroy_all
     ['tvod', 'svod'].each do |type|

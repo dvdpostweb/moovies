@@ -27,105 +27,100 @@ class StreamingProductsController < ApplicationController
       @streaming_not_prefered = nil
     end
     
-    respond_to do |format|
-      
-      
-      format.html do
-        if @product
-          if @vod_disable == "1" || Rails.env == "pre_production"
-            if view_context.streaming_access? && current_customer.actived? && current_customer.suspended? && current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s)
-              if !@streaming_prefered.blank? || !@streaming_not_prefered.blank?
-                if @token_valid == false && @vod_create_token == "0" && Rails.env != "pre_production"
-                  error = t('streaming_products.not_available.offline')
-                  show_error(error, @code)
-                else
-                  render :action => :show
-                end
-              else
-                error = t('streaming_products.not_available.not_available')
+    if !request.xhr?
+      if @product
+        if @vod_disable == "1" || Rails.env == "pre_production"
+          if view_context.streaming_access? && current_customer.actived? && !current_customer.suspended? && current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s) && (@product.svod? || (!@product.svod? && current_customer.payable?))
+            if !@streaming_prefered.blank? || !@streaming_not_prefered.blank?
+              if @token_valid == false && @vod_create_token == "0" && Rails.env != "pre_production"
+                error = t('streaming_products.not_available.offline')
                 show_error(error, @code)
+              else
+                render :action => :show
               end
             else
-               error = t('streaming_products.no_access.no_access')
-               show_error(error, @code)
-            end  
+              error = t('streaming_products.not_available.not_available')
+              show_error(error, @code)
+            end
           else
-            error = t('streaming_products.not_available.offline')
-            show_error(error, @code)
-          end
+             error = t('streaming_products.no_access.no_access')
+             show_error(error, @code)
+          end  
         else
-          error = t('streaming_products.not_available.not_available')
+          error = t('streaming_products.not_available.offline')
           show_error(error, @code)
         end
+      else
+        error = t('streaming_products.not_available.not_available')
+        show_error(error, @code)
       end
-      format.js do
-        if view_context.streaming_access? 
+    else
+      if view_context.streaming_access? 
+        streaming_version = StreamingProduct.find_by_id(params[:streaming_product_id])
+        if (!current_customer.suspended? && !Token.dvdpost_ip?(request.remote_ip) && !current_customer.super_user? && !(/^192(.*)/.match(request.remote_ip)) && current_customer.actived? && current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s) && (@product.svod? || (!@product.svod? && current_customer.payable?)))
+          status = @token.nil? ? nil : @token.current_status(request.remote_ip)
           streaming_version = StreamingProduct.find_by_id(params[:streaming_product_id])
-          if (!current_customer.suspended? && !Token.dvdpost_ip?(request.remote_ip) && !current_customer.super_user? && !(/^192(.*)/.match(request.remote_ip)) && current_customer.actived? && current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s))
-            status = @token.nil? ? nil : @token.current_status(request.remote_ip)
-            streaming_version = StreamingProduct.find_by_id(params[:streaming_product_id])
-            if !@token || status == Token.status[:expired]
-              if current_customer
-                creation = current_customer.create_token(params[:id], @product, request.remote_ip, params[:streaming_product_id], params[:kind], params[:source])
-              else
-                creation = nil
-              end
-              if creation
-                @token = creation[:token]
-                error = creation[:error]
-              
-                if current_customer && @token
-                  #mail_id = DVDPost.email[:streaming_product]
-                  product_id = @product.id
-                  if current_customer.gender == 'm' 
-                    gender = t('mails.gender_male')
-                  else
-                    gender = t('mails.gender_female')
-                  end
-                  #to do 
-                    #movie_detail = DVDPost.mail_movie_detail(current_customer.to_param, @product.id)
-                    #vod_selection = DVDPost.mail_vod_selection(current_customer.to_param, params[:kind])
-                    #recommendation_dvd_to_dvd = DVDPost.mail_recommendation_dvd_to_dvd(current_customer.to_param, @product.id)
-                    #options = 
-                    #{
-                    #  "\\$\\$\\$customers_name\\$\\$\\$" => "#{current_customer.first_name.capitalize} #{current_customer.last_name.capitalize}",
-                    #  "\\$\\$\\$gender_simple\\$\\$\\$" => gender ,
-                    #  "\\$\\$\\$movie_details\\$\\$\\$" => movie_detail,
-                    #  "\\$\\$\\$selection_vod\\$\\$\\$" => vod_selection,
-                    #  "\\$\\$\\$date\\$\\$\\$" => Time.now.strftime('%d/%m/%Y'),
-                    #  "\\$\\$\\$recommendation_dvd_to_dvd\\$\\$\\$" => recommendation_dvd_to_dvd,
-                    #}
-                    #send_message(mail_id, options)
-                
-                end
-              end
-            end
-          else
-            if current_customer.payment_suspended?
-              error = Token.error[:user_suspended]
+          if !@token || status == Token.status[:expired]
+            if current_customer
+              creation = current_customer.create_token(params[:id], @product, request.remote_ip, params[:streaming_product_id], params[:kind], params[:source])
             else
-              error = Token.error[:user_holidays_suspended]
+              creation = nil
             end
-          end
-          if params[:subtitle_id]
-            @sub = Subtitle.find(params[:subtitle_id])
-          else
-            @sub = nil
-          end
-          if @token
-            current_customer.remove_product_from_wishlist(params[:id], request.remote_ip) if current_customer
-            StreamingViewingHistory.create(:streaming_product_id => params[:streaming_product_id], :token_id => @token.to_param, :ip => request.remote_ip)
-            Customer.send_evidence('PlayStart', @product.to_param, current_customer, request, {:responseid => params[:response_id], :segment1 => params[:source], :formFactor => view_context.format_text(@browser) , :rule => params[:source]}) if current_customer
-            render :partial => 'streaming_products/player', :locals => {:token => @token, :filename => streaming_version.filename, :source => streaming_version.source, :streaming => streaming_version, :browser => @browser }, :layout => false
-          elsif Token.dvdpost_ip?(request.remote_ip) || (current_customer && current_customer.super_user?) || (/^192(.*)/.match(request.remote_ip))
-            render :partial => 'streaming_products/player', :locals => {:token => @token, :filename => streaming_version.filename, :source => streaming_version.source, :streaming => streaming_version, :browser => @browser }, :layout => false
-            Customer.send_evidence('PlayStart', @product.to_param, current_customer, request, {:responseid => params[:response_id], :segment1 => params[:source], :formFactor => view_context.format_text(@browser) , :rule => params[:source]}) if current_customer
-          else
-            render :partial => 'streaming_products/no_player', :locals => {:token => @token, :error => error}, :layout => false
+            if creation
+              @token = creation[:token]
+              error = creation[:error]
+            
+              if current_customer && @token
+                #mail_id = DVDPost.email[:streaming_product]
+                product_id = @product.id
+                if current_customer.gender == 'm' 
+                  gender = t('mails.gender_male')
+                else
+                  gender = t('mails.gender_female')
+                end
+                #to do 
+                  #movie_detail = DVDPost.mail_movie_detail(current_customer.to_param, @product.id)
+                  #vod_selection = DVDPost.mail_vod_selection(current_customer.to_param, params[:kind])
+                  #recommendation_dvd_to_dvd = DVDPost.mail_recommendation_dvd_to_dvd(current_customer.to_param, @product.id)
+                  #options = 
+                  #{
+                  #  "\\$\\$\\$customers_name\\$\\$\\$" => "#{current_customer.first_name.capitalize} #{current_customer.last_name.capitalize}",
+                  #  "\\$\\$\\$gender_simple\\$\\$\\$" => gender ,
+                  #  "\\$\\$\\$movie_details\\$\\$\\$" => movie_detail,
+                  #  "\\$\\$\\$selection_vod\\$\\$\\$" => vod_selection,
+                  #  "\\$\\$\\$date\\$\\$\\$" => Time.now.strftime('%d/%m/%Y'),
+                  #  "\\$\\$\\$recommendation_dvd_to_dvd\\$\\$\\$" => recommendation_dvd_to_dvd,
+                  #}
+                  #send_message(mail_id, options)
+              
+              end
+            end
           end
         else
-          render :partial => 'streaming_products/no_access', :layout => false
+          if current_customer.payment_suspended?
+            error = Token.error[:user_suspended]
+          else
+            error = Token.error[:user_holidays_suspended]
+          end
         end
+        if params[:subtitle_id]
+          @sub = Subtitle.find(params[:subtitle_id])
+        else
+          @sub = nil
+        end
+        if @token
+          current_customer.remove_product_from_wishlist(params[:id], request.remote_ip) if current_customer
+          StreamingViewingHistory.create(:streaming_product_id => params[:streaming_product_id], :token_id => @token.to_param, :ip => request.remote_ip)
+          Customer.send_evidence('PlayStart', @product.to_param, current_customer, request, {:responseid => params[:response_id], :segment1 => params[:source], :formFactor => view_context.format_text(@browser) , :rule => params[:source]}) if current_customer
+          render :partial => 'streaming_products/player', :locals => {:token => @token, :filename => streaming_version.filename, :source => streaming_version.source, :streaming => streaming_version, :browser => @browser }, :layout => false
+        elsif Token.dvdpost_ip?(request.remote_ip) || (current_customer && current_customer.super_user?) || (/^192(.*)/.match(request.remote_ip))
+          render :partial => 'streaming_products/player', :locals => {:token => @token, :filename => streaming_version.filename, :source => streaming_version.source, :streaming => streaming_version, :browser => @browser }, :layout => false
+          Customer.send_evidence('PlayStart', @product.to_param, current_customer, request, {:responseid => params[:response_id], :segment1 => params[:source], :formFactor => view_context.format_text(@browser) , :rule => params[:source]}) if current_customer
+        else
+          render :partial => 'streaming_products/no_player', :locals => {:token => @token, :error => error}, :layout => false
+        end
+      else
+        render :partial => 'streaming_products/no_access', :layout => false
       end
     end
   end
