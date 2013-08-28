@@ -116,7 +116,7 @@ class Product < ActiveRecord::Base
       id = options[:kind] == :normal ? 1 : 4
       options[:package] = Moovies.packages.invert[id]
     end
-    products = Product.by_kind(options[:kind]).by_right()
+    products = Product.by_kind(options[:kind])
     products = products.exclude_products_id([exact.collect(&:products_id)]) if exact
     products = products.by_actor(options[:actor_id]) if options[:actor_id]
     products = products.by_category(options[:category_id]) if options[:category_id]

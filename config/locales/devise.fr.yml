@@ -79,13 +79,13 @@ fr:
       confirmed: 'Votre compte a été validé, vous êtes maintenant connecté'
     registrations:
       edit:
-        title: Editez
+        title: Modifiez votre mot de passe
         email: Adresse e-mail
         waiting: 'En attente de confirmation der:'
         current_pass: Mot de passe actuel
         warning_current_pass: (nous avons besoin de votre mot de passe actuel pour sauvegarder vos changements)
         warning_new_pass: (laissez vide si vous ne souhaitez pas changer)
-        pass: NNouveau mot de passe
+        pass: Nouveau mot de passe
         confirmation: Confirmez le nouveau mot de passe
         back: Retour
         update: Modifier

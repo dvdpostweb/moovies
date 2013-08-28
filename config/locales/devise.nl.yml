@@ -78,7 +78,7 @@ nl:
       confirmed: 'Uw account is geactiveerd.'
     registrations:
       edit:
-        title: Wijzig
+        title: Wijzig uw wachtwoord
         email: E-mail adres
         waiting: 'In afwachting van bevestiging van:'
         current_pass: Huidig wachtwoord

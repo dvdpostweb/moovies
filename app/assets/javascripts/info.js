@@ -1,4 +1,12 @@
 $(function() {
+  $('#form_step3').on('submit', function(){
+    if($('input[name=brand]:checked', '#form_step3').val() == undefined)
+    {
+      alert($('#alert_cc').html())
+      return false
+    }
+  })
+  
 	$('#abo .link_adult').on('click', function(){
 		$('#tab_adult').toggle()
 	})
