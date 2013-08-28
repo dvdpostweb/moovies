@@ -64,7 +64,7 @@ en:
     registrations:
       edit:
         title: Change your password
-        email: email
+        email: E-mail
         waiting: 'Currently waiting confirmation for:'
         current_pass: Current password
         warning_current_pass: (we need your current password to confirm your changes)
