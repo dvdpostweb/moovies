@@ -63,7 +63,7 @@ en:
       updated_not_active: "Your password was changed successfully."
     registrations:
       edit:
-        title: Edit
+        title: Change your password
         email: email
         waiting: 'Currently waiting confirmation for:'
         current_pass: Current password
