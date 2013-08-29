@@ -1,7 +1,10 @@
 class OgonesController < ApplicationController
   skip_before_filter  :verify_authenticity_token
   def create
+    Rails.logger.debug{ "@@@#{params[:orderID]} #{params[:orderID][0]}" }
+    
     if params[:orderID][0] != 'p'
+      Rails.logger.debug { "ici" }
       params.delete('action')
       params.delete('controller')
       params.delete('locale')
