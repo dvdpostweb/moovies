@@ -138,8 +138,8 @@
 #film-descr {float:right; width:476px;}
 #film-img-wrap {
   float: left;
-  margin: 4px 15px 0 0;
-  -moz-box-shadow: 0px 0px 4px #000000;
+ margin: 0 0 16px;
+   -moz-box-shadow: 0px 0px 4px #000000;
   -webkit-box-shadow: 0px 0px 4px #000000;
   box-shadow: 0px 0px 4px #000000;
   overflow: hidden;
@@ -391,14 +391,11 @@
 {
   width:180px;
 }
-#uninterested a:last-child
-{
-  float:right;
-}
+
 #c-members .bysort
 {
-  margin: 0 0 8px 0px;
-  padding: 0px 0 0 0;
+ margin: 0 -80px 0 0;
+   padding: 0px 0 0 0;
   float: right;
 }
 #c-members a {
@@ -412,7 +409,6 @@
 #c-members li {
   padding: 0 15px 0;
   list-style: none outside none;
-  background:#C3D1DB url(image_path('formats-bg.gif')) 0 0 repeat-x;
 }
 #c-members h2 {
   margin-bottom: 8px;
@@ -460,11 +456,11 @@
 }
 
 #c-members .numbers a {
-  background: url(image_path('chat-icon.png')) no-repeat scroll 0 0px transparent;
-  color: #1B2228;
-  float: right;
-  padding: 0px 0px 0 22px;
-  margin: 0 0 0 163px;
+    background: url("/assets/chat-icon.png") no-repeat scroll 0 0 transparent;
+    color: #1B2228;
+    float: right;
+    margin: 0 0 0 22px;
+    padding: 0 0 0 22px;
 }
 
 
@@ -499,7 +495,11 @@
   font-weight: bold;
 }
 #c-members .publish {
-  float: right; font-size: 14px; font-weight: normal; margin: 0 12px 0 0;
+    float: right;
+    font-family: arial;
+    font-size: 13px;
+    font-weight: normal;
+    margin: 0 12px 0 0;
 }
 #review_text 
 {
@@ -915,7 +915,10 @@ margin: 4px 0;
   margin: 0;
   color: #767672;
 }
-
+#critics-wrap .movie-ttl {
+        border-left: medium none;
+        border-right: medium none;
+}
 
 .genre {
   float:right;
@@ -1476,9 +1479,7 @@ text-align:center;
 }
 
 #critics-wrap {
-    border: 1px solid #C4C4C0;
     margin-top: 20px;
-    padding:10px;
 }
 
 #critics-wrap .tab a.active {
@@ -1687,4 +1688,8 @@ ul#ratings_labels li:last-child {
 #film-details .watch
 {
 	margin:4px 0;
+}
+.oters .links a:last-child, #uninterested a:last-child
+{
+  display:block;
 }
