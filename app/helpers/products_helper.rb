@@ -355,7 +355,7 @@ module ProductsHelper
 
   def streaming_audio_bublles(product, vod_next = false)
     content=''
-    bubble = vod_next ? StreamingProduct.not_yet_available.where(:imdb_id => product.imdb_id).group('language_id') : StreamingProduct.available.where(:imdb_id => product.imdb_id).group('language_id')
+    bubble = StreamingProduct.available_beta.where(:imdb_id => product.imdb_id).group('language_id')
     bubble.collect{
     |product|
       lang = product.language.by_language(I18n.locale).first
@@ -368,7 +368,7 @@ module ProductsHelper
 
   def streaming_subtitle_bublles(product, vod_next = false)
     content=''
-    bubble = vod_next ? StreamingProduct.not_yet_available.where(:imdb_id => product.imdb_id).group('subtitle_id') : StreamingProduct.available.where(:imdb_id => product.imdb_id).group('subtitle_id')
+    bubble = StreamingProduct.available_beta.where(:imdb_id => product.imdb_id).group('subtitle_id')
     bubble.collect {
     |product|
       lang = product.subtitle.by_language(I18n.locale).first
