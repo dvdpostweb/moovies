@@ -3,7 +3,7 @@
 <div id="slider-wrap">
   <div id="image_promo">
     <h1><%= t('.title').html_safe %></h1>
-    <h2><%= t '.slogan' %></h2>
+    <h2><%= t('.slogan').html_safe %></h2>
     <ul id="output">
       <li>
         <div class="caption osc">
@@ -11,9 +11,6 @@
           <h4>
             <%= carousel.description(I18n.locale) %>
           </h4>
-        </div>
-        <div id="try_it">
-          <a href="<%= path %>" class="essaigratuit osc btn"><%= carousel.link(I18n.locale) %></a>
         </div>
         <a href="<%= path %>"><%= image %></a>
       </li>

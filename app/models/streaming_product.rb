@@ -6,6 +6,7 @@ class StreamingProduct < ActiveRecord::Base
   has_many :products, :primary_key => :imdb_id, :foreign_key => :imdb_id, :limit => 1
   has_many :subtitles, :primary_key => :subtitle_id, :foreign_key => :undertitles_id
   has_many :languages, :foreign_key => :languages_id, :primary_key => :language_id
+  has_many :svod_dates, :primary_key => :imdb_id, :foreign_key => :imdb_id
   belongs_to :studio, :foreign_key => :studio_id
   scope :by_filename, lambda {|filename| where(:filename => filename)}
   scope :by_version, lambda {|language_id, subtitle_id| where(:language_id => language_id, :subtitle_id => subtitle_id)}
@@ -63,6 +64,10 @@ class StreamingProduct < ActiveRecord::Base
     end
   end
 
+  def svod?
+    !svod_dates.svod.empty?
+  end
+  
   def self.date_available(imdb_id, country_name)
     stream = StreamingProduct.country(country_name).not_yet_available.find_all_by_imdb_id(imdb_id).first
     date = stream.available_from && stream.available_from > Date.today ? stream.available_from.strftime('%d/%m/%Y') : stream.available_backcatalogue_from.strftime('%d/%m/%Y')

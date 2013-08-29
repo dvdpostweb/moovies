@@ -1,7 +1,7 @@
 <div id="step_wrap">
   <div id="step_container">
     <div class="step_form">
-      <%= form_for(:customer, :url => customer_payment_methods_path(:customer_id => current_customer.to_param), :html => { :method => :put }) do |f| %>
+      <%= form_for(:customer, :url => customer_payment_methods_path(:customer_id => current_customer.to_param), :html => { :method => :put, :id => "form_step3" }) do |f| %>
       <div class="step_3 step <%= I18n.locale %>" align="center"></div>
 
       <h3><%= t('.subscription') %></h3>
@@ -62,7 +62,7 @@
             &nbsp;
           </td>
           <td>
-            <input type="submit" name ="sent" value= "<%= t '.confirm' %>" class="promo_button" />
+            <input type="submit" name ="sent" value= "<%= t '.confirm' %>" class="promo_button step3" />
           </td>
         </tr>
       </table>
@@ -77,5 +77,6 @@
   </div>
   <%= render :partial => 'devise/registrations/faq1' %>
 </div>
-
-
+<div id='alert_cc' style="display:none">
+  <%= t('.alert_cc') %>
+</div>
