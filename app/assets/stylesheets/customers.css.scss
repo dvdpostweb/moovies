@@ -53,7 +53,7 @@
 #gauche {
   display:block;
   float:left;
-  width:485px;
+  width:435px;
   font-family:Arial, Helvetica, sans-serif;
 }
 
@@ -70,7 +70,7 @@
 #droite {
   display:block;
   float:right;
-  width:372px;
+  width:422px;
   font-family:Arial, Helvetica, sans-serif;
 }
 
@@ -339,4 +339,16 @@ a.renew{
 	font-weight:bold;
   font-family:'Open Sans Condensed', sans-serif!important;
    text-decoration: underline;
+}
+.change_pass h2
+{
+  margin-bottom: 15px;
+}  
+.change_pass input
+{
+  margin-bottom: 10px;
+}
+.change_pass a:hover
+{
+  text-decoration: none !important;
 }

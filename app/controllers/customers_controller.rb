@@ -27,7 +27,7 @@ class CustomersController < ApplicationController
       params[:customer][:address_attributes][:gender] = params[:customer][:gender]
       params[:customer][:address_attributes][:customers_id] = current_customer.to_param
     end
-    params[:nickname] = params[:customer][:first_name] if current_customer.nickname.nil? && !params[:customer][:first_name].nil?
+    params[:customer][:nickname] = params[:customer][:first_name] if current_customer.nickname.nil? && !params[:customer][:first_name].nil?
     @customer = current_customer
     
     if @customer.update_attributes(params[:customer])

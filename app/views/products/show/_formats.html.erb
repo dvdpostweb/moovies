@@ -1,3 +1,6 @@
+<% if product.get_vod(session[:country]).empty? %>
+  <%= render :partial => 'products/vod_list',  :locals => {:product => product, :source => @source, :response_id => @response_id} %>
+<% else %>
 <div id="formats">
   <h3><%= t '.format_available' %></h3>
 
@@ -21,3 +24,4 @@
     <% end %>
   </table>
 </div><!-- #formats -->
+<% end %>

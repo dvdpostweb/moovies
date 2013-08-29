@@ -36,8 +36,10 @@ class Product < ActiveRecord::Base
   has_many :uninterested_customers, :through => :uninteresteds, :source => :customer, :uniq => true
   has_many :streaming_products_be, :class_name => 'StreamingProduct', :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "streaming_products.available = 1 and streaming_products.country ='BE' and streaming_products.status in ('online_test_ok', 'soon', 'uploaded') and (streaming_products.expire_backcatalogue_at is null or streaming_products.expire_backcatalogue_at > now())"
   has_many :streaming_products_lu, :class_name => 'StreamingProduct', :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "streaming_products.available = 1 and streaming_products.country ='LU' and streaming_products.status in ('online_test_ok', 'soon', 'uploaded') and (streaming_products.expire_backcatalogue_at is null or streaming_products.expire_backcatalogue_at > now())"
+  has_many :streaming_products_nl, :class_name => 'StreamingProduct', :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "streaming_products.available = 1 and streaming_products.country ='NL' and streaming_products.status in ('online_test_ok', 'soon', 'uploaded') and (streaming_products.expire_backcatalogue_at is null or streaming_products.expire_backcatalogue_at > now())"
   has_many :vod_online_be, :class_name => 'StreamingProduct', :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "streaming_products.available = 1 and streaming_products.country ='BE' and streaming_products.status = 'online_test_ok' and ((streaming_products.available_from <= date(now()) and streaming_products.expire_at >= date(now())) or (streaming_products.available_backcatalogue_from <= date(now()) and streaming_products.expire_backcatalogue_at >= date(now())))"
   has_many :vod_online_lu, :class_name => 'StreamingProduct', :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "streaming_products.available = 1 and streaming_products.country ='lu' and streaming_products.status = 'online_test_ok' and ((streaming_products.available_from <= date(now()) and streaming_products.expire_at >= date(now())) or (streaming_products.available_backcatalogue_from <= date(now()) and streaming_products.expire_backcatalogue_at >= date(now())))"
+  has_many :vod_online_nl, :class_name => 'StreamingProduct', :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "streaming_products.available = 1 and streaming_products.country ='NL' and streaming_products.status = 'online_test_ok' and ((streaming_products.available_from <= date(now()) and streaming_products.expire_at >= date(now())) or (streaming_products.available_backcatalogue_from <= date(now()) and streaming_products.expire_backcatalogue_at >= date(now())))"
   has_many :tokens, :foreign_key => :imdb_id, :primary_key => :imdb_id
   has_many :streaming_trailers, :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "available = 1 and status = 'online_test_ok'"
   has_many :tokens_trailers, :foreign_key => :imdb_id, :primary_key => :imdb_id
@@ -87,7 +89,7 @@ class Product < ActiveRecord::Base
   sphinx_scope(:svod_soon)                {{:with =>          {:svod_start => Time.now.end_of_day..1.months.from_now}}}
   sphinx_scope(:tvod_soon)                {{:with =>          {:tvod_start => Time.now.end_of_day..1.months.from_now}}}
   sphinx_scope(:svod_last_added)          {{:with =>          {:svod_start => 1.months.ago..Time.now.end_of_day}}}
-  sphinx_scope(:tvod_last_added)          {{:with =>          {:tvod_start => 1.months.ago..Time.now.end_of_day}}}
+  sphinx_scope(:tvod_last_added)          {{:with =>          {:tvod_start => 5.months.ago..Time.now.end_of_day}}}
   sphinx_scope(:svod_last_chance)         {{:with =>          {:svod_end => Time.now.end_of_day..1.months.from_now}}}
   sphinx_scope(:tvod_last_chance)         {{:with =>          {:tvod_end => Time.now.end_of_day..1.months.from_now}}}
   sphinx_scope(:most_viewed)              {{:with =>          {:count_tokens => 1..1000000}}}
@@ -116,7 +118,7 @@ class Product < ActiveRecord::Base
       id = options[:kind] == :normal ? 1 : 4
       options[:package] = Moovies.packages.invert[id]
     end
-    products = Product.by_kind(options[:kind]).by_right()
+    products = Product.by_kind(options[:kind])
     products = products.exclude_products_id([exact.collect(&:products_id)]) if exact
     products = products.by_actor(options[:actor_id]) if options[:actor_id]
     products = products.by_category(options[:category_id]) if options[:category_id]
@@ -482,35 +484,36 @@ class Product < ActiveRecord::Base
         ''
       elsif options[:view_mode] && options[:view_mode] == 'svod_soon'
         'svod_start desc, streaming_available_at_order DESC, rating desc'
-      elsif options[:view_mode] && options[:view_mode] == 'tvod_soon'
-        'tvod_start asc, streaming_available_at_order DESC, rating desc'
-      elsif options[:view_mode] && options[:view_mode] == 'tvod_last_added'
-        'tvod_start desc, streaming_available_at_order DESC, rating desc'
-      elsif options[:view_mode] && options[:view_mode] == 'tvod_last_chance'
-        'tvod_end asc, streaming_available_at_order DESC, rating desc'
-      elsif options[:view_mode] && options[:view_mode] == 'svod_soon'
-        'svod_start asc, streaming_available_at_order DES, rating desc'
       elsif options[:view_mode] && options[:view_mode] == 'svod_last_added'
         'svod_start desc, streaming_available_at_order DESC, rating desc'
       elsif options[:view_mode] && options[:view_mode] == 'svod_last_chance'
         'svod_end asc, streaming_available_at_order DESC, rating desc'
       elsif options[:view_mode] && options[:view_mode] == 'tvod_soon'
-        'tvod_start desc, streaming_available_at_order DESC, rating desc'
+        'tvod_start asc, year DESC, rating desc'
+      elsif options[:view_mode] && options[:view_mode] == 'tvod_last_added'
+        'year DESC, rating desc'
+      elsif options[:view_mode] && options[:view_mode] == 'tvod_last_chance'
+        'tvod_end asc, year DESC, rating desc'
       elsif options[:view_mode] && options[:view_mode] == 'most_viewed'
-        'count_tokens desc, streaming_available_at_order DESC, rating desc'
+        'count_tokens desc, year DESC, rating desc'
       else
         "streaming_available_at_order DESC"
       end
     end
   end
+  
+  def svod?
+    !svod_dates.svod.empty?
+  end
+  
   def self.get_product_home
     HomeProduct.destroy_all
     ['tvod', 'svod'].each do |type|
       [1,2,3].each do |locale_id|
-        ['be'].each do |country|
+        ['nl', 'lu'].each do |country|
           package_id = type == 'svod' ? 1 : 2
-          products = Product.search(:per_page => 6, :with => { :audio_sub => locale_id, :kind => Zlib::crc32(Moovies.product_kinds[:normal]), :package_id => package_id}, :indices => ["product_#{country}_core"]).order("#{type}_start desc, streaming_available_at_order DESC, rating desc")
-          products = type == 'svod' ?  products.search(:with => {:svod_start => 6.months.ago..Time.now.end_of_day}) : products.search(:with => {:tvod_start => 6.months.ago..Time.now.end_of_day})
+          products = Product.search(:per_page => 6, :with => { :audio_sub => locale_id, :kind => Zlib::crc32(Moovies.product_kinds[:normal]), :package_id => package_id}, :indices => ["product_#{country}_core"])
+          products = type == 'svod' ?  products.search(:with => {:svod_start => 6.months.ago..Time.now.end_of_day, :studio_id => 11}).order('svod_start desc, streaming_available_at_order DESC, rating desc') : products.search(:with => {:tvod_start => 5.months.ago..Time.now.end_of_day}).order("year DESC, rating desc")
           products.each do |p|
             HomeProduct.create(:product_id => p.id, :country => country, :locale_id => locale_id, :kind => type)
           end

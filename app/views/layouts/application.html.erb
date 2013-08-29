@@ -19,7 +19,7 @@
     <% if current_customer && current_customer.suspended? %>
     <div id='p_suspended'>
       <ul id='suspended'>
-        <li><%= current_customer.suspended_notification %></li>
+        <li><%= current_customer.suspended_notification.html_safe %></li>
       </ul>
     </div>
     <% end %>

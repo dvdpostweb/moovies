@@ -23,6 +23,7 @@ Moovies::Application.routes.draw do
     resources :reviews, :only => :show do
       resource :review_rating, :only => :create
     end
+    match "messages/urgent" => "messages#urgent"
     resources :messages
     resources :tickets do
       resources :message_tickets, :only => [:create]
