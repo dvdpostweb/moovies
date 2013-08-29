@@ -20,8 +20,8 @@ set :output, './log/cron.log'
 every 1.day, :at => '0:20 am' do  
   rake "thinking_sphinx:index"  
 end
-every 1.day, :at => '0:35 am' do  
-  runner "Product.get_product_home"  
-end
+#every 1.day, :at => '0:35 am' do  
+#  runner "Product.get_product_home"  
+#end
 
 # Learn more: http://github.com/javan/whenever
