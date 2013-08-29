@@ -4,14 +4,16 @@ class OgonesController < ApplicationController
     Rails.logger.debug{ "@@@#{params[:orderID]} #{params[:orderID][0]}" }
     
     if params[:orderID][0] != 'p'
-      Rails.logger.debug { "ici" }
+      
       params.delete('action')
       params.delete('controller')
       params.delete('locale')
       params.delete('kind')
       url = URI.join('http://test', "ogone_process.php?#{params.to_query}")
       require 'net/http'
+      Rails.logger.debug { url }
       result = Net::HTTP.get(url)
+      Rails.logger.debug { "ici" }
       render :nothing => true, :status => 200, :content_type => 'text/html'
       return
     end
