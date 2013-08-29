@@ -18,6 +18,9 @@
   color: #afb7bf;
  
 }
+#critics-wrap .tab a {
+padding: 0px;
+}
 
 .tab a:hover {
   text-decoration: none;
@@ -39,9 +42,12 @@
   overflow: hidden;
   color: #1b2228;
 }
+#critics-wrap .panel-container {
+      border: 1px solid #C4C4C0;
+}
 
 #film-details .tab-container {
-  margin: 0 -20px;
+
 }
 
 #film-details .panel-container .thumb {
