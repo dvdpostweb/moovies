@@ -224,7 +224,7 @@ module Moovies
     def ogone_pspid
       HashWithIndifferentAccess.new.merge({
         :development => 'dvdpostogonetest',
-        :staging => 'dvdpost',
+        :staging => 'dvdpostogonetest',
         :production => 'dvdpost'
       })
     end
@@ -232,7 +232,7 @@ module Moovies
     def ogone_pass
       HashWithIndifferentAccess.new.merge({
         :development => 'KILLBILL1$metropolis',
-        :staging => 'KILLBILL',
+        :staging => 'KILLBILL1$metropolis',
         :production => 'KILLBILL'
       })
     end
@@ -240,7 +240,7 @@ module Moovies
     def ogone_url
       HashWithIndifferentAccess.new.merge({
         :development => 'test',
-        :staging => 'prod',
+        :staging => 'test',
         :production => 'prod'
       })
     end
