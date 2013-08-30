@@ -1,6 +1,6 @@
 <div style='height:75px;width:970px'>
-  <div class='load' style='margin: 15px 0pt; text-align: center;'><%= t '.redirection' %></div>
-  <div class='load' style='width: 32px; height: 32px; margin: 6px auto;'>
+  <div style='margin: 15px 0pt; text-align: center;'><%= t '.redirection' %></div>
+  <div style='width: 32px; height: 32px; margin: 6px auto;'>
     <%= image_tag 'loading.gif', :title => 'loading' %>
   </div></div>
 <form name="checkout_confirmation" id="checkout_confirmation" method="post" action="https://secure.ogone.com/ncol/<%= Moovies.ogone_url[Rails.env] %>/orderstandard.asp">
