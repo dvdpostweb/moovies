@@ -210,7 +210,7 @@
 #btns-wrap a#trailer {
   background-image: url(image_path('button_trailer.png'));
      background-repeat: no-repeat;
-     color: #C3C4C0;
+     color: #212A31;
      display: block;
      font-size: 14px;
      font-weight: bold;
@@ -1074,12 +1074,10 @@ margin: 4px 0;
   font-weight: bold;
   background-repeat: no-repeat;
 }
-.oters .btns .trailer
-{
-background-image: url(image_path('button_trailer.png'));
-color: #C3C4C0;
-font-size: 14px;
-
+.oters .btns .trailer {
+    background-image: url("/assets/button_trailer.png");
+    color: #212A31;
+    font-size: 14px;
 }
 
 .oters .btns input{
