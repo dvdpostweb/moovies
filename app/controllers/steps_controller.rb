@@ -17,6 +17,8 @@ class StepsController < ApplicationController
   def update
     if params[:id] == 'step3'
       current_customer.update_column(:customers_registration_step, 31)
+   if params[:id] == 'invoice'
+      current_customer.update_column(:customers_registration_step, 33)
     end
     redirect_after_registration(customer_path)
   end
