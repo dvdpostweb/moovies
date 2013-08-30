@@ -1,22 +1,6 @@
 class OgonesController < ApplicationController
   skip_before_filter  :verify_authenticity_token
   def create
-    Rails.logger.debug{ "@@@#{params[:orderID]} #{params[:orderID][0]}" }
-    
-    if params[:orderID][0] != 'p'
-      
-      params.delete('action')
-      params.delete('controller')
-      params.delete('locale')
-      params.delete('kind')
-      url = URI.join('http://test', "ogone_process.php?#{params.to_query}")
-      require 'net/http'
-      Rails.logger.debug { url }
-      result = Net::HTTP.get(url)
-      Rails.logger.debug { "ici" }
-      render :nothing => true, :status => 200, :content_type => 'text/html'
-      return
-    end
     if params[:skip]
       customer = current_customer
       if current_customer.promo_type == 'D'
