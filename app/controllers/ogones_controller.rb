@@ -1,7 +1,7 @@
 class OgonesController < ApplicationController
   skip_before_filter  :verify_authenticity_token
   def create
-    if params[:skip]
+    if params[:skip] 
       customer = current_customer
       if current_customer.promo_type == 'D'
         @promo = Discount.find(current_customer.promo_id)
@@ -11,7 +11,7 @@ class OgonesController < ApplicationController
         @promo = Activation.find(current_customer.promo_id)
         context = 'new_activation'
       end
-      if @promo.promo_price > 0
+      if @promo.promo_price > 0 && @promo.payable != 2
         return false
       end
     else
@@ -68,7 +68,12 @@ class OgonesController < ApplicationController
           customer.abo_history(abo_action, customer.next_abo_type_id)
           
       end
-      customer.update_attributes(:customers_abo => 1, :customers_registration_step => 100, :subscription_expiration_date => duration, :auto_stop => auto_stop, :customers_abo_discount_recurring_to_date => recurring)
+      if customer.samsung_codes.unvalidated.empty?
+        cust_abo = 1
+      else
+        cust_abo = 1
+      end
+      customer.update_attributes(:customers_abo => cust_abo, :customers_registration_step => 100, :subscription_expiration_date => duration, :auto_stop => auto_stop, :customers_abo_discount_recurring_to_date => recurring)
       customer.abo_history(action, customer.next_abo_type_id)
       
       if customer.gender == 'm' 
