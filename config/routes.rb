@@ -16,6 +16,8 @@ Moovies::Application.routes.draw do
       resource 'addresses', :only => [:edit, :update, :create]
       resource 'suspension', :only => [:new, :create, :destroy]
       resource 'promotion', :only => [:show, :edit]
+      resource 'images', :only => [:create]
+      
       resource :payment_methods, :only => [:edit, :update, :show]
       resources :reviews, :only => [:index]
     end

@@ -34,7 +34,7 @@ class CustomersController < ApplicationController
       flash[:notice] = t(:customer_modify) if current_customer.step == 100
       if current_customer.step == 31
         
-        current_customer.update_column(:customers_registration_step, samsung_codes.empty? 33 : 32)
+        current_customer.update_column(:customers_registration_step, current_customer.samsung_codes.unvalidated.empty? ? 33 : 32)
       end
       if request.xhr?
         render :layout => false

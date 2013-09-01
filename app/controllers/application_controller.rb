@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
           redirect_to step_path(:id => 'step2')
         end
       elsif current_customer.step.to_i == 32
-        if (params['controller'] == 'steps' && params[:id] == 'invoice') || (params[:controller] == 'invoice' && params[:action] == 'create')
+        if (params['controller'] == 'steps' && params[:id] == 'invoice') || (params[:controller] == 'images' && params[:action] == 'create')
         else
           redirect_to step_path(:id => 'invoice')
         end
