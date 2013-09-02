@@ -1,7 +1,7 @@
 <div id="step_wrap">
   <div id="step_container">
     <div class="step_form">
-      <div class="step_2 step <%= I18n.locale %>" align="center"></div>
+      <div class="step_2 step <%= I18n.locale %>"></div>
       <h3><%= t('.title') %></h3>
       <p id='invoice_description'>
         <%= t('.description').html_safe %>
@@ -12,7 +12,7 @@
         <p id ='invoice_detail'>
           <%= t('.detail', :default => 'only image or pdf') %>
         </p>
-        <p class="bouton_probleme" align="center">
+        <p class="bouton_probleme">
           <%= submit_tag t('.valid'), :class => "promo_button", :id => "bt_valid" %>
         </p>
       <% end %>
