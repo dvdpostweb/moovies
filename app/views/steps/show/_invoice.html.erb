@@ -7,7 +7,7 @@
         <%= t('.description').html_safe %>
       </p>
       <%= form_for :images, :url => customer_images_path(:customer_id => current_customer), :html => {:multipart => true} do |f| %>
-        <p align="center"><%= f.file_field :invoice, :accept => 'image/*,application/pdf' %></p>
+        <p><%= f.file_field :invoice, :accept => 'image/*,application/pdf' %></p>
         <br />
         <p class="bouton_probleme">
           <%= submit_tag t('.valid'), :class => "promo_button", :id => "bt_valid" %>
