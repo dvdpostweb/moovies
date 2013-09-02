@@ -52,7 +52,7 @@ Moovies::Application.routes.draw do
     resources :actors, :only => [:index], concerns: :productable
     resources :directors, :only => [], concerns: :productable
     resources :studios, :only => [:index], concerns: :productable
-    resources :phone_requests, :only => [:new, :create]
+    resources :phone_requests, :only => [:new, :create, :index]
     get 'faq', :to => 'messages#faq'
     match 'info/:page_name' => 'info#index', :as => :info
     resources :steps, :only => [:show, :update]
