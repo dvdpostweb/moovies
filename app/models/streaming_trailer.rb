@@ -5,7 +5,7 @@ class StreamingTrailer < ActiveRecord::Base
   scope :available, lambda { where('available = ? and status = "online_test_ok"', 1)}
   scope :available_beta, lambda {where('status != "deleted"', 1)}
   scope :prefered_audio, lambda {|language_id| where(:language_id => language_id)}
-  scope :sub_nil, lambda {|language_id| where(:subtitle_id => nil)}
+  scope :sub_nil, where(:subtitle_id => nil)
   
   scope :prefered_subtitle, lambda {|subtitle_id| where('subtitle_id = ? and language_id <> ?', subtitle_id, subtitle_id)}
   scope :not_prefered, lambda {|language_id| where("language_id != :language_id and (subtitle_id != :language_id or subtitle_id is null)", {:language_id => language_id})}
