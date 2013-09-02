@@ -1,4 +1,7 @@
 class PhoneRequestsController < ApplicationController
+  def index
+    redirect_to new_phone_request_path
+  end
   def new
     @phone_request = PhoneRequest.new
   end

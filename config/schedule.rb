@@ -8,11 +8,11 @@
 # set :output, "/path/to/my/cron_log.log"
 set :output, './log/cron.log'
 #
-# every 2.hours do
+ every 30.minutes do
 #   command "/usr/bin/some_great_command"
-#   runner "MyModel.some_method"
+   runner "Product.update_package"
 #   rake "some:great:rake:task"
-# end
+ end
 #
 # every 4.days do
 #   runner "AnotherModel.prune_old_records"

@@ -67,6 +67,7 @@ class Customer < ActiveRecord::Base
   has_many :actions, :foreign_key => :customerid, :class_name => 'Subscription'
   has_many :tokens
   has_many :suspensions
+  has_many :samsung_codes
 
   has_many :vod_wishlists
   has_many :vod_wishlists_histories

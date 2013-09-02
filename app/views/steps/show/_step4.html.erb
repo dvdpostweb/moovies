@@ -2,10 +2,15 @@
   <div id="step_wrap">
     <div class="step_form">
       <h3><%= t('.congrats') %></h3>
-      <p><%= t('.desc1') %></p>
-      <p><%= t('.desc2') %></p>
+      <% if 1==1 || current_customer.samsung_codes.unvalidated.empty? %>
+        <p><%= t('.desc1') %></p>
+        <p><%= t('.desc2') %></p>
+     <% else %>
+        <p><%= t('.desc1_samsung') %></p>
+        <p><%= t('.desc2_samsung') %></p>
+     <% end %>
       <div class="catalogue_promo"> 
-        <%= link_to t('.catalogue'), products_path(:package => Moovies.packages.invert[2]), :class => :promo_button %>
+        <%= link_to t('.catalogue'), products_path(:package => Moovies.packages.invert[1]), :class => :promo_button %>
       </div>
       <div class="vod_faq">
         <%= link_to t('.vod_faq'), root_localize_path, :class => :promo_button %>
