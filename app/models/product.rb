@@ -463,15 +463,15 @@ class Product < ActiveRecord::Base
       elsif options[:sort] == 'alpha_za'
         "descriptions_title_#{I18n.locale} desc"
       elsif options[:sort] == 'rating'
-        "rating desc, in_stock DESC"
+        "rating desc, year DESC"
       elsif options[:sort] == 'token'
         "count_tokens desc, streaming_id desc"
       elsif options[:sort] == 'token_month'
         "count_tokens_month desc, streaming_id desc"
       elsif options[:sort] == 'most_viewed'
-        "most_viewed desc"
+        "count_tokens desc"
       elsif options[:sort] == 'most_viewed_last_year'
-        "most_viewed_last_year desc"
+        "count_tokens desc"
       elsif options[:sort] == 'new'
         "streaming_available_at_order DESC, rating desc"
       else
