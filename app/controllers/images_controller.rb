@@ -1,8 +1,7 @@
 class ImagesController < ApplicationController
   
   def create
-    if params[:images] && params[:images][:invoice] && params[:images][:invoice].content_type.include?('image') ||  params[:images][:invoice].content_type.include?('pdf') 
-      
+    if params[:images] && params[:images][:invoice] && (params[:images][:invoice].content_type.include?('image') ||  params[:images][:invoice].content_type.include?('pdf'))      
       current_customer.samsung_codes.unvalidated.last.update_column(:invoice, params[:images][:invoice].read)
       current_customer.update_column(:customers_registration_step, 33)
       Emailer.invoice(current_customer).deliver
