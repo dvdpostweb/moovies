@@ -82,7 +82,7 @@ class Product < ActiveRecord::Base
   sphinx_scope(:by_ratings)               {|min, max|         {:with =>       {:rating => min..max}}}
   sphinx_scope(:by_recommended_ids)       {|recommended_ids|  {:with =>       {:id => recommended_ids}}}
   sphinx_scope(:with_languages)           {|language_ids|     {:with =>       {:language_ids => language_ids}}}
-  sphinx_scope(:with_languages)           {|language_ids|     {:with =>       {:language_ids => language_ids}}}
+  sphinx_scope(:with_subtitles)           {|sub_ids|          {:with =>       {:subtitle_ids => sub_ids}}}
   sphinx_scope(:with_speaker)             {|speaker_ids|      {:with =>       {:speaker => speaker_ids}}}
   sphinx_scope(:available)                {{:without =>       {:state => 99}}}
   sphinx_scope(:recent)                   {{:without =>       {:availability => 0}, :with => {:available_at => 2.months.ago..Time.now.end_of_day, :next => 0}}}
@@ -463,15 +463,15 @@ class Product < ActiveRecord::Base
       elsif options[:sort] == 'alpha_za'
         "descriptions_title_#{I18n.locale} desc"
       elsif options[:sort] == 'rating'
-        "rating desc, in_stock DESC"
+        "rating desc, year DESC"
       elsif options[:sort] == 'token'
         "count_tokens desc, streaming_id desc"
       elsif options[:sort] == 'token_month'
         "count_tokens_month desc, streaming_id desc"
       elsif options[:sort] == 'most_viewed'
-        "most_viewed desc"
+        "count_tokens desc"
       elsif options[:sort] == 'most_viewed_last_year'
-        "most_viewed_last_year desc"
+        "count_tokens desc"
       elsif options[:sort] == 'new'
         "streaming_available_at_order DESC, rating desc"
       else
@@ -505,7 +505,25 @@ class Product < ActiveRecord::Base
   def svod?
     !svod_dates.svod.empty?
   end
-  
+  def self.update_package
+    sql = "update products p
+    join (select if((start_on <=date(now()) and end_on >= date(now()) or (group_concat(distinct status)='uploaded') and start_on > now() and (start_on = min(available_from) or start_on = min(available_backcatalogue_from))), 1,2) package,products_id
+    from products p
+    left join `streaming_products` sp on sp.imdb_id = p.`imdb_id` and available=1 and status <> 'deleted' and status <> 'local_test_fail'
+    left join `svod_dates` s on s.imdb_id = p.imdb_id and ((start_on <= date(now()) and end_on >=now()) or (start_on > date(now())) )
+    where products_type='dvd_norm' group by p.imdb_id) sp on sp.products_id = p.products_id
+    set package_id = package;"
+    ActiveRecord::Base.connection.execute(sql)
+    sql2 = "update products p
+    join (select if((start_on <=date(now()) and end_on >= date(now()) or (group_concat(distinct status)='uploaded') and start_on > now() and (start_on = min(available_from) or start_on = min(available_backcatalogue_from))), 4,5) package,products_id
+    from products p
+    left join `streaming_products` sp on sp.imdb_id = p.`imdb_id` and available=1 and status <> 'deleted' and status <> 'local_test_fail'
+    left join `svod_dates` s on s.imdb_id = p.imdb_id and ((start_on <= date(now()) and end_on >=now()) or (start_on > date(now())) )
+    where products_type='dvd_adult' group by p.imdb_id) sp on sp.products_id = p.products_id
+    set package_id = package;"
+    ActiveRecord::Base.connection.execute(sql2)
+    
+  end
   def self.get_product_home
     HomeProduct.destroy_all
     ['tvod', 'svod'].each do |type|

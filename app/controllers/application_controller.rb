@@ -28,6 +28,11 @@ class ApplicationController < ActionController::Base
         else
           redirect_to step_path(:id => 'step2')
         end
+      elsif current_customer.step.to_i == 32
+        if (params['controller'] == 'steps' && params[:id] == 'invoice') || (params[:controller] == 'images' && params[:action] == 'create')
+        else
+          redirect_to step_path(:id => 'invoice')
+        end
       elsif current_customer.step.to_i == 33
         if (params['controller'] == 'steps' && params[:id] == 'step3') || (params[:controller] == 'ogones')
         else
