@@ -12,8 +12,9 @@
     
     <%= stylesheet_link_tag "application", :media => "all" %>
     <%= render :partial => 'layouts/google_analytics' %>
+    <%= render :partial => 'layouts/apple' %>
     <%= csrf_meta_tags %>
-    
+       
   </head>
   <body id="<%= @body_id %>" class="<%= params[:kind] %> <%= current_customer ? :private : :public %>">
     <% if current_customer && current_customer.suspended? %>
