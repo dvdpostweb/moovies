@@ -82,7 +82,7 @@ class Product < ActiveRecord::Base
   sphinx_scope(:by_ratings)               {|min, max|         {:with =>       {:rating => min..max}}}
   sphinx_scope(:by_recommended_ids)       {|recommended_ids|  {:with =>       {:id => recommended_ids}}}
   sphinx_scope(:with_languages)           {|language_ids|     {:with =>       {:language_ids => language_ids}}}
-  sphinx_scope(:with_languages)           {|language_ids|     {:with =>       {:language_ids => language_ids}}}
+  sphinx_scope(:with_subtitles)           {|sub_ids|          {:with =>       {:subtitle_ids => sub_ids}}}
   sphinx_scope(:with_speaker)             {|speaker_ids|      {:with =>       {:speaker => speaker_ids}}}
   sphinx_scope(:available)                {{:without =>       {:state => 99}}}
   sphinx_scope(:recent)                   {{:without =>       {:availability => 0}, :with => {:available_at => 2.months.ago..Time.now.end_of_day, :next => 0}}}
