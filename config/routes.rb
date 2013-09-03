@@ -68,11 +68,11 @@ Moovies::Application.routes.draw do
       match 'versions' => 'streaming_products#versions'
     end
     
-    get ':id' => "promotions#show", :as => :promotion_localize
-    post ':id' => "promotions#create", :as => :promotion_localize
+    get ':id' => "promotions#show", :as => :promotion_localize, :id => /samsung/
+    post ':id' => "promotions#create", :as => :promotion_localize, :id => /samsung/
   end
-  get ':id' => "promotions#show", defaults: { format: 'choose' }, :as => :promotion
-  post ':id' => "promotions#create", defaults: { format: 'choose' }, :as => :promotion
+  get ':id' => "promotions#show", defaults: { format: 'choose' }, :as => :promotion, :id => /smarttv|radio_contact|samsung/
+  post ':id' => "promotions#create", defaults: { format: 'choose' }, :as => :promotion, :id => /smarttv|radio_contact|samsung/
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
