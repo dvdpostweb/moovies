@@ -35,8 +35,6 @@ class Discount < ActiveRecord::Base
 
   def promo_price
     abo_price = subscription_type.product.price.to_f
-      
-
       case self.type
         #total = price - X%
         when 1

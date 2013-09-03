@@ -40,4 +40,7 @@ class Activation < ActiveRecord::Base
     eval "promo_text_#{locale}"
   end
 
+  def promo_price
+    0
+  end
 end
