@@ -3,6 +3,13 @@ class ProductsController < ApplicationController
   before_filter :find_product, :except => [:index, :drop_cached]
 
   def index
+    unless current_customer
+      if params[:kind] == :adult
+        @discount_top = Discount.find(Moovies.discount["catalogue_adult_#{I18n.locale}"])
+      else
+        @discount_top = Discount.find(Moovies.discount["catalogue_#{I18n.locale}"])
+      end
+    end
     @body_id = 'products_index'
     @filter = view_context.get_current_filter({})
     if params['actor_id']

@@ -198,6 +198,18 @@ module Moovies
        :hp_bottom_fr => 20,
        :hp_bottom_nl => 21,
        :hp_bottom_en => 22,
+       :catalogue_fr => 25,
+       :catalogue_nl => 26,
+       :catalogue_en => 27,
+       :catalogue_adult_fr =>28,
+       :catalogue_adult_nl =>29,
+       :catalogue_adult_en =>30,
+       :contact_fr => 34,
+       :contact_nl => 35,
+       :contact_en => 36,
+       :contact_adult_fr => 32,
+       :contact_adult_nl => 33,
+       :contact_adult_en => 31
       })
     end
 
