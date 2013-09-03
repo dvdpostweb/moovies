@@ -112,7 +112,7 @@ class Customer < ActiveRecord::Base
         self.group_id = @discount.group_id
       elsif @activation
         self.promo_type = 'A'
-        self.promo_id = @discount.id
+        self.promo_id = @activation.id
         self.abo_type_id = @activation.abo_type_id
         self.next_abo_type_id = @activation.next_abo_type_id
         self.group_id = @activation.group_id
