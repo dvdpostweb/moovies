@@ -1,1 +1,5 @@
-<%= render :partial => "steps/show/#{params[:id]}" %>
+<% if @step_id.nil? %>
+  <%= render :partial => "steps/show/#{params[:id]}" %>
+<% else %>
+  <%= render :partial => "steps/show/#{@step_id}" %>
+<% end %>
