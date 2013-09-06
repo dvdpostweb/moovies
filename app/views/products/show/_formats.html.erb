@@ -11,7 +11,6 @@
       <td width="145"></td>
       <td></td>
     </tr>
-    <% Rails.logger.debug { "@@@#{product.get_vod(session[:country])}" }%>
     <% product.get_vod(session[:country]).each do |vod| %>
     <tr>
       <td><%= vod.language.by_language(I18n.locale).first.name %></td>
