@@ -211,6 +211,10 @@
   text-align: center;
   width: 100%;
 }
+#prices .current .prices_bg span
+{
+  color: white;
+}
 #prices .prices_bg {
 
   float: left;
@@ -226,6 +230,9 @@
   padding: 2px 0 8px;
   text-align: center;
   width: 100%;
+}
+#prices .current .price_sec ul li:last-child {
+  border-bottom:none;
 }
 #prices .list_sec ul {
   float: left;
@@ -310,6 +317,10 @@ background-repeat: no-repeat;
   height: auto !important;
   margin-left: 10px;
   width: 144px;
+}
+#prices .basic_package.current {
+  background: #666;
+  color:#fff;
 }
 
 #prices .price_sign a.btn {

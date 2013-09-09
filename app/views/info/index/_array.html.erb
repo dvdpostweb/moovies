@@ -1,0 +1,140 @@
+<div class="main_price_table">
+  <div class="list_sec">
+    <ul>
+      <li><%= link_to t('info.index.abo.cat_svod'), products_path(:package => Moovies.packages.invert[1], :kind => nil) %></li>
+      <li><%= link_to t('info.index.abo.cat_tvod'), products_path(:package => Moovies.packages.invert[2], :kind => nil) %></li>
+      <% if @kid_visible %><li><%= link_to t('info.index.abo.cat_kid'), products_path(:package => Moovies.packages.invert[3], :kind => nil) %></li><% end %>
+      <li><%= link_to t('info.index.abo.cat_svod_adult'), products_path(:package => Moovies.packages.invert[4], :kind => :adult) %></li>
+      <li><%= link_to t('info.index.abo.cat_tvod_adult'), products_path(:package => Moovies.packages.invert[5], :kind => :adult) %></li>
+    </ul>
+  </div>
+  <div class="right_price_table">
+    <div class="basic_package<%= " current" if current_customer.subscription_type.id == 1 %>">
+      <div class="head">
+        <span class="plush">Plush</span> & <%= t('info.index.abo.tab_unlimited').html_safe %>
+      </div>
+      <div class="prices_bg">
+        <span><%= @discount_svod.subscription_type.product.price %>€<small><%= t('info.index.abo.per_month') %></small></span>
+      </div>
+      <div class="price_sec">
+        <ul>
+          <li class="green-tick"></li>
+          <li class="green-tick"></li>
+          <% if @kid_visible %><li class="red-tick"></li><% end %>
+          <li class="red-tick"></li>
+          <li class="green-tick"></li>
+        </ul>
+      </div>
+      <div class="price_sign" align="center">
+        <% if current_customer %>
+          <%= link_to t('info.index.abo.change'), subscription_path(:abo_id => 1), :method => :put, :class => "btn" unless current_customer.subscription_type.id == 1 %>
+        <% else %>
+          <%= link_to t('info.index.abo.try_now'), new_customer_registration_path(:code => @discount_svod.name), :class => "btn" %>
+        <% end %>
+        
+      </div>
+    </div>
+    <% if @kid_visible %>
+    <div class="basic_package<%= " current" if current_customer.subscription_type.id == 2 %>">
+      <div class="head">
+        <span class="plush">Plush</span> & <%= t('info.index.abo.tab_kid').html_safe %>
+      </div>
+      <div class="prices_bg">
+        <a class="val_banner" href="#"></a>
+        <span><%= @discount_kids.subscription_type.product.price %>€<small><%= t('info.index.abo.per_month') %></small></span>
+      </div>
+      <div class="price_sec color">
+        <ul>
+          <li class="green-tick"></li>
+          <li class="green-tick"></li>
+          <li class="green-tick"></li>
+          <li class="red-tick"></li>
+          <li class="green-tick"></li>
+        </ul>
+      </div>
+      <div class="price_sign" align="center">
+        <% if current_customer %>
+          <%= link_to t('info.index.abo.change'), subscription_path(:abo_id => 2), :method => :put, :class => "btn" unless current_customer.subscription_type.id == 2 %>
+        <% else %>
+          <%= link_to t('info.index.abo.try_now'), new_customer_registration_path(:code => @discount_kids.name), :class => "btn" %>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+    <div class="basic_package<%= " current" if current_customer.subscription_type.id == 5 %>">
+      <div class="head">
+        <span><%= t('info.index.abo.tab_adult_only').html_safe %></span>
+      </div>
+      <div class="prices_bg">
+        <span><%= @discount_adult.subscription_type.product.price %>€<small><%= t('info.index.abo.per_month') %></small></span>
+      </div>
+      <div class="price_sec">
+        <ul>
+          <li class="red-tick"></li>
+          <li class="red-tick"></li>
+          <% if @kid_visible %><li class="red-tick"></li><% end %>
+          <li class="green-tick"></li>
+          <li class="green-tick"></li>
+        </ul>
+      </div>
+      <div class="price_sign" align="center">
+        <% if current_customer %>
+          <%= link_to t('info.index.abo.change'), subscription_path(:abo_id => 5), :method => :put, :class => "btn" unless current_customer.subscription_type.id == 5 %>
+        <% else %>
+          <%= link_to t('info.index.abo.try_now'), new_customer_registration_path(:code => @discount_adult.name), :class => "btn" %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="basic_package<%= " current" if current_customer.subscription_type.id == 3 %>">
+      <div class="head">
+        <span class="plush">Plush</span> & <%= t('info.index.abo.tab_adult').html_safe %>
+      </div>
+      <div class="prices_bg">
+        <span><%= @discount_classic_adult.subscription_type.product.price %>€<small><%= t('info.index.abo.per_month') %></small></span>
+      </div>
+      <div class="price_sec">
+        <ul>
+          <li class="green-tick"></li>
+          <li class="green-tick"></li>
+          <% if @kid_visible %><li class="red-tick"></li><% end %>
+          <li class="green-tick"></li>
+          <li class="green-tick"></li>
+        </ul>
+      </div>
+      <div class="price_sign" align="center">
+        <% if current_customer %>
+          <%= link_to t('info.index.abo.change'), subscription_path(:abo_id => 3), :method => :put, :class => "btn" unless current_customer.subscription_type.id == 3 %>
+        <% else %>
+          <%= link_to t('info.index.abo.try_now'), new_customer_registration_path(:code => @discount_classic_adult.name), :class => "btn" %>
+        <% end %>
+      </div>
+    </div>
+    <% if @kid_visible %>
+    <div class="basic_package<%= " current" if current_customer.subscription_type.id == 4 %>">
+      <div class="head">
+        <span class="plush">Plush</span> & <%= t('info.index.abo.tab_all').html_safe %> 
+      </div>
+      <div class="prices_bg">
+        <span><%= @discount_all.subscription_type.product.price %>€<small><%= t('info.index.abo.per_month') %></small></span>
+      </div>
+      <div class="price_sec">
+        <ul>
+          <li class="green-tick"></li>
+          <li class="green-tick"></li>
+          <% if @kid_visible %><li class="green-tick"></li><% end %>
+          <li class="green-tick"></li>
+          <li class="green-tick"></li>
+        </ul>
+      </div>
+      <div class="price_sign" align="center">
+        <% if current_customer %>
+          <%= link_to t('info.index.abo.change'), subscription_path(:abo_id => 4), :method => :put, :class => "btn" unless current_customer.subscription_type.id == 4 %>
+        <% else %>
+          <%= link_to t('info.index.abo.try_now'), new_customer_registration_path(:code => @discount_all.name), :class => "btn" %>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
