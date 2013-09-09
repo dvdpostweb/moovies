@@ -47,7 +47,7 @@ Moovies::Application.routes.draw do
     concern :productable do
       resources :products, :only => :index
     end
-
+    resource :subscription, :only => [:update]
     resources :categories, :only => [:index], concerns: :productable
     resources :actors, :only => [:index], concerns: :productable
     resources :directors, :only => [], concerns: :productable

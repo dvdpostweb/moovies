@@ -42,11 +42,11 @@
           <li><h4><%= t '.explore' %></h4></li>
           <li><%= link_to t('layouts.header.home'), root_localize_path %></li>
           <li><%= link_to t('layouts.header.explore'), products_path(:package => Moovies.packages.invert[params[:kind] == :normal ? 1 : 4]) %></li>
+          <li><%= link_to t('layouts.header.price'), info_path(:page_name => 'abo') %></li>
           <% if current_customer %>
             <li><%= link_to t('layouts.header.wishlist'), vod_wishlists_path %></li>
             <li><%= link_to t('layouts.menu.contact'), messages_path %></li>
           <% else %>
-            <li><%= link_to t('layouts.header.price'), info_path(:page_name => 'abo') %></li>
             <li><%= link_to t('layouts.menu.contact'), new_phone_request_path() %></li>
           <% end %>
         </ul>

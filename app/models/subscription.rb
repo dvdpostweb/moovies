@@ -8,20 +8,13 @@ class Subscription < ActiveRecord::Base
 
   def self.action
     action = OrderedHash.new
-    action.push(:reconduction_ealier, 13)
     action.push(:abo_downgrade, 25)
-    action.push(:abo_upgrade, 24)
-    action.push(:free_upgrade, 14)
-    action.push(:add_rotation_adult, 26)
-    action.push(:add_rotation_normal, 27)
+    action.push(:abo_upgrade, 2)
     action.push(:creation_without_promo, 1)
     action.push(:creation_with_discount, 6)
     action.push(:creation_with_activation, 8)
     action.push(:free_reconduction, 17)
     action.push(:reconduction, 7)
-    action.push(:svod_adult_on, 30)
-    action.push(:svod_adult_off, 31)
-    action.push(:svod_adult_break_off, 32)
 
     action
   end
