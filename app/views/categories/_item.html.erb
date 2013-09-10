@@ -5,15 +5,12 @@
   <p>
     <%= link_to "#{item.name}", path, :class => "title" %>
   </p>
-  <% children = item.children %>
-  <% if children.count > 0 %>
+  <% children = Category.search(:order => "name_#{I18n.locale} asc", :with => {:active => 1, :parent_id => item.id, :type => Zlib::crc32(Moovies.product_kinds[params[:kind]])}, :without => {"#{@not_empty}" => 0}) %>
   <ul>
-    <% query = params[:filter] == "vod" ? children.active.movies.vod : children.active.movies %>
-    <% query.collect do |sub_item| %>
+    <% children.collect do |sub_item| %>
       <li>
         <%= link_to "#{sub_item.name}", category_products_path(:category_id => sub_item.to_param, :package => params[:package]), :class => "studios" %>
       </li>
     <% end %>
   </ul>
-  <% end %>
 </li>
