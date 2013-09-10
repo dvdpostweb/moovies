@@ -16,9 +16,9 @@ class SubscriptionsController < ApplicationController
       end
       current_customer.save(validate: false)
       current_customer.abo_history(action, params[:abo_id])
-      redirect_to info_path(:page_name => :abo)
+      redirect_to root_localize_path(), :notice => t('subscription.update.abo_success', :abo => current_customer.next_subscription_type.description )
     else
-      redirect_to info_path(:page_name => :abo), :alert => t('.error_abo')
+      redirect_to info_path(:page_name => :abo), :alert => t('subscription.update.error_abo')
     end
   end
 end
