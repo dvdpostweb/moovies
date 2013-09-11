@@ -323,7 +323,7 @@ class Customer < ActiveRecord::Base
 
   def abo_history(action, new_abo_type = 0)
     code_id = (action == 6 || action == 8) ? self.promo_id : nil
-    Subscription.create(:customer_id => self.to_param, :Action => action, :Date => Time.now().to_s(:db), :product_id => (new_abo_type.to_i > 0 ? new_abo_type : self.abo_type_id), :site => 1, :payment_method => subscription_payment_method.id, :code_id => code_id)
+    Subscription.create(:customer_id => self.to_param, :Action => action, :Date => Time.now().to_s(:db), :product_id => (new_abo_type.to_i > 0 ? new_abo_type : self.abo_type_id), :site => 1, :payment_method => subscription_payment_method.name, :code_id => code_id)
   end
 
   def is_freetest?

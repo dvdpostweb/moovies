@@ -1,13 +1,15 @@
 <div id ="prices">
 <% if current_customer %>
-  <% if current_customer.group_id == 2 || !current_customer.payable? %>
-   <h3><%= t('.only_tel').html_safe %></h3>
+  <% if !current_customer.payable? %>
+    <p><%= t('.only_tel_no_cc').html_safe %></p>
+  <% elsif current_customer.promo_id == 10 #samsung %>
+    <h3><%= t('.only_tel_samsung').html_safe %></h3>
   <% elsif current_customer.locked == 1 %>
-    <h3><%= t('.locked', :default => 'Vous avez déjà changer votre abo ce mois attendez le %{next_reconduction_at} pour changer à nouveau. <br /> Vous serez reconduit sur cet abo : %{abo}', :next_reconduction_at => current_customer.subscription_expiration_date.strftime("%d/%m/%Y"), :abo => current_customer.next_subscription_type.description ).html_safe %></h3>
+    <p><%= t('.locked', :default => 'Vous avez déjà changer votre abo ce mois attendez le %{next_reconduction_at} pour changer à nouveau. <br /> Vous serez reconduit sur cet abo : %{abo}', :next_reconduction_at => current_customer.subscription_expiration_date.strftime("%d/%m/%Y"), :abo => current_customer.next_subscription_type.description ).html_safe %></p>
   <% else %>
     <h1><%= t('.title').html_safe %></h1>
     <%= render :partial => 'info/index/array' %>
-    <%= t('.description').html_safe %>
+    <div id="abo_description"><%= t('.description').html_safe %></div>
   <% end %>
 <% else %>
   <% if params[:kind] == :normal %>
@@ -92,5 +94,5 @@
       </div>
     </div>
     </div>
-  </div>
 <% end %>
+</div>
