@@ -1,5 +1,5 @@
 class MessagesController < ApplicationController
-  before_filter :authenticate_customer!, :unless => :faq? 
+  before_filter :authenticate_customer!, :unless => :faq?
 
   def show
     @message = current_customer.tickets.find(params[:id])
