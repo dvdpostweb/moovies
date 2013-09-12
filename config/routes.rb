@@ -68,8 +68,8 @@ Moovies::Application.routes.draw do
       match 'versions' => 'streaming_products#versions'
     end
     
-    get ':id' => "promotions#show", :as => :promotion_localize, :id => /samsung/
-    post ':id' => "promotions#create", :as => :promotion_localize, :id => /samsung/
+    get ':id' => "promotions#show", :as => :promotion_localize, :id => /samsung|promotion/
+    post ':id' => "promotions#create", :as => :promotion_localize, :id => /samsung|promotion/
   end
   get ':id' => "promotions#show", defaults: { format: 'choose' }, :as => :promotion, :id => /smarttv|radio_contact|samsung/
   post ':id' => "promotions#create", defaults: { format: 'choose' }, :as => :promotion, :id => /smarttv|radio_contact|samsung/

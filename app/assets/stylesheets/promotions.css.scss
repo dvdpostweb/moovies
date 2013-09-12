@@ -42,12 +42,7 @@
   float: right;
 }
 
-#samsung_choose .choice_language {
-  background-image: url(image_path('promotions/bg_l_samsung.jpg'));
-  background-position: 0px 0px;
-  background-repeat: no-repeat;
-  height: 537px;
-}
+
 
 #header {
   background: none repeat scroll 0 0 #FFFFFF;
@@ -55,8 +50,13 @@
   position: relative;
   width: 100%;
 }
-
-
+/*****samsung */
+#samsung_choose .choice_language {
+  background-image: url(image_path('promotions/bg_l_samsung.jpg'));
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+  height: 537px;
+}
 #samsung_choose #header h2 a, #samsung #header h2 a {
   background: url(image_path('promotions/logo_samsung.jpg')) repeat scroll 0 0 transparent;
   height: 39px;
@@ -68,6 +68,34 @@
   height: 64px;
   width: 152px;
 }
+#samsung #promo_content {
+  background: url(image_path('promotions/bg_samsung.jpg')) repeat scroll 0 0 transparent;
+  height: 596px;
+  margin: 0 auto;
+  width: 970px;
+}
+
+/***********/
+/****** promotion */
+
+#promotion #promo_content {
+  background: url(image_path('promotions/fr/bg_promotions.jpg')) repeat scroll 0 0 transparent;
+  height: 722px;
+  margin: 0 auto;
+  width: 970px;
+}
+#promotion #header h2 a {
+  background: url(image_path('promotions/logo_samsung.jpg')) repeat scroll 0 0 transparent;
+  height: 39px;
+  width: 224px;
+}
+
+ #promotion #header h1 a {
+  background: url(image_path('promotions/logo_plush.png')) repeat scroll 0 -12px transparent;
+  height: 64px;
+  width: 152px;
+}
+/*****/
 #header h1 {
   float: left;
   height: 39px;
@@ -212,12 +240,7 @@ html, body{
   width: 463px;
   text-align: center;
 }
-#samsung #promo_content {
-  background: url(image_path('promotions/bg_samsung.jpg')) repeat scroll 0 0 transparent;
-  height: 596px;
-  margin: 0 auto;
-  width: 970px;
-}
+
 
 #promo_form .inputs_promo_code {
   width: 180px;
