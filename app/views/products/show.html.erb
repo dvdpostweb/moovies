@@ -76,7 +76,7 @@
       <h3>
         <%= t '.synopsis' %>
       </h3>
-      <p><%= @product_description.text.html_safe %></p>
+      <p><%= @product_description.text.to_s.html_safe %></p>
       <div id="btns-wrap" class="osc">
         <% if @trailer %>
         <%= link_to(t('.trailer'), product_trailer_path(:product_id => @product.to_param, :source => @source, :response_id => @response_id), {:class => 'trailer', :id => 'trailer', :target => :_blank}) %>

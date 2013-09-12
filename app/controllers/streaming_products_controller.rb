@@ -1,6 +1,8 @@
 class StreamingProductsController < ApplicationController
-
   def show
+    unless current_customer
+      redirect_to root_localize_path and return
+    end
     @body_id = 'streaming'
     @vod_create_token = "1"#General.find_by_CodeType('VOD_CREATE_TOKEN').value
     @vod_disable = "1" #General.find_by_CodeType('VOD_ONLINE').value
@@ -206,5 +208,4 @@ class StreamingProductsController < ApplicationController
       logger.error(e.backtrace)
     end
   end
-  
 end

@@ -28,6 +28,7 @@ class Customer < ActiveRecord::Base
   alias_attribute :promo_type,                   :activation_discount_code_type
   alias_attribute :promo_id,                     :activation_discount_code_id
   alias_attribute :step,                         :customers_registration_step
+  alias_attribute :locked,                       :customers_locked__for_reconduction
   validates_length_of :first_name, :minimum => 2, :on => :update
   validates_length_of :last_name, :minimum => 2, :on => :update
   validates_format_of :phone, :with => /^(\+)?[0-9 \-\/.]+$/, :on => :update
@@ -36,7 +37,7 @@ class Customer < ActiveRecord::Base
   validates_uniqueness_of :email, :case_sensitive => false, :on => :update
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :newsletter, :newsletter_parnter, :last_name, :first_name, :language, :address_id, :phone, :birthday, :gender, :abo_type_id, :customers_abo_type, :auto_stop, :customers_abo_auto_stop_next_reconduction, :next_abo_type_id, :customers_next_abo_type, :promo_type, :activation_discount_code_type, :promo_id, :nickname, :code, :customers_dob, :address_attributes, :step,:ogone_owner, :ogone_exp_date, :ogone_card_no, :ogone_card_type, :customers_abo_payment_method, :customers_abo, :customers_registration_step, :subscription_expiration_date, :auto_stop, :customers_abo_discount_recurring_to_date, :filter_id, :samsung, :new_email
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :newsletter, :newsletter_parnter, :last_name, :first_name, :language, :address_id, :phone, :birthday, :gender, :abo_type_id, :customers_abo_type, :auto_stop, :customers_abo_auto_stop_next_reconduction, :next_abo_type_id, :customers_next_abo_type, :promo_type, :activation_discount_code_type, :promo_id, :nickname, :code, :customers_dob, :address_attributes, :step,:ogone_owner, :ogone_exp_date, :ogone_card_no, :ogone_card_type, :customers_abo_payment_method, :customers_abo, :customers_registration_step, :subscription_expiration_date, :auto_stop, :customers_abo_discount_recurring_to_date, :filter_id, :samsung, :new_email, :customers_locked__for_reconduction
   attr_writer :code
   attr_accessor :samsung
   attr_accessor :new_email
@@ -112,7 +113,7 @@ class Customer < ActiveRecord::Base
         self.group_id = @discount.group_id
       elsif @activation
         self.promo_type = 'A'
-        self.promo_id = @discount.id
+        self.promo_id = @activation.id
         self.abo_type_id = @activation.abo_type_id
         self.next_abo_type_id = @activation.next_abo_type_id
         self.group_id = @activation.group_id
@@ -321,7 +322,8 @@ class Customer < ActiveRecord::Base
   end
 
   def abo_history(action, new_abo_type = 0)
-    Subscription.create(:customer_id => self.to_param, :Action => action, :Date => Time.now().to_s(:db), :product_id => (new_abo_type.to_i > 0 ? new_abo_type : self.abo_type_id), :site => 1, :payment_method => subscription_payment_method.name.upcase)
+    code_id = (action == 6 || action == 8) ? self.promo_id : nil
+    Subscription.create(:customer_id => self.to_param, :Action => action, :Date => Time.now().to_s(:db), :product_id => (new_abo_type.to_i > 0 ? new_abo_type : self.abo_type_id), :site => 1, :payment_method => subscription_payment_method.name, :code_id => code_id)
   end
 
   def is_freetest?

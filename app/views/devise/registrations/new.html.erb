@@ -9,7 +9,7 @@
         <% if @samsung %>
           <%= f.hidden_field(:samsung, :value => @samsung) %>
         <% else %>
-          <%= cookies[:code] ? f.hidden_field(:code, :value => cookies[:code]) : f.hidden_field(:code, :value => Moovies.discount["svod_#{I18n.locale}"]) %>
+          <%= cookies[:code] ? f.hidden_field(:code, :value => cookies[:code]) : f.hidden_field(:code, :value => @default_code) %>
         <% end %>
         <%= f.hidden_field :language, :value => Moovies.customer_languages[I18n.locale] %>
         <div class="labelstep">

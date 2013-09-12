@@ -17,7 +17,8 @@ class Customers::RegistrationsController < Devise::RegistrationsController
       elsif @activation
         cookies.permanent[:code] = code
       else
-        cookies.permanent[:code] = Moovies.discount["svod_#{I18n.locale}"]
+        @default_code = Discount.find(Moovies.discount["svod_#{I18n.locale}"]).name
+        cookies.permanent[:code] = @default_code
       end
     end
     super

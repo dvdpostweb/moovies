@@ -9,6 +9,12 @@
         <td width="250" align="right"><strong><%= t('.your_account') %>:</strong></td>
         <td align="left"><%= customer.subscription_type.description %></td>
       </tr>
+      <% if customer.subscription_type.id != customer.next_subscription_type %>
+      <tr>
+        <td width="250" align="right"><strong><%= t('.your_next_account') %>:</strong></td>
+        <td align="left"><%= customer.next_subscription_type.description %></td>
+      </tr>
+      <% end %>
       <tr>
         <td align="right" valign="top" id="modif" colspan="2">
           <ul>
