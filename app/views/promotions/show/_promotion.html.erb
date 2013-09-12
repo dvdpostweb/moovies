@@ -9,12 +9,12 @@
     <div id="promo_content">
       <h1 style="color: #212A31;"><%= t('.title') %><br/><font color="#98D321"><strong><%= t('.title_promo') %></strong></font></h1>
       <div id="promo_form">
-        <h2><%= t('promotions.show.samsung.subtitle').html_safe %></h2>
+        <h2><%= t('.subtitle').html_safe %></h2>
         <%= form_tag promotion_localize_path(:id => params[:id]), :id => 'form_step' do %>
         <div align="center">
           <span>
-           <%= t('promotions.show.samsung.serie') %>  <br />
-            <%= "<div id='error'>#{t('promotions.show.samsung.error')}</div>".html_safe if @error %>
+           <%= t('.serie') %>  <br />
+            <%= "<div id='error'>#{t('.error')}</div>".html_safe if @error %>
             <%= text_field_tag(:code, @code_samsung, :id => 'code3', :size => 20, :class => 'inputs_promo_code') %><br />
           </span>
         </div>
@@ -80,8 +80,8 @@
       </div>
       <%= form_tag promotion_localize_path(:id => params[:id]), :id => 'form_step2' do %>
       <div id="area_promo">
-        <h2><%= t('promotions.show.samsung.promo').html_safe %></h2>
-        <div align="center"><%= t('promotions.show.samsung.serie') %><br><%= "<div id='error'>#{t('promotions.show.samsung.error')}</div>".html_safe if @error %><%= text_field_tag(:code, @code_samsung, :id => 'code4', :size => 20, :class => 'inputs_promo_code') %></div>
+        <h2><%= t('.promo').html_safe %></h2>
+        <div align="center"><%= t('.serie') %><br><%= "<div id='error'>#{t('.error')}</div>".html_safe if @error %><%= text_field_tag(:code, @code_samsung, :id => 'code4', :size => 20, :class => 'inputs_promo_code') %></div>
         <p class="news_form">
           <%= check_box_tag 'marketing', 1, @checked, :class => :marketing3, :id => 'mark2' %>
           <%= t('promotions.show.samsung.accepteconditions') %>
@@ -91,7 +91,7 @@
       </div>
       <% end %>
       <p align="center"><%= image_tag "#{I18n.locale}/info_tel.jpg" %></p>
-      <div id="promo_footer"><%= t('promotions.show.samsung.conditions').html_safe %></div>
+      <div id="promo_footer"><%= t('.conditions').html_safe %></div>
       </div>
     </div>
   </div>
