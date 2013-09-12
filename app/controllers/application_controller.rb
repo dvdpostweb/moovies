@@ -5,7 +5,9 @@ class ApplicationController < ActionController::Base
   before_filter :init
   before_filter :redirect_after_registration
   before_filter :get_wishlist_source
-  before_filter :validation_adult  
+  before_filter :validation_adult
+  before_filter :authenticate, :if => :staging?
+
   layout :layout_by_resource
   
   def handle_unverified_request
@@ -109,6 +111,15 @@ class ApplicationController < ActionController::Base
   end
 
   private
+  def staging?
+    Rails.env == 'staging'
+  end
+
+  def authenticate
+    authenticate_or_request_with_http_basic('Administration') do |username, password|
+      username == 'plush' && password == 'meninblack'
+    end
+  end
 
   def extract_locale_from_accept_language_header
     request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first if request.env['HTTP_ACCEPT_LANGUAGE']

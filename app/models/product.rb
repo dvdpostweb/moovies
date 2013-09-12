@@ -333,11 +333,11 @@ class Product < ActiveRecord::Base
     name = 
     case options[:country_id] 
       when 131 
-        'lu' 
+        'lu'
       when 161 
-        'nl' 
+        'nl'
       else 
-        'be' 
+        'be'
     end
     products.search(search, :max_matches => limit, :per_page => per_page, :page => page, :indices => ["product_#{name}_core"], :sql => {:include => ["vod_online_#{name}", :director, :actors, :public, :streaming_trailers, :tokens_trailers, "descriptions_#{I18n.locale}", :svod_dates_online]})
   end

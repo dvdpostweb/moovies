@@ -60,7 +60,7 @@
  *   $(document).bind('reveal.facebox', function() { ...stuff to do after the facebox and contents are revealed... })
  *
  */
-(function($) {
+$(function() {
   $.facebox = function(data, klass) {
     $.facebox.loading()
 
@@ -74,7 +74,7 @@
   /*
    * Public, $.facebox methods
    */
-
+  close_label = $('#close_face').html()
   $.extend($.facebox, {
     settings: {
       opacity      : 0,
@@ -97,7 +97,7 @@
                 </div> \
                 <div class="footer"> \
                   <a href="#" class="close"> \
-                    CLOSE \
+                    '+close_label+' \
                   </a> \
                 </div> \
               </td> \
@@ -320,4 +320,4 @@
     })
   })
 
-})(jQuery);
+});

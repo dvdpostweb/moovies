@@ -3,6 +3,13 @@ class PhoneRequestsController < ApplicationController
     redirect_to new_phone_request_path
   end
   def new
+    unless current_customer
+      if params[:kind] == :adult
+        @discount_top = Discount.find(Moovies.discount["contact_adult_#{I18n.locale}"])
+      else
+        @discount_top = Discount.find(Moovies.discount["contact_#{I18n.locale}"])
+      end
+    end
     @phone_request = PhoneRequest.new
   end
 

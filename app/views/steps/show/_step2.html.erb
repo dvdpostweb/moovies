@@ -9,7 +9,7 @@
             <table class='step2form' cellpadding="2" cellspacing="0" border="0" align="center" width="100%">
               <tr>
                 <td colspan="3">
-                   <%= error_messages_for :customer %>
+                   <%= error_messages_for :customer, :header_message => '', :message => '' %>
                 </td>
               </tr>
               <tr>
@@ -75,7 +75,7 @@
                   <span class="explain_text"><%= t('.country') %> <span class="asterisk_step">*</span></span>
                 </td>
                 <td>
-                  <%= af.select :entry_country_id, @countries.collect{|country| [country.name, country.id]}, :class => :new_step_select %>
+                  <%= af.select :entry_country_id, @countries.collect{|country| [t(".country_#{country.id}"), country.id]}, :class => :new_step_select %>
                 </td>
                 <td align="right" class="explain_text">
                   <div id='check_country' class=""><div id="text"></div> </div>

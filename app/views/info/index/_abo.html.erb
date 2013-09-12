@@ -1,193 +1,98 @@
 <div id ="prices">
-<% if params[:kind] == :normal %>
-  <h2><%= raw t '.unlimited' %></h2>
-  <div class="abo_prices">
-    <div class="big_price">
-      <%= link_to new_customer_registration_path(:code => @discount_svod.name) do %>
-        <%= float_html(@discount_svod.promo_price) %>€ <%= t '.first_month' %>
-        <span class="normal_price"><%= t '.instead_of' %> <span class="barre-gris"><%= float_html(@discount_svod.subscription_type.product.price) %>€</span></span>
-      <% end %>
-    </div>
-    <div class="tickets"><%= t '.unlimited_text'.html_safe %></div>
-    <div class="subscribe" align="center"><%= link_to t('.try_now'), new_customer_registration_path(:code => @discount_svod.name), :class => "btn" %></div>
-  </div>
-  <div class="abo_infos">
-    <h3><%= t('.discover_unlimited').html_safe %></h3>
-    <ul>
-      <li><strong><%= t('.discover_unlimited_desc1') %></strong></li>
-      <li><%= t('.discover_unlimited_desc2') %></li>
-      <li><%= t('.discover_unlimited_desc3') %></li>
-    </ul>
-    <div class="price_slogan"><%= t('.price_slogan').html_safe %></div>
-  </div>
-  <div class="clearfix"></div>
-  <% if @kid_visible %>
-  <h2><%= raw t('.kid') %></h2>
-  <div class="abo_prices">
-    <div class="big_price kid">
-      <%= link_to new_customer_registration_path(:code => @discount_kids.name) do %>
-        <%= float_html(@discount_kids.promo_price) %>€ <%= t '.first_month' %>
-        <span class="normal_price"><%= t '.instead_of' %> <span class="barre-gris"><%= float_html(@discount_kids.subscription_type.product.price) %>€</span></span>
-      <% end %>
-    </div>
-
-    <div class="kids_dvd"><%= t '.kid_text'.html_safe %></div>
-    <div class="subscribe" align="center"><%= link_to t('.try_now'), new_customer_registration_path(:code => @discount_kids.name), :class => "btn" %></div>
-  </div>
-  <div class="abo_infos">
-    <h3><%= raw t '.discover_kid' %></h3>
-    <ul>
-      <li><strong><%= t('.discover_unlimited_desc1') %></strong></li>
-      <li><%= t('.discover_unlimited_desc2') %></li>
-      <li><%= t('.discover_unlimited_desc3') %></li>
-      <li><span class="kid"><%= t('.discover_kid_desc') %></span></li>
-    </ul>
-    <div class="price_slogan"><%= t('.price_slogan').html_safe %></div>
-  </div>
+<% if current_customer %>
+  <% if !current_customer.payable? %>
+    <p><%= t('.only_tel_no_cc').html_safe %></p>
+  <% elsif current_customer.promo_id == 10 #samsung %>
+    <h3><%= t('.only_tel_samsung').html_safe %></h3>
+  <% elsif current_customer.locked == 1 %>
+    <p><%= t('.locked', :default => 'Vous avez déjà changer votre abo ce mois attendez le %{next_reconduction_at} pour changer à nouveau. <br /> Vous serez reconduit sur cet abo : %{abo}', :next_reconduction_at => current_customer.subscription_expiration_date.strftime("%d/%m/%Y"), :abo => current_customer.next_subscription_type.description ).html_safe %></p>
+  <% else %>
+    <h1><%= t('.title').html_safe %></h1>
+    <%= render :partial => 'info/index/array' %>
+    <div id="abo_description"><%= t('.description').html_safe %></div>
   <% end %>
-  <div class="clearfix"></div>
-  <p class="link_adult"><%= t('.show_adult') %></p>
-<% end %>
-  <div id="tab_adult" style="display:<%= params[:kind] == :normal ? 'none' : 'block' %>">
-    <h2><%= raw t('.adult') %></h2>
-    <div id="adult">
+<% else %>
+  <% if params[:kind] == :normal %>
+    <h2><%= raw t '.unlimited' %></h2>
     <div class="abo_prices">
       <div class="big_price">
-        <%= link_to new_customer_registration_path(:code => @discount_adult.name) do %>
-          <%= float_html(@discount_adult.promo_price) %>€ <%= t '.first_month' %>
-          <span class="normal_price"><%= t '.instead_of' %> <span class="barre-gris"><%= float_html(@discount_adult.subscription_type.product.price) %>€</span></span>
+        <%= link_to new_customer_registration_path(:code => @discount_svod.name) do %>
+          <%= float_html(@discount_svod.promo_price) %>€ <%= t '.first_month' %>
+          <span class="normal_price"><%= t '.instead_of' %> <span class="barre-gris"><%= float_html(@discount_svod.subscription_type.product.price) %>€</span></span>
         <% end %>
       </div>
-      <div class="adult_dvd"><%= t('.adult_text') %></div>
-      <div class="subscribe" align="center"><%= link_to t('.try_now'), new_customer_registration_path(:code => @discount_adult.name), :class => "btn" %></div>
+      <div class="tickets"><%= t '.unlimited_text'.html_safe %></div>
+      <div class="subscribe" align="center"><%= link_to t('.try_now'), new_customer_registration_path(:code => @discount_svod.name), :class => "btn" %></div>
     </div>
     <div class="abo_infos">
-      <h3><%= raw t('.discover_adult') %></h3>
+      <h3><%= t('.discover_unlimited').html_safe %></h3>
       <ul>
-        <li><strong><%= t('.discover_adult_desc1') %></strong></li>
-        <li><%= t('.discover_adult_desc2') %></li>
-        <li><%= t('.discover_adult_desc3') %></li>
+        <li><strong><%= t('.discover_unlimited_desc1') %></strong></li>
+        <li><%= t('.discover_unlimited_desc2') %></li>
+        <li><%= t('.discover_unlimited_desc3') %></li>
       </ul>
       <div class="price_slogan"><%= t('.price_slogan').html_safe %></div>
     </div>
-  </div>
-  
-    <div id="package_container">
-    <div class="main_pack_sec">
-      <div class="pack_head">
-        <h2><%= t('.more') %></h2>
+    <div class="clearfix"></div>
+    <% if @kid_visible %>
+    <h2><%= raw t('.kid') %></h2>
+    <div class="abo_prices">
+      <div class="big_price kid">
+        <%= link_to new_customer_registration_path(:code => @discount_kids.name) do %>
+          <%= float_html(@discount_kids.promo_price) %>€ <%= t '.first_month' %>
+          <span class="normal_price"><%= t '.instead_of' %> <span class="barre-gris"><%= float_html(@discount_kids.subscription_type.product.price) %>€</span></span>
+        <% end %>
       </div>
-      <div class="main_price_table">
-        <div class="list_sec">
-          <ul>
-            <li><%= link_to t('.cat_svod'), products_path(:package => Moovies.packages.invert[1], :kind => nil) %></li>
-            <li><%= link_to t('.cat_tvod'), products_path(:package => Moovies.packages.invert[2], :kind => nil) %></li>
-            <% if @kid_visible %><li><%= link_to t('.cat_kid'), products_path(:package => Moovies.packages.invert[3], :kind => nil) %></li> <% end %>
-            <li><%= link_to t('.cat_svod_adult'), products_path(:package => Moovies.packages.invert[4], :kind => :adult) %></li>
-            <li><%= link_to t('.cat_tvod_adult'), products_path(:package => Moovies.packages.invert[5], :kind => :adult) %></li>
-          </ul>
-        </div>
-        <div class="right_price_table">
-          <div class="basic_package">
-            <div class="head">
-              <span class="plush">Plush</span> & <%= t('.tab_unlimited').html_safe %>
-            </div>
-            <div class="prices_bg">
-              <span><%= @discount_svod.subscription_type.product.price %>€<small><%= t('.per_month') %></small></span>
-            </div>
-            <div class="price_sec">
-              <ul>
-                <li class="green-tick"></li>
-                <li class="green-tick"></li>
-                <% if @kid_visible %><li class="red-tick"></li><% end %>
-                <li class="red-tick"></li>
-                <li class="green-tick"></li>
-              </ul>
-            </div>
-            <div class="price_sign" align="center"><%= link_to t('.try_now'), new_customer_registration_path(:code => @discount_svod.name), :class => "btn" %></div>
-          </div>
-          <% if @kid_visible %>
-          <div class="basic_package">
-            <div class="head">
-              <span class="plush">Plush</span> & <%= t('.tab_kid').html_safe %>
-            </div>
-            <div class="prices_bg">
-              <a class="val_banner" href="#"></a>
-              <span><%= @discount_kids.subscription_type.product.price %>€<small><%= t('.per_month') %></small></span>
-            </div>
-            <div class="price_sec color">
-              <ul>
-                <li class="green-tick"></li>
-                <li class="green-tick"></li>
-                <li class="green-tick"></li>
-                <li class="red-tick"></li>
-                <li class="green-tick"></li>
-              </ul>
-            </div>
-            <div class="price_sign" align="center"><%= link_to t('.try_now'), new_customer_registration_path(:code => @discount_kids.name), :class => "btn" %></div>
-          </div>
-          <% end %>
-          <div class="basic_package">
-            <div class="head">
-              <span><%= t('.tab_adult_only').html_safe %></span>
-            </div>
-            <div class="prices_bg">
-              <span><%= @discount_adult.subscription_type.product.price %>€<small><%= t('.per_month') %></small></span>
-            </div>
-            <div class="price_sec">
-              <ul>
-                <li class="red-tick"></li>
-                <li class="red-tick"></li>
-                <% if @kid_visible %><li class="red-tick"></li><% end %>
-                <li class="green-tick"></li>
-                <li class="green-tick"></li>
-              </ul>
-            </div>
-            <div class="price_sign" align="center"><%= link_to t('.try_now'), new_customer_registration_path(:code => @discount_adult.name), :class => "btn" %></div>
-          </div>
 
-          <div class="basic_package">
-            <div class="head">
-              <span class="plush">Plush</span> & <%= t('.tab_adult').html_safe %>
-            </div>
-            <div class="prices_bg">
-              <span><%= @discount_classic_adult.subscription_type.product.price %>€<small><%= t('.per_month') %></small></span>
-            </div>
-            <div class="price_sec">
-              <ul>
-                <li class="green-tick"></li>
-                <li class="green-tick"></li>
-                <% if @kid_visible %><li class="red-tick"></li><% end %>
-                <li class="green-tick"></li>
-                <li class="green-tick"></li>
-              </ul>
-            </div>
-            <div class="price_sign" align="center"><%= link_to t('.try_now'), new_customer_registration_path(:code => @discount_classic_adult.name), :class => "btn" %></div>
-          </div>
-          <% if @kid_visible %>
-          <div class="basic_package">
-            <div class="head">
-              <span class="plush">Plush</span> & <%= t('.tab_all').html_safe %> 
-            </div>
-            <div class="prices_bg">
-              <span><%= @discount_all.subscription_type.product.price %>€<small><%= t('.per_month') %></small></span>
-            </div>
-            <div class="price_sec">
-              <ul>
-                <li class="green-tick"></li>
-                <li class="green-tick"></li>
-                <% if @kid_visible %><li class="green-tick"></li><% end %>
-                <li class="green-tick"></li>
-                <li class="green-tick"></li>
-              </ul>
-            </div>
-            <div class="price_sign" align="center"><%= link_to t('.try_now'), new_customer_registration_path(:code => @discount_all.name), :class => "btn" %></a>
-            </div>
-          </div>
+      <div class="kids_dvd"><%= t '.kid_text'.html_safe %></div>
+      <div class="subscribe" align="center"><%= link_to t('.try_now'), new_customer_registration_path(:code => @discount_kids.name), :class => "btn" %></div>
+    </div>
+    <div class="abo_infos">
+      <h3><%= raw t '.discover_kid' %></h3>
+      <ul>
+        <li><strong><%= t('.discover_unlimited_desc1') %></strong></li>
+        <li><%= t('.discover_unlimited_desc2') %></li>
+        <li><%= t('.discover_unlimited_desc3') %></li>
+        <li><span class="kid"><%= t('.discover_kid_desc') %></span></li>
+      </ul>
+      <div class="price_slogan"><%= t('.price_slogan').html_safe %></div>
+    </div>
+    <% end %>
+    <div class="clearfix"></div>
+    <p class="link_adult"><%= t('.show_adult') %></p>
+  <% end %>
+    <div id="tab_adult" style="display:<%= params[:kind] == :normal ? 'none' : 'block' %>">
+      <h2><%= raw t('.adult') %></h2>
+      <div id="adult">
+      <div class="abo_prices">
+        <div class="big_price">
+          <%= link_to new_customer_registration_path(:code => @discount_adult.name) do %>
+            <%= float_html(@discount_adult.promo_price) %>€ <%= t '.first_month' %>
+            <span class="normal_price"><%= t '.instead_of' %> <span class="barre-gris"><%= float_html(@discount_adult.subscription_type.product.price) %>€</span></span>
           <% end %>
         </div>
+        <div class="adult_dvd"><%= t('.adult_text') %></div>
+        <div class="subscribe" align="center"><%= link_to t('.try_now'), new_customer_registration_path(:code => @discount_adult.name), :class => "btn" %></div>
+      </div>
+      <div class="abo_infos">
+        <h3><%= raw t('.discover_adult') %></h3>
+        <ul>
+          <li><strong><%= t('.discover_adult_desc1') %></strong></li>
+          <li><%= t('.discover_adult_desc2') %></li>
+          <li><%= t('.discover_adult_desc3') %></li>
+        </ul>
+        <div class="price_slogan"><%= t('.price_slogan').html_safe %></div>
       </div>
     </div>
-  </div>
-  </div>
+  
+      <div id="package_container">
+      <div class="main_pack_sec">
+        <div class="pack_head">
+          <h2><%= t('.more') %></h2>
+        </div>
+        <%= render :partial => 'info/index/array' %>
+      </div>
+    </div>
+    </div>
+<% end %>
 </div>
