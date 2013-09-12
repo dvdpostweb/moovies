@@ -927,7 +927,7 @@ margin: 4px 0;
 }
 .movie-ttl h3 {
   float: left;
-  width: 320px;
+  width: 520px;
   padding-right: 7px;
   font-size: 20px;
 }
@@ -1399,7 +1399,25 @@ text-align:center;
   clear:both;
   padding:10px
 }
+.movie-descr .hd {
+    background: url(image_path('icon_hd.png')) no-repeat scroll 0 0 transparent;
+    display: block;
+    height: 26px;
+    left: 54px;
+    position: absolute;
+    top: 126px;
+    width: 48px;
+}
 
+#film-info #film-img-wrap .hd {
+    background: url(image_path('icon_hd.png')) no-repeat scroll 0 0 transparent;
+    display: block;
+    height: 26px;
+    left: 114px;
+    position: absolute;
+    top: 217px;
+    width: 48px;
+}
 
 .linkallversions {
   background-color: white;
