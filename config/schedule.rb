@@ -20,6 +20,19 @@ set :output, './log/cron.log'
 every 1.day, :at => '0:20 am' do  
   rake "thinking_sphinx:index"  
 end
+every 1.day, :at => '11:20 am' do  
+  rake "thinking_sphinx:index"  
+end
+every 1.day, :at => '5:20 pm' do  
+  rake "thinking_sphinx:index"  
+end
+
+every '* 8,9,10,11,12,13,14,15,16,17,18 * * 1,2,3,4,5' do
+  Product.update_plush
+end
+every 1.day, :at => '0:05 am' do
+  Product.update_plush
+end
 #every 1.day, :at => '0:35 am' do  
 #  runner "Product.get_product_home"  
 #end
