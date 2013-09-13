@@ -539,4 +539,8 @@ class Product < ActiveRecord::Base
       end
     end
   end
+
+  def self.update_plush
+    ActiveRecord::Base.connection.execute('call sp_plush_update();')
+  end
 end

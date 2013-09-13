@@ -7,7 +7,7 @@
   </div>
   <div class="container clearfix">
     <div id="promo_content">
-      <h1 style="color: #212A31;"><%= t('.title') %><br/><font color="#98D321"><strong><%= t('.title_promo') %></strong></font></h1>
+      <h1 style="color: #212A31;"><%= t('.title') %><br/><strong><%= t('.title_promo') %></strong></h1>
       <div id="promo_form">
         <h2><%= t('.subtitle').html_safe %></h2>
         <%= form_tag promotion_localize_path(:id => params[:id]), :id => 'form_step' do %>
@@ -81,7 +81,7 @@
       <%= form_tag promotion_localize_path(:id => params[:id]), :id => 'form_step2' do %>
       <div id="area_promo">
         <h2><%= t('.promo').html_safe %></h2>
-        <div align="center"><%= t('.serie') %><br><%= "<div id='error'>#{t('.error')}</div>".html_safe if @error %><%= text_field_tag(:code, @code_samsung, :id => 'code4', :size => 20, :class => 'inputs_promo_code') %></div>
+        <div align="center" class='form_explain'><%= t('.serie') %><br><%= "<div id='error'>#{t('.error')}</div>".html_safe if @error %><%= text_field_tag(:code, @code_samsung, :id => 'code4', :size => 20, :class => 'inputs_promo_code') %></div>
         <p class="news_form">
           <%= check_box_tag 'marketing', 1, @checked, :class => :marketing3, :id => 'mark2' %>
           <%= t('promotions.show.samsung.accepteconditions') %>
