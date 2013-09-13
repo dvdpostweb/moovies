@@ -9,7 +9,7 @@
     <div id="promo_content">
       <h1 style="color: #212A31;"><%= t('.title') %><br/><strong><%= t('.title_promo') %></strong></h1>
       <div id="promo_form">
-        <h2><%= t('.subtitle').html_safe %></h2>
+        <h2><%= t('promotions.show.samsung.subtitle').html_safe %></h2>
         <%= form_tag promotion_localize_path(:id => params[:id]), :id => 'form_step' do %>
         <div align="center">
           <span>
