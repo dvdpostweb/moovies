@@ -1,8 +1,7 @@
 class Review < ActiveRecord::Base
+  establish_connection "common_#{Rails.env}"
   cattr_reader :per_page
   @@per_page = 3
-
-  self.primary_key = :reviews_id
 
   attr_accessible :customers_id, :customers_name, :products_id, :languages_id, :rating, :text
   alias_attribute :created_at,    :date_added
@@ -23,9 +22,9 @@ class Review < ActiveRecord::Base
 
   belongs_to :customer, :foreign_key => :customers_id
   
-  belongs_to :product, :foreign_key => :products_id
+  belongs_to :product, :foreign_key => :imdb_id, :primary_key => :imdb_id
 
-  has_many :review_ratings, :foreign_key => :reviews_id
+  has_many :review_ratings, :primary_key => :reviews_id
 
   scope :ordered, lambda {|sorted| {:order => sorted}}
   scope :approved, where(:reviews_check => true)

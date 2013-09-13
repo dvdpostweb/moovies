@@ -2,7 +2,8 @@ class Product < ActiveRecord::Base
   include ThinkingSphinx::Scopes
   cattr_reader :per_page
   self.primary_key = :products_id
-  
+  self.table_name_prefix = "#{Rails.configuration.database_configuration["#{Rails.env}"]['database']}."
+
   alias_attribute :availability,    :products_availability
   alias_attribute :available_at,    :products_date_available
   alias_attribute :created_at,      :products_date_added
@@ -31,7 +32,7 @@ class Product < ActiveRecord::Base
   has_many :descriptions_nl, :class_name => 'ProductDescription', :foreign_key => :products_id, :conditions => {:language_id => 2}
   has_many :descriptions_en, :class_name => 'ProductDescription', :foreign_key => :products_id, :conditions => {:language_id => 3}
   has_many :ratings, :foreign_key => :products_id
-  has_many :reviews, :foreign_key => :products_id
+  has_many :reviews, :foreign_key => :imdb_id, :primary_key => :imdb_id
   has_many :uninteresteds, :foreign_key => :products_id
   has_many :uninterested_customers, :through => :uninteresteds, :source => :customer, :uniq => true
   has_many :streaming_products_be, :class_name => 'StreamingProduct', :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "streaming_products.available = 1 and streaming_products.country ='BE' and streaming_products.status in ('online_test_ok', 'soon', 'uploaded') and (streaming_products.expire_backcatalogue_at is null or streaming_products.expire_backcatalogue_at > now())"

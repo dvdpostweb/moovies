@@ -16,6 +16,14 @@ development:
   password: 3gallfir-
   host: matadi
   port: 3306
+common_development:
+  adapter: mysql2
+  encoding: utf8
+  database: common_staging
+  username: webuser
+  password: 3gallfir-
+  host: matadi
+  port: 3306
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
