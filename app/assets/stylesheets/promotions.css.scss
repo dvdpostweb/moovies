@@ -334,6 +334,8 @@ h1, h2, h3, h4, h5 {
   line-height: 33px;
   padding-top: 10px;
   text-align: center;
+     font-weight: bold;
+       padding-bottom: 20px;
 }
 
 #area_promo p {
@@ -346,6 +348,7 @@ h1, h2, h3, h4, h5 {
   background: url(image_path('promotions/tab-content-bg.png')) repeat-x scroll 0 0 transparent;
   height: 306px;
   margin: 30px 14px 19px;
+      font-size: 18px;
 }
 
 #promo_footer {
