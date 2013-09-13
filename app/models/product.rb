@@ -497,7 +497,7 @@ class Product < ActiveRecord::Base
       elsif options[:view_mode] && options[:view_mode] == 'most_viewed'
         'count_tokens desc, year DESC, rating desc'
       else
-        "streaming_available_at_order DESC"
+        "count_tokens desc"
       end
     end
   end

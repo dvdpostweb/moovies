@@ -31,7 +31,7 @@ class PromotionsController < ApplicationController
   end
   private
   def get_data
-    params[:id] = 'smarttv' if params[:id] == 'radio_contact'
+    params[:id] = 'smarttv' if params[:id] == 'radio_contact' ||  params[:id] == 'nostalgie'
     
     @partial = params[:id]
     @partial += "_#{params[:format]}" if params[:format]
