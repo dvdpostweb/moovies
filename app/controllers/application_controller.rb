@@ -1,11 +1,11 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   helper :all
-  before_filter :set_locale
-  before_filter :init
-  before_filter :redirect_after_registration
-  before_filter :get_wishlist_source
-  before_filter :validation_adult
+  before_filter :set_locale, :unless => :flag?
+  before_filter :init, :unless => :flag? 
+  before_filter :redirect_after_registration, :unless => :flag?
+  before_filter :get_wishlist_source, :unless => :flag?
+  before_filter :validation_adult, :unless => :flag?
   before_filter :authenticate, :if => :staging?
 
   layout :layout_by_resource
@@ -113,6 +113,10 @@ class ApplicationController < ActionController::Base
   private
   def staging?
     Rails.env == 'staging'
+  end
+
+  def flag?
+    params[:action] == 'flag'
   end
 
   def authenticate

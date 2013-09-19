@@ -37,6 +37,12 @@ class PromotionsController < ApplicationController
     @partial += "_#{params[:format]}" if params[:format]
     @body_id = @partial
     @code_samsung = t('promotions.show.samsung.default')
-    @code_samsung = '' if params[:id] == 'promotion'
+    if params[:id] == 'promotion'
+      if params[:code]
+        @code_samsung = params[:code]
+      else
+        @code_samsung = ''
+      end
+    end
   end
 end
