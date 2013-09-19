@@ -90,7 +90,7 @@ class OgonesController < ApplicationController
         "\\$\\$\\$subscription\\$\\$\\$" => customer.subscription_type.description,
         "\\$\\$\\$root_url\\$\\$\\$" => root_url(:locale => nil)
         }
-      view_context.send_message(Moovies.email[:welcome], options, customer)
+      view_context.send_message(Moovies.email[:welcome], options, params[:locale], customer)
       #to do 
       #sponsor = Sponsorship.find_by_son_id(customer.to_param)
       #unless sponsor
