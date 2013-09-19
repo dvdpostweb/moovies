@@ -2,8 +2,8 @@ class StreamingTrailer < ActiveRecord::Base
   has_many :subtitles, :foreign_key => :undertitles_id, :primary_key => :subtitle_id
   has_many :languages, :foreign_key => :languages_id, :primary_key => :language_id
   has_one :tokens_trailer, :foreign_key => :filename, :primary_key => :filename
-  scope :available, lambda { where('available = ? and status = "online_test_ok"', 1)}
-  scope :available_beta, lambda {where('status != "deleted"', 1)}
+  scope :available, lambda { where('streaming_trailers.available = ? and streaming_trailers.status = "online_test_ok"', 1)}
+  scope :available_beta, lambda {where('streaming_trailers.status != "deleted"', 1)}
   scope :prefered_audio, lambda {|language_id| where(:language_id => language_id)}
   scope :sub_nil, where(:subtitle_id => nil)
   
