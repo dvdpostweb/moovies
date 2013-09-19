@@ -1,11 +1,11 @@
 module ApplicationHelper
 
-  def send_message(mail_id, options, customer_default = nil)
+  def send_message(mail_id, options, locale, customer_default = nil)
     customer = customer_default ? customer_default : current_customer
-    mail_object = Email.by_language(I18n.locale).find(mail_id)
+    mail_object = Email.by_language(locale).find(mail_id)
     recipient = customer
     if 1==1 || mail_object.force_copy
-      mail_history= MailHistory.create(:date => Time.now().to_s(:db), :customers_id => customer.to_param, :mail_messages_id => mail_id, :language_id => Moovies.customer_languages[I18n.locale], :customers_email_address=> customer.email)
+      mail_history= MailHistory.create(:date => Time.now().to_s(:db), :customers_id => customer.to_param, :mail_messages_id => mail_id, :language_id => Moovies.customer_languages[locale], :customers_email_address=> customer.email)
       options["\\$\\$\\$mail_messages_sent_history_id\\$\\$\\$"] = mail_history.to_param
     else
       options["\\$\\$\\$mail_messages_sent_history_id\\$\\$\\$"] = 0
