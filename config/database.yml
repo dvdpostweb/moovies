@@ -35,6 +35,14 @@ staging:
   password: 3gallfir-
   host: 192.168.100.204
   port: 3306
+common_staging:
+  adapter: mysql2
+  encoding: utf8
+  database: common_staging
+  username: webuser
+  password: 3gallfir-
+  host: matadi
+  port: 3306
 test:
   adapter: mysql2
   encoding: utf8
@@ -44,6 +52,14 @@ test:
   username: root
   password: matrix
   host: localhost
+common_test:
+  adapter: mysql2
+  encoding: utf8
+  database: common_staging
+  username: webuser
+  password: 3gallfir-
+  host: matadi
+  port: 3306
 
 production:
   adapter: mysql2
@@ -54,3 +70,11 @@ production:
   username: webuser
   password: 3gallfir-
   host: 192.168.100.204
+common_production:
+  adapter: mysql2
+  encoding: utf8
+  database: common_production
+  username: webuser
+  password: 3gallfir-
+  host: matadi
+  port: 3306
