@@ -1,6 +1,7 @@
 class InfoController < ApplicationController
   def index
     @body_id = params[:page_name]
+    params[:page_name] = 'abo' if params[:page_name] == 'price' 
     if params[:page_name] == 'abo'
       @discount_svod = Discount.find(Moovies.discount["svod_#{I18n.locale}"])
       @discount_kids = Discount.find(Moovies.discount["kid_#{I18n.locale}"])
