@@ -3,7 +3,7 @@ class Review < ActiveRecord::Base
   cattr_reader :per_page
   @@per_page = 3
 
-  attr_accessible :customers_id, :customers_name, :products_id, :languages_id, :rating, :text
+  attr_accessible :customers_id, :customers_name, :imdb_id, :languages_id, :rating, :text, :source
   alias_attribute :created_at,    :date_added
   alias_attribute :text,          :reviews_text
   alias_attribute :rating,        :reviews_rating
@@ -14,7 +14,7 @@ class Review < ActiveRecord::Base
   before_create :set_created_at
   before_validation :set_defaults
 
-  validates_presence_of :products_id
+  validates_presence_of :imdb_id
   validates_presence_of :customers_id
   validates_presence_of :text
   validates_presence_of :customers_name

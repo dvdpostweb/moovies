@@ -1,6 +1,10 @@
 <div class="movie-ttl">
   	<h3>
+  	  <% if review.source == 'PLUSH' %>
         <a href="<%= customer_reviews_path(:customer_id => review.customers_id) %>"><%= review.customers_name %></a>
+      <% else %>
+        <%= review.customers_name %>
+      <% end %>
       <span class="publish">
         <%= "#{t '.published_on'} #{review.created_at.strftime("%d/%m/%Y")}" %>
       </span>
@@ -17,7 +21,7 @@
     </div>
     <p> 
       <strong><%= t '.critic' %> :</strong> 
-      <%= review.text %>
+      <%= review.text.html_safe %>
     </p>
     <div class="relevant">
       <%= render :partial => 'reviews/index/critics_new', :locals => {:review => review} %>
