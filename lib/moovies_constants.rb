@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 module Moovies
   class << self
     def images_path
@@ -62,14 +64,22 @@ module Moovies
 
     def fb_url
       HashWithIndifferentAccess.new.merge({
-        :fr => "http://www.facebook.com/",
-        :nl => "http://www.facebook.com/",
-        :en => "http://www.facebook.com/"
+        :fr => "https://www.facebook.com/pages/Plush-Belgique/204628663048936",
+        :nl => "https://www.facebook.com/pages/Plush-België/357963814336167"
       })
     end
-
+    def google_url
+      HashWithIndifferentAccess.new.merge({
+        :fr => "https://plus.google.com/u/0/b/103211800176547282006/103211800176547282006",
+        :nl => "https://plus.google.com/u/0/b/107615603373625685175/107615603373625685175"
+      })
+    end
+    
     def twitter_url
-      "http://twitter.com/"
+      HashWithIndifferentAccess.new.merge({
+        :fr => "https://twitter.com/PlushBelgique",
+        :nl => "https://twitter.com/PlushBelgie"
+      })
     end
 
     def product_kinds
