@@ -2,7 +2,7 @@
 #
 # It's helpful, but not entirely necessary to understand cron before proceeding.
 # http://en.wikipedia.org/wiki/Cron
-
+env :PATH, '/opt/ruby-1.9.3-p448/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/opt/ruby/bin::/opt/ruby/bin:'
 # Example:
 #
 # set :output, "/path/to/my/cron_log.log"
