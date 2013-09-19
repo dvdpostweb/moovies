@@ -27,20 +27,21 @@ class ReviewsController < ApplicationController
 
   def new
     @product = Product.both_available.find(params[:product_id])
-    @review = Review.new(:products_id => params[:product_id])
+    @review = Review.new(:imdb_id => @product.imdb_id)
     if request.xhr?
       render :layout => false
     end
   end
 
   def create
-    begin
+    #begin
       @product = Product.both_available.find(params[:product_id])
       params[:review][:text] = params[:review][:text].gsub(/\n/, '').gsub(/\r/, '').gsub(//, "'").gsub(//,'"').gsub(//,'"').gsub(//,'...').gsub(//,'&oelig;').gsub(/«/,'"').gsub(/»/,'"')
       review = @product.reviews.build(params[:review])
       review.customer = current_customer
+      review.customers_name = current_customer.nickname
       review.languages_id = Moovies.languages[I18n.locale]
-      
+      Rails.logger.debug { "@@@#{review.inspect}" }
       review.save!
       unless current_customer.has_rated?(@product)
         @product.ratings.create(:customer => current_customer, :value => params[:review][:rating])
@@ -49,9 +50,9 @@ class ReviewsController < ApplicationController
       end
       flash[:notice] = t('products.show.review.review_save')
     
-    rescue Exception => e  
-      flash[:error] = t('products.show.review.review_not_save')
-    end
+    #rescue Exception => e  
+    #  flash[:error] = t('products.show.review.review_not_save')
+    #end
     if request.xhr?
       render :layout => false
     else
