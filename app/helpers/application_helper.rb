@@ -129,14 +129,6 @@ module ApplicationHelper
     true
   end
   
-  def twitter_url
-    'http://twitter.com'
-  end
-
-  def facebook_url(locale)
-    'http://facebook.com'
-  end
-
   def image_url(source)
     URI.join(root_url, image_path(source))
   end
