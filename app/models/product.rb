@@ -42,7 +42,7 @@ class Product < ActiveRecord::Base
   has_many :vod_online_lu, :class_name => 'StreamingProduct', :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "streaming_products.available = 1 and streaming_products.country ='lu' and streaming_products.status = 'online_test_ok' and ((streaming_products.available_from <= date(now()) and streaming_products.expire_at >= date(now())) or (streaming_products.available_backcatalogue_from <= date(now()) and streaming_products.expire_backcatalogue_at >= date(now())))"
   has_many :vod_online_nl, :class_name => 'StreamingProduct', :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "streaming_products.available = 1 and streaming_products.country ='NL' and streaming_products.status = 'online_test_ok' and ((streaming_products.available_from <= date(now()) and streaming_products.expire_at >= date(now())) or (streaming_products.available_backcatalogue_from <= date(now()) and streaming_products.expire_backcatalogue_at >= date(now())))"
   has_many :tokens, :foreign_key => :imdb_id, :primary_key => :imdb_id
-  has_many :streaming_trailers, :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "available = 1 and status = 'online_test_ok'"
+  has_many :streaming_trailers, :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "streaming_trailers.available = 1 and streaming_trailers.status = 'online_test_ok'"
   has_many :tokens_trailers, :foreign_key => :imdb_id, :primary_key => :imdb_id
   has_many :svod_dates, :foreign_key => :imdb_id, :primary_key => :imdb_id
   has_many :svod_dates_online, :class_name => 'SvodDate', :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "start_on <= date(now()) and end_on >= date(now())"
