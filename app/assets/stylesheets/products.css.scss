@@ -1460,12 +1460,13 @@ text-align:center;
   float: right;
 }
 
-#products_index #add {
+#products_index #add, #reviews_index #add {
   text-align:left;
 
 }
-#products_index .watch {
+#products_index .watch, #reviews_index .watch {
   text-align:left;
+  
 }
 
 

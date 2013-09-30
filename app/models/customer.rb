@@ -82,7 +82,7 @@ class Customer < ActiveRecord::Base
       if samsung_code
         self.code = samsung_code.promotion
       else
-        self.code = Moovies.discount["svod_fr"]
+        self.code = Discount.find(Moovies.discount["svod_#{I18n.locale}"]).name
       end
     end
   end
@@ -94,7 +94,7 @@ class Customer < ActiveRecord::Base
         samsung_code.update_attributes(:customer_id => self.id, :used_at => Time.now())
         self.code = samsung_code.promotion
       else
-        self.code = Moovies.discount["svod_fr"]
+        self.code = Discount.find(Moovies.discount["svod_#{I18n.locale}"]).name
       end
     end
   end
@@ -103,7 +103,7 @@ class Customer < ActiveRecord::Base
       @discount = Discount.by_name(code).available.first
       @activation = Activation.by_name(code).available.first
       if @discount.nil? && @activation.nil?
-        @discount = Discount.by_name(Moovies.discount["svod_fr"]).first
+        @discount = Discount.find(Moovies.discount["svod_#{I18n.locale}"])
       end
       if @discount
         self.promo_type = 'D'
