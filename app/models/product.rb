@@ -2,7 +2,7 @@ class Product < ActiveRecord::Base
   include ThinkingSphinx::Scopes
   cattr_reader :per_page
   self.primary_key = :products_id
-  self.table_name_prefix = "#{Rails.configuration.database_configuration["#{Rails.env}"]['database']}."
+  #self.table_name_prefix = "#{Rails.configuration.database_configuration["#{Rails.env}"]['database']}."
 
   alias_attribute :availability,    :products_availability
   alias_attribute :available_at,    :products_date_available
