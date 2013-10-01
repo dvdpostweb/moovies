@@ -96,7 +96,7 @@ class Product < ActiveRecord::Base
   sphinx_scope(:most_viewed)              {{:with =>          {:count_tokens => 1..1000000}}}
   sphinx_scope(:by_package)               {|package_id|       {:with =>          {:package_id => package_id}}}
   sphinx_scope(:random)                   {{:order =>         '@random'}}
-  sphinx_scope(:by_new)                   {{:with =>          {:year => 2.years.ago.year..Date.today.year, :next => 0, :available_at => 3.months.ago..Time.now.end_of_day}}}
+  sphinx_scope(:by_new)                   {{:with =>          {:year => 2.years.ago.year..Date.today.year}}}
   sphinx_scope(:order)                    {|order, sort_mode| {:order => order, :sort_mode => sort_mode}}
   sphinx_scope(:group)                    {|group,sort|       {:group_by => group, :group_function => :attr, :group_clause   => sort}}
   sphinx_scope(:limit)                    {|limit|            {:limit => limit}}
@@ -438,12 +438,17 @@ class Product < ActiveRecord::Base
     case options[:view_mode].to_sym
     when :recent
       products.recent
+    when :svod_new
+      products.by_new
+    when :tvod_new
+      products.by_new
     when :svod_soon
       products.svod_soon
     when :svod_last_added
       products.svod_last_added
     when :svod_last_chance
       products.svod_last_chance
+
     when :tvod_soon
       products.tvod_soon
     when :tvod_last_added
