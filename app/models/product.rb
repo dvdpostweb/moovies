@@ -460,23 +460,23 @@ class Product < ActiveRecord::Base
   def self.get_sort(options)
     if options[:sort]
       if options[:sort] == 'alpha_az'
-        "descriptions_title_#{I18n.locale} asc"
+        "descriptions_title_#{I18n.locale} ASC"
       elsif options[:sort] == 'alpha_za'
-        "descriptions_title_#{I18n.locale} desc"
+        "descriptions_title_#{I18n.locale} DESC"
       elsif options[:sort] == 'rating'
-        "rating desc, year DESC"
+        "rating DESC, year DESC"
       elsif options[:sort] == 'token'
-        "count_tokens desc, streaming_id desc"
+        "count_tokens DESC, streaming_id DESC"
       elsif options[:sort] == 'token_month'
-        "count_tokens_month desc, streaming_id desc"
+        "count_tokens_month DESC, streaming_id DESC"
       elsif options[:sort] == 'most_viewed'
-        "count_tokens desc"
+        "count_tokens DESC"
       elsif options[:sort] == 'most_viewed_last_year'
-        "count_tokens desc"
+        "count_tokens DESC"
       elsif options[:sort] == 'new'
-        "streaming_available_at_order DESC, rating desc"
+        "streaming_available_at_order DESC, rating DESC"
       else
-        "streaming_available_at_order DESC, rating desc"
+        "streaming_available_at_order DESC, rating DESC"
       end
     else
       if options[:list_id] && !options[:list_id].blank?
@@ -484,21 +484,25 @@ class Product < ActiveRecord::Base
       elsif options[:search] && !options[:search].blank?
         ''
       elsif options[:view_mode] && options[:view_mode] == 'svod_soon'
-        'svod_start desc, streaming_available_at_order DESC, rating desc'
+        'svod_start DESC, streaming_available_at_order DESC, rating DESC'
+      elsif options[:view_mode] && options[:view_mode] == 'svod_new'
+        'year DESC, svod_start DESC, streaming_available_at_order DESC, rating DESC'
       elsif options[:view_mode] && options[:view_mode] == 'svod_last_added'
-        'svod_start desc, streaming_available_at_order DESC, rating desc'
+        'svod_start DESC, streaming_available_at_order DESC, rating DESC'
       elsif options[:view_mode] && options[:view_mode] == 'svod_last_chance'
-        'svod_end asc, streaming_available_at_order DESC, rating desc'
+        'svod_end ASC, streaming_available_at_order DESC, rating DESC'
       elsif options[:view_mode] && options[:view_mode] == 'tvod_soon'
-        'tvod_start asc, year DESC, rating desc'
+        'tvod_start ASC, year DESC, rating DESC'
+      elsif options[:view_mode] && options[:view_mode] == 'tvod_new'
+        'year DESC, DESC, streaming_available_at_order DESC, rating DESC'
       elsif options[:view_mode] && options[:view_mode] == 'tvod_last_added'
-        'year DESC, rating desc'
+        'tvod_start DESC, streaming_available_at_order DESC, rating DESC'
       elsif options[:view_mode] && options[:view_mode] == 'tvod_last_chance'
-        'tvod_end asc, year DESC, rating desc'
+        'tvod_end ASC, year DESC, rating DESC'
       elsif options[:view_mode] && options[:view_mode] == 'most_viewed'
-        'count_tokens desc, year DESC, rating desc'
+        'count_tokens DESC, year DESC, rating DESC'
       else
-        "count_tokens desc"
+        "count_tokens DESC"
       end
     end
   end
