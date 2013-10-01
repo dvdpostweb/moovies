@@ -281,9 +281,11 @@ module ProductsHelper
     return "#{pre}: #{t 'products.left_column.svod_most_viewed'}" if params[:view_mode] == 'most_viewed'
     return "#{pre}: #{t 'products.left_column.svod_last_chance'}" if params[:view_mode] == 'svod_last_chance'
     return "#{pre}: #{t 'products.left_column.svod_soon'}" if params[:view_mode] == 'svod_soon'
+    return "#{pre}: #{t 'products.left_column.svod_new'}" if params[:view_mode] == 'svod_new'
     return "#{pre}: #{t 'products.left_column.tvod_last_added'}" if params[:view_mode] == 'tvod_last_added'
     return "#{pre}: #{t 'products.left_column.tvod_last_chance'}" if params[:view_mode] == 'tvod_last_chance'
     return "#{pre}: #{t 'products.left_column.tvod_soon'}" if params[:view_mode] == 'tvod_soon'
+    return "#{pre}: #{t 'products.left_column.tvod_new'}" if params[:view_mode] == 'tvod_new'
     
     return  "#{pre}: #{t('products.left_column.svod_all')}"
   end
