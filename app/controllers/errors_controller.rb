@@ -1,8 +1,5 @@
 class ErrorsController < ApplicationController
-  def error_404
-    @not_found_path = params[:not_found]
-  end
-
-  def error_500
+  skip_before_filter :authenticate_user! # if using Devise
+  def not_found
   end
 end
