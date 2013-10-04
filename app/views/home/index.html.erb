@@ -69,7 +69,7 @@
   <!--   ==============   MAIN CONTENT   ==============   -->
   <div id="maincontent" >
     <div id="new-infinity-wrap">
-      <h2><%= t('.unlimited_new').html_safe %></h2>
+      <h2><%= params[:kind] == :adult ? t('.unlimited_adult_new').html_safe : t('.unlimited_new').html_safe %></h2>
       <div class="tab-container">
         <ul>
           <%= render :partial => 'products/detail', :collection => @new_svod, :locals => {:content => :svod} %>
@@ -80,7 +80,7 @@
     </div>
 
     <div id="new-alacarte-wrap">
-      <h2><%= t('.tvod_new').html_safe %></h2>
+      <h2><%= params[:kind] == :adult ? t('.tvod_adult_new').html_safe : t('.tvod_new').html_safe %></h2>
       <div class="tab-container">
         <ul>
           <%= render :partial => 'products/detail', :collection => @new_tvod, :locals => {:content => :tvod} %>
