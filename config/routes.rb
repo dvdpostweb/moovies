@@ -73,8 +73,13 @@ Moovies::Application.routes.draw do
   end
   get ':id' => "promotions#show", defaults: { format: 'choose' }, :as => :promotion, :id => /smarttv|radio_contact|samsung|nostalgie/
   post ':id' => "promotions#create", defaults: { format: 'choose' }, :as => :promotion, :id => /smarttv|radio_contact|samsung|nostalgie/
-  match 'errors/error_404', to: 'errors#error_404'
+
+  match "/404", :to => "errors#not_found"
+  match "/500", :to => "errors#not_found"
   
+  #unless Rails.application.config.consider_all_requests_local
+  #      match '*not_found', to: 'errors#error_404'
+  #end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
