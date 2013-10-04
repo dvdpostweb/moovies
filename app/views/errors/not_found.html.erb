@@ -1,18 +1,18 @@
 <div id="text_error">
-<h1>ERROR </h1>
+<h1>ERROR</h1>
 <h2>Oops, this is probably not where you wanted to end up. Luckily it’s not the end of the world ! </h2>
 Here are some links to help you find what you are looking for:
 <ul>
-  <li><a href="#">Homepage</a></li>
-   <li><a href="#">Catalogue</a></li>
-   <li><a href="#">Subscriptions</a></li>
-   <li><a href="#">Contact</a></li>
+  <li><%= link_to "Homepage", root_localize_path %></li>
+   <li><%= link_to "Catalogue", products_path(:package => Moovies.packages.invert[1], :kind => nil) %></li>
+   <li><%= link_to "Subscriptions", info_path(:page_name => :abo) %></li>
+   <li><%= link_to "Contact", new_phone_request_path %></li>
 </ul>
 
 <h2>On the bright side, you found a hidden promotion!</h2>
 If you are not a member yet, subscribe now with the code <span class="promo_code">ERROR404</span> 
   <br/>to <span>enjoy the first month of Plush Unlimited 
 for only 3,95€</span>.
-<p><a class="essaigratuit osc btn" href="/fr/customers/sign_up?code=ERROR404">Subscribe now </a></p>
+<p><a class="essaigratuit osc btn" href="<%= promotion_localize_path(:id => 'promotion', :kind => nil, :code => 'ERROR404') %>">Subscribe now </a></p>
 
 </div>
