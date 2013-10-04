@@ -500,7 +500,7 @@ class Product < ActiveRecord::Base
         'tvod_start ASC, year DESC, rating DESC'
       elsif options[:view_mode] && options[:view_mode] == 'tvod_new'
         'year DESC, tvod_start DESC, streaming_available_at_order DESC, rating DESC'
-      elsif options[:view_mode] && options[:view_mode] == 'tvod_last_added'
+      elsif options[:view_mode] && options[:view_mode] == 'tvod_last _added'
         'tvod_start DESC, streaming_available_at_order DESC, rating DESC'
       elsif options[:view_mode] && options[:view_mode] == 'tvod_last_chance'
         'tvod_end ASC, year DESC, rating DESC'
@@ -517,7 +517,7 @@ class Product < ActiveRecord::Base
   end
   def self.update_package
     sql = "update products p
-    join (select if((start_on <=date(now()) and end_on >= date(now()) or (group_concat(distinct status)='uploaded') and start_on > now() and (start_on = min(available_from) or start_on = min(available_backcatalogue_from))), 1,2) package,products_id
+    join (select if((start_on <=date(now()) and end_on >= date(now()) or (group_concat(distinct status)='uploaded' and start_on > now()) or (start_on = min(available_from) or start_on = min(available_backcatalogue_from))), 1,2) package,products_id
     from products p
     left join `streaming_products` sp on sp.imdb_id = p.`imdb_id` and available=1 and status <> 'deleted' and status <> 'local_test_fail'
     left join `svod_dates` s on s.imdb_id = p.imdb_id and ((start_on <= date(now()) and end_on >=now()) or (start_on > date(now())) )
@@ -525,7 +525,7 @@ class Product < ActiveRecord::Base
     set package_id = package;"
     ActiveRecord::Base.connection.execute(sql)
     sql2 = "update products p
-    join (select if((start_on <=date(now()) and end_on >= date(now()) or (group_concat(distinct status)='uploaded') and start_on > now() and (start_on = min(available_from) or start_on = min(available_backcatalogue_from))), 4,5) package,products_id
+    join (select if((start_on <=date(now()) and end_on >= date(now()) or (group_concat(distinct status)='uploaded' and start_on > now()) or (start_on = min(available_from) or start_on = min(available_backcatalogue_from))), 4,5) package,products_id
     from products p
     left join `streaming_products` sp on sp.imdb_id = p.`imdb_id` and available=1 and status <> 'deleted' and status <> 'local_test_fail'
     left join `svod_dates` s on s.imdb_id = p.imdb_id and ((start_on <= date(now()) and end_on >=now()) or (start_on > date(now())) )
