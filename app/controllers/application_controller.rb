@@ -55,6 +55,8 @@ class ApplicationController < ActionController::Base
       "devise_layout"
     elsif params[:controller] == 'promotions' and params[:id] != 'smarttv'
       'promo'
+    elsif params[:controller] == 'errors' 
+      'errors'
     else
       "application"
     end

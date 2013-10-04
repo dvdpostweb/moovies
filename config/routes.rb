@@ -73,6 +73,8 @@ Moovies::Application.routes.draw do
   end
   get ':id' => "promotions#show", defaults: { format: 'choose' }, :as => :promotion, :id => /smarttv|radio_contact|samsung|nostalgie/
   post ':id' => "promotions#create", defaults: { format: 'choose' }, :as => :promotion, :id => /smarttv|radio_contact|samsung|nostalgie/
+  match 'errors/error_404', to: 'errors#error_404'
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -129,4 +131,5 @@ Moovies::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id(.:format)))'
+  
 end
