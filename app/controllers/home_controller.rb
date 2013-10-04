@@ -1,8 +1,8 @@
 class HomeController < ApplicationController
   def index
-    if params[:kind] == :adult
-      redirect_to products_path(:package => Moovies.packages.invert[4], :kind => :adult)
-    end
+    #if params[:kind] == :adult
+    #  redirect_to products_path(:package => Moovies.packages.invert[4], :kind => :adult)
+    #end
     @body_id = 'home'
     @new_svod = HomeProduct.where(:country => Product.country_short_name(session[:country_id]), :kind => :svod, :locale_id => Moovies.languages[I18n.locale]).order('id asc').includes(:product)
     @new_tvod = HomeProduct.where(:country => Product.country_short_name(session[:country_id]), :kind => :tvod, :locale_id => Moovies.languages[I18n.locale]).order('id asc').includes(:product)
