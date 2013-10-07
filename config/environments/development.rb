@@ -10,7 +10,7 @@ Moovies::Application.configure do
   config.whiny_nils = true
 
   # Show full error reports and disable caching
-  config.consider_all_requests_local       = false
+  config.consider_all_requests_local       = true
   config.action_controller.perform_caching = true
   config.cache_store = :mem_cache_store, 'binga:11211'
   config.i18n_cache_store = ActiveSupport::Cache.lookup_store(:mem_cache_store, 'binga:11211', :namespace => "development")
