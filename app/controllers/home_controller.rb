@@ -1,14 +1,18 @@
 class HomeController < ApplicationController
   def index
-    if params[:kind] == :adult
-      redirect_to products_path(:package => Moovies.packages.invert[4], :kind => :adult)
-    end
+    #if params[:kind] == :adult
+    #  redirect_to products_path(:package => Moovies.packages.invert[4], :kind => :adult)
+    #end
     @body_id = 'home'
-    @new_svod = HomeProduct.where(:country => Product.country_short_name(session[:country_id]), :kind => :svod, :locale_id => Moovies.languages[I18n.locale]).order('id asc').includes(:product)
-    @new_tvod = HomeProduct.where(:country => Product.country_short_name(session[:country_id]), :kind => :tvod, :locale_id => Moovies.languages[I18n.locale]).order('id asc').includes(:product)
+    @new_svod = HomeProduct.where(:country => Product.country_short_name(session[:country_id]), :kind => "svod#{params[:kind] == :adult ? '_adult' : ''}", :locale_id => Moovies.languages[I18n.locale]).order('id asc').includes(:product)
+    @new_tvod = HomeProduct.where(:country => Product.country_short_name(session[:country_id]), :kind => "tvod#{params[:kind] == :adult ? '_adult' : ''}", :locale_id => Moovies.languages[I18n.locale]).order('id asc').includes(:product)
     @discount_bottom = Discount.find(Moovies.discount["hp_bottom_#{I18n.locale}"])
     @newsletter = PublicNewsletter.new(params[:public_newsletter])
-    @carousel = Landing.by_language(I18n.locale).not_expirated.private.order_rand.limit(1).first if current_customer
+    if current_customer
+      @carousel = Landing.by_language(I18n.locale).not_expirated
+      @carousel = params[:kind] == :adult ? @carousel.adult : @carousel.private
+      @carousel = @carousel.order_rand.limit(1).first
+    end
   end
 
   def validation
