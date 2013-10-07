@@ -535,13 +535,13 @@ class Product < ActiveRecord::Base
     
   end
   def self.get_product_home
-    HomeProduct.destroy_all
+    HomeProduct.where(:kind => ['svod', 'tvod']).destroy_all
     ['tvod', 'svod'].each do |type|
       [1,2,3].each do |locale_id|
-        ['nl', 'lu'].each do |country|
+        ['be', 'nl', 'lu'].each do |country|
           package_id = type == 'svod' ? 1 : 2
           products = Product.search(:per_page => 6, :with => { :audio_sub => locale_id, :kind => Zlib::crc32(Moovies.product_kinds[:normal]), :package_id => package_id}, :indices => ["product_#{country}_core"])
-          products = type == 'svod' ?  products.search(:with => {:svod_start => 6.months.ago..Time.now.end_of_day, :studio_id => 11}).order('svod_start desc, streaming_available_at_order DESC, rating desc') : products.search(:with => {:tvod_start => 5.months.ago..Time.now.end_of_day}).order("year DESC, rating desc")
+          products = type == 'svod' ?  products.search(:with => {:svod_start => 6.months.ago..Time.now.end_of_day, :studio_id => 11}).order('svod_start desc, streaming_available_at_order DESC, rating desc') : products.search(:with => {:tvod_start => 5.months.ago..Time.now.end_of_day}).order("year DESC, tvod_start DESC, streaming_available_at_order DESC, rating DESC")
           products.each do |p|
             HomeProduct.create(:product_id => p.id, :country => country, :locale_id => locale_id, :kind => type)
           end
@@ -550,6 +550,23 @@ class Product < ActiveRecord::Base
     end
   end
 
+  def self.get_product_home_adult
+    HomeProduct.where(:kind => ['svod_adult', 'tvod_adult']).destroy_all
+    filter = SearchFilter.get_filter(nil)
+    ['tvod', 'svod'].each do |type|
+      [1,2,3].each do |locale_id|
+        ['be', 'nl', 'lu'].each do |country|
+          package_id = type == 'svod' ? 4 : 5
+          #products = Product.search(:per_page => 6, :with => { :audio_sub => locale_id, :kind => Zlib::crc32(Moovies.product_kinds[:adult]), :package_id => package_id}, :indices => ["product_#{country}_core"])
+          #products = type == 'svod' ?  products.search(:with => {:svod_start => 6.months.ago..Time.now.end_of_day, :studio_id => 11}).order('year DESC, svod_start DESC, streaming_available_at_order DESC, rating DESC') : products.search(:with => {:tvod_start => 5.months.ago..Time.now.end_of_day}).order("year DESC, rating desc")
+          products = filter(filter, {:view_mode => "#{type}_new", :per_page => 6, :kind => :adult, :package => Moovies.packages.invert[package_id]})
+          products.each do |p|
+            HomeProduct.create(:product_id => p.id, :country => country, :locale_id => locale_id, :kind => "#{type}_adult")
+          end
+        end
+      end
+    end
+  end
   def self.update_plush
     ActiveRecord::Base.connection.execute('call sp_plush_update();')
   end
