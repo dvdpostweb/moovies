@@ -202,12 +202,12 @@ module Moovies
        :all_fr => 14,
        :all_nl => 15,
        :all_en => 16,
-       :hp_top_fr => 17,
-       :hp_top_nl => 18,
-       :hp_top_en => 19,
-       :hp_bottom_fr => 20,
-       :hp_bottom_nl => 21,
-       :hp_bottom_en => 22,
+       :hp_top_fr_normal => 17,
+       :hp_top_nl_normal => 18,
+       :hp_top_en_normal => 19,
+       :hp_bottom_fr_normal => 20,
+       :hp_bottom_nl_normal => 21,
+       :hp_bottom_en_normal => 22,
        :catalogue_fr => 25,
        :catalogue_nl => 26,
        :catalogue_en => 27,
@@ -219,7 +219,13 @@ module Moovies
        :contact_en => 36,
        :contact_adult_fr => 32,
        :contact_adult_nl => 33,
-       :contact_adult_en => 31
+       :contact_adult_en => 31,
+       :hp_bottom_fr_adult => 56,
+       :hp_bottom_nl_adult => 57,
+       :hp_bottom_en_adult => 58,
+       :hp_top_fr_adult => 54,
+       :hp_top_nl_adult => 53,
+       :hp_top_en_adult => 55,
       })
     end
 
