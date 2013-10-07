@@ -86,11 +86,7 @@ class ApplicationController < ActionController::Base
     @kid_visible = false
     cookies.permanent[:adult_hide] = params[:all] if params[:all]
     params[:kind] = params[:kind] ? params[:kind].to_sym : :normal
-    if params[:kind] == :adult
-      @discount_top = Discount.find(Moovies.discount["adult_#{I18n.locale}"])
-    else
-      @discount_top = Discount.find(Moovies.discount["hp_top_#{I18n.locale}"])
-    end
+    @discount_top = Discount.find(Moovies.discount["hp_top_#{I18n.locale}_#{params[:kind]}"])
     if params[:locale].nil?
       params[:locale] = I18n.locale
     end
