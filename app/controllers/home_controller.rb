@@ -5,6 +5,8 @@ class HomeController < ApplicationController
     @new_tvod = HomeProduct.where(:country => Product.country_short_name(session[:country_id]), :kind => "tvod#{params[:kind] == :adult ? '_adult' : ''}", :locale_id => Moovies.languages[I18n.locale]).order('id asc').includes(:product)
     @discount_bottom = Discount.find(Moovies.discount["hp_bottom_#{I18n.locale}_#{params[:kind]}"])
     @newsletter = PublicNewsletter.new(params[:public_newsletter])
+    @svod_id = params[:kind] == :adult ? 4 : 1 
+    @tvod_id = params[:kind] == :adult ? 5 : 2 
     if current_customer
       @carousel = Landing.by_language(I18n.locale).not_expirated
       @carousel = params[:kind] == :adult ? @carousel.adult : @carousel.private
