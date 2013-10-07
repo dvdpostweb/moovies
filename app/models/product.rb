@@ -500,7 +500,7 @@ class Product < ActiveRecord::Base
         'tvod_start ASC, year DESC, rating DESC'
       elsif options[:view_mode] && options[:view_mode] == 'tvod_new'
         'year DESC, tvod_start DESC, streaming_available_at_order DESC, rating DESC'
-      elsif options[:view_mode] && options[:view_mode] == 'tvod_last _added'
+      elsif options[:view_mode] && options[:view_mode] == 'tvod_last_added'
         'tvod_start DESC, streaming_available_at_order DESC, rating DESC'
       elsif options[:view_mode] && options[:view_mode] == 'tvod_last_chance'
         'tvod_end ASC, year DESC, rating DESC'
