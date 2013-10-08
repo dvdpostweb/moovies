@@ -43,7 +43,8 @@ Moovies::Application.routes.draw do
       match 'log' => 'products#log'
       
     end
-    resources :promotions, :only => ['show', 'update']
+    resources :promotions, :only => [:show]
+    post 'promotions/:id' => "promotions#create", :as => :promotion_canva
     concern :productable do
       resources :products, :only => :index
     end
