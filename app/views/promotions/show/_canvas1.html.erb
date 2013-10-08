@@ -28,8 +28,8 @@
   <div class="container clearfix">
     <div id="promo_content">
       <h1 style="color: #212A31;">
-        <%= t2('title', @promo.name) %><br/>
-        <strong><%= t2('title_promo', @promo.name) %></strong>
+        <%= t2('title', @promo.name).html_safe %><br/>
+        <strong><%= t2('title_promo', @promo.name).html_safe %></strong>
       </h1>
       <div id="promo_form">
         <h2><%= t2('subtitle', @promo.name).html_safe %></h2>
