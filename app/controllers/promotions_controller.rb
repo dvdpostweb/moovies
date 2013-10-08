@@ -37,7 +37,7 @@ class PromotionsController < ApplicationController
       @partial = 'default'
       @body_class = "canvas#{@promo.canva_id}"
       @canvas = @body_class
-      @canvas += "_#{params[:format]}" if params[:format]
+      @canvas += "_#{params[:format]}" if params[:format] && @promo.params[:choose]
       if !params[:code].nil?
         @code = params[:code]
       elsif @promo.params[:code]
