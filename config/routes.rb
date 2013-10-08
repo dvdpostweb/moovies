@@ -68,7 +68,6 @@ Moovies::Application.routes.draw do
       match 'subtitle' => 'streaming_products#subtitle'
       match 'versions' => 'streaming_products#versions'
     end
-    
     get ':id' => "promotions#show", :as => :promotion_localize, :id => /samsung|promotion/
     post ':id' => "promotions#create", :as => :promotion_localize, :id => /samsung|promotion/
   end
