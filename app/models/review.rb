@@ -70,7 +70,6 @@ class Review < ActiveRecord::Base
   end
 
   def rating_by_customer(customer=nil)
-    Rails.logger.debug { "@@@#{self.inspect}" }
     review_ratings.by_customer(customer).first
   end
 
