@@ -73,6 +73,7 @@ Moovies::Application.routes.draw do
   end
   get ':id' => "promotions#show", defaults: { format: 'choose' }, :as => :promotion, :id => /smarttv|radio_contact|samsung|nostalgie/
   post ':id' => "promotions#create", defaults: { format: 'choose' }, :as => :promotion, :id => /smarttv|radio_contact|samsung|nostalgie/
+  resources :promotions, defaults: { format: 'choose' }, :only => [:show]
 
   match "/404", :to => "errors#not_found"
   match "/500", :to => "errors#not_found"

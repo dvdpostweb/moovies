@@ -36,6 +36,8 @@ class PromotionsController < ApplicationController
     if @promo
       @partial = 'default'
       @body_class = "canvas#{@promo.canva_id}"
+      @canvas = @body_class
+      @canvas += "_#{params[:format]}" if params[:format]
       if !params[:code].nil?
         @code = params[:code]
       elsif @promo.params[:code]
@@ -45,8 +47,9 @@ class PromotionsController < ApplicationController
       end
     else
       @partial = params[:id]
+      @partial += "_#{params[:format]}" if params[:format]
     end
-    @partial += "_#{params[:format]}" if params[:format]
+    
     @body_id = @partial
     @code_samsung = t('promotions.show.samsung.default')
   end
