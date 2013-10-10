@@ -126,7 +126,7 @@ class Product < ActiveRecord::Base
     products = products.hetero if options[:hetero] && (options[:category_id] && (options[:category_id].to_i != 76 && options[:category_id].to_i != 72) )
     products = products.by_director(options[:director_id]) if options[:director_id]
     products = products.by_imdb_id(options[:imdb_id]) if options[:imdb_id]
-    products = options[:kind] == :normal ? products.by_studio(options[:studio_id]) : products.by_streaming_studio(options[:studio_id]) if options[:studio_id]
+    products = options[:kind] == :normal ? products.by_streaming_studio(options[:studio_id]) : products.by_studio(options[:studio_id]) if options[:studio_id]
     products = products.by_audience(filter.audience_min, filter.audience_max) if filter.audience? && options[:kind] == :normal
     products = products.by_country(filter.country_id) if filter.country_id?
     products = products.by_ratings(filter.rating_min.to_f, filter.rating_max.to_f) if filter.rating?
