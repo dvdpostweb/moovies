@@ -82,6 +82,7 @@ class ApplicationController < ActionController::Base
   end
 
   def init
+    cookies[:code] = { value: params[:code], expires: 15.days.from_now } if params[:code]
     @browser = Browser.new(:ua => request.user_agent, :accept_language => "en-us")
     @kid_visible = false
     cookies.permanent[:adult_hide] = params[:all] if params[:all]
@@ -90,7 +91,6 @@ class ApplicationController < ActionController::Base
     if params[:locale].nil?
       params[:locale] = I18n.locale
     end
-
     if params[:debug_country_id]
       session[:country_id] = params[:debug_country_id].to_i
     else

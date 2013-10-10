@@ -35,4 +35,7 @@ Moovies::Application.configure do
         :host => 'localhost:3000',
         :only_path => false
   }
+  RouteTranslator.config do |config|
+    config.force_locale = true
+  end
 end

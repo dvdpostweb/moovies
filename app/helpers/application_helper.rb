@@ -59,9 +59,9 @@ module ApplicationHelper
   def switch_locale_link(options=nil)
     content = ''
     I18n.available_locales.each do |locale|
-      new_params = params.merge(:locale => locale)
+      new_params = params.merge(:locale => locale.to_s)
       new_params.delete(:kind)
-      content += content_tag(:li, link_to(locale.to_s.upcase, new_params, {:class => I18n.locale.to_s == locale.to_s ? 'active' : 'nothing'}))
+      content += content_tag(:li, link_to(locale.to_s.upcase, url_for(new_params), {:class => I18n.locale.to_s == locale.to_s ? 'active' : 'nothing'}))
     end
     content.html_safe
   end
@@ -137,5 +137,12 @@ module ApplicationHelper
     Moovies.geo_country_name[id]
   end
 
+  def get_code(code)
+    if cookies[:code]
+      cookies[:code]
+    else
+      code
+    end
+  end
   
 end

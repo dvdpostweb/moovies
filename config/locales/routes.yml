@@ -1,0 +1,24 @@
+en:
+  routes:
+    products: products
+    product: catalogue
+    promotions: promotions
+    info: info
+    messages: messages
+    actors: actors
+fr:
+  routes:
+    products: catalogues
+    product: product
+    promotions: promotions
+    info: information
+    messages: messages
+    actors: acteurs
+nl:
+  routes:
+    products: products
+    product: product
+    promotions: promoties
+    info: informatie
+    messages: berichten
+    actors: actors
