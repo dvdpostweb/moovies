@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/NielsKSchjoedt/route_translator.git
+  revision: 5d8053356f36eba9c6ed16df97e35f4da7a9faeb
+  specs:
+    route_translator (3.1.0)
+
+GIT
   remote: git://github.com/svenfuchs/i18n-active_record.git
   revision: b631b05a96d578b6c01c4751cc1a0ba8a84406af
   specs:
@@ -241,6 +247,7 @@ DEPENDENCIES
   orderedhash
   quiet_assets
   rails (= 3.2.14)
+  route_translator!
   routing_concerns (~> 0.1.0)
   rspec-rails (>= 2.0.1)
   sass-rails

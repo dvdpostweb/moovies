@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta http-equiv="p3p" content="CP='ALL PUR DSP CUR ADMi DEVi CONi OUR COR IND'" />
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript"><!-- // --><![CDATA[
+
+			//! Tradetracker Conversion-Tag.
+			
+			// Get query string.
+			var queryStringParts = location.search.substr(1).split('&');
+
+			// Initialize query string parameters.
+			var parameters = new Object();
+			for (var i = 0, n = queryStringParts.length; i < n; i++)
+			{
+				var variableValuePair = queryStringParts[i].split('=');
+				if (variableValuePair.length == 2)
+					parameters[unescape(variableValuePair[0])] = unescape(variableValuePair[1]);
+			}
+
+			var campaignID = typeof(parameters.campaignID) == 'undefined' ? '' : parameters.campaignID;
+			var productID = typeof(parameters.productID) == 'undefined' ? '' : parameters.productID;
+			var conversionType = typeof(parameters.conversionType) == 'undefined' ? '' : parameters.conversionType;
+			var useHttps = typeof(parameters.https) == 'undefined' || parameters.https != '1' ? '' : parameters.https;
+
+			var trackingType = 2;
+
+			// Get tracking data from the cookie created on the landingpage.
+			var cookieName = 'TT2_' + campaignID + '=';
+			var trackingData = '';
+			var cookies = document.cookie.split(';');
+			for (var i = 0, n = cookies.length; i < n; i++)
+			{
+				cookies[i] = cookies[i].replace(/^\s+/, '');
+				if (cookies[i].indexOf(cookieName) == 0)
+					trackingData = unescape(cookies[i].substr(cookieName.length));
+			}
+
+			// Set transaction information.
+			var transactionID = typeof(parameters.transactionID) == 'undefined' ? '' : parameters.transactionID; // Transaction identifier.
+			var transactionAmount = typeof(parameters.transactionAmount) == 'undefined' ? '' : parameters.transactionAmount; // Transaction amount.
+			var quantity = typeof(parameters.quantity) == 'undefined' ? '' : parameters.quantity; // Quantity (optional).
+			var email = typeof(parameters.email) == 'undefined' ? '' : parameters.email; // Customer e-mail address if available (optional).
+			var descriptionMerchant = typeof(parameters.descrMerchant) == 'undefined' ? '' : parameters.descrMerchant; // Transaction details for merchants (optional).
+			var descriptionAffiliate = typeof(parameters.descrAffiliate) == 'undefined' ? '' : parameters.descrAffiliate; // Transaction details for affiliates (optional).
+
+			var trackBackURL = (useHttps ? 'https' : 'http') + '://' + (conversionType == 'lead' ? 'tl' : 'ts') + '.tradetracker.net/?cid=' + campaignID + '&pid=' + productID + '&data=' + encodeURIComponent(trackingData) + '&type=' + trackingType + '&tid=' + encodeURIComponent(transactionID) + '&tam=' + encodeURIComponent(transactionAmount) + '&qty=' + encodeURIComponent(quantity) + '&eml=' + encodeURIComponent(email) + '&descrMerchant=' + encodeURIComponent(descriptionMerchant) + '&descrAffiliate=' + encodeURIComponent(descriptionAffiliate);
+
+			document.write('<img src="' + trackBackURL + '" width="1" height="1" border="0" alt="" />');
+
+		// ]]></script>
+	</body>
+</html>

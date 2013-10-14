@@ -1,7 +1,6 @@
 class PromotionsController < ApplicationController
   before_filter :get_data
   def show
-    @promotion = Customer.new
   end
 
   def create
@@ -37,23 +36,21 @@ class PromotionsController < ApplicationController
     if @promo
       @partial = 'default'
       @body_class = "canvas#{@promo.canva_id}"
-      if @promo.canva_id == 1
-        if @promo.params['date_limit'] == false
-          @promo.params['date_limit'] = 3.days.from_now.strftime('%d/%m/%Y')
-        end
+      @canvas = @body_class
+      @canvas += "_#{params[:format]}" if params[:format] && @promo.params[:choose]
+      if !params[:code].nil?
+        @code = params[:code]
+      elsif @promo.params[:code]
+        @code = @promo.params[:code]
+      else
+        @code = ''
       end
     else
       @partial = params[:id]
+      @partial += "_#{params[:format]}" if params[:format]
     end
-    @partial += "_#{params[:format]}" if params[:format]
+    
     @body_id = @partial
     @code_samsung = t('promotions.show.samsung.default')
-    if params[:id] == 'promotion'
-      if params[:code]
-        @code_samsung = params[:code]
-      else
-        @code_samsung = ''
-      end
-    end
   end
 end

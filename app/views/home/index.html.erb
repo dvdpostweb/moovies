@@ -7,27 +7,27 @@
 <!-- Services -->
 <div id="services-wrap">
   <div class="wrap" id="vod-ppv">
-    <h3><%= t '.unlinmited' %></h3>
+    <h3><%= t ".unlinmited#{params[:kind] == :adult ? '_adult' : ''}" %></h3>
     <center>
-        <%= link_to image_tag("infinity#{params[:kind]==:adult ? '_adult' : ''}.gif", :size => '200x95'), products_path(:package => Moovies.packages.invert[1], :kind => nil) %>
+        <%= link_to image_tag("infinity#{params[:kind]==:adult ? '_adult' : ''}.gif", :size => '200x95'), products_path(:package => Moovies.packages.invert[@svod_id]) %>
     </center>
-    • <%= t '.unlinmited1' %><br />
-    • <%= t '.unlinmited2' %><br />
-    • <%= raw t '.unlinmited3' %>
+    • <%= t ".unlinmited1#{params[:kind] == :adult ? '_adult' : ''}" %><br />
+    • <%= t ".unlinmited2#{params[:kind] == :adult ? '_adult' : ''}" %><br />
+    • <%= raw t ".unlinmited3#{params[:kind] == :adult ? '_adult' : ''}" %>
     <ul class="osc">
-      <li><%= link_to t('.discover'), products_path(:package => Moovies.packages.invert[1], :kind => nil) %></li>
+      <li><%= link_to t('.discover'), products_path(:package => Moovies.packages.invert[@svod_id]) %></li>
     </ul>
   </div>
   <div class="wrap" id="alacarte">
-    <h3><%= t '.tvod' %></h3>
+    <h3><%= t ".tvod#{params[:kind] == :adult ? '_adult' : ''}" %></h3>
     <center>
-      <%= link_to image_tag("alacarte#{params[:kind]==:adult ? '_adult' : ''}.gif", :size => '200x95'), products_path(:package => Moovies.packages.invert[2], :kind => nil) %>
+      <%= link_to image_tag("alacarte#{params[:kind]==:adult ? '_adult' : ''}.gif", :size => '200x95'), products_path(:package => Moovies.packages.invert[@tvod_id], :kind => nil) %>
     </center>
-    • <%= t '.tvod1' %><br />
-    • <%= t '.tvod2' %><br />
-    • <%= raw t '.tvod3' %>
+    • <%= t ".tvod1#{params[:kind] == :adult ? '_adult' : ''}" %><br />
+    • <%= t ".tvod2#{params[:kind] == :adult ? '_adult' : ''}" %><br />
+    • <%= raw t ".tvod3#{params[:kind] == :adult ? '_adult' : ''}" %>
     <ul class="osc">
-      <li><%= link_to t('.discover'), products_path(:package => Moovies.packages.invert[2], :kind => nil) %></li>
+      <li><%= link_to t('.discover'), products_path(:package => Moovies.packages.invert[@tvod_id]) %></li>
     </ul>
   </div>
   <div class="wrap" id="apps">
@@ -95,7 +95,7 @@
     <div class="clear"></div>
     <% unless current_customer %>
     <div id="subscribe-wrap">
-      <%= link_to image_tag("#{I18n.locale}/banner_promo_hp#{params[:kind]==:adult ? '_adult' : ''}.jpg", :size => '942x188'), new_customer_registration_path(:code => @discount_bottom.name) %>
+      <%= link_to image_tag("#{I18n.locale}/banner_promo_hp#{params[:kind]==:adult ? '_adult' : ''}.jpg", :size => '942x188'), new_customer_registration_path(:code => get_code(@discount_bottom.name)) %>
     </div>
     <% end %>
     <div class="clear"></div>

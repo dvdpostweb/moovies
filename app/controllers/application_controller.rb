@@ -22,7 +22,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-
   def redirect_after_registration(path = nil)
     if current_customer && current_customer.step != 100 && params[:controller] != 'devise/sessions' && params[:controller] != 'payment_methods' && !(params[:controller] == 'info' && params[:page_name] == 'conditions')
       if current_customer.step.to_i == 31
@@ -83,19 +82,15 @@ class ApplicationController < ActionController::Base
   end
 
   def init
+    cookies[:code] = { value: params[:code], expires: 15.days.from_now } if params[:code]
     @browser = Browser.new(:ua => request.user_agent, :accept_language => "en-us")
     @kid_visible = false
     cookies.permanent[:adult_hide] = params[:all] if params[:all]
     params[:kind] = params[:kind] ? params[:kind].to_sym : :normal
-    if params[:kind] == :adult
-      @discount_top = Discount.find(Moovies.discount["adult_#{I18n.locale}"])
-    else
-      @discount_top = Discount.find(Moovies.discount["hp_top_#{I18n.locale}"])
-    end
+    @discount_top = Discount.find(Moovies.discount["hp_top_#{I18n.locale}_#{params[:kind]}"])
     if params[:locale].nil?
       params[:locale] = I18n.locale
     end
-
     if params[:debug_country_id]
       session[:country_id] = params[:debug_country_id].to_i
     else

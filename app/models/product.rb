@@ -126,7 +126,7 @@ class Product < ActiveRecord::Base
     products = products.hetero if options[:hetero] && (options[:category_id] && (options[:category_id].to_i != 76 && options[:category_id].to_i != 72) )
     products = products.by_director(options[:director_id]) if options[:director_id]
     products = products.by_imdb_id(options[:imdb_id]) if options[:imdb_id]
-    products = options[:kind] == :normal ? products.by_studio(options[:studio_id]) : products.by_streaming_studio(options[:studio_id]) if options[:studio_id]
+    products = options[:kind] == :normal ? products.by_streaming_studio(options[:studio_id]) : products.by_studio(options[:studio_id]) if options[:studio_id]
     products = products.by_audience(filter.audience_min, filter.audience_max) if filter.audience? && options[:kind] == :normal
     products = products.by_country(filter.country_id) if filter.country_id?
     products = products.by_ratings(filter.rating_min.to_f, filter.rating_max.to_f) if filter.rating?
@@ -517,31 +517,33 @@ class Product < ActiveRecord::Base
   end
   def self.update_package
     sql = "update products p
-    join (select if((start_on <=date(now()) and end_on >= date(now()) or (group_concat(distinct status)='uploaded') and start_on > now() and (start_on = min(available_from) or start_on = min(available_backcatalogue_from))), 1,2) package,products_id
-    from products p
-    left join `streaming_products` sp on sp.imdb_id = p.`imdb_id` and available=1 and status <> 'deleted' and status <> 'local_test_fail'
-    left join `svod_dates` s on s.imdb_id = p.imdb_id and ((start_on <= date(now()) and end_on >=now()) or (start_on > date(now())) )
-    where products_type='dvd_norm' group by p.imdb_id) sp on sp.products_id = p.products_id
-    set package_id = package;"
+        join (select if((start_on <=date(now()) and end_on >= date(now()) or (group_concat(distinct status)='uploaded' and start_on > now()) or ((start_on = min(available_from) and start_on >= date(now())) or (start_on = min(available_backcatalogue_from) and start_on >= date(now()) and (expire_at < date(now()) or expire_at is null)))), 1,2) package,products_id
+        from products p
+        left join `streaming_products` sp on sp.imdb_id = p.`imdb_id` and available=1 and status <> 'deleted' and status <> 'local_test_fail'
+        left join `svod_dates` s on s.imdb_id = p.imdb_id and ((start_on <= date(now()) and end_on >=now()) or (start_on > date(now())) )
+        where products_type='dvd_norm'  group by p.imdb_id) sp on sp.products_id = p.products_id
+        set package_id = package;
+    "
     ActiveRecord::Base.connection.execute(sql)
     sql2 = "update products p
-    join (select if((start_on <=date(now()) and end_on >= date(now()) or (group_concat(distinct status)='uploaded') and start_on > now() and (start_on = min(available_from) or start_on = min(available_backcatalogue_from))), 4,5) package,products_id
-    from products p
-    left join `streaming_products` sp on sp.imdb_id = p.`imdb_id` and available=1 and status <> 'deleted' and status <> 'local_test_fail'
-    left join `svod_dates` s on s.imdb_id = p.imdb_id and ((start_on <= date(now()) and end_on >=now()) or (start_on > date(now())) )
-    where products_type='dvd_adult' group by p.imdb_id) sp on sp.products_id = p.products_id
-    set package_id = package;"
+        join (select if((start_on <=date(now()) and end_on >= date(now()) or (group_concat(distinct status)='uploaded' and start_on > now()) or ((start_on = min(available_from) and start_on >= date(now())) or (start_on = min(available_backcatalogue_from) and start_on >= date(now()) and (expire_at < date(now()) or expire_at is null)))), 4,5) package,products_id
+        from products p
+        left join `streaming_products` sp on sp.imdb_id = p.`imdb_id` and available=1 and status <> 'deleted' and status <> 'local_test_fail'
+        left join `svod_dates` s on s.imdb_id = p.imdb_id and ((start_on <= date(now()) and end_on >=now()) or (start_on > date(now())) )
+        where products_type='dvd_adult'  group by p.imdb_id) sp on sp.products_id = p.products_id
+        set package_id = package;
+    "
     ActiveRecord::Base.connection.execute(sql2)
     
   end
   def self.get_product_home
-    HomeProduct.destroy_all
+    HomeProduct.where(:kind => ['svod', 'tvod']).destroy_all
     ['tvod', 'svod'].each do |type|
       [1,2,3].each do |locale_id|
-        ['nl', 'lu'].each do |country|
+        ['be', 'nl', 'lu'].each do |country|
           package_id = type == 'svod' ? 1 : 2
           products = Product.search(:per_page => 6, :with => { :audio_sub => locale_id, :kind => Zlib::crc32(Moovies.product_kinds[:normal]), :package_id => package_id}, :indices => ["product_#{country}_core"])
-          products = type == 'svod' ?  products.search(:with => {:svod_start => 6.months.ago..Time.now.end_of_day, :studio_id => 11}).order('svod_start desc, streaming_available_at_order DESC, rating desc') : products.search(:with => {:tvod_start => 5.months.ago..Time.now.end_of_day}).order("year DESC, rating desc")
+          products = type == 'svod' ?  products.search(:with => {:svod_start => 6.months.ago..Time.now.end_of_day, :studio_id => 11}).order('svod_start desc, streaming_available_at_order DESC, rating desc') : products.search(:with => {:tvod_start => 5.months.ago..Time.now.end_of_day}).order("year DESC, tvod_start DESC, streaming_available_at_order DESC, rating DESC")
           products.each do |p|
             HomeProduct.create(:product_id => p.id, :country => country, :locale_id => locale_id, :kind => type)
           end
@@ -550,6 +552,23 @@ class Product < ActiveRecord::Base
     end
   end
 
+  def self.get_product_home_adult
+    HomeProduct.where(:kind => ['svod_adult', 'tvod_adult']).destroy_all
+    filter = SearchFilter.get_filter(nil)
+    ['tvod', 'svod'].each do |type|
+      [1,2,3].each do |locale_id|
+        ['be', 'nl', 'lu'].each do |country|
+          package_id = type == 'svod' ? 4 : 5
+          #products = Product.search(:per_page => 6, :with => { :audio_sub => locale_id, :kind => Zlib::crc32(Moovies.product_kinds[:adult]), :package_id => package_id}, :indices => ["product_#{country}_core"])
+          #products = type == 'svod' ?  products.search(:with => {:svod_start => 6.months.ago..Time.now.end_of_day, :studio_id => 11}).order('year DESC, svod_start DESC, streaming_available_at_order DESC, rating DESC') : products.search(:with => {:tvod_start => 5.months.ago..Time.now.end_of_day}).order("year DESC, rating desc")
+          products = filter(filter, {:view_mode => "#{type}_new", :per_page => 6, :kind => :adult, :package => Moovies.packages.invert[package_id]})
+          products.each do |p|
+            HomeProduct.create(:product_id => p.id, :country => country, :locale_id => locale_id, :kind => "#{type}_adult")
+          end
+        end
+      end
+    end
+  end
   def self.update_plush
     ActiveRecord::Base.connection.execute('call sp_plush_update();')
   end

@@ -1,8 +1,6 @@
 class ErrorsController < ApplicationController
-  def error_404
-    @not_found_path = params[:not_found]
-  end
-
-  def error_500
+  skip_before_filter :authenticate_customer! # if using Devise
+  def not_found
+    @body_id = "i#{rand(5)+1}"
   end
 end
