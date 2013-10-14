@@ -138,7 +138,7 @@ module ApplicationHelper
   end
 
   def get_code(code)
-    if cookies[:code]
+    if params[:kind] == :normal && cookies[:code]
       cookies[:code]
     else
       code
