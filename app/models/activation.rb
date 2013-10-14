@@ -16,14 +16,10 @@ class Activation < ActiveRecord::Base
   alias_attribute :promo_text_nl, :activation_text_nl
   alias_attribute :promo_text_en, :activation_text_en
   alias_attribute :group_id, :activation_group
-  
+  alias_attribute :payable, :activation_waranty
   
   scope :by_name, lambda {|name| where(:activation_code => name)}
   scope :available, lambda {where('(activation_code_validto_date > ? or activation_code_validto_date is null) and customers_id = 0', Time.now.to_s(:db))}
-
-  def payable
-    0
-  end
 
   def duration
     case duration_type

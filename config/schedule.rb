@@ -36,5 +36,8 @@ end
 #every 1.day, :at => '0:35 am' do  
 #  runner "Product.get_product_home"  
 #end
+every 1.day, :at => '11:55 am' do  
+  runner "Product.get_product_home_adult"  
+end
 
 # Learn more: http://github.com/javan/whenever
