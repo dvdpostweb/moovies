@@ -302,7 +302,45 @@ font-weight: bold;
 
 }
 
+.more_movies {
+  padding-top:15px;
+  padding-right:40px;
+  font-size:16px;
+}
 
+#new-infinity-wrap .more_movies a {
+     background: url("/assets/play.gif") no-repeat scroll 0 0 transparent;
+     color: #98D321;
+     font-size: 22px;
+     font-weight: bold;
+     padding-left: 27px;
+ }
+ 
+#new-alacarte-wrap .more_movies a {
+      background: url("/assets/play_alacarte.gif") no-repeat scroll 0 0 transparent;
+      color: #66CCCC;
+      font-size: 22px;
+      font-weight: bold;
+      padding-left: 27px;
+  }
+  
+  
+  
+ .adult #new-infinity-wrap .more_movies a {
+       background: url("/assets/play_adult.gif") no-repeat scroll 0 0 transparent;
+       color: #993399;
+       font-size: 22px;
+       font-weight: bold;
+       padding-left: 27px;
+   }
+
+ .adult #new-alacarte-wrap .more_movies a {
+        background: url("/assets/play_alacarte_adult.gif") no-repeat scroll 0 0 transparent;
+        color: #C36EC3;
+        font-size: 22px;
+        font-weight: bold;
+        padding-left: 27px;
+    }
 
 #new-infinity-wrap li, #new-alacarte-wrap li {
     float: left;
