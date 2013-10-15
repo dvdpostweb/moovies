@@ -21,6 +21,7 @@ class StreamingProduct < ActiveRecord::Base
   scope :not_prefered, lambda {|language_id| where("language_id != :language_id and (subtitle_id != :language_id or subtitle_id is null)",{:language_id => language_id})}
   scope :alpha, where(:source => 'ALPHANETWORKS')
   scope :country, lambda {|country| where(:country => country)}
+  scope :hd, where(:quality => ['720p', '1080p'])
   
   scope :group_by_version, :group => 'language_id, subtitle_id'
   scope :group_by_language, :group => 'language_id'

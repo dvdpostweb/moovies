@@ -511,7 +511,11 @@ class Product < ActiveRecord::Base
       end
     end
   end
-  
+
+  def hd?(country)
+    self.get_vod(country).hd.count > 0
+  end
+
   def svod?
     !svod_dates.svod.empty?
   end
