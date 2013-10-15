@@ -3,6 +3,41 @@ Moovies::Application.routes.draw do
   root :to => 'home#index'
   resource :ogone, :only => [:create]
   match 'flag' => 'home#flag'
+  scope '(:kind)', :kind => /normal|adult/ do
+    localized do
+  #    devise_for :customers, :controllers => { :registrations => "customers/registrations", :confirmations => "customers/confirmations" }
+  #    resources :customers do
+  #      match 'newsletter' => 'customers#newsletter', :only => [:update]
+  #      #mail_copy 'mail_copy', :controller => :customers, :action => :mail_copy, :only => [:update]
+  #      #newsletters_x 'newsletters_x', :controller => :customers, :action => :newsletters_x, :only => [:update]
+  #      #newsletter_x 'newsletter_x', :controller => :customers, :action => :newsletter_x, :conditions => {:method => :get}
+  #      #sexuality 'sexuality', :controller => :customers, :action => :sexuality, :only => [:update]
+  #      resource 'addresses', :only => [:edit, :update, :create]
+  #      resource 'suspension', :only => [:new, :create, :destroy]
+  #      resource 'promotion', :only => [:show, :edit]
+  #      resource 'images', :only => [:create]
+  #
+  #      resource :payment_methods, :only => [:edit, :update, :show]
+  #      resources :reviews, :only => [:index]
+  #    end
+  #     match 'info/:page_name' => 'info#index', :as => :info
+  #    resources :actors, :only => [:index], concerns: :productable
+  #    resources :products, :only => [:index, :show] do
+  #      resource :rating, :only => :create
+  #      resources :reviews, :only => [:new, :create]
+  #      resources :tokens, :only => [:new, :create]
+  #      match 'step' => 'products#step'
+  #      match 'awards'=> 'products#awards'
+  #      match 'seen' => 'products#seen'
+  #      match 'trailer' => 'products#trailer'
+  #      match 'uninterested' => 'products#uninterested'
+  #      match 'action' => 'products#action'
+  #      match 'log' => 'products#log'
+  #    end
+  #    resources :phone_requests, :only => [:new, :create, :index]
+  #    match 'search/(:search)' => 'search#index', :as => :search
+    end
+  end
   scope ':locale/(:kind)', :locale => /en|fr|nl/, :kind => /normal|adult/ do
     match "/" => 'home#index', :as => :root_localize
     match "validation" => 'home#validation'
@@ -72,41 +107,7 @@ Moovies::Application.routes.draw do
     get ':id' => "promotions#show", :as => :promotion_localize, :id => /samsung|promotion/
     post ':id' => "promotions#create", :as => :promotion_localize, :id => /samsung|promotion/
   end
-  #scope '(:kind)', :kind => /normal|adult/ do
-  #  localized do
-  #    devise_for :customers, :controllers => { :registrations => "customers/registrations", :confirmations => "customers/confirmations" }
-  #    resources :customers do
-  #      match 'newsletter' => 'customers#newsletter', :only => [:update]
-  #      #mail_copy 'mail_copy', :controller => :customers, :action => :mail_copy, :only => [:update]
-  #      #newsletters_x 'newsletters_x', :controller => :customers, :action => :newsletters_x, :only => [:update]
-  #      #newsletter_x 'newsletter_x', :controller => :customers, :action => :newsletter_x, :conditions => {:method => :get}
-  #      #sexuality 'sexuality', :controller => :customers, :action => :sexuality, :only => [:update]
-  #      resource 'addresses', :only => [:edit, :update, :create]
-  #      resource 'suspension', :only => [:new, :create, :destroy]
-  #      resource 'promotion', :only => [:show, :edit]
-  #      resource 'images', :only => [:create]
-  #
-  #      resource :payment_methods, :only => [:edit, :update, :show]
-  #      resources :reviews, :only => [:index]
-  #    end
-  #    match 'info/:page_name' => 'info#index', :as => :info
-  #    resources :actors, :only => [:index], concerns: :productable
-  #    resources :products, :only => [:index, :show] do
-  #      resource :rating, :only => :create
-  #      resources :reviews, :only => [:new, :create]
-  #      resources :tokens, :only => [:new, :create]
-  #      match 'step' => 'products#step'
-  #      match 'awards'=> 'products#awards'
-  #      match 'seen' => 'products#seen'
-  #      match 'trailer' => 'products#trailer'
-  #      match 'uninterested' => 'products#uninterested'
-  #      match 'action' => 'products#action'
-  #      match 'log' => 'products#log'
-  #    end
-  #    resources :phone_requests, :only => [:new, :create, :index]
-  #    match 'search/(:search)' => 'search#index', :as => :search
-  #  end
-  #end
+  
   
   get ':id' => "promotions#show", defaults: { format: 'choose' }, :as => :promotion, :id => /smarttv|radio_contact|samsung|nostalgie/
   post ':id' => "promotions#create", defaults: { format: 'choose' }, :as => :promotion, :id => /smarttv|radio_contact|samsung|nostalgie/
