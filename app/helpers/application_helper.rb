@@ -144,5 +144,4 @@ module ApplicationHelper
       code
     end
   end
-  
 end

@@ -97,6 +97,7 @@ class Product < ActiveRecord::Base
   sphinx_scope(:by_package)               {|package_id|       {:with =>          {:package_id => package_id}}}
   sphinx_scope(:random)                   {{:order =>         '@random'}}
   sphinx_scope(:by_new)                   {{:with =>          {:year => 2.years.ago.year..Date.today.year}}}
+  sphinx_scope(:hd)                       {{:with =>          {:hd => 1}}}
   sphinx_scope(:order)                    {|order, sort_mode| {:order => order, :sort_mode => sort_mode}}
   sphinx_scope(:group)                    {|group,sort|       {:group_by => group, :group_function => :attr, :group_clause   => sort}}
   sphinx_scope(:limit)                    {|limit|            {:limit => limit}}
@@ -436,6 +437,10 @@ class Product < ActiveRecord::Base
   end
   def self.get_view_mode(products, options)
     case options[:view_mode].to_sym
+    when :svod_hd
+        products.hd
+    when :tvod_hd
+        products.hd
     when :recent
       products.recent
     when :svod_new
@@ -511,7 +516,11 @@ class Product < ActiveRecord::Base
       end
     end
   end
-  
+
+  def hd?(country)
+    self.get_vod(country).hd.count > 0
+  end
+
   def svod?
     !svod_dates.svod.empty?
   end
