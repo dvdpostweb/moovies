@@ -47,7 +47,7 @@ class OgonesController < ApplicationController
             recurring = nil
           end
           
-          price = @discount.promo_price
+          price = @promo.promo_price
           if price > 0
             abo_action = 7
           else
@@ -59,7 +59,12 @@ class OgonesController < ApplicationController
           activation = Activation.find(current_customer.promo_id)
           @promo = activation
           action = Subscription.action[:creation_with_activation]
-          price = 0
+          price = @promo.promo_price
+          if price > 0
+            abo_action = 7
+          else
+            abo_action = 17
+          end
           duration = activation.duration
           auto_stop = activation.auto_stop
           recurring = 0

@@ -17,7 +17,11 @@ class Activation < ActiveRecord::Base
   alias_attribute :promo_text_en, :activation_text_en
   alias_attribute :group_id, :activation_group
   alias_attribute :payable, :activation_waranty
-  
+  alias_attribute :type, :activation_type
+  alias_attribute :value, :activation_value
+
+  has_one :subscription_type, :primary_key => :activation_products_id, :foreign_key => :products_id
+
   scope :by_name, lambda {|name| where(:activation_code => name)}
   scope :available, lambda {where('(activation_code_validto_date > ? or activation_code_validto_date is null) and customers_id = 0', Time.now.to_s(:db))}
 
@@ -37,6 +41,18 @@ class Activation < ActiveRecord::Base
   end
 
   def promo_price
-    0
+      abo_price = subscription_type.product.price.to_f
+      case self.type
+        #total = price - X%
+        when 1
+          price = (abo_price - (self.value / 100 * abo_price)).round(2)
+        # tot = X € 
+        when 2
+          price = self.value
+        # tot = price - X€
+        when 3
+          price = abo_price - self.value
+      end
+    price.to_f
   end
 end
