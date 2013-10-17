@@ -36,9 +36,20 @@
         <%= form_tag promotion_canva_path(:id => params[:id]), :id => 'form_step' do %>
         <div align="center">
           <span>
-           <%= t('.serie') %>  <br />
+          <h3>  Inscrivez-vous pour profiter de
+            <strong>4 films gratuits</strong>
+            *</h3><br />
+            
+         
+            <p style="float: left; padding-left: 20px; margin-bottom: 5px;">Votre adresse email:<br />
+                      <input class="inputs_promo_code" id='email2' type="text"  name="email_address_step" autocomplete="off" value="" size="40" />
+                    </p>
+                    <p style="float: right; padding-right: 20px; margin-bottom: 5px;">Votre mot de passe :<br />
+                      <input class="inputs_promo_code" id='password2' type="password" name="password_step" size="40"  autocomplete="off" value=""  />
+
+                    </p>
+   <div style="clear:both;"></div>
             <%= "<div id='error'>#{t('.error')}</div>".html_safe if @error %>
-            <%= text_field_tag(:code, @code, :id => 'code3', :size => 20, :class => 'inputs_promo_code') %><br />
           </span>
         </div>
         <p class="news">
