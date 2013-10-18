@@ -1,7 +1,10 @@
 class CustomFailure < Devise::FailureApp
   def redirect_url
+    
     if warden_message == :unconfirmed
       step_path(:id => :confirm)
+    elsif params[:return_url]
+      params[:return_url]
     else
       super
     end
