@@ -159,7 +159,9 @@ html, body{
 #promo_content h3 {
   font-size: 20px;
 }
-
+.canvas2 #promo_content h3 {
+  margin: 0 0 10px 0;
+}
 #promo_form p.news {
   font-size: 12px;
   margin: 0 0 15px 0;
@@ -394,4 +396,8 @@ ul {
 
 #promo_form .inputs_promo_code {
   width:180px;
+}
+.label
+{
+  float: left; padding-left: 20px; margin-bottom: 5px;
 }

@@ -33,23 +33,21 @@
       </h1>
       <div id="promo_form">
         <h2><%= t2('subtitle', @promo.name).html_safe %></h2>
-        <%= form_tag promotion_canva_path(:id => params[:id]), :id => 'form_step' do %>
+        <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:id => 'new_customer'}) do |f| %>
         <div align="center">
           <span>
-          <h3>  Inscrivez-vous pour profiter de
-            <strong>4 films gratuits</strong>
-            *</h3><br />
-            
-         
-            <p style="float: left; padding-left: 20px; margin-bottom: 5px;">Votre adresse email:<br />
-                      <input class="inputs_promo_code" id='email2' type="text"  name="email_address_step" autocomplete="off" value="" size="40" />
-                    </p>
-                    <p style="float: right; padding-right: 20px; margin-bottom: 5px;">Votre mot de passe :<br />
-                      <input class="inputs_promo_code" id='password2' type="password" name="password_step" size="40"  autocomplete="off" value=""  />
-
-                    </p>
-   <div style="clear:both;"></div>
-            <%= "<div id='error'>#{t('.error')}</div>".html_safe if @error %>
+          <h3><%= t2('.promo', @promo.name).html_safe %></h3>
+            <p class='label'><%= t '.email_label' %> :<br />
+              <%= f.text_field :email, :class => 'inputs_promo_code', :size => '40', :tye => 'text' %>
+              
+            </p>
+            <p class='label'><%= t '.pass_label' %> :<br />
+               <%= f.password_field :password, :class => 'inputs_promo_code', :size => '40', :maxlength => '40' %>
+            </p>
+            <%= f.hidden_field :code, :value => 'PRXADN' %>
+            <%= hidden_field_tag :return_url, promotion_canva_path(:id => params[:id]) %>
+            <div style="clear:both;"></div>
+            <%= "<div id='error'>#{t('.error')}</div>".html_safe if alert && !alert.empty? %>
           </span>
         </div>
         <p class="news">
@@ -112,14 +110,19 @@
           </tr>
         </table>
       </div>
-      <%= form_tag promotion_canva_path(:id => params[:id]), :id => 'form_step2' do %>
+      <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:id => 'new_customer2'}) do |f| %>
       <div id="area_promo">
         <h2><%= t2('promo', @promo.name).html_safe %></h2>
-        <div align="center" class='form_explain'><%= t('.serie') %><br><%= "<div id='error'>#{t('.error')}</div>".html_safe if @error %><%= text_field_tag(:code, @code, :id => 'code4', :size => 20, :class => 'inputs_promo_code') %></div>
-        <p class="news_form">
-          <%= check_box_tag 'marketing', 1, @checked, :class => :marketing3, :id => 'mark2' %>
-          <%= t('.accepteconditions') %>
+        <p class='label'><%= t '.email_label' %> :<br />
+          <%= f.text_field :email, :class => 'inputs_promo_code', :size => '40', :tye => 'text' %>
         </p>
+        <p class='label'><%= t '.pass_label' %> :<br />
+           <%= f.password_field :password, :class => 'inputs_promo_code', :size => '40', :maxlength => '40' %>
+        </p>
+        <%= f.hidden_field :code, :value => 'PRXADN' %>
+        <%= hidden_field_tag :return_url, promotion_canva_path(:id => params[:id]) %>
+        <div style="clear:both;"></div>
+        <%= "<div id='error'>#{t('.error')}</div>".html_safe if alert && !alert.empty? %>
         <div class="clearfix"></div>
         <p align="center"><input type="submit" border="0" align="absmiddle" class="promo_button" id="submit_id4" name="sent" value="<%= t('.essayer') %>"></p>
       </div>
