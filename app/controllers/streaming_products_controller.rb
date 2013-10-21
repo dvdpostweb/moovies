@@ -202,9 +202,9 @@ class StreamingProductsController < ApplicationController
   private
   def notify_country_error(customer_id, country_id, imdb_id, error)
     begin
-      Airbrake.notify(:error_message => "customer have a problem with VOD customer_id : #{customer_id} country_id: #{country_id} imdb_id: #{imdb_id}, error #{error}", :backtrace => $@, :environment_name => ENV['RAILS_ENV'])
+      Airbrake.notify(:error_message => "customer have a problem with VOD customer_id : #{customer_id} country_id: #{country_id} imdb_id: #{imdb_id}, error #{error} ip #{session[:my_ip]}", :backtrace => $@, :environment_name => ENV['RAILS_ENV'])
     rescue => e
-      logger.error("customer have a problem with VOD customer_id : #{customer_id} country_id: #{country_id} imdb_id: #{imdb_id} error #{error}")
+      logger.error("customer have a problem with VOD customer_id : #{customer_id} country_id: #{country_id} imdb_id: #{imdb_id} error #{error} ip #{session[:my_ip]}")
       logger.error(e.backtrace)
     end
   end
