@@ -125,10 +125,6 @@ module ApplicationHelper
     current_filter
   end
   
-  def streaming_access?
-    true
-  end
-  
   def image_url(source)
     URI.join(root_url, image_path(source))
   end

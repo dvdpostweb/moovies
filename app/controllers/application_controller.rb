@@ -102,7 +102,6 @@ class ApplicationController < ActionController::Base
           my_ip = request.remote_ip
           session[:my_ip] = my_ip
         end
-        Rails.logger.debug { "@@@#{request.env["HTTP_X_FORWARDED_FOR"]} #{request.remote_ip }" }
         c = GeoIP.new('GeoIP.dat').country(my_ip)
         if c.country_code == 0 && Rails.env == "production" && ! /^192(.*)/.match(my_ip) && ! /^172(.*)/.match(my_ip) && ! /^10(.*)/.match(my_ip) && ! /^127(.*)/.match(my_ip)
           notify_airbrake("country code is empty ip : #{my_ip}") 
