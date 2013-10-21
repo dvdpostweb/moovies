@@ -6,7 +6,9 @@
 					<% token = current_customer.get_token(@product.imdb_id) %>
 					<% token_valid = token.nil? ? false : token.validate?(request.remote_ip) %>
 				  <% if @product.svod_dates_online.first || token_valid %>
-						window.location.href = '<%= streaming_product_path(:id => @product.imdb_id) %>'
+				    <% if params[:origin] == 'products' %>
+						  window.location.href = '<%= streaming_product_path(:id => @product.imdb_id) %>' 
+						<% end %>
 					<% else %>
 						<% if current_customer.payable? %>
 							jQuery.facebox('<%= escape_javascript(render(:partial => 'products/tvod_alert', :locals => {:product => @product})) %>')

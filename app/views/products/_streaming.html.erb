@@ -6,5 +6,5 @@
     <% title = raw t('.watch_tvod', :price => product.get_vod_online(session[:country_id]).first.ppv_price) %>
     <% class_name = "alacarte action_btn" %>
   <% end %>
-  <%= link_to  title, product_action_path(:product_id => product.to_param), :class => class_name %>
+  <%= link_to  title, product_action_path(:product_id => product.to_param, :origin => :products), :class => class_name %>
 <% end %>

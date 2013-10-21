@@ -182,7 +182,9 @@ class ProductsController < ApplicationController
   end
 
   def action
-    
+    if request.xhr?
+      render :layout => false
+    end
   end
 
   def log

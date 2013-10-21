@@ -22,6 +22,18 @@
 //= require streaming_products
 //= require jquery.cycle.all.min
 $(function() {
+  if ($('.action_face').html()!=undefined)
+  {
+    url = $('.action_face').html()
+    jQuery.facebox(function() {
+      $.ajax({
+        url: url,
+        dataType: 'html',
+        type: 'GET',
+        success: function(data) { jQuery.facebox(data); }
+      });
+    });
+  }
 	$("#checkout_confirmation").submit();
 	
   $('.facebox').on('click', function() {
