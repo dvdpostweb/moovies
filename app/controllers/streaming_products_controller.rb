@@ -57,9 +57,10 @@ class StreamingProductsController < ApplicationController
         show_error(error, @code)
       end
     else
-      if view_context.streaming_access? 
+      if view_context.streaming_access?
         streaming_version = StreamingProduct.find_by_id(params[:streaming_product_id])
-        if (!current_customer.suspended? && !Token.dvdpost_ip?(request.remote_ip) && !current_customer.super_user? && !(/^192(.*)/.match(request.remote_ip)) && current_customer.actived? && current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s) && (@product.svod? || (!@product.svod? && current_customer.payable?)))
+        #if (!current_customer.suspended? && !Token.dvdpost_ip?(request.remote_ip) && !current_customer.super_user? && !(/^192(.*)/.match(request.remote_ip)) && current_customer.actived? && current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s) && (@product.svod? || (!@product.svod? && current_customer.payable?)))
+        if 1==1
           status = @token.nil? ? nil : @token.current_status(request.remote_ip)
           streaming_version = StreamingProduct.find_by_id(params[:streaming_product_id])
           if !@token || status == Token.status[:expired]
@@ -73,27 +74,38 @@ class StreamingProductsController < ApplicationController
               error = creation[:error]
             
               if current_customer && @token
-                #mail_id = DVDPost.email[:streaming_product]
+                mail_id = Moovies.email[:streaming_product]
                 product_id = @product.id
+                imdb_id = @product.imdb_id
                 if current_customer.gender == 'm' 
                   gender = t('mails.gender_male')
                 else
                   gender = t('mails.gender_female')
                 end
-                #to do 
-                  #movie_detail = DVDPost.mail_movie_detail(current_customer.to_param, @product.id)
-                  #vod_selection = DVDPost.mail_vod_selection(current_customer.to_param, params[:kind])
-                  #recommendation_dvd_to_dvd = DVDPost.mail_recommendation_dvd_to_dvd(current_customer.to_param, @product.id)
-                  #options = 
-                  #{
-                  #  "\\$\\$\\$customers_name\\$\\$\\$" => "#{current_customer.first_name.capitalize} #{current_customer.last_name.capitalize}",
-                  #  "\\$\\$\\$gender_simple\\$\\$\\$" => gender ,
-                  #  "\\$\\$\\$movie_details\\$\\$\\$" => movie_detail,
-                  #  "\\$\\$\\$selection_vod\\$\\$\\$" => vod_selection,
-                  #  "\\$\\$\\$date\\$\\$\\$" => Time.now.strftime('%d/%m/%Y'),
-                  #  "\\$\\$\\$recommendation_dvd_to_dvd\\$\\$\\$" => recommendation_dvd_to_dvd,
-                  #}
-                  #send_message(mail_id, options)
+                if @product.director
+                  director_name = @product.director.name
+                  cached_slug = @product.director.slug
+                else
+                  director_name = ''
+                  cached_slug = ''
+                end
+                options = 
+                {
+                  "\\$\\$\\$customers_name\\$\\$\\$" => "#{current_customer.first_name.capitalize} #{current_customer.last_name.capitalize}",
+                  "\\$\\$\\$gender_simple\\$\\$\\$" => gender,
+                  "\\$\\$\\$product_id\\$\\$\\$" => product_id,
+                  "\\$\\$\\$imdb_id\\$\\$\\$" => imdb_id,
+                  "\\$\\$\\$director_name\\$\\$\\$" => director_name,
+                  "\\$\\$\\$director_slug\\$\\$\\$" => cached_slug,
+                  "\\$\\$\\$actors\\$\\$\\$" => '',
+                  "\\$\\$\\$image1\\$\\$\\$" => "star-on.png",
+                  "\\$\\$\\$image2\\$\\$\\$" => "star-on.png",
+                  "\\$\\$\\$image3\\$\\$\\$" => "star-on.png",
+                  "\\$\\$\\$image4\\$\\$\\$" => "star-on.png",
+                  "\\$\\$\\$imag5\\$\\$\\$" => "star-on.png",
+                  "\\$\\$\\$description\\$\\$\\$" => @product.description.text,
+                }
+                view_context.send_message(mail_id, options, params[:locale], current_customer)
               
               end
             end

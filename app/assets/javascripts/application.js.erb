@@ -49,6 +49,9 @@ $(function() {
     });
     return false;
   });
+  $('body').delegate('.facebox_close', 'click', function() {
+    $(document).trigger('close.facebox')
+  })
   $('#catalogue_menu, #account_menu').on('mouseover',function(){
     $('.dropdown').hide()
     id = $(this).attr('id').replace('_menu','')
