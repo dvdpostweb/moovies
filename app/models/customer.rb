@@ -26,7 +26,9 @@ class Customer < ActiveRecord::Base
   alias_attribute :auto_stop,                    :customers_abo_auto_stop_next_reconduction
   alias_attribute :next_abo_type_id,             :customers_next_abo_type
   alias_attribute :promo_type,                   :activation_discount_code_type
+  alias_attribute :next_promo_id,                :customers_next_discount_code
   alias_attribute :promo_id,                     :activation_discount_code_id
+  
   alias_attribute :step,                         :customers_registration_step
   alias_attribute :locked,                       :customers_locked__for_reconduction
   validates_length_of :first_name, :minimum => 2, :on => :update
@@ -117,6 +119,7 @@ class Customer < ActiveRecord::Base
         self.abo_type_id = @activation.abo_type_id
         self.next_abo_type_id = @activation.next_abo_type_id
         self.group_id = @activation.group_id
+        self.next_promo_id = @activation.next_discount_id
       end
   end
   def email_change
