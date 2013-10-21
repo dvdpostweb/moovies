@@ -54,7 +54,7 @@ module Moovies
       HashWithIndifferentAccess.new.merge({
         :sponsorships_invitation    => 446,
         :sponsorships_son           => 447,
-        :streaming_product          => 571,
+        :streaming_product          => 615,
         :streaming_product_free     => 585,
         :message_free               => 578,
         :welcome                    => 556,
