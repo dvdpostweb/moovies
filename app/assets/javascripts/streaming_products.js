@@ -93,15 +93,11 @@ $(function() {
  else if ($('#warning').html()!=undefined)
   {
     url = $('#warning').html();
-    jQuery.facebox(function() {
-      $.ajax({
-        url: url,
-        dataType: 'html',
-        type: 'GET',
-        success: function(data) { jQuery.facebox(data); }
+      $.ajax({dataType: 'script',
+         url: url,
+         type: 'get',
+         data: {},
       });
-    });
-    
   }
   
   $('#streaming').delegate("#more" ,"click", function(){

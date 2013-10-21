@@ -67,3 +67,6 @@
   </div>
   <div style="display:none" id="returnStatus"></div>
   <div style="display:none" id ="product_id"><%= @product.id %></di>
+    <% if params[:warning].to_i == 1 && (@token.nil? || !@token_valid )  %>
+      <div id='warning' style='display:none'><%= product_action_path(:product_id => @product.to_param, :origin => 'streaming', :hide_btn => 1) %></div>
+    <% end %>
