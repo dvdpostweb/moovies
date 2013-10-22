@@ -74,37 +74,60 @@ class StreamingProductsController < ApplicationController
               error = creation[:error]
             
               if current_customer && @token
-                mail_id = Moovies.email[:streaming_product]
+                type = "#{@product.svod? ? 'svod' : 'tvod'}_#{params[:kind]}".to_sym
+                mail_id = Moovies.email[type]
                 product_id = @product.id
                 imdb_id = @product.imdb_id
-                if current_customer.gender == 'm' 
+                if current_customer.gender == 'm'
                   gender = t('mails.gender_male')
                 else
                   gender = t('mails.gender_female')
                 end
-                if @product.director
-                  director_name = @product.director.name
-                  cached_slug = @product.director.slug
+                
+                if @product.description
+                  image = @product.description.image
+                  description = @product.description.text
                 else
-                  director_name = ''
-                  cached_slug = ''
+                  image = ''
+                  description = ''
                 end
+                stars = view_context.ratings_array(@product.rating)
                 options = 
                 {
                   "\\$\\$\\$customers_name\\$\\$\\$" => "#{current_customer.first_name.capitalize} #{current_customer.last_name.capitalize}",
                   "\\$\\$\\$gender_simple\\$\\$\\$" => gender,
                   "\\$\\$\\$product_id\\$\\$\\$" => product_id,
                   "\\$\\$\\$imdb_id\\$\\$\\$" => imdb_id,
-                  "\\$\\$\\$director_name\\$\\$\\$" => director_name,
-                  "\\$\\$\\$director_slug\\$\\$\\$" => cached_slug,
-                  "\\$\\$\\$actors\\$\\$\\$" => '',
-                  "\\$\\$\\$image1\\$\\$\\$" => "star-on.png",
-                  "\\$\\$\\$image2\\$\\$\\$" => "star-on.png",
-                  "\\$\\$\\$image3\\$\\$\\$" => "star-on.png",
-                  "\\$\\$\\$image4\\$\\$\\$" => "star-on.png",
-                  "\\$\\$\\$imag5\\$\\$\\$" => "star-on.png",
-                  "\\$\\$\\$description\\$\\$\\$" => @product.description.text,
+                  "\\$\\$\\$actors\\$\\$\\$" => view_context.actors_list(@product),
+                  "\\$\\$\\$image1\\$\\$\\$" => stars[0],
+                  "\\$\\$\\$image2\\$\\$\\$" => stars[1],
+                  "\\$\\$\\$image3\\$\\$\\$" => stars[2],
+                  "\\$\\$\\$image4\\$\\$\\$" => stars[3],
+                  "\\$\\$\\$image5\\$\\$\\$" => stars[4],
+                  "\\$\\$\\$name\\$\\$\\$" => @product.title,
+                  "\\$\\$\\$year\\$\\$\\$" => @product.year,
+                  "\\$\\$\\$image\\$\\$\\$" => image,
+                  "\\$\\$\\$description\\$\\$\\$" => description,
                 }
+                if params[:kind] == :adult
+                  if @product.studio
+                    studio_name = @product.studio.name
+                    studio_id = @product.studio.id
+                  else
+                    studio_name = ''
+                    studio_id = ''
+                  end
+                  options = options.merge("\\$\\$\\$studio_name\\$\\$\\$" => studio_name, "\\$\\$\\$studio_slug\\$\\$\\$" => studio_id)
+                else
+                  if @product.director
+                    director_name = @product.director.name
+                    cached_slug = @product.director.slug
+                  else
+                    director_name = ''
+                    cached_slug = ''
+                  end
+                  options = options.merge("\\$\\$\\$director_name\\$\\$\\$" => director_name, "\\$\\$\\$director_slug\\$\\$\\$" => cached_slug)
+                end
                 view_context.send_message(mail_id, options, params[:locale], current_customer)
               
               end
