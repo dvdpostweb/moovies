@@ -50,18 +50,6 @@ module Moovies
       })
     end
 
-    def email
-      HashWithIndifferentAccess.new.merge({
-        :sponsorships_invitation    => 446,
-        :sponsorships_son           => 447,
-        :streaming_product          => 615,
-        :streaming_product_free     => 585,
-        :message_free               => 578,
-        :welcome                    => 556,
-        :lavenir                   => 560
-      })
-    end
-
     def fb_url
       HashWithIndifferentAccess.new.merge({
         :fr => "https://www.facebook.com/pages/Plush-Belgique/204628663048936",
@@ -297,6 +285,10 @@ module Moovies
       HashWithIndifferentAccess.new.merge({
         :message_free               => 578,
         :welcome                    => 606,
+        :svod_normal                => 615,
+        :tvod_normal                => 616,
+        :svod_adult                 => 617,
+        :tvod_adult                 => 618,
       })
     end
 

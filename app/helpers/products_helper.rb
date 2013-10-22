@@ -536,4 +536,31 @@ module ProductsHelper
       end
     end
   end
+
+  def ratings_array(rating)
+    rating = rating[:rating]
+    rating_array = []
+    5.times do |i|
+      i += 1
+      if rating >=2
+        rating_array << 'star-on.png'
+      elsif rating == 1
+        rating_array << 'star-half.png'
+      else
+        rating_array << 'star-off.png'        
+      end
+      rating -= 2
+    end
+    rating_array
+  end
+
+  def actors_list(product)
+    list = []
+    if product.actors.size > 0
+      product.actors.each do |actor|
+        list << "<a href='http://www.plush.be/#{I18n.locale}/#{params[:kind] == :adult ? 'adult/' : ''}actors/#{actor.slug}/products' style='color:  rgb(43, 56, 64); text-decoration: none;' target='_blank'>#{actor.name}</a>"
+      end
+    end
+    list.join(', ')
+  end
 end
