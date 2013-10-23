@@ -485,3 +485,251 @@ width: 902px;
 {
   font-size: 32px;
 }
+
+/*****************/
+/* TV connect  */
+/*****************/
+
+#top_box {
+    background-attachment: scroll;
+    background-color: #FFFFFF;
+    background-image: url("/assets/tvconnect/bg_connection.jpg");
+        background-position: -8px 106px;
+    background-repeat: no-repeat no-repeat;
+   height: 538px;
+    line-height: 140%;
+}
+
+#middle_box .options_box h2 {
+    font-size: 19px;
+    height: 50px;
+    line-height: 21px;
+        padding: 8px 15px 19px 44px;
+    text-align: left;
+}
+
+#middle_box .options_box .step1 h2 {
+    background: url("/assets/promotions/1.gif") no-repeat scroll 4px 5px transparent;
+}
+#middle_box .options_box .step2 h2 {
+    background: url("/assets/promotions/2.gif") no-repeat scroll 4px 5px transparent;
+}
+#middle_box .options_box .step3 h2 {
+    background: url("/assets/promotions/3.gif") no-repeat scroll 4px 5px transparent;
+}
+
+#middle_box ul.list_options li input, .guide_hidden {
+    display: none;
+}
+#middle_box .options_box {
+    background-color: #FFFFFF;
+    display: block;
+    float: left;
+    margin-right: 16px;
+    width: 298px;
+}
+#middle_box .options_top {
+    height: 240px;
+    text-align: center;
+    font-size:12px;
+}
+
+#left_box, #right_box {
+    float: right;
+    width: 481px;
+}
+#right_box {
+  padding-top:20px;
+}
+#left_box h3 {
+    background: url("/assets/promotions/square.gif") no-repeat scroll 0 16px transparent;
+    font-size: 24px;
+    padding-left: 22px;
+    padding-top: 12px;
+    
+}
+
+#top_box a {color:#98D321;
+  font-weight:bold;}
+#top_box h1 {
+  font-size:32px;
+  line-height:95%;
+}
+
+
+
+#top_box p#intro_copy {
+    padding-top: 15px;
+    padding-bottom:24px;
+ color: #212A31;
+}
+
+#guide_smallprint {
+    background-color: #FFFFFF;
+    border: 1px solid #ADADAD;
+    line-height: 140%;
+    margin-bottom: 18px;
+    padding-top: 15px;
+     padding-bottom: 15px;
+    text-align: center;
+    width: 942px;
+}
+
+
+
+#middle_box {
+color:#212A31;
+}
+
+#middle_box ul.list_options li .guide_checkbox {
+  margin:28px 10px 28px 0;
+}
+
+
+.guide_checkbox {
+  background-color:#FFFFFF;
+  border:1px solid #ABAB99;
+  float:left;
+  height:13px;
+  overflow:hidden;
+  width:13px;
+}
+
+.guide_selected, .guide_chosen {
+    background-color: #A82D24;
+    border: 1px solid #FFFFFF;
+}
+
+
+.vga_fr {
+    background: url(image_path('tvconnect/fr/vga.gif')) no-repeat scroll 0 0 #FFFFFF;
+}
+.vga_en {
+    background: url(image_path('tvconnect/en/vga.gif')) no-repeat scroll 0 0 #FFFFFF;
+}
+.vga_nl {
+    background: url(image_path('tvconnect/nl/vga.gif')) no-repeat scroll 0 0 #FFFFFF;
+}
+.hdmi {
+    background: url(image_path('tvconnect/hdmi.gif')) no-repeat scroll 0 0 #FFFFFF;
+}
+.dvi {
+    background: url(image_path('tvconnect/dvi.gif'))  no-repeat scroll 0 0 #FFFFFF;
+}
+.svideo {
+    background: url(image_path('tvconnect/svideo.gif')) no-repeat scroll 0 0 #FFFFFF;
+}
+.scart {
+    background: url(image_path('tvconnect/scart.gif')) no-repeat scroll 0 0 #FFFFFF;
+}
+.component {
+    background: url(image_path('tvconnect/component.gif')) no-repeat scroll 0 0 #FFFFFF;
+}
+
+#content_info #audio_suggestion h3, #content_info #video_suggestion h3{
+    font-size: 20px!important;
+    padding-bottom: 0px!important;
+}
+
+#middle_box ul.list_options li {
+  cursor:pointer;
+  display:block;
+  height:72px;
+  line-height:70px;
+  list-style-type:none;
+  margin-bottom:5px;
+  margin-left:7px;
+  padding-left:137px;
+}
+
+#middle_box ul.list_options li {
+  cursor:pointer;
+  display:block;
+  height:72px;
+  line-height:70px;
+  list-style-type:none;
+  margin-bottom:5px;
+  margin-left:7px;
+  padding-left:137px;
+}
+
+.guide_checkbox {
+  background-color:#FFFFFF;
+  border:1px solid #4C4545;
+  float:left;
+  height:13px;
+  overflow:hidden;
+  width:13px;
+}
+
+.guide_result {
+  background-attachment:scroll;
+  background-color:#FFFFFF;
+  background-position:0 0;
+  background-repeat:initial initial;
+  display:block;
+  height:90px;
+  width:200px;
+}
+p.cable_name {
+  text-align:center;
+}
+.result_card {
+  font-size:12px;
+  font-weight:bold;
+  text-align:center;
+}
+
+#vod-wrap h2 {
+  float:left;
+  font-size:2em;
+  margin-bottom:5px;
+}
+#middle_box .options_top h3 {
+  padding-top:8px;
+  text-align:left;
+}
+
+#middle_box #video_output, #middle_box #audio_output {
+  float:left;
+  margin:13px 0 0 13px;
+}
+#middle_box #video_input, #middle_box #audio_input {
+  float:right;
+  margin:12px -58px 0 0;
+}
+
+
+#middle_box .guide_buy {
+  background-color:#9ECA3B;
+    background-repeat:repeat no-repeat;
+    border:1px solid #7EA613;
+    border-bottom-left-radius:4px;
+    border-bottom-right-radius:4px;
+    border-top-left-radius:4px;
+    border-top-right-radius:4px;
+    box-shadow:rgba(255, 255, 255, 0.796875) 0 1px 1px inset;
+    color:#FFFFFF;
+    font-size:20px;
+    height:28px;
+    margin:12px 0 12px 30px;
+    padding:5px;
+    text-shadow:#72942A 0 -1px 0;
+    width:120px;
+  
+}
+
+
+#middle_box .options_top h3 {
+    padding-top: 8px;
+    text-align: left;
+}
+
+#middle_box .options_top h3, #middle_box .options_top p, #middle_box .options_top img, #middle_box .suggestion h3, #middle_box p.cable_name {
+    margin-bottom: 10px;
+}
+.li_selected, .li_chosen {
+
+    background-position: 0 -72px;
+}
+

@@ -1,0 +1,165 @@
+<div id="content_info">
+  <div class="top"></div>
+  <div id="main_box">
+    <div id="top_box">
+      <h1 title="How to watch streamed movies on your TV">Comment connecter votre PC à votre TV</h1>
+      <p id="intro_copy"> La grande majorité des téléviseurs possèdent une connectique dédié pour le pc qui permet de relier un laptop/ordinateur à une télévision. Tout ce dont vous avez besoin est un câble: une extrémité sera connectée à votre téléviseur et l’autre à votre ordinateur. <br />
+        C'est plus simple que vous ne le pensez...</p>
+      <div id="left_box">
+        <p>En répondant simplement aux <strong>2 questions ci-dessous</strong>, nous pourrons vous aider à trouver le bon câble.</p>
+        <h3>Vérifiez la connectique de votre ordinateur</h3>
+        <p>Observez les côtés, l'avant et l'arrière de votre ordinateur et cliquez sur la connectique correspondante.</p>
+        <h3>Vérifiez la connectique de votre téléviseur</h3>
+        <p>Observez les côtés, l'avant et l'arrière de votre téléviseur et cliquez sur la connectique correspondante.</p>
+      </div>
+      <div id="right_box">
+        <p>Dès que vous aurez acheté un câble adapté et que vous l’aurez connecté à votre ordinateur, vous pourrez aussitôt lire <a href="/fr/products?view_mode=streaming">nos films en streaming</a> et les faire passer sur votre TV</p>
+        <p>Ce service est accessible à tous les membres belges de DVDPost.</p>
+        <p> </p>
+        <p id="enjoy">Essayez et soyez convaincu par la qualité <a href="/fr/products?view_mode=streaming">des films en streaming.</a></p>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div id="guide_smallprint">
+      <p><strong>Nous espérons que les câbles que nous vous avons suggérés seront les bons.</strong> Si un problème persistait, veuillez alors consulter la notice de votre laptop/ordinateur et de votre téléviseur ou contactez votre revendeur pour de plus amples renseignements.</p>
+    </div>
+    <div id="middle_box">
+      <div class="options_box" id="box_output">
+       
+        <div class="options_top step1">
+          <img src="<%= image_path "/assets/tvconnect/computer.jpg" %>">
+          
+          <h2>Vérifiez la connectique 
+            de votre ordinateur 
+          </h2>
+          
+          <p>Sélectionnez la connectique correspondante</p>
+        </div>
+        <ul class="list_options" id="guide_output">
+          <li class="hdmi" id="out_hdmi">
+            <input type="radio" value="hdmi" id="out_hdmi" class="options_input" disabled="disabled" />
+            <div class="guide_checkbox"></div>
+            <p class="connector_type">HDMI</p>
+          </li>
+          <!--<li id="out_dvi" class="dvi">
+    <input disabled="disabled" class="options_input" id="out_dvi" value="dvi" type="radio">
+    <div class="guide_checkbox"></div>
+    <p class="connector_type">DVI</p>
+  </li>-->
+          <!-- removing mini dvi
+    <li id="out_minidvi" class="minidvi">
+        <input type="radio" class="options_input" id="out_minidvi" value="out_minidvi"/>
+        <div class="guide_checkbox"></div>
+        <p class="connector_type">Mini DVI</p>
+    </li>
+    -->
+          <li class="vga_fr li_chosen" id="out_vga">
+            <input type="radio" value="vga" id="out_vga" class="options_input" />
+               <div class="guide_checkbox guide_chosen"></div>
+            <p class="connector_type">VGA</p>
+          </li>
+          <!--<li id="out_svideo" class="svideo">
+    <input disabled="disabled" class="options_input" id="out_svideo" value="svideo" type="radio">
+    <div class="guide_checkbox"></div>
+    <p class="connector_type">S-Video</p>
+  </li>-->
+        </ul>
+      </div>
+      <div class="options_box" id="box_input">
+    
+        <div class="options_top step2">
+          <img src="<%= image_path "/assets/tvconnect/tv.jpg" %>">
+          <h2>Vérifiez la connectique 
+            de votre téléviseur</h2>
+
+          <p>Sélectionnez la connectique correspondante</p>
+        </div>
+        <ul id="guide_input" class="list_options" style="display: block;">
+          <li class="hdmi" id="in_hdmi" style="display: none;">
+            <input type="radio" value="hdmi" id="in_hdmi" class="options_input" disabled="disabled" />
+            <div class="guide_checkbox"></div>
+            <p class="connector_type">HDMI</p>
+          </li>
+          <!--<li class="dvi" id="in_dvi" style="display: none;">
+    <input type="radio" value="dvi" id="in_dvi" class="options_input" disabled="">
+    <div class="guide_checkbox"></div>
+    <p class="connector_type">DVI</p>
+  </li>-->
+          <li class="vga_fr" id="in_vga" style="">
+            <input type="radio" value="vga" id="in_vga" class="options_input" />
+            <div class="guide_checkbox guide_chosen"></div>
+            <p class="connector_type">VGA</p>
+          </li>
+          <li class="component" id="in_component" style="">
+            <input type="radio" value="component" id="in_component" class="options_input" disabled="disabled" />
+            <div class="guide_checkbox"></div>
+            <p class="connector_type">Component</p>
+          </li>
+          <li class="scart" id="in_scart" style="">
+            <input type="radio" value="scart" id="in_scart" class="options_input" disabled="disabled" />
+            <div class="guide_checkbox"></div>
+            <p class="connector_type">PERITEL</p>
+          </li>
+          <!--<li class="svideo" id="in_svideo" style="display: none;">
+    <input type="radio" value="svideo" id="in_svideo" class="options_input" disabled="">
+    <div class="guide_checkbox"></div>
+    <p class="connector_type">S-Video</p>
+  </li>
+  <li class="composite" id="in_composite" style="display: none;">
+    <input type="radio" value="composite" id="in_composite" class="options_input" disabled="">
+    <div class="guide_checkbox"></div>
+    <p class="connector_type">Composite</p>
+  </li>-->
+        </ul>
+      </div>
+      <div class="options_box" id="option_last">
+    
+        <div class="options_top step3">
+          <img src="<%= image_path "/assets/tvconnect/connect.jpg" %>">
+          <h2>Voici ce que nous 
+         vous suggérons</h2>
+
+          <p style="display: block;">Merci de compléter l’étape 1 et 2</p>
+        </div>
+        <div style="" id="video_suggestion" class="suggestion">
+          <h3>Pour connecter la vidéo:</h3>
+          <div id="video_result" class="guide_result">
+            <div id="video_output" class="result_card"> <img src="<%= image_path "/assets/tvconnect/res_vga.gif" %>" alt="VGA" />
+              <p>VGA</p>
+            </div>
+            <div id="video_input" class="result_card"> <img src="<%= image_path "/assets/tvconnect/res_vga.gif" %>" alt="VGA" />
+              <p>VGA</p>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <p class="cable_name"></p>
+          <a target="_blank" class="guide_buy" href="">Acheter maintenant</a> </div>
+        <div style="" id="audio_suggestion" class="suggestion">
+          <hr />
+          <h3>Pour connecter le son</h3>
+          <div class="guide_result" id="audio_result">
+            <div class="result_card" id="audio_output">  <img src="<%= image_path "/assets/tvconnect/minijack.gif" %>" alt="Mini Jack" />
+              <p>Mini Jack</p>
+            </div>
+            <div class="result_card" id="audio_input"> <img src="<%= image_path "/assets/tvconnect/rca.gif" %>" alt="RCA" />
+              <p>R/L RCA</p>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <p class="cable_name">Audio Y-Cable</p>
+          <a class="guide_buy" href="http://www.pixmania.be/be/fr/168111/art/hama/cable-rca-jack-stereo-mal.html" title="Buy Mini Jack to RCA cable or adaptor" target="_blank">Acheter maintenant</a> </div>
+      </div>
+      <div style='display:none'>
+        <div id='locale_db'>fr</div>
+        <div id='cable'>câble [out] vers [in]</div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</div>
+<div class="end"></div>
+</div>
+<div style='display:none'>
+  <div id='locale'>fr</div>
+</div>
+</div>
