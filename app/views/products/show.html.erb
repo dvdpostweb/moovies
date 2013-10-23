@@ -98,7 +98,7 @@
   <%= render :partial => 'products/left_column', :locals => {:filter => @filter, :countries => @countries} %>
   <% if params[:add].to_i == 1 %>
   <% submit_id = "p_#{@product.to_param}_#{rand(10)}"%>
-  <div id='add_p' style='display:none' class='action_face'><%= product_action_path(:product_id => @product.to_param, :origin => 'products') %></div>
+  <div id='add_p' style='display:none' class='action_face_js'><%= product_action_path(:product_id => @product.to_param, :origin => 'products') %></div>
   <% end %>
   <% if params[:review].to_i == 1 %>
   <div id='review' style='display:none' class='action_face'><%= new_product_review_path(:product_id => @product.to_param) %></div>
