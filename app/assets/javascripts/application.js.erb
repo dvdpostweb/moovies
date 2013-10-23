@@ -21,6 +21,7 @@
 //= require home
 //= require streaming_products
 //= require jquery.cycle.all.min
+//= require get_connected
 $(function() {
   if ($('.action_face').html()!=undefined)
   {
@@ -32,6 +33,14 @@ $(function() {
         type: 'GET',
         success: function(data) { jQuery.facebox(data); }
       });
+    });
+  }
+  if ($('.action_face_js').html()!=undefined)
+  {
+    $.ajax({dataType: 'script',
+       url: $('.action_face_js').html(),
+       type: 'get',
+       data: {},
     });
   }
 	$("#checkout_confirmation").submit();
