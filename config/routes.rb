@@ -5,37 +5,18 @@ Moovies::Application.routes.draw do
   match 'flag' => 'home#flag'
   scope '(:kind)', :kind => /normal|adult/ do
     localized do
-  #    devise_for :customers, :controllers => { :registrations => "customers/registrations", :confirmations => "customers/confirmations" }
-  #    resources :customers do
-  #      match 'newsletter' => 'customers#newsletter', :only => [:update]
-  #      #mail_copy 'mail_copy', :controller => :customers, :action => :mail_copy, :only => [:update]
-  #      #newsletters_x 'newsletters_x', :controller => :customers, :action => :newsletters_x, :only => [:update]
-  #      #newsletter_x 'newsletter_x', :controller => :customers, :action => :newsletter_x, :conditions => {:method => :get}
-  #      #sexuality 'sexuality', :controller => :customers, :action => :sexuality, :only => [:update]
-  #      resource 'addresses', :only => [:edit, :update, :create]
-  #      resource 'suspension', :only => [:new, :create, :destroy]
-  #      resource 'promotion', :only => [:show, :edit]
-  #      resource 'images', :only => [:create]
-  #
-  #      resource :payment_methods, :only => [:edit, :update, :show]
-  #      resources :reviews, :only => [:index]
-  #    end
-  #     match 'info/:page_name' => 'info#index', :as => :info
-  #    resources :actors, :only => [:index], concerns: :productable
-  #    resources :products, :only => [:index, :show] do
-  #      resource :rating, :only => :create
-  #      resources :reviews, :only => [:new, :create]
-  #      resources :tokens, :only => [:new, :create]
-  #      match 'step' => 'products#step'
-  #      match 'awards'=> 'products#awards'
-  #      match 'seen' => 'products#seen'
-  #      match 'trailer' => 'products#trailer'
-  #      match 'uninterested' => 'products#uninterested'
-  #      match 'action' => 'products#action'
-  #      match 'log' => 'products#log'
-  #    end
-  #    resources :phone_requests, :only => [:new, :create, :index]
-  #    match 'search/(:search)' => 'search#index', :as => :search
+      resources :products, :only => [:index, :show] do
+        resource :rating, :only => :create
+        resources :reviews, :only => [:new, :create]
+        resources :tokens, :only => [:new, :create]
+        match 'step' => 'products#step'
+        match 'awards'=> 'products#awards'
+        match 'seen' => 'products#seen'
+        match 'trailer' => 'products#trailer'
+        match 'uninterested' => 'products#uninterested'
+        match 'action' => 'products#action'
+        match 'log' => 'products#log'
+      end
     end
   end
   scope ':locale/(:kind)', :locale => /en|fr|nl/, :kind => /normal|adult/ do
@@ -58,7 +39,7 @@ Moovies::Application.routes.draw do
     end
     match 'info/:page_name' => 'info#index', :as => :info
     
-    resources :products, :only => [:index, :show] do
+    resources :products, :only => [:index, :show], :as => :old_products do
       resource :rating, :only => :create
       resources :reviews, :only => [:new, :create]
       resources :tokens, :only => [:new, :create]
