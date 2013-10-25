@@ -235,7 +235,7 @@ private
       msg = "product not found"
       logger.error(msg)
       flash[:notice] = msg
-      redirect_to products_path
+      redirect_to products_short_path
     end
   end
 end

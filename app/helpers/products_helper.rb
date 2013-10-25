@@ -342,7 +342,7 @@ module ProductsHelper
           end
         end
         html_content << content_tag(:li) do
-          link_to t('.category_back'), products_path, :id => 'all_categorie'
+          link_to t('.category_back'), products_short_path, :id => 'all_categorie'
         end
       end
     end
