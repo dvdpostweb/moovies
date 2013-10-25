@@ -1,10 +1,10 @@
 <% unless @hide_menu %>
   <ul id="nav" class="osc">
   	<li>
-  	  <%= link_to t('.catalogue'), params[:kind] == :adult ? products_short_path(:package => Moovies.packages.invert[4]) : products_short_path(:package => t("routes.products.params.package.#{Moovies.packages.invert[1]}")), :id => 'catalogue_menu', :class => params[:controller] == 'products' ? :active : :inactive %>
+  	  <%= link_to t('.catalogue'), params[:kind] == :adult ? products_short_path(:package => Moovies.packages.invert[4]) : products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}")), :id => 'catalogue_menu', :class => params[:controller] == 'products' ? :active : :inactive %>
   		<ul id="catalogue" class="dropdown" style="display:none">
-  			<li><%= link_to t('.infinite'), products_short_path(:package => t("routes.products.params.package.#{Moovies.packages.invert[1]}"), :kind => nil), :class => params[:package] == Moovies.packages.invert[1] ? :active : :inactive %></li>
-  			<li><%= link_to t('.tvod'), products_short_path(:package => t("routes.products.params.package.#{Moovies.packages.invert[2]}"), :kind => nil), :class => params[:package] == Moovies.packages.invert[2] ? :active : :inactive %></li>
+  			<li><%= link_to t('.infinite'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}"), :kind => nil), :class => params[:package] == Moovies.packages.invert[1] ? :active : :inactive %></li>
+  			<li><%= link_to t('.tvod'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[2]}"), :kind => nil), :class => params[:package] == Moovies.packages.invert[2] ? :active : :inactive %></li>
   			<% if @kid_visible %>
   			<li><%= link_to t('.kid'), products_short_path(:package => Moovies.packages.invert[3], :kind => nil), :class => params[:package] == Moovies.packages.invert[3] ? :active : :inactive %></li>
   			<% end %>
@@ -14,7 +14,7 @@
   			<% end %>
   		</ul>
   	</li>
-  	<li><%= link_to t('.abo'), info_path(:page_name => t('routes.infos.params.abo')), :id => 'abo' %></li>
+  	<li><%= link_to t('.abo'), info_path(:page_name => t('routes.infos.params.abo')), :id => 'abo', :class => params[:page_name] == 'abo' ? :active : :inactive %></li>
   	<li id='menu_account_li'><%= link_to t('.my_account'), current_customer ? customer_path(:id => current_customer) : customers_path, :id => 'account_menu', :class => params[:controller] == 'customers' || params[:controller] == 'watchlists' ? :active : :inactive %>
   		<ul id="account" class="dropdown" style="display:none">
   		<li><%= link_to t('.watchlist', :default => 'Ma playlist'), vod_wishlists_path, :class => params[:controller] == 'watchlists' ? :active : :inactive %></li>

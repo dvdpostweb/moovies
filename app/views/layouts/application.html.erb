@@ -41,7 +41,7 @@
         <ul>
           <li><h4><%= t '.explore' %></h4></li>
           <li><%= link_to t('layouts.header.home'), root_localize_path %></li>
-          <li><%= link_to t('layouts.header.explore'), products_short_path(:package => t("routes.products.params.package.#{Moovies.packages.invert[params[:kind] == :normal ? 1 : 4]}")) %></li>
+          <li><%= link_to t('layouts.header.explore'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[params[:kind] == :normal ? 1 : 4]}")) %></li>
           <li><%= link_to t('layouts.header.price'), info_path(:page_name => t('routes.infos.params.abo')) %></li>
           <% if current_customer %>
             <li><%= link_to t('layouts.header.wishlist'), vod_wishlists_path %></li>
