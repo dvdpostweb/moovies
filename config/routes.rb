@@ -28,7 +28,8 @@ Moovies::Application.routes.draw do
         match 'subtitle' => 'streaming_products#subtitle'
         match 'versions' => 'streaming_products#versions'
       end
-      resources :products, :only => [:index, :show] do
+      resources :products, :only => [:show], constraints: { :id => /[0-9]+[a-z\-]*/ }
+      resources :products, :only => [], constraints: { :product_id => /[0-9]+[a-z\-]*/ } do
         resource :rating, :only => :create
         resources :reviews, :only => [:new, :create]
         resources :tokens, :only => [:new, :create]
@@ -40,7 +41,7 @@ Moovies::Application.routes.draw do
         match 'action' => 'products#action'
         match 'log' => 'products#log'
       end
-      match 'products/:package(/:view_mode)' => 'products#index', :as => :products_short
+      match 'products(/:package)(/:view_mode)' => 'products#index', :as => :products_short
       resources :phone_requests, :only => [:new, :create, :index]
       resources :actors, :only => [:index], concerns: :productable
       resources :directors, :only => [], concerns: :productable

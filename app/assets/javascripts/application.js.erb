@@ -160,9 +160,6 @@ $(function() {
      }
      html_item.html("<div style='height:19px'><img src='/assets/"+loader+"'/></div>");
      set_page(url)
-     var regex = new RegExp(".*/products/([0-9]*).*value=([0-9])");
-     res = regex.exec(url)
-     send_event('Movie', 'ItemRated', res[1], res[2])
 
      $.ajax({dataType: 'html',
        url: url,
@@ -226,10 +223,6 @@ $(function() {
            type: 'GET',
            success: function(data) 
            { 
-             set_page(url)
-             var regex = new RegExp(".*/products/([0-9]*).*");
-             res = regex.exec(url)
-             send_event('Movie', 'ViewTrailer', res[1],'')
 
              jQuery.facebox(data); 
            }

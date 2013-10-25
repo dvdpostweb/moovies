@@ -6,7 +6,7 @@
   <fieldset>
     <ul id="main">
       <li class="audience<%= ' open' if filter.audience? %>">
-        <%= link_to t('.public'), products_path(:audience => 1) %>
+        <%= link_to t('.public'), products_short_path(:audience => 1) %>
         <div id="audience-slider" <%= "style=display:none" unless filter.audience? %>>
           <%= f.hidden_field :audience_min, :value => filter.audience_min || 0 %>
           <%= f.hidden_field :audience_max, :value => filter.audience_max || 18 %>
@@ -20,13 +20,13 @@
         <div id="audience-slider-range" <%= "style=display:none" unless filter.audience? %>></div>
       </li>
       <li class="country<%= ' open' if filter.country_id? %>">
-        <%= link_to t('.countries'), products_path(:countries => 1) %>
+        <%= link_to t('.countries'), products_short_path(:countries => 1) %>
         <div <%= "style=display:none" unless filter.country_id? %>>
           <%= f.select :country_id, countries.collect{|country| [country.name, country.id]}, {:include_blank => true} %>
         </div>
       </li>
       <li class="year<%= ' open' if filter.year? %>">
-        <%= link_to t('.year'), products_path(:year => 1) %>
+        <%= link_to t('.year'), products_short_path(:year => 1) %>
         <% max = Time.now.year + 1 %>
         <% max_year = filter.year_max && filter.year_max <= max ? filter.year_max : max %>
         <div <%= "style=display:none" unless filter.year? %>>
@@ -37,7 +37,7 @@
         </div>
       </li>
       <li class="ratings<%= ' open' if filter.rating? %>">
-        <%= link_to t('.ratings'), products_path(:rating => 1) %>
+        <%= link_to t('.ratings'), products_short_path(:rating => 1) %>
         <div id="ratings-slider" <%= "style=display:none" unless filter.rating? %>>
           <%= f.hidden_field :rating_min, :value => filter.rating_min || 1 %>
           <%= f.hidden_field :rating_max, :value => filter.rating_max || 5 %>
@@ -50,7 +50,7 @@
         <div id="ratings-slider-range" <%= "style=display:none" unless filter.rating? %>></div>
       </li>
       <li class="audio<%= ' open' if filter.audio? %>">
-        <%= link_to t('.audio'), products_path(:audio => 1) %>
+        <%= link_to t('.audio'), products_short_path(:audio => 1) %>
         <div <%= "style=display:none" unless filter.audio? %>>
           <% Language.by_language(I18n.locale).each do |track| %>
             <label>
@@ -61,7 +61,7 @@
         </div>
       </li>
       <li class="subtitles<%= ' open' if filter.subtitles? %>">
-        <%= link_to t('.subtitles'), products_path(:subtitles => 1) %>
+        <%= link_to t('.subtitles'), products_short_path(:subtitles => 1) %>
         <div <%= "style=display:none" unless filter.subtitles? %>>
           <% Subtitle.by_language(I18n.locale).each do |sub| %>
             <label>

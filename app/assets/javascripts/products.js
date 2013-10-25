@@ -49,19 +49,7 @@ $(function() {
   img.src = $('#image_1').attr('src');
   }
   $('#uninterested a').click(function() {
-    url = $(this).attr('href')
-     var regex = new RegExp('.*/products/([0-9]*)/([^?]*)');
-    res = regex.exec(url)
-    
-    if(res[2]=='seen')
-    {
-      action = 'AlreadySeen'
-    }
-    else
-    {
-      action = 'NotInterestedItem'
-    }
-    send_event('Movie', action, res[1],'')
+
   });
   $('.normal .preview_box img').click(function() {
     url = $(this).attr('src')
