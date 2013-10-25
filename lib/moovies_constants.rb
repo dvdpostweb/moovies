@@ -291,7 +291,6 @@ module Moovies
         :tvod_adult                 => 618,
       })
     end
-
   end
 
 end

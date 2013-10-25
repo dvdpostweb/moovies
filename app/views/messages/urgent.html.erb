@@ -1,7 +1,7 @@
 <div id='title' class="urgent"><%= t '.title' %></div>
 <div id="titles-wrap" class="urgent">
   <div class="top"></div>
-    <%= t('.description', :full_name => "#{current_customer.first_name.capitalize} #{current_customer.last_name.capitalize}", :url_condiction => info_path(:page_name => 'conditions')) %>
+    <%= t('.description', :full_name => "#{current_customer.first_name.capitalize} #{current_customer.last_name.capitalize}", :url_condiction => info_path(:page_name =>t('.routes.infos.params.conditions'))) %>
     
     <div id="contact-wrap" class="urgent">
       <div id="tabs-content">

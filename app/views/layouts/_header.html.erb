@@ -9,7 +9,7 @@
   </div>
 </div>
 <ul id="lang">
-  <li><%= link_to t('.conditions'), info_path(:page_name => :conditions) unless current_customer %></li>
+  <li><%= link_to t('.conditions'), info_path(:page_name => t('routes.infos.params.privacy')) unless current_customer %></li>
   <li><%= switch_locale_link(params) %></li>
   <li class="wrap">
     <% if !current_customer %>

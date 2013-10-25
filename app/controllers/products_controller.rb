@@ -3,6 +3,12 @@ class ProductsController < ApplicationController
   before_filter :find_product, :except => [:index, :drop_cached]
 
   def index
+    if params[:package] == t('routes.products.params.package.unlimited')
+      params[:package] = Moovies.packages.invert[1] 
+    end
+    if params[:package] == t('routes.products.params.package.tvod')
+      params[:package] = Moovies.packages.invert[2] 
+    end
     unless current_customer
       if params[:kind] == :adult
         @discount_top = Discount.find(Moovies.discount["catalogue_adult_#{I18n.locale}"])

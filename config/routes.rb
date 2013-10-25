@@ -1,10 +1,34 @@
 Moovies::Application.routes.draw do
 
+  concern :productable do
+    resources :products, :only => :index
+  end
+
   root :to => 'home#index'
   resource :ogone, :only => [:create]
   match 'flag' => 'home#flag'
   scope '(:kind)', :kind => /normal|adult/ do
     localized do
+      devise_for :customers, :controllers => { :registrations => "customers/registrations", :confirmations => "customers/confirmations" }
+      resources :customers do
+        match 'newsletter' => 'customers#newsletter', :only => [:update]
+        resource 'addresses', :only => [:edit, :update, :create]
+        resource 'suspension', :only => [:new, :create, :destroy]
+        resource 'promotion', :only => [:show, :edit]
+        resource 'images', :only => [:create]
+
+        resource :payment_methods, :only => [:edit, :update, :show]
+        resources :reviews, :only => [:index]
+      end
+      match 'info/:page_name' => 'info#index', :as => :info
+      match 'streaming_products/faq', :to => 'streaming_products#faq'
+      match 'streaming_products/sample', :to => 'streaming_products#sample'
+      resources :streaming_products, :only => [:show] do
+        match 'language' => 'streaming_products#language'
+        match 'subtitle' => 'streaming_products#subtitle'
+        match 'versions' => 'streaming_products#versions'
+      end
+      match 'products/:package(/:view_mode)' => 'products#index', :as => :products_short
       resources :products, :only => [:index, :show] do
         resource :rating, :only => :create
         resources :reviews, :only => [:new, :create]
@@ -17,27 +41,26 @@ Moovies::Application.routes.draw do
         match 'action' => 'products#action'
         match 'log' => 'products#log'
       end
+      resources :phone_requests, :only => [:new, :create, :index]
+      resources :actors, :only => [:index], concerns: :productable
+      resources :directors, :only => [], concerns: :productable
+      
     end
   end
   scope ':locale/(:kind)', :locale => /en|fr|nl/, :kind => /normal|adult/ do
     match "/" => 'home#index', :as => :root_localize
     match "validation" => 'home#validation'
-    devise_for :customers, :controllers => { :registrations => "customers/registrations", :confirmations => "customers/confirmations" }
-    resources :customers do
+    devise_for :customers, :controllers => { :registrations => "customers/registrations", :confirmations => "customers/confirmations" }, :as => :old_customers
+    resources :customers, :as => :old_customer do
       match 'newsletter' => 'customers#newsletter', :only => [:update]
-      #mail_copy 'mail_copy', :controller => :customers, :action => :mail_copy, :only => [:update]
-      #newsletters_x 'newsletters_x', :controller => :customers, :action => :newsletters_x, :only => [:update]
-      #newsletter_x 'newsletter_x', :controller => :customers, :action => :newsletter_x, :conditions => {:method => :get}
-      #sexuality 'sexuality', :controller => :customers, :action => :sexuality, :only => [:update]
       resource 'addresses', :only => [:edit, :update, :create]
       resource 'suspension', :only => [:new, :create, :destroy]
       resource 'promotion', :only => [:show, :edit]
       resource 'images', :only => [:create]
-
       resource :payment_methods, :only => [:edit, :update, :show]
       resources :reviews, :only => [:index]
     end
-    match 'info/:page_name' => 'info#index', :as => :info
+    match 'info/:page_name' => 'info#index', :as => :info_old
     
     resources :products, :only => [:index, :show], :as => :old_products do
       resource :rating, :only => :create
@@ -51,7 +74,7 @@ Moovies::Application.routes.draw do
       match 'action' => 'products#action'
       match 'log' => 'products#log'
     end
-    resources :phone_requests, :only => [:new, :create, :index]
+    resources :phone_requests, :only => [:new, :create, :index], :as => :old_phone_requests
     match 'search/(:search)' => 'search#index', :as => :search
     resources :public_newsletters, :only => [:new, :create]
     resources :reviews, :only => :show do
@@ -64,13 +87,10 @@ Moovies::Application.routes.draw do
     end
     resources :promotions, :only => [:show]
     post 'promotions/:id' => "promotions#create", :as => :promotion_canva
-    concern :productable do
-      resources :products, :only => :index
-    end
     resource :subscription, :only => [:update]
     resources :categories, :only => [:index], concerns: :productable
-    resources :actors, :only => [:index], concerns: :productable
-    resources :directors, :only => [], concerns: :productable
+    resources :actors, :only => [:index], concerns: :productable, :as => :old_actors
+    resources :directors, :only => [], concerns: :productable, :as => :old_directors
     resources :studios, :only => [:index], concerns: :productable
     get 'faq', :to => 'messages#faq'
     
@@ -78,9 +98,9 @@ Moovies::Application.routes.draw do
     resources :watchlists, :as => :vod_wishlists
     match 'display_vod' => 'watchlists#display_vod'
     resource :search_filters, :only => [:update, :destroy]
-    match 'streaming_products/faq', :to => 'streaming_products#faq'
-    match 'streaming_products/sample', :to => 'streaming_products#sample'
-    resources :streaming_products, :only => [:show] do
+    match 'streaming_products/faq', :to => 'streaming_products#faq', :as => :old_streaming_products_faq
+    match 'streaming_products/sample', :to => 'streaming_products#sample', :as => :old_streaming_products_sample
+    resources :streaming_products, :only => [:show], :as => :old_streaming_products do
       match 'language' => 'streaming_products#language'
       match 'subtitle' => 'streaming_products#subtitle'
       match 'versions' => 'streaming_products#versions'
