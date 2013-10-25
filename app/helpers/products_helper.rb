@@ -35,7 +35,7 @@ module ProductsHelper
      when 'STUDIO_VOD'
         studio_products_path(:studio_id => carousel.reference_id, :filter => :vod)
       when 'SEARCH'
-        products_path(:search => carousel.reference_id)
+        search_path(:search => carousel.reference_id)
       when 'URL'
         eval(carousel.reference_id)
       end

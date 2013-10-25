@@ -20,7 +20,7 @@ class HomeController < ApplicationController
       begin
         redirect_to session['current_uri']
       rescue => e
-        redirect_to products_path(:package => Moovies.packages.invert[4], :kind => :adult)
+        redirect_to root_localize_path
       end
     end
   end

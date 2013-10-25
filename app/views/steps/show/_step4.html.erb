@@ -10,7 +10,7 @@
         <p><%= t('.desc2_samsung') %></p>
      <% end %>
       <div class="catalogue_promo"> 
-        <%= link_to t('.catalogue'), products_path(:package => Moovies.packages.invert[1]), :class => :promo_button %>
+        <%= link_to t('.catalogue'), products_short_path(:package => t("routes.products.params.package.#{Moovies.packages.invert[1]}")), :class => :promo_button %>
       </div>
       <div class="vod_faq">
         <%= link_to t('.vod_faq'), root_localize_path, :class => :promo_button %>

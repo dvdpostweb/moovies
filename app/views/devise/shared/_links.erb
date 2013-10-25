@@ -4,7 +4,7 @@
   <% end -%>
 
   <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-    <%= link_to t('.sign_up'), info_path(:page_name => :abo) %><br />
+    <%= link_to t('.sign_up'), info_path(:page_name => t('routes.infos.params.abo')) %><br />
   <% end -%>
 
   <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>

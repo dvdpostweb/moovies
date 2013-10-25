@@ -9,37 +9,37 @@
   <div class="wrap" id="vod-ppv">
     <h3><%= t ".unlinmited#{params[:kind] == :adult ? '_adult' : ''}" %></h3>
     <center>
-        <%= link_to image_tag("infinity#{params[:kind]==:adult ? '_adult' : ''}.gif", :size => '200x95'), products_path(:package => Moovies.packages.invert[@svod_id]) %>
+        <%= link_to image_tag("infinity#{params[:kind]==:adult ? '_adult' : ''}.gif", :size => '200x95'), products_short_path(:package => t("routes.products.params.package.#{Moovies.packages.invert[@svod_id]}")) %>
     </center>
     • <%= t ".unlinmited1#{params[:kind] == :adult ? '_adult' : ''}" %><br />
     • <%= t ".unlinmited2#{params[:kind] == :adult ? '_adult' : ''}" %><br />
     • <%= raw t ".unlinmited3#{params[:kind] == :adult ? '_adult' : ''}" %>
     <ul class="osc">
-      <li><%= link_to t('.discover'), products_path(:package => Moovies.packages.invert[@svod_id]) %></li>
+      <li><%= link_to t('.discover'), products_short_path(:package => t("routes.products.params.package.#{Moovies.packages.invert[@svod_id]}")) %></li>
     </ul>
   </div>
   <div class="wrap" id="alacarte">
     <h3><%= t ".tvod#{params[:kind] == :adult ? '_adult' : ''}" %></h3>
     <center>
-      <%= link_to image_tag("alacarte#{params[:kind]==:adult ? '_adult' : ''}.gif", :size => '200x95'), products_path(:package => Moovies.packages.invert[@tvod_id], :kind => nil) %>
+      <%= link_to image_tag("alacarte#{params[:kind]==:adult ? '_adult' : ''}.gif", :size => '200x95'), products_short_path(:package => t("routes.products.params.package.#{Moovies.packages.invert[@tvod_id]}"), :kind => nil) %>
     </center>
     • <%= t ".tvod1#{params[:kind] == :adult ? '_adult' : ''}" %><br />
     • <%= t ".tvod2#{params[:kind] == :adult ? '_adult' : ''}" %><br />
     • <%= raw t ".tvod3#{params[:kind] == :adult ? '_adult' : ''}" %>
     <ul class="osc">
-      <li><%= link_to t('.discover'), products_path(:package => Moovies.packages.invert[@tvod_id]) %></li>
+      <li><%= link_to t('.discover'), products_short_path(:package => t("routes.products.params.package.#{Moovies.packages.invert[@tvod_id]}")) %></li>
     </ul>
   </div>
   <div class="wrap" id="apps">
     <h3><%= t '.multi' %></h3>
     <center>
-      <%= link_to image_tag("icon_plateforme#{params[:kind]==:adult ? '_adult' : ''}.gif", :size => '200x95'), info_path(:page_name => :vod) %>
+      <%= link_to image_tag("icon_plateforme#{params[:kind]==:adult ? '_adult' : ''}.gif", :size => '200x95'), info_path(:page_name => t('routes.infos.params.vod')) %>
     </center>
     • <%= t '.multi1' %><br />
     • <%= t '.multi2' %><br />
     • <%= raw t '.multi3' %>
     <ul class="osc">
-      <li><%= link_to t('.discover'), info_path(:page_name => :vod) %></li>
+      <li><%= link_to t('.discover'), info_path(:page_name => t('routes.infos.params.vod')) %></li>
     </ul>
   </div>
   <div class="wrap" id="news">
@@ -80,7 +80,7 @@
       </div>
          <div class="clear"></div>
         <div class="more_movies" align="right">
-          <%= link_to t('.all'), products_path(:package => Moovies.packages.invert[params[:kind] == :adult ? 4 : 1], :kind => nil) %>
+          <%= link_to t('.all'), products_short_path(:package => t("routes.products.params.package.#{Moovies.packages.invert[params[:kind] == :adult ? 4 : 1]}"), :kind => nil) %>
         </div>
     </div>
 
@@ -93,7 +93,7 @@
       </div>
       <div class="clear"></div>
       <div class="more_movies" align="right">
-        <%= link_to t('.all'), products_path(:package => Moovies.packages.invert[params[:kind] == :adult ? 5 : 2], :kind => nil) %>
+        <%= link_to t('.all'), products_short_path(:package => t("routes.products.params.package.#{Moovies.packages.invert[params[:kind] == :adult ? 5 : 2]}"), :kind => nil) %>
       </div>
     </div>
     <div class="clear"></div>
