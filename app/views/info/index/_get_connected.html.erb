@@ -15,7 +15,7 @@
         <p><%= t ('.buy').html_safe %></p>
         <p><%= t '.warning' %></p>
         <p> </p>
-        <p id="enjoy"><%= t '.enjoy' %></p>
+        <p id="enjoy"><%= t('.enjoy').html_safe %></p>
       </div>
       <div class="clearfix"></div>
     </div>
@@ -128,7 +128,7 @@
             <div class="clearfix"></div>
           </div>
           <p class="cable_name"></p>
-          <a target="_blank" class="guide_buy" href=""><%= t '.buy' %></a> </div>
+          <a target="_blank" class="guide_buy" href=""><%= t '.buy_button' %></a> </div>
         <div  style="display: none;" id="audio_suggestion" class="suggestion">
           <hr />
           <h3><%= t '.conncet_sound' %></h3>
@@ -142,7 +142,7 @@
             <div class="clearfix"></div>
           </div>
           <p class="cable_name">Audio Y-Cable</p>
-          <a class="guide_buy" href="http://www.pixmania.be/be/fr/168111/art/hama/cable-rca-jack-stereo-mal.html" title="Buy Mini Jack to RCA cable or adaptor" target="_blank"><%= t '.buy' %></a> </div>
+          <a class="guide_buy" href="http://www.pixmania.be/be/fr/168111/art/hama/cable-rca-jack-stereo-mal.html" title="Buy Mini Jack to RCA cable or adaptor" target="_blank"><%= t '.buy_button' %></a> </div>
       </div>
       <div style='display:none'>
         <div id='locale_db'><%= I18n.locale %></div>
