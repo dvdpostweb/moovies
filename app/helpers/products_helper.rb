@@ -214,12 +214,14 @@ module ProductsHelper
     end
 
     image_name = if rating >= 2
-      "#{name}-on.png"
+      "#{name}-on"
     elsif rating == 1
-      "#{name}-half.png"
+      "#{name}-half"
     else
-      "#{name}-off.png"
+      "#{name}-off"
     end
+    image_name += '_adult' if params[:kind] == :adult
+    image_name += '.png'
     s = size == :long || size == 'long' ? '19x19' : '12x12'
     image = image_tag(image_name, :class => class_name, :id => "star_#{product.id}_#{value}", :name => image_name, :size => s)
     
@@ -537,17 +539,17 @@ module ProductsHelper
     end
   end
 
-  def ratings_array(rating)
+  def ratings_array(rating, kind)
     rating = rating[:rating]
     rating_array = []
     5.times do |i|
       i += 1
       if rating >=2
-        rating_array << 'star-on.png'
+        rating_array << "star-on#{kind == :adult ? '_adult' : ''}.png"
       elsif rating == 1
-        rating_array << 'star-half.png'
+        rating_array << "star-half#{kind == :adult ? '_adult' : ''}.png"
       else
-        rating_array << 'star-off.png'        
+        rating_array << "star-off#{kind == :adult ? '_adult' : ''}.png"
       end
       rating -= 2
     end

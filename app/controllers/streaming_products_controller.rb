@@ -91,7 +91,7 @@ class StreamingProductsController < ApplicationController
                   image = ''
                   description = ''
                 end
-                stars = view_context.ratings_array(@product.rating)
+                stars = view_context.ratings_array(@product.rating, params[:kind])
                 options = 
                 {
                   "\\$\\$\\$customers_name\\$\\$\\$" => "#{current_customer.first_name.capitalize} #{current_customer.last_name.capitalize}",
