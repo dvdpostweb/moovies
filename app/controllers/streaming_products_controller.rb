@@ -203,11 +203,14 @@ class StreamingProductsController < ApplicationController
 
   def sample
     @body_id = 'streaming'
+    @meta_title = t("streaming_products.sample.meta_title", :default => '')
+    @meta_description = t("streaming_products.sample.meta_description", :default => '')
     params[:id] = Moovies.data_sample[params[:kind]][:imdb_id]
     product_id = Moovies.data_sample[params[:kind]][:product_id]
     @product = Product.find_by_products_id(product_id)
     @streaming_prefered = StreamingProduct.group_by_language.available.find_all_by_imdb_id(params[:id], I18n.locale)
     @token_name = Moovies.token_sample[params[:kind]]
+    
     if request.xhr?
       @streaming = StreamingProduct.find_by_id(params[:streaming_product_id])
       render :layout => false

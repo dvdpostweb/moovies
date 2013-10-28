@@ -9,7 +9,7 @@ Moovies::Application.routes.draw do
   match 'flag' => 'home#flag'
   scope '(:kind)', :kind => /normal|adult/ do
     localized do
-      devise_for :customers, :controllers => { :registrations => "customers/registrations", :confirmations => "customers/confirmations" }
+      devise_for :customers, :controllers => { :registrations => "customers/registrations", :confirmations => "customers/confirmations", :sessions => "customers/sessions" }
       resources :customers do
         match 'newsletter' => 'customers#newsletter', :only => [:update]
         resource 'addresses', :only => [:edit, :update, :create]
