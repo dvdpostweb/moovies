@@ -4,10 +4,10 @@ class ProductsController < ApplicationController
 
   def index
     if params[:package] == t('routes.product.params.package.unlimited')
-      params[:package] = Moovies.packages.invert[1] 
+      params[:package] = Moovies.packages.invert[1]
     end
     if params[:package] == t('routes.product.params.package.tvod')
-      params[:package] = Moovies.packages.invert[2] 
+      params[:package] = Moovies.packages.invert[2]
     end
     unless current_customer
       if params[:kind] == :adult
@@ -25,6 +25,19 @@ class ProductsController < ApplicationController
     if params['director_id']
       @people = Director.find(params['director_id'])
       params['director_id'] = @people.id
+    end
+    if params[:package] == Moovies.packages.invert[1]
+      @meta_title = t('products.index.unlimited.meta_title')
+      @meta_description = t('products.index.unlimited.meta_description')
+    elsif params[:package] == Moovies.packages.invert[2]
+      @meta_title = t('products.index.tvod.meta_title')
+      @meta_description = t('products.index.tvod.meta_description')
+    elsif !params[:actor_id].nil?
+      @meta_title = t('products.index.actor.meta_title', :name => @people.name)
+      @meta_description = t('products.index.actor.meta_description', :name => @people.name)
+    elsif !params[:director_id].nil?
+      @meta_title = t('products.index.director.meta_title', :name => @people.name)
+      @meta_description = t('products.index.director.meta_description', :name => @people.name)
     end
     new_params = session[:sexuality] == 0 ? params.merge(:per_page => 15, :country_id => session[:country_id], :hetero => 1) : params.merge(:per_page => 15, :country_id => session[:country_id])
     @products = Product.filter(@filter, new_params)
@@ -58,6 +71,9 @@ class ProductsController < ApplicationController
       @categories = @product.categories
       @token = current_customer ? current_customer.get_token(@product.imdb_id) : nil
     end
+    @meta_title = t('products.show.meta_title', :name => @product_title, :default => '')
+    @meta_description = t('products.show.meta_description', :name => @product_title, :default => '')
+    
     @response_id = params[:response_id]
     
     if !request.xhr? || (request.xhr? && (params[:reviews_page] || params[:sort]))

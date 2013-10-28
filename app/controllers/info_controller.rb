@@ -13,6 +13,8 @@ class InfoController < ApplicationController
     elsif params[:page_name] == t('routes.infos.params.get_connected')
       params[:page_name] = 'get_connected'
     end
+    @meta_title = t("info.index.#{params[:page_name]}.meta_title", :default => '')
+    @meta_description = t("info.index.#{params[:page_name]}.meta_description", :default => '')
     @body_id = params[:page_name]
     if params[:page_name] == 'abo'
       @discount_svod = Discount.find(Moovies.discount["svod_#{I18n.locale}"])
