@@ -46,9 +46,10 @@ $(function() {
 	$("#checkout_confirmation").submit();
 	
   $('.facebox').on('click', function() {
+    url = $(this).attr('href')
     jQuery.facebox(function() {
       $.ajax({
-        url: $(this).attr('href'),
+        url: url,
         dataType: 'html',
         type: 'GET',
         success: function(data) { jQuery.facebox(data); }
