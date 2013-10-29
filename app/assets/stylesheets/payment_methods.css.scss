@@ -9,24 +9,17 @@
     text-align: left;} 
 
 .button_confirm_switch {
-	background:url(image_path('button-anticipation.png')) no-repeat scroll 0 0 transparent;
-	border:medium none;
-	color:white;
-	font-weight:bold;
-	height:52px;
-	text-shadow:1px 1px 1px #333333;
-	width:269px;
-	font-size:16px;
-}
-.button_confirm_switch:hover {
-	background:url(image_path('button-anticipation.png')) no-repeat scroll 0 -55px transparent;
-	border:medium none;
-	color:white;
-	font-weight:bold;
-	height:52px;
-	text-shadow:1px 1px 1px #333333;
-	width:269px;
-	cursor:pointer;
+	background-color: #9ECA3B;
+     background-image: -moz-linear-gradient(center top , #ACD341 0%, #88BD32 100%);
+     background-repeat: repeat-x;
+     border: 1px solid #7EA613;
+     border-radius: 4px 4px 4px 4px;
+     box-shadow: 0 1px 1px rgba(255, 255, 255, 0.8) inset;
+     color: #FFFFFF;
+     font-size: 15px;
+     padding: 5px;
+     text-shadow: 0 -1px 0 #72942A;
+     width: 200px;
 }
 
 .payment {
@@ -43,12 +36,14 @@
 
 
 #switch_dom  #title{
-  color: #303030;
-    font-family: Arial,Helvetica,sans-serif;
-    font-size: 18px;
+  color: #212A31;
+font-family: 'Open Sans Condensed',sans-serif;      
+font-size: 28px;
     padding-left: 15px;
     padding-right: 15px;
     text-align: left;
+     font-weight: normal;
+     text-transform: none;
 }
 
 #switch_dom  a {   color: #454545;
@@ -58,12 +53,10 @@
 	} 
 
 #switch_dom  h3 {
-    color: #ff3300;
-     font-family: Arial,Helvetica,sans-serif;
-    font-size: 14px;
-    font-weight: bold;
+    color:  #98D321;
+    font-size: 22px;
     text-align: left;
-	text-transform: uppercase;
+
 }
 
 .checkalive {

@@ -76,6 +76,49 @@
 }
 
 /***********/
+
+/*****Mobistar */
+.canvas3 #header h2 a, .canvas3#header h2 a {
+    background: url("/assets/promotions/logo_mobistar.jpg") repeat scroll 0 0 transparent;
+    height: 60px;
+    width: 224px;
+}
+
+.canvas3 #promo_content {
+    background: url("/assets/promotions/bg_mobistar.jpg") repeat scroll 0 0 transparent;
+    height: 667px;
+    margin: 0 auto;
+    width: 970px;
+}
+
+.canvas3 #promo_content .step1 {
+    background: url("/assets/promotions/1.gif") no-repeat scroll 0 0 transparent;
+    height: 30px;
+    padding-left: 38px;
+    width: 200px;
+}
+.canvas3 #promo_content .step2 {
+    background: url("/assets/promotions/2.gif") no-repeat scroll 0 0 transparent;
+    height: 30px;
+    padding-left: 38px;
+    width: 200px;
+}
+.canvas3 #promo_content .step3 {
+    background: url("/assets/promotions/3.gif") no-repeat scroll 0 0 transparent;
+    height: 30px;
+    padding-left: 38px;
+    width: 200px;
+}
+.canvas3 #promo_content .step4 {
+    background: url("/assets/promotions/4.gif") no-repeat scroll 0 0 transparent;
+    height: 30px;
+    padding-left: 38px;
+    width: 200px;
+}
+
+
+/***********/
+
 /****** promotion */
 
 #promotion #promo_content {
@@ -401,3 +444,4 @@ ul {
 {
   float: left; padding-left: 20px; margin-bottom: 5px;
 }
+

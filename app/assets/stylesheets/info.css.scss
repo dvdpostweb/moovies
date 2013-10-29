@@ -596,8 +596,7 @@ color:#212A31;
 }
 
 .guide_selected, .guide_chosen {
-    background-color: #A82D24;
-    border: 1px solid #FFFFFF;
+  background-color:#98D321!important;
 }
 
 
@@ -668,11 +667,11 @@ color:#212A31;
   background-position:0 0;
   background-repeat:initial initial;
   display:block;
-  height:90px;
+  height: 66px;
   width:200px;
 }
 p.cable_name {
-  text-align:center;
+  text-align:left;
 }
 .result_card {
   font-size:12px;
@@ -692,11 +691,11 @@ p.cable_name {
 
 #middle_box #video_output, #middle_box #audio_output {
   float:left;
-  margin:13px 0 0 13px;
+  margin:0px 0 0 13px;
 }
 #middle_box #video_input, #middle_box #audio_input {
   float:right;
-  margin:12px -58px 0 0;
+  margin:0px -58px 0 0;
 }
 
 
@@ -712,7 +711,6 @@ p.cable_name {
     color:#FFFFFF;
     font-size:20px;
     height:28px;
-    margin:12px 0 12px 30px;
     padding:5px;
     text-shadow:#72942A 0 -1px 0;
     width:120px;
@@ -724,6 +722,13 @@ p.cable_name {
     padding-top: 8px;
     text-align: left;
 }
+#middle_box a {
+    text-decoration: none;
+}
+
+#middle_box p {
+    padding-bottom: 0px;
+}
 
 #middle_box .options_top h3, #middle_box .options_top p, #middle_box .options_top img, #middle_box .suggestion h3, #middle_box p.cable_name {
     margin-bottom: 10px;
@@ -731,5 +736,11 @@ p.cable_name {
 .li_selected, .li_chosen {
 
     background-position: 0 -72px;
+}
+
+#audio_suggestion, #video_suggestion {
+    border: 1px solid #ADADAD;
+    margin-bottom: 10px;
+    padding: 11px;
 }
 
