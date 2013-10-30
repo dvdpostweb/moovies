@@ -229,6 +229,8 @@ private
     begin
       if params[:id]
         id = params[:id]
+      elsif params[:old_product_id]
+        id = params[:old_product_id]
       else
         id = params[:product_id]
       end
