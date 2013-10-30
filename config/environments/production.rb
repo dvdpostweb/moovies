@@ -65,5 +65,8 @@ Moovies::Application.configure do
     :host => "www.plush.be",
     :only_path => false
   }
+  RouteTranslator.config do |config|
+    config.force_locale = true
+  end
 
 end
