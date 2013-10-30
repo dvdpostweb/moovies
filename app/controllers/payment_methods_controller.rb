@@ -11,8 +11,8 @@ class PaymentMethodsController < ApplicationController
     if params[:type] == 'credit_card' || params[:type] == 'credit_card_modification'
       internal_com = params[:type]
       @price = 0
-      @url_back = url_for(:controller => 'payment_methods', :action => :edit, :params => {:type => params[:type]}, :only_path => false, :protocol => 'http')
-      @url_ok =   url_for(:controller => 'payment_methods', :action => :edit, :params => {:type => "#{params[:type]}_finish"}, :only_path => false, :protocol => 'http')
+      @url_back = edit_customer_payment_methods_url(:customer_id => current_customer.to_param, :type => params[:type])
+      @url_ok = edit_customer_payment_methods_url(:customer_id => current_customer.to_param, :type => "#{params[:type]}_finish")
     else
       if current_customer.promo_type == 'D'
         @promo = Discount.find(current_customer.promo_id)
