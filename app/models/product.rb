@@ -137,6 +137,7 @@ class Product < ActiveRecord::Base
     products = products.by_package(Moovies.packages[options[:package]]) if options[:package] && (options[:view_mode] != 'svod_soon' && options[:view_mode] != 'tvod_soon')
     products = self.get_view_mode(products, options) if options[:view_mode]
     sort = get_sort(options)
+    Rails.logger.debug { "@@@S#{sort}" }
     products = products.order(sort, :extended) if sort != ''
     products = search_clean(products, options[:search], {:page => options[:page], :per_page => options[:per_page], :limit => options[:limit], :country_id => options[:country_id]})
     
@@ -484,7 +485,7 @@ class Product < ActiveRecord::Base
       elsif options[:sort] == 'most_viewed_last_year'
         "count_tokens DESC"
       elsif options[:sort] == 'new'
-        "streaming_available_at_order DESC, rating DESC"
+        "year DESC, rating DESC"
       else
         "streaming_available_at_order DESC, rating DESC"
       end
@@ -577,8 +578,5 @@ class Product < ActiveRecord::Base
         end
       end
     end
-  end
-  def self.update_plush
-    ActiveRecord::Base.connection.execute('call sp_plush_update();')
   end
 end
