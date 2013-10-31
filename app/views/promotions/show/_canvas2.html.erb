@@ -13,7 +13,6 @@
 }
 <% end %>
 </style>
-
 <div id="wrap">
   <div id="header" >
     <h1>
@@ -26,6 +25,9 @@
     <% end %>
   </div>
   <div class="container clearfix">
+    <% if current_customer && current_customer.abo_active == 1 %>
+      <%= t('no_right').html_safe %>
+    <% else %>
     <div id="promo_content">
       <h1 style="color: #212A31;">
         <%= t2('title', @promo.name).html_safe %><br/>
@@ -127,11 +129,13 @@
         <p align="center"><input type="submit" border="0" align="absmiddle" class="promo_button" id="submit_id4" name="sent" value="<%= t('.essayer') %>"></p>
       </div>
       <% end %>
+      
       <p align="center"><%= image_tag "#{I18n.locale}/info_tel.jpg" %></p>
       <div id="promo_footer"><%= t2('conditions', @promo.name).html_safe %></div>
       </div>
     </div>
   </div>
+  <% end %>
 </div>
 <div style="display:none" id='text_error_conditions'><%= t('.error_conditions') %></div>
 <div id="default" style="display:none"><%= t '.default' %></div>
