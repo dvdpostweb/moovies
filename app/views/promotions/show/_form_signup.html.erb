@@ -1,0 +1,40 @@
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:id => 'new_customer'}) do |f| %>
+<div align="center">
+  <span>
+    <h3><%= t2('.promo', @promo.name).html_safe %></h3>
+    <p class='label'><%= t '.email_label' %> :<br />
+      <%= f.text_field :email, :class => 'inputs_promo_code', :size => '40', :tye => 'text' %>
+
+    </p>
+    <p class='label'><%= t '.pass_label' %> :<br />
+      <%= f.password_field :password, :class => 'inputs_promo_code', :size => '40', :maxlength => '40' %>
+    </p>
+    <%= f.hidden_field :code, :value => 'PRXADN' %>
+    <%= hidden_field_tag :return_url, promotion_canva_path(:id => params[:id]) %>
+    <div style="clear:both;"></div>
+    <%= "<div id='error'>#{t('.error')}</div>".html_safe if alert && !alert.empty? %>
+  </span>
+</div>
+<p class="news">
+  <%= check_box_tag 'marketing', 1, @checked, :class => :marketing3, :id => 'mark' %>
+  <%= t('.accepteconditions') %>
+</p>
+<div class="garanties">
+  <h4><%= t('.garanties') %></h4>
+  <ul>
+    <li class="engagement"><%= t('.engagement') %></li>
+    <li class="stop"><%= t('.stop') %></li>
+    <li class="security"><%= t('.securite') %></li>
+  </ul>
+</div>
+<div class="avantages">
+  <h4><%= t('.avantages') %></h4>
+  <ul>
+    <li class="film"><%= t('.film') %></li>
+    <li class="home"><%= t('.home') %></li>
+    <li class="platform"><%= t('.platform') %></li>
+  </ul>
+</div>
+<div style="clear:both;"></div>
+<p style="padding-top:5px;"><input type="submit" border="0" align="absmiddle" id="submit_id3" class="promo_button" name="sent" value="<%= t('.essayer') %>" /></p>
+<% end %>

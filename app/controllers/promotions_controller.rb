@@ -25,7 +25,15 @@ class PromotionsController < ApplicationController
         @error = true
         render :show
       else
-        redirect_to new_customer_registration_path(:code => code)
+        if current_customer
+          customer = current_customer
+          customer.step = 31
+          customer.code = code
+          customer.save
+          redirect_to step_path(:id => 'step2')
+        else
+          redirect_to new_customer_registration_path(:code => code)
+        end
       end
     end
   end

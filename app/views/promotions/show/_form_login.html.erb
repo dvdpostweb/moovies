@@ -1,0 +1,35 @@
+<%= form_tag promotion_canva_path(:id => params[:id]), :id => 'form_step' do %>
+<div align="center">
+  <span>
+    <h3><%= t2('.promo', @promo.name).html_safe %></h3>
+    <%= t('.code') %>  <br />
+    <%= "<div id='error'>#{t('.error')}</div>".html_safe if @error %>
+    <%= text_field_tag(:code, @code, :id => 'code', :size => 20, :class => 'inputs_promo_code') %><br />
+    <%= hidden_field_tag :return_url, promotion_canva_path(:id => params[:id]) %>
+    <div style="clear:both;"></div>
+    <%= "<div id='error'>#{t('.error')}</div>".html_safe if alert && !alert.empty? %>
+  </span>
+</div>
+<p class="news">
+  <%= check_box_tag 'marketing', 1, @checked, :class => :marketing3, :id => 'mark' %>
+  <%= t('.accepteconditions') %>
+</p>
+<div class="garanties">
+  <h4><%= t('.garanties') %></h4>
+  <ul>
+    <li class="engagement"><%= t('.engagement') %></li>
+    <li class="stop"><%= t('.stop') %></li>
+    <li class="security"><%= t('.securite') %></li>
+  </ul>
+</div>
+<div class="avantages">
+  <h4><%= t('.avantages') %></h4>
+  <ul>
+    <li class="film"><%= t('.film') %></li>
+    <li class="home"><%= t('.home') %></li>
+    <li class="platform"><%= t('.platform') %></li>
+  </ul>
+</div>
+<div style="clear:both;"></div>
+<p style="padding-top:5px;"><input type="submit" border="0" align="absmiddle" id="submit_id3" class="promo_button" name="sent" value="<%= t('.essayer') %>" /></p>
+<% end %>
