@@ -13,7 +13,6 @@
 }
 <% end %>
 </style>
-
 <div id="wrap">
   <div id="header" >
     <h1>
@@ -26,6 +25,9 @@
     <% end %>
   </div>
   <div class="container clearfix">
+    <% if current_customer && current_customer.abo_active == 1 %>
+      <%= t('no_right').html_safe %>
+    <% else %>
     <div id="promo_content">
       <h1 style="color: #212A31;">
         <%= t2('title', @promo.name).html_safe %><br/>
@@ -36,65 +38,67 @@
         <% if current_customer %>
           <%= render :partial => 'promotions/show/form_login' %>          
         <% else %>
-          <%= render :partial => 'promotions/show/form_sigup' %>
+          <%= render :partial => 'promotions/show/form_signup' %>
         <% end %>
       </div>
     </div>
 
-
-    <div id="commentcamarche_content">
-      <h2><%= t('.plush') %></h2>
-      <h3><%= t('.illimite') %></h3>
-      <table cellpadding="0" cellspacing="0" border="0">
-        <tr id="vod">
-          <td><img src="<%= image_path "/assets/promotions/#{I18n.locale}/vod.jpg" %>" style="padding-left:20px;"/></td>
-          <td><img src="<%= image_path "/assets/promotions/#{I18n.locale}/streamingbutton.jpg" %>" style="padding-top:50px;"  /></td>
-          <td><img src="<%= image_path "/assets/promotions/#{I18n.locale}/icon_subtitles.gif" %>" style="padding-top:30px; padding-left:40px;" /></td>
-          <td><img src="<%= image_path "/assets/promotions/tv_vod.jpg" %>"  style="padding-top:14px;" /></td>
-        </tr>
-        <tr id="vod">
-          <td class="step1"><%= t('.istep1').html_safe %></td>
-          <td class="step2"><%= t('.istep2').html_safe %></td>
-          <td class="step3"><%= t('.istep3').html_safe %></td>
-          <td class="step4"><%= t('.istep4').html_safe %></td>
-        </tr>
-      </table>
-      <h3><%= t('.carte') %></h3>
-      <table cellpadding="0" cellspacing="0" border="0">
-        <tr id="dvd">
-          <td><img src="<%= image_path "/assets/promotions/#{I18n.locale}/vodppv.jpg" %>"style="padding-left:20px;"/></td>
-          <td><img src="<%= image_path "/assets/promotions/#{I18n.locale}/payperviewbutton.jpg" %>" style="padding-top:28px;" /></td>
-          <td><img src="<%= image_path "/assets/promotions/#{I18n.locale}/icon_subtitles.gif" %>" style="padding-top:30px; padding-left:40px;" /></td>
-          <td><img src="<%= image_path "/assets/promotions/tv_vodppv.jpg" %>" style="padding-top:14px;"/></td>
-        </tr>
-        <tr id="dvd">
-          <td class="step1"><%= t('.astep1').html_safe %></td>
-          <td class="step2"><%= t('.astep2').html_safe %></td>
-          <td class="step3"><%= t('.astep3').html_safe %></td>
-          <td class="step4"><%= t('.astep4').html_safe %></td>
-        </tr>
-      </table>
+      <div id="commentcamarche_content">
+        <h2><%= t('.plush') %></h2>
+        <h3><%= t('.illimite') %></h3>
+        <table cellpadding="0" cellspacing="0" border="0">
+          <tr id="vod">
+            <td><img src="<%= image_path "/assets/promotions/#{I18n.locale}/vod.jpg" %>" style="padding-left:20px;"/></td>
+            <td><img src="<%= image_path "/assets/promotions/#{I18n.locale}/streamingbutton.jpg" %>" style="padding-top:50px;"  /></td>
+            <td><img src="<%= image_path "/assets/promotions/#{I18n.locale}/icon_subtitles.gif" %>" style="padding-top:30px; padding-left:40px;" /></td>
+            <td><img src="<%= image_path "/assets/promotions/tv_vod.jpg" %>"  style="padding-top:14px;" /></td>
+          </tr>
+          <tr id="vod">
+            <td class="step1"><%= t('.istep1').html_safe %></td>
+            <td class="step2"><%= t('.istep2').html_safe %></td>
+            <td class="step3"><%= t('.istep3').html_safe %></td>
+            <td class="step4"><%= t('.istep4').html_safe %></td>
+          </tr>
+        </table>
+        <h3><%= t('.carte') %></h3>
+        <table cellpadding="0" cellspacing="0" border="0">
+          <tr id="dvd">
+            <td><img src="<%= image_path "/assets/promotions/#{I18n.locale}/vodppv.jpg" %>"style="padding-left:20px;"/></td>
+            <td><img src="<%= image_path "/assets/promotions/#{I18n.locale}/payperviewbutton.jpg" %>" style="padding-top:28px;" /></td>
+            <td><img src="<%= image_path "/assets/promotions/#{I18n.locale}/icon_subtitles.gif" %>" style="padding-top:30px; padding-left:40px;" /></td>
+            <td><img src="<%= image_path "/assets/promotions/tv_vodppv.jpg" %>" style="padding-top:14px;"/></td>
+          </tr>
+          <tr id="dvd">
+            <td class="step1"><%= t('.astep1').html_safe %></td>
+            <td class="step2"><%= t('.astep2').html_safe %></td>
+            <td class="step3"><%= t('.astep3').html_safe %></td>
+            <td class="step4"><%= t('.astep4').html_safe %></td>
+          </tr>
+        </table>
+      </div>
+      <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:id => 'new_customer2'}) do |f| %>
+      <div id="area_promo">
+        <h2><%= t2('promo', @promo.name).html_safe %></h2>
+        <p class='label'><%= t '.email_label' %> :<br />
+          <%= f.text_field :email, :class => 'inputs_promo_code', :size => '40', :tye => 'text' %>
+        </p>
+        <p class='label'><%= t '.pass_label' %> :<br />
+           <%= f.password_field :password, :class => 'inputs_promo_code', :size => '40', :maxlength => '40' %>
+        </p>
+        <%= f.hidden_field :code, :value => 'PRXADN' %>
+        <%= hidden_field_tag :return_url, promotion_canva_path(:id => params[:id]) %>
+        <div style="clear:both;"></div>
+        <%= "<div id='error'>#{t('.error')}</div>".html_safe if alert && !alert.empty? %>
+        <div class="clearfix"></div>
+        <p align="center"><input type="submit" border="0" align="absmiddle" class="promo_button" id="submit_id4" name="sent" value="<%= t('.essayer') %>"></p>
+      </div>
+      <% end %>
+      
+      <p align="center"><%= image_tag "#{I18n.locale}/info_tel.jpg" %></p>
+      <div id="promo_footer"><%= t2('conditions', @promo.name).html_safe %></div>
+      </div>
     </div>
-    <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:id => 'new_customer2'}) do |f| %>
-    <div id="area_promo">
-      <h2><%= t2('promo', @promo.name).html_safe %></h2>
-      <p class='label'><%= t '.email_label' %> :<br />
-        <%= f.text_field :email, :class => 'inputs_promo_code', :size => '40', :tye => 'text' %>
-      </p>
-      <p class='label'><%= t '.pass_label' %> :<br />
-        <%= f.password_field :password, :class => 'inputs_promo_code', :size => '40', :maxlength => '40' %>
-      </p>
-      <%= f.hidden_field :code, :value => 'PRXADN' %>
-      <%= hidden_field_tag :return_url, promotion_canva_path(:id => params[:id]) %>
-      <div style="clear:both;"></div>
-      <%= "<div id='error'>#{t('.error')}</div>".html_safe if alert && !alert.empty? %>
-      <div class="clearfix"></div>
-      <p align="center"><input type="submit" border="0" align="absmiddle" class="promo_button" id="submit_id4" name="sent" value="<%= t('.essayer') %>"></p>
-    </div>
-    <% end %>
-    <p align="center"><%= image_tag "#{I18n.locale}/info_tel.jpg" %></p>
-    <div id="promo_footer"><%= t2('conditions', @promo.name).html_safe %></div>
-  </div>
+  <% end %>
 </div>
 </div>
 </div>
