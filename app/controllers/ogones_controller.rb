@@ -67,7 +67,7 @@ class OgonesController < ApplicationController
           end
           duration = activation.duration
           auto_stop = activation.auto_stop
-          recurring = 0
+          recurring = nil
         	abo_action = 17
           activation.update_attributes(:created_at => Time.now.localtime.to_s(:db), :customers_id => customer.to_param)
           customer.abo_history(abo_action, customer.next_abo_type_id)
