@@ -30,6 +30,10 @@ class Customers::RegistrationsController < Devise::RegistrationsController
     elsif params[:samsung]
       @samsung = params[:samsung]
     end
+    @user = Customer.find_by_email(params[:customer][:email])
+    if @user and @user.confirmed? and @user.valid_password?(params[:customer][:password])
+      sign_in @user, :bypass => true                
+    end
     super
   end
   protected
