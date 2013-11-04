@@ -77,6 +77,7 @@
         </table>
       </div>
       <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:id => 'new_customer2'}) do |f| %>
+      <%= devise_error_messages! %>
       <div id="area_promo">
         <h2><%= t2('promo', @promo.name).html_safe %></h2>
         <p class='label'><%= t '.email_label' %> :<br />
@@ -85,7 +86,7 @@
         <p class='label'><%= t '.pass_label' %> :<br />
            <%= f.password_field :password, :class => 'inputs_promo_code', :size => '40', :maxlength => '40' %>
         </p>
-        <%= f.hidden_field :code, :value => 'PRXADN' %>
+        <%= f.hidden_field :code, :value => @promo.params[:code] %>
         <%= hidden_field_tag :return_url, promotion_canva_path(:id => params[:id]) %>
         <div style="clear:both;"></div>
         <%= "<div id='error'>#{t('.error')}</div>".html_safe if alert && !alert.empty? %>

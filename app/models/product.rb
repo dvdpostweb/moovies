@@ -89,7 +89,7 @@ class Product < ActiveRecord::Base
   sphinx_scope(:recent)                   {{:without =>       {:availability => 0}, :with => {:available_at => 2.months.ago..Time.now.end_of_day, :next => 0}}}
   sphinx_scope(:svod_soon)                {{:with =>          {:svod_start => Time.now.end_of_day..1.months.from_now}}}
   sphinx_scope(:tvod_soon)                {{:with =>          {:tvod_start => Time.now.end_of_day..1.months.from_now}}}
-  sphinx_scope(:svod_last_added)          {{:with =>          {:svod_start => 1.months.ago..Time.now.end_of_day}}}
+  sphinx_scope(:svod_last_added)          {{:with =>          {:svod_start => 3.months.ago..Time.now.end_of_day}}}
   sphinx_scope(:tvod_last_added)          {{:with =>          {:tvod_start => 5.months.ago..Time.now.end_of_day}}}
   sphinx_scope(:svod_last_chance)         {{:with =>          {:svod_end => Time.now.end_of_day..1.months.from_now}}}
   sphinx_scope(:tvod_last_chance)         {{:with =>          {:tvod_end => Time.now.end_of_day..1.months.from_now}}}
