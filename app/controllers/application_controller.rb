@@ -100,8 +100,8 @@ class ApplicationController < ActionController::Base
         
         if my_ip.nil?
           my_ip = request.remote_ip
-          session[:my_ip] = my_ip
         end
+        session[:my_ip] = my_ip
         c = GeoIP.new('GeoIP.dat').country(my_ip)
         if c.country_code == 0 && Rails.env == "production" && ! /^192(.*)/.match(my_ip) && ! /^172(.*)/.match(my_ip) && ! /^10(.*)/.match(my_ip) && ! /^127(.*)/.match(my_ip)
           notify_airbrake("country code is empty ip : #{my_ip}") 
@@ -112,6 +112,15 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def after_sign_out_path_for(resource_or_scope)
+      root_localize_path
+  end
+
+  def after_sign_in_path_for(resource_or_scope)
+      root_localize_path
+  end
+
   def staging?
     Rails.env == 'staging'
   end
@@ -146,5 +155,5 @@ class ApplicationController < ActionController::Base
       redirect_to validation_path
     end
   end
-  
+
 end

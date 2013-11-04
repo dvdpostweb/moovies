@@ -1,6 +1,7 @@
 class PromotionsController < ApplicationController
   before_filter :get_data
   def show
+    Rails.logger.debug { "show promo#{params}" }
   end
 
   def create
@@ -37,7 +38,8 @@ class PromotionsController < ApplicationController
       end
     end
   end
-  private
+
+
   def get_data
     params[:id] = 'smarttv' if params[:id] == 'radio_contact' ||  params[:id] == 'nostalgie'
     @promo = Promotion.find_by_name(params[:id])
