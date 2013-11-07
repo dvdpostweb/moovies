@@ -28,11 +28,11 @@
   <div class="container clearfix">
     <div id="promo_content">
       <h1 style="color: #212A31;">
-        <%= t2('title', @promo.name).html_safe %><br/>
-        <strong><%= t2('title_promo', @promo.name).html_safe %></strong>
+        <%= t2('.title', @promo.name).html_safe %><br/>
+        <strong><%= t2('.title_promo', @promo.name).html_safe %></strong>
       </h1>
       <div id="promo_form">
-        <h2><%= t2('subtitle', @promo.name).html_safe %></h2>
+        <h2><%= t2('.subtitle', @promo.name).html_safe %></h2>
         <%= form_tag promotion_canva_path(:id => params[:id]), :id => 'form_step' do %>
         <div align="center">
           <span>
@@ -103,7 +103,7 @@
       </div>
       <%= form_tag promotion_canva_path(:id => params[:id]), :id => 'form_step2' do %>
       <div id="area_promo">
-        <h2><%= t2('promo', @promo.name).html_safe %></h2>
+        <h2><%= t2('.promo', @promo.name).html_safe %></h2>
         <div align="center" class='form_explain'><%= t('.serie') %><br><%= "<div id='error'>#{t('.error')}</div>".html_safe if @error %><%= text_field_tag(:code, @code, :id => 'code4', :size => 20, :class => 'inputs_promo_code') %></div>
         <p class="news_form">
           <%= check_box_tag 'marketing', 1, @checked, :class => :marketing3, :id => 'mark2' %>
@@ -114,7 +114,7 @@
       </div>
       <% end %>
       <p align="center"><%= image_tag "#{I18n.locale}/info_tel.jpg" %></p>
-      <div id="promo_footer"><%= t2('conditions', @promo.name).html_safe %></div>
+      <div id="promo_footer"><%= t2('.conditions', @promo.name).html_safe %></div>
       </div>
     </div>
   </div>
