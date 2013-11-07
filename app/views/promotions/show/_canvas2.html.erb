@@ -1,7 +1,6 @@
 <style>
 .canvas2 #promo_content {
-  background: url('http://www.dvdpost.be/images/promotions_plush/<%= @promo.params[:background_locale] ? "#{I18n.locale}/" : '' %><%= @promo.params[:background] %>') repeat scroll 0 0 transparent;
-  height: 722px;
+  background: url('http://www.dvdpost.be/images/promotions_plush/<%= @promo.params[:background_locale] ? "#{I18n.locale}/" : '' %><%= @promo.params[:background] %>') no-repeat scroll 0 0 transparent;
   margin: 0 auto;
   width: 970px;
 }
@@ -33,12 +32,14 @@
         <%= t2('title', @promo.name).html_safe %><br/>
         <strong><%= t2('title_promo', @promo.name).html_safe %></strong>
       </h1>
-      <div id="promo_form">
-        <h2><%= t2('subtitle', @promo.name).html_safe %></h2>
+      <div id="promo_form" class="light">
+        <h2 class="light"><%= t2('subtitle', @promo.name).html_safe %></h2>
         <% if current_customer %>
+          <%= render :partial => 'promotions/show/form_logged' %>          
+        <% elsif @prospect %>
           <%= render :partial => 'promotions/show/form_login' %>          
         <% else %>
-          <%= render :partial => 'promotions/show/form_signup' %>
+          <%= render :partial => 'promotions/show/form_signup', :locals => {:number => ''} %>
         <% end %>
       </div>
     </div>
@@ -76,25 +77,6 @@
           </tr>
         </table>
       </div>
-      <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:id => 'new_customer2'}) do |f| %>
-      <%= devise_error_messages! %>
-      <div id="area_promo">
-        <h2><%= t2('promo', @promo.name).html_safe %></h2>
-        <p class='label'><%= t '.email_label' %> :<br />
-          <%= f.text_field :email, :class => 'inputs_promo_code', :size => '40', :tye => 'text' %>
-        </p>
-        <p class='label'><%= t '.pass_label' %> :<br />
-           <%= f.password_field :password, :class => 'inputs_promo_code', :size => '40', :maxlength => '40' %>
-        </p>
-        <%= f.hidden_field :code, :value => @promo.params[:code] %>
-        <%= hidden_field_tag :return_url, promotion_canva_path(:id => params[:id]) %>
-        <div style="clear:both;"></div>
-        <%= "<div id='error'>#{t('.error')}</div>".html_safe if alert && !alert.empty? %>
-        <div class="clearfix"></div>
-        <p align="center"><input type="submit" border="0" align="absmiddle" class="promo_button" id="submit_id4" name="sent" value="<%= t('.essayer') %>"></p>
-      </div>
-      <% end %>
-      
       <p align="center"><%= image_tag "#{I18n.locale}/info_tel.jpg" %></p>
       <div id="promo_footer"><%= t2('conditions', @promo.name).html_safe %></div>
       </div>

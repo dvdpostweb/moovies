@@ -182,7 +182,15 @@ html, body{
   outline: medium none;
   text-indent: -999em;
 }
-
+#promo_content #promo_form.light {
+  margin: 26px 0 0 40px;
+  width: 459px;
+  text-align: center;
+  background: white;
+  padding: 10px 0;
+  border: #0c4f00 3px solid;
+  box-shadow: 2px 4px 11px #333;
+}
 #promo_content h1 {
   color: #FFFFFF;
   font-size: 48px;
@@ -197,6 +205,13 @@ html, body{
   line-height: 28px;
   text-align: center;
   margin: 50px 0 20px 0;
+}
+#promo_content h2.light {
+  font-size: 28px;
+  font-weight: bold;
+  line-height: 28px;
+  text-align: center;
+  margin: 0 0 20px 0;
 }
 
 #promo_content h3 {
@@ -241,7 +256,7 @@ html, body{
   font-size: 14px;
   margin-left: 20px;
   text-align: left;
-  width: 200px;
+  width: 197px;
 }
 
 #promo_content #promo_form .avantages {
@@ -284,6 +299,10 @@ html, body{
   padding-left: 40px;
   width: 463px;
   text-align: center;
+}
+#promo_content #promo_form.light
+{
+  padding-left: 0px;
 }
 
 
@@ -445,3 +464,6 @@ ul {
   float: left; padding-left: 20px; margin-bottom: 5px;
 }
 
+#error_explanation{
+  font-size:12px;
+}

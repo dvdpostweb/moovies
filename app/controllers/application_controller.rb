@@ -69,6 +69,7 @@ class ApplicationController < ActionController::Base
       else
         I18n.locale = :fr
       end
+      
       current_customer.update_locale(locale) if current_customer
     end
   end

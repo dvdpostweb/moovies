@@ -1,18 +1,18 @@
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:id => 'new_customer'}) do |f| %>
-<%= devise_error_messages! %>
+<%= devise_error_messages!.gsub(/<a.*a>/,"si c'est ton email log toi pour profiter ton ta promo #{link_to('ici', promotion_path(:id => params[:id], :email => params[:customer][:email]))}").html_safe if params[:customer] && params[:customer][:email]%>
+
 <div align="center">
   <span>
     <h3><%= t2('.promo', @promo.name).html_safe %></h3>
-    <p class='label'><%= t '.email_label' %> :<br />
-      <%= f.text_field :email, :class => 'inputs_promo_code', :size => '40', :tye => 'text' %>
-
+    <p><%= t '.email_label' %> :<br />
+      <%= f.text_field :email, :value => @email, :class => 'inputs_promo_code', :size => '40', :tye => 'text' %>
     </p>
-    <p class='label'><%= t '.pass_label' %> :<br />
+    <p><%= t '.pass_label' %> :<br />
       <%= f.password_field :password, :class => 'inputs_promo_code', :size => '40', :maxlength => '40' %>
     </p>
     <div class="labelstep">
-      <%= f.label :password_confirmation, t('.confirmation_pass') %>
-      <%= f.password_field :password_confirmation %>
+      <%= f.label :password_confirmation, t('.confirmation_pass') %>:<br />
+      <%= f.password_field :password_confirmation, :class => 'inputs_promo_code' %>
     </div>
     <%= f.hidden_field :code, :value => @code %>
     <%= hidden_field_tag :id, params[:id] %>
