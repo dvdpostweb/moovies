@@ -137,7 +137,6 @@ class Product < ActiveRecord::Base
     products = products.by_package(Moovies.packages[options[:package]]) if options[:package] && (options[:view_mode] != 'svod_soon' && options[:view_mode] != 'tvod_soon')
     products = self.get_view_mode(products, options) if options[:view_mode]
     sort = get_sort(options)
-    Rails.logger.debug { "@@@S#{sort}" }
     products = products.order(sort, :extended) if sort != ''
     products = search_clean(products, options[:search], {:page => options[:page], :per_page => options[:per_page], :limit => options[:limit], :country_id => options[:country_id]})
     

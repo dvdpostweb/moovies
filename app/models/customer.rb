@@ -7,7 +7,7 @@ class Customer < ActiveRecord::Base
   after_save :set_samsung
   before_save :get_code_from_samsung
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :confirmable
+         :recoverable, :rememberable, :trackable, :confirmable
 
   alias_attribute :abo_active,                   :customers_abo
   alias_attribute :last_name,                    :customers_lastname
@@ -36,8 +36,16 @@ class Customer < ActiveRecord::Base
   validates_format_of :phone, :with => /^(\+)?[0-9 \-\/.]+$/, :on => :update
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :update
   validates :birthday,  :date => { :after => 100.years.ago, :before => 18.years.ago}, :on => :update
-  validates_uniqueness_of :email, :case_sensitive => false, :on => :update
+  validates :email, :uniqueness => {:message => 'pas ok', :case_sensitive => false}, :on => :update
+  
+  
+  validates_presence_of   :email, :on => :create
+  validates :email, :uniqueness => {:message => I18n.t('errors.messages.taken'), :case_sensitive => false}, :on => :create
+  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create
 
+  validates_presence_of     :password, :if => :password_required?
+  validates_confirmation_of :password, :if => :password_required?
+  validates_length_of       :password, :within => 8..128, :allow_blank => true, :on => :create
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :newsletter, :newsletter_parnter, :last_name, :first_name, :language, :address_id, :phone, :birthday, :gender, :abo_type_id, :customers_abo_type, :auto_stop, :customers_abo_auto_stop_next_reconduction, :next_abo_type_id, :customers_next_abo_type, :promo_type, :activation_discount_code_type, :promo_id, :nickname, :code, :customers_dob, :address_attributes, :step,:ogone_owner, :ogone_exp_date, :ogone_card_no, :ogone_card_type, :customers_abo_payment_method, :customers_abo, :customers_registration_step, :subscription_expiration_date, :auto_stop, :customers_abo_discount_recurring_to_date, :filter_id, :samsung, :new_email, :customers_locked__for_reconduction
   attr_writer :code
@@ -283,7 +291,6 @@ class Customer < ActiveRecord::Base
         end
 
         if token_string
-          #to do
           token = !file.svod? ? Token.create(:customer_id => id, :imdb_id => imdb_id, :token => token_string, :is_ppv => true, :ppv_price => file.ppv_price, :source_id => source, :country => file.country, :kind => 'PPV') : Token.create(:customer_id => id, :imdb_id => imdb_id, :token => token_string, :source_id => source, :country => file.country)
           if token.id.blank?
             return {:token => nil, :error => Token.error[:query_rollback]}
@@ -477,5 +484,9 @@ class Customer < ActiveRecord::Base
       logger.error("customer have a problem with credit customer_id : #{to_param} action: #{action} action type: #{action_type} quantity: #{quantity}")
       logger.error(e.backtrace)
     end
+  end
+  
+  def password_required?
+    !persisted? || !password.nil? || !password_confirmation.nil?
   end
 end

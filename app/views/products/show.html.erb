@@ -20,7 +20,7 @@
     <div id="film-info">
       <div id="film-img-wrap">
         <%= "<span class='hd'></span>".html_safe if @product.hd?(session[:hd]) %>
-        <%= product_image_tag @product_image, :width => 180, :alt => "#{@product_title} (#{@product.year})" %>
+        <%= product_image_tag @product_image, :width => 160, :alt => "#{@product_title} (#{@product.year})" %>
         <%= content_tag(:span, '', :class => 'new') if @product.is_new? %>
         <!--<span class="hd"></span>-->
       </div>

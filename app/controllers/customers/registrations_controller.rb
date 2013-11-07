@@ -25,16 +25,32 @@ class Customers::RegistrationsController < Devise::RegistrationsController
   end
 
   def create
-    
     if params[:customer] && params[:customer][:samsung]
       @samsung = params[:customer][:samsung]
     elsif params[:samsung]
       @samsung = params[:samsung]
     end
-    @user = Customer.find_by_email(params[:customer][:email])
-    if @user and @user.confirmed? and @user.valid_password?(params[:customer][:password])
-      sign_in @user, :bypass => true
-      redirect_to root_localize_path and return
+    if params[:id]
+      @user = Customer.find_by_email(params[:customer][:email])
+      if @user
+        if @user.valid_password?(params[:customer][:password])
+          
+          if @user.abo_active == 0
+            @user.step = 31
+            @user.code = params[:customer][:code]
+            @user.save(:validate => false)
+            if @user.confirmed?
+              sign_in @user, :bypass => true
+              redirect_to step_path(:id => 'step2') and return
+            else
+              Devise::Mailer.confirmation_instructions(@user).deliver
+              redirect_to step_path(:id => 'confirm') and return
+            end
+          else
+            redirect_to root_localize_path and return
+          end
+        end
+      end
     end
     build_resource
 
@@ -51,15 +67,16 @@ class Customers::RegistrationsController < Devise::RegistrationsController
     else
       clean_up_passwords resource
       if params[:id]
-         params[:id] = 'smarttv' if params[:id] == 'radio_contact' ||  params[:id] == 'nostalgie'
-          @promo = Promotion.find_by_name(params[:id])
+         @promo = Promotion.find_by_name(params[:id])
           if @promo
-            @partial = 'default'
+            @partial = 'canvas'
             @body_class = "canvas#{@promo.canva_id}"
             @canvas = @body_class
             @canvas += "_#{params[:format]}" if params[:format] && @promo.params[:choose]
             if !params[:code].nil?
               @code = params[:code]
+            elsif params[:customer] && params[:customer][:code]
+              @code = params[:customer][:code]
             elsif @promo.params[:code]
               @code = @promo.params[:code]
             else
@@ -72,6 +89,14 @@ class Customers::RegistrationsController < Devise::RegistrationsController
 
           @body_id = @partial
           @code_samsung = t('promotions.show.samsung.default')
+          @checked = params[:marketing] == "1" ? true : false
+          if params[:email]
+            @email = params[:email]
+          elsif params[:customer] && params[:customer][:email]
+            @email = params[:customer][:email]
+          else
+            @email = nil
+          end
         render :template => 'promotions/show', :layout => 'promo' 
       else
         respond_with resource
@@ -90,4 +115,5 @@ class Customers::RegistrationsController < Devise::RegistrationsController
     #return_url
     root_localize_path(:sing_up_failed => 1)
   end
+
 end

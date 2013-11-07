@@ -9,6 +9,7 @@ fr:
         one: "N'a pas sauvegardé %{resource}"
         other: "N'a pas sauvegardé %{resource}"
       taken: "est déjà pris, <a href='/fr/customers/sign_in'>identifiez-vous ici</a>"
+      taken2: "est déjà pris"
       invalid: "n'est pas correct"
       blank: 'ne peux pas être vide'
       too_short: "est trop court (au moins %{count} caractères)"
