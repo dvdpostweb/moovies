@@ -1,10 +1,9 @@
 <%= form_tag promotion_canva_path(:id => params[:id]), :id => 'form_step' do %>
 <div align="center">
   <span>
-    <h3><%= t2('.promo', @promo.name).html_safe %></h3>
-    <%= t('.code') %>  <br />
+    <h3><%= t2('promotions.show.canvas2.promo', @promo.name).html_safe %></h3>
     <p class="inputs_codes">
-      <%= t '.email_label' %>:<br />
+      <%= t 'promotions.show.canvas2.email_label' %>:<br />
       <div class='inputs_promo_code'><%= current_customer.email %></div>
     </p>
     <%= hidden_field_tag(:code, @code ) %><br />
@@ -15,24 +14,24 @@
 </div>
 <p class="news">
   <%= check_box_tag 'marketing', 1, @checked, :class => :marketing3, :id => 'mark' %>
-  <%= t('.accepteconditions') %>
+  <%= t('promotions.show.canvas2.accepteconditions') %>
 </p>
 <div class="garanties">
-  <h4><%= t('.garanties') %></h4>
+  <h4><%= t('promotions.show.canvas2.garanties') %></h4>
   <ul>
-    <li class="engagement"><%= t('.engagement') %></li>
-    <li class="stop"><%= t('.stop') %></li>
-    <li class="security"><%= t('.securite') %></li>
+    <li class="engagement"><%= t('promotions.show.canvas2.engagement') %></li>
+    <li class="stop"><%= t('promotions.show.canvas2.stop') %></li>
+    <li class="security"><%= t('promotions.show.canvas2.securite') %></li>
   </ul>
 </div>
 <div class="avantages">
-  <h4><%= t('.avantages') %></h4>
+  <h4><%= t('promotions.show.canvas2.avantages') %></h4>
   <ul>
-    <li class="film"><%= t('.film') %></li>
-    <li class="home"><%= t('.home') %></li>
-    <li class="platform"><%= t('.platform') %></li>
+    <li class="film"><%= t('promotions.show.canvas2.film') %></li>
+    <li class="home"><%= t('promotions.show.canvas2.home') %></li>
+    <li class="platform"><%= t('promotions.show.canvas2.platform') %></li>
   </ul>
 </div>
 <div style="clear:both;"></div>
-<p style="padding-top:5px;"><input type="submit" border="0" align="absmiddle" id="submit_id3" class="promo_button" name="sent" value="<%= t('.essayer') %>" /></p>
+<p style="padding-top:5px;"><input type="submit" border="0" align="absmiddle" id="submit_id3" class="promo_button" name="sent" value="<%= t('promotions.show.canvas2.essayer') %>" /></p>
 <% end %>

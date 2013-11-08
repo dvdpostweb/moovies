@@ -47,7 +47,7 @@ class Customers::RegistrationsController < Devise::RegistrationsController
               redirect_to step_path(:id => 'confirm') and return
             end
           else
-            redirect_to root_localize_path and return
+            redirect_to promotion_path(:id => params[:id]), :alert => 'not used' and return
           end
         end
       end
