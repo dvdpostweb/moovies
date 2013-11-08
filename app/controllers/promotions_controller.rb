@@ -27,6 +27,13 @@ class PromotionsController < ApplicationController
         flash.discard
         render :show
       else
+        if params[:email]
+          @user = Customer.find_by_email(params[:email])
+          if !@user.confirmed?
+            Devise::Mailer.confirmation_instructions(@user).deliver
+          end
+        end
+        
         if current_customer
           if current_customer.abo_active == 0
             customer = current_customer
@@ -35,6 +42,8 @@ class PromotionsController < ApplicationController
             customer.save(:validate => false)
             redirect_to step_path(:id => 'step2')
           else
+            Rails.logger.debug { "ici@@@" }
+            flash[:alert] = 'not used'
             render :show
           end
         else

@@ -3,6 +3,7 @@
   background: url('http://www.dvdpost.be/images/promotions_plush/<%= @promo.params[:background_locale] ? "#{I18n.locale}/" : '' %><%= @promo.params[:background] %>') no-repeat scroll 0 0 transparent;
   margin: 0 auto;
   width: 970px;
+  min-height: 722px;
 }
 <% if @promo.params[:brand_logo] %>
 .canvas2 #header h2,.canvas2 #header h2 a {
@@ -24,9 +25,6 @@
     <% end %>
   </div>
   <div class="container clearfix">
-    <% if current_customer && current_customer.abo_active == 1 %>
-      <%= t('no_right').html_safe %>
-    <% else %>
     <div id="promo_content">
       <h1 style="color: #212A31;">
         <%= t2('.title', @promo.name).html_safe %><br/>
@@ -81,7 +79,6 @@
       <div id="promo_footer"><%= t2('.conditions', @promo.name).html_safe %></div>
       </div>
     </div>
-  <% end %>
 </div>
 </div>
 </div>
