@@ -40,6 +40,7 @@ class PromotionsController < ApplicationController
             customer.step = 31
             customer.code = code
             customer.save(:validate => false)
+            customer.abo_history(35, customer.abo_type_id)
             redirect_to step_path(:id => 'step2')
           else
             flash[:alert] = 'not used'

@@ -39,6 +39,7 @@ class Customers::RegistrationsController < Devise::RegistrationsController
             @user.step = 31
             @user.code = params[:customer][:code]
             @user.save(:validate => false)
+            @user.abo_history(35, @user.abo_type_id)
             if @user.confirmed?
               sign_in @user, :bypass => true
               redirect_to step_path(:id => 'step2') and return
@@ -55,6 +56,7 @@ class Customers::RegistrationsController < Devise::RegistrationsController
     build_resource
 
     if resource.save
+      resource.abo_history(35, resource.abo_type_id)
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_navigational_format?
         sign_up(resource_name, resource)

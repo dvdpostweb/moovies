@@ -24,6 +24,7 @@ class Customers::SessionsController < Devise::SessionsController
           customer.step = 31
           customer.code = code
           customer.save(:validate => false)
+          customer.abo_history(35, customer.abo_type_id)
         else
           redirect_to promotion_path(:id => params[:id]), :alert => 'not used' and return
         end
