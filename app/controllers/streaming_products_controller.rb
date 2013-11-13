@@ -73,7 +73,7 @@ class StreamingProductsController < ApplicationController
               @token = creation[:token]
               error = creation[:error]
             
-              if current_customer && @token
+              if current_customer && @token && !@product.svod?
                 type = "#{@product.svod? ? 'svod' : 'tvod'}_#{params[:kind]}".to_sym
                 mail_id = Moovies.email[type]
                 product_id = @product.id
