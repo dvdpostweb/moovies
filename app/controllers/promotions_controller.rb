@@ -42,7 +42,6 @@ class PromotionsController < ApplicationController
             customer.save(:validate => false)
             redirect_to step_path(:id => 'step2')
           else
-            Rails.logger.debug { "ici@@@" }
             flash[:alert] = 'not used'
             render :show
           end

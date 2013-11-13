@@ -323,7 +323,7 @@ background-repeat: no-repeat;
   color:#fff;
 }
 
-#prices .price_sign a.btn {
+#prices .price_sign .btn {
   background-color: #D55023; 
   @include filter-gradient(#EE8419, #E26417, vertical);
   @include background-image(linear-gradient(top, #EE8419 0%,#E26417 100%));
@@ -344,6 +344,9 @@ background-repeat: no-repeat;
   text-shadow: 0 -1px 0 #D83C14;
   text-transform: uppercase;
   width: 130px;
+}
+#prices .price_sign button.btn {
+  height:44px;
 }
 #abo_description
 {

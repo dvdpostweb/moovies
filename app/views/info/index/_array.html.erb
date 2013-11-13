@@ -1,15 +1,15 @@
 <div class="main_price_table">
   <div class="list_sec">
     <ul>
-      <li><%= link_to t('info.index.abo.cat_svod'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}"), :kind => nil) %></li>
-      <li><%= link_to t('info.index.abo.cat_tvod'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[2]}"), :kind => nil) %></li>
-      <% if @kid_visible %><li><%= link_to t('info.index.abo.cat_kid'), products_short_path(:package => Moovies.packages.invert[3], :kind => nil) %></li><% end %>
-      <li><%= link_to t('info.index.abo.cat_svod_adult'), products_short_path(:package => Moovies.packages.invert[4], :kind => :adult) %></li>
-      <li><%= link_to t('info.index.abo.cat_tvod_adult'), products_short_path(:package => Moovies.packages.invert[5], :kind => :adult) %></li>
+      <li><%= current_customer && current_customer.step == 90 ? t('info.index.abo.cat_svod') : link_to(t('info.index.abo.cat_svod'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}"), :kind => nil)) %></li>
+      <li><%= current_customer && current_customer.step == 90 ? t('info.index.abo.cat_tvod') : link_to(t('info.index.abo.cat_tvod'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[2]}"), :kind => nil)) %></li>
+      <% if @kid_visible %><li><%= current_customer && current_customer.step == 90 ? t('info.index.abo.cat_kid') : link_to(t('info.index.abo.cat_kid'), products_short_path(:package => Moovies.packages.invert[3], :kind => nil)) %></li><% end %>
+      <li><%= current_customer && current_customer.step == 90 ? t('info.index.abo.cat_svod_adult') : link_to(t('info.index.abo.cat_svod_adult'), products_short_path(:package => Moovies.packages.invert[4], :kind => :adult)) %></li>
+      <li><%= current_customer && current_customer.step == 90 ? t('info.index.abo.cat_tvod_adult') : link_to(t('info.index.abo.cat_tvod_adult'), products_short_path(:package => Moovies.packages.invert[5], :kind => :adult)) %></li>
     </ul>
   </div>
   <div class="right_price_table">
-    <div class="basic_package<%= " current" if current_customer && current_customer.subscription_type.id == 1 %>">
+    <div class="basic_package<%= " current" if current_customer && current_customer.subscription_type.id == 1 && current_customer.step != 90 %>">
       <div class="head">
         <span class="plush">Plush</span> & <%= t('info.index.abo.tab_unlimited').html_safe %>
       </div>
@@ -27,7 +27,15 @@
       </div>
       <div class="price_sign" align="center">
         <% if current_customer %>
-          <%= link_to t('info.index.abo.change'), subscription_path(:abo_id => 1), :method => :put, :class => "btn btn_align" unless  current_customer.subscription_type.id == 1 %>
+          <% if current_customer.step == 90 %>
+            <%= form_tag promotion_canva_path(:id => params[:id]), :id => 'form_step' do %>
+              <%= hidden_field_tag(:code, @discount_svod.name) %><br />
+              <%= hidden_field_tag :return_url, step_path(:id => :old) %>
+              <button border="0" align="absmiddle" class="btn btn_align" name="sent"><%= t('.relaunch') %></button>
+            <% end %>
+          <% else %>
+            <%= link_to t('info.index.abo.change'), subscription_path(:abo_id => 1), :method => :put, :class => "btn btn_align" unless  current_customer.subscription_type.id == 1 %>
+          <% end %>
         <% else %>
           <%= link_to t('info.index.abo.try_now'), new_customer_registration_path(:code => @discount_svod.name), :class => "btn" %>
         <% end %>
@@ -35,7 +43,7 @@
       </div>
     </div>
     <% if @kid_visible %>
-    <div class="basic_package<%= " current" if current_customer && current_customer.subscription_type.id == 2 %>">
+    <div class="basic_package<%= " current" if current_customer && current_customer.subscription_type.id == 2 && current_customer.step != 90 %>">
       <div class="head">
         <span class="plush">Plush</span> & <%= t('info.index.abo.tab_kid').html_safe %>
       </div>
@@ -54,14 +62,22 @@
       </div>
       <div class="price_sign" align="center">
         <% if current_customer %>
-          <%= link_to t('info.index.abo.change'), subscription_path(:abo_id => 2), :method => :put, :class => "btn btn_align" unless  current_customer.subscription_type.id == 2 %>
+          <% if current_customer.step == 90 %>
+            <%= form_tag promotion_canva_path(:id => params[:id]), :id => 'form_step' do %>
+              <%= hidden_field_tag(:code, @discount_kids.name ) %><br />
+              <%= hidden_field_tag :return_url, step_path(:id => :old) %>
+              <button border="0" align="absmiddle" class="btn btn_align" name="sent"><%= t('.relaunch') %></button>
+            <% end %>
+          <% else %>
+            <%= link_to t('info.index.abo.change'), subscription_path(:abo_id => 2), :method => :put, :class => "btn btn_align" unless  current_customer.subscription_type.id == 2 %>
+          <% end %>
         <% else %>
           <%= link_to t('info.index.abo.try_now'), new_customer_registration_path(:code => @discount_kids.name), :class => "btn" %>
         <% end %>
       </div>
     </div>
     <% end %>
-    <div class="basic_package<%= " current" if current_customer && current_customer.subscription_type.id == 5 %>">
+    <div class="basic_package<%= " current" if current_customer && current_customer.subscription_type.id == 5 && current_customer.step != 90 %>">
       <div class="head">
         <span><%= t('info.index.abo.tab_adult_only').html_safe %></span>
       </div>
@@ -79,14 +95,22 @@
       </div>
       <div class="price_sign" align="center">
         <% if current_customer %>
-          <%= link_to t('info.index.abo.change'), subscription_path(:abo_id => 5), :method => :put, :class => "btn btn_align" unless current_customer.subscription_type.id == 5 %>
+          <% if current_customer.step == 90 %>
+            <%= form_tag promotion_canva_path(:id => params[:id]), :id => 'form_step' do %>
+              <%= hidden_field_tag(:code,  @discount_adult.name) %><br />
+              <%= hidden_field_tag :return_url, step_path(:id => :old) %>
+              <button border="0" align="absmiddle" class="btn btn_align" name="sent"><%= t('.relaunch') %></button>
+            <% end %>
+          <% else %>
+            <%= link_to t('info.index.abo.change'), subscription_path(:abo_id => 5), :method => :put, :class => "btn btn_align" unless current_customer.subscription_type.id == 5 %>
+          <% end %>
         <% else %>
           <%= link_to t('info.index.abo.try_now'), new_customer_registration_path(:code => @discount_adult.name), :class => "btn" %>
         <% end %>
       </div>
     </div>
 
-    <div class="basic_package<%= " current" if current_customer && current_customer.subscription_type.id == 3 %>">
+    <div class="basic_package<%= " current" if current_customer && current_customer.subscription_type.id == 3 && current_customer.step != 90 %>">
       <div class="head">
         <span class="plush">Plush</span> & <%= t('info.index.abo.tab_adult').html_safe %>
       </div>
@@ -104,14 +128,22 @@
       </div>
       <div class="price_sign" align="center">
         <% if current_customer %>
-          <%= link_to t('info.index.abo.change'), subscription_path(:abo_id => 3), :method => :put, :class => "btn btn_align" unless current_customer.subscription_type.id == 3 %>
+          <% if current_customer.step == 90 %>
+            <%= form_tag promotion_canva_path(:id => params[:id]), :id => 'form_step' do %>
+              <%= hidden_field_tag(:code, @discount_classic_adult.name) %><br />
+              <%= hidden_field_tag :return_url, step_path(:id => :old) %>
+              <button border="0" align="absmiddle" class="btn btn_align" name="sent"><%= t('.relaunch') %></button>
+            <% end %>
+          <% else %>
+            <%= link_to t('info.index.abo.change'), subscription_path(:abo_id => 3), :method => :put, :class => "btn btn_align" unless current_customer.subscription_type.id == 3 %>
+          <% end %>
         <% else %>
           <%= link_to t('info.index.abo.try_now'), new_customer_registration_path(:code => @discount_classic_adult.name), :class => "btn" %>
         <% end %>
       </div>
     </div>
     <% if @kid_visible %>
-    <div class="basic_package<%= " current" if current_customer && current_customer.subscription_type.id == 4 %>">
+    <div class="basic_package<%= " current" if current_customer && current_customer.subscription_type.id == 4 && current_customer.step != 90 %>">
       <div class="head">
         <span class="plush">Plush</span> & <%= t('info.index.abo.tab_all').html_safe %> 
       </div>
@@ -129,7 +161,15 @@
       </div>
       <div class="price_sign" align="center">
         <% if current_customer %>
-          <%= link_to t('info.index.abo.change'), subscription_path(:abo_id => 4), :method => :put, :class => "btn btn_align" unless current_customer.subscription_type.id == 4 %>
+          <% if current_customer.step == 90 %>
+            <%= form_tag promotion_canva_path(:id => params[:id]), :id => 'form_step' do %>
+              <%= hidden_field_tag(:code, @discount_all.name) %><br />
+              <%= hidden_field_tag :return_url, step_path(:id => :old) %>
+              <button border="0" align="absmiddle" class="btn btn_align" name="sent"><%= t('.relaunch') %></button>
+            <% end %>
+          <% else %>
+            <%= link_to t('info.index.abo.change'), subscription_path(:abo_id => 4), :method => :put, :class => "btn btn_align" unless current_customer.subscription_type.id == 4 %>
+          <% end %>
         <% else %>
           <%= link_to t('info.index.abo.try_now'), new_customer_registration_path(:code => @discount_all.name), :class => "btn" %>
         <% end %>
