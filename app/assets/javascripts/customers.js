@@ -30,5 +30,24 @@ $(function() {
     });
     return false;
   });
+  $('#moncompte').delegate("#new_suspension", "click", function(){
+    $('#new_suspension').html("<div style='height:32px'><img src='/assets/ajax-loader.gif' /></div>")
+    $('#suspend-abonament form').ajaxSubmit(options);
+    return false; // prevent default behaviour
+  });
   
+  var options = {
+    success: showResponse,
+    dataType: 'html'  // post-submit callback
+  };
+
+  // post-submit callback
+  function showResponse(responseText, statusText)  {
+    if(jQuery.trim(responseText) == "Success"){
+      $.facebox.close;
+      window.location.href = window.location.pathname;
+    } else {
+      $('.content').html(responseText);
+    }
+  }
 });
