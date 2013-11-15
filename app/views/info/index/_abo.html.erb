@@ -9,7 +9,7 @@
   <% else %>
     <h1><%= t('.title').html_safe if params[:id] != 'old' %></h1>
     <%= render :partial => 'info/index/array' %>
-    <div id="abo_description"><%= params[:id] != 'old' ? t('.description').html_safe : t('.description_old').html_safe %></div>
+    <div id="abo_description"><%= t('.description').html_safe if params[:id] != 'old' %></div>
   <% end %>
 <% else %>
   <% if params[:kind] == :normal %>

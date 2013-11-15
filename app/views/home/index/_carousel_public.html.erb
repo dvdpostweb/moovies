@@ -8,7 +8,7 @@
           <%= link_to t('home.index.try'), new_customer_registration_path(:code => get_code(@discount_top.name)), :class => 'essaigratuit osc btn' %> 
           <div id="engagement"><%= t 'home.index.try_text' %></div>
         </div>
-        <%= link_to image_tag("#{I18n.locale}/#{t('.bg_infinit_img')}#{params[:kind]==:adult ? '_adult' : ''}.jpg", :size => '932x328', :alt => t('.bg_infinity').html_safe), new_customer_registration_path(:code => get_code(@discount_top.name)) %>
+        <%= link_to image_tag("#{I18n.locale}/#{t('.bg_infinit_img')}#{params[:kind]==:adult ? '-adult' : ''}.jpg", :size => '932x328', :alt => t('.bg_infinity').html_safe), new_customer_registration_path(:code => get_code(@discount_top.name)) %>
       </li>
     </ul>
   </div>
