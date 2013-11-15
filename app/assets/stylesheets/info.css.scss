@@ -150,7 +150,7 @@
   padding-left: 83px;
 }
 #prices .adult_dvd {
-    background-image: url("/assets/dvd_prices.png");
+    background-image: url(image_path('dvd_prices.png'));
     background-position: 0 0;
     background-repeat: no-repeat;
     color: #3E3D40;
@@ -496,7 +496,7 @@ width: 902px;
 #top_box {
     background-attachment: scroll;
     background-color: #FFFFFF;
-    background-image: url("/assets/tvconnect/bg_connection.jpg");
+    background-image: url(image_path('tvconnect/bg_connection.jpg'));
         background-position: -8px 106px;
     background-repeat: no-repeat no-repeat;
    height: 538px;
@@ -512,13 +512,13 @@ width: 902px;
 }
 
 #middle_box .options_box .step1 h2 {
-    background: url("/assets/promotions/1.gif") no-repeat scroll 4px 5px transparent;
+    background: url(image_path('promotions/1.gif')) no-repeat scroll 4px 5px transparent;
 }
 #middle_box .options_box .step2 h2 {
-    background: url("/assets/promotions/2.gif") no-repeat scroll 4px 5px transparent;
+    background: url(image_path('promotions/2.gif')) no-repeat scroll 4px 5px transparent;
 }
 #middle_box .options_box .step3 h2 {
-    background: url("/assets/promotions/3.gif") no-repeat scroll 4px 5px transparent;
+    background: url(image_path('promotions/3.gif')) no-repeat scroll 4px 5px transparent;
 }
 
 #middle_box ul.list_options li input, .guide_hidden {
@@ -545,7 +545,7 @@ width: 902px;
   padding-top:20px;
 }
 #left_box h3 {
-    background: url("/assets/promotions/square.gif") no-repeat scroll 0 16px transparent;
+    background: url(image_path('promotions/square.gif')) no-repeat scroll 0 16px transparent;
     font-size: 24px;
     padding-left: 22px;
     padding-top: 12px;
