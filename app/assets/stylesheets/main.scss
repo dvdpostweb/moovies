@@ -164,17 +164,17 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {border:0;padding:0;
 	width: 100%;
 	background: #212a31;
 }
-#header h1 {
+#header div {
 	float: left;
 	margin: 0 0 0 20px;
 	height: 39px;
 }
-#header h1 a {
+#header div a {
 	background: url(image_path('logo.png')) repeat scroll 0 0 transparent;
 	height: 86px;
 	width: 224px;
 }
-.adult #header h1 a {
+.adult #header div a {
 	background: url(image_path('logo_adult.png')) repeat scroll 0 0 transparent;
     height: 86px;
     width: 224px;
