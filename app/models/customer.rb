@@ -28,6 +28,7 @@ class Customer < ActiveRecord::Base
   alias_attribute :promo_type,                   :activation_discount_code_type
   alias_attribute :next_promo_id,                :customers_next_discount_code
   alias_attribute :promo_id,                     :activation_discount_code_id
+  alias_attribute :recurring_until,              :customers_abo_discount_recurring_to_date
   
   alias_attribute :step,                         :customers_registration_step
   alias_attribute :locked,                       :customers_locked__for_reconduction

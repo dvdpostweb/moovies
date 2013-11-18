@@ -66,18 +66,16 @@
           <% end %>
         </td>
       </tr>
+      -->
+      <% if current_customer.abo_active? %>
       <tr>
-        <td align="right" class="adresse"><strong><%= t '.date_abo' %></strong></td>
-        <td align="left" class="adresse">
-          <%= customer.subscription.created_at.strftime("%d/%m/%Y") if customer.actived? && customer.subscription %>
-        </td>
-      </tr>
-      <tr>
-        <td align="right"><strong><%= t '.date_end_abo' %></strong></td>
+        <td align="right"><strong><%= current_customer.auto_stop == 0 || (current_customer.auto_stop == 1 && current_customer.recurring_until && current_customer.recurring_until > Date.today) ? t('.date_end_abo') : t('.date_end') %></strong></td>
         <td align="left">
           <%= customer.subscription_expiration_date.strftime("%d/%m/%Y") if customer.subscription_expiration_date %>
         </td>
       </tr>
+      <% end %>
+      <!--
       <tr>
                 <td width="360" align="right"><strong>Films dans votre liste cinéma :</strong></td>
         <td width="258" align="left">22</td>
