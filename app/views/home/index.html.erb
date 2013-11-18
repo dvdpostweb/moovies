@@ -43,7 +43,7 @@
     </ul>
   </div>
   <div class="wrap" id="news">
-    <h3><%= t '.newsletter' %></h3>
+    <h3 class="<%= I18n.locale %>"><%= t '.newsletter' %></h3>
 
     <%= form_for @newsletter do |f| %>
     <center>
@@ -102,7 +102,7 @@
       <%= link_to image_tag("#{I18n.locale}/#{t('.banner_img')}#{params[:kind]==:adult ? '-adult' : ''}.jpg", :size => '942x188', :alt => t('.banner_alt')), new_customer_registration_path(:code => get_code(@discount_bottom.name)) %>
     </div>
     <% end %>
-    <%= t('.descritpion', :link_abo => info_path(:page_name => t('routes.infos.params.abo')), :link_svod => (params[:kind] == :adult ? products_short_path(:package => Moovies.packages.invert[4]) : products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}"))), :link_tvod => (params[:kind] ==  :adult ? products_short_path(:package => Moovies.packages.invert[5]) : products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[2]}")))).html_safe %>
+    <%= t('.descritpion', :link_abo => info_path(:page_name => t('routes.infos.params.vod')), :link_svod => (params[:kind] == :adult ? products_short_path(:package => Moovies.packages.invert[4]) : products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}"))), :link_tvod => (params[:kind] ==  :adult ? products_short_path(:package => Moovies.packages.invert[5]) : products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[2]}")))).html_safe %>
     <div class="clear"></div>
   </div>
 </div>
