@@ -2,7 +2,11 @@
   <%= render :partial => 'products/vod_list',  :locals => {:product => product, :source => @source, :response_id => @response_id} %>
 <% else %>
 <div id="formats">
-   <div class="verimatrix"><strong>ATTENTION:</strong> pour regarder ce film, l’installation d’un player spécifique est requis. Pour en savoir plus et pour télécharger le player, vous pouvez vous rendre sur <a href=""><strong>la page d’explication ViewRight</strong></a></div>
+  <% if product.get_vod(session[:country]).first && product.get_vod(session[:country]).first.drm == true %>
+    <div class="verimatrix">
+      <%= t('.drm_warning', :link => 'ok').html_safe %>
+    </div>
+  <% end %>
   <h3><%= t '.format_available' %></h3>
 
   <table border="0" cellpadding="0" cellspacing="0">

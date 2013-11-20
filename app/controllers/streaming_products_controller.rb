@@ -3,7 +3,6 @@ class StreamingProductsController < ApplicationController
     if params[:code]
       @code = StreamingCode.by_name(params[:code]).available.first
     end
-    Rails.logger.debug { "@@@#{@code} #{@code.nil?}" }
     if @code.nil? && !current_customer
       redirect_to root_localize_path and return
     end

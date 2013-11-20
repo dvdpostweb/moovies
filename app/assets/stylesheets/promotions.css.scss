@@ -601,6 +601,11 @@ ul {
 {
   color: #900;
 }
+.canvas2 #error
+{
+  font-size: 12px;
+  padding: 0 0 6px 0;
+}
 .form_explain
 {
   font-size:12px;
@@ -630,7 +635,12 @@ ul {
     margin-top: -12px;
       color: #900;
 }
-
+#error_explanation a{
+  color: #900;
+}
+.canvas2 #error_explanation {
+  margin-top:0;
+}
 
 
 .inputs_codes {
