@@ -1,7 +1,7 @@
 <!--   ==============   MAIN CONTENT   ==============   -->
 <div id="maincontent" >
 	<%= render :partial => 'layouts/filters', :locals => {:filter => @filter }%>
-  <h2 class="ttl"><%= products_index_title %></h2>
+  <h1 class="ttl"><%= products_index_title %></h1>
   <%= render :partial => 'products/index/image', :locals => {:people => @people} if @people %>
   
   <!--   ==============   MOVIES   ==============   -->
@@ -17,6 +17,8 @@
   <div id='pagination_content'>
       <%= render :partial => 'products/index/pagination', :locals => {:item => @products} %>
   </div>
+  <%= t('home.index.descritpion', :link_abo => info_path(:page_name => t('routes.infos.params.vod')), :link_svod => (params[:kind] == :adult ? products_short_path(:package => Moovies.packages.invert[4]) : products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}"))), :link_tvod => (params[:kind] ==  :adult ? products_short_path(:package => Moovies.packages.invert[5]) : products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[2]}")))).html_safe %>
+  
   <!--   ==============   END MOVIES   ==============   -->
 </div>
 <%= render :partial => 'products/left_column', :locals => {:filter => @filter, :countries => @countries} %>
