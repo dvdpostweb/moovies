@@ -4,7 +4,7 @@
 <div id="formats">
   <% if product.get_vod(session[:country]).first && product.get_vod(session[:country]).first.drm == true %>
     <div class="verimatrix">
-      <%= t('.drm_warning', :link => 'ok').html_safe %>
+      <%= t('.drm_warning', :link => info_path(:page_name => :viewright)).html_safe %>
     </div>
   <% end %>
   <h3><%= t '.format_available' %></h3>

@@ -747,3 +747,77 @@ p.cable_name {
     padding: 11px;
 }
 
+/***************/
+/*  view right */
+/***************/
+
+.verimatrix {
+    background-color: #E5E5E5;
+    background-image: url(image_path('computer_verimatrix.png'));
+    background-position: 8px 8px;
+    background-repeat: no-repeat;
+    color: #212A31;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    margin-top: 10px;
+    padding: 10px 10px 10px 104px;
+    width: 330px;
+}
+
+#btns-wrap .verimatrix a{
+background-image:none!important;
+color:#212A31;
+text-decoration:underline;
+display: inline;
+}
+#verimatrix-wrap
+{
+  margin: 0 39px;
+}
+#verimatrix-wrap, #verimatrix-wrap h2
+{
+  font-family: Arial,Helvetica,sans-serif;
+}
+#verimatrix-wrap p
+{
+  margin:12px 0;
+}
+#verimatrix_area .verimatrix {
+    background-color: #E5E5E5;
+    background-image: url(image_path('computer_verimatrix.png'));
+    background-position: 8px 8px;
+    background-repeat: no-repeat;
+    color: #212A31;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    margin: 0 auto 10px;
+    padding: 10px 10px 10px 104px;
+	text-align:left;
+    width: 400px;
+	border:#FFFFFF solid 2px;
+}
+
+
+
+#verimatrix-wrap a {
+    background-color: #98D321;
+    float: left;
+    font-size: 14px;
+    margin: 4px;
+    padding: 6px 6px 6px 30px;
+}
+
+#verimatrix-wrap .mac a{
+
+background-image: url(image_path('apple_verimatrix.png'));
+  background-position: 5px 3px;
+    background-repeat: no-repeat;
+}
+
+
+#verimatrix-wrap .win a{
+
+background-image: url(image_path('win_verimatrix.png'));
+  background-position: 5px 3px;
+    background-repeat: no-repeat;
+}

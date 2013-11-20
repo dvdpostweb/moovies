@@ -22,7 +22,7 @@
               <div class="choice_language">
                 <% if @streaming.drm == true %>
                   <div id="verimatrix_area">
-                    <div class="verimatrix"><%= t('.drm_warning', :link => 'ok').html_safe %></div>
+                    <div class="verimatrix"><%= t('.drm_warning', :link => info_path(:page_name => :viewright)).html_safe %></div>
                   </div>
                 <% end %>
                 <h3><%= t('.version_title') %></h3>
