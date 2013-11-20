@@ -1,13 +1,14 @@
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:id => 'new_customer'}) do |f| %>
-<%= devise_error_messages!.gsub(/<a.*a>/,"si c'est ton email log toi pour profiter ton ta promo #{link_to('ici', promotion_path(:id => params[:id], :email => params[:customer][:email]))}").html_safe if params[:customer] && params[:customer][:email]%>
 
 <div align="center">
   <span>
     <h3><%= t2('promotions.show.canvas2.promo', @promo.name).html_safe %></h3>
-    <p class="inputs_codes"><%= t 'promotions.show.canvas2.email_label' %> :<br />
+    <%= devise_error_messages!.gsub(/<a.*a>/,"si c'est ton email log toi pour profiter ton ta promo #{link_to('ici', promotion_path(:id => params[:id], :email => params[:customer][:email]))}").html_safe if params[:customer] && params[:customer][:email]%>
+    
+    <p class="inputs_codes"><%= f.label :email, t('promotions.show.canvas2.email_label') %> :<br />
       <%= f.text_field :email, :value => @email, :class => 'inputs_promo_code', :size => '40', :tye => 'text' %>
     </p>
-   <p class="inputs_codes"><%= t 'promotions.show.canvas2.pass_label' %> :<br />
+   <p class="inputs_codes"><%= f.label :password, t('promotions.show.canvas2.pass_label') %> :<br />
       <%= f.password_field :password, :class => 'inputs_promo_code', :size => '40', :maxlength => '40' %>
     </p>
     <p class="inputs_codes_conf">

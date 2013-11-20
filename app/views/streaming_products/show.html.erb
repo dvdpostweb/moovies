@@ -20,10 +20,11 @@
           <% if @code || (@token && @token_valid) || (current_customer && current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s)) %>
             <% if @streaming_prefered.count > 0 || (@streaming_not_prefered && @streaming_not_prefered.count > 0) %>
               <div class="choice_language">
+                <% if @streaming.drm == true %>
                   <div id="verimatrix_area">
-                		  <div class="verimatrix"><strong>ATTENTION:</strong> Pour regarder ce film, l’installation du player ViewRight est requis. Si vous n’avez pas encore le player, vous pouvez le télécharger <a href=""><strong>via la page d’explication ViewRight</strong></a>.<br /><br />
-                Votre compte ne sera pas débité tant que vous n’avez pas démarré le film</div>
-                </div>
+                    <div class="verimatrix"><%= t('.drm_warning', :link => 'ok').html_safe %></div>
+                  </div>
+                <% end %>
                 <h3><%= t('.version_title') %></h3>
                 <div id="choice_new">
                   <div id="step1" class="step" style="width:696px;height:120px">
