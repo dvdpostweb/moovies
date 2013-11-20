@@ -1,6 +1,10 @@
 class StreamingProductsController < ApplicationController
   def show
-    unless current_customer
+    if params[:code]
+      @code = StreamingCode.by_name(params[:code]).available.first
+    end
+    Rails.logger.debug { "@@@#{@code} #{@code.nil?}" }
+    if @code.nil? && !current_customer
       redirect_to root_localize_path and return
     end
     @body_id = 'streaming'
@@ -11,7 +15,7 @@ class StreamingProductsController < ApplicationController
     else
       @product = Product.find_by_imdb_id(params[:id])
     end
-    if @product
+    if @product && current_customer
       @token = current_customer.get_token(@product.imdb_id)
     end
     @token_valid = @token.nil? ? false : @token.validate?(request.remote_ip)
@@ -32,7 +36,7 @@ class StreamingProductsController < ApplicationController
     if !request.xhr?
       if @product
         if @vod_disable == "1" || Rails.env == "pre_production"
-          if view_context.streaming_access? && current_customer.actived? && !current_customer.suspended? && current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s) && (@product.svod? || (!@product.svod? && current_customer.payable?))
+          if view_context.streaming_access? && (@code || (current_customer.actived? && !current_customer.suspended? && current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s) && (@product.svod? || (!@product.svod? && current_customer.payable?))))
             if !@streaming_prefered.blank? || !@streaming_not_prefered.blank?
               if @token_valid == false && @vod_create_token == "0" && Rails.env != "pre_production"
                 error = t('streaming_products.not_available.offline')
@@ -59,13 +63,15 @@ class StreamingProductsController < ApplicationController
     else
       if view_context.streaming_access?
         streaming_version = StreamingProduct.find_by_id(params[:streaming_product_id])
-        if (!current_customer.suspended? && !Token.dvdpost_ip?(request.remote_ip) && !current_customer.super_user? && !(/^192(.*)/.match(request.remote_ip)) && current_customer.actived? && current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s) && (@product.svod? || (!@product.svod? && current_customer.payable?)))
+        if @code || ((!current_customer.suspended? && !Token.dvdpost_ip?(request.remote_ip) && !current_customer.super_user? && !(/^192(.*)/.match(request.remote_ip)) && current_customer.actived? && current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s) && (@product.svod? || (!@product.svod? && current_customer.payable?))))
         #if 1==1
           status = @token.nil? ? nil : @token.current_status(request.remote_ip)
           streaming_version = StreamingProduct.find_by_id(params[:streaming_product_id])
           if !@token || status == Token.status[:expired]
-            if current_customer
-              creation = current_customer.create_token(params[:id], @product, request.remote_ip, params[:streaming_product_id], params[:kind], params[:source])
+            if @code
+              creation = Token.create_token(params[:id], @product, request.remote_ip, params[:streaming_product_id], params[:kind], current_customer ? current_customer : nil, params[:source], @code.name)
+            elsif current_customer
+              creation = Token.create_token(params[:id], @product, request.remote_ip, params[:streaming_product_id], params[:kind], current_customer, params[:source])
             else
               creation = nil
             end

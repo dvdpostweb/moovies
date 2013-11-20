@@ -39,7 +39,7 @@ module ApplicationHelper
   end
 
   def streaming_access?
-    !current_customer || session[:country_id] == 22 || session[:country_id] == 131 || session[:country_id] == 0 || session[:country_id] == 161 || current_customer.super_user?
+    session[:country_id] == 22 || session[:country_id] == 131 || session[:country_id] == 0 || session[:country_id] == 161 || (current_customer && current_customer.super_user?)
   end
 
   def sort_review_for_select

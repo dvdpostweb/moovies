@@ -283,26 +283,6 @@ class Customer < ActiveRecord::Base
     credit_histories.last
   end
 
-  def create_token(imdb_id, product, current_ip, streaming_product_id, kind, source = 7)
-    file = StreamingProduct.find(streaming_product_id)
-        begin
-          token_string = Moovies.generate_token_from_alpha(file.filename, kind, false)
-        rescue => e
-          token_string = false
-        end
-
-        if token_string
-          token = !file.svod? ? Token.create(:customer_id => id, :imdb_id => imdb_id, :token => token_string, :is_ppv => true, :ppv_price => file.ppv_price, :source_id => source, :country => file.country, :kind => 'PPV') : Token.create(:customer_id => id, :imdb_id => imdb_id, :token => token_string, :source_id => source, :country => file.country)
-          if token.id.blank?
-            return {:token => nil, :error => Token.error[:query_rollback]}
-          else
-            return {:token => token, :error => nil}
-          end
-        else
-          return {:token => nil, :error => Token.error[:generation_token_failed]}
-        end
-  end
-
   def get_token(imdb_id)
     tokens.recent(2.week.ago.localtime, Time.now).find_all_by_imdb_id(imdb_id).last
   end
