@@ -9,7 +9,7 @@
   <div class="wrap" id="vod-ppv">
     <h3><%= t ".unlinmited#{params[:kind] == :adult ? '_adult' : ''}" %></h3>
     <center>
-        <%= link_to image_tag("infinity#{params[:kind]==:adult ? '_adult' : ''}.gif", :size => '200x95'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[@svod_id]}")) %>
+        <%= link_to image_tag("#{I18n.locale}/#{t('.vod_unlimited_img')}#{params[:kind]==:adult ? '-adult' : ''}.gif", :size => '200x95', :alt => t('.vod_unlimited')), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[@svod_id]}")) %>
     </center>
     • <%= t ".unlinmited1#{params[:kind] == :adult ? '_adult' : ''}" %><br />
     • <%= t ".unlinmited2#{params[:kind] == :adult ? '_adult' : ''}" %><br />
@@ -19,9 +19,9 @@
     </ul>
   </div>
   <div class="wrap" id="alacarte">
-    <h3><%= t ".tvod#{params[:kind] == :adult ? '_adult' : ''}" %></h3>
+    <h3><%= t ".tvod#{params[:kind] == :adult ? '-adult' : ''}" %></h3>
     <center>
-      <%= link_to image_tag("alacarte#{params[:kind]==:adult ? '_adult' : ''}.gif", :size => '200x95'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[@tvod_id]}"), :kind => nil) %>
+      <%= link_to image_tag("#{I18n.locale}/pay-per-view#{params[:kind]==:adult ? '-adult' : ''}.gif", :size => '200x95', :alt => 'pay per view'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[@tvod_id]}"), :kind => nil) %>
     </center>
     • <%= t ".tvod1#{params[:kind] == :adult ? '_adult' : ''}" %><br />
     • <%= t ".tvod2#{params[:kind] == :adult ? '_adult' : ''}" %><br />
@@ -33,7 +33,7 @@
   <div class="wrap" id="apps">
     <h3><%= t '.multi' %></h3>
     <center>
-      <%= link_to image_tag("icon_plateforme#{params[:kind]==:adult ? '_adult' : ''}.gif", :size => '200x95'), info_path(:page_name => t('routes.infos.params.vod')) %>
+      <%= link_to image_tag("#{I18n.locale}/video-on-demand#{params[:kind]==:adult ? '-adult' : ''}.gif", :size => '200x95', :alt => 'video on demand'), info_path(:page_name => t('routes.infos.params.vod')) %>
     </center>
     • <%= t '.multi1' %><br />
     • <%= t '.multi2' %><br />
@@ -99,9 +99,10 @@
     <div class="clear"></div>
     <% unless current_customer %>
     <div id="subscribe-wrap">
-      <%= link_to image_tag("#{I18n.locale}/banner_promo_hp#{params[:kind]==:adult ? '_adult' : ''}.jpg", :size => '942x188'), new_customer_registration_path(:code => get_code(@discount_bottom.name)) %>
+      <%= link_to image_tag("#{I18n.locale}/#{t('.banner_img')}#{params[:kind]==:adult ? '-adult' : ''}.jpg", :size => '942x188', :alt => t('.banner_alt')), new_customer_registration_path(:code => get_code(@discount_bottom.name)) %>
     </div>
     <% end %>
+    <%= t('.descritpion', :link_abo => info_path(:page_name => t('routes.infos.params.abo')), :link_svod => (params[:kind] == :adult ? products_short_path(:package => Moovies.packages.invert[4]) : products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}"))), :link_tvod => (params[:kind] ==  :adult ? products_short_path(:package => Moovies.packages.invert[5]) : products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[2]}")))).html_safe %>
     <div class="clear"></div>
   </div>
 </div>

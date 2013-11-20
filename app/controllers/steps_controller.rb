@@ -11,6 +11,12 @@ class StepsController < ApplicationController
     elsif params[:id] == 'step3'
       @hide_footer = true
       @hide_menu = true
+    elsif params[:id] == 'old'
+      @discount_svod = Discount.find(Moovies.discount["svod_step90_#{I18n.locale}"])
+      #@discount_kids = Discount.find(Moovies.discount["kid_step90_#{I18n.locale}"])
+      @discount_adult = Discount.find(Moovies.discount["adult_step90_#{I18n.locale}"])
+      @discount_classic_adult = Discount.find(Moovies.discount["classic_adult_step90_#{I18n.locale}"])
+      #@discount_all = Discount.find(Moovies.discount["all_step90_#{I18n.locale}"])
     end
   end
 

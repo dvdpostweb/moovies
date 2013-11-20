@@ -18,7 +18,7 @@ class SearchFiltersController < ApplicationController
       current_customer.update_attributes(:filter_id => nil) if current_customer
       cookies.delete :filter_id
     end
-    redirect_back_or(products_path)
+    redirect_back_or(products_short_path)
   end
 
   private

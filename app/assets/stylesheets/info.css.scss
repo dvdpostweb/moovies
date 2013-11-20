@@ -150,7 +150,7 @@
   padding-left: 83px;
 }
 #prices .adult_dvd {
-    background-image: url("/assets/dvd_prices.png");
+    background-image: url(image_path('dvd_prices.png'));
     background-position: 0 0;
     background-repeat: no-repeat;
     color: #3E3D40;
@@ -323,7 +323,7 @@ background-repeat: no-repeat;
   color:#fff;
 }
 
-#prices .price_sign a.btn {
+#prices .price_sign .btn {
   background-color: #D55023; 
   @include filter-gradient(#EE8419, #E26417, vertical);
   @include background-image(linear-gradient(top, #EE8419 0%,#E26417 100%));
@@ -344,6 +344,9 @@ background-repeat: no-repeat;
   text-shadow: 0 -1px 0 #D83C14;
   text-transform: uppercase;
   width: 130px;
+}
+#prices .price_sign button.btn {
+  height:44px;
 }
 #abo_description
 {
@@ -493,7 +496,7 @@ width: 902px;
 #top_box {
     background-attachment: scroll;
     background-color: #FFFFFF;
-    background-image: url("/assets/tvconnect/bg_connection.jpg");
+    background-image: url(image_path('tvconnect/bg_connection.jpg'));
         background-position: -8px 106px;
     background-repeat: no-repeat no-repeat;
    height: 538px;
@@ -509,13 +512,13 @@ width: 902px;
 }
 
 #middle_box .options_box .step1 h2 {
-    background: url("/assets/promotions/1.gif") no-repeat scroll 4px 5px transparent;
+    background: url(image_path('promotions/1.gif')) no-repeat scroll 4px 5px transparent;
 }
 #middle_box .options_box .step2 h2 {
-    background: url("/assets/promotions/2.gif") no-repeat scroll 4px 5px transparent;
+    background: url(image_path('promotions/2.gif')) no-repeat scroll 4px 5px transparent;
 }
 #middle_box .options_box .step3 h2 {
-    background: url("/assets/promotions/3.gif") no-repeat scroll 4px 5px transparent;
+    background: url(image_path('promotions/3.gif')) no-repeat scroll 4px 5px transparent;
 }
 
 #middle_box ul.list_options li input, .guide_hidden {
@@ -542,7 +545,7 @@ width: 902px;
   padding-top:20px;
 }
 #left_box h3 {
-    background: url("/assets/promotions/square.gif") no-repeat scroll 0 16px transparent;
+    background: url(image_path('promotions/square.gif')) no-repeat scroll 0 16px transparent;
     font-size: 24px;
     padding-left: 22px;
     padding-top: 12px;

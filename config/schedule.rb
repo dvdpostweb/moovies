@@ -27,12 +27,6 @@ every 1.day, :at => '5:20 pm' do
   rake "ts:index"  
 end
 
-every '* 8,9,10,11,12,13,14,15,16,17,18 * * 1,2,3,4,5' do
-  runner "Product.update_plush"
-end
-every 1.day, :at => '0:05 am' do
-  runner "Product.update_plush"
-end
 #every 1.day, :at => '0:35 am' do  
 #  runner "Product.get_product_home"  
 #end

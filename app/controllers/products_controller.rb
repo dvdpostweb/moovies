@@ -18,6 +18,8 @@ class ProductsController < ApplicationController
     end
     @body_id = 'products_index'
     @filter = view_context.get_current_filter({})
+    params[:director_id] = params[:old_director_id] if params[:old_director_id]
+    params[:actor_id] = params[:old_actor_id] if params[:old_actor_id]
     if params['actor_id']
       @people = Actor.find(params['actor_id'])
       params['actor_id'] = @people.id
@@ -227,6 +229,8 @@ private
     begin
       if params[:id]
         id = params[:id]
+      elsif params[:old_product_id]
+        id = params[:old_product_id]
       else
         id = params[:product_id]
       end

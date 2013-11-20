@@ -73,7 +73,7 @@ class StreamingProductsController < ApplicationController
               @token = creation[:token]
               error = creation[:error]
             
-              if current_customer && @token
+              if current_customer && @token && !@product.svod?
                 type = "#{@product.svod? ? 'svod' : 'tvod'}_#{params[:kind]}".to_sym
                 mail_id = Moovies.email[type]
                 product_id = @product.id
@@ -163,6 +163,7 @@ class StreamingProductsController < ApplicationController
   end
 
   def language
+    params[:streaming_product_id] = params[:old_streaming_product_id] if params[:old_streaming_product_id]
     token = current_customer.get_token(params[:streaming_product_id]) if current_customer
     token_valid = token.nil? ? false : token.validate?(request.remote_ip)
     if Rails.env != 'pre_production' && token_valid == false
@@ -176,6 +177,7 @@ class StreamingProductsController < ApplicationController
   end
 
   def subtitle
+    params[:streaming_product_id] = params[:old_streaming_product_id] if params[:old_streaming_product_id]
     token = current_customer.get_token(params[:streaming_product_id]) if current_customer
     token_valid = token.nil? ? false : token.validate?(request.remote_ip)
     if Rails.env != 'pre_production' && token_valid == false
@@ -189,6 +191,7 @@ class StreamingProductsController < ApplicationController
   end
 
   def versions
+    params[:streaming_product_id] = params[:old_streaming_product_id] if params[:old_streaming_product_id]
     token = current_customer.get_token(params[:streaming_product_id]) if current_customer
     token_valid = token.nil? ? false : token.validate?(request.remote_ip)
     if Rails.env != 'pre_production' && token_valid == false
@@ -240,7 +243,7 @@ class StreamingProductsController < ApplicationController
   private
   def notify_country_error(customer_id, country_id, imdb_id, error)
     begin
-      Airbrake.notify(:error_message => "customer have a problem with VOD customer_id : #{customer_id} country_id: #{country_id} imdb_id: #{imdb_id}, error #{error} ip #{session[:my_ip]}", :backtrace => $@, :environment_name => ENV['RAILS_ENV'])
+      Airbrake.notify(:error_message => "customer have a problem with VOD customer_id : #{customer_id} country_id: #{country_id} imdb_id: #{imdb_id}, error #{error} ip #{session[:my_ip]} forwarded: #{request.env["HTTP_X_FORWARDED_FOR"]} remote: #{request.remote_ip}", :backtrace => $@, :environment_name => ENV['RAILS_ENV'])
     rescue => e
       logger.error("customer have a problem with VOD customer_id : #{customer_id} country_id: #{country_id} imdb_id: #{imdb_id} error #{error} ip #{session[:my_ip]}")
       logger.error(e.backtrace)
