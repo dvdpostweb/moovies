@@ -5,9 +5,9 @@
 #home #maincontent {
     display: inline;
     float: left;
-    margin-left: 14px;
+    margin: 0 14px;
     position: relative;
-    width: 970px;
+    width: 942px;
 }
 
 #slider-wrap {
@@ -228,17 +228,24 @@ a.plus-btn {
 }
 
 .adult #services-wrap li a {
-    background: url("/assets/play_adult.gif") no-repeat scroll 0 5px transparent;
+    background: url(image_path('play_adult.gif')) no-repeat scroll 0 5px transparent;
     color: #993399;
 }
 #news.wrap h3 {
-    background: url(image_path('icon_news.gif')) no-repeat scroll 3px -11px transparent;
-    height: 55px;
-    padding-left: 30px;
+  height: 55px;
+  padding-left: 30px;
 }
-
+#news.wrap h3.fr {
+  background: url(image_path('fr/promotions-video-streaming.gif')) no-repeat scroll 3px -11px transparent;
+}
+#news.wrap h3.nl {
+  background: url(image_path('nl/film-streaming-promoties.gif')) no-repeat scroll 3px -11px transparent;
+}
+#news.wrap h3.en {
+  background: url(image_path('en/video-streaming-promotions.gif')) no-repeat scroll 3px -11px transparent;
+}
 .adult #news.wrap h3 {
-    background: url("/assets/icon_news_adult.gif") no-repeat scroll 3px -11px transparent;
+    background: url(image_path('icon_news_adult.gif')) no-repeat scroll 3px -11px transparent;
 }
 #news.wrap input[type="text"] {
     border: 1px solid #A6AAAD;
@@ -262,7 +269,7 @@ a.plus-btn {
 }
 
 .adult #news.wrap input[type="submit"] {
-    background: url("/assets/play_adult.gif") no-repeat scroll 0 5px transparent;
+    background: url(image_path('/play_adult.gif')) no-repeat scroll 0 5px transparent;
     color: #993399;
 
 }
@@ -309,7 +316,7 @@ font-weight: bold;
 }
 
 #new-infinity-wrap .more_movies a {
-     background: url("/assets/play.gif") no-repeat scroll 0 0 transparent;
+     background: url(image_path('play.gif')) no-repeat scroll 0 0 transparent;
      color: #98D321;
      font-size: 22px;
      font-weight: bold;
@@ -317,7 +324,7 @@ font-weight: bold;
  }
  
 #new-alacarte-wrap .more_movies a {
-      background: url("/assets/play_alacarte.gif") no-repeat scroll 0 0 transparent;
+      background: url(image_path('play_alacarte.gif')) no-repeat scroll 0 0 transparent;
       color: #66CCCC;
       font-size: 22px;
       font-weight: bold;
@@ -327,7 +334,7 @@ font-weight: bold;
   
   
  .adult #new-infinity-wrap .more_movies a {
-       background: url("/assets/play_adult.gif") no-repeat scroll 0 0 transparent;
+       background: url(image_path('play_adult.gif')) no-repeat scroll 0 0 transparent;
        color: #993399;
        font-size: 22px;
        font-weight: bold;
@@ -335,23 +342,26 @@ font-weight: bold;
    }
 
  .adult #new-alacarte-wrap .more_movies a {
-        background: url("/assets/play_alacarte_adult.gif") no-repeat scroll 0 0 transparent;
+        background: url(image_path('play_alacarte_adult.gif')) no-repeat scroll 0 0 transparent;
         color: #C36EC3;
         font-size: 22px;
         font-weight: bold;
         padding-left: 27px;
     }
-
+#new-infinity-wrap ul, #new-alacarte-wrap ul {
+  margin:0 0 0 4px;
+}
 #new-infinity-wrap li, #new-alacarte-wrap li {
     float: left;
-    margin: 5px;
+    margin: 5px 4px;
 }
 
 #image_promo h1{
 	text-align:center;
 	font-size:45px;
-	
-	
+}
+#image_promo h1 b{
+  color: #98d321;
 }
 #image_promo h2 {
     font-size: 32px;
@@ -363,8 +373,8 @@ color:  #98d321;
 
 }
 
-.adult #image_promo span {
-    color: #993399!important;
+.adult #image_promo b {
+    color: #939;
 }
 
 

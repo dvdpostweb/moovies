@@ -16,7 +16,6 @@ Moovies::Application.routes.draw do
         resource 'suspension', :only => [:new, :create, :destroy]
         resource 'promotion', :only => [:show, :edit]
         resource 'images', :only => [:create]
-
         resource :payment_methods, :only => [:edit, :update, :show]
         resources :reviews, :only => [:index]
       end
@@ -107,15 +106,16 @@ Moovies::Application.routes.draw do
       match 'versions' => 'streaming_products#versions'
     end
     get 'unsubscribe', :to => 'customers#unsubscribe'    
+    #match ':id' => "promotions#show", :as => :promotion_localize, constraints: lambda { |request| Promotion.find_by_name(request.path_parameters[:id]) || 'samsung' }
     get ':id' => "promotions#show", :as => :promotion_localize, :id => /samsung|promotion/
     post ':id' => "promotions#create", :as => :promotion_localize, :id => /samsung|promotion/
     
   end
   
   
-  get ':id' => "promotions#show", defaults: { format: 'choose' }, :as => :promotion, :id => /smarttv|radio_contact|samsung|nostalgie/
-  post ':id' => "promotions#create", defaults: { format: 'choose' }, :as => :promotion, :id => /smarttv|radio_contact|samsung|nostalgie/
-  resources :promotions, defaults: { format: 'choose' }, :only => [:show]
+  get ':id' => "promotions#show", defaults: { format: 'choose' }, :as => :promotion, :id => /smarttv|radio_contact|samsung|nostalgie/, :as => :short_promotion
+  post ':id' => "promotions#show", defaults: { format: 'choose' }, :as => :promotion, :id => /smarttv|radio_contact|samsung|nostalgie/, :as => :short_promotion
+  resources :promotions, defaults: { format: 'choose' }, :only => [:show], :as => :root_promotion
 
   match "/404", :to => "errors#not_found"
   match "/500", :to => "errors#not_found"

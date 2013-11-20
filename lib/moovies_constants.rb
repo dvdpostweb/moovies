@@ -214,6 +214,15 @@ module Moovies
        :hp_top_fr_adult => 54,
        :hp_top_nl_adult => 53,
        :hp_top_en_adult => 55,
+       :svod_step90_fr => 73,
+       :svod_step90_nl => 74,
+       :svod_step90_en => 75,
+       :adult_step90_fr => 76,
+       :adult_step90_nl => 77,
+       :adult_step90_en => 78,
+       :classic_adult_step90_fr => 80,
+       :classic_adult_step90_nl => 81,
+       :classic_adult_step90_en => 79,
       })
     end
 

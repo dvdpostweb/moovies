@@ -38,4 +38,6 @@ Moovies::Application.configure do
   RouteTranslator.config do |config|
     config.force_locale = true
   end
+  config.assets.precompile += %w( jquery.ui.datepicker-fr.js jquery.ui.datepicker-nl.js jquery.ui.datepicker-en.js login.css promotions.css promotions.js errors.css )
+  
 end

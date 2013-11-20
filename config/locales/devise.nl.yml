@@ -9,6 +9,7 @@ nl:
         one: "Kon %{resource} niet opslaan:"
         other: "Kon %{resource} niet opslaan:"
       taken: "bestaal al, <a href='/nl/customers/sign_in'>log hier in</a>"
+      taken2: "bestaal al"
       invalid: "is niet correct"
       blank: 'mag niet leeg zijn'
       too_short: "is te kort (minimum %{count} karakters)"

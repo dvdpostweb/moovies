@@ -456,7 +456,7 @@
 }
 
 #c-members .numbers a {
-    background: url("/assets/chat-icon.png") no-repeat scroll 0 0 transparent;
+    background: url(image_path('chat-icon.png')) no-repeat scroll 0 0 transparent;
     color: #1B2228;
     float: right;
     margin: 0 0 0 22px;
@@ -1075,7 +1075,7 @@ margin: 4px 0;
   background-repeat: no-repeat;
 }
 .oters .btns .trailer {
-    background-image: url("/assets/button_trailer.png");
+    background-image: url(image_path('button_trailer.png'));
     color: #212A31;
     font-size: 14px;
 }
