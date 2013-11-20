@@ -15,8 +15,8 @@
         <a id='player'>
         </a>
 
-        <% if !current_customer.suspended? %>
-          <% if (@token && @token_valid) || (current_customer && current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s)) %>
+        <% if @code || !current_customer.suspended? %>
+          <% if @code || (@token && @token_valid) || (current_customer && current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s)) %>
             <% if @streaming_prefered.count > 0 || (@streaming_not_prefered && @streaming_not_prefered.count > 0) %>
               <div class="choice_language">
                 <h3><%= t('.version_title') %></h3>
