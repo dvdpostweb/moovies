@@ -4,16 +4,16 @@
 <div align="center">
   <span>
     <h3><%= t2('promotions.show.canvas2.promo', @promo.name).html_safe %></h3>
-    <p><%= t 'promotions.show.canvas2.email_label' %> :<br />
+    <p class="inputs_codes"><%= t 'promotions.show.canvas2.email_label' %> :<br />
       <%= f.text_field :email, :value => @email, :class => 'inputs_promo_code', :size => '40', :tye => 'text' %>
     </p>
-    <p><%= t 'promotions.show.canvas2.pass_label' %> :<br />
+   <p class="inputs_codes"><%= t 'promotions.show.canvas2.pass_label' %> :<br />
       <%= f.password_field :password, :class => 'inputs_promo_code', :size => '40', :maxlength => '40' %>
     </p>
-    <div class="labelstep">
+    <p class="inputs_codes_conf">
       <%= f.label :password_confirmation, t('promotions.show.canvas2.confirmation_pass') %>:<br />
       <%= f.password_field :password_confirmation, :class => 'inputs_promo_code' %>
-    </div>
+    </p>
     <%= f.hidden_field :code, :value => @code %>
     <%= hidden_field_tag :id, params[:id] %>
     <div style="clear:both;"></div>
@@ -41,5 +41,5 @@
   </ul>
 </div>
 <div style="clear:both;"></div>
-<p style="padding-top:5px;"><input type="submit" border="0" align="absmiddle" id="submit_id3" class="promo_button" name="sent" value="<%= t('promotions.show.canvas2.essayer') %>" /></p>
+<p><input type="submit" border="0" align="absmiddle" id="submit_id3" class="promo_button" name="sent" value="<%= t('promotions.show.canvas2.essayer') %>" /></p>
 <% end %>
