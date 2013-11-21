@@ -30,6 +30,16 @@ module ApplicationHelper
       @message.save
   end
 
+  def send_message_public(mail_id, options, locale, email)
+    mail_object = Email.by_language(locale).find(mail_id)
+    list = ""
+    options.each {|k, v|  list << "#{k.to_s.tr("\\","")}:::#{v};;;"}
+    email_data_replace(mail_object.subject, options)
+    subject = email_data_replace(mail_object.subject, options)
+    message = email_data_replace(mail_object.body, options)
+    Emailer.public_email(email, subject, message, Rails.env == 'development' ? true : false).deliver
+  end
+
   def email_data_replace(text,options)
     options.each {|key, value| 
       r = Regexp.new(key, true)

@@ -80,29 +80,21 @@
 /*****Mobistar */
 
 .canvas3 #promo_content h1 {
-    color: #FFFFFF;
+    color: #005c05;
     font-size: 48px;
     line-height: 49px;
     padding-top: 18px;
     text-align: center;
 }
-.canvas3 #header h2 a, .canvas3#header h2 a {
-    background: url(image_path('promotions/logo_mobistar.jpg')) repeat scroll 0 0 transparent;
-    height: 60px;
-    width: 224px;
-}
-
-.canvas3 #promo_content {
-    background: url(image_path('promotions/bg_mobistar.jpg')) repeat scroll 0 0 transparent;
-    height: 667px;
-    margin: 0 auto;
-    width: 970px;
+.canvas3 #promo_content h1 span{
+  color: white;
 }
 
 .canvas3 #promo_content #promo_form {
     font-size: 18px;
     line-height: 18px;
     padding-left: 48px;
+    padding-top:50px;
     text-align: left;
     width: 463px;
     color:#212A31;
@@ -117,31 +109,8 @@
 }
 
 .canvas3 #promo_content .step1 {
-    background: url(image_path('promotions/1.gif')) no-repeat scroll 0 0 transparent;
     height: 30px;
      padding-left: 45px;
-    width: 400px;
-      padding-bottom: 20px;
-}
-.canvas3 #promo_content .step2 {
-    background: url(image_path('promotions/2.gif')) no-repeat scroll 0 0 transparent;
-    height: 30px;
-    padding-left: 45px;
-    width: 400px;
-      padding-bottom: 20px;
-}
-.canvas3 #promo_content .step3 {
-    background: url(image_path('promotions/3.gif')) no-repeat scroll 0 0 transparent;
-    height: 30px;
-     padding-left: 45px;
-    width: 400px;
-    padding-top: 5px;
-      padding-bottom: 15px;
-}
-.canvas3 #promo_content .step4 {
-    background: url(image_path('promotions/4.gif')) no-repeat scroll 0 0 transparent;
-    height: 30px;
-    padding-left: 45px;
     width: 400px;
       padding-bottom: 20px;
 }
@@ -165,12 +134,19 @@ font-size: 14px;
 }
 
 .canvas3 .telfooter a{
-    background: url("/assets/fr/info_tel.jpg") no-repeat scroll 0 0 transparent;
     height: 75px;
     margin: 0 auto;
     width: 410px;
 }
-
+.canvas3 .telfooter a.fr{
+background: url(image_path('fr/info_tel.jpg')) no-repeat scroll 0 0 transparent
+}
+.canvas3 .telfooter a.nl{
+background: url(image_path('nl/info_tel.jpg')) no-repeat scroll 0 0 transparent
+}
+.canvas3 .telfooter a.en{
+background: url(image_path('en/info_tel.jpg')) no-repeat scroll 0 0 transparent
+}
 
 /* for mobile */
 

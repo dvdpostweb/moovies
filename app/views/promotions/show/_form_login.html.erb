@@ -1,7 +1,6 @@
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
 <div align="center">
   <span>
-    <h3><%= t2('promotions.show.canvas2.promo', @promo.name).html_safe %></h3>
     <%= "<div id='error'>#{alert}</div>".html_safe if alert && !alert.empty? %>
     <p class="inputs_codes">
       <%= f.label :email, t('promotions.show.canvas2.email_label') %>:<br />

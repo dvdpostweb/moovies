@@ -14,6 +14,7 @@ $(function() {
   });
   $('#form_step, #form_step2').on('submit', function(){
     if($(this).children('.inputs_promo_code').val() == '' || $(this).children('.inputs_promo_code').val() == $('#default').html()){
+      alert($('#default').html())
       return false
     }
 		else
