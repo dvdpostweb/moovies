@@ -291,6 +291,25 @@ module ProductsHelper
     
     return  "#{pre}: #{t('products.left_column.svod_all')}"
   end
+  def products_index_description
+    #pre = params[:package] == Moovies.packages.invert[1] || params[:package].nil? || params[:package] == Moovies.packages.invert[4] ? t('.svod') : t('.tvod')
+    return '' if params[:director_id] && !params[:director_id].blank?
+    return '' if params[:studio_id] && !params[:studio_id].blank?
+    return '' if params[:actor_id] && !params[:actor_id].blank?
+    return '' if params[:category_id] && !params[:category_id].blank?
+    return '' if params[:view_mode] == 'svod_last_added'
+    return '' if params[:view_mode] == 'most_viewed'
+    return '' if params[:view_mode] == 'svod_last_chance'
+    return '' if params[:view_mode] == 'svod_soon'
+    return '' if params[:view_mode] == 'svod_new'
+    return '' if params[:view_mode] == 'tvod_last_added'
+    return '' if params[:view_mode] == 'tvod_last_chance'
+    return '' if params[:view_mode] == 'tvod_soon'
+    return '' if params[:view_mode] == 'tvod_new'
+    
+    return 'products.index.description_svod_all' if params[:package] == Moovies.packages.invert[1] || params[:package].nil? || params[:package] == Moovies.packages.invert[4]
+    return ''
+  end
 
   def title_add_to_wishlist(type_text, type_button, media = nil)
     if type_button == :reserve
