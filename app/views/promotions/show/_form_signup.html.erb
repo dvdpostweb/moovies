@@ -2,8 +2,7 @@
 
 <div align="center">
   <span>
-    <h3><%= t2('promotions.show.canvas2.promo', @promo.name).html_safe %></h3>
-    <%= devise_error_messages!.gsub(/<a.*a>/,"si c'est ton email log toi pour profiter ton ta promo #{link_to('ici', promotion_path(:id => params[:id], :email => params[:customer][:email]))}").html_safe if params[:customer] && params[:customer][:email]%>
+    <%= devise_error_messages!.gsub(/<a.*a>/, t('products.canvas3.promo_already_taken', :link => promotion_path(:id => params[:id], :email => params[:customer][:email]))).html_safe if params[:customer] && params[:customer][:email]%>
     
     <p class="inputs_codes"><%= f.label :email, t('promotions.show.canvas2.email_label') %> :<br />
       <%= f.text_field :email, :value => @email, :class => 'inputs_promo_code', :size => '40', :tye => 'text' %>

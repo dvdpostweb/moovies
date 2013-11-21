@@ -4,6 +4,7 @@ class PromotionsController < ApplicationController
   end
 
   def create
+    @checked = params[:marketing] == "1" ? true : false
     if params[:id] == 'samsung'
       if !params[:code].nil?
         @code_samsung = params[:code]
@@ -12,13 +13,29 @@ class PromotionsController < ApplicationController
         else
           @error = true
           flash.discard
-          @checked = params[:marketing] == "1" ? true : false
           render :show
         end
       else
         render :show
       end
-    else  
+    elsif @promo.canva_id == 3
+      @error = ''
+      if !/\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/.match(params[:email])
+        @error += "#{t('promotions.create.wrong_email')}<br />"
+      end
+      if !StreamingCode.by_name(params[:code]).email.available.first
+        @error += t('promotions.create.wrong_code')
+      end
+      if @error == ''
+        options = {
+          "\\$\\$\\$link\\$\\$\\$" => info_url(:page_name => :mobistar, :email => params[:email])
+        }
+        view_context.send_message_public(621, options, I18n.locale, params[:email])
+        StreamingCode.by_name(params[:code]).first.update_attribute(:email, params[:email])
+      else
+        render :show
+      end
+    else
       code = params[:code]
       @discount = Discount.by_name(code).available.first
       @activation = Activation.by_name(code).available.first

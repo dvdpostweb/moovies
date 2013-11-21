@@ -14,6 +14,13 @@ class Emailer < ActionMailer::Base
     mail(:to => @email, :subject => subject)
   end
 
+  def public_email(email, subject, content, test)
+    @email = email
+    @email = test ? 'gs@dvdpost.be' : email
+    @content = content
+    mail(:to => @email, :subject => subject)
+  end
+
   def invoice(customer)
     @id = customer.id
     mail(:to => 'cl@dvdpost.be', :subject => "samsung invoice #{@id}")

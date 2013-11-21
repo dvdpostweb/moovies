@@ -1,55 +1,65 @@
+<style>
+.canvas3 #promo_content {
+  background: url('http://www.dvdpost.be/images/promotions_plush/<%= @promo.params[:background_locale] ? "#{I18n.locale}/" : '' %><%= @promo.params[:background] %>') no-repeat scroll 0 0 transparent;
+  margin: 0 auto;
+  width: 970px;
+  min-height: 722px;
+}
+<% if @promo.params[:brand_logo] %>
+.canvas3 #header h2,.canvas2 #header h2 a {
+  background: url('http://www.dvdpost.be/images/promotions_plush/<%= @promo.params[:brand_logo] %>') repeat scroll 0 0 transparent;
+  height: 60px;
+  width: 224px;
+}
+<% end %>
+</style>
 <div id="wrap">
   <div id="header" >
-    <h1> <a href="/fr" class="f-btn">plush.be</a> </h1>
-    <h2><a href="http://www.mobistar.be/" class="f-btn">http://www.mobistar.be/</a></h2>
+    <h1>
+      <%= link_to 'plush.be', root_localize_path(), :class => 'f-btn' %>
+    </h1>
+    <% if @promo.params[:brand_logo] %>
+    <h2>
+      <%= !@promo.params[:brand_url] ? '' : link_to(@promo.params[:brand_url], @promo.params[:brand_url], :class => 'f-btn', :target => '_blank') %>
+    </h2>
+    <% end %>
   </div>
   <div class="container clearfix">
     <div id="promo_content">
-      <h1 style="color: #005c05;">Découvrez gratuitement le film<br/>
-        <font color="#ffffff"><strong>XXXX</strong></font> grâce à Mobistar et Plush</h1>
+      <h1><%= t2('.title', @promo.name).html_safe %><br/>
+      <strong><%= t2('.title_promo', @promo.name).html_safe %></strong></h1>
       <div id="promo_form">
-        
-        <h2>Comment profiter de l'offre Mobistar ?</h2>
-      <form accept-charset="UTF-8" action="/fr/samsung" id="form_step" method="post">
-      <div style="margin:0;padding:0;display:inline">
-        <input name="utf8" type="hidden" value="✓" />
-        <input name="authenticity_token" type="hidden" value="0ioTvVrFpkZ4x9x3314mu5wUPkNdahTQ3pZ+2dWzEYk=" />
-      </div>
+      <% if @error == '' %>
+        <%= t('.gratz').html_safe %>
+      <% else %>
+        <%= form_tag promotion_canva_path(:id => params[:id]), :id => 'form_step' do %>
      
-      <p class="step1">Entrez une adresse e-mail valide et votre code promo et validez</p>
-      <form id="form_step" action="/step1.php" method="post" name="verify_form">
-        <input type="hidden" name="activation_code" value="CTDWNF" />
-        <input type="hidden" value="fr" name="language" />
-        <p class="email">Votre adresse email:<br />
-          <input type="text" size="40" value="" autocomplete="off" name="email_address_step" id="email" class="inputs_promo_code" />
-        </p>
-        <p class="promocode">Votre code promo :<br />
-          <input type="password" value="" autocomplete="off" size="40" name="password_step" id="password" class="inputs_promo_code" />
-        </p>
+        <p class="step1"><%= t('.intro') %></p>
+          <p class="email"><%= label_tag :email, t('.email_label') %>:<br />
+            <%= text_field_tag :email, params[:email], :class => 'inputs_promo_code', :size => '40', :tye => 'text' %>
+          </p>
+          <p class="promocode"><%= label_tag :code, t('.code_label') %>:<br />
+            <%= text_field_tag(:code, params[:code], :id => 'code3', :size => 40, :class => 'inputs_promo_code') %><br />
+          </p>
     
-        <div style="clear:both;"></div>
-        <p class="news">
-          <input class="marketing3" id="mark" name="marketing" type="checkbox" value="1" />
-          J&#x27;accepte les conditions de l&#x27;offre situées en-bas de cette page </p>
-        <p>
-          <input type="submit" border="0" align="absmiddle" id="submit_id3" class="promo_button" name="sent" value="Valider" />
-        </p>
-        <p class="step2">Cliquez sur le lien dans l’e-mail que nous venons de vous envoyer</p>
-        <p class="step3">Profitez de votre film offert </p>
-        <p class="step4">Abonnez-vous à Plush si vous souhaitez profiter de films autant que vous voulez</p>
-      </form>
+          <div style="clear:both;"></div>
+          <p class="news">
+            <%= "<div id='error'>#{@error.html_safe}</div>".html_safe if @error %>
+            <%= check_box_tag 'marketing', 1, @checked, :class => :marketing3, :id => 'mark' %>
+            <%= t('.accepteconditions') %>
+          </p>
+          <p>
+            <input type="submit" border="0" align="absmiddle" id="submit_id3" class="promo_button" name="sent" value="Valider" />
+          </p>
+        <% end %>
+      <% end %>
     </div>
   </div>
-  <p align="center" class="telfooter"><a href="mailto:info@plush.be" class="f-btn">info@plush.be</a></p>
-  <div id="promo_footer">*Offre r&eacute;serv&eacute;e aux personnes ayant achet&eacute; une Smart Tv Samsung du mod&egrave;le F66/67 pendant la p&eacute;riode promotionnelle. <br/>
-    <br/>
-    Si vous &ecirc;tes d&eacute;j&agrave; client chez Plush, vous ne pourrez pas vous inscrire via cette landing. Merci de bien vouloir contacter notre service client au num&eacute;ro gratuit 0800/26.371 ou au num&eacute;ro payant 0032/2.80.80.393 pour les appels effectu&eacute;s hors de la Belgique pour profiter de l'abonnement offert. <br/>
-    <br/>
-    Les nouveaux clients qui s'inscrivent via cette landing avec le numéro de série de leur Smart TV Samsung et qui upload une photo de leur facture recevront 1 an d'abonnement Plush Unlimited gratuit si la Smart Tv Samsung a été achetée entre le 2 septembre et le 2 novembre. Les clients peuvent s'inscrire pour profiter de cette promotion jusqu'au 30 novembre. Après cette date, il n'y aura plus moyen de s'inscrire pour b&eacute;n&eacute;icier de cette offre. Si la facture montre que la TV n'a pas été achetée pendant la période promotionnelle, le compte Plush sera suspendu dans les 48h.  
-    Apr&egrave;s 1 an l'abonnement est cl&ocirc;tur&eacute; automatiquement. Si vous souhaitez continuer &agrave; profiter de notre service VOD, merci de contacter notre service client.</div>
+  <p align="center" class="telfooter"><a href="mailto:info@plush.be" class="f-btn <%= I18n.locale %>">info@plush.be</a></p>
+  <div id="promo_footer"><%= t2('.conditions', @promo.name).html_safe %></div>
 </div>
 </div>
 </div>
 </div>
-<div style="display:none" id='text_error_conditions'>Merci de cocher la case &quot;J&#x27;accepte les conditions de l&#x27;offre situées en-bas de cette page&quot; avant de continuer l&#x27;inscription</div>
-
+<div style="display:none" id='text_error_conditions'><%= t('.error_conditions') %></div>
+<div id="default" style="display:none"></div>
