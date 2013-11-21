@@ -77,7 +77,9 @@ class StreamingProductsController < ApplicationController
             if creation
               @token = creation[:token]
               error = creation[:error]
-            
+              if params[:email] && @code && !@code.mail_id.nil?
+                 view_context.send_message_public(@code.mail_id, {}, I18n.locale, params[:email])
+              end
               if current_customer && @token && !@product.svod?
                 type = "#{@product.svod? ? 'svod' : 'tvod'}_#{params[:kind]}".to_sym
                 mail_id = Moovies.email[type]
