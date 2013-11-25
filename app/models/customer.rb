@@ -37,11 +37,11 @@ class Customer < ActiveRecord::Base
   validates_format_of :phone, :with => /^(\+)?[0-9 \-\/.]+$/, :on => :update
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :update
   validates :birthday,  :date => { :after => 100.years.ago, :before => 18.years.ago}, :on => :update
-  validates :email, :uniqueness => {:message => 'pas ok', :case_sensitive => false}, :on => :update
+  validates :email, :uniqueness => {:message => :taken2, :case_sensitive => false}, :on => :update
   
   
   validates_presence_of   :email, :on => :create
-  validates :email, :uniqueness => {:message => I18n.t('errors.messages.taken'), :case_sensitive => false}, :on => :create
+  validates :email, :uniqueness => {:message => :taken, :case_sensitive => false}, :on => :create
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create
 
   validates_presence_of     :password, :if => :password_required?

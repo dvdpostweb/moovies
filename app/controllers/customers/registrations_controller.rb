@@ -48,7 +48,7 @@ class Customers::RegistrationsController < Devise::RegistrationsController
               redirect_to step_path(:id => 'confirm') and return
             end
           else
-            redirect_to promotion_path(:id => params[:id]), :alert => 'not used' and return
+            redirect_to promotion_path(:id => params[:id]), :alert => t('session.error_already_customer') and return
           end
         end
       end

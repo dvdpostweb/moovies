@@ -1,4 +1,4 @@
-<%= form_tag promotion_canva_path(:id => params[:id]), :id => 'form_step' do %>
+<%= form_tag promotion_canva_path(:id => params[:id]), :id => 'form_logged' do %>
 <div align="center">
   <span>
     <div class="email_show">
@@ -13,10 +13,6 @@
     <%= "<div id='error'>#{alert}</div>".html_safe if alert && !alert.empty? %>
   </span>
 </div>
-<p class="news">
-  <%= check_box_tag 'marketing', 1, @checked, :class => :marketing3, :id => 'mark' %>
-  <%= t('promotions.show.canvas2.accepteconditions') %>
-</p>
 <div class="garanties">
   <h4><%= t('promotions.show.canvas2.garanties') %></h4>
   <ul>

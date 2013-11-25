@@ -20,10 +20,15 @@
     <%= "<div id='error'>#{alert}</div>".html_safe if alert && !alert.empty? %>
   </span>
 </div>
-<p class="news">
-  <%= check_box_tag 'marketing', 1, @checked, :class => :marketing3, :id => 'mark' %>
-  <%= t('promotions.show.canvas2.accepteconditions') %>
+<p class="news align">
+  <%= f.check_box :newsletter, :checked => true, :align => :top %>
+  <%= t('.newsletter') %>
 </p>
+<p class="news align">
+  <%= f.check_box :newsletter_parnter, :checked => true, :align => :top %>
+  <%= t('.newsletter_parnter') %>
+</p>
+
 <div class="garanties">
   <h4><%= t('promotions.show.canvas2.garanties') %></h4>
   <ul>
@@ -33,7 +38,7 @@
   </ul>
 </div>
 <div class="avantages">
-  <h4><%= t('.avantages') %></h4>
+  <h4><%= t('promotions.show.canvas2.avantages') %></h4>
   <ul>
     <li class="film"><%= t('promotions.show.canvas2.film') %></li>
     <li class="home"><%= t('promotions.show.canvas2.home') %></li>

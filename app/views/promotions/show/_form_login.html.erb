@@ -1,4 +1,4 @@
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:id => 'login'}) do |f| %>
 <div align="center">
   <span>
     <%= "<div id='error'>#{alert}</div>".html_safe if alert && !alert.empty? %>
@@ -17,10 +17,6 @@
     
   </span>
 </div>
-<p class="news">
-  <%= check_box_tag 'marketing', 1, @checked, :class => :marketing3, :id => 'mark' %>
-  <%= t('promotions.show.canvas2.accepteconditions') %>
-</p>
 <div class="garanties">
   <h4><%= t('promotions.show.canvas2.garanties') %></h4>
   <ul>

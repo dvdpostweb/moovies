@@ -60,7 +60,7 @@ class PromotionsController < ApplicationController
             customer.abo_history(35, customer.abo_type_id)
             redirect_to step_path(:id => 'step2')
           else
-            flash[:alert] = 'not used'
+            flash[:alert] = t('session.error_already_customer')
             render :show
           end
         else
