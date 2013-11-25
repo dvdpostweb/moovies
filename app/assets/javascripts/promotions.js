@@ -36,22 +36,5 @@ $(function() {
 		}
     
   })
-  $('#new_customer, #new_customer2').on('submit', function(){
-    
-			id = $(this).attr('id')
-			if(id == 'new_customer')
-			{
-				id_mark = '#mark'
-			}
-			else
-			{
-				id_mark = '#mark2'
-			}
-			if(!$(id_mark).is(':checked'))
-			{
-				alert($('#text_error_conditions').html())
-		    return false
-			}
-	})	
-  
+
 })

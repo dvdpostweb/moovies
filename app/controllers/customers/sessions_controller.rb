@@ -28,7 +28,7 @@ class Customers::SessionsController < Devise::SessionsController
           customer.save(:validate => false)
           customer.abo_history(35, customer.abo_type_id)
         else
-          redirect_to promotion_path(:id => params[:id]), :alert => 'error' and return
+          redirect_to promotion_path(:id => params[:id]), :alert => t('session.error_already_customer') and return
         end
       end
     end
