@@ -13,17 +13,21 @@ module StreamingProductsHelper
         window.location.href ='#{url}'
         script
       end
-    elsif 1==0
+    elsif streaming.drm == true
       audio = streaming.languages.by_language(:fr).first.short_alpha
       sub = streaming.subtitles.count > 0 ? streaming.subtitles.by_language(:fr).first.short_alpha : 'non'
-      url = Moovies.hls_url(token_name, audio, sub)
+      url = Moovies.verimatrix_url(token_name, audio, sub)
       script = url
     else
       script = <<-script
       $("#player").html("<object width='696' height='389'><param name='movie' value='http://#{Moovies.streaming_url}/StrobeMediaPlayback.swf'></param><param name='flashvars' value='src=http://#{Moovies.streaming_url}/#{token_name}_#{streaming.languages.by_language(:fr).first.short_alpha}_#{streaming.subtitles.count > 0 ? streaming.subtitles.by_language(:fr).first.short_alpha : 'non'}.f4m&loop=false&autoPlay=true&streamType=recorded&verbose=true&initialBufferTime=5&expandedBufferTime=30'></param><param name='allowFullScreen' value='true'></param><param name='allowscriptaccess' value='always'></param><embed src='http://#{Moovies.streaming_url}/StrobeMediaPlayback.swf' type='application/x-shockwave-flash' allowscriptaccess='always' allowfullscreen='true' width='696' height='389' flashvars='src=http://#{Moovies.streaming_url}/#{token_name}_#{streaming.languages.by_language(:fr).first.short_alpha}_#{streaming.subtitles.count > 0 ? streaming.subtitles.by_language(:fr).first.short_alpha : 'non'}.f4m&loop=false&autoPlay=true&streamType=recorded&verbose=true&initialBufferTime=5&expandedBufferTime=30'></embed></object>")
       script
     end
-    javascript_tag script
+    if streaming.drm == true
+      script
+    else
+      javascript_tag script
+    end
   end
 
   def time_left(stream, kind)

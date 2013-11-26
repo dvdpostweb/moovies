@@ -31,6 +31,8 @@ $(function() {
       type: 'GET',
       data: {},
       success: function(data) {
+        $('#presentation').html('')
+        $('.qualityvod').show()
         if(/.m3u8$/.test(data))
         {
           if (/MSIE (\d+\.\d+);/.test(navigator.userAgent))
@@ -45,8 +47,7 @@ $(function() {
           $('#flow').html(data);
         }        
         
-        $('#presentation').html('')
-        $('.qualityvod').show()
+        
       },
       error: function() {
         $('#presentation').html(content);
