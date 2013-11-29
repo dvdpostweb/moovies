@@ -2,9 +2,11 @@ class PaymentMethodsController < ApplicationController
   before_filter :authenticate_customer!
   def show
     @choose_partial = params[:type] || 'index'
+    @body_id = @choose_partial
   end
   def edit
     @choose_partial = params[:type] || 'index'
+    @body_id = @choose_partial
   end
 
   def update
