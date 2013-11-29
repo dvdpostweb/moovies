@@ -3,7 +3,7 @@
   <div style="margin-left: 20px; width: 800px;">
     <%= form_for(:customer, :url => customer_payment_methods_path(:customer_id => current_customer.to_param), :html => { :method => :put, :id => :payment_methods }) do |f| %>
     <%= hidden_field_tag(:type, 'credit_card_modification')  %>
-    <div style="width: 800px;" > 
+    <div style="width: 800px; height:80px" > 
       <%= image_tag 'card.png', :class => :img_card %>
       <p><%= t('.credit_card_redirect').html_safe %></p>
     </div>
