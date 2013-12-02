@@ -62,7 +62,7 @@ class Product < ActiveRecord::Base
   scope :by_imdb_ids, lambda {|imdb| where("imdb_id in (#{imdb})")}
   scope :ordered, :order => 'products_id desc'
   scope :group_by_imdb, :group => 'imdb_id'
-  sphinx_scope(:by_right)                 {{:with =>          {:streaming_imdb_id => 1..10000000}}}
+  sphinx_scope(:by_right)                 {{:with =>          {:streaming_imdb_id => 1..3147483647}}}
   sphinx_scope(:by_products_id)           {|products_id|      {:with =>       {:product_id => products_id}}}
   sphinx_scope(:exclude_products_id)      {|products_id|      {:without =>    {:product_id => products_id}}}
   sphinx_scope(:by_actor)                 {|actor|            {:with =>       {:actors_id => actor.to_param}}}
@@ -96,7 +96,7 @@ class Product < ActiveRecord::Base
   sphinx_scope(:most_viewed)              {{:with =>          {:count_tokens => 1..1000000}}}
   sphinx_scope(:by_package)               {|package_id|       {:with =>          {:package_id => package_id}}}
   sphinx_scope(:random)                   {{:order =>         '@random'}}
-  sphinx_scope(:by_new)                   {{:with =>          {:year => 2.years.ago.year..Date.today.year}}}
+  sphinx_scope(:by_new)                   {{:with =>          {:year => 2.years.ago.year..Date.today.year, :imdb_id_online => 1..3147483647}}}
   sphinx_scope(:hd)                       {{:with =>          {:hd => 1}}}
   sphinx_scope(:order)                    {|order, sort_mode| {:order => order, :sort_mode => sort_mode}}
   sphinx_scope(:group)                    {|group,sort|       {:group_by => group, :group_function => :attr, :group_clause   => sort}}
@@ -453,7 +453,6 @@ class Product < ActiveRecord::Base
       products.svod_last_added
     when :svod_last_chance
       products.svod_last_chance
-
     when :tvod_soon
       products.tvod_soon
     when :tvod_last_added
