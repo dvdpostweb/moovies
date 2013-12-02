@@ -309,6 +309,24 @@ module ProductsHelper
     return "products.index.description_#{pre}_all"
   end
 
+  def products_alt_banner
+    pre = params[:package] == Moovies.packages.invert[1] || params[:package].nil? || params[:package] == Moovies.packages.invert[4] ? 'svod' : 'tvod'
+    return "products.index.alt_banner_#{pre}_director" if params[:director_id] && !params[:director_id].blank?
+    return "products.index.alt_banner_#{pre}_studio" if params[:studio_id] && !params[:studio_id].blank?
+    return "products.index.alt_banner_#{pre}_actor" if params[:actor_id] && !params[:actor_id].blank?
+    return "products.index.alt_banner_#{pre}_category" if params[:category_id] && !params[:category_id].blank?
+    return "products.index.alt_banner_svod_last_added" if params[:view_mode] == 'svod_last_added'
+    return "products.index.alt_banner_#{pre}_most_viewed" if params[:view_mode] == 'most_viewed'
+    return "products.index.alt_banner_svod_last_chance" if params[:view_mode] == 'svod_last_chance'
+    return "products.index.alt_banner_svod_soon" if params[:view_mode] == 'svod_soon'
+    return "products.index.alt_banner_svod_new" if params[:view_mode] == 'svod_new'
+    return "products.index.alt_banner_tvod_last_added" if params[:view_mode] == 'tvod_last_added'
+    return "products.index.alt_banner_tvod_last_chance" if params[:view_mode] == 'tvod_last_chance'
+    return "products.index.alt_banner_tvod_soon" if params[:view_mode] == 'tvod_soon'
+    return "products.index.alt_banner_tvod_new" if params[:view_mode] == 'tvod_new'
+    return "products.index.alt_banner_#{pre}_all"
+  end
+
   def title_add_to_wishlist(type_text, type_button, media = nil)
     if type_button == :reserve
       if type_text == :short
