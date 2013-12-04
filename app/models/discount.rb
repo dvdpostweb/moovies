@@ -18,6 +18,7 @@ class Discount < ActiveRecord::Base
   alias_attribute :promo_text_fr, :discount_text_fr
   alias_attribute :promo_text_nl, :discount_text_nl
   alias_attribute :promo_text_en, :discount_text_en
+  alias_attribute :month_before_reuse, :discount_nbr_month_before_reuse
   
   scope :by_name, lambda {|name| where(:discount_code => name)}
   scope :available, lambda { where('(discount_validityto > ? or discount_validityto is null) and discount_status = 1', Time.now.to_s(:db))}

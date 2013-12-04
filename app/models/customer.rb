@@ -80,6 +80,7 @@ class Customer < ActiveRecord::Base
   has_many :tokens
   has_many :suspensions
   has_many :samsung_codes
+  has_many :discount_use, :foreign_key => :customers_id
 
   has_many :vod_wishlists
   has_many :vod_wishlists_histories
@@ -436,6 +437,15 @@ class Customer < ActiveRecord::Base
   def payable?
     payment_method > 0
   end
+
+  def discount_reuse?(months)
+    if discount_use.use(months).size > 0
+      false
+    else
+      true
+    end
+  end
+
   private
   def convert_created_at
     begin
@@ -470,4 +480,5 @@ class Customer < ActiveRecord::Base
   def password_required?
     !persisted? || !password.nil? || !password_confirmation.nil?
   end
+
 end
