@@ -52,15 +52,20 @@ class PromotionsController < ApplicationController
         end
         
         if current_customer
-          if current_customer.abo_active == 0
-            customer = current_customer
-            customer.step = 31
-            customer.code = code
-            customer.save(:validate => false)
-            customer.abo_history(35, customer.abo_type_id)
-            redirect_to step_path(:id => 'step2')
+          if @discount.nil? || (@discount && current_customer.discount_reuse?(@discount.month_before_reuse))
+            if current_customer.abo_active == 0
+              customer = current_customer
+              customer.step = 31
+              customer.code = code
+              customer.save(:validate => false)
+              customer.abo_history(35, customer.abo_type_id)
+              redirect_to step_path(:id => 'step2')
+            else
+              flash[:alert] = t('session.error_already_customer')
+              render :show
+            end
           else
-            flash[:alert] = t('session.error_already_customer')
+            flash[:alert] = t('session.error_discount_reused')
             render :show
           end
         else

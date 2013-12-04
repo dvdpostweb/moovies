@@ -29,10 +29,10 @@ set :keep_releases, 5
 
 set :user, "plush"
 set :domain, "94.139.62.122"
-set :domain2,  "217.112.190.177"
+set :domain2,  "192.168.102.15"
 set :port, 22012
-server :app, domain, domain2
-server :web, domain, domain2
+role :app, domain
+role :web, domain
 
 role :db, domain, :primary => true
 

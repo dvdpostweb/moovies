@@ -21,14 +21,18 @@ class Customers::SessionsController < Devise::SessionsController
       if @discount.nil? && @activation.nil?
         redirect_to params[:return_url], :alert => 'wrong code' and return
       else
-        if current_customer.abo_active == 0
-          customer = current_customer
-          customer.step = 31
-          customer.code = code
-          customer.save(:validate => false)
-          customer.abo_history(35, customer.abo_type_id)
+        if @discount.nil? || (@discount && current_customer.discount_reuse?(@discount.month_before_reuse))
+          if current_customer.abo_active == 0
+            customer = current_customer
+            customer.step = 31
+            customer.code = code
+            customer.save(:validate => false)
+            customer.abo_history(35, customer.abo_type_id)
+          else
+            redirect_to promotion_path(:id => params[:id]), :alert => t('session.error_already_customer') and return
+          end
         else
-          redirect_to promotion_path(:id => params[:id]), :alert => t('session.error_already_customer') and return
+          redirect_to promotion_path(:id => params[:id]), :alert => t('session.error_discount_reused') and return
         end
       end
     end

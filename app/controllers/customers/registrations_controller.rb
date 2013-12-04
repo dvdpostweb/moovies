@@ -34,21 +34,25 @@ class Customers::RegistrationsController < Devise::RegistrationsController
       @user = Customer.find_by_email(params[:customer][:email])
       if @user
         if @user.valid_password?(params[:customer][:password])
-          
-          if @user.abo_active == 0
-            @user.step = 31
-            @user.code = params[:customer][:code]
-            @user.save(:validate => false)
-            @user.abo_history(35, @user.abo_type_id)
-            if @user.confirmed?
-              sign_in @user, :bypass => true
-              redirect_to step_path(:id => 'step2') and return
+          @discount = Discount.by_name(params[:customer][:code]).available.first
+          if @discount.nil? || (@discount && @user.discount_reuse?(@discount.month_before_reuse))
+            if @user.abo_active == 0
+              @user.step = 31
+              @user.code = params[:customer][:code]
+              @user.save(:validate => false)
+              @user.abo_history(35, @user.abo_type_id)
+              if @user.confirmed?
+                sign_in @user, :bypass => true
+                redirect_to step_path(:id => 'step2') and return
+              else
+                Devise::Mailer.confirmation_instructions(@user).deliver
+                redirect_to step_path(:id => 'confirm') and return
+              end
             else
-              Devise::Mailer.confirmation_instructions(@user).deliver
-              redirect_to step_path(:id => 'confirm') and return
+              redirect_to promotion_path(:id => params[:id]), :alert => t('session.error_already_customer') and return
             end
           else
-            redirect_to promotion_path(:id => params[:id]), :alert => t('session.error_already_customer') and return
+            redirect_to promotion_path(:id => params[:id]), :alert => t('session.error_discount_reused') and return
           end
         end
       end
