@@ -70,10 +70,10 @@ module ApplicationHelper
     content = ''
     I18n.available_locales.each do |locale|
       new_params = params.merge(:locale => locale.to_s)
-      new_params = params.merge(:page_name => I18n.t("routes.infos.params.#{params[:page_name]}", locale: locale)) if params[:page_name] and params[:kind] == :normal
-      
-      new_params = params.merge(:package => I18n.t("routes.product.params.package.#{params[:package]}", locale: locale)) if params[:package] and params[:kind] == :normal
+      new_params = new_params.merge(:page_name => I18n.t("routes.infos.params.#{params[:page_name]}", locale: locale)) if params[:page_name] and params[:kind] == :normal
+      new_params = new_params.merge(:package => I18n.t("routes.product.params.package.#{params[:package]}", locale: locale)) if params[:package] and params[:kind] == :normal
       new_params.delete(:kind)
+      Rails.logger.debug { "@@@#{new_params.inspect}" }
       content += content_tag(:li, link_to(locale.to_s.upcase, url_for(new_params), {:class => I18n.locale.to_s == locale.to_s ? 'active' : 'nothing'}))
     end
     content.html_safe
