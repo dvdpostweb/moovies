@@ -93,7 +93,10 @@ class OgonesController < ApplicationController
         "\\$\\$\\$gender_simple\\$\\$\\$" => gender,
         "\\$\\$\\$promotion\\$\\$\\$" => @promo.text(customer.locale).html_safe,
         "\\$\\$\\$subscription\\$\\$\\$" => customer.subscription_type.description,
-        "\\$\\$\\$root_url\\$\\$\\$" => root_url(:locale => nil)
+        "\\$\\$\\$root_url\\$\\$\\$" => root_url(:locale => nil),
+        "\\$\\$\\$abo_price\\$\\$\\$" => customer.subscription_type.product.price,
+        "\\$\\$\\$general_conditions\\$\\$\\$" => t('info.index.conditions.info')
+        
         }
       view_context.send_message(Moovies.email[:welcome], options, params[:locale], customer)
       #to do 
