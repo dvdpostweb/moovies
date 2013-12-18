@@ -144,7 +144,7 @@ var timer = setTimeout('cdtd()',1000);
           <h2><%= t '.q1' %> </h2>
           <%= t '.r1' %>
           <h2><%= t '.q2' %></h2>
-          <%= t('.r2', :link_svod => products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}")), :link_tvod =>  products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[2]}"))) %>      
+          <%= t('.r2', :link_svod => products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}")), :link_tvod =>  products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[2]}")).html_safe) %>      
           <h2><%= t '.q3' %></h2>
           <%= t '.r3' %>
 
