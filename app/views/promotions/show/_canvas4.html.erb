@@ -1,3 +1,31 @@
+<script type="text/javascript">
+function cdtd() {
+var xmas = new Date("December 31, 2013 00:01:00");
+var now = new Date();
+var timeDiff = xmas.getTime() - now.getTime();
+if (timeDiff <= 0) {        
+    clearInterval(timer);
+    document.getElementById('einde').innerHTML = '<span style="color:#FF0000;">Volgende woensdag een nieuwe aanbieding!</span>';
+		return;
+      // Run any code needed for countdown completion here
+}
+var seconds = Math.floor(timeDiff / 1000);
+var minutes = Math.floor(seconds / 60);
+var hours = Math.floor(minutes / 60);
+var days = Math.floor(hours / 24);
+minutes %= 60;
+seconds %= 60;
+hours %= 24
+document.getElementById("daysBox").innerHTML = days;
+document.getElementById("hoursBox").innerHTML = hours;
+document.getElementById("minsBox").innerHTML = minutes;
+document.getElementById("secsBox").innerHTML = seconds;
+var timer = setTimeout('cdtd()',1000);
+}
+</script>
+
+
+
 <style>
 .canvas1 #promo_content {
   background: url('http://www.dvdpost.be/images/promotions_plush/<%= @promo.params[:background_locale] ? "#{I18n.locale}/" : '' %><%= @promo.params[:background] %>') repeat scroll 0 0 transparent;
@@ -20,13 +48,118 @@
       <%= link_to 'plush.be', root_localize_path(), :class => 'f-btn' %>
     </h1>
     <% if @promo.params[:brand_logo] %>
-      <h2>
-        <%= !@promo.params[:brand_url] ? '' : link_to(@promo.params[:brand_url], @promo.params[:brand_url], :class => 'f-btn', :target => '_blank') %>
-      </h2>
+    <h2>
+      <%= !@promo.params[:brand_url] ? '' : link_to(@promo.params[:brand_url], @promo.params[:brand_url], :class => 'f-btn', :target => '_blank') %>
+    </h2>
     <% end %>
   </div>
   <div class="container clearfix">
+    <div id="vp_header">
+      <div id="vp_top_header"> </div>
+      <div class="blockLeft">
+        <h1>Vente Privé </h1>
+      </div>
+      <p class="header_discount show"> <span><%= t '.until' %></span><strong><i class="maxDiscount">-60<sup>%</sup></i></strong> </p>
+      <div id="vp_countdown">
+        <div>
+          <p><%= t '.time_left' %></p>
+          <p><%= t '.end' %></p>
+          <table id="countInfos">
+            <tbody>
+              <tr>
+                <td><%= t '.days' %></td>
+                <td><%= t '.hours' %></td>
+                <td><%= t '.min' %></td>
+                <td><%= t '.sec' %></td>
+              </tr>
+              <tr>
+                <td ><div id='daysBox'></div></td>
+                <td ><div id='hoursBox'></div></td>
+                <td ><div id='minsBox'></div></td>
+                <td ><div id='secsBox'></div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="container clearfix">
+      <!--products-->
+      <div style="display: block;" class="pbx_clearFix" id="vp_products">
+        <!--line 1-->
+        <div class="column grid8 first_item"> <a href="#" class="title"> <span class="table"><span class="row"><span class="cell">
+          <h2><%= t '.promo1_h2' %><h2>
+          <h3><%= t '.promo1_h3' %></h3>
+        </span></span></span> </a> <a href="#"> <span class="table"><span class="row"><span class="cell"> <%= image_tag 'promotions/bronze_star.jpg', :size => '281x157' %> </span></span></span> </a>
+        <div class="infos">
+          <%= t('.promo1_div').html_safe %>
+        </div>
+        <p class="show"><i class="maxDiscount">-10<sup>%</sup></i></p>
+        <div align="center"><a href="#" class="btn_credits btn_credits_options"><%= t '.signup' %></a></div>
+      </div>
+        <div class="column grid8"> <a href="#" class="title"> <span class="table"><span class="row"><span class="cell">
+          <h2><%= t '.promo2_h2' %></h2>
+          <h3><%= t '.promo2_h3' %></h3>
+        </span></span></span> </a> <a href="#"> <span class="table"><span class="row"><span class="cell"> <%= image_tag 'promotions/bronze_star.jpg', :size => '281x157' %> </span></span></span> </a>
+        <div class="infos"><%= t('.promo2_div').html_safe %></div>
+          <p class="show"><i class="maxDiscount">-20<sup>%</sup></i></p>
+          <div align="center"><a href="#" class="btn_credits btn_credits_options"><%= t '.signup' %></a></div>
+        </div>
+        <div class="column grid8 silver"> <a href="#" class="title"><span class="table"><span class="row"><span class="cell">
+          <h2><%= t '.promo3_h2' %></h2>
+          <h3><%= t '.promo3_h3' %></h3>
+        </span></span></span> </a> <a href="#"> <span class="table"><span class="row"><span class="cell"> <%= image_tag 'promotions/silver_star.jpg', :size => '281x157' %> </span></span></span> </a>
+        <div class="infos"><%= t('.promo3_div').html_safe %></div>
+          <p class="show"><i class="maxDiscount">-30<sup>%</sup></i></p>
+          <div align="center"><a href="#" class="btn_credits btn_credits_options"><%= t '.signup' %></a></div>
+        </div>
+        <!--line 2-->
+        <div class="column grid8 first_item silver"> <a href="#" class="title"> <span class="table"><span class="row"><span class="cell">
+          <h2><%= t '.promo4_h2' %></h2>
+          <h3><%= t '.promo3_h3' %></h3>
+        </span></span></span> </a> <a href="#"> <span class="table"><span class="row"><span class="cell"><%= image_tag 'promotions/silver_star.jpg', :size => '281x157' %></span></span></span> </a>
+        <div class="infos"><%= t('.promo3_div').html_safe %></div>
+          <p class="show"><i class="maxDiscount">-40<sup>%</sup></i></p>
+          <div align="center"><a href="#" class="btn_credits btn_credits_options"><%= t '.signup' %></a></div>
+        </div>
+        <div class="column grid8 gold"> <a href="#" class="title"> <span class="table"><span class="row"><span class="cell">
+          <h2><%= t '.promo4_h2' %></h2>
+          <h3><%= t '.promo4_h3' %></h3>
+        </span></span></span> </a> <a href="#"> <span class="table"><span class="row"><span class="cell"> <%= image_tag 'promotions/gold_star.jpg', :size => '281x157' %> </span></span></span> </a> <strong>
+          <div class="infos"></strong><%= t('.promo4_div').html_safe %></div>
+            <p class="show"><i class="maxDiscount">-50<sup>%</sup></i></p>
+            <div align="center"><a href="#" class="btn_credits btn_credits_options"><%= t '.signup' %></a></div>
+          </div>
+          <div class="column grid8 gold"> <a href="#" class="title"><span class="table"><span class="row"><span class="cell">
+            <h2><%= t '.promo5_h2' %></h2>
+            <h3><%= t '.promo5_h3' %></h3>
+          </span></span></span> </a> <a href="#"> <span class="table"><span class="row"><span class="cell"> <%= image_tag 'promotions/gold_star.jpg', :size => '281x157' %> </span></span></span> </a>
+          <div class="infos"><%= t('.promo5_div').html_safe %></div>
+            <p class="show"><i class="maxDiscount">-60<sup>%</sup></i></p>
+            <div align="center"><a href="#" class="btn_credits btn_credits_options"><%= t '.signup' %></a></div>
+          </div>
+        </div>
+        <div class="faq">
+          <h1>FAQ</h1>
+          <h2><%= t '.q1' %> </h2>
+          <%= t '.r1' %>
+          <h2><%= t '.q2' %></h2>
+          <%= t('.r2', :link_svod => products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}")), :link_tvod =>  products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[2]}"))) %>      
+          <h2><%= t '.q3' %></h2>
+          <%= t '.r3' %>
+
+          <h2><%= t '.q4' %></h2>
+          <%= t '.r4' %>
+          <div class="conditions">
+            <h1><%= t '.conditions' %></h1>
+            <%= t('.conditions_div').html_safe %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
-<div style="display:none" id='text_error_conditions'><%= t('.error_conditions') %></div>
-<div id="default" style="display:none"><%= t '.default' %></div>
+  
+  
+  <div style="display:none" id='text_error_conditions'><%= t('.error_conditions') %></div>
+  <div id="default" style="display:none"><%= t '.default' %></div>
+<script type="text/javascript">cdtd();</script>
