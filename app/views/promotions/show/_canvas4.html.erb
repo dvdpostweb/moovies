@@ -88,7 +88,7 @@ var timer = setTimeout('cdtd()',1000);
       <div style="display: block;" class="pbx_clearFix" id="vp_products">
         <!--line 1-->
         <div class="column grid8 first_item"> <a href="<%= new_customer_registration_path(:code => 'VPPL3') %>" class="title"> <span class="table"><span class="row"><span class="cell">
-          <h2><%= t '.promo1_h2' %><h2>
+          <h2><%= t '.promo1_h2' %></h2>
           <h3><%= t '.promo1_h3' %></h3>
         </span></span></span> </a> <a href="<%= new_customer_registration_path(:code => 'VPPL3') %>"> <span class="table"><span class="row"><span class="cell"> <%= image_tag 'promotions/bronze_star.jpg', :size => '281x157' %> </span></span></span> </a>
         <div class="infos">
@@ -125,8 +125,8 @@ var timer = setTimeout('cdtd()',1000);
         <div class="column grid8 gold"> <a href="<%= new_customer_registration_path(:code => 'VPPL8') %>" class="title"> <span class="table"><span class="row"><span class="cell">
           <h2><%= t '.promo5_h2' %></h2>
           <h3><%= t '.promo5_h3' %></h3>
-        </span></span></span> </a> <a href="<%= new_customer_registration_path(:code => 'VPPL8') %>"> <span class="table"><span class="row"><span class="cell"> <%= image_tag 'promotions/gold_star.jpg', :size => '281x157' %> </span></span></span> </a> <strong>
-          <div class="infos"></strong><%= t('.promo5_div').html_safe %></div>
+        </span></span></span> </a> <a href="<%= new_customer_registration_path(:code => 'VPPL8') %>"> <span class="table"><span class="row"><span class="cell"> <%= image_tag 'promotions/gold_star.jpg', :size => '281x157' %> </span></span></span> </a> 
+          <div class="infos"><%= t('.promo5_div').html_safe %></div>
             <p class="show"><i class="maxDiscount">-50<sup>%</sup></i></p>
             <div align="center"><a href="<%= new_customer_registration_path(:code => 'VPPL8') %>" class="btn_credits btn_credits_options"><%= t '.signup' %></a></div>
           </div>
