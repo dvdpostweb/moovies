@@ -321,9 +321,9 @@ class Product < ActiveRecord::Base
   def self.search_clean(products, query_string, options={})
     qs = []
     if query_string
-      query_string = query_string.gsub(/[_-]/, ' ').gsub(/["\(\)]/, ' ').gsub(/[@$!^\/\\|]/, '')
+      query_string = query_string.gsub(/[_-]/, ' ').gsub(/["\(\)]/, ' ').gsub(/[@$!^\/\\|]/, '').gsub(' et ',' ')
       qs = query_string.split.collect do |word|
-        "*#{replace_specials(word)}*"
+        "#{replace_specials(word)}*"
       end  
       search = "@descriptions_title #{qs.join(' ')}" unless query_string.empty?
     else
