@@ -36,4 +36,7 @@ class HomeController < ApplicationController
     render :text => open('app/assets/images/blank.gif', "rb").read
   end
 
+  def moodme
+  end
+
 end
