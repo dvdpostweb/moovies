@@ -1,8 +1,8 @@
 set :default_environment, {
-    'PATH' => "/opt/ruby-1.9.3-p448/bin:/opt/ruby/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/opt/ruby/bin::/opt/ruby/bin:",
-    'GEM_HOME' => '/opt/ruby-1.9.3-p448/lib/ruby/gems/1.9.1',
-    'GEM_PATH' => '/opt/ruby-1.9.3-p448/lib/ruby/gems/1.9.1',
-    'BUNDLE_PATH' => '/opt/ruby-1.9.3-p448/lib/ruby/gems/1.9.1/gems'
+    'PATH' => "/opt/ruby-1.9.3-p484/bin:/opt/ruby/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/opt/ruby/bin::/opt/ruby/bin:",
+    'GEM_HOME' => '/opt/ruby-1.9.3-p484/lib/ruby/gems/1.9.1',
+    'GEM_PATH' => '/opt/ruby-1.9.3-p484/lib/ruby/gems/1.9.1',
+    'BUNDLE_PATH' => '/opt/ruby-1.9.3-p484/lib/ruby/gems/1.9.1/gems'
 }
 
 #############################################################
@@ -31,10 +31,10 @@ set :user, "plush"
 set :domain, "94.139.62.122"
 set :domain2,  "94.139.62.123"
 set :port, 22012
-role :app, domain
-role :web, domain
+role :app, domain2
+role :web, domain2
 
-role :db, domain, :primary => true
+role :db, domain2, :primary => true
 
 #############################################################
 #	Git
