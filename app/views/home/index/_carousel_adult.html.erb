@@ -1,0 +1,15 @@
+<div id="slider-wrap">
+  <div id="image_promo">
+    <h1><%= t('home.index.title').html_safe %></h1>
+    <h2><%= t 'home.index.slogan' %></h2>
+    <ul id="output">
+      <li>
+        <div id="try_it">
+          <%= link_to t('.try'), info_path(:page_name => t('routes.infos.params.abo')), :class => 'essaigratuit osc btn' %> 
+        </div>
+        <%= link_to image_tag("#{I18n.locale}/unlimited-video-on-demand-adult2.jpg", :size => '932x328'), info_path(:page_name => t('routes.infos.params.abo')) %>
+      </li>
+    </ul>
+  </div>
+</div>
+<!-- #slider-wrap -->

@@ -50,7 +50,6 @@ Moovies::Application.routes.draw do
   scope ':locale/(:kind)', :locale => /en|fr|nl/, :kind => /normal|adult/ do
     match "/" => 'home#index', :as => :root_localize
     match "validation" => 'home#validation'
-    match "domiciliation" => 'home#domiciliation'
     
     devise_for :customers, :controllers => { :registrations => "customers/registrations", :confirmations => "customers/confirmations" }, :as => :old_customers
     resources :customers, :as => :old_customer do
