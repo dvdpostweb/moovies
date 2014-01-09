@@ -173,14 +173,6 @@ class Customer < ActiveRecord::Base
     suspension_status == 1
   end
 
-  def suspended_notification
-    if payment_suspended?
-      I18n.t('customer.cc_paymet_alert')
-    else
-      I18n.t('customer.holidays_suspended', :date => suspensions.holidays.last.date_end.strftime('%d/%m/%Y'))
-    end
-  end
-
   def name
     "#{first_name} #{last_name}"
   end
