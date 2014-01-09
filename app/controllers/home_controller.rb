@@ -38,19 +38,4 @@ class HomeController < ApplicationController
 
   def moodme
   end
-
-  def domiciliation
-    respond_to do |format|
-      format.pdf do
-        filename = "#{Rails.root}/public/dom_fr.pdf"
-        pdf = Prawn::Document.new(:template => filename) do
-          go_to_page(2)
-          character_spacing(4.7) do
-              text_box "2345611111678", :at => [-25, 87], :size => 12, :kerning => true
-          end
-        end
-        send_data pdf.render
-      end
-    end
-  end
 end

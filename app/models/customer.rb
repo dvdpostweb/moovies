@@ -446,6 +446,10 @@ class Customer < ActiveRecord::Base
     end
   end
 
+  def no_adult?
+    abo_type_id != 3 && abo_type_id != 4 && abo_type_id != 5
+  end
+
   private
   def convert_created_at
     begin
