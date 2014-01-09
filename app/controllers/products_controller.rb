@@ -43,7 +43,7 @@ class ProductsController < ApplicationController
     end
     new_params = session[:sexuality] == 0 ? params.merge(:per_page => 15, :country_id => session[:country_id], :hetero => 1) : params.merge(:per_page => 15, :country_id => session[:country_id])
     @products = Product.filter(@filter, new_params)
-    @target = cookies[:endless] == 'active' ? '_blank' : '_self'
+    @target = cookies[:endless] == 'deactive' ?  '_self' : '_blank'
     if params[:endless]
       cookies.permanent[:endless] = params[:endless]
     end

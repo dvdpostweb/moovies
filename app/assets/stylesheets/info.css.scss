@@ -821,3 +821,28 @@ background-image: url(image_path('win_verimatrix.png'));
   background-position: 5px 3px;
     background-repeat: no-repeat;
 }
+.add_credit_card
+{
+  background-color: #ee8419;
+  *zoom: 1;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFEE8419', endColorstr='#FFE26417');
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ee8419), color-stop(100%, #e26417));
+  background-image: -webkit-linear-gradient(top, #ee8419 0%, #e26417 100%);
+  background-image: -moz-linear-gradient(top, #ee8419 0%, #e26417 100%);
+  background-image: -o-linear-gradient(top, #ee8419 0%, #e26417 100%);
+  background-image: linear-gradient(top, #ee8419 0%, #e26417 100%);
+  border: 1px solid #D55023;
+  border-radius: 4px 4px 4px 4px;
+  box-shadow: 0 1px 1px rgba(255, 255, 255, 0.8) inset;
+  text-shadow: 0 -1px 0 #D83C14;
+  bottom: 18px;
+  color: white;
+  display: block;
+  font-size: 24px;
+  font-weight: bold;
+  height: 53px;
+  line-height: 54px;
+  text-align: center;
+  text-transform: uppercase;
+  width: 243px;
+}
