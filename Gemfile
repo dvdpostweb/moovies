@@ -57,7 +57,7 @@ gem "capistrano", "~> 2.15.5"
 gem "capistrano-ext"
 gem "client_side_validations"
 gem 'date_validator'
-gem 'whenever', :require => false
+gem 'whenever', "~> 0.9.0", :require => false
 gem 'geoip'
 gem 'hpricot', '~> 0.8.6'
 gem "browser", '~> 0.2.0'

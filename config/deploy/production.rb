@@ -41,7 +41,7 @@ set :port, 22012
 role :app, domain2, domain
 role :web, domain2, domain
 
-role :db, domain, :primary => true
+role :db, domain, domain2, :primary => true
 
 #############################################################
 #	Git
