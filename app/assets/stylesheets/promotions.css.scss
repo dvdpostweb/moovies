@@ -1053,7 +1053,9 @@ html, body{
   padding-left: 20px;
   text-transform: uppercase;
 }
-
+#commentcamarche_content h3.carte {
+  background: url(image_path('promotions/square_ppv.gif')) no-repeat scroll 0 12px transparent;
+}
 .promo_info {
   border: 1px solid #9B9999;
   margin: 5px 15px 5px 0;
@@ -1231,5 +1233,11 @@ ul {
 }
 .canvas5 #promo_content #promo_form.light {
   border: #939 3px solid;
+}
+.canvas5 #commentcamarche_content h3 {
+  background: url(image_path('promotions/square_adult.gif')) no-repeat scroll 0 12px transparent;
+}
+.canvas5 #commentcamarche_content h3.carte {
+  background: url(image_path('promotions/square_ppv_adult.gif')) no-repeat scroll 0 12px transparent;
 }
 /**************************/
