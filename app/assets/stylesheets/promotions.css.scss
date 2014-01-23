@@ -82,28 +82,28 @@
 /***********/
 
 /*****Mobistar */
-
 .canvas3 #promo_content h1 {
-    color: #005c05;
-    font-size: 48px;
+    color: #003C6A;
+    font-size: 44px;
     line-height: 49px;
-    padding-top: 18px;
-    text-align: center;
+    padding-left: 60px;
+    padding-top: 119px;
+    text-align: left;
 }
-.canvas3 #promo_content h1 span{
-  color: white;
+.canvas3 #promo_content h1 span {
+    color: #003C6A;
+    font-size: 53px;
 }
 
 .canvas3 #promo_content #promo_form {
-    font-size: 18px;
+    color: #444444;
+    font-family: 'Open Sans Condensed',sans-serif;
     line-height: 18px;
-    padding-left: 48px;
-    padding-top:50px;
+    padding-left: 43px;
+    padding-top: 32px;
     text-align: left;
     width: 449px;
-    color:#212A31;
 }
-
 
 .canvas3 #promo_content #promo_form .promo_button, .canvas3 #area_promo .promo_button {
     font-size: 26px;
@@ -113,28 +113,35 @@
 }
 
 .canvas3 #promo_content .step1 {
+    font-size: 23px;
     height: 30px;
-     padding-left: 45px;
+    line-height: 26px;
+    padding-bottom: 51px;
+    padding-left: 18px;
+      padding-right: 18px;
     width: 400px;
-      padding-bottom: 20px;
 }
 
 .canvas3 #promo_form p.news {
-    font-size: 12px;
-    margin: 0 0 0 39px;
+    font-size: 14px;
+    margin: 0 0 8px 39px;
 }
 .canvas3 #promo_form .email {
-  float:left;  
-  padding-left:45px; 
-  font-size: 14px;
-  
+    float: left;
+    font-size: 18px;
+    padding-left: 45px;
 }
 
+.canvas3 #promo_form .inputs_promo_code {
+    width: 300px;
+}
+.canvas3 #promo_footer {
+    padding-bottom: 0px;
+}
 .canvas3 #promo_form .promocode {
-float:right; 
-padding-right:25px; 
-font-size: 14px;
-  
+    float: left;
+    font-size: 18px;
+    padding-left: 45px;
 }
 
 .canvas3 .telfooter a{
@@ -164,25 +171,41 @@ background: url(image_path('en/info_tel.jpg')) no-repeat scroll 0 0 transparent
    width: 320px;
 }
 .canvas3 #promo_content {
-   background: none;
+   background: none!important;
     background-color:#94cc2b;
-    height: 634px;
-    margin: 0 auto;
-    width: 320px;
+    min-height: 360px !important;
+       
+     margin: 0 auto;
+    width: 320px!important;
     margin-bottom:12px;
 }
 .canvas3 #promo_content h1 {
-    color: #FFFFFF;
+    color: #003C6A;
     font-size: 28px;
-    line-height: 29px;
-    padding-top: 18px;
-    text-align: center;
+    line-height: 35px;
+    padding-left: 29px !important;
+    padding-top: 30px;
+    text-align: left;
 }
-.canvas3 #header h2 a, #header.canvas3 h2 a {
-    width: 142px;
+
+.canvas3 #promo_content h1 span {
+    color: #003C6A;
+    font-size: 42px!important;
 }
+
+.canvas3 #header h1 {
+    float: left;
+    height: 39px;
+    margin: 15px 0 0 7px;
+}
+.canvas3 #header h2, .canvas2 #header h2 a {
+    background: url("http://www.dvdpost.be/images/promotions_plush/logo_mobistar.jpg") repeat scroll 0 0 transparent;
+    height: 60px;
+ width: 142px !important;
+}
+
 .canvas3#default #header h1 a {
-    width: 142px;
+    width: 142px!important;
      background: url("/assets/promotions/logo_plush.png") repeat scroll -12px -12px transparent;
 }
 .canvas3 #header {
@@ -192,12 +215,17 @@ background: url(image_path('en/info_tel.jpg')) no-repeat scroll 0 0 transparent
     background-color: #FFFFFF;
     color: #212A31;
     font-size: 14px;
-    height: 526px;
     line-height: 18px;
-    padding-left: 10px;
+    min-height: 360px !important;
+    padding-left: 9px;
     padding-right: 10px;
     text-align: left;
-    width: 300px;
+    width: 293px;
+     margin: 0 auto;
+}
+.canvas3 #promo_form p.news {
+    font-size: 14px;
+    margin: 0 0 8px 14px;
 }
 
 .canvas3 #promo_content h2 {
@@ -210,20 +238,22 @@ background: url(image_path('en/info_tel.jpg')) no-repeat scroll 0 0 transparent
 }
 
 .canvas3 #promo_content .step1, .canvas3 #promo_content .step2, .canvas3 #promo_content .step3, .canvas3 #promo_content .step4 {
-    width: 250px;
+    width: 260px;
 }
 
 .canvas3 #promo_content #promo_form .promo_button, .canvas3 #area_promo .promo_button {
-  
+      margin: 6px 0 24px 18px;
     font-size: 20px;
     padding: 5px;
   
 }
-
+.canvas3 #promo_form .inputs_promo_code {
+    width: 200px;
+}
 .canvas3 #promo_form .email, .canvas3 #promo_form .promocode {
   float:none;  
-  padding-left:45px; 
-  font-size: 12px;
+  padding-left:19px; 
+  font-size: 16px;
   
 }
 .canvas3 .telfooter {
@@ -235,10 +265,10 @@ background: url(image_path('en/info_tel.jpg')) no-repeat scroll 0 0 transparent
 
 
 .canvas3 .telfooter a {
-    background: url("/assets/fr/info_tel_mobile.jpg") no-repeat scroll 0 0 transparent;
-    height: 139px;
+    background: url("/assets/fr/info_tel_mobile.jpg") no-repeat scroll 0 0 transparent!important;
+    height: 139px!important;
     margin: 0 auto;
-    width: 245px;
+    width: 245px!important;
 }
 }
 
