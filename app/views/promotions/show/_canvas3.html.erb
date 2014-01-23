@@ -46,12 +46,11 @@
           <p class="news">
             <%= "<div id='error'>#{@error.html_safe}</div>".html_safe if @error %>
             <%= check_box_tag 'marketing', 1, @checked, :class => :marketing3, :id => 'mark' %>
-            <%= t('.accepteconditions') %>
+            <%= t('.marketing') %>
           </p>
           <p class="news">
-            <%= "<div id='error'>#{@error.html_safe}</div>".html_safe if @error %>
-            <%= check_box_tag 'marketing', 1, @checked, :class => :marketing3, :id => 'mark' %>
-            <%= t('.accepteconditions') %>
+            <%= check_box_tag 'marketing_partners', 1, @checked, :class => :marketing3, :id => 'mark' %>
+            <%= t('.marketing_partners') %>
           </p>
           <p>
             <input type="submit" border="0" align="absmiddle" id="submit_id3" class="promo_button" name="sent" value="Regarder le film" />
