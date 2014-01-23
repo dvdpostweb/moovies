@@ -28,7 +28,7 @@ class PromotionsController < ApplicationController
       end
       if @error == ''
         options = {
-          "\\$\\$\\$link\\$\\$\\$" => streaming_product_url(:id => 274155, :email => params[:email], :code => params[:code])
+          "\\$\\$\\$link\\$\\$\\$" => streaming_product_url(:id => 1794850, :email => params[:email], :code => params[:code])
         }
         view_context.send_message_public(621, options, I18n.locale, params[:email])
         StreamingCode.by_name(params[:code]).first.update_attribute(:email, params[:email])
