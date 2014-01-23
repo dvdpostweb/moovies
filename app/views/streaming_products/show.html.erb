@@ -8,13 +8,19 @@
         <% end %>
         <div class="clear"></div>
         <div id="presentation">
-          <div id = 'image_vod'><%= product_image_tag @product.image, :alt => "#{@product.title} (#{@product.year})" %></div>
+          <% unless @streaming && @streaming.drm %><div id = 'image_vod'><%= product_image_tag @product.image, :alt => "#{@product.title} (#{@product.year})" %></div> <% end %>
         </div>
         <div id='flow'>
         </div>
-        <a id='player'>
+        <a id='player' class='<%= @streaming && @streaming.drm ? 'drm' : 'normal' %>'>
         </a>
-        
+        <% if @streaming && @streaming.drm %>
+        <p align='center' id='player-verimatrix'>
+          <button id="resume-btn"><%= t('.resume') %></button>
+  			  <button id="pause-btn"><%= t('.pause') %></button>
+  			  <button id="enable-fullscreen-btn"><%= t('.fullscreen') %></button>
+  			</p>
+  			<% end %>
 
         <% if @code || !current_customer.suspended? %>
           <% if @code || (@token && @token_valid) || (current_customer && current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s)) %>
@@ -75,6 +81,11 @@
   </div>
   <div style="display:none" id="returnStatus"></div>
   <div style="display:none" id ="product_id"><%= @product.id %></di>
+  <div style="display:none" id ="drm"><%= @streaming && @streaming.drm ? 1 : 0 %></div>
+  <% if @streaming && @streaming.drm %>
+    <div id='log' style='display=<%= Rails.env == 'production' ? 'none': 'block' %>'></div>
+    <div id='debug-info' style='display=<%= Rails.env == 'production' ? 'none': 'block' %>'>></div>
+  <% end %>
     <% if params[:warning].to_i == 1 && (@token.nil? || !@token_valid )  %>
       <div id='warning' style='display:none'><%= product_action_path(:product_id => @product.to_param, :origin => 'streaming', :hide_btn => 1) %></div>
     <% end %>

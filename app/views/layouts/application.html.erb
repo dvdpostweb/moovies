@@ -10,7 +10,7 @@
   	<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700' rel='stylesheet' type='text/css' />
 	  <%= javascript_include_tag "application" %>
 	  <%= javascript_include_tag "jquery.ui.datepicker-#{I18n.locale}" %>
-    
+    <%= javascript_include_tag 'md5', 'viewrightplayer', 'viewrightplayer_control' if @streaming && @streaming.drm %>
     <%= stylesheet_link_tag "application", :media => "all" %>
     <%= render :partial => 'layouts/google_analytics' %>
     <%= render :partial => 'layouts/apple' %>
