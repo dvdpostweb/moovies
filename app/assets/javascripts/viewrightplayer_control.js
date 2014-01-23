@@ -131,15 +131,15 @@ for (selector in actions) {
 		this.action.apply(this.action, arguments);
 	}.bind({ action: actions[selector] }));
 }*/
-window.setInterval(showDebugInfo, 100);
+window.setInterval(showDebugInfo, 1000);
 }
-$('#resume-btn').live("click", function() {
+$('#player-verimatrix').delegate("#resume-btn", "click", function() {
 	player.resume();
 })
-$('#pause-btn').live("click", function() {
+$('#player-verimatrix').delegate("#pause-btn", "click", function() {
 	player.pause();
 })
-$('#enable-fullscreen-btn').live("click", function() {
+$('#player-verimatrix').delegate("#enable-fullscreen-btn", "click", function() {
 	player.enableFullscreen();
 })
 })
