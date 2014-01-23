@@ -3,7 +3,7 @@
   background: url('http://www.dvdpost.be/images/promotions_plush/<%= @promo.params[:background_locale] ? "#{I18n.locale}/" : '' %><%= @promo.params[:background] %>') no-repeat scroll 0 0 transparent;
   margin: 0 auto;
   width: 970px;
-  min-height: 722px;
+  min-height: 660px;
 }
 <% if @promo.params[:brand_logo] %>
 .canvas3 #header h2,.canvas2 #header h2 a {
@@ -27,7 +27,7 @@
   <div class="container clearfix">
     <div id="promo_content">
       <h1><%= t2('.title', @promo.name).html_safe %><br/>
-      <strong><%= t2('.title_promo', @promo.name).html_safe %></strong></h1>
+      <span><%= t2('.title_promo', @promo.name).html_safe %></span></h1>
       <div id="promo_form">
       <% if @error == '' %>
         <%= t('.gratz').html_safe %>
@@ -48,8 +48,13 @@
             <%= check_box_tag 'marketing', 1, @checked, :class => :marketing3, :id => 'mark' %>
             <%= t('.accepteconditions') %>
           </p>
+          <p class="news">
+            <%= "<div id='error'>#{@error.html_safe}</div>".html_safe if @error %>
+            <%= check_box_tag 'marketing', 1, @checked, :class => :marketing3, :id => 'mark' %>
+            <%= t('.accepteconditions') %>
+          </p>
           <p>
-            <input type="submit" border="0" align="absmiddle" id="submit_id3" class="promo_button" name="sent" value="Valider" />
+            <input type="submit" border="0" align="absmiddle" id="submit_id3" class="promo_button" name="sent" value="Regarder le film" />
           </p>
         <% end %>
       <% end %>
