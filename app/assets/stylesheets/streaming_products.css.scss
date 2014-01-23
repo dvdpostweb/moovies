@@ -44,6 +44,7 @@
     color: white;
     width: 696px;
     margin: 0 auto;
+    clear:both;
 }
 #vodtime {
     background: url(image_path('icon_time.gif')) no-repeat scroll 0 1px transparent;
@@ -573,4 +574,8 @@ a#vod_title_id:hover
 .adult a#vod_title_id:hover
 {
   color: #E2007C;
+}
+#player-verimatrix button
+{
+  border:1px solid #333;
 }
