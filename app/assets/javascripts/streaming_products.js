@@ -22,8 +22,14 @@ $(function() {
     content = $('#presentation').html()
     loader = 'loading.gif';
     $('.error').html('');
-    $('#player').html('')
-    $('#presentation').html("<div style='height:389px'><div class='load'><img src='/assets/"+loader+"'/></div></div>")
+    if($('#drm').html() == "1")
+    {
+    }
+    else
+    {
+      $('#player').html('')
+      $('#presentation').html("<div style='height:389px'><div class='load'><img src='/images/"+loader+"'/></div></div>")
+    }
     $(this).hide()
     $.ajax({
       dataType: 'html',
@@ -35,11 +41,14 @@ $(function() {
         $('.qualityvod').show()
         if(/.m3u8$/.test(data))
         {
-          if (/MSIE (\d+\.\d+);/.test(navigator.userAgent))
+         /* if (/MSIE (\d+\.\d+);/.test(navigator.userAgent))
             $("#player").html('<object id="ViewRightControl" classid="CLSID:059BFDA3-0AAB-419F-9F69-AF9BBE3A4668" width="696" height="389"></object><button type="button" id="play" style="display:none">Play</button><button type="button" id="pause">Pause</button><button id="fullscreenon_off" type="button">Fullscreen</button>');
           else
             $("#player").html('<object id="ViewRightControl" type="application/x-viewright-m3u8" width="696" height="389"></object><button type="button" id="play" style="display:none">Play</button><button type="button" id="pause">Pause</button><button id="fullscreenon_off" type="button">Fullscreen</button>');
-          Open($.trim(data))
+          Open($.trim(data))*/
+          var player = new ViewRightPlayer();
+          player.get_player('#player')
+          player.open($.trim(data))
           
         }
         else
@@ -170,7 +179,7 @@ $(function() {
   });
   //verimatrix
   
-  function Unload()
+  /*function Unload()
   {
       ViewRightControl.Close();
       ViewRightControl.UnLoad();
@@ -621,5 +630,5 @@ $(function() {
   {
   	UpdateReturnStatus("--");
   	UpdateReturnStatus(ViewRightControl.SetBufferingAnimation(setcc, true));
-  }
+  }*/
 });
