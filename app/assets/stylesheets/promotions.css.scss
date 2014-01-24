@@ -164,11 +164,6 @@ background: url(image_path('en/info_tel.jpg')) no-repeat scroll 0 0 transparent
 
 @media screen and (max-width: 480px) {
   
-  @viewport{
-      zoom: 1.0;
-      width: device-width;
-  }
-
 .canvas3 #wrap {
     background: none repeat scroll 0 0 #FFFFFF;
     box-shadow: 0 0 45px #000000;

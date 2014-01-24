@@ -29,15 +29,15 @@ class PromotionsController < ApplicationController
       if !/\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/.match(params[:email])
         @error += "#{t('promotions.create.wrong_email')}<br />"
       end
-      if !StreamingCode.by_name(params[:code]).email.available.first
+      if !StreamingCode.by_name(params[:streaming_code]).email.available.first
         @error += t('promotions.create.wrong_code')
       end
       if @error == ''
         options = {
-          "\\$\\$\\$link\\$\\$\\$" => streaming_product_url(:id => 1730697, :email => params[:email], :code => params[:code])
+          "\\$\\$\\$link\\$\\$\\$" => streaming_product_url(:id => 1730697, :email => params[:email], :streaming_code => params[:streaming_code])
         }
         view_context.send_message_public(621, options, I18n.locale, params[:email])
-        StreamingCode.by_name(params[:code]).first.update_attribute(:email, params[:email])
+        StreamingCode.by_name(params[:streaming_code]).first.update_attribute(:email, params[:email])
         marketing = params[:marketing] || 0
         marketing_partners = params[:marketing_partners] || 0
         if prospect = Prospect.where(:email => params[:email]).first
