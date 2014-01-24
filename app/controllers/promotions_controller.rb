@@ -43,7 +43,7 @@ class PromotionsController < ApplicationController
         if prospect = Prospect.where(:email => params[:email]).first
           prospect.update_attributes(:newsletters => marketing, :newsletters_partners => marketing_partners)
         else
-          Prospect.create(:email => params[:email], :newsletters => marketing, :newsletters_partners => marketing_partners)
+          Prospect.create(:email => params[:email], :newsletters => marketing, :newsletters_partners => marketing_partners, :locale_id => Moovies.customer_languages[I18n.locale])
         end
       else
         render :show
