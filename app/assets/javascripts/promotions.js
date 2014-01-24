@@ -30,7 +30,7 @@ $(function() {
 			}
 			if(!$(id_mark).is(':checked'))
 			{
-				alert($('#text_error_conditions').html())
+				alert($('#text_error_conditions'+'ddd').html())
 		    return false
 			}
 		}
