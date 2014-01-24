@@ -1,7 +1,7 @@
 class StreamingProductsController < ApplicationController
   def show
-    if params[:code]
-      @code = StreamingCode.by_name(params[:code]).available.first
+    if params[:streaming_code]
+      @code = StreamingCode.by_name(params[:streaming_code]).available.first
     end
     if @code.nil? && !current_customer
       flash[:error] = t('streaming_products.code_expired')
