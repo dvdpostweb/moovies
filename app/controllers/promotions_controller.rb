@@ -2,8 +2,8 @@ class PromotionsController < ApplicationController
   before_filter :get_data
   def show
     if @promo && @promo.canva_id ==3
-      @checked = true
-      @checked_partners = true
+      @checked = false
+      @checked_partners = false
       
     end
   end
@@ -41,7 +41,7 @@ class PromotionsController < ApplicationController
         marketing = params[:marketing] || 0
         marketing_partners = params[:marketing_partners] || 0
         if prospect = Prospect.where(:email => params[:email]).first
-          prospect.update_attributes(:newsletters => marketing, :newsletters_partners => marketing_partners)
+          prospect.update_attributes(:newsletters => marketing, :newsletters_partners => marketing_partners, :locale_id => Moovies.customer_languages[I18n.locale])
         else
           Prospect.create(:email => params[:email], :newsletters => marketing, :newsletters_partners => marketing_partners, :locale_id => Moovies.customer_languages[I18n.locale])
         end
