@@ -28,9 +28,9 @@ $(function() {
 			{
 				id_mark = '#mark2'
 			}
-			if(!$(id_mark).is(':checked'))
+			if($(id_mark).length > 0 && !$(id_mark).is(':checked'))
 			{
-				alert($('#text_error_conditions'+'ddd').html())
+				alert($('#text_error_conditions').html())
 		    return false
 			}
 		}

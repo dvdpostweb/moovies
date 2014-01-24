@@ -43,15 +43,15 @@
           </p>
     
           <div style="clear:both;"></div>
-          <p class="news">
+          <div class="news">
             <%= "<div id='error'>#{@error.html_safe}</div>".html_safe if @error %>
-            <%= check_box_tag 'newsletters', 1, @checked, :class => :marketing3, :id => 'marketing' %>
+            <%= check_box_tag 'marketing', 1, @checked, :class => :marketing3, :id => 'marketing' %>
             <%= t('.marketing') %>
-          </p>
-          <p class="news">
-            <%= check_box_tag 'newsletters_partners', 1, @checked, :class => :marketing3, :id => 'marketing' %>
+          </div>
+          <div class="news">
+            <%= check_box_tag 'marketing_partners', 1, @checked_partners, :class => :marketing3, :id => 'marketing' %>
             <%= t('.marketing_partners') %>
-          </p>
+          </div>
           <p>
             <input type="submit" border="0" align="absmiddle" id="submit_id3" class="promo_button" name="sent" value="Regarder le film" />
           </p>

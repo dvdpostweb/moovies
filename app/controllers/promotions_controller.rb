@@ -1,10 +1,16 @@
 class PromotionsController < ApplicationController
   before_filter :get_data
   def show
+    if @promo && @promo.canva_id ==3
+      @checked = true
+      @checked_partners = true
+      
+    end
   end
 
   def create
     @checked = params[:marketing] == "1" ? true : false
+    @checked_partners = params[:marketing_partners] == "1" ? true : false
     if params[:id] == 'samsung'
       if !params[:code].nil?
         @code_samsung = params[:code]
@@ -28,11 +34,17 @@ class PromotionsController < ApplicationController
       end
       if @error == ''
         options = {
-          "\\$\\$\\$link\\$\\$\\$" => streaming_product_url(:id => 1794850, :email => params[:email], :code => params[:code])
+          "\\$\\$\\$link\\$\\$\\$" => streaming_product_url(:id => 1730697, :email => params[:email], :code => params[:code])
         }
         view_context.send_message_public(621, options, I18n.locale, params[:email])
         StreamingCode.by_name(params[:code]).first.update_attribute(:email, params[:email])
-        Prospect.create(:email => params[:email], :newsletters => params[:newsletters], :newsletters_partners => params[:newsletters_partners])
+        marketing = params[:marketing] || 0
+        marketing_partners = params[:marketing_partners] || 0
+        if prospect = Prospect.where(:email => params[:email]).first
+          prospect.update_attributes(:newsletters => marketing, :newsletters_partners => marketing_partners)
+        else
+          Prospect.create(:email => params[:email], :newsletters => marketing, :newsletters_partners => marketing_partners)
+        end
       else
         render :show
       end
