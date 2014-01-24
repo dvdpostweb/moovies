@@ -59,6 +59,7 @@
         <% else %>
         tu ne peux pas regarder de films durant la suspension de ton compte  
         <% end %>
+        <%= render partial: 'streaming_products/show/error', :locals => {:error => @error} if @error %>
         <div id="all_versions_data">
         
         </div>
