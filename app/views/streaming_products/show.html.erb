@@ -83,8 +83,8 @@
   <div style="display:none" id ="product_id"><%= @product.id %></di>
   <div style="display:none" id ="drm"><%= @streaming && @streaming.drm ? 1 : 0 %></div>
   <% if @streaming && @streaming.drm %>
-    <div id='log' style='display=<%= Rails.env == 'production' ? 'none': 'block' %>'></div>
-    <div id='debug-info' style='display=<%= Rails.env == 'production' ? 'none': 'block' %>'>></div>
+    <div id='log' style='display:<%= Rails.env == 'production' ? 'none': 'block' %>'></div>
+    <div id='debug-info' style='display:<%= Rails.env == 'production' ? 'none': 'block' %>'>></div>
   <% end %>
     <% if params[:warning].to_i == 1 && (@token.nil? || !@token_valid )  %>
       <div id='warning' style='display:none'><%= product_action_path(:product_id => @product.to_param, :origin => 'streaming', :hide_btn => 1) %></div>

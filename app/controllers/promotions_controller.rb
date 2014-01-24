@@ -32,6 +32,7 @@ class PromotionsController < ApplicationController
         }
         view_context.send_message_public(621, options, I18n.locale, params[:email])
         StreamingCode.by_name(params[:code]).first.update_attribute(:email, params[:email])
+        Prospect.create(:email => params[:email], :newsletters => params[:newsletters], :newsletters_partners => params[:newsletters_partners])
       else
         render :show
       end

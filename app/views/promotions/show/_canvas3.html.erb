@@ -45,11 +45,11 @@
           <div style="clear:both;"></div>
           <p class="news">
             <%= "<div id='error'>#{@error.html_safe}</div>".html_safe if @error %>
-            <%= check_box_tag 'marketing', 1, @checked, :class => :marketing3, :id => 'mark' %>
+            <%= check_box_tag 'newsletters', 1, @checked, :class => :marketing3, :id => 'marketing' %>
             <%= t('.marketing') %>
           </p>
           <p class="news">
-            <%= check_box_tag 'marketing_partners', 1, @checked, :class => :marketing3, :id => 'mark' %>
+            <%= check_box_tag 'newsletters_partners', 1, @checked, :class => :marketing3, :id => 'marketing' %>
             <%= t('.marketing_partners') %>
           </p>
           <p>
