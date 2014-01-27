@@ -139,4 +139,13 @@ $('#player-verimatrix').delegate("#pause-btn", "click", function() {
 $('#player-verimatrix').delegate("#enable-fullscreen-btn", "click", function() {
 	player.enableFullscreen();
 })
+$('#streaming').delegate('#playback-indicator > DIV, #playback-indicator > DIV > DIV',"click", function(e) {
+  var containerWidth = $('#playback-indicator').width(),
+      clickPos = (e.offsetX==undefined)?e.pageX-$('#playback-indicator').offset().left:e.offsetX,
+      percentage = clickPos * 100.0 / containerWidth;
+  if (percentage >= 0 && percentage <=100)
+  {
+  player.setPlaybackPercentage(percentage);
+  }
+})
 })

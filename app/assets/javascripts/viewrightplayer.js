@@ -986,6 +986,7 @@ window.ViewRightPlayer = (function() {
 
 		if (currentPosition !== this._lastPosition) {
 			this.onPositionChanged(currentPosition, this._lastPosition);
+			$('#playback-indicator > DIV > DIV').width(this.getPlaybackPercentage() + '%');
 		}
 
 		this._lastPosition = currentPosition;
