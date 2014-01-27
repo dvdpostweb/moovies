@@ -117,6 +117,15 @@ class ApplicationController < ActionController::Base
   end
 
   private
+  def notify_hoptoad(message)
+    begin
+      Airbrake.notify(:error_message => "GeoIP error : #{message}", :backtrace => $@, :environment_name => ENV['RAILS_ENV'])
+    rescue => e
+      logger.error("GeoIP error: #{message}")
+      logger.error(e.backtrace)
+    end
+  end
+
 
   def after_sign_out_path_for(resource_or_scope)
       root_localize_path
