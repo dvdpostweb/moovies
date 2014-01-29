@@ -1,10 +1,9 @@
 class PromotionsController < ApplicationController
   before_filter :get_data
   def show
-    if @promo && @promo.canva_id ==3
+    if @promo && @promo.canva_id == 3
       @checked = true
       @checked_partners = false
-      
     end
   end
 
