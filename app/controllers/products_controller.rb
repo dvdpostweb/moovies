@@ -9,6 +9,9 @@ class ProductsController < ApplicationController
     if params[:package] == t('routes.product.params.package.tvod')
       params[:package] = Moovies.packages.invert[2]
     end
+    unless Moovies.packages.include?(params[:package])
+      params[:package] = Moovies.packages.invert[1]
+    end
     unless current_customer
       if params[:kind] == :adult
         @discount_top = Discount.find(Moovies.discount["catalogue_adult_#{I18n.locale}"])
