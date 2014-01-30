@@ -91,7 +91,9 @@ class PromotionsController < ApplicationController
   def get_data
     params[:id] = 'smarttv' if params[:id] == 'radio_contact' ||  params[:id] == 'nostalgie'
     @checked = true if params[:checked]
-    @promo = Promotion.find_by_name(params[:id])
+    id = params[:id].gsub(/[^0-9a-zA-Z]/,'')
+    
+    @promo = Promotion.find_by_name(id)
     if @promo
       @partial = 'canvas'
       @body_class = "canvas#{@promo.canva_id}"
