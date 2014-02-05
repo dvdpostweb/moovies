@@ -27,11 +27,11 @@
   <div class="container clearfix">
     <div id="promo_content">
       <h1 style="color: #212A31;">
-        <%= t2('.title', @promo.name).html_safe %><br/>
-        <strong><%= t2('.title_promo', @promo.name).html_safe %></strong>
+        <%= t2('.title', @promo.params[:key]).html_safe %><br/>
+        <strong><%= t2('.title_promo', @promo.params[:key]).html_safe %></strong>
       </h1>
       <div id="promo_form" class="light">
-        <h2 class="light"><%= t2('.subtitle', @promo.name).html_safe %></h2>
+        <h2 class="light"><%= t2('.subtitle', @promo.params[:key]).html_safe %></h2>
         <% if current_customer %>
           <%= render :partial => 'promotions/show/form_logged' %>          
         <% elsif @prospect %>
@@ -76,7 +76,7 @@
         </table>
       </div>
       <p align="center"><%= image_tag "#{I18n.locale}/info_tel.jpg" %></p>
-      <div id="promo_footer"><%= t2('.conditions', @promo.name).html_safe %></div>
+      <div id="promo_footer"><%= t2('.conditions', @promo.params[:key]).html_safe %></div>
       </div>
     </div>
 </div>

@@ -26,8 +26,8 @@
   </div>
   <div class="container clearfix">
     <div id="promo_content">
-      <h1><%= t2('.title', @promo.name).html_safe %><br/>
-      <span><%= t2('.title_promo', @promo.name).html_safe %></span></h1>
+      <h1><%= t2('.title', @promo.params[:key]).html_safe %><br/>
+      <span><%= t2('.title_promo', @promo.params[:key]).html_safe %></span></h1>
       <div id="promo_form">
       <% if @error == '' %>
         <%= t('.gratz').html_safe %>
@@ -60,7 +60,7 @@
     </div>
   </div>
   <p align="center" class="telfooter"><a href="mailto:info@plush.be" class="f-btn <%= I18n.locale %>">info@plush.be</a></p>
-  <div id="promo_footer"><%= t2('.conditions', @promo.name).html_safe %></div>
+  <div id="promo_footer"><%= t2('.conditions', @promo.params[:key]).html_safe %></div>
 </div>
 </div>
 </div>
