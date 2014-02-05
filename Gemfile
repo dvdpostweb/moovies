@@ -19,7 +19,14 @@ group :development do
   gem 'quiet_assets'
   gem 'thin'
   gem 'spring'
-end 
+end
+gem 'cucumber-rails', :require => false
+group  :development, :test do
+  gem 'factory_girl_rails'
+  gem 'faker'
+  gem 'capybara'
+  gem 'launchy'
+end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

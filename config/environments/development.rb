@@ -14,7 +14,8 @@ Moovies::Application.configure do
   config.action_controller.perform_caching = true
   config.cache_store = :mem_cache_store, 'binga:11211'
   config.i18n_cache_store = ActiveSupport::Cache.lookup_store(:mem_cache_store, 'binga:11211', :namespace => "development")
-
+  config.i18n.enforce_available_locales = false
+  I18n.config.enforce_available_locales = false
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
 

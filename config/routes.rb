@@ -67,7 +67,6 @@ Moovies::Application.routes.draw do
       resource :rating, :only => :create
       resources :reviews, :only => [:new, :create]
       resources :tokens, :only => [:new, :create]
-      match 'step' => 'products#step'
       match 'awards'=> 'products#awards'
       match 'seen' => 'products#seen'
       match 'trailer' => 'products#trailer'
