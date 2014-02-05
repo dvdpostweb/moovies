@@ -61,6 +61,9 @@ Moovies::Application.configure do
   config.cache_store = :mem_cache_store, '192.168.100.204:11211'
   config.i18n.available_locales = [:fr, :nl, :en]
   config.i18n_cache_store = ActiveSupport::Cache.lookup_store(:mem_cache_store, '192.168.100.204:11211', :namespace => "production")
+  config.i18n.enforce_available_locales = false
+  I18n.config.enforce_available_locales = false
+
   config.action_mailer.default_url_options = { 
     :host => "www.plush.be",
     :only_path => false
