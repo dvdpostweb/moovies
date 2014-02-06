@@ -1,4 +1,5 @@
 class ProspectsController < ApplicationController
+  skip_before_filter :verify_authenticity_token, :only => []
   def new
     @prospect = Prospect.new
   end
