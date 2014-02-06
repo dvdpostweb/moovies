@@ -1,7 +1,5 @@
 Moovies::Application.routes.draw do
 
-  get "prospects/create"
-
   concern :productable do
     resources :products, :only => :index
   end
