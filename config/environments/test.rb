@@ -10,7 +10,10 @@ Moovies::Application.configure do
   # Configure static asset server for tests with Cache-Control for performance
   config.serve_static_assets = true
   config.static_cache_control = "public, max-age=3600"
-
+  config.i18n_cache_store = ActiveSupport::Cache.lookup_store(:mem_cache_store, 'binga:11211', :namespace => "test")
+  config.i18n.available_locales = [:fr, :nl, :en]
+  config.i18n.enforce_available_locales = false
+  I18n.config.enforce_available_locales = false
   # Log error messages when you accidentally call methods on nil
   config.whiny_nils = true
 
@@ -39,4 +42,8 @@ Moovies::Application.configure do
 
   # Allow pass debug_assets=true as a query parameter to load pages with unpackaged assets
   config.assets.allow_debugging = true
+  config.action_mailer.default_url_options = {
+        :host => 'localhost:3000',
+        :only_path => false
+  }
 end

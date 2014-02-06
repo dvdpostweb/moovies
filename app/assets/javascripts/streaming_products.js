@@ -28,7 +28,7 @@ $(function() {
     else
     {
       $('#player').html('')
-      $('#presentation').html("<div style='height:389px'><div class='load'><img src='/images/"+loader+"'/></div></div>")
+      $('#presentation').html("<div style='height:389px'><div class='load'><img src='/assets/"+loader+"'/></div></div>")
     }
     $(this).hide()
     $.ajax({

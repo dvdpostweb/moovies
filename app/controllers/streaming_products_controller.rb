@@ -1,9 +1,10 @@
 class StreamingProductsController < ApplicationController
   def show
-    if params[:code]
-      @code = StreamingCode.by_name(params[:code]).available.first
+    if params[:streaming_code]
+      @code = StreamingCode.by_name(params[:streaming_code]).available.first
     end
     if @code.nil? && !current_customer
+      flash[:error] = t('streaming_products.code_expired')
       redirect_to root_localize_path and return
     end
     @body_id = 'streaming'
@@ -243,7 +244,8 @@ class StreamingProductsController < ApplicationController
       notify_country_error(current_customer.to_param, session[:country_id], params[:id], error)
       redirect_to root_localize_path
     else
-      render :partial => 'streaming_products/show/error', :layout => true, :locals => {:error => error}
+      @error = error
+      #render :partial => 'streaming_products/show/error', :locals => {:error => error}
     end
   end
 

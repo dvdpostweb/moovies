@@ -1,6 +1,6 @@
 class Activation < ActiveRecord::Base
-  set_table_name :activation_code
-  set_primary_key :activation_id
+  self.table_name = :activation_code
+  self.primary_key = :activation_id
 
   alias_attribute :name,:activation_code
   alias_attribute :expire_at, :activation_code_validto_date

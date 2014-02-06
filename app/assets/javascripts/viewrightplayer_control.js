@@ -46,9 +46,6 @@ player.onPositionChanged = function() {
 
 return_res = player.init('#player');
 if(return_res != false){
-if (!player.isProvisioned()) {
-	window.location.href = 'http://hls.estpak.ee/vm/order.php?id=' + player.getClientId();
-}
 
 /*var actions = {
 		'#play-nasa-btn': function() {
@@ -141,5 +138,14 @@ $('#player-verimatrix').delegate("#pause-btn", "click", function() {
 })
 $('#player-verimatrix').delegate("#enable-fullscreen-btn", "click", function() {
 	player.enableFullscreen();
+})
+$('#streaming').delegate('#playback-indicator > DIV, #playback-indicator > DIV > DIV',"click", function(e) {
+  var containerWidth = $('#playback-indicator').width(),
+      clickPos = (e.offsetX==undefined)?e.pageX-$('#playback-indicator').offset().left:e.offsetX,
+      percentage = clickPos * 100.0 / containerWidth;
+  if (percentage >= 0 && percentage <=100)
+  {
+  player.setPlaybackPercentage(percentage);
+  }
 })
 })

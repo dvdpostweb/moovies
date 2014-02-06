@@ -1,10 +1,15 @@
 class PromotionsController < ApplicationController
   before_filter :get_data
   def show
+    if @promo && @promo.canva_id == 3
+      @checked = true
+      @checked_partners = false
+    end
   end
 
   def create
     @checked = params[:marketing] == "1" ? true : false
+    @checked_partners = params[:marketing_partners] == "1" ? true : false
     if params[:id] == 'samsung'
       if !params[:code].nil?
         @code_samsung = params[:code]
@@ -23,15 +28,22 @@ class PromotionsController < ApplicationController
       if !/\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/.match(params[:email])
         @error += "#{t('promotions.create.wrong_email')}<br />"
       end
-      if !StreamingCode.by_name(params[:code]).email.available.first
+      if !StreamingCode.by_name(params[:streaming_code]).email.available.first
         @error += t('promotions.create.wrong_code')
       end
       if @error == ''
         options = {
-          "\\$\\$\\$link\\$\\$\\$" => streaming_product_url(:id => 274155, :email => params[:email], :code => params[:code])
+          "\\$\\$\\$link\\$\\$\\$" => streaming_product_url(:id => 1730697, :email => params[:email], :streaming_code => params[:streaming_code])
         }
         view_context.send_message_public(621, options, I18n.locale, params[:email])
-        StreamingCode.by_name(params[:code]).first.update_attribute(:email, params[:email])
+        StreamingCode.by_name(params[:streaming_code]).first.update_attribute(:email, params[:email])
+        marketing = params[:marketing] || 0
+        marketing_partners = params[:marketing_partners] || 0
+        if prospect = Prospect.where(:email => params[:email]).first
+          prospect.update_attributes(:newsletters => marketing, :newsletters_partners => marketing_partners, :locale_id => Moovies.customer_languages[I18n.locale])
+        else
+          Prospect.create(:email => params[:email], :newsletters => marketing, :newsletters_partners => marketing_partners, :locale_id => Moovies.customer_languages[I18n.locale])
+        end
       else
         render :show
       end
@@ -79,7 +91,9 @@ class PromotionsController < ApplicationController
   def get_data
     params[:id] = 'smarttv' if params[:id] == 'radio_contact' ||  params[:id] == 'nostalgie'
     @checked = true if params[:checked]
-    @promo = Promotion.find_by_name(params[:id])
+    id = params[:id].gsub(/[^0-9a-zA-Z-]/,'')
+    
+    @promo = Promotion.find_by_name(id)
     if @promo
       @partial = 'canvas'
       @body_class = "canvas#{@promo.canva_id}"

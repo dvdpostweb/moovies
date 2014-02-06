@@ -32,7 +32,8 @@
     <div class="container clearfix">
       <% if !current_customer && (params[:controller] != 'home' && params[:controller] != 'customers/registrations' && params[:controller] != 'steps' && params[:page_name] != 'abo') and !(params[:controller] == 'promotions' and params[:id] == 'smarttv') %>
       <div id="subscribe-wrap">
-        <%= link_to image_tag("#{I18n.locale}/banner_promo_hp#{@code ? "_#{@code.activation_group_id}" : ''}#{params[:kind] == :adult ? '_adult' : ''}.jpg", :size => '942x188', :alt => t(products_alt_banner)), new_customer_registration_path(:code => get_code(@discount_top.name)) %>
+        
+        <%= link_to image_tag("#{I18n.locale}/banner_promo_hp#{@code ? "_#{@code.activation_group_id}" : ''}#{params[:kind] == :adult ? '_adult' : ''}.jpg", :size => '942x188', :alt => t(products_alt_banner)), @code ? promotion_path(:id => :mobistar2) : new_customer_registration_path(:code => get_code(@discount_top.name)) %>
       </div>
       <% elsif params[:kind] == :adult && current_customer && (params[:controller] != 'home' && params[:controller] != 'customers/registrations' && params[:controller] != 'steps' && params[:page_name] != 'abo') and !(params[:controller] == 'promotions' and params[:id] == 'smarttv') && current_customer.no_adult? %>
       <div id="subscribe-wrap">

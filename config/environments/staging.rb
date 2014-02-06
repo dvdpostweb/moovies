@@ -46,6 +46,8 @@ Moovies::Application.configure do
 
   config.cache_store = :mem_cache_store, '192.168.100.206:11211'
   config.i18n_cache_store = ActiveSupport::Cache.lookup_store(:mem_cache_store, '192.168.100.206:11211', :namespace => "staging")
+  config.i18n.enforce_available_locales = false
+  I18n.config.enforce_available_locales = false
 
   RouteTranslator.config do |config|
     config.force_locale = true
