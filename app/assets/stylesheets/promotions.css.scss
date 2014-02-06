@@ -102,7 +102,7 @@
     padding-left: 43px;
     padding-top: 32px;
     text-align: left;
-    width: 436px;
+    width: 430px;
     font-size:16px;
 }
 
@@ -123,7 +123,7 @@
     width: 400px;
 }
 
-.canvas3 #promo_form p.news {
+.canvas3 #promo_form div.news, .canvas3 #promo_form p.news {
     font-size: 14px;
     margin: 0 0 8px 39px;
 }
@@ -164,11 +164,6 @@ background: url(image_path('en/info_tel.jpg')) no-repeat scroll 0 0 transparent
 
 @media screen and (max-width: 480px) {
   
-  @viewport{
-      zoom: 1.0;
-      width: device-width;
-  }
-
 .canvas3 #wrap {
     background: none repeat scroll 0 0 #FFFFFF;
     box-shadow: 0 0 45px #000000;
@@ -204,7 +199,7 @@ background: url(image_path('en/info_tel.jpg')) no-repeat scroll 0 0 transparent
     height: 39px;
     margin: 15px 0 0 7px;
 }
-.canvas3 #header h2, .canvas2 #header h2 a {
+.canvas3 #header h2{
     background: url("http://www.dvdpost.be/images/promotions_plush/logo_mobistar.jpg") repeat scroll 0 0 transparent;
     height: 60px;
  width: 142px !important;
@@ -885,7 +880,7 @@ color: #212A31;
 #header h2 {
   float: left;
   height: 42px;
-  margin: 24px 0 0 5px;
+  margin: 14px 0 0 5px;
 }
 
 .choice_language h3 {

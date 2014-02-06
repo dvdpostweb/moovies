@@ -26,8 +26,8 @@
   </div>
   <div class="container clearfix">
     <div id="promo_content">
-      <h1><%= t2('.title', @promo.name).html_safe %><br/>
-      <span><%= t2('.title_promo', @promo.name).html_safe %></span></h1>
+      <h1><%= t2('.title', @promo.params[:key]).html_safe %><br/>
+      <span><%= t2('.title_promo', @promo.params[:key]).html_safe %></span></h1>
       <div id="promo_form">
       <% if @error == '' %>
         <%= t('.gratz').html_safe %>
@@ -38,20 +38,20 @@
           <p class="email"><%= label_tag :email, t('.email_label') %>:<br />
             <%= text_field_tag :email, params[:email], :class => 'inputs_promo_code', :size => '40', :tye => 'text' %>
           </p>
-          <p class="promocode"><%= label_tag :code, t('.code_label') %>:<br />
-            <%= text_field_tag(:code, params[:code], :id => 'code3', :size => 40, :class => 'inputs_promo_code') %><br />
+          <p class="promocode"><%= label_tag :streaming_code, t('.code_label') %>:<br />
+            <%= text_field_tag(:streaming_code, params[:streaming_code], :id => 'code3', :size => 40, :class => 'inputs_promo_code') %><br />
           </p>
     
           <div style="clear:both;"></div>
-          <p class="news">
+          <div class="news">
             <%= "<div id='error'>#{@error.html_safe}</div>".html_safe if @error %>
-            <%= check_box_tag 'marketing', 1, @checked, :class => :marketing3, :id => 'mark' %>
+            <%= check_box_tag 'marketing', 1, @checked, :class => :marketing3, :id => 'marketing' %>
             <%= t('.marketing') %>
-          </p>
-          <p class="news">
-            <%= check_box_tag 'marketing_partners', 1, @checked, :class => :marketing3, :id => 'mark' %>
+          </div>
+          <div class="news">
+            <%= check_box_tag 'marketing_partners', 1, @checked_partners, :class => :marketing3, :id => 'marketing' %>
             <%= t('.marketing_partners') %>
-          </p>
+          </div>
           <p>
             <input type="submit" border="0" align="absmiddle" id="submit_id3" class="promo_button" name="sent" value="Regarder le film" />
           </p>
@@ -60,7 +60,7 @@
     </div>
   </div>
   <p align="center" class="telfooter"><a href="mailto:info@plush.be" class="f-btn <%= I18n.locale %>">info@plush.be</a></p>
-  <div id="promo_footer"><%= t2('.conditions', @promo.name).html_safe %></div>
+  <div id="promo_footer"><%= t2('.conditions', @promo.params[:key]).html_safe %></div>
 </div>
 </div>
 </div>

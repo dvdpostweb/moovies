@@ -1,5 +1,5 @@
 class SearchFilter < ActiveRecord::Base
-  set_table_name :filters
+  self.table_name = :filters
 
   serialize :audio
   serialize :subtitles

@@ -3,11 +3,11 @@
   <% if params[:kind] == :normal %>
   <h3 class="ttl infinity menu"><%= t '.unlimited' %></h3>
   <ul class="nav osc" style='display: <%= menu_show(1, params, @product) %>'>
-    <!--<li class="list"><%= link_to t('.svod_hd'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}"), :view_mode => :svod_hd) %></li>-->
     <li class="list"><%= link_to t('.svod_new'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}"), :view_mode => :svod_new) %></li>
     <li class="list"><%= link_to t('.svod_last_added'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}"), :view_mode => :svod_last_added) %></li>
     <li class="list"><%= link_to t('.svod_most_viewed'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}"), :view_mode => :most_viewed) %></li>
     <li class="list"><%= link_to t('.svod_last_chance'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}"), :view_mode => :svod_last_chance) %></li>
+    <li class="list"><%= link_to t('.svod_hd'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}"), :view_mode => :svod_hd) %></li>
     <li class="list"><%= link_to t('.svod_soon'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}"), :view_mode => :svod_soon) %></li>
     <li class="list"><%= link_to t('.svod_categories'), categories_path(:package => Moovies.packages.invert[1]) %></li>
     <li class="list"><%= link_to t('.svod_all'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}")) %></li>
