@@ -1,0 +1,10 @@
+<%= form_for @prospect do |f| %>
+  email <%= f.text_field :email %><br />
+  firstname <%= f.text_field :firstname %><br />
+  lastname <%= f.text_field :lastname %><br />
+  locale_id <%= f.text_field :locale_id %><br />
+  gender <%= f.text_field :gender %><br />
+  birth_at <%= f.text_field :birth_at %><br />
+  zip <%= f.text_field :zip %><br />
+  <%= f.submit :name => nil %>
+<% end %>
