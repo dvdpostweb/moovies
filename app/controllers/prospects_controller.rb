@@ -1,5 +1,5 @@
 class ProspectsController < ApplicationController
-  skip_before_filter :verify_authenticity_token, :only => []
+  skip_before_filter :verify_authenticity_token, :only => [:create]
   def new
     @prospect = Prospect.new
   end
@@ -9,7 +9,7 @@ class ProspectsController < ApplicationController
     if prospect.save
       render :text => "OK"
     else
-      render :text => "KO"
+      render :text => "NOK"
     end
   end
 end
