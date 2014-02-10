@@ -23,7 +23,7 @@ class PromotionsController < ApplicationController
       else
         render :show
       end
-    elsif @promo.canva_id == 3
+    elsif @promo && @promo.canva_id == 3
       @error = ''
       if !/\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/.match(params[:email])
         @error += "#{t('promotions.create.wrong_email')}<br />"
