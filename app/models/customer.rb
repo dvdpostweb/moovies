@@ -88,6 +88,7 @@ class Customer < ActiveRecord::Base
   accepts_nested_attributes_for :address, :allow_destroy => true
 
   has_and_belongs_to_many :seen_products, :class_name => 'Product', :join_table => :products_seen, :uniq => true
+  has_many :products, :through => :vod_wishlists
   def get_code_from_samsung
     if self.samsung
       samsung_code = SamsungCode.available.find_by_code(self.samsung)

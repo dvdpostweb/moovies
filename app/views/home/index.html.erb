@@ -75,7 +75,7 @@
     
       <div class="tab-container">
         <ul>
-          <%= render :partial => 'products/detail', :collection => @new_svod, :locals => {:content => :svod} %>
+          <%= render :partial => 'products/detail', :collection => @new_svod %>
         </ul>
 
 
@@ -90,7 +90,7 @@
       <h2><%= params[:kind] == :adult ? t('.tvod_adult_new').html_safe : t('.tvod_new').html_safe %></h2>
       <div class="tab-container">
         <ul>
-          <%= render :partial => 'products/detail', :collection => @new_tvod, :locals => {:content => :tvod} %>
+          <%= render :partial => 'products/detail', :collection => @new_tvod %>
         </ul>
       </div>
       <div class="clear"></div>

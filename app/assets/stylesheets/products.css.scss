@@ -1243,7 +1243,7 @@ margin: 4px 0 0;
   display: block;
   float: left;
   font-size: 1.10em;
-  padding: 7px 0 4px 10px;
+  padding: 7px 0 4px 15px;
   width: 151px;
 }
 
@@ -1282,7 +1282,26 @@ text-align:center;
 
 
 }
+#filtered .close:hover {
+background-position: -42px -10px;
+}
 
+#filtered .close {
+position: absolute;
+display: inline-block;
+width: 12px;
+height: 12px;
+background: url(image_path('chosen-sprite.png')) -42px 1px no-repeat;
+font-size: 1px;
+margin:0 0 0 -12px;
+cursor: pointer;
+}
+.packages.current
+{
+  font-size:14px;
+  color:red;
+  font-weight:bold;
+}
 
 #carousel_vod
 {
@@ -1637,7 +1656,7 @@ text-align:center;
   background: url(image_path('slided_background_selected.gif')) 0 0 no-repeat;
 }
 #filters li a.ui-slider-handle {
-  background: url(image_path('feche_off.png')) 0 0 no-repeat;
+  background: url(image_path('feche_off.png')) 0 0 no-repeat !important;
   border: 0;
   top: -8px;
   -webkit-border-radius: 0;
@@ -1756,4 +1775,8 @@ text-decoration:underline;
   color: white;
   font-size: 14px;
   font-weight: bold;
+}
+#products_index .content #add
+{
+  text-align:center;
 }

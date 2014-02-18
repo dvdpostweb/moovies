@@ -3,15 +3,21 @@ class ProductsController < ApplicationController
   before_filter :find_product, :except => [:index, :drop_cached]
 
   def index
+    
+    if params[:category_id] && params[:filters].nil? || (params[:filters] && params[:filters][:category_id].nil?)
+      params[:filters] = Hash.new if params[:filters].nil?
+      params[:filters][:category_id] = params[:category_id]
+    end
     if params[:package] == t('routes.product.params.package.unlimited')
       params[:package] = Moovies.packages.invert[1]
     end
     if params[:package] == t('routes.product.params.package.tvod')
       params[:package] = Moovies.packages.invert[2]
     end
-    unless Moovies.packages.include?(params[:package])
-      params[:package] = Moovies.packages.invert[1]
-    end
+    #unless Moovies.packages.include?(params[:package])
+    #  params[:package] = Moovies.packages.invert[1]
+    #end
+    Rails.logger.debug { "@@@#{params[:package]}" }
     unless current_customer
       if params[:kind] == :adult
         @discount_top = Discount.find(Moovies.discount["catalogue_adult_#{I18n.locale}"])
@@ -20,17 +26,19 @@ class ProductsController < ApplicationController
       end
     end
     @body_id = 'products_index'
-    @filter = view_context.get_current_filter({})
     params[:director_id] = params[:old_director_id] if params[:old_director_id]
     params[:actor_id] = params[:old_actor_id] if params[:old_actor_id]
     if params['actor_id']
+      params[:filters] = Hash.new if params[:filters].nil?
       @people = Actor.find(params['actor_id'])
       params['actor_id'] = @people.id
     end
     if params['director_id']
+      params[:filters] = Hash.new if params[:filters].nil?
       @people = Director.find(params['director_id'])
       params['director_id'] = @people.id
     end
+    
     if params[:package] == Moovies.packages.invert[1]
       @meta_title = t('products.index.unlimited.meta_title')
       @meta_description = t('products.index.unlimited.meta_description')
@@ -44,15 +52,44 @@ class ProductsController < ApplicationController
       @meta_title = t('products.index.director.meta_title', :name => @people.name)
       @meta_description = t('products.index.director.meta_description', :name => @people.name)
     end
-    new_params = session[:sexuality] == 0 ? params.merge(:per_page => 15, :country_id => session[:country_id], :hetero => 1) : params.merge(:per_page => 15, :country_id => session[:country_id])
-    @products = Product.filter(@filter, new_params)
+    
+    @vod_wishlist = current_customer.products.collect(&:products_id)
+    @countries = ProductCountry.visible.ordered
+      if params[:filters]
+        new_params = params.merge(:per_page => 25, :country_id => session[:country_id])
+        new_params = new_params.merge(:hetero => 1) if session[:sexuality] == 0
+        @products = Product.filter_online(nil, new_params)
+        @selected_countries = ProductCountry.where(:countries_id => params[:filters][:country_id])
+        @languages = Language.by_language(I18n.locale).find(params[:filters][:audio].reject(&:empty?)).collect(&:name).join(', ') if Product.audio?(params[:filters][:audio])
+        @subtitles = Subtitle.by_language(I18n.locale).find(params[:filters][:subtitles].reject(&:empty?)).collect(&:name).join(', ') if Product.subtitle?(params[:filters][:subtitles])
+      else
+        if params[:package] == Moovies.packages.invert[1]
+          new_params = session[:sexuality] == 0 ? params.merge(:per_page => 25, :country_id => session[:country_id], :hetero => 1, :includes => ["descriptions_#{I18n.locale}"]) : params.merge(:per_page => 25, :country_id => session[:country_id], :includes => ["descriptions_#{I18n.locale}"])
+          new_params = new_params.merge(:view_mode => :svod_new)
+          @new = Product.filter(nil, new_params)
+          new_params = new_params.merge(:view_mode => 'svod_soon')
+          @soon = Product.filter(nil, new_params)
+        else
+          new_params = session[:sexuality] == 0 ? params.merge(:per_page => 25, :country_id => session[:country_id], :hetero => 1, :includes => ["descriptions_#{I18n.locale}"]) : params.merge(:per_page => 25, :country_id => session[:country_id], :includes => ["descriptions_#{I18n.locale}"])
+          new_params = new_params.merge(:view_mode => :tvod_new)
+          @new = Product.filter(nil, new_params)
+          new_params = new_params.merge(:view_mode => 'tvod_soon')
+          @soon = Product.filter(nil, new_params)
+        end
+      end
+    #else
+    #  
+    #  @filter = view_context.get_current_filter({})
+    #  new_params = session[:sexuality] == 0 ? params.merge(:per_page => 15, :country_id => session[:country_id], :hetero => 1) : params.merge(:per_page => 15, :country_id => session[:country_id])
+    #  @products = Product.filter(@filter, new_params)
+    #end
     @target = cookies[:endless] == 'deactive' ?  '_self' : '_blank'
     if params[:endless]
       cookies.permanent[:endless] = params[:endless]
     end
-    @countries = ProductCountry.visible.order
     @tokens = current_customer.get_all_tokens_id(params[:kind]) if current_customer
     @rating_color = params[:kind] == :adult ? :pink : :white
+     Rails.logger.debug { "@@@111#{params[:package]}" }
     if request.xhr?
       render :layout => false
     end

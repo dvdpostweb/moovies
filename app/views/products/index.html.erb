@@ -1,6 +1,29 @@
+<% if params[:filters].nil? %>
+<div id="maincontent" >
+  <div id='filter_layout'>
+  </div>
+  <div id="products">
+    <div id="ca-container" class="ca-container">
+      <div class="ca-wrapper">
+        <%= render :partial => 'products/detail2', :collection => @new %>
+      </div>
+    </div>
+    <div id="ca-container2" class="ca-container">
+      <div class="ca-wrapper">
+        <%= render :partial => 'products/detail2', :collection => @soon %>
+      </div>
+    </div>
+  </div>
+  <div id='pagination_content'>
+  </div>
+</div>
+<%= render :partial => 'products/index/filters_online', :locals => { :countries => @countries} %>  
+<% else %>
 <!--   ==============   MAIN CONTENT   ==============   -->
 <div id="maincontent" >
-	<%= render :partial => 'layouts/filters', :locals => {:filter => @filter }%>
+  <div id='filter_layout'>
+	<%= render :partial => 'layouts/filters_online', :locals => {:selected_countries => @selected_countries, :languages => @languages, :subtitles => @subtitles }%>
+  </div>
   <h1 class="ttl"><%= products_index_title %></h1>
   <%= render :partial => 'products/index/image', :locals => {:people => @people} if @people %>
   
@@ -21,6 +44,8 @@
   
   <!--   ==============   END MOVIES   ==============   -->
 </div>
-<%= render :partial => 'products/left_column', :locals => {:filter => @filter, :countries => @countries} %>
+<%= render :partial => 'products/index/filters_online', :locals => { :countries => @countries} %>  
+
 <div id="toTop"><%= t('.back') %></div>
   <!--   ==============   END MAIN CONTENT   ==============   --> 
+<% end %>
