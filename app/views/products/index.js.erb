@@ -1,6 +1,11 @@
-$('#products').append("<%= escape_javascript(render(:partial => 'products/index/movie_details', :collection => @products, :locals => {:target => @target}, :formats => [:html])) %>");
-<% if (params[:type] == 'directors' && @directors.next_page) || (params[:type] == 'actors' && @actors.next_page) || ((params[:type] == 'products' || params[:type] == nil) && @products.next_page) %>
-  $('#pagination_content').html('<%= escape_javascript(render(:partial => 'products/index/pagination', :locals => {:item => @products})) %>');
-<% else %>
-  $('#pagination_content').remove();
-<% end %>
+  $('#products').html("<%= escape_javascript(render(:partial => 'products/index/movie_details', :collection => @products, :locals => {:target => @target}, :formats => [:html])) %>");
+  $('#filter_layout').html("<%= escape_javascript(render(:partial => 'layouts/filters_online', :locals => {:selected_countries => @selected_countries, :languages => @languages, :subtitles => @subtitles}, :formats => [:html])) %>")
+  <% if (params[:type] == 'directors' && @directors.next_page) || (params[:type] == 'actors' && @actors.next_page) || ((params[:type] == 'products' || params[:type] == nil) && @products.next_page) %>
+     $('#pagination_content').html('<%= escape_javascript(render(:partial => 'products/index/pagination', :locals => {:item => @products})) %>');
+      if ($('#products_index #pagination.active').length) {
+        endscroll()
+      }
+      
+   <% else %>
+     $('#pagination_content').html(' ');
+   <% end %>

@@ -3,8 +3,8 @@ class HomeController < ApplicationController
     @body_id = 'home'
     @meta_title = t("home.index.meta_title", :default => '')
     @meta_description = t("home.index.meta_description", :default => '')
-    @new_svod = HomeProduct.where(:country => Product.country_short_name(session[:country_id]), :kind => "svod#{params[:kind] == :adult ? '_adult' : ''}", :locale_id => Moovies.languages[I18n.locale]).order('id asc').includes(:product)
-    @new_tvod = HomeProduct.where(:country => Product.country_short_name(session[:country_id]), :kind => "tvod#{params[:kind] == :adult ? '_adult' : ''}", :locale_id => Moovies.languages[I18n.locale]).order('id asc').includes(:product)
+    @new_svod = HomeProduct.where(:country => Product.country_short_name(session[:country_id]), :kind => "svod#{params[:kind] == :adult ? '_adult' : ''}", :locale_id => Moovies.languages[I18n.locale]).order('id asc').includes(:product => [Product.get_vod_online_name(session[:country_id]),"descriptions_#{I18n.locale}", :svod_dates])
+    @new_tvod = HomeProduct.where(:country => Product.country_short_name(session[:country_id]), :kind => "tvod#{params[:kind] == :adult ? '_adult' : ''}", :locale_id => Moovies.languages[I18n.locale]).order('id asc').includes(:product => [Product.get_vod_online_name(session[:country_id]),"descriptions_#{I18n.locale}", :svod_dates])
     @discount_bottom = Discount.find(Moovies.discount["hp_bottom_#{I18n.locale}_#{params[:kind]}"])
     @newsletter = PublicNewsletter.new(params[:public_newsletter])
     @svod_id = params[:kind] == :adult ? 4 : 1 
@@ -13,6 +13,7 @@ class HomeController < ApplicationController
       @carousel = Landing.by_language(I18n.locale).not_expirated
       @carousel = params[:kind] == :adult ? @carousel.adult : @carousel.private
       @carousel = @carousel.order_rand.limit(1).first
+      @vod_wishlist = current_customer.products.collect(&:products_id)
     end
   end
 

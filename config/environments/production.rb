@@ -41,6 +41,7 @@ Moovies::Application.configure do
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"
+  config.action_dispatch.ip_spoofing_check = false
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   config.assets.precompile += %w( jquery.ui.datepicker-fr.js jquery.ui.datepicker-nl.js jquery.ui.datepicker-en.js login.css promotions.css promotions.js errors.css md5.js viewrightplayer.js viewrightplayer_control.js)

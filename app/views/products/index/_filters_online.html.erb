@@ -1,0 +1,78 @@
+<div id="online">
+<%= form_tag products_short_path(:package => params[:package], :list_id => params[:list_id], :category_id => params[:category_id], :actor_id => params[:actor_id], :director_id => params[:director_id], :studio_id => params[:studio_id]), method: 'get', id: 'filter_online_form' do %>
+<div id="filters">
+  <h3>
+    <%= t '.refine' %>
+  </h3>
+  <fieldset>
+    <ul id="main">
+      <li class="package open">
+        <%= link_to Moovies.packages.invert[1], products_short_path(:package => Moovies.packages.invert[1], :list_id => params[:list_id], :category_id => params[:category_id], :actor_id => params[:actor_id], :director_id => params[:director_id], :filter => params[:filter], :studio_id => params[:studio_id]), :class => "packages #{params[:package] == Moovies.packages.invert[1] ? 'current' : 0}" %><br />
+          <%= link_to Moovies.packages.invert[2], products_short_path(:package => Moovies.packages.invert[2], :list_id => params[:list_id], :category_id => params[:category_id], :actor_id => params[:actor_id], :director_id => params[:director_id], :filter => params[:filter], :studio_id => params[:studio_id]), :class => "packages #{params[:package] == Moovies.packages.invert[2] ? 'current' : 0}" %>
+      </li>
+      <li class="audience open">
+        <%= t('.public') %>
+        <div id="audience-slider">
+          <%= hidden_field_tag "filters[audience_min]", 0 %>
+          <%= hidden_field_tag "filters[audience_max]", 18 %>
+          <ul id="audience_labels">
+            <% ['ALL', '-10', '-12', '-16', '-18'].collect do |p| %>
+              <li><%= p %></li>
+            <% end %>
+          </ul>
+          
+        </div>
+        <div id="audience-slider-range"></div>
+      </li>
+      <li class="country open">
+        <%= t('.countries') %>
+        <div>
+          <%= collection_select(:filters, :country_id, @countries, :id, :name, {:include_blank => true}, {:multiple => true, :class => 'chosen-select', 'data-placeholder' =>"countries...", 'data-no_results_text' => 'not_found'}) %>
+        </div>
+      </li>
+      <li class="year open">
+        <%= t('.year') %>
+        <% max = Time.now.year + 1 %>
+        <div>
+          <%= t '.from' %>
+          <%= select_year  1910 , :field_name => 'filters[year_min]', :start_year => 1910, :end_year => max %>
+          <%= t '.to' %>
+          <%= select_year max , :field_name => 'filters[year_max]', :start_year => 1910, :end_year => max %>
+        </div>
+      </li>
+      <li class="ratings open">
+        <%= t('.ratings') %>
+        <div id="ratings-slider">
+          <%= hidden_field_tag "filters[rating_min]", 1 %>
+          <%= hidden_field_tag "filters[rating_max]", 5 %>
+          <ul id="ratings_labels">
+            <% ['1', '2', '3', '4', '5'].collect do |rating| %>
+              <li><%= rating %></li>
+            <% end %>
+          </ul>
+        </div>
+        <div id="ratings-slider-range"></div>
+      </li>
+      <li class="audio open">
+        <%= t('.audio') %>
+        <div>
+          <%= collection_select(:filters, :audio, Language.by_language(I18n.locale), :id, :name, {:include_blank => true}, {:multiple => true, :class => 'chosen-select', 'data-placeholder' =>"audio...", 'data-no_results_text' => 'not_found'}) %>
+        </div>
+      </li>
+      <li class="subtitles open">
+        <%= t('.subtitles') %>
+        <div>
+          <%= collection_select(:filters, :subtitles, Subtitle.by_language(I18n.locale), :id, :name, {:include_blank => true}, {:multiple => true, :class => 'chosen-select', 'data-placeholder' =>"subtitles...", 'data-no_results_text' => 'not_found'}) %>
+        </div>
+      </li>
+      <li class="audio open">
+        <%= t('.category') %>
+        <div>
+          <%= collection_select(:filters, :category_id, Category.by_kind(params[:kind]).includes("descriptions_#{I18n.locale}").roots.movies.vod, :id, :name, {:selected => params[:filters] && params[:filters][:category_id] ? params[:filters][:category_id] : nil, :include_blank => true}, {:class => 'chosen-select', 'data-placeholder' =>"category...", 'data-no_results_text' => 'not_found'}) %>
+        </div>
+      </li>
+    </ul>
+  </fieldset>
+</div>
+<% end %>
+</div>

@@ -293,7 +293,7 @@ a#nav7
     width: 180px;
 }
 
-#filters li a {
+.edit_search_filter #filters li a {
 	background: url(image_path('filters-arrows.png')) no-repeat scroll 5px 2px transparent;
 	border-bottom: 1px solid #9f9e98;
 	color: #9f9e98;
@@ -307,10 +307,12 @@ a#nav7
 	text-decoration: none;
 }
 
-#filters li.open a {
+.edit_search_filter #filters li.open a {
 	background: url(image_path('filters-arrows.png')) no-repeat scroll 4px -18px transparent;
 }
-
+.chosen-select {
+width: 188px;
+}
 .li_submit
 /*   ============   RIGHT COLUMN   ============   */
 
