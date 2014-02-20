@@ -7,6 +7,7 @@ en:
       not_found: "not found"
       not_locked: "was not locked"
       taken: "has already been taken, <a href='/en/customers/sign_in'>sign in here</a>"
+      taken_step: "votre email est déjà dans notre base de donnée, <a href='/en/customers/reactive?code=%{code}'>identifiez-vous ici</a>"
       taken2: "has already been taken"
       not_saved:
         one: ""
