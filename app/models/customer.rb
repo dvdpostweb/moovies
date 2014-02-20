@@ -41,7 +41,9 @@ class Customer < ActiveRecord::Base
   
   
   validates_presence_of   :email, :on => :create
-  validates :email, :uniqueness => {:message => :taken, :case_sensitive => false}, :on => :create
+  #validates :email, :uniqueness => {:message => :taken, :case_sensitive => false}, :on => :create
+  validate :email_step, :on => :create
+  validate :email_abo, :on => :create
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create
 
   validates_presence_of     :password, :if => :password_required?
@@ -49,7 +51,7 @@ class Customer < ActiveRecord::Base
   validates_length_of       :password, :within => 8..128, :allow_blank => true, :on => :create
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :newsletter, :newsletter_parnter, :last_name, :first_name, :language, :address_id, :phone, :birthday, :gender, :abo_type_id, :customers_abo_type, :auto_stop, :customers_abo_auto_stop_next_reconduction, :next_abo_type_id, :customers_next_abo_type, :promo_type, :activation_discount_code_type, :promo_id, :nickname, :code, :customers_dob, :address_attributes, :step,:ogone_owner, :ogone_exp_date, :ogone_card_no, :ogone_card_type, :customers_abo_payment_method, :customers_abo, :customers_registration_step, :subscription_expiration_date, :auto_stop, :customers_abo_discount_recurring_to_date, :filter_id, :samsung, :new_email, :customers_locked__for_reconduction
-  attr_writer :code
+  attr_accessor :code
   attr_accessor :samsung
   attr_accessor :new_email
   
@@ -110,8 +112,12 @@ class Customer < ActiveRecord::Base
       end
     end
   end
-    
+  def code
+    @code
+  end
+  
   def code=(code)
+      @code = code
       @discount = Discount.by_name(code).available.first
       @activation = Activation.by_name(code).available.first
       if @discount.nil? && @activation.nil?
@@ -443,6 +449,14 @@ class Customer < ActiveRecord::Base
   end
 
   private
+  def email_step
+    errors.add(:email, I18n.t("errors.messages.taken_step", :code => self.code)) if Customer.where(:email => self.email, :customers_abo => 0).exists?
+  end
+
+  def email_abo
+    errors.add(:email, I18n.t("errors.messages.taken")) if Customer.where(:email => self.email, :customers_abo => 1).exists?
+  end
+
   def convert_created_at
     begin
       self.created_at = Date.civil(self.year.to_i, self.month.to_i, self.day.to_i)

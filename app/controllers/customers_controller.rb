@@ -1,5 +1,5 @@
 class CustomersController < ApplicationController
-  before_filter :authenticate_customer!
+  before_filter :authenticate_customer!, :unless => :reactive?
   def index
     redirect_to customer_path(:id => current_customer)
   end
@@ -58,6 +58,10 @@ class CustomersController < ApplicationController
     end
   end
 
+  def reactive
+    @hide_menu = true
+  end
+
   def newsletter
     @customer = current_customer
     @customer.newsletter!(params[:type], params[:value])
@@ -112,4 +116,8 @@ class CustomersController < ApplicationController
       
     end
   end
+  protected
+   def reactive?
+     params[:action] == 'reactive'
+   end
 end
