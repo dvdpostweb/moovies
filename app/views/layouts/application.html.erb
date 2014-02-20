@@ -30,7 +30,7 @@
     <% end %>
     <%= render(:partial => 'layouts/header') %>
     <div class="container clearfix">
-      <% if !current_customer && (params[:controller] != 'home' && params[:controller] != 'customers/registrations' && params[:controller] != 'steps' && params[:page_name] != 'abo') and !(params[:controller] == 'promotions' and params[:id] == 'smarttv') %>
+      <% if !current_customer && (params[:controller] != 'home' && params[:controller] != 'customers/registrations' && params[:controller] != 'steps' && params[:page_name] != 'abo') and !(params[:controller] == 'promotions' and params[:id] == 'smarttv') and !(params[:controller] == 'customers' and params[:action] == 'reactive') %>
       <div id="subscribe-wrap">
         
         <%= link_to image_tag("#{I18n.locale}/banner_promo_hp#{@code ? "_#{@code.activation_group_id}" : ''}#{params[:kind] == :adult ? '_adult' : ''}.jpg", :size => '942x188', :alt => t(products_alt_banner)), @code ? promotion_path(:id => :mobistar2) : new_customer_registration_path(:code => get_code(@discount_top.name)) %>
