@@ -450,7 +450,7 @@ class Customer < ActiveRecord::Base
 
   private
   def email_step
-    errors.add(:email, I18n.t("errors.messages.taken_step", :code => self.code)) if Customer.where(:email => self.email, :customers_abo => 0).exists?
+    errors.add(:email, I18n.t("errors.messages.taken_step", :code => self.code, :email => self.email)) if Customer.where(:email => self.email, :customers_abo => 0).exists?
   end
 
   def email_abo
