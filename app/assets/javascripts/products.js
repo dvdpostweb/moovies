@@ -323,15 +323,25 @@ $(function() {
       
       return false
     })
-    
   }
   
   function submit_online()
   {
     $('#products').html("<div style='height:22px'><img src='/assets/ajax-loader.gif'/></div>");
     $('#filter_online_form').ajaxSubmit({dataType: 'script'});
-  
+    history.pushState('', 'New Page Title', 'http://localhost:3000/fr/products?'+$('#filter_online_form').serialize());
   }
+  /*if($('#products_index').length)
+  {
+    $('#filter_online_form')[0].reset()
+      console.log($("#audience-slider-range"))
+     $("#audience-slider-range").slider("values", [0,4])
+     $("#ratings-slider-range").slider("values", [0,18])
+     $('#filters_audio').val('audio...').trigger('chosen:updated');
+     $('#filters_subtitles').val('sub...').trigger('chosen:updated');
+     $('#filters_category_id').val('category').trigger('chosen:updated');
+    
+  }*/
   
 });
 

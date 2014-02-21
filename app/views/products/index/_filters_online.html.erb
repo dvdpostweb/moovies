@@ -13,8 +13,9 @@
       <li class="audience open">
         <%= t('.public') %>
         <div id="audience-slider">
+          <% Rails.logger.debug { "@@@#{params[:filters] && params[:filters][:audience_min] ? params[:filters][:audience_min] : 'non'}" }%>
           <%= hidden_field_tag "filters[audience_min]", 0 %>
-          <%= hidden_field_tag "filters[audience_max]", 18 %>
+          <%= hidden_field_tag "filters[audience_max]", params[:filters] && params[:filters][:audience_max] ? params[:filters][:audience_max] :18 %>
           <ul id="audience_labels">
             <% ['ALL', '-10', '-12', '-16', '-18'].collect do |p| %>
               <li><%= p %></li>
