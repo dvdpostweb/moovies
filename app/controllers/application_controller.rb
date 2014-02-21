@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   before_filter :get_wishlist_source, :unless => :flag?
   before_filter :validation_adult, :unless => :flag?
   before_filter :authenticate, :if => :staging?
+  before_filter :set_cache_buster
 
   layout :layout_by_resource
   
@@ -51,6 +52,16 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+  def products?
+    params[:controller] == 'products'
+  end
+
+  def set_cache_buster
+    Rails.logger.debug { "@@@" }
+    response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
+  end
 
   def layout_by_resource
     if devise_controller? and params[:controller] != 'customers/registrations'

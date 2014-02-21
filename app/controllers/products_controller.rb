@@ -17,7 +17,6 @@ class ProductsController < ApplicationController
     #unless Moovies.packages.include?(params[:package])
     #  params[:package] = Moovies.packages.invert[1]
     #end
-    Rails.logger.debug { "@@@#{params[:package]}" }
     unless current_customer
       if params[:kind] == :adult
         @discount_top = Discount.find(Moovies.discount["catalogue_adult_#{I18n.locale}"])
@@ -53,7 +52,7 @@ class ProductsController < ApplicationController
       @meta_description = t('products.index.director.meta_description', :name => @people.name)
     end
     
-    @vod_wishlist = current_customer.products.collect(&:products_id)
+    @vod_wishlist = current_customer.products.collect(&:products_id) if current_customer
     @countries = ProductCountry.visible.ordered
       if params[:filters]
         new_params = params.merge(:per_page => 25, :country_id => session[:country_id])
@@ -89,7 +88,6 @@ class ProductsController < ApplicationController
     end
     @tokens = current_customer.get_all_tokens_id(params[:kind]) if current_customer
     @rating_color = params[:kind] == :adult ? :pink : :white
-     Rails.logger.debug { "@@@111#{params[:package]}" }
     if request.xhr?
       render :layout => false
     end
