@@ -20,32 +20,8 @@
 <%= render :partial => 'products/index/filters_online', :locals => { :countries => @countries} %>  
 <% else %>
 <!--   ==============   MAIN CONTENT   ==============   -->
-<div id="maincontent" >
-  <div id='filter_layout'>
-	<%= render :partial => 'layouts/filters_online', :locals => {:selected_countries => @selected_countries, :languages => @languages, :subtitles => @subtitles }%>
+  <div id="all">
+    <%= render :partial => 'products/index/all' %>
   </div>
-  <h1 class="ttl"><%= products_index_title %></h1>
-  <%= render :partial => 'products/index/image', :locals => {:people => @people} if @people %>
-  
-  <!--   ==============   MOVIES   ==============   -->
-  <% if cookies[:endless] == 'deactive' %>
-    <%= link_to t('.endless_active'), params.merge(:endless => 'active', :kind => (params[:kind] == :normal ? nil : params[:kind])), :class => "endless" %>
-  <% else %>
-    <%= link_to t('.endless_deactive'), params.merge(:endless => 'deactive', :kind => (params[:kind] == :normal ? nil : params[:kind])), :class => "endless" %>
-  <% end %>
-  <div id="products">
-    <%= render :partial => 'products/index/sorting' %>
-    <%= render :partial => 'products/index/movie_details', :collection => @products, :locals => {:target => @target} %>
-  </div>
-  <div id='pagination_content'>
-      <%= render :partial => 'products/index/pagination', :locals => {:item => @products} %>
-  </div>
-  <%= t(products_index_description, :link_abo => info_path(:page_name => t('routes.infos.params.vod')), :link_svod => (params[:kind] == :adult ? products_short_path(:package => Moovies.packages.invert[4]) : products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}"))), :link_tvod => (params[:kind] ==  :adult ? products_short_path(:package => Moovies.packages.invert[5]) : products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[2]}")))).html_safe %>
-  
-  <!--   ==============   END MOVIES   ==============   -->
-</div>
-<%= render :partial => 'products/index/filters_online', :locals => { :countries => @countries} %>  
-
-<div id="toTop"><%= t('.back') %></div>
   <!--   ==============   END MAIN CONTENT   ==============   --> 
 <% end %>

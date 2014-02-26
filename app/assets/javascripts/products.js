@@ -1,4 +1,5 @@
 $(function() {
+  History = window.History, // Note: We are using a capital H instead of a lower h
   $('#ca-container').contentcarousel({
       // speed for the sliding animation
       sliderSpeed     : 500,
@@ -273,7 +274,8 @@ $(function() {
     })
     $('#products_index').delegate("#close_actor", "click", function() {
       $('#products').html("<div style='height:22px'><img src='/assets/ajax-loader.gif'/></div>");
-      $.ajax({url: $(this).attr('url'), dataType: 'script'});
+      $('#filter_online_form').attr('action', $(this).attr('url'))
+      submit_online()
     })
     $('#products_index').delegate("#close_director", "click", function() {
       $('#products').html("<div style='height:22px'><img src='/assets/ajax-loader.gif'/></div>");
@@ -281,8 +283,8 @@ $(function() {
     })
     
     $('#products_index').delegate("#pagination.deactive a", "click", function() {
-      $('#pagination').html("<img src='/assets/loading.gif' />");
-       $.ajax({url: $(this).attr('href'), dataType: 'script'});
+      $('#filter_online_form').attr('action', $(this).attr('url'))
+        submit_online()
        return false
     })
     
@@ -329,7 +331,7 @@ $(function() {
   {
     $('#products').html("<div style='height:22px'><img src='/assets/ajax-loader.gif'/></div>");
     $('#filter_online_form').ajaxSubmit({dataType: 'script'});
-    history.pushState('', 'New Page Title', 'http://localhost:3000/fr/products?'+$('#filter_online_form').serialize());
+    history.pushState('', 'New Page Title', $('#filter_online_form').attr('action')+"?"+$('#filter_online_form').serialize()+"&ajax=1");
   }
   /*if($('#products_index').length)
   {
@@ -342,7 +344,26 @@ $(function() {
      $('#filters_category_id').val('category').trigger('chosen:updated');
     
   }*/
-  
+  History.Adapter.bind(window,'statechange',function(){ // Note: We are using statechange instead of popstate
+  					// Log the State
+  					
+  					var State = History.getState(); // Note: We are using History.getState() instead of event.state
+  					 $('#products').html("<div style='height:22px'><img src='/assets/ajax-loader.gif'/></div>");
+  					console.log(State.url)
+  					
+  					$.ajax({
+              url: State.url,
+              dataType: 'script',
+              type: 'GET',
+              data: {},
+              success: function(data) {
+                
+              },
+              error: function() {
+                
+              }
+  				});
+  })
 });
 
 function goToByScroll(id){
