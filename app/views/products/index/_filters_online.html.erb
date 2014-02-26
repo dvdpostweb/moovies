@@ -13,9 +13,8 @@
       <li class="audience open">
         <%= t('.public') %>
         <div id="audience-slider">
-          <% Rails.logger.debug { "@@@#{params[:filters] && params[:filters][:audience_min] ? params[:filters][:audience_min] : 'non'}" }%>
-          <%= hidden_field_tag "filters[audience_min]", 0 %>
-          <%= hidden_field_tag "filters[audience_max]", params[:filters] && params[:filters][:audience_max] ? params[:filters][:audience_max] :18 %>
+          <%= hidden_field_tag "filters[audience_min]", params[:filters] && params[:filters][:audience_min] ? params[:filters][:audience_min] :  0 %>
+          <%= hidden_field_tag "filters[audience_max]", params[:filters] && params[:filters][:audience_max] ? params[:filters][:audience_max] : 18 %>
           <ul id="audience_labels">
             <% ['ALL', '-10', '-12', '-16', '-18'].collect do |p| %>
               <li><%= p %></li>
@@ -28,24 +27,25 @@
       <li class="country open">
         <%= t('.countries') %>
         <div>
-          <%= collection_select(:filters, :country_id, @countries, :id, :name, {:include_blank => true}, {:multiple => true, :class => 'chosen-select', 'data-placeholder' =>"countries...", 'data-no_results_text' => 'not_found'}) %>
+          <%= collection_select(:filters, :country_id, @countries, :id, :name, {:selected => params[:filters] && params[:filters][:country_id] ? params[:filters][:country_id] : nil, :include_blank => true}, {:multiple => true, :class => 'chosen-select', 'data-placeholder' =>"countries...", 'data-no_results_text' => 'not_found'}) %>
         </div>
       </li>
       <li class="year open">
         <%= t('.year') %>
         <% max = Time.now.year + 1 %>
+        <% max_year = params[:date] && params[:date][:filters] && params[:date][:filters][:year_max] && params[:date][:filters][:year_max].to_i <= max ? params[:date][:filters][:year_max].to_i : max %>
         <div>
           <%= t '.from' %>
-          <%= select_year  1910 , :field_name => 'filters[year_min]', :start_year => 1910, :end_year => max %>
+          <%= select_year (params[:date] && params[:date][:filters] && params[:date][:filters][:year_min] ? params[:date][:filters][:year_min].to_i : 1910 ), :field_name => 'filters[year_min]', :start_year => 1910, :end_year => max %>
           <%= t '.to' %>
-          <%= select_year max , :field_name => 'filters[year_max]', :start_year => 1910, :end_year => max %>
+          <%= select_year max_year , :field_name => 'filters[year_max]', :start_year => 1910, :end_year => max %>
         </div>
       </li>
       <li class="ratings open">
         <%= t('.ratings') %>
         <div id="ratings-slider">
-          <%= hidden_field_tag "filters[rating_min]", 1 %>
-          <%= hidden_field_tag "filters[rating_max]", 5 %>
+          <%= hidden_field_tag "filters[rating_min]", params[:filters] && params[:filters][:rating_min] ? params[:filters][:rating_min] : 1 %>
+          <%= hidden_field_tag "filters[rating_max]", params[:filters] && params[:filters][:rating_max] ? params[:filters][:rating_max] : 5 %>
           <ul id="ratings_labels">
             <% ['1', '2', '3', '4', '5'].collect do |rating| %>
               <li><%= rating %></li>

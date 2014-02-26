@@ -3,6 +3,9 @@ class ProductsController < ApplicationController
   before_filter :find_product, :except => [:index, :drop_cached]
 
   def index
+    Rails.logger.debug { "@@@#{params.inspect}" }
+    Rails.logger.debug { "@@@#{params[:filters].inspect}" }
+    Rails.logger.debug { "@@@#{params[:filters].inspect}" }
     
     if params[:category_id] && params[:filters].nil? || (params[:filters] && params[:filters][:category_id].nil?)
       params[:filters] = Hash.new if params[:filters].nil?
