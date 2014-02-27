@@ -287,3 +287,96 @@ a.confirm:hover
 {
 	margin:0 0 10px 0;
 }
+
+
+/*   ============   for mobile   ============   */
+
+@media screen and (max-width: 480px) {
+.step_1.fr {
+    background: url(image_path('fr/steps_mobile.jpg')) no-repeat scroll -5px 0px transparent;
+}
+.step_2.fr {
+    background: url(image_path('fr/steps_mobile.jpg')) no-repeat scroll -5px -102px transparent;
+}
+.step_3.fr {
+    background: url(image_path('fr/steps_mobile.jpg')) no-repeat scroll -5px -207px transparent;
+}
+.step_1.nl {
+    background: url(image_path('nl/steps_mobile.jpg')) no-repeat scroll -5px 0px transparent;
+}
+.step_2.nl {
+    background: url(image_path('nl/steps_mobile.jpg')) no-repeat scroll -5px -102px transparent;
+}
+.step_3.nl {
+    background: url(image_path('nl/steps_mobile.jpg')) no-repeat scroll -5px -207px transparent;
+}
+.step_1.en {
+    background: url(image_path('en/steps_mobile.jpg')) no-repeat scroll -5px 0px transparent;
+}
+.step_2.en {
+    background: url(image_path('en/steps_mobile.jpg')) no-repeat scroll -5px -102px transparent;
+}
+.step_3.en {
+    background: url(image_path('en/steps_mobile.jpg')) no-repeat scroll -5px -207px transparent;
+}
+
+#step_container {
+    float: left;
+ width: 320px;}
+ 
+#step_container .step_form {
+	  width: 280px;
+}
+
+#top .wrap {
+  
+     width: 320px;
+}
+
+#step_wrap {
+    font-size: 14px;
+	 margin-top: -26px;
+   width: 280px;
+}
+
+#step_container .step_form {
+    padding: 10px;
+	  width: 270px;
+}
+
+.faq-container {
+    float: left;
+      width: 290px;
+	   margin: 0 auto;
+	   margin-top:20px;
+}
+
+#step_wrap .promo_button {
+    background-color: #9ECA3B;
+    background-image: -moz-linear-gradient(center top , #ACD341 0%, #88BD32 100%);
+    background-repeat: repeat-x;
+    border: 1px solid #7EA613;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.8) inset;
+    color: #FFFFFF;
+	height:35px;
+    font-size: 20px;
+    padding: 5px;
+    text-shadow: 0 -1px 0 #72942A;
+    width: 260px;
+}
+
+#step3 #step_wrap .promo_button {
+   
+    width: 222px;
+	
+}
+#step2 #step_wrap .promo_button {
+   
+    width: 240px;
+	
+}
+
+
+
+}

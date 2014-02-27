@@ -114,3 +114,32 @@ ul#output #try_it #engagement {
 {
 	text-align:left;
 }
+
+
+/*   ============   for mobile   ============   */
+
+@media screen and (max-width: 480px) { 
+  
+  
+  ul#output {
+      width: 380px !important;
+  }
+
+  ul#output img {
+    display: none;
+  }
+
+
+
+  ul#output li {
+    background: url(image_path('fr/video-a-la-demande-illimitee_mobile.jpg')) no-repeat scroll 0px 0px transparent !important;
+
+      height: 343px;
+         width: 280px !important;
+  }
+  
+  #try_it {
+      top: 222px;
+  }
+  
+}

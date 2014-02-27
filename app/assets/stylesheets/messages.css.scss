@@ -863,3 +863,19 @@ a.btn_all_message:hover {
 {
   margin: 1em 0;
 }
+
+
+/*   ============   for mobile   ============   */
+
+@media screen and (max-width: 480px) { 
+  
+  
+  #contact-wrap #tabs-content .form {
+     width: 280px;
+  }
+  
+  #contact-wrap {
+      padding: 10px;
+  }
+  
+  }
