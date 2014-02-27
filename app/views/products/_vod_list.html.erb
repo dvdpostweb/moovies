@@ -1,6 +1,9 @@
 <% if current_customer %>
 <div id = "vod_list_<%= product.to_param %>">
-  <% if item = current_customer.vod_wishlists.find_by_imdb_id(product.imdb_id) %>
+  <% if @vod_wishlist && @vod_wishlist.include?( product.id) || @vod_wishlist.nil? %>
+      <% item = current_customer.vod_wishlists.where(imdb_id: product.imdb_id).first %>
+  <% end %>
+  <% if item %>
     <%= form_for(:vod_wishlist, :url => vod_wishlist_path(:id => item.to_param), :html => {:method => :delete}) do |f| %>
       <%= f.hidden_field :product_id, :value => product.to_param %>
       <%= f.hidden_field :submit_id, :value => "vod_list_#{product.to_param}" %>

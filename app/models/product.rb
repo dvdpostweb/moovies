@@ -46,6 +46,7 @@ class Product < ActiveRecord::Base
   has_many :tokens_trailers, :foreign_key => :imdb_id, :primary_key => :imdb_id
   has_many :svod_dates, :foreign_key => :imdb_id, :primary_key => :imdb_id
   has_many :svod_dates_online, :class_name => 'SvodDate', :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "start_on <= date(now()) and end_on >= date(now())"
+  has_many :vod_wishlists, :primary_key => :imdb_id, :foreign_key => :imdb_id
   
   #has_many :recommendations
   has_many :recommendations_products, :through => :recommendations, :source => :product
@@ -71,6 +72,7 @@ class Product < ActiveRecord::Base
   sphinx_scope(:hetero)                   {{:without =>       {:category_id => [76, 72]}}}
   sphinx_scope(:gay)                      {{:with =>          {:category_id => [76, 72]}}}
   sphinx_scope(:by_country)               {|country|          {:with =>       {:country_id => country.to_param}}}
+  sphinx_scope(:by_countries_id)          {|countries_id|     {:with =>       {:country_id => countries_id}}}
   sphinx_scope(:by_director)              {|director|         {:with =>       {:director_id => director.to_param}}}
   sphinx_scope(:by_studio)                {|studio|           {:with =>       {:studio_id => studio.to_param}}}
   sphinx_scope(:by_streaming_studio)      {|studio|           {:with =>       {:streaming_studio_id => studio.to_param}}}
@@ -114,8 +116,33 @@ class Product < ActiveRecord::Base
      
      sort
   end
-  
-  def self.filter(filter, options={}, exact=nil)
+  def self.filter_online(filters, options={}, exact=nil)
+    products = Product.by_kind(options[:kind])
+    products = products.exclude_products_id([exact.collect(&:products_id)]) if exact
+    products = products.by_actor(options[:actor_id]) if options[:actor_id]
+    #products = products.by_category(options[:category_id]) if options[:category_id]
+    products = products.hetero if options[:hetero] && (options[:category_id] && (options[:category_id].to_i != 76 && options[:category_id].to_i != 72) )
+    products = products.by_director(options[:director_id]) if options[:director_id]
+    products = products.by_imdb_id(options[:imdb_id]) if options[:imdb_id]
+    products = options[:kind] == :normal ? products.by_streaming_studio(options[:studio_id]) : products.by_studio(options[:studio_id]) if options[:studio_id]
+    if options[:filters]
+      products = products.by_audience(options[:filters][:audience_min], options[:filters][:audience_max]) if Product.audience?(options[:filters][:audience_min], options[:filters][:audience_max]) && options[:kind] == :normal
+      products = products.by_countries_id(options[:filters][:country_id].reject(&:empty?)) if Product.countries?(options[:filters][:country_id])
+      products = products.by_ratings(options[:filters][:rating_min].to_f, options[:filters][:rating_max].to_f) if Product.rating?(options[:filters][:rating_min], options[:filters][:rating_max])
+      products = products.by_period(options[:date][:filters][:year_min], options[:date][:filters][:year_max]) if options[:date] && Product.year?(options[:date][:filters][:year_min], options[:date][:filters][:year_max])
+      products = products.with_languages(audio = options[:filters][:audio].reject(&:empty?) ) if Product.audio?(options[:filters][:audio])
+      products = products.with_subtitles(options[:filters][:subtitles].reject(&:empty?)) if Product.subtitle?(options[:filters][:subtitles])
+      products = products.by_package(Moovies.packages[options[:package]]) if options[:package] && (options[:view_mode] != 'svod_soon' && options[:view_mode] != 'tvod_soon')
+      products = products.by_category(options[:filters][:category_id]) if !options[:filters][:category_id].nil? && !options[:filters][:category_id].blank?
+    end
+    products = self.get_view_mode(products, options) if options[:view_mode]
+    sort = get_sort(options)
+    products = products.order(sort, :extended) if sort != ''
+    products = search_clean(products, options[:search], {:page => options[:page], :per_page => options[:per_page], :limit => options[:limit], :country_id => options[:country_id], :includes => options[:includes]})
+    
+    products
+  end
+  def self.filter(filters, options={}, exact=nil)
     if options[:package].nil? && options[:controller] != 'search' && options[:concerns] != :productable
       id = options[:kind] == :normal ? 1 : 4
       options[:package] = Moovies.packages.invert[id]
@@ -128,17 +155,19 @@ class Product < ActiveRecord::Base
     products = products.by_director(options[:director_id]) if options[:director_id]
     products = products.by_imdb_id(options[:imdb_id]) if options[:imdb_id]
     products = options[:kind] == :normal ? products.by_streaming_studio(options[:studio_id]) : products.by_studio(options[:studio_id]) if options[:studio_id]
-    products = products.by_audience(filter.audience_min, filter.audience_max) if filter.audience? && options[:kind] == :normal
-    products = products.by_country(filter.country_id) if filter.country_id?
-    products = products.by_ratings(filter.rating_min.to_f, filter.rating_max.to_f) if filter.rating?
-    products = products.by_period(filter.year_min, filter.year_max) if filter.year?
-    products = products.with_languages(options[:audio] ? options[:audio] : filter.audio) if filter.audio?
-    products = products.with_subtitles(options[:subtitles]? options[:subtitles] : filter.subtitles) if filter.subtitles?
+    if !filters.nil?  
+      products = products.by_audience(filters.audience_min, filters.audience_max) if filters.audience? && options[:kind] == :normal
+      products = products.by_country(filters.country_id) if filters.country_id?
+      products = products.by_ratings(filters.rating_min.to_f, filters.rating_max.to_f) if filters.rating?
+      products = products.by_period(filters.year_min, filters.year_max) if filters.year?
+      products = products.with_languages(options[:audio] ? options[:audio] : filters.audio) if filters.audio?
+      products = products.with_subtitles(options[:subtitles]? options[:subtitles] : filters.subtitles) if filters.subtitles?
+    end
     products = products.by_package(Moovies.packages[options[:package]]) if options[:package] && (options[:view_mode] != 'svod_soon' && options[:view_mode] != 'tvod_soon')
     products = self.get_view_mode(products, options) if options[:view_mode]
     sort = get_sort(options)
     products = products.order(sort, :extended) if sort != ''
-    products = search_clean(products, options[:search], {:page => options[:page], :per_page => options[:per_page], :limit => options[:limit], :country_id => options[:country_id]})
+    products = search_clean(products, options[:search], {:page => options[:page], :per_page => options[:per_page], :limit => options[:limit], :country_id => options[:country_id], :includes => options[:includes]})
     
     products
   end
@@ -207,7 +236,30 @@ class Product < ActiveRecord::Base
       else
         descriptions_fr.first
       end
-        
+  end
+
+  def self.year?(year_min, year_max)
+    !(year_min.nil? && year_max.nil?) && !((year_min.to_i == 0 || year_min.to_i == 1910) && year_max.to_i >= Time.now.year)
+  end
+
+  def self.audience?(audience_min, audience_max)
+    !(audience_min.nil? && audience_max.nil?) && !(audience_min.to_i == 0 && audience_max.to_i == 18)
+  end
+
+  def self.rating?(rating_min, rating_max)
+    !(rating_min.nil? && rating_max.nil?) && !(rating_min.to_i == 1 && rating_max.to_i == 5)
+  end
+
+  def self.countries?(countries_id)
+    countries_id.reject(&:empty?).size > 0 if countries_id
+  end
+
+  def self.audio?(audios)
+    audios.reject(&:empty?).size > 0 if audios
+  end
+
+  def self.subtitle?(subtitles)
+    subtitles.reject(&:empty?).size > 0 if subtitles
   end
 
   def to_param
@@ -215,7 +267,7 @@ class Product < ActiveRecord::Base
   end
 
   def public_name
-    desc = descriptions.by_language(I18n.locale).first
+    desc = description
     desc && !desc.cached_name.nil? ? "#{id}-#{desc.cached_name}" : id
   end
 
@@ -332,6 +384,7 @@ class Product < ActiveRecord::Base
     page = options[:page] || 1
     limit = options[:limit] ? options[:limit].to_i : "1000"
     per_page = options[:per_page] || self.per_page
+
     name = 
     case options[:country_id] 
       when 131 
@@ -341,7 +394,8 @@ class Product < ActiveRecord::Base
       else 
         'be'
     end
-    products.search(search, :max_matches => limit, :per_page => per_page, :page => page, :indices => ["product_#{name}_core"], :sql => {:include => ["vod_online_#{name}", :director, :actors, :public, :streaming_trailers, :tokens_trailers, "descriptions_#{I18n.locale}", :svod_dates_online]})
+    options[:includes] = ["vod_online_#{name}", :director, :actors, :public, :streaming_trailers, :tokens_trailers, "descriptions_#{I18n.locale}", :svod_dates_online] if options[:includes].nil?
+    products.search(search, :max_matches => limit, :per_page => per_page, :page => page, :indices => ["product_#{name}_core"], :sql => {:include => options[:includes]})
   end
 
   def self.replace_specials(str)
@@ -425,6 +479,18 @@ class Product < ActiveRecord::Base
          vod_online_be
     end
   end
+  
+  def self.get_vod_online_name(country_id)
+    case country_id
+       when 131
+         'vod_online_lu'
+       when 161
+         'vod_online_nl'
+       else
+         'vod_online_be'
+    end
+  end
+  
   def get_vod(country_id)
     case country_id
        when 131

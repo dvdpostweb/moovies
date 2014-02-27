@@ -4,6 +4,9 @@ class Category < ActiveRecord::Base
 
   belongs_to :parent, :class_name => 'Category', :foreign_key => :parent_id
   has_many :descriptions, :class_name => 'CategoryDescription', :foreign_key => :categories_id
+  has_many :descriptions_fr, :class_name => 'CategoryDescription', :foreign_key => :categories_id, :conditions => {:language_id => 1}
+  has_many :descriptions_nl, :class_name => 'CategoryDescription', :foreign_key => :categories_id, :conditions => {:language_id => 1}
+  has_many :descriptions_en, :class_name => 'CategoryDescription', :foreign_key => :categories_id, :conditions => {:language_id => 1}
   has_and_belongs_to_many :products, :join_table => :products_to_categories, :foreign_key => :categories_id, :association_foreign_key => :products_id
   has_many :children, :class_name => 'Category', :foreign_key => :parent_id
 
@@ -28,9 +31,20 @@ class Category < ActiveRecord::Base
   sphinx_scope(:by_first_fr)      {|letter|           {:with =>       {:first_fr_int => Zlib::crc32(letter)}}}
   
   sphinx_scope(:order)                    {|order, sort_mode| {:order => order, :sort_mode => sort_mode}}
-  
+
+  def description
+    case I18n.locale
+      when :nl
+        descriptions_nl.first
+      when :en
+        descriptions_en.first
+      else
+        descriptions_fr.first
+      end
+  end
+
   def name
-    descriptions.by_language(I18n.locale).first.name
+    description.name
   end
 
   def root?
