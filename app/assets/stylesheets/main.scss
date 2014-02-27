@@ -427,6 +427,23 @@ a#nav7
 	width: 700px;
 }
 
+.telfooter a.fr {
+    background: url(image_path('fr/info_tel.jpg')) no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+.telfooter a {
+
+margin-top:10px;
+    height: 75px;
+    margin: 0 auto;
+    width: 410px;
+}
+.telfooter {
+  padding-top:20px;
+    padding-bottom:20px;
+}
+
+
+
 /*   ============   FOOTER   ============   */
 
 #footer{
@@ -916,3 +933,94 @@ margin-top: 10px;
 {
   line-height: 32px;
 }
+
+/*   ============   for mobile   ============   */
+
+@media screen and (max-width: 480px) { 
+
+
+#wrap {
+    box-shadow: 0 0 45px #000000;
+    margin: 0 auto 100px;
+    text-align: left;
+ width: 320px;
+}
+
+#header {
+    height: 92px;
+}
+
+#nav {
+    float: left;
+    margin-top: 35px;
+     width: 320px;
+}
+
+
+#lang {
+    display: block;
+    height: 24px;
+    margin: 0 auto;
+    padding-top: 16px;
+    text-align: right;
+  width: 320px;
+}
+
+
+div.notice {
+    font-size: 14px;
+    text-align: center;
+	  margin: 0 auto;
+    width: 260px;
+}
+
+
+.watch {
+    font-size: 17px;
+    width: 130px;
+       margin-top: 5px;
+}
+
+#add {
+    font-size: 17px;
+    width: 130px;
+}
+.alacarte {
+     margin-top: 5px;
+    font-size: 13px;
+    width: 102px;
+}
+
+
+#subscribe-wrap {
+ 
+     width: 320px;
+}
+
+
+#footer {
+     width: 480px;
+    padding: 35px 0 40px;
+ 
+}
+#footer .wrap {
+    width: 320px;
+}
+
+.telfooter a.fr {
+    background: url(image_path('fr/info_tel_mobile.jpg')) no-repeat scroll 0 0 rgba(0, 0, 0, 0)!important ;
+    height: 139px ;
+    margin: 0 auto;
+     width: 280px;
+}
+
+#footer h4 {
+    margin-top: 17px;
+}
+
+
+
+
+ }
+
+
