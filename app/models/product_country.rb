@@ -7,7 +7,7 @@ class ProductCountry < ActiveRecord::Base
   has_many :products, :foreign_key => :products_countries_id
 
   scope :visible, where(:inprod => 1)
-  scope :order, :order => 'countries_name asc'
+  scope :ordered, :order => 'countries_name asc'
 
   def name
     self[I18n.locale]

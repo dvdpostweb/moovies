@@ -33,5 +33,7 @@ end
 every 1.day, :at => '11:55 am' do  
   runner "Product.get_product_home_adult"  
 end
-
+every :reboot do  
+  rake "ts:start"  
+end
 # Learn more: http://github.com/javan/whenever

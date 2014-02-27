@@ -1,5 +1,7 @@
 Moovies::Application.routes.draw do
 
+  get "prospects/create"
+
   concern :productable do
     resources :products, :only => :index
   end
@@ -7,6 +9,7 @@ Moovies::Application.routes.draw do
   root :to => 'home#index'
   resource :ogone, :only => [:create]
   match 'flag' => 'home#flag'
+  resources :prospects, :only => [:create, :new]
   scope '(:kind)', :kind => /normal|adult/ do
     localized do
       devise_for :customers, :controllers => { :registrations => "customers/registrations", :confirmations => "customers/confirmations", :sessions => "customers/sessions" }
