@@ -135,9 +135,10 @@ class Product < ActiveRecord::Base
       products = products.by_package(Moovies.packages[options[:package]]) if options[:package] && (options[:view_mode] != 'svod_soon' && options[:view_mode] != 'tvod_soon')
       products = products.by_category(options[:filters][:category_id]) if !options[:filters][:category_id].nil? && !options[:filters][:category_id].blank?
     end
-    products = self.get_view_mode(products, options) if options[:view_mode]
+    products = self.get_view_mode(products, options[:view_mode]) if options[:view_mode]
     sort = get_sort(options)
     products = products.order(sort, :extended) if sort != ''
+    Rails.logger.debug { "@@@#{options[:includes]}" }
     products = search_clean(products, options[:search], {:page => options[:page], :per_page => options[:per_page], :limit => options[:limit], :country_id => options[:country_id], :includes => options[:includes]})
     
     products
@@ -164,7 +165,7 @@ class Product < ActiveRecord::Base
       products = products.with_subtitles(options[:subtitles]? options[:subtitles] : filters.subtitles) if filters.subtitles?
     end
     products = products.by_package(Moovies.packages[options[:package]]) if options[:package] && (options[:view_mode] != 'svod_soon' && options[:view_mode] != 'tvod_soon')
-    products = self.get_view_mode(products, options) if options[:view_mode]
+    products = self.get_view_mode(products, options[:view_mode]) if options[:view_mode]
     sort = get_sort(options)
     products = products.order(sort, :extended) if sort != ''
     products = search_clean(products, options[:search], {:page => options[:page], :per_page => options[:per_page], :limit => options[:limit], :country_id => options[:country_id], :includes => options[:includes]})
@@ -501,8 +502,8 @@ class Product < ActiveRecord::Base
          streaming_products_be
     end
   end
-  def self.get_view_mode(products, options)
-    case options[:view_mode].to_sym
+  def self.get_view_mode(products, view_mode)
+    case view_mode.to_sym
     when :svod_hd
         products.hd
     when :tvod_hd
@@ -525,6 +526,10 @@ class Product < ActiveRecord::Base
       products.tvod_last_added
     when :tvod_last_chance
       products.tvod_last_chance
+    when :tvod_most_viewed
+      products.most_viewed
+    when :svod_most_viewed
+      products.most_viewed
     when :most_viewed
       products.most_viewed
     else
@@ -558,16 +563,16 @@ class Product < ActiveRecord::Base
         "special_order asc"
       elsif options[:search] && !options[:search].blank?
         ''
-      elsif options[:view_mode] && options[:view_mode] == 'svod_soon'
-        'svod_start DESC, streaming_available_at_order DESC, rating DESC'
-      elsif options[:view_mode] && options[:view_mode] == 'svod_new'
-        'year DESC, svod_start DESC, streaming_available_at_order DESC, rating DESC'
       elsif options[:view_mode] && options[:view_mode] == 'svod_last_added'
         'svod_start DESC, streaming_available_at_order DESC, rating DESC'
       elsif options[:view_mode] && options[:view_mode] == 'svod_last_chance'
         'svod_end ASC, streaming_available_at_order DESC, rating DESC'
+      elsif options[:view_mode] && options[:view_mode] == 'svod_soon'
+        'svod_start DESC, streaming_available_at_order DESC, rating DESC'
       elsif options[:view_mode] && options[:view_mode] == 'tvod_soon'
         'tvod_start ASC, year DESC, rating DESC'
+      elsif options[:view_mode] && options[:view_mode] == 'svod_new'
+        'year DESC, svod_start DESC, streaming_available_at_order DESC, rating DESC'
       elsif options[:view_mode] && options[:view_mode] == 'tvod_new'
         'year DESC, tvod_start DESC, streaming_available_at_order DESC, rating DESC'
       elsif options[:view_mode] && options[:view_mode] == 'tvod_last_added'
@@ -575,6 +580,10 @@ class Product < ActiveRecord::Base
       elsif options[:view_mode] && options[:view_mode] == 'tvod_last_chance'
         'tvod_end ASC, year DESC, rating DESC'
       elsif options[:view_mode] && options[:view_mode] == 'most_viewed'
+        'count_tokens DESC, year DESC, rating DESC'
+      elsif options[:view_mode] && options[:view_mode] == 'tvod_most_viewed'
+        'count_tokens DESC, year DESC, rating DESC'
+      elsif options[:view_mode] && options[:view_mode] == 'svod_most_viewed'
         'count_tokens DESC, year DESC, rating DESC'
       else
         "count_tokens DESC"

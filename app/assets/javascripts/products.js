@@ -257,6 +257,13 @@ $(function() {
       $("#date_filters_year_max").val($("#date_filters_year_min option:last").val());
       submit_online()
     });
+    $('#products_index').delegate(".links", "change", function(){
+      submit_online()
+    })
+    /*$('#products_index').delegate(".links", "click", function() {
+      $('#filters_view_mode').val($(this).attr('data'))
+      submit_online()
+    })*/
     $('#products_index').delegate("#close_ratings", "click", function() {
       $("#ratings-slider-range").slider("values", [0,18])
     })
@@ -273,19 +280,21 @@ $(function() {
       submit_online()
     })
     $('#products_index').delegate("#close_actor", "click", function() {
-      $('#products').html("<div style='height:22px'><img src='/assets/ajax-loader.gif'/></div>");
       $('#filter_online_form').attr('action', $(this).attr('url'))
       submit_online()
     })
     $('#products_index').delegate("#close_director", "click", function() {
-      $('#products').html("<div style='height:22px'><img src='/assets/ajax-loader.gif'/></div>");
-      $.ajax({url: $(this).attr('url'), dataType: 'script'});
+      $('#filter_online_form').attr('action', $(this).attr('url'))
+      submit_online()
+    })
+    $('#products_index').delegate("#close_view_mode", "click", function() {
+      $('.links').prop('checked', false);
+      submit_online()
     })
     
     $('#products_index').delegate("#pagination.deactive a", "click", function() {
-      $('#filter_online_form').attr('action', $(this).attr('url'))
-        submit_online()
-       return false
+      ajax($(this).attr('href'))
+      return false
     })
     
      
@@ -326,7 +335,12 @@ $(function() {
       return false
     })
   }
-  
+  function ajax(path)
+  {
+    $('#products').html("<div style='height:22px'><img src='/assets/ajax-loader.gif'/></div>");
+    $.ajax({url: path, dataType: 'script'});
+    history.pushState('', 'New Page Title', path);
+  }
   function submit_online()
   {
     $('#products').html("<div style='height:22px'><img src='/assets/ajax-loader.gif'/></div>");

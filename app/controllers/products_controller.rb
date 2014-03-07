@@ -3,10 +3,6 @@ class ProductsController < ApplicationController
   before_filter :find_product, :except => [:index, :drop_cached]
 
   def index
-    Rails.logger.debug { "@@@#{params.inspect}" }
-    Rails.logger.debug { "@@@#{params[:filters].inspect}" }
-    Rails.logger.debug { "@@@#{params[:filters].inspect}" }
-    
     if params[:category_id] && params[:filters].nil? || (params[:filters] && params[:filters][:category_id].nil?)
       params[:filters] = Hash.new if params[:filters].nil?
       params[:filters][:category_id] = params[:category_id]
@@ -16,6 +12,9 @@ class ProductsController < ApplicationController
     end
     if params[:package] == t('routes.product.params.package.tvod')
       params[:package] = Moovies.packages.invert[2]
+    end
+    if params[:filters] && params[:filters][:view_mode]
+      params[:view_mode] = params[:package] == Moovies.packages.invert[2] || params[:package] == Moovies.packages.invert[4] ? "tvod_#{params[:filters][:view_mode]}" : "svod_#{params[:filters][:view_mode]}"
     end
     #unless Moovies.packages.include?(params[:package])
     #  params[:package] = Moovies.packages.invert[1]
@@ -58,7 +57,7 @@ class ProductsController < ApplicationController
     @vod_wishlist = current_customer.products.collect(&:products_id) if current_customer
     @countries = ProductCountry.visible.ordered
       if params[:filters]
-        new_params = params.merge(:per_page => 25, :country_id => session[:country_id])
+        new_params = params.merge(:per_page => 25, :country_id => session[:country_id], :includes => :vod_online_be)
         new_params = new_params.merge(:hetero => 1) if session[:sexuality] == 0
         @products = Product.filter_online(nil, new_params)
         @selected_countries = ProductCountry.where(:countries_id => params[:filters][:country_id])
