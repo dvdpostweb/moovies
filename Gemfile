@@ -70,3 +70,4 @@ gem 'hpricot', '~> 0.8.6'
 gem "browser", '~> 0.2.0'
 gem 'route_translator', :git => 'git://github.com/NielsKSchjoedt/route_translator.git'
 gem 'chosen-rails'
+gem "hash_to_hidden_fields"

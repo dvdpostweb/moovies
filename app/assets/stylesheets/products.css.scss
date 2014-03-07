@@ -1,4 +1,4 @@
-#products_index  #maincontent {
+#products_index  #all {
   float: right;
 }
 
@@ -907,6 +907,11 @@ margin: 4px 0;
 .movie-wrap {
   overflow: hidden;
 }
+.movie-wrap-jacket
+{
+  float:left;
+  padding:5px;
+}
 .movie-ttl {
   overflow: hidden;
   line-height:34px;
@@ -1705,8 +1710,6 @@ ul#ratings_labels li:last-child {
 #filters li label {
   color: #5c6377;
   cursor: pointer;
-  display: block;
-  padding: 0 0 0 12px;
 }
 
 #filters li label:hover {
@@ -1779,4 +1782,8 @@ text-decoration:underline;
 #products_index .content #add
 {
   text-align:center;
+}
+#pagination_content
+{
+  clear:both;
 }
