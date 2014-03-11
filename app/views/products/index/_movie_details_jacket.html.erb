@@ -5,7 +5,7 @@
 <% path = product_path(:id => product.to_param, :source => @source, :response_id => @response_id) %>
 <div class="movie-wrap-jacket">
     <div class="thumb-wrap">
-      <%= "<span class='hd'></span>".html_safe if product.hd?(session[:hd]) %>
+      <%= "<span class='hd'></span>".html_safe if product.hd?(session[:country_id]) %>
       <%= link_to path, :target => target, :class => :cover, :alt => product_title do %>
         <%= product_image_tag product_image, :width => 125 %>
       <% end %>

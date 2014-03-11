@@ -57,7 +57,7 @@ class ProductsController < ApplicationController
     @vod_wishlist = current_customer.products.collect(&:products_id) if current_customer
     @countries = ProductCountry.visible.ordered
       if params[:filters]
-        new_params = params.merge(:per_page => 25, :country_id => session[:country_id], :includes => :vod_online_be)
+        new_params = params.merge(:per_page => 25, :country_id => session[:country_id], :includes => [ "descriptions_#{I18n.locale}"])
         new_params = new_params.merge(:hetero => 1) if session[:sexuality] == 0
         @products = Product.filter_online(nil, new_params)
         @selected_countries = ProductCountry.where(:countries_id => params[:filters][:country_id])
@@ -87,6 +87,9 @@ class ProductsController < ApplicationController
     @target = cookies[:endless] == 'deactive' ?  '_self' : '_blank'
     if params[:endless]
       cookies.permanent[:endless] = params[:endless]
+    end
+    if params[:display]
+      cookies.permanent[:display] = params[:display]
     end
     @tokens = current_customer.get_all_tokens_id(params[:kind]) if current_customer
     @rating_color = params[:kind] == :adult ? :pink : :white

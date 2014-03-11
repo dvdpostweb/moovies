@@ -47,7 +47,7 @@ test:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: moovies_test
+  database: plush_test
   pool: 5
   username: root
   password: matrix

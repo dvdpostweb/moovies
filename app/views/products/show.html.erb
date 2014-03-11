@@ -19,7 +19,7 @@
     </div><!-- .ttl-wrap -->
     <div id="film-info">
       <div id="film-img-wrap">
-        <%= "<span class='hd'></span>".html_safe if @product.hd?(session[:hd]) %>
+        <%= "<span class='hd'></span>".html_safe if @product.hd?(session[:country_id]) %>
         <%= product_image_tag @product_image, :width => 160, :alt => "#{@product_title} (#{@product.year})" %>
         <%= content_tag(:span, '', :class => 'new') if @product.is_new? %>
         <!--<span class="hd"></span>-->

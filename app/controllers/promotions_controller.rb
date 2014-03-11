@@ -23,7 +23,7 @@ class PromotionsController < ApplicationController
       else
         render :show
       end
-    elsif @promo.canva_id == 3
+    elsif @promo && @promo.canva_id == 3
       @error = ''
       if !/\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/.match(params[:email])
         @error += "#{t('promotions.create.wrong_email')}<br />"
@@ -71,6 +71,7 @@ class PromotionsController < ApplicationController
               customer.code = code
               customer.save(:validate => false)
               customer.abo_history(35, customer.abo_type_id)
+              DiscountUse.create(:discount_code_id => @discount.id, :customer_id => customer.to_param, :discount_use_date => Time.now.localtime) if @discount
               redirect_to step_path(:id => 'step2')
             else
               flash[:alert] = t('session.error_already_customer')

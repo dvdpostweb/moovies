@@ -87,7 +87,7 @@
     font-size: 44px;
     line-height: 49px;
     padding-left: 60px;
-    padding-top: 119px;
+   padding-top: 53px;
     text-align: left;
 }
 .canvas3 #promo_content h1 span {
@@ -107,11 +107,23 @@
 }
 
 .canvas3 #promo_content #promo_form .promo_button, .canvas3 #area_promo .promo_button {
-    font-size: 26px;
+    font-size: 30px;
     margin: 6px 0 24px 43px;
-    padding: 5px;
-    width: 200px;
+    padding: 10px;
+    width: 314px;
+    background: #f8b500; /* Old browsers */
+    background: -moz-linear-gradient(top,  #f8b500 1%, #ef8b00 99%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#f8b500), color-stop(99%,#ef8b00)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #f8b500 1%,#ef8b00 99%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #f8b500 1%,#ef8b00 99%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #f8b500 1%,#ef8b00 99%); /* IE10+ */
+    background: linear-gradient(to bottom,  #f8b500 1%,#ef8b00 99%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8b500', endColorstr='#ef8b00',GradientType=0 ); /* IE6-9 */
+  
+     border: 1px solid #ffb503;
+     
 }
+
 
 .canvas3 #promo_content .step1 {
     font-size: 23px;
