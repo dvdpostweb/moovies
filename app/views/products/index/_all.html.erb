@@ -14,7 +14,7 @@
 <% end %>
 <div id="products">
   <%= render :partial => 'products/index/sorting' %>
-  <%= render :partial => 'products/index/movie_details', :collection => @products, :locals => {:target => @target} %>
+  <%= render :partial => 'products/index/movie_details_jacket', :collection => @products, :locals => {:target => @target} %>
 </div>
 <div id='pagination_content'>
     <%= render :partial => 'products/index/pagination', :locals => {:item => @products} %>
@@ -23,6 +23,3 @@
 
 <!--   ==============   END MOVIES   ==============   -->
 </div>
-<%= render :partial => 'products/index/filters_online', :locals => { :countries => @countries} %>  
-
-<div id="toTop"><%= t('.back') %></div>

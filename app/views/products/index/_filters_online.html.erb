@@ -7,8 +7,32 @@
   <fieldset>
     <ul id="main">
       <li class="package open">
-        <%= link_to Moovies.packages.invert[1], products_short_path(:package => Moovies.packages.invert[1], :list_id => params[:list_id], :category_id => params[:category_id], :actor_id => params[:actor_id], :director_id => params[:director_id], :filter => params[:filter], :studio_id => params[:studio_id]), :class => "packages #{params[:package] == Moovies.packages.invert[1] ? 'current' : 0}" %><br />
-          <%= link_to Moovies.packages.invert[2], products_short_path(:package => Moovies.packages.invert[2], :list_id => params[:list_id], :category_id => params[:category_id], :actor_id => params[:actor_id], :director_id => params[:director_id], :filter => params[:filter], :studio_id => params[:studio_id]), :class => "packages #{params[:package] == Moovies.packages.invert[2] ? 'current' : 0}" %>
+        <%= hidden_field_tag :sort, params[:sort] %>
+        <%= link_to t("products.left_column.#{Moovies.packages.invert[1]}"), products_short_path(:package => Moovies.packages.invert[1]), :class => "packages #{params[:package] == Moovies.packages.invert[1] ? 'current' : 0}" %><br />
+          <%= link_to t("products.left_column.#{Moovies.packages.invert[2]}"), products_short_path(:package => Moovies.packages.invert[2]), :class => "packages #{params[:package] == Moovies.packages.invert[2] ? 'current' : 0}" %>
+      </li>
+      <li>
+        <%= t('.link') %><br />
+        <%= radio_button_tag('filters[view_mode]', "new", params[:filters] && params[:filters][:view_mode] == 'new' ? true : false, class: "links") %>
+        <%= label_tag('filters[view_mode]_new', t('products.left_column.svod_new')) %>
+        <br />
+        <%= radio_button_tag('filters[view_mode]', "soon", params[:filters] && params[:filters][:view_mode] == 'soon' ? true : false, class: "links") %>
+        <%= label_tag('filters[view_mode]_soon', t('products.left_column.svod_soon')) %>
+        <br />
+        <%= radio_button_tag('filters[view_mode]', "last_added", params[:filters] && params[:filters][:view_mode] == 'last_added' ? true : false, class: "links") %>
+        <%= label_tag('filters[view_mode]_soon', t('products.left_column.svod_last_added')) %>
+        <br />
+        <%= radio_button_tag('filters[view_mode]', "most_viewed", params[:filters] && params[:filters][:view_mode] == 'most_viewed' ? true : false, class: "links") %>
+        <%= label_tag('filters[view_mode]_soon', t('products.left_column.svod_most_viewed')) %>
+        <br />
+        <%= radio_button_tag('filters[view_mode]', "last_chance", params[:filters] && params[:filters][:view_mode] == 'last_chance' ? true : false, class: "links") %>
+        <%= label_tag('filters[view_mode]_soon',  t('products.left_column.svod_last_chance')) %>
+        <br />
+        <%= radio_button_tag('filters[view_mode]', "hd", params[:filters] && params[:filters][:view_mode] == 'hd' ? true : false, class: "links") %>
+        <%= label_tag('filters[view_mode]_soon', t('products.left_column.svod_hd')) %>
+        
+        <span id ='news' class="links<%= params[:filters] && params[:filters][:view_mode] ? ' select' :  '' %>" data="new">new</span>
+        
       </li>
       <li class="audience open">
         <%= t('.public') %>
