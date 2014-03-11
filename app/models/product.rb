@@ -138,7 +138,6 @@ class Product < ActiveRecord::Base
     products = self.get_view_mode(products, options[:view_mode]) if options[:view_mode]
     sort = get_sort(options)
     products = products.order(sort, :extended) if sort != ''
-    Rails.logger.debug { "@@@#{options[:includes]}" }
     products = search_clean(products, options[:search], {:page => options[:page], :per_page => options[:per_page], :limit => options[:limit], :country_id => options[:country_id], :includes => options[:includes]})
     
     products
@@ -396,7 +395,7 @@ class Product < ActiveRecord::Base
         'be'
     end
     options[:includes] = ["vod_online_#{name}", :director, :actors, :public, :streaming_trailers, :tokens_trailers, "descriptions_#{I18n.locale}", :svod_dates_online] if options[:includes].nil?
-    products.search(search, :max_matches => limit, :per_page => per_page, :page => page, :indices => ["product_#{name}_core"], :sql => {:include => options[:includes]})
+    products.search(search, :max_matches => limit, :per_page => per_page, :page => page, :indices => ["product_#{name}_core"], :sql => { :include => options[:includes]})
   end
 
   def self.replace_specials(str)
@@ -592,7 +591,7 @@ class Product < ActiveRecord::Base
   end
 
   def hd?(country)
-    self.get_vod(country).hd.count > 0
+    self.get_vod(country).hd.size > 0
   end
 
   def svod?

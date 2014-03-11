@@ -1,20 +1,23 @@
 <div id="maincontent" >
-
 <div id='filter_layout'>
 <%= render :partial => 'layouts/filters_online', :locals => {:selected_countries => @selected_countries, :languages => @languages, :subtitles => @subtitles }%>
 </div>
 <h1 class="ttl"><%= products_index_title %></h1>
 <%= render :partial => 'products/index/image', :locals => {:people => @people} if @people %>
-
+<% if cookies[:display] == 'list' %>
+  list - <%= link_to t('.jacket'), params.merge(:display => 'jacket', :kind => (params[:kind] == :normal ? nil : params[:kind]), :page => nil) %>
+<% else %>
+  <%= link_to t('.list'), params.merge(:display => 'list', :kind => (params[:kind] == :normal ? nil : params[:kind]), :page => nil) %> - jacket
+<% end %>
 <!--   ==============   MOVIES   ==============   -->
 <% if cookies[:endless] == 'deactive' %>
-  <%= link_to t('.endless_active'), params.merge(:endless => 'active', :kind => (params[:kind] == :normal ? nil : params[:kind])), :class => "endless" %>
+  <%= link_to t('.endless_active'), params.merge(:endless => 'active', :kind => (params[:kind] == :normal ? nil : params[:kind]), :page => nil), :class => "endless" %>
 <% else %>
-  <%= link_to t('.endless_deactive'), params.merge(:endless => 'deactive', :kind => (params[:kind] == :normal ? nil : params[:kind])), :class => "endless" %>
+  <%= link_to t('.endless_deactive'), params.merge(:endless => 'deactive', :kind => (params[:kind] == :normal ? nil : params[:kind]), :page => nil), :class => "endless" %>
 <% end %>
 <div id="products">
   <%= render :partial => 'products/index/sorting' %>
-  <%= render :partial => 'products/index/movie_details_jacket', :collection => @products, :locals => {:target => @target} %>
+  <%= render :partial => cookies[:display] == 'list' ? 'products/index/movie_details' : 'products/index/movie_details_jacket', :collection => @products, :locals => {:target => @target} %>
 </div>
 <div id='pagination_content'>
     <%= render :partial => 'products/index/pagination', :locals => {:item => @products} %>

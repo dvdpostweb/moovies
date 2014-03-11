@@ -26,6 +26,7 @@ group  :development, :test do
   gem 'faker'
   gem 'capybara'
   gem 'launchy'
+  gem 'selenium-webdriver'
 end
 # Gems used only for assets and not required
 # in production environments by default.
