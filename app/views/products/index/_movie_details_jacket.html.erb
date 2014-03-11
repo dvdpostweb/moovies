@@ -1,0 +1,14 @@
+<% product = movie_details_jacket %>
+<% data = product.description_data(false) %>
+<% product_title = data[:title] %>
+<% product_image = data[:image] %>
+<% path = product_path(:id => product.to_param, :source => @source, :response_id => @response_id) %>
+<div class="movie-wrap-jacket">
+    <div class="thumb-wrap">
+      <%= "<span class='hd'></span>".html_safe if product.hd?(session[:hd]) %>
+      <%= link_to path, :target => target, :class => :cover, :alt => product_title do %>
+        <%= product_image_tag product_image, :width => 125 %>
+      <% end %>
+    </div>
+      <!--<span class="hd"></span>-->
+</div><!-- .movie-wrap -->

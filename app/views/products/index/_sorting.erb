@@ -3,10 +3,7 @@
   <div class="bysort_choice">
     <% var = params[:sort] ? params[:sort].to_sym : :normal %>
     <%= form_for(:product, :url => request.fullpath, :html => { :method => :get, :id => :sort_form  } ) do |f| %>
-      <% request.query_parameters.each do |key,value| %>
-        
-        <%= hidden_field_tag(key, value) if key != 'sort' %>
-      <% end %>
+      <%= hash_to_hidden_fields(params.merge(:page => nil, :sort => nil)) %>
       <%= select_tag(:sort, options_for_select(sort_collection_for_select, var), { :onchange => '$("#sort_form").submit()'}) %>
     <% end %>
   </div>
