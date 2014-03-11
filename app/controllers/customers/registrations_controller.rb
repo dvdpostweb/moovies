@@ -41,6 +41,7 @@ class Customers::RegistrationsController < Devise::RegistrationsController
               @user.code = params[:customer][:code]
               @user.save(:validate => false)
               @user.abo_history(35, @user.abo_type_id)
+              DiscountUse.create(:discount_code_id => @discount.id, :customer_id => @user.to_param, :discount_use_date => Time.now.localtime) if @discount
               if @user.confirmed?
                 sign_in @user, :bypass => true
                 redirect_to step_path(:id => 'step2') and return

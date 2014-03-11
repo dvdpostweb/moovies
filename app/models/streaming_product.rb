@@ -41,6 +41,10 @@ class StreamingProduct < ActiveRecord::Base
     streaming
   end
 
+  def hd?
+    quality == '720p' || quality == '1080p'
+  end
+
   def self.get_not_prefered_streaming_by_imdb_id(imdb_id, local)
     if Rails.env == "production"
       streaming = available.not_prefered(Mooives.customer_languages[local]).find_all_by_imdb_id(imdb_id)

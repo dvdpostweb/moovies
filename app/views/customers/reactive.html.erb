@@ -1,0 +1,34 @@
+<div class="container clearfix">
+  <div id="step_wrap">
+    <div id="step_container">
+      <div class="step_form">
+        <div class="step_1 step <%= I18n.locale %>" align="center"></div>
+        <h3><%= t('.title') %></h3>
+        <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:id => 'login2'}) do |f| %>
+          <%= devise_error_messages! %>
+          <span>
+            <%= "<div id='error'>#{alert}</div>".html_safe if alert && !alert.empty? %>
+            <p class="inputs_codes">
+              <%= f.label :email, t('promotions.show.canvas2.email_label') %>:<br />
+              <%= f.text_field :email, :value => params[:email], :class => 'inputs_promo_code', :size => '35', :tye => 'text' %>
+            </p>
+            <p class="inputs_codes">
+              <%= f.label :password, t('promotions.show.canvas2.pass_label') %>:<br />
+              <%= f.password_field :password, :class => 'inputs_promo_code', :size => '35', :maxlength => '40'%>
+            </p>
+            <%= hidden_field_tag(:code, params[:code], :id => 'code') %><br />
+            <%= hidden_field_tag :return_url, customers_reactive_path(:email => params[:email], :code => params[:code]) %>
+            <div style="clear:both;"></div>
+
+          </span>
+        <p><br/><%= f.submit t('.sign_in'), :class => 'promo_button' %></p>
+        <% end %>
+      </div>
+      <p align="center" style="padding-top:15px;">
+        <%= image_tag "#{I18n.locale}/info_tel.jpg" %>
+      </p>
+    </div>
+
+  <%= render :partial => 'devise/registrations/faq1' %>
+  </div>
+</div>
