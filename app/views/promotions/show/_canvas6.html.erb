@@ -23,7 +23,8 @@ test facebook connect
       // The response object is returned with a status field that lets the app know the current
       // login status of the person. In this case, we're handling the situation where they 
       // have logged in to the app.
-      testAPI();
+      //testAPI();
+      getInfo()
     } else if (response.status === 'not_authorized') {
       // In this case, the person is logged into Facebook, but not into the app, so we call
       // FB.login() to prompt them to do so. 
@@ -61,13 +62,29 @@ test facebook connect
       console.log('Good to see you, ' + response.name + '.');
     });
   }
+  function getInfo(){
+    FB.api('/me', function(response) {
+      $('fb_first_name').val(response.first_name)
+      $('fb_last_name').val(response.last_name)
+      $('fb_birthday').val(response.birthday)
+      $('fb_email').val(response.email)
+      $('fb_id').val(response.id)
+    });
+  }
 </script>
 
 <!--
   Below we include the Login Button social plugin. This button uses the JavaScript SDK to
   present a graphical Login button that triggers the FB.login() function when clicked. -->
 login 
-<fb:login-button max_rows="1" size="xlarge" show_faces="false" auto_logout_link="false" scope="first_name,last_name,email,user_birthday"></fb:login-button>
+<fb:login-button max_rows="1" size="xlarge" show_faces="false" auto_logout_link="false" scope="email,user_birthday"></fb:login-button>
 login large
+
+
+<input type="text" name="first_name" id="fb_first_name">
+<input type="text" name="last_name" id="fb_last_name">
+<input type="text" name="birthday" id="fb_birthday">
+<input type="text" name="email" id="fb_email">
+<input type="text" name="id" id="fb_id">
 </body>
 </html>
