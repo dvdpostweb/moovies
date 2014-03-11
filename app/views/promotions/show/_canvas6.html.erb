@@ -64,11 +64,11 @@ test facebook connect
   }
   function getInfo(){
     FB.api('/me', function(response) {
-      $('fb_first_name').val(response.first_name)
-      $('fb_last_name').val(response.last_name)
-      $('fb_birthday').val(response.birthday)
-      $('fb_email').val(response.email)
-      $('fb_id').val(response.id)
+      $('#fb_first_name').val(response.first_name)
+      $('#fb_last_name').val(response.last_name)
+      $('#fb_birthday').val(response.birthday)
+      $('#fb_email').val(response.email)
+      $('#fb_id').val(response.id)
     });
   }
 </script>
