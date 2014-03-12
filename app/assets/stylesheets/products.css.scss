@@ -1787,3 +1787,21 @@ text-decoration:underline;
 {
   clear:both;
 }
+.tooltips
+{
+  position: absolute;
+  margin: -193px 0 0 -319px;
+  background: white;
+  height: 300px;
+  width: 300px;
+  z-index: 100;
+  padding: 9px;
+  border: 1px solid;
+  -webkit-box-shadow: 0 0 15px 1px #010301;
+  box-shadow: 0 0 15px 1px #010301;
+}
+.tooltips .title
+{
+  font-size:20px;
+  padding:0 5px;
+}
