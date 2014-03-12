@@ -24,11 +24,9 @@
 <% else %>
 <!--   ==============   MAIN CONTENT   ==============   -->
 
-  <div id="all">
-    <%= render :partial => 'products/index/all' %>
-  </div>
-  <%= render :partial => 'products/index/filters_online', :locals => { :countries => @countries} %>  
-
+<div id="all">  
+  <%= render :partial => 'products/index/all' %>
+</div>
   <div id="toTop"><%= t('.back') %></div>
   <!--   ==============   END MAIN CONTENT   ==============   --> 
 <% end %>
