@@ -183,6 +183,18 @@ $(function() {
   });
   if($('#online #filters').html())
   {
+    $('#products_index').delegate('.cover' , 'mouseenter', function () {
+    	$(this).parent().find('.tooltips' ).stop(true,true).show();
+    });
+    $('#products_index').delegate('.cover' , 'mouseleave', function () {
+      $('.tooltips' ).fadeOut( 200 );
+    });
+    $('#products_index').delegate('.tooltips' , 'mouseenter', function () {
+    	$(this).stop(true,true).show();
+    });
+    $('#products_index').delegate('.tooltips' , 'mouseleave', function () {
+    	$('.tooltips' ).fadeOut( 200 );
+    });
     
     audience_slider_values = {'0': 0, '10': 1, '12': 2, '16': 3, '18': 4};
     $("#online #audience-slider-range").slider({
