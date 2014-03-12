@@ -8,8 +8,8 @@
     <ul id="main">
       <li class="package open">
         <%= hidden_field_tag :sort, params[:sort] %>
-        <%= link_to t("products.left_column.#{Moovies.packages.invert[1]}"), products_short_path(:package => Moovies.packages.invert[1]), :class => "packages #{params[:package] == Moovies.packages.invert[1] ? 'current' : 0}" %><br />
-          <%= link_to t("products.left_column.#{Moovies.packages.invert[2]}"), products_short_path(:package => Moovies.packages.invert[2]), :class => "packages #{params[:package] == Moovies.packages.invert[2] ? 'current' : 0}" %>
+        <%= link_to t("products.left_column.#{Moovies.packages.invert[(params[:kind] == :adult ? 4 : 1)]}"), products_short_path(:package => Moovies.packages.invert[(params[:kind] == :adult ? 4 : 1)]), :class => "packages #{params[:package] == Moovies.packages.invert[(params[:kind] == :adult ? 4 : 1)] ? 'current' : 0}" %><br />
+          <%= link_to t("products.left_column.#{Moovies.packages.invert[(params[:kind] == :adult ? 5 : 2)]}"), products_short_path(:package => Moovies.packages.invert[(params[:kind] == :adult ? 5 : 2)]), :class => "packages #{params[:package] == Moovies.packages.invert[(params[:kind] == :adult ? 5 : 2)] ? 'current' : 0}" %>
       </li>
       <li>
         <%= t('.link') %><br />

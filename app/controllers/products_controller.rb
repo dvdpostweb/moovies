@@ -56,26 +56,20 @@ class ProductsController < ApplicationController
     
     @vod_wishlist = current_customer.products.collect(&:products_id) if current_customer
     @countries = ProductCountry.visible.ordered
-      if params[:filters]
+      if params[:package].nil?
+        new_params = session[:sexuality] == 0 ? params.merge(:per_page => 25, :country_id => session[:country_id], :hetero => 1, :includes => ["descriptions_#{I18n.locale}"]) : params.merge(:per_page => 25, :country_id => session[:country_id], :includes => ["descriptions_#{I18n.locale}"])
+        new_params = new_params.merge(:view_mode => :svod_new)
+        @new = Product.filter(nil, new_params)
+        new_params = new_params.merge(:view_mode => 'svod_soon')
+        @soon = Product.filter(nil, new_params)
+      else
         new_params = params.merge(:per_page => 25, :country_id => session[:country_id], :includes => [ "descriptions_#{I18n.locale}"])
         new_params = new_params.merge(:hetero => 1) if session[:sexuality] == 0
         @products = Product.filter_online(nil, new_params)
-        @selected_countries = ProductCountry.where(:countries_id => params[:filters][:country_id])
-        @languages = Language.by_language(I18n.locale).find(params[:filters][:audio].reject(&:empty?)).collect(&:name).join(', ') if Product.audio?(params[:filters][:audio])
-        @subtitles = Subtitle.by_language(I18n.locale).find(params[:filters][:subtitles].reject(&:empty?)).collect(&:name).join(', ') if Product.subtitle?(params[:filters][:subtitles])
-      else
-        if params[:package] == Moovies.packages.invert[1]
-          new_params = session[:sexuality] == 0 ? params.merge(:per_page => 25, :country_id => session[:country_id], :hetero => 1, :includes => ["descriptions_#{I18n.locale}"]) : params.merge(:per_page => 25, :country_id => session[:country_id], :includes => ["descriptions_#{I18n.locale}"])
-          new_params = new_params.merge(:view_mode => :svod_new)
-          @new = Product.filter(nil, new_params)
-          new_params = new_params.merge(:view_mode => 'svod_soon')
-          @soon = Product.filter(nil, new_params)
-        else
-          new_params = session[:sexuality] == 0 ? params.merge(:per_page => 25, :country_id => session[:country_id], :hetero => 1, :includes => ["descriptions_#{I18n.locale}"]) : params.merge(:per_page => 25, :country_id => session[:country_id], :includes => ["descriptions_#{I18n.locale}"])
-          new_params = new_params.merge(:view_mode => :tvod_new)
-          @new = Product.filter(nil, new_params)
-          new_params = new_params.merge(:view_mode => 'tvod_soon')
-          @soon = Product.filter(nil, new_params)
+        if params[:filters]
+          @selected_countries = ProductCountry.where(:countries_id => params[:filters][:country_id]) 
+          @languages = Language.by_language(I18n.locale).find(params[:filters][:audio].reject(&:empty?)).collect(&:name).join(', ') if Product.audio?(params[:filters][:audio])
+          @subtitles = Subtitle.by_language(I18n.locale).find(params[:filters][:subtitles].reject(&:empty?)).collect(&:name).join(', ') if Product.subtitle?(params[:filters][:subtitles])
         end
       end
     #else
