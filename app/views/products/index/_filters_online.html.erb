@@ -1,15 +1,13 @@
 <div id="online">
 <%= form_tag products_short_path(:package => params[:package], :list_id => params[:list_id], :category_id => params[:category_id], :actor_id => params[:actor_id], :director_id => params[:director_id], :studio_id => params[:studio_id]), method: 'get', id: 'filter_online_form' do %>
 <div id="filters">
-  <h3>
-    <%= t '.refine' %>
-  </h3>
+  
   <fieldset>
     <ul id="main">
       <li class="package open">
         <%= hidden_field_tag :sort, params[:sort] %>
-        <%= link_to t("products.left_column.#{Moovies.packages.invert[1]}"), products_short_path(:package => Moovies.packages.invert[1]), :class => "packages #{params[:package] == Moovies.packages.invert[1] ? 'current' : 0}" %><br />
-          <%= link_to t("products.left_column.#{Moovies.packages.invert[2]}"), products_short_path(:package => Moovies.packages.invert[2]), :class => "packages #{params[:package] == Moovies.packages.invert[2] ? 'current' : 0}" %>
+        <%= link_to t("products.left_column.#{Moovies.packages.invert[1]}"), products_short_path(:package => Moovies.packages.invert[1]), :class => "packages svod #{params[:package] == Moovies.packages.invert[1] ? 'current' : ''}" %><br />
+          <%= link_to t("products.left_column.#{Moovies.packages.invert[2]}"), products_short_path(:package => Moovies.packages.invert[2]), :class => "packages tvod #{params[:package] == Moovies.packages.invert[2] ? 'current' : ''}" %>
       </li>
       <li>
         <%= t('.link') %><br />
@@ -31,7 +29,6 @@
         <%= radio_button_tag('filters[view_mode]', "hd", params[:filters] && params[:filters][:view_mode] == 'hd' ? true : false, class: "links") %>
         <%= label_tag('filters[view_mode]_soon', t('products.left_column.svod_hd')) %>
         
-        <span id ='news' class="links<%= params[:filters] && params[:filters][:view_mode] ? ' select' :  '' %>" data="new">new</span>
         
       </li>
       <li class="audience open">
@@ -49,19 +46,19 @@
         <div id="audience-slider-range"></div>
       </li>
       <li class="country open">
-        <%= t('.countries') %>
+        <%= t('.countries', :default => 'country') %>
         <div>
           <%= collection_select(:filters, :country_id, @countries, :id, :name, {:selected => params[:filters] && params[:filters][:country_id] ? params[:filters][:country_id] : nil, :include_blank => true}, {:multiple => true, :class => 'chosen-select', 'data-placeholder' =>"countries...", 'data-no_results_text' => 'not_found'}) %>
         </div>
       </li>
       <li class="year open">
-        <%= t('.year') %>
+        <%= t('.year' , :default => 'year') %>
         <% max = Time.now.year + 1 %>
         <% max_year = params[:date] && params[:date][:filters] && params[:date][:filters][:year_max] && params[:date][:filters][:year_max].to_i <= max ? params[:date][:filters][:year_max].to_i : max %>
         <div>
-          <%= t '.from' %>
+          <%= t '.from', :default => 'from' %>
           <%= select_year (params[:date] && params[:date][:filters] && params[:date][:filters][:year_min] ? params[:date][:filters][:year_min].to_i : 1910 ), :field_name => 'filters[year_min]', :start_year => 1910, :end_year => max %>
-          <%= t '.to' %>
+          <%= t '.to', :default => 'to' %>
           <%= select_year max_year , :field_name => 'filters[year_max]', :start_year => 1910, :end_year => max %>
         </div>
       </li>

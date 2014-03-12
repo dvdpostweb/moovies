@@ -244,8 +244,7 @@ a#nav7
 /*   ============   FILTERS   ============   */
 #products_index #filters, #film-details #filters {
 	background: none repeat scroll 0 0 #FFFFFF;
-	border: 1px solid #9f9e98;
-	border-radius: 4px 4px 4px 4px;
+	margin-left:14px;
 	color: #bfbeba;
 	line-height: 27px;
 	margin-top: 30px;
@@ -275,12 +274,23 @@ a#nav7
 
 #filters ul#main {
 
-
+color:#212A31;
 	padding: 4px 1px 5px;
 	width: 178px;
 }
 
+#filters ul#main #news {
 
+  background-color:#EE8419;
+	background-repeat:repeat no-repeat;
+	border-bottom-left-radius:4px;
+	border-bottom-right-radius:4px;
+	border-top-left-radius:4px;
+	border-top-right-radius:4px;
+	color:#FFFFFF;
+
+	padding:5px;
+}
 
 #filters h3 {
     background: url(image_path('search.png')) no-repeat scroll 0 8px transparent;

@@ -482,9 +482,10 @@ a#back_message
 {
   color: #FF4B00;
 }
-.open {
-  color:#666666;
-  font-weight:lighter;
+.open .translation_missing{
+    color: #212A31;
+  font-weight:bold;
+  font-size: 15px;
 }
 
 
