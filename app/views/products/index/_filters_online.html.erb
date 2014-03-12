@@ -1,13 +1,13 @@
 <div id="online">
-<%= form_tag products_short_path(:package => params[:package], :list_id => params[:list_id], :category_id => params[:category_id], :actor_id => params[:actor_id], :director_id => params[:director_id], :studio_id => params[:studio_id]), method: 'get', id: 'filter_online_form' do %>
+<%= form_tag products_short_path(:package => params[:package].nil? ? Moovies.packages.invert[1] : params[:package], :list_id => params[:list_id], :category_id => params[:category_id], :actor_id => params[:actor_id], :director_id => params[:director_id], :studio_id => params[:studio_id]), method: 'get', id: 'filter_online_form' do %>
 <div id="filters">
   
   <fieldset>
     <ul id="main">
       <li class="package open">
         <%= hidden_field_tag :sort, params[:sort] %>
-        <%= link_to t("products.left_column.#{Moovies.packages.invert[1]}"), products_short_path(:package => Moovies.packages.invert[1]), :class => "packages svod #{params[:package] == Moovies.packages.invert[1] ? 'current' : ''}" %><br />
-          <%= link_to t("products.left_column.#{Moovies.packages.invert[2]}"), products_short_path(:package => Moovies.packages.invert[2]), :class => "packages tvod #{params[:package] == Moovies.packages.invert[2] ? 'current' : ''}" %>
+        <%= link_to t("products.left_column.#{Moovies.packages.invert[(params[:kind] == :adult ? 4 : 1)]}"), products_short_path(:package => Moovies.packages.invert[(params[:kind] == :adult ? 4 : 1)]), :class => "tvod packages #{params[:package] == Moovies.packages.invert[(params[:kind] == :adult ? 4 : 1)] ? 'current' : ''}" %><br />
+          <%= link_to t("products.left_column.#{Moovies.packages.invert[(params[:kind] == :adult ? 5 : 2)]}"), products_short_path(:package => Moovies.packages.invert[(params[:kind] == :adult ? 5 : 2)]), :class => "svod packages #{params[:package] == Moovies.packages.invert[(params[:kind] == :adult ? 5 : 2)] ? 'current' : ''}" %>
       </li>
       <li>
         <%= t('.link') %><br />
@@ -18,16 +18,16 @@
         <%= label_tag('filters[view_mode]_soon', t('products.left_column.svod_soon')) %>
         <br />
         <%= radio_button_tag('filters[view_mode]', "last_added", params[:filters] && params[:filters][:view_mode] == 'last_added' ? true : false, class: "links") %>
-        <%= label_tag('filters[view_mode]_soon', t('products.left_column.svod_last_added')) %>
+        <%= label_tag('filters[view_mode]_last_added', t('products.left_column.svod_last_added')) %>
         <br />
         <%= radio_button_tag('filters[view_mode]', "most_viewed", params[:filters] && params[:filters][:view_mode] == 'most_viewed' ? true : false, class: "links") %>
-        <%= label_tag('filters[view_mode]_soon', t('products.left_column.svod_most_viewed')) %>
+        <%= label_tag('filters[view_mode]_most_viewed', t('products.left_column.svod_most_viewed')) %>
         <br />
         <%= radio_button_tag('filters[view_mode]', "last_chance", params[:filters] && params[:filters][:view_mode] == 'last_chance' ? true : false, class: "links") %>
-        <%= label_tag('filters[view_mode]_soon',  t('products.left_column.svod_last_chance')) %>
+        <%= label_tag('filters[view_mode]_last_chance',  t('products.left_column.svod_last_chance')) %>
         <br />
         <%= radio_button_tag('filters[view_mode]', "hd", params[:filters] && params[:filters][:view_mode] == 'hd' ? true : false, class: "links") %>
-        <%= label_tag('filters[view_mode]_soon', t('products.left_column.svod_hd')) %>
+        <%= label_tag('filters[view_mode]_hd', t('products.left_column.svod_hd')) %>
         
         
       </li>

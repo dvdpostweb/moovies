@@ -1,7 +1,8 @@
 <% product = movie_details_jacket %>
-<% data = product.description_data(false) %>
+<% data = product.description_data(true) %>
 <% product_title = data[:title] %>
 <% product_image = data[:image] %>
+
 <% path = product_path(:id => product.to_param, :source => @source, :response_id => @response_id) %>
 <div class="movie-wrap-jacket">
     <div class="thumb-wrap">
@@ -9,6 +10,13 @@
       <%= link_to path, :target => target, :class => :cover, :alt => product_title do %>
         <%= product_image_tag product_image, :width => 125 %>
       <% end %>
+      <div class="tooltips" style="display:none">
+        <p class="title"><%= product_title %> (<%= product.year %>)</p>
+        <p class="description"><%= truncate_html(data[:description].text, :length => 500) %> </p>
+        <p class="rating"><%= render :partial => 'products/rating', :locals => {:product => product, :background => @rating_color, :size => :long, :source => @source, :response_id => @response_id} %></p>
+        <p class="runtime"><%= t('.runtime') %> <%= product.runtime %> <%= t('.minutes') %></p>
+        <p class="other">loading</p>
+      </div>
     </div>
       <!--<span class="hd"></span>-->
 </div><!-- .movie-wrap -->

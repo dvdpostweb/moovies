@@ -183,34 +183,46 @@ $(function() {
   });
   if($('#online #filters').html())
   {
+    $('#products_index').delegate('.cover' , 'mouseenter', function () {
+    	$(this).parent().find('.tooltips' ).stop(true,true).show();
+    });
+    $('#products_index').delegate('.cover' , 'mouseleave', function () {
+      $('.tooltips' ).fadeOut( 200 );
+    });
+    $('#products_index').delegate('.tooltips' , 'mouseenter', function () {
+    	$(this).stop(true,true).show();
+    });
+    $('#products_index').delegate('.tooltips' , 'mouseleave', function () {
+    	$('.tooltips' ).fadeOut( 200 );
+    });
     
     audience_slider_values = {'0': 0, '10': 1, '12': 2, '16': 3, '18': 4};
-    $("#audience-slider-range").slider({
+    $("#online #audience-slider-range").slider({
       range: true,
       min: 0,
       max: 4,
-      values: [audience_slider_values[$("#filters_audience_min").val()], audience_slider_values[$("#filters_audience_max").val()]],
+      values: [audience_slider_values[$("#online #filters_audience_min").val()], audience_slider_values[$("#online #filters_audience_max").val()]],
       step: 1,
       change: function(event, ui) {
         actual_audience_values = {'0': 0, '1': 10, '2': 12, '3': 16, '4': 18};
-        $("#filters_audience_min").val(actual_audience_values[ui.values[0]]);
-        $("#filters_audience_max").val(actual_audience_values[ui.values[1]]);
+        $("#online #filters_audience_min").val(actual_audience_values[ui.values[0]]);
+        $("#online #filters_audience_max").val(actual_audience_values[ui.values[1]]);
         submit_online()
       }
     });
     $('.chosen-select').chosen({allow_single_deselect: true}).change(function(){submit_online()});
-    $('#date_filters_year_min, #date_filters_year_max').on("change", function(){
+    $('#online #date_filters_year_min, #online  #date_filters_year_max').on("change", function(){
       submit_online()
     })
-    $("#ratings-slider-range").slider({
+    $("#online #ratings-slider-range").slider({
       range: true,
       min: 1,
       max: 5,
       values: [$("#filters_rating_min").val(),$("#filters_rating_max").val()],
       step: 1,
       change: function(event, ui) {
-        $("#filters_rating_min").val(ui.values[0]);
-        $("#filters_rating_max").val(ui.values[1]);
+        $("#online #filters_rating_min").val(ui.values[0]);
+        $("#online #filters_rating_max").val(ui.values[1]);
          submit_online()
       }
     });
@@ -223,16 +235,15 @@ $(function() {
     })
     
     $('#products_index').delegate("#close_audience", "click", function() {
-      $("#audience-slider-range").slider("values", [0,4])
+      $("#online #audience-slider-range").slider("values", [0,4])
     });
     $('#products_index').delegate("#close_country", "click", function() {
-      $('#filters_country_id').val('').trigger('chosen:updated');
+      $('#online #filters_country_id').val('').trigger('chosen:updated');
       submit_online()
     });
     $('#products_index').delegate("#close_year", "click", function() {
-      $('#filters_country_id').val('').trigger('chosen:updated');
-      $("#date_filters_year_min").val($("#date_filters_year_min option:first").val());
-      $("#date_filters_year_max").val($("#date_filters_year_min option:last").val());
+      $("#online #date_filters_year_min").val($("#online #date_filters_year_min option:first").val());
+      $("#online #date_filters_year_max").val($("#online #date_filters_year_min option:last").val());
       submit_online()
     });
     $('#products_index').delegate(".links", "change", function(){
@@ -243,18 +254,18 @@ $(function() {
       submit_online()
     })*/
     $('#products_index').delegate("#close_ratings", "click", function() {
-      $("#ratings-slider-range").slider("values", [0,18])
+      $("#online #ratings-slider-range").slider("values", [0,18])
     })
     $('#products_index').delegate("#close_audios", "click", function() {
-      $('#filters_audio').val('audio...').trigger('chosen:updated');
+      $('#online #filters_audio').val('audio...').trigger('chosen:updated');
       submit_online()
     })
     $('#products_index').delegate("#close_subtitles", "click", function() {
-      $('#filters_subtitles').val('sub...').trigger('chosen:updated');
+      $('#online #filters_subtitles').val('sub...').trigger('chosen:updated');
       submit_online()
     })
     $('#products_index').delegate("#close_category", "click", function() {
-      $('#filters_category_id').val('category').trigger('chosen:updated');
+      $('#online #filters_category_id').val('').trigger('chosen:updated');
       submit_online()
     })
     $('#products_index').delegate("#close_actor", "click", function() {
@@ -301,11 +312,11 @@ $(function() {
       range: true,
       min: 1,
       max: 5,
-      values: [$("#search_filter_rating_min").val(),$("#search_filter_rating_max").val()],
+      values: [$("#online #search_filter_rating_min").val(),$("#online #search_filter_rating_max").val()],
       step: 1,
       slide: function(event, ui) {
-        $("#search_filter_rating_min").val(ui.values[0]);
-        $("#search_filter_rating_max").val(ui.values[1]);
+        $("#online #search_filter_rating_min").val(ui.values[0]);
+        $("#online #search_filter_rating_max").val(ui.values[1]);
       }
     });
     $('#products_index').delegate(".categorie_online", "click", function() {
