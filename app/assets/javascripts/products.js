@@ -196,44 +196,23 @@ $(function() {
     	$('.tooltips' ).fadeOut( 200 );
     });
     
-    audience_slider_values = {'0': 0, '10': 1, '12': 2, '16': 3, '18': 4};
-    $("#online #audience-slider-range").slider({
-      range: true,
-      min: 0,
-      max: 4,
-      values: [audience_slider_values[$("#online #filters_audience_min").val()], audience_slider_values[$("#online #filters_audience_max").val()]],
-      step: 1,
-      change: function(event, ui) {
-        actual_audience_values = {'0': 0, '1': 10, '2': 12, '3': 16, '4': 18};
-        $("#online #filters_audience_min").val(actual_audience_values[ui.values[0]]);
-        $("#online #filters_audience_max").val(actual_audience_values[ui.values[1]]);
-        submit_online()
-      }
-    });
-    $('.chosen-select').chosen({allow_single_deselect: true}).change(function(){submit_online()});
-    $('#online #date_filters_year_min, #online  #date_filters_year_max').on("change", function(){
+    
+    load_form()
+    $('#products_index').delegate('#online #date_filters_year_min, #online  #date_filters_year_max', "change", function(){
       submit_online()
     })
-    $("#online #ratings-slider-range").slider({
-      range: true,
-      min: 1,
-      max: 5,
-      values: [$("#filters_rating_min").val(),$("#filters_rating_max").val()],
-      step: 1,
-      change: function(event, ui) {
-        $("#online #filters_rating_min").val(ui.values[0]);
-        $("#online #filters_rating_max").val(ui.values[1]);
-         submit_online()
-      }
-    });
-    $('.packages').on('click', function(){
+    $('#products_index').delegate('.packages', 'click', function(){
       $('#filter_online_form').attr('action', $(this).attr('href'))
       $('.packages').removeClass('current')
       $(this).addClass('current')
       submit_online()
       return false;
     })
+    $('#products_index').delegate(".links", "change", function(){
+      submit_online()
+    })
     
+    /*close thing*/
     $('#products_index').delegate("#close_audience", "click", function() {
       $("#online #audience-slider-range").slider("values", [0,4])
     });
@@ -246,9 +225,6 @@ $(function() {
       $("#online #date_filters_year_max").val($("#online #date_filters_year_min option:last").val());
       submit_online()
     });
-    $('#products_index').delegate(".links", "change", function(){
-      submit_online()
-    })
     /*$('#products_index').delegate(".links", "click", function() {
       $('#filters_view_mode').val($(this).attr('data'))
       submit_online()
@@ -330,13 +306,7 @@ $(function() {
     $.ajax({url: path, dataType: 'script'});
     history.pushState('', 'New Page Title', path);
   }
-  function submit_online()
-  {
-    $('#products').html("<div style='height:22px'><img src='/assets/ajax-loader.gif'/></div>");
-    $('#filter_online_form').ajaxSubmit({dataType: 'script'});
-    endscroll()
-    history.pushState('', 'New Page Title', $('#filter_online_form').attr('action')+"?"+$('#filter_online_form').serialize()+"&ajax=1");
-  }
+  
   /*if($('#products_index').length)
   {
     $('#filter_online_form')[0].reset()
@@ -353,7 +323,6 @@ $(function() {
   					
   					var State = History.getState(); // Note: We are using History.getState() instead of event.state
   					 $('#products').html("<div style='height:22px'><img src='/assets/ajax-loader.gif'/></div>");
-  					console.log(State.url)
   					
   					$.ajax({
               url: State.url,
@@ -397,4 +366,41 @@ function endscroll()
        }
     });
   }
+}
+function submit_online()
+{
+  $('#products').html("<div style='height:22px'><img src='/assets/ajax-loader.gif'/></div>");
+  $('#filter_online_form').ajaxSubmit({dataType: 'script'});
+  endscroll()
+  history.pushState('', 'New Page Title', $('#filter_online_form').attr('action')+"?"+$('#filter_online_form').serialize()+"&ajax=1");
+}
+function load_form()
+{
+  $('.chosen-select').chosen({allow_single_deselect: true}).change(function(){submit_online()});
+  $("#online #ratings-slider-range").slider({
+    range: true,
+    min: 1,
+    max: 5,
+    values: [$("#filters_rating_min").val(),$("#filters_rating_max").val()],
+    step: 1,
+    change: function(event, ui) {
+      $("#online #filters_rating_min").val(ui.values[0]);
+      $("#online #filters_rating_max").val(ui.values[1]);
+       submit_online()
+    }
+  });
+  audience_slider_values = {'0': 0, '10': 1, '12': 2, '16': 3, '18': 4};
+  $("#online #audience-slider-range").slider({
+    range: true,
+    min: 0,
+    max: 4,
+    values: [audience_slider_values[$("#online #filters_audience_min").val()], audience_slider_values[$("#online #filters_audience_max").val()]],
+    step: 1,
+    change: function(event, ui) {
+      actual_audience_values = {'0': 0, '1': 10, '2': 12, '3': 16, '4': 18};
+      $("#online #filters_audience_min").val(actual_audience_values[ui.values[0]]);
+      $("#online #filters_audience_max").val(actual_audience_values[ui.values[1]]);
+      submit_online()
+    }
+  });
 }
