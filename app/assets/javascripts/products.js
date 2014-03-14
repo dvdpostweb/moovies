@@ -185,6 +185,22 @@ $(function() {
   {
     $('#products_index').delegate('.cover' , 'mouseenter', function () {
     	$(this).parent().find('.tooltips' ).stop(true,true).show();
+    	content = $(this).parent().find('.other')
+    	if(content.html() =='loading')
+    	{
+    	$.ajax({
+        url: $(this).attr('data-url'),
+        dataType: 'html',
+        type: 'GET',
+        data: {},
+        success: function(data) {
+          content.html(data);
+        },
+        error: function() {
+          content.html('error');
+        }
+      });
+    }
     });
     $('#products_index').delegate('.cover' , 'mouseleave', function () {
       $('.tooltips' ).fadeOut( 200 );
@@ -302,7 +318,8 @@ $(function() {
   }
   function ajax(path)
   {
-    $('#products').html("<div style='height:22px'><img src='/assets/ajax-loader.gif'/></div>");
+    /*$('#products').html("<div style='height:22px'><img src='/assets/ajax-loader.gif'/></div>");*/
+    $('.loading_bar').show()
     $.ajax({url: path, dataType: 'script'});
     history.pushState('', 'New Page Title', path);
   }
@@ -322,7 +339,8 @@ $(function() {
   					// Log the State
   					
   					var State = History.getState(); // Note: We are using History.getState() instead of event.state
-  					 $('#products').html("<div style='height:22px'><img src='/assets/ajax-loader.gif'/></div>");
+  					 /*$('#products').html("<div style='height:22px'><img src='/assets/ajax-loader.gif'/></div>");*/
+  					 $('.loading_bar').show()
   					
   					$.ajax({
               url: State.url,
@@ -351,6 +369,7 @@ function endscroll()
     $(window).scroll(function() {
        var path;
        path = $('#products_index #pagination .next_page').attr('href');
+       
        if ($(window).scrollTop() < 500)
        {
          $('#toTop').fadeOut('slow')
@@ -361,6 +380,7 @@ function endscroll()
        }
        if (path && $(window).scrollTop() > $(document).height() - $(window).height() - 1200) {
          set_page(path)
+         console.log('path'+path)
          $('#pagination').html("<img src='/assets/loading.gif' />");
          return $.ajax({url: path, dataType: 'script'});
        }
@@ -369,8 +389,9 @@ function endscroll()
 }
 function submit_online()
 {
-  $('#products').html("<div style='height:22px'><img src='/assets/ajax-loader.gif'/></div>");
+  $('.loading_bar').show();
   $('#filter_online_form').ajaxSubmit({dataType: 'script'});
+  console.log('submit_online')
   endscroll()
   history.pushState('', 'New Page Title', $('#filter_online_form').attr('action')+"?"+$('#filter_online_form').serialize()+"&ajax=1");
 }

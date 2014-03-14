@@ -1,0 +1,24 @@
+<div class="director">
+  <%= @product.director.name %>
+</director>
+<div class="actors">
+  <%= @product.actors.collect(&:name).join(',') %>
+</div>
+<div class="categories">
+  <%= @product.categories.collect(&:name).join(',') %>
+</div>
+
+<ul class="btns osc">
+  <li>
+    <%= render :partial => 'products/streaming',  :locals => {:product => @product, :source => @source, :response_id => @response_id} %>
+  </li>
+  <li>
+    <%= render :partial => 'products/vod_list',  :locals => {:product => @product, :source => @source, :response_id => @response_id} %>
+  </li>
+  <% if @product.trailer? %>
+  <li>
+    <%= link_to(t('.trailer'), product_trailer_path(:product_id => @product.to_param, :source => @source, :response_id => @response_id), :class => 'trailer', :target => :_blank) %>
+  </li>
+  <% end %>
+
+</ul>

@@ -7,7 +7,7 @@
 <div class="movie-wrap-jacket">
     <div class="thumb-wrap">
       <%= "<span class='hd'></span>".html_safe if product.hd?(session[:country_id]) %>
-      <%= link_to path, :target => target, :class => :cover, :alt => product_title do %>
+      <%= link_to path, :target => target, :class => :cover, :alt => product_title, 'data-url' => product_data_path(:product_id => product.to_param, :source => @source, :response_id => @response_id)  do %>
         <%= product_image_tag product_image, :width => 125 %>
       <% end %>
       <div class="tooltips" style="display:none">
@@ -15,7 +15,7 @@
         <p class="description"><%= truncate_html(data[:description].text, :length => 500) %> </p>
         <p class="rating"><%= render :partial => 'products/rating', :locals => {:product => product, :background => @rating_color, :size => :long, :source => @source, :response_id => @response_id} %></p>
         <p class="runtime"><%= t('.runtime') %> <%= product.runtime %> <%= t('.minutes') %></p>
-        <p class="other">loading</p>
+        <div class="other">loading</div>
       </div>
     </div>
       <!--<span class="hd"></span>-->
