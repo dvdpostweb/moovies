@@ -1,5 +1,8 @@
 $(function() {
-  History = window.History, // Note: We are using a capital H instead of a lower h
+  History = window.History // Note: We are using a capital H instead of a lower h
+  var State = History.getState()
+  console.log(State.url)
+  
   $('#ca-container').contentcarousel({
       // speed for the sliding animation
       sliderSpeed     : 500,
@@ -274,7 +277,7 @@ $(function() {
     })
     
     $('#products_index').delegate("#pagination.deactive a", "click", function() {
-      ajax($(this).attr('href'))
+      ajax_pagination($(this).attr('href'))
       return false
     })
     
@@ -316,46 +319,33 @@ $(function() {
       return false
     })
   }
-  function ajax(path)
-  {
-    /*$('#products').html("<div style='height:22px'><img src='/assets/ajax-loader.gif'/></div>");*/
-    $('.loading_bar').show()
-    $.ajax({url: path, dataType: 'script'});
-    history.pushState('', 'New Page Title', path);
-  }
-  
-  /*if($('#products_index').length)
-  {
-    $('#filter_online_form')[0].reset()
-      console.log($("#audience-slider-range"))
-     $("#audience-slider-range").slider("values", [0,4])
-     $("#ratings-slider-range").slider("values", [0,18])
-     $('#filters_audio').val('audio...').trigger('chosen:updated');
-     $('#filters_subtitles').val('sub...').trigger('chosen:updated');
-     $('#filters_category_id').val('category').trigger('chosen:updated');
-    
-  }*/
   History.Adapter.bind(window,'statechange',function(){ // Note: We are using statechange instead of popstate
-  					// Log the State
-  					
-  					var State = History.getState(); // Note: We are using History.getState() instead of event.state
-  					 /*$('#products').html("<div style='height:22px'><img src='/assets/ajax-loader.gif'/></div>");*/
-  					 $('.loading_bar').show()
-  					
-  					$.ajax({
-              url: State.url,
-              dataType: 'script',
-              type: 'GET',
-              data: {},
-              success: function(data) {
-                
-              },
-              error: function() {
-                
-              }
-  				});
+  	// Log the State
+  	var State = History.getState(); // Note: We are using History.getState() instead of event.state
+  	console.log('history back')
+  	$('.loading_bar').show()
+  	$.ajax({
+      url: State.url,
+      dataType: 'script',
+      type: 'GET',
+      data: {},
+      success: function(data) {},
+      error: function() {}
+  	});
   })
-});
+ });
+
+function ajax_pagination(path)
+{
+  /*$('#products').html("<div style='height:22px'><img src='/assets/ajax-loader.gif'/></div>");*/
+  $('.loading_bar').show()
+  $.ajax({url: path, dataType: 'script'});
+  history.pushState('', 'New Page Title', path);
+  console.log('history enter ajax')
+  
+}
+
+
 
 function goToByScroll(id){
   $('html,body').animate({scrollTop: $("#"+id).offset().top},'slow');
@@ -380,7 +370,6 @@ function endscroll()
        }
        if (path && $(window).scrollTop() > $(document).height() - $(window).height() - 1200) {
          set_page(path)
-         console.log('path'+path)
          $('#pagination').html("<img src='/assets/loading.gif' />");
          return $.ajax({url: path, dataType: 'script'});
        }
@@ -391,8 +380,7 @@ function submit_online()
 {
   $('.loading_bar').show();
   $('#filter_online_form').ajaxSubmit({dataType: 'script'});
-  console.log('submit_online')
-  endscroll()
+  console.log('history enter')
   history.pushState('', 'New Page Title', $('#filter_online_form').attr('action')+"?"+$('#filter_online_form').serialize()+"&ajax=1");
 }
 function load_form()
