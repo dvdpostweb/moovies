@@ -1939,7 +1939,7 @@ text-decoration:underline;
   position: absolute;
   margin: -193px 0 0 -319px;
   background: white;
-  height: 300px;
+  min-height: 300px;
   width: 300px;
   z-index: 100;
   padding: 9px;
@@ -1951,4 +1951,12 @@ text-decoration:underline;
 {
   font-size:20px;
   padding:0 5px;
+}
+.loading_bar
+{
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  margin: 158px 0 0 550px;
+  z-index: 100;
 }

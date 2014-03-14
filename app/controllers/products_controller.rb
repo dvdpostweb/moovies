@@ -248,6 +248,12 @@ class ProductsController < ApplicationController
     end
   end
 
+  def data
+    if request.xhr?
+      render :layout => false
+    end
+  end
+
   def log
     if request.xhr?
       render :layout => false
