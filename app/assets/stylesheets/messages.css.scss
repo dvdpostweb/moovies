@@ -482,12 +482,16 @@ a#back_message
 {
   color: #FF4B00;
 }
-.open .translation_missing{
+.audience, .country, .year, .ratings, .audio, .subtitles {
     color: #212A31;
   font-weight:bold;
   font-size: 15px;
 }
-
+#date_filters_year_min, #date_filters_year_max {
+  color: #5C6377;
+  font-weight:lighter;
+  font-size: 13px;
+}
 
 .close {
   color:#000000;
