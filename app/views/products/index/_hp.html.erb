@@ -1,0 +1,12 @@
+<div id="maincontent" >
+  <div id='filter_layout'></div>
+  <div id="products">
+    <%= render :partial => 'products/index/hp_list', :locals => {:data => @new, :title => :news_svod} %>
+    <%= render :partial => 'products/index/hp_list', :locals => {:data => @soon, :title => :soon_svod} %>
+    <%= render :partial => 'products/index/hp_list', :locals => {:data => @new, :title => :news_svod} %>
+    <%= render :partial => 'products/index/hp_list', :locals => {:data => @soon, :title => :soon_svod} %>
+  </div>
+</div>
+<%= render :partial => 'products/index/filters_online', :locals => { :countries => @countries} %>  
+
+<div id='pagination_content'></div>

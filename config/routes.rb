@@ -40,6 +40,7 @@ Moovies::Application.routes.draw do
         match 'uninterested' => 'products#uninterested'
         match 'action' => 'products#action'
         match 'log' => 'products#log'
+        match 'data' => 'products#data' 
       end
       match 'products(/:package)(/:view_mode)' => 'products#index', :as => :products_short
       resources :phone_requests, :only => [:new, :create, :index]

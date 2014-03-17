@@ -53,14 +53,14 @@ class ProductsController < ApplicationController
       @meta_title = t('products.index.director.meta_title', :name => @people.name)
       @meta_description = t('products.index.director.meta_description', :name => @people.name)
     end
-    
+    @source = WishlistSource.wishlist_source(params, @wishlist_source)
     @vod_wishlist = current_customer.products.collect(&:products_id) if current_customer
     @countries = ProductCountry.visible.ordered
       if params[:package].nil?
         new_params = session[:sexuality] == 0 ? params.merge(:per_page => 25, :country_id => session[:country_id], :hetero => 1, :includes => ["descriptions_#{I18n.locale}"]) : params.merge(:per_page => 25, :country_id => session[:country_id], :includes => ["descriptions_#{I18n.locale}"])
-        new_params = new_params.merge(:view_mode => :svod_new)
-        @new = Product.filter(nil, new_params)
-        new_params = new_params.merge(:view_mode => 'svod_soon')
+        #new_params = new_params.merge(:view_mode => :tvod_new)
+        @new = Product.filter(nil, new_params.merge(:view_mode => :tvod_new))
+        #new_params = new_params.merge(:view_mode => :tvod_soon)
         @soon = Product.filter(nil, new_params)
       else
         new_params = params.merge(:per_page => 25, :country_id => session[:country_id], :includes => [ "descriptions_#{I18n.locale}"])
@@ -243,6 +243,12 @@ class ProductsController < ApplicationController
   end
 
   def action
+    if request.xhr?
+      render :layout => false
+    end
+  end
+
+  def data
     if request.xhr?
       render :layout => false
     end

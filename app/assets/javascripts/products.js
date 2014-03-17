@@ -1,31 +1,7 @@
 $(function() {
-  History = window.History, // Note: We are using a capital H instead of a lower h
-  $('#ca-container').contentcarousel({
-      // speed for the sliding animation
-      sliderSpeed     : 500,
-      // easing for the sliding animation
-      sliderEasing    : 'easeOutExpo',
-      // speed for the item animation (open / close)
-      itemSpeed       : 500,
-      // easing for the item animation (open / close)
-      itemEasing      : 'easeOutExpo',
-      // number of items to scroll at a time
-      scroll          : 6
-      
-  });
-  $('#ca-container2').contentcarousel({
-      // speed for the sliding animation
-      sliderSpeed     : 500,
-      // easing for the sliding animation
-      sliderEasing    : 'easeOutExpo',
-      // speed for the item animation (open / close)
-      itemSpeed       : 500,
-      // easing for the item animation (open / close)
-      itemEasing      : 'easeOutExpo',
-      // number of items to scroll at a time
-      scroll          : 6
-      
-  });
+  History = window.History // Note: We are using a capital H instead of a lower h
+  
+  $('.ca-container').contentcarousel({sliderSpeed: 500,sliderEasing: 'easeOutExpo',itemSpeed: 500,itemEasing: 'easeOutExpo', scroll: 6});
   $("body").delegate("#c-members #pagination a", "click", function() {
     html_item = $(this).parent();
     content = html_item.html();
@@ -184,12 +160,36 @@ $(function() {
   if($('#online #filters').html())
   {
     $('#products_index').delegate('.cover' , 'mouseenter', function () {
+      if($("#ca-container").length>0)
+      {
+        $(this).parent().find('.tooltips' ).css('margin-top', -193 - $(window).scrollTop());
+      }
     	$(this).parent().find('.tooltips' ).stop(true,true).show();
+    	content = $(this).parent().find('.tooltips_other')
+    	if(content.html() =='loading')
+    	{
+    	$.ajax({
+        url: $(this).attr('data-url'),
+        dataType: 'html',
+        type: 'GET',
+        data: {},
+        success: function(data) {
+          content.html(data);
+        },
+        error: function() {
+          content.html('error');
+        }
+      });
+    }
     });
     $('#products_index').delegate('.cover' , 'mouseleave', function () {
       $('.tooltips' ).fadeOut( 200 );
     });
     $('#products_index').delegate('.tooltips' , 'mouseenter', function () {
+      if($('#ca-container').length>0)
+      {
+        $(this).css('margin-top', -193 - $(window).scrollTop());
+      }
     	$(this).stop(true,true).show();
     });
     $('#products_index').delegate('.tooltips' , 'mouseleave', function () {
@@ -258,7 +258,7 @@ $(function() {
     })
     
     $('#products_index').delegate("#pagination.deactive a", "click", function() {
-      ajax($(this).attr('href'))
+      ajax_pagination($(this).attr('href'))
       return false
     })
     
@@ -300,44 +300,31 @@ $(function() {
       return false
     })
   }
-  function ajax(path)
-  {
-    $('#products').html("<div style='height:22px'><img src='/assets/ajax-loader.gif'/></div>");
-    $.ajax({url: path, dataType: 'script'});
-    history.pushState('', 'New Page Title', path);
-  }
-  
-  /*if($('#products_index').length)
-  {
-    $('#filter_online_form')[0].reset()
-      console.log($("#audience-slider-range"))
-     $("#audience-slider-range").slider("values", [0,4])
-     $("#ratings-slider-range").slider("values", [0,18])
-     $('#filters_audio').val('audio...').trigger('chosen:updated');
-     $('#filters_subtitles').val('sub...').trigger('chosen:updated');
-     $('#filters_category_id').val('category').trigger('chosen:updated');
-    
-  }*/
   History.Adapter.bind(window,'statechange',function(){ // Note: We are using statechange instead of popstate
-  					// Log the State
-  					
-  					var State = History.getState(); // Note: We are using History.getState() instead of event.state
-  					 $('#products').html("<div style='height:22px'><img src='/assets/ajax-loader.gif'/></div>");
-  					
-  					$.ajax({
-              url: State.url,
-              dataType: 'script',
-              type: 'GET',
-              data: {},
-              success: function(data) {
-                
-              },
-              error: function() {
-                
-              }
-  				});
+  	// Log the State
+  	var State = History.getState(); // Note: We are using History.getState() instead of event.state
+  	
+  	$('.loading_bar').show()
+  	$.ajax({
+      url: State.url,
+      dataType: 'script',
+      type: 'GET',
+      data: {},
+      success: function(data) {},
+      error: function() {}
+  	});
   })
-});
+ });
+
+function ajax_pagination(path)
+{
+  /*$('#products').html("<div style='height:22px'><img src='/assets/ajax-loader.gif'/></div>");*/
+  $('.loading_bar').show()
+  $.ajax({url: path, dataType: 'script'});
+  History.pushState(null,null, path);
+}
+
+
 
 function goToByScroll(id){
   $('html,body').animate({scrollTop: $("#"+id).offset().top},'slow');
@@ -351,6 +338,7 @@ function endscroll()
     $(window).scroll(function() {
        var path;
        path = $('#products_index #pagination .next_page').attr('href');
+       
        if ($(window).scrollTop() < 500)
        {
          $('#toTop').fadeOut('slow')
@@ -369,10 +357,9 @@ function endscroll()
 }
 function submit_online()
 {
-  $('#products').html("<div style='height:22px'><img src='/assets/ajax-loader.gif'/></div>");
+  $('.loading_bar').show();
   $('#filter_online_form').ajaxSubmit({dataType: 'script'});
-  endscroll()
-  history.pushState('', 'New Page Title', $('#filter_online_form').attr('action')+"?"+$('#filter_online_form').serialize()+"&ajax=1");
+  History.pushState(null, null, $('#filter_online_form').attr('action')+"?"+$('#filter_online_form').serialize());
 }
 function load_form()
 {
@@ -403,4 +390,9 @@ function load_form()
       submit_online()
     }
   });
-}
+}  
+$(window).scroll(function(){
+      var $this = $(this);
+      $('.ca-wrapper .tooltips:visible').css('margin-top', -193 - $this.scrollTop());
+      /*$('#box2').css('left', 20 - $this.scrollLeft());*/
+  });
