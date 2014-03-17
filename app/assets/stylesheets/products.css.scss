@@ -1488,7 +1488,7 @@ text-decoration:none;
 
 
 }
-#products_index #products .ca-item img{
+#products_index #products .ca-item .cover img{
   border:2px solid #FFFFFF;
     box-shadow:#000000 0 0 4px;
     height:150px;
@@ -1496,6 +1496,11 @@ text-decoration:none;
 
 
 }
+#products_index #products .ca-item .tooltips
+{
+  position:fixed;
+}
+
 #about_ppv
 {
   clear:both;
