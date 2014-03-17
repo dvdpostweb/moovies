@@ -1,34 +1,7 @@
 $(function() {
   History = window.History // Note: We are using a capital H instead of a lower h
-  var State = History.getState()
-  console.log(State.url)
   
-  $('#ca-container').contentcarousel({
-      // speed for the sliding animation
-      sliderSpeed     : 500,
-      // easing for the sliding animation
-      sliderEasing    : 'easeOutExpo',
-      // speed for the item animation (open / close)
-      itemSpeed       : 500,
-      // easing for the item animation (open / close)
-      itemEasing      : 'easeOutExpo',
-      // number of items to scroll at a time
-      scroll          : 6
-      
-  });
-  $('#ca-container2').contentcarousel({
-      // speed for the sliding animation
-      sliderSpeed     : 500,
-      // easing for the sliding animation
-      sliderEasing    : 'easeOutExpo',
-      // speed for the item animation (open / close)
-      itemSpeed       : 500,
-      // easing for the item animation (open / close)
-      itemEasing      : 'easeOutExpo',
-      // number of items to scroll at a time
-      scroll          : 6
-      
-  });
+  $('.ca-container').contentcarousel({sliderSpeed: 500,sliderEasing: 'easeOutExpo',itemSpeed: 500,itemEasing: 'easeOutExpo', scroll: 6});
   $("body").delegate("#c-members #pagination a", "click", function() {
     html_item = $(this).parent();
     content = html_item.html();
@@ -186,9 +159,13 @@ $(function() {
   });
   if($('#online #filters').html())
   {
+    console.log('ok')
     $('#products_index').delegate('.cover' , 'mouseenter', function () {
+      console.log('over')
+      $(this).parent().find('.tooltips' ).css('margin-top', -193 - $(window).scrollTop());
     	$(this).parent().find('.tooltips' ).stop(true,true).show();
-    	content = $(this).parent().find('.other')
+    	content = $(this).parent().find('.tooltips_other')
+    	console.log(content)
     	if(content.html() =='loading')
     	{
     	$.ajax({
@@ -209,6 +186,7 @@ $(function() {
       $('.tooltips' ).fadeOut( 200 );
     });
     $('#products_index').delegate('.tooltips' , 'mouseenter', function () {
+      $(this).css('margin-top', -193 - $(window).scrollTop());
     	$(this).stop(true,true).show();
     });
     $('#products_index').delegate('.tooltips' , 'mouseleave', function () {
@@ -322,7 +300,7 @@ $(function() {
   History.Adapter.bind(window,'statechange',function(){ // Note: We are using statechange instead of popstate
   	// Log the State
   	var State = History.getState(); // Note: We are using History.getState() instead of event.state
-  	console.log('history back')
+  	
   	$('.loading_bar').show()
   	$.ajax({
       url: State.url,
@@ -340,9 +318,7 @@ function ajax_pagination(path)
   /*$('#products').html("<div style='height:22px'><img src='/assets/ajax-loader.gif'/></div>");*/
   $('.loading_bar').show()
   $.ajax({url: path, dataType: 'script'});
-  history.pushState('', 'New Page Title', path);
-  console.log('history enter ajax')
-  
+  History.pushState(null,null, path);
 }
 
 
@@ -380,8 +356,7 @@ function submit_online()
 {
   $('.loading_bar').show();
   $('#filter_online_form').ajaxSubmit({dataType: 'script'});
-  console.log('history enter')
-  history.pushState('', 'New Page Title', $('#filter_online_form').attr('action')+"?"+$('#filter_online_form').serialize()+"&ajax=1");
+  History.pushState(null, null, $('#filter_online_form').attr('action')+"?"+$('#filter_online_form').serialize());
 }
 function load_form()
 {
@@ -412,4 +387,9 @@ function load_form()
       submit_online()
     }
   });
-}
+}  
+$(window).scroll(function(){
+      var $this = $(this);
+      $('.tooltips:visible').css('margin-top', -193 - $this.scrollTop());
+      /*$('#box2').css('left', 20 - $this.scrollLeft());*/
+  });
