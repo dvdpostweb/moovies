@@ -125,6 +125,8 @@ class Product < ActiveRecord::Base
     products = products.by_director(options[:director_id]) if options[:director_id]
     products = products.by_imdb_id(options[:imdb_id]) if options[:imdb_id]
     products = options[:kind] == :normal ? products.by_streaming_studio(options[:studio_id]) : products.by_studio(options[:studio_id]) if options[:studio_id]
+    products = products.by_package(Moovies.packages[options[:package]]) if options[:package] && (options[:view_mode] != 'svod_soon' && options[:view_mode] != 'tvod_soon')
+    
     if options[:filters]
       products = products.by_audience(options[:filters][:audience_min], options[:filters][:audience_max]) if Product.audience?(options[:filters][:audience_min], options[:filters][:audience_max]) && options[:kind] == :normal
       products = products.by_countries_id(options[:filters][:country_id].reject(&:empty?)) if Product.countries?(options[:filters][:country_id])
@@ -132,7 +134,6 @@ class Product < ActiveRecord::Base
       products = products.by_period(options[:date][:filters][:year_min], options[:date][:filters][:year_max]) if options[:date] && Product.year?(options[:date][:filters][:year_min], options[:date][:filters][:year_max])
       products = products.with_languages(audio = options[:filters][:audio].reject(&:empty?) ) if Product.audio?(options[:filters][:audio])
       products = products.with_subtitles(options[:filters][:subtitles].reject(&:empty?)) if Product.subtitle?(options[:filters][:subtitles])
-      products = products.by_package(Moovies.packages[options[:package]]) if options[:package] && (options[:view_mode] != 'svod_soon' && options[:view_mode] != 'tvod_soon')
       products = products.by_category(options[:filters][:category_id]) if !options[:filters][:category_id].nil? && !options[:filters][:category_id].blank?
     end
     products = self.get_view_mode(products, options[:view_mode]) if options[:view_mode]
