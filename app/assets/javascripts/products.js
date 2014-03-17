@@ -159,13 +159,13 @@ $(function() {
   });
   if($('#online #filters').html())
   {
-    console.log('ok')
     $('#products_index').delegate('.cover' , 'mouseenter', function () {
-      console.log('over')
-      $(this).parent().find('.tooltips' ).css('margin-top', -193 - $(window).scrollTop());
+      if($("#ca-container").length>0)
+      {
+        $(this).parent().find('.tooltips' ).css('margin-top', -193 - $(window).scrollTop());
+      }
     	$(this).parent().find('.tooltips' ).stop(true,true).show();
     	content = $(this).parent().find('.tooltips_other')
-    	console.log(content)
     	if(content.html() =='loading')
     	{
     	$.ajax({
@@ -186,7 +186,10 @@ $(function() {
       $('.tooltips' ).fadeOut( 200 );
     });
     $('#products_index').delegate('.tooltips' , 'mouseenter', function () {
-      $(this).css('margin-top', -193 - $(window).scrollTop());
+      if($('#ca-container').length>0)
+      {
+        $(this).css('margin-top', -193 - $(window).scrollTop());
+      }
     	$(this).stop(true,true).show();
     });
     $('#products_index').delegate('.tooltips' , 'mouseleave', function () {
@@ -390,6 +393,6 @@ function load_form()
 }  
 $(window).scroll(function(){
       var $this = $(this);
-      $('.tooltips:visible').css('margin-top', -193 - $this.scrollTop());
+      $('.ca-wrapper .tooltips:visible').css('margin-top', -193 - $this.scrollTop());
       /*$('#box2').css('left', 20 - $this.scrollLeft());*/
   });
