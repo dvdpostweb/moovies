@@ -1,4 +1,5 @@
 class SuspensionsController < ApplicationController
+  before_filter :authenticate_customer!
   def new
     @already_suspended = current_customer.suspended?
     if @already_suspended

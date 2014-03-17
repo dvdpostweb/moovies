@@ -1,30 +1,12 @@
+<!--   ==============   MAIN CONTENT   ==============   -->
 <% if params[:package].nil? %>
 <div id="all">
-  <div id="maincontent" >
-    <div id='filter_layout'></div>
-    <div id="products">
-      <div id="ca-container" class="ca-container">
-        <div class="ca-wrapper">
-          <%= render :partial => 'products/detail2', :collection => @new %>
-        </div>
-      </div>
-      <div id="ca-container2" class="ca-container">
-        <div class="ca-wrapper">
-          <%= render :partial => 'products/detail2', :collection => @soon %>
-        </div>
-      </div>
-    </div>
-  </div>
-  <%= render :partial => 'products/index/filters_online', :locals => { :countries => @countries} %>  
-  
-  <div id='pagination_content'></div>
+  <%= render :partial => 'products/index/hp' %>
 </div>
 <% else %>
-<!--   ==============   MAIN CONTENT   ==============   -->
-
 <div id="all">  
   <%= render :partial => 'products/index/all' %>
 </div>
-  <div id="toTop"><%= t('.back') %></div>
-  <!--   ==============   END MAIN CONTENT   ==============   --> 
+<div id="toTop"><%= t('.back') %></div>
 <% end %>
+<!--   ==============   END MAIN CONTENT   ==============   --> 

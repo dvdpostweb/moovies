@@ -78,13 +78,13 @@
       <li class="audio open">
         <%= t('.audio', :default => 'audio') %>
         <div>
-          <%= collection_select(:filters, :audio, Language.by_language(I18n.locale), :id, :name, {:include_blank => true}, {:multiple => true, :class => 'chosen-select', 'data-placeholder' =>"audio...", 'data-no_results_text' => 'not_found'}) %>
+          <%= collection_select(:filters, :audio, Language.by_language(I18n.locale), :id, :name, {:selected => params[:filters] && params[:filters][:audio] ? params[:filters][:audio] : nil, :include_blank => true}, {:multiple => true, :class => 'chosen-select', 'data-placeholder' =>"audio...", 'data-no_results_text' => 'not_found'}) %>
         </div>
       </li>
       <li class="subtitles open">
         <%= t('.subtitles', :default => 'subtitles') %>
         <div>
-          <%= collection_select(:filters, :subtitles, Subtitle.by_language(I18n.locale), :id, :name, {:include_blank => true}, {:multiple => true, :class => 'chosen-select', 'data-placeholder' =>"subtitles...", 'data-no_results_text' => 'not_found'}) %>
+          <%= collection_select(:filters, :subtitles, Subtitle.by_language(I18n.locale), :id, :name, {:selected => params[:filters] && params[:filters][:subtitles] ? params[:filters][:subtitles] : nil, :include_blank => true}, {:multiple => true, :class => 'chosen-select', 'data-placeholder' =>"subtitles...", 'data-no_results_text' => 'not_found'}) %>
         </div>
       </li>
       <li class="audio open">
