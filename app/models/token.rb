@@ -51,7 +51,7 @@ class Token < ActiveRecord::Base
           if token.id.blank?
             return {:token => nil, :error => Token.error[:query_rollback]}
           else
-            if file.tvod? && file.studio_id != 750
+            if file.tvod? && file.studio_id != 750 && !product.adult?
              LuckyCycleAction.poke(file, I18n.locale, customer, token)
             end
             return {:token => token, :error => nil}
