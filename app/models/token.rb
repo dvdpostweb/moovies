@@ -1,8 +1,12 @@
+require "uri"
+require 'net/https'
+
 class Token < ActiveRecord::Base
   belongs_to :customer, :primary_key => :customers_id
   has_many :streaming_products, :primary_key => :imdb_id, :foreign_key => :imdb_id
   has_many :streaming_products_free, :primary_key => :imdb_id, :foreign_key => :imdb_id
   has_many :token_ips
+  has_one :lucky_cycle
   has_many :products, :foreign_key => :imdb_id, :primary_key => :imdb_id
 
   after_create :generate_token
@@ -43,11 +47,13 @@ class Token < ActiveRecord::Base
           params = params.merge(:ppv_price => file.ppv_price, :kind => 'PPV', :is_ppv => true) if !file.svod?
           params = params.merge(:customer_id => customer.id) if customer
           params = params.merge(:code => code) if code
-          
           token = Token.create(params)
           if token.id.blank?
             return {:token => nil, :error => Token.error[:query_rollback]}
           else
+            if file.tvod? && file.studio_id != 750
+             LuckyCycleAction.poke(file, I18n.locale, customer, token)
+            end
             return {:token => token, :error => nil}
           end
         else

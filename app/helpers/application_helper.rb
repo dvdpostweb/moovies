@@ -39,7 +39,7 @@ module ApplicationHelper
     message = email_data_replace(mail_object.body, options)
     Emailer.public_email(email, subject, message, Rails.env == 'development' ? true : false).deliver
   end
-
+  
   def email_data_replace(text,options)
     options.each {|key, value| 
       r = Regexp.new(key, true)
