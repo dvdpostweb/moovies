@@ -1,6 +1,6 @@
 <% if params[:filters] || params[:date] || params[:View_mode] %>
   <div id="filtered_content">
-    <div id="filter_title"> <%= t '.active' %></div>
+    <div id="filter_title"> <%= t 'layouts.filters.active' %></div>
 
     <ul id="filtered" class="clearfix">
       <li>
@@ -77,7 +77,10 @@
           <%= @people.name %>
         </li>
       <% end %>
-      
+      <li id="close-f">
+        <%= link_to :reset, products_short_path(:package => params[:package])%>
+      </li>  
     </ul>
+    
   </div>
 <% end %>

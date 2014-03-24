@@ -1,9 +1,19 @@
+<% if @product.director && !@product.adult? %>
 <div class="director">
-  <%= @product.director.name if @product.director %>
+  <%= link_to @product.director.name, director_products_path(:director_id => @product.director.to_param) if @product.director %>
 </div>
+<% end %>
+<% if @product.adult? && @product.studio %>
+<div class="director">
+  <h4><%= t '.studio' %></h4>
+  <div><%= link_to @product.studio.name, studio_products_path(:studio_id => @product.studio.to_param) %></div>
+<div>
+<% end %>
+<% if !@product.actors.empty?  %>
 <div class="actors">
-  <%= @product.actors.collect(&:name).join(',') if @product.actors.size > 0 %>
+  <%= @product.actors.collect{|actor| link_to actor.name, actor_products_path(:actor_id => actor.to_param)}.join(', ').html_safe %>
 </div>
+<% end %>
 <div class="categories">
   <%= @product.categories.collect(&:name).join(',') if @product.categories %>
 </div>
