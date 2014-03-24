@@ -12,6 +12,8 @@ class InfoController < ApplicationController
       params[:page_name] = 'conditions'
     elsif params[:page_name] == t('routes.infos.params.get_connected')
       params[:page_name] = 'get_connected'
+    elsif params[:page_name] == t('routes.infos.params.luckycycle')
+      params[:page_name] = 'luckycycle'
     end
     @meta_title = t("info.index.#{params[:page_name]}.meta_title", :default => '')
     @meta_description = t("info.index.#{params[:page_name]}.meta_description", :default => '')
