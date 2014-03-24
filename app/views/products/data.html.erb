@@ -1,11 +1,11 @@
 <div class="director">
-  <%= @product.director.name %>
-</director>
+  <%= @product.director.name if @product.director %>
+</div>
 <div class="actors">
-  <%= @product.actors.collect(&:name).join(',') %>
+  <%= @product.actors.collect(&:name).join(',') if @product.actors.size > 0 %>
 </div>
 <div class="categories">
-  <%= @product.categories.collect(&:name).join(',') %>
+  <%= @product.categories.collect(&:name).join(',') if @product.categories %>
 </div>
 
 <ul class="btns osc">

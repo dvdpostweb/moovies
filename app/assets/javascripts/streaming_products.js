@@ -39,6 +39,8 @@ $(function() {
       success: function(data) {
         $('#presentation').html('')
         $('.qualityvod').show()
+        console.log('@@@'+data)
+        console.log(/.m3u8$/.test(data))
         if(/.m3u8$/.test(data))
         {
          /* if (/MSIE (\d+\.\d+);/.test(navigator.userAgent))
