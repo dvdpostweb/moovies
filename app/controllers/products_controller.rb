@@ -65,7 +65,7 @@ class ProductsController < ApplicationController
         @svod_last = Product.filter(nil, new_params.merge(:view_mode => 'svod_last_added', :package => Moovies.packages.invert[params[:kind] == :adult ? 4 : 1]))
         @svod_best_rating = Product.filter(nil, new_params.merge(:sort => 'rating', :package => Moovies.packages.invert[params[:kind] == :adult ? 4 : 1]))
         @svod_most_view = Product.filter(nil, new_params.merge(:view_mode => 'svod_most_viewed', :package => Moovies.packages.invert[params[:kind] == :adult ? 4 : 1]))
-        @svod_last_chance = Product.filter(nil, new_params.merge(:view_mode => 'svod_last_chance', :package => Moovies.packages.invert[params[:kind] == :adult ? 4 : 1]))
+        #@svod_last_chance = Product.filter(nil, new_params.merge(:view_mode => 'svod_last_chance', :package => Moovies.packages.invert[params[:kind] == :adult ? 4 : 1]))
         
       else
         new_params = params.merge(:per_page => 25, :country_id => session[:country_id], :includes => [ "descriptions_#{I18n.locale}"])

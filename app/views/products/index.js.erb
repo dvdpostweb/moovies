@@ -1,4 +1,4 @@
-<% if params[:package].nil? %>
+<% if params[:package].nil? && params[:concerns] != :productable %>
    $('#all').html("<%= escape_javascript(render(:partial => 'products/index/hp', :formats => [:html])) %>");
   $('.loading_bar').hide();
   endscroll()
