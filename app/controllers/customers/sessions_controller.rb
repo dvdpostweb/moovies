@@ -99,7 +99,7 @@ class Customers::SessionsController < Devise::SessionsController
           end
           customer = Customer.where(:email => params[:customer][:email]).first if params[:customer] && params[:customer][:email]
           if @discount.nil? || (@discount && customer && customer.discount_reuse?(@discount.month_before_reuse))
-            if customer.abo_active == 1
+            if customer && customer.abo_active == 1
               redirect_to params[:return_url], :alert => t('session.error_already_customer') and return
             end
           else
