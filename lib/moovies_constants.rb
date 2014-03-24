@@ -290,6 +290,10 @@ module Moovies
       "http://vod.dvdpost.be/#{token}_#{audio}_#{sub}.m3u8"
     end
 
+    def akamai_url(token, audio, sub)
+      "http://vod.dvdpost.be/#{token}_#{audio}_#{sub}.m3u8"
+    end
+
     def verimatrix_url(token, audio, sub)
       "http://94.139.62.205/Content/HLS/VOD/Token/#{token}_#{audio}_#{sub}.m3u8"
     end
