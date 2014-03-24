@@ -1,13 +1,13 @@
 <div class="director">
   <%= @product.director.name %>
-</director>
+</div>
 <div class="actors">
   <%= @product.actors.collect(&:name).join(',') %>
 </div>
 <div class="categories">
   <%= @product.categories.collect(&:name).join(',') %>
 </div>
-
+<div class="clear"></div>
 <ul class="btns osc">
   <li>
     <%= render :partial => 'products/streaming',  :locals => {:product => @product, :source => @source, :response_id => @response_id} %>

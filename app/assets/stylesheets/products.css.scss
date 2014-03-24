@@ -1491,8 +1491,8 @@ text-decoration:none;
 #products_index #products .ca-item .cover img{
   border:2px solid #FFFFFF;
     box-shadow:#000000 0 0 4px;
-    height:150px;
-    width:110px;
+    height:136px;
+    width:100px;
 
 
 }
@@ -1748,7 +1748,7 @@ text-decoration:none;
 
 .chosen-container-multi .chosen-choices li.search-field input[type="text"] {
  
-    color: #A6AAAD !important;
+    color: #5C6377 !important
     
     
 }
@@ -1776,44 +1776,44 @@ background: url("/assets/filters-arrows.png") no-repeat scroll -2px -18px transp
   border-radius: 4px 4px 4px 4px !important;
   background-image:none !important;
    border: 1px solid #A6AAAD !important;
-     color: #A6AAAD !important;
+     color: #5C6377 !important
 }
 
  
-label {  
-    display: inline-block;  
-    cursor: pointer;  
-    position: relative;  
-    padding-left: 25px;    
-    font-size: 13px;  
-    line-height:17px;
+label {
+    cursor: pointer;
+    display: inline-block;
+    font-size: 13px;
+    line-height: 26px;
+    padding-left: 25px;
+    position: relative;
 }
 
 input[type=radio] {  
     display: none;  
 }
-label:before {  
-    content: "";  
-    display: inline-block;  
+label:before {
+    border: 1px solid #9F9E98;    
+    content: "";
+    display: inline-block;
+    height: 11px;
+    left: 0;
+    margin-right: 10px;
+    margin-top: 6px;
+    position: absolute;
+    width: 11px;
+}
+.yeardate {
   
-    width: 11px;  
-    height: 11px;  
-  
-    margin-right: 10px;  
-    position: absolute;  
-    left: 0;  
-    bottombottom: 1px;  
-   box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8); 
-     border-radius: 8px;  
-     border:1px solid #9F9E98;
+  color: #5C6377 !important;
+ font-weight: lighter !important;
+ font-size:13px !important;
 }
 
 input[type="radio"]:checked + label:before {
-  background:#5C6377; 
-      
-     border-radius: 8px; 
-     width: 11px;  
-     height: 11px;
+    background: none repeat scroll 0 0 #212A31;
+    height: 11px;
+    width: 11px;
 }
 
 .ui-slider {
@@ -1853,7 +1853,7 @@ ul#audience_labels li, ul#year_labels li, ul#ratings_labels li {
   margin-top: -5px;
   
   text-align:center;
-  color: #A6AAAD;
+  color: #5C6377 !important;
 font-weight: lighter !important;
   background: none;
 }
@@ -1908,6 +1908,64 @@ ul#ratings_labels li:last-child {
 {
   display:block;
 }
+
+
+.tooltips .tooltips_title {
+    color: #212A31;
+    font-family: 'Open Sans Condensed',sans-serif;
+    font-size: 25px;
+    padding-bottom: 10px;
+    text-align:center;
+    line-height:23px;
+}
+
+.tooltips .tooltips_rating {
+    border-bottom: 1px solid #A6AAAD !important;
+    border-top: 1px solid #A6AAAD !important;
+    margin-top: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+.tooltips .tooltips_runtime
+{
+  color: #5C6377 !important;
+    font-size: 13px;
+    padding-bottom:10px;
+     padding-top:10px;
+  
+  
+}
+
+
+.tooltips .tooltips_description {
+  text-align: left;
+  
+  
+}
+
+.tooltips .tooltips_other .director, .tooltips .tooltips_other .actors
+
+{
+  color: #212A31;
+    font-size: 11px;
+    padding-bottom:10px;
+    float:left;
+    width:150px;
+  
+  
+}
+
+li .trailer {
+    background-image: url(image_path('button_trailer.png'));
+    color: #212A31;
+    font-size: 14px;
+}
+
+
+
+
+
+
 
 /***********************
 **   Verimatrix      *
