@@ -56,12 +56,17 @@ class ProductsController < ApplicationController
     @source = WishlistSource.wishlist_source(params, @wishlist_source)
     @vod_wishlist = current_customer.products.collect(&:products_id) if current_customer
     @countries = ProductCountry.visible.ordered
-      if params[:package].nil?
-        new_params = session[:sexuality] == 0 ? params.merge(:per_page => 25, :country_id => session[:country_id], :hetero => 1, :includes => ["descriptions_#{I18n.locale}"]) : params.merge(:per_page => 25, :country_id => session[:country_id], :includes => ["descriptions_#{I18n.locale}"])
-        #new_params = new_params.merge(:view_mode => :tvod_new)
-        @new = Product.filter(nil, new_params.merge(:view_mode => :tvod_new))
-        #new_params = new_params.merge(:view_mode => :tvod_soon)
-        @soon = Product.filter(nil, new_params)
+      if params[:package].nil? 
+        new_params = session[:sexuality] == 0 ? params.merge(:per_page => 50, :country_id => session[:country_id], :hetero => 1, :includes => ["descriptions_#{I18n.locale}"]) : params.merge(:per_page => 50, :country_id => session[:country_id], :includes => ["descriptions_#{I18n.locale}"])
+        @tvod_last = Product.filter(nil, new_params.merge(:view_mode => 'tvod_last_added', :package => Moovies.packages.invert[params[:kind] == :adult ? 5 : 2]))
+        @tvod_best_rating = Product.filter(nil, new_params.merge(:sort => 'rating', :package => Moovies.packages.invert[params[:kind] == :adult ? 5 : 2]))
+        @tvod_most_view = Product.filter(nil, new_params.merge(:view_mode => 'tvod_most_viewed', :package => Moovies.packages.invert[params[:kind] == :adult ? 5 : 2]))
+        @tvod_last_chance = Product.filter(nil, new_params.merge(:view_mode => 'tvod_last_chance', :package => Moovies.packages.invert[params[:kind] == :adult ? 5 : 2]))
+        @svod_last = Product.filter(nil, new_params.merge(:view_mode => 'svod_last_added', :package => Moovies.packages.invert[params[:kind] == :adult ? 4 : 1]))
+        @svod_best_rating = Product.filter(nil, new_params.merge(:sort => 'rating', :package => Moovies.packages.invert[params[:kind] == :adult ? 4 : 1]))
+        @svod_most_view = Product.filter(nil, new_params.merge(:view_mode => 'svod_most_viewed', :package => Moovies.packages.invert[params[:kind] == :adult ? 4 : 1]))
+        @svod_last_chance = Product.filter(nil, new_params.merge(:view_mode => 'svod_last_chance', :package => Moovies.packages.invert[params[:kind] == :adult ? 4 : 1]))
+        
       else
         new_params = params.merge(:per_page => 25, :country_id => session[:country_id], :includes => [ "descriptions_#{I18n.locale}"])
         new_params = new_params.merge(:hetero => 1) if session[:sexuality] == 0
