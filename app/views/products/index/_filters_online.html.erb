@@ -55,7 +55,7 @@
         <%= t('.year' , :default => 'year') %>
         <% max = Time.now.year + 1 %>
         <% max_year = params[:date] && params[:date][:filters] && params[:date][:filters][:year_max] && params[:date][:filters][:year_max].to_i <= max ? params[:date][:filters][:year_max].to_i : max %>
-        <div>
+        <div class="yeardate">
           <%= t '.from', :default => 'from' %>
           <%= select_year (params[:date] && params[:date][:filters] && params[:date][:filters][:year_min] ? params[:date][:filters][:year_min].to_i : 1910 ), :field_name => 'filters[year_min]', :start_year => 1910, :end_year => max %>
           <%= t '.to', :default => 'to' %>
