@@ -1564,11 +1564,11 @@ text-decoration:none;
   float: right;
 }
 
-#products_index #add, #reviews_index #add {
+#products_index #add, #reviews_index #add, #search_index #add {
   text-align:left;
 
 }
-#products_index .watch, #reviews_index .watch {
+#products_index .watch, #reviews_index .watch, #search_index .watch {
   text-align:left;
 }
 #products_index .content .watch {
@@ -2023,7 +2023,7 @@ text-decoration:underline;
   background: white;
   min-height: 300px;
   width: 300px;
-  z-index: 100;
+  z-index: 1000;
   padding: 9px;
   border: 1px solid;
   -webkit-box-shadow: 0 0 15px 1px #010301;

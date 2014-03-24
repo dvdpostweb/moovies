@@ -1,3 +1,28 @@
 // Place all the styles related to the search controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#search_index #maincontent
+{
+  display: inline;
+  float: right;
+  margin-right: 14px;
+  position: relative;
+  width: 940px;
+}
+#search_index .bysort {
+margin: 0 0 0 768px;
+padding: 0 0 11px;
+width: 233px;
+}
+
+#search_index .movie-descr {
+width: 601px;
+padding: 0 8px 0 120px;
+}
+
+#search_index #products {
+  clear: none;
+  border-top: 1px solid #212A31;
+  padding-top:12px;
+}
