@@ -56,7 +56,7 @@ class ProductsController < ApplicationController
     @source = WishlistSource.wishlist_source(params, @wishlist_source)
     @vod_wishlist = current_customer.products.collect(&:products_id) if current_customer
     @countries = ProductCountry.visible.ordered
-      if params[:package].nil? 
+      if params[:package].nil? && params[:concerns] != :productable
         new_params = session[:sexuality] == 0 ? params.merge(:per_page => 50, :country_id => session[:country_id], :hetero => 1, :includes => ["descriptions_#{I18n.locale}"]) : params.merge(:per_page => 50, :country_id => session[:country_id], :includes => ["descriptions_#{I18n.locale}"])
         @tvod_last = Product.filter(nil, new_params.merge(:view_mode => 'tvod_last_added', :package => Moovies.packages.invert[params[:kind] == :adult ? 5 : 2]))
         @tvod_best_rating = Product.filter(nil, new_params.merge(:sort => 'rating', :package => Moovies.packages.invert[params[:kind] == :adult ? 5 : 2]))
