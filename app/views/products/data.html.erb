@@ -17,7 +17,9 @@
 </div>
 <% end %>
 <div class="categories">
-  <%= @product.categories.collect(&:name).join('|') if @product.categories %>
+  <h3>
+  <%= @product.categories.collect(&:name).join(' | ') if @product.categories %>
+  </h3>
 </div>
 <div class="clear"></div>
 <ul class="btns osc jacket">

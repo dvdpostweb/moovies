@@ -1,7 +1,7 @@
 $(function() {
   History = window.History // Note: We are using a capital H instead of a lower h
   
-  $('.ca-container').contentcarousel({sliderSpeed: 500,sliderEasing: 'easeOutExpo',itemSpeed: 500,itemEasing: 'easeOutExpo', scroll: 6});
+  $('.ca-container').contentcarousel({sliderSpeed: 500,sliderEasing: 'easeOutExpo',itemSpeed: 500,itemEasing: 'easeOutExpo', scroll: 5});
   $("body").delegate("#c-members #pagination a", "click", function() {
     html_item = $(this).parent();
     content = html_item.html();
