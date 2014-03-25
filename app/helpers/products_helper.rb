@@ -274,11 +274,11 @@ module ProductsHelper
   end
 
   def products_index_title
-    pre = params[:package] == Moovies.packages.invert[1] || params[:package].nil? || params[:package] == Moovies.packages.invert[4] ? t('.svod', :default => 'svod') : t('.tvod', :default => 'tvod')
-    return "#{pre}: #{t '.director'}: #{Director.find(params[:director_id]).name}" if params[:director_id] && !params[:director_id].blank?
-    return "#{pre}: #{t '.studio'}: #{Studio.find(params[:studio_id]).name}" if params[:studio_id] && !params[:studio_id].blank?
-    return "#{pre}: #{t ".actor_#{params[:kind]}"}: #{Actor.find(params[:actor_id]).name}" if params[:actor_id] && !params[:actor_id].blank?
-    return "#{pre}: #{t ".categorie#{params[:filter]}"}: #{Category.find(params[:category_id]).descriptions.by_language(I18n.locale).first.name}" if params[:category_id] && !params[:category_id].blank?
+    pre = params[:package] == Moovies.packages.invert[1] || params[:package].nil? || params[:package] == Moovies.packages.invert[4] ? t('products.index.svod', :default => 'svod') : t('products.index.tvod', :default => 'tvod')
+    return "#{pre}: #{t 'products.index.director'}: #{Director.find(params[:director_id]).name}" if params[:director_id] && !params[:director_id].blank?
+    return "#{pre}: #{t 'products.index.studio'}: #{Studio.find(params[:studio_id]).name}" if params[:studio_id] && !params[:studio_id].blank?
+    return "#{pre}: #{t "products.index.actor_#{params[:kind]}"}: #{Actor.find(params[:actor_id]).name}" if params[:actor_id] && !params[:actor_id].blank?
+    return "#{pre}: #{t "products.index.categorie#{params[:filter]}"}: #{Category.find(params[:category_id]).descriptions.by_language(I18n.locale).first.name}" if params[:category_id] && !params[:category_id].blank?
     return "#{pre}: #{t 'products.left_column.svod_last_added'}" if params[:view_mode] == 'svod_last_added'
     return "#{pre}: #{t 'products.left_column.svod_most_viewed'}" if params[:view_mode] == 'most_viewed'
     return "#{pre}: #{t 'products.left_column.svod_most_viewed'}" if params[:view_mode] == 'svod_most_viewed'

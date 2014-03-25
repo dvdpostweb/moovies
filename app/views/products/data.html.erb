@@ -1,13 +1,23 @@
-<div class="categories">
-  <h3><%= @product.categories.collect(&:name).join('|') if @product.categories %></h3>
-</div>
+<% if @product.director && !@product.adult? %>
 <div class="director">
   <h3><%= t('.directed_by') %></h3>
-  <%= @product.director.name if @product.director %>
+  <%= link_to @product.director.name, director_products_path(:director_id => @product.director.to_param) if @product.director %>
 </div>
+<% end %>
+<% if @product.adult? && @product.studio %>
+<div class="director">
+  <h4><%= t '.studio' %></h4>
+  <div><%= link_to @product.studio.name, studio_products_path(:studio_id => @product.studio.to_param) %></div>
+<div>
+<% end %>
+<% if !@product.actors.empty?  %>
 <div class="actors">
    <h3><%= t '.actors' %></h3>
-  <%= @product.actors.collect(&:name).join(',') if @product.actors.size > 0 %>
+   <%= @product.actors.collect{|actor| link_to actor.name, actor_products_path(:actor_id => actor.to_param)}.join(', ').html_safe %>
+</div>
+<% end %>
+<div class="categories">
+  <%= @product.categories.collect(&:name).join('|') if @product.categories %>
 </div>
 <div class="clear"></div>
 <ul class="btns osc jacket">
