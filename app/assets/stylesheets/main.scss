@@ -791,6 +791,30 @@ color:#fff;
 display: block;
 }
 
+.jacket .watch {
+  float:left;
+  	text-align: center !important;
+  	  margin:5px;
+}
+.jacket .alacarte{
+  float:left;
+ margin:5px;
+  
+}
+
+.jacket #add{
+  float:left;
+   margin:5px;
+  	text-align: center !important;
+}
+
+.jacket .trailer {
+  float:left;
+   margin:5px;
+  
+}
+
+
 .watch {
 	background-image: url(image_path('button_streaming.gif'));
 	background-position: 0 0;
@@ -804,6 +828,8 @@ display: block;
 	text-align: center;
 	width: 145px;
 }
+
+
 
 
 .alacarte{
