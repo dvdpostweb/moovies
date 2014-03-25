@@ -1437,9 +1437,9 @@ text-decoration:none;
 .bysort_choice { float:left;}
 
 .bysort {
-    margin: 0 0 0 471px;
+    margin: -10px 0 0 336px;
     padding: 0 0 11px;
-    width: 233px;
+    width: 242px;
 }
 
 #toTop:hover {
@@ -1465,9 +1465,11 @@ text-decoration:none;
     background: none repeat scroll 0 0 #212A31;
     color: #FFFFFF;
     display: block;
-    float: right;
-    margin: -31px 0 0 200px;
+    float: left;
+    margin: -2px 0 0 16px;
     padding: 5px;
+    text-align: center;
+    width: 233px;
 }
 #products
 {
@@ -1476,7 +1478,6 @@ text-decoration:none;
 
 #products_index #products {
   clear: none;
-  border-top: 1px solid #212A31;
   padding-top:12px;
 
 
@@ -1899,6 +1900,7 @@ ul#ratings_labels li:last-child {
 	padding: 0 8px 0 117px;
 	position: relative;
 	width: 358px;
+	 margin-left: 5px;
 }
 #film-details .watch
 {
@@ -1925,13 +1927,17 @@ ul#ratings_labels li:last-child {
     margin-top: 10px;
     padding-bottom: 5px;
     padding-top: 5px;
+     margin-left: 5px;
+      text-align:left;
 }
 .tooltips .tooltips_runtime
 {
-  color: #5C6377 !important;
-    font-size: 13px;
-    padding-bottom:10px;
-     padding-top:10px;
+  color: #212A31 !important;
+    font-size: 12px;
+    padding-bottom:5px;
+     padding-top:5px;
+      margin-left: 5px;
+       text-align:left;
   
   
 }
@@ -1943,29 +1949,119 @@ ul#ratings_labels li:last-child {
   
 }
 
-.tooltips .tooltips_other .director, .tooltips .tooltips_other .actors
+.categories h3 {
+    color: #212A31;
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 5px;
+    margin-top: 8px;
+    text-transform: uppercase;
+    text-align:left;
+     width:250px;
+    
+}
+
+.categories {
+  margin-right:10px;
+    width:250px;
+}
+
+.tooltips .tooltips_other .actors
 
 {
   color: #212A31;
     font-size: 11px;
     padding-bottom:10px;
     float:left;
-    width:150px;
+    width:170px;
+    padding-left:5px;
+    text-align:left;
   
   
 }
 
-li .trailer {
-    background-image: url(image_path('button_trailer.png'));
+.tooltips .tooltips_other .director
+
+{
+  color: #212A31;
+    font-size: 11px;
+    padding-bottom:10px;
+    float:left;
+    width:130px;
+    margin-left:5px;
+    text-align:left;
+  
+  
+}
+
+
+.trailer {
+    background-image:  url(image_path('button_trailer.png'));
+    background-repeat: no-repeat;
     color: #212A31;
+    display: block;
+    float: left;
     font-size: 14px;
+    font-weight: bold;
+    height: 32px;
+    line-height: 32px;
+    padding-left: 36px;
+    width: 145px;
+     text-align:left;
+}
+
+
+.selected-Grid {
+    background-image: url(image_path('TileViewSelected.gif'));
+    cursor: pointer;
+    float: left;
+    height: 21px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-indent: -9999px;
+    width: 28px;
+}
+
+.selected-Expanded {
+    background-image: url(image_path('BlurbViewSelected.gif'));
+    cursor: pointer;
+    float: left;
+    height: 21px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-indent: -9999px;
+    width: 28px;
 }
 
 
 
+.Expanded {
+    background-image: url(image_path('views.gif'));
+    background-position: -28px 0;
+    cursor: pointer;
+    float: left;
+    height: 21px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-indent: -9999px;
+    width: 28px;
+}
 
-
-
+.Grid {
+    background-image: url(image_path('views.gif'));
+    background-position: 0 0;
+    cursor: pointer;
+    float: left;
+    height: 21px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-indent: -9999px;
+    width: 29px;
+}
 
 /***********************
 **   Verimatrix      *
@@ -2024,8 +2120,8 @@ text-decoration:underline;
   position: absolute;
   margin: -193px 0 0 -319px;
   background: white;
-  min-height: 300px;
-  width: 300px;
+  min-height: 312px;
+  width: 312px;
   z-index: 100;
   padding: 9px;
   border: 1px solid;

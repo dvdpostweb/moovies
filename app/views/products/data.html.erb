@@ -1,14 +1,16 @@
+<div class="categories">
+  <h3><%= @product.categories.collect(&:name).join('|') if @product.categories %></h3>
+</div>
 <div class="director">
+  <h3><%= t('.directed_by') %></h3>
   <%= @product.director.name if @product.director %>
 </div>
 <div class="actors">
+   <h3><%= t '.actors' %></h3>
   <%= @product.actors.collect(&:name).join(',') if @product.actors.size > 0 %>
 </div>
-<div class="categories">
-  <%= @product.categories.collect(&:name).join(',') if @product.categories %>
-</div>
 <div class="clear"></div>
-<ul class="btns osc">
+<ul class="btns osc jacket">
   <li>
     <%= render :partial => 'products/streaming',  :locals => {:product => @product, :source => @source, :response_id => @response_id} %>
   </li>

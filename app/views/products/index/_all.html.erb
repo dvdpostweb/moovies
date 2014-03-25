@@ -6,9 +6,9 @@
   <h1 class="ttl"><%= products_index_title %></h1>
   <%= render :partial => 'products/index/image', :locals => {:people => @people} if @people %>
   <% if cookies[:display] == 'list' %>
-    list - <%= link_to t('.jacket'), params.merge(:display => 'jacket', :kind => (params[:kind] == :normal ? nil : params[:kind]), :page => nil) %>
+    <div class="selected-Expanded"  >list</div> <%= link_to t('.jacket'), params.merge(:display => 'jacket', :kind => (params[:kind] == :normal ? nil : params[:kind]), :page => nil), :class => 'Grid' %>
   <% else %>
-    <%= link_to t('.list'), params.merge(:display => 'list', :kind => (params[:kind] == :normal ? nil : params[:kind]), :page => nil) %> - jacket
+    <%= link_to t('.list'), params.merge(:display => 'list', :kind => (params[:kind] == :normal ? nil : params[:kind]), :page => nil), :class => 'Expanded' %> <div class="selected-Grid">jacket</div>
   <% end %>
   <!--   ==============   MOVIES   ==============   -->
   <% if cookies[:endless] == 'deactive' %>
