@@ -1,5 +1,5 @@
 <!--   ==============   MAIN CONTENT   ==============   -->
-<% if params[:package].nil? %>
+<% if params[:package].nil? && params[:concerns] != :productable %>
 <div id="all">
   <%= render :partial => 'products/index/hp' %>
 </div>

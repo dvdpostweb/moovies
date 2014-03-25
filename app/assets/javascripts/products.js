@@ -198,29 +198,29 @@ $(function() {
     
     
     load_form()
-    $('#products_index').delegate('#online #date_filters_year_min, #online  #date_filters_year_max', "change", function(){
+    $('#products_index, #film-details, #categories, #studios').delegate('#online #date_filters_year_min, #online  #date_filters_year_max', "change", function(){
       submit_online()
     })
-    $('#products_index').delegate('.packages', 'click', function(){
+    $('#products_index, #film-details, #categories, #studios').delegate('.packages', 'click', function(){
       $('#filter_online_form').attr('action', $(this).attr('href'))
       $('.packages').removeClass('current')
       $(this).addClass('current')
       submit_online()
       return false;
     })
-    $('#products_index').delegate(".links", "change", function(){
+    $('#products_index, #film-details, #categories, #studios').delegate(".links", "change", function(){
       submit_online()
     })
     
     /*close thing*/
-    $('#products_index').delegate("#close_audience", "click", function() {
+    $('#products_index, #film-details, #categories, #studios').delegate("#close_audience", "click", function() {
       $("#online #audience-slider-range").slider("values", [0,4])
     });
-    $('#products_index').delegate("#close_country", "click", function() {
+    $('#products_index, #film-details').delegate("#close_country", "click", function() {
       $('#online #filters_country_id').val('').trigger('chosen:updated');
       submit_online()
     });
-    $('#products_index').delegate("#close_year", "click", function() {
+    $('#products_index, #film-details, #categories, #studios').delegate("#close_year", "click", function() {
       $("#online #date_filters_year_min").val($("#online #date_filters_year_min option:first").val());
       $("#online #date_filters_year_max").val($("#online #date_filters_year_min option:last").val());
       submit_online()
@@ -357,9 +357,15 @@ function endscroll()
 }
 function submit_online()
 {
-  $('.loading_bar').show();
-  $('#filter_online_form').ajaxSubmit({dataType: 'script'});
-  History.pushState(null, null, $('#filter_online_form').attr('action')+"?"+$('#filter_online_form').serialize());
+  if($('#products_index').length > 0){
+    $('.loading_bar').show();
+    $('#filter_online_form').ajaxSubmit({dataType: 'script'});
+    History.pushState(null, null, $('#filter_online_form').attr('action')+"?"+$('#filter_online_form').serialize());
+  }
+  else
+  {
+    $('#filter_online_form').submit();
+  }
 }
 function load_form()
 {

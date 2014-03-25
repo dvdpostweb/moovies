@@ -95,7 +95,8 @@
     </div><!-- #film-info -->
   </div>
   <!--   ==============   END MAIN CONTENT   ==============   -->
-  <%= render :partial => 'products/left_column', :locals => {:filter => @filter, :countries => @countries} %>
+  <%= render :partial => 'products/index/filters_online', :locals => { :countries => @countries} %>  
+  
   <% if params[:add].to_i == 1 %>
   <% submit_id = "p_#{@product.to_param}_#{rand(10)}"%>
   <div id='add_p' style='display:none' class='action_face_js'><%= product_action_path(:product_id => @product.to_param, :origin => 'products') %></div>
