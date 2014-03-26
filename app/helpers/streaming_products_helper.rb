@@ -1,5 +1,5 @@
 module StreamingProductsHelper
-  def flowplayer(source_file, source, streaming, token_name, browser)
+  def flowplayer(source_file, source, streaming, token_name, browser, code = nil)
     if browser.iphone? || browser.ipad? || browser.tablet?
       audio = streaming.languages.by_language(:fr).first.short_alpha
       sub = streaming.subtitles.count > 0 ? streaming.subtitles.by_language(:fr).first.short_alpha : 'non'
@@ -18,7 +18,7 @@ module StreamingProductsHelper
       sub = streaming.subtitles.count > 0 ? streaming.subtitles.by_language(:fr).first.short_alpha : 'non'
       url = Moovies.verimatrix_url(token_name, audio, sub)
       script = url
-    elsif streaming.imdb_id == 1620449
+    elsif code.nil?
       audio = streaming.languages.by_language(:fr).first.short_alpha
       sub = streaming.subtitles.count > 0 ? streaming.subtitles.by_language(:fr).first.short_alpha : 'non'
       url = Moovies.hls_url(token_name, audio, sub)
