@@ -379,7 +379,16 @@ function submit_online()
   if($('#products_index').length > 0){
     $('.loading_bar').show();
     $('#filter_online_form').ajaxSubmit({dataType: 'script'});
-    History.pushState(null, null, $('#filter_online_form').attr('action')+"?"+$('#filter_online_form').serialize());
+    if($('#filter_online_form').attr('action').indexOf('?')>0)
+    {
+      history_url = $('#filter_online_form').attr('action')+"&"+$('#filter_online_form').serialize()  
+    }
+    else
+    {
+      history_url = $('#filter_online_form').attr('action')+"?"+$('#filter_online_form').serialize()
+    }
+    
+    History.pushState(null, null, history_url);
   }
   else
   {

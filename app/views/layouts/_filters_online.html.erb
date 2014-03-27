@@ -3,10 +3,12 @@
     <div id="filter_title"> <%= t 'layouts.filters.active' %></div>
 
     <ul id="filtered" class="clearfix">
+      <% if params[:package] %>
       <li>
         <strong><%= t 'products.index.type' %></strong>
         <%= t("products.left_column.#{params[:package]}") %>
       </li>
+      <% end %>
       <% if Product.audience?(params[:filters][:audience_min], params[:filters][:audience_max]) && params[:kind] == :normal %>
         <li>
           <span class='close' id="close_audience"></span>
@@ -78,7 +80,7 @@
         </li>
       <% end %>
       <li id="close-f">
-        <%= link_to :reset, products_short_path(:package => params[:package])%>
+        <%= link_to 'Reset', products_short_path()%>
       </li>  
     </ul>
     
