@@ -503,7 +503,6 @@ class Product < ActiveRecord::Base
     end
   end
   def self.get_view_mode(products, view_mode)
-    Rails.logger.debug { "@@@#{view_mode}" }
     case view_mode.to_sym
     when :svod_hd
         products.hd
@@ -539,7 +538,7 @@ class Product < ActiveRecord::Base
   end
 
   def self.get_sort(options)
-    if options[:sort]
+    if !options[:sort].nil? && !options[:sort].empty?
       if options[:sort] == 'alpha_az'
         "descriptions_title_#{I18n.locale} ASC"
       elsif options[:sort] == 'alpha_za'
