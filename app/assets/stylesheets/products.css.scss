@@ -920,6 +920,7 @@ margin: 4px 0;
 float: left;
 padding: 5px;
 height: 201px;
+position: relative;
 }
 .movie-ttl {
   overflow: hidden;
@@ -1222,7 +1223,10 @@ margin: 4px 0 0;
 }
 
 
-
+#filtered
+{
+  width: 570px;
+}
 #filter_title {
   
  background: url(image_path('search.png')) no-repeat scroll 0 4px transparent;     color: #9F9E98;
@@ -1279,22 +1283,20 @@ margin: 4px 0 0;
 }
 
 #filtered li#close-f a {
-   background-color: #9ECA3B;
-      background-repeat: repeat no-repeat;
-      border: 1px solid #7EA613;
-      border-radius: 4px 4px 4px 4px;
-      box-shadow: 0 1px 1px rgba(255, 255, 255, 0.796) inset;
-      color: #FFFFFF;
-      font-size: 16px;
-      height: 21px;
-        margin: 1px -2px 4px -53px;
- 
-      text-shadow: 0 -1px 0 #72942A;
-      width: 120px;
-text-align:center;
-  display:block;
-
-
+ background-color: #9ECA3B;
+ background-repeat: repeat no-repeat;
+ border: 1px solid #7EA613;
+ border-radius: 4px 4px 4px 4px;
+ box-shadow: 0 1px 1px rgba(255, 255, 255, 0.796) inset;
+ color: #FFFFFF;
+ font-size: 16px;
+ height: 21px;
+ margin: 1px -2px 4px -53px;
+ text-shadow: 0 -1px 0 #72942A;
+ width: 120px;
+ text-align:center;
+ display:block;
+ line-height: 23px;
 }
 #filtered .close:hover {
 background-position: -42px -10px;
@@ -1439,7 +1441,7 @@ text-decoration:none;
 .bysort {
     margin: -10px 0 0 336px;
     padding: 0 0 11px;
-    width: 242px;
+    width: 247px;
 }
 
 #toTop:hover {
@@ -2138,4 +2140,13 @@ text-decoration:underline;
   width: 50px;
   margin: -23px 0 0 923px;
   z-index: 100;
+}
+.movie-wrap-jacket .hd {
+  background: url("/assets/icon_hd.png") no-repeat scroll 0 0 transparent;
+  display: block;
+  height: 26px;
+  left: 84px;
+  position: absolute;
+  top: 169px;
+  width: 48px;
 }

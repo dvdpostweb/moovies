@@ -273,43 +273,17 @@ module ProductsHelper
     check_box_tag "search_filter[#{attribute}[#{sub_attribute}]]", true, checked
   end
 
-  def products_index_title
-    pre = params[:package] == Moovies.packages.invert[1] || params[:package].nil? || params[:package] == Moovies.packages.invert[4] ? t('products.index.svod', :default => 'svod') : t('products.index.tvod', :default => 'tvod')
-    return "#{pre}: #{t 'products.index.director'}: #{Director.find(params[:director_id]).name}" if params[:director_id] && !params[:director_id].blank?
-    return "#{pre}: #{t 'products.index.studio'}: #{Studio.find(params[:studio_id]).name}" if params[:studio_id] && !params[:studio_id].blank?
-    return "#{pre}: #{t "products.index.actor_#{params[:kind]}"}: #{Actor.find(params[:actor_id]).name}" if params[:actor_id] && !params[:actor_id].blank?
-    return "#{pre}: #{t "products.index.categorie#{params[:filter]}"}: #{Category.find(params[:category_id]).descriptions.by_language(I18n.locale).first.name}" if params[:category_id] && !params[:category_id].blank?
-    return "#{pre}: #{t 'products.left_column.svod_last_added'}" if params[:view_mode] == 'svod_last_added'
-    return "#{pre}: #{t 'products.left_column.svod_most_viewed'}" if params[:view_mode] == 'most_viewed'
-    return "#{pre}: #{t 'products.left_column.svod_most_viewed'}" if params[:view_mode] == 'svod_most_viewed'
-    return "#{pre}: #{t 'products.left_column.svod_most_viewed'}" if params[:view_mode] == 'tvod_most_viewed'
-    return "#{pre}: #{t 'products.left_column.svod_last_chance'}" if params[:view_mode] == 'svod_last_chance'
-    return "#{pre}: #{t 'products.left_column.svod_soon'}" if params[:view_mode] == 'svod_soon'
-    return "#{pre}: #{t 'products.left_column.svod_new'}" if params[:view_mode] == 'svod_new'
-    return "#{pre}: #{t 'products.left_column.tvod_last_added'}" if params[:view_mode] == 'tvod_last_added'
-    return "#{pre}: #{t 'products.left_column.tvod_last_chance'}" if params[:view_mode] == 'tvod_last_chance'
-    return "#{pre}: #{t 'products.left_column.tvod_soon'}" if params[:view_mode] == 'tvod_soon'
-    return "#{pre}: #{t 'products.left_column.tvod_new'}" if params[:view_mode] == 'tvod_new'
-    
-    return  "#{pre}: #{t('products.left_column.svod_all')}"
-  end
   def products_index_description
     pre = params[:package] == Moovies.packages.invert[1] || params[:package].nil? || params[:package] == Moovies.packages.invert[4] ? 'svod' : 'tvod'
     return "products.index.description_#{pre}_director" if params[:director_id] && !params[:director_id].blank?
     return "products.index.description_#{pre}_studio" if params[:studio_id] && !params[:studio_id].blank?
     return "products.index.description_#{pre}_actor" if params[:actor_id] && !params[:actor_id].blank?
     return "products.index.description_#{pre}_category" if params[:category_id] && !params[:category_id].blank?
-    return "products.index.description_svod_last_added" if params[:view_mode] == 'svod_last_added'
+    return "products.index.description_#{pre}_last_added" if params[:view_mode] == 'last_added'
     return "products.index.description_#{pre}_most_viewed" if params[:view_mode] == 'most_viewed'
-    return "products.index.description_#{pre}_most_viewed" if params[:view_mode] == 'svod_most_viewed'
-    return "products.index.description_#{pre}_most_viewed" if params[:view_mode] == 'tvod_most_viewed'
-    return "products.index.description_svod_last_chance" if params[:view_mode] == 'svod_last_chance'
-    return "products.index.description_svod_soon" if params[:view_mode] == 'svod_soon'
-    return "products.index.description_svod_new" if params[:view_mode] == 'svod_new'
-    return "products.index.description_tvod_last_added" if params[:view_mode] == 'tvod_last_added'
-    return "products.index.description_tvod_last_chance" if params[:view_mode] == 'tvod_last_chance'
-    return "products.index.description_tvod_soon" if params[:view_mode] == 'tvod_soon'
-    return "products.index.description_tvod_new" if params[:view_mode] == 'tvod_new'
+    return "products.index.description_#{pre}_last_chance" if params[:view_mode] == 'last_chance'
+    return "products.index.description_#{pre}_soon" if params[:view_mode] == 'soon'
+    return "products.index.description_#{pre}_new" if params[:view_mode] == 'new'
     return "products.index.description_#{pre}_all"
   end
 
@@ -319,17 +293,11 @@ module ProductsHelper
     return "products.index.alt_banner_#{pre}_studio" if params[:studio_id] && !params[:studio_id].blank?
     return "products.index.alt_banner_#{pre}_actor" if params[:actor_id] && !params[:actor_id].blank?
     return "products.index.alt_banner_#{pre}_category" if params[:category_id] && !params[:category_id].blank?
-    return "products.index.alt_banner_svod_last_added" if params[:view_mode] == 'svod_last_added'
+    return "products.index.alt_banner_#{pre}_last_added" if params[:view_mode] == 'last_added'
     return "products.index.alt_banner_#{pre}_most_viewed" if params[:view_mode] == 'most_viewed'
-    return "products.index.alt_banner_#{pre}_most_viewed" if params[:view_mode] == 'tvod_most_viewed'
-    return "products.index.alt_banner_#{pre}_most_viewed" if params[:view_mode] == 'svod_most_viewed'
-    return "products.index.alt_banner_svod_last_chance" if params[:view_mode] == 'svod_last_chance'
-    return "products.index.alt_banner_svod_soon" if params[:view_mode] == 'svod_soon'
-    return "products.index.alt_banner_svod_new" if params[:view_mode] == 'svod_new'
-    return "products.index.alt_banner_tvod_last_added" if params[:view_mode] == 'tvod_last_added'
-    return "products.index.alt_banner_tvod_last_chance" if params[:view_mode] == 'tvod_last_chance'
-    return "products.index.alt_banner_tvod_soon" if params[:view_mode] == 'tvod_soon'
-    return "products.index.alt_banner_tvod_new" if params[:view_mode] == 'tvod_new'
+    return "products.index.alt_banner_#{pre}_last_chance" if params[:view_mode] == 'last_chance'
+    return "products.index.alt_banner_#{pre}_soon" if params[:view_mode] == 'soon'
+    return "products.index.alt_banner_#{pre}_new" if params[:view_mode] == 'new'
     return "products.index.alt_banner_#{pre}_all"
   end
 
