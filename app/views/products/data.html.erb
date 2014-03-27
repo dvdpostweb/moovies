@@ -6,9 +6,9 @@
 <% end %>
 <% if @product.adult? && @product.studio %>
 <div class="director">
-  <h4><%= t 'products.show.product.actors' %></h4>
+  <h3><%= t 'products.show.product.studio' %></h3>
   <div><%= link_to @product.studio.name, studio_products_path(:studio_id => @product.studio.to_param) %></div>
-<div>
+</div>
 <% end %>
 <% if !@product.actors.empty?  %>
 <div class="actors">

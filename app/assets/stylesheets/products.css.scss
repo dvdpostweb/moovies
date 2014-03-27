@@ -1368,6 +1368,26 @@ background: none repeat scroll 0 0 #66CCCC;
   color: #FFFFFF;
 font-family:'Open Sans Condensed', sans-serif;
 }
+.adult .packages.svod {
+  border: #993399 1px solid;
+    color: #993399;
+}
+
+.adult .packages.svod.current {
+    background-color: #993399;
+    color: #FFFFFF;
+}
+
+
+.adult .packages.tvod {
+  border: #C36EC3 1px solid;
+    color: #C36EC3;
+}
+
+.adult .packages.tvod.current {
+    background-color: #C36EC3;
+    color: #FFFFFF;
+}
 .package a:hover{
 text-decoration:none;
   

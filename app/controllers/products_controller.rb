@@ -14,7 +14,7 @@ class ProductsController < ApplicationController
       params[:package] = Moovies.packages.invert[2]
     end
     if params[:filters] && params[:filters][:view_mode]
-      params[:view_mode] = params[:package] == Moovies.packages.invert[2] || params[:package] == Moovies.packages.invert[4] ? "tvod_#{params[:filters][:view_mode]}" : "svod_#{params[:filters][:view_mode]}"
+      params[:view_mode] = params[:package] == Moovies.packages.invert[2] || params[:package] == Moovies.packages.invert[5] ? "tvod_#{params[:filters][:view_mode]}" : "svod_#{params[:filters][:view_mode]}"
     end
     if params[:package] and !['unlimited', 'tvod', 'adult_unlimited', 'adult_tvod'].include?(params[:package])
       params[:package] = Moovies.packages.invert[1]
