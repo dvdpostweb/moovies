@@ -1,3 +1,5 @@
+#<%= params[:div_id]%>|||<p class="tooltips_rating stars"><%= render :partial => 'products/rating', :locals => {:product => @product, :background => @rating_color, :size => :long, :source => @source, :response_id => @response_id} %></p>
+<p class="tooltips_runtime"><%= t('products.show.product.duration') %> <%= @product.runtime %> <%= t('products.show.minutes') %></p>
 <% if @product.director && !@product.adult? %>
 <div class="director">
   <h3><%= t('products.show.product.directed_by') %></h3>

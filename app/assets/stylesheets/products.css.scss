@@ -1801,7 +1801,7 @@ background: url("/assets/filters-arrows.png") no-repeat scroll -2px -18px transp
 }
 
  
-label {
+#filters label {
     cursor: pointer;
     display: inline-block;
     font-size: 13px;
@@ -1810,10 +1810,10 @@ label {
     position: relative;
 }
 
-input[type=radio] {  
+#filters input[type=radio] {  
     display: none;  
 }
-label:before {
+#filters label:before {
     border: 1px solid #9F9E98;    
     content: "";
     display: inline-block;
@@ -1831,7 +1831,7 @@ label:before {
  font-size:13px !important;
 }
 
-input[type="radio"]:checked + label:before {
+#filters input[type="radio"]:checked + label:before {
     background: none repeat scroll 0 0 #212A31;
     height: 11px;
     width: 11px;
