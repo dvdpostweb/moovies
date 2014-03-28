@@ -13,6 +13,39 @@ module StreamingProductsHelper
         window.location.href ='#{url}'
         script
       end
+    elsif !code.nil?
+      audio = streaming.languages.by_language(:fr).first.short_alpha
+            sub = streaming.subtitles.count > 0 ? streaming.subtitles.by_language(:fr).first.short_alpha : 'non'
+            url = Moovies.hls_url(token_name, audio, sub)
+            script = <<-script
+            var parameters = {
+                src: "#{url}",
+                autoPlay: "true",
+                verbose: true,
+                controlBarAutoHide: "true",
+                controlBarPosition: "bottom",
+                plugin_hls: "/HLSProviderOSMF.swf"
+            };
+
+
+            // Embed the player SWF:	            
+            swfobject.embedSWF(
+      	"/GrindPlayer.swf"
+      	, "player"
+      	, 696
+      	, 389
+      	, "10.1.0"
+      	, "expressInstall.swf"
+      	, parameters
+      	, {
+                  allowFullScreen: "true",
+                  wmode: "direct"
+              }
+      	, {
+                  name: "StrobeMediaPlayback"
+              }
+      );
+      script
     elsif streaming.drm == true
       audio = streaming.languages.by_language(:fr).first.short_alpha
       sub = streaming.subtitles.count > 0 ? streaming.subtitles.by_language(:fr).first.short_alpha : 'non'
