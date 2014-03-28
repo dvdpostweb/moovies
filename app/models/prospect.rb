@@ -1,5 +1,5 @@
 class Prospect < ActiveRecord::Base
-  attr_accessible :email, :newsletters_partners, :firstname, :lastname, :locale_id, :gender, :birth_at, :zip, :civ
+  attr_accessible :email, :newsletters_partners, :newsletters, :firstname, :lastname, :locale_id, :gender, :birth_at, :zip, :civ
   attr_reader :civ
   before_create :set_default
   validates :email, :presence => true, :uniqueness => true
