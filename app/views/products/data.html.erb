@@ -1,18 +1,20 @@
+#<%= params[:div_id]%>|||<p class="tooltips_rating stars"><%= render :partial => 'products/rating', :locals => {:product => @product, :background => @rating_color, :size => :long, :source => @source, :response_id => @response_id} %></p>
+<p class="tooltips_runtime"><%= t('products.show.product.duration') %> <%= @product.runtime %> <%= t('products.show.minutes') %></p>
 <% if @product.director && !@product.adult? %>
 <div class="director">
-  <h3><%= t('.directed_by') %></h3>
+  <h3><%= t('products.show.product.directed_by') %></h3>
   <%= link_to @product.director.name, director_products_path(:director_id => @product.director.to_param) if @product.director %>
 </div>
 <% end %>
 <% if @product.adult? && @product.studio %>
 <div class="director">
-  <h4><%= t '.studio' %></h4>
+  <h3><%= t 'products.show.product.studio' %></h3>
   <div><%= link_to @product.studio.name, studio_products_path(:studio_id => @product.studio.to_param) %></div>
-<div>
+</div>
 <% end %>
 <% if !@product.actors.empty?  %>
 <div class="actors">
-   <h3><%= t '.actors' %></h3>
+   <h3><%= t 'products.show.product.actors' %></h3>
    <%= @product.actors.collect{|actor| link_to actor.name, actor_products_path(:actor_id => actor.to_param)}.join(', ').html_safe %>
 </div>
 <% end %>
