@@ -94,6 +94,8 @@ class Product < ActiveRecord::Base
   sphinx_scope(:svod_last_added)          {{:with =>          {:svod_start => 3.months.ago..Time.now.end_of_day, :imdb_id_online => 1..3147483647}}}
   sphinx_scope(:tvod_last_added)          {{:with =>          {:tvod_start => 5.months.ago..1.day.ago, :imdb_id_online => 1..3147483647}}}
   sphinx_scope(:svod_last_chance)         {{:with =>          {:svod_end => Time.now.end_of_day..1.months.from_now}}}
+  sphinx_scope(:best_rated)               {{:with =>          {:rating => 3.0..5.0}}}
+  
   sphinx_scope(:tvod_last_chance)         {{:with =>          {:streaming_expire_at => Time.now.end_of_day..1.months.from_now}}}
   sphinx_scope(:most_viewed)              {{:with =>          {:count_tokens => 1..1000000}}}
   sphinx_scope(:by_package)               {|package_id|       {:with =>          {:package_id => package_id}}}
@@ -530,6 +532,10 @@ class Product < ActiveRecord::Base
       products.most_viewed
     when :svod_most_viewed
       products.most_viewed
+    when :tvod_best_rated
+      products.best_rated
+    when :svod_best_rated
+      products.best_rated
     when :most_viewed
       products.most_viewed
     else
@@ -538,7 +544,7 @@ class Product < ActiveRecord::Base
   end
 
   def self.get_sort(options)
-    if !options[:sort].nil? && !options[:sort].empty?
+    if !options[:sort].nil? && !options[:sort].empty? && options[:sort] != 'normal'
       if options[:sort] == 'alpha_az'
         "descriptions_title_#{I18n.locale} ASC"
       elsif options[:sort] == 'alpha_za'
@@ -581,6 +587,10 @@ class Product < ActiveRecord::Base
         'tvod_end ASC, year DESC, rating DESC'
       elsif options[:view_mode] && options[:view_mode] == 'most_viewed'
         'count_tokens DESC, year DESC, rating DESC'
+      elsif options[:view_mode] && options[:view_mode] == 'svod_best_rated'
+        'rating DESC, year DESC'
+      elsif options[:view_mode] && options[:view_mode] == 'tvod_best_rated'
+        'rating DESC, year DESC'
       elsif options[:view_mode] && options[:view_mode] == 'tvod_most_viewed'
         'count_tokens DESC, year DESC, rating DESC'
       elsif options[:view_mode] && options[:view_mode] == 'svod_most_viewed'
