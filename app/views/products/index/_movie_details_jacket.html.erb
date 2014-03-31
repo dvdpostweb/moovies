@@ -10,6 +10,12 @@
       <%= link_to path, :target => target, :class => :cover, :alt => product_title, 'data-url' => product_data_path(:product_id => product.to_param, :source => @source, :response_id => @response_id)  do %>
         <%= product_image_tag product_image, :width => 125 %>
       <% end %>
+       <!-- luckycycle-->
+             <div class="lucky">
+                <h1>Buy and win</h1>
+               </div>
+            <!-- luckycycle-->
+      
       <div class="tooltips" style="display:none">
         <p class="tooltips_title"><%= product_title %> (<%= product.year %>)</p>
         <p class="tooltips_description"><%= truncate_html(data[:description].text, :length => 500) %> </p>

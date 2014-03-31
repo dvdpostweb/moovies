@@ -2,15 +2,19 @@
 <div id="maincontent" >
   <div id='filter_layout'></div>
   <div id="products">
+     <div class="tvod"><h2>Plush à la carte :</h2>
     <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_last, :title => :tvod_last} %>
     <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_best_rating, :title => :tvod_best_rating} %>
     <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_most_view, :title => :tvod_most_view} %>
     <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_last_chance, :title => :tvod_last_chance} %>
+    </div> 
     
+      <div class="svod"><h2>Plush Unlimited :</h2>
     <%= render :partial => 'products/index/hp_list', :locals => {:data => @svod_last, :title => :svod_last} %>
     <%= render :partial => 'products/index/hp_list', :locals => {:data => @svod_best_rating, :title => :svod_best_rating} %>
     <%= render :partial => 'products/index/hp_list', :locals => {:data => @svod_most_view, :title => :svod_most_view} %>
-    
+     </div> 
+     
   </div>
 </div>
 <%= render :partial => 'products/index/filters_online', :locals => { :countries => @countries} %>  

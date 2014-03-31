@@ -311,9 +311,15 @@ font-weight: bold;
 
 .more_movies {
   padding-top:15px;
-  padding-right:40px;
+  padding-right:21px;
   font-size:16px;
 }
+
+.private #new-alacarte-wrap .more_movies {
+  padding-bottom:15px;
+}
+
+
 
 #new-infinity-wrap .more_movies a {
      background: url(image_path('play.gif')) no-repeat scroll 0 0 transparent;
@@ -373,6 +379,10 @@ color:  #98d321;
 
 }
 
+.adult  #image_promo span {
+    color: #993399;
+}
+
 .adult #image_promo b {
     color: #939;
 }
@@ -419,10 +429,26 @@ color:  #98d321;
   font-size:1.2em;
   height:28px;
   padding: 13px 0 0 0;
-  width:185px;
+  width:215px;
+  margin-top:10px;
   text-align:center;
   text-decoration: none
 }
+
+.popup.validation #movix_explain {
+  color:#212A31;
+    padding-top:20px;
+  
+}
+
+.popup.validation  #movix_explain .attention_movix {
+   color:#212A31;
+   font-size:22px;
+font-family: 'Open Sans Condensed',sans-serif;
+line-height:40px;
+
+ }
+  
 #home .load2
 {
   width:139px;
