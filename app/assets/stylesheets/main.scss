@@ -193,6 +193,14 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {border:0;padding:0;
 	color: #7d8891;
 	font-size: 20px;
 }
+
+#nav #adult {
+    color: #993399;
+}
+#nav #home {
+    color: #98D321;
+}
+
 #nav a.active {
 	color: #fff;
 }
@@ -518,18 +526,36 @@ margin-top:10px;
 	opacity: 0.5;
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
 }
+
+
+.popup.validation {
+	 border: 1px solid #C4C4C0;
+	 padding:20px;
+}
+
+
+.popup.validation #addwishlist_title {
+	font-family: 'Open Sans Condensed',sans-serif;
+	font-size: 28px;
+	left: 0;
+	text-align: center;
+	text-decoration: none;
+	top: 0;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	color: #212A31 !important;
+}
+
 #addwishlist_title {
-	font-family: Arial,Helvetica,sans-serif;
-	font-size: 24px;
-	font-weight: bold;
+	font-family: 'Open Sans Condensed',sans-serif;
+	font-size: 28px;
 	left: 0;
 	text-align: center;
 	text-decoration: none;
 	top: 0;
 	padding-top: 12px;
 	padding-bottom: 12px;
-	border-bottom: #DDD 1px solid;
-	color: #191E24 !important;
+	color: #212A31 !important;
 }
 #addwishlist_explain {
 	color: #454545;
@@ -815,6 +841,11 @@ display: block;
 }
 
 
+
+#new-infinity-wrap .watch, #new-alacarte-wrap .alacarte {
+  margin-top:5px;
+}
+
 .watch {
 	background-image: url(image_path('button_streaming.gif'));
 	background-position: 0 0;
@@ -886,6 +917,8 @@ ul.dropdown li {
 	margin-left:10px !important;
 	width:120px;
 }
+
+
 .dropdown {
 	background-image: url(image_path('bg_subcats.png'));
 	height: initial !important;
@@ -898,11 +931,15 @@ ul.dropdown li {
 }
 
 #nav #catalogue {
-	height: 96px;
+	height: 57px;
 	left: 255px;
 	position: absolute;
 	top: 64%;
 	z-index: 2012;
+}
+
+.adult #nav #catalogue {
+	height: 120px;
 }
 
 #nav #account {
