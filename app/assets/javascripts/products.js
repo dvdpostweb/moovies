@@ -175,9 +175,7 @@ $(function() {
         data: {},
         success: function(data) {
           res = data.split('|||')
-          console.log(res[0])
-          console.log(res[1])
-          
+      
           $(res[0]).html(res[1]);
         },
         error: function() {
@@ -205,7 +203,7 @@ $(function() {
     $('#products_index, #film-details, #categories, #studios').delegate('#online #date_filters_year_min, #online  #date_filters_year_max', "change", function(){
       submit_online()
     })
-    $('#products_index, #film-details, #categories, #studios').delegate('.packages', 'click', function(){
+    $('#products_index, #film-details, #categories, #studios').delegate('.packages.svod, .packages.tvod', 'click', function(){
       $('#filter_online_form').attr('action', $(this).attr('href'))
       $('.packages').removeClass('current')
       $(this).addClass('current')
