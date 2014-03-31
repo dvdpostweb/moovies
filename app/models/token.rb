@@ -30,29 +30,34 @@ class Token < ActiveRecord::Base
   
   def self.create_token(imdb_id, product, current_ip, streaming_product_id, kind, customer = nil, source = 7, code = nil)
     file = StreamingProduct.find(streaming_product_id)
-        begin
-          token_string = Moovies.generate_token_from_alpha(file.filename, kind, false)
-        rescue => e
-          token_string = false
-        end
-        if code
-          StreamingCode.by_name(code).first.update_attribute(:used_at, Time.now.localtime)
-        end
-        if token_string
-          params = {:imdb_id => imdb_id, :token => token_string, :source_id => source, :country => file.country}
-          params = params.merge(:ppv_price => file.ppv_price, :kind => 'PPV', :is_ppv => true) if !file.svod?
-          params = params.merge(:customer_id => customer.id) if customer
-          params = params.merge(:code => code) if code
+    if code
+      StreamingCode.by_name(code).first.update_attribute(:used_at, Time.now.localtime)
+      #to do
+      token = Token.last
+      return {:token => token, :error => nil}
+    else
+      begin
+        token_string = Moovies.generate_token_from_alpha(file.filename, kind, false)
+      rescue => e
+        token_string = false
+      end
+
+      if token_string
+        params = {:imdb_id => imdb_id, :token => token_string, :source_id => source, :country => file.country}
+        params = params.merge(:ppv_price => file.ppv_price, :kind => 'PPV', :is_ppv => true) if !file.svod?
+        params = params.merge(:customer_id => customer.id) if customer
+        params = params.merge(:code => code) if code
           
-          token = Token.create(params)
-          if token.id.blank?
-            return {:token => nil, :error => Token.error[:query_rollback]}
-          else
-            return {:token => token, :error => nil}
-          end
+        token = Token.create(params)
+        if token.id.blank?
+          return {:token => nil, :error => Token.error[:query_rollback]}
         else
-          return {:token => nil, :error => Token.error[:generation_token_failed]}
+          return {:token => token, :error => nil}
         end
+      else
+        return {:token => nil, :error => Token.error[:generation_token_failed]}
+      end
+    end
   end
   
   def self.validate(token_param, filename, ip)

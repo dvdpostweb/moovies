@@ -3,8 +3,10 @@
     <div class="ttl-wrap">
       <div class="ttl osc">
         <h2><%= "#{@product_title} (#{@product.year})" %></h2>
+        
         <h3><%= @product.categories.active(params[:kind]).collect{|category| link_to category.name, category_products_path(:category_id => category)}.join(', ').html_safe %></h3>
       </div>
+     
       <div id="votes-wrap">
         <div id="votes">
 
@@ -16,14 +18,23 @@
           <div id="uninterested"><%= render :partial => 'products/show/seen_uninterested', :locals => {:product => @product, :source => @source, :response_id => @response_id} if current_customer %></div>
         </div>
       </div><!-- #votes-wrap -->
+       
     </div><!-- .ttl-wrap -->
     <div id="film-info">
+      <div id="film-wrap">
       <div id="film-img-wrap">
         <%= "<span class='hd'></span>".html_safe if @product.hd?(session[:country_id]) %>
         <%= product_image_tag @product_image, :width => 160, :alt => "#{@product_title} (#{@product.year})" %>
         <%= content_tag(:span, '', :class => 'new') if @product.is_new? %>
         <!--<span class="hd"></span>-->
       </div>
+      <!-- luckycycle-->
+       <div class="lucky">
+          <h1>Buy and win</h1>
+          <p>1 chance out of 5 this for FREE</p>
+         </div>
+      <!-- luckycycle-->
+    </div>
       <div id="film-descr">
 
         <% actors = @product.actors.collect{|actor| link_to actor.name, actor_products_path(:actor_id => actor.to_param) }.join(', ').html_safe %>
@@ -84,7 +95,7 @@
         <% end %>
         <div class="clearfix"></div>
       </div>
-      <%= render :partial => 'products/show/formats', :locals => {:product => @product, :svod_date => @svod_date}%>
+      <%= render :partial => 'products/show/formats', :locals => {:product => @product, :svod_date => @svod_date}%>      
       <div id="thumbs-wrap">
         <h3><%= t '.photo' %></h3>
         <div>
@@ -107,3 +118,5 @@
   <% if params[:trailer].to_i == 1 && @product.trailer? %>
   <div id='rating' style='display:none' class='action_face'><%= product_trailer_path(:product_id => @product.to_param, :source => @source, :response_id => @response_id) %></div>
   <% end %>
+  
+ 

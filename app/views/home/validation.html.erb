@@ -1,15 +1,6 @@
-<div style="position:relative !important; margin: 20px auto;width:400px" id="facebox">
-  <div class="popup">
-    <table>
-      <tbody>
-        <tr>
-          <td class="tl"></td>
-          <td class="b"></td>
-          <td class="tr"></td>
-        </tr>
-        <tr>
-          <td class="b"></td>
-          <td class="body"><div class="content">
+<div style="position:relative !important; margin: 20px auto;width:400px">
+  <div class="popup validation">
+    <div class="content">
               <div id="addwishlist_title" ><%= t('.title') %></div>
              
               <p align="center"><%= link_to t('.over18'), validation_path(:valid => 1), :id => :yes, :class => I18n.locale %></p>
@@ -20,15 +11,6 @@
                 </div>
            
             </div>
-            <div class="footer" style="display: block;"> <a class="close" href="<%= root_localize_path(:kind => nil) %>"> CLOSE </a> </div></td>
-          <td class="b"></td>
-        </tr>
-        <tr>
-          <td class="bl"></td>
-          <td class="b"></td>
-          <td class="br"></td>
-        </tr>
-      </tbody>
-    </table>
+           
   </div>
 </div>
