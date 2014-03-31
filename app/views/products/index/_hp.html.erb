@@ -9,7 +9,7 @@
        <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_last_chance, :title => :tvod_last_chance} if @tvod_last_chance.size > 0  %>
     </div> 
     
-      <div class="svod"><h2><%= t('unlimited') %> :</h2>
+      <div class="svod"><h2><%= t('.unlimited') %> :</h2>
         <%= render :partial => 'products/index/hp_list', :locals => {:data => @svod_last, :title => :svod_last} if @svod_last.size > 0  %>
         <%= render :partial => 'products/index/hp_list', :locals => {:data => @svod_best_rating, :title => :svod_best_rating} if @svod_best_rating.size > 0  %>
         <%= render :partial => 'products/index/hp_list', :locals => {:data => @svod_most_view, :title => :svod_most_view} if @svod_most_view.size > 0  %>
