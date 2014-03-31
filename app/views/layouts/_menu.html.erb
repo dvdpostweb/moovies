@@ -3,8 +3,8 @@
   	<li>
   	  <%= link_to t('.catalogue'), products_short_path(), :id => 'catalogue_menu', :class => params[:controller] == 'products' ? :active : :inactive %>
   		<ul id="catalogue" class="dropdown" style="display:none">
-  			<li><%= link_to t('.infinite'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}"), :kind => nil), :class => params[:package] == Moovies.packages.invert[1] ? :active : :inactive %></li>
-  			<li><%= link_to t('.tvod'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[2]}"), :kind => nil), :class => params[:package] == Moovies.packages.invert[2] ? :active : :inactive %></li>
+  			<li><%= link_to t('.infinite'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}"), :kind => nil, :tag => 1), :class => params[:package] == Moovies.packages.invert[1] ? :active : :inactive %></li>
+  			<li><%= link_to t('.tvod'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[2]}"), :kind => nil, :tag => 1), :class => params[:package] == Moovies.packages.invert[2] ? :active : :inactive %></li>
   			<% if @kid_visible %>
   			<li><%= link_to t('.kid'), products_short_path(:package => Moovies.packages.invert[3], :kind => nil), :class => params[:package] == Moovies.packages.invert[3] ? :active : :inactive %></li>
   			<% end %>

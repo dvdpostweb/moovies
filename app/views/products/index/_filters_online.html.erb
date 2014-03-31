@@ -20,6 +20,9 @@
         <%= radio_button_tag('filters[view_mode]', "last_chance", params[:filters] && params[:filters][:view_mode] == 'last_chance' ? true : false, class: "links") %>
         <%= label_tag('filters[view_mode]_last_chance',  t('products.left_column.svod_last_chance')) %>
         <br />
+        <%= radio_button_tag('filters[view_mode]', "best_rated", params[:filters] && params[:filters][:view_mode] == 'best_rated' ? true : false, class: "links") %>
+        <%= label_tag('filters[view_mode]_best_rated',  t('products.left_column.svod_best_rated')) %>
+        <br />
         <%= radio_button_tag('filters[view_mode]', "soon", params[:filters] && params[:filters][:view_mode] == 'soon' ? true : false, class: "links") %>
         <%= label_tag('filters[view_mode]_soon', t('products.left_column.svod_soon')) %>
         <br />
