@@ -174,7 +174,11 @@ $(function() {
         type: 'GET',
         data: {},
         success: function(data) {
-          content.html(data);
+          res = data.split('|||')
+          console.log(res[0])
+          console.log(res[1])
+          
+          $(res[0]).html(res[1]);
         },
         error: function() {
           content.html('error');

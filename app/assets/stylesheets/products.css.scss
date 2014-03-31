@@ -1493,6 +1493,26 @@ background: none repeat scroll 0 0 #66CCCC;
   color: #FFFFFF;
 font-family:'Open Sans Condensed', sans-serif;
 }
+.adult .packages.svod {
+  border: #993399 1px solid;
+    color: #993399;
+}
+
+.adult .packages.svod.current {
+    background-color: #993399;
+    color: #FFFFFF;
+}
+
+
+.adult .packages.tvod {
+  border: #C36EC3 1px solid;
+    color: #C36EC3;
+}
+
+.adult .packages.tvod.current {
+    background-color: #C36EC3;
+    color: #FFFFFF;
+}
 .package a:hover{
 text-decoration:none;
   
@@ -1898,7 +1918,7 @@ background: url("/assets/filters-arrows.png") no-repeat scroll -2px -18px transp
 }
 
  
-label {
+#filters label {
     cursor: pointer;
     display: inline-block;
     font-size: 13px;
@@ -1907,10 +1927,10 @@ label {
     position: relative;
 }
 
-input[type=radio] {  
+#filters input[type=radio] {  
     display: none;  
 }
-label:before {
+#filters label:before {
     border: 1px solid #9F9E98;    
     content: "";
     display: inline-block;
@@ -1928,7 +1948,7 @@ label:before {
  font-size:13px !important;
 }
 
-input[type="radio"]:checked + label:before {
+#filters input[type="radio"]:checked + label:before {
     background: none repeat scroll 0 0 #212A31;
     height: 11px;
     width: 11px;

@@ -538,8 +538,7 @@ class Product < ActiveRecord::Base
   end
 
   def self.get_sort(options)
-    Rails.logger.debug { "@@@#{options[:sort]}" }
-    if options[:sort]
+    if !options[:sort].nil? && !options[:sort].empty?
       if options[:sort] == 'alpha_az'
         "descriptions_title_#{I18n.locale} ASC"
       elsif options[:sort] == 'alpha_za'
