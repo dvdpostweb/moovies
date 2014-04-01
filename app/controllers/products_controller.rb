@@ -58,9 +58,10 @@ class ProductsController < ApplicationController
     end
     @source = WishlistSource.wishlist_source(params, @wishlist_source)
     @vod_wishlist = current_customer.products.collect(&:products_id) if current_customer
+    @eone = Product.joins(:streaming_products).where(streaming_products: {studio_id: 750}).collect(&:products_id)
     @countries = ProductCountry.visible.ordered
       if params[:package].nil? && params[:concerns] != :productable
-        new_params = session[:sexuality] == 0 ? params.merge(:per_page => 50, :country_id => session[:country_id], :hetero => 1, :includes => ["descriptions_#{I18n.locale}"]) : params.merge(:per_page => 50, :country_id => session[:country_id], :includes => ["descriptions_#{I18n.locale}"])
+        new_params = session[:sexuality] == 0 ? params.merge(:per_page => 50, :country_id => session[:country_id], :hetero => 1, :includes => ["descriptions_#{I18n.locale}", 'vod_online_be']) : params.merge(:per_page => 50, :country_id => session[:country_id], :includes => ["descriptions_#{I18n.locale}", 'vod_online_be'])
         tvod_package_id = params[:kind] == :adult ? 5 : 2
         svod_package_id = params[:kind] == :adult ? 4 : 1
         @tvod_last =        Product.filter(nil, new_params.merge(:view_mode => 'tvod_last_added',  :package => Moovies.packages.invert[tvod_package_id]))
@@ -73,7 +74,7 @@ class ProductsController < ApplicationController
         #@svod_last_chance = Product.filter(nil, new_params.merge(:view_mode => 'svod_last_chance', :package => Moovies.packages.invert[params[:kind] == :adult ? 4 : 1]))
         
       else
-        new_params = params.merge(:per_page => 25, :country_id => session[:country_id], :includes => [ "descriptions_#{I18n.locale}"])
+        new_params = params.merge(:per_page => 25, :country_id => session[:country_id], :includes => [ "descriptions_#{I18n.locale}", 'vod_online_be'])
         new_params = new_params.merge(:hetero => 1) if session[:sexuality] == 0
         @products = Product.filter_online(nil, new_params)
         if params[:filters]

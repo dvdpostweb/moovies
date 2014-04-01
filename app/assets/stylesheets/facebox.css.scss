@@ -102,7 +102,7 @@ text-decoration:none;
 
 .facebox_overlayBG {
   background-color: #000;
-  z-index: 99;
+  z-index: 5000;
 }
 
 * html #facebox_overlay { /* ie6 hack */
