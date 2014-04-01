@@ -2,14 +2,14 @@
 <div id="maincontent" >
   <div id='filter_layout'></div>
   <div id="products">
-     <div class="tvod"><h2>Plush à la carte :</h2>
+     <div class="tvod"><h2><%= t('.alacarte') %> :</h2>
        <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_last, :title => :tvod_last} if @tvod_last.size > 0 %>
        <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_best_rating, :title => :tvod_best_rating} if @tvod_best_rating.size > 0  %>
        <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_most_view, :title => :tvod_most_view} if @tvod_most_view.size > 0  %>
        <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_last_chance, :title => :tvod_last_chance} if @tvod_last_chance.size > 0  %>
     </div> 
     
-      <div class="svod"><h2>Plush Unlimited :</h2>
+      <div class="svod"><h2><%= t('.unlimited') %> :</h2>
         <%= render :partial => 'products/index/hp_list', :locals => {:data => @svod_last, :title => :svod_last} if @svod_last.size > 0  %>
         <%= render :partial => 'products/index/hp_list', :locals => {:data => @svod_best_rating, :title => :svod_best_rating} if @svod_best_rating.size > 0  %>
         <%= render :partial => 'products/index/hp_list', :locals => {:data => @svod_most_view, :title => :svod_most_view} if @svod_most_view.size > 0  %>
