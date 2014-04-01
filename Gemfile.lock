@@ -204,6 +204,8 @@ GEM
     rake (10.1.0)
     rdoc (3.12.2)
       json (~> 1.4)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     riddle (1.5.8)
     routing_concerns (0.1.0)
       actionpack (>= 3.2.0)
@@ -307,6 +309,7 @@ DEPENDENCIES
   orderedhash
   quiet_assets
   rails (= 3.2.14)
+  rest-client
   route_translator!
   routing_concerns (~> 0.1.0)
   rspec-rails (>= 2.0.1)

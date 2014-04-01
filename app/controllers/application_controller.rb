@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   before_filter :get_wishlist_source, :unless => :flag?
   before_filter :validation_adult, :unless => :flag?
   before_filter :authenticate, :if => :staging?
+  
   #before_filter :set_cache_buster
 
   layout :layout_by_resource

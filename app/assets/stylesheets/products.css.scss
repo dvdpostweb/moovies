@@ -83,7 +83,6 @@
   margin-top: 8px;
   padding: 0 5px 2px 27px;
   width: 72px;
-  display:none;
 }
 #products .movie-wrap .lucky h1 {
   color: #FFFFFF;
@@ -92,7 +91,6 @@
   font-weight: bold;
   margin-top: 7px;
   text-transform: uppercase;
-  display:none;
 }
 
 #products .movie-wrap-jacket .lucky {
@@ -105,7 +103,6 @@
   position: absolute;
   top: -29px;
   width: 97px;
-  display:none;
 }
 
 #products .movie-wrap-jacket .lucky h1 {
@@ -115,20 +112,18 @@
   font-weight: bold;
   margin-top: 7px;
   text-transform: uppercase;
-  display:none;
 }
 
 .ca-wrapper .content .lucky {
-    background: url("/assets/icon_lucky.png") no-repeat scroll 3px 3px #1A7834;
+    background: url(image_path('icon_lucky.png')) no-repeat scroll 3px 3px #1A7834;
     color: #FFFFFF;
     height: 24px;
     left: 3px;
     margin-top: 8px;
-    padding: 0 5px 2px 27px;
+    padding: 0 1px 2px 23px;
     position: absolute;
     top: -34px;
-    width: 72px;
-    display:none;
+    width: 81px;
 }
 
 .ca-wrapper .content .lucky h1 {
@@ -148,7 +143,6 @@
   padding: 10px 5px 1px;
   width: 104px;
   padding-left: 55px;
-  display:none;
 }
 
 #film-details .lucky h1 {
@@ -157,7 +151,6 @@
   font-size:14px;
   font-weight: bold;
   text-transform: uppercase;
-  display:none;
 }
 
 
