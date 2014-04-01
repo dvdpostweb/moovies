@@ -219,7 +219,7 @@ background: url(image_path('en/info_tel.jpg')) no-repeat scroll 0 0 transparent
 
 .canvas3#default #header h1 a {
     width: 142px!important;
-     background: url("/assets/promotions/logo_plush.png") repeat scroll -12px -12px transparent;
+     background: url(image_path('promotions/logo_plush.png')) repeat scroll -12px -12px transparent;
 }
 .canvas3 #header {
     height: 84px;
@@ -278,7 +278,7 @@ background: url(image_path('en/info_tel.jpg')) no-repeat scroll 0 0 transparent
 
 
 .canvas3 .telfooter a {
-    background: url("/assets/fr/info_tel_mobile.jpg") no-repeat scroll 0 0 transparent!important;
+    background: url(image_path('fr/info_tel_mobile.jpg')) no-repeat scroll 0 0 transparent!important;
     height: 139px!important;
     margin: 0 auto;
     width: 245px!important;
