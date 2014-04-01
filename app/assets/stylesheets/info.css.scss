@@ -770,15 +770,15 @@ color:#212A31;
 text-decoration:underline;
 display: inline;
 }
-#verimatrix-wrap
+#verimatrix-wrap, #lucky-wrap
 {
   margin: 0 39px;
 }
-#verimatrix-wrap, #verimatrix-wrap h2
+#verimatrix-wrap, #verimatrix-wrap h2, #lucky-wrap h2
 {
   font-family: Arial,Helvetica,sans-serif;
 }
-#verimatrix-wrap p
+#verimatrix-wrap p, #lucky-wrap p
 {
   margin:12px 0;
 }
@@ -797,6 +797,11 @@ display: inline;
 	border:#FFFFFF solid 2px;
 }
 
+#lucky-wrap a {
+  font-size: 14px;
+     font-weight: bold;
+     text-decoration: underline;
+}
 
 
 #verimatrix-wrap a {

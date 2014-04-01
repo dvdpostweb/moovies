@@ -55,13 +55,13 @@
 }
 
 #products .svod h2 {
-color:#66cccc;
-border-bottom: #66cccc solid 2px;
+  color:#98d321;
+  border-bottom: #98d321 solid 2px;
 }
 
 #products .tvod h2  {
-color:#98d321;
-border-bottom: #98d321 solid 2px;
+  color:#66cccc;
+  border-bottom: #66cccc solid 2px;
 }
 
 .adult #products .svod h2 {
@@ -114,8 +114,26 @@ border-bottom: #C36EC3 solid 2px;
     text-transform: uppercase;
 }
 
+.ca-wrapper .content .lucky {
+    background: url("/assets/icon_lucky.png") no-repeat scroll 3px 3px #1A7834;
+    color: #FFFFFF;
+    height: 24px;
+    left: 3px;
+    margin-top: 8px;
+    padding: 0 5px 2px 27px;
+    position: absolute;
+    top: -34px;
+    width: 72px;
+}
 
-
+.ca-wrapper .content .lucky h1 {
+    color: #FFFFFF;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    margin-top: 7px;
+    text-transform: uppercase;
+}
 
 #film-details .lucky {
   background: url("/assets/icon_lucky_big.png") no-repeat scroll 5px 7px #1A7834;
@@ -2132,6 +2150,11 @@ ul#ratings_labels li:last-child {
 }
 
 
+.tooltips .tooltips_other .actors a, .tooltips .tooltips_other .director a {
+  color: #212A31 !important;
+}
+
+
 .trailer {
     background-image:  url(image_path('button_trailer.png'));
     background-repeat: no-repeat;
@@ -2248,6 +2271,13 @@ text-decoration:underline;
 {
   text-align:center;
 }
+.adult .svod #add {
+  color:#fff !important;
+}
+.adult .svod #watch {
+  color:#fff !important;
+}
+
 #pagination_content
 {
   clear:both;
@@ -2278,14 +2308,24 @@ text-decoration:underline;
   margin: -23px 0 0 923px;
   z-index: 100;
 }
-.movie-wrap-jacket .hd {
-  background: url("/assets/icon_hd.png") no-repeat scroll 0 0 transparent;
-  display: block;
-  height: 26px;
-  left: 84px;
-  position: absolute;
-  top: 169px;
-  width: 48px;
+.ca-wrapper .content .hd {
+    background: url("/assets/icon_hd_little.png") no-repeat scroll 0 0 transparent;
+    display: block;
+    height: 17px;
+    left: 75px;
+    position: absolute;
+    top: 121px;
+    width: 30px;
+}
+
+.movie-descr .hd {
+    background: url("/assets/icon_hd.png") no-repeat scroll 0 0 transparent;
+    display: block;
+    height: 26px;
+    left: 54px;
+    position: absolute;
+    top: 126px;
+    width: 48px;
 }
 
 #movies_banners1 {
@@ -2299,18 +2339,23 @@ text-decoration:underline;
   clear: both;
     height: 188px;
     margin: 0 14px 23px;
-    width: 942px;
+     width: 958px;
 }
 
 #movies_banners3 {
   clear: both;
     height: 188px;
     margin: 0 14px 23px;
-    width: 942px;
+  width: 958px;
 }
 
  #movies_banners2 img {
-   margin-left:12px;
-   
-   
+     float: left;
+     margin-right: 16px;
  }
+ 
+ #movies_banners3 img {
+      float: left;
+      margin-right: 14px;
+  }
+ 
