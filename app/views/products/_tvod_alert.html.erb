@@ -1,4 +1,7 @@
 <%= t('.tvod_price', :price => product.get_vod_online(session[:country_id]).first.ppv_price).html_safe %>
 <br /><br />
+<% if product.lucky_cycle?(nil, current_customer, product.get_vod_online(session[:country_id]).first) %>
+  <%= t('.luck_details', :default => 'Ce film fait partie de l\'action Lucky Cycle. Pour plus d\'informations, <a  target="_blank" href="%{info_link}">consultez cette page</a>. En appuyant sur Regardez, vous acceptez les <a target="_blank" href="%{condition_link}">conditions générales</a> du concours Lucky Cycle.', :info_link => info_path(:page_name => t('routes.infos.params.luckycycle')), :condition_link => image_path("lucky_cycle_#{I18n.locale}.pdf")).html_safe %>
+<% end %>
 <%= params[:hide_btn] != "1" ? link_to(t('.click_here'), streaming_product_path(:id => product.imdb_id), :id => 'streaming_btn', :class => 'alacarte') : 
  "<div id='streaming_btn' class ='alacarte facebox_close'>#{t('.close_button')}</div>".html_safe %>
