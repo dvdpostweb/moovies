@@ -157,6 +157,21 @@
   text-decoration:underline;
   display:block;
 }
+#facebox #lucky
+{
+  background: url("/assets/icon_lucky.png") no-repeat 4px 5px #1A7834;
+  margin: 0 0 15px 0;
+  padding: 5px 5px 5px 31px;
+  color: white;
+  font-size: 13px;
+}
+
+#facebox #lucky a
+{
+  text-decoration:underline;
+  color: white;
+  
+}
 
 #film-details div.ttl h3, #film-details div.ttl h3 a {
   color: #212A31;
