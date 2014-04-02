@@ -31,7 +31,7 @@
       <% if @product.lucky_cycle?(nil, current_customer, @product.vod_online_be.first) %>
         <div class="lucky">
           <h1><%= t('.lucky')%></h1>
-          <p><%= link_to t('.lucky_slogan'),info_path(:page_name => t('routes.infos.params.luckycycle')) %></p>
+          <p><%= link_to t('.lucky_slogan'), info_path(:page_name => t('routes.infos.params.luckycycle')) %></p>
         </div>
       <% end %>
     </div>
