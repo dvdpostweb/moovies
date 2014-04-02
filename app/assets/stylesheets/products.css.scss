@@ -140,9 +140,8 @@
   color: #FFFFFF;
   margin-bottom: 8px;
   margin-top: 8px;
-  padding: 10px 5px 1px;
-  width: 104px;
-  padding-left: 55px;
+  padding: 10px 5px 1px 50px;
+  width: 109px;
 }
 
 #film-details .lucky h1 {
@@ -154,6 +153,9 @@
 }
 #film-details .lucky a {
   color: #FFF;
+  margin: 2px 0 0 0;
+  text-decoration:underline;
+  display:block;
 }
 
 #film-details div.ttl h3, #film-details div.ttl h3 a {
