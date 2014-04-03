@@ -76,6 +76,7 @@ Moovies::Application.routes.draw do
       match 'action' => 'products#action'
       match 'log' => 'products#log'
     end
+    resources :lucky_cycle, :only => [:show]
     resources :phone_requests, :only => [:new, :create, :index], :as => :old_phone_requests
     match 'search/(:search)' => 'search#index', :as => :search
     resources :public_newsletters, :only => [:new, :create]
