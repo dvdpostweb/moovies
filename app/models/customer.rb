@@ -83,6 +83,7 @@ class Customer < ActiveRecord::Base
   has_many :suspensions
   has_many :samsung_codes
   has_many :discount_use, :foreign_key => :customers_id
+  has_many :lucky_cycle
 
   has_many :vod_wishlists
   has_many :vod_wishlists_histories

@@ -35,6 +35,7 @@ class Product < ActiveRecord::Base
   has_many :reviews, :foreign_key => :imdb_id, :primary_key => :imdb_id
   has_many :uninteresteds, :foreign_key => :products_id
   has_many :uninterested_customers, :through => :uninteresteds, :source => :customer, :uniq => true
+  has_many :streaming_products, :class_name => 'StreamingProduct', :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "streaming_products.available = 1 and streaming_products.country ='BE'"
   has_many :streaming_products_be, :class_name => 'StreamingProduct', :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "streaming_products.available = 1 and streaming_products.country ='BE' and streaming_products.status in ('online_test_ok', 'soon', 'uploaded') and (streaming_products.expire_backcatalogue_at is null or streaming_products.expire_backcatalogue_at > now())"
   has_many :streaming_products_lu, :class_name => 'StreamingProduct', :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "streaming_products.available = 1 and streaming_products.country ='LU' and streaming_products.status in ('online_test_ok', 'soon', 'uploaded') and (streaming_products.expire_backcatalogue_at is null or streaming_products.expire_backcatalogue_at > now())"
   has_many :streaming_products_nl, :class_name => 'StreamingProduct', :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "streaming_products.available = 1 and streaming_products.country ='NL' and streaming_products.status in ('online_test_ok', 'soon', 'uploaded') and (streaming_products.expire_backcatalogue_at is null or streaming_products.expire_backcatalogue_at > now())"
@@ -608,6 +609,29 @@ class Product < ActiveRecord::Base
   def svod?
     !svod_dates.svod.empty?
   end
+
+  def lucky_cycle?(eone_movies, customer, streaming)
+    if self.package_id == 2
+      if !customer || (customer.address.belgian?)
+        if eone_movies && !eone_movies.include?(self.id)
+          if vod_online_be.size > 0
+            true
+          else
+            false
+          end
+        elsif streaming && streaming.studio_id != 750
+          true
+        else
+          false
+        end
+      else
+        false
+      end
+    else
+      false
+    end
+  end
+
   def self.update_package
     sql = "update products p
         join (select if((start_on <=date(now()) and end_on >= date(now()) or (group_concat(distinct status)='uploaded' and start_on > now()) or ((start_on = min(available_from) and start_on >= date(now())) or (start_on = min(available_backcatalogue_from) and start_on >= date(now()) and (expire_at < date(now()) or expire_at is null)))), 1,2) package,products_id

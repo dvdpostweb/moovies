@@ -117,6 +117,11 @@ class StreamingProductsController < ApplicationController
                   "\\$\\$\\$image\\$\\$\\$" => image,
                   "\\$\\$\\$description\\$\\$\\$" => description,
                 }
+                if @token.lucky_cycle
+                  type = "lucky_#{params[:kind]}".to_sym
+                  mail_id = Moovies.email[type]
+                  options = options.merge("\\$\\$\\$lucky_link\\$\\$\\$" => lucky_cycle_url(:id => @token.lucky_cycle.computed_hash))
+                end
                 if params[:kind] == :adult
                   if @product.studio
                     studio_name = @product.studio.name
