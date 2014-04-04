@@ -72,7 +72,7 @@ class ProductsController < ApplicationController
         @svod_best_rating = Product.filter(nil, new_params.merge(:view_mode => 'svod_best_rated',  :package => Moovies.packages.invert[svod_package_id]))
         @svod_most_view =   Product.filter(nil, new_params.merge(:view_mode => 'svod_most_viewed', :package => Moovies.packages.invert[svod_package_id]))
         #@svod_last_chance = Product.filter(nil, new_params.merge(:view_mode => 'svod_last_chance', :package => Moovies.packages.invert[params[:kind] == :adult ? 4 : 1]))
-        @top = Product.joins(:lists).where("lists.#{I18n.locale} = 1").order("lists.id desc").limit(25)
+        @top = Product.joins(:lists).includes("descriptions_#{I18n.locale}", 'vod_online_be').where("lists.#{I18n.locale} = 1").order("lists.id desc").limit(25)
       else
         new_params = params.merge(:per_page => 25, :country_id => session[:country_id], :includes => [ "descriptions_#{I18n.locale}", 'vod_online_be'])
         new_params = new_params.merge(:hetero => 1) if session[:sexuality] == 0
