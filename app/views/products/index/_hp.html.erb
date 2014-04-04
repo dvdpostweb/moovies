@@ -3,17 +3,17 @@
   <div id='filter_layout'></div>
   <div id="products">
      <div class="tvod"><h2><%= t('.alacarte') %> :</h2>
-       <%= render :partial => 'products/index/hp_list', :locals => {:data => @top, :title => :top, :type => nil, :view_mode => nil} if @top.size > 5 && params[:kind] != :adult%>
+       <%= render :partial => 'products/index/hp_list', :locals => {:data => @top, :title => :top, :type => nil, :view_mode => nil, :source => 6} if @top.size > 5 && params[:kind] != :adult%>
 
-       <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_last, :title => :tvod_last, :type => :tvod, :view_mode => :last_added} if @tvod_last.size > 5 %>
-       <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_best_rating, :title => :tvod_best_rating, :type => :tvod, :view_mode => :best_rated} if @tvod_best_rating.size > 5 %>
-       <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_most_view, :title => :tvod_most_view, :type => :tvod, :view_mode => :most_viewed} if @tvod_most_view.size > 5 %>
-       <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_last_chance, :title => :tvod_last_chance, :type => :tvod, :view_mode => :last_chance} if @tvod_last_chance.size > 5 %>
+       <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_last, :title => :tvod_last, :type => :tvod, :view_mode => :last_added, :source => 49} if @tvod_last.size > 5 %>
+       <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_best_rating, :title => :tvod_best_rating, :type => :tvod, :view_mode => :best_rated, :source => 55} if @tvod_best_rating.size > 5 %>
+       <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_most_view, :title => :tvod_most_view, :type => :tvod, :view_mode => :most_viewed, :source => 46} if @tvod_most_view.size > 5 %>
+       <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_last_chance, :title => :tvod_last_chance, :type => :tvod, :view_mode => :last_chance, :source => 56} if @tvod_last_chance.size > 5 %>
     </div> 
     <div class="svod"><h2><%= t('.unlimited') %> :</h2>
-      <%= render :partial => 'products/index/hp_list', :locals => {:data => @svod_last, :title => :svod_last, :type => :svod, :view_mode => :last_added} if @svod_last.size > 5 %>
-      <%= render :partial => 'products/index/hp_list', :locals => {:data => @svod_best_rating, :title => :svod_best_rating, :type => :tvod, :view_mode => :best_rated} if @svod_best_rating.size > 5%>
-      <%= render :partial => 'products/index/hp_list', :locals => {:data => @svod_most_view, :title => :svod_most_view, :type => :svod, :view_mode => :most_viewed} if @svod_most_view.size > 5 %>
+      <%= render :partial => 'products/index/hp_list', :locals => {:data => @svod_last, :title => :svod_last, :type => :svod, :view_mode => :last_added, :source => 49} if @svod_last.size > 5 %>
+      <%= render :partial => 'products/index/hp_list', :locals => {:data => @svod_best_rating, :title => :svod_best_rating, :type => :tvod, :view_mode => :best_rated, :source => 55} if @svod_best_rating.size > 5%>
+      <%= render :partial => 'products/index/hp_list', :locals => {:data => @svod_most_view, :title => :svod_most_view, :type => :svod, :view_mode => :most_viewed, :source => 46} if @svod_most_view.size > 5 %>
    </div> 
   </div>
 </div>
