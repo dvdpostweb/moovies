@@ -4,5 +4,5 @@
   <div class="ca-wrapper">
     <%= render :partial => 'products/detail2', :collection => data %>
   </div>
-  <%= link_to t(".more"), products_short_path(:package => Moovies.packages.invert[package_id], 'filters[view_mode]' => view_mode), :class => :right %>
+  <%= link_to t(".more"), products_short_path(:package => Moovies.packages.invert[package_id], 'filters[view_mode]' => view_mode), :class => :right if !type.nil? %>
 </div>

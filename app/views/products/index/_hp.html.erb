@@ -3,6 +3,8 @@
   <div id='filter_layout'></div>
   <div id="products">
      <div class="tvod"><h2><%= t('.alacarte') %> :</h2>
+       <%= render :partial => 'products/index/hp_list', :locals => {:data => @top, :title => :top, :type => nil, :view_mode => nil} if @top.size > 0 %>
+
        <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_last, :title => :tvod_last, :type => :tvod, :view_mode => :last_added} if @tvod_last.size > 0 %>
        <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_best_rating, :title => :tvod_best_rating, :type => :tvod, :view_mode => :best_rated} if @tvod_best_rating.size > 0  %>
        <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_most_view, :title => :tvod_most_view, :type => :tvod, :view_mode => :most_viewed} if @tvod_most_view.size > 0  %>
