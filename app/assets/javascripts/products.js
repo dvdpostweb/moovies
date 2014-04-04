@@ -324,7 +324,6 @@ $(function() {
   History.Adapter.bind(window,'statechange',function(){ // Note: We are using statechange instead of popstate
   	// Log the State
   	var State = History.getState(); // Note: We are using History.getState() instead of event.state
-  	
   	$('.loading_bar').show()
   	$.ajax({
       url: State.url,
@@ -380,7 +379,7 @@ function submit_online()
 {
   if($('#products_index').length > 0){
     $('.loading_bar').show();
-    $('#filter_online_form').ajaxSubmit({dataType: 'script'});
+    /*$('#filter_online_form').ajaxSubmit({dataType: 'script'});*/
     if($('#filter_online_form').attr('action').indexOf('?')>0)
     {
       history_url = $('#filter_online_form').attr('action')+"&"+$('#filter_online_form').serialize()  
