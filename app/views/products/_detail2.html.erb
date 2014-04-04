@@ -9,7 +9,7 @@
     <% cache(product.id, :expires_in => 2.hour) do %>
       <%= "<span class='hd'></span>".html_safe if product.hd?(session[:country_id]) %>
     <% end %>
-    <%= link_to image_tag(product.image, :width => 145, :height => 217), product_path(:id => product.to_param, :source => @source), 'data-url' => product_data_path(:product_id => product.to_param, :source => @source, :response_id => @response_id, :div_id => div_id), :class => :cover %>
+    <%= link_to image_tag(product.image, :width => 145, :height => 217), product_path(:id => product.to_param, :source => source), 'data-url' => product_data_path(:product_id => product.to_param, :source => source, :response_id => @response_id, :div_id => div_id), :class => :cover %>
     <% if product.lucky_cycle?(@eone, current_customer, nil) %>
     <div class="lucky">
       <h1><%= t('.lucky')%></h1>
