@@ -40,7 +40,7 @@ Moovies::Application.configure do
     :host => "staging.plush.be",
     :only_path => false
   }
-#  config.action_mailer.delivery_method = :ses
+  config.action_mailer.delivery_method = :ses
   config.log_level = :debug
   config.i18n.available_locales = [:fr, :nl, :en]
 
