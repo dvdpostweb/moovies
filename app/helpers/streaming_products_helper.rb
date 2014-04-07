@@ -3,7 +3,7 @@ module StreamingProductsHelper
     if browser.iphone? || browser.ipad? || browser.tablet?
       audio = streaming.languages.by_language(:fr).first.short_alpha
       sub = streaming.subtitles.count > 0 ? streaming.subtitles.by_language(:fr).first.short_alpha : 'non'
-      url = Moovies.hls_url(token_name, audio, sub)
+      url = code.nil? ? Moovies.hls_url(token_name, audio, sub) : Moovies.akamai_url(token_name, audio, sub)
       if browser.iphone? || (browser.tablet? && !browser.ipad?)
         script = <<-script
         $("#player").html("<video  width='696' height='389' src='#{url}'></video>")
@@ -16,7 +16,7 @@ module StreamingProductsHelper
     elsif !code.nil?
       audio = streaming.languages.by_language(:fr).first.short_alpha
             sub = streaming.subtitles.count > 0 ? streaming.subtitles.by_language(:fr).first.short_alpha : 'non'
-            url = Moovies.hls_url(token_name, audio, sub)
+            url = Moovies.akamai_url(token_name, audio, sub)
             script = <<-script
             var parameters = {
                 src: "#{url}",
