@@ -37,7 +37,7 @@ class Token < ActiveRecord::Base
     if code
       StreamingCode.by_name(code).first.update_attribute(:used_at, Time.now.localtime)
       #to do
-      token = Token.last
+      token = Token.find(16703)
       return {:token => token, :error => nil}
     else
       begin
