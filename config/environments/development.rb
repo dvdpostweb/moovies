@@ -18,8 +18,6 @@ Moovies::Application.configure do
   I18n.config.enforce_available_locales = false
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
-  mailer = AmazonSes::Mailer.new(secret_key: 'AKIAICQS7KIVA5N62SKQ', access_key: "Au/ZyAC8yBAZGGSPdGDNEz00v2biQZPjUnxpd+qLl3Xn")
-  config.action_mailer.delivery_method = mailer
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 
