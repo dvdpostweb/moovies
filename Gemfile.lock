@@ -46,6 +46,9 @@ GEM
       activesupport
       builder
       json
+    amazon-ses-mailer (0.0.4)
+      mail
+      ruby-hmac
     arel (3.0.2)
     aws-ses (0.5.0)
       builder
@@ -227,6 +230,7 @@ GEM
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
+    ruby-hmac (0.4.0)
     rubyzip (1.1.0)
     sass (3.2.9)
     sass-rails (3.2.6)
@@ -282,6 +286,7 @@ PLATFORMS
 
 DEPENDENCIES
   airbrake (~> 3.1.12)
+  amazon-ses-mailer
   aws-ses (~> 0.5.0)
   better_errors
   binding_of_caller
