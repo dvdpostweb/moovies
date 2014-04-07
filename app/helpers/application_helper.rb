@@ -18,7 +18,10 @@ module ApplicationHelper
         subject = email_data_replace(mail_object.subject, options)
         message = email_data_replace(mail_object.body, options)
         mail_history.update_attributes(:lstvariable => list)
-        Emailer.welcome_email(recipient, subject, message, Rails.env == 'development' ? true : false).deliver
+        #Emailer.welcome_email(recipient, subject, message, Rails.env == 'development' ? true : false).deliver
+        ses = AWS::SES::Base.new(:access_key_id     => 'AKIAICQS7KIVA5N62SKQ', :secret_access_key => 'Au/ZyAC8yBAZGGSPdGDNEz00v2biQZPjUnxpd+qLl3Xn', :server => "email-smtp.eu-west-1.amazonaws.com")
+        Rails.logger.debug { "@@@#{ses.inspect}" }
+        ses.send_email(:to        => recipient.email, :source    => '"info@plush.be" <info@plush.be>', :subject   => subject, :text_body => message)
       end
       @ticket = Ticket.new(:customer_id => customer.to_param, :category_ticket_id => mail_object.category_id)
       @ticket.save
