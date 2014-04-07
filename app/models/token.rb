@@ -36,7 +36,6 @@ class Token < ActiveRecord::Base
     file = StreamingProduct.find(streaming_product_id)
     if code
       StreamingCode.by_name(code).first.update_attribute(:used_at, Time.now.localtime)
-      #to do
       token = Token.find(16703)
       return {:token => token, :error => nil}
     else
