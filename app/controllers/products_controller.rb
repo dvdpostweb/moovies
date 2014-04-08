@@ -254,12 +254,14 @@ class ProductsController < ApplicationController
   end
 
   def action
+    @source = params[:source].nil? ? 7 : params[:source]
     if request.xhr?
       render :layout => false
     end
   end
 
   def data
+    @source = params[:source].nil? ? 7 : params[:source]
     if request.xhr?
       render :layout => false
     end
