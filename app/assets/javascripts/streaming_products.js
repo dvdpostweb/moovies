@@ -18,6 +18,7 @@ $(function() {
   })
   
   $('#streaming').delegate('.qualityvod', "click", function() {
+    console.log('here')
     /*response_id = getParameterByName('response_id')*/
     content = $('#presentation').html()
     loader = 'loading.gif';

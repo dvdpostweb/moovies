@@ -18,6 +18,7 @@ module StreamingProductsHelper
             sub = streaming.subtitles.count > 0 ? streaming.subtitles.by_language(:fr).first.short_alpha : 'non'
             url = Moovies.akamai_url(token_name, audio, sub)
             script = <<-script
+            $('#player').html("<div id='player_hls'></div>")
             var parameters = {
                 src: "#{url}",
                 autoPlay: "true",
@@ -31,7 +32,7 @@ module StreamingProductsHelper
             // Embed the player SWF:	            
             swfobject.embedSWF(
       	"/GrindPlayer.swf"
-      	, "player"
+      	, "player_hls"
       	, 696
       	, 389
       	, "10.1.0"
@@ -91,6 +92,8 @@ module StreamingProductsHelper
         t('.user_holidays_suspended')
       when Token.error[:generation_token_failed] then
         t('.rollback')
+      when Token.error[:code_expired] then
+        t('streaming_products.code_expired')
     end
   end
 
