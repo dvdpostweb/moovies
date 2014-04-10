@@ -1,5 +1,10 @@
 <% product = detail.product %>
 <li>
+   <%= "<span class='hd'></span>".html_safe if 1==1 || product.hd?(session[:country_id]) %>
+    <% if 1==1 || product.lucky_cycle?(@eone, current_customer, nil) %>
+     <div class="lucky">
+     </div>
+      <% end %>
   <%= link_to image_tag(product.image, :width => 145, :height => 217), product_path(:id => product.to_param) %>
   <br />
     <%= render :partial => 'products/streaming',  :locals => {:product => product, :source => @source, :response_id => @response_id} %>
