@@ -74,6 +74,16 @@
   border-bottom: #C36EC3 solid 2px;
 }
 
+#products .movie-wrap-jacket .lucky {
+    background: url("/assets/icon_lucky.png") no-repeat scroll 3px 3px #1A7834;
+    height: 24px;
+    left: 7px;
+    margin-top: 8px;
+    position: absolute;
+    top: 163px;
+    width: 26px;
+}
+
 #products  .movie-wrap .lucky {
   background: url(image_path('icon_lucky.png')) no-repeat scroll 3px 3px #1A7834;
   color: #FFFFFF;
@@ -93,17 +103,6 @@
   text-transform: uppercase;
 }
 
-#products .movie-wrap-jacket .lucky {
-  background: url(image_path('icon_lucky.png')) no-repeat scroll 3px 3px #1A7834;
-  color: #FFFFFF;
-  height: 24px;
-  left: 5px;
-  margin-top: 8px;
-  padding: 0 5px 2px 27px;
-  position: absolute;
-  top: -29px;
-  width: 97px;
-}
 
 #products .movie-wrap-jacket .lucky h1 {
   color: #FFFFFF;
@@ -114,17 +113,26 @@
   text-transform: uppercase;
 }
 
-.ca-wrapper .content .lucky {
-    background: url(image_path('icon_lucky.png')) no-repeat scroll 3px 3px #1A7834;
-    color: #FFFFFF;
-    height: 24px;
-    left: 3px;
+#new-alacarte-wrap .tab-container .lucky {
+    background: url("/assets/icon_lucky.png") no-repeat scroll 3px 3px #1A7834;
+    height: 25px;
+    left: 0;
     margin-top: 8px;
-    padding: 0 1px 2px 23px;
     position: absolute;
-    top: -34px;
-    width: 81px;
+    top: 184px;
+    width: 25px;
 }
+
+.ca-wrapper .content .lucky {
+    background: url("/assets/icon_lucky.png") no-repeat scroll 3px 3px #1A7834;
+    height: 25px;
+    left: 5px;
+    margin-top: 8px;
+    position: absolute;
+    top: 105px;
+    width: 25px;
+}
+
 
 .ca-wrapper .content .lucky h1 {
     color: #FFFFFF;
@@ -2338,6 +2346,16 @@ ul#ratings_labels li:last-child {
   top: 169px;
   width: 48px;
 }
+#maincontent .tab-container .hd {
+    background: url("/assets/icon_hd.png") no-repeat scroll 0 0 transparent;
+    display: block;
+    height: 26px;
+    left: 97px;
+    position: absolute;
+    top: 191px;
+    width: 48px;
+}
+
 
 #movies_banners1 {
   clear: both;
