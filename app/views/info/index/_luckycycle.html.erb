@@ -1,3 +1,6 @@
+<% if current_customer %>
+  <%= image_tag "#{I18n.locale}/banner_lucky.jpg", id: :banner_lucky %>
+<% end %>
 <div id="lucky-wrap">
   <h2><%= t('.q1') %></h2>
   <p><%= t('.r1').html_safe %></p>

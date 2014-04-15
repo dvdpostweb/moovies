@@ -7,11 +7,11 @@
 					<% token_valid = token.nil? ? false : token.validate?(request.remote_ip) %>
 				  <% if @product.svod_dates_online.first || token_valid %>
 				    <% if params[:origin] == 'products' %>
-						  window.location.href = '<%= streaming_product_path(:id => @product.imdb_id) %>' 
+						  window.location.href = '<%= streaming_product_path(:id => @product.imdb_id, :source => @source) %>' 
 						<% end %>
 					<% else %>
 						<% if current_customer.payable? %>
-							jQuery.facebox('<%= escape_javascript(render(:partial => 'products/tvod_alert', :locals => {:product => @product})) %>')
+							jQuery.facebox('<%= escape_javascript(render(:partial => 'products/tvod_alert', :locals => {:product => @product, :source => @source})) %>')
 						<% else %>
 							jQuery.facebox('<%= escape_javascript(render(:partial => 'products/no_credit_card')) %>')
 						<% end %>

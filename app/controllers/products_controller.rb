@@ -90,6 +90,8 @@ class ProductsController < ApplicationController
     #  @products = Product.filter(@filter, new_params)
     #end
     @target = cookies[:endless] == 'deactive' ?  '_self' : '_blank'
+    @carousels = Landing.hit.by_language(I18n.locale).not_expirated
+    
     if params[:endless]
       cookies.permanent[:endless] = params[:endless]
     end
@@ -254,12 +256,14 @@ class ProductsController < ApplicationController
   end
 
   def action
+    @source = params[:source].nil? ? 7 : params[:source]
     if request.xhr?
       render :layout => false
     end
   end
 
   def data
+    @source = params[:source].nil? ? 7 : params[:source]
     if request.xhr?
       render :layout => false
     end
