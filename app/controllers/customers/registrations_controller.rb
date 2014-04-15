@@ -37,8 +37,9 @@ class Customers::RegistrationsController < Devise::RegistrationsController
           @discount = Discount.by_name(params[:customer][:code]).available.first
           if @discount.nil? || (@discount && @user.discount_reuse?(@discount.month_before_reuse))
             if @user.abo_active == 0
-              @user.step = 31
+              @user.step = @discount.nil? ? 31 : @discount.goto_step
               @user.code = params[:customer][:code]
+              @user.abo_active = 1 if @discount.goto_step.to_i == 100
               @user.save(:validate => false)
               @user.abo_history(35, @user.abo_type_id)
               DiscountUse.create(:discount_code_id => @discount.id, :customer_id => @user.to_param, :discount_use_date => Time.now.localtime) if @discount
@@ -58,8 +59,14 @@ class Customers::RegistrationsController < Devise::RegistrationsController
         end
       end
     end
+    
     build_resource
-
+    @discount = Discount.by_name(params[:customer][:code]).available.first
+    if @discount
+      resource.step = @discount.goto_step
+      resource.abo_active = 1 if @discount.goto_step.to_i == 100
+    end
+    
     if resource.save
       resource.abo_history(35, resource.abo_type_id)
       if resource.active_for_authentication?
