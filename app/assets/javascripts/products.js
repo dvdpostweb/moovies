@@ -124,7 +124,7 @@ $(function() {
     set_page(url)
   }
   /***trailer ***/
-  $('body').delegate(".linkallversions a", "click", function() {
+  $('body').delegate("#content_trailer .linkallversions a", "click", function() {
     html_item = $(this);
     content = html_item.html();
     html_item.html("Loading...");

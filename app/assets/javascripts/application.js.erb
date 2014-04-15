@@ -66,7 +66,7 @@ $(function() {
   $('body').delegate('.facebox_close', 'click', function() {
     $(document).trigger('close.facebox')
   })
-  /*$('#catalogue_menu, #account_menu').on('mouseover',function(){
+  $('#account_menu').on('mouseover',function(){
     $('.dropdown').hide()
     id = $(this).attr('id').replace('_menu','')
     $('#'+id).show()
@@ -74,7 +74,7 @@ $(function() {
   $('.dropdown').on('mouseleave',function(){
     id = $(this).attr('id').replace('_menu','')
     $('#'+id).hide()
-  })*/
+  })
   $('#nav #abo, #nav #adult, #nav #message, #header h1').on('mouseover',function(){
     $('.dropdown').hide()
   })

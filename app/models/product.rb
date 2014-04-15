@@ -612,7 +612,7 @@ class Product < ActiveRecord::Base
   end
 
   def lucky_cycle?(eone_movies, customer, streaming)
-    if self.package_id == 2
+    if Rails.env == "production" && self.package_id == 2 
       if !customer || (customer.address.belgian?)
         if eone_movies && !eone_movies.include?(self.id)
           if vod_online_be.size > 0

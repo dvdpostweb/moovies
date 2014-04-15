@@ -16,8 +16,8 @@ class Token < ActiveRecord::Base
   scope :available, lambda {|from, to| where(:updated_at => from..to)}
   scope :expired, lambda {|to| where("updated_at < ?", to)}
   
-  scope :recent, lambda {|from, to| where(:updated_at=> from..to)}
-  scope :by_imdb_id, lambda {|imdb_id| where(:imdb_id=> imdb_id)}
+  scope :recent, lambda {|from, to| where(:updated_at => from..to)}
+  scope :by_imdb_id, lambda {|imdb_id| where(:imdb_id => imdb_id)}
   
   scope :ordered, :order => 'tokens.updated_at asc'
   scope :ordered_old, :order => 'tokens.updated_at desc'
@@ -36,7 +36,6 @@ class Token < ActiveRecord::Base
     file = StreamingProduct.find(streaming_product_id)
     if code
       StreamingCode.by_name(code).first.update_attribute(:used_at, Time.now.localtime)
-      #to do
       token = Token.find(16703)
       return {:token => token, :error => nil}
     else
@@ -104,6 +103,7 @@ class Token < ActiveRecord::Base
     error.push(:user_suspended, 4)
     error.push(:generation_token_failed, 5)
     error.push(:customer_not_activated, 6)
+    error.push(:code_expired, 7)
     
     error
   end

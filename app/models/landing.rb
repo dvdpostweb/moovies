@@ -8,6 +8,7 @@ class Landing < ActiveRecord::Base
   scope :not_expirated, where('expirated_date > now() or expirated_date is null')
   scope :private, where(:login => ['private', 'both' ])
   scope :public,  where(:login => ['public', 'both' ])
+  scope :hit,  where(:login => 'hit')
   scope :public_test,  where(:login => ['public_test' ])
   scope :adult,  where(:login => 'adult')
   scope :by_language, lambda {|language| where((language == :nl ? :actif_dutch : (language == :en ? :actif_english : :actif_french)) => "YES")}

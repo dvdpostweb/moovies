@@ -37,7 +37,7 @@ module ProductsHelper
       when 'SEARCH'
         search_path(:search => carousel.reference_id)
       when 'URL'
-        eval(carousel.reference_id)
+        eval(carousel.link(I18n.locale))
       end
   end
   def get_reviews()
