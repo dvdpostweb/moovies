@@ -30,6 +30,10 @@
   width: 440px;
 }
 
+#prices #alacarte .abo_infos {
+  min-height: 150px;
+}
+
 #prices h2 span, #prices h3 span{
   color:#98D321;
   font-weight: bold;
@@ -41,6 +45,11 @@
 }
 #prices span.plush {
   color:#98D321;
+  font-weight: bold;
+}
+
+#prices span.plushalacarte {
+  color:#66CCCC;
   font-weight: bold;
 }
 #prices span.adult{
@@ -124,7 +133,15 @@
   line-height: 27px;
   padding-left: 32px;
 }
-
+#prices #alacarte .abo_infos li {
+    background-image: url("/assets/bullets_ok_alacarte.png");
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    font-size: 17px;
+    height: 26px;
+    line-height: 27px;
+    padding-left: 32px;
+}
 
 
 #prices .abo_infos p {
@@ -149,6 +166,20 @@
   line-height: 22px;
   padding-left: 83px;
 }
+
+#prices #alacarte .tickets {
+    background-image: url("/assets/alacarte_choices.png");
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    color: #3E3D40;
+    font-size: 18px;
+    font-weight: normal;
+    height: 66px;
+    line-height: 22px;
+    padding-left: 83px;
+    padding-top: 7px;
+}
+
 #prices .adult_dvd {
     background-image: url(image_path('dvd_prices.png'));
     background-position: 0 0;
