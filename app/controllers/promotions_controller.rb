@@ -67,8 +67,9 @@ class PromotionsController < ApplicationController
           if @discount.nil? || (@discount && current_customer.discount_reuse?(@discount.month_before_reuse))
             if current_customer.abo_active == 0
               customer = current_customer
-              customer.step = 31
+              customer.step = @discount.nil? ? 31 : discount.goto_step
               customer.code = code
+              customer.customer_abo = 1 if @discount.goto_step.to_i == 100
               customer.save(:validate => false)
               customer.abo_history(35, customer.abo_type_id)
               DiscountUse.create(:discount_code_id => @discount.id, :customer_id => customer.to_param, :discount_use_date => Time.now.localtime) if @discount

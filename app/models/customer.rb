@@ -181,6 +181,9 @@ class Customer < ActiveRecord::Base
     suspension_status == 1
   end
 
+  def tvod_only?
+    abo_type_id == 6
+  end
   def name
     "#{first_name} #{last_name}"
   end
