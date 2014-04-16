@@ -39,9 +39,9 @@ class Customers::RegistrationsController < Devise::RegistrationsController
             if @user.abo_active == 0
               @user.step = @discount.nil? ? 31 : @discount.goto_step
               @user.code = params[:customer][:code]
-              @user.abo_active = 1 if @discount.goto_step.to_i == 100
+              @user.abo_active = 1 if @discount && @discount.goto_step.to_i == 100
               @user.save(:validate => false)
-              @user.abo_history(35, @user.abo_type_id)
+              @user.abo_history(@discount && @discount.goto_step.to_i == 100 ? 6 : 35, @user.abo_type_id)
               DiscountUse.create(:discount_code_id => @discount.id, :customer_id => @user.to_param, :discount_use_date => Time.now.localtime) if @discount
               if @user.confirmed?
                 sign_in @user, :bypass => true

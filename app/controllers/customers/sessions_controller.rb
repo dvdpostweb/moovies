@@ -11,10 +11,10 @@ class Customers::SessionsController < Devise::SessionsController
     if params[:code]
       customer = current_customer
       customer.step = @discount.goto_step
-      customer.customer_abo = 1 if @discount.goto_step.to_i == 100
+      customer.customer_abo = 1 if @discount && @discount.goto_step.to_i == 100
       customer.code = params[:code]
       customer.save(:validate => false)
-      customer.abo_history(35, customer.abo_type_id)
+      customer.abo_history(@discount && @discount.goto_step.to_i == 100 ? 6 : 35, customer.abo_type_id)
       DiscountUse.create(:discount_code_id => @discount.id, :customer_id => customer.to_param, :discount_use_date => Time.now.localtime) if @discount
     end
     set_flash_message(:notice, :signed_in) if is_navigational_format?
