@@ -26,9 +26,10 @@
   </div>
   <div class="container clearfix">
     <div id="promo_content">
-      <h1 style="color: #212A31;">
-        <%= t2('.title', @promo.params[:key]).html_safe %><br/>
-        <strong><%= t2('.title_promo', @promo.params[:key]).html_safe %></strong>
+      <h1>
+        <% Rails.logger.debug { "@@@#{ @promo.params.inspect}" }%>
+        <%= t2('.title', @promo.params[:key], {:title_color => @promo.params[:title_color]}).html_safe %><br/>
+        <strong><%= t2('.title_promo', @promo.params[:key], {:title_color => @promo.params[:title_color]}).html_safe %></strong>
       </h1>
       <div id="promo_form" class="light">
         <h2 class="light"><%= t2('.subtitle', @promo.params[:key]).html_safe %></h2>
