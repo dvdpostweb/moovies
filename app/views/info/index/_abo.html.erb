@@ -22,7 +22,13 @@
         <% end %>
       </div>
       <div class="tickets"><%= t '.unlimited_text'.html_safe %></div>
-      <div class="subscribe" align="center"><%= link_to t('.try_now'), new_customer_registration_path(:code => @discount_svod.name), :class => "btn" %></div>
+      <div class="subscribe" align="center">
+        <% if current_customer %>
+          <%= link_to t('info.index.abo.change'), subscription_path(:abo_id => 1), :method => :put, :class => "btn" %>
+        <% else %>  
+          <%= link_to t('.try_now'), new_customer_registration_path(:code => @discount_svod.name), :class => "btn" %>
+        <% end %>
+      </div>
     </div>
     
     <div class="abo_infos">
@@ -35,27 +41,30 @@
       <div class="price_slogan"><%= t('.price_slogan').html_safe %></div>
     </div>
     <div class="clearfix"></div>
-    <h2>Profitez de moments exceptionnelles avec <span style="color:#66CCCC; font-weight: bold;">Plush à la Carte</span></h2>
+    <% unless current_customer && current_customer.tvod_only? %>
+    <h2><%= raw t '.tvod_only' %></h2>
      <div id="alacarte">
     <div class="abo_prices">
       <div class="big_price">
-        <h3><span style="color:#66CCCC; font-weight: bold;">Aucun frais</span> mensuelles</h3>
+        <h3><%= raw t('.tvod_only_no_abo') %></h3>
       </div>
       <div class="tickets">
-        Choisissez le film de votre choix parmi plus de 1500 titres</div>
-      <div class="subscribe" align="center"><a class="btn" href="#">Inscrivez-vous</a></div>
+        <%= raw t('.tvod_only_text') %>
+      </div>
+      <div class="subscribe" align="center"><%= link_to t('.signup'), new_customer_registration_path(:code => @discount_tvod_only.name), :class => "btn" %></div>
     </div>
     <div class="abo_infos">
-<h3>Découvrez <span style="color:#66CCCC; font-weight: bold;">Plush à la Carte</span></h3>
+      <h3><%= raw t('.tvod_only_discover') %></h3>
       <ul>
-        <li><strong>Plus de 1500 films</strong></li>
-        <li>Des nouveautés chaque semaine</li>
-        <li>Payez uniquement ce que vous consomez</li>
+        <li><strong><%= t('.tvod_only_discover_desc1') %></strong></li>
+        <li><%= t('.tvod_only_discover_desc2') %></li>
+        <li><%= t('.tvod_only_discover_desc3') %></li>
       </ul>
-      <div class="price_slogan">Accédez au plus grand catalogue VOD de la Belgique!</div>
+      <div class="price_slogan"><%= t '.tvod_only_slogan' %></div>
     </div>
     </div>
     <div class="clearfix"></div>
+    <% end %>
     <% if @kid_visible %>
     <h2><%= raw t('.kid') %></h2>
     <div class="abo_prices">
@@ -93,7 +102,13 @@
           <% end %>
         </div>
         <div class="adult_dvd"><%= t('.adult_text') %></div>
-        <div class="subscribe" align="center"><%= link_to t('.try_now'), new_customer_registration_path(:code => @discount_adult.name), :class => "btn" %></div>
+        <div class="subscribe" align="center">
+          <% if current_customer && current_customer.tvod_only? %>
+            <%= link_to t('info.index.abo.change'), subscription_path(:abo_id => 5), :method => :put, :class => "btn" %>
+          <% else %>
+            <%= link_to t('.try_now'), new_customer_registration_path(:code => @discount_adult.name), :class => "btn" %>
+          <% end %>
+        </div>
       </div>
       <div class="abo_infos">
         <h3><%= raw t('.discover_adult') %></h3>
