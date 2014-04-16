@@ -42,9 +42,10 @@
         
       </div>
     </div>
-    <div class="basic_package<%= " current" if current_customer && current_customer.subscription_type.id == 1 && current_customer.step != 90 %>">
+    <% if current_customer.tvod_only? %>
+    <div class="basic_package<%= " current" if current_customer && current_customer.subscription_type.id == 6 && current_customer.step != 90 %>">
       <div class="head">
-        <span class="plushalacarte">Plush a la carte</span>
+        <span class="plushalacarte"><%= t('.tvod_only') %></span>
       </div>
       <div class="prices_bg">
         <span>0€<small><%= t('info.index.abo.per_month') %></small></span>
@@ -59,22 +60,13 @@
         </ul>
       </div>
       <div class="price_sign" align="center">
-        <% if current_customer %>
-          <% if current_customer.step == 90 %>
-            <%= form_tag promotion_canva_path(:id => params[:id]), :id => 'form_step' do %>
-              <%= hidden_field_tag(:code, @discount_svod.name) %><br />
-              <%= hidden_field_tag :return_url, step_path(:id => :old) %>
-              <button border="0" align="absmiddle" class="btn btn_align" name="sent"><%= t('.relaunch') %></button>
-            <% end %>
-          <% else %>
-            <%= link_to t('info.index.abo.change'), subscription_path(:abo_id => 1), :method => :put, :class => "btn btn_align" unless  current_customer.subscription_type.id == 1 %>
-          <% end %>
-        <% else %>
-          <%= link_to t('info.index.abo.try_now'), new_customer_registration_path(:code => @discount_svod.name), :class => "btn" %>
+        <% unless current_customer %>
+          <%= link_to t('info.index.abo.try_now'), new_customer_registration_path(:code => @discount_tvod_only.name), :class => "btn" %>
         <% end %>
         
       </div>
     </div>
+    <% end %>
     <% if @kid_visible %>
     <div class="basic_package<%= " current" if current_customer && current_customer.subscription_type.id == 2 && current_customer.step != 90 %>">
       <div class="head">
