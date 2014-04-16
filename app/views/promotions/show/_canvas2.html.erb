@@ -12,6 +12,13 @@
   width: 224px;
 }
 <% end %>
+<% logger.debug("@@@#{@promo.params[:border_color]}") %>
+<% if @promo.params[:border_color] %>
+#promo_content #promo_form.light
+{
+  border: <%= @promo.params[:border_color] %> 3px solid;
+}
+<% end %>
 </style>
 <div id="wrap">
   <div id="header" >
@@ -27,7 +34,6 @@
   <div class="container clearfix">
     <div id="promo_content">
       <h1>
-        <% Rails.logger.debug { "@@@#{ @promo.params.inspect}" }%>
         <%= t2('.title', @promo.params[:key], {:title_color => @promo.params[:title_color]}).html_safe %><br/>
         <strong><%= t2('.title_promo', @promo.params[:key], {:title_color => @promo.params[:title_color]}).html_safe %></strong>
       </h1>
