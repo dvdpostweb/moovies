@@ -33,6 +33,8 @@
               <%= hidden_field_tag :return_url, step_path(:id => :old) %>
               <button border="0" align="absmiddle" class="btn btn_align" name="sent"><%= t('.relaunch') %></button>
             <% end %>
+          <% elsif current_customer.tvod_only? %>
+            <%= link_to t('info.index.abo.change'), subscription_path(:code => @discount_svod.name), :method => :put, :class => "btn btn_align" %>
           <% else %>
             <%= link_to t('info.index.abo.change'), subscription_path(:abo_id => 1), :method => :put, :class => "btn btn_align" unless  current_customer.subscription_type.id == 1 %>
           <% end %>
@@ -42,7 +44,7 @@
         
       </div>
     </div>
-    <% if current_customer.tvod_only? %>
+    <% if current_customer && current_customer.tvod_only? %>
     <div class="basic_package<%= " current" if current_customer && current_customer.subscription_type.id == 6 && current_customer.step != 90 %>">
       <div class="head">
         <span class="plushalacarte"><%= t('.tvod_only') %></span>
@@ -93,6 +95,8 @@
               <%= hidden_field_tag :return_url, step_path(:id => :old) %>
               <button border="0" align="absmiddle" class="btn btn_align" name="sent"><%= t('.relaunch') %></button>
             <% end %>
+          <% elsif current_customer.tvod_only? %>
+              <%= link_to t('info.index.abo.change'), subscription_path(:code => @discount_kids.name), :method => :put, :class => "btn btn_align" %>
           <% else %>
             <%= link_to t('info.index.abo.change'), subscription_path(:abo_id => 2), :method => :put, :class => "btn btn_align" unless  current_customer.subscription_type.id == 2 %>
           <% end %>
@@ -126,6 +130,8 @@
               <%= hidden_field_tag :return_url, step_path(:id => :old) %>
               <button border="0" align="absmiddle" class="btn btn_align" name="sent"><%= t('.relaunch') %></button>
             <% end %>
+          <% elsif current_customer.tvod_only? %>
+              <%= link_to t('info.index.abo.change'), subscription_path(:code => @discount_adult.name), :method => :put, :class => "btn btn_align" %>
           <% else %>
             <%= link_to t('info.index.abo.change'), subscription_path(:abo_id => 5), :method => :put, :class => "btn btn_align" unless current_customer.subscription_type.id == 5 %>
           <% end %>
@@ -159,6 +165,8 @@
               <%= hidden_field_tag :return_url, step_path(:id => :old) %>
               <button border="0" align="absmiddle" class="btn btn_align" name="sent"><%= t('.relaunch') %></button>
             <% end %>
+          <% elsif current_customer.tvod_only? %>
+                <%= link_to t('info.index.abo.change'), subscription_path(:code => @discount_classic_adult.name), :method => :put, :class => "btn btn_align" %>
           <% else %>
             <%= link_to t('info.index.abo.change'), subscription_path(:abo_id => 3), :method => :put, :class => "btn btn_align" unless current_customer.subscription_type.id == 3 %>
           <% end %>
@@ -192,6 +200,8 @@
               <%= hidden_field_tag :return_url, step_path(:id => :old) %>
               <button border="0" align="absmiddle" class="btn btn_align" name="sent"><%= t('.relaunch') %></button>
             <% end %>
+          <% elsif current_customer.tvod_only? %>
+            <%= link_to t('info.index.abo.change'), subscription_path(:code => @discount_all.name), :method => :put, :class => "btn btn_align" %>
           <% else %>
             <%= link_to t('info.index.abo.change'), subscription_path(:abo_id => 4), :method => :put, :class => "btn btn_align" unless current_customer.subscription_type.id == 4 %>
           <% end %>

@@ -24,7 +24,7 @@
       <div class="tickets"><%= t '.unlimited_text'.html_safe %></div>
       <div class="subscribe" align="center">
         <% if current_customer %>
-          <%= link_to t('info.index.abo.change'), subscription_path(:abo_id => 1), :method => :put, :class => "btn" %>
+          <%= link_to t('info.index.abo.change'), subscription_path(:code => @discount_svod.name), :method => :put, :class => "btn" %>
         <% else %>  
           <%= link_to t('.try_now'), new_customer_registration_path(:code => @discount_svod.name), :class => "btn" %>
         <% end %>
@@ -104,7 +104,7 @@
         <div class="adult_dvd"><%= t('.adult_text') %></div>
         <div class="subscribe" align="center">
           <% if current_customer && current_customer.tvod_only? %>
-            <%= link_to t('info.index.abo.change'), subscription_path(:abo_id => 5), :method => :put, :class => "btn" %>
+            <%= link_to t('info.index.abo.change'), subscription_path(:code => @discount_adult.name), :method => :put, :class => "btn" %>
           <% else %>
             <%= link_to t('.try_now'), new_customer_registration_path(:code => @discount_adult.name), :class => "btn" %>
           <% end %>
