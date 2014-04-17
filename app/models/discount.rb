@@ -46,6 +46,8 @@ class Discount < ActiveRecord::Base
         # tot = price - X€
         when 3
           price = abo_price - self.value
+        else
+          price = 0
       end
     price.to_f
   end

@@ -68,7 +68,7 @@ class Customers::RegistrationsController < Devise::RegistrationsController
     end
     
     if resource.save
-      resource.abo_history(35, resource.abo_type_id)
+      resource.abo_history(@discount && @discount.goto_step.to_i == 100 ? 6 : 35, resource.abo_type_id)
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_navigational_format?
         sign_up(resource_name, resource)
