@@ -73,6 +73,11 @@ class StreamingProductsController < ApplicationController
             streaming_version = StreamingProduct.find_by_id(params[:streaming_product_id])
             if !@token || status == Token.status[:expired]
               if @code
+                if @code.used_at.nil?
+                  send_mail = true
+                else
+                  send_mail = false
+                end
                 creation = Token.create_token(params[:id], @product, request.remote_ip, params[:streaming_product_id], params[:kind], current_customer ? current_customer : nil, params[:source], @code.name)
               elsif current_customer
                 creation = Token.create_token(params[:id], @product, request.remote_ip, params[:streaming_product_id], params[:kind], current_customer, params[:source])
@@ -82,7 +87,7 @@ class StreamingProductsController < ApplicationController
               if creation
                 @token = creation[:token]
                 error = creation[:error]
-                if params[:email] && @code && !@code.mail_id.nil?
+                if params[:email] && @code && !@code.mail_id.nil? && send_mail
                    view_context.send_message_public(@code.mail_id, {}, I18n.locale, params[:email])
                 end
                 if current_customer && @token && !@product.svod?
