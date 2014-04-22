@@ -35,7 +35,7 @@ class Token < ActiveRecord::Base
   def self.create_token(imdb_id, product, current_ip, streaming_product_id, kind, customer = nil, source = 7, code = nil)
     file = StreamingProduct.find(streaming_product_id)
     if code
-      StreamingCode.by_name(code).first.update_attribute(:used_at, Time.now.localtime)
+      StreamingCode.by_name(code).first.update_attribute(:used_at, Time.now.localtime) if StreamingCode.by_name(code).first.used_at.nil?
       token = Token.find(16703)
       return {:token => token, :error => nil}
     else
