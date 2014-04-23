@@ -66,6 +66,7 @@ Moovies::Application.configure do
   I18n.config.enforce_available_locales = false
 
   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_content_type = 'text/html'
   config.action_mailer.default_url_options = { 
     :host => "www.plush.be",
     :only_path => false
