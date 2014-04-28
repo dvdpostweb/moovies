@@ -53,6 +53,7 @@ class Token < ActiveRecord::Base
           
         token = Token.create(params)
         if token.id.blank?
+          self.notify_error_token((customer ? customer.id : 0), Token.error[:query_rollback])
           return {:token => nil, :error => Token.error[:query_rollback]}
         else
           if product.lucky_cycle?(nil, customer, file)
@@ -61,6 +62,7 @@ class Token < ActiveRecord::Base
           return {:token => token, :error => nil}
         end
       else
+        self.notify_error_token((customer ? customer.id : 0), Token.error[:generation_token_failed])
         return {:token => nil, :error => Token.error[:generation_token_failed]}
       end
     end
@@ -135,6 +137,16 @@ class Token < ActiveRecord::Base
     return token_status == Token.status[:ok] || token_status == Token.status[:ip_valid]
   end
 
+  
+  def self.notify_error_token(customer_id, error)
+    begin
+      Rails.logger.debug { "@@@errror #{customer_id} #{error}" }
+      Airbrake.notify(:error_message => "customer #{customer_id}  #{error}", :backtrace => $@, :environment_name => ENV['RAILS_ENV'])
+    rescue => e
+      logger.error("customer: #{to_param} #{error}")
+      logger.error(e.backtrace)
+    end
+  end
   private
   def generate_token
     if token.nil?
