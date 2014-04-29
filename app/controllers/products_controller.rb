@@ -58,7 +58,6 @@ class ProductsController < ApplicationController
     end
     @source = WishlistSource.wishlist_source(params, @wishlist_source)
     @vod_wishlist = current_customer.products.collect(&:products_id) if current_customer
-    @eone = Product.joins(:streaming_products).where(streaming_products: {studio_id: 750}).collect(&:products_id)
     @countries = ProductCountry.visible.ordered
       if params[:package].nil? && params[:concerns] != :productable
         new_params = session[:sexuality] == 0 ? params.merge(:per_page => 50, :country_id => session[:country_id], :hetero => 1, :includes => ["descriptions_#{I18n.locale}", 'vod_online_be']) : params.merge(:per_page => 50, :country_id => session[:country_id], :includes => ["descriptions_#{I18n.locale}", 'vod_online_be'])

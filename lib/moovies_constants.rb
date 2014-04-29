@@ -307,8 +307,6 @@ module Moovies
         :tvod_normal                => 616,
         :svod_adult                 => 617,
         :tvod_adult                 => 618,
-        :lucky_normal               => 632,
-        :lucky_adult                => 633,
       })
     end
   end
