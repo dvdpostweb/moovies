@@ -18,3 +18,4 @@ ActionMailer::Base.smtp_settings = {
 #  :enable_starttls_auto => true
 #}
 ActionMailer::Base.default :from => 'info@plush.be'
+ActionMailer::Base.default :content_type => "text/html"

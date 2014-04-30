@@ -3,7 +3,7 @@ class Prospect < ActiveRecord::Base
   attr_reader :civ
   before_create :set_default
   validates :email, :presence => true, :uniqueness => true
-  validates :firstname, :lastname, :locale_id, :gender, :presence => true
+  validates :locale_id, :presence => true
   def civ=(data)
     if data == 'Mme'
       self.gender = 'F'
