@@ -9,7 +9,6 @@ class HomeController < ApplicationController
     @newsletter = PublicNewsletter.new(params[:public_newsletter])
     @svod_id = params[:kind] == :adult ? 4 : 1 
     @tvod_id = params[:kind] == :adult ? 5 : 2
-    @eone = Product.joins(:streaming_products).where(streaming_products: {studio_id: 750}).collect(&:products_id)
     if current_customer
       @carousel = Landing.by_language(I18n.locale).not_expirated
       @carousel = params[:kind] == :adult ? @carousel.adult : @carousel.private

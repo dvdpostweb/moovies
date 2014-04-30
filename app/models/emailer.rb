@@ -26,7 +26,4 @@ class Emailer < ActionMailer::Base
     mail(:to => 'cl@dvdpost.be', :subject => "samsung invoice #{@id}")
   end
 
-  def lucky_cycle(lucky, subject, content)
-    mail(:to => lucky.email, :subject => subject)
-  end
 end
