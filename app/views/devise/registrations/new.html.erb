@@ -2,7 +2,9 @@
   <div id="step_wrap">
     <div id="step_container">
       <div class="step_form">
+        <% if @promo.nil? || !@promo.tvod_only %>
         <div class="step_1 step <%= I18n.locale %>" align="center"></div>
+        <% end %>
         <h3><%= t('.title', :default => 'Créez votre compte:') %></h3>
         <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
         <%= devise_error_messages! %>

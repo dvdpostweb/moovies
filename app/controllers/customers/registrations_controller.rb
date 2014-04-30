@@ -13,8 +13,10 @@ class Customers::RegistrationsController < Devise::RegistrationsController
       @discount = Discount.by_name(code).available.first
       @activation = Activation.by_name(code).available.first
       if @discount
+        @promo = @discount
         cookies[:code] = { value: code, expires: 15.days.from_now }
       elsif @activation
+        @promo = @activation
         cookies[:code] = { value: code, expires: 15.days.from_now }
       else
         @default_code = Discount.find(Moovies.discount["svod_#{I18n.locale}"]).name

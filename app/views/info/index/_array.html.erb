@@ -44,7 +44,7 @@
         
       </div>
     </div>
-    <% if current_customer && current_customer.tvod_only? %>
+    <% unless current_customer %>
     <div class="basic_package<%= " current" if current_customer && current_customer.subscription_type.id == 6 && current_customer.step != 90 %>">
       <div class="head">
         <span class="plushalacarte"><%= t('.tvod_only') %></span>
@@ -62,10 +62,7 @@
         </ul>
       </div>
       <div class="price_sign" align="center">
-        <% unless current_customer %>
           <%= link_to t('info.index.abo.try_now'), new_customer_registration_path(:code => @discount_tvod_only.name), :class => "btn" %>
-        <% end %>
-        
       </div>
     </div>
     <% end %>
