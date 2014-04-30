@@ -25,6 +25,10 @@ class Activation < ActiveRecord::Base
   scope :by_name, lambda {|name| where(:activation_code => name)}
   scope :available, lambda {where('(activation_code_validto_date > ? or activation_code_validto_date is null) and customers_id = 0', Time.now.to_s(:db))}
 
+  def tvod_only
+    subscription_type.id == 6
+  end
+
   def duration
     case duration_type
     when 1

@@ -23,6 +23,10 @@ class Discount < ActiveRecord::Base
   scope :by_name, lambda {|name| where(:discount_code => name)}
   scope :available, lambda { where('(discount_validityto > ? or discount_validityto is null) and discount_status = 1', Time.now.to_s(:db))}
   has_one :subscription_type, :primary_key => :listing_products_allowed, :foreign_key => :products_id
+  def tvod_only
+    subscription_type.id == 6
+  end
+
   def duration
     case duration_type
     when 1
