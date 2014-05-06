@@ -7,3 +7,12 @@
 <% end %>
 <%= params[:hide_btn] != "1" ? link_to(t('.click_here'), streaming_product_path(:id => product.imdb_id, :source => @source), :id => 'streaming_btn', :class => 'alacarte') : 
  "<div id='streaming_btn' class ='alacarte facebox_close'>#{t('.close_button')}</div>".html_safe %>
+
+<div id="infostvod">
+ <h1>Le saviez-vous?</h1>
+ <p>Les abonnés Plush Unlimited bénéficient de <strong>0,5€ de réduction</strong> sur le prix de location de ce film.
+ <br/> <br/> <a class="essaigratuit osc btn" href="#">Abonnez-vous</a>
+<br/>Vous pouvez bien entendu regarder le film sans abonnement également<br/> <br/>
+ <a id="streaming_btn" class="alacarte" href="#">Regarder le film 2,49€</a>
+ </p>
+</div>
