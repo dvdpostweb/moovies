@@ -14,6 +14,7 @@ class SubscriptionsController < ApplicationController
           current_customer.step = @discount.goto_step
           current_customer.promo_type = 'D'
           current_customer.promo_id = @discount.id
+          current_customer.abo_active = 0
           action = Subscription.action[:tvod_init_sub]
         else
           redirect_to info_path(:page_name => t('routes.infos.params.abo')), :alert => t('subscription.update.error_abo')

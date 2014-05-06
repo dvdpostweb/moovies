@@ -40,10 +40,8 @@ class PromotionsController < ApplicationController
         marketing = params[:marketing] || 0
         marketing_partners = params[:marketing_partners] || 0
         if prospect = Prospect.where(:email => params[:email]).first
-          Rails.logger.debug { "@@@" }
           prospect.update_attributes(:newsletters => marketing, :newsletters_partners => marketing_partners, :locale_id => Moovies.customer_languages[I18n.locale])
         else
-          Rails.logger.debug { "@@@#{params[:email]} #{marketing} #{marketing_partners} #{Moovies.customer_languages[I18n.locale]}" }
           Prospect.create(:email => params[:email], :newsletters => marketing, :newsletters_partners => marketing_partners, :locale_id => Moovies.customer_languages[I18n.locale])
         end
       else
