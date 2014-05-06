@@ -6,7 +6,6 @@ class Token < ActiveRecord::Base
   has_many :streaming_products, :primary_key => :imdb_id, :foreign_key => :imdb_id
   has_many :streaming_products_free, :primary_key => :imdb_id, :foreign_key => :imdb_id
   has_many :token_ips
-  has_one :lucky_cycle
   has_many :products, :foreign_key => :imdb_id, :primary_key => :imdb_id
 
   after_create :generate_token
@@ -35,7 +34,7 @@ class Token < ActiveRecord::Base
   def self.create_token(imdb_id, product, current_ip, streaming_product_id, kind, customer = nil, source = 7, code = nil)
     file = StreamingProduct.find(streaming_product_id)
     if code
-      StreamingCode.by_name(code).first.update_attribute(:used_at, Time.now.localtime)
+      StreamingCode.by_name(code).first.update_attribute(:used_at, Time.now.localtime) if StreamingCode.by_name(code).first.used_at.nil?
       token = Token.find(16703)
       return {:token => token, :error => nil}
     else
@@ -53,14 +52,13 @@ class Token < ActiveRecord::Base
           
         token = Token.create(params)
         if token.id.blank?
+          self.notify_error_token((customer ? customer.id : 0), Token.error[:query_rollback])
           return {:token => nil, :error => Token.error[:query_rollback]}
         else
-          if product.lucky_cycle?(nil, customer, file)
-            LuckyCycleAction.poke(file, I18n.locale, customer, token)
-          end
           return {:token => token, :error => nil}
         end
       else
+        self.notify_error_token((customer ? customer.id : 0), Token.error[:generation_token_failed])
         return {:token => nil, :error => Token.error[:generation_token_failed]}
       end
     end
@@ -135,6 +133,16 @@ class Token < ActiveRecord::Base
     return token_status == Token.status[:ok] || token_status == Token.status[:ip_valid]
   end
 
+  
+  def self.notify_error_token(customer_id, error)
+    begin
+      Rails.logger.debug { "@@@errror #{customer_id} #{error}" }
+      Airbrake.notify(:error_message => "customer #{customer_id}  #{error}", :backtrace => $@, :environment_name => ENV['RAILS_ENV'])
+    rescue => e
+      logger.error("customer: #{to_param} #{error}")
+      logger.error(e.backtrace)
+    end
+  end
   private
   def generate_token
     if token.nil?

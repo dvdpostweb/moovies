@@ -35,11 +35,6 @@
         <%= link_to path, :target => target, :class => :cover, :alt => product_title do %>
           <%= product_image_tag product_image, :width => 100 %>
         <% end %>
-        <% if product.lucky_cycle?(@eone, current_customer, nil) %>
-        <div class="lucky">
-          <h1><%= t('.lucky') %></h1>
-        </div>
-        <% end %>
       </div>
       
       <!--<span class="hd"></span>-->

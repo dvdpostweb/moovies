@@ -116,6 +116,17 @@ class CustomersController < ApplicationController
       
     end
   end
+
+  def back_to_tvod
+    if current_customer.subscription && current_customer.subscription.product_id == 6
+      current_customer.abo_type_id = 6
+      current_customer.next_abo_type_id = 6
+      current_customer.step = 100
+      current_customer.abo_active = 1
+      current_customer.save(:validate => false)
+    end
+    redirect_to root_localize_path
+  end
   protected
    def reactive?
      params[:action] == 'reactive'

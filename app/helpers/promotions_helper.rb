@@ -1,5 +1,5 @@
 module PromotionsHelper
-  def t2(name, brand)
-    t("#{name}_#{brand}", :default => '').empty? ? t("#{name}") :  t("#{name}_#{brand}")
+  def t2(name, brand, options = {})
+    t("#{name}_#{brand}", :default => '').empty? ? t("#{name}", options) :  t("#{name}_#{brand}", options)
   end
 end
