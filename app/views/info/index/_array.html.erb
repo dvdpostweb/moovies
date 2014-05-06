@@ -9,6 +9,29 @@
     </ul>
   </div>
   <div class="right_price_table">
+    <% unless current_customer %>
+    <div class="basic_package<%= " current" if current_customer && current_customer.subscription_type.id == 6 && current_customer.step != 90 %>">
+      <div class="head">
+        <span class="plushalacarte"><%= t('.tvod_only') %></span>
+      </div>
+      <div class="prices_bg">
+        <span>0€<small><%= t('info.index.abo.per_month') %></small></span>
+      </div>
+      <div class="price_sec">
+        <ul>
+          <li class="red-tick"></li>
+          <li class="green-tick"></li>
+          <% if @kid_visible %><li class="red-tick"></li><% end %>
+          <li class="red-tick"></li>
+          <li class="green-tick"></li>
+        </ul>
+      </div>
+      <div class="price_sign" align="center">
+          <%= link_to t('info.index.abo.try_now'), new_customer_registration_path(:code => @discount_tvod_only.name), :class => "btn" %>
+      </div>
+    </div>
+    <% end %>
+    
     <div class="basic_package<%= " current" if current_customer && current_customer.subscription_type.id == 1 && current_customer.step != 90 %>">
       <div class="head">
         <span class="plush">Plush</span> & <%= t('info.index.abo.tab_unlimited').html_safe %>
@@ -33,39 +56,8 @@
               <%= hidden_field_tag :return_url, step_path(:id => :old) %>
               <button border="0" align="absmiddle" class="btn btn_align" name="sent"><%= t('.relaunch') %></button>
             <% end %>
-          <% else %>
-            <%= link_to t('info.index.abo.change'), subscription_path(:abo_id => 1), :method => :put, :class => "btn btn_align" unless  current_customer.subscription_type.id == 1 %>
-          <% end %>
-        <% else %>
-          <%= link_to t('info.index.abo.try_now'), new_customer_registration_path(:code => @discount_svod.name), :class => "btn" %>
-        <% end %>
-        
-      </div>
-    </div>
-    <div class="basic_package<%= " current" if current_customer && current_customer.subscription_type.id == 1 && current_customer.step != 90 %>">
-      <div class="head">
-        <span class="plushalacarte">Plush a la carte</span>
-      </div>
-      <div class="prices_bg">
-        <span>0€<small><%= t('info.index.abo.per_month') %></small></span>
-      </div>
-      <div class="price_sec">
-        <ul>
-          <li class="red-tick"></li>
-          <li class="green-tick"></li>
-          <% if @kid_visible %><li class="red-tick"></li><% end %>
-          <li class="red-tick"></li>
-          <li class="green-tick"></li>
-        </ul>
-      </div>
-      <div class="price_sign" align="center">
-        <% if current_customer %>
-          <% if current_customer.step == 90 %>
-            <%= form_tag promotion_canva_path(:id => params[:id]), :id => 'form_step' do %>
-              <%= hidden_field_tag(:code, @discount_svod.name) %><br />
-              <%= hidden_field_tag :return_url, step_path(:id => :old) %>
-              <button border="0" align="absmiddle" class="btn btn_align" name="sent"><%= t('.relaunch') %></button>
-            <% end %>
+          <% elsif current_customer.tvod_only? %>
+            <%= link_to t('info.index.abo.change'), subscription_path(:code => @discount_svod.name), :method => :put, :class => "btn btn_align" %>
           <% else %>
             <%= link_to t('info.index.abo.change'), subscription_path(:abo_id => 1), :method => :put, :class => "btn btn_align" unless  current_customer.subscription_type.id == 1 %>
           <% end %>
@@ -101,6 +93,8 @@
               <%= hidden_field_tag :return_url, step_path(:id => :old) %>
               <button border="0" align="absmiddle" class="btn btn_align" name="sent"><%= t('.relaunch') %></button>
             <% end %>
+          <% elsif current_customer.tvod_only? %>
+              <%= link_to t('info.index.abo.change'), subscription_path(:code => @discount_kids.name), :method => :put, :class => "btn btn_align" %>
           <% else %>
             <%= link_to t('info.index.abo.change'), subscription_path(:abo_id => 2), :method => :put, :class => "btn btn_align" unless  current_customer.subscription_type.id == 2 %>
           <% end %>
@@ -134,6 +128,8 @@
               <%= hidden_field_tag :return_url, step_path(:id => :old) %>
               <button border="0" align="absmiddle" class="btn btn_align" name="sent"><%= t('.relaunch') %></button>
             <% end %>
+          <% elsif current_customer.tvod_only? %>
+              <%= link_to t('info.index.abo.change'), subscription_path(:code => @discount_adult.name), :method => :put, :class => "btn btn_align" %>
           <% else %>
             <%= link_to t('info.index.abo.change'), subscription_path(:abo_id => 5), :method => :put, :class => "btn btn_align" unless current_customer.subscription_type.id == 5 %>
           <% end %>
@@ -167,6 +163,8 @@
               <%= hidden_field_tag :return_url, step_path(:id => :old) %>
               <button border="0" align="absmiddle" class="btn btn_align" name="sent"><%= t('.relaunch') %></button>
             <% end %>
+          <% elsif current_customer.tvod_only? %>
+                <%= link_to t('info.index.abo.change'), subscription_path(:code => @discount_classic_adult.name), :method => :put, :class => "btn btn_align" %>
           <% else %>
             <%= link_to t('info.index.abo.change'), subscription_path(:abo_id => 3), :method => :put, :class => "btn btn_align" unless current_customer.subscription_type.id == 3 %>
           <% end %>
@@ -200,6 +198,8 @@
               <%= hidden_field_tag :return_url, step_path(:id => :old) %>
               <button border="0" align="absmiddle" class="btn btn_align" name="sent"><%= t('.relaunch') %></button>
             <% end %>
+          <% elsif current_customer.tvod_only? %>
+            <%= link_to t('info.index.abo.change'), subscription_path(:code => @discount_all.name), :method => :put, :class => "btn btn_align" %>
           <% else %>
             <%= link_to t('info.index.abo.change'), subscription_path(:abo_id => 4), :method => :put, :class => "btn btn_align" unless current_customer.subscription_type.id == 4 %>
           <% end %>

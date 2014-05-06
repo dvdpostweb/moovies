@@ -13,8 +13,10 @@ class Customers::RegistrationsController < Devise::RegistrationsController
       @discount = Discount.by_name(code).available.first
       @activation = Activation.by_name(code).available.first
       if @discount
+        @promo = @discount
         cookies[:code] = { value: code, expires: 15.days.from_now }
       elsif @activation
+        @promo = @activation
         cookies[:code] = { value: code, expires: 15.days.from_now }
       else
         @default_code = Discount.find(Moovies.discount["svod_#{I18n.locale}"]).name
@@ -37,10 +39,11 @@ class Customers::RegistrationsController < Devise::RegistrationsController
           @discount = Discount.by_name(params[:customer][:code]).available.first
           if @discount.nil? || (@discount && @user.discount_reuse?(@discount.month_before_reuse))
             if @user.abo_active == 0
-              @user.step = 31
+              @user.step = @discount.nil? ? 31 : @discount.goto_step
               @user.code = params[:customer][:code]
+              @user.abo_active = 1 if @discount && @discount.goto_step.to_i == 100
               @user.save(:validate => false)
-              @user.abo_history(35, @user.abo_type_id)
+              @user.abo_history(@discount && @discount.goto_step.to_i == 100 ? 6 : 35, @user.abo_type_id)
               DiscountUse.create(:discount_code_id => @discount.id, :customer_id => @user.to_param, :discount_use_date => Time.now.localtime) if @discount
               if @user.confirmed?
                 sign_in @user, :bypass => true
@@ -58,10 +61,16 @@ class Customers::RegistrationsController < Devise::RegistrationsController
         end
       end
     end
+    
     build_resource
-
+    @discount = Discount.by_name(params[:customer][:code]).available.first
+    if @discount
+      resource.step = @discount.goto_step
+      resource.abo_active = 1 if @discount.goto_step.to_i == 100
+    end
+    
     if resource.save
-      resource.abo_history(35, resource.abo_type_id)
+      resource.abo_history(@discount && @discount.goto_step.to_i == 100 ? 6 : 35, resource.abo_type_id)
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_navigational_format?
         sign_up(resource_name, resource)

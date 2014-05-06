@@ -83,7 +83,6 @@ class Customer < ActiveRecord::Base
   has_many :suspensions
   has_many :samsung_codes
   has_many :discount_use, :foreign_key => :customers_id
-  has_many :lucky_cycle
 
   has_many :vod_wishlists
   has_many :vod_wishlists_histories
@@ -181,6 +180,9 @@ class Customer < ActiveRecord::Base
     suspension_status == 1
   end
 
+  def tvod_only?
+    abo_type_id == 6
+  end
   def name
     "#{first_name} #{last_name}"
   end

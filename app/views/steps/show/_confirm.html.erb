@@ -2,7 +2,9 @@
   <div id="step_wrap">
     <div id="step_container">
       <div class="step_form">
-        <div class="step_1 step <%= I18n.locale %>" align="center"></div>
+        <% if @promo.nil? || !@promo.tvod_only %>
+          <div class="step_1 step <%= I18n.locale %>" align="center"></div>
+        <% end %>
         <h3><%= t('.title') %></h3>
         <p><%= t('.description').html_safe %></p>
         <br /><br />

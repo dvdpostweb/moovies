@@ -223,6 +223,7 @@ module Moovies
        :classic_adult_step90_fr => 80,
        :classic_adult_step90_nl => 81,
        :classic_adult_step90_en => 79,
+       :tvod_only => 128
       })
     end
 
@@ -307,8 +308,6 @@ module Moovies
         :tvod_normal                => 616,
         :svod_adult                 => 617,
         :tvod_adult                 => 618,
-        :lucky_normal               => 632,
-        :lucky_adult                => 633,
       })
     end
   end
