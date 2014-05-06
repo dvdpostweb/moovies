@@ -9,6 +9,29 @@
     </ul>
   </div>
   <div class="right_price_table">
+    <% unless current_customer %>
+    <div class="basic_package<%= " current" if current_customer && current_customer.subscription_type.id == 6 && current_customer.step != 90 %>">
+      <div class="head">
+        <span class="plushalacarte"><%= t('.tvod_only') %></span>
+      </div>
+      <div class="prices_bg">
+        <span>0€<small><%= t('info.index.abo.per_month') %></small></span>
+      </div>
+      <div class="price_sec">
+        <ul>
+          <li class="red-tick"></li>
+          <li class="green-tick"></li>
+          <% if @kid_visible %><li class="red-tick"></li><% end %>
+          <li class="red-tick"></li>
+          <li class="green-tick"></li>
+        </ul>
+      </div>
+      <div class="price_sign" align="center">
+          <%= link_to t('info.index.abo.try_now'), new_customer_registration_path(:code => @discount_tvod_only.name), :class => "btn" %>
+      </div>
+    </div>
+    <% end %>
+    
     <div class="basic_package<%= " current" if current_customer && current_customer.subscription_type.id == 1 && current_customer.step != 90 %>">
       <div class="head">
         <span class="plush">Plush</span> & <%= t('info.index.abo.tab_unlimited').html_safe %>
@@ -44,28 +67,6 @@
         
       </div>
     </div>
-    <% unless current_customer %>
-    <div class="basic_package<%= " current" if current_customer && current_customer.subscription_type.id == 6 && current_customer.step != 90 %>">
-      <div class="head">
-        <span class="plushalacarte"><%= t('.tvod_only') %></span>
-      </div>
-      <div class="prices_bg">
-        <span>0€<small><%= t('info.index.abo.per_month') %></small></span>
-      </div>
-      <div class="price_sec">
-        <ul>
-          <li class="red-tick"></li>
-          <li class="green-tick"></li>
-          <% if @kid_visible %><li class="red-tick"></li><% end %>
-          <li class="red-tick"></li>
-          <li class="green-tick"></li>
-        </ul>
-      </div>
-      <div class="price_sign" align="center">
-          <%= link_to t('info.index.abo.try_now'), new_customer_registration_path(:code => @discount_tvod_only.name), :class => "btn" %>
-      </div>
-    </div>
-    <% end %>
     <% if @kid_visible %>
     <div class="basic_package<%= " current" if current_customer && current_customer.subscription_type.id == 2 && current_customer.step != 90 %>">
       <div class="head">
