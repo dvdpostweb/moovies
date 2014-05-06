@@ -866,17 +866,21 @@ display: block;
 
 .alacarte{
 background-image: url(image_path('button_streamingppv.gif'));
-font-size: 14px;
-font-weight: bold;
-height: 32px;
-line-height: 30px;
-padding-left: 28px;
-text-align: left;
-width: 117px;
-color:#fff;
-
-display: block;
+ color: #FFFFFF;
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    height: 32px;
+    line-height: 31px;
+    padding-left: 25px;
+    text-align: left;
+    width: 120px;
 }
+
+#infostvod .alacarte{
+    font-size: 11px;
+}
+
 div.alacarte
 {
   cursor:pointer;
@@ -1003,6 +1007,17 @@ margin-top: 10px;
 .content .watch
 {
   line-height: 32px;
+}
+
+
+#new-alacarte-wrap .infotvod {
+    background-image: url("/assets/icon_info.png");
+    display: block;
+    height: 32px;
+    left: 117px;
+    position: absolute;
+    top: 221px;
+    width: 32px;
 }
 
 /*   ============   for mobile   ============   */
