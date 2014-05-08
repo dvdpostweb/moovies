@@ -3,13 +3,17 @@
     <% title = t('.watch_svod') %>
     <% class_name = "watch action_btn" %>
   <% else %>
-    <% title = raw t('.watch_tvod', :price => product.get_vod_online(session[:country_id]).first.ppv_price) %>
+    <% title = raw t('.watch_tvod', :price => current_customer && current_customer.tvod_only? &&  !local_assigns.has_key?(:min_price) ? product.get_vod_online(session[:country_id]).first.tvod_price : product.get_vod_online(session[:country_id]).first.ppv_price) %>
     <% class_name = "alacarte action_btn" %>
   <% end %>
-  <span class="infotvod"></span>
-  <div class="tooltips">
-  <p class="tooltips_description">Les abonnés aux catalogue <strong>Plush Unlimited bénéficient de 0,5€ de réduction</strong> sur le prix de location de ce film. <br/> <br/> 
-    Envie de profiter de <strong>plus de 600 films en illimité</strong> ainsi que d’une <strong>réduction sur le catalogue à la Carte</strong>? <br/> <br/> <a class="essaigratuit osc btn" href="#">Abonnez-vous</a></p>
- </div>
-  <%= link_to  title, product_action_path(:product_id => product.to_param, :origin => :products, :source => source), :class => class_name %>
+  <% if current_customer.tvod_only? && !product.svod_dates_online.first && popup == true %>  
+    <span class="infotvod"></span>
+    <div class="tooltips_tvod" style='display:none'>
+      <p class="tooltips_description">
+        <%= t('tvod_price_description').html_safe %><br/> <br/>
+        <%= link_to t('sign_up'), info_path(:page_name => t('routes.infos.params.abo')), :class => 'essaigratuit osc btn' %>
+      </p>
+    </div>
+ <% end %>
+  <%= link_to  title, local_assigns.has_key?(:min_price) ? product_sign_up_path(:product_id => product.to_param) : product_action_path(:product_id => product.to_param, :origin => :products, :source => source), :class => class_name %>
 <% end %>

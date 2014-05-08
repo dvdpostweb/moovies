@@ -4,7 +4,7 @@
     <%= content_tag(:span, '', :class => 'new') if product.is_new? %>
   </span>
   <% if product.in_streaming_or_soon? and streaming_access? %>
-      <%= render :partial => 'products/streaming',  :locals => {:product => product, :token => @token} %>
+      <%= render :partial => 'products/streaming',  :locals => {:product => product, :token => @token, :popup => false} %>
     <% end %>
       <%= render :partial => 'products/vod_list',  :locals => {:product => product} %>
       <%= render :partial => 'products/credit_vod', :locals => {:product => product, :credits => credits} if credits && credits > 1 %>

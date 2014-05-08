@@ -15,6 +15,13 @@ class PaymentMethodsController < ApplicationController
       @price = 0
       @url_back = edit_customer_payment_methods_url(:customer_id => current_customer.to_param, :type => params[:type])
       @url_ok = edit_customer_payment_methods_url(:customer_id => current_customer.to_param, :type => "#{params[:type]}_finish")
+    elsif params[:type] == 'tvod'
+      internal_com = 'tvod'
+      #to_do
+      @url_back = edit_customer_payment_methods_url(:customer_id => current_customer.to_param, :type => params[:type])
+      @url_ok = edit_customer_payment_methods_url(:customer_id => current_customer.to_param, :type => "#{params[:type]}_finish")
+      @product = Product.find(params[:product_id])
+      @price = @product.get_vod_online(session[:country_id]).first.tvod_price
     else
       if current_customer.promo_type == 'D'
         @promo = Discount.find(current_customer.promo_id)

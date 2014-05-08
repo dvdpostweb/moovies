@@ -255,6 +255,7 @@ width: 11px;
 	padding-right: 10px;
 	padding-top: 3px;
 	padding-bottom: 3px;
+	position:relative;
 }
 .box .availability {
 float: left;
@@ -265,3 +266,7 @@ width: 158px;
 float: left;
 }
 
+#mywhishlist .infotvod
+{
+  top: 7px;
+}

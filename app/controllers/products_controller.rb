@@ -254,6 +254,12 @@ class ProductsController < ApplicationController
     @product_description =  data[:description]
   end
 
+  def sign_up
+    if request.xhr?
+      render :layout => false
+    end
+  end
+
   def action
     @source = params[:source].nil? ? 7 : params[:source]
     if request.xhr?

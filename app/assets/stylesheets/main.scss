@@ -1009,15 +1009,63 @@ margin-top: 10px;
   line-height: 32px;
 }
 
-
-#new-alacarte-wrap .infotvod {
-    background-image: url("/assets/icon_info.png");
-    display: block;
-    height: 32px;
-    left: 117px;
+.tooltips_tvod {
+    background: none repeat scroll 0 0 white;
+    border: 1px solid;
+    box-shadow: 0 0 15px 1px #010301;
+    margin: 42px 0 0 -186px;
+    min-height: 122px;
+    padding: 9px;
     position: absolute;
-    top: 221px;
-    width: 32px;
+    width: 312px;
+    z-index: 1000;
+}
+
+#infostvod a.essaigratuit {
+    background-color: #EE8419;
+    background-image: -moz-linear-gradient(center top , #EE8419 0%, #E26417 100%);
+    border: 1px solid #D55023;
+    border-radius: 4px 4px 4px 4px;
+    bottom: 18px;
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.8) inset;
+    color: white;
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    height: 33px;
+    line-height: 33px;
+    text-align: center;
+    text-shadow: 0 -1px 0 #D83C14;
+    text-transform: uppercase;
+    width: 144px;
+}
+.tooltips_tvod a.essaigratuit, .content a.essaigratuit {
+    background-color: #EE8419;
+    background-image: -moz-linear-gradient(center top , #EE8419 0%, #E26417 100%);
+    border: 1px solid #D55023;
+    border-radius: 4px 4px 4px 4px;
+    bottom: 18px;
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.8) inset;
+    color: white;
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    height: 33px;
+    line-height: 36px;
+    text-align: center;
+    text-shadow: 0 -1px 0 #D83C14;
+    text-transform: uppercase;
+    width: 200px;
+}
+
+.infotvod {
+  background: url("/assets/icon_info.png") -7px -7px;
+  display: block;
+  height: 19px;
+  left: 123px;
+  position: absolute;
+  top: 228px;
+  width: 19px;
 }
 
 /*   ============   for mobile   ============   */

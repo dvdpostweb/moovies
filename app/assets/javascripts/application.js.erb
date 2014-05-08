@@ -260,6 +260,19 @@ $(function() {
     });
     return false
   })
+  $('body').delegate('.alacarte' , 'mouseleave', function () {
+     $(this).prev('.tooltips_tvod' ).fadeOut( 200 );
+   });
+   $('body').delegate('.infotvod' , 'mouseenter', function () {
+   	$(this).next('.tooltips_tvod' ).stop(true,true).show();
+   });
+   $('body').delegate('.tooltips_tvod' , 'mouseleave', function () {
+      $(this).fadeOut( 200 );
+    });
+    $('body').delegate('.tooltips_tvod' , 'mouseenter', function () {
+    	$(this).stop(true,true).show();
+    });
+  
 });
 function querySt(hu ,ji) {
   gy = hu.split("&");
