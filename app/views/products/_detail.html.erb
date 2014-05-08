@@ -5,7 +5,7 @@
   <% end %>
   <%= link_to image_tag(product.image, :width => 145, :height => 217), product_path(:id => product.to_param) %>
   <br />
-  <%= render :partial => 'products/streaming',  :locals => {:product => product, :source => @source, :response_id => @response_id} %>
+  <%= render :partial => 'products/streaming',  :locals => {:product => product, :source => @source, :popup => true} %>
   <br />
   <%= render :partial => 'products/vod_list',  :locals => {:product => product, :source => @source, :response_id => @response_id} %>
 </li>

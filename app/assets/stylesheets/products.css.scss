@@ -2196,57 +2196,6 @@ ul#ratings_labels li:last-child {
 }
 
 
-#new-alacarte-wrap .tooltips {
-    background: none repeat scroll 0 0 white;
-    border: 1px solid;
-    box-shadow: 0 0 15px 1px #010301;
-    margin: 42px 0 0 -186px;
-    min-height: 122px;
-    padding: 9px;
-    position: absolute;
-    width: 312px;
-    z-index: 1000;
-}
-
-#infostvod a.essaigratuit {
-    background-color: #EE8419;
-    background-image: -moz-linear-gradient(center top , #EE8419 0%, #E26417 100%);
-    border: 1px solid #D55023;
-    border-radius: 4px 4px 4px 4px;
-    bottom: 18px;
-    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.8) inset;
-    color: white;
-    display: block;
-    font-size: 18px;
-    font-weight: bold;
-    height: 33px;
-    line-height: 33px;
-    text-align: center;
-    text-shadow: 0 -1px 0 #D83C14;
-    text-transform: uppercase;
-    width: 144px;
-}
-#new-alacarte-wrap .tooltips a.essaigratuit {
-    background-color: #EE8419;
-    background-image: -moz-linear-gradient(center top , #EE8419 0%, #E26417 100%);
-    border: 1px solid #D55023;
-    border-radius: 4px 4px 4px 4px;
-    bottom: 18px;
-    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.8) inset;
-    color: white;
-    display: block;
-    font-size: 20px;
-    font-weight: bold;
-    height: 33px;
-    line-height: 36px;
-    text-align: center;
-    text-shadow: 0 -1px 0 #D83C14;
-    text-transform: uppercase;
-    width: 200px;
-}
-
-
-
 .tooltips
 {
   position: absolute;
@@ -2349,4 +2298,12 @@ ul#ratings_labels li:last-child {
   font-size: 20px;
   margin: 0 0 0 10px;
   text-decoration: underline;
+}
+#products_index .tooltips_tvod
+{
+ margin:0 0 0 -343px;;  
+}
+#products_index .infotvod
+{
+  top: 3px;  
 }
