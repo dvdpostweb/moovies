@@ -22,12 +22,17 @@
         <% end %>
       </tbody></table>
       <h3><%= t('.payment') %></h3>
-      <div class="freetrial"><%= t(".#{@promo.comment.downcase}", :default => '') %></div>
+      <div class="freetrial">icii<%= t(".#{@promo.comment.downcase}", :default => '') %></div>
       <% if @promo.payable == 2 %>
         <div class="freetrial">
         <%= t('.freetrial1').html_safe %>
            <%= link_to t('.go'), ogone_path(:skip => 1), :method => :post %><br/><br/><%= t('.freetrial2').html_safe %>
         </div>
+      <% end %>
+      <% if @promo.payable != 2 && @promo.promo_price == 0 %>
+      <div class="freetrial">
+        <%= t('.reminder') %>
+      </div>
       <% end %>
       
       <div class="choice">
