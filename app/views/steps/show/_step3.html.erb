@@ -22,7 +22,7 @@
         <% end %>
       </tbody></table>
       <h3><%= t('.payment') %></h3>
-      <div class="freetrial">icii<%= t(".#{@promo.comment.downcase}", :default => '') %></div>
+      <div class="freetrial"><%= t(".#{@promo.comment.downcase}", :default => '') %></div>
       <% if @promo.payable == 2 %>
         <div class="freetrial">
         <%= t('.freetrial1').html_safe %>
