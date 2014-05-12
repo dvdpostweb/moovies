@@ -72,6 +72,14 @@ class StreamingProduct < ActiveRecord::Base
   def svod?
     !svod_dates.svod.empty?
   end
+
+  def prepaid?
+    svod_dates.svod.prepaid_svod.first || svod_dates.svod.prepaid_all.first
+  end
+
+  def prepaid_all?
+    svod_dates.svod.prepaid_all.first
+  end
   
   def tvod?
     svod_dates.svod.empty?
