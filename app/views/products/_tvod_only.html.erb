@@ -5,7 +5,7 @@
      <input type='hidden' name='product_id' value ='<%= @product.id %>'>
      <input type='hidden' name='type' value ='tvod'>
      
-     <button type="submit" class="alacarte"><%= t('.click_here', :price => @product.get_vod_online(session[:country_id]).first.tvod_price).html_safe %></button>
+     <button type="submit" class="alacarte alacarte_sub"><%= t('.click_here', :price => @product.get_vod_online(session[:country_id]).first.tvod_price).html_safe %></button>
   </p>
   <% end %>
 </div>

@@ -876,7 +876,15 @@ background-image: url(image_path('button_streamingppv.gif'));
     text-align: left;
     width: 120px;
 }
-
+.alacarte_sub
+{
+  border: 0;
+  width: 159px;
+  line-height: 27px;
+  padding-left: 24px;
+  background-repeat: no-repeat;
+  background-color: #6CC;
+}
 #infostvod .alacarte{
     font-size: 11px;
 }
@@ -1066,6 +1074,7 @@ margin-top: 10px;
   position: absolute;
   top: 228px;
   width: 19px;
+  cursor:pointer;
 }
 
 /*   ============   for mobile   ============   */
