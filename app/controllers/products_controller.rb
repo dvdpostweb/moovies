@@ -262,6 +262,7 @@ class ProductsController < ApplicationController
 
   def action
     @source = params[:source].nil? ? 7 : params[:source]
+    @streaming = StreamingProduct.available.country(Product.country_short_name(session[:country_id])).find_by_imdb_id(@product.imdb_id)
     if request.xhr?
       render :layout => false
     end
