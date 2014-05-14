@@ -258,7 +258,7 @@ module Moovies
     def ogone_pass
       HashWithIndifferentAccess.new.merge({
         :development => 'KILLBILL1$metropolis',
-        :staging => 'KILLBILL1',
+        :staging => 'KILLBILL1$metropolis',
         :production => 'KILLBILL'
       })
     end
