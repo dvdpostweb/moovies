@@ -264,12 +264,14 @@ $(function() {
      $(this).prev('.tooltips_tvod' ).fadeOut( 200 );
    });
    $('body').delegate('.infotvod' , 'mouseenter', function () {
+     $('.tooltips_tvod').hide()
    	$(this).next('.tooltips_tvod' ).stop(true,true).show();
    });
    $('body').delegate('.tooltips_tvod' , 'mouseleave', function () {
       $(this).fadeOut( 200 );
     });
     $('body').delegate('.tooltips_tvod' , 'mouseenter', function () {
+      $('.tooltips_tvod').hide()
     	$(this).stop(true,true).show();
     });
   
