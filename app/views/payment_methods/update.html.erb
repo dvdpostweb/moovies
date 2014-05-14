@@ -3,7 +3,7 @@
   <div style='width: 32px; height: 32px; margin: 6px auto;'>
     <%= image_tag 'loading.gif', :title => 'loading' %>
   </div></div>
-<form name="checkout_confirmation" id="checkout_confirmation" method="post" action="https://secure.ogone.com/ncol/<%= Moovies.ogone_url[Rails.env] %>/orderstandard_utf8.asp">
+<form name="checkout_confirmation" id="checkout_confirmation" method="post" action="https://secure.ogone.com/ncol/<%= Moovies.ogone_url[Rails.env] %>/orderstandard.asp">
 <input type="hidden" name="prod" value="">
 <input type="hidden" name="orderID" value="<%= @order_id %>">
 <input type="hidden" name="pspid" value="<%= Moovies.ogone_pspid[Rails.env] %>">
