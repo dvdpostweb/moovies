@@ -11,6 +11,17 @@
 <input type="hidden" name="language" value="<%= @ogone_language %>">
 <input type="hidden" name="amount" value="<%= (@price*100).to_i %>">
 <input type="hidden" name="SHASign" value="<%= @hash %>">
+<input type="hidden" name="RL" value="ncol-2.0">
+<input type="hidden" name="ALIAS" value="<%= @alias %>">
+<input type="hidden" name="CN" value="<%= current_customer.name %>">
+<input type="hidden" name="COM" value="<%= @com %>">
+<input type="hidden" name="ALIASUSAGE" value="<%= @com %>">
+<input type="hidden" name="declineurl" value="<%= @url_back %>">
+<input type="hidden" name="exceptionurl" value="<%= @url_back %>">
+<input type="hidden" name="cancelurl" value="<%= @url_back %>">
+<input type="hidden" name="catalogurl" value="<%= @url_back %>">
+<input type="hidden" name="accepturl" value="<%= @url_ok %>">
+<input type="hidden" name="TP" value="<%= @template_ogone %>">
 
 <% if !@brand.nil? %>
 <input type="hidden" name="PM" value="CreditCard">
