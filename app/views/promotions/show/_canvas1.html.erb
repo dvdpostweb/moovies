@@ -31,7 +31,7 @@
         <%= t2('.title', @promo.params[:key]).html_safe %><br/>
         <strong><%= t2('.title_promo', @promo.params[:key]).html_safe %></strong>
       </h1>
-      <div id="promo_form">
+      <div id="promo_form" class="light">
         <h2><%= t2('.subtitle', @promo.params[:key]).html_safe %></h2>
         <%= form_tag promotion_canva_path(:id => params[:id]), :id => 'form_step' do %>
         <div align="center">
