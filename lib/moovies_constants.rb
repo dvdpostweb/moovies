@@ -308,6 +308,7 @@ module Moovies
         :tvod_normal                => 616,
         :svod_adult                 => 617,
         :tvod_adult                 => 618,
+        :welcome_tvod               => 634,
       })
     end
   end
