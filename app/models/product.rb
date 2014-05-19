@@ -562,7 +562,7 @@ class Product < ActiveRecord::Base
       elsif options[:sort] == 'most_viewed_last_year'
         "count_tokens DESC"
       elsif options[:sort] == 'new'
-        "year DESC, rating DESC"
+        "year DESC, streaming_available_at_order DESC"
       else
         "streaming_available_at_order DESC, rating DESC"
       end
