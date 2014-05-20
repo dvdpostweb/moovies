@@ -10,7 +10,6 @@ class Customers::ConfirmationsController < Devise::ConfirmationsController
         top.each do |top|
           unless top.vod_online_be.size == 0
             index = index + 1
-            Rails.logger.debug { "@@@#{top.inspect} #{index}" }
             options = options.merge("\\$\\$\\$products_id#{index}\\$\\$\\$" => top.id, "\\$\\$\\$products_id#{index}_img\\$\\$\\$" => top.description.image, "\\$\\$\\$products_id#{index}_name\\$\\$\\$" => top.title)
             break if index == 4
           end
