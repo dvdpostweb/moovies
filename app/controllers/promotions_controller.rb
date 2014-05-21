@@ -4,7 +4,11 @@ class PromotionsController < ApplicationController
     if @promo && @promo.canva_id == 3
       @checked = true
       @checked_partners = false
+    elsif @promo && @promo.canva_id == 8
+      streaming_code = StreamingCode.where('name like ?', 'EXP%').email.available.order('rand()').limit(1)
+      @internal_code = streaming_code.first.name
     end
+    
   end
 
   def create
@@ -40,10 +44,8 @@ class PromotionsController < ApplicationController
         marketing = params[:marketing] || 0
         marketing_partners = params[:marketing_partners] || 0
         if prospect = Prospect.where(:email => params[:email]).first
-          Rails.logger.debug { "@@@" }
           prospect.update_attributes(:newsletters => marketing, :newsletters_partners => marketing_partners, :locale_id => Moovies.customer_languages[I18n.locale])
         else
-          Rails.logger.debug { "@@@#{params[:email]} #{marketing} #{marketing_partners} #{Moovies.customer_languages[I18n.locale]}" }
           Prospect.create(:email => params[:email], :newsletters => marketing, :newsletters_partners => marketing_partners, :locale_id => Moovies.customer_languages[I18n.locale])
         end
       else
@@ -97,7 +99,6 @@ class PromotionsController < ApplicationController
     id = params[:id].gsub(/[^0-9a-zA-Z-]/,'')
     
     @promo = Promotion.find_by_name(id)
-    Rails.logger.debug { "@@@#{@promo.inspect}" }
     if @promo
       @partial = 'canvas'
       @body_class = "canvas#{@promo.canva_id}"
