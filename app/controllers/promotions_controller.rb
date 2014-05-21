@@ -97,6 +97,7 @@ class PromotionsController < ApplicationController
     id = params[:id].gsub(/[^0-9a-zA-Z-]/,'')
     
     @promo = Promotion.find_by_name(id)
+    Rails.logger.debug { "@@@#{@promo.inspect}" }
     if @promo
       @partial = 'canvas'
       @body_class = "canvas#{@promo.canva_id}"
