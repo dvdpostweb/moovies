@@ -2,7 +2,9 @@
   <div id="step_wrap">
     <div id="step_container">
       <div class="step_form">
+        <% if @promo.nil? || !@promo.tvod_only %>
         <div class="step_1 step <%= I18n.locale %>" align="center"></div>
+        <% end %>
         <h3><%= t('.title') %></h3>
         <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:id => 'login2'}) do |f| %>
           <%= devise_error_messages! %>
@@ -16,8 +18,10 @@
               <%= f.label :password, t('promotions.show.canvas2.pass_label') %>:<br />
               <%= f.password_field :password, :class => 'inputs_promo_code', :size => '35', :maxlength => '40'%>
             </p>
-            <%= hidden_field_tag(:code, params[:code], :id => 'code') %><br />
-            <%= hidden_field_tag :return_url, customers_reactive_path(:email => params[:email], :code => params[:code]) %>
+            <%= hidden_field_tag(:code, @promo.name, :id => 'code') %>
+            <%= cookies[:code] ? hidden_field_tag(:code, cookies[:code], :id => 'code') : hidden_field_tag(:code, @default_code, :id => 'code') %>
+            <br />
+            <%= hidden_field_tag :return_url, customers_reactive_path(:email => params[:email], :code => cookies[:code] ? cookies[:code] : @default_code) %>
             <div style="clear:both;"></div>
 
           </span>
