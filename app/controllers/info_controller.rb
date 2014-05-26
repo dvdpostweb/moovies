@@ -22,6 +22,7 @@ class InfoController < ApplicationController
       @discount_adult = Discount.find(Moovies.discount["adult_#{I18n.locale}"])
       @discount_classic_adult = Discount.find(Moovies.discount["classic_adult_#{I18n.locale}"])
       @discount_all = Discount.find(Moovies.discount["all_#{I18n.locale}"])
+      @discount_tvod_only = Discount.find(Moovies.discount['tvod_only'])
     end
   end
 end

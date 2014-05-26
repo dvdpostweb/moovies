@@ -2,3 +2,5 @@
 <br /><br />
 <%= params[:hide_btn] != "1" ? link_to(t('.click_here'), streaming_product_path(:id => product.imdb_id, :source => @source), :id => 'streaming_btn', :class => 'alacarte') : 
  "<div id='streaming_btn' class ='alacarte facebox_close'>#{t('.close_button')}</div>".html_safe %>
+
+

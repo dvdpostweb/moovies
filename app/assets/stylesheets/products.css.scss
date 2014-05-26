@@ -294,6 +294,14 @@
 
 }
 
+#formats td.noavailable {
+    font-size: 12px;
+}
+
+#formats .lineformat {
+    border-bottom: 1px solid #C4C4C0;
+    padding-bottom: 6px;
+}
 
 #formats th {
   padding: 15px 8px 10px;
@@ -307,8 +315,8 @@
 #formats td {
   border-left: 1px solid #C4C4C0;
   color: #90908C;
-  font-size: 14px;
-  padding: 0 8px 25px;
+  font-size: 13px;
+padding: 0 16px 8px 10px;
 }
 #formats tr th:first-child, #formats tr td:first-child {
   border: none;
@@ -686,6 +694,10 @@
   margin:5px 0 0;
   text-align:center;
   width:170px;
+}
+#film-details .load2 
+{
+  width:145px;
 }
 #creditdorcel
 {
@@ -2186,6 +2198,8 @@ ul#ratings_labels li:last-child {
 {
   clear:both;
 }
+
+
 .tooltips
 {
   position: absolute;
@@ -2288,4 +2302,12 @@ ul#ratings_labels li:last-child {
   font-size: 20px;
   margin: 0 0 0 10px;
   text-decoration: underline;
+}
+#products_index .tooltips_tvod
+{
+ margin:0 0 0 -343px;;  
+}
+#products_index .infotvod
+{
+  top: 3px;  
 }

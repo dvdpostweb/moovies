@@ -71,6 +71,10 @@
           </td>
           <td>
             <input type="submit" name ="sent" value= "<%= t '.confirm' %>" class="promo_button step3" />
+            <% if current_customer.subscription && current_customer.subscription.product_id == 6 %>
+              <%= link_to t('tvod_only_back'), back_to_tvod_path() %>
+            <% end %>
+            
           </td>
         </tr>
       </table>

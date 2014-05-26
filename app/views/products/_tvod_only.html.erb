@@ -1,0 +1,11 @@
+<div id="infostvod">
+  <h1><%= t('.tvod_title') %></h1>
+  <%= form_for(:customer, :url => customer_payment_methods_path(:customer_id => current_customer.to_param), :html => { :method => :put, :id => :payment_methods }) do |f| %>
+  <p><%= t(".tvod_price_#{params[:kind]}", :link => info_path(:page_name => t('routes.infos.params.abo'))).html_safe %>
+     <input type='hidden' name='product_id' value ='<%= @product.id %>'>
+     <input type='hidden' name='type' value ='tvod'>
+     
+     <button type="submit" class="alacarte alacarte_sub"><%= t('.click_here', :price => @product.get_vod_online(session[:country_id]).first.tvod_price).html_safe %></button>
+  </p>
+  <% end %>
+</div>

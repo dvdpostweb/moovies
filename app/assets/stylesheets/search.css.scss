@@ -11,9 +11,9 @@
   width: 940px;
 }
 #search_index .bysort {
-margin: 0 0 0 768px;
-padding: 0 0 11px;
-width: 233px;
+    margin: 0 0 0 742px;
+    padding: 0 0 11px;
+    width: 230px;
 }
 
 #search_index .movie-descr {
@@ -26,14 +26,12 @@ padding: 0 8px 0 120px;
   border-top: 1px solid #212A31;
   padding-top:12px;
 }
-#search_index .endless {
-  margin: 29px 0 0 416px;
-}
+
 .grid
 {
   clear:both;
 }
-#search_index .endless
-{
-  float:right;
+#search_index .endless {
+    float: left;
+    margin: 9px 0 0 392px;
 }

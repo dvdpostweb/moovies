@@ -60,6 +60,21 @@ class CustomersController < ApplicationController
 
   def reactive
     @hide_menu = true
+    if params[:code] || cookies[:code]
+      code = params[:code] || cookies[:code]
+      @discount = Discount.by_name(code).available.first
+      @activation = Activation.by_name(code).available.first
+      if @discount
+        @promo = @discount
+        cookies[:code] = { value: code, expires: 15.days.from_now }
+      elsif @activation
+        @promo = @activation
+        cookies[:code] = { value: code, expires: 15.days.from_now }
+      else
+        @default_code = Discount.find(Moovies.discount["svod_#{I18n.locale}"]).name
+        cookies[:code] = { value: @default_code, expires: 15.days.from_now } 
+      end
+    end
   end
 
   def newsletter
@@ -115,6 +130,17 @@ class CustomersController < ApplicationController
       end
       
     end
+  end
+
+  def back_to_tvod
+    if current_customer.subscription && current_customer.subscription.product_id == 6
+      current_customer.abo_type_id = 6
+      current_customer.next_abo_type_id = 6
+      current_customer.step = 100
+      current_customer.abo_active = 1
+      current_customer.save(:validate => false)
+    end
+    redirect_to root_localize_path
   end
   protected
    def reactive?

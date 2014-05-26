@@ -223,6 +223,7 @@ module Moovies
        :classic_adult_step90_fr => 80,
        :classic_adult_step90_nl => 81,
        :classic_adult_step90_en => 79,
+       :tvod_only => 128
       })
     end
 
@@ -257,7 +258,7 @@ module Moovies
     def ogone_pass
       HashWithIndifferentAccess.new.merge({
         :development => 'KILLBILL1$metropolis',
-        :staging => 'KILLBILL1',
+        :staging => 'KILLBILL1$metropolis',
         :production => 'KILLBILL'
       })
     end
@@ -307,6 +308,7 @@ module Moovies
         :tvod_normal                => 616,
         :svod_adult                 => 617,
         :tvod_adult                 => 618,
+        :welcome_tvod               => 634,
       })
     end
   end

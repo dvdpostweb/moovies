@@ -3,13 +3,15 @@
 	<% if streaming_access? %>
 		<% if current_customer.actived? %>
 			<% if !current_customer.suspended? %>
-		    <% if current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s) %>
+		    <% if (current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s) || (@streaming && @streaming.prepaid_all?)) %>
 					<% token = current_customer.get_token(@product.imdb_id) %>
 					<% token_valid = token.nil? ? false : token.validate?(request.remote_ip) %>
 				  <% if @product.svod_dates_online.first || token_valid %>
 						window.location.href = '<%= streaming_product_path(:id => @product.imdb_id) %>'
 					<% else %>
-						<% if current_customer.payable? %>
+						<% if current_customer.tvod_only? %>
+						  	jQuery.facebox('<%= escape_javascript(render(:partial => 'products/tvod_only', :locals => {:product => @product, :source => @source})) %>')
+						<% elsif current_customer.payable? %>
 							jQuery.facebox('<%= escape_javascript(render(:partial => 'products/tvod_alert', :locals => {:product => @product})) %>')
 						<% else %>
 							jQuery.facebox('<%= escape_javascript(render(:partial => 'products/no_credit_card')) %>')
