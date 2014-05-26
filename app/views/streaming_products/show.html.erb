@@ -28,7 +28,7 @@
   			<% end %>
 
         <% if @code || !current_customer.suspended? %>
-          <% if @code || (@token && @token_valid) || (current_customer && current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s)) %>
+          <% if @code || (@token && @token_valid) || (current_customer && current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s)) || (current_customer.tvod_only? && @streaming.prepaid_all?) %>
             <% if @streaming_prefered.count > 0 || (@streaming_not_prefered && @streaming_not_prefered.count > 0) %>
               <div class="choice_language">
                 
@@ -55,10 +55,10 @@
             </p>
             <% end %>
           <% else %>
-          ce n'est pas dans ton package
+            wrong package
           <% end %>
         <% else %>
-        tu ne peux pas regarder de films durant la suspension de ton compte  
+          suspension
         <% end %>
         <%= render partial: 'streaming_products/show/error', :locals => {:error => @error} if @error %>
         <div id="all_versions_data">

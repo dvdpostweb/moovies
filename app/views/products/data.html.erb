@@ -26,7 +26,7 @@
 <div class="clear"></div>
 <ul class="btns osc jacket">
   <li>
-    <%= render :partial => 'products/streaming',  :locals => {:product => @product, :source => @source, :response_id => @response_id} %>
+    <%= render :partial => 'products/streaming',  :locals => {:product => @product, :source => @source, :popup => false} %>
   </li>
   <li>
     <%= render :partial => 'products/vod_list',  :locals => {:product => @product, :source => @source, :response_id => @response_id} %>

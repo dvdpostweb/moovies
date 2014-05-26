@@ -13,16 +13,29 @@
     <tr>
       <td width="90"><%= t'.audio' %></td>
       <td width="90"><%= t '.subtitles' %></td>
-      <td width="145"></td>
+      
+      <td width="130"><strong><%= current_customer && current_customer.tvod_only? ? t('.price_customer') : t('.price') %></strong></td>
+      <% if current_customer && current_customer.tvod_only? %><td width="130"><strong><%= t('.price_tvod')  %></strong></td><% end %>
       <td></td>
+    </tr>
+    <tr>
+      <td colspan="5"><div class="lineformat"></div></td>
     </tr>
     <% product.get_vod(session[:country]).each do |vod| %>
     <tr>
       <td><%= vod.language.by_language(I18n.locale).first.name %></td>
       <td><%= vod.subtitle.by_language(I18n.locale).first ? vod.subtitle.by_language(I18n.locale).first.name : t('.no_subtitle') %></td>
-      <td><%= render :partial => 'products/streaming',  :locals => {:product => product, :source => @source, :response_id => @response_id} if vod.available? %>
+      <td>
+        <%= render :partial => 'products/streaming',  :locals => {:product => product, :source => @source, :popup => false, :min_price => true} if vod.available? %>
         <%= render :partial => 'products/vod_list',  :locals => {:product => product, :source => @source, :response_id => @response_id} %>
       </td>
+      <% if current_customer && current_customer.tvod_only? %>
+      <td>
+      
+        <%= render :partial => 'products/streaming',  :locals => {:product => product, :source => @source, :popup => false,} if vod.available? %>
+        <%= render :partial => 'products/vod_list',  :locals => {:product => product, :source => @source, :response_id => @response_id} %>
+      </td>
+      <% end %>
       <%= get_vod_message(vod, svod_date, params[:kind].to_s, Moovies.packages.invert[product.package_id]) %>
     </tr>
     <% end %>

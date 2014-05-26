@@ -3,6 +3,33 @@ class StreamingProductsController < ApplicationController
     if params[:streaming_code]
       @code = StreamingCode.by_name(params[:streaming_code]).available.first
     end
+    if Rails.env != 'pre_production' 
+      @product = Product.both_available.find_by_imdb_id(params[:id])
+    else
+      @product = Product.find_by_imdb_id(params[:id])
+    end
+    @token_valid = @token.nil? ? false : @token.validate?(request.remote_ip)
+    if @product && current_customer 
+      @token = current_customer.get_token(@product.imdb_id)
+    end
+    if Rails.env != 'pre_production' && @token_valid == false
+      @streaming = StreamingProduct.available.country(Product.country_short_name(session[:country_id])).find_by_imdb_id(params[:id])
+      @streaming_prefered = StreamingProduct.group_by_language.country(Product.country_short_name(session[:country_id])).available.find_all_by_imdb_id(params[:id], I18n.locale)
+      @streaming_not_prefered = nil
+    elsif Rails.env != 'pre_production' && @token_valid == true
+      @streaming = StreamingProduct.available_token.country(Product.country_short_name(session[:country_id])).find_by_imdb_id(params[:id])
+      @streaming_prefered = StreamingProduct.group_by_language.country(Product.country_short_name(session[:country_id])).available_token.find_all_by_imdb_id(params[:id], I18n.locale)
+      @streaming_not_prefered = nil
+    else
+      @streaming = StreamingProduct.available_beta.country(Product.country_short_name(session[:country_id])).alpha.find_by_imdb_id(params[:id])
+      @streaming_prefered = StreamingProduct.alpha.country(Product.country_short_name(session[:country_id])).group_by_language.find_all_by_imdb_id(params[:id], I18n.locale)
+      @streaming_not_prefered = nil
+    end
+    @token_valid = @token.nil? ? false : @token.validate?(request.remote_ip)
+    if current_customer && current_customer.tvod_only? && !(@token_valid == true || @streaming.prepaid_all?)
+      flash[:error] = t('streaming_products.tvod_no_token')
+      redirect_to root_localize_path and return
+    end
     if @code.nil? && !current_customer
       if request.xhr?
         render :partial => 'streaming_products/no_player', :locals => {:token => nil, :error => Token.error[:code_expired]}, :layout => false
@@ -14,42 +41,25 @@ class StreamingProductsController < ApplicationController
       @body_id = 'streaming'
       @vod_create_token = "1"#General.find_by_CodeType('VOD_CREATE_TOKEN').value
       @vod_disable = "1" #General.find_by_CodeType('VOD_ONLINE').value
-      if Rails.env != 'pre_production' 
-        @product = Product.both_available.find_by_imdb_id(params[:id])
-      else
-        @product = Product.find_by_imdb_id(params[:id])
-      end
-      if @product && current_customer
-        @token = current_customer.get_token(@product.imdb_id)
-      end
-      @token_valid = @token.nil? ? false : @token.validate?(request.remote_ip)
-      if Rails.env != 'pre_production' && @token_valid == false
-        @streaming = StreamingProduct.available.country(Product.country_short_name(session[:country_id])).find_by_imdb_id(params[:id])
-        @streaming_prefered = StreamingProduct.group_by_language.country(Product.country_short_name(session[:country_id])).available.find_all_by_imdb_id(params[:id], I18n.locale)
-        @streaming_not_prefered = nil
-      elsif Rails.env != 'pre_production' && @token_valid == true
-        @streaming = StreamingProduct.available_token.country(Product.country_short_name(session[:country_id])).find_by_imdb_id(params[:id])
-        @streaming_prefered = StreamingProduct.group_by_language.country(Product.country_short_name(session[:country_id])).available_token.find_all_by_imdb_id(params[:id], I18n.locale)
-        @streaming_not_prefered = nil
-      else
-        @streaming = StreamingProduct.available_beta.country(Product.country_short_name(session[:country_id])).alpha.find_by_imdb_id(params[:id])
-        @streaming_prefered = StreamingProduct.alpha.country(Product.country_short_name(session[:country_id])).group_by_language.find_all_by_imdb_id(params[:id], I18n.locale)
-        @streaming_not_prefered = nil
-      end
     
       if !request.xhr?
         if @product
           if @vod_disable == "1" || Rails.env == "pre_production"
-            if view_context.streaming_access? && (@code || (current_customer.actived? && !current_customer.suspended? && current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s) && (@product.svod? || (!@product.svod? && current_customer.payable?))))
-              if !@streaming_prefered.blank? || !@streaming_not_prefered.blank?
-                if @token_valid == false && @vod_create_token == "0" && Rails.env != "pre_production"
-                  error = t('streaming_products.not_available.offline')
-                  show_error(error, @code)
+            if view_context.streaming_access?
+              if @code || (current_customer.actived? && !current_customer.suspended? && (current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s) || @streaming.prepaid_all?) && (@product.svod? || (!@product.svod? && current_customer.payable?)))
+                if !@streaming_prefered.blank? || !@streaming_not_prefered.blank?
+                  if @token_valid == false && @vod_create_token == "0" && Rails.env != "pre_production"
+                    error = t('streaming_products.not_available.offline')
+                    show_error(error, @code)
+                  else
+                    render :action => :show
+                  end
                 else
-                  render :action => :show
+                  error = t('streaming_products.not_available.not_available')
+                  show_error(error, @code)
                 end
               else
-                error = t('streaming_products.not_available.not_available')
+                error = t('streaming_products.no_access.problem')
                 show_error(error, @code)
               end
             else
@@ -67,7 +77,7 @@ class StreamingProductsController < ApplicationController
       else
         if view_context.streaming_access?
           streaming_version = StreamingProduct.find_by_id(params[:streaming_product_id])
-          if @code || ((!current_customer.suspended? && !Token.dvdpost_ip?(request.remote_ip) && !current_customer.super_user? && !(/^192(.*)/.match(request.remote_ip)) && current_customer.actived? && current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s) && (@product.svod? || (!@product.svod? && current_customer.payable?))))
+          if @code || ((!current_customer.suspended? && !Token.dvdpost_ip?(request.remote_ip) && !current_customer.super_user? && !(/^192(.*)/.match(request.remote_ip)) && current_customer.actived? && (current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s) || @streaming.prepaid_all?) && (@product.svod? || (!@product.svod? && current_customer.payable?))))
           #if 1==1
             status = @token.nil? ? nil : @token.current_status(request.remote_ip)
             streaming_version = StreamingProduct.find_by_id(params[:streaming_product_id])

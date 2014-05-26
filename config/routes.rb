@@ -40,7 +40,8 @@ Moovies::Application.routes.draw do
         match 'uninterested' => 'products#uninterested'
         match 'action' => 'products#action'
         match 'log' => 'products#log'
-        match 'data' => 'products#data' 
+        match 'data' => 'products#data'
+        match 'sign_up' => 'products#sign_up' 
       end
       match 'products(/:package)(/:view_mode)' => 'products#index', :as => :products_short
       resources :phone_requests, :only => [:new, :create, :index]
@@ -107,7 +108,8 @@ Moovies::Application.routes.draw do
       match 'subtitle' => 'streaming_products#subtitle'
       match 'versions' => 'streaming_products#versions'
     end
-    get 'unsubscribe', :to => 'customers#unsubscribe'    
+    get 'unsubscribe', :to => 'customers#unsubscribe'
+    get 'back_to_tvod', :to => 'customers#back_to_tvod'
     #match ':id' => "promotions#show", :as => :promotion_localize, constraints: lambda { |request| Promotion.find_by_name(request.path_parameters[:id]) || 'samsung' }
     get ':id' => "promotions#show", :as => :promotion_localize, :id => /samsung|promotion/
     post ':id' => "promotions#create", :as => :promotion_localize, :id => /samsung|promotion/

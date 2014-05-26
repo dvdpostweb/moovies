@@ -39,7 +39,7 @@
       </div>
       <ul class="btns osc">
         <li>
-        <%= render :partial => 'products/streaming',  :locals => {:product => product, :source => @source, :response_id => @response_id} %>
+        <%= render :partial => 'products/streaming',  :locals => {:product => product, :source => @source, :popup => false} %>
         <br />
         <%= render :partial => 'products/vod_list',  :locals => {:product => product, :source => @source, :response_id => @response_id} %>
         

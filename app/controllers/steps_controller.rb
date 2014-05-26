@@ -42,5 +42,12 @@ class StepsController < ApplicationController
         @promo = Activation.find(current_customer.promo_id)
       end
     end
+  else params[:id] == 'confirm'
+    if cookies[:code]
+      @promo = Discount.by_name(cookies[:code]).available.first
+      if @promo.nil?
+        @promo = Activation.by_name(cookies[:code]).available.first
+      end
+    end
   end
 end
