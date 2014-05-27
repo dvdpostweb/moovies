@@ -15,7 +15,7 @@
       <td width="90"><%= t '.subtitles' %></td>
       
       <td width="130"><strong><%= (current_customer && current_customer.tvod_only?) || !current_customer ? t('.price_customer') : t('.price') unless product.svod? %></strong></td>
-      <% if (current_customer && current_customer.tvod_only?) || !current_customer %><td width="130"><strong><%= t('.price_tvod')  %></strong></td><% end %>
+      <% if !product.svod? && ((current_customer && current_customer.tvod_only?) || !current_customer) %><td width="130"><strong><%= t('.price_tvod')  %></strong></td><% end %>
       <td></td>
     </tr>
     <tr>
