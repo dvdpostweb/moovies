@@ -10,7 +10,7 @@ class Customers::SessionsController < Devise::SessionsController
     self.resource = warden.authenticate!(auth_options)
     if params[:code]
       customer = current_customer
-      customer.step = @discount.goto_step
+      customer.step = @discount.nil? ? 31 : @discount.goto_step
       customer.abo_active = 1 if @discount && @discount.goto_step.to_i == 100
       customer.code = params[:code]
       customer.save(:validate => false)
