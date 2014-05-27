@@ -19,11 +19,11 @@
     <h1>
       <%= link_to 'plush.be', root_localize_path(), :class => 'f-btn' %>
     </h1>
-    <% if @promo.params[:brand_logo] %>
+    
     <h2>
       <%= !@promo.params[:brand_url] ? '' : link_to(@promo.params[:brand_url], @promo.params[:brand_url], :class => 'f-btn', :target => '_blank') %>
     </h2>
-    <% end %>
+    
     <div class="social-content">
     	<h1>Faites-en profiter vos amis</h1>
     	<ul>
