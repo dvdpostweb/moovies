@@ -25,17 +25,18 @@
     <tr>
       <td><%= vod.language.by_language(I18n.locale).first.name %></td>
       <td><%= vod.subtitle.by_language(I18n.locale).first ? vod.subtitle.by_language(I18n.locale).first.name : t('.no_subtitle') %></td>
-      <td>
-        <%= render :partial => 'products/streaming',  :locals => {:product => product, :source => @source, :popup => false, :min_price => true} if vod.available? %>
-        <%= render :partial => 'products/vod_list',  :locals => {:product => product, :source => @source, :response_id => @response_id} %>
-      </td>
       <% if !product.svod? && ((current_customer && current_customer.tvod_only?) || !current_customer) %>
       <td>
-      
-        <%= render :partial => 'products/streaming',  :locals => {:product => product, :source => @source, :popup => false,} if vod.available? %>
+        <%= render :partial => 'products/streaming',  :locals => {:product => product, :source => @source, :popup => false, :min_price => false} if vod.available? %>
         <%= render :partial => 'products/vod_list',  :locals => {:product => product, :source => @source, :response_id => @response_id} %>
       </td>
       <% end %>
+      <td>
+      
+        <%= render :partial => 'products/streaming',  :locals => {:product => product, :source => @source, :popup => false} if vod.available? %>
+        <%= render :partial => 'products/vod_list',  :locals => {:product => product, :source => @source, :response_id => @response_id} %>
+      </td>
+      
       <%= get_vod_message(vod, svod_date, params[:kind].to_s, Moovies.packages.invert[product.package_id]) %>
     </tr>
     <% end %>

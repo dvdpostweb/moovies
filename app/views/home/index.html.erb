@@ -70,22 +70,6 @@
 <div class="container clearfix" >
   <!--   ==============   MAIN CONTENT   ==============   -->
   <div id="maincontent" >
-    <div id="new-infinity-wrap">
-      <h2><%= params[:kind] == :adult ? t('.unlimited_adult_new').html_safe : t('.unlimited_new').html_safe %></h2>
-    
-      <div class="tab-container">
-        <ul>
-          <%= render :partial => 'products/detail', :collection => @new_svod %>
-        </ul>
-
-
-      </div>
-         <div class="clear"></div>
-        <div class="more_movies" align="right">
-          <%= link_to t('.all'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[params[:kind] == :adult ? 4 : 1]}"), :tag => 3) %>
-        </div>
-    </div>
-
     <div id="new-alacarte-wrap">
       <h2><%= params[:kind] == :adult ? t('.tvod_adult_new').html_safe : t('.tvod_new').html_safe %></h2>
       <div class="tab-container">
@@ -98,6 +82,19 @@
         <%= link_to t('.all'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[params[:kind] == :adult ? 5 : 2]}"), :tag => 3) %>
       </div>
     </div>
+    <div id="new-infinity-wrap">
+      <h2><%= params[:kind] == :adult ? t('.unlimited_adult_new').html_safe : t('.unlimited_new').html_safe %></h2>
+      <div class="tab-container">
+        <ul>
+          <%= render :partial => 'products/detail', :collection => @new_svod %>
+        </ul>
+      </div>
+      <div class="clear"></div>
+      <div class="more_movies" align="right">
+        <%= link_to t('.all'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[params[:kind] == :adult ? 4 : 1]}"), :tag => 3) %>
+      </div>
+    </div>
+
     <div class="clear"></div>
     <% unless current_customer %>
     <div id="subscribe-wrap">

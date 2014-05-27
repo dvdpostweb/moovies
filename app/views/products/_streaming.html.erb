@@ -15,5 +15,5 @@
       </p>
     </div>
  <% end %>
-  <%= link_to  title, local_assigns.has_key?(:min_price) ? product_sign_up_path(:product_id => product.to_param) : product_action_path(:product_id => product.to_param, :origin => :products, :source => source), :class => class_name %>
+  <%= link_to  title, local_assigns.has_key?(:min_price) && current_customer ? product_sign_up_path(:product_id => product.to_param) : product_action_path(:product_id => product.to_param, :origin => :products, :source => source), :class => class_name %>
 <% end %>
