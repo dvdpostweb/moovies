@@ -7,12 +7,16 @@
   min-height: 600px;
 }
 <% if @promo.params[:brand_logo] %>
-.canvas8 #header h2,.canvas2 #header h2 a {
+.canvas8 #header h2{
   background: url('http://www.dvdpost.be/images/promotions_plush/<%= @promo.params[:brand_logo] %>') repeat scroll 0 0 transparent;
   height: 60px;
   width: 224px;
 }
 <% end %>
+.canvas8 #header h2
+{
+  width:224px;
+}
 </style>
 <div id="wrap">
   <div id="header" >
