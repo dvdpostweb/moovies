@@ -9,7 +9,7 @@ class PromotionsController < ApplicationController
       @internal_code = streaming_code.first.name
       @meta_image = "http://www.dvdpost.be/images/promotions_plush/#{@promo.params[:background_locale] ? "#{I18n.locale}/" : '' }#{@promo.params[:background]}"
     end
-    @meta_title = t("promotions.title_#{@promo.id}", :default => '')
+    @meta_title = t("promotions.title_#{@promo.id}", :default => '') if @promo
     
   end
 
