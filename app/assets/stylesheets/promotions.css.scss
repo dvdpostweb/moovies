@@ -1313,3 +1313,46 @@ ul {
 .canvas7 .choice_language h3 {
 color:#FFFFFF;
 }
+
+.canvas8 #header .social-content h1 {
+    font-size: 20px;
+    padding-top: 24px;
+}
+
+.canvas8 #header .social-content {
+padding-left:30px;
+}
+
+.canvas8 #header .social-content .share-facebook a{
+background:url(image_path('promotions/facebook.gif'));
+  display: block;
+    float: left;
+    height: 38px;
+    margin-left: 10px;
+    margin-top: 33px;
+    width: 38px;}
+
+.canvas8 #header .social-content .share-google-plus a{
+background:url(image_path('promotions/googleplus.gif'));
+  display: block;
+    float: left;
+    height: 38px;
+    margin-left: 10px;
+    margin-top: 33px;
+    width: 38px;}
+
+.canvas8 #header .social-content .share-twitter a{
+ background:url(image_path('promotions/twitter.gif'));
+  display: block;
+    float: left;
+    height: 38px;
+    margin-left: 10px;
+    margin-top: 33px;
+    width: 38px;
+
+}
+
+.canvas8 #header .social-content {
+    left: 220px;
+    position: relative;
+}
