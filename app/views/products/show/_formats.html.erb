@@ -14,8 +14,8 @@
       <td width="90"><%= t'.audio' %></td>
       <td width="90"><%= t '.subtitles' %></td>
       
-      <td width="130"><strong><%= current_customer && current_customer.tvod_only? ? t('.price_customer') : t('.price') %></strong></td>
-      <% if current_customer && current_customer.tvod_only? %><td width="130"><strong><%= t('.price_tvod')  %></strong></td><% end %>
+      <td width="130"><strong><%= (current_customer && current_customer.tvod_only?) || !current_customer ? t('.price_customer') : t('.price') unless product.svod? %></strong></td>
+      <% if (current_customer && current_customer.tvod_only?) || !current_customer %><td width="130"><strong><%= t('.price_tvod')  %></strong></td><% end %>
       <td></td>
     </tr>
     <tr>
@@ -29,7 +29,7 @@
         <%= render :partial => 'products/streaming',  :locals => {:product => product, :source => @source, :popup => false, :min_price => true} if vod.available? %>
         <%= render :partial => 'products/vod_list',  :locals => {:product => product, :source => @source, :response_id => @response_id} %>
       </td>
-      <% if current_customer && current_customer.tvod_only? %>
+      <% if !product.svod? && ((current_customer && current_customer.tvod_only?) || !current_customer) %>
       <td>
       
         <%= render :partial => 'products/streaming',  :locals => {:product => product, :source => @source, :popup => false,} if vod.available? %>
