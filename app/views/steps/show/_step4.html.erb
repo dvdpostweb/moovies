@@ -27,7 +27,7 @@
   <% if [139].include?(current_customer.promo_id) %>
     
     <!-- Begin Addiliate Tracking code with image-->
-    <img src="http://www.addiliate.com/report.html?cp=<%= I18n.locale == :nl ? 'A3434599' : '43DHR5NP' %>&rId=[]&orderId=[]&amount=[]" width="1" height="1" alt="" />
+    <img src="http://www.addiliate.com/report.html?cp=<%= I18n.locale == :nl ? 'A3434599' : '43DHR5NP' %>&rId=<%= current_customer.id %>&orderId=[]&amount=[]" width="1" height="1" alt="" />
     <!-- End Addiliate Tracking code with image-->
   <% end %>
   <% if [59,60,61,62,65].include?(current_customer.promo_id) %>
