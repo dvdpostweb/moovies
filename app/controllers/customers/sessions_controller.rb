@@ -11,7 +11,7 @@ class Customers::SessionsController < Devise::SessionsController
     if params[:code]
       customer = current_customer
       customer.step = @discount.goto_step
-      customer.customer_abo = 1 if @discount && @discount.goto_step.to_i == 100
+      customer.abo_active = 1 if @discount && @discount.goto_step.to_i == 100
       customer.code = params[:code]
       customer.save(:validate => false)
       customer.abo_history(@discount && @discount.goto_step.to_i == 100 ? 6 : 35, customer.abo_type_id)

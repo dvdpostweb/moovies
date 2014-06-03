@@ -117,7 +117,7 @@ Moovies::Application.routes.draw do
   end
   
   
-  get ':id' => "promotions#show", defaults: { format: 'choose' }, :as => :promotion, :id => /smarttv|radio_contact|samsung|nostalgie/, :as => :short_promotion
+  get ':id' => "promotions#show", defaults: { format: 'choose' }, :as => :promotion, :id => /smarttv|radio_contact|samsung|nostalgie|test2/, :as => :short_promotion
   post ':id' => "promotions#show", defaults: { format: 'choose' }, :as => :promotion, :id => /smarttv|radio_contact|samsung|nostalgie/, :as => :short_promotion
   resources :promotions, defaults: { format: 'choose' }, :only => [:show], :as => :root_promotion
 

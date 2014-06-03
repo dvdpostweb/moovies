@@ -1,4 +1,4 @@
 <p class="tooltips_description">
-  <%= t('tvod_price_description').html_safe %><br/> <br/>
-  <%= link_to t('sign_up'), info_path(:page_name => t('routes.infos.params.abo')), :class => 'essaigratuit osc btn' %>
+  <%= t(".tvod_price_description_#{params[:kind]}").html_safe %><br/> <br/>
+  <%= link_to t('.sign_up'), info_path(:page_name => t('routes.infos.params.abo')), :class => 'essaigratuit osc btn' %>
 </p>

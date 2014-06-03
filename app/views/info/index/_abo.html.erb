@@ -44,7 +44,7 @@
     <% unless current_customer && current_customer.tvod_only? %>
     <h2><%= raw t '.tvod_only' %></h2>
      <div id="alacarte">
-    <div class="abo_prices">
+    <div class="abo_prices <%= I18n.locale %>">
       <div class="big_price">
         <h3><%= raw t('.tvod_only_no_abo') %></h3>
       </div>
