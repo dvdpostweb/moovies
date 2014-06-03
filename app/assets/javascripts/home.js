@@ -21,7 +21,9 @@ $(function() {
   {
     var $container = $('#output').cycle({ 
     speed:   2000,
-    timeout: 5000
+    timeout: 5000,
+    next:   '#next', 
+    prev:   '#prev'
   });
   }
 });
