@@ -52,7 +52,6 @@ class Token < ActiveRecord::Base
       if token_string
         params = {:imdb_id => imdb_id, :token => token_string, :source_id => source, :country => file.country}
         params = params.merge(:ppv_price => file.ppv_price, :kind => 'PPV', :is_ppv => true) if !file.svod?
-        Rails.logger.debug { "@@@#{file.prepaid?}" }
         params = params.merge(:kind => 'PREPAID') if file.prepaid?
         
         params = params.merge(:customer_id => customer.id) if customer

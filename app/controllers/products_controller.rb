@@ -107,6 +107,13 @@ class ProductsController < ApplicationController
 
   def show
     @body_id = "film-details"
+    unless current_customer
+      if params[:kind] == :adult
+        @discount_top = Discount.find(Moovies.discount["catalogue_show_#{I18n.locale}_adult"])
+      else
+        @discount_top = Discount.find(Moovies.discount["catalogue_show_#{I18n.locale}"])
+      end
+    end
     #to do user_agent = UserAgent.parse(request.user_agent)
     @tokens = current_customer.get_all_tokens_id(params[:kind], @product.imdb_id) if current_customer
     @countries = ProductCountry.visible.order

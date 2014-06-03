@@ -119,23 +119,6 @@ class StreamingProductsController < ApplicationController
                     description = ''
                   end
                   stars = view_context.ratings_array(@product.rating, params[:kind])
-                  options = 
-                  {
-                    "\\$\\$\\$customers_name\\$\\$\\$" => "#{current_customer.first_name.capitalize} #{current_customer.last_name.capitalize}",
-                    "\\$\\$\\$gender_simple\\$\\$\\$" => gender,
-                    "\\$\\$\\$product_id\\$\\$\\$" => product_id,
-                    "\\$\\$\\$imdb_id\\$\\$\\$" => imdb_id,
-                    "\\$\\$\\$actors\\$\\$\\$" => view_context.actors_list(@product),
-                    "\\$\\$\\$image1\\$\\$\\$" => stars[0],
-                    "\\$\\$\\$image2\\$\\$\\$" => stars[1],
-                    "\\$\\$\\$image3\\$\\$\\$" => stars[2],
-                    "\\$\\$\\$image4\\$\\$\\$" => stars[3],
-                    "\\$\\$\\$image5\\$\\$\\$" => stars[4],
-                    "\\$\\$\\$name\\$\\$\\$" => @product.title,
-                    "\\$\\$\\$year\\$\\$\\$" => @product.year,
-                    "\\$\\$\\$image\\$\\$\\$" => image,
-                    "\\$\\$\\$description\\$\\$\\$" => description,
-                  }
                   if params[:kind] == :adult
                     if @product.studio
                       studio_name = @product.studio.name
@@ -144,19 +127,51 @@ class StreamingProductsController < ApplicationController
                       studio_name = ''
                       studio_id = ''
                     end
+                     options = 
+                     {
+                        "\\$\\$\\$customers_name\\$\\$\\$" => "#{current_customer.first_name.capitalize} #{current_customer.last_name.capitalize}",
+                        "\\$\\$\\$gender_simple\\$\\$\\$" => gender,
+                        "\\$\\$\\$product_id\\$\\$\\$" => product_id,
+                        "\\$\\$\\$imdb_id\\$\\$\\$" => imdb_id,
+                        "\\$\\$\\$actors\\$\\$\\$" => view_context.actors_list(@product),
+                        "\\$\\$\\$image1\\$\\$\\$" => stars[0],
+                        "\\$\\$\\$image2\\$\\$\\$" => stars[1],
+                        "\\$\\$\\$image3\\$\\$\\$" => stars[2],
+                        "\\$\\$\\$image4\\$\\$\\$" => stars[3],
+                        "\\$\\$\\$image5\\$\\$\\$" => stars[4],
+                        "\\$\\$\\$name\\$\\$\\$" => @product.title,
+                        "\\$\\$\\$year\\$\\$\\$" => @product.year,
+                        "\\$\\$\\$image\\$\\$\\$" => image,
+                        "\\$\\$\\$description\\$\\$\\$" => description,
+                      }
                     options = options.merge("\\$\\$\\$studio_name\\$\\$\\$" => studio_name, "\\$\\$\\$studio_slug\\$\\$\\$" => studio_id)
                   else
-                    if @product.director
-                      director_name = @product.director.name
-                      cached_slug = @product.director.slug
-                    else
-                      director_name = ''
-                      cached_slug = ''
+                    options = 
+                    {
+                      "\\$\\$\\$customers_name\\$\\$\\$" => "#{current_customer.first_name.capitalize} #{current_customer.last_name.capitalize}",
+                      "\\$\\$\\$gender_simple\\$\\$\\$" => gender,
+                      "\\$\\$\\$products_id\\$\\$\\$" => product_id,
+                      "\\$\\$\\$imdb_id\\$\\$\\$" => imdb_id,
+                      "\\$\\$\\$image1\\$\\$\\$" => stars[0],
+                      "\\$\\$\\$image2\\$\\$\\$" => stars[1],
+                      "\\$\\$\\$image3\\$\\$\\$" => stars[2],
+                      "\\$\\$\\$image4\\$\\$\\$" => stars[3],
+                      "\\$\\$\\$image5\\$\\$\\$" => stars[4],
+                      "\\$\\$\\$products_name\\$\\$\\$" => @product.title,
+                      "\\$\\$\\$products_year\\$\\$\\$" => @product.year,
+                      "\\$\\$\\$products_image\\$\\$\\$" => image,
+                    }
+                    top = Product.joins(:lists).includes("descriptions_#{I18n.locale}", 'vod_online_be').where("lists.#{I18n.locale} = 1").order("lists.id desc").limit(20)
+                    index = 0 
+                    top.each do |top|
+                      unless top.vod_online_be.size == 0
+                        index = index + 1
+                        options = options.merge("\\$\\$\\$products_id#{index}\\$\\$\\$" => top.id, "\\$\\$\\$products_id#{index}_img\\$\\$\\$" => top.description.image, "\\$\\$\\$products_id#{index}_name\\$\\$\\$" => top.title)
+                        break if index == 4
+                      end
                     end
-                    options = options.merge("\\$\\$\\$director_name\\$\\$\\$" => director_name, "\\$\\$\\$director_slug\\$\\$\\$" => cached_slug)
                   end
                   view_context.send_message(mail_id, options, params[:locale], current_customer)
-              
                 end
               end
             end
