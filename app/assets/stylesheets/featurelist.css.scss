@@ -27,10 +27,25 @@ ul#output li .caption {
   top: 269px;
 }
 
+ul#output li .caption a
+{
+  color:white;
+}
 
 
-
-
+#home #prev, #home #next
+{
+  position: absolute;
+  left: 450px;
+  z-index: 20;
+  font-size:20px;
+  color:#fff;
+  cursor:pointer;
+}
+#home #next
+{
+  left: 550px;
+}
 
 ul#output li .caption h2 {
   color: #FFFFFF;
@@ -95,12 +110,12 @@ ul#output li .intro h1 {
     position: absolute;
     text-shadow: 0 1px 10px #242424;
     top: 287px;
-    width: 400px;
+    width: 386px;
       z-index: 2;
 }
 
 
-#image_promo ul#output li .regarder.action_btn, #output .watch {
+#image_promo ul#output li .regarder {
   
   background: url(image_path('button_streamingppv.gif')) no-repeat scroll 0px 0px transparent !important;    
   bottom:13px;
@@ -113,14 +128,14 @@ ul#output li .intro h1 {
   text-shadow:#242424 0 1px 10px;
   top:284px;
   width:145px;
-  z-index:3;
+  z-index:10;
   text-align:left;
   font-weight:normal;
   line-height:22px;
 }
 
 
-#image_promo ul#output img {
+#image_promo ul#output .image {
     left: 346px;
     position: absolute;
     z-index: 1;

@@ -1,11 +1,11 @@
 <% path =  carousel_path(carousel_public_item) %>
 <% image = image_tag(carousel_public_item.image, :alt => carousel_public_item.title(I18n.locale), :size => '585x328') %>
 <li>
-  <a href="<%= path %>" class="regarder action_btn"><%= t('.price', :price => carousel_public_item.product.get_vod_online(session[:country_id]).first.ppv_price).html_safe %></a>
-  <a href="<%= path %>">
+  <a href="<%= path %>" class="regarder"><%= t('.price', :price => carousel_public_item.product.get_vod_online(session[:country_id]).first.ppv_price).html_safe %></a>
+  <a href="<%= path %>" class="image">
     <%= image %>
   </a>
   <div class="caption osc">
-    <h2><%= carousel_public_item.title(I18n.locale)%></h2>
+    <h2><a href="<%= path %>"><%= carousel_public_item.title(I18n.locale) %></a></h2>
   </div>
 </li>
