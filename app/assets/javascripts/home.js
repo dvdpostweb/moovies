@@ -23,7 +23,8 @@ $(function() {
     speed:   2000,
     timeout: 5000,
     next:   '#next', 
-    prev:   '#prev'
+    prev:   '#prev',
+    pause: 1
   });
   }
 });
