@@ -111,7 +111,6 @@ class ProductsController < ApplicationController
     @tokens = current_customer.get_all_tokens_id(params[:kind], @product.imdb_id) if current_customer
     @countries = ProductCountry.visible.order
     @svod_date = @product.svod_dates.current.order.first
-    @vod_online
     #@filter = get_current_filter({})
     unless request.xhr?
       @trailer =  @product.trailer?
