@@ -107,6 +107,13 @@ class ProductsController < ApplicationController
 
   def show
     @body_id = "film-details"
+    unless current_customer
+      if params[:kind] == :adult
+        @discount_top = Discount.find(Moovies.discount["catalogue_show_#{I18n.locale}_adult"])
+      else
+        @discount_top = Discount.find(Moovies.discount["catalogue_show_#{I18n.locale}"])
+      end
+    end
     #to do user_agent = UserAgent.parse(request.user_agent)
     @tokens = current_customer.get_all_tokens_id(params[:kind], @product.imdb_id) if current_customer
     @countries = ProductCountry.visible.order
@@ -133,24 +140,6 @@ class ProductsController < ApplicationController
       @reviews_count = @reviews.total_entries
     end
 
-    if !request.xhr? || (request.xhr? && params[:recommendation_page])
-      #product_recommendations = @product.recommendations(params[:kind])
-      customer_id = current_customer ? current_customer.id : 0
-      r_type = params[:r_type].to_i || 1
-      @recommendation_page = params[:recommendation_page].to_i
-      @recommendation_page = 1 if @recommendation_page == 0
-      data = @product.recommendations(params[:kind])
-      if data
-        product_recommendations = data[:products]
-        @recommendation_response_id = data[:response_id]
-      else
-        product_recommendations = nil
-      end
-      if product_recommendations
-      @recommendations = product_recommendations.paginate(:page => params[:recommendation_page], :per_page => 5)
-      @recommendation_nb_page = @recommendations.total_pages
-      end
-    end
     if request.xhr?
       if params[:reviews_page] || params[:sort]
         render :partial => 'products/show/reviews', :locals => {:product => @product, :reviews_count => @reviews_count, :reviews => @reviews, :review_sort => @review_sort, :source => @source, :response_id => @source}

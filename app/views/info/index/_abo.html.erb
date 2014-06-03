@@ -13,6 +13,30 @@
   <% end %>
 <% else %>
   <% if params[:kind] == :normal %>
+    <% unless current_customer && current_customer.tvod_only? %>
+    <h2><%= raw t '.tvod_only' %></h2>
+     <div id="alacarte">
+    <div class="abo_prices <%= I18n.locale %>">
+      <div class="big_price">
+        <h3><%= raw t('.tvod_only_no_abo') %></h3>
+      </div>
+      <div class="tickets">
+        <%= raw t('.tvod_only_text') %>
+      </div>
+      <div class="subscribe" align="center"><%= link_to t('.signup'), new_customer_registration_path(:code => @discount_tvod_only.name), :class => "btn" %></div>
+    </div>
+    <div class="abo_infos">
+      <h3><%= raw t('.tvod_only_discover') %></h3>
+      <ul>
+        <li><strong><%= t('.tvod_only_discover_desc1') %></strong></li>
+        <li><%= t('.tvod_only_discover_desc2') %></li>
+        <li><%= t('.tvod_only_discover_desc3') %></li>
+      </ul>
+      <div class="price_slogan"><%= t '.tvod_only_slogan' %></div>
+    </div>
+    </div>
+    <div class="clearfix"></div>
+    <% end %>
     <h2><%= raw t '.unlimited' %></h2>
     <div class="abo_prices">
       <div class="big_price">
@@ -41,30 +65,7 @@
       <div class="price_slogan"><%= t('.price_slogan').html_safe %></div>
     </div>
     <div class="clearfix"></div>
-    <% unless current_customer && current_customer.tvod_only? %>
-    <h2><%= raw t '.tvod_only' %></h2>
-     <div id="alacarte">
-    <div class="abo_prices <%= I18n.locale %>">
-      <div class="big_price">
-        <h3><%= raw t('.tvod_only_no_abo') %></h3>
-      </div>
-      <div class="tickets">
-        <%= raw t('.tvod_only_text') %>
-      </div>
-      <div class="subscribe" align="center"><%= link_to t('.signup'), new_customer_registration_path(:code => @discount_tvod_only.name), :class => "btn" %></div>
-    </div>
-    <div class="abo_infos">
-      <h3><%= raw t('.tvod_only_discover') %></h3>
-      <ul>
-        <li><strong><%= t('.tvod_only_discover_desc1') %></strong></li>
-        <li><%= t('.tvod_only_discover_desc2') %></li>
-        <li><%= t('.tvod_only_discover_desc3') %></li>
-      </ul>
-      <div class="price_slogan"><%= t '.tvod_only_slogan' %></div>
-    </div>
-    </div>
-    <div class="clearfix"></div>
-    <% end %>
+    
     <% if @kid_visible %>
     <h2><%= raw t('.kid') %></h2>
     <div class="abo_prices">

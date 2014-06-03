@@ -34,8 +34,13 @@ class Token < ActiveRecord::Base
   def self.create_token(imdb_id, product, current_ip, streaming_product_id, kind, customer = nil, source = 7, code = nil)
     file = StreamingProduct.find(streaming_product_id)
     if code
-      StreamingCode.by_name(code).first.update_attribute(:used_at, Time.now.localtime) if StreamingCode.by_name(code).first.used_at.nil?
-      token = Token.find(16703)
+      streaming_code = StreamingCode.by_name(code).first
+      StreamingCode.by_name(code).first.update_attribute(:used_at, Time.now.localtime) if streaming_code.used_at.nil?
+      if streaming_code && streaming_code.name.include?('EXP')
+        token = Token.find(16703)
+      else
+        token = Token.find(16703)
+      end
       return {:token => token, :error => nil}
     else
       begin
@@ -47,7 +52,6 @@ class Token < ActiveRecord::Base
       if token_string
         params = {:imdb_id => imdb_id, :token => token_string, :source_id => source, :country => file.country}
         params = params.merge(:ppv_price => file.ppv_price, :kind => 'PPV', :is_ppv => true) if !file.svod?
-        Rails.logger.debug { "@@@#{file.prepaid?}" }
         params = params.merge(:kind => 'PREPAID') if file.prepaid?
         
         params = params.merge(:customer_id => customer.id) if customer

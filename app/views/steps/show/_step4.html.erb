@@ -24,6 +24,12 @@
     <!-- ptg -->
     <img src='http://fr.ptg.be/aimg/plush.gif' />
   <% end %>
+  <% if [139].include?(current_customer.promo_id) %>
+    
+    <!-- Begin Addiliate Tracking code with image-->
+    <img src="http://www.addiliate.com/report.html?cp=<%= I18n.locale == :nl ? 'A3434599' : '43DHR5NP' %>&rId=<%= current_customer.id %>&orderId=[]&amount=[]" width="1" height="1" alt="" />
+    <!-- End Addiliate Tracking code with image-->
+  <% end %>
   <% if [59,60,61,62,65].include?(current_customer.promo_id) %>
     <!-- tradetracker -->
     <iframe src="/trade/conversion.html?campaignID=12814&productID=<%= I18n.locale == :fr ? 15272 : 4211 %>&conversionType=lead&https=0&transactionID=<%= current_customer.id %>&transactionAmount=0&email=<%= current_customer.email %>&descrMerchant=plush&descrAffiliate=plush" frameborder="0" scrolling="0" marginwidth="0" marginheight="0" width="1" height="1"></iframe>

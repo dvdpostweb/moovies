@@ -82,7 +82,7 @@
 /***********/
 
 /*****Mobistar */
-.canvas3 #promo_content h1 {
+.canvas3 #promo_content h1,.canvas8 #promo_content h1 {
     color: #003C6A;
     font-size: 44px;
     line-height: 49px;
@@ -90,12 +90,12 @@
    padding-top: 53px;
     text-align: left;
 }
-.canvas3 #promo_content h1 span {
+.canvas3 #promo_content h1 span, .canvas8 #promo_content h1 span {
     color: #003C6A;
     font-size: 53px;
 }
 
-.canvas3 #promo_content #promo_form {
+.canvas3 #promo_content #promo_form,.canvas8 #promo_content #promo_form {
     color: #444444;
     font-family: 'Open Sans Condensed',sans-serif;
     line-height: 18px;
@@ -106,7 +106,7 @@
     font-size:16px;
 }
 
-.canvas3 #promo_content #promo_form .promo_button, .canvas3 #area_promo .promo_button {
+.canvas3 #promo_content #promo_form .promo_button, .canvas3 #area_promo .promo_button ,.canvas8 #promo_content #promo_form .promo_button, .canvas8 #area_promo .promo_button {
     font-size: 30px;
     margin: 6px 0 24px 43px;
     padding: 10px;
@@ -125,7 +125,7 @@
 }
 
 
-.canvas3 #promo_content .step1 {
+.canvas3 #promo_content .step1, .canvas8 #promo_content .step1 {
     font-size: 23px;
     height: 30px;
     line-height: 26px;
@@ -135,40 +135,40 @@
     width: 400px;
 }
 
-.canvas3 #promo_form div.news, .canvas3 #promo_form p.news {
+.canvas3 #promo_form div.news, .canvas3 #promo_form p.news, .canvas8 #promo_form div.news, .canvas8 #promo_form p.news {
     font-size: 14px;
     margin: 0 0 8px 39px;
 }
-.canvas3 #promo_form .email {
+.canvas3 #promo_form .email, .canvas8 #promo_form .email {
     float: left;
     font-size: 18px;
     padding-left: 45px;
 }
 
-.canvas3 #promo_form .inputs_promo_code {
+.canvas3 #promo_form .inputs_promo_code, .canvas8 #promo_form .inputs_promo_code {
     width: 300px;
 }
-.canvas3 #promo_footer {
+.canvas3 #promo_footer, .canvas8 #promo_footer {
     padding-bottom: 0px;
 }
-.canvas3 #promo_form .promocode {
+.canvas3 #promo_form .promocode, .canvas8 #promo_form .promocode {
     float: left;
     font-size: 18px;
     padding-left: 45px;
 }
 
-.canvas3 .telfooter a{
+.canvas3 .telfooter a, .canvas8 .telfooter a{
     height: 75px;
     margin: 0 auto;
     width: 410px;
 }
-.canvas3 .telfooter a.fr{
+.canvas3 .telfooter a.fr,.canvas8 .telfooter a.fr{
 background: url(image_path('fr/info_tel.jpg')) no-repeat scroll 0 0 transparent
 }
-.canvas3 .telfooter a.nl{
+.canvas3 .telfooter a.nl,.canvas8 .telfooter a.nl{
 background: url(image_path('nl/info_tel.jpg')) no-repeat scroll 0 0 transparent
 }
-.canvas3 .telfooter a.en{
+.canvas3 .telfooter a.en, .canvas8 .telfooter a.en{
 background: url(image_path('en/info_tel.jpg')) no-repeat scroll 0 0 transparent
 }
 
@@ -1314,3 +1314,45 @@ ul {
 color:#FFFFFF;
 }
 
+.canvas8 #header .social-content h1 {
+    font-size: 20px;
+    padding-top: 24px;
+}
+
+.canvas8 #header .social-content {
+padding-left:30px;
+}
+
+.canvas8 #header .social-content .share-facebook a{
+background:url(image_path('promotions/facebook.gif'));
+  display: block;
+    float: left;
+    height: 38px;
+    margin-left: 10px;
+    margin-top: 33px;
+    width: 38px;}
+
+.canvas8 #header .social-content .share-google-plus a{
+background:url(image_path('promotions/googleplus.gif'));
+  display: block;
+    float: left;
+    height: 38px;
+    margin-left: 10px;
+    margin-top: 33px;
+    width: 38px;}
+
+.canvas8 #header .social-content .share-twitter a{
+ background:url(image_path('promotions/twitter.gif'));
+  display: block;
+    float: left;
+    height: 38px;
+    margin-left: 10px;
+    margin-top: 33px;
+    width: 38px;
+
+}
+
+.canvas8 #header .social-content {
+    left: 220px;
+    position: relative;
+}
