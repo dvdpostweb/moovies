@@ -1,14 +1,22 @@
 <div id="slider-wrap">
   <div id="image_promo">
-    <h1><%= t('home.index.title').html_safe %></h1>
-    <h2><%= t 'home.index.slogan' %></h2>
     <ul id="output">
       <li>
-        <div id="try_it">
+        <div id="try_it" align="center">
+         <h1> <span>Plus de 1500 films</span><br />
+          au bout des doigts</h1>
+          <h2>Regarder des films quand vous voulez, où que vous soyez !</h2>
           <%= link_to t('home.index.try'), new_customer_registration_path(:code => get_code(@discount_top.name)), :class => 'essaigratuit osc btn' %> 
           <div id="engagement"><%= t 'home.index.try_text' %></div>
         </div>
-        <%= link_to image_tag("#{I18n.locale}/#{t('.bg_infinit_img')}#{params[:kind]==:adult ? '-adult' : ''}.jpg", :size => '932x328', :alt => t('.bg_infinity').html_safe), new_customer_registration_path(:code => get_code(@discount_top.name)) %>
+        <div class="caption osc">
+        <h2>12 Years a Slave</h2>
+        </div>
+        <a href="#" class="regarder action_btn">Regarder 3,49 €</a>
+        <!--<%= link_to image_tag("#{I18n.locale}/#{t('.bg_infinit_img')}#{params[:kind]==:adult ? '-adult' : ''}.jpg", :size => '932x328', :alt => t('.bg_infinity').html_safe), new_customer_registration_path(:code => get_code(@discount_top.name)) %> -->
+        <a href="#">
+        <img alt="#" height="328" src="http://www.dvdpost.be/images/plush/HP_movies/film01.jpg" width="585"/>
+        </a>
       </li>
     </ul>
   </div>

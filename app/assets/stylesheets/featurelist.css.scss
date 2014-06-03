@@ -61,10 +61,70 @@ ul#output li .intro h1 {
 }
 
 #try_it {
-    left: 10px;
-    position: absolute;
-    top: 189px;
+  background-color:#212A31;
+  height:308px;
+  padding:10px;
+  position:absolute;
+  width:327px;
 }
+
+#try_it h2{
+  color: #FFFFFF;
+   line-height:30px;
+   padding-bottom:20px;
+}
+
+#try_it h1 {
+  color:#66CCCC;
+  font-size:40px;
+  font-weight:bold;
+  line-height:42px;
+  padding-bottom:62px;
+}
+#try_it h1 span{
+   color:#66CCCC;
+    font-size:40px;
+   text-transform: uppercase;
+}
+
+
+#image_promo ul#output li .caption {
+    bottom: 13px;
+    color: #FFFFFF;
+    font-size: 15px;
+    left: 375px;
+    position: absolute;
+    text-shadow: 0 1px 10px #242424;
+    top: 287px;
+    width: 400px;
+      z-index: 2;
+}
+
+
+#image_promo ul#output li .regarder.action_btn {
+  
+background: url(image_path('button_streamingppv.gif')) no-repeat scroll 0px 0px transparent !important;    
+  bottom:13px;
+  color:#FFFFFF;
+  font-size:15px;
+  left:764px;
+  padding-left:26px;
+  padding-top:6px;
+  position:absolute;
+  text-shadow:#242424 0 1px 10px;
+  top:284px;
+  width:145px;
+  z-index:3;
+}
+
+
+#image_promo ul#output img {
+    left: 346px;
+    position: absolute;
+    z-index: 1;
+}
+
+
 
 ul#output li a.essaigratuit {
   background-color: #ee8419; 

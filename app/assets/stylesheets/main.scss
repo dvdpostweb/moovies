@@ -876,6 +876,35 @@ background-image: url(image_path('button_streamingppv.gif'));
     text-align: left;
     width: 120px;
 }
+
+
+.normal.private .alacarte{
+background-image: url(image_path('button_streamingppv_infos.gif'));
+ color: #FFFFFF;
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    height: 32px;
+    line-height: 31px;
+    padding-left: 25px;
+    text-align: left;
+    width: 120px;
+}
+
+
+
+.adult.private .alacarte{
+background-image: url(image_path('button_streamingppv_adult_infos.gif'));
+ color: #FFFFFF;
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    height: 32px;
+    line-height: 31px;
+    padding-left: 25px;
+    text-align: left;
+    width: 120px;
+}
 .alacarte_sub
 {
   border: 0;
@@ -1067,9 +1096,9 @@ margin-top: 10px;
 }
 
 .infotvod {
-  background: url("/assets/icon_info.png") -7px -7px;
+  
   display: block;
-  height: 19px;
+  height: 25px;
   left: 123px;
   position: absolute;
   top: 228px;
