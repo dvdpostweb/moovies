@@ -877,7 +877,6 @@ background-image: url(image_path('button_streamingppv.gif'));
     width: 120px;
 }
 
-
 .normal.private .alacarte{
 background-image: url(image_path('button_streamingppv_infos.gif'));
  color: #FFFFFF;
@@ -905,7 +904,7 @@ background-image: url(image_path('button_streamingppv_adult_infos.gif'));
     text-align: left;
     width: 120px;
 }
-.alacarte_sub
+.alacarte_sub,.adult .alacarte_sub
 {
   border: 0;
   width: 159px;
@@ -913,6 +912,10 @@ background-image: url(image_path('button_streamingppv_adult_infos.gif'));
   padding-left: 24px;
   background-repeat: no-repeat;
   background-color: #6CC;
+}
+.adult .alacarte_sub
+{
+  background-color: #C36EC3;
 }
 #infostvod .alacarte{
     font-size: 11px;

@@ -1,5 +1,5 @@
 <% if current_customer %>
-<div id = "vod_list_<%= product.to_param %>">
+<div id = "vod_list_<%= product.to_param %>" class="vod_list">
   <% if @vod_wishlist && @vod_wishlist.include?( product.id) || @vod_wishlist.nil? %>
       <% item = current_customer.vod_wishlists.where(imdb_id: product.imdb_id).first %>
   <% end %>

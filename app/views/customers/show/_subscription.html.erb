@@ -36,7 +36,7 @@
       </tr>
       <tr>
         <td colspan='2'>
-          <% if customer.actived? %>
+          <% if customer.actived? && !customer.tvod_only? %>
             <ul>
               <li class='link_payment'>
                 <% if current_customer.payment_method == 1 %>
