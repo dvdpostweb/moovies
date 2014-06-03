@@ -1,24 +1,17 @@
 <div id="slider-wrap">
+  
   <div id="image_promo">
-    <ul id="output">
-      <li>
-        <div id="try_it" align="center">
-         <h1> <span>Plus de 1500 films</span><br />
-          au bout des doigts</h1>
-          <h2>Regarder des films quand vous voulez, où que vous soyez !</h2>
+       <div id="try_it" align="center">
+         <h1><%= t(".carousel_h1_#{params[:kind]}").html_safe %></h1>
+          <h2><%= t(".carousel_h2_#{params[:kind]}").html_safe %></h2>
           <%= link_to t('home.index.try'), new_customer_registration_path(:code => get_code(@discount_top.name)), :class => 'essaigratuit osc btn' %> 
           <div id="engagement"><%= t 'home.index.try_text' %></div>
         </div>
-        <div class="caption osc">
-        <h2>12 Years a Slave</h2>
-        </div>
-        <a href="#" class="regarder action_btn">Regarder 3,49 €</a>
-        <!--<%= link_to image_tag("#{I18n.locale}/#{t('.bg_infinit_img')}#{params[:kind]==:adult ? '-adult' : ''}.jpg", :size => '932x328', :alt => t('.bg_infinity').html_safe), new_customer_registration_path(:code => get_code(@discount_top.name)) %> -->
-        <a href="#">
-        <img alt="#" height="328" src="http://www.dvdpost.be/images/plush/HP_movies/film01.jpg" width="585"/>
-        </a>
-      </li>
+       
+    <ul id="output">
+      <%= render :partial => 'home/index/carousel_public_item', :collection => @carousel %>
     </ul>
+    
   </div>
 </div>
 <!-- #slider-wrap -->

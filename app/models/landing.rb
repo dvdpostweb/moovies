@@ -11,6 +11,8 @@ class Landing < ActiveRecord::Base
   scope :hit,  where(:login => 'hit')
   scope :public_test,  where(:login => ['public_test' ])
   scope :adult,  where(:login => 'adult')
+  scope :adult_public,  where(:login => 'adult_public')
+  
   scope :by_language, lambda {|language| where((language == :nl ? :actif_dutch : (language == :en ? :actif_english : :actif_french)) => "YES")}
   scope :by_language_beta, lambda {|language| where((language == :nl ? :actif_dutch : (language == :en ? :actif_english : :actif_french)) => ["BETA","YES"])}
 

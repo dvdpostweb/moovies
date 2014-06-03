@@ -17,4 +17,11 @@ $(function() {
       return false
     }
   })
+  if($('#output').length)
+  {
+    var $container = $('#output').cycle({ 
+    speed:   2000,
+    timeout: 5000
+  });
+  }
 });

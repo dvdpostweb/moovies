@@ -4,14 +4,13 @@ ul#output {
   height: 343px;
   left: 0;
   position: relative;
-  width: 620px;
 	margin:20px 0 0 0;
 }
 
 ul#output li {
   height: 343px;
   position: absolute;
-  width: 707px;
+  width: 346px;
 }
 
 
@@ -71,7 +70,7 @@ ul#output li .intro h1 {
 #try_it h2{
   color: #FFFFFF;
    line-height:30px;
-   padding-bottom:20px;
+   padding-bottom:50px;
 }
 
 #try_it h1 {
@@ -79,7 +78,7 @@ ul#output li .intro h1 {
   font-size:40px;
   font-weight:bold;
   line-height:42px;
-  padding-bottom:62px;
+  padding-bottom:22px;
 }
 #try_it h1 span{
    color:#66CCCC;
@@ -101,9 +100,9 @@ ul#output li .intro h1 {
 }
 
 
-#image_promo ul#output li .regarder.action_btn {
+#image_promo ul#output li .regarder.action_btn, #output .watch {
   
-background: url(image_path('button_streamingppv.gif')) no-repeat scroll 0px 0px transparent !important;    
+  background: url(image_path('button_streamingppv.gif')) no-repeat scroll 0px 0px transparent !important;    
   bottom:13px;
   color:#FFFFFF;
   font-size:15px;
@@ -115,6 +114,9 @@ background: url(image_path('button_streamingppv.gif')) no-repeat scroll 0px 0px 
   top:284px;
   width:145px;
   z-index:3;
+  text-align:left;
+  font-weight:normal;
+  line-height:22px;
 }
 
 
@@ -126,7 +128,7 @@ background: url(image_path('button_streamingppv.gif')) no-repeat scroll 0px 0px 
 
 
 
-ul#output li a.essaigratuit {
+#home a.essaigratuit {
   background-color: #ee8419; 
   @include filter-gradient(#ee8419, #e26417, vertical);
   @include background-image(linear-gradient(top, #ee8419 0%,#e26417 100%));
