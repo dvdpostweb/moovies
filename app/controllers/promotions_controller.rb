@@ -4,7 +4,13 @@ class PromotionsController < ApplicationController
     if @promo && @promo.canva_id == 3
       @checked = true
       @checked_partners = false
+    elsif @promo && @promo.canva_id == 8
+      streaming_code = StreamingCode.where('name like ?', 'EXP%').email.available.order('rand()').limit(1)
+      @internal_code = streaming_code.first.name
+      @meta_image = "http://www.dvdpost.be/images/promotions_plush/#{@promo.params[:background_locale] ? "#{I18n.locale}/" : '' }#{@promo.params[:background]}"
     end
+    @meta_title = t("promotions.title_#{@promo.id}", :default => '') if @promo
+    
   end
 
   def create

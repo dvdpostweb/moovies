@@ -1,0 +1,5 @@
+<% if !product.get_vod_online(session[:country_id]).empty? %>
+  <% title = raw t('products.streaming.watch_tvod', :price => product.get_vod_online(session[:country_id]).first.ppv_price) %>
+  <% class_name = "alacarte action_btn" %>
+  <%= link_to  title, current_customer ? product_sign_up_path(:product_id => product.to_param) : product_action_path(:product_id => product.to_param, :origin => :products, :source => source), :class => class_name %>
+<% end %>

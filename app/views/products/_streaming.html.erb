@@ -3,7 +3,7 @@
     <% title = t('.watch_svod') %>
     <% class_name = "watch action_btn" %>
   <% else %>
-    <% title = raw t('.watch_tvod', :price => current_customer && current_customer.tvod_only? &&  !local_assigns.has_key?(:min_price) ? product.get_vod_online(session[:country_id]).first.tvod_price : product.get_vod_online(session[:country_id]).first.ppv_price) %>
+    <% title = raw t('.watch_tvod', :price => (current_customer && current_customer.tvod_only?) || !current_customer && local_assigns.has_key?(:max_price)  ? product.get_vod_online(session[:country_id]).first.tvod_price : product.get_vod_online(session[:country_id]).first.ppv_price) %>
     <% class_name = "alacarte action_btn" %>
   <% end %>
   <% if current_customer && current_customer.tvod_only? && !product.svod_dates_online.first && popup == true %>  
@@ -15,5 +15,5 @@
       </p>
     </div>
  <% end %>
-  <%= link_to  title, local_assigns.has_key?(:min_price) ? product_sign_up_path(:product_id => product.to_param) : product_action_path(:product_id => product.to_param, :origin => :products, :source => source), :class => class_name %>
+  <%= link_to  title, product_action_path(:product_id => product.to_param, :origin => :products, :source => source), :class => class_name %>
 <% end %>
