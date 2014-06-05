@@ -2,15 +2,16 @@
 
 ul#output {
   height: 343px;
-  left: 0;
+  left: 347px;
   position: relative;
   margin:20px 0 0 0;
+  width: 585px;
 }
 
 ul#output li {
   height: 343px;
   position: absolute;
-  width: 346px;
+  width: 585px;
 }
 
 
@@ -137,7 +138,7 @@ ul#output li .intro h1 {
   bottom: 13px;
   color: #FFFFFF;
   font-size: 15px;
-  left: 358px;
+  left: 12px;
   position: absolute;
   text-shadow: 0 1px 10px #242424;
   top: 287px;
@@ -159,7 +160,7 @@ ul#output li .intro h1 {
   font-size:18px;
   font-weight:normal;
   height:35px;
-  left:730px;
+  left:386px;
   line-height:24px;
   padding-left:34px;
   padding-top:6px;
@@ -173,7 +174,7 @@ ul#output li .intro h1 {
 
 
 #image_promo ul#output .image {
-  left: 346px;
+  left: 0;
   position: absolute;
   z-index: 1;
 }
