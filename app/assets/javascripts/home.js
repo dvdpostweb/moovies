@@ -20,7 +20,8 @@ $(function() {
   if($('#output').length)
   {
     var $container = $('#output').cycle({ 
-    speed:   2000,
+    fx:      'scrollHorz',  
+    speed:   500,
     timeout: 5000,
     next:   '#next', 
     prev:   '#prev',
