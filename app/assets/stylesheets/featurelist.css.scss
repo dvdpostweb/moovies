@@ -35,16 +35,29 @@ ul#output li .caption a
 
 #home #prev, #home #next
 {
-  position: absolute;
-  left: 450px;
+  cursor: pointer;
+      height: 90px;
+      opacity: 1;
+      position: absolute;
+      top: 280px;
+      width: 48px;
   z-index: 20;
-  font-size:20px;
-  color:#fff;
-  cursor:pointer;
+ 
 }
-#home #next
-{
-  left: 550px;
+#home #next {
+left:1371px;
+
+  background: url(image_path('slider-right-off.png')) no-repeat scroll 0px 0px transparent !important;    
+  
+  
+}
+
+#home #prev {
+ left:834px;
+
+  background: url(image_path('slider-left-off.png')) no-repeat scroll 0px 0px transparent !important;    
+ 
+  
 }
 
 ul#output li .caption h2 {
@@ -80,59 +93,78 @@ ul#output li .intro h1 {
   padding:10px;
   position:absolute;
   width:327px;
+  z-index: 300;
 }
 
 #try_it h2{
   color: #FFFFFF;
-   line-height:30px;
+     font-size:20px;
+   line-height:22px;
    padding-bottom:50px;
+  font-family:Arial, Helvetica, sans-serif;
 }
 
+.adult #try_it h1 {
+  color:#C36EC3;
+}
+.adult #try_it h1 span{
+  color:#C36EC3;
+}
+ 
 #try_it h1 {
   color:#66CCCC;
-  font-size:40px;
+  font-size:34px;
   font-weight:bold;
-  line-height:42px;
+  line-height:38px;
   padding-bottom:22px;
+  padding-top:10px;
 }
 #try_it h1 span{
    color:#66CCCC;
-    font-size:40px;
+    font-size:34px;
    text-transform: uppercase;
 }
+#try_it #engagement {
+  color: #FFFFFF;
+       font-size:15px;
+      padding-top:10px;
 
-
+}
 #image_promo ul#output li .caption {
     bottom: 13px;
     color: #FFFFFF;
     font-size: 15px;
-    left: 375px;
+    left: 358px;
     position: absolute;
     text-shadow: 0 1px 10px #242424;
     top: 287px;
-    width: 386px;
-      z-index: 2;
+    width: 320px;
+    z-index: 2;
 }
 
+
+.adult #image_promo ul#output li .regarder {
+  background: url(image_path('button_tvod_hp_adult.jpg')) no-repeat scroll 0px 0px transparent !important;    
+}
 
 #image_promo ul#output li .regarder {
-  
-  background: url(image_path('button_streamingppv.gif')) no-repeat scroll 0px 0px transparent !important;    
+  background: url(image_path('button_tvod_hp.jpg')) no-repeat scroll 0px 0px transparent !important;    
   bottom:13px;
   color:#FFFFFF;
-  font-size:15px;
-  left:764px;
-  padding-left:26px;
+  font-size:18px;
+  font-weight:normal;
+  height:35px;
+  left:730px;
+  line-height:24px;
+  padding-left:34px;
   padding-top:6px;
   position:absolute;
-  text-shadow:#242424 0 1px 10px;
-  top:284px;
-  width:145px;
-  z-index:10;
   text-align:left;
-  font-weight:normal;
-  line-height:22px;
+  top:284px;
+  width:184px;
+  z-index:10;
 }
+
 
 
 #image_promo ul#output .image {
@@ -144,9 +176,17 @@ ul#output li .intro h1 {
 
 
 #home a.essaigratuit {
-  background-color: #ee8419; 
-  @include filter-gradient(#ee8419, #e26417, vertical);
-  @include background-image(linear-gradient(top, #ee8419 0%,#e26417 100%));
+  
+  background: #fa6818; /* Old browsers */
+  background: -moz-linear-gradient(top,  #fa6818 0%, #df3a14 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fa6818), color-stop(100%,#df3a14)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #fa6818 0%,#df3a14 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #fa6818 0%,#df3a14 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #fa6818 0%,#df3a14 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #fa6818 0%,#df3a14 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fa6818', endColorstr='#df3a14',GradientType=0 ); /* IE6-9 */
+  
+  
 
   border: 1px solid #D55023;
   border-radius: 4px 4px 4px 4px;
