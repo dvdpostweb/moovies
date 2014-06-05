@@ -8,12 +8,15 @@
           <div id="engagement"><%= t 'home.index.try_text' %></div>
         </div>
     
-    <div id="prev"></div> 
+    
    
     <ul id="output">
       <%= render :partial => 'home/index/carousel_public_item', :collection => @carousel %>
     </ul>
+    <div id='select'>
+     <div id="prev"></div> 
      <div id="next"></div> 
+    </div>
   </div>
 </div>
 <!-- #slider-wrap -->
