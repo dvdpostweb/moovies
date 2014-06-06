@@ -2255,7 +2255,7 @@ ul#ratings_labels li:last-child {
   width: 48px;
 }
 #maincontent .tab-container .hd {
-    background: url("/assets/icon_hd.png") no-repeat scroll 0 0 transparent;
+    background: url(image_path('icon_hd.png')) no-repeat scroll 0 0 transparent;
     display: block;
     height: 26px;
     left: 97px;
@@ -2305,9 +2305,25 @@ ul#ratings_labels li:last-child {
 }
 #products_index .tooltips_tvod
 {
- margin:0 0 0 -343px;;  
+ margin:0 0 0 -343px;  
 }
 #products_index .infotvod
 {
   top: 3px;  
+}
+.normal.private .alacarte.price, .adult.private .alacarte.price {
+    background-image: url(image_path('button_streamingppv_price.gif'));
+    color: #FFFFFF;
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    height: 32px;
+    line-height: 31px;
+    padding-left: 25px;
+    text-align: left;
+    width: 175px;
+    border:0;
+}
+.adult.private .alacarte.price {
+    background-image: url(image_path('button_streamingppv_price_adult.gif'));
 }
