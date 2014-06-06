@@ -1,15 +1,18 @@
 <div id="slider-wrap">
   
   <div id="image_promo">
-       <div id="try_it" align="center">
-         <h1><%= t(".carousel_h1_#{params[:kind]}").html_safe %></h1>
-          <h2><%= t(".carousel_h2_#{params[:kind]}").html_safe %></h2>
-          <%= link_to t('home.index.try'), new_customer_registration_path(:code => get_code(@discount_top.name)), :class => 'essaigratuit osc btn' %> 
-          <div id="engagement"><%= t 'home.index.try_text' %></div>
-        </div>
-    
-    
-   
+    <div id="try_it" align="center">
+      <% if current_customer %>
+        <h1><%= t(".carousel_h1_logged_#{params[:kind]}").html_safe %></h1>
+        <h2><%= t(".carousel_h2_logged_#{params[:kind]}").html_safe %></h2>
+        <%= link_to t('home.index.try_logged'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[params[:kind] == :adult ? 5 : 2]}")), :class => 'essaigratuit osc btn' %>
+      <% else %>
+        <h1><%= t(".carousel_h1_#{params[:kind]}").html_safe %></h1>
+        <h2><%= t(".carousel_h2_#{params[:kind]}").html_safe %></h2>
+        <%= link_to t('home.index.try'), new_customer_registration_path(:code => get_code(@discount_top.name)), :class => 'essaigratuit osc btn' %> 
+        <div id="engagement"><%= t 'home.index.try_text' %></div>
+     <% end %>
+    </div>
     <ul id="output">
       <%= render :partial => 'home/index/carousel_public_item', :collection => @carousel %>
     </ul>

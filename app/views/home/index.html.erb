@@ -1,11 +1,4 @@
-<% if params[:kind] == :adult && current_customer && current_customer.no_adult? %>
-  <!-- Tabs rotattor -->
-  <%= render :partial => 'home/index/carousel_adult', :locals => {:carousel => @carousel} %>
-<% elsif current_customer %>
-  <%= render :partial => 'home/index/carousel', :locals => {:carousel => @carousel} %>
-<% else %>
-  <%= render :partial => 'home/index/carousel_public' %>
-<% end %>
+<%= render :partial => 'home/index/carousel_public' %>
 <!-- Services -->
 <div id="services-wrap">
   <div class="wrap" id="vod-ppv">
