@@ -3,7 +3,8 @@ class Landing < ActiveRecord::Base
 
   scope :order, :order => "ordered asc, id desc"
   scope :order_admin, :order =>"id desc" 
-  scope :order_rand, :order =>"rand()" 
+  scope :order_rand, :order =>"rand()"
+  scope :order_id, :order => 'id desc'
   
   scope :not_expirated, where('expirated_date > now() or expirated_date is null')
   scope :private, where(:login => ['private', 'both' ])

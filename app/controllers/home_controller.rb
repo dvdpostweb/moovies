@@ -9,12 +9,11 @@ class HomeController < ApplicationController
     @newsletter = PublicNewsletter.new(params[:public_newsletter])
     @svod_id = params[:kind] == :adult ? 4 : 1 
     @tvod_id = params[:kind] == :adult ? 5 : 2
+    @carousel = Landing.by_language(I18n.locale).not_expirated.order_id
     if current_customer
-      @carousel = Landing.by_language(I18n.locale).not_expirated
       @carousel = params[:kind] == :adult ? @carousel.adult : @carousel.private
       @vod_wishlist = current_customer.products.collect(&:products_id)
     else
-      @carousel = Landing.by_language(I18n.locale).not_expirated
       @carousel = params[:kind] == :adult ? @carousel.adult_public : @carousel.public
     end
   end
