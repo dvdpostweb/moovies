@@ -12,7 +12,6 @@ class HomeController < ApplicationController
     if current_customer
       @carousel = Landing.by_language(I18n.locale).not_expirated
       @carousel = params[:kind] == :adult ? @carousel.adult : @carousel.private
-      @carousel = @carousel.order_rand.limit(1).first
       @vod_wishlist = current_customer.products.collect(&:products_id)
     else
       @carousel = Landing.by_language(I18n.locale).not_expirated
