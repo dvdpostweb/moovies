@@ -17,7 +17,7 @@
   <h4><%= t('promotions.show.canvas2.garanties') %></h4>
   <ul>
     <li class="engagement"><%= t2('promotions.show.canvas2.engagement', @promo.params[:key]) %></li>
-    <li class="stop"><%= t('promotions.show.canvas2.stop') %></li>
+    <li class="stop"><%= t2('promotions.show.canvas2.stop', @promo.params[:key]) %></li>
     <li class="security"><%= t('promotions.show.canvas2.securite') %></li>
   </ul>
 </div>
@@ -30,5 +30,5 @@
   </ul>
 </div>
 <div style="clear:both;"></div>
-<p style="padding-top:5px;"><input type="submit" border="0" align="absmiddle" id="submit_id3" class="promo_button" name="sent" value="<%= t('promotions.show.canvas2.essayer') %>" /></p>
+<p style="padding-top:5px;"><input type="submit" border="0" align="absmiddle" id="submit_id3" class="promo_button" name="sent" value="<%= t2('promotions.show.canvas2.essayer', @promo.params[:key]) %>" /></p>
 <% end %>
