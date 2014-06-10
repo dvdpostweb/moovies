@@ -50,6 +50,7 @@
 
       <div id="commentcamarche_content">
         <h2><%= t('.plush') %></h2>
+        <% if !@promo.params[:hide_svod] == true %>
         <h3><%= t('.illimite') %></h3>
         <table cellpadding="0" cellspacing="0" border="0">
           <tr id="vod">
@@ -65,6 +66,8 @@
             <td class="step4"><%= t('.istep4').html_safe %></td>
           </tr>
         </table>
+        <% end %>
+        <% if !@promo.params[:hide_tvod] == true %>
         <h3 class="carte"><%= t('.carte') %></h3>
         <table cellpadding="0" cellspacing="0" border="0">
           <tr id="dvd">
@@ -80,6 +83,7 @@
             <td class="step4"><%= t('.astep4').html_safe %></td>
           </tr>
         </table>
+        <% end %>
       </div>
       <p align="center"><%= image_tag "#{I18n.locale}/info_tel.jpg" %></p>
       <div id="promo_footer"><%= t2('.conditions', @promo.params[:key]).html_safe %></div>
