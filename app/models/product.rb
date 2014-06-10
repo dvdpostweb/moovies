@@ -92,7 +92,9 @@ class Product < ActiveRecord::Base
   sphinx_scope(:available)                {{:without =>       {:state => 99}}}
   sphinx_scope(:recent)                   {{:without =>       {:availability => 0}, :with => {:available_at => 2.months.ago..Time.now.end_of_day, :next => 0}}}
   sphinx_scope(:svod_soon)                {{:with =>          {:svod_start => Time.now.end_of_day..1.months.from_now}}}
-  sphinx_scope(:tvod_soon)                {{:with =>          {:tvod_start => Time.now.end_of_day..1.months.from_now}}}
+  sphinx_scope(:tvod_soon)                {{:without =>          {:tvod_start_combi => 0}}}
+  sphinx_scope(:tvod_soon2)                {{:with =>         {:tvod_start => 0}}}
+  
   sphinx_scope(:svod_last_added)          {{:with =>          {:svod_start => 3.months.ago..Time.now.end_of_day, :imdb_id_online => 1..3147483647}}}
   sphinx_scope(:tvod_last_added)          {{:with =>          {:tvod_start => 5.months.ago..1.day.ago, :imdb_id_online => 1..3147483647}}}
   sphinx_scope(:svod_last_chance)         {{:with =>          {:svod_end => Time.now.end_of_day..1.months.from_now}}}
@@ -400,7 +402,7 @@ class Product < ActiveRecord::Base
         'be'
     end
     options[:includes] = ["vod_online_#{name}", :director, :actors, :public, :streaming_trailers, :tokens_trailers, "descriptions_#{I18n.locale}", :svod_dates_online] if options[:includes].nil?
-    products.search(search, :max_matches => limit, :per_page => per_page, :page => page, :indices => ["product_#{name}_core"], :sql => { :include => options[:includes]})
+    products.search(search, :max_matches => limit, :per_page => per_page, :page => page, :indices => ["product_#{name}_core"], :sql => { :include => options[:includes]}, :select => "*, IF(tvod_start = 0, 10402410456, if(tvod_start > 1402410456 and tvod_start <1405003931, tvod_start,0)) AS tvod_start_combi")
   end
 
   def self.replace_specials(str)
@@ -578,7 +580,7 @@ class Product < ActiveRecord::Base
       elsif options[:view_mode] && options[:view_mode] == 'svod_soon'
         'svod_start DESC, streaming_available_at_order DESC, rating DESC'
       elsif options[:view_mode] && options[:view_mode] == 'tvod_soon'
-        'tvod_start ASC, year DESC, rating DESC'
+        'tvod_start_combi ASC, year DESC, rating DESC'
       elsif options[:view_mode] && options[:view_mode] == 'svod_new'
         'year DESC, svod_start DESC, streaming_available_at_order DESC, rating DESC'
       elsif options[:view_mode] && options[:view_mode] == 'tvod_new'

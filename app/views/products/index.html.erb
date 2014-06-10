@@ -1,4 +1,4 @@
-<% if params[:kind] != :adult && @carousels.size > 0 %>
+<% if params[:kind] != :adult && @carousels && @carousels.size > 0 %>
 <div id="movies_banners<%= @carousels.size %>">
   <% @carousels.each do |carousel| %>
     <%= link_to image_tag(carousel.image, :alt => carousel.title(I18n.locale)), carousel_path(carousel) %>
