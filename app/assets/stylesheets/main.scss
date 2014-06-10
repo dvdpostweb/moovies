@@ -1108,7 +1108,27 @@ margin-top: 10px;
   width: 19px;
   cursor:pointer;
 }
-
+#button_new_account {
+    background: #fa6818; /* Old browsers */
+    background: -moz-linear-gradient(top,  #fa6818 0%, #df3a14 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fa6818), color-stop(100%,#df3a14)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #fa6818 0%,#df3a14 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #fa6818 0%,#df3a14 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #fa6818 0%,#df3a14 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #fa6818 0%,#df3a14 100%); /* W3C */
+    border: 1px solid #D55023;
+    border-radius: 4px;
+    bottom: 18px;
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.8) inset;
+    color: #FFFFFF;
+    display: block;
+    font-size: 20px;
+    height: 37px;
+    line-height: 38px;
+    text-align: center;
+    text-shadow: 0 -1px 0 #D83C14;
+    width: 184px;
+}
 /*   ============   for mobile   ============   */
 
 @media screen and (max-width: 480px) { 
@@ -1197,5 +1217,3 @@ div.notice {
 
 
  }
-
-
