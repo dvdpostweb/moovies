@@ -20,7 +20,7 @@
 <div class="garanties">
   <h4><%= t('promotions.show.canvas2.garanties') %></h4>
   <ul>
-    <li class="engagement"><%= t('promotions.show.canvas2.engagement') %></li>
+    <li class="engagement"><%= t2('promotions.show.canvas2.engagement', @promo.params[:key]) %></li>
     <li class="stop"><%= t('promotions.show.canvas2.stop') %></li>
     <li class="security"><%= t('promotions.show.canvas2.securite') %></li>
   </ul>
