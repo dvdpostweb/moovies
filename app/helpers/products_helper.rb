@@ -531,7 +531,7 @@ module ProductsHelper
         "<td class='goalacarte'>#{t('.soon_in_tvod', :days => (svod_date.end_on - Date.today).to_i).html_safe}</td>".html_safe
       elsif svod_date && svod_date.end_on == Date.today
         "<td class='goalacarte'>#{t('.tomorrow_in_tvod')}</td>".html_safe
-      elsif vod.expire_at && vod.expire_at > Date.today && vod.expire_at < Date.today+30.days
+      elsif vod.expire_at && vod.expire_at > Date.today && vod.expire_at < Date.today+30.days && vod.expire_at != vod.available_backcatalogue_from
         "<td class='noavailable'>#{t('.last_chance', :days => (vod.expire_at - Date.today).to_i).html_safe}</td>".html_safe
       elsif vod.expire_backcatalogue_at && vod.expire_backcatalogue_at > Date.today && vod.expire_backcatalogue_at < Date.today+30.days
         "<td class='noavailable'>#{t('.last_chance', :days => (vod.expire_backcatalogue_at - Date.today).to_i).html_safe}</td>".html_safe
