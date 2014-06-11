@@ -15,7 +15,7 @@ class Customers::ConfirmationsController < Devise::ConfirmationsController
           end
         end
         view_context.send_message(Moovies.email[:welcome_tvod], options, params[:locale], current_customer)
-        root_localize_path
+        step_path(:id => 'step4')
       else
         step_path(:id => 'step2')
       end
