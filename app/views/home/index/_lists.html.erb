@@ -1,0 +1,39 @@
+<!-- #services-wrap -->
+<div class="container clearfix" >
+  <!--   ==============   MAIN CONTENT   ==============   -->
+  <div id="maincontent" >
+    <div id="new-alacarte-wrap">
+      <h2><%= params[:kind] == :adult ? t('home.index.tvod_adult_new').html_safe : t('home.index.tvod_new').html_safe %></h2>
+      <div class="tab-container">
+        <ul>
+          <%= render :partial => 'products/detail', :collection => @new_tvod %>
+        </ul>
+      </div>
+      <div class="clear"></div>
+      <div class="more_movies" align="right">
+        <%= link_to t('home.index.all'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[params[:kind] == :adult ? 5 : 2]}"), :tag => 3) %>
+      </div>
+    </div>
+    <div id="new-infinity-wrap">
+      <h2><%= params[:kind] == :adult ? t('home.index.unlimited_adult_new').html_safe : t('home.index.unlimited_new').html_safe %></h2>
+      <div class="tab-container">
+        <ul>
+          <%= render :partial => 'products/detail', :collection => @new_svod %>
+        </ul>
+      </div>
+      <div class="clear"></div>
+      <div class="more_movies" align="right">
+        <%= link_to t('home.index.all'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[params[:kind] == :adult ? 4 : 1]}"), :tag => 3) %>
+      </div>
+    </div>
+
+    <div class="clear"></div>
+    <% unless current_customer %>
+    <div id="subscribe-wrap">
+      <%= link_to image_tag("#{I18n.locale}/#{t('home.index.banner_img')}#{params[:kind]==:adult ? '-adult' : ''}.jpg", :size => '942x188', :alt => t('home.index.banner_alt')), new_customer_registration_path(:code => get_code(@discount_bottom.name)) %>
+    </div>
+    <% end %>
+    <%= t('home.index.descritpion', :link_abo => info_path(:page_name => t('routes.infos.params.vod')), :link_svod => (params[:kind] == :adult ? products_short_path(:package => Moovies.packages.invert[4]) : products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}"), :tag => 5)), :link_tvod => (params[:kind] ==  :adult ? products_short_path(:package => Moovies.packages.invert[5]) : products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[2]}"), :tag => 5))).html_safe if params[:controller] == 'home' %>
+    <div class="clear"></div>
+  </div>
+</div>

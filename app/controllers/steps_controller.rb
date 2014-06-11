@@ -11,6 +11,9 @@ class StepsController < ApplicationController
     elsif params[:id] == 'step3'
       @hide_footer = true
       @hide_menu = true
+    elsif params[:id] == 'step4'
+      @new_svod = HomeProduct.where(:country => Product.country_short_name(session[:country_id]), :kind => "svod#{params[:kind] == :adult ? '_adult' : ''}", :locale_id => Moovies.languages[I18n.locale]).order('id asc').includes(:product => [Product.get_vod_online_name(session[:country_id]),"descriptions_#{I18n.locale}", :svod_dates])
+      @new_tvod = HomeProduct.where(:country => Product.country_short_name(session[:country_id]), :kind => "tvod#{params[:kind] == :adult ? '_adult' : ''}", :locale_id => Moovies.languages[I18n.locale]).order('id asc').includes(:product => [Product.get_vod_online_name(session[:country_id]),"descriptions_#{I18n.locale}", :svod_dates])
     elsif params[:id] == 'old'
       @discount_svod = Discount.find(Moovies.discount["svod_step90_#{I18n.locale}"])
       #@discount_kids = Discount.find(Moovies.discount["kid_step90_#{I18n.locale}"])

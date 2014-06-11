@@ -1,23 +1,11 @@
 <div class="container clearfix">
   <div id="step_wrap">
     <div class="step_form">
-      <h3><%= t('.congrats') %></h3>
-      <% if 1==1 || current_customer.samsung_codes.unvalidated.empty? %>
-        <p><%= t('.desc1') %></p>
-        <p><%= t('.desc2') %></p>
-     <% else %>
-        <p><%= t('.desc1_samsung') %></p>
-        <p><%= t('.desc2_samsung') %></p>
-     <% end %>
-      <div class="catalogue_promo"> 
-        <%= link_to t('.catalogue'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}")), :class => :promo_button %>
-      </div>
-      <div class="vod_faq">
-        <%= link_to t('.vod_faq'), root_localize_path, :class => :promo_button %>
-      </div>
-    </div>
+      <h3><strong><%= t('.congrats') %></strong></h3>
+      <p id='step4_desc'><%= t('.congrats_desc').html_safe %></p>
     <div class="clearfix"></div>
   </div>
+  <%= render :partial => 'home/index/lists' %>
 </div>
 <% if Rails.env == "production" %>
   <% if [127].include?(current_customer.promo_id) %>
