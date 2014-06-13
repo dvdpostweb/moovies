@@ -5,6 +5,8 @@ class PaymentMethodsController < ApplicationController
     @body_id = @choose_partial
   end
   def edit
+    @product = Product.find(params[:product_id]) if params[:product_id]
+    
     @choose_partial = params[:type] || 'index'
     @body_id = @choose_partial
   end
