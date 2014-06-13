@@ -58,7 +58,7 @@ gem "rspec-rails", ">= 2.0.1", :group => [:development, :test]
 gem "friendly_id", "~> 4.0.9"
 gem "routing_concerns", "~> 0.1.0"
 gem 'jquery-form-rails'
-gem 'thinking-sphinx', '3.0.5'
+gem 'thinking-sphinx', '3.0.6'
 gem "composite_primary_keys", "~> 5.0.13"
 gem "truncate_html", "~> 0.9.2"
 gem "capistrano", "~> 2.15.5"
