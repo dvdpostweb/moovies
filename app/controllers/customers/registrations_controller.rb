@@ -39,6 +39,7 @@ class Customers::RegistrationsController < Devise::RegistrationsController
           @discount = Discount.by_name(params[:customer][:code]).available.first
           if @discount.nil? || (@discount && @user.discount_reuse?(@discount.month_before_reuse))
             if @user.abo_active == 0
+              cookies[:code] = { value: params[:customer][:code], expires: 15.days.from_now }
               @user.step = @discount.nil? ? 31 : @discount.goto_step
               @user.code = params[:customer][:code]
               @user.abo_active = 1 if @discount && @discount.goto_step.to_i == 100
@@ -61,10 +62,10 @@ class Customers::RegistrationsController < Devise::RegistrationsController
         end
       end
     end
-    
     build_resource
     @discount = Discount.by_name(params[:customer][:code]).available.first
     if @discount
+      cookies[:code] = { value: params[:customer][:code], expires: 15.days.from_now }
       resource.step = @discount.goto_step
       resource.abo_active = 1 if @discount.goto_step.to_i == 100
     end

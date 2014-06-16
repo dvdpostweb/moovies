@@ -5,6 +5,12 @@ class PaymentMethodsController < ApplicationController
     @body_id = @choose_partial
   end
   def edit
+    if params[:product_id]
+      @product = Product.find(params[:product_id]) 
+      if @product.svod?
+        redirect_to root_localize_path() and return
+      end
+    end
     @choose_partial = params[:type] || 'index'
     @body_id = @choose_partial
   end
@@ -19,7 +25,9 @@ class PaymentMethodsController < ApplicationController
       product_id = 0
     elsif params[:type] == 'tvod'
       internal_com = 'tvod'
-      #to_do
+      if @product.svod?
+        redirect_to root_localize_path() and return
+      end
       @product = Product.find(params[:product_id])
       @url_back = product_url(:id => @product.id)
       @url_ok = streaming_product_url(:id => @product.imdb_id)
@@ -55,12 +63,30 @@ class PaymentMethodsController < ApplicationController
     		@ogone_language = 'en_US'
     		@template_ogone = URI.join(root_url, 'template_en.htm')
     end
-    @brand = params[:brand] if params[:brand]
+    if params[:brand]
+      @brand = params[:brand]
+      @pm = case @brand
+        when 'PAYPAL'
+          'PAYPAL'
+        when 'iDEAL'
+          'iDEAL'
+        when 'Belfius Direct Net'
+          'Belfius Direct Net'
+        when 'ING HomePay'
+          'ING HomePay'
+        when 'DirectEbankingBE'
+          'DirectEbankingBE'
+        when 'DirectEbankingNL'
+          'DirectEbankingNL'
+        else
+        'CreditCard'
+      end
+    end
     
     @alias = "p#{current_customer.to_param}"
     OgoneCheck.create(:orderid => @order_id, :amount => (@price*100).to_i, :customers_id => current_customer.to_param, :context => internal_com, :site => 1, :language_id => Moovies.customer_languages[I18n.locale], :products_id => product_id)
     list = {:COM => @com, :ALIAS => @alias, :AMOUNT => (@price*100).to_i, :CURRENCY => 'EUR', :LANGUAGE => @ogone_language, :ORDERID => @order_id, :PSPID => Moovies.ogone_pspid[Rails.env], :CN => current_customer.name, :ALIASUSAGE => @com, :DECLINEURL => @url_back, :EXCEPTIONURL => @url_back, :CANCELURL => @url_back, :CATALOGURL => @url_back, :ACCEPTURL => @url_ok, :TP => @template_ogone}
-    list = list.merge(:PM => 'CreditCard', :BRAND => @brand) if !@brand.nil?
+    list = list.merge(:PM => @pm, :BRAND => @brand) if !@brand.nil?
     list = list.sort
     string = list.map { |k,v| "#{k.to_s.upcase}=#{v}#{Moovies.ogone_pass[Rails.env]}" }.join()
     if Rails.env == 'production'

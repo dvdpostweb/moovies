@@ -24,7 +24,7 @@
 <input type="hidden" name="TP" value="<%= @template_ogone %>">
 
 <% if !@brand.nil? %>
-<input type="hidden" name="PM" value="CreditCard">
+<input type="hidden" name="PM" value="<%= @pm.nil? ? 'CreditCard' : @pm %>">
 <input type="hidden" name="BRAND" value="<%= @brand %>">
 <% end %>
 </form>
