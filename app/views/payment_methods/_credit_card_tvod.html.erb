@@ -10,8 +10,8 @@
         <%= link_to(image_tag(product_image, :size => '100x150') ,product_path(:id => @product.to_param)) %>
       </div>
       <div id="right_part">
-        <p><%= t('.location') %>: <strong><%= product_title %></strong> </p>
-        <p><%= t('.price') %>: <strong> <%= current_customer && current_customer.tvod_only? ? @product.get_vod_online(session[:country_id]).first.tvod_price : @product.get_vod_online(session[:country_id]).first.ppv_price %>€</strong></p>
+        <p><%= t('.location') %> <strong><%= product_title %></strong> </p>
+        <p><%= t('.price') %> <strong> <%= current_customer && current_customer.tvod_only? ? @product.get_vod_online(session[:country_id]).first.tvod_price : @product.get_vod_online(session[:country_id]).first.ppv_price %>€</strong></p>
       </div>
       <div class="clearfix"></div>
     </div>
@@ -26,12 +26,12 @@
       <h2><strong>Mister cash</strong></h2>
       <p><%= link_to(image_tag('bancontact_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'Bancontact/Mister Cash'), :method => :put) %></p>
       <h2><strong>Paypal</strong></h2>
-      <p><%= link_to(image_tag('paypal_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'paypal'), :method => :put) %></p>
+      <p><%= link_to(image_tag('paypal_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'PAYPAL'), :method => :put) %></p>
       <h2><strong>Web-Banking</strong></h2>
       <p>
-        <a href="#" target="_blank"><%= image_tag 'ideal_iconpaiement.gif', :size => '100x38' %></a> 
-        <a href="#" target="_blank"><%= image_tag 'belfius_iconpaiement.gif', :size => '100x38' %></a>
-        <a href="#" target="_blank"><%= image_tag 'ing_iconpaiement.gif', :size => '100x38' %></a> 
+        <%= link_to(image_tag('ideal_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'iDEAL'), :method => :put) %>
+        <%= link_to(image_tag('belfius_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'Belfius Direct Net'), :method => :put) %>
+        <%= link_to(image_tag('ing_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'ING HomePay'), :method => :put) %>
       </p>
       <h2><strong>Web-Banking via Sofort</strong></h2>
       <p>
@@ -39,8 +39,8 @@
       </p>
       <br />
       <p>
-        <a href="#" target="_blank"><%= image_tag 'sofortbelgium_iconpaiement.gif', :size => '100x38' %></a>
-        <a href="#" target="_blank"><%= image_tag 'sofortlux_iconpaiement.gif', :size => '100x38' %></a>
+        <%= link_to(image_tag('sofortbelgium_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'DirectEbankingBE'), :method => :put) %>
+        <%= link_to(image_tag('sofortlux_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'DirectEbankingNL'), :method => :put) %>
       </p>
     </div>
     <div class="secure_icons">
@@ -49,57 +49,4 @@
       <p><img  src="https://secure.ogone.com/images/verisign_EN.gif" alt="" /></p>
     </div>
   <div class="clearfix"></div>
-</div>
-
-
-<div class="switch_dom" id="switch_dom">
-  <div id="title"><%= t '.title' %></div>
-  <div style="margin-left: 20px; width: 800px;">
-    <%= form_for(:customer, :url => customer_payment_methods_path(:customer_id => current_customer.to_param), :html => { :method => :put, :id => :payment_methods }) do |f| %>
-    <%= hidden_field_tag(:type, 'credit_card')  %>
-    <div style="width: 800px;" > 
-      <%= image_tag 'card.png', :class => :img_card %>
-      <p><h3><%= t('.credit_card').html_safe %></h3></p>
-      <p><%= t('.credit_card_redirect').html_safe %></p>
-    </div>
-    <div align="right" style="padding-right: 8px;">
-      <div class="choice">
-        <table>
-          <tr>
-            <td>	
-              <input type="radio" value="visa" name="brand" id="visa">
-            </td>
-            <td align="center" valign="middle">
-              <%= image_tag "visa_icon.png" %><p>Visa</p>
-            </td>
-            <td><input type="radio" value="mastercard" name="brand" id="master"></td>
-            <td align="center" valign="middle">
-              <%= image_tag "master_card_icon.png" %>
-              <p>Master Card </p>
-            </td>
-            <td>
-              <input type="radio" value="american Express" name="brand" id="amex">
-            </td>
-            <td align="center" valign="middle">
-              <%= image_tag "american-express_icon.png" %>
-              <p>American Express</p>
-            </td>
-          </tr>
-        </table>
-        <table cellspacing="0" cellpadding="0">
-          <tr>
-            <td align="left"><img width="130" height="66" align="left" style="padding-right: 25px;" src="http://www.dvdpost.be/images/www3/languages/french/images/buttons/canvas/logo_ogone_big.gif"></td>
-            <td style="padding-top: 15px; padding-left: 10px;">
-              <button type="submit" class="button_confirm_switch"><%= t'.follow' %></button>
-            </td>
-          </tr>
-        </table>
-      </div>
-    </div>
-    <% end %>
-  </div>
-
-</div>
-<div id='alert_cc' style="display:none">
-  <%= t('.alert_cc') %>
 </div>
