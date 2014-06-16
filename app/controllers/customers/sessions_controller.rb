@@ -34,6 +34,7 @@ class Customers::SessionsController < Devise::SessionsController
           if @discount.nil? && @activation.nil?
             redirect_to params[:return_url], :alert => t('session.error_wrong_code') and return
           end
+          cookies[:code] = { value: params[:code], expires: 15.days.from_now }
           customer = Customer.where(:email => params[:customer][:email]).first if params[:customer] && params[:customer][:email]
           if @discount.nil? || (@discount && customer && customer.discount_reuse?(@discount.month_before_reuse))
             if customer && customer.abo_active == 1
