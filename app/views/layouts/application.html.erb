@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
-<html>
+<html <%= 'itemscope itemtype="http://schema.org/Movie"'.html_safe if !@product_image.nil? %>>
   <head>
     <title>
       <%= h @meta_title.blank? ? t('.title') : @meta_title %>
@@ -8,6 +8,29 @@
     <meta name="description" content="<%= @meta_description.blank? ? '' : @meta_description %>">
     <%= favicon_link_tag "favicon.ico" %>
   	<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700' rel='stylesheet' type='text/css' />
+    <% if !@product_image.nil? %>
+
+          <!-- Schema.org markup for Google+ --> 
+      <meta itemprop="name" content="<%= @product_title %>"> 
+      <meta itemprop="description" content="<%= @product_description.text %>"> 
+      <meta itemprop="image" content="<%= @product_image %>">
+
+      <!-- Twitter Card data --> 
+      <meta name="twitter:card" content="product"> 
+      <meta name="twitter:site" content="@plush"> 
+      <meta name="twitter:title" content="<%= @product_title %>"> 
+      <meta name="twitter:description" content="<%= @product_description.text %>"> 
+      <meta name="twitter:creator" content="@plush"> 
+      <meta name="twitter:image" content="<%= @product_image %>">
+      
+      <!-- Open Graph data --> 
+      <meta property="og:title" content="<%= @product_title %>" /> 
+      <meta property="og:type" content="movie" /> 
+      <meta property="og:url" content="<%= product_url(:id => @product.id) %>" />
+      <meta property="og:image" content="<%= @product_image %>" />
+      <meta property="og:description" content="<%= @product_description.text %>" /> 
+      <meta property="og:site_name" content="Plush" /> 
+    <% end %>
 	  <%= javascript_include_tag "application" %>
 	  <%= javascript_include_tag "jquery.ui.datepicker-#{I18n.locale}" %>
     <%= javascript_include_tag 'md5', 'viewrightplayer', 'viewrightplayer_control' if @streaming && @streaming.drm %>
