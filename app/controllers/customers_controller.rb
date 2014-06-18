@@ -138,6 +138,8 @@ class CustomersController < ApplicationController
       current_customer.next_abo_type_id = 6
       current_customer.step = 100
       current_customer.abo_active = 1
+      current_customer.auto_stop = 0
+      current_customer.subscription_expiration_date = nil
       current_customer.save(:validate => false)
     end
     redirect_to root_localize_path
