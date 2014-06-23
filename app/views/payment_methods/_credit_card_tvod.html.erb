@@ -20,8 +20,8 @@
       <h2><strong><%= t('.credit_card').html_safe %></strong></h2>
       <p>
         <%= link_to(image_tag('visa_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'visa'), :method => :put) %>
-        <a href="#" target="_blank"><%= image_tag 'mastercard_iconpaiement.gif', :size => '100x38' %></a>
-        <a href="#" target="_blank"><%= image_tag 'amex_iconpaiement.gif', :size => '100x38' %></a> 
+        <%= link_to(image_tag('mastercard_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'mastercard'), :method => :put) %>
+        <%= link_to(image_tag('amex_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'american Express'), :method => :put) %>
       </p>
       <h2><strong>Mister cash</strong></h2>
       <p><%= link_to(image_tag('bancontact_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'Bancontact/Mister Cash'), :method => :put) %></p>
