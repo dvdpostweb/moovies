@@ -1,5 +1,5 @@
 ThinkingSphinx::Index.define :product, :with => :active_record, :name => 'product_nl' do
-  indexes descriptions('DISTINCT products_description.`products_name`'), :as => :descriptions_title, :sortage => true, :type => :string, :multi => true
+  indexes descriptions('products_description.`products_name`'), :as => :descriptions_title, :sortage => true, :type => :string, :multi => true
   
   has "CRC32(products_type)", :as => :kind, :type => :integer
   has products_countries_id,      :as => :country_id
@@ -15,22 +15,22 @@ ThinkingSphinx::Index.define :product, :with => :active_record, :name => 'produc
   has products_rating,            :as => :dvdpost_rating
   has imdb_id
   has package_id
-  has actors('DISTINCT actors.`actors_id`'),         :as => :actors_id, :type => :integer, :multi => true
-  has categories('DISTINCT categories.categories_id'), :as => :category_id, :type => :integer, :multi => true
+  has actors('actors.`actors_id`'),         :as => :actors_id, :type => :integer, :multi => true
+  has categories('categories.categories_id'), :as => :category_id, :type => :integer, :multi => true
   has director(:directors_id),    :as => :director_id
   has studio(:studio_id),         :as => :studio_id
   
   has 'cast((cast((rating_users/rating_count)*2 AS SIGNED)/2) as decimal(2,1))', :type => :float, :as => :rating
-  has streaming_products_nl('DISTINCT streaming_products.`imdb_id`'), :as => :streaming_imdb_id, :type => :integer, :multi => true
-  has streaming_products_nl('DISTINCT streaming_products.`language_id`'), :as => :language_ids, :type => :integer, :multi => true
-  has streaming_products_nl('DISTINCT streaming_products.`subtitle_id`'), :as => :subtitle_ids, :type => :integer, :multi => true
+  has streaming_products_nl('streaming_products.`imdb_id`'), :as => :streaming_imdb_id, :type => :integer, :multi => true
+  has streaming_products_nl('streaming_products.`language_id`'), :as => :language_ids, :type => :integer, :multi => true
+  has streaming_products_nl('streaming_products.`subtitle_id`'), :as => :subtitle_ids, :type => :integer, :multi => true
   has "ifnull(concat('2',replace(if(min(vod_online_nls_products.expire_at) > date(now()),min(vod_online_nls_products.available_from),null),'-','')),ifnull(concat('2',replace(min(vod_online_nls_products.available_backcatalogue_from), '-','')), ifnull(concat('1',replace(if(min(streaming_products.expire_at) > date(now()),min(streaming_products.available_from),null), '-','')),concat('1',replace(min(streaming_products.available_backcatalogue_from), '-','')))))", :type => :integer, :as => :streaming_available_at_order
   has "ifnull(if(min(vod_online_nls_products.expire_at) > date(now()),min(vod_online_nls_products.available_from),null),ifnull(min(vod_online_nls_products.available_backcatalogue_from), ifnull(if(min(streaming_products.expire_at) > date(now()),min(streaming_products.available_from),null),min(streaming_products.available_backcatalogue_from))))", :type => :timestamp, :as => :streaming_available_at
-  has "if(vod_online_nls_products.expire_at < now(), vod_online_nls_products.expire_at, vod_online_nls_products.expire_backcatalogue_at)", :type => :timestamp, :as => :streaming_expire_at
+  has "if((vod_online_nls_products.expire_at < now(), vod_online_nls_products.expire_at, vod_online_nls_products.expire_backcatalogue_at))", :type => :timestamp, :as => :streaming_expire_at
   
-  has vod_online_nl('DISTINCT vod_online_nls_products.`imdb_id`'), :as => :imdb_id_online, :type => :integer, :multi => true
-  has vod_online_nl('DISTINCT vod_online_nls_products.`language_id`'), :as => :online_language_ids, :type => :integer, :multi => true
-  has vod_online_nl('DISTINCT vod_online_nls_products.`subtitle_id`'), :as => :online_subtitle_ids, :type => :integer, :multi => true
+  has vod_online_nl('vod_online_nls_products.`imdb_id`'), :as => :imdb_id_online, :type => :integer, :multi => true
+  has vod_online_nl('vod_online_nls_products.`language_id`'), :as => :online_language_ids, :type => :integer, :multi => true
+  has vod_online_nl('vod_online_nls_products.`subtitle_id`'), :as => :online_subtitle_ids, :type => :integer, :multi => true
   
   has "(select count(*) c from tokens where tokens.imdb_id = products.imdb_id and (datediff(now(),created_at) < 40))", :type => :integer, :as => :count_tokens
   has "(select start_on svod_start from products p left join svod_dates sd on sd.imdb_id = p.imdb_id and (start_on >= date(now()) or end_on >= date(now())) where p.imdb_id = products.imdb_id order by sd.start_on limit 1)", :as => :svod_start, :type => :timestamp
