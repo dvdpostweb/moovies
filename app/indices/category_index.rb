@@ -1,5 +1,5 @@
 ThinkingSphinx::Index.define :category, :with => :active_record do
-  indexes descriptions('DISTINCT categories_name'), :as => :name, :sortage => true, :type => :string, :multi => true
+  indexes descriptions('categories_name'), :as => :name, :sortage => true, :type => :string, :multi => true
   has "if(active = 'YES', 1,0)", :as => :active, :type => :integer
   has parent_id
   has "CRC32(categories_type)", :as => :type, :type => :integer
