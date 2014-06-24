@@ -5,6 +5,7 @@ class PromotionsController < ApplicationController
       @checked = true
       @checked_partners = false
     elsif @promo && @promo.canva_id == 8
+      @checked = true
       streaming_code = StreamingCode.where('name like ?', "#{@promo.params[:code]}%").email.available.order('rand()').limit(1)
       @internal_code = streaming_code.first.name
       @meta_image = @promo.params[:image]
