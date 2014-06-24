@@ -36,11 +36,7 @@ class Token < ActiveRecord::Base
     if code
       streaming_code = StreamingCode.by_name(code).first
       StreamingCode.by_name(code).first.update_attribute(:used_at, Time.now.localtime) if streaming_code.used_at.nil?
-      if streaming_code && streaming_code.name.include?('EXP')
-        token = Token.find(16703)
-      else
-        token = Token.find(16703)
-      end
+      token = Token.find(19959)
       return {:token => token, :error => nil}
     else
       begin

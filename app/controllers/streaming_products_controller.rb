@@ -2,6 +2,7 @@ class StreamingProductsController < ApplicationController
   def show
     if params[:streaming_code]
       @code = StreamingCode.by_name(params[:streaming_code]).available.first
+      @discount_top = Discount.find(195)
     end
     if Rails.env != 'pre_production' 
       @product = Product.both_available.find_by_imdb_id(params[:id])
