@@ -29,7 +29,7 @@ class PromotionsController < ApplicationController
       else
         render :show
       end
-    elsif @promo && @promo.canva_id == 3
+    elsif @promo && (@promo.canva_id == 3 || @promo.canva_id)
       @error = ''
       if !/\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/.match(params[:email])
         @error += "#{t('promotions.create.wrong_email')}<br />"
@@ -38,10 +38,6 @@ class PromotionsController < ApplicationController
         @error += t('promotions.create.wrong_code')
       end
       if @error == ''
-        options = {
-          "\\$\\$\\$link\\$\\$\\$" => streaming_product_url(:id => 1376451, :email => params[:email], :streaming_code => params[:streaming_code])
-        }
-        view_context.send_message_public(621, options, I18n.locale, params[:email])
         StreamingCode.by_name(params[:streaming_code]).first.update_attribute(:email, params[:email])
         marketing = params[:marketing] || 0
         marketing_partners = params[:marketing_partners] || 0
@@ -50,6 +46,7 @@ class PromotionsController < ApplicationController
         else
           Prospect.create(:email => params[:email], :newsletters => marketing, :newsletters_partners => marketing_partners, :locale_id => Moovies.customer_languages[I18n.locale])
         end
+        redirect_to streaming_product_path(:id => 1645155, :email => params[:email], :streaming_code => params[:streaming_code])
       else
         render :show
       end
