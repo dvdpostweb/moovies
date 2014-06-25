@@ -39,7 +39,7 @@ class PromotionsController < ApplicationController
         @error += t('promotions.create.wrong_code')
       end
       if @error == ''
-        if @streaming_code.mail_id > 0
+        if !@streaming_code.mail_id.nil?
           options = {
             "\\$\\$\\$link\\$\\$\\$" => streaming_product_url(:id => 1376451, :email => params[:email], :streaming_code => params[:streaming_code])
           }

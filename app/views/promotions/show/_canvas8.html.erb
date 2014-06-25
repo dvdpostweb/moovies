@@ -43,8 +43,10 @@
       <span><%= t2('.title_promo', @promo.params[:key]).html_safe %></span></h1>
       <div id="promo_form">
       <% if @error == '' %>
+       <div class="explain_promo">
         <%= t('.gratz').html_safe %>
-        <%= link_to 'lien du film', streaming_product_path(:id => 1645155, :email => params[:email], :streaming_code => params[:streaming_code]) if @streaming_code.mail_id.nil? %>
+        <%= link_to 'lien du film', streaming_product_path(:id => 1645155, :email => params[:email], :streaming_code => params[:streaming_code]), :class => 'btn_watch' if @streaming_code.mail_id.nil? %>
+      </div>
       <% else %>
         <%= form_tag promotion_canva_path(:id => params[:id]), :id => 'form_step' do %>
      

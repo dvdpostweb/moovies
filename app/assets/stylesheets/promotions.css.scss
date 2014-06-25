@@ -1356,3 +1356,47 @@ background:url(image_path('promotions/googleplus.gif'));
     left: 220px;
     position: relative;
 }
+
+
+.canvas8 #promo_content #promo_form .explain_promo {
+padding-left:20px;
+padding-right:20px;
+  text-align: justify;
+}
+
+
+.canvas8 #promo_content #promo_form .explain_promo a {
+color:#98d321;
+font-weight: bold;
+
+}
+
+
+
+.canvas8 #promo_content #promo_form .explain_promo .btn_watch {
+background: #f8b500; /* Old browsers */
+background: -moz-linear-gradient(top,  #f8b500 1%, #ef8b00 99%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#f8b500), color-stop(99%,#ef8b00)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #f8b500 1%,#ef8b00 99%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #f8b500 1%,#ef8b00 99%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #f8b500 1%,#ef8b00 99%); /* IE10+ */
+background: linear-gradient(to bottom,  #f8b500 1%,#ef8b00 99%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8b500', endColorstr='#ef8b00',GradientType=0 ); /* IE6-9 */
+
+ border: 1px solid #ffb503;
+border-radius: 4px 4px 4px 4px;
+box-shadow: 0 1px 1px rgba(255, 255, 255, 0.8) inset;
+color: white;
+display: inline-block;
+font-size: 25px;
+height: 29px;
+line-height: 20px;
+margin-left: 100px;
+margin-top: 20px;
+padding: 7px 0 0;
+text-align: center;
+text-shadow: 0 -1px 0 #D83C14;
+width: 179px;
+text-decoration:none;
+
+}
