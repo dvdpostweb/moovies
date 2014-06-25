@@ -6,6 +6,7 @@ class PromotionsController < ApplicationController
       @checked_partners = false
     elsif @promo && @promo.canva_id == 8
       @checked = true
+      @checked_partners = true
       streaming_code = StreamingCode.where('name like ?', "#{@promo.params[:code]}%").email.available.order('rand()').limit(1)
       @internal_code = streaming_code.first.name
       @meta_image = @promo.params[:image]
@@ -39,7 +40,7 @@ class PromotionsController < ApplicationController
         @error += t('promotions.create.wrong_code')
       end
       if @error == ''
-        if @streaming_code.mail_id > 0
+        if !@streaming_code.mail_id.nil?
           options = {
             "\\$\\$\\$link\\$\\$\\$" => streaming_product_url(:id => 1376451, :email => params[:email], :streaming_code => params[:streaming_code])
           }
