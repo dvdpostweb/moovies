@@ -10,7 +10,7 @@
       <div id="votes-wrap">
         <div id="votes">
 
-          <div class="stars" id="rating-stars-<%= @product.to_param %>" product_id ="<%= @product.to_param %>">
+          <div class="stars" id="rating-stars-<%= @product.to_param %>" product_id ="<%= @product.to_param %>" itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">
             <%= render :partial => 'products/rating', :locals => {:product => @product, :background => @rating_color, :size => :long, :source => @source, :response_id => @response_id} %>
           </div>
           <span class="osc"><%= "(#{@product.rating_count} #{t('.count')})".html_safe %></span>
