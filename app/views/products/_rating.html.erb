@@ -1,1 +1,3 @@
 <%= rating_image_links(product, background, (size rescue nil), (replace rescue nil), (recommendation rescue nil), (response_id rescue nil), (source rescue nil)).html_safe %>
+<span class="note" itemprop="ratingValue" content="<%= product.rating[:rating%>">
+<meta itemprop="bestRating" content="5">

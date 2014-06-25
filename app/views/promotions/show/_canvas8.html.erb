@@ -46,7 +46,7 @@
       <div class="explain_promo">
         <% if @streaming_code.mail_id.nil? %>
           <%= t('.gratz_without_verification').html_safe %>
-          <%= link_to 'lien du film', streaming_product_path(:id => 1645155, :email => params[:email], :streaming_code => params[:streaming_code]), :class => 'btn_watch' %>
+          <%= link_to(t('.movie_link'), streaming_product_path(:id => 1645155, :email => params[:email], :streaming_code => params[:streaming_code]), :class => 'btn_watch') %>
         <% else %>
           <%= t('.gratz').html_safe %>
         <% end %>
