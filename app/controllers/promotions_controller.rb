@@ -42,7 +42,7 @@ class PromotionsController < ApplicationController
       if @error == ''
         if !@streaming_code.mail_id.nil?
           options = {
-            "\\$\\$\\$link\\$\\$\\$" => streaming_product_url(:id => 1376451, :email => params[:email], :streaming_code => params[:streaming_code])
+            "\\$\\$\\$link\\$\\$\\$" => streaming_product_url(:id => 1645155, :email => params[:email], :streaming_code => params[:streaming_code])
           }
           view_context.send_message_public(@streaming_code.mail_id, options, I18n.locale, params[:email])
         end
