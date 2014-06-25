@@ -2,18 +2,18 @@
   <div id="maincontent">
     <div class="ttl-wrap">
       <div class="ttl osc">
-        <h2><%= "#{@product_title} (#{@product.year})" %></h2>
+        <h2><%= "#{@product_title} (#{@product.year})" %><meta itemprop="name" content="<%= @product_title %>" /></h2>
         
-        <h3><%= @product.categories.active(params[:kind]).collect{|category| link_to category.name, category_products_path(:category_id => category)}.join(', ').html_safe %></h3>
+        <h3><%= @product.categories.active(params[:kind]).collect{|category| "<span itemprop='genre'>#{link_to(category.name, category_products_path(:category_id => category))}</span>"}.join(', ').html_safe %></h3>
       </div>
      
       <div id="votes-wrap">
         <div id="votes">
 
-          <div class="stars" id="rating-stars-<%= @product.to_param %>" product_id ="<%= @product.to_param %>">
+          <div class="stars" id="rating-stars-<%= @product.to_param %>" product_id ="<%= @product.to_param %>" itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">
             <%= render :partial => 'products/rating', :locals => {:product => @product, :background => @rating_color, :size => :long, :source => @source, :response_id => @response_id} %>
           </div>
-          <span class="osc"><%= "(#{@product.rating_count} #{t('.count')})".html_safe %></span>
+          <span class="osc" data-prop="ratingCount" itemprop="ratingCount"><%= "(#{@product.rating_count} #{t('.count')})".html_safe %></span>
 
           <div id="uninterested"><%= render :partial => 'products/show/seen_uninterested', :locals => {:product => @product, :source => @source, :response_id => @response_id} if current_customer %></div>
         </div>
@@ -24,7 +24,7 @@
       <div id="film-wrap">
       <div id="film-img-wrap">
         <%= "<span class='hd'></span>".html_safe if @product.hd?(session[:country_id]) %>
-        <%= product_image_tag @product_image, :width => 160, :alt => "#{@product_title} (#{@product.year})" %>
+        <%= product_image_tag @product_image, :width => 160, :alt => "#{@product_title} (#{@product.year})", :itemprop => "image" %>
         <%= content_tag(:span, '', :class => 'new') if @product.is_new? %>
       </div>
     </div>
@@ -60,7 +60,9 @@
         </div>
         <div id="duration">
           <h3><%= t '.duration' %></h3>
-          <%= "#{@product.runtime} #{t '.minutes'}" %>
+          <span itemprop="duration" content="<%= prop_duration(@product.runtime) %>">
+            <%= "#{@product.runtime} #{t '.minutes'}" %>
+          </span>
         </div>
         <div id="picture">
           <h3><%= t '.picture' %></h3>
@@ -81,7 +83,7 @@
       <h3>
         <%= t '.synopsis' %>
       </h3>
-      <p><%= @product_description.text.to_s.html_safe %></p>
+      <p itemprop="description"><%= @product_description.text.to_s.html_safe %></p>
       <div id="btns-wrap" class="osc">
         <% if @trailer %>
         <%= link_to(t('.trailer'), product_trailer_path(:product_id => @product.to_param, :source => @source, :response_id => @response_id), {:class => 'trailer', :id => 'trailer', :target => :_blank}) %>
