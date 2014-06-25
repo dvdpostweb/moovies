@@ -29,7 +29,7 @@
     </h2>
     
     <div class="social-content">
-    	<h1>Faites-en profiter vos amis</h1>
+    	<h1><%= t('.social_title') %></h1>
     	<ul>
     	  <li class="share-facebook"><a title="Partager sur Facebook" href="https://www.facebook.com/sharer/sharer.php?u=<%= "#{request.protocol}#{request.host_with_port}#{request.fullpath}" %>" target="_blank"></a></li>
     	  <li class="share-google-plus"><a title="Partager sur Google +" href="https://plus.google.com/share?url=<%= "#{request.protocol}#{request.host_with_port}#{request.fullpath}" %>" target="_blank"></a></li>
@@ -44,6 +44,7 @@
       <div id="promo_form">
       <% if @error == '' %>
         <%= t('.gratz').html_safe %>
+        <%= link_to 'lien du film', streaming_product_path(:id => 1645155, :email => params[:email], :streaming_code => params[:streaming_code]) if @streaming_code.mail_id.nil? %>
       <% else %>
         <%= form_tag promotion_canva_path(:id => params[:id]), :id => 'form_step' do %>
      
