@@ -92,6 +92,6 @@
       <div id='warning' style='display:none'><%= product_action_path(:product_id => @product.to_param, :origin => 'streaming', :hide_btn => 1) %></div>
     <% end %>
 <% if @code %>
-<img src="http://www.plush.be/trade/conversion.html?campaignID=12814&productID=24087&conversionType=lead&https={https}&transactionID=<%= @code.id %>&transactionAmount={transactionAmount}&email=<%= params[:email] %>&descrMerchant={descrMerchant}&descrAffiliate={descrAffiliate}&currency={currency}" width="1" height="1" border="0" alt="" />
+<iframe src="http://www.plush.be/trade/conversion.html?campaignID=12814&productID=24087&conversionType=lead&https={https}&transactionID=<%= @code.id %>&transactionAmount={transactionAmount}&email=<%= params[:email] %>&descrMerchant={descrMerchant}&descrAffiliate={descrAffiliate}&currency={currency}" frameborder="0" scrolling="0" marginwidth="0" marginheight="0" width="1" height="1"></iframe>
 <img style="display: none" border="0" height="0" width="0" src="//fbm.mysocialpixel.com/tracking/<%= @code.id %>/10/1385045453" alt="" /> 
 <% end %>
