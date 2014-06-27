@@ -4,7 +4,7 @@
     <% class_name = "watch action_btn" %>
   <% else %>
     <% title = raw t('.watch_tvod', :price => (current_customer && current_customer.tvod_only?) || !current_customer && local_assigns.has_key?(:max_price)  ? product.get_vod_online(session[:country_id]).first.tvod_price : product.get_vod_online(session[:country_id]).first.ppv_price) %>
-    <% class_name = "alacarte action_btn" %>
+    <% class_name = popup == true ? "alacarte action_btn popup" : 'alacarte action_btn' %>
   <% end %>
   <% if current_customer && current_customer.tvod_only? && !product.svod_dates_online.first && popup == true %>  
     <span class="infotvod"></span>
