@@ -88,7 +88,11 @@ class PromotionsController < ApplicationController
               customer.save(:validate => false)
               customer.abo_history(@discount && @discount.goto_step.to_i == 100 ? 6 : 35, customer.abo_type_id)
               DiscountUse.create(:discount_code_id => @discount.id, :customer_id => customer.to_param, :discount_use_date => Time.now.localtime) if @discount
-              redirect_to step_path(:id => 'step2')
+              if customer.step == 100
+                redirect_to root_localize_path
+              else
+                redirect_to step_path(:id => 'step2')
+              end  
             else
               flash[:alert] = t('session.error_already_customer')
               render :show
