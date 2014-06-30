@@ -1,36 +1,36 @@
 module ApplicationHelper
 
   def send_message(mail_id, options, locale, customer_default = nil)
-  #  customer = customer_default ? customer_default : current_customer
-  #  mail_object = Email.by_language(locale).find(mail_id)
-  #  recipient = customer
-  #  if 1==1 || mail_object.force_copy
-  #    mail_history= MailHistory.create(:date => Time.now().to_s(:db), :customers_id => customer.to_param, :mail_messages_id => mail_id, :language_id => Moovies.customer_languages[locale], :customers_email_address=> customer.email)
-  #    options["\\$\\$\\$mail_messages_sent_history_id\\$\\$\\$"] = mail_history.to_param
-  #  else
-  #    options["\\$\\$\\$mail_messages_sent_history_id\\$\\$\\$"] = 0
-  #  end
-  #    list = ""
-  #    options.each {|k, v|  list << "#{k.to_s.tr("\\","")}:::#{v};;;"}
-  #    #to do 
-  #    if 1 == 1 || mail_object.force_copy
-  #      email_data_replace(mail_object.subject, options)
-  #      subject = email_data_replace(mail_object.subject, options)
-  #      message = email_data_replace(mail_object.body, options)
-  #      mail_history.update_attributes(:lstvariable => list)
-  #      Emailer.welcome_email(recipient, subject, message, Rails.env == 'development' ? true : false).deliver
-  #      #ses = AWS::SES::Base.new(:access_key_id     => 'AKIAICQS7KIVA5N62SKQ', :secret_access_key => 'Au/ZyAC8yBAZGGSPdGDNEz00v2biQZPjUnxpd+qLl3Xn', :server => "email-smtp.eu-west-1.amazonaws.com")
-  #      #Rails.logger.debug { "@@@#{ses.inspect}" }
-  #      #ses.send_email(:to        => recipient.email, :source    => '"info@plush.be" <info@plush.be>', :subject   => subject, :text_body => message)
-  #    end
-  #    @ticket = Ticket.new(:customer_id => customer.to_param, :category_ticket_id => mail_object.category_id)
-  #    @ticket.save
-  #    if mail_history
-  #      @message = MessageTicket.new(:ticket => @ticket, :mail_id => mail_id, :data => list, :user_id => 55, :mail_history_id => mail_history.to_param)
-  #    else
-  #      @message = MessageTicket.new(:ticket => @ticket, :mail_id => mail_id, :data => list, :user_id => 55)
-  #    end
-  #    @message.save
+    customer = customer_default ? customer_default : current_customer
+    mail_object = Email.by_language(locale).find(mail_id)
+    recipient = customer
+    if 1==1 || mail_object.force_copy
+      mail_history= MailHistory.create(:date => Time.now().to_s(:db), :customers_id => customer.to_param, :mail_messages_id => mail_id, :language_id => Moovies.customer_languages[locale], :customers_email_address=> customer.email)
+      options["\\$\\$\\$mail_messages_sent_history_id\\$\\$\\$"] = mail_history.to_param
+    else
+      options["\\$\\$\\$mail_messages_sent_history_id\\$\\$\\$"] = 0
+    end
+      list = ""
+      options.each {|k, v|  list << "#{k.to_s.tr("\\","")}:::#{v};;;"}
+      #to do 
+      if 1 == 1 || mail_object.force_copy
+        email_data_replace(mail_object.subject, options)
+        subject = email_data_replace(mail_object.subject, options)
+        message = email_data_replace(mail_object.body, options)
+        mail_history.update_attributes(:lstvariable => list)
+        Emailer.welcome_email(recipient, subject, message, Rails.env == 'development' ? true : false).deliver
+        #ses = AWS::SES::Base.new(:access_key_id     => 'AKIAICQS7KIVA5N62SKQ', :secret_access_key => 'Au/ZyAC8yBAZGGSPdGDNEz00v2biQZPjUnxpd+qLl3Xn', :server => "email-smtp.eu-west-1.amazonaws.com")
+        #Rails.logger.debug { "@@@#{ses.inspect}" }
+        #ses.send_email(:to        => recipient.email, :source    => '"info@plush.be" <info@plush.be>', :subject   => subject, :text_body => message)
+      end
+      @ticket = Ticket.new(:customer_id => customer.to_param, :category_ticket_id => mail_object.category_id)
+      @ticket.save
+      if mail_history
+        @message = MessageTicket.new(:ticket => @ticket, :mail_id => mail_id, :data => list, :user_id => 55, :mail_history_id => mail_history.to_param)
+      else
+        @message = MessageTicket.new(:ticket => @ticket, :mail_id => mail_id, :data => list, :user_id => 55)
+      end
+      @message.save
   end
 
   def send_message_public(mail_id, options, locale, email)
