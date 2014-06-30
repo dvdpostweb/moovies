@@ -48,8 +48,12 @@ class Token < ActiveRecord::Base
       if token_string
         params = {:imdb_id => imdb_id, :token => token_string, :source_id => source, :country => file.country}
         params = params.merge(:ppv_price => file.ppv_price, :kind => 'PPV', :is_ppv => true) if !file.svod?
-        params = params.merge(:kind => 'PREPAID') if file.prepaid?
-        
+        if file.prepaid?
+          params = params.merge(:kind => 'PREPAID')
+        else customer.tvod_free > 0 && !file.svod?
+          customer.update_column(:tvod_free, customer.tvod_free - 1)
+          params = params.merge(:kind => 'FREE')
+        end
         params = params.merge(:customer_id => customer.id) if customer
         params = params.merge(:code => code) if code
           
@@ -139,7 +143,6 @@ class Token < ActiveRecord::Base
   
   def self.notify_error_token(customer_id, error)
     begin
-      Rails.logger.debug { "@@@errror #{customer_id} #{error}" }
       Airbrake.notify(:error_message => "customer #{customer_id}  #{error}", :backtrace => $@, :environment_name => ENV['RAILS_ENV'])
     rescue => e
       logger.error("customer: #{to_param} #{error}")

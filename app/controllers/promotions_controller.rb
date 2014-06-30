@@ -79,6 +79,7 @@ class PromotionsController < ApplicationController
             if current_customer.abo_active == 0 || (current_customer.abo_active == 1 && current_customer.tvod_only?)
               customer = current_customer
               customer.step = @discount.nil? ? 31 : @discount.goto_step
+              customer.tvod_free = @discount.tvod_free if @discount && @discount.tvod_free && @discount.tvod_free > 0
               customer.code = code
               customer.abo_active = 1 if @discount && @discount.goto_step.to_i == 100
               if customer.tvod_only?
