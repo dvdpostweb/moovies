@@ -9,12 +9,16 @@
 				  <% if @product.svod_dates_online.first || token_valid %>
 						window.location.href = '<%= streaming_product_path(:id => @product.imdb_id) %>'
 					<% else %>
-						<% if current_customer.tvod_only? %>
-						  	jQuery.facebox('<%= escape_javascript(render(:partial => 'products/tvod_only', :locals => {:product => @product, :source => @source})) %>')
-						<% elsif current_customer.payable? %>
-							jQuery.facebox('<%= escape_javascript(render(:partial => 'products/tvod_alert', :locals => {:product => @product})) %>')
+						<% if current_customer.tvod_free > 0 %>
+							window.location.href = '<%= streaming_product_path(:id => @product.imdb_id) %>'
 						<% else %>
-							jQuery.facebox('<%= escape_javascript(render(:partial => 'products/no_credit_card')) %>')
+							<% if current_customer.tvod_only? %>
+							  	jQuery.facebox('<%= escape_javascript(render(:partial => 'products/tvod_only', :locals => {:product => @product, :source => @source})) %>')
+							<% elsif current_customer.payable? %>
+								jQuery.facebox('<%= escape_javascript(render(:partial => 'products/tvod_alert', :locals => {:product => @product})) %>')
+							<% else %>
+								jQuery.facebox('<%= escape_javascript(render(:partial => 'products/no_credit_card')) %>')
+							<% end %>
 						<% end %>
 					<% end %>
 		    <% else %>
