@@ -5,8 +5,8 @@ class Category < ActiveRecord::Base
   belongs_to :parent, :class_name => 'Category', :foreign_key => :parent_id
   has_many :descriptions, :class_name => 'CategoryDescription', :foreign_key => :categories_id
   has_many :descriptions_fr, :class_name => 'CategoryDescription', :foreign_key => :categories_id, :conditions => {:language_id => 1}
-  has_many :descriptions_nl, :class_name => 'CategoryDescription', :foreign_key => :categories_id, :conditions => {:language_id => 1}
-  has_many :descriptions_en, :class_name => 'CategoryDescription', :foreign_key => :categories_id, :conditions => {:language_id => 1}
+  has_many :descriptions_nl, :class_name => 'CategoryDescription', :foreign_key => :categories_id, :conditions => {:language_id => 2}
+  has_many :descriptions_en, :class_name => 'CategoryDescription', :foreign_key => :categories_id, :conditions => {:language_id => 3}
   has_and_belongs_to_many :products, :join_table => :products_to_categories, :foreign_key => :categories_id, :association_foreign_key => :products_id
   has_many :children, :class_name => 'Category', :foreign_key => :parent_id
 
