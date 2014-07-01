@@ -27,7 +27,7 @@ class StreamingProductsController < ApplicationController
       @streaming_not_prefered = nil
     end
     @token_valid = @token.nil? ? false : @token.validate?(request.remote_ip)
-    if current_customer && current_customer.tvod_only? && !(@token_valid == true || @streaming.prepaid_all?)
+    if current_customer && current_customer.tvod_only? && !(@token_valid == true || @streaming.prepaid_all? || current_customer.tvod_free > 0)
       flash[:error] = t('streaming_products.tvod_no_token')
       redirect_to root_localize_path and return
     end
@@ -78,7 +78,7 @@ class StreamingProductsController < ApplicationController
       else
         if view_context.streaming_access?
           streaming_version = StreamingProduct.find_by_id(params[:streaming_product_id])
-          if @code || ((!current_customer.suspended? && !Token.dvdpost_ip?(request.remote_ip) && !current_customer.super_user? && !(/^192(.*)/.match(request.remote_ip)) && current_customer.actived? && (current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s) || @streaming.prepaid_all?) && (@product.svod? || (!@product.svod? && current_customer.payable?))))
+          if @code || ((!current_customer.suspended? && !Token.dvdpost_ip?(request.remote_ip) && !current_customer.super_user? && !(/^192(.*)/.match(request.remote_ip)) && current_customer.actived? && (current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s) || @streaming.prepaid_all?) && (@product.svod? || (!@product.svod? && current_customer.payable?) || current_customer.tvod_free > 0)))
           #if 1==1
             status = @token.nil? ? nil : @token.current_status(request.remote_ip)
             streaming_version = StreamingProduct.find_by_id(params[:streaming_product_id])
@@ -191,11 +191,9 @@ class StreamingProductsController < ApplicationController
           if @token
             current_customer.remove_product_from_wishlist(params[:id], request.remote_ip) if current_customer
             StreamingViewingHistory.create(:streaming_product_id => params[:streaming_product_id], :token_id => @token.to_param, :ip => request.remote_ip)
-            Customer.send_evidence('PlayStart', @product.to_param, current_customer, request, {:responseid => params[:response_id], :segment1 => params[:source], :formFactor => view_context.format_text(@browser) , :rule => params[:source]}) if current_customer
             render :partial => 'streaming_products/player', :locals => {:token => @token, :filename => streaming_version.filename, :source => streaming_version.source, :streaming => streaming_version, :browser => @browser }, :layout => false
           elsif Token.dvdpost_ip?(request.remote_ip) || (current_customer && current_customer.super_user?) || (/^192(.*)/.match(request.remote_ip))
             render :partial => 'streaming_products/player', :locals => {:token => @token, :filename => streaming_version.filename, :source => streaming_version.source, :streaming => streaming_version, :browser => @browser }, :layout => false
-            Customer.send_evidence('PlayStart', @product.to_param, current_customer, request, {:responseid => params[:response_id], :segment1 => params[:source], :formFactor => view_context.format_text(@browser) , :rule => params[:source]}) if current_customer
           else
             render :partial => 'streaming_products/no_player', :locals => {:token => @token, :error => error}, :layout => false
           end
