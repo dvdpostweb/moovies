@@ -56,7 +56,7 @@
       <% if !current_customer && (params[:controller] != 'home' && params[:controller] != 'customers/registrations' && params[:controller] != 'steps' && params[:page_name] != 'abo') and !(params[:controller] == 'promotions' and params[:id] == 'smarttv') and !(params[:controller] == 'customers' and params[:action] == 'reactive') %>
       <div id="subscribe-wrap">
         <% if params[:kind] == :adult %>
-        <%= link_to image_tag("#{I18n.locale}/banner_promo_hp#{@code ? "_#{@code.activation_group_id}" : ''}_adult.jpg", :size => '942x188', :alt => t(products_alt_banner)), @code ? promotion_path(:id => :mobistar2) : new_customer_registration_path(:code => get_code(@discount_top.name)), :target => "_blank" %>
+        <%= link_to image_tag("#{I18n.locale}/banner_promo_hp_tvod#{@code ? "_#{@code.activation_group_id}" : ''}_adult.jpg", :size => '942x188', :alt => t(products_alt_banner)), @code ? promotion_path(:id => :mobistar2) : new_customer_registration_path(:code => get_code(@discount_top.name)), :target => "_blank" %>
         <% else %>
         <%= link_to image_tag("#{I18n.locale}/banner-promo-hp_tvod#{@code ? "_#{@code.activation_group_id}" : ''}.jpg", :size => '942x188', :alt => t(products_alt_banner)), new_customer_registration_path(:code => get_code(@discount_top.name)), :target => "_blank" %>
         <% end %>

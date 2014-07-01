@@ -30,11 +30,6 @@
     <iframe src="/trade/conversion.html?campaignID=14220&productID=<%= I18n.locale == :fr ? 21137 : 21136 %>&conversionType=lead&https=0&transactionID=<%= current_customer.id %>&transactionAmount=0&email=<%= current_customer.email %>&descrMerchant=plush&descrAffiliate=plush" frameborder="0" scrolling="0" marginwidth="0" marginheight="0" width="1" height="1"></iframe>
     <!-- tradetracker -->
   <% end %>
-  <% if I18n.locale != :nl %>
-    <img style="display: none" border="0" height="0" width="0" src="//fbm.mysocialpixel.com/tracking/<%= current_customer.id %>/10/1385045453" alt="" /> 
-  <% elsif %>
-    <img style="display: none" border="0" height="0" width="0" src="//fbm.mysocialpixel.com/tracking/<%= current_customer.id %>/10/1385045664" alt="" />
-  <% end %>
 <% end %>
 
 <!-- Google Code for Plush - Conversion Conversion Page svod -->
