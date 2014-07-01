@@ -11,7 +11,7 @@ class Customers::SessionsController < Devise::SessionsController
     if params[:code]
       customer = current_customer
       customer.step = @discount.nil? ? 31 : @discount.goto_step
-      @user.tvod_free = @discount.tvod_free if @discount && @discount.tvod_free && @discount.tvod_free > 0
+      customer.tvod_free = @discount.tvod_free if @discount && @discount.tvod_free && @discount.tvod_free > 0
       customer.abo_active = 1 if @discount && @discount.goto_step.to_i == 100
       if customer.tvod_only?
         customer.auto_stop = 0
