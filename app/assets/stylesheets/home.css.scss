@@ -455,7 +455,69 @@ line-height:40px;
   width:139px;
 }
 
+#movie-free {
+ padding: 0 20px;
+}
 
+#movie-free .movie{
+float:left;
+}
+
+#movie-free .text-explain {
+    background: url("http://www.dvdpost.be/images/plush/movie_free/bg_moviefree.jpg") no-repeat scroll 0 0 transparent;
+    float: right;
+    height: 196px;
+    padding: 20px 20px 0;
+    width: 539px;
+}
+ #movie-free .text-explain h1{
+ color:#ffffff;
+  font-size: 30px;
+    padding-left: 10px;
+ }
+ 
+ #movie-free .text-explain h1 span{
+  text-transform: uppercase;
+  }
+ 
+  #movie-free .text-explain h2{
+   color:#20400c;
+    font-size: 22px;
+     line-height: 24px;
+       padding-left: 10px;
+   }
+   
+    #movie-free .text-explain  a.filmgratuit {
+   background: #fa6818; /* Old browsers */
+   background: -moz-linear-gradient(top,  #fa6818 0%, #df3a14 100%); /* FF3.6+ */
+   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fa6818), color-stop(100%,#df3a14)); /* Chrome,Safari4+ */
+   background: -webkit-linear-gradient(top,  #fa6818 0%,#df3a14 100%); /* Chrome10+,Safari5.1+ */
+   background: -o-linear-gradient(top,  #fa6818 0%,#df3a14 100%); /* Opera 11.10+ */
+   background: -ms-linear-gradient(top,  #fa6818 0%,#df3a14 100%); /* IE10+ */
+   background: linear-gradient(to bottom,  #fa6818 0%,#df3a14 100%); /* W3C */
+   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fa6818', endColorstr='#df3a14',GradientType=0 ); /* IE6-9 */
+
+
+
+   border: 1px solid #D55023;
+   border-radius: 4px 4px 4px 4px;
+   box-shadow: 0 1px 1px rgba(255, 255, 255, 0.8) inset;
+   text-shadow: 0 -1px 0 #D83C14;
+       color: white;
+       display: block;
+       font-size: 22px;
+       font-weight: bold;
+       height: 48px;
+       line-height: 47px;
+       margin-right: 23px;
+       margin-top: 19px;
+       text-align: center;
+       text-shadow: 0 -1px 0 #d83c14;
+       text-transform: uppercase;
+       width: 223px;
+   }
+   
+   
 
 /*   ============   for mobile   ============   */
 
