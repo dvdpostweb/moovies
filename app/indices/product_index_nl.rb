@@ -17,7 +17,7 @@ ThinkingSphinx::Index.define :product, :with => :active_record, :name => 'produc
   has package_id
   has "case 
     when  products_status = -1 then 99
-    else products_status end", :type => :integer, :as => :products_status
+    else products_status end", :type => :integer, :as => :state
     has actors('actors.`actors_id`'),         :as => :actors_id, :type => :integer, :multi => true
   has categories('categories.categories_id'), :as => :category_id, :type => :integer, :multi => true
   has director(:directors_id),    :as => :director_id
