@@ -42,7 +42,7 @@ class PromotionsController < ApplicationController
       if @error == ''
         if !@streaming_code.mail_id.nil?
           options = {
-            "\\$\\$\\$link\\$\\$\\$" => streaming_product_url(:id => 1376451, :email => params[:email], :streaming_code => params[:streaming_code])
+            "\\$\\$\\$link\\$\\$\\$" => streaming_product_url(:id => 1645155, :email => params[:email], :streaming_code => params[:streaming_code])
           }
           view_context.send_message_public(@streaming_code.mail_id, options, I18n.locale, params[:email])
         end
@@ -79,6 +79,7 @@ class PromotionsController < ApplicationController
             if current_customer.abo_active == 0 || (current_customer.abo_active == 1 && current_customer.tvod_only?)
               customer = current_customer
               customer.step = @discount.nil? ? 31 : @discount.goto_step
+              customer.tvod_free = @discount.tvod_free if @discount && @discount.tvod_free && @discount.tvod_free > 0
               customer.code = code
               customer.abo_active = 1 if @discount && @discount.goto_step.to_i == 100
               if customer.tvod_only?
@@ -88,7 +89,11 @@ class PromotionsController < ApplicationController
               customer.save(:validate => false)
               customer.abo_history(@discount && @discount.goto_step.to_i == 100 ? 6 : 35, customer.abo_type_id)
               DiscountUse.create(:discount_code_id => @discount.id, :customer_id => customer.to_param, :discount_use_date => Time.now.localtime) if @discount
-              redirect_to step_path(:id => 'step2')
+              if customer.step == 100
+                redirect_to root_localize_path
+              else
+                redirect_to step_path(:id => 'step2')
+              end  
             else
               flash[:alert] = t('session.error_already_customer')
               render :show

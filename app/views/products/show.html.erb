@@ -7,10 +7,10 @@
         <h3><%= @product.categories.active(params[:kind]).collect{|category| "<span itemprop='genre'>#{link_to(category.name, category_products_path(:category_id => category))}</span>"}.join(', ').html_safe %></h3>
       </div>
      
-      <div id="votes-wrap">
+      <div id="votes-wrap" itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">
         <div id="votes">
 
-          <div class="stars" id="rating-stars-<%= @product.to_param %>" product_id ="<%= @product.to_param %>" itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">
+          <div class="stars" id="rating-stars-<%= @product.to_param %>" product_id ="<%= @product.to_param %>" >
             <%= render :partial => 'products/rating', :locals => {:product => @product, :background => @rating_color, :size => :long, :source => @source, :response_id => @response_id} %>
           </div>
           <span class="osc" data-prop="ratingCount" itemprop="ratingCount"><%= "(#{@product.rating_count} #{t('.count')})".html_safe %></span>

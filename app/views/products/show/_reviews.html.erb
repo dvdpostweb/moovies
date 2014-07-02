@@ -1,4 +1,4 @@
-<div class="numbers" data-prop="reviewCount" itemprop="reviewCount">
+<div class="numbers" data-prop="reviewCount">
   <%= link_to t('.new_review'), new_product_review_path(:product_id => product.to_param, :source => source, :response_id => response_id), :id => 'add_new_review', :class => :facebox if current_customer %>
   <%= "#{reviews_count} #{reviews_count == 1 ? t('.review') : t('.reviews')}" %>
 </div>

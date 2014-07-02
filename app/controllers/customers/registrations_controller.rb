@@ -42,6 +42,7 @@ class Customers::RegistrationsController < Devise::RegistrationsController
               cookies[:code] = { value: params[:customer][:code], expires: 15.days.from_now }
               @user.step = @discount.nil? ? 31 : @discount.goto_step
               @user.code = params[:customer][:code]
+              @user.tvod_free = @discount.tvod_free if @discount.tvod_free && @discount.tvod_free > 0
               @user.abo_active = 1 if @discount && @discount.goto_step.to_i == 100
               if @user.tvod_only?
                 @user.auto_stop = 0
@@ -52,7 +53,11 @@ class Customers::RegistrationsController < Devise::RegistrationsController
               DiscountUse.create(:discount_code_id => @discount.id, :customer_id => @user.to_param, :discount_use_date => Time.now.localtime) if @discount
               if @user.confirmed?
                 sign_in @user, :bypass => true
-                redirect_to step_path(:id => 'step2') and return
+                if @user.step == 100
+                  redirect_to root_localize_path and return
+                else
+                  redirect_to step_path(:id => 'step2') and return
+                end
               else
                 Devise::Mailer.confirmation_instructions(@user).deliver
                 redirect_to step_path(:id => 'confirm') and return
@@ -71,6 +76,7 @@ class Customers::RegistrationsController < Devise::RegistrationsController
     if @discount
       cookies[:code] = { value: params[:customer][:code], expires: 15.days.from_now }
       resource.step = @discount.goto_step
+      resource.tvod_free = @discount.tvod_free if @discount.tvod_free && @discount.tvod_free > 0
       resource.abo_active = 1 if @discount.goto_step.to_i == 100
     end
     
