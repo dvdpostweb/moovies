@@ -15,8 +15,10 @@ ThinkingSphinx::Index.define :product, :with => :active_record, :name => 'produc
   has products_rating,            :as => :dvdpost_rating
   has imdb_id
   has package_id
-  has products_status
-  has actors('actors.`actors_id`'),         :as => :actors_id, :type => :integer, :multi => true
+  has "case 
+    when  products_status = -1 then 99
+    else products_status end", :type => :integer, :as => :products_status
+    has actors('actors.`actors_id`'),         :as => :actors_id, :type => :integer, :multi => true
   has categories('categories.categories_id'), :as => :category_id, :type => :integer, :multi => true
   has director(:directors_id),    :as => :director_id
   has studio(:studio_id),         :as => :studio_id
