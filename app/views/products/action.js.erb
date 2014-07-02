@@ -5,17 +5,21 @@
 		    <% if (current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s) || (@streaming && @streaming.prepaid_all?)) %>
 					<% token = current_customer.get_token(@product.imdb_id) %>
 					<% token_valid = token.nil? ? false : token.validate?(request.remote_ip) %>
-				  <% if @product.svod_dates_online.first || token_valid %>
+				  <% if @product.svod? || token_valid %>
 				    <% if params[:origin] == 'products' %>
-						  window.location.href = '<%= streaming_product_path(:id => @product.imdb_id, :source => @source) %>' 
+						  window.location.href = '<%= streaming_product_path(:id => @product.imdb_id, :source => @source) %>'
 						<% end %>
-					<% else %>
-					  <% if current_customer.tvod_only? %>
-					  	jQuery.facebox('<%= escape_javascript(render(:partial => 'products/tvod_only', :locals => {:product => @product, :source => @source})) %>')
-						<% elsif current_customer.payable? %>
-							jQuery.facebox('<%= escape_javascript(render(:partial => 'products/tvod_alert', :locals => {:product => @product, :source => @source})) %>')
-						<% else %>
-							jQuery.facebox('<%= escape_javascript(render(:partial => 'products/no_credit_card')) %>')
+					<% else %>//tvod
+						<% if current_customer.tvod_free > 0 %>
+							window.location.href = '<%= streaming_product_path(:id => @product.imdb_id, :source => @source) %>'
+						<% else	%>
+						  <% if current_customer.tvod_only? %>
+						  	jQuery.facebox('<%= escape_javascript(render(:partial => 'products/tvod_only', :locals => {:product => @product, :source => @source})) %>')
+							<% elsif current_customer.payable? %>
+								jQuery.facebox('<%= escape_javascript(render(:partial => 'products/tvod_alert', :locals => {:product => @product, :source => @source})) %>')
+							<% else %>
+								jQuery.facebox('<%= escape_javascript(render(:partial => 'products/no_credit_card')) %>')
+							<% end %>
 						<% end %>
 					<% end %>
 		    <% else %>

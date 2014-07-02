@@ -877,7 +877,7 @@ background-image: url(image_path('button_streamingppv.gif'));
     width: 120px;
 }
 
-.normal.private .alacarte{
+.normal.private .alacarte.popup{
 background-image: url(image_path('button_streamingppv_infos.gif'));
  color: #FFFFFF;
     display: block;
@@ -892,7 +892,7 @@ background-image: url(image_path('button_streamingppv_infos.gif'));
 
 
 
-.adult.private .alacarte{
+.adult.private .alacarte.popup{
 background-image: url(image_path('button_streamingppv_adult_infos.gif'));
  color: #FFFFFF;
     display: block;
