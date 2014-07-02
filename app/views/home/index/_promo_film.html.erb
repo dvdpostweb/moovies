@@ -1,0 +1,13 @@
+<!-- movie Free-->
+<div id="movie-free">
+  <div class="movie"><a href="<%= promotion_path(:id => 'film-site')%>"><img src="http://www.dvdpost.be/images/plush/movie_free/129693.jpg"></a></div>
+  <div class="text-explain">
+    <h1><%= t('.promo_film_title').html_safe %></h1>
+    <h2><%= t('.promo_film_desc').html_safe %></h2>
+    <p align="right">
+      <%= link_to t('.promo_film_btn'), promotion_path(:id => 'film-site'), :class => 'filmgratuit osc btn' %>
+    </p>
+  </div>
+  <div class="clearfix"></div>
+</div>
+<!-- Services -->
