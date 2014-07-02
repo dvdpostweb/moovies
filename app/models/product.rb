@@ -122,7 +122,7 @@ class Product < ActiveRecord::Base
      sort
   end
   def self.filter_online(filters, options={}, exact=nil)
-    products = Product.by_kind(options[:kind])
+    products = Product.available.by_kind(options[:kind])
     products = products.exclude_products_id([exact.collect(&:products_id)]) if exact
     products = products.by_actor(options[:actor_id]) if options[:actor_id]
     #products = products.by_category(options[:category_id]) if options[:category_id]
@@ -153,7 +153,7 @@ class Product < ActiveRecord::Base
       id = options[:kind] == :normal ? 1 : 4
       options[:package] = Moovies.packages.invert[id]
     end
-    products = Product.by_kind(options[:kind])
+    products = Product.available.by_kind(options[:kind])
     products = products.exclude_products_id([exact.collect(&:products_id)]) if exact
     products = products.by_actor(options[:actor_id]) if options[:actor_id]
     products = products.by_category(options[:category_id]) if options[:category_id]
