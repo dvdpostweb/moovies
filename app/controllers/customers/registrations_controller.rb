@@ -44,7 +44,7 @@ class Customers::RegistrationsController < Devise::RegistrationsController
               @user.code = params[:customer][:code]
               @user.tvod_free = @discount.tvod_free if @discount.tvod_free && @discount.tvod_free > 0
               @user.abo_active = 1 if @discount && @discount.goto_step.to_i == 100
-              if @user.tvod_only?
+              if @discount.tvod_only?
                 @user.auto_stop = 0
                 @user.subscription_expiration_date = nil
               end
