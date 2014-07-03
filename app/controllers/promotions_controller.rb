@@ -82,7 +82,7 @@ class PromotionsController < ApplicationController
               customer.tvod_free = @discount.tvod_free if @discount && @discount.tvod_free && @discount.tvod_free > 0
               customer.code = code
               customer.abo_active = 1 if @discount && @discount.goto_step.to_i == 100
-              if customer.tvod_only?
+              if @discount.tvod_only?
                 customer.auto_stop = 0
                 customer.subscription_expiration_date = nil
               end

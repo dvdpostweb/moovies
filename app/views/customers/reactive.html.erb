@@ -18,7 +18,6 @@
               <%= f.label :password, t('promotions.show.canvas2.pass_label') %>:<br />
               <%= f.password_field :password, :class => 'inputs_promo_code', :size => '35', :maxlength => '40'%>
             </p>
-            <%= hidden_field_tag(:code, @promo.name, :id => 'code') %>
             <%= cookies[:code] ? hidden_field_tag(:code, cookies[:code], :id => 'code') : hidden_field_tag(:code, @default_code, :id => 'code') %>
             <br />
             <%= hidden_field_tag :return_url, customers_reactive_path(:email => params[:email], :code => cookies[:code] ? cookies[:code] : @default_code) %>
