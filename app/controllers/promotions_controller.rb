@@ -82,7 +82,7 @@ class PromotionsController < ApplicationController
               customer.tvod_free = @discount.tvod_free if @discount && @discount.tvod_free && @discount.tvod_free > 0
               customer.code = code
               customer.abo_active = 1 if @discount && @discount.goto_step.to_i == 100
-              if @discount.tvod_only?
+              if @discount.tvod_only
                 customer.auto_stop = 0
                 customer.subscription_expiration_date = nil
               end
@@ -90,7 +90,16 @@ class PromotionsController < ApplicationController
               customer.abo_history(@discount && @discount.goto_step.to_i == 100 ? 6 : 35, customer.abo_type_id)
               DiscountUse.create(:discount_code_id => @discount.id, :customer_id => customer.to_param, :discount_use_date => Time.now.localtime) if @discount
               if customer.step == 100
-                redirect_to root_localize_path
+                if params[:imdb_id]
+                  product = Product.where(:imdb_id => params[:imdb_id]).first
+                  if product
+                    redirect_to product_path(:id => product.to_param) and return
+                  else
+                    redirect_to root_localize_path and return
+                  end
+                else
+                  redirect_to root_localize_path and return
+                end
               else
                 redirect_to step_path(:id => 'step2')
               end  

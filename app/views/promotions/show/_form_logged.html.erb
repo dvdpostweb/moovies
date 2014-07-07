@@ -7,8 +7,10 @@
       <div class=''><strong><%= current_customer.email %></strong></div>
     </p>
     </div>
-    <%= hidden_field_tag(:code, @code ) %><br />
-    <%= hidden_field_tag :return_url, promotion_canva_path(:id => params[:id]) %>
+    <%= hidden_field_tag(:code, @code ) %>
+    <%= hidden_field_tag(:imdb_id, params[:imdb_id] ) if params[:imdb_id] %>
+    <%= hidden_field_tag :return_url, promotion_canva_path(:id => params[:id], :imdb_id, params[:imdb_id]) %>
+    <br />
     <div style="clear:both;"></div>
     <%= "<div id='error'>#{alert}</div>".html_safe if alert && !alert.empty? %>
   </span>

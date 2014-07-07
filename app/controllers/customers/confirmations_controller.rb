@@ -15,7 +15,17 @@ class Customers::ConfirmationsController < Devise::ConfirmationsController
           end
         end
         view_context.send_message(Moovies.email[:welcome_tvod], options, params[:locale], current_customer)
-        step_path(:id => 'step4')
+        if cookies[:imdb_id]
+          product = Product.where(:imdb_id => cookies[:imdb_id]).first
+          cookies.delete :imdb_id
+          if product
+            product_path(:id => product.to_param)
+          else
+            step_path(:id => 'step4')
+          end
+        else
+          step_path(:id => 'step4')
+        end
       else
         step_path(:id => 'step2')
       end

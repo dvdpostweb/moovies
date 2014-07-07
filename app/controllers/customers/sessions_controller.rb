@@ -9,6 +9,7 @@ class Customers::SessionsController < Devise::SessionsController
   def create
     self.resource = warden.authenticate!(auth_options)
     if params[:code]
+      cookies[:imdb_id] = { value: params[:imdb_id], expires: 15.days.from_now } if params[:imdb_id]
       customer = current_customer
       customer.step = @discount.nil? ? 31 : @discount.goto_step
       customer.tvod_free = @discount.tvod_free if @discount && @discount.tvod_free && @discount.tvod_free > 0

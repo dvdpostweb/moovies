@@ -33,6 +33,7 @@ class Customers::RegistrationsController < Devise::RegistrationsController
       @samsung = params[:samsung]
     end
     if params[:id]
+      cookies[:imdb_id] = { value: params[:imdb_id], expires: 15.days.from_now } if params[:imdb_id]
       @user = Customer.find_by_email(params[:customer][:email])
       if @user
         if @user.valid_password?(params[:customer][:password])
@@ -54,7 +55,17 @@ class Customers::RegistrationsController < Devise::RegistrationsController
               if @user.confirmed?
                 sign_in @user, :bypass => true
                 if @user.step == 100
-                  redirect_to root_localize_path and return
+                  if cookies[:imdb_id]
+                    product = Product.where(:imdb_id => cookies[:imdb_id]).first
+                    cookies.delete :imdb_id
+                    if product
+                      redirect_to product_path(:id => product.to_param) and return
+                    else
+                      redirect_to root_localize_path and return
+                    end
+                  else
+                    redirect_to root_localize_path and return
+                  end
                 else
                   redirect_to step_path(:id => 'step2') and return
                 end
