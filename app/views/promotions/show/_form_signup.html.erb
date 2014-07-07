@@ -15,6 +15,7 @@
       <%= f.password_field :password_confirmation, :class => 'inputs_promo_code' %>
     </p>
     <%= f.hidden_field :code, :value => @code %>
+    <%= hidden_field_tag(:imdb_id, params[:imdb_id] ) if params[:imdb_id] %>
     <%= hidden_field_tag :id, params[:id] %>
     <div style="clear:both;"></div>
     <%= "<div id='error'>#{alert}</div>".html_safe if alert && !alert.empty? %>

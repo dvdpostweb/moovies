@@ -143,7 +143,19 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource_or_scope)
+
+    if cookies[:imdb_id]
+
+      product = Product.where(:imdb_id => cookies[:imdb_id]).first
+      cookies.delete :imdb_id
+      if product
+        product_path(:id => product.to_param)
+      else
+        root_localize_path
+      end
+    else
       root_localize_path
+    end
   end
 
   def staging?

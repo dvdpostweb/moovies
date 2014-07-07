@@ -11,7 +11,9 @@
       <%= f.password_field :password, :class => 'inputs_promo_code', :size => '35', :maxlength => '40'%>
     </p>
     <%= hidden_field_tag(:code, @code, :id => 'code') %><br />
-    <%= hidden_field_tag :return_url, promotion_canva_path(:id => params[:id], :email => params[:email], :checked => 1) %>
+    <%= hidden_field_tag(:imdb_id, params[:imdb_id] ) if params[:imdb_id] %>
+    
+    <%= hidden_field_tag :return_url, promotion_canva_path(:id => params[:id], :email => params[:email], :checked => 1, :imdb_id =>params[:imdb_id]) %>
     <%= hidden_field_tag :id, params[:id] %>
     <div style="clear:both;"></div>
     
