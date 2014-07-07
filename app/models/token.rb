@@ -50,7 +50,7 @@ class Token < ActiveRecord::Base
         params = params.merge(:ppv_price => file.ppv_price, :kind => 'PPV', :is_ppv => true) if !file.svod?
         if file.prepaid?
           params = params.merge(:kind => 'PREPAID')
-        else customer.tvod_free > 0 && !file.svod?
+        elsif customer.tvod_free > 0 && !file.svod?
           customer.update_column(:tvod_free, customer.tvod_free - 1)
           params = params.merge(:kind => 'FREE')
         end
