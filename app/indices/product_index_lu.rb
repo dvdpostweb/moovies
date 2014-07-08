@@ -28,7 +28,7 @@ ThinkingSphinx::Index.define :product, :with => :active_record, :name => 'produc
   has streaming_products_lu('streaming_products.`language_id`'), :as => :language_ids, :type => :integer, :multi => true
   has streaming_products_lu('streaming_products.`subtitle_id`'), :as => :subtitle_ids, :type => :integer, :multi => true
   has "ifnull(concat('2',replace(if(min(vod_online_lus_products.expire_at) > date(now()),min(vod_online_lus_products.available_from),null),'-','')),ifnull(concat('2',replace(min(vod_online_lus_products.available_backcatalogue_from), '-','')), ifnull(concat('1',replace(if(min(streaming_products.expire_at) > date(now()),min(streaming_products.available_from),null), '-','')),concat('1',replace(min(streaming_products.available_backcatalogue_from), '-','')))))", :type => :integer, :as => :streaming_available_at_order
-  has "if((vod_online_lus_products.expire_at < now(), vod_online_lus_products.expire_at, vod_online_lus_products.expire_backcatalogue_at))", :type => :timestamp, :as => :streaming_expire_at
+  has "if(vod_online_lus_products.expire_at < now(),vod_online_lus_products.expire_at,vod_online_lus_products.expire_backcatalogue_at)", :type => :timestamp, :as => :streaming_expire_at
   
   has vod_online_lu('vod_online_lus_products.`imdb_id`'), :as => :imdb_id_online, :type => :integer, :multi => true
   has vod_online_lu('vod_online_lus_products.`language_id`'), :as => :online_language_ids, :type => :integer, :multi => true
