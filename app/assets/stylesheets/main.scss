@@ -828,7 +828,7 @@ display: block;
   
 }
 
-.jacket #add{
+.jacket #add, .jacket .add{
   float:left;
    margin:5px;
   	text-align: center !important;
@@ -926,7 +926,7 @@ div.alacarte
   cursor:pointer;
 }
 
-#add {
+#add, .add {
 	background-image: url(image_path('button_add.gif'));
 	background-position: 0 0;
 	background-repeat: no-repeat;
@@ -941,7 +941,7 @@ div.alacarte
 }
 
 
-#add.btn_remove_form {
+#add.btn_remove_form, .add.btn_remove_form{
 	background-image: url(image_path('button_delete.png'));
 	background-position: 0 0;
 	background-repeat: no-repeat;
@@ -1176,7 +1176,7 @@ div.notice {
        margin-top: 5px;
 }
 
-#add {
+#add, .add {
     font-size: 17px;
     width: 130px;
 }

@@ -10,7 +10,7 @@
       <%= hidden_field_tag :source, source %>
       <%= hidden_field_tag :response_id, response_id %>
       
-      <%= submit_tag t('.drop'), :class => 'btn_remove_form streaming_remove_list', :id => "add", :style => 'border:0px;cursor:pointer' %>
+      <%= submit_tag t('.drop'), :class => 'btn_remove_form streaming_remove_list add', :style => 'border:0px;cursor:pointer' %>
     <% end %>
   <% else %>
     <%= form_for :vod_wishlist, :url => vod_wishlists_path() do |f| %>
@@ -21,10 +21,10 @@
       <%= hidden_field_tag :response_id, response_id %>
       <% text = t('.add')  %>
       <% class_name = 'streaming_soon_btn'  %>
-      <%= submit_tag text, :class => "#{class_name} streaming_add_list", :id => "add", :style => 'border:0px;cursor:pointer' %>
+      <%= submit_tag text, :class => "#{class_name} streaming_add_list add", :style => 'border:0px;cursor:pointer' %>
     <% end %>
   <% end %>
 </div>
 <% else %>
-  <%= link_to t('.add'), product_log_path(:product_id => product.id, :media => 'vod'), :class => "streaming_btn streaming_soon_btn facebox", :id => "add" %>
+  <%= link_to t('.add'), product_log_path(:product_id => product.id, :media => 'vod'), :class => "streaming_btn streaming_soon_btn facebox add" %>
 <% end %>

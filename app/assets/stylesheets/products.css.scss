@@ -1645,7 +1645,7 @@ ul.grid li {
   float: right;
 }
 
-#products_index #add, #reviews_index #add, #search_index #add {
+#products_index #add, #reviews_index #add, #search_index #add, #products_index .add, #reviews_index .add, #search_index .add {
   text-align:left;
 
 }
@@ -2183,11 +2183,11 @@ ul#ratings_labels li:last-child {
   font-size: 14px;
   font-weight: bold;
 }
-#products_index .content #add
+#products_index .content #add, #products_index .content .add
 {
   text-align:center;
 }
-.adult .svod #add {
+.adult .svod #add, .adult .svod .add {
   color:#fff !important;
 }
 .adult .svod #watch {
