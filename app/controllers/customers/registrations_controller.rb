@@ -32,6 +32,15 @@ class Customers::RegistrationsController < Devise::RegistrationsController
     elsif params[:samsung]
       @samsung = params[:samsung]
     end
+    @discount = Discount.by_name(params[:customer][:code]).available.first
+    @activation = Activation.params[:customer][:code](code).available.first
+    if @discount
+      @promo = @discount
+    elsif @activation
+      @promo = @activation
+    else
+      @promo = nil
+    end
     if params[:id]
       cookies[:imdb_id] = { value: params[:imdb_id], expires: 15.days.from_now } if params[:imdb_id]
       @user = Customer.find_by_email(params[:customer][:email])
@@ -83,12 +92,12 @@ class Customers::RegistrationsController < Devise::RegistrationsController
       end
     end
     build_resource
-    @discount = Discount.by_name(params[:customer][:code]).available.first
-    if @discount
+    if @promo
+
       cookies[:code] = { value: params[:customer][:code], expires: 15.days.from_now }
-      resource.step = @discount.goto_step
-      resource.tvod_free = @discount.tvod_free if @discount.tvod_free && @discount.tvod_free > 0
-      resource.abo_active = 1 if @discount.goto_step.to_i == 100
+      resource.step = @promo.goto_step
+      resource.tvod_free = @promo.tvod_free if @promo.tvod_free && @promo.tvod_free > 0
+      resource.abo_active = 1 if @promo.goto_step.to_i == 100
     end
     
     if resource.save
