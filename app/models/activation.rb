@@ -29,6 +29,14 @@ class Activation < ActiveRecord::Base
     subscription_type.id == 6
   end
 
+  def goto_step
+    if tvod_only
+      100
+    else
+      31
+    end
+  end
+
   def duration
     case duration_type
     when 1
