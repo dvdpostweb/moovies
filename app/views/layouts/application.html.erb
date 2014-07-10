@@ -91,7 +91,7 @@
         <ul>
           <li><h4><%= t '.follow' %></h4></li>
           <li><%= link_to "Facebook", Moovies.fb_url[I18n.locale], :target => "_blank" %></li>
-          <li><%= link_to "Google+", Moovies.google_url[I18n.locale], :target => "_blank" %></li>
+          <li><%= link_to "Google+", Moovies.google_url[I18n.locale], :target => "_blank", :rel => "publisher" %></li>
           <li><%= link_to "Twitter", Moovies.twitter_url[I18n.locale], :target => "_blank" %></li>
         </ul>
         <% end %>
