@@ -33,7 +33,10 @@ class PromotionsController < ApplicationController
       end
     elsif @promo && (@promo.canva_id == 3 || @promo.canva_id == 8)
       @error = ''
-      if !/\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/.match(params[:email])
+      streaming_code = StreamingCode.where('name like ?', "#{@promo.params[:code]}%").email.available.order('rand()').limit(1)
+      @internal_code = streaming_code.first.name
+
+      if !/\A[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\.[A-Za-z]+\z/.match(params[:email])
         @error += "#{t('promotions.create.wrong_email')}<br />"
       end
       if !@streaming_code = StreamingCode.by_name(params[:streaming_code]).email.available.first
