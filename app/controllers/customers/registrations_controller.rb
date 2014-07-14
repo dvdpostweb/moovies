@@ -33,34 +33,34 @@ class Customers::RegistrationsController < Devise::RegistrationsController
       @samsung = params[:samsung]
     end
     @discount = Discount.by_name(params[:customer][:code]).available.first
-    @activation = Activation.params[:customer][:code](code).available.first
+    @activation = Activation.by_name(params[:customer][:code]).available.first
     if @discount
-      @promo = @discount
+      @promotion = @discount
     elsif @activation
-      @promo = @activation
+      @promotion = @activation
     else
-      @promo = nil
+      @promotion = nil
     end
     if params[:id]
       cookies[:imdb_id] = { value: params[:imdb_id], expires: 15.days.from_now } if params[:imdb_id]
       @user = Customer.find_by_email(params[:customer][:email])
       if @user
         if @user.valid_password?(params[:customer][:password])
-          @discount = Discount.by_name(params[:customer][:code]).available.first
-          if @discount.nil? || (@discount && @user.discount_reuse?(@discount.month_before_reuse))
+          if @activation || (@discount && @user.discount_reuse?(@discount.month_before_reuse))
             if @user.abo_active == 0
               cookies[:code] = { value: params[:customer][:code], expires: 15.days.from_now }
-              @user.step = @discount.nil? ? 31 : @discount.goto_step
+              @user.step = @promotion.nil? ? 31 : @promotion.goto_step
               @user.code = params[:customer][:code]
-              @user.tvod_free = @discount.tvod_free if @discount.tvod_free && @discount.tvod_free > 0
-              @user.abo_active = 1 if @discount && @discount.goto_step.to_i == 100
-              if @discount.tvod_only?
+              @user.tvod_free = @promotion.tvod_free if @promotion.tvod_free && @promotion.tvod_free > 0
+              @user.abo_active = 1 if @promotion && @promotion.goto_step.to_i == 100
+              if @promotion.tvod_only
                 @user.auto_stop = 0
                 @user.subscription_expiration_date = nil
               end
               @user.save(:validate => false)
-              @user.abo_history(@discount && @discount.goto_step.to_i == 100 ? 6 : 35, @user.abo_type_id)
+              @user.abo_history(@promotion && @promotion.goto_step.to_i == 100 ? 6 : 35, @user.abo_type_id)
               DiscountUse.create(:discount_code_id => @discount.id, :customer_id => @user.to_param, :discount_use_date => Time.now.localtime) if @discount
+              @activation.update_attributes(:customers_id => @user.id, :created_at => Time.now.localtime) if @activation
               if @user.confirmed?
                 sign_in @user, :bypass => true
                 if @user.step == 100
@@ -92,16 +92,20 @@ class Customers::RegistrationsController < Devise::RegistrationsController
       end
     end
     build_resource
-    if @promo
-
+    if @promotion
       cookies[:code] = { value: params[:customer][:code], expires: 15.days.from_now }
-      resource.step = @promo.goto_step
-      resource.tvod_free = @promo.tvod_free if @promo.tvod_free && @promo.tvod_free > 0
-      resource.abo_active = 1 if @promo.goto_step.to_i == 100
+      resource.step = @promotion.goto_step
+      resource.tvod_free = @promotion.tvod_free if @promotion.tvod_free && @promotion.tvod_free > 0
+      resource.abo_active = 1 if @promotion.goto_step.to_i == 100
     end
     
     if resource.save
-      resource.abo_history(@discount && @discount.goto_step.to_i == 100 ? 6 : 35, resource.abo_type_id)
+      resource.abo_history(@promotion && @promotion.goto_step.to_i == 100 ? 6 : 35, resource.abo_type_id)
+      if @promotion.goto_step.to_i == 100
+        DiscountUse.create(:discount_code_id => @discount.id, :customer_id => resource.to_param, :discount_use_date => Time.now.localtime) if @discount
+        @activation.update_attributes(:customers_id => resource.id, :created_at => Time.now.localtime) if @activation
+      end
+
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_navigational_format?
         sign_up(resource_name, resource)
