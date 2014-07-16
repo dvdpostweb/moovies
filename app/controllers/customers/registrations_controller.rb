@@ -51,9 +51,15 @@ class Customers::RegistrationsController < Devise::RegistrationsController
               cookies[:code] = { value: params[:customer][:code], expires: 15.days.from_now }
               @user.step = @promotion.nil? ? 31 : @promotion.goto_step
               @user.code = params[:customer][:code]
+<<<<<<< HEAD
               @user.tvod_free = @promotion.tvod_free if @promotion.tvod_free && @promotion.tvod_free > 0
               @user.abo_active = 1 if @promotion && @promotion.goto_step.to_i == 100
               if @promotion.tvod_only
+=======
+              @user.tvod_free = @discount.tvod_free if @discount.tvod_free && @discount.tvod_free > 0
+              @user.abo_active = 1 if @discount && @discount.goto_step.to_i == 100
+              if @discount.tvod_only
+>>>>>>> e7d339fb2cdc15a4b1c1f2f96c73f246d2fdecf0
                 @user.auto_stop = 0
                 @user.subscription_expiration_date = nil
               end
