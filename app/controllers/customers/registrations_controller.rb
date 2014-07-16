@@ -33,7 +33,7 @@ class Customers::RegistrationsController < Devise::RegistrationsController
       @samsung = params[:samsung]
     end
     @discount = Discount.by_name(params[:customer][:code]).available.first
-    @activation = Activation.params[:customer][:code].available.first
+    @activation = Activation.by_name(params[:customer][:code]).available.first
     if @discount
       @promo = @discount
     elsif @activation
