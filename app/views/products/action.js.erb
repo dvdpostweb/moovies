@@ -7,16 +7,16 @@
 					<% token_valid = token.nil? ? false : token.validate?(request.remote_ip) %>
 				  <% if @product.svod? || token_valid %>
 				    <% if params[:origin] == 'products' %>
-						  window.location.href = '<%= streaming_product_path(:id => @product.imdb_id, :source => @source) %>'
+						  window.location.href = '<%= streaming_product_path(:id => @product.imdb_id, :season_id => @product.season_id, :episode_id => @product.episode_id, :source => @source) %>'
 						<% end %>
 					<% else %>//tvod
 						<% if current_customer.tvod_free > 0 %>
-							window.location.href = '<%= streaming_product_path(:id => @product.imdb_id, :source => @source) %>'
+							window.location.href = '<%= streaming_product_path(:id => @product.imdb_id, :season_id => @product.season_id, :episode_id => @product.episode_id, :source => @source) %>'
 						<% else	%>
 						  <% if current_customer.tvod_only? %>
-						  	jQuery.facebox('<%= escape_javascript(render(:partial => 'products/tvod_only', :locals => {:product => @product, :source => @source})) %>')
+						  	jQuery.facebox('<%= escape_javascript(render(:partial => 'products/tvod_only', :locals => {:product => @product, :season_id => @product.season_id, :episode_id => @product.episode_id, :source => @source})) %>')
 							<% elsif current_customer.payable? %>
-								jQuery.facebox('<%= escape_javascript(render(:partial => 'products/tvod_alert', :locals => {:product => @product, :source => @source})) %>')
+								jQuery.facebox('<%= escape_javascript(render(:partial => 'products/tvod_alert', :locals => {:product => @product, :season_id => @product.season_id, :episode_id => @product.episode_id, :source => @source})) %>')
 							<% else %>
 								jQuery.facebox('<%= escape_javascript(render(:partial => 'products/no_credit_card')) %>')
 							<% end %>

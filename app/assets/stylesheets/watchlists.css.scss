@@ -242,6 +242,13 @@ float: left;
  #mywhishlist .vod {
 border-bottom: 1px solid #9E9FA2;
 }
+ #mywhishlist #ready  .vod.serie,  #mywhishlist #comin .vod.serie  {
+  margin: 0 0 0 20px;
+  }
+ #mywhishlist #ready .vod.serie,  #mywhishlist #coming .vod.serie
+ {
+  background: #f4f4f0;
+ }
 .wishlist_remove {
 background: url(image_path('trash-icon.png')) no-repeat scroll 0 0 transparent;
 border: 0 none;
@@ -269,4 +276,9 @@ float: left;
 #mywhishlist .infotvod
 {
   top: 7px;
+}
+#mywhishlist .vod_series
+{
+  clear:both; 
+  margin: 10px 0 10px 44px;
 }

@@ -90,7 +90,11 @@
         <% end %>
         <div class="clearfix"></div>
       </div>
-      <%= render :partial => 'products/show/formats', :locals => {:product => @product, :svod_date => @svod_date}%>      
+      <% if @product.series? %>
+        <%= render :partial => 'products/show/serie_formats', :locals => {:product => @product, :svod_date => @svod_date} %>
+      <% else %>
+        <%= render :partial => 'products/show/formats', :locals => {:product => @product, :svod_date => @svod_date}%>
+      <% end %>
       <div id="thumbs-wrap">
         <h3><%= t '.photo' %></h3>
         <div>

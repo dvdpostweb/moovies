@@ -97,7 +97,6 @@ class ProductsController < ApplicationController
     if params[:display]
       cookies.permanent[:display] = params[:display]
     end
-    @tokens = current_customer.get_all_tokens_id(params[:kind]) if current_customer
     @rating_color = params[:kind] == :adult ? :pink : :white
     if request.xhr?
       render :layout => false
@@ -115,14 +114,13 @@ class ProductsController < ApplicationController
       end
     end
     #to do user_agent = UserAgent.parse(request.user_agent)
-    @tokens = current_customer.get_all_tokens_id(params[:kind], @product.imdb_id) if current_customer
     @countries = ProductCountry.visible.order
     @svod_date = @product.svod_dates.current.order.first
     #@filter = get_current_filter({})
     unless request.xhr?
       @trailer =  @product.trailer?
       data = @product.description_data(true)
-      @product_title = data[:title]
+      @product_title = @product.series? ? @product.serie.name : data[:title]
       @product_image = data[:image]
       @product_description =  data[:description]
       @categories = @product.categories

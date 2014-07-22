@@ -5,25 +5,25 @@ class StreamingProductsController < ApplicationController
       @discount_top = Discount.find(195)
     end
     if Rails.env != 'pre_production' 
-      @product = Product.both_available.find_by_imdb_id(params[:id])
+      @product = Product.both_available.where(:imdb_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id]).first
     else
-      @product = Product.find_by_imdb_id(params[:id])
+      @product = Product.where(:imdb_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id]).first
     end
     @token_valid = @token.nil? ? false : @token.validate?(request.remote_ip)
     if @product && current_customer 
       @token = current_customer.get_token(@product.imdb_id)
     end
     if Rails.env != 'pre_production' && @token_valid == false
-      @streaming = StreamingProduct.available.country(Product.country_short_name(session[:country_id])).find_by_imdb_id(params[:id])
-      @streaming_prefered = StreamingProduct.group_by_language.country(Product.country_short_name(session[:country_id])).available.find_all_by_imdb_id(params[:id], I18n.locale)
+      @streaming = StreamingProduct.available.country(Product.country_short_name(session[:country_id])).where(:imdb_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id]).first
+      @streaming_prefered = StreamingProduct.group_by_language.country(Product.country_short_name(session[:country_id])).available.where(:imdb_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id])
       @streaming_not_prefered = nil
     elsif Rails.env != 'pre_production' && @token_valid == true
-      @streaming = StreamingProduct.available_token.country(Product.country_short_name(session[:country_id])).find_by_imdb_id(params[:id])
-      @streaming_prefered = StreamingProduct.group_by_language.country(Product.country_short_name(session[:country_id])).available_token.find_all_by_imdb_id(params[:id], I18n.locale)
+      @streaming = StreamingProduct.available_token.country(Product.country_short_name(session[:country_id])).where(:imdb_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id]).first
+      @streaming_prefered = StreamingProduct.group_by_language.country(Product.country_short_name(session[:country_id])).available_token.where(:imdb_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id])
       @streaming_not_prefered = nil
     else
-      @streaming = StreamingProduct.available_beta.country(Product.country_short_name(session[:country_id])).alpha.find_by_imdb_id(params[:id])
-      @streaming_prefered = StreamingProduct.alpha.country(Product.country_short_name(session[:country_id])).group_by_language.find_all_by_imdb_id(params[:id], I18n.locale)
+      @streaming = StreamingProduct.available_beta.country(Product.country_short_name(session[:country_id])).alpha.where(:imdb_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id]).first
+      @streaming_prefered = StreamingProduct.alpha.country(Product.country_short_name(session[:country_id])).group_by_language.where(:imdb_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id])
       @streaming_not_prefered = nil
     end
     @token_valid = @token.nil? ? false : @token.validate?(request.remote_ip)
@@ -209,11 +209,11 @@ class StreamingProductsController < ApplicationController
     token = current_customer.get_token(params[:streaming_product_id]) if current_customer
     token_valid = token.nil? ? false : token.validate?(request.remote_ip)
     if Rails.env != 'pre_production' && token_valid == false
-      @streaming_subtitle = StreamingProduct.available.country(Product.country_short_name(session[:country_id])).by_language(params[:language_id]).find_all_by_imdb_id(params[:streaming_product_id])
+      @streaming_subtitle = StreamingProduct.available.country(Product.country_short_name(session[:country_id])).by_language(params[:language_id]).where(:imdb_id => params[:streaming_product_id], :season_id => params[:season_id], :episode_id => params[:episode_id])
     elsif Rails.env != 'pre_production' && token_valid == true
-      @streaming_subtitle = StreamingProduct.available_token.country(Product.country_short_name(session[:country_id])).by_language(params[:language_id]).find_all_by_imdb_id(params[:streaming_product_id])
+      @streaming_subtitle = StreamingProduct.available_token.country(Product.country_short_name(session[:country_id])).by_language(params[:language_id]).where(:imdb_id => params[:streaming_product_id], :season_id => params[:season_id], :episode_id => params[:episode_id])
     else
-      @streaming_subtitle = StreamingProduct.available_beta.country(Product.country_short_name(session[:country_id])).alpha.by_language(params[:language_id]).find_all_by_imdb_id(params[:streaming_product_id])
+      @streaming_subtitle = StreamingProduct.available_beta.country(Product.country_short_name(session[:country_id])).alpha.by_language(params[:language_id]).where(:imdb_id => params[:streaming_product_id], :season_id => params[:season_id], :episode_id => params[:episode_id])
     end
     render :partial => 'streaming_products/show/subtitles', :locals => {:streaming => @streaming_subtitle, :sample => params[:sample]}, :layout => false
   end
@@ -237,11 +237,11 @@ class StreamingProductsController < ApplicationController
     token = current_customer.get_token(params[:streaming_product_id]) if current_customer
     token_valid = token.nil? ? false : token.validate?(request.remote_ip)
     if Rails.env != 'pre_production' && token_valid == false
-      @streaming_prefered = StreamingProduct.available.country(Product.country_short_name(session[:country_id])).find_all_by_imdb_id(params[:streaming_product_id], I18n.locale) 
+      @streaming_prefered = StreamingProduct.available.country(Product.country_short_name(session[:country_id])).where(:imdb_id => params[:streaming_product_id], :season_id => params[:season_id], :episode_id => params[:episode_id]) 
     elsif Rails.env != 'pre_production' && token_valid == true
-      @streaming_prefered = StreamingProduct.available_token.country(Product.country_short_name(session[:country_id])).find_all_by_imdb_id(params[:streaming_product_id], I18n.locale) 
+      @streaming_prefered = StreamingProduct.available_token.country(Product.country_short_name(session[:country_id])).where(:imdb_id => params[:streaming_product_id], :season_id => params[:season_id], :episode_id => params[:episode_id])
     else
-      @streaming_prefered = StreamingProduct.available_beta.country(Product.country_short_name(session[:country_id])).alpha.find_all_by_imdb_id(params[:streaming_product_id], I18n.locale) 
+      @streaming_prefered = StreamingProduct.available_beta.country(Product.country_short_name(session[:country_id])).alpha.where(:imdb_id => params[:streaming_product_id], :season_id => params[:season_id], :episode_id => params[:episode_id])
     end
     render :partial => 'streaming_products/show/versions', :locals => {:version => @streaming_prefered, :source => params[:source],  :response_id => params[:response_id]}
   end

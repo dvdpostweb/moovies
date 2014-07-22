@@ -6,7 +6,8 @@ class Token < ActiveRecord::Base
   has_many :streaming_products, :primary_key => :imdb_id, :foreign_key => :imdb_id
   has_many :streaming_products_free, :primary_key => :imdb_id, :foreign_key => :imdb_id
   has_many :token_ips
-  has_many :products, :foreign_key => :imdb_id, :primary_key => :imdb_id
+  has_many :products, :primary_key => [:imdb_id, :season_id, :episode_id], :foreign_key => [:imdb_id, :season_id, :episode_id]
+  belongs_to :product, :primary_key => [:imdb_id, :season_id, :episode_id], :foreign_key => [:imdb_id, :season_id, :episode_id]
 
   after_create :generate_token
 
