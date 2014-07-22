@@ -51,7 +51,7 @@
       </div>
 
       <ul class="btns osc">
-        <% unless produdt.serie? %>
+        <% unless product.series? %>
         <li>
           <%= render :partial => 'products/streaming',  :locals => {:product => product, :source => @source, :popup => true} %>
         </li>
