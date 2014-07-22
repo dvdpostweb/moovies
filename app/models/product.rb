@@ -101,6 +101,7 @@ class Product < ActiveRecord::Base
   
   sphinx_scope(:tvod_last_chance)         {{:with =>          {:streaming_expire_at => Time.now.end_of_day..1.months.from_now}}}
   sphinx_scope(:most_viewed)              {{:with =>          {:count_tokens => 1..1000000}}}
+  sphinx_scope(:series)                   {{:with =>          {:serie_id => 1..1000000}}}
   sphinx_scope(:by_package)               {|package_id|       {:with =>          {:package_id => package_id}}}
   sphinx_scope(:random)                   {{:order =>         '@random'}}
   sphinx_scope(:by_new)                   {{:with =>          {:year => 2.years.ago.year..Date.today.year, :imdb_id_online => 1..3147483647}}}
@@ -519,6 +520,7 @@ class Product < ActiveRecord::Base
     end
   end
   def self.get_view_mode(products, view_mode)
+    logger.debug("@@@#{view_mode}")
     case view_mode.to_sym
     when :svod_hd
         products.hd
@@ -552,6 +554,10 @@ class Product < ActiveRecord::Base
       products.best_rated
     when :most_viewed
       products.most_viewed
+    when :tvod_series
+      products.series
+    when :svod_series
+      products.series
     else
       products
     end

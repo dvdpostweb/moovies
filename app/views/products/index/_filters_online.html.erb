@@ -32,6 +32,9 @@
         <br />
         <%= radio_button_tag('filters[view_mode]', "hd", params[:filters] && params[:filters][:view_mode] == 'hd' ? true : false, class: "links") %>
         <%= label_tag('filters[view_mode]_hd', t('products.left_column.svod_hd')) %>
+        <br />
+        <%= radio_button_tag('filters[view_mode]', "series", params[:filters] && params[:filters][:view_mode] == 'series' ? true : false, class: "links") %>
+        <%= label_tag('filters[view_mode]_series', t('products.left_column.series')) %>
       </li>
       <li class="audio open">
         <%= t('products.index.filters.audio', :default => 'audio') %>
