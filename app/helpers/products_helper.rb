@@ -523,7 +523,7 @@ module ProductsHelper
   end
 
   def get_vod_message(vod, svod_date, kind, package)
-    if vod.available?
+    if vod && vod.available?
       
       if svod_date && svod_date.start_on > Date.today && svod_date.start_on < Date.today+30.days
         "<td class='goinfinite'>#{t('products.show.formats.soon_in_svod_' + kind, :days => (svod_date.start_on - Date.today).to_i).html_safe}</td>".html_safe
