@@ -413,7 +413,7 @@ class Product < ActiveRecord::Base
         'be'
     end
     options[:includes] = ["vod_online_#{name}", :director, :actors, :public, :streaming_trailers, :tokens_trailers, "descriptions_#{I18n.locale}", :svod_dates_online] if options[:includes].nil?
-    products.search(search, :max_matches => limit, :per_page => per_page, :page => page, :indices => ["product_#{name}_core"], :group_by => 'imdb_id, serie_id', :sql => { :include => options[:includes]}, :select => "*, IF(vod_next = 1, 10402410456, if(tvod_start > #{Time.now.to_i} and tvod_start < #{1.month.from_now.to_i}, tvod_start,0)) AS tvod_start_combi")
+    products.search(search, :max_matches => limit, :per_page => per_page, :page => page, :indices => ["product_#{name}_core"], :group_by => 'imdb_id', :sql => { :include => options[:includes]}, :select => "*, IF(vod_next = 1, 10402410456, if(tvod_start > #{Time.now.to_i} and tvod_start < #{1.month.from_now.to_i}, tvod_start,0)) AS tvod_start_combi")
   end
 
   def self.replace_specials(str)
