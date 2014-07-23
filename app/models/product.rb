@@ -520,7 +520,6 @@ class Product < ActiveRecord::Base
     end
   end
   def self.get_view_mode(products, view_mode)
-    logger.debug("@@@#{view_mode}")
     case view_mode.to_sym
     when :svod_hd
         products.hd
