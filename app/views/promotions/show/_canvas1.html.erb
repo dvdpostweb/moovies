@@ -109,6 +109,7 @@
           </tr>
         </table>
       </div>
+      <% if !@promo.params[:hide_form_bottom] == true %>
       <%= form_tag promotion_canva_path(:id => params[:id]), :id => 'form_step2' do %>
       <div id="area_promo">
         <h2><%= t2('.promo', @promo.params[:key]).html_safe %></h2>
@@ -120,6 +121,7 @@
         <div class="clearfix"></div>
         <p align="center"><input type="submit" border="0" align="absmiddle" class="promo_button" id="submit_id4" name="sent" value="<%= t('.essayer') %>"></p>
       </div>
+      <% end %>
       <% end %>
       <p align="center"><%= image_tag "#{I18n.locale}/info_tel.jpg" %></p>
       <div id="promo_footer"><%= t2('.conditions', @promo.params[:key]).html_safe %></div>
