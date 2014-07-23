@@ -65,11 +65,16 @@ class PromotionsController < ApplicationController
       code = params[:code]
       @discount = Discount.by_name(code).available.first
       @activation = Activation.by_name(code).available.first
-      if @discount.nil? && @activation.nil?
+      if @discount
+          @promotion = @discount
+      elsif @activation
+        @promotion = @activation
+      else
         flash[:alert] = 'error de code'
         flash.discard
         render :show
-      else
+      end
+      if @promotion
         if params[:email]
           @user = Customer.find_by_email(params[:email])
           if !@user.confirmed?
@@ -78,20 +83,21 @@ class PromotionsController < ApplicationController
         end
         
         if current_customer
-          if @discount.nil? || (@discount && current_customer.discount_reuse?(@discount.month_before_reuse))
+          if @activation || (@discount && current_customer.discount_reuse?(@discount.month_before_reuse))
             if current_customer.abo_active == 0 || (current_customer.abo_active == 1 && current_customer.tvod_only?)
               customer = current_customer
-              customer.step = @discount.nil? ? 31 : @discount.goto_step
-              customer.tvod_free = @discount.tvod_free if @discount && @discount.tvod_free && @discount.tvod_free > 0
+              customer.step = @promotion.nil? ? 31 : @promotion.goto_step
+              customer.tvod_free = @promotion.tvod_free if @promotion && @promotion.tvod_free && @promotion.tvod_free > 0
               customer.code = code
-              customer.abo_active = 1 if @discount && @discount.goto_step.to_i == 100
-              if @discount.tvod_only
+              customer.abo_active = 1 if @promotion && @promotion.goto_step.to_i == 100
+              if @promotion.tvod_only
                 customer.auto_stop = 0
                 customer.subscription_expiration_date = nil
               end
               customer.save(:validate => false)
-              customer.abo_history(@discount && @discount.goto_step.to_i == 100 ? 6 : 35, customer.abo_type_id)
+              customer.abo_history(@promotion && @promotion.goto_step.to_i == 100 ? 6 : 35, customer.abo_type_id)
               DiscountUse.create(:discount_code_id => @discount.id, :customer_id => customer.to_param, :discount_use_date => Time.now.localtime) if @discount
+              @activation.update_attributes(:customers_id => customer.to_param, :created_at => Time.now.localtime) if @activation
               if customer.step == 100
                 if params[:imdb_id]
                   product = Product.where(:imdb_id => params[:imdb_id]).first
