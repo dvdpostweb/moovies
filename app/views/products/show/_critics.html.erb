@@ -1,9 +1,10 @@
-<% text = (t('products.show.members_critic')+" (<span id='rat'>#{product.rating[:rating] > 0 ? product.rating[:rating] / 2.0 : 0 }</span> / <span id='total'>5</span>)").html_safe %>
+<% text = (t('products.show.members_critic')+" (<span id='rat' itemprop='ratingValue'>#{product.rating[:rating] > 0 ? product.rating[:rating] / 2.0 : 0 }</span> / <span id='total'>5</span>)").html_safe %>
 <div id="critics-wrap">
   <div class="tab-container">
     <ul class="etabs osc tabs">
       <li class="tab" id='tab1_li'>
         <%= link_to(text, '#tab1', :id => 'tab1_menu', :class => :active) %>
+
       </li>                
     </ul>
     <div class="panel-container">
