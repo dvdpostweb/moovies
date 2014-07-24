@@ -24,7 +24,7 @@
                   <span class="explain_text"><%= t '.first_name' %> <span class="asterisk_step">*</span></span>							
                 </td>
                 <td>
-                  <%= f.text_field :first_name, :class => :new_step_input %>
+                  <%= f.text_field :first_name, :class => :new_step_input, :validate => true %>
                 </td>
               </tr>
               <tr>
@@ -32,7 +32,7 @@
                   <span class="explain_text"><%= t '.last_name' %> <span class="asterisk_step">*</span></span>
                 </td>
                 <td>
-                  <%= f.text_field :last_name, :class => :new_step_input %>
+                  <%= f.text_field :last_name, :class => :new_step_input, :validate => true %>
                 </td>
                 
               </tr>
@@ -42,7 +42,7 @@
                 </td>
                 <td>
                   <div>
-                  <%= f.date_select :customers_dob, :start_year => 18.years.ago.year, :end_year => 100.years.ago.year, use_month_numbers: true, prompt: { day: t('.day'), month: t('.month'), year: t('.year') }, :order => [:day, :month, :year] %>
+                  <%= f.date_select :customers_dob, :start_year => 18.years.ago.year, :end_year => 100.years.ago.year, use_month_numbers: true, prompt: { day: t('.day'), month: t('.month'), year: t('.year') }, :order => [:day, :month, :year], :validate => true %>
                   <label for="customer_birthday" class="message"></label>
                   </div>
                 </td>
@@ -88,7 +88,7 @@
                   <span class="explain_text"><%= t('.phone')%></span><span class="asterisk_step">*</span>
                 </td>
                 <td>
-                  <%= f.text_field :phone, :class => :new_step_input %>
+                  <%= f.text_field :phone, :class => :new_step_input, :validate => true %>
                 </td>
               </tr>               
               <tr>

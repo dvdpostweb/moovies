@@ -63,7 +63,7 @@ gem "composite_primary_keys", "~> 5.0.13"
 gem "truncate_html", "~> 0.9.2"
 gem "capistrano", "~> 2.15.5"
 gem "capistrano-ext"
-gem "client_side_validations"
+gem 'client_side_validations', '~> 3.2.6'
 gem 'date_validator'
 gem 'whenever', "~> 0.9.0", :require => false
 gem 'geoip'

@@ -32,11 +32,11 @@ class Customer < ActiveRecord::Base
   
   alias_attribute :step,                         :customers_registration_step
   alias_attribute :locked,                       :customers_locked__for_reconduction
-  validates_length_of :first_name, :minimum => 2, :on => :update
-  validates_length_of :last_name, :minimum => 2, :on => :update
-  validates_format_of :phone, :with => /^(\+)?[0-9 \-\/.]+$/, :on => :update
+  validates_length_of :first_name, :minimum => 2, :on => :update, :if => :svod?
+  validates_length_of :last_name, :minimum => 2, :on => :update, :if => :svod?
+  validates_format_of :phone, :with => /^(\+)?[0-9 \-\/.]+$/, :on => :update, :if => :svod?
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :update
-  validates :birthday,  :date => { :after => 100.years.ago, :before => 18.years.ago}, :on => :update
+  validates :birthday,  :presence => true, :date => { :after => 100.years.ago, :before => 18.years.ago}, :on => :update, :if => :svod?
   validates :email, :uniqueness => {:message => :taken2, :case_sensitive => false}, :on => :update
   
   
@@ -183,6 +183,11 @@ class Customer < ActiveRecord::Base
   def tvod_only?
     abo_type_id == 6
   end
+
+  def svod?
+    abo_type_id != 6
+  end
+
   def name
     "#{first_name} #{last_name}"
   end
