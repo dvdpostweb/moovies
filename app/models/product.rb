@@ -99,7 +99,7 @@ class Product < ActiveRecord::Base
   sphinx_scope(:svod_last_chance)         {{:with =>          {:svod_end => Time.now.end_of_day..1.months.from_now}}}
   sphinx_scope(:best_rated)               {{:with =>          {:rating => 3.0..5.0}}}
   
-  sphinx_scope(:tvod_last_chance)         {{:with =>          {:streaming_expire_at => Time.now.end_of_day..1.months.from_now}}}
+  sphinx_scope(:tvod_last_chance)         {{:with =>          {:streaming_expire_at => Time.now.beginning_of_day..1.months.from_now}}}
   sphinx_scope(:most_viewed)              {{:with =>          {:count_tokens => 1..1000000}}}
   sphinx_scope(:by_package)               {|package_id|       {:with =>          {:package_id => package_id}}}
   sphinx_scope(:random)                   {{:order =>         '@random'}}
