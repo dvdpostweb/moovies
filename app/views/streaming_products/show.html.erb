@@ -94,6 +94,9 @@
 <% if @code %>
   <% if @code.name.match(/^TEXP/) %>
     <iframe src="http://www.plush.be/trade/conversion.html?campaignID=12814&productID=24087&conversionType=lead&https={https}&transactionID=<%= @code.id %>&transactionAmount={transactionAmount}&email=<%= params[:email] %>&descrMerchant={descrMerchant}&descrAffiliate={descrAffiliate}&currency={currency}" frameborder="0" scrolling="0" marginwidth="0" marginheight="0" width="1" height="1"></iframe>
+  <% elsif @code.name.match(/^PEXP/) %>
+    <img style="display: none" border="0" height="0" width="0" src="http://fr.ptg.be/aimg/plush.gif" alt="" />
   <% end %>
+
   <img style="display: none" border="0" height="0" width="0" src="//fbm.mysocialpixel.com/tracking/<%= @code.id %>/10/1385045453" alt="" /> 
 <% end %>
