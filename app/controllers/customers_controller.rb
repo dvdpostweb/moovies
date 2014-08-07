@@ -6,7 +6,6 @@ class CustomersController < ApplicationController
   def show
     @body_id = 'moncompte'
     @customer = current_customer
-    @streaming_available = current_customer.get_all_tokens
     env = Rails.env == 'staging' || Rails.env == 'development' ? 'staging' :  Rails.env
     @review_count = current_customer.reviews.approved.joins("INNER JOIN plush_#{env}.products ON `products`.`imdb_id` = `reviews`.`imdb_id`").where(:products => {:products_type => Moovies.product_kinds[params[:kind]], :products_status => [-2,0,1]}).count
     @classic_count = current_customer.vod_wishlists.joins(:products, :streaming_products).where("streaming_products.available = 1 and products_status != -1 and products_type = :type and country = :country", {:type => Moovies.product_kinds[:normal], :country => Product.country_short_name(session[:country_id])}).count(:imdb_id, :distinct => true)

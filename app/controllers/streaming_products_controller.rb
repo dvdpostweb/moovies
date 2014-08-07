@@ -1,5 +1,7 @@
 class StreamingProductsController < ApplicationController
   def show
+    params[:season_id] = params[:season_id] || 0
+    params[:episode_id] = params[:episode_id] || 0
     if params[:streaming_code]
       @code = StreamingCode.by_name(params[:streaming_code]).available.first
       @discount_top = Discount.find(195)
@@ -9,9 +11,8 @@ class StreamingProductsController < ApplicationController
     else
       @product = Product.where(:imdb_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id]).first
     end
-    @token_valid = @token.nil? ? false : @token.validate?(request.remote_ip)
     if @product && current_customer 
-      @token = current_customer.get_token(@product.imdb_id)
+      @token = current_customer.get_token(@product.imdb_id,  @product.season_id, @product.episode_id)
     end
     if Rails.env != 'pre_production' && @token_valid == false
       @streaming = StreamingProduct.available.country(Product.country_short_name(session[:country_id])).where(:imdb_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id]).first
@@ -47,7 +48,7 @@ class StreamingProductsController < ApplicationController
         if @product
           if @vod_disable == "1" || Rails.env == "pre_production"
             if view_context.streaming_access?
-              if @code || (current_customer.actived? && !current_customer.suspended? && (current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s) || @streaming.prepaid_all?) && (@product.svod? || (!@product.svod? && current_customer.payable?)))
+              if @code || (current_customer.actived? && !current_customer.suspended? && (current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s) || @streaming.prepaid_all?) && (@product.svod? || (@product.tvod? && current_customer.payable? ) || current_customer.tvod_free > 0))
                 if !@streaming_prefered.blank? || !@streaming_not_prefered.blank?
                   if @token_valid == false && @vod_create_token == "0" && Rails.env != "pre_production"
                     error = t('streaming_products.not_available.offline')
@@ -206,7 +207,7 @@ class StreamingProductsController < ApplicationController
 
   def language
     params[:streaming_product_id] = params[:old_streaming_product_id] if params[:old_streaming_product_id]
-    token = current_customer.get_token(params[:streaming_product_id]) if current_customer
+    token = current_customer.get_token(params[:streaming_product_id], params[:season_id], params[:episode_id]) if current_customer
     token_valid = token.nil? ? false : token.validate?(request.remote_ip)
     if Rails.env != 'pre_production' && token_valid == false
       @streaming_subtitle = StreamingProduct.available.country(Product.country_short_name(session[:country_id])).by_language(params[:language_id]).where(:imdb_id => params[:streaming_product_id], :season_id => params[:season_id], :episode_id => params[:episode_id])
@@ -220,7 +221,7 @@ class StreamingProductsController < ApplicationController
 
   def subtitle
     params[:streaming_product_id] = params[:old_streaming_product_id] if params[:old_streaming_product_id]
-    token = current_customer.get_token(params[:streaming_product_id]) if current_customer
+    token = current_customer.get_token(params[:streaming_product_id], params[:season_id], params[:episode_id]) if current_customer
     token_valid = token.nil? ? false : token.validate?(request.remote_ip)
     if Rails.env != 'pre_production' && token_valid == false
       @streaming = StreamingProduct.available.find(params[:id])
@@ -234,7 +235,7 @@ class StreamingProductsController < ApplicationController
 
   def versions
     params[:streaming_product_id] = params[:old_streaming_product_id] if params[:old_streaming_product_id]
-    token = current_customer.get_token(params[:streaming_product_id]) if current_customer
+    token = current_customer.get_token(params[:streaming_product_id], params[:season_id], params[:episode_id]) if current_customer
     token_valid = token.nil? ? false : token.validate?(request.remote_ip)
     if Rails.env != 'pre_production' && token_valid == false
       @streaming_prefered = StreamingProduct.available.country(Product.country_short_name(session[:country_id])).where(:imdb_id => params[:streaming_product_id], :season_id => params[:season_id], :episode_id => params[:episode_id]) 
@@ -259,16 +260,6 @@ class StreamingProductsController < ApplicationController
     if request.xhr?
       @streaming = StreamingProduct.find_by_id(params[:streaming_product_id])
       render :layout => false
-    end
-  end
-
-  def faq
-    @product = Product.find_by_imdb_id(params[:streaming_product_id])
-    unless current_customer
-      @hide_menu = false
-      @customer_id = 0
-    else
-      @customer_id = current_customer.to_param
     end
   end
 

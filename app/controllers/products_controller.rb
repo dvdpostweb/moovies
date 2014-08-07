@@ -124,7 +124,7 @@ class ProductsController < ApplicationController
       @product_image = data[:image]
       @product_description =  data[:description]
       @categories = @product.categories
-      @token = current_customer ? current_customer.get_token(@product.imdb_id) : nil
+      @token = current_customer ? current_customer.get_token(@product.imdb_id, @product.season_id, @product.episode_id) : nil
     end
     @meta_title = t('products.show.meta_title', :name => @product_title, :default => '')
     @meta_description = t('products.show.meta_description', :name => @product_title, :default => '')
@@ -247,8 +247,8 @@ class ProductsController < ApplicationController
   end
 
   def action
-    @source = params[:source].nil? ? 7 : params[:source]
-    @streaming = StreamingProduct.available.country(Product.country_short_name(session[:country_id])).find_by_imdb_id(@product.imdb_id)
+    @source = params[:source] || 7
+    @streaming = StreamingProduct.available.country(Product.country_short_name(session[:country_id])).by_primary(@product.imdb_id, @product.season_id, @product.episode_id).first
     if request.xhr?
       render :layout => false
     end

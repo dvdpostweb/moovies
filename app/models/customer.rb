@@ -155,7 +155,6 @@ class Customer < ActiveRecord::Base
       list = tokens.collect(&:imdb_id).join(',')
       vod_seen = !list.empty? ? Product.group_by_imdb.normal_available.by_imdb_ids([list]) : nil
     end
-    tokens = get_all_tokens(kind, :old)
     rated = rated_products
     p = vod_seen ? vod_seen + seen - rated : seen - rated
   end
@@ -286,14 +285,11 @@ class Customer < ActiveRecord::Base
     credit_histories.last
   end
 
-  def get_token(imdb_id)
-    tokens.recent(2.week.ago.localtime, Time.now).find_all_by_imdb_id(imdb_id).last
+  def get_token(imdb_id, season_id, episode_id)
+    tokens.recent(2.week.ago.localtime, Time.now).by_primary(imdb_id, season_id, episode_id).last
   end
 
-  def get_all_tokens_id(kind = nil, imdb_id = 0)
-    tokens.available(48.hours.ago.localtime, Time.now).find_all_by_imdb_id(imdb_id).collect(&:imdb_id)
-  end
-
+  
   def get_all_tokens(kind = nil, type = nil, page = 1)
     if type == :old
       tokens.expired(48.hours.ago.localtime).select('distinct tokens.*, count(distinct tokens.id) count_tokens').group('tokens.id').ordered_old.joins(:products).where(:products => {:products_type => Moovies.product_kinds[kind]}).paginate(:per_page => 20, :page => page)
@@ -307,9 +303,8 @@ class Customer < ActiveRecord::Base
   end
 
   def remove_product_from_wishlist(imdb_id, current_ip)
-    all = Product.find_all_by_imdb_id(imdb_id)
-    if vod_wishlists && vod_wishlists.find_by_imdb_id(imdb_id)
-      vod = vod_wishlists.find_by_imdb_id(imdb_id)
+    if vod_wishlists && vod_wishlists.by_primary(imdb_id, season_id, episode_id)
+      vod = vod_wishlists.by_primary(imdb_id, season_id, episode_id)
       vod_wishlists_histories.create(:imdb_id => vod.imdb_id, :source_id => vod.source_id, :added_at => vod.created_at)
       vod.destroy() 
     end

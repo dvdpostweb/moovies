@@ -62,6 +62,7 @@ class Product < ActiveRecord::Base
   scope :normal_available, where('products_status != -1 and products_type = ? ', Moovies.product_kinds[:normal])
   scope :adult_available, where('products_status != -1 and products_type = ? ', Moovies.product_kinds[:adult])
   scope :both_available, where('products_status != -1')
+  scope :by_primary, lambda {|imdb_id, season_id, episode_id| where(:imdb_id => imdb_id, :season_id => season_id, :episode_id => episode_id)}
   scope :by_imdb_ids, lambda {|imdb| where("imdb_id in (#{imdb})")}
   scope :ordered, :order => 'products_id desc'
   scope :group_by_imdb, :group => 'imdb_id'
@@ -626,6 +627,10 @@ class Product < ActiveRecord::Base
 
   def svod?
     !svod_dates.svod.empty?
+  end
+
+  def tvod?
+    !svod?
   end
 
   def self.update_package
