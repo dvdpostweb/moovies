@@ -17,7 +17,7 @@ class Token < ActiveRecord::Base
   scope :expired, lambda {|to| where("updated_at < ?", to)}
   
   scope :recent, lambda {|from, to| where(:updated_at => from..to)}
-  scope :by_imdb_id, lambda {|imdb_id| where(:imdb_id => imdb_id)}
+  scope :by_primary, lambda {|imdb_id, season_id, episode_id| where(:imdb_id => imdb_id, :season_id => season_id, :episode_id => episode_id)}
   
   scope :ordered, :order => 'tokens.updated_at asc'
   scope :ordered_old, :order => 'tokens.updated_at desc'

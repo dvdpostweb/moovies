@@ -3,7 +3,7 @@
 		<% if current_customer.actived? %>
 			<% if !current_customer.suspended? %>
 		    <% if (current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s) || (@streaming && @streaming.prepaid_all?)) %>
-					<% token = current_customer.get_token(@product.imdb_id) %>
+					<% token = current_customer.get_token(@product.imdb_id, @product.season_id, @product.episode_id) %>
 					<% token_valid = token.nil? ? false : token.validate?(request.remote_ip) %>
 				  <% if @product.svod? || token_valid %>
 				    <% if params[:origin] == 'products' %>

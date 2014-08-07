@@ -4,7 +4,7 @@
 		<% if current_customer.actived? %>
 			<% if !current_customer.suspended? %>
 		    <% if (current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s) || (@streaming && @streaming.prepaid_all?)) %>
-					<% token = current_customer.get_token(@product.imdb_id) %>
+					<% token = current_customer.get_token(@product.imdb_id, @product.season_id, @product.episode_id) %>
 					<% token_valid = token.nil? ? false : token.validate?(request.remote_ip) %>
 				  <% if @product.svod_dates_online.first || token_valid %>
 						window.location.href = '<%= streaming_product_path(:id => @product.imdb_id, :season_id => @product.season_id, :episode_id => @product.episode_id) %>'
