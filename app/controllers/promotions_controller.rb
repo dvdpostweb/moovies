@@ -81,7 +81,6 @@ class PromotionsController < ApplicationController
             Devise::Mailer.confirmation_instructions(@user).deliver
           end
         end
-        
         if current_customer
           if @activation || (@discount && current_customer.discount_reuse?(@discount.month_before_reuse))
             if current_customer.abo_active == 0 || (current_customer.abo_active == 1 && current_customer.tvod_only?)
@@ -113,6 +112,7 @@ class PromotionsController < ApplicationController
                 redirect_to step_path(:id => 'step2')
               end  
             else
+              logger.debug("@@@erro")
               flash[:alert] = t('session.error_already_customer')
               render :show
             end

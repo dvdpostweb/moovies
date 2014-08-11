@@ -1,10 +1,10 @@
 #encoding: utf-8
 
 module ProductsHelper
-  def carousel_path(carousel)
+  def carousel_path(carousel, hp = false)
     case carousel.kind
       when 'MOVIE'
-        product_path(:id => carousel.reference_id, :source => @wishlist_source[:carousel])
+        product_path(:id => carousel.reference_id, :source => hp ? @wishlist_source[:carousel_hp] : @wishlist_source[:carousel])
       when 'OTHER'
         info_path(:page_name => carousel.name)
       when 'OLD_SITE'
