@@ -9,7 +9,34 @@
  .osc, h1, h2, h3, h4, h5 {
  	font-family: 'Open Sans Condensed', sans-serif;
  }
+div.notice {
+    background: none repeat scroll 0 0 #CDE4EC;
+    border: 1px solid #888888;
+    font-size: 14px;
+    padding: 10px;
+    text-align: center;
+    width: 948px;
+    color:#333;
+    margin:0 0 10px 0;
 
+}
+#wrap2
+{
+    margin: 0 auto 0;
+    text-align: left;
+    width: 970px;
+}
+div.flash_error {
+    background: none repeat scroll 0 0 #D9A0A7;
+    border: 1px solid #888888;
+    font-size: 14px;
+    padding: 10px;
+    text-align: center;
+    width: 948px;
+    color:#333;
+    margin:0 0 10px 0;
+
+}
 .choice_language .button_languages {
   background-color: #D55023; 
   @include filter-gradient(#EE8419, #E26417, vertical);

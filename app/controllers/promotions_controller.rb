@@ -69,12 +69,8 @@ class PromotionsController < ApplicationController
           @promotion = @discount
       elsif @activation
         @promotion = @activation
-      else
-        flash[:alert] = 'error de code'
-        flash.discard
-        render :show
       end
-      if @promotion
+      #if @promotion
         if params[:email]
           @user = Customer.find_by_email(params[:email])
           if !@user.confirmed?
@@ -110,20 +106,26 @@ class PromotionsController < ApplicationController
                 end
               else
                 redirect_to step_path(:id => 'step2')
-              end  
+              end
+            elsif current_customer.abo_active == 1 && @activation && @activation.all_cust?
+              current_customer.tvod_free = current_customer.tvod_free + @promotion.tvod_free if @promotion && @promotion.tvod_free && @promotion.tvod_free > 0
+              current_customer.save(:validate => false)
+              current_customer.abo_history(38, current_customer.abo_type_id)
+              @activation.update_attributes(:customers_id => current_customer.to_param, :created_at => Time.now.localtime)
+              redirect_to root_localize_path, notice: t('session.promotion.sucess') and return
             else
-              logger.debug("@@@erro")
               flash[:alert] = t('session.error_already_customer')
+              flash.discard
               render :show
             end
           else
             flash[:alert] = t('session.error_discount_reused')
+            flash.discard
             render :show
           end
         else
           redirect_to new_customer_registration_path(:code => code)
         end
-      end
     end
   end
 

@@ -41,9 +41,9 @@ class Customer < ActiveRecord::Base
   
   
   validates_presence_of   :email, :on => :create
-  #validates :email, :uniqueness => {:message => :taken, :case_sensitive => false}, :on => :create
   validate :email_step, :on => :create
   validate :email_abo, :on => :create
+  validate :email_all_cust, :on => :create
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create
 
   validates_presence_of     :password, :if => :password_required?
@@ -463,7 +463,11 @@ class Customer < ActiveRecord::Base
   end
 
   def email_abo
-    errors.add(:email, I18n.t("errors.messages.taken")) if Customer.where(:email => self.email, :customers_abo => 1).exists?
+    errors.add(:email, I18n.t("errors.messages.taken")) if Customer.where(:email => self.email, :customers_abo => 1).exists? && (@activation && !@activation.all_cust? || @activation.nil?)
+  end
+
+  def email_all_cust
+    errors.add(:email, I18n.t("errors.messages.taken_all_cust", :code => self.code, :email => self.email)) if Customer.where(:email => self.email, :customers_abo => 1).exists? && (@activation && @activation.all_cust?)
   end
 
   def convert_created_at
