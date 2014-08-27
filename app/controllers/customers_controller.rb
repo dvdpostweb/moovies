@@ -1,5 +1,5 @@
 class CustomersController < ApplicationController
-  before_filter :authenticate_customer!, :unless => :reactive?
+  before_filter :authenticate_customer!, :unless => :no_customer?
   def index
     redirect_to customer_path(:id => current_customer)
   end
@@ -76,6 +76,19 @@ class CustomersController < ApplicationController
       end
     end
   end
+  def promotion
+    @hide_menu = true
+    if params[:code]
+      @code = params[:code]
+      @discount = Discount.by_name(@code).available.first
+      @activation = Activation.by_name(@code).available.first
+      if @discount
+        @promo = @discount
+      elsif @activation
+        @promo = @activation
+      end
+    end
+  end
 
   def newsletter
     @customer = current_customer
@@ -145,7 +158,7 @@ class CustomersController < ApplicationController
     redirect_to root_localize_path
   end
   protected
-   def reactive?
-     params[:action] == 'reactive'
+   def no_customer?
+     params[:action] == 'reactive' || params[:action] == 'promotion'
    end
 end

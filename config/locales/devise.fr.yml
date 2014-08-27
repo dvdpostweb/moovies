@@ -10,6 +10,7 @@ fr:
         other: "N'a pas sauvegardé %{resource}"
       taken: "est déjà pris, <a href='/fr/customers/sign_in'>identifiez-vous ici</a>"
       taken_step: "Cette adresse email existe déjà, <a href='/fr/customers/reactive?code=%{code}&email=%{email}'>identifiez-vous ici</a>"
+      taken_all_cust: "pour profiter de l'action quand même, <a href='/fr/customers/promotion?code=%{code}&email=%{email}'>identifiez-vous ici</a>"
       taken2: "est déjà pris"
       invalid: "n'est pas correct"
       blank: 'ne peux pas être vide'
