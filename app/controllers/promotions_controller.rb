@@ -103,15 +103,12 @@ class PromotionsController < ApplicationController
                 if params[:imdb_id]
                   product = Product.where(:imdb_id => params[:imdb_id]).first
                   if product
-                    flash[:notice] = t('session.promotion.sucess')
                     redirect_to product_path(:id => product.to_param) and return
                   else
-                    flash[:notice] = t('session.promotion.sucess')
-                    redirect_to root_localize_path and return
+                    redirect_to step_path(:id => 'step4') and return
                   end
                 else
-                  flash[:notice] = t('session.promotion.sucess')
-                  redirect_to root_localize_path and return
+                  redirect_to step_path(:id => 'step4') and return
                 end
               else
                 redirect_to step_path(:id => 'step2')
