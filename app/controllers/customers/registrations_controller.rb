@@ -70,10 +70,10 @@ class Customers::RegistrationsController < Devise::RegistrationsController
                     if product
                       redirect_to product_path(:id => product.to_param) and return
                     else
-                      redirect_to root_localize_path and return
+                      redirect_to step_path(:id => 'step4') and return
                     end
                   else
-                    redirect_to root_localize_path and return
+                    redirect_to step_path(:id => 'step4') and return
                   end
                 else
                   redirect_to step_path(:id => 'step2') and return
