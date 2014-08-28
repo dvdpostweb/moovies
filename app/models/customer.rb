@@ -321,10 +321,10 @@ class Customer < ActiveRecord::Base
   end
 
   def abo_history(action, new_abo_type = 0, activation_code_id = 0)
-    if action == 6 || action == 8 || action == 35
-      code_id = self.promo_id
-    elsif activation_code_id.to_i > 0
+    if activation_code_id.to_i > 0
       code_id = activation_code_id
+    elsif action == 6 || action == 8 || action == 35
+      code_id = self.promo_id
     else
       code_id = nil
     end
