@@ -10,7 +10,7 @@ nl:
         other: "Kon %{resource} niet opslaan:"
       taken: "bestaal al, <a href='/nl/customers/sign_in'>log hier in</a>"
       taken_step: "Dit e-mail adres bestaat al, <a href='/nl/customers/reactive?code=%{code}&email=%{email}'>log u hier in</a>"
-     taken_all_cust: "bestaat al. <a href='/nl/customers/promotion?code=%{code}&email=%{email}'>Log hier in</a> om van de promotie te genieten"
+      taken_all_cust: "bestaat al. <a href='/nl/customers/promotion?code=%{code}&email=%{email}'>Log hier in</a> om van de promotie te genieten"
       taken2: "bestaal al"
       invalid: "is niet correct"
       blank: 'mag niet leeg zijn'
