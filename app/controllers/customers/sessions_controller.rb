@@ -12,9 +12,9 @@ class Customers::SessionsController < Devise::SessionsController
       cookies[:imdb_id] = { value: params[:imdb_id], expires: 15.days.from_now } if params[:imdb_id]
       customer = current_customer
       if customer && customer.abo_active == 1 && @activation && @activation.all_cust?
-        customer.tvod_free = customer.tvod_free + @promotion.tvod_free if @promotion && @promotion.tvod_free && @promotion.tvod_free > 0
+        customer.tvod_free = customer.tvod_free + @activation.tvod_free if @activation && @activation.tvod_free && @activation.tvod_free > 0
         customer.save(:validate => false)
-        customer.abo_history(38, customer.abo_type_id)
+        customer.abo_history(38, customer.abo_type_id, @activation.id)
         @activation.update_attributes(:customers_id => customer.to_param, :created_at => Time.now.localtime)
       else
         customer.step = @promotion.nil? ? 31 : @promotion.goto_step
@@ -31,7 +31,11 @@ class Customers::SessionsController < Devise::SessionsController
         @activation.update_attributes(:customers_id => customer.to_param, :created_at => Time.now.localtime) if @activation
       end
     end
-    set_flash_message(:notice, :signed_in) if is_navigational_format?
+    if params[:code]
+      flash[:notice] = t('session.promotion.sucess')
+    else
+      set_flash_message(:notice, :signed_in) if is_navigational_format?
+    end
     sign_in(resource_name, resource)
     respond_with resource, :location => after_sign_in_path_for(resource)
     
