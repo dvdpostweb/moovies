@@ -6,7 +6,7 @@
       <h2><%= params[:kind] == :adult ? t('home.index.tvod_adult_new').html_safe : t('home.index.tvod_new').html_safe %></h2>
       <div class="tab-container">
         <ul>
-          <%= render :partial => 'products/detail', :collection => @new_tvod, :locals => {:source => @wishlist_source[:hp_list]} %>
+          <%= render :partial => 'products/detail', :collection => @new_tvod, :locals => {:source => type = 'subscription' ? @wishlist_source[:subscription] : @wishlist_source[:hp_list]} %>
         </ul>
       </div>
       <div class="clear"></div>
@@ -18,7 +18,7 @@
       <h2><%= params[:kind] == :adult ? t('home.index.unlimited_adult_new').html_safe : t('home.index.unlimited_new').html_safe %></h2>
       <div class="tab-container">
         <ul>
-          <%= render :partial => 'products/detail', :collection => @new_svod, :locals => {:source => @wishlist_source[:hp_list]} %>
+          <%= render :partial => 'products/detail', :collection => @new_svod, :locals => {:source => type = 'subscription' ? @wishlist_source[:subscription] : @wishlist_source[:hp_list]} %>
         </ul>
       </div>
       <div class="clear"></div>
