@@ -10,7 +10,7 @@
         <%= link_to(image_tag(product_image, :size => '100x150') ,product_path(:id => @product.to_param)) %>
       </div>
       <div id="right_part">
-        <p><%= t('.location') %> <strong><%= product_title %></strong> </p>
+        <p><%= t('.location') %> <strong><%= @product.episode_title %></strong> </p>
         <p><%= t('.price') %> <strong> <%= current_customer && current_customer.tvod_only? ? @product.get_vod_online(session[:country_id]).first.tvod_price : @product.get_vod_online(session[:country_id]).first.ppv_price %>€</strong></p>
       </div>
       <div class="clearfix"></div>
@@ -19,19 +19,27 @@
     <div class="paiement_choices">
       <h2><strong><%= t('.credit_card').html_safe %></strong></h2>
       <p>
-        <%= link_to(image_tag('visa_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'visa'), :method => :put) %>
-        <%= link_to(image_tag('mastercard_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'mastercard'), :method => :put) %>
-        <%= link_to(image_tag('amex_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'american Express'), :method => :put) %>
+        <%= link_to(image_tag('visa_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'visa', :source => params[:source]
+), :method => :put) %>
+        <%= link_to(image_tag('mastercard_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'mastercard', :source => params[:source]
+), :method => :put) %>
+        <%= link_to(image_tag('amex_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'american Express', :source => params[:source]
+), :method => :put) %>
       </p>
       <h2><strong>Mister cash</strong></h2>
-      <p><%= link_to(image_tag('bancontact_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'Bancontact/Mister Cash'), :method => :put) %></p>
+      <p><%= link_to(image_tag('bancontact_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'Bancontact/Mister Cash', :source => params[:source]
+), :method => :put) %></p>
       <h2><strong>Paypal</strong></h2>
-      <p><%= link_to(image_tag('paypal_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'PAYPAL'), :method => :put) %></p>
+      <p><%= link_to(image_tag('paypal_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'PAYPAL', :source => params[:source]
+), :method => :put) %></p>
       <h2><strong>Web-Banking</strong></h2>
       <p>
-        <%= link_to(image_tag('ideal_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'iDEAL'), :method => :put) %>
-        <%= link_to(image_tag('belfius_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'Belfius Direct Net'), :method => :put) %>
-        <%= link_to(image_tag('ing_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'ING HomePay'), :method => :put) %>
+        <%= link_to(image_tag('ideal_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'iDEAL', :source => params[:source]
+), :method => :put) %>
+        <%= link_to(image_tag('belfius_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'Belfius Direct Net', :source => params[:source]
+), :method => :put) %>
+        <%= link_to(image_tag('ing_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'ING HomePay', :source => params[:source]
+), :method => :put) %>
       </p>
       <h2><strong>Web-Banking via Sofort</strong></h2>
       <p>
@@ -39,8 +47,10 @@
       </p>
       <br />
       <p>
-        <%= link_to(image_tag('sofortbelgium_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'DirectEbankingBE'), :method => :put) %>
-        <%= link_to(image_tag('sofortlux_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'DirectEbankingNL'), :method => :put) %>
+        <%= link_to(image_tag('sofortbelgium_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'DirectEbankingBE', :source => params[:source]
+), :method => :put) %>
+        <%= link_to(image_tag('sofortlux_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'DirectEbankingNL', :source => params[:source]
+), :method => :put) %>
       </p>
     </div>
     <div class="secure_icons">
