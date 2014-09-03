@@ -1,10 +1,10 @@
 #encoding: utf-8
 
 module ProductsHelper
-  def carousel_path(carousel)
+  def carousel_path(carousel, hp = false)
     case carousel.kind
       when 'MOVIE'
-        product_path(:id => carousel.reference_id, :source => @wishlist_source[:carousel])
+        product_path(:id => carousel.reference_id, :source => hp ? @wishlist_source[:carousel_hp] : @wishlist_source[:carousel])
       when 'OTHER'
         info_path(:page_name => carousel.name)
       when 'OLD_SITE'
@@ -533,8 +533,12 @@ module ProductsHelper
         "<td class='goalacarte'>#{t('.tomorrow_in_tvod')}</td>".html_safe
       elsif vod.expire_at && vod.expire_at > Date.today && vod.expire_at < Date.today+30.days && vod.expire_at != vod.available_backcatalogue_from
         "<td class='noavailable'>#{t('.last_chance', :days => (vod.expire_at - Date.today).to_i).html_safe}</td>".html_safe
+      elsif vod.expire_at && vod.expire_at == Date.today
+        "<td class='noavailable'>#{t('.last_chance_today').html_safe}</td>".html_safe
       elsif vod.expire_backcatalogue_at && vod.expire_backcatalogue_at > Date.today && vod.expire_backcatalogue_at < Date.today+30.days
         "<td class='noavailable'>#{t('.last_chance', :days => (vod.expire_backcatalogue_at - Date.today).to_i).html_safe}</td>".html_safe
+      elsif vod.expire_backcatalogue_at && vod.expire_backcatalogue_at == Date.today
+        "<td class='noavailable'>#{t('.last_chance_today').html_safe}</td>".html_safe
       else
         "<td></td>".html_safe
       end
@@ -545,6 +549,8 @@ module ProductsHelper
         "<td>#{t('.available_soon_'+ package.to_s, :days => (vod.available_backcatalogue_from - Date.today).to_i).html_safe}</td>".html_safe
       elsif vod.expire_backcatalogue_at && vod.expire_backcatalogue_at < Date.today
         "<td>#{t('.not_available_anymore').html_safe}</td>".html_safe
+      elsif vod.available_backcatalogue_from.nil?
+        "<td></td>".html_safe
       else
         "<td>#{t('.soon').html_safe}</td>".html_safe
       end

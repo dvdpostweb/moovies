@@ -47,7 +47,7 @@ class Customers::RegistrationsController < Devise::RegistrationsController
       if @user
         if @user.valid_password?(params[:customer][:password])
           if @activation || (@discount && @user.discount_reuse?(@discount.month_before_reuse))
-            if @user.abo_active == 0
+            if @user.abo_active == 0 || (@user.abo_active == 1 && @user.tvod_only?)
               cookies[:code] = { value: params[:customer][:code], expires: 15.days.from_now }
               @user.step = @promotion.nil? ? 31 : @promotion.goto_step
               @user.code = params[:customer][:code]
@@ -70,10 +70,10 @@ class Customers::RegistrationsController < Devise::RegistrationsController
                     if product
                       redirect_to product_path(:id => product.to_param) and return
                     else
-                      redirect_to root_localize_path and return
+                      redirect_to step_path(:id => 'step4') and return
                     end
                   else
-                    redirect_to root_localize_path and return
+                    redirect_to step_path(:id => 'step4') and return
                   end
                 else
                   redirect_to step_path(:id => 'step2') and return

@@ -54,13 +54,17 @@
     <% end %>
     <%= render(:partial => 'layouts/header') %>
     <div class="container clearfix">
-      <% if !current_customer && (params[:controller] != 'home' && params[:controller] != 'customers/registrations' && params[:controller] != 'steps' && params[:page_name] != 'abo') and !(params[:controller] == 'promotions' and params[:id] == 'smarttv') and !(params[:controller] == 'customers' and params[:action] == 'reactive') %>
+      <% if !current_customer && (params[:controller] != 'home' && params[:controller] != 'customers/registrations' && params[:controller] != 'steps' && params[:page_name] != 'abo') and !(params[:controller] == 'promotions' and params[:id] == 'smarttv') and !(params[:controller] == 'customers' and (params[:action] == 'reactive' || params[:action] == 'promotion')) %>
       <div id="subscribe-wrap">
         <% if params[:kind] == :adult %>
-        <%= link_to image_tag("#{I18n.locale}/banner_promo_hp_tvod#{@code ? "_#{@code.activation_group_id}" : ''}_adult.jpg", :size => '942x188', :alt => t(products_alt_banner)), @code ? promotion_path(:id => :mobistar2) : new_customer_registration_path(:code => get_code(@discount_top.name)), :target => "_blank" %>
+          <% path = @code ? promotion_path(:id => :mobistar2) : new_customer_registration_path(:code => get_code(@discount_top.name)) %>
         <% else %>
-        <%= link_to image_tag("#{I18n.locale}/banner-promo-hp_tvod#{@code ? "_#{@code.activation_group_id}" : ''}.jpg", :size => '942x188', :alt => t(products_alt_banner)), new_customer_registration_path(:code => get_code(@discount_top.name)), :target => "_blank" %>
+          <% path = new_customer_registration_path(:code => get_code(@discount_top.name)) %>
         <% end %>
+        <% src = "#{I18n.locale}/banner-promo-hp_tvod#{@code ? "_#{@code.activation_group_id}" : ''}#{params[:kind] == :adult ? '_adult' : ''}.jpg" %>
+        <% src_norm = "#{I18n.locale}/banner-promo-hp_tvod#{params[:kind] == :adult ? '_adult' : ''}.jpg" %>
+        <% image = FileTest.exist?("#{Rails.root}/assets/images/#{src}") ? image_tag(src, :size => '942x188', :alt => t(products_alt_banner)) : image_tag(src_norm, :size => '942x188', :alt => t(products_alt_banner)) %>
+        <%= link_to image, path, :target => "_blank" %>
       </div>
       <% elsif params[:kind] == :adult && current_customer && (params[:controller] != 'home' && params[:controller] != 'customers/registrations' && params[:controller] != 'steps' && params[:page_name] != 'abo') and !(params[:controller] == 'promotions' and params[:id] == 'smarttv') && current_customer.no_adult? %>
       <div id="subscribe-wrap">

@@ -11,20 +11,31 @@ class Customers::SessionsController < Devise::SessionsController
     if params[:code]
       cookies[:imdb_id] = { value: params[:imdb_id], expires: 15.days.from_now } if params[:imdb_id]
       customer = current_customer
-      customer.step = @promotion.nil? ? 31 : @promotion.goto_step
-      customer.tvod_free = @promotion.tvod_free if @promotion && @promotion.tvod_free && @promotion.tvod_free > 0
-      customer.abo_active = 1 if @promotion && @promotion.goto_step.to_i == 100
-      if @promotion.tvod_only
-        customer.auto_stop = 0
-        customer.subscription_expiration_date = nil
+      if customer && customer.abo_active == 1 && @activation && @activation.all_cust?
+        customer.tvod_free = customer.tvod_free + @activation.tvod_free if @activation && @activation.tvod_free && @activation.tvod_free > 0
+        customer.save(:validate => false)
+        customer.abo_history(38, customer.abo_type_id, @activation.to_param)
+        @activation.update_attributes(:customers_id => customer.to_param, :created_at => Time.now.localtime)
+      else
+        customer.step = @promotion.nil? ? 31 : @promotion.goto_step
+        customer.tvod_free = @promotion.tvod_free if @promotion && @promotion.tvod_free && @promotion.tvod_free > 0
+        customer.abo_active = 1 if @promotion && @promotion.goto_step.to_i == 100
+        if @promotion.tvod_only
+          customer.auto_stop = 0
+          customer.subscription_expiration_date = nil
+        end
+        customer.code = params[:code]
+        customer.save(:validate => false)
+        customer.abo_history(@promotion && @promotion.goto_step.to_i == 100 ? 6 : 35, customer.abo_type_id)
+        DiscountUse.create(:discount_code_id => @discount.id, :customer_id => customer.to_param, :discount_use_date => Time.now.localtime) if @discount
+        @activation.update_attributes(:customers_id => customer.to_param, :created_at => Time.now.localtime) if @activation
       end
-      customer.code = params[:code]
-      customer.save(:validate => false)
-      customer.abo_history(@promotion && @promotion.goto_step.to_i == 100 ? 6 : 35, customer.abo_type_id)
-      DiscountUse.create(:discount_code_id => @discount.id, :customer_id => customer.to_param, :discount_use_date => Time.now.localtime) if @discount
-      @activation.update_attributes(:customers_id => customer.to_param, :created_at => Time.now.localtime) if @activation
     end
-    set_flash_message(:notice, :signed_in) if is_navigational_format?
+    if params[:code]
+      flash[:notice] = t('session.promotion.sucess')
+    else
+      set_flash_message(:notice, :signed_in) if is_navigational_format?
+    end
     sign_in(resource_name, resource)
     respond_with resource, :location => after_sign_in_path_for(resource)
     
@@ -49,7 +60,7 @@ class Customers::SessionsController < Devise::SessionsController
         cookies[:code] = { value: params[:code], expires: 15.days.from_now }
         customer = Customer.where(:email => params[:customer][:email]).first if params[:customer] && params[:customer][:email]
         if @activation || (@discount && customer && customer.discount_reuse?(@discount.month_before_reuse))
-          if customer.abo_active == 1
+          if customer.abo_active == 1 && customer.svod? && ((@activation && !@activation.all_cust? ) || @activation.nil?)
             redirect_to params[:return_url], :alert => t('session.error_already_customer') and return
           end
         else

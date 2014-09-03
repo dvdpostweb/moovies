@@ -69,22 +69,23 @@ class PromotionsController < ApplicationController
           @promotion = @discount
       elsif @activation
         @promotion = @activation
-      else
-        flash[:alert] = 'error de code'
-        flash.discard
-        render :show
       end
-      if @promotion
+      #if @promotion
         if params[:email]
           @user = Customer.find_by_email(params[:email])
           if !@user.confirmed?
             Devise::Mailer.confirmation_instructions(@user).deliver
           end
         end
-        
         if current_customer
           if @activation || (@discount && current_customer.discount_reuse?(@discount.month_before_reuse))
-            if current_customer.abo_active == 0 || (current_customer.abo_active == 1 && current_customer.tvod_only?)
+            if current_customer.abo_active == 1 && @activation && @activation.all_cust?
+              current_customer.tvod_free = current_customer.tvod_free + @activation.tvod_free if @activation && @activation.tvod_free && @activation.tvod_free > 0
+              current_customer.save(:validate => false)
+              current_customer.abo_history(38, current_customer.abo_type_id, @activation.to_param)
+              @activation.update_attributes(:customers_id => current_customer.to_param, :created_at => Time.now.localtime)
+              redirect_to root_localize_path, notice: t('session.promotion.sucess') and return
+            elsif current_customer.abo_active == 0 || (current_customer.abo_active == 1 && current_customer.tvod_only?)
               customer = current_customer
               customer.step = @promotion.nil? ? 31 : @promotion.goto_step
               customer.tvod_free = @promotion.tvod_free if @promotion && @promotion.tvod_free && @promotion.tvod_free > 0
@@ -104,26 +105,27 @@ class PromotionsController < ApplicationController
                   if product
                     redirect_to product_path(:id => product.to_param) and return
                   else
-                    redirect_to root_localize_path and return
+                    redirect_to step_path(:id => 'step4') and return
                   end
                 else
-                  redirect_to root_localize_path and return
+                  redirect_to step_path(:id => 'step4') and return
                 end
               else
                 redirect_to step_path(:id => 'step2')
-              end  
+              end
             else
               flash[:alert] = t('session.error_already_customer')
+              flash.discard
               render :show
             end
           else
             flash[:alert] = t('session.error_discount_reused')
+            flash.discard
             render :show
           end
         else
           redirect_to new_customer_registration_path(:code => code)
         end
-      end
     end
   end
 

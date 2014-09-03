@@ -1,3 +1,1 @@
 <%= rating_image_links(product, background, (size rescue nil), (replace rescue nil), (recommendation rescue nil), (response_id rescue nil), (source rescue nil)).html_safe %>
-<span class="note" itemprop="ratingValue" content="<%= product.rating[:rating] > 0 ? product.rating[:rating] / 2.0 : 0 %>"></span>
-<meta itemprop="bestRating" content="5">

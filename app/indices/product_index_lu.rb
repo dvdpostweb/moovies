@@ -15,9 +15,7 @@ ThinkingSphinx::Index.define :product, :with => :active_record, :name => 'produc
   has products_rating,            :as => :dvdpost_rating
   has imdb_id
   has package_id
-  has "case 
-    when  products_status = -1 then 99
-    else products_status end", :type => :integer, :as => :state
+  has "case when  products_status = -1 then 99 else products_status end", :type => :integer, :as => :state
   has actors('actors.`actors_id`'),         :as => :actors_id, :type => :integer, :multi => true
   has categories('categories.categories_id'), :as => :category_id, :type => :integer, :multi => true
   has director(:directors_id),    :as => :director_id
@@ -27,9 +25,8 @@ ThinkingSphinx::Index.define :product, :with => :active_record, :name => 'produc
   has streaming_products_lu('streaming_products.`imdb_id`'), :as => :streaming_imdb_id, :type => :integer, :multi => true
   has streaming_products_lu('streaming_products.`language_id`'), :as => :language_ids, :type => :integer, :multi => true
   has streaming_products_lu('streaming_products.`subtitle_id`'), :as => :subtitle_ids, :type => :integer, :multi => true
-  has "ifnull(concat('2',replace(if(min(vod_online_lus_products.expire_at) > date(now()),min(vod_online_lus_products.available_from),null),'-','')),ifnull(concat('2',replace(min(vod_online_lus_products.available_backcatalogue_from), '-','')), ifnull(concat('1',replace(if(min(streaming_products.expire_at) > date(now()),min(streaming_products.available_from),null), '-','')),concat('1',replace(min(streaming_products.available_backcatalogue_from), '-','')))))", :type => :integer, :as => :streaming_available_at_order
-  has "if(vod_online_lus_products.expire_at < now(),vod_online_lus_products.expire_at,vod_online_lus_products.expire_backcatalogue_at)", :type => :timestamp, :as => :streaming_expire_at
-  
+  has "(select if( date(now()) <= date(min(expire_at)) ,replace(min(available_from),'-',''), if(date(now()) <= date(max(expire_at)), replace(max(available_from),'-',''),replace(min(available_backcatalogue_from),'-','')))  from streaming_products   where status = 'online_test_ok' and available = 1  and imdb_id = products.imdb_id and   (date(now())  > expire_at or date(now()) <= date(expire_at) or expire_at is null) order by available_from asc, available_backcatalogue_from asc limit 1)", :type => :integer, :as => :streaming_available_at_order
+  has "if(vod_online_lus_products.expire_at >= date(now()),vod_online_lus_products.expire_at,vod_online_lus_products.expire_backcatalogue_at)", :type => :timestamp, :as => :streaming_expire_at
   has vod_online_lu('vod_online_lus_products.`imdb_id`'), :as => :imdb_id_online, :type => :integer, :multi => true
   has vod_online_lu('vod_online_lus_products.`language_id`'), :as => :online_language_ids, :type => :integer, :multi => true
   has vod_online_lu('vod_online_lus_products.`subtitle_id`'), :as => :online_subtitle_ids, :type => :integer, :multi => true
@@ -38,7 +35,7 @@ ThinkingSphinx::Index.define :product, :with => :active_record, :name => 'produc
   has "(select start_on svod_start from products p left join svod_dates sd on sd.imdb_id = p.imdb_id and (start_on >= date(now()) or end_on >= date(now())) where p.imdb_id = products.imdb_id order by sd.start_on limit 1)", :as => :svod_start, :type => :timestamp
   has "(select end_on svod_end from products p left join svod_dates sd on sd.imdb_id = p.imdb_id and (start_on >= date(now()) or end_on >= date(now()))  where p.imdb_id =products.imdb_id order by sd.start_on limit 1)", :as => :svod_end, :type => :timestamp
   has "(select ifnull(end_on,ifnull((select end_on from svod_dates where imdb_id=products.imdb_id and svod_dates.start_on < date(now()) order by start_on desc limit 1),if(expire_at >= date(now()) and available_from <=date(now()),min(available_from),min(available_backcatalogue_from)))) svod_start from products p join `streaming_products` sp on p.imdb_id = sp.imdb_id and available =1 and status  in ('uploaded','soon','online_test_ok') and country ='LU' left join svod_dates sd on sd.imdb_id = p.imdb_id and ( start_on <= date(now()) and end_on>= date(now())) where p.imdb_id = products.imdb_id order by sd.start_on limit 1)", :as => :tvod_start, :type => :timestamp
-  has "(select if(end_on,null,ifnull((select start_on from svod_dates where imdb_id= products.imdb_id and svod_dates.start_on > date(now()) order by start_on desc limit 1),if(expire_at >= date(now()) and available_from <=date(now()) and DATEDIFF(available_backcatalogue_from,expire_at) > 6 ,min(expire_at),min(expire_backcatalogue_at)))) svod_end from products p join `streaming_products` sp on p.imdb_id = sp.imdb_id and available =1 and status  in ('uploaded','soon','online_test_ok') and country ='LU' left join svod_dates sd on sd.imdb_id = p.imdb_id and ( start_on <= date(now()) and end_on>= date(now())) where p.imdb_id = products.imdb_id order by sd.start_on limit 1)", :as => :tvod_end, :type => :timestamp
+  has "(select if(end_on,null,ifnull((select start_on from svod_dates where imdb_id= products.imdb_id and svod_dates.start_on > date(now()) order by start_on desc limit 1),if(expire_at >= date(now()) and available_from <=date(now()) and (DATEDIFF(available_backcatalogue_from,expire_at) > 6 or expire_backcatalogue_at is null) ,min(expire_at),min(expire_backcatalogue_at)))) svod_end from products p join `streaming_products` sp on p.imdb_id = sp.imdb_id and available =1 and status  in ('uploaded','soon','online_test_ok') and country ='BE' left join svod_dates sd on sd.imdb_id = p.imdb_id and ( start_on <= date(now()) and end_on>= date(now())) where p.imdb_id = products.imdb_id group by sp.id order by sd.start_on,svod_end desc limit 1)", :as => :tvod_end, :type => :timestamp
   #has descriptions_fr.products_name,         :as => :descriptions_title_fr, :sortage => true
   #has descriptions_nl.products_name,         :as => :descriptions_title_nl, :sortage => true
   #has descriptions_en.products_name,         :as => :descriptions_title_en, :sortage => true
