@@ -85,7 +85,7 @@ class PaymentMethodsController < ApplicationController
     end
     
     @alias = "p#{current_customer.to_param}"
-    OgoneCheck.create(:orderid => @order_id, :amount => (@price*100).to_i, :customers_id => current_customer.to_param, :context => internal_com, :site => 1, :language_id => Moovies.customer_languages[I18n.locale], :imdb_id => @product.imdb_id, :seaon_id => @product.seaon_id, :episode_id => @product.episode_id)
+    OgoneCheck.create(:orderid => @order_id, :amount => (@price*100).to_i, :customers_id => current_customer.to_param, :context => internal_com, :site => 1, :language_id => Moovies.customer_languages[I18n.locale], :imdb_id => @product.imdb_id, :season_id => @product.season_id, :episode_id => @product.episode_id, :source_id => params[:source])
     list = {:COM => @com, :ALIAS => @alias, :AMOUNT => (@price*100).to_i, :CURRENCY => 'EUR', :LANGUAGE => @ogone_language, :ORDERID => @order_id, :PSPID => Moovies.ogone_pspid[Rails.env], :CN => current_customer.name, :ALIASUSAGE => @com, :DECLINEURL => @url_back, :EXCEPTIONURL => @url_back, :CANCELURL => @url_back, :CATALOGURL => @url_back, :ACCEPTURL => @url_ok, :TP => @template_ogone}
     list = list.merge(:PM => @pm, :BRAND => @brand) if !@brand.nil?
     list = list.sort
