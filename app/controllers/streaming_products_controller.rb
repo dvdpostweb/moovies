@@ -47,7 +47,7 @@ class StreamingProductsController < ApplicationController
         if @product
           if @vod_disable == "1" || Rails.env == "pre_production"
             if view_context.streaming_access?
-              if @code || (current_customer.actived? && !current_customer.suspended? && (current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s) || @streaming.prepaid_all?) && (@product.svod? || (!@product.svod? && current_customer.payable?)))
+              if @code || (current_customer.actived? && !current_customer.suspended? && (current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s) || @streaming.prepaid_all?) && (@product.svod? || (!@product.svod? && current_customer.payable? ) || current_customer.tvod_free > 0))
                 if !@streaming_prefered.blank? || !@streaming_not_prefered.blank?
                   if @token_valid == false && @vod_create_token == "0" && Rails.env != "pre_production"
                     error = t('streaming_products.not_available.offline')

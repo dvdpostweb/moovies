@@ -54,6 +54,7 @@ Moovies::Application.routes.draw do
     match "/" => 'home#index', :as => :root_localize
     match "validation" => 'home#validation'
     match 'customers/reactive' => "customers#reactive"
+    match 'customers/promotion' => "customers#promotion"
     devise_for :customers, :controllers => { :registrations => "customers/registrations", :confirmations => "customers/confirmations" }, :as => :old_customers
     resources :customers, :as => :old_customer do
       match 'newsletter' => 'customers#newsletter', :only => [:update]

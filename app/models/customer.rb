@@ -32,18 +32,18 @@ class Customer < ActiveRecord::Base
   
   alias_attribute :step,                         :customers_registration_step
   alias_attribute :locked,                       :customers_locked__for_reconduction
-  validates_length_of :first_name, :minimum => 2, :on => :update
-  validates_length_of :last_name, :minimum => 2, :on => :update
-  validates_format_of :phone, :with => /^(\+)?[0-9 \-\/.]+$/, :on => :update
+  validates_length_of :first_name, :minimum => 2, :on => :update, :if => :svod?
+  validates_length_of :last_name, :minimum => 2, :on => :update, :if => :svod?
+  validates_format_of :phone, :with => /^(\+)?[0-9 \-\/.]+$/, :on => :update, :if => :svod?
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :update
-  validates :birthday,  :date => { :after => 100.years.ago, :before => 18.years.ago}, :on => :update
+  validates :birthday,  :presence => true, :date => { :after => 100.years.ago, :before => 18.years.ago}, :on => :update, :if => :svod?
   validates :email, :uniqueness => {:message => :taken2, :case_sensitive => false}, :on => :update
   
   
   validates_presence_of   :email, :on => :create
-  #validates :email, :uniqueness => {:message => :taken, :case_sensitive => false}, :on => :create
   validate :email_step, :on => :create
   validate :email_abo, :on => :create
+  validate :email_all_cust, :on => :create
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create
 
   validates_presence_of     :password, :if => :password_required?
@@ -183,6 +183,11 @@ class Customer < ActiveRecord::Base
   def tvod_only?
     abo_type_id == 6
   end
+
+  def svod?
+    abo_type_id != 6
+  end
+
   def name
     "#{first_name} #{last_name}"
   end
@@ -315,8 +320,14 @@ class Customer < ActiveRecord::Base
     end
   end
 
-  def abo_history(action, new_abo_type = 0)
-    code_id = (action == 6 || action == 8) ? self.promo_id : nil
+  def abo_history(action, new_abo_type = 0, activation_code_id = 0)
+    if activation_code_id.to_i > 0
+      code_id = activation_code_id
+    elsif action == 6 || action == 8 || action == 35
+      code_id = self.promo_id
+    else
+      code_id = nil
+    end
     Subscription.create(:customer_id => self.to_param, :Action => action, :Date => Time.now().to_s(:db), :product_id => (new_abo_type.to_i > 0 ? new_abo_type : self.abo_type_id), :site => 1, :payment_method => subscription_payment_method.name, :code_id => code_id)
   end
 
@@ -458,7 +469,11 @@ class Customer < ActiveRecord::Base
   end
 
   def email_abo
-    errors.add(:email, I18n.t("errors.messages.taken")) if Customer.where(:email => self.email, :customers_abo => 1).exists?
+    errors.add(:email, I18n.t("errors.messages.taken")) if Customer.where(:email => self.email, :customers_abo => 1).exists? && (@activation && !@activation.all_cust? || @activation.nil?)
+  end
+
+  def email_all_cust
+    errors.add(:email, I18n.t("errors.messages.taken_all_cust", :code => self.code, :email => self.email)) if Customer.where(:email => self.email, :customers_abo => 1).exists? && (@activation && @activation.all_cust?)
   end
 
   def convert_created_at

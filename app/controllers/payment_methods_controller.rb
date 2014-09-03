@@ -21,7 +21,7 @@ class PaymentMethodsController < ApplicationController
       @price = 0
       @url_back = edit_customer_payment_methods_url(:customer_id => current_customer.to_param, :type => params[:type])
       @url_ok = edit_customer_payment_methods_url(:customer_id => current_customer.to_param, :type => "#{params[:type]}_finish")
-      @com = t 'payment_methods.ogone'
+      @com = t 'payment_methods.ogone_modification'
       product_id = 0
     elsif params[:type] == 'tvod'
       internal_com = 'tvod'
