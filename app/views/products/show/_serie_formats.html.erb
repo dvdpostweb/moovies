@@ -3,7 +3,7 @@
   <div class="details">
     <div class="season_title"><%= "Season #{ season.season_id}" %></div>
     <div class='message'>
-      #to do
+       <%= get_vod_message(season.get_vod(session[:country]).first, svod_date, params[:kind].to_s, Moovies.packages.invert[product.package_id]) %>
     </div>
     <div class="oters">
       <div class="lang">
