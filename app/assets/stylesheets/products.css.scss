@@ -2327,3 +2327,85 @@ ul#ratings_labels li:last-child {
 .adult.private .alacarte.price {
     background-image: url(image_path('button_streamingppv_price_adult.gif'));
 }
+/*********/
+/* serie */
+/*********/
+
+.season
+{
+  font-size:16px;
+  color:#000;
+  position: relative;
+}
+.episode .details
+{
+  margin:5px;
+  position: absolute;
+  top: -4px;
+  right: 10px;
+  cursor : pointer;
+}
+.season .season_title
+{
+  border-bottom: 1px solid #aaa;
+  padding: 15px 0;
+}
+.episode
+{
+  margin: 10px 0 0 10px;
+  color:#000;
+  border-bottom: 1px solid #aaa;
+  padding: 9px 10px 16px 10px;
+  position: relative;
+}
+.episode .actions
+{
+  margin:5px;
+  position: absolute;
+  top: -4px;
+  right: 10px;
+}
+.season .message
+{
+  margin: 5px;
+  position: absolute;
+  top: 10px;
+  left: 235px;
+}
+.season .oters
+{
+  margin: 5px;
+  position: absolute;
+  top: 10px;
+  left: 80px;
+  min-height: 35px;
+}
+.season .arrow-down {
+  width: 0; 
+  height: 0; 
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid #333;
+  position: absolute;
+  right: 10px;
+  top: 28px;
+}
+
+.season .arrow-right {
+  width: 0;
+  height: 0;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-left: 7px solid #333;
+  position: absolute;
+  right: 10px;
+  top: 28px;
+}
+#film-details .episode .alacarte {
+  float:left;
+  margin: 0 4px;
+}
+#film-details .episode .serie_list
+{
+  float:left;
+}

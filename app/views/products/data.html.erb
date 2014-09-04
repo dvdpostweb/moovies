@@ -24,6 +24,7 @@
   </h3>
 </div>
 <div class="clear"></div>
+<% if !@product.series? %>
 <ul class="btns osc jacket">
   <li>
     <%= render :partial => 'products/streaming',  :locals => {:product => @product, :source => @source, :popup => false} %>
@@ -31,6 +32,7 @@
   <li>
     <%= render :partial => 'products/vod_list',  :locals => {:product => @product, :source => @source, :response_id => @response_id} %>
   </li>
+  <% end %>
   <% if @product.trailer? %>
   <li>
     <%= link_to(t('.trailer'), product_trailer_path(:product_id => @product.to_param, :source => @source, :response_id => @response_id), :class => 'trailer', :target => :_blank) %>

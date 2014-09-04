@@ -226,7 +226,7 @@ module ProductsHelper
     image = image_tag(image_name, :class => class_name, :id => "star_#{product.id}_#{value}", :name => image_name, :size => s)
     
     if current_customer && class_name == 'star'
-      link_to(image, product_rating_path(:product_id => product, :value => value, :background => background, :size => size, :replace => replace, :recommendation => recommendation, :response_id => response_id, :source => source))
+      link_to(image, product_rating_path(:product_id => product.to_param, :value => value, :background => background, :size => size, :replace => replace, :recommendation => recommendation, :response_id => response_id, :source => source))
     else
       image
     end
@@ -368,7 +368,7 @@ module ProductsHelper
 
   def streaming_audio_bublles(product, vod_next = false)
     content=''
-    bubble = StreamingProduct.available_beta.where(:imdb_id => product.imdb_id).group('language_id')
+    bubble = StreamingProduct.available_beta.where(:imdb_id => product.imdb_id, :season_id => product.season_id, :episode_id => product.episode_id).group('language_id')
     bubble.collect{
     |product|
       lang = product.language.by_language(I18n.locale).first
@@ -381,7 +381,7 @@ module ProductsHelper
 
   def streaming_subtitle_bublles(product, vod_next = false)
     content=''
-    bubble = StreamingProduct.available_beta.where(:imdb_id => product.imdb_id).group('subtitle_id')
+    bubble = StreamingProduct.available_beta.where(:imdb_id => product.imdb_id, :season_id => product.season_id, :episode_id => product.episode_id).group('subtitle_id')
     bubble.collect {
     |product|
       lang = product.subtitle.by_language(I18n.locale).first
@@ -523,22 +523,22 @@ module ProductsHelper
   end
 
   def get_vod_message(vod, svod_date, kind, package)
-    if vod.available?
+    if vod && vod.available?
       
       if svod_date && svod_date.start_on > Date.today && svod_date.start_on < Date.today+30.days
-        "<td class='goinfinite'>#{t('.soon_in_svod_' + kind, :days => (svod_date.start_on - Date.today).to_i).html_safe}</td>".html_safe
+        "<td class='goinfinite'>#{t('products.show.formats.soon_in_svod_' + kind, :days => (svod_date.start_on - Date.today).to_i).html_safe}</td>".html_safe
       elsif svod_date && svod_date.end_on > Date.today && svod_date.end_on < Date.today+30.days && vod.expire_at && vod.expire_at > Date.today
-        "<td class='goalacarte'>#{t('.soon_in_tvod', :days => (svod_date.end_on - Date.today).to_i).html_safe}</td>".html_safe
+        "<td class='goalacarte'>#{t('products.show.formats.soon_in_tvod', :days => (svod_date.end_on - Date.today).to_i).html_safe}</td>".html_safe
       elsif svod_date && svod_date.end_on == Date.today
-        "<td class='goalacarte'>#{t('.tomorrow_in_tvod')}</td>".html_safe
+        "<td class='goalacarte'>#{t('products.show.formats.tomorrow_in_tvod')}</td>".html_safe
       elsif vod.expire_at && vod.expire_at > Date.today && vod.expire_at < Date.today+30.days && vod.expire_at != vod.available_backcatalogue_from
-        "<td class='noavailable'>#{t('.last_chance', :days => (vod.expire_at - Date.today).to_i).html_safe}</td>".html_safe
+        "<td class='noavailable'>#{t('products.show.formats.last_chance', :days => (vod.expire_at - Date.today).to_i).html_safe}</td>".html_safe
       elsif vod.expire_at && vod.expire_at == Date.today
-        "<td class='noavailable'>#{t('.last_chance_today').html_safe}</td>".html_safe
+        "<td class='noavailable'>#{t('products.show.formats.last_chance_today').html_safe}</td>".html_safe
       elsif vod.expire_backcatalogue_at && vod.expire_backcatalogue_at > Date.today && vod.expire_backcatalogue_at < Date.today+30.days
-        "<td class='noavailable'>#{t('.last_chance', :days => (vod.expire_backcatalogue_at - Date.today).to_i).html_safe}</td>".html_safe
+        "<td class='noavailable'>#{t('products.show.formats.last_chance', :days => (vod.expire_backcatalogue_at - Date.today).to_i).html_safe}</td>".html_safe
       elsif vod.expire_backcatalogue_at && vod.expire_backcatalogue_at == Date.today
-        "<td class='noavailable'>#{t('.last_chance_today').html_safe}</td>".html_safe
+        "<td class='noavailable'>#{t('products.show.formats.last_chance_today').html_safe}</td>".html_safe
       else
         "<td></td>".html_safe
       end

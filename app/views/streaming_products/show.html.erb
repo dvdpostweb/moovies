@@ -1,7 +1,7 @@
   <div  <%= @code && @code.white_label ? 'id="maincontent_no_border"' : 'id="maincontent"' %> >
     <div id="vod-wrap">
         <h2>
-          <span id="vod_title"><%= h @product.description.title %> (<%= @product.year %>)<span>
+          <span id="vod_title"><%= h !@product.series? ? @product.description.title : @product.episode_title %> (<%= @product.year %>)<span>
         </h2>
         <% if @streaming.drm == true %>
           <div id="verimatrix_area">
@@ -29,7 +29,7 @@
 
         <% if @code || !current_customer.suspended? %>
           <% if @code || (@token && @token_valid) || (current_customer && current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s)) || (current_customer.tvod_only? && @streaming.prepaid_all?) %>
-            <% if @streaming_prefered.count > 0 || (@streaming_not_prefered && @streaming_not_prefered.count > 0) %>
+            <% if !@streaming_prefered.empty? || (@streaming_not_prefered && !@streaming_not_prefered.empty?) %>
               <div class="choice_language">
                 
                 <h3><%= t('.version_title') %></h3>
@@ -43,7 +43,7 @@
                   </div>
                 </div>
                 <p  class="info_vod" >
-                  <%= link_to t('.all_versions'), streaming_product_versions_path(:streaming_product_id => params[:id], :streaming_code => params[:streaming_code], :email => params[:email], :source => params[:source], :response_id => params[:response_id]), :id => :all_versions %>
+                  <%= link_to t('.all_versions'), streaming_product_versions_path(:streaming_product_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id], :streaming_code => params[:streaming_code], :email => params[:email], :source => params[:source], :response_id => params[:response_id]), :id => :all_versions %>
                   <br /><br />
 
                 </p>
