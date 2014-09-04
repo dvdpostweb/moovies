@@ -13,7 +13,6 @@ class Product < ActiveRecord::Base
   alias_attribute :product_type,    :products_product_type
   alias_attribute :rating,          :products_rating
   alias_attribute :runtime,         :products_runtime
-  alias_attribute :series_id,       :products_series_id
   alias_attribute :year,            :products_year
   alias_attribute :price,           :products_price
   alias_attribute :next,            :products_next
@@ -26,6 +25,7 @@ class Product < ActiveRecord::Base
   belongs_to :studio, :foreign_key => :products_studio
   belongs_to :country, :class_name => 'ProductCountry', :foreign_key => :products_countries_id
   belongs_to :picture_format, :foreign_key => :products_picture_format, :conditions => {:language_id => Moovies.languages[I18n.locale.to_s]}
+  belongs_to :serie
   has_many :lists
   has_one :public, :primary_key => :products_public, :foreign_key => :public_id, :conditions => {:language_id => Moovies.languages[I18n.locale.to_s]}
   has_many :descriptions, :class_name => 'ProductDescription', :foreign_key => :products_id
@@ -36,14 +36,14 @@ class Product < ActiveRecord::Base
   has_many :reviews, :foreign_key => :imdb_id, :primary_key => :imdb_id
   has_many :uninteresteds, :foreign_key => :products_id
   has_many :uninterested_customers, :through => :uninteresteds, :source => :customer, :uniq => true
-  has_many :streaming_products, :class_name => 'StreamingProduct', :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "streaming_products.available = 1 and streaming_products.country ='BE'"
-  has_many :streaming_products_be, :class_name => 'StreamingProduct', :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "streaming_products.available = 1 and streaming_products.country ='BE' and streaming_products.status in ('online_test_ok', 'soon', 'uploaded') and (streaming_products.expire_backcatalogue_at is null or streaming_products.expire_backcatalogue_at >= date(now()))"
-  has_many :streaming_products_lu, :class_name => 'StreamingProduct', :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "streaming_products.available = 1 and streaming_products.country ='LU' and streaming_products.status in ('online_test_ok', 'soon', 'uploaded') and (streaming_products.expire_backcatalogue_at is null or streaming_products.expire_backcatalogue_at >= date(now()))"
-  has_many :streaming_products_nl, :class_name => 'StreamingProduct', :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "streaming_products.available = 1 and streaming_products.country ='NL' and streaming_products.status in ('online_test_ok', 'soon', 'uploaded') and (streaming_products.expire_backcatalogue_at is null or streaming_products.expire_backcatalogue_at >= date(now()))"
-  has_many :vod_online_be, :class_name => 'StreamingProduct', :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "streaming_products.available = 1 and streaming_products.country ='BE' and streaming_products.status = 'online_test_ok' and ((streaming_products.available_from <= date(now()) and streaming_products.expire_at >= date(now())) or (streaming_products.available_backcatalogue_from <= date(now()) and streaming_products.expire_backcatalogue_at >= date(now())))"
-  has_many :vod_online_lu, :class_name => 'StreamingProduct', :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "streaming_products.available = 1 and streaming_products.country ='lu' and streaming_products.status = 'online_test_ok' and ((streaming_products.available_from <= date(now()) and streaming_products.expire_at >= date(now())) or (streaming_products.available_backcatalogue_from <= date(now()) and streaming_products.expire_backcatalogue_at >= date(now())))"
-  has_many :vod_online_nl, :class_name => 'StreamingProduct', :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "streaming_products.available = 1 and streaming_products.country ='NL' and streaming_products.status = 'online_test_ok' and ((streaming_products.available_from <= date(now()) and streaming_products.expire_at >= date(now())) or (streaming_products.available_backcatalogue_from <= date(now()) and streaming_products.expire_backcatalogue_at >= date(now())))"
-  has_many :tokens, :foreign_key => :imdb_id, :primary_key => :imdb_id
+  has_many :streaming_products, :class_name => 'StreamingProduct',    :primary_key => [:imdb_id, :season_id, :episode_id], :foreign_key => [:imdb_id, :season_id, :episode_id], :conditions => "streaming_products.available = 1 and streaming_products.country ='BE'"
+  has_many :streaming_products_be, :class_name => 'StreamingProduct', :primary_key => [:imdb_id, :season_id, :episode_id], :foreign_key => [:imdb_id, :season_id, :episode_id], :conditions => "streaming_products.available = 1 and streaming_products.country ='BE' and streaming_products.status in ('online_test_ok', 'soon', 'uploaded') and (streaming_products.expire_backcatalogue_at is null or streaming_products.expire_backcatalogue_at >= date(now()))"
+  has_many :streaming_products_lu, :class_name => 'StreamingProduct', :primary_key => [:imdb_id, :season_id, :episode_id], :foreign_key => [:imdb_id, :season_id, :episode_id], :conditions => "streaming_products.available = 1 and streaming_products.country ='LU' and streaming_products.status in ('online_test_ok', 'soon', 'uploaded') and (streaming_products.expire_backcatalogue_at is null or streaming_products.expire_backcatalogue_at >= date(now()))"
+  has_many :streaming_products_nl, :class_name => 'StreamingProduct', :primary_key => [:imdb_id, :season_id, :episode_id], :foreign_key => [:imdb_id, :season_id, :episode_id], :conditions => "streaming_products.available = 1 and streaming_products.country ='NL' and streaming_products.status in ('online_test_ok', 'soon', 'uploaded') and (streaming_products.expire_backcatalogue_at is null or streaming_products.expire_backcatalogue_at >= date(now()))"
+  has_many :vod_online_be, :class_name => 'StreamingProduct',         :primary_key => [:imdb_id, :season_id, :episode_id], :foreign_key => [:imdb_id, :season_id, :episode_id], :conditions => "streaming_products.available = 1 and streaming_products.country ='BE' and streaming_products.status = 'online_test_ok' and ((streaming_products.available_from <= date(now()) and streaming_products.expire_at >= date(now())) or (streaming_products.available_backcatalogue_from <= date(now()) and streaming_products.expire_backcatalogue_at >= date(now())))"
+  has_many :vod_online_lu, :class_name => 'StreamingProduct',         :primary_key => [:imdb_id, :season_id, :episode_id], :foreign_key => [:imdb_id, :season_id, :episode_id], :conditions => "streaming_products.available = 1 and streaming_products.country ='lu' and streaming_products.status = 'online_test_ok' and ((streaming_products.available_from <= date(now()) and streaming_products.expire_at >= date(now())) or (streaming_products.available_backcatalogue_from <= date(now()) and streaming_products.expire_backcatalogue_at >= date(now())))"
+  has_many :vod_online_nl, :class_name => 'StreamingProduct',         :primary_key => [:imdb_id, :season_id, :episode_id], :foreign_key => [:imdb_id, :season_id, :episode_id], :conditions => "streaming_products.available = 1 and streaming_products.country ='NL' and streaming_products.status = 'online_test_ok' and ((streaming_products.available_from <= date(now()) and streaming_products.expire_at >= date(now())) or (streaming_products.available_backcatalogue_from <= date(now()) and streaming_products.expire_backcatalogue_at >= date(now())))"
+  has_many :tokens,                                                   :primary_key => [:imdb_id, :season_id, :episode_id], :foreign_key => [:imdb_id, :season_id, :episode_id]
   has_many :streaming_trailers, :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "streaming_trailers.available = 1 and streaming_trailers.status = 'online_test_ok'"
   has_many :tokens_trailers, :foreign_key => :imdb_id, :primary_key => :imdb_id
   has_many :svod_dates, :foreign_key => :imdb_id, :primary_key => :imdb_id
@@ -62,6 +62,7 @@ class Product < ActiveRecord::Base
   scope :normal_available, where('products_status != -1 and products_type = ? ', Moovies.product_kinds[:normal])
   scope :adult_available, where('products_status != -1 and products_type = ? ', Moovies.product_kinds[:adult])
   scope :both_available, where('products_status != -1')
+  scope :by_primary, lambda {|imdb_id, season_id, episode_id| where(:imdb_id => imdb_id, :season_id => season_id, :episode_id => episode_id)}
   scope :by_imdb_ids, lambda {|imdb| where("imdb_id in (#{imdb})")}
   scope :ordered, :order => 'products_id desc'
   scope :group_by_imdb, :group => 'imdb_id'
@@ -101,6 +102,7 @@ class Product < ActiveRecord::Base
   
   sphinx_scope(:tvod_last_chance)         {{:with =>          {:streaming_expire_at => Time.now.beginning_of_day..1.months.from_now}}}
   sphinx_scope(:most_viewed)              {{:with =>          {:count_tokens => 1..1000000}}}
+  sphinx_scope(:series)                   {{:with =>          {:serie_id => 1..1000000}}}
   sphinx_scope(:by_package)               {|package_id|       {:with =>          {:package_id => package_id}}}
   sphinx_scope(:random)                   {{:order =>         '@random'}}
   sphinx_scope(:by_new)                   {{:with =>          {:year => 2.years.ago.year..Date.today.year, :imdb_id_online => 1..3147483647}}}
@@ -304,9 +306,20 @@ class Product < ActiveRecord::Base
     File.join(Moovies.images_path, 'products', "#{id}.jpg")
   end
 
+  def serie_title
+    serie.name 
+  end
+
+  def episode_title(full = true)
+    "#{serie.name if full} S#{sprintf '%02d', season_id}E#{sprintf '%02d', episode_id} : #{title}"
+  end
+
+  def smart_title
+    series? ? serie_title : title
+  end
   def description_data(full = false)
     if desc = description
-      title = desc.title
+      title = desc.title 
       if products_type == Moovies.product_kinds[:adult]
         image = File.join(Moovies.imagesx_path, desc.image)  if !desc.image.blank?
       else
@@ -365,7 +378,7 @@ class Product < ActiveRecord::Base
   end
 
   def series?
-    products_series_id != 0
+    !serie_id.nil?
   end
 
   def in_streaming_or_soon?
@@ -383,7 +396,7 @@ class Product < ActiveRecord::Base
       qs = query_string.split.collect do |word|
         "#{replace_specials(word)}*"
       end  
-      search = "@descriptions_title #{qs.join(' ')}" unless query_string.empty?
+      search = "#{qs.join(' ')}" unless query_string.empty?
     else
       search = ''
     end
@@ -401,7 +414,7 @@ class Product < ActiveRecord::Base
         'be'
     end
     options[:includes] = ["vod_online_#{name}", :director, :actors, :public, :streaming_trailers, :tokens_trailers, "descriptions_#{I18n.locale}", :svod_dates_online] if options[:includes].nil?
-    products.search(search, :max_matches => limit, :per_page => per_page, :page => page, :indices => ["product_#{name}_core"], :sql => { :include => options[:includes]}, :select => "*, IF(vod_next = 1, 10402410456, if(tvod_start > #{Time.now.to_i} and tvod_start < #{1.month.from_now.to_i}, tvod_start,0)) AS tvod_start_combi")
+    products.search(search, :max_matches => limit, :per_page => per_page, :page => page, :indices => ["product_#{name}_core"], :group_by => 'imdb_id', :sql => { :include => options[:includes]}, :select => "*, IF(vod_next = 1, 10402410456, if(tvod_start > #{Time.now.to_i} and tvod_start < #{1.month.from_now.to_i}, tvod_start,0)) AS tvod_start_combi")
   end
 
   def self.replace_specials(str)
@@ -541,6 +554,10 @@ class Product < ActiveRecord::Base
       products.best_rated
     when :most_viewed
       products.most_viewed
+    when :tvod_series
+      products.series
+    when :svod_series
+      products.series
     else
       products
     end
@@ -610,6 +627,10 @@ class Product < ActiveRecord::Base
 
   def svod?
     !svod_dates.svod.empty?
+  end
+
+  def tvod?
+    !svod?
   end
 
   def self.update_package

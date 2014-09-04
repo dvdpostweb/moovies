@@ -22,36 +22,20 @@ class StreamingProduct < ActiveRecord::Base
   scope :alpha, where(:source => 'ALPHANETWORKS')
   scope :country, lambda {|country| where(:country => country)}
   scope :hd, where(:quality => ['720p', '1080p'])
-  
+  scope :by_primary, lambda {|imdb_id, season_id, episode_id| where(:imdb_id => imdb_id, :season_id => season_id, :episode_id => episode_id)}
   scope :group_by_version, :group => 'language_id, subtitle_id'
   scope :group_by_language, :group => 'language_id'
   scope :ordered, :order => 'quality asc'
 
+  def smart_available
+    Rails.env == 'production' ? available : available_beta
+  end
   def available?
     status == 'online_test_ok' && ((available_from && available_from <= Date.today && expire_at >= Date.today) || (available_backcatalogue_from && available_backcatalogue_from <= Date.today && expire_backcatalogue_at >= Date.today))
-  end
-  def self.get_prefered_streaming_by_imdb_id(imdb_id, local)
-    if Rails.env == "production"
-      streaming = available.prefered_audio(Mooives.customer_languages[local]).find_all_by_imdb_id(imdb_id)
-      streaming += available.prefered_subtitle(Mooives.customer_languages[local]).find_all_by_imdb_id(imdb_id)
-    else
-      streaming = available_beta.prefered_audio(Mooives.customer_languages[local]).find_all_by_imdb_id(imdb_id)
-      streaming += available_beta.prefered_subtitle(Mooives.customer_languages[local]).find_all_by_imdb_id(imdb_id)
-    end
-    streaming
   end
 
   def hd?
     quality == '720p' || quality == '1080p'
-  end
-
-  def self.get_not_prefered_streaming_by_imdb_id(imdb_id, local)
-    if Rails.env == "production"
-      streaming = available.not_prefered(Mooives.customer_languages[local]).find_all_by_imdb_id(imdb_id)
-    else
-      streaming = available_beta.not_prefered(Mooives.customer_languages[local]).find_all_by_imdb_id(imdb_id)
-    end
-    streaming
   end
 
   def self.source

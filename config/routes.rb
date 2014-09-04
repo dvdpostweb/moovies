@@ -21,7 +21,6 @@ Moovies::Application.routes.draw do
         resources :reviews, :only => [:index]
       end
       match 'info/:page_name' => 'info#index', :as => :info
-      match 'streaming_products/faq', :to => 'streaming_products#faq'
       match 'streaming_products/sample', :to => 'streaming_products#sample'
       resources :streaming_products, :only => [:show] do
         match 'language' => 'streaming_products#language'
@@ -32,7 +31,7 @@ Moovies::Application.routes.draw do
       resources :products, :only => [], constraints: { :product_id => /[0-9]+[0-9a-z\-]*/ } do
         resource :rating, :only => :create
         resources :reviews, :only => [:new, :create]
-        resources :tokens, :only => [:new, :create]
+        #resources :tokens, :only => [:new, :create]
         match 'step' => 'products#step'
         match 'awards'=> 'products#awards'
         match 'seen' => 'products#seen'
@@ -102,7 +101,6 @@ Moovies::Application.routes.draw do
     resources :watchlists, :as => :vod_wishlists
     match 'display_vod' => 'watchlists#display_vod'
     resource :search_filters, :only => [:update, :destroy]
-    match 'streaming_products/faq', :to => 'streaming_products#faq', :as => :old_streaming_products_faq
     match 'streaming_products/sample', :to => 'streaming_products#sample', :as => :old_streaming_products_sample
     resources :streaming_products, :only => [:show], :as => :old_streaming_products do
       match 'language' => 'streaming_products#language'
