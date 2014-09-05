@@ -46,13 +46,13 @@ class Token < ActiveRecord::Base
       end
 
       if token_string
-        params = {:imdb_id => imdb_id, :token => token_string, :source_id => source, :country => file.country}
-        params = params.merge(:ppv_price => file.ppv_price, :kind => 'PPV', :is_ppv => true) if !file.svod?
+        params = {:imdb_id => imdb_id, :token => token_string, :source_id => source, :country => file.country, :payment_kind => 'NONE'}
+        params = params.merge(:ppv_price => file.ppv_price, :kind => 'PPV', :is_ppv => true, :payment_kind => 'POSTPAID') if !file.svod?
         if file.prepaid?
           params = params.merge(:kind => 'PREPAID')
         elsif customer.tvod_free > 0 && !file.svod?
           customer.update_column(:tvod_free, customer.tvod_free - 1)
-          params = params.merge(:kind => 'FREE')
+          params = params.merge(:kind => 'FREE', :payment_kind => 'NONE')
         end
         params = params.merge(:customer_id => customer.id) if customer
         params = params.merge(:code => code) if code
