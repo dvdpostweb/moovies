@@ -315,6 +315,7 @@ class Product < ActiveRecord::Base
   end
 
   def smart_title
+    logger.debug("@@@#{self.id}")
     series? ? serie_title : title
   end
   def description_data(full = false)
@@ -378,7 +379,7 @@ class Product < ActiveRecord::Base
   end
 
   def series?
-    !serie_id.nil?
+    !serie_id.nil? && serie_id > 0
   end
 
   def in_streaming_or_soon?
