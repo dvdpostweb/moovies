@@ -7,6 +7,7 @@ class SearchController < ApplicationController
     @directors = params[:kind] == :normal ?  Director.search_clean(params[:search], params[:page]) : 0
     @actors = Actor.search_clean(params[:search], params[:kind], params[:page])
     @countries = ProductCountry.visible.order
+    @source = @wishlist_source[:search]
     if params[:endless]
       cookies.permanent[:endless] = params[:endless]
     end
