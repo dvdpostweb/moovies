@@ -612,6 +612,10 @@ class Product < ActiveRecord::Base
     !svod_dates.svod.empty?
   end
 
+  def tvod?
+    !svod?
+  end
+
   def self.update_package
     sql = "update products p
         join (select if((start_on <=date(now()) and end_on >= date(now()) or (group_concat(distinct status)='uploaded' and start_on > now()) or ((start_on = min(available_from) and start_on >= date(now())) or (start_on = min(available_backcatalogue_from) and start_on >= date(now()) and (expire_at < date(now()) or expire_at is null)))), 1,2) package,products_id
