@@ -10,14 +10,24 @@
     </div>
     <div class="clear"></div>
   </div>
-  <div class="section two">
+    <div class="section six">
     <div class="device_title">
-      <h3><%= t '.smart' %></h3>
-      <img src="<%= image_path "smarttv_logo_vod.jpg" %>" />
+      <h3><%= t '.consoles' %></h3>
+      <img src="<%= image_path "playstation_logo_vod.jpg" %>"  />
+
     </div>
     <div class="device_infos">
-    <%= t('.smart.text').html_safe %>
+    <%= t('.consoles.text').html_safe %>
+      <div class="ps_title">
+        <%= t('.ps3_title') %>
+      </div>
+      <%= t('.ps3_desc') %>
+      <div class="ps_title">
+      <%= t('.ps4_title') %>
+      </div>
+      <%= t('.ps4_desc') %>
     </div>
+    <div class="clear"></div>
   </div>
   <div class="section three">
     <div id="apple">
@@ -48,6 +58,16 @@
       <div class="clear"></div>
     </div>
   </div>
+  <div class="section two">
+    <div class="device_title">
+      <h3><%= t '.smart' %></h3>
+      <img src="<%= image_path "smarttv_logo_vod.jpg" %>" />
+    </div>
+    <div class="device_infos">
+    <%= t('.smart.text').html_safe %>
+    </div>
+  </div>
+  
   <div class="section five">
     <div class="device_title">
       <h3><%= t '.tv', :link => info_path(:page_name => t('routes.infos.params.get_connected')) %></h3>
@@ -58,15 +78,5 @@
     </div>
     <div class="clear"></div>
   </div>
-  <div class="section six">
-    <div class="device_title">
-      <h3><%= t '.consoles' %></h3>
-      <img src="<%= image_path "playstation_logo_vod.jpg" %>"  />
-    </div>
-    <div class="device_infos">
-    <%= t('.consoles.text').html_safe %>
-      
-    </div>
-    <div class="clear"></div>
-  </div>
+
 </div>

@@ -18,6 +18,13 @@
   </li>
 </ul>
 <div id="wrap"> 
+  <% if current_customer && current_customer.tvod_free > 0 %>
+  <div class='flash_message'>
+    <div class="notice">
+      <%= t('.tvod_free', :tvod_free => current_customer.tvod_free).html_safe %>
+    </div>
+  </div>
+  <% end %>
   <% if flash[:notice] %>
 	<div class='flash_message'>
     <div class="notice">
