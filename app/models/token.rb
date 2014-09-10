@@ -12,14 +12,14 @@ class Token < ActiveRecord::Base
 
   validates_presence_of :imdb_id
 
-  scope :available, lambda {|from, to| where(:updated_at => from..to)}
-  scope :expired, lambda {|to| where("updated_at < ?", to)}
+  scope :available, lambda {|from, to| where(:created_at => from..to)}
+  scope :expired, lambda {|to| where("created_at < ?", to)}
   
-  scope :recent, lambda {|from, to| where(:updated_at => from..to)}
+  scope :recent, lambda {|from, to| where(:created_at => from..to)}
   scope :by_imdb_id, lambda {|imdb_id| where(:imdb_id => imdb_id)}
   
-  scope :ordered, :order => 'tokens.updated_at asc'
-  scope :ordered_old, :order => 'tokens.updated_at desc'
+  scope :ordered, :order => 'tokens.created_at asc'
+  scope :ordered_old, :order => 'tokens.created_at desc'
 
   def self.regen
     Token.recent(2.days.ago.localtime, Time.now).each do |token|
@@ -28,6 +28,20 @@ class Token < ActiveRecord::Base
       token_string = Moovies.generate_token_from_alpha(filename, :normal)
       puts token_string
       token.update_attribute(:token, token_string)
+    end
+  end
+  def create_token_code(imdb_id, kind)
+    file = StreamingProduct.where(:imdb_id => imdb_id).first
+    begin
+      token_string = Moovies.generate_token_from_alpha(file.filename, kind, false)
+    rescue => e
+      token_string = false
+    end
+    if token_string
+      update_attribute(:token, token_string)
+      return true
+    else
+      return false
     end
   end
   
@@ -124,7 +138,7 @@ class Token < ActiveRecord::Base
   end
 
   def expired?
-    updated_at < 48.hours.ago.localtime
+    created_at < 48.hours.ago.localtime
   end
 
   def current_status(current_ip)

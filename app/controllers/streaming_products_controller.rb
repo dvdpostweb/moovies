@@ -27,6 +27,13 @@ class StreamingProductsController < ApplicationController
       @streaming_not_prefered = nil
     end
     @token_valid = @token.nil? ? false : @token.validate?(request.remote_ip)
+    if @token_valid == true and @token.token.include?('hdnts')
+      if @token.create_token_code(params[:id], params[:kind])
+      else
+        flash[:error] = t('streaming_products.tvod_no_token')
+      redirect_to root_localize_path and return
+      end
+    end
     if current_customer && current_customer.tvod_only? && !(@token_valid == true || @streaming.prepaid_all? || current_customer.tvod_free > 0)
       flash[:error] = t('streaming_products.tvod_no_token')
       redirect_to root_localize_path and return
