@@ -50,7 +50,7 @@ gem 'compass-rails'
 # To use debugger
 # gem 'ruby-debug'
 gem "devise"
-gem "airbrake", "~> 3.1.12"
+gem "airbrake", "~> 4"
 gem "jquery-rails"
 gem 'jquery-ui-rails'
 gem 'dynamic_form'
