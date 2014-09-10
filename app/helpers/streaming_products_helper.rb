@@ -65,7 +65,7 @@ module StreamingProductsHelper
   end
 
   def time_left(stream, kind)
-    distance_of_time_in_hours((stream.updated_at + 48.hours), Time.now.localtime)
+    distance_of_time_in_hours((stream.created_at + 48.hours), Time.now.localtime)
   end
 
   def distance_of_time_in_hours(from_time,to_time)

@@ -8,7 +8,8 @@
             <div class="verimatrix"><%= t('.drm_warning', :link => info_path(:page_name => :viewright)).html_safe %></div>
           </div>
         <% end %>
-        <% if @token && @token_valid && !@product.svod? && @code.nil? %>
+        <% logger.debug("@@@#{@token_valid}") %>
+        <% if @token && @token_valid && @product.tvod? && @code.nil? %>
           <div id='time'><div id="vodtime"><%= t '.time_left' %> : <strong><%= time_left(@token, params[:kind]) %></strong></div></div>
         <% end %>
         <div class="clear"></div>
