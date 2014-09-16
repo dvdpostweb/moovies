@@ -58,7 +58,13 @@ class Customers::RegistrationsController < Devise::RegistrationsController
                 @user.subscription_expiration_date = nil
               end
               @user.save(:validate => false)
-              @user.abo_history(@promotion && @promotion.goto_step.to_i == 100 ? 6 : 35, @user.abo_type_id)
+              action =
+              if @promotion && @promotion.goto_step.to_i == 100
+                @promotion.class.to_s == 'Activation' ? 8 : 6 
+              else
+                35
+              end
+              @user.abo_history(action, @user.abo_type_id)
               DiscountUse.create(:discount_code_id => @discount.id, :customer_id => @user.to_param, :discount_use_date => Time.now.localtime) if @discount
               @activation.update_attributes(:customers_id => @user.id, :created_at => Time.now.localtime) if @activation
               if @user.confirmed?
@@ -100,7 +106,13 @@ class Customers::RegistrationsController < Devise::RegistrationsController
     end
     
     if resource.save
-      resource.abo_history(@promotion && @promotion.goto_step.to_i == 100 ? 6 : 35, resource.abo_type_id)
+      action =
+      if @promotion && @promotion.goto_step.to_i == 100
+        @promotion.class.to_s == 'Activation' ? 8 : 6 
+      else
+        35
+      end
+      resource.abo_history(action, resource.abo_type_id)
       if @promotion.goto_step.to_i == 100
         DiscountUse.create(:discount_code_id => @discount.id, :customer_id => resource.to_param, :discount_use_date => Time.now.localtime) if @discount
         @activation.update_attributes(:customers_id => resource.id, :created_at => Time.now.localtime) if @activation
