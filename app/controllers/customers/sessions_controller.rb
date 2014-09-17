@@ -26,6 +26,7 @@ class Customers::SessionsController < Devise::SessionsController
         end
         customer.code = params[:code]
         customer.save(:validate => false)
+        action = 
         if @promotion && @promotion.goto_step.to_i == 100
           @promotion.class.to_s == 'Activation' ? 8 : 6 
         else
