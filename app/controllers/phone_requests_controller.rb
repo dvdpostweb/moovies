@@ -13,6 +13,10 @@ class PhoneRequestsController < ApplicationController
       end
     end
     @phone_request = PhoneRequest.new
+    alert_start = Date.parse(General.where(:CodeType => 'OFFLINE_CUST_START').first.value)
+    alert_end = Date.parse(General.where(:CodeType => 'OFFLINE_CUST_END').first.value)
+
+    @alert = alert_start <= Date.today && alert_end >=Date.today ? true : false
   end
 
   def create
