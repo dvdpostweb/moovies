@@ -37,6 +37,15 @@
     <%= javascript_include_tag 'md5', 'viewrightplayer', 'viewrightplayer_control' if @streaming && @streaming.drm %>
     <%= stylesheet_link_tag "application", :media => "all" %>
     <%= render :partial => 'layouts/apple' %>
+    <script type="text/javascript">
+(function(d){
+    var f = d.getElementsByTagName('SCRIPT')[0], p = d.createElement('SCRIPT');
+    p.type = 'text/javascript';
+    p.async = true;
+    p.src = '//assets.pinterest.com/js/pinit.js';
+    f.parentNode.insertBefore(p, f);
+}(document));
+</script>
     <%= csrf_meta_tags %>
        
   </head>
@@ -54,6 +63,23 @@
     <% end %>
     <%= render(:partial => 'layouts/header') %>
     <div class="container clearfix">
+      <div id="socialbox-float" style="display:none">
+        <ul>
+          <li class="facebook">
+            <a class="Facebook" onclick="javascript:window.open('https://www.facebook.com/sharer/sharer.php?u=<%= "#{request.protocol}#{request.host_with_port}#{request.fullpath}" %>', '', 'width=626,height=436');" href="javascript:void(0);">
+                <%= image_tag "facebook.png" %>
+            </a>
+          </li>
+          <li class="twitter"><a class="Twitter" onclick="javascript:window.open('https://twitter.com/share?url=<%= "#{request.protocol}#{request.host_with_port}#{request.fullpath}" %>&text=' + encodeURIComponent('<%=   @meta_title.blank? ? t('.title').gsub("'", %q(\\\')) : @meta_title.gsub("'", %q(\\\')) %>'), '', 'width=626,height=436');" href="javascript:void(0);"><%= image_tag "twitter.png" %></a></li>
+          <li class="google"><a class="GooglePlus" onclick="" href="javascript:void(0);"><%= image_tag "googleplus.png" %></a></li>
+          <li class="pinterest"><a class="Pinterest" href="http://www.pinterest.com/pin/create/button/
+        ?url=http%3A%2F%2Fwww.flickr.com%2Fphotos%2Fkentbrew%2F6851755809%2F
+        &media=http%3A%2F%2Ffarm8.staticflickr.com%2F7027%2F6851755809_df5b2051c9_z.jpg
+        &description=Next%20stop%3A%20Pinterest"
+        
+        data-pin-config="above"><%= image_tag "pinterest.png" %></a></li>
+        </ul>
+      </div>
       <% if !current_customer && (params[:controller] != 'home' && params[:controller] != 'customers/registrations' && params[:controller] != 'steps' && params[:page_name] != 'abo') and !(params[:controller] == 'promotions' and params[:id] == 'smarttv') and !(params[:controller] == 'customers' and (params[:action] == 'reactive' || params[:action] == 'promotion')) %>
       <div id="subscribe-wrap">
         <% if params[:kind] == :adult %>
