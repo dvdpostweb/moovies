@@ -445,16 +445,35 @@ width: 902px;
 }
 
 #content_info .section.six {
-    background-image: url(image_path('playstation_vod.jpg'));
-    background-position: 667px 19px;
+  background-position: 667px 19px;
+  background-repeat: no-repeat;
+  min-height: 140px;
+}
+#content_info .section.six #ps4 {
+  background-image: url(image_path('ps4.jpg')) !important;
+  background-position: 667px 11px;
+  background-repeat: no-repeat;
+  border-top: 1px solid #abab99;
+  padding-top: 30px;
+}
+#content_info .section.six #ps3 {
+    background-image: url(image_path('ps3.jpg'))!important;
+    padding-bottom: 30px;
+   background-position: 667px -20px;
     background-repeat: no-repeat;
-    min-height: 140px;
 }
 #content_info .section.five {
-    background-image: url(image_path('tv_vod.jpg'));
+    background-image:url(image_path('tv_vod_apple.jpg'));
     background-position: 683px 15px;
     background-repeat: no-repeat;
     min-height: 160px;
+}
+#content_info .section.three #android {
+    background-image: url(image_path('android_vod.jpg'))!important;
+}
+
+#content_info .section.three #apple {
+      background-image: url(image_path('apple_vod.jpg'))!important;
 }
 #content_info .section.two {
     background-image: url(image_path('smarttv_vod.jpg'));
@@ -885,3 +904,4 @@ background-image: url(image_path('win_verimatrix.png'));
   font-weight: bold;
   padding: 5px 0;
 }
+

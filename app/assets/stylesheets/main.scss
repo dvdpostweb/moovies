@@ -1000,6 +1000,7 @@ ul.dropdown li {
 }
 .container {
     margin-top: 14px;
+    position: relative;
 }
 .content #login
 {
@@ -1217,3 +1218,64 @@ div.notice {
 
 
  }
+/***************/
+/* social css  */
+/***************/
+
+#socialbox-float ul li {
+    height: 40px;
+    text-align: center;
+}
+
+#socialbox-float {
+    background: none repeat scroll 0 0 #c4c4c0;
+    height: 160px;
+     margin:10px 0 0 970px;
+    top: 200px;
+    position: absolute;
+
+    width: 40px;
+    z-index: 20;
+}
+
+#socialbox-float ul li a {
+    color: white;
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 40px;
+}
+
+
+
+
+#socialbox-float ul li.facebook:hover {
+    background-color: #3b5999;
+    transition-duration: 0.4s;
+    transition-property: background-color;
+    transition-timing-function: ease-out;
+}
+#socialbox-float ul li.twitter:hover {
+    background-color: #4099ff;
+    transition-duration: 0.4s;
+    transition-property: background-color;
+    transition-timing-function: ease-out;
+}
+#socialbox-float ul li.pinterest:hover {
+    background-color: #cb2028;
+    transition-duration: 0.4s;
+    transition-property: background-color;
+    transition-timing-function: ease-out;
+}
+
+#socialbox-float ul li.google:hover {
+    background-color: #da2713;
+    transition-duration: 0.4s;
+    transition-property: background-color;
+    transition-timing-function: ease-out;
+}
+
+#film-details #maincontent {
+    float: right;
+    position: relative;
+    width: 740px;
+}
