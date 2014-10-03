@@ -6,6 +6,7 @@ Moovies::Application.routes.draw do
 
   root :to => 'home#index'
   resource :ogone, :only => [:create]
+  resource :home_products, :only => [:update, :edit]
   match 'flag' => 'home#flag'
   resources :prospects, :only => [:create, :new]
   scope '(:kind)', :kind => /normal|adult/ do
