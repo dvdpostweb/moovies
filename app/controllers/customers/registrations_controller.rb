@@ -113,7 +113,7 @@ class Customers::RegistrationsController < Devise::RegistrationsController
         35
       end
       resource.abo_history(action, resource.abo_type_id)
-      if @promotion.goto_step.to_i == 100
+      if @promotion && @promotion.goto_step.to_i == 100
         DiscountUse.create(:discount_code_id => @discount.id, :customer_id => resource.to_param, :discount_use_date => Time.now.localtime) if @discount
         @activation.update_attributes(:customers_id => resource.id, :created_at => Time.now.localtime) if @activation
       end
