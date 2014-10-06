@@ -1,4 +1,5 @@
 class ListsController < ApplicationController
+  before_filter :authenticate
   def new
   end
 
