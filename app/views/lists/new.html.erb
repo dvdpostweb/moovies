@@ -1,0 +1,10 @@
+<%= form_tag list_path do %>
+  <% 10.times do |i| %>
+    <%= text_field_tag "product_id_#{i}" %>
+    fr <%= check_box_tag "fr_#{i}", 1, :checked %>
+    nl <%= check_box_tag "nl_#{i}", 1, :checked %>
+    en <%= check_box_tag "en_#{i}", 1, :checked %>
+    <br />
+  <% end %>
+  <input type="submit" name="" value="new"> 
+<% end %>
