@@ -13,7 +13,7 @@
 		
 		<div class="status">
 		  <% if type == :token %>
-        <%= render :partial => 'products/streaming', :locals => {:product => product, :text => :short, :source => @wishlist_source[:wishlist_vod], :popup => true} %>
+        <%= render :partial => 'products/streaming', :locals => {:product => product, :text => :short, :source => @wishlist_source[:wishlist_vod], :popup => true, :hide_price => true} %>
 			<% elsif type == :list %>
         <%= render :partial => 'products/streaming', :locals => {:product => product, :text => :short, :source => @wishlist_source[:wishlist_vod], :popup => true} %>
 			<% end %>

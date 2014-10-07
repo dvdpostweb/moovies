@@ -27,6 +27,7 @@ group  :development, :test do
   gem 'capybara'
   gem 'launchy'
   gem 'selenium-webdriver'
+  gem 'brakeman', :require => false
 end
 # Gems used only for assets and not required
 # in production environments by default.
