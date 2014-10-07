@@ -1,6 +1,10 @@
 $(function() {
   History = window.History // Note: We are using a capital H instead of a lower h
-  
+  $('#film-details').delegate('.season .details' , 'click', function () {
+    $(this).parent().children('.episodes').toggle('slow')
+    $(this).parent().children('.arrow').toggleClass('arrow-down arrow-right' )
+
+  })
   $('.ca-container').contentcarousel({sliderSpeed: 500,sliderEasing: 'easeOutExpo',itemSpeed: 500,itemEasing: 'easeOutExpo', scroll: 5});
   $("body").delegate("#c-members #pagination a", "click", function() {
     html_item = $(this).parent();
@@ -334,7 +338,7 @@ $(function() {
       error: function() {}
   	});
   })
- });
+});
 
 function ajax_pagination(path)
 {

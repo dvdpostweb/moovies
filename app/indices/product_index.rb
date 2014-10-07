@@ -1,6 +1,8 @@
 ThinkingSphinx::Index.define :product, :with => :active_record, :name => 'product_be' do
   indexes descriptions('products_description.`products_name`'), :as => :descriptions_title, :sortage => true, :type => :string, :multi => true
-  
+  indexes serie("name_fr"), :as => :serie_title_fr, :type => :string
+  indexes serie("name_nl"), :as => :serie_title_nl, :type => :string
+  indexes serie("name_en"), :as => :serie_title_en, :type => :string
   has "CRC32(products_type)", :as => :kind, :type => :integer
   has products_countries_id,      :as => :country_id
   has products_date_available,    :as => :available_at
@@ -20,6 +22,9 @@ ThinkingSphinx::Index.define :product, :with => :active_record, :name => 'produc
   has categories('categories.categories_id'), :as => :category_id, :type => :integer, :multi => true
   has director(:directors_id),    :as => :director_id
   has studio(:studio_id),         :as => :studio_id
+  has serie_id
+  has season_id
+  has episode_id
   
   has 'cast((cast((rating_users/rating_count)*2 AS SIGNED)/2) as decimal(2,1))', :type => :float, :as => :rating
   has streaming_products_be('streaming_products.`imdb_id`'), :as => :streaming_imdb_id, :type => :integer, :multi => true

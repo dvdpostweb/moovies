@@ -6,7 +6,7 @@
 <% path = product_path(:id => product.to_param, :source => @source, :response_id => @response_id) %>
 <div class="movie-wrap">
   <div class="movie-ttl">
-    <h3><%= link_to product_title, path, :target => target %></h3>
+    <h3><%= link_to product.smart_title, path, :target => target %></h3>
     <div class="stars vote" id="rating-stars-<%= product.id %>" product_id="<%= product.id %>">
       <%= render :partial => 'products/rating', :locals => {:product => product, :background => :white, :size => :long, :source => @source, :response_id => @response_id} %>
     </div>
@@ -49,13 +49,16 @@
       <div class="links" id="seen-uninterested-<%= product.to_param %>">
         <%= render :partial => 'products/show/seen_uninterested', :locals => {:product => product, :source => @source, :response_id => @response_id} if current_customer %>
       </div>
+
       <ul class="btns osc">
+        <% unless product.series? %>
         <li>
           <%= render :partial => 'products/streaming',  :locals => {:product => product, :source => @source, :popup => true} %>
         </li>
         <li>
           <%= render :partial => 'products/vod_list',  :locals => {:product => product, :source => @source, :response_id => @response_id} %>
         </li>
+        <% end %>
         <% if product.trailer? %>
         <li>
           <%= link_to(t('.trailer'), product_trailer_path(:product_id => product.to_param, :source => @source, :response_id => @response_id), :class => 'trailer', :target => :_blank) %>
