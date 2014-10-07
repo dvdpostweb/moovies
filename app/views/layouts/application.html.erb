@@ -53,7 +53,9 @@
     </div>
     <% end %>
     <%= render(:partial => 'layouts/header') %>
+    
     <div class="container clearfix">
+      <% if params[:controller] == 'products' && params[:action] == 'show' %>
       <div id="socialbox-float">
         <ul>
           <li class="facebook">
@@ -63,9 +65,10 @@
           </li>
           <li class="twitter"><a class="Twitter" onclick="javascript:window.open('https://twitter.com/share?url=<%= "#{request.protocol}#{request.host_with_port}#{request.fullpath}" %>&text=' + encodeURIComponent('<%=   @meta_title.blank? ? t('.title').gsub("'", %q(\\\')) : @meta_title.gsub("'", %q(\\\')) %>'), '', 'width=626,height=436');" href="javascript:void(0);"><%= image_tag "twitter.png" %></a></li>
           <li class="google"><a class="GooglePlus" onclick="javascript:window.open('https://plus.google.com/share?url=<%= "#{request.protocol}#{request.host_with_port}#{request.fullpath}" %>', '', 'width=626,height=436');" href="javascript:void(0);"><%= image_tag "googleplus.png" %></a></li>
-          <li class="pinterest"><a target="_blank" class="Pinterest" href="javascript:void(0);" onclick="javascript:window.open('http://www.pinterest.com/pin/create/button/?url=<%= "#{request.protocol}#{request.host_with_port}#{request.fullpath}" %>&description=<%= @meta_title.blank? ? t('.title').gsub("'", %q(\\\')) : @meta_title.gsub("'", %q(\\\')) %>', '', 'width=750,height=316');" data-pin-config="above"><%= image_tag "pinterest.png" %></a></li>
+          <li class="pinterest"><a target="_blank" class="Pinterest" href="javascript:void(0);" onclick="javascript:window.open('http://www.pinterest.com/pin/create/button/?url=<%= "#{request.protocol}#{request.host_with_port}#{request.fullpath}" %>&media=<%= @product_image %>&description=<%= @meta_title.blank? ? t('.title').gsub("'", %q(\\\')) : @meta_title.gsub("'", %q(\\\')) %>', '', 'width=750,height=316');" data-pin-config="above"><%= image_tag "pinterest.png" %></a></li>
         </ul>
       </div>
+      <% end %>
       <% if !current_customer && (params[:controller] != 'home' && params[:controller] != 'customers/registrations' && params[:controller] != 'steps' && params[:page_name] != 'abo') and !(params[:controller] == 'promotions' and params[:id] == 'smarttv') and !(params[:controller] == 'customers' and (params[:action] == 'reactive' || params[:action] == 'promotion')) %>
       <div id="subscribe-wrap">
         <% if params[:kind] == :adult %>
