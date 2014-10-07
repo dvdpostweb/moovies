@@ -6,7 +6,8 @@ class Token < ActiveRecord::Base
   has_many :streaming_products, :primary_key => :imdb_id, :foreign_key => :imdb_id
   has_many :streaming_products_free, :primary_key => :imdb_id, :foreign_key => :imdb_id
   has_many :token_ips
-  has_many :products, :foreign_key => :imdb_id, :primary_key => :imdb_id
+  has_many :products, :primary_key => [:imdb_id, :season_id, :episode_id], :foreign_key => [:imdb_id, :season_id, :episode_id]
+  belongs_to :product, :primary_key => [:imdb_id, :season_id, :episode_id], :foreign_key => [:imdb_id, :season_id, :episode_id]
 
   after_create :generate_token
 
@@ -16,7 +17,7 @@ class Token < ActiveRecord::Base
   scope :expired, lambda {|to| where("created_at < ?", to)}
   
   scope :recent, lambda {|from, to| where(:created_at => from..to)}
-  scope :by_imdb_id, lambda {|imdb_id| where(:imdb_id => imdb_id)}
+  scope :by_primary, lambda {|imdb_id, season_id, episode_id| where(:imdb_id => imdb_id, :season_id => season_id, :episode_id => episode_id)}
   
   scope :ordered, :order => 'tokens.created_at asc'
   scope :ordered_old, :order => 'tokens.created_at desc'
@@ -45,7 +46,7 @@ class Token < ActiveRecord::Base
     end
   end
   
-  def self.create_token(imdb_id, product, current_ip, streaming_product_id, kind, customer = nil, source = 7, code = nil)
+  def self.create_token(imdb_id, product, current_ip, streaming_product_id, season_id, episode_id, kind, customer = nil, source = 7, code = nil)
     file = StreamingProduct.find(streaming_product_id)
     if code
       streaming_code = StreamingCode.by_name(code).first
@@ -60,8 +61,13 @@ class Token < ActiveRecord::Base
       end
 
       if token_string
+<<<<<<< HEAD
         params = {:imdb_id => imdb_id, :token => token_string, :source_id => source, :country => file.country, :payment_kind => 'NONE'}
         params = params.merge(:ppv_price => file.ppv_price, :kind => 'PPV', :is_ppv => true, :payment_kind => 'POSTPAID') if !file.svod?
+=======
+        params = {:imdb_id => imdb_id, :token => token_string, :source_id => source, :country => file.country, :season_id => season_id, :episode_id => episode_id}
+        params = params.merge(:ppv_price => file.ppv_price, :kind => 'PPV', :is_ppv => true) if !file.svod?
+>>>>>>> 4236ff7467d1a07483ccaec62e0b9eec0a85ed4f
         if file.prepaid?
           params = params.merge(:kind => 'PREPAID')
         elsif customer.tvod_free > 0 && !file.svod?
