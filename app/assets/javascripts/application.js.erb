@@ -29,9 +29,10 @@
 //= require history
 //= require swfobject
 $(function() {
-  social_position = $('#socialbox-float').offset().top - parseInt($('#socialbox-float').css('margin-top'));
-  social_top = $('#socialbox-float').css('top')
-
+  if ($('#socialbox-float').length> 0) {
+    social_position = $('#socialbox-float').offset().top - parseInt($('#socialbox-float').css('margin-top'));
+    social_top = $('#socialbox-float').css('top')
+  };
   if ($('.action_face').html()!=undefined)
   {
     url = $('.action_face').html()
@@ -298,10 +299,11 @@ function send_event(arg1,arg2,arg3,arg4)
 }
 
 $(window).scroll(function(){
-  console.log($(window).scrollTop()+" > "+social_position )
-  if($(window).scrollTop() > social_position){
-    $('#socialbox-float').css('position','fixed').css('top', '0');
-  } else {
-    $('#socialbox-float').css('position','absolute').css('top', social_top);
-  }    
+  if(typeof social_position != "undefined"){
+    if($(window).scrollTop() > social_position){
+      $('#socialbox-float').css('position','fixed').css('top', '0');
+    } else {
+      $('#socialbox-float').css('position','absolute').css('top', social_top);
+    }    
+  }
 });
