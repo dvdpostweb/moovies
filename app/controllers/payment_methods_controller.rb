@@ -23,6 +23,9 @@ class PaymentMethodsController < ApplicationController
       @url_ok = edit_customer_payment_methods_url(:customer_id => current_customer.to_param, :type => "#{params[:type]}_finish")
       @com = t 'payment_methods.ogone_modification'
       product_id = 0
+      imdb_id = 0
+      season_id = 0
+      episode_id = 0
     elsif params[:type] == 'tvod'
       internal_com = 'tvod'
       @product = Product.find(params[:product_id]) 
@@ -35,6 +38,9 @@ class PaymentMethodsController < ApplicationController
       @price = @product.get_vod_online(session[:country_id]).first.tvod_price
       @com = t 'payment_methods.tvod', :default => 'payment plush tvod'
       product_id = @product.imdb_id
+      imdb_id = @product.imdb_id
+      season_id = @product.season_id
+      episode_id = @product.episode_id
     else
       @com= t 'payment_methods.ogone'
       if current_customer.promo_type == 'D'
@@ -49,6 +55,10 @@ class PaymentMethodsController < ApplicationController
       @url_ok = url_for(:controller => 'steps', :action => :show, :id => 'step4', :only_path => false, :protocol => 'http')
       
       product_id = 0
+      imdb_id = 0
+      season_id = 0
+      episode_id = 0
+
     end
     
     @order_id = "p#{current_customer.to_param}#{Time.now.strftime('%Y%m%d%H%M%S')}"
@@ -85,7 +95,7 @@ class PaymentMethodsController < ApplicationController
     end
     
     @alias = "p#{current_customer.to_param}"
-    OgoneCheck.create(:orderid => @order_id, :amount => (@price*100).round, :customers_id => current_customer.to_param, :context => internal_com, :site => 1, :language_id => Moovies.customer_languages[I18n.locale], :imdb_id => @product.imdb_id, :season_id => @product.season_id, :episode_id => @product.episode_id, :source_id => params[:source])
+    OgoneCheck.create(:orderid => @order_id, :amount => (@price*100).round, :customers_id => current_customer.to_param, :context => internal_com, :site => 1, :language_id => Moovies.customer_languages[I18n.locale], :imdb_id => imdb_id, :season_id => season_id, :episode_id => episode_id, :source_id => params[:source])
     list = {:COM => @com, :ALIAS => @alias, :AMOUNT => (@price*100).round, :CURRENCY => 'EUR', :LANGUAGE => @ogone_language, :ORDERID => @order_id, :PSPID => Moovies.ogone_pspid[Rails.env], :CN => current_customer.name, :ALIASUSAGE => @com, :DECLINEURL => @url_back, :EXCEPTIONURL => @url_back, :CANCELURL => @url_back, :CATALOGURL => @url_back, :ACCEPTURL => @url_ok, :TP => @template_ogone}
     list = list.merge(:PM => @pm, :BRAND => @brand) if !@brand.nil?
     list = list.sort
