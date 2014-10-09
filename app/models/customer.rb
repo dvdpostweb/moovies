@@ -191,6 +191,10 @@ class Customer < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  def name_without_accent
+    name.mb_chars.normalize(:kd).gsub(/[^\x00-\x7F]/n, '').to_s
+  end
+
   def recommendations(filter, options)
     begin
       # external service call can't be allowed to crash the app
