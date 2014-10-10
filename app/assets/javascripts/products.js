@@ -1,6 +1,6 @@
 $(function() {
   History = window.History // Note: We are using a capital H instead of a lower h
-  $('#film-details').delegate('.season .details' , 'click', function () {
+  $('#film-details').delegate('.season .details, .season .arrow' , 'click', function () {
     $(this).parent().children('.episodes').toggle('slow')
     $(this).parent().children('.arrow').toggleClass('arrow-down arrow-right' )
 
