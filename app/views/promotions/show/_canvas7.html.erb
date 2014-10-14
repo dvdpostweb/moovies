@@ -28,7 +28,9 @@
     <% end %>    
     <% if !@promo.params[:until_at].nil? %>
       <ul id="promo_date" class="osc">
-        <li>Offre valable jusqu'au <%= @promo.params[:until_at] == true ? 3.days.from_now.localtime.strftime('%d/%m/%Y') : @promo.params[:until_at] %></li>
+        <li><%= t('promotion.show.until_at') %>
+
+<%= @promo.params[:until_at] == true ? 3.days.from_now.localtime.strftime('%d/%m/%Y') : @promo.params[:until_at] %></li>
     </ul>
     <% end %>
   </div>
