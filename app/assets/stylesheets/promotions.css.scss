@@ -1425,3 +1425,16 @@ width: 179px;
 text-decoration:none;
 
 }
+
+#promo_date li {
+color: #FFFFFF;
+float: left;
+font-size: 24px;
+margin-left: 576px;
+margin-top: -29px;
+text-transform: uppercase;
+}
+.canvas1 #promo_date li, .canvas2 #promo_date li, .canvas3 #promo_date li, .canvas5 #promo_date li, .canvas7 #promo_date li
+{
+    color: #000;
+}
