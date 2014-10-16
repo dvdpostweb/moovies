@@ -529,6 +529,8 @@ module ProductsHelper
         "<td class='goinfinite'>#{t('products.show.formats.soon_in_svod_' + kind, :days => (svod_date.start_on - Date.today).to_i).html_safe}</td>".html_safe
       elsif svod_date && svod_date.end_on > Date.today && svod_date.end_on < Date.today+30.days && vod.expire_at && vod.expire_at > Date.today
         "<td class='goalacarte'>#{t('products.show.formats.soon_in_tvod', :days => (svod_date.end_on - Date.today).to_i).html_safe}</td>".html_safe
+      elsif svod_date && svod_date.end_on > Date.today && svod_date.end_on < Date.today+30.days && vod.expire_backcatalogue_at && vod.expire_backcatalogue_at > Date.today
+        "<td class='goalacarte'>#{t('products.show.formats.soon_in_tvod', :days => (svod_date.end_on - Date.today).to_i).html_safe}</td>".html_safe
       elsif svod_date && svod_date.end_on == Date.today
         "<td class='goalacarte'>#{t('products.show.formats.tomorrow_in_tvod')}</td>".html_safe
       elsif vod.expire_at && vod.expire_at > Date.today && vod.expire_at < Date.today+30.days && vod.expire_at != vod.available_backcatalogue_from
