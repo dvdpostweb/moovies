@@ -1,53 +1,38 @@
 <div id="playstation_content">
-      <h1 style="color: #212A31;">Accédez à <strong>plus de 3100 films</strong> sur <br>
-      votre téléviseur grâce à Plush & PlayStation</font></h1>
-      <div id="playstation_form">
-        <h2><strong>Téléchargez l’application Plush</strong> sur <br/> votre PS3 ou PS4 et découvrez:</h2>
-        <form method="post" id="form_step" action="" accept-charset="UTF-8"><div style="margin:0;padding:0;display:inline"><input type="hidden" value="✓" name="utf8"><input type="hidden" value="" name="authenticity_token"></div>
-          <ul>
-            <li>Plus de 700 films en illimité</li>
-            <li>Plus de 2400 films à la Carte</li>
-            <li>Des nouveautés chaque semaine</li>
-            <li>Le choix entre VO et VOST</li>
-            <li>Le catalogue le plus varié de Belgique</li>
-          </ul>
-        <p style="padding-top:5px;"><input type="submit" border="0" align="absmiddle" value="Créez un compte" name="sent" class="promo_button" id="s"></p>
-</form>      </div>
+  <h1><%= t('.title').html_safe %></h1>
+  <div id="playstation_form">
+    <h2><%= t('.subtitle').html_safe %></h2>
+      <ul>
+        <%= t('.li').html_safe %>
+      </ul>
+      <p style="padding-top:5px;">
+        <%= link_to t('.try'), new_customer_registration_path(:code => @discount.name), :class => 'promo_button' %>
+      </p>
+    </form>      
+  </div>
+</div>
+<div id="commentcamarche_contentps">
+  <h2><%= t('.how') %></h2>
+    <div class="section six">
+      <div id="ps3">
+        <div class="device_title"> 
+          <%= image_tag 'logo_ps3.jpg' %>
+        </div>
+        <div class="device_infos">
+          <div class="ps_title"> <%= t('info.index.vod.ps3_title').html_safe %> </div>
+          <%= t('info.index.vod.ps3_desc').html_safe %>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div id="ps4">
+      <div class="device_title">
+        <%= image_tag 'logo_ps4.jpg' %>
+      </div>
+      <div class="device_infos">
+        <div class="ps_title"> <%= t('info.index.vod.ps4_title').html_safe %></div>
+        <%= t('info.index.vod.ps4_desc').html_safe %>
+      </div>
+      <div class="clear"></div>
     </div>
-    <div id="commentcamarche_contentps">
-          <h2>Comment télécharger l’application PlayStation?</h2>
-          <div class="section six">
-                 
-                 <div id="ps3">
-                   <div class="device_title"><%= image_tag 'logo_ps3.jpg' %></div>
-                   <div class="device_infos">
-                     <div class="ps_title"> Comment télécharger l'application sur PlayStation 3? </div>
-                     1. Rendez-vous dans l'onglet TV/Video de votre menu XMB et séléctionnez l'icone Plush. <br/>
-                     <br/>
-                     Si vous ne vous trouvez pas sur l'écran de démarrage, maintennez le boutons PS enfoncé et séléectionner Quitter et ensuite Oui pour revenir à l'écran de démarrage. <br/>
-                     <br/>
-                     2. Sélectionnez oui si vous voyez le message suivant: Pour utiliser cette fonction, vous devez d'abord télécharger le logiciel. Voulez-vous le télécharger? L'application Plush sera alors téléchargée <br/>
-                     <br/>
-                     Connectez-vous avec votre compte Plush ou créez un compte Plush pour accéder au contenu. </div>
-                   <div class="clear"></div>
-                 </div>
-                  <div id="ps4">
-
-                 <div class="device_title"><%= image_tag 'logo_ps4.jpg' %></div>
-                 <div class="device_infos">
-
-                   <div class="ps_title"> Comment télécharger l'application sur PlayStation 4? </div>
-                   1. Rendez-vous dans l'onglet TV/Video de votre menu et séléctionnez l'icone Plush. <br/>
-                   <br/>
-                   Si vous ne vous trouvez pas sur l'écran de démarrage, appuyez sur le boutons PS pour revenir à l'écran de démarrage. <br/>
-                   Attention: Vous devez être connecté à un compte PSN afin de pouvoir ouvrir l'onglet TV/Video <br/>
-                   <br/>
-                   2. Sélectionnez Télécharger. L'application Plush sera alors téléchargée <br/>
-                   <br/>
-                   Connectez-vous avec votre compte Plush ou créez un compte Plush pour accéder au contenu. </div>
-                 <div class="clear"></div>
-                 </div>
-               </div>
-          
-              
-          </div>
+  </div>
+</div>
