@@ -16,8 +16,10 @@ class SearchController < ApplicationController
         @active = 'products'
       elsif @actors.count > 0
         @active = 'actors'
-      else @directors != 0 && @directors.count > 0
+      elsif @directors != 0 && @directors.count > 0
         @active = 'directors'
+      else
+        @active = 'products'
       end
     else
       @active = params[:type]
