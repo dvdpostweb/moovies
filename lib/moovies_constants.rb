@@ -229,7 +229,8 @@ module Moovies
        :classic_adult_step90_fr => 80,
        :classic_adult_step90_nl => 81,
        :classic_adult_step90_en => 79,
-       :tvod_only => 128
+       :tvod_only => 128,
+       :playstation => 246,
       })
     end
 
