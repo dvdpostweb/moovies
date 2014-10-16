@@ -19,6 +19,7 @@
     <%= render :partial => 'products/index/peoples', :locals => {:people => @directors} if @active == 'directors'  %>
     <%= 'empty' if @active.nil? %>
   </div>
+  <%= @active == 'products' && @products.size == 0 ? "<div class='not_found'>#{t('.not_found')}</div>".html_safe : '' %>
   <div id='pagination_content'>
       <%= render :partial => 'products/index/pagination', :locals => {:item => @item} if @active == 'products' %>
   </div>
