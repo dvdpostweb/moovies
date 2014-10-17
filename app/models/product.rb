@@ -315,7 +315,6 @@ class Product < ActiveRecord::Base
   end
 
   def smart_title
-    logger.debug("@@@#{self.id}")
     series? ? serie_title : title
   end
   def description_data(full = false)

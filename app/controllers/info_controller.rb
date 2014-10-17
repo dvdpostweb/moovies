@@ -12,6 +12,8 @@ class InfoController < ApplicationController
       params[:page_name] = 'conditions'
     elsif params[:page_name] == t('routes.infos.params.get_connected')
       params[:page_name] = 'get_connected'
+    elsif params[:page_name] == t('routes.infos.params.playstation')
+      params[:page_name] = 'playstation'
     end
     @meta_title = t("info.index.#{params[:page_name]}.meta_title", :default => '')
     @meta_description = t("info.index.#{params[:page_name]}.meta_description", :default => '')
@@ -23,6 +25,8 @@ class InfoController < ApplicationController
       @discount_classic_adult = Discount.find(Moovies.discount["classic_adult_#{I18n.locale}"])
       @discount_all = Discount.find(Moovies.discount["all_#{I18n.locale}"])
       @discount_tvod_only = Discount.find(Moovies.discount['tvod_only'])
+    elsif params[:page_name] == 'playstation'
+      @discount = Discount.find(Moovies.discount["playstation"])
     end
   end
 end
