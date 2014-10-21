@@ -95,6 +95,12 @@
       <% else %>
         <%= render :partial => 'products/show/formats', :locals => {:product => @product, :svod_date => @svod_date}%>
       <% end %>
+      <div>
+        <% @recommendations.each do |recommendation| %>
+          <% data = recommendation.product.description_data %>
+          <%= link_to product_image_tag(data[:image], :width => 90), product_path(:id => recommendation.product.id) %>
+        <% end %>
+      </div>
       <div id="thumbs-wrap">
         <h3><%= t '.photo' %></h3>
         <div>
