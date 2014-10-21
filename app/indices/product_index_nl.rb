@@ -23,7 +23,7 @@ ThinkingSphinx::Index.define :product, :with => :active_record, :name => 'produc
   has serie_id
   has season_id
   has episode_id
-
+  has rating_count
   has 'cast((cast((rating_users/rating_count)*2 AS SIGNED)/2) as decimal(2,1))', :type => :float, :as => :rating
   has streaming_products_nl('streaming_products.`imdb_id`'), :as => :streaming_imdb_id, :type => :integer, :multi => true
   has streaming_products_nl('streaming_products.`language_id`'), :as => :language_ids, :type => :integer, :multi => true
