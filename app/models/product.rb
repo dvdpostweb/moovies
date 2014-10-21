@@ -49,6 +49,7 @@ class Product < ActiveRecord::Base
   has_many :svod_dates, :foreign_key => :imdb_id, :primary_key => :imdb_id
   has_many :svod_dates_online, :class_name => 'SvodDate', :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "start_on <= date(now()) and end_on >= date(now())"
   has_many :vod_wishlists, :primary_key => :imdb_id, :foreign_key => :imdb_id
+  has_many :recommendations, :primary_key => :imdb_id, :foreign_key => :imdb_id
   
   #has_many :recommendations
   has_many :recommendations_products, :through => :recommendations, :source => :product
@@ -180,25 +181,25 @@ class Product < ActiveRecord::Base
     products
   end
 
-  def recommendations(kind)
-    begin
-      # external service call can't be allowed to crash the app
-      recommendation_ids = Moovies.product_linked_recommendations(self, kind, I18n.locale)
-    rescue => e
-      logger.error("Failed to retrieve recommendations: #{e.message}")
-    end
-    if recommendation_ids && !recommendation_ids.empty?
-      if kind == :normal
-        Product.available.by_products_id(recommendation_ids)
-      else
-        if categories.find_by_categories_id([76,72])
-          Product.available.gay.by_products_id(recommendation_ids)
-        else
-          Product.available.hetero.by_products_id(recommendation_ids)
-        end
-      end
-    end
-  end
+  #def recommendations(kind)
+  #  begin
+  #    # external service call can't be allowed to crash the app
+  #    recommendation_ids = Moovies.product_linked_recommendations(self, kind, I18n.locale)
+  #  rescue => e
+  #    logger.error("Failed to retrieve recommendations: #{e.message}")
+  #  end
+  #  if recommendation_ids && !recommendation_ids.empty?
+  #    if kind == :normal
+  #      Product.available.by_products_id(recommendation_ids)
+  #    else
+  #      if categories.find_by_categories_id([76,72])
+  #        Product.available.gay.by_products_id(recommendation_ids)
+  #      else
+  #        Product.available.hetero.by_products_id(recommendation_ids)
+  #      end
+  #    end
+  #  end
+  #end
 
   def recommendations_new(kind, customer_id, type)
     begin
