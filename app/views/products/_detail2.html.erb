@@ -3,7 +3,7 @@
 <% product_title = data[:title] %>
 <% product_image = data[:image] %>
 <% div_id = "#{product.id}#{Random.rand(1000)}"%>
-<% unless product.vod_online_be.size == 0 %>
+<% if 1==1 #unless product.vod_online_be.size == 0 %>
 <div class="ca-item ca-item-<%= detail2_counter + 1 %>">
   <div class="content">
     <% cache(product.id, :expires_in => 2.hour) do %>
