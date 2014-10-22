@@ -1560,13 +1560,25 @@ ul.grid li {
   clear: none;
 }
 
-#products_index #products .content{
+#products_index #products .content, #film-details .content{
 
   width:110px;
 
 
 }
-#products_index #products .ca-item .cover img{
+
+#film-details .ca-container .title
+{
+  margin-top: 15px;
+  margin-bottom: 0;
+  font-size: 24px;
+}
+
+#film-details .small
+{
+  display:none;
+}
+#products_index #products .ca-item .cover img, #film-details .ca-item .cover img{
   border:2px solid #FFFFFF;
   box-shadow:#000000 0 0 4px;
   height:136px;
@@ -1574,7 +1586,7 @@ ul.grid li {
 
 
 }
-#products_index #products .ca-item .tooltips
+#products_index #products .ca-item .tooltips, #film-details .ca-item .tooltips
 {
   position:fixed;
 }
