@@ -168,7 +168,7 @@ $(function() {
       {
         $(this).parent().find('.tooltips' ).css('margin-top', -193 - $(window).scrollTop());
       }
-    	$(this).parent().find('.tooltips' ).stop(true,true).delay(300).fadeIn('fast');
+    	$(this).parent().find('.tooltips' ).delay(400).fadeIn('fast');
     	content = $(this).parent().find('.tooltips_other')
     	if(content.html() =='loading')
     	{
@@ -189,17 +189,20 @@ $(function() {
     }
     });
     $('#products_index').delegate('.cover' , 'mouseleave', function () {
-      $('.tooltips' ).stop(true,true).fadeOut( 200 );
+      $(this).parent().find('.tooltips' ).stop(true,true)
+      $(this).parent().find('.tooltips' ).delay(200).fadeOut( 200 );
+
     });
     $('#products_index').delegate('.tooltips' , 'mouseenter', function () {
       if($('#ca-container').length>0)
       {
         $(this).css('margin-top', -193 - $(window).scrollTop());
       }
-    	$(this).stop(true,true).delay(300).fadeIn('fast');
+      $(this ).stop(true,true)
+      $(this).fadeIn('fast');
     });
     $('#products_index').delegate('.tooltips' , 'mouseleave', function () {
-    	$('.tooltips' ).stop(true,true).fadeOut( 200 );
+    	$(this ).fadeOut( 200 );
     });
     
     
