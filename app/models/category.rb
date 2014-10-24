@@ -20,7 +20,7 @@ class Category < ActiveRecord::Base
   scope :vod, where(:vod => true)
   
   scope :ordered, :order => 'display_group ASC, sort_order ASC'
-  scope :alphabetic_orderd, :order => 'categories_description.categories_name'
+  scope :alphabetic_orderd, :order => 'categories_name'
   scope :by_size, where("size > 0")
   scope :random, :order => 'rand()'
 

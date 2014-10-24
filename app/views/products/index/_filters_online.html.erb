@@ -96,7 +96,7 @@
       <li class="category open">
         <%= t('products.index.filters.category', :default => 'category') %>
         <div>
-          <%= collection_select(:filters, :category_id, Category.by_kind(params[:kind]).includes("descriptions_#{I18n.locale}").roots.movies.vod, :id, :name, {:selected => params[:filters] && params[:filters][:category_id] ? params[:filters][:category_id] : nil, :include_blank => true}, {:class => 'chosen-select', 'data-placeholder' =>"#{t('products.index.filters.category')}...", 'data-no_results_text' => t('products.index.filters.not_found')}) %>
+          <%= collection_select(:filters, :category_id, Category.by_kind(params[:kind]).joins("descriptions_#{I18n.locale}".to_sym).includes("descriptions_#{I18n.locale}").roots.movies.vod.alphabetic_orderd, :id, :name, {:selected => params[:filters] && params[:filters][:category_id] ? params[:filters][:category_id] : nil, :include_blank => true}, {:class => 'chosen-select', 'data-placeholder' =>"#{t('products.index.filters.category')}...", 'data-no_results_text' => t('products.index.filters.not_found')}) %>
         </div>
       </li>
     </ul>
