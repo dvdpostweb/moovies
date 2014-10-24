@@ -2384,25 +2384,25 @@ ul#ratings_labels li:last-child {
   min-height: 35px;
 }
 .season .arrow-down {
-  width: 0; 
+ width: 0; 
   height: 0; 
-  border-left: 7px solid transparent;
-  border-right: 7px solid transparent;
-  border-top: 7px solid #333;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #C4C4C0;
   position: absolute;
-  right: 10px;
-  top: 28px;
+  right: 4px;
+  top: 27px;
 }
 
 .season .arrow-right {
   width: 0;
   height: 0;
-  border-top: 7px solid transparent;
-  border-bottom: 7px solid transparent;
-  border-left: 7px solid #333;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid #C4C4C0;
   position: absolute;
-  right: 10px;
-  top: 28px;
+  right: 4px;
+  top: 21px;
 }
 #film-details .episode .alacarte {
   float:left;

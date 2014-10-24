@@ -58,6 +58,9 @@
       <% if params[:controller] == 'products' && params[:action] == 'show' %>
       <div id="socialbox-float">
         <ul>
+          <li class="share">
+                <%= image_tag "share.png" %>
+          </li>
           <li class="facebook">
             <a class="Facebook" onclick="javascript:window.open('https://www.facebook.com/sharer/sharer.php?u=<%= "#{request.protocol}#{request.host_with_port}#{request.fullpath}" %>', '', 'width=626,height=436');" href="javascript:void(0);">
                 <%= image_tag "facebook.png" %>
