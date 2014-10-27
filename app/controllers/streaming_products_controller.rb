@@ -213,6 +213,8 @@ class StreamingProductsController < ApplicationController
   end
 
   def language
+    params[:season_id] = params[:season_id] || 0
+    params[:episode_id] = params[:episode_id] || 0
     params[:streaming_product_id] = params[:old_streaming_product_id] if params[:old_streaming_product_id]
     token = current_customer.get_token(params[:streaming_product_id], params[:season_id], params[:episode_id]) if current_customer
     token_valid = token.nil? ? false : token.validate?(request.remote_ip)
@@ -227,6 +229,8 @@ class StreamingProductsController < ApplicationController
   end
 
   def subtitle
+    params[:season_id] = params[:season_id] || 0
+    params[:episode_id] = params[:episode_id] || 0
     params[:streaming_product_id] = params[:old_streaming_product_id] if params[:old_streaming_product_id]
     token = current_customer.get_token(params[:streaming_product_id], params[:season_id], params[:episode_id]) if current_customer
     token_valid = token.nil? ? false : token.validate?(request.remote_ip)
@@ -241,6 +245,8 @@ class StreamingProductsController < ApplicationController
   end
 
   def versions
+    params[:season_id] = params[:season_id] || 0
+    params[:episode_id] = params[:episode_id] || 0
     params[:streaming_product_id] = params[:old_streaming_product_id] if params[:old_streaming_product_id]
     token = current_customer.get_token(params[:streaming_product_id], params[:season_id], params[:episode_id]) if current_customer
     token_valid = token.nil? ? false : token.validate?(request.remote_ip)
