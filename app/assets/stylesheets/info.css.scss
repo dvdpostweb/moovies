@@ -958,7 +958,9 @@ padding-left: 36px;
     margin: 8px 0 0;
     padding: 10px;
     text-shadow: 0 -1px 0 #d83c14;
-    width:370px;
+    width:349px;
+    display: inline-block;
+    text-align: center;
 }
 
 #commentcamarche_contentps {
@@ -997,3 +999,14 @@ background-repeat: no-repeat;
 border-top: 1px solid #abab99;
 padding-top: 30px;
 }
+#playstation_content h1
+{
+  color: #212A31;
+}
+
+.footer_playstation {
+	background: none repeat scroll 0% 0% transparent; 
+	margin-top: 20px; 
+	position: absolute;
+	color: #FFF;
+	}

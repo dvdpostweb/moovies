@@ -1,4 +1,4 @@
-<% Product.where(serie_id: product.serie_id).group(:season_id).each do |season| %>
+<% Product.where(serie_id: product.serie_id).group(:season_id).each_with_index do |season, i| %>
 <div class="season">
   <div class="details">
     <div class="season_title"><%= "Season #{ season.season_id}" %></div>
@@ -11,8 +11,8 @@
       </div>
     </div>
   </div>
-  <div class="arrow arrow-right"></div>
-  <div class='episodes'  style="display:none">
+  <div class="arrow arrow-<%= i == 0 ? 'down' : 'right' %>"></div>
+  <div class='episodes'  style="display:<%= i == 0 ? 'bock' : 'none' %>">
   <% Product.where(serie_id: product.serie_id, season_id: season.season_id).group(:episode_id).each do |episode| %>
     <div class="episode">
       <%= "Ep #{ episode.episode_id} : #{episode.title}" %>

@@ -30,8 +30,8 @@ Moovies::Application.routes.draw do
         match 'subtitle' => 'streaming_products#subtitle'
         match 'versions' => 'streaming_products#versions'
       end
-      resources :products, :only => [:show], constraints: { :id => /[0-9]+[0-9a-z\-]*/ }
-      resources :products, :only => [], constraints: { :product_id => /[0-9]+[0-9a-z\-]*/ } do
+      resources :products, :only => [:show], constraints: { :id => /[0-9]+[0-9a-zA-Z\-_]*/ }
+      resources :products, :only => [], constraints: { :product_id => /[0-9]+[0-9a-zA-Z\-_]*/ } do
         resource :rating, :only => :create
         resources :reviews, :only => [:new, :create]
         #resources :tokens, :only => [:new, :create]

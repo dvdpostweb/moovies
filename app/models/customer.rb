@@ -195,30 +195,30 @@ class Customer < ActiveRecord::Base
     name.mb_chars.normalize(:kd).gsub(/[^\x00-\x7F]/n, '').to_s
   end
 
-  def recommendations(filter, options)
-    begin
-      # external service call can't be allowed to crash the app
-      #recommendation_ids = DVDPost.home_page_recommendations_new(self.to_param, options[:kind])
-      data = DVDPost.home_page_recommendations(self.to_param, I18n.locale)
-      recommendation_ids = data[:dvd_id]
-      response_id = data[:response_id]
-      url = data[:url]
-      results = if recommendation_ids
-        hidden_ids = (rated_products + seen_products + wishlist_products + uninterested_products).uniq.collect(&:id)
-        result_ids = recommendation_ids - hidden_ids
-        #result_ids = recommendation_ids
-        filter.update_attributes(:recommended_ids => result_ids)
-        options.merge!(:subtitles => [2]) if I18n.locale == :nl
-        options.merge!(:audio => [1]) if I18n.locale == :fr
-        {:recommendation => Product.filter(filter, options.merge(:view_mode => :recommended)), :response_id => response_id}
-      else
-        []
-      end
-    rescue => e
-      logger.error("Failed to retrieve recommendations: #{e.message}")
-      {:recommendation => false, :response_id => false}
-    end
-  end
+  #def recommendations(filter, options)
+  #  begin
+  #    # external service call can't be allowed to crash the app
+  #    #recommendation_ids = DVDPost.home_page_recommendations_new(self.to_param, options[:kind])
+  #    data = DVDPost.home_page_recommendations(self.to_param, I18n.locale)
+  #    recommendation_ids = data[:dvd_id]
+  #    response_id = data[:response_id]
+  #    url = data[:url]
+  #    results = if recommendation_ids
+  #      hidden_ids = (rated_products + seen_products + wishlist_products + uninterested_products).uniq.collect(&:id)
+  #      result_ids = recommendation_ids - hidden_ids
+  #      #result_ids = recommendation_ids
+  #      filter.update_attributes(:recommended_ids => result_ids)
+  #      options.merge!(:subtitles => [2]) if I18n.locale == :nl
+  #      options.merge!(:audio => [1]) if I18n.locale == :fr
+  #      {:recommendation => Product.filter(filter, options.merge(:view_mode => :recommended)), :response_id => response_id}
+  #    else
+  #      []
+  #    end
+  #  rescue => e
+  #    logger.error("Failed to retrieve recommendations: #{e.message}")
+  #    {:recommendation => false, :response_id => false}
+  #  end
+  #end
 
   def self.send_evidence(type, product_id, customer, request, params = nil , args = nil)
     begin
