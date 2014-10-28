@@ -49,6 +49,7 @@ class Product < ActiveRecord::Base
   has_many :svod_dates, :foreign_key => :imdb_id, :primary_key => :imdb_id
   has_many :svod_dates_online, :class_name => 'SvodDate', :foreign_key => :imdb_id, :primary_key => :imdb_id, :conditions => "start_on <= date(now()) and end_on >= date(now())"
   has_many :vod_wishlists, :primary_key => :imdb_id, :foreign_key => :imdb_id
+  has_many :recommendations, :primary_key => :imdb_id, :foreign_key => :imdb_id
   
   #has_many :recommendations
   has_many :recommendations_products, :through => :recommendations, :source => :product
@@ -98,7 +99,7 @@ class Product < ActiveRecord::Base
   sphinx_scope(:svod_last_added)          {{:with =>          {:svod_start => 3.months.ago..Time.now.end_of_day, :imdb_id_online => 1..3147483647}}}
   sphinx_scope(:tvod_last_added)          {{:with =>          {:tvod_start => 5.months.ago..1.day.ago, :imdb_id_online => 1..3147483647}}}
   sphinx_scope(:svod_last_chance)         {{:with =>          {:svod_end => Time.now.end_of_day..1.months.from_now}}}
-  sphinx_scope(:best_rated)               {{:with =>          {:rating => 3.0..5.0}}}
+  sphinx_scope(:best_rated)               {{:with =>          {:rating => 3.0..5.0, :rating_count => 3..1000000}}}
   
   sphinx_scope(:tvod_last_chance)         {{:with =>          {:streaming_expire_at => Time.now.beginning_of_day..1.months.from_now}}}
   sphinx_scope(:most_viewed)              {{:with =>          {:count_tokens => 1..1000000}}}
@@ -180,25 +181,25 @@ class Product < ActiveRecord::Base
     products
   end
 
-  def recommendations(kind)
-    begin
-      # external service call can't be allowed to crash the app
-      recommendation_ids = Moovies.product_linked_recommendations(self, kind, I18n.locale)
-    rescue => e
-      logger.error("Failed to retrieve recommendations: #{e.message}")
-    end
-    if recommendation_ids && !recommendation_ids.empty?
-      if kind == :normal
-        Product.available.by_products_id(recommendation_ids)
-      else
-        if categories.find_by_categories_id([76,72])
-          Product.available.gay.by_products_id(recommendation_ids)
-        else
-          Product.available.hetero.by_products_id(recommendation_ids)
-        end
-      end
-    end
-  end
+  #def recommendations(kind)
+  #  begin
+  #    # external service call can't be allowed to crash the app
+  #    recommendation_ids = Moovies.product_linked_recommendations(self, kind, I18n.locale)
+  #  rescue => e
+  #    logger.error("Failed to retrieve recommendations: #{e.message}")
+  #  end
+  #  if recommendation_ids && !recommendation_ids.empty?
+  #    if kind == :normal
+  #      Product.available.by_products_id(recommendation_ids)
+  #    else
+  #      if categories.find_by_categories_id([76,72])
+  #        Product.available.gay.by_products_id(recommendation_ids)
+  #      else
+  #        Product.available.hetero.by_products_id(recommendation_ids)
+  #      end
+  #    end
+  #  end
+  #end
 
   def recommendations_new(kind, customer_id, type)
     begin
@@ -315,7 +316,6 @@ class Product < ActiveRecord::Base
   end
 
   def smart_title
-    logger.debug("@@@#{self.id}")
     series? ? serie_title : title
   end
   def description_data(full = false)

@@ -126,6 +126,7 @@ class ProductsController < ApplicationController
       @categories = @product.categories
       @token = current_customer ? current_customer.get_token(@product.imdb_id, @product.season_id, @product.episode_id) : nil
     end
+    @recommendations = @product.recommendations_products.includes(["descriptions_#{I18n.locale}", 'vod_online_be']).ordered
     @meta_title = t('products.show.meta_title', :name => @product_title, :default => '')
     @meta_description = t('products.show.meta_description', :name => @product_title, :default => '')
     
