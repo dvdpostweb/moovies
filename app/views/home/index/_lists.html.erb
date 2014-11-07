@@ -28,6 +28,9 @@
     </div>
 
     <div class="clear"></div>
+     <div id="subscribe-wrap">
+      <%= link_to image_tag("promotions/#{I18n.locale}/bannerpromo-playstation.jpg", :size => '942x188', ), info_path(:page_name => t('routes.infos.params.playstation')) %>
+    </div>
     <p><%= t('.playstation').html_safe %></p>
 
     <% unless current_customer %>
