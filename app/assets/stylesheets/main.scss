@@ -13,23 +13,26 @@ body {
 }
 #background
 {
-	position: absolute;
-	width: 1743px;
-	height: 1010px;
-	left: 0;
-	z-index: -999;
+	display:block;
+  height:100%;
+  width:100%;
+  position:fixed;
+  left:0;
+  top:0;
+  z-index:0;
+  text-indent:-5000em;
 }
 #background.fr
 {
-	background: #202c37 url(asset-path("fr/bg_playstation.jpg", image)) fixed;
+	background: #202c37 url(asset-path("fr/bg_playstation.jpg", image)) ;
 }
 #background.nl
 {
-	background: #202c37 url(asset-path("nl/onbeperkte-vod.jpg", image)) fixed;
+	background: #202c37 url(asset-path("nl/onbeperkte-vod.jpg", image)) ;
 }
 #background.en
 {
-	background: #202c37 url(asset-path("en/bg_playstation.jpg", image)) fixed;
+	background: #202c37 url(asset-path("en/bg_playstation.jpg", image)) ;
 }
 .osc, h1, h2, h3, h4, h5 {
 	font-family: 'Open Sans Condensed', sans-serif;
@@ -88,6 +91,7 @@ textarea {
 }
 #wrap {
 	background: white;
+	position: relative
 }
 #wrap {
 	margin: 0 auto 100px;
@@ -165,6 +169,7 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {border:0;padding:0;
 	padding-top: 150px;
 	height: 24px;
 	text-align: right;
+	position: relative;
 }
 #lang li {
 	display: inline;
