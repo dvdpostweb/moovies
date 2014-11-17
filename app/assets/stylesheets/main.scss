@@ -11,15 +11,23 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 1.2em;  
 }
-body.fr
+#background
+{
+	position: absolute;
+	width: 1743px;
+	height: 1010px;
+	left: 0;
+	z-index: -999;
+}
+#background.fr
 {
 	background: #202c37 url(asset-path("fr/bg_playstation.jpg", image)) fixed;
 }
-body.nl
+#background.nl
 {
-	background: #202c37 url(asset-path("nl/bg_playstation.jpg", image)) fixed;
+	background: #202c37 url(asset-path("nl/onbeperkte-vod.jpg", image)) fixed;
 }
-body.en
+#background.en
 {
 	background: #202c37 url(asset-path("en/bg_playstation.jpg", image)) fixed;
 }
