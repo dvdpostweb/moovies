@@ -41,6 +41,7 @@
        
   </head>
   <body id="<%= @body_id %>" class="<%= params[:kind] %> <%= current_customer ? :private : :public %> <%= I18n.locale %>">
+    <a href='http://google.com' id='background' class='<%= I18n.locale %>'></a>
     <%= render :partial => 'layouts/google_analytics' %>
     <% if current_customer && current_customer.suspended? %>
     <div id='p_suspended'>
