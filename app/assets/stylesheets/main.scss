@@ -128,6 +128,8 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {border:0;padding:0;
 .private #top {
 	line-height: 34px;
 	background: url(image_path('top-bg.gif')) 0 0 repeat-x;
+	position: relative;
+	margin-top: -11px;
 }
 .public #top {
 	background: none;
@@ -166,7 +168,7 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {border:0;padding:0;
 	width: 970px;
 	margin: 0 auto;
 	/*padding-top: 16px;*/
-	padding-top: 150px;
+	margin-top: 150px;
 	height: 24px;
 	text-align: right;
 	position: relative;
