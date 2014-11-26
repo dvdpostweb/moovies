@@ -28,7 +28,13 @@
     </div>
 
     <div class="clear"></div>
+     <div id="subscribe-wrap">
+      <%= link_to image_tag("promotions/#{I18n.locale}/bannerpromo-playstation.jpg", :size => '942x188', ), info_path(:page_name => t('routes.infos.params.playstation')) %>
+    </div>
+    <p><%= t('.playstation').html_safe %></p>
+
     <% unless current_customer %>
+
     <div id="subscribe-wrap">
       <%= link_to image_tag("#{I18n.locale}/#{t('home.index.banner_img')}#{params[:kind]==:adult ? '-adult' : ''}.jpg", :size => '942x188', :alt => t('home.index.banner_alt')), new_customer_registration_path(:code => get_code(@discount_bottom.name)) %>
     </div>
