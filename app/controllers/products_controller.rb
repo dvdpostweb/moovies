@@ -199,7 +199,6 @@ class ProductsController < ApplicationController
     else
         trailers = @product.trailers.by_language(I18n.locale).paginate(:per_page => 1, :page => params[:trailer_page])
     end
-    Customer.send_evidence('ViewTrailer', @product.to_param, current_customer, request, {:response_id => params[:response_id], :segment1 => @source, :formFactor => view_context.format_text(@browser), :rule => @source})
     if request.xhr?
       if trailer.class.name == 'StreamingTrailer'
         render :partial => 'products/trailer', :locals => {:trailer => trailer, :trailers => trailers}
