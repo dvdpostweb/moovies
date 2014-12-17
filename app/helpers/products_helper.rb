@@ -586,8 +586,12 @@ module ProductsHelper
     list.join(', ')
   end
   def prop_duration(duration)
-    h = duration / 60
-    m = duration - (h * 60)
-    "PT#{h}H#{m}M"
+    if duration
+      h = duration / 60
+      m = duration - (h * 60)
+      "PT#{h}H#{m}M"
+    else
+      0
+    end
   end
 end
