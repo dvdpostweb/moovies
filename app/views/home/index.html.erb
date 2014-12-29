@@ -1,5 +1,5 @@
 <%= render :partial => 'home/index/carousel_public' %>
-<%= render :partial => 'home/index/promo_film' if 1 == 0 || (!current_customer && params[:kind] == :normal) %>
+<%= render :partial => 'home/index/promo_film' if 1 == 0 && (!current_customer && params[:kind] == :normal) %>
 <div id="services-wrap">
   <div class="wrap" id="vod-ppv">
     <h3><%= t ".unlinmited#{params[:kind] == :adult ? '_adult' : ''}" %></h3>
