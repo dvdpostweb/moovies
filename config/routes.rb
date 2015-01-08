@@ -4,7 +4,7 @@ Moovies::Application.routes.draw do
     resources :products, :only => :index
   end
 
-  root :to => 'home#index'
+  root :to => 'products#index'
   resource :ogone, :only => [:create]
   resource :home_products, :only => [:update, :edit]
   resource :list, :only => [:new, :create]
@@ -53,7 +53,7 @@ Moovies::Application.routes.draw do
     end
   end
   scope ':locale/(:kind)', :locale => /en|fr|nl/, :kind => /normal|adult/ do
-    match "/" => 'home#index', :as => :root_localize
+    match "/" => 'products#index', :as => :root_localize
     match "validation" => 'home#validation'
     match 'customers/reactive' => "customers#reactive"
     match 'customers/promotion' => "customers#promotion"
