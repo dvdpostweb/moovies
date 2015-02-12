@@ -18,19 +18,12 @@ $(function() {
   })
   
   $('#streaming').delegate('.qualityvod', "click", function() {
-    console.log('here')
     /*response_id = getParameterByName('response_id')*/
     content = $('#presentation').html()
     loader = 'loading.gif';
     $('.error').html('');
-    if($('#drm').html() == "1")
-    {
-    }
-    else
-    {
       $('#player').html('')
       $('#presentation').html("<div style='height:389px'><div class='load'><img src='/assets/"+loader+"'/></div></div>")
-    }
     $(this).hide()
     $.ajax({
       dataType: 'html',
@@ -40,18 +33,7 @@ $(function() {
       success: function(data) {
         $('#presentation').html('')
         $('.qualityvod').show()
-        if(/.m3u8$/.test(data))
-        {
-          var player = new ViewRightPlayer();
-          player.get_player('#player')
-          player.open($.trim(data))
-        }
-        else
-        {
-          $('#flow').html(data);
-        }        
-        
-        
+        $('#flow').html(data);
       },
       error: function() {
         $('#presentation').html(content);

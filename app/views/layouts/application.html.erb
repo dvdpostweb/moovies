@@ -34,7 +34,7 @@
     <% end %>
 	  <%= javascript_include_tag "application" %>
 	  <%= javascript_include_tag "jquery.ui.datepicker-#{I18n.locale}" %>
-    <%= javascript_include_tag 'md5', 'viewrightplayer', 'viewrightplayer_control' if @streaming && @streaming.drm %>
+    <%= javascript_include_tag 'http://yandex.st/swfobject/2.2/swfobject.min.js' %>
     <%= stylesheet_link_tag "application", :media => "all" %>
     <%= render :partial => 'layouts/apple' %>
     <%= csrf_meta_tags %>

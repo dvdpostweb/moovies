@@ -303,6 +303,24 @@ module Moovies
       #"http://vod.dvdpost.be/#{token}_#{audio}_#{sub}.m3u8"
     end
 
+    def akamai_hls_url(imdb_id, audio, sub, hd = false, season_id = 0, episode_id = 0)
+      if season_id == '0'
+        season_name = ''
+      else
+        season_name = "S#{season_id}E#{episode_id}_"
+      end
+      "http://homehlsvod-vh.akamaihd.net/i/#{season_name}#{imdb_id}_A#{audio}_S#{sub}_,800000,2200000#{hd ? ',3000000' : ''},.f4v.csmil/master.m3u8"
+    end
+
+    def akamai_hls_trailer_url(imdb_id, audio, sub, season_id = '0', episode_id = 0)
+      if season_id == '0'
+        season_name = ''
+      else
+        season_name = "S#{season_id}E#{episode_id}_"
+      end
+      "http://homehlsvod-vh.akamaihd.net/i/trailer_#{season_name}#{imdb_id}_A#{audio}_S#{sub}_,800000,2200000,3000000,.f4v.csmil/master.m3u8"
+    end
+
     def verimatrix_url(token, audio, sub)
       "http://94.139.62.205/Content/HLS/VOD/Token/#{token}_#{audio}_#{sub}.m3u8"
     end
