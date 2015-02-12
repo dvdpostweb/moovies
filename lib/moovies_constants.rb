@@ -304,7 +304,7 @@ module Moovies
     end
 
     def akamai_hls_url(imdb_id, audio, sub, hd = false, season_id = 0, episode_id = 0)
-      if season_id == '0'
+      if season_id.to_s == '0'
         season_name = ''
       else
         season_name = "S#{season_id}E#{episode_id}_"
