@@ -55,7 +55,8 @@ class Token < ActiveRecord::Base
       return {:token => token, :error => nil}
     else
       begin
-        token_string = Moovies.generate_token_from_alpha(file.filename, kind, false)
+        #token_string = Moovies.generate_token_from_alpha(file.filename, kind, false)
+        token_string = 'none'
       rescue => e
         token_string = false
       end

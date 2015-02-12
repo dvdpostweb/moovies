@@ -125,6 +125,7 @@ class Product < ActiveRecord::Base
      sort
   end
   def self.filter_online(filters, options={}, exact=nil)
+    logger.debug("@@@#{options}")
     products = Product.available.by_kind(options[:kind])
     products = products.exclude_products_id([exact.collect(&:products_id)]) if exact
     products = products.by_actor(options[:actor_id]) if options[:actor_id]
