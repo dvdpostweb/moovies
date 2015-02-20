@@ -38,10 +38,10 @@ set :user, "plush"
 set :domain, "94.139.62.123"
 set :domain2,  "94.139.62.122"
 set :port, 22012
-role :app, domain2, domain
-role :web, domain2, domain
+role :app, domain2#, domain
+role :web, domain2#, domain
 
-role :db, domain, domain2, :primary => true
+role :db, domain2,  :primary => true
 
 #############################################################
 #	Git

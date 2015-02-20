@@ -307,7 +307,7 @@ module Moovies
       if season_id.to_s == '0'
         season_name = ''
       else
-        season_name = "S#{season_id}E#{episode_id}_"
+        season_name = "S#{sprintf '%02d', season_id}E#{sprintf '%02d', episode_id}_"
       end
       "http://homehlsvod-vh.akamaihd.net/i/#{season_name}#{imdb_id}_A#{audio}_S#{sub}_,800000,2200000#{hd ? ',3000000' : ''},.f4v.csmil/master.m3u8"
     end
