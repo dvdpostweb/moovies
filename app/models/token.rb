@@ -56,7 +56,7 @@ class Token < ActiveRecord::Base
     else
       begin
         #token_string = Moovies.generate_token_from_alpha(file.filename, kind, false)
-        token_string = 'none'
+        token_string = '3/i/' + file.imdb_id.to_s
       rescue => e
         token_string = false
       end
