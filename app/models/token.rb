@@ -62,7 +62,7 @@ class Token < ActiveRecord::Base
       end
 
       if token_string
-        params = {:imdb_id => imdb_id, :token => token_string, :source_id => source, :country => file.country, :payment_kind => 'NONE', :season_id => season_id, :episode_id => episode_id}
+        params = {:imdb_id => imdb_id, :token => token_string, :source_id => source, :country => file.country, :payment_kind => 'NONE', :season_id => season_id, :episode_id => episode_id, :videoland => file.videoland}
         params = params.merge(:ppv_price => file.ppv_price, :kind => 'PPV', :is_ppv => true, :payment_kind => 'POSTPAID') if !file.svod?
         if file.prepaid?
           params = params.merge(:kind => 'PREPAID')

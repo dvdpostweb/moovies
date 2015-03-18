@@ -476,7 +476,7 @@ class Product < ActiveRecord::Base
   end
 
   def trailer?
-    ((Rails.env == "production" ? !streaming_trailers.empty? : !streaming_trailers.empty?) && !tokens_trailers.empty? )
+    ((Rails.env == "production" ? !streaming_trailers.empty? : !streaming_trailers.empty?))
   end
 
   def self.country_short_name(country_id)
