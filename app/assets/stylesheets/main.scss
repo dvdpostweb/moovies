@@ -22,17 +22,9 @@ body {
   z-index:0;
   text-indent:-5000em;
 }
-#background.fr
+#background
 {
-	background: #202c37 url(asset-path("fr/bg_playstation.jpg", image)) no-repeat scroll center top ;
-}
-#background.nl
-{
-	background: #202c37 url(asset-path("nl/onbeperkte-vod.jpg", image)) no-repeat scroll center top ;
-}
-#background.en
-{
-	background: #202c37 url(asset-path("en/bg_playstation.jpg", image)) no-repeat scroll center top ;
+	background: #202c37 url(asset-path("bg.jpg", image));
 }
 .osc, h1, h2, h3, h4, h5 {
 	font-family: 'Open Sans Condensed', sans-serif;
