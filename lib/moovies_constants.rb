@@ -309,12 +309,7 @@ module Moovies
       else
         season_name = "S#{sprintf '%02d', season_id}E#{sprintf '%02d', episode_id}_"
       end
-      bitrate =
-      if videoland
-        '6000000'
-      else
-        "800000,2200000#{hd ? ',3000000' : ''}"
-      end
+      bitrate = "800000,2200000#{hd ? ',3000000' : ''}"
       "http://homehlsvod-vh.akamaihd.net/i/#{season_name}#{imdb_id}_A#{audio}_S#{sub}_,#{bitrate},.f4v.csmil/master.m3u8"
     end
 
@@ -324,10 +319,7 @@ module Moovies
       else
         season_name = "S#{season_id}E#{episode_id}_"
       end
-      bitrate = if videoland
-        '6000000'
-      else
-        "800000,2200000,3000000"
+      bitrate = "800000,2200000,3000000"
       end
       "http://homehlsvod-vh.akamaihd.net/i/trailer_#{season_name}#{imdb_id}_A#{audio}_S#{sub}_,#{bitrate},.f4v.csmil/master.m3u8"
     end
