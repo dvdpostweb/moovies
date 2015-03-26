@@ -34,7 +34,7 @@ class Token < ActiveRecord::Base
   def create_token_code(imdb_id, kind)
     file = StreamingProduct.where(:imdb_id => imdb_id).first
     begin
-      token_string = '3/i/' + imdb_id.to_s
+      token_string = "#{file.hd? ? '4' : '3'}/i/" + imdb_id.to_s
     rescue => e
       token_string = false
     end
@@ -56,7 +56,7 @@ class Token < ActiveRecord::Base
     else
       begin
         #token_string = Moovies.generate_token_from_alpha(file.filename, kind, false)
-        token_string = '3/i/' + file.imdb_id.to_s
+        token_string = "#{file.hd? ? '4' : '3'}/i/" + file.imdb_id.to_s
       rescue => e
         token_string = false
       end
