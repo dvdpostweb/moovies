@@ -3,7 +3,7 @@
         <h2>
           <span id="vod_title"><%= h !@product.series? ? @product.description.title : @product.episode_title %> (<%= @product.year %>)<span>
         </h2>
-        <%=  "<h3>Powered by</h3>".html_safe if @streaming.videoland? %>
+        <%=  "<h3 class='vl'>Powered by</h3>".html_safe if @streaming.videoland? %>
         <% if @token && @token_valid && @product.tvod? && @code.nil? %>
           <div id='time'><div id="vodtime"><%= t '.time_left' %> : <strong><%= time_left(@token, params[:kind]) %></strong></div></div>
         <% end %>
