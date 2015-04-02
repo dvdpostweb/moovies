@@ -70,7 +70,7 @@ class PromotionsController < ApplicationController
       elsif @activation
         @promotion = @activation
       end
-      #if @promotion
+      if @promotion
         if params[:email]
           @user = Customer.find_by_email(params[:email])
           if !@user.confirmed?
@@ -132,6 +132,11 @@ class PromotionsController < ApplicationController
         else
           redirect_to new_customer_registration_path(:code => code)
         end
+      else
+        flash[:alert] = t('session.error_wrong_code')
+        flash.discard
+        render :show
+      end
     end
   end
 
