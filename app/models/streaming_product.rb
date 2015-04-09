@@ -19,7 +19,7 @@ class StreamingProduct < ActiveRecord::Base
   scope :prefered_audio, lambda {|language_id| where(:language_id => language_id) }
   scope :prefered_subtitle, lambda {|subtitle_id| where('subtitle_id = ? and language_id <> ?', subtitle_id, subtitle_id)}
   scope :not_prefered, lambda {|language_id| where("language_id != :language_id and (subtitle_id != :language_id or subtitle_id is null)",{:language_id => language_id})}
-  scope :alpha, where(:source => 'ALPHANETWORKS')
+  scope :alpha, where(:source => ['ALPHANETWORKS','VIDEOLAND'])
   scope :country, lambda {|country| where(:country => country)}
   scope :hd, where(:quality => ['720p', '1080p'])
   scope :by_primary, lambda {|imdb_id, season_id, episode_id| where(:imdb_id => imdb_id, :season_id => season_id, :episode_id => episode_id)}
@@ -42,6 +42,7 @@ class StreamingProduct < ActiveRecord::Base
     source = OrderedHash.new
     source.push(:softlayer, 'SOFTLAYER')
     source.push(:alphanetworks, 'ALPHANETWORKS')
+    source.push(:videoland, 'VIDEOLAND')
     source
   end
 
