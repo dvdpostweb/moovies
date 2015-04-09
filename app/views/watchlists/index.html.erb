@@ -32,7 +32,7 @@
     <%= render :partial => path, :collection => @token_list, :locals => {:display_vod => @display_vod, :type => :token, :series => []} %>
   </div>
 <% end %>
-<h2><%= t '.list' %>dd (<%= @list.count('distinct vod_wishlists.id').size %>)</h2>    	
+<h2><%= t '.list' %> (<%= @list.count('distinct vod_wishlists.id').size %>)</h2>    	
 <div class="box<%= class_name %>" id="ready">
   <% render :partial => 'watchlists/index/display', :locals => {:display_vod => @display_vod} %>
   <%= render :partial => path, :collection => @list, :locals => {:display_vod => @display_vod, :type => :list, :series => []} %>
