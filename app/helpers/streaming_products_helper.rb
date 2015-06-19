@@ -3,7 +3,7 @@ module StreamingProductsHelper
       audio = streaming.languages.by_language(:fr).first.short_alpha
       sub = streaming.subtitles.count > 0 ? streaming.subtitles.by_language(:fr).first.short_alpha : 'non'
       hd = streaming.hd? ? true : false
-      url = Moovies.akamai_hls_url(streaming.imdb_id, audio, sub, hd, streaming.videoland, season_id , episode_id)
+      url = Moovies.akamai_hls_url(streaming.imdb_id, audio, sub, hd, streaming.videoland, streaming.akamai_folder, season_id , episode_id)
     if browser.iphone? || browser.ipad? || browser.tablet?
       #url = code.nil? ? Moovies.hls_url(token_name, audio, sub) : Moovies.akamai_url(token_name, audio, sub)
       if browser.iphone? || (browser.tablet? && !browser.ipad?)
