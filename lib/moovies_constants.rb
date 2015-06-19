@@ -303,14 +303,15 @@ module Moovies
       #"http://vod.dvdpost.be/#{token}_#{audio}_#{sub}.m3u8"
     end
 
-    def akamai_hls_url(imdb_id, audio, sub, hd, videoland, season_id = 0, episode_id = 0)
+    def akamai_hls_url(imdb_id, audio, sub, hd, videoland, folder, season_id = 0, episode_id = 0)
       if season_id.to_s == '0'
         season_name = ''
       else
         season_name = "S#{sprintf '%02d', season_id}E#{sprintf '%02d', episode_id}_"
       end
+      folder_path = folder.present? ? "#{folder}/" : ''
       bitrate = "800000,2200000#{hd ? ',3000000' : ''}"
-      "http://homehlsvod-vh.akamaihd.net/i/#{season_name}#{imdb_id}_A#{audio}_S#{sub}_,#{bitrate},.f4v.csmil/master.m3u8"
+      "http://homehlsvod-vh.akamaihd.net/i/#{folder_path}#{season_name}#{imdb_id}_A#{audio}_S#{sub}_,#{bitrate},.f4v.csmil/master.m3u8"
     end
 
     def akamai_hls_trailer_url(imdb_id, audio, sub, videoland, season_id = '0', episode_id = 0)
