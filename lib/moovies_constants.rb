@@ -322,7 +322,7 @@ module Moovies
       end
       bitrate = "800000,2200000,3000000"
       folder_path = folder.present? ? "#{folder}/" : ''
-      "http://homehlsvod-vh.akamaihd.net/i/trailer/#{folder_path}trailer_#{season_name}#{imdb_id}_A#{audio}_S#{sub}_,#{bitrate},.f4v.csmil/master.m3u8"
+      "http://homehlsvod-vh.akamaihd.net/i/trailers/#{folder_path}trailer_#{season_name}#{imdb_id}_A#{audio}_S#{sub}_,#{bitrate},.f4v.csmil/master.m3u8"
     end
 
     def verimatrix_url(token, audio, sub)
