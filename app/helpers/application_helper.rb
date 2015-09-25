@@ -143,12 +143,12 @@ module ApplicationHelper
   end
 
   def get_code(code)
-    #if cookies[:code]
-    #  cookies[:code]
-    #else
-    #  code
-    #end
-    code
+    if cookies[:code]
+      cookies[:code]
+    else
+      code
+    end
+    #code
   end
 
   def resource_name
