@@ -6,9 +6,6 @@
 <% if product.vod_online_be.size != 0 || view_mode.to_s == 'soon' %>
 <div class="ca-item ca-item-<%= detail2_counter + 1 %>">
   <div class="content">
-    <% cache(product.id, :expires_in => 2.hour) do %>
-      <%= "<span class='hd'></span>".html_safe if product.hd?(session[:country_id]) %>
-    <% end %>
     <%= link_to image_tag(product.image, :width => 145, :height => 217), product_path(:id => product.to_param, :source => source), 'data-url' => product_data_path(:product_id => product.to_param, :source => source, :response_id => @response_id, :div_id => div_id), :class => :cover %>
     <div class="tooltips" style="display:none">
       <p class="tooltips_title"><%= product.smart_title %> (<%= product.year %>)</p>
