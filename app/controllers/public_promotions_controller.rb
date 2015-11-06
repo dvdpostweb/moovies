@@ -12,8 +12,8 @@ class PublicPromotionsController < ApplicationController
       render :text => new_customer_registration_path(:code => params[:promotion]);
     else
       respond_to do |format|
-        format.html {render :text => t('.public_promotion.update.error')}
-        format.js {render :text => t('.public_promotion.update.error')}
+        format.html {render :text => t('public_promotion.update.error')}
+        format.js {render :text => t('public_promotion.update.error')}
       end
     end
   end
