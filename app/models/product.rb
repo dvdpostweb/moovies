@@ -541,6 +541,7 @@ class Product < ActiveRecord::Base
     when :svod_last_chance
       products.svod_last_chance
     when :tvod_soon
+      logger.debug("@@@")
       products.tvod_soon
     when :tvod_last_added
       products.tvod_last_added
