@@ -64,7 +64,7 @@ class ProductsController < ApplicationController
         tvod_package_id = params[:kind] == :adult ? 5 : 2
         svod_package_id = params[:kind] == :adult ? 4 : 1
         @tvod_last =        Product.filter(nil, new_params.merge(:view_mode => 'tvod_last_added',  :package => Moovies.packages.invert[tvod_package_id]))
-        @tvod_soon =        Product.filter(nil, new_params.merge(:view_mode => 'tvod_soon',  :package => Moovies.packages.invert[tvod_package_id]))
+        @tvod_soon =        Product.filter(nil, new_params.merge(:view_mode => 'tvod_soon'))
 
         @tvod_best_rating = Product.filter(nil, new_params.merge(:view_mode => 'tvod_best_rated',  :package => Moovies.packages.invert[tvod_package_id]))
         @tvod_most_view =   Product.filter(nil, new_params.merge(:view_mode => 'tvod_most_viewed', :package => Moovies.packages.invert[tvod_package_id]))
