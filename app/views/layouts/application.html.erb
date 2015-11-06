@@ -85,7 +85,7 @@
         <%= link_to image, path, :target => "_blank" %>
         <a href="<%= edit_public_promotion_path() %>" id="codePromo"><%= t('.code_promo')%></a>
         
-      </div>Vous avez un code promo? Cliquez ici
+      </div>
       <% elsif params[:kind] == :adult && current_customer && (params[:controller] != 'home' && params[:controller] != 'customers/registrations' && params[:controller] != 'steps' && params[:page_name] != 'abo') and !(params[:controller] == 'promotions' and params[:id] == 'smarttv') && current_customer.no_adult? %>
       <div id="subscribe-wrap">
         <%= link_to image_tag("#{I18n.locale}/banner_promo_hp_adult_customer.jpg", :size => '942x188', :alt => t(products_alt_banner)), info_path(:page_name => t('routes.infos.params.abo')) %>
