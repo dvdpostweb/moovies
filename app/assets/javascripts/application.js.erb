@@ -29,6 +29,56 @@
 //= require history
 //= require swfobject
 $(function() {
+    var options_norm = {
+    success: show_add_norm,
+    dataType: 'html'
+    
+  }
+  function show_add_norm(responseText, statusText){
+    if(jQuery.trim(statusText) == "success"){
+      if(responseText.indexOf('sign_up')>=0)
+      {
+        $(location).attr('href', responseText);
+      }
+      else
+      {
+        html_item.html(responseText);
+      }
+    }
+    else
+    {
+      html_item.html(content);
+    }
+  };
+  
+  $("body").delegate(".public_promo_btn","click", function() {
+    if ($("#promotion").val()!=""){
+      loader = 'ajax-loader.gif';
+      $("#public_promo").ajaxSubmit(options_norm);
+      html_item =  $("#public_promo #status")
+      content = html_item.html();
+      loader = 'ajax-loader.gif';
+      html_item.html("<div style='height:42px'><img src='/assets/"+loader+"'/></div>");
+    }
+    else
+    {
+      html_item =  $("#public_promo #status").html('')
+    }
+      return false; // prevent default behaviour
+    
+  });
+  $('body').delegate('#codePromo, #codePromo2','click', function(){
+    url = $(this).attr('href');
+    jQuery.facebox(function() {
+      $.ajax({
+        url: url,
+        dataType: 'html',
+        type: 'GET',
+        success: function(data) { jQuery.facebox(data); }
+      });
+    });
+    return false;
+  });
   if ($('#socialbox-float').length> 0) {
     social_position = $('#socialbox-float').offset().top - parseInt($('#socialbox-float').css('margin-top'));
     social_top = $('#socialbox-float').css('top')

@@ -49,10 +49,10 @@ Moovies::Application.routes.draw do
       resources :phone_requests, :only => [:new, :create, :index]
       resources :actors, :only => [:index], concerns: :productable
       resources :directors, :only => [], concerns: :productable
-      
     end
   end
   scope ':locale/(:kind)', :locale => /en|fr|nl/, :kind => /normal|adult/ do
+    resource :public_promotion, :only => [:edit, :update]
     match "/" => 'products#index', :as => :root_localize
     match "validation" => 'home#validation'
     match 'customers/reactive' => "customers#reactive"
