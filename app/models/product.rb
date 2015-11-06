@@ -309,7 +309,7 @@ class Product < ActiveRecord::Base
   end
 
   def serie_title
-    serie.name 
+    serie.name if serie
   end
 
   def episode_title(full = true)
