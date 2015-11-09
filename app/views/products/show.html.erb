@@ -95,7 +95,7 @@
       <% else %>
         <%= render :partial => 'products/show/formats', :locals => {:product => @product, :svod_date => @svod_date}%>
       <% end %>
-      <%= render :partial => 'products/index/hp_list', :locals => {:data => @recommendations, :title => :recommendations, :type => :none, :view_mode => :none, :source => 4} if @recommendations.size > 0 %>
+      <%= render :partial => 'products/index/hp_list', :locals => {:data => @recommendations, :title => :recommendations, :type => :none, :view_mode => :none, :source => 4, :belgium => nil} if @recommendations.size > 0 %>
       <div id="thumbs-wrap">
         <h3><%= t '.photo' %></h3>
         <div>

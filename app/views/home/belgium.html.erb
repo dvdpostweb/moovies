@@ -3,10 +3,10 @@
   <div id='filter_layout'></div>
   <div id="products">
      <div class="tvod"><h2><%= t('.belgium') %> :</h2>
-       <%= render :partial => 'products/index/hp_list', :locals => {:data => @country, :title => :country, :type => nil, :view_mode => nil, :source => 64} %>
-       <%= render :partial => 'products/index/hp_list', :locals => {:data => @actor, :title => :actor, :type => nil, :view_mode => nil, :source => 14} %>
-       <%= render :partial => 'products/index/hp_list', :locals => {:data => @director, :title => :director, :type => nil, :view_mode => nil, :source => 65} %>
-       <%= render :partial => 'products/index/hp_list', :locals => {:data => @land, :title => :land, :type => nil, :view_mode => nil, :source => 66} %>
+       <%= render :partial => 'products/index/hp_list', :locals => {:data => @country, :title => :country, :type => nil, :view_mode => nil, :source => 64, :belgium => 1} %>
+       <%= render :partial => 'products/index/hp_list', :locals => {:data => @actor, :title => :actor, :type => nil, :view_mode => nil, :source => 14, :belgium => 2} %>
+       <%= render :partial => 'products/index/hp_list', :locals => {:data => @director, :title => :director, :type => nil, :view_mode => nil, :source => 65, :belgium => 3} %>
+       <%= render :partial => 'products/index/hp_list', :locals => {:data => @land, :title => :land, :type => nil, :view_mode => nil, :source => 66, :belgium => 4} %>
     </div>
   </div>
 </div>

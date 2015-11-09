@@ -99,7 +99,7 @@ class Product < ActiveRecord::Base
   sphinx_scope(:belgium_actor)            {{:with =>          {:belgium_actor => 1}}}
   sphinx_scope(:belgium_director)         {{:with =>          {:belgium_director => 1}}}
   sphinx_scope(:belgium_land)             {{:with =>          {:belgium_land => 1}}}
-
+  sphinx_scope(:online)                   {{:with =>          {:imdb_id_online => 1..3147483647}}}
 
   sphinx_scope(:svod_last_added)          {{:with =>          {:svod_start => 3.months.ago..Time.now.end_of_day, :imdb_id_online => 1..3147483647}}}
   sphinx_scope(:tvod_last_added)          {{:with =>          {:tvod_start => 5.months.ago..1.day.ago, :imdb_id_online => 1..3147483647}}}
@@ -132,6 +132,7 @@ class Product < ActiveRecord::Base
      sort
   end
   def self.filter_online(filters, options={}, exact=nil)
+    logger.debug("@@@@#{options}")
     products = Product.available.by_kind(options[:kind])
     products = products.exclude_products_id([exact.collect(&:products_id)]) if exact
     products = products.by_actor(options[:actor_id]) if options[:actor_id]
@@ -155,6 +156,10 @@ class Product < ActiveRecord::Base
       products = products.with_subtitles(options[:filters][:subtitles].reject(&:empty?)) if Product.subtitle?(options[:filters][:subtitles])
       products = products.by_category(options[:filters][:category_id]) if !options[:filters][:category_id].nil? && !options[:filters][:category_id].blank?
     end
+    products = products.belgium_country if options[:belgium] && options[:belgium].to_i == 1
+    products = products.belgium_actor if options[:belgium] && options[:belgium].to_i == 2
+    products = products.belgium_director if options[:belgium] && options[:belgium].to_i == 3
+    products = products.belgium_land if options[:belgium] && options[:belgium].to_i == 4
     products = self.get_view_mode(products, options[:view_mode]) if options[:view_mode]
     sort = get_sort(options)
     products = products.order(sort, :extended) if sort != ''
@@ -177,10 +182,11 @@ class Product < ActiveRecord::Base
     products = products.by_imdb_id(options[:imdb_id]) if options[:imdb_id]
     products = options[:kind] == :normal ? products.by_streaming_studio(options[:studio_id]) : products.by_studio(options[:studio_id]) if options[:studio_id]
     products = products.without_series if options[:without_series]
-    products = products.belgium_country if options[:belgium] == 1
-    products = products.belgium_actor if options[:belgium] == 2
-    products = products.belgium_director if options[:belgium] == 3
-    products = products.belgium_land if options[:belgium] == 4
+    products = products.online.belgium_country if options[:belgium] == 1
+    products = products.online.belgium_actor if options[:belgium] == 2
+    products = products.online.belgium_director if options[:belgium] == 3
+    products = products.online.belgium_land if options[:belgium] == 4
+
     if !filters.nil?  
       products = products.by_audience(filters.audience_min, filters.audience_max) if filters.audience? && options[:kind] == :normal
       products = products.by_country(filters.country_id) if filters.country_id?
@@ -357,9 +363,9 @@ class Product < ActiveRecord::Base
     {:image => image, :title => title, :description => description}
   end
   
-  def preview_image(id, kind)
+  def preview_image(id, kind, size='small')
     path = kind == :adult ? Moovies.imagesx_preview_path : Moovies.images_preview_path
-    File.join(path,'small', "#{imdb_id}_#{id}.jpg")
+    File.join(path,size, "#{imdb_id}_#{id}.jpg")
   end
 
   def trailer_image(kind)
@@ -557,7 +563,6 @@ class Product < ActiveRecord::Base
     when :svod_last_chance
       products.svod_last_chance
     when :tvod_soon
-      logger.debug("@@@")
       products.tvod_soon
     when :tvod_last_added
       products.tvod_last_added

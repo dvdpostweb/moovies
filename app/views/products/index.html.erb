@@ -6,7 +6,7 @@
 </div>
 <% end %>
 <!--   ==============   MAIN CONTENT   ==============   -->
-<% if params[:package].nil? && params[:concerns] != :productable %>
+<% if params[:package].nil? && params[:concerns] != :productable && params[:belgium].blank? %>
 <div id="all">
   <%= render :partial => 'products/index/hp' %>
   <div class="clear"></div>
