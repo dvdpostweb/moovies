@@ -40,4 +40,16 @@ class HomeController < ApplicationController
 
   def moodme
   end
+  def belgium
+    @body_id = 'products_index'
+    @countries = ProductCountry.visible.ordered
+    new_params = session[:sexuality] == 0 ? params.merge(:per_page => 50, :country_id => session[:country_id], :hetero => 1, :includes => ["descriptions_#{I18n.locale}", 'vod_online_be']) : params.merge(:per_page => 50, :country_id => session[:country_id], :includes => ["descriptions_#{I18n.locale}", 'vod_online_be'])
+    tvod_package_id = params[:kind] == :adult ? 5 : 2
+    svod_package_id = params[:kind] == :adult ? 4 : 1
+    @country =        Product.filter(nil, new_params.merge(:belgium => 1,  :package => Moovies.packages.invert[tvod_package_id]))
+    @actor =          Product.filter(nil, new_params.merge(:belgium => 2,  :package => Moovies.packages.invert[tvod_package_id]))
+    @director =       Product.filter(nil, new_params.merge(:belgium => 3,  :package => Moovies.packages.invert[tvod_package_id]))
+    @land =           Product.filter(nil, new_params.merge(:belgium => 4,  :package => Moovies.packages.invert[tvod_package_id]))
+
+  end
 end
