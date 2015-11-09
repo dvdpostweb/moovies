@@ -104,6 +104,8 @@ class Product < ActiveRecord::Base
   sphinx_scope(:tvod_last_chance)         {{:with =>          {:streaming_expire_at => Time.now.beginning_of_day..1.months.from_now}}}
   sphinx_scope(:most_viewed)              {{:with =>          {:count_tokens => 1..1000000}}}
   sphinx_scope(:series)                   {{:with =>          {:serie_id => 1..1000000}}}
+  sphinx_scope(:without_series)           {{:with =>          {:serie_id => 0}}}
+
   sphinx_scope(:by_package)               {|package_id|       {:with =>          {:package_id => package_id}}}
   sphinx_scope(:random)                   {{:order =>         '@random'}}
   sphinx_scope(:by_new)                   {{:with =>          {:year => 2.years.ago.year..Date.today.year, :imdb_id_online => 1..3147483647}}}
@@ -125,7 +127,6 @@ class Product < ActiveRecord::Base
      sort
   end
   def self.filter_online(filters, options={}, exact=nil)
-    logger.debug("@@@#{options}")
     products = Product.available.by_kind(options[:kind])
     products = products.exclude_products_id([exact.collect(&:products_id)]) if exact
     products = products.by_actor(options[:actor_id]) if options[:actor_id]
@@ -153,6 +154,7 @@ class Product < ActiveRecord::Base
     products
   end
   def self.filter(filters, options={}, exact=nil)
+    logger.debug("@@@@#{options}")
     if options[:package].nil? && options[:controller] != 'search' && options[:concerns] != :productable
       id = options[:kind] == :normal ? 1 : 4
       options[:package] = Moovies.packages.invert[id]
@@ -165,6 +167,7 @@ class Product < ActiveRecord::Base
     products = products.by_director(options[:director_id]) if options[:director_id]
     products = products.by_imdb_id(options[:imdb_id]) if options[:imdb_id]
     products = options[:kind] == :normal ? products.by_streaming_studio(options[:studio_id]) : products.by_studio(options[:studio_id]) if options[:studio_id]
+    products = products.without_series if options[:without_series]
     if !filters.nil?  
       products = products.by_audience(filters.audience_min, filters.audience_max) if filters.audience? && options[:kind] == :normal
       products = products.by_country(filters.country_id) if filters.country_id?
