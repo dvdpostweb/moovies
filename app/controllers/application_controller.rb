@@ -97,6 +97,16 @@ class ApplicationController < ActionController::Base
 
   def init
     cookies[:code] = { value: params[:code], expires: 15.days.from_now } if params[:code]
+    if cookies[:code].present?
+      code = cookies[:code]
+      @discount = Discount.by_name(code).available.first
+      @activation = Activation.by_name(code).available.first
+      if @discount
+          @promotion = @discount
+      elsif @activation
+        @promotion = @activation
+      end
+    end
     @browser = Browser.new(:ua => request.user_agent, :accept_language => "en-us")
     @kid_visible = false
     cookies.permanent[:adult_hide] = params[:all] if params[:all]
