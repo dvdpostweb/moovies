@@ -37,10 +37,10 @@
         <%= radio_button_tag('filters[view_mode]', "series", params[:filters] && params[:filters][:view_mode] == 'series' ? true : false, class: "links") %>
         <%= label_tag('filters[view_mode]_series', t('products.left_column.series')) %>
       </li>
-      <li style="display:none">
+      <li>
         <hr />
       </li>
-      <li style="display:none">
+      <li>
         <%= link_to t('.belgium'), belgium_path, :id => :belgium_link, :class => params[:belgium].present? ? 'checked' : '' %>
       </li>
       <li class="audio open">
