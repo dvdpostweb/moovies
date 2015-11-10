@@ -74,17 +74,8 @@
       <% end %>
       <% if !current_customer && (params[:controller] != 'home' && params[:controller] != 'customers/registrations' && params[:controller] != 'steps' && params[:page_name] != 'abo') && !(params[:controller] == 'promotions' && params[:id] == 'smarttv') && !(params[:controller] == 'info' && params[:page_name] == 'playstation') && !(params[:controller] == 'customers' && (params[:action] == 'reactive' || params[:action] == 'promotion')) %>
       <div id="subscribe-wrap">
-        <% if params[:kind] == :adult %>
-          <% path = @code ? promotion_path(:id => :mobistar2) : new_customer_registration_path(:code => get_code(@discount_top.name)) %>
-        <% else %>
-          <% path = new_customer_registration_path(:code => get_code(@discount_top.name)) %>
-        <% end %>
-        <% src = "#{I18n.locale}/banner-promo-hp_tvod#{@code ? "_#{@code.activation_group_id}" : ''}#{params[:kind] == :adult ? '_adult' : ''}.jpg" %>
-        <% src_norm = "#{I18n.locale}/banner-promo-hp_tvod#{params[:kind] == :adult ? '_adult' : ''}.jpg" %>
-        <% image = FileTest.exist?("#{Rails.root}/assets/images/#{src}") ? image_tag(src, :size => '942x188', :alt => t(products_alt_banner)) : image_tag(src_norm, :size => '942x188', :alt => t(products_alt_banner)) %>
-        <%= link_to image, path, :target => "_blank" %>
+        <%= landing_img(@code, @promotion, params, products_alt_banner, @discount_top) %>
         <a href="<%= edit_public_promotion_path() %>" id="codePromo"><%= t('.code_promo')%></a>
-        
       </div>
       <% elsif params[:kind] == :adult && current_customer && (params[:controller] != 'home' && params[:controller] != 'customers/registrations' && params[:controller] != 'steps' && params[:page_name] != 'abo') and !(params[:controller] == 'promotions' and params[:id] == 'smarttv') && current_customer.no_adult? %>
       <div id="subscribe-wrap">
