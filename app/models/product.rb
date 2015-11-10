@@ -132,7 +132,6 @@ class Product < ActiveRecord::Base
      sort
   end
   def self.filter_online(filters, options={}, exact=nil)
-    logger.debug("@@@@#{options}")
     products = Product.available.by_kind(options[:kind])
     products = products.exclude_products_id([exact.collect(&:products_id)]) if exact
     products = products.by_actor(options[:actor_id]) if options[:actor_id]
@@ -156,10 +155,10 @@ class Product < ActiveRecord::Base
       products = products.with_subtitles(options[:filters][:subtitles].reject(&:empty?)) if Product.subtitle?(options[:filters][:subtitles])
       products = products.by_category(options[:filters][:category_id]) if !options[:filters][:category_id].nil? && !options[:filters][:category_id].blank?
     end
-    products = products.belgium_country if options[:belgium] && options[:belgium].to_i == 1
-    products = products.belgium_actor if options[:belgium] && options[:belgium].to_i == 2
-    products = products.belgium_director if options[:belgium] && options[:belgium].to_i == 3
-    products = products.belgium_land if options[:belgium] && options[:belgium].to_i == 4
+    products = products.online.belgium_country if options[:belgium] && options[:belgium].to_i == 1
+    products = products.online.belgium_actor if options[:belgium] && options[:belgium].to_i == 2
+    products = products.online.belgium_director if options[:belgium] && options[:belgium].to_i == 3
+    products = products.online.belgium_land if options[:belgium] && options[:belgium].to_i == 4
     products = self.get_view_mode(products, options[:view_mode]) if options[:view_mode]
     sort = get_sort(options)
     products = products.order(sort, :extended) if sort != ''
@@ -168,7 +167,6 @@ class Product < ActiveRecord::Base
     products
   end
   def self.filter(filters, options={}, exact=nil)
-    logger.debug("@@@@#{options}")
     if options[:package].nil? && options[:controller] != 'search' && options[:concerns] != :productable
       id = options[:kind] == :normal ? 1 : 4
       options[:package] = Moovies.packages.invert[id]
@@ -611,6 +609,8 @@ class Product < ActiveRecord::Base
     else
       if options[:list_id] && !options[:list_id].blank?
         "special_order asc"
+      elsif options[:belgium]
+        "year desc, streaming_available_at_order DESC, rating DESC"
       elsif options[:search] && !options[:search].blank?
         ''
       elsif options[:view_mode] && options[:view_mode] == 'svod_last_added'
