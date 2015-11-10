@@ -40,7 +40,7 @@
     <%= csrf_meta_tags %>
        
   </head>
-  <body id="<%= @body_id %>" class="<%= params[:kind] %> <%= current_customer ? :private : :public %> <%= I18n.locale %>">
+  <body id="<%= @body_id %>" class="<%= params[:kind] %> <%= current_customer ? :private : :public %> <%= I18n.locale %> <%= @body_class %>">
     <%= render :partial => 'layouts/google_analytics' %>
     <% if current_customer && current_customer.suspended? %>
     <div id='p_suspended'>

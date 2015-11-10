@@ -270,7 +270,7 @@ a#nav7
 
 
 /*   ============   FILTERS   ============   */
-#products_index #filters, #film-details #filters, #categories #filters, #studios #filters{
+#products_index #filters, #products_belgium #filters, #film-details #filters, #categories #filters, #studios #filters{
 	background: none repeat scroll 0 0 #FFFFFF;
 	margin-left:14px;
 	color: #bfbeba;
@@ -1310,4 +1310,29 @@ div.notice {
 #public_promo
 {
 	text-align: center
+}
+#belgium_link
+{
+	color: #5c6377;
+	padding:0 0 0 25px;
+}
+#belgium_link::before {
+	  border: 1px solid #9F9E98;
+    content: "";
+    display: inline-block;
+    height: 11px;
+    left: 0;
+    margin-right: 10px;
+    margin-top: 6px;
+    position: absolute;
+    width: 11px;
+		margin-left:20px;
+}
+#belgium_link.checked::before
+{
+	background: #212A31;
+}
+#online hr
+{
+	margin:0;
 }

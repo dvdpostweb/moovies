@@ -42,6 +42,7 @@ class HomeController < ApplicationController
   end
   def belgium
     @body_id = 'products_index'
+    @body_class = 'reload'
     @countries = ProductCountry.visible.ordered
     per_page = params[:format] == 'json' ? 5000 : 50
     new_params = session[:sexuality] == 0 ? params.merge(:per_page => per_page, :country_id => session[:country_id], :hetero => 1, :includes => ["descriptions_#{I18n.locale}", 'vod_online_be']) : params.merge(:per_page => 50, :country_id => session[:country_id], :includes => ["descriptions_#{I18n.locale}", 'vod_online_be'])
