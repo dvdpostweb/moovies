@@ -30,6 +30,7 @@ class ProductsController < ApplicationController
       end
     end
     @body_id = 'products_index'
+    @body_class ='not_reload'
     params[:director_id] = params[:old_director_id] if params[:old_director_id]
     params[:actor_id] = params[:old_actor_id] if params[:old_actor_id]
     if params['actor_id']

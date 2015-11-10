@@ -1,4 +1,4 @@
-<% if params[:filters] || params[:date] || params[:View_mode] || params[:belgium] %>
+<% if params[:filters] || params[:date] || params[:View_mode] || !params[:belgium].blank? %>
   <% if  params[:filters].blank? %>
   <% params[:filters] = {} %>
   <% end %>
@@ -12,8 +12,9 @@
         <%= t("products.left_column.#{params[:package]}") %>
       </li>
       <% end %>
-      <% if params[:belgium] %>
+      <% if params[:belgium].present? %>
       <li>
+        <span class='close' id="close_belgium"></span>
         <strong><%= t 'products.index.belgium' %></strong>
         <%= t("products.left_column.belgium_#{params[:belgium]}") %>
       </li>
@@ -25,7 +26,6 @@
           <%= t("products.left_column.#{params[:view_mode]}") %>
         </li>
       <% end %>
-      
       <% if Product.audience?(params[:filters][:audience_min], params[:filters][:audience_max]) && params[:kind] == :normal %>
         <li>
           <span class='close' id="close_audience"></span>
