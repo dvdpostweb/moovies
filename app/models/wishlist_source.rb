@@ -58,6 +58,8 @@
         source = wishlist_source[:studio]
       elsif params[:list_id] && !params[:list_id].blank?
         source = wishlist_source[:theme]
+      elsif params[:source]
+        source = params[:source]
       else
         source = wishlist_source[:product_index]
       end
