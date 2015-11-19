@@ -2,7 +2,7 @@
 <div id="ca-container" class="ca-container">
   <div class="title"><%= t(".title_#{title}")%>
     <%= link_to t(".more"), products_short_path(:package => Moovies.packages.invert[package_id], 'filters[view_mode]' => view_mode), :class => :small if !type.nil? %>
-    <%= link_to t(".more"), products_short_path('belgium' => belgium), :class => :small if !belgium.nil? %>
+    <%= link_to t(".more"), products_short_path('belgium' => belgium, :source => source), :class => :small if !belgium.nil? %>
 
   </div>
   <div class="ca-wrapper">
