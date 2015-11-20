@@ -31,7 +31,17 @@
     <!-- tradetracker -->
   <% end %>
 <% end %>
-
+<% begin %>
+<% sub = current_customer.subscriptions.first %>
+    <% price = sub.action == 6 ? Discount.find_by_discount_code_id(sub.code_id).promo_price :  Activation.find_by_activation_id(sub.code_id).promo_price  %>
+<% rescue %>
+  <% price = 0 %>
+<% end %>
+<script>
+    dataLayer = [{
+      'revenue': '<%= price %>'
+    }];
+</script>
 <!-- Google Code for Plush - Conversion Conversion Page svod -->
 <% if current_customer.tvod_only? %>
 <!-- Google Code for Plush - TVOD Conversion Page -->
