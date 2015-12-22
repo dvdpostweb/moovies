@@ -27,7 +27,7 @@
           <p><%= link_to product.studio.name, studio_products_path(:studio_id => product.studio.to_param) %></p>
         <% end %>
       </div>
-      <p><%= truncate_html(product_description.text, :length => 300) %></p>
+      <p><%= truncate_html(product_description.text, :length => 300) if product_description %></p>
       
       <%= link_to(t('.more'), path, :target => target, :class => 'osc') %>
       <div class="thumb-wrap">
