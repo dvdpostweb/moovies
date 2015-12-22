@@ -14,7 +14,7 @@
       <% end %>
       <div class="tooltips" style="display:none">
         <p class="tooltips_title"><%= product.smart_title %> (<%= product.year %>)</p>
-        <p class="tooltips_description"><%= truncate_html(data[:description].text, :length => 500) %> </p>
+        <p class="tooltips_description"><%= truncate_html(data[:description].text, :length => 500) if data[:description] %> </p>
         <div class="tooltips_other" id = "<%= div_id %>">loading</div>
       </div>
     </div>
