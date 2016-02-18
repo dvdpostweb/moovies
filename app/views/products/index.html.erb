@@ -6,14 +6,21 @@
 </div>
 <% end %>
 <!--   ==============   MAIN CONTENT   ==============   -->
-<% if params[:package].nil? && params[:concerns] != :productable %>
+<% if params[:package].nil? && params[:concerns] != :productable && params[:belgium].blank? %>
 <div id="all">
   <%= render :partial => 'products/index/hp' %>
+  <div class="clear"></div>
+  <div id="subscribe-wrap">
+    <%= link_to image_tag("promotions/#{I18n.locale}/bannerpromo-playstation.jpg", :size => '942x188' ), info_path(:page_name => t('routes.infos.params.playstation')) %>
+  </div>
+  <div id='ps'><%= t('home.index.lists.playstation').html_safe %></div>
+
 </div>
 <% else %>
 <div id="all">  
   <%= render :partial => 'products/index/all' %>
 </div>
+
 <div id="toTop"><%= t('.back') %></div>
 <% end %>
 <!--   ==============   END MAIN CONTENT   ==============   --> 

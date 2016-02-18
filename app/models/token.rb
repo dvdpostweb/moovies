@@ -34,7 +34,7 @@ class Token < ActiveRecord::Base
   def create_token_code(imdb_id, kind)
     file = StreamingProduct.where(:imdb_id => imdb_id).first
     begin
-      token_string = Moovies.generate_token_from_alpha(file.filename, kind, false)
+      token_string = "#{file.hd? ? '4' : '3'}/i/" + imdb_id.to_s
     rescue => e
       token_string = false
     end
@@ -56,18 +56,18 @@ class Token < ActiveRecord::Base
     else
       begin
         #token_string = Moovies.generate_token_from_alpha(file.filename, kind, false)
-        token_string = 'none'
+        token_string = "#{file.hd? ? '4' : '3'}/i/" + file.imdb_id.to_s
       rescue => e
         token_string = false
       end
 
       if token_string
-        params = {:imdb_id => imdb_id, :token => token_string, :source_id => source, :country => file.country, :payment_kind => 'NONE', :season_id => season_id, :episode_id => episode_id}
+        params = {:imdb_id => imdb_id, :token => token_string, :source_id => source, :country => file.country, :payment_kind => 'NONE', :season_id => season_id, :episode_id => episode_id, :videoland => file.videoland}
         params = params.merge(:ppv_price => file.ppv_price, :kind => 'PPV', :is_ppv => true, :payment_kind => 'POSTPAID') if !file.svod?
         if file.prepaid?
           params = params.merge(:kind => 'PREPAID')
-        elsif customer.tvod_free > 0 && !file.svod?
-          customer.update_column(:tvod_free, customer.tvod_free - 1)
+        elsif customer.tvod_free >= file.tvod_credits && !file.svod?
+          customer.update_column(:tvod_free, customer.tvod_free - file.tvod_credits)
           params = params.merge(:kind => 'FREE', :payment_kind => 'NONE')
         end
         params = params.merge(:customer_id => customer.id) if customer

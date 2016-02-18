@@ -74,3 +74,4 @@ gem 'route_translator', :git => 'git://github.com/NielsKSchjoedt/route_translato
 gem 'chosen-rails'
 gem "hash_to_hidden_fields"
 gem "rest-client"
+gem "jbuilder"

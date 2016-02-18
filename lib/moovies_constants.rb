@@ -283,8 +283,8 @@ module Moovies
     end
     def token_sample
       HashWithIndifferentAccess.new.merge({
-        :normal => '52f8b328dd3411.41501418',
-        :adult => '52f8b368f1c6a9.83980296'
+        :normal => '54a14d297d28e1.00140459',
+        :adult => '54a14d58a61b30.80142899'
       })
     end
     def data_sample
@@ -303,22 +303,26 @@ module Moovies
       #"http://vod.dvdpost.be/#{token}_#{audio}_#{sub}.m3u8"
     end
 
-    def akamai_hls_url(imdb_id, audio, sub, hd = false, season_id = 0, episode_id = 0)
-      if season_id == '0'
+    def akamai_hls_url(imdb_id, audio, sub, hd, videoland, folder, season_id = 0, episode_id = 0)
+      if season_id.to_s == '0'
         season_name = ''
       else
-        season_name = "S#{season_id}E#{episode_id}_"
+        season_name = "S#{sprintf '%02d', season_id}E#{sprintf '%02d', episode_id}_"
       end
-      "http://homehlsvod-vh.akamaihd.net/i/#{season_name}#{imdb_id}_A#{audio}_S#{sub}_,800000,2200000#{hd ? ',3000000' : ''},.f4v.csmil/master.m3u8"
+      folder_path = folder.present? ? "#{folder}/" : ''
+      bitrate = "800000,2200000#{hd ? ',3000000' : ''}"
+      "http://homehlsvod-vh.akamaihd.net/i/#{folder_path}#{season_name}#{imdb_id}_A#{audio}_S#{sub}_,#{bitrate},.f4v.csmil/master.m3u8"
     end
 
-    def akamai_hls_trailer_url(imdb_id, audio, sub, season_id = '0', episode_id = 0)
+    def akamai_hls_trailer_url(imdb_id, audio, sub, videoland, folder, season_id = '0', episode_id = 0)
       if season_id == '0'
         season_name = ''
       else
         season_name = "S#{season_id}E#{episode_id}_"
       end
-      "http://homehlsvod-vh.akamaihd.net/i/trailer_#{season_name}#{imdb_id}_A#{audio}_S#{sub}_,800000,2200000,3000000,.f4v.csmil/master.m3u8"
+      bitrate = "800000,2200000,3000000"
+      folder_path = folder.present? ? "#{folder}/" : ''
+      "http://homehlsvod-vh.akamaihd.net/i/trailers/#{folder_path}trailer_#{season_name}#{imdb_id}_A#{audio}_S#{sub}_,#{bitrate},.f4v.csmil/master.m3u8"
     end
 
     def verimatrix_url(token, audio, sub)

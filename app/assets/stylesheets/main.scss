@@ -5,11 +5,13 @@ html, body{
 	padding: 0;
 	text-align: center;
 	font-size: 62.5%;
+	background: #202c37 url(asset-path("bg.jpg", image));
 }
 body {
 	color: #4a5863;
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 1.2em;  
+	font-size: 1.2em;
+	background: #202c37 url(asset-path("bg.jpg", image));
 }
 #background
 {
@@ -22,17 +24,9 @@ body {
   z-index:0;
   text-indent:-5000em;
 }
-#background.fr
+#background
 {
-	background: #202c37 url(asset-path("fr/bg_playstation.jpg", image)) no-repeat scroll center top ;
-}
-#background.nl
-{
-	background: #202c37 url(asset-path("nl/onbeperkte-vod.jpg", image)) no-repeat scroll center top ;
-}
-#background.en
-{
-	background: #202c37 url(asset-path("en/bg_playstation.jpg", image)) no-repeat scroll center top ;
+	background: #202c37 url(asset-path("bg.jpg", image));
 }
 .osc, h1, h2, h3, h4, h5 {
 	font-family: 'Open Sans Condensed', sans-serif;
@@ -168,7 +162,6 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {border:0;padding:0;
 	width: 970px;
 	margin: 0 auto;
 	/*padding-top: 16px;*/
-	margin-top: 150px;
 	height: 24px;
 	text-align: right;
 	position: relative;
@@ -277,7 +270,7 @@ a#nav7
 
 
 /*   ============   FILTERS   ============   */
-#products_index #filters, #film-details #filters, #categories #filters, #studios #filters{
+#products_index #filters, #products_belgium #filters, #film-details #filters, #categories #filters, #studios #filters{
 	background: none repeat scroll 0 0 #FFFFFF;
 	margin-left:14px;
 	color: #bfbeba;
@@ -494,6 +487,7 @@ margin-top:10px;
 	background: #13181d url(image_path('footer-bg.gif')) 0 0 repeat-x;
 	border-top: 1px solid #111519;
 	text-align: left;
+	position: relative;
 }
 #footer .wrap {
 	width: 970px;
@@ -1305,4 +1299,45 @@ div.notice {
     float: right;
     position: relative;
     width: 740px;
+}
+.text_promo {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+#public_promo
+{
+	text-align: center
+}
+#public_promo.align_left
+{
+	text-align: left
+}
+
+#belgium_link
+{
+	color: #5c6377;
+	padding:0 0 0 25px;
+}
+#belgium_link::before {
+	  border: 1px solid #9F9E98;
+    content: "";
+    display: inline-block;
+    height: 11px;
+    left: 0;
+    margin-right: 10px;
+    margin-top: 6px;
+    position: absolute;
+    width: 11px;
+		margin-left:20px;
+}
+#belgium_link.checked::before
+{
+	background: #212A31;
+}
+#online hr
+{
+	margin:0;
 }

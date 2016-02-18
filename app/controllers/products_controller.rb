@@ -30,6 +30,7 @@ class ProductsController < ApplicationController
       end
     end
     @body_id = 'products_index'
+    @body_class ='not_reload'
     params[:director_id] = params[:old_director_id] if params[:old_director_id]
     params[:actor_id] = params[:old_actor_id] if params[:old_actor_id]
     if params['actor_id']
@@ -59,11 +60,13 @@ class ProductsController < ApplicationController
     @source = WishlistSource.wishlist_source(params, @wishlist_source)
     @vod_wishlist = current_customer.products.collect(&:products_id) if current_customer
     @countries = ProductCountry.visible.ordered
-      if params[:package].nil? && params[:concerns] != :productable
+      if params[:package].nil? && params[:concerns] != :productable && params[:belgium].blank?
         new_params = session[:sexuality] == 0 ? params.merge(:per_page => 50, :country_id => session[:country_id], :hetero => 1, :includes => ["descriptions_#{I18n.locale}", 'vod_online_be']) : params.merge(:per_page => 50, :country_id => session[:country_id], :includes => ["descriptions_#{I18n.locale}", 'vod_online_be'])
         tvod_package_id = params[:kind] == :adult ? 5 : 2
         svod_package_id = params[:kind] == :adult ? 4 : 1
         @tvod_last =        Product.filter(nil, new_params.merge(:view_mode => 'tvod_last_added',  :package => Moovies.packages.invert[tvod_package_id]))
+        @tvod_soon =        Product.filter(nil, new_params.merge(:view_mode => 'tvod_soon', :without_series =>1, :package => Moovies.packages.invert[tvod_package_id]))
+
         @tvod_best_rating = Product.filter(nil, new_params.merge(:view_mode => 'tvod_best_rated',  :package => Moovies.packages.invert[tvod_package_id]))
         @tvod_most_view =   Product.filter(nil, new_params.merge(:view_mode => 'tvod_most_viewed', :package => Moovies.packages.invert[tvod_package_id]))
         @tvod_last_chance = Product.filter(nil, new_params.merge(:view_mode => 'tvod_last_chance', :package => Moovies.packages.invert[tvod_package_id]))

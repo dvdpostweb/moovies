@@ -1,4 +1,5 @@
 $(function() {
+
   History = window.History // Note: We are using a capital H instead of a lower h
   $('#film-details').delegate('.season .details, .season .arrow' , 'click', function () {
     $(this).parent().children('.episodes').toggle('slow')
@@ -284,6 +285,11 @@ $(function() {
       $('.links').prop('checked', false);
       submit_online()
     })
+    $('#products_index').delegate("#close_belgium", "click", function() {
+      $('#filter_online_form #belgium').val('')
+
+      submit_online()
+    })
     
     $('#products_index').delegate("#pagination.deactive a", "click", function() {
       ajax_pagination($(this).attr('href'))
@@ -384,7 +390,7 @@ function endscroll()
 }
 function submit_online()
 {
-  if($('#products_index').length > 0){
+  if($('.not_reload').length > 0){
     $('.loading_bar').show();
     /*$('#filter_online_form').ajaxSubmit({dataType: 'script'});*/
     if($('#filter_online_form').attr('action').indexOf('?')>0)
