@@ -35,13 +35,13 @@ set :keep_releases, 5
 #############################################################
 
 set :user, "plush"
-set :domain,  "192.168.102.12"
-set :domain2,  "94.139.62.122"
+set :domain,  "192.168.102.12" #tokyo
+set :domain2,  "192.168.100.221" #stockholm
 set :port, 22
-role :app, domain
-role :web, domain
+role :app, domain2
+role :web, domain2
 
-role :db, domain,  :primary => true
+role :db, domain2,  :primary => true
 
 #############################################################
 #	Git

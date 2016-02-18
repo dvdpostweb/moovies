@@ -36,10 +36,15 @@ class StreamingProductsController < ApplicationController
       redirect_to root_localize_path and return
       end
     end
-    if current_customer && current_customer.tvod_only? && !(@token_valid == true || @streaming.prepaid_all? || current_customer.tvod_free > 0)
+    if current_customer && current_customer.tvod_only? && !(@token_valid == true || @streaming.prepaid_all? || current_customer.tvod_free > @streaming.tvod_credits)
       flash[:error] = t('streaming_products.tvod_no_token')
       redirect_to root_localize_path and return
     end
+    if current_customer && current_customer.tvod_credits? && !(@token_valid == true || @streaming.prepaid_all? || current_customer.tvod_free > @streaming.tvod_credits || @product.svod?)
+      flash[:error] = t('streaming_products.tvod_no_token')
+      redirect_to root_localize_path and return
+    end
+
     if @code.nil? && !current_customer
       if request.xhr?
         render :partial => 'streaming_products/no_player', :locals => {:token => nil, :error => Token.error[:code_expired]}, :layout => false
@@ -56,7 +61,7 @@ class StreamingProductsController < ApplicationController
         if @product
           if @vod_disable == "1" || Rails.env == "pre_production"
             if view_context.streaming_access?
-              if @code || (current_customer.actived? && !current_customer.suspended? && (current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s) || @streaming.prepaid_all?) && (@product.svod? || (@product.tvod? && current_customer.payable?) || @token_valid || current_customer.tvod_free > 0))
+              if @code || (current_customer.actived? && !current_customer.suspended? && (current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s) || @streaming.prepaid_all?) && (@product.svod? || (@product.tvod? && current_customer.payable?) || @token_valid || current_customer.tvod_free > @streaming.tvod_credits))
                 if !@streaming_prefered.blank? || !@streaming_not_prefered.blank?
                   if @token_valid == false && @vod_create_token == "0" && Rails.env != "pre_production"
                     error = t('streaming_products.not_available.offline')
@@ -87,7 +92,7 @@ class StreamingProductsController < ApplicationController
       else
         if view_context.streaming_access?
           streaming_version = StreamingProduct.find_by_id(params[:streaming_product_id])
-          if @code || ((!current_customer.suspended? && !Token.dvdpost_ip?(request.remote_ip) && !current_customer.super_user? && !(/^192(.*)/.match(request.remote_ip)) && current_customer.actived? && (current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s) || @streaming.prepaid_all?) && (@product.svod? || (!@product.svod? && current_customer.payable?) || current_customer.tvod_free > 0)))
+          if @code || ((!current_customer.suspended? && !Token.dvdpost_ip?(request.remote_ip) && !current_customer.super_user? && !(/^192(.*)/.match(request.remote_ip)) && current_customer.actived? && (current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s) || @streaming.prepaid_all?) && (@product.svod? || (!@product.svod? && current_customer.payable?) || current_customer.tvod_free > @streaming.tvod_credits)))
           #if 1==1
             status = @token.nil? ? nil : @token.current_status(request.remote_ip)
             streaming_version = StreamingProduct.find_by_id(params[:streaming_product_id])

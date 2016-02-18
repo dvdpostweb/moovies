@@ -16,11 +16,11 @@ class Address < ActiveRecord::Base
   alias_attribute :address_id, :address_book_id
   
 
-  validates_length_of :first_name, :minimum => 2
-  validates_length_of :last_name, :minimum => 2
-  validates_length_of :street, :minimum => 5
-  validates_length_of :postal_code, :minimum => 4, :maximum => 7
-  validates_length_of :city, :minimum => 1
+  validates_length_of :first_name, :minimum => 2, :if => :svod?
+  validates_length_of :last_name, :minimum => 2, :if => :svod?
+  validates_length_of :street, :minimum => 5, :if => :svod?
+  validates_length_of :postal_code, :minimum => 4, :maximum => 7, :if => :svod?
+  validates_length_of :city, :minimum => 1, :if => :svod?
 
   def replace_semicolon
     self.street = self.street.gsub(/;/, ' ').gsub(/   /,' ').gsub(/  /,' ')
@@ -41,7 +41,9 @@ class Address < ActiveRecord::Base
   def name
     "#{first_name} #{last_name}"
   end
-
+  def svod?
+    customer.abo_type_id != 6
+  end
   private
    def set_default
      self.address_book_id = self.customer.addresses.count > 0 ? self.customer.addresses.maximum(:address_book_id) + 1 : 1

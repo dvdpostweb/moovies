@@ -16,6 +16,7 @@ class Subscription < ActiveRecord::Base
     action.push(:free_reconduction, 17)
     action.push(:reconduction, 7)
     action.push(:tvod_init_sub, 36)
+    action.push(:reconduction_ealier, 13)
 
     action
   end

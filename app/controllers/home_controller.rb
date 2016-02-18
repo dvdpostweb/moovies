@@ -40,6 +40,10 @@ class HomeController < ApplicationController
 
   def moodme
   end
+  def carrefour
+    @hide_menu = true
+    @body_id = 'carrefour'
+  end
   def belgium
     @body_id = 'products_index'
     @body_class = 'reload'

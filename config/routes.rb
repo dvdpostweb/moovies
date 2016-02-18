@@ -52,6 +52,7 @@ Moovies::Application.routes.draw do
     end
   end
   scope ':locale/(:kind)', :locale => /en|fr|nl/, :kind => /normal|adult/ do
+    match 'carrefour' => 'home#carrefour'
     match 'belgium' => "home#belgium"
     resource :public_promotion, :only => [:edit, :update]
     match "/" => 'products#index', :as => :root_localize
