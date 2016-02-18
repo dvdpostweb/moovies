@@ -143,12 +143,12 @@ module ApplicationHelper
   end
 
   def get_code(code)
-    #if cookies[:code]
-    #  cookies[:code]
-    #else
-    #  code
-    #end
-    code
+    if cookies[:code]
+      cookies[:code]
+    else
+      code
+    end
+    #code
   end
 
   def resource_name
@@ -161,6 +161,28 @@ module ApplicationHelper
 
   def devise_mapping
      @devise_mapping ||= Devise.mappings[:customer]
+  end
+  def landing_img(code, promotion, params, products_alt_banner, discount_top)
+    if params[:kind] == :adult
+      path = code ? promotion_path(:id => :mobistar2) : new_customer_registration_path(:code => get_code(discount_top.name))
+    else
+      path = new_customer_registration_path(:code => get_code(discount_top.name))
+    end
+    if promotion && promotion.banner.present?
+      src = "http://www.dvdpost.be/images/#{I18n.locale}/#{promotion.banner}"
+      image = image_tag(src, :size => '942x188')
+
+    else
+      src = "#{I18n.locale}/banner-promo-hp_tvod#{code ? "_#{code.activation_group_id}" : ''}#{params[:kind] == :adult ? '_adult' : ''}.jpg"
+      src_norm = "#{I18n.locale}/banner-promo-hp_tvod#{params[:kind] == :adult ? '_adult' : ''}.jpg"
+      src_norm = "http://www.dvdpost.be/images/plush_banner_public/test.php?img=1&lang=#{I18n.locale}&kind=#{params[:kind]}"
+
+      image = FileTest.exist?("/images/#{src}") ? image_tag(src, :size => '942x188', :alt => t(products_alt_banner)) : image_tag(src_norm, :size => '942x188', :alt => t(products_alt_banner))
+
+    end
+    
+    link_to image, path, :target => "_blank"
+
   end
 
 end

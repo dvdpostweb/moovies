@@ -33,7 +33,11 @@ ThinkingSphinx::Index.define :product, :with => :active_record, :name => 'produc
   has vod_online_nl('vod_online_nls_products.`imdb_id`'), :as => :imdb_id_online, :type => :integer, :multi => true
   has vod_online_nl('vod_online_nls_products.`language_id`'), :as => :online_language_ids, :type => :integer, :multi => true
   has vod_online_nl('vod_online_nls_products.`subtitle_id`'), :as => :online_subtitle_ids, :type => :integer, :multi => true
-  
+  has 'find_in_set("1", cast(belgium_ids as char)) > 0', :type => :integer, :as => :belgium_country
+  has 'find_in_set("2", cast(belgium_ids as char)) > 0', :type => :integer, :as => :belgium_actor
+  has 'find_in_set("3", cast(belgium_ids as char)) > 0', :type => :integer, :as => :belgium_director
+  has 'find_in_set("4", cast(belgium_ids as char)) > 0', :type => :integer, :as => :belgium_land
+
   has "(select count(*) c from tokens where tokens.imdb_id = products.imdb_id and (datediff(now(),created_at) < 40))", :type => :integer, :as => :count_tokens
   has "(select start_on svod_start from products p left join svod_dates sd on sd.imdb_id = p.imdb_id and (start_on >= date(now()) or end_on >= date(now())) where p.imdb_id = products.imdb_id order by sd.start_on limit 1)", :as => :svod_start, :type => :timestamp
   has "(select end_on svod_end from products p left join svod_dates sd on sd.imdb_id = p.imdb_id and (start_on >= date(now()) or end_on >= date(now()))  where p.imdb_id =products.imdb_id order by sd.start_on limit 1)", :as => :svod_end, :type => :timestamp

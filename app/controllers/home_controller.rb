@@ -40,4 +40,38 @@ class HomeController < ApplicationController
 
   def moodme
   end
+  def carrefour
+    @hide_menu = true
+    @body_id = 'carrefour'
+  end
+  def belgium
+    @body_id = 'products_index'
+    @body_class = 'reload'
+    @countries = ProductCountry.visible.ordered
+    per_page = params[:format] == 'json' ? 5000 : 50
+    new_params = session[:sexuality] == 0 ? params.merge(:per_page => per_page, :country_id => session[:country_id], :hetero => 1, :includes => ["descriptions_#{I18n.locale}", 'vod_online_be']) : params.merge(:per_page => 50, :country_id => session[:country_id], :includes => ["descriptions_#{I18n.locale}", 'vod_online_be'])
+    tvod_package_id = params[:kind] == :adult ? 5 : 2
+    svod_package_id = params[:kind] == :adult ? 4 : 1
+    
+    respond_to do |format|
+      format.html do 
+        @country =        Product.filter(nil, new_params.merge(:belgium => 1,  :package => Moovies.packages.invert[tvod_package_id]))
+        @actor =          Product.filter(nil, new_params.merge(:belgium => 2,  :package => Moovies.packages.invert[tvod_package_id]))
+        @director =       Product.filter(nil, new_params.merge(:belgium => 3,  :package => Moovies.packages.invert[tvod_package_id]))
+        @land =           Product.filter(nil, new_params.merge(:belgium => 4,  :package => Moovies.packages.invert[tvod_package_id]))
+      end 
+      format.json
+        case params[:type]
+        when "actor"
+          @list =          Product.filter(nil, new_params.merge(:belgium => 2,  :package => Moovies.packages.invert[tvod_package_id]))
+        when "director"
+          @list =       Product.filter(nil, new_params.merge(:belgium => 3,  :package => Moovies.packages.invert[tvod_package_id]))
+        when "land"
+          @list =           Product.filter(nil, new_params.merge(:belgium => 4,  :package => Moovies.packages.invert[tvod_package_id]))
+        else
+          @list =        Product.filter(nil, new_params.merge(:belgium => 1,  :package => Moovies.packages.invert[tvod_package_id]))
+        end
+
+    end
+  end
 end

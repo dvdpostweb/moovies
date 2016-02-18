@@ -32,11 +32,11 @@ class Customer < ActiveRecord::Base
   
   alias_attribute :step,                         :customers_registration_step
   alias_attribute :locked,                       :customers_locked__for_reconduction
-  validates_length_of :first_name, :minimum => 2, :on => :update, :if => :svod?
-  validates_length_of :last_name, :minimum => 2, :on => :update, :if => :svod?
-  validates_format_of :phone, :with => /^(\+)?[0-9 \-\/.]+$/, :on => :update, :if => :svod?
+  validates_length_of :first_name, :minimum => 2, :on => :publish, :if => :svod?
+  validates_length_of :last_name, :minimum => 2, :on => :publish, :if => :svod?
+  validates_format_of :phone, :with => /^(\+)?[0-9 \-\/.]+$/, :on => :publish, :if => :svod?
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :update
-  validates :birthday,  :presence => true, :date => { :after => 100.years.ago, :before => 18.years.ago}, :on => :update, :if => :svod?
+  validates :birthday,  :presence => true, :date => { :after => 100.years.ago, :before => 18.years.ago}, :on => :publish, :if => :svod?
   validates :email, :uniqueness => {:message => :taken2, :case_sensitive => false}, :on => :update
   
   
@@ -182,6 +182,13 @@ class Customer < ActiveRecord::Base
   def tvod_only?
     abo_type_id == 6
   end
+  def tvod_credits?
+    subscription_type.tvod_credits > 0
+  end
+
+  def next_tvod_credits?
+    next_subscription_type.tvod_credits > 0
+  end
 
   def svod?
     abo_type_id != 6
@@ -193,6 +200,29 @@ class Customer < ActiveRecord::Base
 
   def name_without_accent
     name.mb_chars.normalize(:kd).gsub(/[^\x00-\x7F]/n, '').to_s
+  end
+  def subscription_description
+      subscription_type.description
+  end
+  def next_subscription_description
+      next_subscription_type.description
+  end
+
+  def recondutction_ealier?
+    !actions.reconduction_ealier.recent.blank?
+  end
+
+  def reconduction_now
+    update_attribute(:auto_stop, 0)
+    update_attribute(:subscription_expiration_date, Time.now().localtime.to_s(:db))
+    #update_attribute(:credits_already_recieved, 1)
+    abo_history(Subscription.action[:reconduction_ealier])
+    
+    manage_credits(next_subscription_type, 15)
+  end
+
+  def manage_credits(subscription, action)
+    update_attribute(:tvod_free, subscription.tvod_credits) if subscription.tvod_credits > 0
   end
 
   #def recommendations(filter, options)

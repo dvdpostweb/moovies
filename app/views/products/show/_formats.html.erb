@@ -33,6 +33,7 @@
       <% end %>
       <td>
         <%= render :partial => 'products/streaming',  :locals => {:product => product, :source => @source, :popup => false, :max_price => true} if vod.available? %>
+
         <%= render :partial => 'products/vod_list',  :locals => {:product => product, :source => @source, :response_id => @response_id} %>
       </td>
       

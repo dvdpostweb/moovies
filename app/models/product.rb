@@ -94,8 +94,13 @@ class Product < ActiveRecord::Base
   sphinx_scope(:available)                {{:without =>       {:state => 99}}}
   sphinx_scope(:recent)                   {{:without =>       {:availability => 0}, :with => {:available_at => 2.months.ago..Time.now.end_of_day, :next => 0}}}
   sphinx_scope(:svod_soon)                {{:with =>          {:svod_start => Time.now.end_of_day..1.months.from_now}}}
-  sphinx_scope(:tvod_soon)                {{:without =>          {:tvod_start_combi => 0}}}
-  
+  sphinx_scope(:tvod_soon)                {{:without =>       {:tvod_start_combi => 0}}}
+  sphinx_scope(:belgium_country)          {{:with =>          {:belgium_country => 1}}}
+  sphinx_scope(:belgium_actor)            {{:with =>          {:belgium_actor => 1}}}
+  sphinx_scope(:belgium_director)         {{:with =>          {:belgium_director => 1}}}
+  sphinx_scope(:belgium_land)             {{:with =>          {:belgium_land => 1}}}
+  sphinx_scope(:online)                   {{:with =>          {:imdb_id_online => 1..3147483647}}}
+
   sphinx_scope(:svod_last_added)          {{:with =>          {:svod_start => 3.months.ago..Time.now.end_of_day, :imdb_id_online => 1..3147483647}}}
   sphinx_scope(:tvod_last_added)          {{:with =>          {:tvod_start => 5.months.ago..1.day.ago, :imdb_id_online => 1..3147483647}}}
   sphinx_scope(:svod_last_chance)         {{:with =>          {:svod_end => Time.now.end_of_day..1.months.from_now}}}
@@ -104,6 +109,8 @@ class Product < ActiveRecord::Base
   sphinx_scope(:tvod_last_chance)         {{:with =>          {:streaming_expire_at => Time.now.beginning_of_day..1.months.from_now}}}
   sphinx_scope(:most_viewed)              {{:with =>          {:count_tokens => 1..1000000}}}
   sphinx_scope(:series)                   {{:with =>          {:serie_id => 1..1000000}}}
+  sphinx_scope(:without_series)           {{:with =>          {:serie_id => 0}}}
+
   sphinx_scope(:by_package)               {|package_id|       {:with =>          {:package_id => package_id}}}
   sphinx_scope(:random)                   {{:order =>         '@random'}}
   sphinx_scope(:by_new)                   {{:with =>          {:year => 2.years.ago.year..Date.today.year, :imdb_id_online => 1..3147483647}}}
@@ -125,7 +132,6 @@ class Product < ActiveRecord::Base
      sort
   end
   def self.filter_online(filters, options={}, exact=nil)
-    logger.debug("@@@#{options}")
     products = Product.available.by_kind(options[:kind])
     products = products.exclude_products_id([exact.collect(&:products_id)]) if exact
     products = products.by_actor(options[:actor_id]) if options[:actor_id]
@@ -135,7 +141,11 @@ class Product < ActiveRecord::Base
     products = products.by_imdb_id(options[:imdb_id]) if options[:imdb_id]
     products = options[:kind] == :normal ? products.by_streaming_studio(options[:studio_id]) : products.by_studio(options[:studio_id]) if options[:studio_id]
     products = products.by_package(Moovies.packages[options[:package]]) if options[:package] && (options[:view_mode] != 'svod_soon' && options[:view_mode] != 'tvod_soon')
-    
+    products = products.belgium_country if options[:belgium] == 1
+    products = products.belgium_actor if options[:belgium] == 2
+    products = products.belgium_director if options[:belgium] == 3
+    products = products.belgium_land if options[:belgium] == 4
+
     if options[:filters]
       products = products.by_audience(options[:filters][:audience_min], options[:filters][:audience_max]) if Product.audience?(options[:filters][:audience_min], options[:filters][:audience_max]) && options[:kind] == :normal
       products = products.by_countries_id(options[:filters][:country_id].reject(&:empty?)) if Product.countries?(options[:filters][:country_id])
@@ -145,6 +155,10 @@ class Product < ActiveRecord::Base
       products = products.with_subtitles(options[:filters][:subtitles].reject(&:empty?)) if Product.subtitle?(options[:filters][:subtitles])
       products = products.by_category(options[:filters][:category_id]) if !options[:filters][:category_id].nil? && !options[:filters][:category_id].blank?
     end
+    products = products.online.belgium_country if options[:belgium] && options[:belgium].to_i == 1
+    products = products.online.belgium_actor if options[:belgium] && options[:belgium].to_i == 2
+    products = products.online.belgium_director if options[:belgium] && options[:belgium].to_i == 3
+    products = products.online.belgium_land if options[:belgium] && options[:belgium].to_i == 4
     products = self.get_view_mode(products, options[:view_mode]) if options[:view_mode]
     sort = get_sort(options)
     products = products.order(sort, :extended) if sort != ''
@@ -165,6 +179,12 @@ class Product < ActiveRecord::Base
     products = products.by_director(options[:director_id]) if options[:director_id]
     products = products.by_imdb_id(options[:imdb_id]) if options[:imdb_id]
     products = options[:kind] == :normal ? products.by_streaming_studio(options[:studio_id]) : products.by_studio(options[:studio_id]) if options[:studio_id]
+    products = products.without_series if options[:without_series]
+    products = products.online.belgium_country if options[:belgium] == 1
+    products = products.online.belgium_actor if options[:belgium] == 2
+    products = products.online.belgium_director if options[:belgium] == 3
+    products = products.online.belgium_land if options[:belgium] == 4
+
     if !filters.nil?  
       products = products.by_audience(filters.audience_min, filters.audience_max) if filters.audience? && options[:kind] == :normal
       products = products.by_country(filters.country_id) if filters.country_id?
@@ -309,7 +329,7 @@ class Product < ActiveRecord::Base
   end
 
   def serie_title
-    serie.name 
+    serie.name if serie
   end
 
   def episode_title(full = true)
@@ -341,9 +361,9 @@ class Product < ActiveRecord::Base
     {:image => image, :title => title, :description => description}
   end
   
-  def preview_image(id, kind)
+  def preview_image(id, kind, size='small')
     path = kind == :adult ? Moovies.imagesx_preview_path : Moovies.images_preview_path
-    File.join(path,'small', "#{imdb_id}_#{id}.jpg")
+    File.join(path,size, "#{imdb_id}_#{id}.jpg")
   end
 
   def trailer_image(kind)
@@ -476,7 +496,7 @@ class Product < ActiveRecord::Base
   end
 
   def trailer?
-    ((Rails.env == "production" ? !streaming_trailers.empty? : !streaming_trailers.empty?) && !tokens_trailers.empty? )
+    ((Rails.env == "production" ? !streaming_trailers.empty? : !streaming_trailers.empty?))
   end
 
   def self.country_short_name(country_id)
@@ -589,6 +609,8 @@ class Product < ActiveRecord::Base
     else
       if options[:list_id] && !options[:list_id].blank?
         "special_order asc"
+      elsif options[:belgium]
+        "year desc, streaming_available_at_order DESC, rating DESC"
       elsif options[:search] && !options[:search].blank?
         ''
       elsif options[:view_mode] && options[:view_mode] == 'svod_last_added'

@@ -3,16 +3,17 @@
 <% product_title = data[:title] %>
 <% product_image = data[:image] %>
 <% div_id = "#{product.id}#{Random.rand(1000)}"%>
-<% unless product.vod_online_be.size == 0 %>
+<% if product.vod_online_be.size != 0 || view_mode == view_mode%>
 <div class="ca-item ca-item-<%= detail2_counter + 1 %>">
   <div class="content">
     <% cache(product.id, :expires_in => 2.hour) do %>
       <%= "<span class='hd'></span>".html_safe if product.hd?(session[:country_id]) %>
     <% end %>
-    <%= link_to image_tag(product.image, :width => 145, :height => 217), product_path(:id => product.to_param, :source => source), 'data-url' => product_data_path(:product_id => product.to_param, :source => source, :response_id => @response_id, :div_id => div_id), :class => :cover %>
+    <% image = image_tag(product.image, :width => 145, :height => 217) rescue "<p>No image</p>" %>
+    <%= link_to image, product_path(:id => product.to_param, :source => source), 'data-url' => product_data_path(:product_id => product.to_param, :source => source, :response_id => @response_id, :div_id => div_id), :class => :cover %>
     <div class="tooltips" style="display:none">
       <p class="tooltips_title"><%= product.smart_title %> (<%= product.year %>)</p>
-      <p class="tooltips_description"><%= truncate_html(data[:description].text, :length => 500) %> </p>
+      <p class="tooltips_description"><%= truncate_html((data[:description].text rescue '...'), :length => 500) %> </p>
       <div class="tooltips_other" id='<%= div_id %>'>loading</div>
     </div>
     

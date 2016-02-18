@@ -7,7 +7,7 @@ $(function() {
     }
   })
   
-	$('#abo .link_adult').on('click', function(){
+	$('#abo .link_adult, #old .link_adult').on('click', function(){
 		$('#tab_adult').toggle()
 	})
 	$('#step2 #customer_customers_dob_3i').on('change', birth_change)

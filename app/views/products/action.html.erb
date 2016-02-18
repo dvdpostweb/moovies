@@ -1,4 +1,5 @@
 <script>
+$(function() {
 <% if current_customer %>
 	<% if streaming_access? %>
 		<% if current_customer.actived? %>
@@ -9,10 +10,13 @@
 				  <% if @product.svod_dates_online.first || token_valid %>
 						window.location.href = '<%= streaming_product_path(:id => @product.imdb_id, :season_id => @product.season_id, :episode_id => @product.episode_id) %>'
 					<% else %>
-						<% if current_customer.tvod_free > 0 %>
+						<% if current_customer.tvod_free > @product.streaming_products.first.tvod_credits %>
 							window.location.href = '<%= streaming_product_path(:id => @product.imdb_id, :season_id => @product.season_id, :episode_id => @product.episode_id) %>'
 						<% else %>
-							<% if current_customer.tvod_only? %>
+							<% if current_customer.tvod_credits? %>
+						  	jQuery.facebox('<%= escape_javascript(render(:partial => 'products/tvod_credits_only', :locals => {:product => @product, :season_id => @product.season_id, :episode_id => @product.episode_id, :source => @source})) %>')
+
+							<% elsif current_customer.tvod_only? %>
 							  	jQuery.facebox('<%= escape_javascript(render(:partial => 'products/tvod_only', :locals => {:product => @product, :season_id => @product.season_id, :episode_id => @product.episode_id, :source => @source})) %>')
 							<% elsif current_customer.payable? %>
 								jQuery.facebox('<%= escape_javascript(render(:partial => 'products/tvod_alert', :locals => {:product => @product, :season_id => @product.season_id, :episode_id => @product.episode_id})) %>')
@@ -36,4 +40,5 @@
 <% else %>
   jQuery.facebox('<%= escape_javascript(render(:partial => 'products/log')) %>')
 <% end %>
+})
 </script>
