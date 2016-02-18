@@ -65,6 +65,7 @@ class Activation < ActiveRecord::Base
         when 3
           price = abo_price - self.value
       end
+    price = 0 if price < 0
     price.to_f
   end
 end

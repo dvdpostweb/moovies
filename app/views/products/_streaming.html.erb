@@ -4,16 +4,19 @@
     <% title = t('.watch_svod') %>
     <% class_name = "watch action_btn" %>
   <% else %>
-    <% if (current_customer && current_customer.tvod_free > 0) || hide_price %>
+    <% credit = product.streaming_products.first.tvod_credits %>
+    <% if (current_customer && (current_customer.tvod_free > credit || current_customer.tvod_credits?) ) || hide_price %>
      <% key = '.watch_tvod_free' %>
+     <% credit = "#{credit} #{credit > 1 ? t('products.credits') : t('products.credit') }" %>
      <% popup = false %>
     <% else %>
       <% key = '.watch_tvod' %>
+      <% credit = '' %>
     <% end %>
      <% title = raw t(key, :price => (current_customer && current_customer.tvod_only?) || !current_customer && local_assigns.has_key?(:max_price)  ? product.get_vod_online(session[:country_id]).first.tvod_price : product.get_vod_online(session[:country_id]).first.ppv_price) %>
     <% class_name = popup == true ? "alacarte action_btn popup" : 'alacarte action_btn' %>
   <% end %>
-  <% if current_customer && current_customer.tvod_only? && !product.svod? && popup == true %>  
+  <% if current_customer && current_customer.tvod_only? && !product.svod? && popup == true %>
     <span class="infotvod"></span>
     <div class="tooltips_tvod" style='display:none'>
       <p class="tooltips_description">
@@ -23,4 +26,5 @@
     </div>
  <% end %>
   <%= link_to  title, product_action_path(:product_id => product.to_param, :origin => :products, :source => source), :class => class_name %>
+  <%= credit %>
 <% end %>
