@@ -48,14 +48,24 @@ class Customers::RegistrationsController < Devise::RegistrationsController
         if @user.valid_password?(params[:customer][:password])
           if @activation || (@discount && @user.discount_reuse?(@discount.month_before_reuse))
             if @user.abo_active == 0 || (@user.abo_active == 1 && @user.tvod_only?)
-              cookies[:code] = { value: params[:customer][:code], expires: 15.days.from_now }
-              @user.step = @promotion.nil? ? 31 : @promotion.goto_step
-              @user.code = params[:customer][:code]
-              @user.tvod_free = @promotion.tvod_free if @promotion.tvod_free && @promotion.tvod_free > 0
-              @user.abo_active = 1 if @promotion && @promotion.goto_step.to_i == 100
-              if @promotion.tvod_only
-                @user.auto_stop = 0
-                @user.subscription_expiration_date = nil
+              if params[:customer][:abo].present?
+                @user.step = 31
+                @user.code = params[:customer][:code]
+                sub = SubscriptionType.find(params[:customer][:abo])
+                @activation.update_attributes(:activation_products_id => params[:customer][:abo], :next_abo_type => params[:customer][:abo])
+                @user.tvod_free = @user.tvod_free + sub.tvod_credits
+                @user.abo_type_id = params[:customer][:abo]
+                @user.next_abo_type_id = params[:customer][:abo]
+              else
+                cookies[:code] = { value: params[:customer][:code], expires: 15.days.from_now }
+                @user.step = @promotion.nil? ? 31 : @promotion.goto_step
+                @user.code = params[:customer][:code]
+                @user.tvod_free = @promotion.tvod_free if @promotion.tvod_free && @promotion.tvod_free > 0
+                @user.abo_active = 1 if @promotion && @promotion.goto_step.to_i == 100
+                if @promotion.tvod_only
+                  @user.auto_stop = 0
+                  @user.subscription_expiration_date = nil
+                end
               end
               @user.save(:validate => false)
               action =
@@ -101,14 +111,25 @@ class Customers::RegistrationsController < Devise::RegistrationsController
     if @promotion
       cookies[:code] = { value: params[:customer][:code], expires: 15.days.from_now }
       resource.step = @promotion.goto_step
-      resource.tvod_free = @promotion.tvod_free if @promotion.tvod_free && @promotion.tvod_free > 0
-      resource.abo_active = 1 if @promotion.goto_step.to_i == 100
+      logger.debug params
+      if params[:customer][:abo].present?
+        resource.step = 31
+        resource.code = params[:customer][:code]
+        sub = SubscriptionType.find(params[:customer][:abo])
+        @promotion.update_attributes(:activation_products_id => params[:customer][:abo], :next_abo_type => params[:customer][:abo])
+        resource.tvod_free = resource.tvod_free + sub.tvod_credits
+        resource.abo_type_id = params[:customer][:abo]
+        resource.next_abo_type_id = params[:customer][:abo]
+      else
+        resource.tvod_free = @promotion.tvod_free if @promotion.tvod_free && @promotion.tvod_free > 0
+        resource.abo_active = 1 if @promotion.goto_step.to_i == 100
+      end
     end
     
     if resource.save
       action =
       if @promotion && @promotion.goto_step.to_i == 100
-        @promotion.class.to_s == 'Activation' ? 8 : 6 
+        @promotion.class.to_s == 'Activation' ? 8 : 6
       else
         35
       end

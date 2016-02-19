@@ -705,7 +705,7 @@ h3{
 }
 
 .choise-offer-select{
-  width: 470px;
+  width: 790px;
   height: 270px;
   display: inline-block;
   border: 1px solid #464646;
@@ -890,5 +890,20 @@ input[type="checkbox"]:checked + label span {
   font-size: 12px;
   font-family: Arial,Helvetica, sans-serif;
   
+}
+.error
+{
+    color: #990000;
+    font-size: 15px;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+}
+.error.code
+{
+  margin: 0 0 10px 21px;
+}
+.input-error
+{
+  background: #ffb6c1;
 }
 }

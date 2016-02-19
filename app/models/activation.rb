@@ -26,7 +26,7 @@ class Activation < ActiveRecord::Base
   scope :available, lambda {where('(activation_code_validto_date > ? or activation_code_validto_date is null) and customers_id = 0', Time.now.to_s(:db))}
 
   def tvod_only
-    subscription_type.id == 6
+    subscription_type && subscription_type.id == 6
   end
 
   def goto_step
@@ -53,7 +53,7 @@ class Activation < ActiveRecord::Base
   end
 
   def promo_price
-      abo_price = subscription_type.product.price.to_f
+      abo_price = subscription_type ? subscription_type.product.price.to_f : price
       case self.type
         #total = price - X%
         when 1

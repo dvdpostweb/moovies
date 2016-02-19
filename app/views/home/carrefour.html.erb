@@ -22,6 +22,11 @@
       <%= form_tag carrefour_path(), :id => 'form_carrefour' do %>
       <div class="choise">
         <div class="headline"><h2><%= t('.choose_formula') %></h2></div>
+        <% if @error_abo %>
+          <div class='error'>
+            <%= t('.abo_error') %>
+          </div>
+        <% end %>
         <div class="choise-offer">
           <div class="choise-offer-select">
             <div class="offer-film">
@@ -31,7 +36,7 @@
               <div class="next-month">3,99€</div>
               <div class="next-month-text"><%= t('.next_month') %></div>
               <div class="offer-film-checkbox">
-                <input type="radio" id="select-offer-2" name="abo" />
+                <input type="radio" id="select-offer-2" name="abo" value='7' <%= "checked='checked'" if params[:abo]== "7" %>/>
                 <label for="select-offer-2">
                   <span></span>
                 </label>
@@ -50,13 +55,13 @@
               <div class="next-month">7,99€</div>
               <div class="next-month-text"><%= t('.next_month') %></div>
               <div class="offer-film-checkbox">
-                <input type="radio" id="select-offer-4" name="abo" />
+                <input type="radio" id="select-offer-4" name="abo" value = '8' <%= "checked='checked'" if params[:abo]== "8" %>/>
                 <label for="select-offer-4">
                   <span></span>
                 </label>
               </div>
             </div>
-              <div class="vertical-line"></div>
+            <div class="vertical-line"></div>
             <div class="offer-film">
               <div class="offer-film-number">6 <%= t('.films') %><div class="badge"><div class="badge-text"><%= t('.most_popular') %></div></div></div>
               <div class="first-month">7,99€</div>
@@ -64,7 +69,35 @@
               <div class="next-month">11,99€</div>
               <div class="next-month-text"><%= t('.next_month') %></div>
               <div class="offer-film-checkbox">
-                <input type="radio" id="select-offer-6" name="abo" />
+                <input type="radio" id="select-offer-6" name="abo" value = '9' <%= "checked='checked'" if params[:abo] == "9" %>/>
+                <label for="select-offer-6">
+                  <span></span>
+                </label>
+              </div>
+            </div>
+            <div class="vertical-line"></div>
+            <div class="offer-film">
+              <div class="offer-film-number">8 <%= t('.films') %><div class="badge"><div class="badge-text"><%= t('.most_popular') %></div></div></div>
+              <div class="first-month">10,99€</div>
+              <div class="first-month-text"><%= t('.first_month') %></div>
+              <div class="next-month">14,99€</div>
+              <div class="next-month-text"><%= t('.next_month') %></div>
+              <div class="offer-film-checkbox">
+                <input type="radio" id="select-offer-6" name="abo" value = '10' <%= "checked='checked'" if params[:abo] == "10" %>/>
+                <label for="select-offer-6">
+                  <span></span>
+                </label>
+              </div>
+            </div>
+            <div class="vertical-line"></div>
+            <div class="offer-film">
+              <div class="offer-film-number">10 <%= t('.films') %><div class="badge"><div class="badge-text"><%= t('.most_popular') %></div></div></div>
+              <div class="first-month">13,99€</div>
+              <div class="first-month-text"><%= t('.first_month') %></div>
+              <div class="next-month">17,99€</div>
+              <div class="next-month-text"><%= t('.next_month') %></div>
+              <div class="offer-film-checkbox">
+                <input type="radio" id="select-offer-6" name="abo" value = '11' <%= "checked='checked'" if params[:abo] == "11" %>/>
                 <label for="select-offer-6">
                   <span></span>
                 </label>
@@ -84,7 +117,10 @@
 
       <div class="code">
         <div class="headline"><h2><%= t('.fill_in_code') %></h2></div>
-        <input type="text" class="code-input"><br>
+        <% if @error_code %>
+          <div class='error code'><%= t('.code_error') %></div>
+        <% end %>
+        <input type="text" class="code-input<%= " input-error" if @error_code %>" name='carrefour_code' value='<%= params[:carrefour_code]%>'><br>
         <button class="code-button"><%= t('.valid') %></button>
       </div>
       <% end %>

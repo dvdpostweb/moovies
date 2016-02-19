@@ -13,6 +13,7 @@
         <% else %>
           <%= cookies[:code] ? f.hidden_field(:code, :value => cookies[:code]) : f.hidden_field(:code, :value => @default_code) %>
         <% end %>
+        <%= f.hidden_field :abo, :value => params[:abo] %>
         <%= f.hidden_field :language, :value => Moovies.customer_languages[I18n.locale] %>
         <div class="labelstep">
           <%= f.label :email, t('.email') %>
