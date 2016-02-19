@@ -33,7 +33,7 @@
 <% end %>
 <% begin %>
 <% sub = current_customer.subscriptions.first %>
-    <% price = sub.action == 6 ? Discount.find_by_discount_code_id(sub.code_id).promo_price :  Activation.find_by_activation_id(sub.code_id).promo_price  %>
+    <% price = sub.action == 6 ? Discount.find_by_discount_code_id(sub.code_id).promo_price() :  Activation.find_by_activation_id(sub.code_id).promo_price  %>
 <% rescue %>
   <% price = 0 %>
 <% end %>

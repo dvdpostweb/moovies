@@ -36,7 +36,7 @@ $(function() {
   }
   function show_add_norm(responseText, statusText){
     if(jQuery.trim(statusText) == "success"){
-      if(responseText.indexOf('sign_up')>=0)
+      if(responseText.indexOf('/')>=0)
       {
         $(location).attr('href', responseText);
       }

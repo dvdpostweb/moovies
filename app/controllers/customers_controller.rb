@@ -30,12 +30,9 @@ class CustomersController < ApplicationController
     params[:customer][:nickname] = params[:customer][:first_name] if current_customer.nickname.nil? && !params[:customer][:first_name].nil?
     @customer = current_customer
     @customer.attributes = params[:customer]
-    logger.debug(@customer.inspect)
     if @customer.save(context: :publish)
-      logger.debug('@@@ok')
       flash[:notice] = t(:customer_modify) if current_customer.step == 100
       if current_customer.step == 31
-        
         current_customer.update_column(:customers_registration_step, current_customer.samsung_codes.unvalidated.empty? ? 33 : 32)
       end
       if request.xhr?
@@ -44,7 +41,6 @@ class CustomersController < ApplicationController
         redirect_after_registration(customer_path)
       end
     else
-      logger.debug("@@@#{@customer.errors.inspect}")
       @countries = Country.all
       if request.xhr?
         render :action => :edit, :layout => false

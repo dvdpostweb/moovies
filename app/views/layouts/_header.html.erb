@@ -18,7 +18,7 @@
   </li>
 </ul>
 <div id="wrap"> 
-  <% if current_customer && current_customer.tvod_free > 0 %>
+  <% if current_customer && current_customer.tvod_free > 0 && params[:controller] != 'steps' %>
   <div class='flash_message'>
     <div class="notice">
       <%= t('.tvod_free', :tvod_free => current_customer.tvod_free).html_safe %>
