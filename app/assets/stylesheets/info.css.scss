@@ -1020,3 +1020,257 @@ padding-top: 30px;
     padding: 0 0 0 10px;
 
   }
+
+
+
+  /*price public*/
+.plush-page{    margin: 0 30px;
+ul{
+  list-style: none;
+}
+
+h1{
+  font-family: OpenSuns CondensedBold, sans-serif;
+  margin: 0;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+h2, h3{
+  font-family: Arial,Helvetica, sans-serif;
+  margin: 0;
+}
+
+h2{
+  font-size: 16px;
+  font-weight: normal;
+}
+
+h3{
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.plush-page{
+  width: 970px;
+  margin: auto;
+  padding: 60px 30px 40px;
+  background-color: #fff;
+}
+
+.formules{
+  margin-bottom: 60px;
+}
+
+.headline{
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.text{
+  width: 100%;
+}
+
+.formules-offer-select{
+  width: 784px;
+  height: 230px;
+  margin-top: 20px;
+  border: 1px solid #464646;
+  box-shadow: 2px 2px 14px #d7d7d7;
+}
+
+.offer-film{
+  position: relative;
+  width: 156px;
+  height: 230px;
+  float: left;
+  display: inline-block;
+}
+
+.offer-film a{
+  margin-left: 30px;
+  color: #000;
+  font-size: 12px;
+  font-family: Arial,Helvetica, sans-serif;
+}
+
+.offer-film a:hover{
+  color: #92ac2e;
+}
+
+.badge{
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 70px;
+  height: 67px;
+  color: #fff;
+  font-size: 10px;
+  text-align: center;
+  background-image: url(image_path("carrefour/badge.png"));
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.badge.active{
+  display: block;
+}
+
+.badge .badge-text{
+  padding-top: 15px;
+  font-weight: normal;
+}
+
+.offer-film-number,
+.offer-film-headline,
+.per-month{
+  margin: 50px auto 0;
+  color: #6d8220;
+  font-size: 22px;
+  font-weight: bold;
+  font-family: Arial,Helvetica, sans-serif;
+  text-align: center;
+}
+
+.adulte .offer-film-headline{
+  color: #9330bf;
+}
+
+.per-month{
+  margin-top: 15px;
+  color: #000;
+}
+
+.per-month-text,
+.offer-film-text{
+  color: #000;
+  font-size: 15px;
+  font-family: Arial,Helvetica, sans-serif;
+  text-align: center;
+}
+
+.vertical-line{
+  background-color: #707070;
+  width: 1px;
+  height:140px;
+  margin: 45px 0;
+  float: left;
+  display: inline-block;
+}
+
+.offer-film-button{
+  width: 100px;
+  height: 30px;
+  margin: 20px 28px 20px 28px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: Arial,Helvetica, sans-serif;
+  border: 1px solid #482d27;
+  background: linear-gradient(to bottom, #a0bd33 0%,#7b9227 100%);
+  cursor: pointer;
+}
+
+.adulte .offer-film-button{
+  background: linear-gradient(to bottom, #c572eb 0%,#9532c0 100%);
+}
+
+.formules-offer-list{
+  width: 100%;
+  margin-top: 20px;
+}
+
+.formules-offer-list ul{
+  margin: 0;
+  padding: 0px;
+}
+
+.formules-offer-list ul li{
+  margin-bottom: 10px;
+  font-size: 15px;
+  font-family: Arial,Helvetica, sans-serif;
+}
+
+.list-style-green{
+  width: 8px;
+  height: 8px;
+  margin: 0 5px 2px 0;
+  background-color: #92ac2e;
+  display: inline-block;
+}
+
+/* ----------------- */
+
+.unlimited{
+  margin-bottom: 40px;
+}
+
+.unlimited-offer-select{
+  width: 156px;
+  height: 230px;
+  margin: 20px 35px 0 0;
+  border: 1px solid #464646;
+  box-shadow: 2px 2px 14px #d7d7d7;
+  display: inline-block;
+}
+
+
+.unlimited-offer-select a{
+  font-size: 13px;
+  color: #000;
+}
+
+.unlimited-offer-select a:hover{
+  color: #92ac2e;
+}
+
+.unlimited-offer-select .per-month{
+  margin-top: 12px;
+}
+
+.unlimited-offer-select .offer-film-text{
+  margin-bottom: 30px;
+}
+
+.adulte.unlimited-offer-select .offer-film-text{
+  margin: 0 10px 12px 10px;
+}
+
+.unlimited-offer-select .offer-film-headline{
+  margin-top: 30px;
+}
+
+.unlimited-offer-select .offer-film-button{
+  margin-top: 25px;
+  margin-bottom: 5px;
+}
+
+.unlimited-offer-select .offer-film a{
+  margin-left: 27px;
+}
+
+/* ----------------- */
+
+.cards{
+  margin-top: 30px;
+  border-top: 1px solid #464646;
+}
+
+.cards ul{
+  padding: 0;
+  margin: 20px 100px 15px;
+}
+
+.cards ul li{
+  margin: 20px 15px 0;
+  display: inline;
+}
+
+.cards-bottom-text{
+  width: 100%;
+  font-size: 12px;
+  font-family: Arial,Helvetica, sans-serif;
+  
+}
+}
