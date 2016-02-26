@@ -1024,7 +1024,7 @@ padding-top: 30px;
 
 
   /*price public*/
-.plush-page{    margin: 0 30px;
+.plush-page{    margin: 0 20px;
 ul{
   list-style: none;
 }
@@ -1171,7 +1171,6 @@ h3{
   background: linear-gradient(to bottom, #a0bd33 0%,#7b9227 100%);
   cursor: pointer;
 }
-
 .adulte .offer-film-button{
   background: linear-gradient(to bottom, #c572eb 0%,#9532c0 100%);
 }
@@ -1224,6 +1223,14 @@ h3{
 .unlimited-offer-select a:hover{
   color: #92ac2e;
 }
+.unlimited-offer-select.adulte  a:hover{
+  color: #9532c0;
+}
+a.offer-film-button:hover
+{
+  color:#fff !important;
+}
+
 
 .unlimited-offer-select .per-month{
   margin-top: 12px;
@@ -1273,4 +1280,33 @@ h3{
   font-family: Arial,Helvetica, sans-serif;
   
 }
+a.offer-film-button{
+  color: white;
+  display: inline-block;
+  line-height: 32px;
+  text-align: center;
+  font-size: 14px;
+}
+a.offer-film-button:hover{
+  color:white;
+}
+
+}
+#tvod
+{
+  font-size: 15px;
+  margin: 15px 0;
+  a{
+    color: #92ac2e;
+  }
+  a:hover
+  {
+    color:#92ac2e;
+  }
+}
+.current_abo
+{
+  margin: 22px 27px 0;
+    text-align: center;
+    font-weight: bold;
 }
