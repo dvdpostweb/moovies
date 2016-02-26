@@ -1,5 +1,9 @@
+
 <div class="plush-page">
       <div class="formules">
+        <% if !current_customer %>
+        <div id='tvod'><%= t('.tvod_account') %>, <%= link_to t('.create_tvod'), new_customer_registration_path( :code => 'TVOD_ONLY') %></div>
+        <% end %>
         <div class="headline"><h1><%= t('.tvod') %></h1></div>
         <div class="text"><h2><%= t('.choose_tvod') %></h2></div>
         <div class="formules-offer">
@@ -13,7 +17,7 @@
               </div>
               <div class="per-month">3,99€</div>
               <div class="per-month-text"><%= t('.per_month') %></div>
-              <button class="offer-film-button"><%= t('.buy') %></button>
+              <%= link_price(current_customer, 'CF2FILMS',7) %>
             </div>
               <div class="vertical-line"></div>
             <div class="offer-film">
@@ -25,28 +29,28 @@
               </div>
               <div class="per-month">7,99€</div>
               <div class="per-month-text"><%= t('.per_month') %></div>
-              <button class="offer-film-button"><%= t('.buy') %></button>
-            </div>
+                <%= link_price(current_customer, 'CF4FILMS', 8) %>
+              </div>
               <div class="vertical-line"></div>
             <div class="offer-film">
               <div class="offer-film-number">6 <%= t('.films') %><div class="badge"><div class="badge-text"><%= t('.most_popular') %></div></div></div>
               <div class="per-month">11,99€</div>
               <div class="per-month-text"><%= t('.per_month') %></div>
-              <button class="offer-film-button"><%= t('.buy') %></button>
-            </div>
+                <%= link_price(current_customer, 'CF6FILMS',9) %>
+              </div>
               <div class="vertical-line"></div>
             <div class="offer-film">
               <div class="offer-film-number">8 <%= t('.films') %><div class="badge"><div class="badge-text"><%= t('.most_popular') %></div></div></div>
               <div class="per-month">14,99€</div>
               <div class="per-month-text"><%= t('.per_month') %></div>
-              <button class="offer-film-button"><%= t('.buy') %></button>
+              <%= link_price(current_customer, 'CF8FILMS',10) %>
             </div>
               <div class="vertical-line"></div>
             <div class="offer-film">
               <div class="offer-film-number">10 <%= t('.films') %><div class="badge"><div class="badge-text"><%= t('.most_popular') %></div></div></div>
               <div class="per-month">17,99€</div>
               <div class="per-month-text"><%= t('.per_month') %></div>
-              <button class="offer-film-button"><%= t('.buy') %></button>
+              <%= link_price(current_customer, 'CF10FILMS',11) %>
               <!--a href="">Voir plus de formules</a-->
             </div>
           </div>
@@ -71,8 +75,8 @@
               <div class="offer-film-text"><%= t('.catalog_svod') %></div>
               <div class="per-month">9,95€</div>
               <div class="per-month-text"><%= t('.per_month') %></div>
-              <button class="offer-film-button"><%= t('.buy') %></button>
-              <a href=""><%= t('.see_cat') %></a>
+              <%= link_price(current_customer, 'SVOD', 1) %>
+              <a href="<%= products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}")) %>"><%= t('.see_cat') %></a>
             </div>
           </div>
           <div class="unlimited-offer-select adulte">
@@ -81,8 +85,9 @@
               <div class="offer-film-text"><%= t('.adult_desc').html_safe %></div>
               <div class="per-month">19,95€</div>
               <div class="per-month-text"><%= t('.per_month') %></div>
-              <button class="offer-film-button"><%= t('.buy') %></button>
-              <a href=""><%= t('.see_cat') %></a>
+              <%= link_price(current_customer, 'SVOD_ADULT', 5) %>
+              <a href="<%= products_short_path(:kind => 'adult',:package => t("routes.product.params.package.#{Moovies.packages.invert[4]}")) %>"><%= t('.see_cat') %></a>
+
             </div>
           </div>
           <div class="formules-offer-list">

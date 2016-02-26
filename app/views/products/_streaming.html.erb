@@ -7,7 +7,7 @@
     <% credit = product.streaming_products.first.tvod_credits %>
     <% if (current_customer && (current_customer.tvod_free > credit || current_customer.tvod_credits?) ) || hide_price %>
      <% key = '.watch_tvod_free' %>
-     <% credit = "#{credit} #{credit > 1 ? t('products.credits') : t('products.credit') }" %>
+     <% credit = "#{t('products.cost')}#{credit} #{credit > 1 ? t('products.credits') : t('products.credit') }" %>
      <% popup = false %>
     <% else %>
       <% key = '.watch_tvod' %>
@@ -26,5 +26,6 @@
     </div>
  <% end %>
   <%= link_to  title, product_action_path(:product_id => product.to_param, :origin => :products, :source => source), :class => class_name %>
-  <%= credit %>
+  
+  <span class="film-price"><%= credit %></span>
 <% end %>

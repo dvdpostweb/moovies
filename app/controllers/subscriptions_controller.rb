@@ -5,7 +5,7 @@ class SubscriptionsController < ApplicationController
       redirect_to root_localize_path() and return
     end
     
-      current_customer.locked = 1
+      #current_customer.locked = 1
       if current_customer.tvod_only? && params[:code]
         @discount = Discount.by_name(params[:code]).available.first
         if @discount
@@ -33,6 +33,6 @@ class SubscriptionsController < ApplicationController
       end
       current_customer.save(validate: false)
       current_customer.abo_history(action, params[:abo_id])
-      redirect_to root_localize_path(), :notice => t('subscription.update.abo_success', :abo => current_customer.next_subscription_type.description )
+      redirect_to info_path(:page_name => t('routes.infos.params.abo')), :notice => t('subscription.update.abo_success', :abo => current_customer.next_subscription_type.description )
   end
 end
