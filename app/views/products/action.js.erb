@@ -10,7 +10,7 @@
 						  window.location.href = '<%= streaming_product_path(:id => @product.imdb_id, :season_id => @product.season_id, :episode_id => @product.episode_id, :source => @source) %>'
 						<% end %>
 					<% else %>//tvod
-						<% if current_customer.tvod_free > @product.streaming_products.first.tvod_credits %>
+						<% if current_customer.tvod_free >= @product.streaming_products.first.tvod_credits %>
 							window.location.href = '<%= streaming_product_path(:id => @product.imdb_id, :season_id => @product.season_id, :episode_id => @product.episode_id, :source => @source) %>'
 						<% else	%>
 

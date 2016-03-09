@@ -5,7 +5,7 @@
     <% class_name = "watch action_btn" %>
   <% else %>
     <% credit = product.streaming_products.first.tvod_credits %>
-    <% if (current_customer && (current_customer.tvod_free > credit || current_customer.tvod_credits?) ) || hide_price %>
+    <% if (current_customer && (current_customer.tvod_free >= credit || current_customer.tvod_credits?) ) || hide_price %>
      <% key = '.watch_tvod_free' %>
      <% credit = "#{t('products.cost')}#{credit} #{credit > 1 ? t('products.credits') : t('products.credit') }" %>
      <% popup = false %>
