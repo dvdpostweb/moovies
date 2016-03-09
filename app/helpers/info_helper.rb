@@ -12,7 +12,7 @@ module InfoHelper
 
   def link_price(customer, code, abo, type)
     if customer
-      text = t('info.index.abo.change')
+      text = type == 'tvod' ? t('info.index.abo.change') : t('products.show.recommendation.add')
       if current_customer.step == 90
         link_to text, promotion_canva_path(:code => code, :return_url => info_path(:page_name => t('routes.infos.params.abo')), :id => 'old'), :method => :post, :class =>  'offer-film-button' 
       else
