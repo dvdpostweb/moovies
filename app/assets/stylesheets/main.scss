@@ -844,24 +844,33 @@ display: block;
   	  margin:5px;
 }
 .jacket .alacarte{
-  float:left;
  margin:5px;
-  
 }
 
 .jacket #add, .jacket .add{
-  float:left;
    margin:5px;
   	text-align: center !important;
 }
 
 .jacket .trailer {
-  float:left;
    margin:5px;
    color:#212A31 !important;
   
 }
-
+.film-price {
+    /*width: 100%;*/
+    margin: 0px 5px 2px;
+    font-size: 15px;
+    font-weight: bold;
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: #6acccb;
+    float: left;
+    text-align: left;
+}
+.btns li
+{
+  float:left;
+}
 
 
 #new-infinity-wrap .watch, #new-alacarte-wrap .alacarte {

@@ -1,0 +1,115 @@
+
+<div class="plush-page">
+      <div class="formules">
+        <% if !current_customer %>
+        <div id='tvod'><%= t('.tvod_account') %>, <%= link_to t('.create_tvod'), new_customer_registration_path( :code => 'TVOD_ONLY') %></div>
+        <% end %>
+        <div class="headline"><h1><%= t('.tvod') %></h1></div>
+        <div class="text"><h2><%= t('.choose_tvod') %></h2></div>
+        <div class="formules-offer">
+          <div class="formules-offer-select">
+            <div class="offer-film">
+              <div class="offer-film-number">
+                2 <%= t('.films') %>
+                <div class="badge">
+                  <div class="badge-text"><%= t('.most_popular') %></div>
+                </div>
+              </div>
+              <div class="per-month">3,99€</div>
+              <div class="per-month-text"><%= t('.per_month') %></div>
+              <%= link_price(current_customer, 'CF2FILMS',7) %>
+            </div>
+              <div class="vertical-line"></div>
+            <div class="offer-film">
+              <div class="offer-film-number">
+                4 <%= t('.films') %>
+                <div class="badge active"> <!-- Klasu active dodavati kroz javascript kad postoji specijalna ponuda -->
+                  <div class="badge-text"><%= t('.most_popular') %></div>
+                </div>
+              </div>
+              <div class="per-month">7,99€</div>
+              <div class="per-month-text"><%= t('.per_month') %></div>
+                <%= link_price(current_customer, 'CF4FILMS', 8) %>
+              </div>
+              <div class="vertical-line"></div>
+            <div class="offer-film">
+              <div class="offer-film-number">6 <%= t('.films') %><div class="badge"><div class="badge-text"><%= t('.most_popular') %></div></div></div>
+              <div class="per-month">11,99€</div>
+              <div class="per-month-text"><%= t('.per_month') %></div>
+                <%= link_price(current_customer, 'CF6FILMS',9) %>
+              </div>
+              <div class="vertical-line"></div>
+            <div class="offer-film">
+              <div class="offer-film-number">8 <%= t('.films') %><div class="badge"><div class="badge-text"><%= t('.most_popular') %></div></div></div>
+              <div class="per-month">14,99€</div>
+              <div class="per-month-text"><%= t('.per_month') %></div>
+              <%= link_price(current_customer, 'CF8FILMS',10) %>
+            </div>
+              <div class="vertical-line"></div>
+            <div class="offer-film">
+              <div class="offer-film-number">10 <%= t('.films') %><div class="badge"><div class="badge-text"><%= t('.most_popular') %></div></div></div>
+              <div class="per-month">17,99€</div>
+              <div class="per-month-text"><%= t('.per_month') %></div>
+              <%= link_price(current_customer, 'CF10FILMS',11) %>
+              <!--a href="">Voir plus de formules</a-->
+            </div>
+          </div>
+        </div>
+        <div class="formules-offer-list">
+          <ul>
+            <li><div class="list-style-green"></div><%= t('home.carrefour.catalog').html_safe %></li>
+            <li><div class="list-style-green"></div><%= t('home.carrefour.free').html_safe %></li>
+            <li><div class="list-style-green"></div><%= t('home.carrefour.increase').html_safe  %></li>
+            <li><div class="list-style-green"></div><%= t('home.carrefour.2_credits').html_safe  %></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="unlimited">
+        <div class="headline"><h1><%= t('.svod') %></h1></div>
+        <div class="text"><h2><%= t('.svod_desc') %></h2></div>
+        <div class="formules-offer">
+          <div class="unlimited-offer-select">
+            <div class="offer-film">
+              <div class="offer-film-headline"><%= t('.cine') %></div>
+              <div class="offer-film-text"><%= t('.catalog_svod') %></div>
+              <div class="per-month">9,95€</div>
+              <div class="per-month-text"><%= t('.per_month') %></div>
+              <%= link_price(current_customer, 'SVOD', 1) %>
+              <a href="<%= products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}")) %>"><%= t('.see_cat') %></a>
+            </div>
+          </div>
+          <div class="unlimited-offer-select adulte">
+            <div class="offer-film">
+              <div class="offer-film-headline"><%= t('.adult') %></div>
+              <div class="offer-film-text"><%= t('.adult_desc').html_safe %></div>
+              <div class="per-month">19,95€</div>
+              <div class="per-month-text"><%= t('.per_month') %></div>
+              <%= link_price(current_customer, 'SVOD_ADULT', 5) %>
+              <a href="<%= products_short_path(:kind => 'adult',:package => t("routes.product.params.package.#{Moovies.packages.invert[4]}")) %>"><%= t('.see_cat') %></a>
+
+            </div>
+          </div>
+          <div class="formules-offer-list">
+            <ul>
+              <li><div class="list-style-green"></div><b><%= t('home.carrefour.free').html_safe %></li>
+              <li><div class="list-style-green"></div><%= t('.adult18').html_safe %></li>
+              <li><div class="list-style-green"></div><%= t('.new_title').html_safe %></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <div class="cards">
+        <ul>
+          <li><%= image_tag 'carrefour/mastercard.png' %></li>
+          <li><%= image_tag 'carrefour/visa.png' %></li>
+          <li><%= image_tag 'carrefour/amex.png' %></li>
+          <li><%= image_tag 'carrefour/atos.png' %></li>
+          <li><%= image_tag 'carrefour/paypal.png' %></li>
+          <li><%= image_tag 'carrefour/norton.png' %></li>
+          <li><%= image_tag 'carrefour/verisign.png' %></li>
+        </ul>
+        <center><span class="cards-bottom-text">Secured online transactions managed by Ingenico</span></center>
+      </div>
+    </div>

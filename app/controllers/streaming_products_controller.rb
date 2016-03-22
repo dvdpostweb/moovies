@@ -36,11 +36,11 @@ class StreamingProductsController < ApplicationController
       redirect_to root_localize_path and return
       end
     end
-    if current_customer && current_customer.tvod_only? && !(@token_valid == true || @streaming.prepaid_all? || current_customer.tvod_free > @streaming.tvod_credits)
+    if current_customer && current_customer.tvod_only? && !(@token_valid == true || @streaming.prepaid_all? || current_customer.tvod_free >= @streaming.tvod_credits)
       flash[:error] = t('streaming_products.tvod_no_token')
       redirect_to root_localize_path and return
     end
-    if current_customer && current_customer.tvod_credits? && !(@token_valid == true || @streaming.prepaid_all? || current_customer.tvod_free > @streaming.tvod_credits || @product.svod?)
+    if current_customer && current_customer.tvod_credits? && !(@token_valid == true || @streaming.prepaid_all? || current_customer.tvod_free >= @streaming.tvod_credits || @product.svod?)
       flash[:error] = t('streaming_products.tvod_no_token')
       redirect_to root_localize_path and return
     end
@@ -92,7 +92,7 @@ class StreamingProductsController < ApplicationController
       else
         if view_context.streaming_access?
           streaming_version = StreamingProduct.find_by_id(params[:streaming_product_id])
-          if @code || ((!current_customer.suspended? && !Token.dvdpost_ip?(request.remote_ip) && !current_customer.super_user? && !(/^192(.*)/.match(request.remote_ip)) && current_customer.actived? && (current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s) || @streaming.prepaid_all?) && (@product.svod? || (!@product.svod? && current_customer.payable?) || current_customer.tvod_free > @streaming.tvod_credits)))
+          if @code || ((!current_customer.suspended? && !Token.dvdpost_ip?(request.remote_ip) && !current_customer.super_user? && !(/^192(.*)/.match(request.remote_ip)) && current_customer.actived? && (current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s) || @streaming.prepaid_all?) && (@product.svod? || (!@product.svod? && current_customer.payable?) || current_customer.tvod_free >= @streaming.tvod_credits)))
           #if 1==1
             status = @token.nil? ? nil : @token.current_status(request.remote_ip)
             streaming_version = StreamingProduct.find_by_id(params[:streaming_product_id])
