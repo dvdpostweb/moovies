@@ -20,9 +20,6 @@ group :development do
   gem 'quiet_assets'
   gem 'thin'
   gem 'spring'
-end
-
-group :development, :staging do
   gem "letter_opener"
   gem 'rack-mini-profiler'
 end
