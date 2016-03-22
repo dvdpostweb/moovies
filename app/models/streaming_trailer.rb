@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: streaming_trailers
+#
+#  id             :integer          not null, primary key
+#  imdb_id        :integer
+#  filename       :string(255)
+#  available_from :date
+#  expire_at      :date
+#  available      :boolean
+#  language_id    :integer
+#  subtitle_id    :integer
+#  created_at     :datetime
+#  updated_at     :datetime
+#  status         :string(18)       default("ripped")
+#  videoland      :boolean          default(FALSE)
+#  akamai_folder  :string(255)
+#
+
 class StreamingTrailer < ActiveRecord::Base
   has_many :subtitles, :foreign_key => :undertitles_id, :primary_key => :subtitle_id
   has_many :languages, :foreign_key => :languages_id, :primary_key => :language_id

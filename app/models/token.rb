@@ -1,3 +1,27 @@
+# == Schema Information
+#
+# Table name: tokens
+#
+#  id           :integer          not null, primary key
+#  token        :string(255)
+#  created_at   :datetime
+#  updated_at   :datetime
+#  customer_id  :integer
+#  code         :string(255)
+#  imdb_id      :integer
+#  count_ip     :integer          default(2)
+#  is_ppv       :boolean          default(FALSE)
+#  ppv_price    :float            default(0.0), not null
+#  compensed    :integer          default(0)
+#  source_id    :integer
+#  country      :string(3)
+#  kind         :string(10)       default("NORMAL")
+#  season_id    :integer          default(0), not null
+#  episode_id   :integer          default(0), not null
+#  payment_kind :string(8)
+#  videoland    :boolean          default(FALSE)
+#
+
 require "uri"
 require 'net/https'
 

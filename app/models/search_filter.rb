@@ -1,3 +1,25 @@
+# == Schema Information
+#
+# Table name: filters
+#
+#  id              :integer          not null, primary key
+#  customer_id     :integer
+#  country_id      :integer
+#  audience_min    :integer
+#  audience_max    :integer
+#  rating_min      :integer
+#  rating_max      :integer
+#  year_min        :integer
+#  year_max        :integer
+#  audio           :text
+#  subtitles       :text
+#  media           :text
+#  recommended_ids :text
+#  dvdpost_choice  :boolean
+#  created_at      :datetime
+#  updated_at      :datetime
+#
+
 class SearchFilter < ActiveRecord::Base
   self.table_name = :filters
 

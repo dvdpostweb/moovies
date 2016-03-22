@@ -1,3 +1,38 @@
+# == Schema Information
+#
+# Table name: streaming_products
+#
+#  id                           :integer          not null, primary key
+#  imdb_id                      :integer
+#  filename                     :string(255)
+#  available_from               :date
+#  expire_at                    :date
+#  available_backcatalogue_from :date
+#  expire_backcatalogue_at      :date
+#  available                    :boolean
+#  language_id                  :integer
+#  subtitle_id                  :integer
+#  created_at                   :datetime
+#  updated_at                   :datetime
+#  studio_id                    :integer
+#  status                       :string(18)       default("ripped")
+#  quality                      :string(5)        default("SD")
+#  source                       :string(13)       default("SOFTLAYER")
+#  vod_support_id               :integer          default(1), not null
+#  is_ppv                       :boolean
+#  ppv_price                    :float
+#  country                      :string(2)        default("BE")
+#  package_id                   :integer
+#  drm                          :boolean          default(FALSE), not null
+#  tvod_price                   :float
+#  season_id                    :integer          default(0), not null
+#  episode_id                   :integer          default(0), not null
+#  videoland                    :boolean          default(FALSE)
+#  videoland_reference          :string(45)
+#  akamai_folder                :string(45)
+#  tvod_credits                 :integer          default(1), not null
+#
+
 class StreamingProduct < ActiveRecord::Base
 
   has_many :subtitle, :foreign_key => :undertitles_id, :primary_key => :subtitle_id

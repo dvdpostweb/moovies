@@ -1,3 +1,30 @@
+# == Schema Information
+#
+# Table name: studio
+#
+#  studio_id                   :integer          not null, primary key
+#  studio_name                 :string(50)       default(""), not null
+#  studio_type                 :string(9)        default("DVD_NORM"), not null
+#  cost_for_new                :float            default(1.0), not null
+#  cost                        :float            default(1.0), not null
+#  vod_be                      :boolean          default(FALSE), not null
+#  fee_new_vod                 :float
+#  fee_back_catalogue          :float
+#  minimum_new_vod             :float
+#  minimum_back_catalogue      :float
+#  minimum_global              :float
+#  billing_reporting           :integer          default(0), not null
+#  vod_lux                     :boolean          default(FALSE)
+#  vod_nl                      :boolean          default(FALSE)
+#  plush_price_new             :float
+#  plush_price_back_catalogue  :float
+#  svod_fee_new_vod            :float
+#  svod_fee_back_catalogue     :float
+#  svod_minimum_new_vod        :float
+#  svod_minimum_back_catalogue :float
+#  svod_minimum_global         :float
+#
+
 class Studio < ActiveRecord::Base
 
   self.primary_key = :studio_id

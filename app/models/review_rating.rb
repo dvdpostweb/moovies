@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: reviews_rating
+#
+#  review_id           :integer          default(0), not null
+#  customers_id        :integer          default(0), not null
+#  reviews_interesting :integer          default(0), not null
+#  created_at          :datetime
+#  updated_at          :datetime
+#  source              :string(40)       default("DVDPOST"), not null
+#
+
 class ReviewRating < ActiveRecord::Base
   establish_connection "common_#{Rails.env}"
   self.table_name = :reviews_rating

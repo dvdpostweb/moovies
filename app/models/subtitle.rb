@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: products_undertitles
+#
+#  undertitles_id          :integer          default(0), not null, primary key
+#  language_id             :integer          default(0), not null
+#  undertitles_description :string(50)       default(""), not null
+#  short                   :string(255)
+#  short_alpha             :string(4)
+#
+
 class Subtitle < ActiveRecord::Base
 
   self.table_name = :products_undertitles

@@ -1,3 +1,25 @@
+# == Schema Information
+#
+# Table name: reviews
+#
+#  id                    :integer          not null, primary key
+#  imdb_id               :integer          default(0), not null
+#  customers_id          :integer
+#  customers_name        :string(64)       default(""), not null
+#  reviews_rating        :integer
+#  date_added            :datetime
+#  last_modified         :datetime
+#  reviews_read          :integer          default(0), not null
+#  reviews_check         :integer          default(1), not null
+#  reviews_corrected     :integer          default(0), not null
+#  customers_best_rating :integer          default(0), not null
+#  customers_bad_rating  :integer          default(0), not null
+#  languages_id          :integer          default(0), not null
+#  reviews_text          :text             default(""), not null
+#  dvdpost_rating        :integer
+#  source                :string(40)       default("DVDPOST"), not null
+#
+
 class Review < ActiveRecord::Base
   establish_connection "common_#{Rails.env}"
   cattr_reader :per_page

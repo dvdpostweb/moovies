@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: products_uninterested
+#
+#  products_uninterested_id :integer          not null, primary key
+#  products_id              :integer          default(0), not null
+#  date                     :datetime         not null
+#  customers_id             :integer
+#
+
 class Uninterested < ActiveRecord::Base
   self.table_name = :products_uninterested
 

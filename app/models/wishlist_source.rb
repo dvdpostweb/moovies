@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: wishlist_sources
+#
+#  id         :integer          not null, primary key
+#  name       :string(45)       not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
   class WishlistSource < ActiveRecord::Base
   def self.wishlist_source(params, wishlist_source)
       if wishlist_source.nil?

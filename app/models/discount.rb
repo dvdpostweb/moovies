@@ -1,3 +1,46 @@
+# == Schema Information
+#
+# Table name: discount_code
+#
+#  discount_code_id                :integer          not null, primary key
+#  discount_code                   :string(50)       default(""), not null
+#  discount_type                   :integer          default(0), not null
+#  discount_value                  :decimal(6, 2)    default(0.0), not null
+#  discount_limit                  :integer          default(1), not null
+#  discount_commitment             :integer          default(1), not null
+#  discount_status                 :integer          default(1), not null
+#  discount_text_fr                :string(255)      default(""), not null
+#  discount_text_nl                :string(255)      default(""), not null
+#  discount_text_en                :string(255)      default(""), not null
+#  discount_abo_validityto_type    :integer          default(0), not null
+#  discount_abo_validityto_value   :integer          default(0), not null
+#  comment                         :text
+#  discount_nbr_month_before_reuse :integer          default(3), not null
+#  discount_recurring_nbr_of_month :integer          default(0), not null
+#  bypass_discountuse              :integer          default(0), not null
+#  discount_validityto             :date
+#  payable                         :integer          default(1), not null
+#  next_discount                   :integer          default(0), not null
+#  credit0_auto_reconduct          :integer          default(0), not null
+#  landing_page                    :integer          default(0), not null
+#  landing_page_php                :string(50)
+#  listing_products_allowed        :string(50)
+#  abo_auto_stop_next_reconduction :integer          default(0), not null
+#  goto_step                       :integer          default(31), not null
+#  banner                          :string(30)
+#  Footer                          :string(25)       default("FREETRIAL"), not null
+#  free_upgrade_allowed            :integer          default(0), not null
+#  group_id                        :integer          default(0), not null
+#  shopping_discount               :string(25)
+#  droselia                        :integer          not null
+#  next_abo_type                   :integer
+#  paypal                          :integer          default(0)
+#  creditcard                      :integer          default(0)
+#  debitcard                       :integer          default(0)
+#  discount_action                 :string(9)        default("")
+#  tvod_free                       :integer          default(0)
+#
+
 class Discount < ActiveRecord::Base
   self.table_name = :discount_code
   self.primary_key = :discount_code_id

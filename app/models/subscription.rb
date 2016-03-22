@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: abo
+#
+#  abo_id             :integer          not null, primary key
+#  customerid         :integer          default(0), not null
+#  Action             :integer          default(0), not null
+#  code_id            :integer
+#  Date               :datetime         not null
+#  product_id         :integer          default(0), not null
+#  payment_method     :string(255)      default("ogone"), not null
+#  privilege_notified :integer          default(0), not null
+#  comment            :text             default(""), not null
+#  site               :integer          default(0), not null
+#
+
 class Subscription < ActiveRecord::Base
   self.table_name = :abo
   self.primary_key = :abo_id

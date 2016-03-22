@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: products_languages
+#
+#  languages_id          :integer          default(0), not null, primary key
+#  languagenav_id        :integer          default(0), not null
+#  languages_description :string(50)
+#  short                 :string(4)
+#  short_alpha           :string(4)
+#
+
 class Language < ActiveRecord::Base
   self.table_name = :products_languages
 

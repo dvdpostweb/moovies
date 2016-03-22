@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: phone_custserv
+#
+#  id          :integer          not null, primary key
+#  customer_id :integer          not null
+#  name        :string(255)
+#  reason      :integer          not null
+#  hour        :integer          not null
+#  day         :date             not null
+#  comment     :string(45)
+#  open        :integer          default(0), not null
+#  created_at  :datetime
+#  updated_at  :datetime
+#  phone       :string(20)
+#  language_id :integer
+#
+
 class PhoneRequest < ActiveRecord::Base
   self.table_name = :phone_custserv
   

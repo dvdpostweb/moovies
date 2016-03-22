@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: address_book
+#
+#  customers_id         :integer          default(0), not null, primary key
+#  address_book_id      :integer          default(1), not null, primary key
+#  entry_gender         :string(1)        default(""), not null
+#  entry_company        :string(32)
+#  entry_firstname      :string(32)       default(""), not null
+#  entry_lastname       :string(32)       default(""), not null
+#  entry_street_address :string(64)       default(""), not null
+#  entry_suburb         :string(32)
+#  entry_postcode       :string(10)       default(""), not null
+#  entry_city           :string(32)       default(""), not null
+#  entry_state          :string(32)
+#  entry_country_id     :integer          default(0), not null
+#  entry_zone_id        :integer          default(0), not null
+#  date_added           :timestamp        not null
+#
+
 class Address < ActiveRecord::Base
   self.table_name = :address_book
   self.primary_keys = :customers_id, :address_book_id
