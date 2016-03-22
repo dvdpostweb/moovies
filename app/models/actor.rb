@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: actors
+#
+#  actors_id          :integer          not null, primary key
+#  actors_name        :string(50)       default(""), not null
+#  actors_dateofbirth :string(10)
+#  birth_place        :string(255)
+#  death_at           :date
+#  death_place        :string(255)
+#  actors_type        :string(10)       default(""), not null
+#  slug               :string(255)
+#  image_active       :boolean          default(FALSE), not null
+#  focus              :boolean          default(FALSE), not null
+#  sexuality          :string(6)        default("hetero"), not null
+#
+
 class Actor < ActiveRecord::Base
   self.primary_key = :actors_id
   extend FriendlyId

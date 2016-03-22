@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: directors
+#
+#  directors_id          :integer          not null, primary key
+#  directors_name        :string(50)       default(""), not null
+#  image_active          :boolean          default(FALSE)
+#  directors_dateofbirth :string(10)
+#  birth_place           :string(255)
+#  death_at              :date
+#  death_place           :string(255)
+#  slug                  :string(255)
+#
+
 class Director < ActiveRecord::Base
   self.primary_key = :directors_id
   extend FriendlyId

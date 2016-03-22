@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: public
+#
+#  public_id   :integer          default(0), not null, primary key
+#  language_id :integer          default(0), not null
+#  public_name :string(50)       default(""), not null
+#
+
 class Public < ActiveRecord::Base
   self.table_name = :public
 

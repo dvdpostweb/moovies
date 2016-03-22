@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: picture_format
+#
+#  picture_format_id   :integer          default(0), not null, primary key
+#  language_id         :integer          default(0), not null
+#  picture_format_name :string(50)       default(""), not null
+#
+
 class PictureFormat < ActiveRecord::Base
   self.table_name = :picture_format
 

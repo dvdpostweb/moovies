@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: products_rating
+#
+#  products_rating_id   :integer          not null, primary key
+#  products_id          :integer          default(0), not null
+#  products_rating      :integer          default(0), not null
+#  products_rating_date :datetime         not null
+#  customers_id         :integer
+#  rating_type          :string(45)
+#  imdb_id              :integer          default(0), not null
+#  criteo_status        :integer          default(0), not null
+#
+
 class Rating < ActiveRecord::Base
   self.table_name = :products_rating
 

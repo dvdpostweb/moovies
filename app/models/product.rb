@@ -1,3 +1,44 @@
+# == Schema Information
+#
+# Table name: products
+#
+#  products_id             :integer          not null, primary key
+#  products_type           :string(10)       default("DVD_NORM")
+#  products_model          :string(50)       not null
+#  imdb_id                 :integer          default(0), not null
+#  products_title          :string(255)      default(""), not null
+#  products_price          :decimal(5, 2)    default(4.0), not null
+#  products_date_added     :datetime         not null
+#  products_last_modified  :datetime
+#  cached_at               :datetime
+#  products_date_available :datetime
+#  products_status         :integer          default(1), not null
+#  products_public         :integer          default(0)
+#  products_runtime        :integer
+#  products_year           :integer
+#  products_countries_id   :integer          default(0), not null
+#  products_picture_format :integer
+#  products_rating         :integer
+#  products_directors_id   :integer
+#  products_studio         :integer
+#  in_cinema_now           :integer          default(0), not null
+#  vod_next                :boolean          default(FALSE)
+#  vod_next_lux            :boolean          default(FALSE)
+#  vod_next_nl             :boolean          default(FALSE)
+#  products_series_id      :integer          default(0), not null
+#  products_series_number  :integer          default(0), not null
+#  distributors_id         :integer          default(0), not null
+#  products_media          :string(45)       default("DVD"), not null
+#  rating_users            :integer          default(0), not null
+#  rating_count            :integer          default(0), not null
+#  imdb_id_serie           :integer
+#  package_id              :integer          default(2)
+#  serie_id                :integer
+#  season_id               :integer          default(0), not null
+#  episode_id              :integer          default(0), not null
+#  belgium_ids             :string(10)
+#
+
 class Product < ActiveRecord::Base
   include ThinkingSphinx::Scopes
   cattr_reader :per_page

@@ -1,3 +1,28 @@
+# == Schema Information
+#
+# Table name: landings
+#
+#  id             :integer          not null, primary key
+#  name           :string(100)      not null
+#  expirated_date :date
+#  reference_id   :string(20)
+#  actif_french   :string(4)        default("YES"), not null
+#  actif_dutch    :string(4)        default("YES"), not null
+#  actif_english  :string(4)        default("YES"), not null
+#  kind           :string(17)       default("MOVIE")
+#  ordered        :integer
+#  login          :string(12)
+#  title_fr       :string(255)
+#  title_nl       :string(255)
+#  title_en       :string(255)
+#  description_fr :string(255)
+#  description_nl :string(255)
+#  description_en :string(255)
+#  link_fr        :string(255)
+#  link_nl        :string(255)
+#  link_en        :string(255)
+#
+
 class Landing < ActiveRecord::Base
   has_one :product, :primary_key => :reference_id, :foreign_key => :products_id
 

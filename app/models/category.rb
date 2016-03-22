@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: categories
+#
+#  categories_id    :integer          not null, primary key
+#  categories_image :string(64)
+#  parent_id        :integer          default(0), not null
+#  sort_order       :integer
+#  date_added       :datetime
+#  last_modified    :datetime
+#  categories_type  :string(10)       default(""), not null
+#  product_type     :string(45)       default("Movie")
+#  active           :string(3)        default("YES")
+#  show_home        :string(3)        default("YES")
+#  display_group    :integer
+#  size             :integer          default(0), not null
+#  vod              :boolean          default(FALSE)
+#
+
 class Category < ActiveRecord::Base
   include ThinkingSphinx::Scopes
   self.primary_key = :categories_id
