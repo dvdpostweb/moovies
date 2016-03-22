@@ -24,6 +24,7 @@ end
 
 group :development, :staging do
   gem "letter_opener"
+  gem 'rack-mini-profiler'
 end
 
 gem 'cucumber-rails', :require => false
