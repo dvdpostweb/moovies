@@ -14,5 +14,5 @@ class CategoryDescription < ActiveRecord::Base
 
   belongs_to :category
 
-  scope :by_language, lambda {|language| where(:language_id => Moovies.languages[language])}
+  scope :by_language, lambda { |language| where(:language_id => Moovies.languages[language]) }
 end

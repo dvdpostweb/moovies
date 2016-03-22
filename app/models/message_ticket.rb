@@ -19,7 +19,7 @@ class MessageTicket < ActiveRecord::Base
   scope :unread, where("`is_read` = 0 and user_id > 0")
   scope :custer, where("user_id > 0")
   scope :ordered, :order => "id DESC"
-  
+
   def unread?
     is_read == 0 && !user_id.nil?
   end

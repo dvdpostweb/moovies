@@ -20,10 +20,10 @@ class Suspension < ActiveRecord::Base
 
   def self.duration
     duration = OrderedHash.new
-    duration.push(7 , :one_weeks  ) 
-    duration.push(14, :two_weeks  )
-    duration.push(21, :tree_weeks )
-    duration.push(30, :one_months )
+    duration.push(7, :one_weeks)
+    duration.push(14, :two_weeks)
+    duration.push(21, :tree_weeks)
+    duration.push(30, :one_months)
     duration
   end
 end

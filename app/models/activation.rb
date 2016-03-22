@@ -44,7 +44,7 @@ class Activation < ActiveRecord::Base
   self.table_name = :activation_code
   self.primary_key = :activation_id
 
-  alias_attribute :name,:activation_code
+  alias_attribute :name, :activation_code
   alias_attribute :expire_at, :activation_code_validto_date
   alias_attribute :duration_type, :validity_type
   alias_attribute :duration_value, :validity_value
@@ -64,8 +64,8 @@ class Activation < ActiveRecord::Base
 
   has_one :subscription_type, :primary_key => :activation_products_id, :foreign_key => :products_id
 
-  scope :by_name, lambda {|name| where(:activation_code => name)}
-  scope :available, lambda {where('(activation_code_validto_date > ? or activation_code_validto_date is null) and customers_id = 0', Time.now.to_s(:db))}
+  scope :by_name, lambda { |name| where(:activation_code => name) }
+  scope :available, lambda { where('(activation_code_validto_date > ? or activation_code_validto_date is null) and customers_id = 0', Time.now.to_s(:db)) }
 
   def tvod_only
     subscription_type && subscription_type.id == 6
@@ -81,12 +81,12 @@ class Activation < ActiveRecord::Base
 
   def duration
     case duration_type
-    when 1
-      duration_value.days.from_now.localtime
-    when 2
-      duration_value.months.from_now.localtime
-    when 3
-      duration_value.year.from_now.localtime
+      when 1
+        duration_value.days.from_now.localtime
+      when 2
+        duration_value.months.from_now.localtime
+      when 3
+        duration_value.year.from_now.localtime
     end
   end
 
@@ -95,18 +95,18 @@ class Activation < ActiveRecord::Base
   end
 
   def promo_price
-      abo_price = subscription_type ? subscription_type.product.price.to_f : price
-      case self.type
-        #total = price - X%
-        when 1
-          price = (abo_price - (self.value / 100 * abo_price)).round(2)
-        # tot = X € 
-        when 2
-          price = self.value
-        # tot = price - X€
-        when 3
-          price = abo_price - self.value
-      end
+    abo_price = subscription_type ? subscription_type.product.price.to_f : price
+    case self.type
+      #total = price - X%
+      when 1
+        price = (abo_price - (self.value / 100 * abo_price)).round(2)
+      # tot = X €
+      when 2
+        price = self.value
+      # tot = price - X€
+      when 3
+        price = abo_price - self.value
+    end
     price = 0 if price < 0
     price.to_f
   end

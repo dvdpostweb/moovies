@@ -21,8 +21,8 @@ class Ticket < ActiveRecord::Base
     filter.push(:archive, 'archive')
     filter.push(:current, 'current')
     filter
-  end  
+  end
 
   scope :ordered, :order => 'id desc'
-  scope :by_kind, lambda {|kind| where(:remove => kind)}
+  scope :by_kind, lambda { |kind| where(:remove => kind) }
 end

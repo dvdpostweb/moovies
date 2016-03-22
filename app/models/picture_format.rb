@@ -16,5 +16,5 @@ class PictureFormat < ActiveRecord::Base
 
   has_many :products, :foreign_key => :products_picture_format
 
-  scope :by_language, lambda {|language| where(:language_id => Moovies.languages[language.to_s])}
+  scope :by_language, lambda { |language| where(:language_id => Moovies.languages[language.to_s]) }
 end

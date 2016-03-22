@@ -34,7 +34,7 @@ class Address < ActiveRecord::Base
   alias_attribute :country_id, :entry_country_id
   alias_attribute :gender, :entry_gender
   alias_attribute :address_id, :address_book_id
-  
+
 
   validates_length_of :first_name, :minimum => 2, :if => :svod?
   validates_length_of :last_name, :minimum => 2, :if => :svod?
@@ -43,7 +43,7 @@ class Address < ActiveRecord::Base
   validates_length_of :city, :minimum => 1, :if => :svod?
 
   def replace_semicolon
-    self.street = self.street.gsub(/;/, ' ').gsub(/   /,' ').gsub(/  /,' ')
+    self.street = self.street.gsub(/;/, ' ').gsub(/   /, ' ').gsub(/  /, ' ')
   end
 
   def belgian?
@@ -61,17 +61,19 @@ class Address < ActiveRecord::Base
   def name
     "#{first_name} #{last_name}"
   end
+
   def svod?
     customer.abo_type_id != 6
   end
+
   private
-   def set_default
-     self.address_book_id = self.customer.addresses.count > 0 ? self.customer.addresses.maximum(:address_book_id) + 1 : 1
-     self.gender = self.customer.gender if self.gender.nil? || self.gender.empty?
-     self.entry_country_id = self.customer.address ? self.customer.address.entry_country_id : 21
-     self.first_name = self.customer.first_name unless self.first_name
-     self.last_name = self.customer.last_name unless self.last_name
-   end
-   
-   
+  def set_default
+    self.address_book_id = self.customer.addresses.count > 0 ? self.customer.addresses.maximum(:address_book_id) + 1 : 1
+    self.gender = self.customer.gender if self.gender.nil? || self.gender.empty?
+    self.entry_country_id = self.customer.address ? self.customer.address.entry_country_id : 21
+    self.first_name = self.customer.first_name unless self.first_name
+    self.last_name = self.customer.last_name unless self.last_name
+  end
+
+
 end

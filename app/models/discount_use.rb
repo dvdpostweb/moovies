@@ -15,5 +15,5 @@ class DiscountUse < ActiveRecord::Base
 
   alias_attribute :created_at, :discount_use_date
   alias_attribute :customer_id, :customers_id
-  scope :use, lambda {|months| where(:discount_use_date => months.months.ago..Time.now.end_of_day)}
+  scope :use, lambda { |months| where(:discount_use_date => months.months.ago..Time.now.end_of_day) }
 end

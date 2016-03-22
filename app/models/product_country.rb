@@ -24,5 +24,5 @@ class ProductCountry < ActiveRecord::Base
   def name
     self[I18n.locale]
   end
-  
+
 end

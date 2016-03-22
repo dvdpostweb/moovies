@@ -18,14 +18,14 @@
 
 class PhoneRequest < ActiveRecord::Base
   self.table_name = :phone_custserv
-  
-  belongs_to :customer,         :foreign_key => :customers_id
+
+  belongs_to :customer, :foreign_key => :customers_id
 
   validates_format_of :phone, :with => /^(\+)?[0-9 \-\/.]+$/
   validates_presence_of :reason
   validates_presence_of :hour
   validates_presence_of :requested_date
-  
+
 
   def self.time_slots
     slots = OrderedHash.new
@@ -70,7 +70,7 @@ class PhoneRequest < ActiveRecord::Base
 
   def requested_date=(date)
     if date.nil?
-        nil 
+      nil
     else
       regex = /\d{2}-\d{2}-\d{4}/
       if date =~ regex
