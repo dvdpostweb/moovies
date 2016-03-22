@@ -1,3 +1,25 @@
+# == Schema Information
+#
+# Table name: filters
+#
+#  id              :integer          not null, primary key
+#  customer_id     :integer
+#  country_id      :integer
+#  audience_min    :integer
+#  audience_max    :integer
+#  rating_min      :integer
+#  rating_max      :integer
+#  year_min        :integer
+#  year_max        :integer
+#  audio           :text
+#  subtitles       :text
+#  media           :text
+#  recommended_ids :text
+#  dvdpost_choice  :boolean
+#  created_at      :datetime
+#  updated_at      :datetime
+#
+
 class SearchFilter < ActiveRecord::Base
   self.table_name = :filters
 
@@ -19,7 +41,7 @@ class SearchFilter < ActiveRecord::Base
     end
     current_filter
   end
-  
+
   def audience?
     (audience_min? || audience_max?) && !(audience_min == 0 && audience_max == 18)
   end
@@ -33,8 +55,8 @@ class SearchFilter < ActiveRecord::Base
   end
 
   def transform_hashes_to_arrays
-    self.audio = audio.keys.collect{|key| key.to_i} if audio? && audio.respond_to?(:keys)
-    self.subtitles = subtitles.keys.collect{|key| key.to_i} if subtitles? && subtitles.respond_to?(:keys)
+    self.audio = audio.keys.collect { |key| key.to_i } if audio? && audio.respond_to?(:keys)
+    self.subtitles = subtitles.keys.collect { |key| key.to_i } if subtitles? && subtitles.respond_to?(:keys)
     self.media = media.symbolize_keys.keys if media? && media.respond_to?(:symbolize_keys)
   end
 
@@ -55,17 +77,17 @@ class SearchFilter < ActiveRecord::Base
   end
 
   def update_with_defaults(options)
-    self.media            = nil || options[:media]
-    self.country_id       = nil || options[:country_id]
-    self.audience_min     = nil || options[:audience_min]
-    self.audience_max     = nil || options[:audience_max]
-    self.rating_min       = nil || options[:rating_min]
-    self.rating_max       = nil || options[:rating_max]
-    self.year_min         = nil || options[:year_min]
-    self.year_max         = nil || options[:year_max]
-    self.audio            = nil || options[:audio]
-    self.subtitles        = nil || options[:subtitles]
-    self.recommended_ids  = nil || options[:recommended_ids]
+    self.media = nil || options[:media]
+    self.country_id = nil || options[:country_id]
+    self.audience_min = nil || options[:audience_min]
+    self.audience_max = nil || options[:audience_max]
+    self.rating_min = nil || options[:rating_min]
+    self.rating_max = nil || options[:rating_max]
+    self.year_min = nil || options[:year_min]
+    self.year_max = nil || options[:year_max]
+    self.audio = nil || options[:audio]
+    self.subtitles = nil || options[:subtitles]
+    self.recommended_ids = nil || options[:recommended_ids]
     save
   end
 end

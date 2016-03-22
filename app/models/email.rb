@@ -5,7 +5,7 @@ class Email < ActiveRecord::Base
   alias_attribute :body, :messages_html
   alias_attribute :subject, :messages_subject
 
-  scope :by_language, lambda {|language| where(:language_id => Moovies.languages[language])}
+  scope :by_language, lambda { |language| where(:language_id => Moovies.languages[language]) }
 
   def short?
     length == 'SHORT'
