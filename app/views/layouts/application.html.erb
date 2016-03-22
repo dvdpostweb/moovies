@@ -72,7 +72,7 @@
         </ul>
       </div>
       <% end %>
-      <% if !current_customer && (!(params[:controller] == 'home' && params[:action] =='validation') && params[:controller] != 'customers/registrations' && params[:controller] != 'steps' && params[:page_name] != 'abo') && !(params[:controller] == 'promotions' && params[:id] == 'smarttv') && !(params[:controller] == 'info' && params[:page_name] == 'playstation') && !(params[:controller] == 'customers' && (params[:action] == 'reactive' || params[:action] == 'promotion')  ) && params[:action] != 'carrefour' %>
+      <% if !current_customer && (!(params[:controller] == 'home' && params[:action] =='validation') && params[:controller] != 'customers/registrations' && params[:controller] != 'steps' && params[:page_name] != 'abo') && !(params[:controller] == 'promotions' && params[:id] == 'smarttv') && !(params[:controller] == 'info' && params[:page_name] == 'playstation') && !(params[:controller] == 'customers' && (params[:action] == 'reactive' || params[:action] == 'promotion')  ) && params[:action] != 'carrefour' && params[:controller] == 'carrefour' %>
       <div id="subscribe-wrap">
         <%= landing_img(@code, @promotion, params, products_alt_banner, @discount_top) %>
         <a href="<%= edit_public_promotion_path() %>" id="codePromo"><%= t('.code_promo')%></a>
