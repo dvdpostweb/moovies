@@ -22,7 +22,7 @@ class Uninterested < ActiveRecord::Base
 
   validates_uniqueness_of :customers_id, :scope => [:customers_id, :products_id]
 
-  scope :by_customer, lambda {|customer| where(:customers_id => customer.to_param)}
+  scope :by_customer, lambda { |customer| where(:customers_id => customer.to_param) }
 
   def set_created_at
     self.created_at = Time.now.to_s(:db)

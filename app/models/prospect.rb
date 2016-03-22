@@ -22,6 +22,7 @@ class Prospect < ActiveRecord::Base
   before_create :set_default
   validates :email, :presence => true, :uniqueness => true
   validates :locale_id, :presence => true
+
   def civ=(data)
     if data == 'Mme'
       self.gender = 'F'
@@ -29,6 +30,7 @@ class Prospect < ActiveRecord::Base
       self.gender = 'M'
     end
   end
+
   private
   def set_default
     self.newsletters_partners = 0

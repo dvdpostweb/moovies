@@ -38,8 +38,8 @@ class Subscription < ActiveRecord::Base
   end
 
   scope :reconduction_ealier, where(:action => self.action[:reconduction_ealier])
-  scope :recent,  lambda { where(:date => 5.days.ago.localtime..Time.now)}
-  scope :reconduction,  where(:action => [7, 17])
+  scope :recent, lambda { where(:date => 5.days.ago.localtime..Time.now) }
+  scope :reconduction, where(:action => [7, 17])
 
   belongs_to :type, :class_name => 'SubscriptionType', :foreign_key => :product_id
 

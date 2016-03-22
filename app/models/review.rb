@@ -26,12 +26,12 @@ class Review < ActiveRecord::Base
   @@per_page = 3
 
   attr_accessible :customers_id, :customers_name, :imdb_id, :languages_id, :rating, :text, :source
-  alias_attribute :created_at,    :date_added
-  alias_attribute :text,          :reviews_text
-  alias_attribute :rating,        :reviews_rating
-  alias_attribute :like_count,    :customers_best_rating
+  alias_attribute :created_at, :date_added
+  alias_attribute :text, :reviews_text
+  alias_attribute :rating, :reviews_rating
+  alias_attribute :like_count, :customers_best_rating
   alias_attribute :dislike_count, :customers_bad_rating
-  alias_attribute :rating,        :reviews_rating
+  alias_attribute :rating, :reviews_rating
 
   before_create :set_created_at
   before_validation :set_defaults
@@ -43,17 +43,17 @@ class Review < ActiveRecord::Base
   validates_inclusion_of :rating, :in => 0..5
 
   belongs_to :customer, :foreign_key => :customers_id
-  
+
   belongs_to :product, :foreign_key => :imdb_id, :primary_key => :imdb_id
 
   has_many :review_ratings, :primary_key => :reviews_id
 
-  scope :ordered, lambda {|sorted| {:order => sorted}}
+  scope :ordered, lambda { |sorted| {:order => sorted} }
   scope :approved, where(:reviews_check => true)
-  scope :by_language, lambda {|language| where(:languages_id => Moovies.languages[language])}
-  scope :by_imdb_id, lambda {|imdb_id| where('products.imdb_id = ?',  imdb_id)}
-  scope :by_customer_id, lambda {|customer_id| where( :customers_id => customer_id )}
-  
+  scope :by_language, lambda { |language| where(:languages_id => Moovies.languages[language]) }
+  scope :by_imdb_id, lambda { |imdb_id| where('products.imdb_id = ?', imdb_id) }
+  scope :by_customer_id, lambda { |customer_id| where(:customers_id => customer_id) }
+
   def self.sort
     sort = OrderedHash.new
     sort.push(:date, 'date_added')
@@ -63,7 +63,7 @@ class Review < ActiveRecord::Base
 
   def self.sort2
     sort = OrderedHash.new
-    sort.push(:interesting  , 'interesting')
+    sort.push(:interesting, 'interesting')
     sort.push(:date, 'date_added')
     sort.push(:rating, 'reviews_rating')
     sort

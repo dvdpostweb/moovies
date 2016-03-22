@@ -23,8 +23,8 @@ class Director < ActiveRecord::Base
   friendly_id :name, use: :slugged
 
   has_many :products, :foreign_key => :products_directors_id
-  
-  
+
+
   def image(number = 1)
     if image_active
       File.join(Moovies.images_path, "directors", "#{id}.jpg")
@@ -32,12 +32,12 @@ class Director < ActiveRecord::Base
       '/assets/no_picture.jpg'
     end
   end
-  
+
   ## There are a lot of commented lines of code in here which are just used for development
   ## Once all scopes are transformed to Thinking Sphinx scopes, it will be cleaned up.
-  sphinx_scope(:order)              {|order, sort_mode| {:order => order, :sort_mode => sort_mode}}
-  sphinx_scope(:group)              {|group,sort|       {:group_by => group, :group_function => :attr, :group_clause   => sort}}
-  sphinx_scope(:limit)              {|limit|            {:limit => limit}}
+  sphinx_scope(:order) { |order, sort_mode| {:order => order, :sort_mode => sort_mode} }
+  sphinx_scope(:group) { |group, sort| {:group_by => group, :group_function => :attr, :group_clause => sort} }
+  sphinx_scope(:limit) { |limit| {:limit => limit} }
 
   def self.search_clean(query_string, page = 0, count = false)
     qs = []
@@ -51,7 +51,7 @@ class Director < ActiveRecord::Base
     page = page || 1
     self.search.search(query_string, :max_matches => 1000, :per_page => 1000, :page => page, :order => :directors_name, :match_mode => :extended)
   end
-  
+
   def self.replace_specials(str)
     str #= String_class.removeaccents(str) #str.mb_chars.normalize(:kd).gsub(/[^\x00-\x7F]/n, '').to_s
   end

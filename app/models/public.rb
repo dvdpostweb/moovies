@@ -32,7 +32,7 @@ class Public < ActiveRecord::Base
       ages << Moovies.product_publics.keys.collect do |age|
         Moovies.product_publics[age] if age != :all && age.to_i.between?(min.to_i, max.to_i)
       end
-    end  
+    end
     ages.flatten.uniq.compact
   end
 end

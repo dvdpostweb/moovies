@@ -37,12 +37,12 @@ class Token < ActiveRecord::Base
 
   validates_presence_of :imdb_id
 
-  scope :available, lambda {|from, to| where(:created_at => from..to)}
-  scope :expired, lambda {|to| where("created_at < ?", to)}
-  
-  scope :recent, lambda {|from, to| where(:created_at => from..to)}
-  scope :by_primary, lambda {|imdb_id, season_id, episode_id| where(:imdb_id => imdb_id, :season_id => season_id, :episode_id => episode_id)}
-  
+  scope :available, lambda { |from, to| where(:created_at => from..to) }
+  scope :expired, lambda { |to| where("created_at < ?", to) }
+
+  scope :recent, lambda { |from, to| where(:created_at => from..to) }
+  scope :by_primary, lambda { |imdb_id, season_id, episode_id| where(:imdb_id => imdb_id, :season_id => season_id, :episode_id => episode_id) }
+
   scope :ordered, :order => 'tokens.created_at asc'
   scope :ordered_old, :order => 'tokens.created_at desc'
 
@@ -55,6 +55,7 @@ class Token < ActiveRecord::Base
       token.update_attribute(:token, token_string)
     end
   end
+
   def create_token_code(imdb_id, kind)
     file = StreamingProduct.where(:imdb_id => imdb_id).first
     begin
@@ -69,7 +70,7 @@ class Token < ActiveRecord::Base
       return false
     end
   end
-  
+
   def self.create_token(imdb_id, product, current_ip, streaming_product_id, season_id, episode_id, kind, customer = nil, source = 7, code = nil)
     file = StreamingProduct.find(streaming_product_id)
     if code
@@ -96,7 +97,7 @@ class Token < ActiveRecord::Base
         end
         params = params.merge(:customer_id => customer.id) if customer
         params = params.merge(:code => code) if code
-          
+
         token = Token.create(params)
         if token.id.blank?
           self.notify_error_token((customer ? customer.id : 0), Token.error[:query_rollback])
@@ -110,9 +111,9 @@ class Token < ActiveRecord::Base
       end
     end
   end
-  
+
   def self.validate(token_param, filename, ip)
-    
+
     token = self.available(2.days.ago.localtime..Time.now).find_by_token(token_param)
     if token
       filename = "mp4:#{filename}"
@@ -139,7 +140,7 @@ class Token < ActiveRecord::Base
       return false
     end
   end
-  
+
   def self.error
     error = OrderedHash.new
     error.push(:bad_package, 1)
@@ -149,7 +150,7 @@ class Token < ActiveRecord::Base
     error.push(:generation_token_failed, 5)
     error.push(:customer_not_activated, 6)
     error.push(:code_expired, 7)
-    
+
     error
   end
 
@@ -168,19 +169,19 @@ class Token < ActiveRecord::Base
   end
 
   def current_status(current_ip)
-    
+
     return Token.status[:expired] if expired?
     return Token.status[:ok] if streaming_products.alpha.count > 0
-    return Token.status[:ip_valid] if current_ips.count < count_ip 
+    return Token.status[:ip_valid] if current_ips.count < count_ip
     return Token.status[:ip_invalid]
   end
-  
+
   def validate?(current_ip)
     token_status = current_status(current_ip)
     return token_status == Token.status[:ok] || token_status == Token.status[:ip_valid]
   end
 
-  
+
   def self.notify_error_token(customer_id, error)
     begin
       Airbrake.notify(:error_message => "customer #{customer_id}  #{error}", :backtrace => $@, :environment_name => ENV['RAILS_ENV'])
@@ -189,6 +190,7 @@ class Token < ActiveRecord::Base
       logger.error(e.backtrace)
     end
   end
+
   private
   def generate_token
     if token.nil?
