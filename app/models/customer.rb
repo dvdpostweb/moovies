@@ -193,6 +193,9 @@ class Customer < ActiveRecord::Base
   def svod?
     abo_type_id != 6
   end
+  def abo_svod?
+    subscription_type.packages_ids.split(',').include?([1,4])
+  end
 
   def name
     "#{first_name} #{last_name}"
