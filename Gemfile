@@ -13,15 +13,21 @@ gem 'i18n-active_record',
       :require => 'i18n/active_record'
 gem "memcache-client", "~> 1.8.5"
 gem 'orderedhash'
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'quiet_assets'
   gem 'thin'
   gem 'spring'
+end
+
+group :development, :staging do
   gem "letter_opener"
 end
+
 gem 'cucumber-rails', :require => false
+
 group  :development, :test do
   gem 'factory_girl_rails'
   gem 'faker'
