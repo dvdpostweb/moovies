@@ -19,6 +19,7 @@ group :development do
   gem 'quiet_assets'
   gem 'thin'
   gem 'spring'
+  gem 'sextant'
 end
 gem 'cucumber-rails', :require => false
 group  :development, :test do
