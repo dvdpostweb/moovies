@@ -175,6 +175,8 @@ GEM
     json (1.8.0)
     launchy (2.4.2)
       addressable (~> 2.3)
+    letter_opener (1.4.1)
+      launchy (~> 2.2)
     libv8 (3.3.10.4)
     mail (2.5.4)
       mime-types (~> 1.16)
@@ -342,6 +344,7 @@ DEPENDENCIES
   jquery-ui-rails
   json
   launchy
+  letter_opener
   memcache-client (~> 1.8.5)
   mysql2 (= 0.3.13)
   orderedhash
