@@ -76,3 +76,4 @@ gem 'chosen-rails'
 gem "hash_to_hidden_fields"
 gem "rest-client"
 gem "jbuilder"
+gem 'gon'
