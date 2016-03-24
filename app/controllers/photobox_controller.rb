@@ -1,6 +1,6 @@
 class PhotoboxController < ApplicationController
 
-  http_basic_authenticate_with name: "photobox", password: "3DbA93L0o9v66BJ", only: :plans
+  #http_basic_authenticate_with name: "photobox", password: "3DbA93L0o9v66BJ", only: :plans
 
   def plans
 
