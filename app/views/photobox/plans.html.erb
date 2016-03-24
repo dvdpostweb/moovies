@@ -1,23 +1,23 @@
 <div class="photobox-page">
 	<div class="special">
 		<div class="special-offer">
-			<div class="special-offer-headline">Offre speciale</div>
+			<div class="special-offer-headline"><%= t('home.photobox.offer').html_safe %></div>
 			<div class="photobox-page-image">
 				<%= image_tag("photobox/logo-photobox.png", alt: "Photobox") %>
 			</div>
-			<h3>Profitez de <span>75% de reduction</span> sur votre premier mois d'abonnement</h3>
+			<h3><%= t('home.photobox.discount.title').html_safe %></h3>
 		</div>
 	</div>
 	
 	<div class="choise">
-		<div class="headline"><h3>Choisissez le forfait qui vous convient</h3></div>
+		<div class="headline"><h3><%= t('home.photobox.choose_formula').html_safe %></h3></div>
 		<div class="choise-offer">
 			<div class="choise-offer-select">
 				<div class="offer-film">
-					<div class="offer-film-number">2 films<div class="badge"><div class="badge-text">Le plus populaire</div></div></div>
+					<div class="offer-film-number">2 <%= t('home.photobox.films').html_safe %><div class="badge"><div class="badge-text"><%= t('home.photobox.most_popular').html_safe %></div></div></div>
 					<div class="first-month">0,99€</div>
-					<div class="first-month-text">le premier mois</div>
-					<div class="next-month-text">(au lieu da <span><strike>3,99€</strike></span>)</div>
+					<div class="first-month-text"><%= t('home.photobox.first_month').html_safe %></div>
+					<div class="next-month-text">(<%= t('home.photobox.original_price').html_safe %> <span><strike>3,99€</strike></span>)</div>
 					<div class="offer-film-checkbox">
 						<input type="radio" name="offer" id="select-offer-2"/>
 						<label for="select-offer-2">
@@ -28,14 +28,14 @@
 					<div class="vertical-line"></div>
 				<div class="offer-film">
 					<div class="offer-film-number">
-						4 films
+						4 <%= t('home.photobox.films').html_safe %>
 						<div class="badge active">
-							<div class="badge-text">Le plus populaire</div>
+							<div class="badge-text"><%= t('home.photobox.most_popular').html_safe %></div>
 						</div>
 					</div>
 					<div class="first-month">1,99€</div>
-					<div class="first-month-text">le premier mois</div>
-					<div class="next-month-text">(au lieu da <span><strike>7,99€</strike></span>)</div>
+					<div class="first-month-text"><%= t('home.photobox.first_month').html_safe %></div>
+					<div class="next-month-text">(<%= t('home.photobox.original_price').html_safe %> <span><strike>7,99€</strike></span>)</div>
 					<div class="offer-film-checkbox">
 						<input type="radio" name="offer" id="select-offer-4"/>
 						<label for="select-offer-4">
@@ -45,10 +45,10 @@
 				</div>
 					<div class="vertical-line"></div>
 				<div class="offer-film">
-					<div class="offer-film-number">6 films<div class="badge"><div class="badge-text">Le plus populaire</div></div></div>
+					<div class="offer-film-number">6 <%= t('home.photobox.films').html_safe %><div class="badge"><div class="badge-text"><%= t('home.photobox.most_popular').html_safe %></div></div></div>
 					<div class="first-month">2,99€</div>
-					<div class="first-month-text">le premier mois</div>
-					<div class="next-month-text">(au lieu da <span><strike>11,99€</strike></span>)</div>
+					<div class="first-month-text"><%= t('home.photobox.first_month').html_safe %></div>
+					<div class="next-month-text">(<%= t('home.photobox.original_price').html_safe %> <span><strike>11,99€</strike></span>)</div>
 					<div class="offer-film-checkbox">
 						<input type="radio" name="offer" id="select-offer-6"/>
 						<label for="select-offer-6">
@@ -59,14 +59,14 @@
 			</div>
 			<div class="choise-offer-list">
 				<div class="choise-offer-list-style">
-					<button id="photobox-btn" class="code-button">VALIDER</button>
+					<button id="photobox-btn" class="code-button"><%= t('home.photobox.valid').html_safe %></button>
 				</div>
 				<div class="choise-offer-list-style">
 					<ul>
-						<li><div class="list-style-blue"></div><b>Acces a tout le catalogue</b> (3000 films, nouveautes comprises)</li>
-						<li><div class="list-style-blue"></div>Les abonnements sont <b>sans engagement</b>, <u>vous arretez quand vous voulez, sans frais</u></li>
-						<li><div class="list-style-blue"></div>Vous pouvez <b>augmenter</b> ou <b>diminuer</b> votre abonnement autant de fois que vous le desirez</li>
-						<li><div class="list-style-blue"></div>Certains films (5%) necessitent <b>2 credits</b> pour etre regardes.</li>
+						<li><div class="list-style-blue"></div><%= t('home.photobox.catalog').html_safe %></li>
+						<li><div class="list-style-blue"></div><%= t('home.photobox.free').html_safe %></u></li>
+						<li><div class="list-style-blue"></div><%= t('home.photobox.increase').html_safe %></li>
+						<li><div class="list-style-blue"></div><%= t('home.photobox.2_credits').html_safe %></li>
 					</ul>
 				</div>
 			</div>
