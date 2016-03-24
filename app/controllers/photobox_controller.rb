@@ -1,5 +1,7 @@
 class PhotoboxController < ApplicationController
 
+  http_basic_authenticate_with name: "photobox", password: "3DbA93L0o9v66BJ", only: :plans
+
   def plans
 
   	gon.case2FILMS75 = "mon-compte/sign_up?code=2FILMS75" if I18n.locale == :fr
