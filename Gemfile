@@ -20,6 +20,7 @@ group :development do
   gem 'thin'
   gem 'spring'
   gem 'sextant'
+  gem "letter_opener"
 end
 gem 'cucumber-rails', :require => false
 group  :development, :test do
