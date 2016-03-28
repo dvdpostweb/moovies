@@ -6,7 +6,7 @@ $( document ).ready(function() {
 	    	} else if ($('#select-offer-4').is(':checked')) {
 	    		window.location.href = gon.case4FILMS75
 	    	} else if ($('#select-offer-6').is(':checked')) {
-	    		window.location.href = gon.case6FILMS7
+	    		window.location.href = gon.case6FILMS75
 	    	} else {
 	    		$(".photobox-error").show().fadeOut(3000);
 	    	}
