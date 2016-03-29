@@ -181,7 +181,7 @@ module ApplicationHelper
 
     end
     
-    link_to image, path, :target => "_blank"
+    link_to image, path#, :target => "_blank"
 
   end
 
