@@ -52,6 +52,7 @@ Moovies::Application.routes.draw do
     end
   end
   scope ':locale/(:kind)', :locale => /en|fr|nl/, :kind => /normal|adult/ do
+    match "freetrial" => "freetrial#plans"
     match "photobox" => "photobox#plans"
     match 'carrefour' => 'home#carrefour'
     match 'belgium' => "home#belgium"
