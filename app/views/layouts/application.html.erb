@@ -4,7 +4,9 @@
     <title>
       <%= h @meta_title.blank? ? t('.title') : @meta_title %>
     </title>
-    <%= include_gon %>
+    <%= include_gon(namespace: 'Plush') %>
+    <%= Gon::Base.render_data %>
+    <% Gon.global.current_customer = current_customer if !customer_signed_in? %>
     <meta http-equiv="content-language" content="<%= I18n.locale %>" />
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
     <meta name="description" content="<%= @meta_description.blank? ? '' : @meta_description %>" />
