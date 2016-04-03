@@ -3,7 +3,7 @@ require 'bundler/capistrano'
 require 'thinking_sphinx/capistrano'
 require './config/boot'
 set :stages, %w(staging production)
-set :default_stage, "production"
+set :default_stage, "stage"
 set :whenever_command, "bundle exec whenever"
 
 after 'deploy:create_symlink' do
