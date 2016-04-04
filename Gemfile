@@ -80,8 +80,5 @@ gem 'chosen-rails'
 gem "hash_to_hidden_fields"
 gem "rest-client"
 gem "jbuilder"
-<<<<<<< HEAD
-gem 'gon'
-=======
 gem 'annotate'
->>>>>>> master
+gem 'gon'
