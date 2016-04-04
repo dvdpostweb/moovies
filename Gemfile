@@ -20,8 +20,8 @@ group :development do
   gem 'quiet_assets'
   gem 'thin'
   gem 'spring'
+  gem 'sextant'
   gem "letter_opener"
-  gem 'rack-mini-profiler'
 end
 
 gem 'cucumber-rails', :require => false
@@ -80,4 +80,8 @@ gem 'chosen-rails'
 gem "hash_to_hidden_fields"
 gem "rest-client"
 gem "jbuilder"
+<<<<<<< HEAD
+gem 'gon'
+=======
 gem 'annotate'
+>>>>>>> master

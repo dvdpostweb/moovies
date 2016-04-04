@@ -1,0 +1,2 @@
+module FreetrialHelper
+end
