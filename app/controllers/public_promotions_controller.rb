@@ -6,10 +6,6 @@ class PublicPromotionsController < ApplicationController
 
   def update
 
-    photobox_code = "PHOTOBOX"
-
-    freetrial_code = "FREETRIAL"
-
     discount = Discount.by_name(params[:promotion]).available.first
 
     activation = Activation.by_name(params[:promotion]).available.first
@@ -18,11 +14,11 @@ class PublicPromotionsController < ApplicationController
 
       render :text => new_customer_registration_path(:code => params[:promotion]);
 
-    elsif photobox_code.present? && params[:promotion] == "PHOTOBOX"
+    elsif params[:promotion] === "PHOTOBOX"
 
       render :text => photobox_path(:code => params[:promotion]);
 
-    elsif freetrial_code.present? && params[:promotion] == "FREETRIAL"
+    elsif params[:promotion] === "FREETRIAL"
 
       render :text => freetrial_path(:code => params[:promotion]);
 
