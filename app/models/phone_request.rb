@@ -1,13 +1,31 @@
+# == Schema Information
+#
+# Table name: phone_custserv
+#
+#  id          :integer          not null, primary key
+#  customer_id :integer          not null
+#  name        :string(255)
+#  reason      :integer          not null
+#  hour        :integer          not null
+#  day         :date             not null
+#  comment     :string(45)
+#  open        :integer          default(0), not null
+#  created_at  :datetime
+#  updated_at  :datetime
+#  phone       :string(20)
+#  language_id :integer
+#
+
 class PhoneRequest < ActiveRecord::Base
   self.table_name = :phone_custserv
-  
-  belongs_to :customer,         :foreign_key => :customers_id
+
+  belongs_to :customer, :foreign_key => :customers_id
 
   validates_format_of :phone, :with => /^(\+)?[0-9 \-\/.]+$/
   validates_presence_of :reason
   validates_presence_of :hour
   validates_presence_of :requested_date
-  
+
 
   def self.time_slots
     slots = OrderedHash.new
@@ -52,7 +70,7 @@ class PhoneRequest < ActiveRecord::Base
 
   def requested_date=(date)
     if date.nil?
-        nil 
+      nil
     else
       regex = /\d{2}-\d{2}-\d{4}/
       if date =~ regex

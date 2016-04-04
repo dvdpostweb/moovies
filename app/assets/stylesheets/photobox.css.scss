@@ -34,6 +34,7 @@ h3{
 .special-offer{
 	display: inline-block;
 	vertical-align: bottom;
+<<<<<<< HEAD
 	-ms-word-break: break-all;
     word-break: break-all;
 
@@ -44,6 +45,8 @@ h3{
        -moz-hyphens: auto;
         -ms-hyphens: auto;
             hyphens: auto;
+=======
+>>>>>>> master
 }
 
 .special-offer span {
@@ -239,6 +242,7 @@ input[type="radio"]:checked + label span {
 	font-size: 12px;
 	font-family: Arial,Helvetica, sans-serif;
 	
+<<<<<<< HEAD
 }
 
 .photobox-error {
@@ -261,3 +265,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 
 text-shadow: 2px 2px 2px #D1FFD3;
 }
+=======
+}
+>>>>>>> master

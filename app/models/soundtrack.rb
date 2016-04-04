@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: products_soundtracks
+#
+#  soundtracks_id          :integer          default(0), not null, primary key
+#  language_id             :integer          default(0), not null
+#  soundtracks_description :string(50)       default(""), not null
+#
+
 class Soundtrack < ActiveRecord::Base
 
   self.table_name = :products_soundtracks
