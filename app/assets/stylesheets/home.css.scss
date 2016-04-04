@@ -643,6 +643,16 @@ h3{
   width: 695px;
   display: inline-block;
   vertical-align: bottom;
+  -ms-word-break: break-all;
+    word-break: break-all;
+
+ /* Non standard for webkit */
+     word-break: break-word;
+
+    -webkit-hyphens: auto;
+       -moz-hyphens: auto;
+        -ms-hyphens: auto;
+            hyphens: auto;
 }
 
 .special-offer ul{
@@ -906,4 +916,8 @@ input[type="checkbox"]:checked + label span {
 {
   background: #ffb6c1;
 }
+}
+
+#carrefour-select-offer-2, #carrefour-select-offer-4, #carrefour-select-offer-6, #carrefour-select-offer-8, #carrefour-select-offer-10 {
+    display:none;
 }
