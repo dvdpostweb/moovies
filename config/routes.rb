@@ -328,6 +328,8 @@
 
 Moovies::Application.routes.draw do
 
+  get "carrefourbonus/plans"
+
   concern :productable do
     resources :products, :only => :index
   end
