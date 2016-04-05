@@ -328,8 +328,6 @@
 
 Moovies::Application.routes.draw do
 
-  get "carrefourbonus/plans"
-
   concern :productable do
     resources :products, :only => :index
   end
@@ -382,6 +380,7 @@ Moovies::Application.routes.draw do
     end
   end
   scope ':locale/(:kind)', :locale => /en|fr|nl/, :kind => /normal|adult/ do
+  	match "carrefourbonus" => "carrefourbonus#plans"
     match "freetrial" => "freetrial#plans"
     match "photobox" => "photobox#plans"
     match 'carrefour' => 'home#carrefour'
