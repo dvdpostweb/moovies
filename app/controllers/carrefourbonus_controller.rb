@@ -3,7 +3,7 @@ class CarrefourbonusController < ApplicationController
   def plans
 
   	@hide_menu = true
-    #@body_id = 'carrefour'
+    @body_id = 'carrefour'
     @error_abo = false
       @error_code = false
     if request.post?
