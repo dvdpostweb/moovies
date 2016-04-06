@@ -5,15 +5,15 @@
           <div class="special-offer-image">
             <%= image_tag('carrefour/carrefour.png') %>
           </div>
-          <h3><%= t('.customer').html_safe %></h3>
+          <h3><%= t('home.carrefourbonus.customer').html_safe %></h3>
           <ul>
             <li>
               <%= image_tag('carrefour/list-logo.png') %>
-              <p><%= t('.4loc').html_safe %></p>
+              <p><%= t('home.carrefourbonus.4loc').html_safe %></p>
             </li>
             <li>
               <%= image_tag('carrefour/list-logo.png') %>
-              <p><%= t('.first').html_safe %></p>
+              <p><%= t('home.carrefourbonus.first').html_safe %></p>
             </li>
           </ul>
         </div>
@@ -21,20 +21,20 @@
       </div>
       <%= form_tag carrefourbonus_path(), :id => 'form_carrefour' do %>
       <div class="choise">
-        <div class="headline"><h2><%= t('.choose_formula') %></h2></div>
+        <div class="headline"><h2><%= t('home.carrefourbonus.choose_formula') %></h2></div>
         <% if @error_abo %>
           <div class='error'>
-            <%= t('.abo_error') %>
+            <%= t('home.carrefourbonus.abo_error') %>
           </div>
         <% end %>
         <div class="choise-offer">
           <div class="choise-offer-select">
             <div class="offer-film">
-              <div class="offer-film-number">2 <%= t('.films') %><div class="badge"><div class="badge-text"><%= t('.most_popular') %></div></div></div>
+              <div class="offer-film-number">2 <%= t('home.carrefourbonus.films') %><div class="badge"><div class="badge-text"><%= t('.most_popular') %></div></div></div>
               <div class="first-month">0€</div>
-              <div class="first-month-text"><%= t('.first_month') %></div>
+              <div class="first-month-text"><%= t('home.carrefourbonus.first_month') %></div>
               <div class="next-month">3,99€</div>
-              <div class="next-month-text"><%= t('.next_month') %></div>
+              <div class="next-month-text"><%= t('home.carrefourbonus.next_month') %></div>
               <div class="offer-film-checkbox">
                 <input type="radio" id="carrefour-select-offer-2" name="abo" value='7' <%= "checked='checked'" if params[:abo]== "7" %>/>
                 <label for="carrefour-select-offer-2">
@@ -45,15 +45,15 @@
               <div class="vertical-line"></div>
             <div class="offer-film offer-film-checked">  <!-- Class offer-film-checked add through javascript, when checkbox is checked, so the background becomes blue -->
               <div class="offer-film-number">
-                4 <%= t('.films') %>
+                4 <%= t('home.carrefourbonus.films') %>
                 <div class="badge active"> <!-- Class active add through javascript when special offere exists -->
-                  <div class="badge-text"><%= t('.most_popular') %></div>
+                  <div class="badge-text"><%= t('home.carrefourbonus.most_popular') %></div>
                 </div>
               </div>
               <div class="first-month">3,99€</div>
-              <div class="first-month-text"><%= t('.first_month') %></div>
+              <div class="first-month-text"><%= t('home.carrefourbonus.first_month') %></div>
               <div class="next-month">7,99€</div>
-              <div class="next-month-text"><%= t('.next_month') %></div>
+              <div class="next-month-text"><%= t('home.carrefourbonus.next_month') %></div>
               <div class="offer-film-checkbox">
                 <input type="radio" id="carrefour-select-offer-4" name="abo" value = '8' <%= "checked='checked'" if params[:abo]== "8" %>/>
                 <label for="carrefour-select-offer-4">
@@ -63,11 +63,11 @@
             </div>
             <div class="vertical-line"></div>
             <div class="offer-film">
-              <div class="offer-film-number">6 <%= t('.films') %><div class="badge"><div class="badge-text"><%= t('.most_popular') %></div></div></div>
+              <div class="offer-film-number">6 <%= t('home.carrefourbonus.films') %><div class="badge"><div class="badge-text"><%= t('home.carrefourbonus.most_popular') %></div></div></div>
               <div class="first-month">7,99€</div>
-              <div class="first-month-text"><%= t('.first_month') %></div>
+              <div class="first-month-text"><%= t('home.carrefourbonus.first_month') %></div>
               <div class="next-month">11,99€</div>
-              <div class="next-month-text"><%= t('.next_month') %></div>
+              <div class="next-month-text"><%= t('home.carrefourbonus.next_month') %></div>
               <div class="offer-film-checkbox">
                 <input type="radio" id="carrefour-select-offer-6" name="abo" value = '9' <%= "checked='checked'" if params[:abo] == "9" %>/>
                 <label for="carrefour-select-offer-6">
@@ -77,11 +77,11 @@
             </div>
             <div class="vertical-line"></div>
             <div class="offer-film">
-              <div class="offer-film-number">8 <%= t('.films') %><div class="badge"><div class="badge-text"><%= t('.most_popular') %></div></div></div>
+              <div class="offer-film-number">8 <%= t('home.carrefourbonus.films') %><div class="badge"><div class="badge-text"><%= t('home.carrefourbonus.most_popular') %></div></div></div>
               <div class="first-month">10,99€</div>
-              <div class="first-month-text"><%= t('.first_month') %></div>
+              <div class="first-month-text"><%= t('home.carrefourbonus.first_month') %></div>
               <div class="next-month">14,99€</div>
-              <div class="next-month-text"><%= t('.next_month') %></div>
+              <div class="next-month-text"><%= t('home.carrefourbonus.next_month') %></div>
               <div class="offer-film-checkbox">
                 <input type="radio" id="carrefour-select-offer-8" name="abo" value = '10' <%= "checked='checked'" if params[:abo] == "10" %>/>
                 <label for="carrefour-select-offer-8">
@@ -91,11 +91,11 @@
             </div>
             <div class="vertical-line"></div>
             <div class="offer-film">
-              <div class="offer-film-number">10 <%= t('.films') %><div class="badge"><div class="badge-text"><%= t('.most_popular') %></div></div></div>
+              <div class="offer-film-number">10 <%= t('home.carrefourbonus.films') %><div class="badge"><div class="badge-text"><%= t('home.carrefourbonus.most_popular') %></div></div></div>
               <div class="first-month">13,99€</div>
-              <div class="first-month-text"><%= t('.first_month') %></div>
+              <div class="first-month-text"><%= t('home.carrefourbonus.first_month') %></div>
               <div class="next-month">17,99€</div>
-              <div class="next-month-text"><%= t('.next_month') %></div>
+              <div class="next-month-text"><%= t('home.carrefourbonus.next_month') %></div>
               <div class="offer-film-checkbox">
                 <input type="radio" id="carrefour-select-offer-10" name="abo" value = '11' <%= "checked='checked'" if params[:abo] == "11" %>/>
                 <label for="carrefour-select-offer-10">
@@ -106,21 +106,21 @@
           </div>
           <div class="choise-offer-list">
             <ul>
-              <li><div class="list-style-blue"></div><%= t('.catalog').html_safe %></li>
-              <li><div class="list-style-blue"></div><%= t('.free').html_safe %></li>
-              <li><div class="list-style-blue"></div><%= t('.increase').html_safe %></li>
-              <li><div class="list-style-blue"></div><%= t('.2_credits').html_safe %></li>
+              <li><div class="list-style-blue"></div><%= t('home.carrefourbonus.catalog').html_safe %></li>
+              <li><div class="list-style-blue"></div><%= t('home.carrefourbonus.free').html_safe %></li>
+              <li><div class="list-style-blue"></div><%= t('home.carrefourbonus.increase').html_safe %></li>
+              <li><div class="list-style-blue"></div><%= t('home.carrefourbonus.2_credits').html_safe %></li>
             </ul>
           </div>
         </div>
       </div>
 
       <div class="code">
-        <div class="headline"><h2><%= t('.fill_in_code') %></h2></div>
+        <div class="headline"><h2><%= t('home.carrefourbonus.fill_in_code') %></h2></div>
         <% if @error_abo %>
-          <div class='carrefourbonus-error'><%= t('home.photobox.error') %></div>
+          <div class='carrefourbonus-error'><%= t('home.carrefourbonus.error') %></div>
         <% end %>
-        <button class="code-button"><%= t('.valid') %></button>
+        <button class="code-button"><%= t('home.carrefourbonus.valid') %></button>
       </div>
       <% end %>
       <div class="cards">
