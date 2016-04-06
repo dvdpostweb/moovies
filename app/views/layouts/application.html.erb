@@ -42,7 +42,6 @@
 	  <%= javascript_include_tag "jquery.ui.datepicker-#{I18n.locale}" %>
     <%= javascript_include_tag 'http://yandex.st/swfobject/2.2/swfobject.min.js' %>
     <%= stylesheet_link_tag "application", :media => "all" %>
-    <%= stylesheet_link_tag 'photobox' if params[:controller] == 'photobox' %>
     <%= render :partial => 'layouts/apple' %>
     <%= csrf_meta_tags %>
 
