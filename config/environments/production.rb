@@ -44,7 +44,7 @@ Moovies::Application.configure do
   config.action_dispatch.ip_spoofing_check = false
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( jquery.ui.datepicker-fr.js jquery.ui.datepicker-nl.js jquery.ui.datepicker-en.js login.css promotions.css promotions.js errors.css md5.js viewrightplayer.js viewrightplayer_control.js)
+  config.assets.precompile += %w( jquery.ui.datepicker-fr.js jquery.ui.datepicker-nl.js jquery.ui.datepicker-en.js login.css promotions.css promotions.js errors.css md5.js viewrightplayer.js viewrightplayer_control.js photobox.css)
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
