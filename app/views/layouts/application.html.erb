@@ -35,7 +35,9 @@
       <meta property="og:description" content="<%= @product_description.text %>" />
       <meta property="og:site_name" content="Plush" />
     <% end %>
-     <%= content_for :head if content_for? :head %>
+    <!--
+     <#%= content_for :head if content_for? :head %>
+     -->
 	  <%= javascript_include_tag "application" %>
 	  <%= javascript_include_tag "jquery.ui.datepicker-#{I18n.locale}" %>
     <%= javascript_include_tag 'http://yandex.st/swfobject/2.2/swfobject.min.js' %>
