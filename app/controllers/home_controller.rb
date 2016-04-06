@@ -52,20 +52,33 @@ class HomeController < ApplicationController
       if params[:abo].blank? || ![7,8,9,10,11].include?(params[:abo].to_i)
         @error_abo = true
       end
-      if params[:carrefour_code] === "CARREFOUR"
-        redirect_to new_customer_registration_path( :code => "CARREFOUR")
-      elsif params[:carrefour_code].present? 
+
+      if params[:carrefour_code] === "CARREFOUR" && params[:abo] === "7"
+        redirect_to new_customer_registration_path( :code => "CFB2FILMS")
+      elsif params[:carrefour_code] === "CARREFOUR" && params[:abo] === "8"
+        redirect_to new_customer_registration_path( :code => "CFB4FILMS")
+      elsif params[:carrefour_code] === "CARREFOUR" && params[:abo] === "9"
+        redirect_to new_customer_registration_path( :code => "CFB6FILMS")
+      elsif params[:carrefour_code] === "CARREFOUR" && params[:abo] === "10"
+        redirect_to new_customer_registration_path( :code => "CFB8FILMS")
+      elsif params[:carrefour_code] === "CARREFOUR" && params[:abo] === "11"
+        redirect_to new_customer_registration_path( :code => "CFB10FILMS")
+      #end
+      elsif params[:carrefour_code].present?
         activation = Activation.by_name(params[:carrefour_code]).available.first
         unless activation
           @error_code = true
         end
-      else
+      elsif
         @error_code = true
       end
-      if @error_code == false && @error_abo == false
+
+      if @error_code == false && @error_abo == false && params[:carrefour_code] != "CARREFOUR"
         redirect_to new_customer_registration_path( :code => params[:carrefour_code], :abo => params[:abo]) and return 
       end
+
     end
+
   end
 
   def belgium
