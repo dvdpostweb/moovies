@@ -50,7 +50,9 @@ class HomeController < ApplicationController
       if params[:abo].blank? || ![7,8,9,10,11].include?(params[:abo].to_i)
         @error_abo = true
       end
-      if params[:carrefour_code].present?
+      if params[:carrefour_code] === "CARREFOUR"
+        redirect_to new_customer_registration_path( :code => params[:carrefour_code])
+      elsif params[:carrefour_code].present?
         activation = Activation.by_name(params[:carrefour_code]).available.first
         unless activation
           @error_code = true
