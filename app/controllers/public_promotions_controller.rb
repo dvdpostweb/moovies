@@ -12,7 +12,7 @@ class PublicPromotionsController < ApplicationController
     elsif params[:promotion] === "FREETRIAL"
       render :text => freetrial_path(:code => params[:promotion]);
     elsif params[:promotion] === "CARREFOUR"
-      render :text => carrefour_path(:code => params[:promotion]);
+      render :text => carrefourbonus_path(:code => params[:promotion]);
     elsif discount.present?
       render :text => new_customer_registration_path(:code => params[:promotion]);
     elsif activation.present?
