@@ -5,7 +5,6 @@ class CarrefourbonusController < ApplicationController
     @error_abo = false
       @error_code = false
     if request.post?
-      
       if params[:abo].blank?
         @error_abo = true
       end
