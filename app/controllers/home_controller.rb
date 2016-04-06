@@ -48,11 +48,9 @@ class HomeController < ApplicationController
     @error_abo = false
       @error_code = false
     if request.post?
-      
       if params[:abo].blank? || ![7,8,9,10,11].include?(params[:abo].to_i)
         @error_abo = true
       end
-
       if params[:carrefour_code] === "CARREFOUR" && params[:abo] === "7"
         redirect_to new_customer_registration_path( :code => "CFB2FILMS")
       elsif params[:carrefour_code] === "CARREFOUR" && params[:abo] === "8"
@@ -63,8 +61,7 @@ class HomeController < ApplicationController
         redirect_to new_customer_registration_path( :code => "CFB8FILMS")
       elsif params[:carrefour_code] === "CARREFOUR" && params[:abo] === "11"
         redirect_to new_customer_registration_path( :code => "CFB10FILMS")
-      #end
-      elsif params[:carrefour_code].present?
+      elsif params[:carrefour_code].present? && params[:carrefour_code] != "CARREFOUR"
         activation = Activation.by_name(params[:carrefour_code]).available.first
         unless activation
           @error_code = true
@@ -72,13 +69,10 @@ class HomeController < ApplicationController
       elsif
         @error_code = true
       end
-
       if @error_code == false && @error_abo == false && params[:carrefour_code] != "CARREFOUR"
         redirect_to new_customer_registration_path( :code => params[:carrefour_code], :abo => params[:abo]) and return 
       end
-
     end
-
   end
 
   def belgium
