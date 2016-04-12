@@ -18,7 +18,6 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'quiet_assets'
-  gem 'thin'
   gem 'spring'
   gem 'sextant'
   gem "letter_opener"
@@ -82,3 +81,5 @@ gem "rest-client"
 gem "jbuilder"
 gem 'annotate'
 gem 'gon'
+gem 'puma', '~> 3.1', '>= 3.1.1'
+gem 'capistrano3-puma',   require: false
