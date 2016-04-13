@@ -51,6 +51,33 @@ h3{
 	vertical-align: super;
 }
 
+
+
+
+.special-freetrial{
+	margin-bottom: 15px;
+}
+
+.special-offer-freetrial{
+	display: freetrialinline-block;
+	vertical-align: bottom;
+}
+
+.special-offer-freetria span {
+	color: #92c13c;
+	font-weight: bold;
+}
+
+.special-offer-headline-freetria{
+	margin-right: 10px;
+	line-height: 40px;
+	font-size: 23px;
+	font-weight: bold;
+	font-family: 'Open Sans Condensed', sans-serif;
+	display: inline-block;
+	vertical-align: super;
+}
+
 .photobox-page-image{
 	display: inline-block;
 }
@@ -250,14 +277,4 @@ input[type="radio"]:checked + label span {
 	background-position: 10px center;
 	color: #D8000C;
 	background-color: #FFBABA;
-}
-
-.freetrial-special {
-/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&1+0,0+100;White+to+Transparent */
-background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
-
-text-shadow: 2px 2px 2px #D1FFD3;
 }
