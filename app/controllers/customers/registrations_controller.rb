@@ -44,82 +44,67 @@ class Customers::RegistrationsController < Devise::RegistrationsController
     if params[:id]
       cookies[:imdb_id] = { value: params[:imdb_id], expires: 15.days.from_now } if params[:imdb_id]
       @user = Customer.find_by_email(params[:customer][:email])
-
       if @user
-
-        if @user.tvod_only? 
-
-          redirect_to step_path(:id => 'step3') and return
-
-        else
-        
-        ##############################################
-
-          if @user.valid_password?(params[:customer][:password])
-            if @activation || (@discount && @user.discount_reuse?(@discount.month_before_reuse))
-              if @user.abo_active == 0 || (@user.abo_active == 1 && @user.tvod_only?)
-                if params[:customer][:abo].present?
-                  @user.step = 31
-                  @user.code = params[:customer][:code]
-                  sub = SubscriptionType.find(params[:customer][:abo])
-                  @activation.update_attributes(:activation_products_id => params[:customer][:abo], :next_abo_type => params[:customer][:abo])
-                  @user.tvod_free = @user.tvod_free + sub.tvod_credits
-                  @user.abo_type_id = params[:customer][:abo]
-                  @user.next_abo_type_id = params[:customer][:abo]
-                else
-                  cookies[:code] = { value: params[:customer][:code], expires: 15.days.from_now }
-                  @user.step = @promotion.nil? ? 31 : @promotion.goto_step
-                  @user.code = params[:customer][:code]
-                  @user.tvod_free = @promotion.tvod_free if @promotion.tvod_free && @promotion.tvod_free > 0
-                  @user.abo_active = 1 if @promotion && @promotion.goto_step.to_i == 100
-                  if @promotion.tvod_only
-                    @user.auto_stop = 0
-                    @user.subscription_expiration_date = nil
-                  end
+        if @user.valid_password?(params[:customer][:password])
+          if @activation || (@discount && @user.discount_reuse?(@discount.month_before_reuse))
+            if @user.abo_active == 0 || (@user.abo_active == 1 && @user.tvod_only?)
+              if params[:customer][:abo].present?
+                @user.step = 31
+                @user.code = params[:customer][:code]
+                sub = SubscriptionType.find(params[:customer][:abo])
+                @activation.update_attributes(:activation_products_id => params[:customer][:abo], :next_abo_type => params[:customer][:abo])
+                @user.tvod_free = @user.tvod_free + sub.tvod_credits
+                @user.abo_type_id = params[:customer][:abo]
+                @user.next_abo_type_id = params[:customer][:abo]
+              else
+                cookies[:code] = { value: params[:customer][:code], expires: 15.days.from_now }
+                @user.step = @promotion.nil? ? 31 : @promotion.goto_step
+                @user.code = params[:customer][:code]
+                @user.tvod_free = @promotion.tvod_free if @promotion.tvod_free && @promotion.tvod_free > 0
+                @user.abo_active = 1 if @promotion && @promotion.goto_step.to_i == 100
+                if @promotion.tvod_only
+                  @user.auto_stop = 0
+                  @user.subscription_expiration_date = nil
                 end
-                @user.save(:validate => false)
-                action =
-                if @promotion && @promotion.goto_step.to_i == 100
-                  @promotion.class.to_s == 'Activation' ? 8 : 6 
-                else
-                  35
-                end
-                @user.abo_history(action, @user.abo_type_id)
-                DiscountUse.create(:discount_code_id => @discount.id, :customer_id => @user.to_param, :discount_use_date => Time.now.localtime) if @discount
-                @activation.update_attributes(:customers_id => @user.id, :created_at => Time.now.localtime) if @activation
-                if @user.confirmed?
-                  sign_in @user, :bypass => true
-                  if @user.step == 100
-                    if cookies[:imdb_id]
-                      product = Product.where(:imdb_id => cookies[:imdb_id]).first
-                      cookies.delete :imdb_id
-                      if product
-                        redirect_to product_path(:id => product.to_param) and return
-                      else
-                        redirect_to step_path(:id => 'step4') and return
-                      end
+              end
+              @user.save(:validate => false)
+              action =
+              if @promotion && @promotion.goto_step.to_i == 100
+                @promotion.class.to_s == 'Activation' ? 8 : 6 
+              else
+                35
+              end
+              @user.abo_history(action, @user.abo_type_id)
+              DiscountUse.create(:discount_code_id => @discount.id, :customer_id => @user.to_param, :discount_use_date => Time.now.localtime) if @discount
+              @activation.update_attributes(:customers_id => @user.id, :created_at => Time.now.localtime) if @activation
+              if @user.confirmed?
+                sign_in @user, :bypass => true
+                if @user.step == 100
+                  if cookies[:imdb_id]
+                    product = Product.where(:imdb_id => cookies[:imdb_id]).first
+                    cookies.delete :imdb_id
+                    if product
+                      redirect_to product_path(:id => product.to_param) and return
                     else
                       redirect_to step_path(:id => 'step4') and return
                     end
                   else
-                    redirect_to step_path(:id => 'step2') and return
+                    redirect_to step_path(:id => 'step4') and return
                   end
                 else
-                  Devise::Mailer.confirmation_instructions(@user).deliver
-                  redirect_to step_path(:id => 'confirm') and return
+                  redirect_to step_path(:id => 'step2') and return
                 end
               else
-                redirect_to promotion_path(:id => params[:id]), :alert => t('session.error_already_customer') and return
+                Devise::Mailer.confirmation_instructions(@user).deliver
+                redirect_to step_path(:id => 'confirm') and return
               end
             else
-              redirect_to promotion_path(:id => params[:id]), :alert => t('session.error_discount_reused') and return
+              redirect_to promotion_path(:id => params[:id]), :alert => t('session.error_already_customer') and return
             end
+          else
+            redirect_to promotion_path(:id => params[:id]), :alert => t('session.error_discount_reused') and return
           end
-
-        #########################3
         end
-
-        
       end
     end
     build_resource

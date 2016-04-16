@@ -6,6 +6,7 @@ en:
       expired: "has expired, please request a new one"
       not_found: "not found"
       not_locked: "was not locked"
+      taken_tvod_only: "This e-mail is already used, <a href='/en/customers/reactive?code=%{code}&email=%{email}'>log in here</a>"
       taken: "has already been taken, <a href='/en/customers/sign_in'>sign in here</a>"
       taken_step: "This e-mail is already used, <a href='/en/customers/reactive?code=%{code}&email=%{email}'>log in here</a>"
       taken_all_cust: "already exists. <a href='/en/customers/promotion?code=%{code}&email=%{email}'>Log in here</a> to enjoy the promotion"

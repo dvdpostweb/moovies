@@ -8,6 +8,7 @@ fr:
       not_saved: 
         one: "N'a pas sauvegardé %{resource}"
         other: "N'a pas sauvegardé %{resource}"
+      taken_tvod_only: "Cette adresse email existe déjà, <a href='/fr/customers/reactive?code=%{code}&email=%{email}'>identifiez-vous ici</a"
       taken: "est déjà pris, <a href='/fr/customers/sign_in'>identifiez-vous ici</a>"
       taken_step: "Cette adresse email existe déjà, <a href='/fr/customers/reactive?code=%{code}&email=%{email}'>identifiez-vous ici</a>"
       taken_all_cust: "existe déjà. <a href='/fr/customers/promotion?code=%{code}&email=%{email}'>Identifiez-vous ici</a> pour profiter de la promotion"
