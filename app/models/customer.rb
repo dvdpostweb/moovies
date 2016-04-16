@@ -576,7 +576,7 @@ class Customer < ActiveRecord::Base
   end
 
   def email_abo
-    errors.add(:email, I18n.t("errors.messages.taken")) if Customer.where(:email => self.email, :customers_abo => 1, customers_abo_type: !6).exists? && (@activation && !@activation.all_cust? || @activation.nil?)
+    errors.add(:email, I18n.t("errors.messages.taken")) if Customer.where(:email => self.email, :customers_abo => 1, 'customers_abo_type != ?', 6).exists? && (@activation && !@activation.all_cust? || @activation.nil?)
   end
 
   def email_all_cust
