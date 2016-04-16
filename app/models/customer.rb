@@ -568,7 +568,7 @@ class Customer < ActiveRecord::Base
   private
 
   def email_tvod_only
-    errors.add(:email, I18n.t("errors.messages.taken_tvod_only")) if Customer.where(:email => self.email, :tvod_only => 6).exists? && (@activation && !@activation.all_cust? || @activation.nil?)
+    errors.add(:email, I18n.t("errors.messages.taken_tvod_only")) if Customer.where(:email => self.email, :customers_abo_type => 6).exists? && (@activation && !@activation.all_cust? || @activation.nil?)
   end
 
   def email_step
