@@ -104,6 +104,7 @@ class Customer < ActiveRecord::Base
 
 
   validates_presence_of :email, :on => :create
+  validate :email_tvod_only, :on => :create
   validate :email_step, :on => :create
   validate :email_abo, :on => :create
   validate :email_all_cust, :on => :create
@@ -565,6 +566,11 @@ class Customer < ActiveRecord::Base
   end
 
   private
+
+  def email_tvod_only
+    errors.add(:email, I18n.t("errors.messages.taken_tvod_only")) if Customer.where(:email => self.email, :tvod_only => 6).exists? && (@activation && !@activation.all_cust? || @activation.nil?)
+  end
+
   def email_step
     errors.add(:email, I18n.t("errors.messages.taken_step", :code => self.code, :email => self.email)) if Customer.where(:email => self.email, :customers_abo => 0).exists?
   end

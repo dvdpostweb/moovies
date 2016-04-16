@@ -8,6 +8,7 @@ nl:
       not_saved: 
         one: "Kon %{resource} niet opslaan:"
         other: "Kon %{resource} niet opslaan:"
+      taken_tvod_only: "Dit e-mail adres bestaat al, <a href='/nl/customers/reactive?code=%{code}&email=%{email}'>log u hier in</a>"
       taken: "bestaal al, <a href='/nl/customers/sign_in'>log hier in</a>"
       taken_step: "Dit e-mail adres bestaat al, <a href='/nl/customers/reactive?code=%{code}&email=%{email}'>log u hier in</a>"
       taken_all_cust: "bestaat al. <a href='/nl/customers/promotion?code=%{code}&email=%{email}'>Log hier in</a> om van de promotie te genieten"
