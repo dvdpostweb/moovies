@@ -203,4 +203,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def choose_layout_popac
+    choose_layout_by_controller('popac')
+  end
+
+  def choose_layout_by_controller(layout)
+    if params[:controller] == 'photobox' || params[:controller] == 'freetrial'
+      layout
+    else
+      "application"
+    end
+  end
+
 end
