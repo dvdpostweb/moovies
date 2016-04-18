@@ -1,6 +1,6 @@
 class PhotoboxController < ApplicationController
 
-	layout :choose_layout_popac
+	#layout :choose_layout_popac
 
   def plans
   	gon.case2FILMS75 = "mon-compte/sign_up?code=2FILMS75" if I18n.locale == :fr

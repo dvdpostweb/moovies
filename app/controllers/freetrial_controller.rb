@@ -1,6 +1,6 @@
 class FreetrialController < ApplicationController
 
-  layout :choose_layout_popac
+  #layout :choose_layout_popac
 
   def plans
 
