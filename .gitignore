@@ -24,7 +24,8 @@ db/sphinx
 **/.DS_Store
 log/*
 tmp/**/*
-#config/development.sphinx.conf
+config/development.sphinx.conf
 db/schema.rb
 rerun.txt
 GeoIP.dat
+config/database.yml
