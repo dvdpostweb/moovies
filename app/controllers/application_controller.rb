@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   before_filter :get_wishlist_source, :unless => :flag?
   before_filter :validation_adult, :unless => :flag?
   before_filter :authenticate, :if => :staging?
+  before_filter :check_request?
   
   #before_filter :set_cache_buster
 
@@ -53,6 +54,7 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+
   def products?
     params[:controller] == 'products'
   end
@@ -138,6 +140,11 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def check_request?
+    request.ssl? ? @dynamic_link = 'https://yandex.st/swfobject/2.2/swfobject.min.js' : @dynamic_link = 'http://yandex.st/swfobject/2.2/swfobject.min.js'
+  end
+
   def notify_hoptoad(message)
     begin
       Airbrake.notify(:error_message => "GeoIP error : #{message}", :backtrace => $@, :environment_name => ENV['RAILS_ENV'])
