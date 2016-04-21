@@ -82,3 +82,7 @@ gem "jbuilder"
 gem 'annotate'
 gem 'gon'
 gem 'puma', '~> 3.1', '>= 3.1.1'
+
+gem 'omniauth-facebook'
+
+gem "figaro"

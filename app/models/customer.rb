@@ -155,6 +155,16 @@ class Customer < ActiveRecord::Base
 
   has_and_belongs_to_many :seen_products, :class_name => 'Product', :join_table => :products_seen, :uniq => true
   has_many :products, :through => :vod_wishlists
+  has_many :authentications, :dependent => :delete_all
+
+  def apply_omniauth(auth)
+    # In previous omniauth, 'user_info' was used in place of 'raw_info'
+    self.email = auth['extra']['raw_info']['email']
+    self.customers_firstname = auth['info']['first_name']
+    self.customers_lastname = auth['extra']['raw_info']['email']
+    # Again, saving token is optional. If you haven't created the column in authentications table, this will fail
+    authentications.build(:provider => auth['provider'], :uid => auth['uid'], :token => auth['credentials']['token'])
+  end
 
   def get_code_from_samsung
     if self.samsung

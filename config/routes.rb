@@ -1,5 +1,7 @@
 Moovies::Application.routes.draw do
 
+  match '/auth/:provider/callback' => 'authentications#create'
+
   concern :productable do
     resources :products, :only => :index
   end
