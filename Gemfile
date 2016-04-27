@@ -88,3 +88,5 @@ gem 'omniauth-facebook'
 gem "figaro"
 
 gem 'rails_12factor', group: :production
+
+ruby "1.9.3-p484"
