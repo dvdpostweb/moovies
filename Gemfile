@@ -86,3 +86,5 @@ gem 'puma', '~> 3.1', '>= 3.1.1'
 gem 'omniauth-facebook'
 
 gem "figaro"
+
+gem 'rails_12factor', group: :production
