@@ -156,6 +156,8 @@ class Customer < ActiveRecord::Base
   has_and_belongs_to_many :seen_products, :class_name => 'Product', :join_table => :products_seen, :uniq => true
   has_many :products, :through => :vod_wishlists
 
+  has_one :mobistar
+
   def get_code_from_samsung
     if self.samsung
       samsung_code = SamsungCode.available.find_by_code(self.samsung)
