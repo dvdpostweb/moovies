@@ -82,4 +82,5 @@ gem "jbuilder"
 gem 'annotate'
 gem 'gon'
 gem 'puma', '~> 3.1', '>= 3.1.1'
-gem 'capistrano-slack-notify'
+gem 'capistrano-slack', :git => 'https://github.com/j-mcnally/capistrano-slack.git'
+
