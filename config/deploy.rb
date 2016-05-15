@@ -15,7 +15,7 @@ set :deployer do
   name
 end
 
-set :slack_token, 'https://hooks.slack.com/services/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' # comes from inbound webhook integration
+set :slack_webhook_url, 'https://hooks.slack.com/services/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' # comes from inbound webhook integration
 set :slack_room, 'general'
 set :slack_subdomain, 'dvdpost'
 set :slack_emoji, ':shipit:'
