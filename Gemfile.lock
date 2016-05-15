@@ -76,6 +76,8 @@ GEM
       net-ssh-gateway (>= 1.1.0)
     capistrano-ext (1.2.1)
       capistrano (>= 1.0.0)
+    capistrano-slack-notify (1.3.2)
+      capistrano (~> 2.10)
     capybara (2.2.1)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -318,6 +320,7 @@ DEPENDENCIES
   browser (~> 0.2.0)
   capistrano (~> 2.15.5)
   capistrano-ext
+  capistrano-slack-notify
   capybara
   chosen-rails
   client_side_validations (~> 3.2.6)
