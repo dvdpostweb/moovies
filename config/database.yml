@@ -15,7 +15,7 @@ development:
   database: plush_staging
   username: root
   password: root
-  host: localhost
+  host: 127.0.0.1
   port: 3306
 
 common_development:
@@ -24,7 +24,7 @@ common_development:
   database: common_staging
   username: root
   password: root
-  host: localhost
+  host: 127.0.0.1
   port: 3306
   
 # Warning: The database defined as "test" will be erased and

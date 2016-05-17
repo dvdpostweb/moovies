@@ -1,11 +1,11 @@
 development:
-  facebook_app_id: 1569512003376758
-  facebook_app_secret: 594d4b99bad3ec6ba7de5acf56b5c3c9
+  facebook_app_id: 541783899334178
+  facebook_app_secret: 71edfc7346ac464e68c7ef43e00e4c08
   puma_env: development
 
 staging:
-  facebook_app_id: 1111210715608759
-  facebook_app_secret: 24ad83bf183119c7e23f019b7e88b855
+  facebook_app_id: 820120514798274
+  facebook_app_secret: 5775a2f2c953ad8e2e3646804314f461
   puma_env: staging
 
 production:
