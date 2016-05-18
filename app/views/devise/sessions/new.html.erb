@@ -27,7 +27,5 @@
       <% end %>
       </div>
       </br>
-      <%= link_to '/auth/facebook/', :class => 'zocial facebook' do %>
-          <span id="span">Login with Facebook</span>
-      <% end %>
+      <%= link_to "Login with Facebook", '/auth/facebook/', :class => 'btn-auth btn-facebook' %>
       <%= render "devise/shared/links" %>
