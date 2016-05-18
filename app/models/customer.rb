@@ -159,13 +159,10 @@ class Customer < ActiveRecord::Base
 
   def apply_omniauth(auth)
     self.email = auth['extra']['raw_info']['email']
-    #where(auth.slice(:provider, :uid)).first_or_initialize.tap do |customer|
-    #  customer.email = auth.info.email
-    #  customer.customers_firstname = auth.info.first_name
-    #  customer.customers_lastname = auth.info.last_name
-    #  customer.skip_confirmation!
-    #  customer.save(:validate => false)
-    #end
+    self.customers_firstname = auth['extra']['raw_info']['first_name']
+    self.customers_lastname = auth['extra']['raw_info']['last_name']
+    self.customers_gender = auth['extra']['raw_info']['gender']
+    #self.adult_pwd = auth['extra']['raw_info']['age_range']
     authentications.build(:provider => auth['provider'], :uid => auth['uid'], :token => auth['credentials']['token'], :email => auth['extra']['raw_info']['email'])
   end
 
