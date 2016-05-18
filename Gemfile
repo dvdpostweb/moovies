@@ -2,9 +2,6 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.2.14'
 
-# Bundle edge Rails instead:
-# gem 'rails',     :git => 'git://github.com/rails/rails.git'
-
 gem 'mysql2',          '0.3.13'
 gem 'json'
 gem 'will_paginate'
@@ -33,8 +30,7 @@ group  :development, :test do
   gem 'selenium-webdriver'
   gem 'brakeman', :require => false
 end
-# Gems used only for assets and not required
-# in production environments by default.
+
 group :assets do
   gem 'coffee-rails'
   gem 'uglifier'
@@ -44,16 +40,6 @@ end
 
 gem 'sass-rails'
 gem 'compass-rails'
-
-
-# Use unicorn as the web server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'ruby-debug'
 gem "devise"
 gem "airbrake", "~> 4"
 gem "jquery-rails"
@@ -82,11 +68,9 @@ gem "jbuilder"
 gem 'annotate'
 gem 'gon'
 gem 'puma', '~> 3.1', '>= 3.1.1'
-
+gem 'capistrano-slack', :git => 'https://github.com/j-mcnally/capistrano-slack.git'
 gem 'omniauth-facebook'
-
 gem "figaro"
-
 gem 'rails_12factor', group: :production
 
 ruby "1.9.3"

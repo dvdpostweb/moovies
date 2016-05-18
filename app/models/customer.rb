@@ -166,6 +166,8 @@ class Customer < ActiveRecord::Base
     authentications.build(:provider => auth['provider'], :uid => auth['uid'], :token => auth['credentials']['token'], :email => auth['extra']['raw_info']['email'])
   end
 
+  has_one :mobistar
+
   def get_code_from_samsung
     if self.samsung
       samsung_code = SamsungCode.available.find_by_code(self.samsung)

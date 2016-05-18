@@ -22,7 +22,22 @@
   <% if current_customer && current_customer.tvod_free > 0 && params[:controller] != 'steps' %>
   <div class='flash_message'>
     <div class="notice">
+
+    <% if current_customer.abo_type_id == 6 && current_customer.activation_discount_code_type == "A" && Mobistar.find_by_activation_id(current_customer.activation_discount_code_id) %>
+      <% if current_customer.tvod_free == 9 %>
+        <%= t('.header_mb_1').html_safe %>
+      <% elsif current_customer.tvod_free == 6 %>
+        <%= t('.header_mb_2').html_safe %>
+      <% elsif current_customer.tvod_free == 3 %>
+        <%= t('.header_mb_3').html_safe %>
+      <% elsif current_customer.tvod_free < 3 %>
+        <%= t('.header_mb_4').html_safe %>
+      <% end %>
+    <% else %>
       <%= t('.tvod_free', :tvod_free => current_customer.tvod_free).html_safe %>
+    <% end %>
+
+      
     </div>
   </div>
   <% end %>
