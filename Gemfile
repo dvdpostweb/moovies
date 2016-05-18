@@ -70,6 +70,7 @@ gem 'gon'
 gem 'puma', '~> 3.1', '>= 3.1.1'
 gem 'capistrano-slack', :git => 'https://github.com/j-mcnally/capistrano-slack.git'
 gem 'omniauth-facebook'
+gem 'omniauth-twitter'
 gem "figaro"
 gem 'rails_12factor', group: :production
 
