@@ -23,11 +23,11 @@ set :slack_deploy_defaults, false # Provided tasks are weird, and hooks are quit
 
 namespace :slack do
   task :starting do
-    slack_connect "#{fetch(:deployer)} *started* deploying to *#{fetch(:stage)}*. :rocket:"
+    slack_connect "#{fetch(:deployer)} *started* deploying Plush to *#{fetch(:stage)}*. :rocket:"
   end
 
   task :finished do
-    slack_connect "#{fetch(:deployer)} *finished* deploying to *#{fetch(:stage)}*. :star2:"
+    slack_connect "#{fetch(:deployer)} *finished* deploying Plush to *#{fetch(:stage)}*. :star2:"
   end
 end
 
