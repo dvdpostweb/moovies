@@ -12,11 +12,13 @@
       margin-top: 250px;
     }
   </style>
+  <%= csrf_meta_tags %>
 </head>
 <body>
   <div id="wrap_login">
     <div id="login_content_bg">
       <div id="login_content" align="center">
+        <h1> <%= link_to 'Plush - Online VOD rental', root_localize_path, :class => 'like-btn' %> </h1>
         <%= yield %>
       </div>
     </div>
