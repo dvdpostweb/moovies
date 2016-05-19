@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<head>
+  <%= favicon_link_tag "favicon.ico" %>
+  <title>
+    <%= h @meta_title.blank? ? t('layouts.application.title') : @meta_title %>
+  </title>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+  <meta name="description" content="<%= @meta_description.blank? ? '' : @meta_description %>">
+  <%= stylesheet_link_tag :login %>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700' rel='stylesheet' type='text/css' />
+  <% if false %><%= javascript_include_tag :defaults %><% end %>
+  <%= csrf_meta_tag %>
+  <%= render :partial => 'layouts/google_analytics' %>
+  <%= render :partial => 'layouts/apple' %>
+  <style>
+    #login_content_bg {
+      margin-top: 250px;
+    }
+  </style>
+</head>
+<body>
+  <div id="wrap_login">
+    <% if flash[:notice] %>
+  	<div class='flash_message'>
+      <div class="notice">
+        <%= flash[:notice] %>
+      </div>
+  	</div>
+    <% end %>
+    <% if flash[:error] %>
+  	<div class='flash_message'>
+      <div class="flash_error">
+        <%= flash[:error] %>
+      </div>
+  	</div>
+    <% end %>
+    
+    <div id="login_content_bg">
+      <div id="login_content" align="center">
+        <h1> <%= link_to 'Plush - Online VOD rental', root_localize_path, :class => 'like-btn' %> </h1>
+        <%= yield %>
+      </div>
+    </div>
+  </div>  
+</body>
+</html>

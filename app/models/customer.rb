@@ -156,21 +156,15 @@ class Customer < ActiveRecord::Base
   has_and_belongs_to_many :seen_products, :class_name => 'Product', :join_table => :products_seen, :uniq => true
   has_many :products, :through => :vod_wishlists
   has_many :authentications, :dependent => :delete_all
+  has_one :mobistar
 
   def apply_omniauth(auth)
-    if auth['extra']['raw_info']['email'].present?
-      self.email = auth['extra']['raw_info']['email']
-    else
-      self.email = auth['uid'] + "@example.com"
-    end
+    self.email = auth['uid'] + "@example.com"
     self.customers_firstname = auth['extra']['raw_info']['first_name'] if auth['extra']['raw_info']['first_name'].present?
     self.customers_lastname = auth['extra']['raw_info']['last_name'] if auth['extra']['raw_info']['last_name'].present?
     self.customers_gender = auth['extra']['raw_info']['gender'] if auth['extra']['raw_info']['gender'].present?
-    #self.adult_pwd = auth['extra']['raw_info']['age_range']
     authentications.build(:provider => auth['provider'], :uid => auth['uid'], :token => auth['credentials']['token'], :email => auth['extra']['raw_info']['email'])
   end
-
-  has_one :mobistar
 
   def get_code_from_samsung
     if self.samsung
