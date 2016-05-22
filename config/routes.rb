@@ -3,6 +3,8 @@ Moovies::Application.routes.draw do
   match '/auth/:provider/callback' => 'authentications#create'
   match 'facebook_canvas' => 'authentications#facebook_canvas'
 
+  match 'freetrialfacebook' => 'freetrialfacebook#pricing'
+
   concern :productable do
     resources :products, :only => :index
   end

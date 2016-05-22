@@ -26,7 +26,7 @@ class AuthenticationsController < ApplicationController
 	  	  customer = Customer.new
 	      customer.apply_omniauth(auth)
 	      customer.skip_confirmation!
-	      customer.customers_registration_step = 31
+	      customer.customers_registration_step = 972
 	      customer.customers_abo_type = 7
 	      customer.customers_next_abo_type = 7
 	      customer.activation_discount_code_id = 252
@@ -39,6 +39,9 @@ class AuthenticationsController < ApplicationController
 	      end
 	    end
 	  end
+	end
+
+	def update_social_user
 	end
 
 	def facebook_canvas

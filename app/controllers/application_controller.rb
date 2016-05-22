@@ -2,7 +2,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper :all
   before_filter :set_locale, :unless => :flag?
-  before_filter :init, :unless => :flag? 
+  before_filter :init, :unless => :flag?
+  before_filter :set_gon
   before_filter :redirect_after_registration, :unless => :flag?
   before_filter :get_wishlist_source, :unless => :flag?
   before_filter :validation_adult, :unless => :flag?
@@ -16,6 +17,11 @@ class ApplicationController < ActionController::Base
   #def handle_unverified_request
   #  raise ActionController::InvalidAuthenticityToken
   #end
+
+  def set_gon
+    gon.current_customer = current_customer
+    gon.locale = I18n.locale
+  end
 
   def default_url_options
     if params[:kind] == :normal
@@ -210,12 +216,26 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  ##################################################################
   def choose_layout_popac
     choose_layout_by_controller('popac')
   end
 
   def choose_layout_by_controller(layout)
     if params[:controller] == 'photobox' || params[:controller] == 'freetrial'
+      layout
+    else
+      "application"
+    end
+  end
+  ######################################################################3
+
+  def choose_layout_social
+    choose_layout_by_social('social')
+  end
+
+  def choose_layout_by_social(layout)
+    if current_customer.customers_registration_step == 972
       layout
     else
       "application"

@@ -1,4 +1,5 @@
 class CustomersController < ApplicationController
+  layout :choose_layout_social
   before_filter :authenticate_customer!, :unless => :no_customer?
   def index
     redirect_to customer_path(:id => current_customer)

@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+  layout :choose_layout_social
   before_filter :authenticate_customer!, :unless => :faq?
 
   def show

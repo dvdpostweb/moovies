@@ -1,5 +1,7 @@
 class ProductsController < ApplicationController
 
+  layout :choose_layout_social
+
   before_filter :find_product, :except => [:index, :drop_cached]
 
   def index

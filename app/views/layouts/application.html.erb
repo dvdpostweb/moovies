@@ -4,9 +4,8 @@
     <title>
       <%= h @meta_title.blank? ? t('.title') : @meta_title %>
     </title>
-    <%= include_gon(namespace: 'Plush') %>
+    <%= include_gon %>
     <%= Gon::Base.render_data %>
-    <% Gon.global.current_customer = current_customer if !customer_signed_in? %>
     <meta http-equiv="content-language" content="<%= I18n.locale %>" />
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
     <meta name="description" content="<%= @meta_description.blank? ? '' : @meta_description %>" />
@@ -47,6 +46,8 @@
 
   </head>
   <body id="<%= @body_id %>" class="<%= params[:kind] %> <%= current_customer ? :private : :public %> <%= I18n.locale %> <%= @body_class %>">
+  <div id="social_spiner">
+  </div>
     <%= render :partial => 'layouts/google_analytics' %>
     <% if current_customer && current_customer.suspended? %>
     <div id='p_suspended'>
