@@ -1,5 +1,5 @@
 class InfoController < ApplicationController
-  layout :choose_layout_social
+  #layout :choose_layout_social
   def index
     if params[:page_name] == t('routes.infos.params.vod')
       params[:page_name] = 'vod'
