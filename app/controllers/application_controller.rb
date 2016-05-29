@@ -216,30 +216,4 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  ##################################################################
-  def choose_layout_popac
-    choose_layout_by_controller('popac')
-  end
-
-  def choose_layout_by_controller(layout)
-    if params[:controller] == 'photobox' || params[:controller] == 'freetrial'
-      layout
-    else
-      "application"
-    end
-  end
-  ######################################################################3
-
-  def choose_layout_social
-    choose_layout_by_social('social')
-  end
-
-  def choose_layout_by_social(layout)
-    if current_customer.customers_registration_step == 972
-      layout
-    else
-      "application"
-    end
-  end
-
 end

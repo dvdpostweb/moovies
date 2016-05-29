@@ -1,6 +1,6 @@
 Moovies::Application.routes.draw do
 
-  get "social_activation/activate"
+  match "social_activation" => "social_activation#activate"
 
   match '/auth/:provider/callback' => 'authentications#create'
   match 'facebook_canvas' => 'authentications#facebook_canvas'

@@ -1,7 +1,5 @@
 class AuthenticationsController < ApplicationController
 
-	layout :resolve_layout
-
 	def create
 	  auth = request.env["omniauth.auth"]
 	  authentication = Authentication.find_by_provider_and_uid_and_email(auth['provider'], auth['uid'], auth['extra']['raw_info']['email'])
@@ -26,10 +24,10 @@ class AuthenticationsController < ApplicationController
 	  	  customer = Customer.new
 	      customer.apply_omniauth(auth)
 	      customer.skip_confirmation!
-	      customer.customers_registration_step = 972
-	      customer.customers_abo_type = 7
-	      customer.customers_next_abo_type = 7
-	      customer.activation_discount_code_id = 252
+	      customer.customers_registration_step = 777
+	      customer.customers_abo_type = 1
+	      customer.customers_next_abo_type = 1
+	      customer.activation_discount_code_type = "D"
 	      if customer.save(:validate => false)
 	        flash[:notice] = "Account created and signed in successfully."
 	        sign_in_and_redirect(:customer, customer)

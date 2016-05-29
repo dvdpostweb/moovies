@@ -170,10 +170,6 @@ class Customer < ActiveRecord::Base
     authentications.build(:provider => auth['provider'], :uid => auth['uid'], :token => auth['credentials']['token'], :email => auth['extra']['raw_info']['email'])
   end
 
-  def from_facebook
-    (self.social_network_tag == "facebook" && self.facebook_activation == 0 && self.customers_registration_step == 77)
-  end
-
   def get_code_from_samsung
     if self.samsung
       samsung_code = SamsungCode.available.find_by_code(self.samsung)
@@ -242,9 +238,6 @@ class Customer < ActiveRecord::Base
     end
     rated = rated_products
     p = vod_seen ? vod_seen + seen - rated : seen - rated
-  end
-
-  def from_facebook?
   end
 
   def has_rated?(product)

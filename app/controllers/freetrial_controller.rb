@@ -1,7 +1,5 @@
 class FreetrialController < ApplicationController
 
-  #layout :choose_layout_popac
-
   def plans
 
   	gon.case2FILMSFREE = "mon-compte/sign_up?code=2FILMSFREE" if I18n.locale == :fr

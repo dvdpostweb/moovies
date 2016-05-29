@@ -46,8 +46,13 @@
 
   </head>
   <body id="<%= @body_id %>" class="<%= params[:kind] %> <%= current_customer ? :private : :public %> <%= I18n.locale %> <%= @body_class %>">
-  <div id="social_spiner">
-  </div>
+  <% if customer_signed_in? %>
+    <% if current_customer.social_network_tag == "facebook" && current_customer.facebook_activation == 0 && params[:controller] != "freetrial" %>
+      <script type="text/javascript">
+        window.location.href = "/en/freetrial"
+      </script>
+    <% end %>
+  <% end %>
     <%= render :partial => 'layouts/google_analytics' %>
     <% if current_customer && current_customer.suspended? %>
     <div id='p_suspended'>

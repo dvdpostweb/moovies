@@ -7,15 +7,15 @@ $(document).ready(function() {
 			if ($('#select-offer-2').is(':checked')) {
 		       $.ajax({
 	                method: 'POST',
-	                url: '/social_activation/activate',
+	                url: '/social_activation',
 	                data: {
 	                    'customer_email': gon.current_customer.email,
-	                    'freetrial_code': "2FILMSFREE"
+	                    'activation_dicsount_code_id': 3
 	                },
 	                dataType: 'json',
 	                success: function (response) {
 	                    if (1 === response.status) {
-	                        //$().toastmessage('showSuccessToast', 'Form skip is turned on');
+	                    	window.location.href = "/en/steps/step2"
 	                    }
 	                },
 	                error: function (response) {
@@ -25,15 +25,15 @@ $(document).ready(function() {
 	    	} else if ($('#select-offer-4').is(':checked')) {
 	    		$.ajax({
 	                method: 'POST',
-	                url: '/social_activation/activate',
+	                url: '/social_activation',
 	                data: {
 	                    'customer_email': gon.current_customer.email,
-	                    'freetrial_code': "4FILMSFREE"
+	                    'activation_dicsount_code_id': 3
 	                },
 	                dataType: 'json',
 	                success: function (response) {
 	                    if (1 === response.status) {
-	                        //$().toastmessage('showSuccessToast', 'Form skip is turned on');
+	                        window.location.href = "/en/steps/step2"
 	                    }
 	                },
 	                error: function (response) {
@@ -43,15 +43,15 @@ $(document).ready(function() {
 	    	} else if ($('#select-offer-6').is(':checked')) {
 	    		$.ajax({
 	                method: 'POST',
-	                url: '/social_activation/activate',
+	                url: '/social_activation',
 	                data: {
 	                    'customer_email': gon.current_customer.email,
-	                    'freetrial_code': "6FILMSFREE"
+	                    'activation_dicsount_code_id': 3
 	                },
 	                dataType: 'json',
 	                success: function (response) {
 	                    if (1 === response.status) {
-	                        //$().toastmessage('showSuccessToast', 'Form skip is turned on');
+	                        window.location.href = "/en/steps/step2"
 	                    }
 	                },
 	                error: function (response) {
