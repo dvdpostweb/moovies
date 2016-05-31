@@ -15,6 +15,9 @@ class AuthenticationsController < ApplicationController
 	  	  new_auth.provider = auth['provider']
 	  	  new_auth.uid = auth['uid']
 	  	  new_auth.token = auth['credentials']['token']
+	  	  #############################################################
+	  	  ## If token expired update with new token from facebook!!!
+	  	  #############################################################
 	  	  new_auth.email = auth['extra']['raw_info']['email']
 	  	  if new_auth.save
             auth = Authentication.find_by_provider_and_uid_and_email(auth['provider'], auth['uid'], auth['extra']['raw_info']['email'])
@@ -25,11 +28,9 @@ class AuthenticationsController < ApplicationController
 	      customer.apply_omniauth(auth)
 	      customer.skip_confirmation!
 	      customer.customers_registration_step = 777
-	      customer.customers_abo_type = 1
-	      customer.customers_next_abo_type = 1
 	      customer.activation_discount_code_type = "D"
 	      if customer.save(:validate => false)
-	        flash[:notice] = "Account created and signed in successfully."
+	        flash[:notice] = t('.social.network.fbconnect.registration.new')
 	        sign_in_and_redirect(:customer, customer)
 	      else
 	        flash[:error] = "Error while creating a user account. Please try again."
@@ -37,9 +38,6 @@ class AuthenticationsController < ApplicationController
 	      end
 	    end
 	  end
-	end
-
-	def update_social_user
 	end
 
 	def facebook_canvas

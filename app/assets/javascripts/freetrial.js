@@ -10,7 +10,10 @@ $(document).ready(function() {
 	                url: '/social_activation',
 	                data: {
 	                    'customer_email': gon.current_customer.email,
-	                    'activation_dicsount_code_id': 3
+	                    'activation_dicsount_code_id': 263,
+	                    'customers_abo_type': 7,
+	                    'customers_next_abo_type': 7,
+	                    'tvod_free': 2
 	                },
 	                dataType: 'json',
 	                success: function (response) {
@@ -28,7 +31,10 @@ $(document).ready(function() {
 	                url: '/social_activation',
 	                data: {
 	                    'customer_email': gon.current_customer.email,
-	                    'activation_dicsount_code_id': 3
+	                    'activation_dicsount_code_id': 264,
+	                    'customers_abo_type': 8,
+	                    'customers_next_abo_type': 8,
+	                    'tvod_free': 4
 	                },
 	                dataType: 'json',
 	                success: function (response) {
@@ -46,7 +52,10 @@ $(document).ready(function() {
 	                url: '/social_activation',
 	                data: {
 	                    'customer_email': gon.current_customer.email,
-	                    'activation_dicsount_code_id': 3
+	                    'activation_dicsount_code_id': 265,
+	                    'customers_abo_type': 9,
+	                    'customers_next_abo_type': 9,
+	                    'tvod_free': 6
 	                },
 	                dataType: 'json',
 	                success: function (response) {
