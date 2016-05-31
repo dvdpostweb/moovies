@@ -9,7 +9,6 @@
     <% end %>
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
     <%= favicon_link_tag "favicon.ico" %>
-    <%= render :partial => 'layouts/google_analytics' %>
     <%= render :partial => 'layouts/apple' %>
   	<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700' rel='stylesheet' type='text/css' />
     <%= javascript_include_tag "promotions" %>
@@ -18,6 +17,7 @@
     <%= csrf_meta_tags %>
   </head>
   <body id="<%= @body_id %>" class="<%= params[:kind] %> <%= current_customer ? :private : :public %> <%= @body_class %>">
+  <%= render :partial => 'layouts/google_analytics' %>
   <div id="wrap2"> 
     <% if flash[:notice] %>
     <div class='flash_message'>
