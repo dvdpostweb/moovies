@@ -1,5 +1,4 @@
 class WatchlistsController < ApplicationController
-  layout :choose_layout_social
   before_filter :authenticate_customer!
 
   def index
