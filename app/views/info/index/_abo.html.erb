@@ -1,6 +1,6 @@
 <% if current_customer && !current_customer.payable? && current_customer.step != 90 %>
 <% content_for :view_specific_css do %>
-    <%= stylesheet_link_tag "empty_payment" %>
+    <%= stylesheet_link_tag "empty-payment" %>
 <% end %>
 
 <div class="main">
