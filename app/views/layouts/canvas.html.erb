@@ -62,9 +62,9 @@
             welcomeBlock.innerHTML = 'Hello, ' + data.first_name + '!';
           });
         }
-      }
+        }
 
-      FB.getLoginStatus(function(response) {
+        FB.getLoginStatus(function(response) {
         // Check login status on load, and if the user is
         // already logged in, go directly to the welcome message.
         if (response.status == 'connected') {
@@ -75,7 +75,7 @@
             onLogin(response);
           }, {scope: 'user_friends, email'});
         }
-      });
+        });
 
     };
 
@@ -106,7 +106,85 @@
       </ul>
     </div>
     <% end %>
-    <%= render(:partial => 'layouts/header') %>
+    <div id="top" class="<%= "promo" if !current_customer && cookies['url_promo'] %>">
+  <div class="wrap">
+    <% if current_customer %>
+      <%= link_to t('.compte'), customer_path(:id => current_customer) %>
+      <%= "#{link_to t('.logout'), destroy_customer_session_path, :id => :logout, :method => :delete} <span>(#{current_customer.email})</span>".html_safe %>
+    <% else %>
+    &nbsp;
+    <% end %>
+  </div>
+</div>
+<ul id="lang">
+  <li><%= link_to t('.conditions'), info_path(:page_name => t('routes.infos.params.privacy')) unless current_customer %></li>
+  <%= switch_locale_link(params) %>
+  <li class="wrap">
+    <% if !current_customer %>
+      <%= link_to t('.login'), new_customer_session_path, :id => :login %>
+      <%= link_to t('.social.network.fbconnect'), 'https://www.plush.be/auth/facebook/', :class => 'btn-auth btn-facebook', :id => :login_fb %>
+    <% end %>
+  </li>
+</ul>
+<div id="wrap"> 
+  <% if current_customer && current_customer.tvod_free > 0 && params[:controller] != 'steps' %>
+  <div class='flash_message'>
+    <div class="notice">
+
+    <% if current_customer.abo_type_id == 6 && current_customer.activation_discount_code_type == "A" && Mobistar.find_by_activation_id(current_customer.activation_discount_code_id) %>
+      <% if current_customer.tvod_free == 9 %>
+        <%= t('.header_mb_1').html_safe %>
+      <% elsif current_customer.tvod_free == 6 %>
+        <%= t('.header_mb_2').html_safe %>
+      <% elsif current_customer.tvod_free == 3 %>
+        <%= t('.header_mb_3').html_safe %>
+      <% end %>
+    <% else %>
+      <%= t('.tvod_free', :tvod_free => current_customer.tvod_free).html_safe %>
+    <% end %>
+
+      
+    </div>
+  </div>
+  <% elsif if current_customer && current_customer.tvod_free == 0 && params[:controller] != 'steps' %>
+  <div class='flash_message'>
+    <div class="notice">
+
+    <% if current_customer.abo_type_id == 6 && current_customer.activation_discount_code_type == "A" && Mobistar.find_by_activation_id(current_customer.activation_discount_code_id) %>
+      
+      <% if current_customer.tvod_free == 0 %>
+        <%= t('.header_mb_4').html_safe %>
+      <% end %>
+    <% else %>
+      <%= t('.tvod_free', :tvod_free => current_customer.tvod_free).html_safe %>
+    <% end %>
+  
+    </div>
+  </div>
+  <% end %>
+  <% end %>
+
+  <% if flash[:notice] %>
+  <div class='flash_message'>
+    <div class="notice">
+      <%= flash[:notice] %>
+    </div>
+  </div>
+  <% end %>
+  <% if flash[:error] || flash[:alert]%>
+  <div class='flash_message'>
+    <div class="flash_error">
+      <%= flash[:error] %><%= flash[:alert] %>
+    </div>
+  </div>
+  <% end %>
+  
+  <!--   ==============   HEADER   ==============   -->
+  <div id="header" >
+    <div><%= link_to t('.tagline'), root_localize_path, :class => 'f-btn' %></div>
+    <%= render :partial => 'layouts/menu' %>
+  </div>
+  <!--   ==============   END HEADER   ==============   --> 
 
     <div class="container clearfix">
       <% if params[:controller] == 'products' && params[:action] == 'show' %>
