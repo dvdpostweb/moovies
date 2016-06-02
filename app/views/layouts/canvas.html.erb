@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml"<%= ' itemscope itemtype="http://schema.org/Movie"'.html_safe if !@product_image.nil? %>>
+  <head>
+    <title>
+      <%= h @meta_title.blank? ? t('.title') : @meta_title %>
+    </title>
+    <%= include_gon %>
+    <%= Gon::Base.render_data %>
+    <meta http-equiv="content-language" content="<%= I18n.locale %>" />
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta name="description" content="<%= @meta_description.blank? ? '' : @meta_description %>" />
+    <%= favicon_link_tag "favicon.ico" %>
+    <link href="<%= request.ssl? ? "https" : "http" %>://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700" rel='stylesheet' type='text/css' />
+    <% if !@product_image.nil? %>
+
+          <!-- Schema.org markup for Google+ -->
+      <meta itemprop="name" content="<%= @product_title %>" />
+      <meta itemprop="description" content="<%= @product_description.text %>" />
+      <meta itemprop="image" content="<%= @product_image %>">
+
+      <!-- Twitter Card data -->
+      <meta name="twitter:card" content="product" />
+      <meta name="twitter:site" content="@plush" />
+      <meta name="twitter:title" content="<%= @product_title %>" />
+      <meta name="twitter:description" content="<%= @product_description.text %>" />
+      <meta name="twitter:creator" content="@plush" />
+      <meta name="twitter:image" content="<%= @product_image %>" />
+
+      <!-- Open Graph data -->
+      <meta property="og:title" content="<%= @product_title %>" />
+      <meta property="og:type" content="movie" />
+      <meta property="og:url" content="<%= product_url(:id => @product.id) %>" />
+      <meta property="og:image" content="<%= @product_image %>" />
+      <meta property="og:description" content="<%= @product_description.text %>" />
+      <meta property="og:site_name" content="Plush" />
+    <% end %>
+    <!--
+     <#%= content_for :head if content_for? :head %>
+     -->
+   
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= yield :view_specific_css %>
+    <%= render :partial => 'layouts/apple' %>
+    <%= csrf_meta_tags %>
+
+  </head>
+  <body id="<%= @body_id %>" class="<%= params[:kind] %> <%= current_customer ? :private : :public %> <%= I18n.locale %> <%= @body_class %>">
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '246953642340322',
+        xfbml      : true,
+        version    : 'v2.6'
+      });
+
+      // ADD ADDITIONAL FACEBOOK CODE HERE
+
+      function onLogin(response) {
+        if (response.status == 'connected') {
+          FB.api('/me?fields=first_name', function(data) {
+            var welcomeBlock = document.getElementById('fb-welcome');
+            welcomeBlock.innerHTML = 'Hello, ' + data.first_name + '!';
+          });
+        }
+      }
+
+      FB.getLoginStatus(function(response) {
+        // Check login status on load, and if the user is
+        // already logged in, go directly to the welcome message.
+        if (response.status == 'connected') {
+          onLogin(response);
+        } else {
+          // Otherwise, show Login dialog first.
+          FB.login(function(response) {
+            onLogin(response);
+          }, {scope: 'user_friends, email'});
+        }
+      });
+
+    };
+
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+  </script>
+  <h1 id="fb-welcome"></h1>
+  <%= render :partial => 'layouts/google_analytics' %>
+  <% if customer_signed_in? %>
+    <% if current_customer.social_network_tag == "facebook" && current_customer.facebook_activation == 0 && params[:controller] != "freetrial" %>
+      <script type="text/javascript">
+        window.location.href = "/en/freetrial"
+      </script>
+    <% end %>
+  <% end %>
+    <% if current_customer && current_customer.suspended? %>
+    <div id='p_suspended'>
+      <ul id='suspended'>
+        <li>
+          <%= suspended_notification(current_customer).html_safe %>
+        </li>
+
+      </ul>
+    </div>
+    <% end %>
+    <%= render(:partial => 'layouts/header') %>
+
+    <div class="container clearfix">
+      <% if params[:controller] == 'products' && params[:action] == 'show' %>
+      <div id="socialbox-float">
+        <ul>
+          <li class="share">
+                <%= image_tag "share.png" %>
+          </li>
+          <li class="facebook">
+            <a class="Facebook" onclick="javascript:window.open('https://www.facebook.com/sharer/sharer.php?u=<%= "#{request.protocol}#{request.host_with_port}#{request.fullpath}" %>', '', 'width=626,height=436');" href="javascript:void(0);">
+                <%= image_tag "facebook.png" %>
+            </a>
+          </li>
+          <li class="twitter"><a class="Twitter" onclick="javascript:window.open('https://twitter.com/share?url=<%= "#{request.protocol}#{request.host_with_port}#{request.fullpath}" %>&text=' + encodeURIComponent('<%=   @meta_title.blank? ? t('.title').gsub("'", %q(\\\')) : @meta_title.gsub("'", %q(\\\')) %>'), '', 'width=626,height=436');" href="javascript:void(0);"><%= image_tag "twitter.png" %></a></li>
+          <li class="google"><a class="GooglePlus" onclick="javascript:window.open('https://plus.google.com/share?url=<%= "#{request.protocol}#{request.host_with_port}#{request.fullpath}" %>', '', 'width=626,height=436');" href="javascript:void(0);"><%= image_tag "googleplus.png" %></a></li>
+          <li class="pinterest"><a target="_blank" class="Pinterest" href="javascript:void(0);" onclick="javascript:window.open('http://www.pinterest.com/pin/create/button/?url=<%= "#{request.protocol}#{request.host_with_port}#{request.fullpath}" %>&media=<%= @product_image %>&description=<%= @meta_title.blank? ? t('.title').gsub("'", %q(\\\')) : @meta_title.gsub("'", %q(\\\')) %>', '', 'width=750,height=316');" data-pin-config="above"><%= image_tag "pinterest.png" %></a></li>
+        </ul>
+      </div>
+      <% end %>
+
+      <% if !current_customer && (!(params[:controller] == 'home' && params[:action] =='validation') && params[:controller] != 'customers/registrations' && params[:controller] != 'steps' && params[:page_name] != 'abo' && params[:page_name] != 'price_public') && !(params[:controller] == 'promotions' && params[:id] == 'smarttv') && !(params[:controller] == 'info' && params[:page_name] == 'playstation') && !(params[:controller] == 'customers' && (params[:action] == 'reactive' || params[:action] == 'promotion')  ) && params[:action] != 'carrefour' && params[:controller] != 'photobox' && params[:controller] != 'freetrial' && params[:controller] != 'carrefourbonus' %>
+
+      <div id="subscribe-wrap">
+        <%= landing_img(@code, @promotion, params, products_alt_banner, @discount_top) %>
+        <a href="<%= edit_public_promotion_path() %>" id="codePromo"><%= t('.code_promo')%></a>
+      </div>
+      <% elsif params[:kind] == :adult && current_customer && (params[:controller] != 'home' && params[:controller] != 'customers/registrations' && params[:controller] != 'steps' && params[:page_name] != 'abo') and !(params[:controller] == 'promotions' and params[:id] == 'smarttv') && current_customer.no_adult? %>
+      <div id="subscribe-wrap">
+        <%= link_to image_tag("#{I18n.locale}/banner_promo_hp_adult_customer.jpg", :size => '942x188', :alt => t(products_alt_banner)), info_path(:page_name => t('routes.infos.params.abo')) %>
+      </div>
+      <% end %>
+      <%= yield %>
+    </div>
+    </div>
+    <!--   ==============   FOOTER   ==============   -->
+    <div id="footer" >
+      <div class="wrap">
+        <% unless @hide_footer %>
+        <ul>
+          <li><h4><%= t '.explore' %></h4></li>
+          <li><%= link_to t('layouts.header.home'), root_localize_path %></li>
+          <li><%= link_to t('layouts.header.svod'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[params[:kind] == :normal ? 1 : 4]}"), :tag => 4) %></li>
+          <li><%= link_to t('layouts.header.tvod'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[params[:kind] == :normal ? 2 : 5]}"), :tag => 4) %></li>
+          <li><%= link_to t('layouts.header.price'), info_path(:page_name => t('routes.infos.params.abo')) %></li>
+          <% if current_customer %>
+            <li><%= link_to t('layouts.header.wishlist'), vod_wishlists_path %></li>
+            <li><%= link_to t('layouts.menu.contact'), messages_path %></li>
+          <% else %>
+            <li><%= link_to t('layouts.menu.contact'), new_phone_request_path() %></li>
+          <% end %>
+        </ul>
+        <% if I18n.locale != :en %>
+        <ul>
+          <li><h4><%= t '.follow' %></h4></li>
+          <li><%= link_to "Facebook", Moovies.fb_url[I18n.locale], :target => "_blank" %></li>
+          <li><%= link_to "Google+", Moovies.google_url[I18n.locale], :target => "_blank", :rel => "publisher" %></li>
+          <li><%= link_to "Twitter", Moovies.twitter_url[I18n.locale], :target => "_blank" %></li>
+        </ul>
+        <% end %>
+        <ul>
+          <li><h4><%= t '.how' %></h4></li>
+          <li><%= link_to t('.contact'), new_phone_request_path %></li>
+          <li><%= link_to t('.vod'), info_path(:page_name => t('routes.infos.params.vod')) %></li>
+          <li><%= link_to t('.faq'), faq_path %></li>
+        </ul>
+        <ul>
+          <li><h4><%= t '.about' %></h4></li>
+          <li><%= link_to t('.who'), info_path(:page_name => t('routes.infos.params.whoweare')) %></li>
+          <li><%= link_to t('.privacy'), info_path(:page_name => t('routes.infos.params.privacy')) %></li>
+          <li><%= link_to t('.conditions'), info_path(:page_name => t('routes.infos.params.conditions')) %></li>
+        </ul>
+        <% end %>
+      </div>
+    </div>
+       <!--   ==============   END FOOTER   ==============   -->
+  <div id="close_face" style="display:none">
+    <%= t('application.close') %>
+  </div>
+  </body>
+    <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "jquery.ui.datepicker-#{I18n.locale}" %>
+    <%= javascript_include_tag "#{@dynamic_link}" %>
+</html>
+
+
+
+
+
+
+
+

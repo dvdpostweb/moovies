@@ -40,18 +40,4 @@ class AuthenticationsController < ApplicationController
 	  end
 	end
 
-	def facebook_canvas
-	end
-
-	private
-
-	def resolve_layout
-      case action_name
-	  when "facebook_canvas"
-		"facebook_canvas_login"
-	  else
-		"application"
-	  end
-	end
-
 end
