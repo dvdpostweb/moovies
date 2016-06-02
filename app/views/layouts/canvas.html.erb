@@ -10,7 +10,7 @@
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
     <meta name="description" content="<%= @meta_description.blank? ? '' : @meta_description %>" />
     <%= favicon_link_tag "favicon.ico" %>
-    <link href="<%= request.ssl? ? "https" : "http" %>://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700" rel='stylesheet' type='text/css' />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700" rel='stylesheet' type='text/css' />
     <% if !@product_image.nil? %>
 
           <!-- Schema.org markup for Google+ -->
@@ -142,7 +142,6 @@
     <% else %>
       <%= t('.tvod_free', :tvod_free => current_customer.tvod_free).html_safe %>
     <% end %>
-
       
     </div>
   </div>
@@ -183,6 +182,7 @@
   <div id="header" >
     <div><%= link_to t('.tagline'), root_localize_path, :class => 'f-btn' %></div>
     <%= render :partial => 'layouts/menu' %>
+    <%= params.inspect %>
   </div>
   <!--   ==============   END HEADER   ==============   --> 
 
@@ -266,7 +266,7 @@
   </body>
     <%= javascript_include_tag "application" %>
     <%= javascript_include_tag "jquery.ui.datepicker-#{I18n.locale}" %>
-    <%= javascript_include_tag "#{@dynamic_link}" %>
+    <%= javascript_include_tag "https://yandex.st/swfobject/2.2/swfobject.min.js" %>
 </html>
 
 
