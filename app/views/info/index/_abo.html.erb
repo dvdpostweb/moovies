@@ -1,27 +1,18 @@
 <% if current_customer && !current_customer.payable? && current_customer.step != 90 %>
 <% content_for :view_specific_css do %>
-    <%= stylesheet_link_tag "bootstrap" %>
+    <%= stylesheet_link_tag "empty_payment" %>
 <% end %>
-<div class="row">
-  <div class="col-md-2"></div>
-  <div class="col-md-6">
-    <div class="row">
-    <div class="page-header">
-      <h1><%= t('info.index.price_public.only_tel_no_cc').html_safe %></h1>
-    </div>
-  </div>
-  <div class="row">
-  <div class="well">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <%= link_to t('info.index.price_public.payment_method_change'), edit_customer_payment_methods_path(:customer_id => current_customer.to_param, :type => :credit_card), :class => :add_credit_card %>
-      </div>
-    </div>
-  </div>
-  </div>
-  </div>
-  <div class="col-md-4"></div>
+
+<div class="main">
+
+        <div class="example-wrapper clearfix">
+          <h3><%= t('info.index.price_public.only_tel_no_cc').html_safe %></h3>
+          <div class="demo-wrapper">
+            <%= link_to t('info.index.price_public.payment_method_change'), edit_customer_payment_methods_path(:customer_id => current_customer.to_param, :type => :credit_card), :class => :modern %>
+          </div>
+        </div>
 </div>
+  
   <% elsif current_customer && current_customer.promo_id == 10 && current_customer.step != 90  #samsung %>
     <h3><%= t('info.index.price_public.only_tel_samsung').html_safe %></h3>
   <% elsif current_customer && current_customer.locked == 1 && current_customer.step != 90  %>
