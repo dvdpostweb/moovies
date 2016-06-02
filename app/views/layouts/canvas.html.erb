@@ -45,49 +45,6 @@
 
   </head>
   <body id="<%= @body_id %>" class="<%= params[:kind] %> <%= current_customer ? :private : :public %> <%= I18n.locale %> <%= @body_class %>">
-  <script>
-    window.fbAsyncInit = function() {
-      FB.init({
-        appId      : '246953642340322',
-        xfbml      : true,
-        version    : 'v2.6'
-      });
-
-      // ADD ADDITIONAL FACEBOOK CODE HERE
-
-      function onLogin(response) {
-        if (response.status == 'connected') {
-          FB.api('/me?fields=first_name', function(data) {
-            var welcomeBlock = document.getElementById('fb-welcome');
-            welcomeBlock.innerHTML = 'Hello, ' + data.first_name + '!';
-          });
-        }
-        }
-
-        FB.getLoginStatus(function(response) {
-        // Check login status on load, and if the user is
-        // already logged in, go directly to the welcome message.
-        if (response.status == 'connected') {
-          onLogin(response);
-        } else {
-          // Otherwise, show Login dialog first.
-          FB.login(function(response) {
-            onLogin(response);
-          }, {scope: 'user_friends, email'});
-        }
-        });
-
-    };
-
-    (function(d, s, id){
-       var js, fjs = d.getElementsByTagName(s)[0];
-       if (d.getElementById(id)) {return;}
-       js = d.createElement(s); js.id = id;
-       js.src = "//connect.facebook.net/en_US/sdk.js";
-       fjs.parentNode.insertBefore(js, fjs);
-     }(document, 'script', 'facebook-jssdk'));
-  </script>
-  <h1 id="fb-welcome"></h1>
   <%= render :partial => 'layouts/google_analytics' %>
   <% if customer_signed_in? %>
     <% if current_customer.social_network_tag == "facebook" && current_customer.facebook_activation == 0 && params[:controller] != "freetrial" %>
@@ -106,85 +63,7 @@
       </ul>
     </div>
     <% end %>
-    <div id="top" class="<%= "promo" if !current_customer && cookies['url_promo'] %>">
-  <div class="wrap">
-    <% if current_customer %>
-      <%= link_to t('.compte'), customer_path(:id => current_customer) %>
-      <%= "#{link_to t('.logout'), destroy_customer_session_path, :id => :logout, :method => :delete} <span>(#{current_customer.email})</span>".html_safe %>
-    <% else %>
-    &nbsp;
-    <% end %>
-  </div>
-</div>
-<ul id="lang">
-  <li><%= link_to t('.conditions'), info_path(:page_name => t('routes.infos.params.privacy')) unless current_customer %></li>
-  <%= switch_locale_link(params) %>
-  <li class="wrap">
-    <% if !current_customer %>
-      <%= link_to t('.login'), new_customer_session_path, :id => :login %>
-      <%= link_to t('.social.network.fbconnect'), 'https://www.plush.be/auth/facebook/', :class => 'btn-auth btn-facebook', :id => :login_fb %>
-    <% end %>
-  </li>
-</ul>
-<div id="wrap"> 
-  <% if current_customer && current_customer.tvod_free > 0 && params[:controller] != 'steps' %>
-  <div class='flash_message'>
-    <div class="notice">
-
-    <% if current_customer.abo_type_id == 6 && current_customer.activation_discount_code_type == "A" && Mobistar.find_by_activation_id(current_customer.activation_discount_code_id) %>
-      <% if current_customer.tvod_free == 9 %>
-        <%= t('.header_mb_1').html_safe %>
-      <% elsif current_customer.tvod_free == 6 %>
-        <%= t('.header_mb_2').html_safe %>
-      <% elsif current_customer.tvod_free == 3 %>
-        <%= t('.header_mb_3').html_safe %>
-      <% end %>
-    <% else %>
-      <%= t('.tvod_free', :tvod_free => current_customer.tvod_free).html_safe %>
-    <% end %>
-      
-    </div>
-  </div>
-  <% elsif if current_customer && current_customer.tvod_free == 0 && params[:controller] != 'steps' %>
-  <div class='flash_message'>
-    <div class="notice">
-
-    <% if current_customer.abo_type_id == 6 && current_customer.activation_discount_code_type == "A" && Mobistar.find_by_activation_id(current_customer.activation_discount_code_id) %>
-      
-      <% if current_customer.tvod_free == 0 %>
-        <%= t('.header_mb_4').html_safe %>
-      <% end %>
-    <% else %>
-      <%= t('.tvod_free', :tvod_free => current_customer.tvod_free).html_safe %>
-    <% end %>
-  
-    </div>
-  </div>
-  <% end %>
-  <% end %>
-
-  <% if flash[:notice] %>
-  <div class='flash_message'>
-    <div class="notice">
-      <%= flash[:notice] %>
-    </div>
-  </div>
-  <% end %>
-  <% if flash[:error] || flash[:alert]%>
-  <div class='flash_message'>
-    <div class="flash_error">
-      <%= flash[:error] %><%= flash[:alert] %>
-    </div>
-  </div>
-  <% end %>
-  
-  <!--   ==============   HEADER   ==============   -->
-  <div id="header" >
-    <div><%= link_to t('.tagline'), root_localize_path, :class => 'f-btn' %></div>
-    <%= render :partial => 'layouts/menu' %>
-    <%= params.inspect %>
-  </div>
-  <!--   ==============   END HEADER   ==============   --> 
+    <%= render(:partial => 'layouts/header') %>
 
     <div class="container clearfix">
       <% if params[:controller] == 'products' && params[:action] == 'show' %>
