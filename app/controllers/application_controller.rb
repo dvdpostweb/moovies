@@ -14,9 +14,9 @@ class ApplicationController < ActionController::Base
 
   layout :layout_by_resource
   
-  def handle_unverified_request
-    raise ActionController::InvalidAuthenticityToken
-  end
+  #def handle_unverified_request
+  #  raise ActionController::InvalidAuthenticityToken
+  #end
 
   def set_gon
     gon.current_customer = current_customer
