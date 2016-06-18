@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   helper :all
   before_filter :set_locale, :unless => :flag?
   before_filter :init, :unless => :flag? 
+  before_filter :set_gon
   before_filter :redirect_after_registration, :unless => :flag?
   before_filter :get_wishlist_source, :unless => :flag?
   before_filter :validation_adult, :unless => :flag?
@@ -12,6 +13,11 @@ class ApplicationController < ActionController::Base
   #before_filter :set_cache_buster
 
   layout :layout_by_resource
+
+  def set_gon
+    gon.current_customer = current_customer
+    gon.locale = I18n.locale
+  end
   
   def handle_unverified_request
     raise ActionController::InvalidAuthenticityToken

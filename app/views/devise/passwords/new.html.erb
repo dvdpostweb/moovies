@@ -1,12 +1,19 @@
-<div id="title"><%= t('.forgot_pass') %></div>
-<div class="signup_forms" align="center"> 
+<div class="step2">
+<%= link_to root_path do %>
+  <%= image_tag "step2/logo.png" %>
+  <% end %>
+</br>
+<div class="separator-part">
+  <div class="separator-line"></div>
+    <label class="separator-label"><%= t('.promotions.show.or') %></label>
+  <div class="separator-line"></div>
+</div>
 <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
-  <%= devise_error_messages! %>
+  <%= f.email_field :email, :class => 'text-field', :placeholder => t('.email') %>
 
-  <div><%= f.label :email, t('.email') %><br />
-  <%= f.email_field :email, :autofocus => true %></div>
-
-  <div><%= f.submit t('.sent'), :id => :submit_button %></div>
+  <%= f.submit t('.sent'), :id => :submit_button, :class => "button-connenct-large" %>
 <% end %>
 </div>
-<%= render "devise/shared/links" %>
+<div class="links">
+  <%= render "devise/shared/links" %>
+</div>

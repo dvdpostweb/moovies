@@ -1,5 +1,8 @@
 Moovies::Application.routes.draw do
 
+  match "social_activation" => "social_activation#activate"
+  match '/auth/:provider/callback' => 'authentications#create'
+
   concern :productable do
     resources :products, :only => :index
   end
@@ -13,7 +16,10 @@ Moovies::Application.routes.draw do
   resources :prospects, :only => [:create, :new]
   scope '(:kind)', :kind => /normal|adult/ do
     localized do
-      devise_for :customers, :controllers => { :registrations => "customers/registrations", :confirmations => "customers/confirmations", :sessions => "customers/sessions" }
+      devise_for :customers, :controllers => { 
+        :registrations => "customers/registrations", 
+        :confirmations => "customers/confirmations", 
+        :sessions => "customers/sessions" }
       resources :customers do
         match 'newsletter' => 'customers#newsletter', :only => [:update]
         resource 'addresses', :only => [:edit, :update, :create]
@@ -130,6 +136,12 @@ Moovies::Application.routes.draw do
 
   match "/404", :to => "errors#not_found"
   match "/500", :to => "errors#not_found"
+
+  namespace :api do
+    namespace :v1 do
+      match "check_presence_of_customer_email" => "validator#check_presence_of_customer_email"
+    end
+  end
   
   #unless Rails.application.config.consider_all_requests_local
   #      match '*not_found', to: 'errors#error_404'

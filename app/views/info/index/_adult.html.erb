@@ -1,0 +1,72 @@
+<% if current_customer && !current_customer.payable? && current_customer.step != 90 %>
+<% content_for :view_specific_css do %>
+    <%= stylesheet_link_tag "empty-payment" %>
+<% end %>
+
+<div class="main">
+
+        <div class="example-wrapper clearfix">
+          <h3><%= t('info.index.price_public.only_tel_no_cc').html_safe %></h3>
+          <div class="demo-wrapper">
+            <%= link_to t('info.index.price_public.payment_method_change'), edit_customer_payment_methods_path(:customer_id => current_customer.to_param, :type => :credit_card), :class => :modern %>
+          </div>
+        </div>
+</div>
+  
+  <% elsif current_customer && current_customer.promo_id == 10 && current_customer.step != 90  #samsung %>
+    <h3><%= t('info.index.price_public.only_tel_samsung').html_safe %></h3>
+  <% elsif current_customer && current_customer.locked == 1 && current_customer.step != 90  %>
+    <p><%= t('info.index.price_public.locked', :default => 'Vous avez déjà changer votre abo ce mois attendez le %{next_reconduction_at} pour changer à nouveau. <br /> Vous serez reconduit sur cet abo : %{abo}', :next_reconduction_at => current_customer.subscription_expiration_date ? current_customer.subscription_expiration_date.strftime("%d/%m/%Y") : '', :abo => current_customer.next_subscription_type.description ).html_safe %></p>
+<% else %>
+  <% abo = current_customer ? current_customer.next_abo_type_id : 6 %>
+  <% content_for :view_specific_css do %>
+    <%= stylesheet_link_tag "adult" %>
+  <% end %>
+  <div class="alacarte">
+	<div class="header-nav">
+		<label><%= t('info.index.price_public.choose_adult_adult').html_safe %></label>
+		<ul>
+			<li class="plush"><%= link_to t('info.index.price_public.choose_adult_tvod').html_safe, info_path(:page_name => t('routes.infos.params.alacarte')), :id => 'abo', :class => params[:page_name] == 'abo' ? :active : :inactive %></li>
+			<li class="eighteen"><%= link_to t('info.index.price_public.choose_adult_svod').html_safe, info_path(:page_name => "unlimited"), :id => 'unlimited', :class => params[:page_name] == 'unlimited' ? :active : :inactive %></li>
+		</ul>
+	</div>
+	<div class="film-block">
+		<div class="film-box">
+			<p id="alacarte-kvadrat"><%= t('info.index.price_public.choose_adult_plan_one').html_safe %></p>
+		</div>
+	</div>
+	<div class="list-block">
+		<ul>
+			<li>
+				<label class="list-text"><%= t('info.index.price_public.adult_line_one').html_safe %></label>
+				<label class="list-number">19,99€</label>
+			</li>
+			<li class="">
+				<label class="list-text"><%= t('info.index.price_public.adult_line_two').html_safe %></label>
+				<label class="list-number"><%= image_tag "adult/ok-violet.png" %></label>
+			</li>
+			<li class="">
+				<label class="list-text"><%= t('info.index.price_public.adult_access_devices').html_safe %></label>
+				<label class="list-number list-number-align"><%= image_tag "adult/ok-violet.png" %></label>
+			</li>
+			<li class="">
+				<label class="list-text"><%= t('info.index.price_public.adult_simultaneus').html_safe %></label>
+				<label class="list-number">illimité</label>
+			</li>
+			<li class="">
+				<label class="list-text"><%= t('info.index.price_public.adult_cancellable').html_safe %></label>
+				<label class="list-number"><%= image_tag "adult/ok-violet.png" %></label>
+			</li>
+		</ul>
+	</div>
+	
+	<div class="footer-block">
+		<div class="description-block"><%= t('info.index.price_public.adult_explanation_1').html_safe %>, <%= link_to t('info.index.price_public.adult_explanation_link').html_safe, info_path(:page_name => t('routes.infos.params.vod')), :id => :multi %>. 
+									   <%= t('info.index.price_public.adult_explanation_2').html_safe %>.
+		</div>
+		<button><%= link_to t('info.index.price_public.adult_button').html_safe, step2_path( :code => "SVOD_ADULT" ) %></button>
+		<div class="description-block description-block-main"><%= t('info.index.price_public.adult_support_info').html_safe %></div>
+		<div class="description-block"><%= link_to t('info.index.price_public.adult_conditions').html_safe, info_path(:page_name => t('routes.infos.params.conditions')) %></div>
+	</div>
+  </div>
+<% end %>

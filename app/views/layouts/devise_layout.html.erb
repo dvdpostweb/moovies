@@ -4,6 +4,8 @@
   <title>
     <%= h @meta_title.blank? ? t('layouts.application.title') : @meta_title %>
   </title>
+  <%= include_gon(namespace: 'Plush') %>
+  <%= Gon::Base.render_data %>
   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
   <meta name="description" content="<%= @meta_description.blank? ? '' : @meta_description %>">
   <%= stylesheet_link_tag :login %>
@@ -14,7 +16,6 @@
   <%= render :partial => 'layouts/apple' %>
 </head>
 <body>
-  <div id="wrap_login">
     <div id="header_login"> 
       <ul id="lang">
         <li> <%= link_to t('.home').upcase, root_localize_path %> </li>
@@ -22,26 +23,109 @@
       </ul>
     </div>
     <% if flash[:notice] %>
-  	<div class='flash_message'>
-      <div class="notice">
         <%= flash[:notice] %>
-      </div>
-  	</div>
     <% end %>
+
     <% if flash[:error] %>
-  	<div class='flash_message'>
-      <div class="flash_error">
         <%= flash[:error] %>
-      </div>
-  	</div>
     <% end %>
+
+    <%= yield %>  
     
-    <div id="login_content_bg">
-      <div id="login_content" align="center">
-        <h1> <%= link_to 'Plush - Online VOD rental', root_localize_path, :class => 'like-btn' %> </h1>
-        <%= yield %>
-      </div>
-    </div>
-  </div>  
+    <script   src="https://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>
+    <script   src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.js"></script>
+
+    <script>
+      $( document ).ready(function() {
+
+        if ((window.location.pathname == "/fr/mon-compte/password/nouveau") || (window.location.pathname == "/nl/mijn-account/password/nieuw") || (window.location.pathname == "/en/my-account/password/new")) {
+
+          $("#new_customer").validate({
+            rules: {
+              'customer[email]': {
+                required: true,
+                email: true,
+                remote: "/api/v1/check_presence_of_customer_email"
+              }
+            },
+            messages: {
+              'customer[email]': {
+                required: required_message(),
+                email: email_message(),
+                remote: remote_message()
+              }
+            }
+          });
+
+        } else if ((window.location.pathname == "/fr/mon-compte/connectez-vous") || (window.location.pathname == "/nl/mijn-account/log-in") || (window.location.pathname == "/en/my-account/log-in")) {
+
+          $("#new_customer").validate({
+            rules: {
+              'customer[email]': {
+                required: true,
+                email: true,
+                remote: "/api/v1/check_presence_of_customer_email"
+              },
+              'customer[password]': {
+                required: true
+              }
+            },
+            messages: {
+              'customer[email]': {
+                required: required_message(),
+                email: email_message(),
+                remote: remote_message()
+              },
+              'customer[password]': {
+                required: login_password()
+              }
+            }
+          });
+
+        }
+
+      });
+
+      function required_message() {
+        if (gon.locale == "fr") {
+          return "Adresse e-mail est nécessaire."
+        } else if (gon.locale == "nl") {
+          return "E-mailadres is verplicht."
+        } else if (gon.locale == "en") {
+          return "Email address is required."
+        }
+      }
+
+      function email_message() {
+        if (gon.locale == "fr") {
+          return "Format votre adresse email doit être correcte."
+        } else if (gon.locale == "nl") {
+          return "Formatteren uw e-mail adres moet correct zijn."
+        } else if (gon.locale == "en") {
+          return "Format your email address must be correct."
+        }
+      }
+
+      function remote_message() {
+        if (gon.locale == "fr") {
+          return "Adresse e-mail ne se trouve pas dans le système."
+        } else if (gon.locale == "nl") {
+          return "E-mail adres is niet gevonden in het systeem."
+        } else if (gon.locale == "en") {
+          return "Email address is not found in the system."
+        }
+      }
+
+      function login_password() {
+        if (gon.locale == "fr") {
+          return "Champ Mot de passe est nécessaire."
+        } else if (gon.locale == "nl") {
+          return "Password veld is verplicht."
+        } else if (gon.locale == "en") {
+          return "Password field is required."
+        }
+      }
+
+    </script>
 </body>
 </html>
