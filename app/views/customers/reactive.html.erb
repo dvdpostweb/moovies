@@ -5,7 +5,7 @@
 <%= link_to root_path do %>
   <%= image_tag "step2/logo.png" %>
 <% end %>
-<button class="face-button">CONNEXION AVEC FACEBOOK</button>
+<%= button_to t('.social.network.fbconnect'), '/auth/facebook/', :class => 'face-button' %>
 </br>
 <div class="separator-part">
   <div class="separator-line"></div>
