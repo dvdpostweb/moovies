@@ -38,16 +38,22 @@
     <!--
      <#%= content_for :head if content_for? :head %>
      -->
-	  <%= javascript_include_tag "application" %>
-	  <%= javascript_include_tag "jquery.ui.datepicker-#{I18n.locale}" %>
-    <%= javascript_include_tag "#{@dynamic_link}" %>
+	  
     <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= yield :view_specific_css %>
     <%= render :partial => 'layouts/apple' %>
     <%= csrf_meta_tags %>
 
   </head>
   <body id="<%= @body_id %>" class="<%= params[:kind] %> <%= current_customer ? :private : :public %> <%= I18n.locale %> <%= @body_class %>">
     <%= render :partial => 'layouts/google_analytics' %>
+    <% if customer_signed_in? %>
+    <% if current_customer.social_network_tag == "facebook" && current_customer.facebook_activation == 0 && params[:controller] != "freetrial" %>
+      <script type="text/javascript">
+        window.location.href = "/" + gon.locale + "/freetrial"
+      </script>
+    <% end %>
+  <% end %>
     <% if current_customer && current_customer.suspended? %>
     <div id='p_suspended'>
       <ul id='suspended'>
@@ -79,7 +85,7 @@
       </div>
       <% end %>
 
-      <% if !current_customer && (!(params[:controller] == 'home' && params[:action] =='validation') && params[:controller] != 'customers/registrations' && params[:controller] != 'steps' && params[:page_name] != 'abo' && params[:page_name] != 'price_public') && !(params[:controller] == 'promotions' && params[:id] == 'smarttv') && !(params[:controller] == 'info' && params[:page_name] == 'playstation') && !(params[:controller] == 'customers' && (params[:action] == 'reactive' || params[:action] == 'promotion')  ) && params[:action] != 'carrefour' && params[:controller] != 'photobox' && params[:controller] != 'freetrial' && params[:controller] != 'carrefourbonus' %>
+      <% if !current_customer && (!(params[:controller] == 'home' && params[:action] =='validation') && params[:controller] != 'customers/registrations' && params[:controller] != 'steps' && params[:page_name] != 'abo' && params[:page_name] != 'price_public') && !(params[:controller] == 'promotions' && params[:id] == 'smarttv') && !(params[:controller] == 'info' && params[:page_name] == 'playstation') && !(params[:controller] == 'customers' && (params[:action] == 'reactive' || params[:action] == 'promotion')  ) && params[:action] != 'carrefour' && params[:controller] != 'photobox' && params[:controller] != 'freetrial' && params[:controller] != 'carrefourbonus' && params[:controller] != 'info' %>
 
       <div id="subscribe-wrap">
         <%= landing_img(@code, @promotion, params, products_alt_banner, @discount_top) %>
@@ -93,6 +99,7 @@
       <%= yield %>
     </div>
     </div>
+     <% unless params[:controller] == "customers/registrations" || (params[:controller] == "payment_methods" && params[:action] == "update") || (params[:controller] == "customers" && params[:action] == "reactive") %>
     <!--   ==============   FOOTER   ==============   -->
     <div id="footer" >
       <div class="wrap">
@@ -133,9 +140,13 @@
         <% end %>
       </div>
     </div>
-       <!--   ==============   END FOOTER   ==============   -->
+    <!--   ==============   END FOOTER   ==============   -->
+    <% end %>
   <div id="close_face" style="display:none">
     <%= t('application.close') %>
   </div>
+  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "jquery.ui.datepicker-#{I18n.locale}" %>
+  <%= javascript_include_tag "#{@dynamic_link}" %>
   </body>
 </html>

@@ -1,48 +1,46 @@
-<div class="container clearfix">
-  <div id="step_wrap">
-    <div id="step_container">
-      <div class="step_form">
-        <% if @promo.nil? || !@promo.tvod_only %>
-        <div class="step_1 step <%= I18n.locale %>" align="center"></div>
-        <% end %>
-        <h3><%= t('.title', :default => 'Créez votre compte:') %></h3>
-        <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-        <%= devise_error_messages! %>
-        <% if @samsung %>
-          <%= f.hidden_field(:samsung, :value => @samsung) %>
-        <% else %>
-          <%= cookies[:code] ? f.hidden_field(:code, :value => cookies[:code]) : f.hidden_field(:code, :value => @default_code) %>
-        <% end %>
-        <%= f.hidden_field :abo, :value => params[:abo] %>
-        <%= f.hidden_field :language, :value => Moovies.customer_languages[I18n.locale] %>
-        <div class="labelstep">
-          <%= f.label :email, t('.email') %>
-          <%= f.email_field :email, :autofocus => true %>
-        </div>
-
-        <div class="labelstep">
-          <%= f.label :password, t('.password').html_safe %>
-          <%= f.password_field :password %>
-        </div>
-
-        <div class="labelstep">
-          <%= f.label :password_confirmation, t('.confirmation_pass') %>
-          <%= f.password_field :password_confirmation %>
-        </div>
-        <p>
-          <%= f.check_box :newsletter, :checked => true, :align => :top %>
-          <%= t('.newsletter') %>
-        </p>
-        <p>
-          <%= f.check_box :newsletter_parnter, :checked => true, :align => :top %>
-          <%= t('.newsletter_parnter') %>
-        </p>
-        <p><br/><%= f.submit t('.sign_up', :default => "Sign up"), :class => 'promo_button' %></p>
-        <% end %>
-      </div>
-      <p align="center" class="telfooter"><a class="f-btn <%= I18n.locale %>" href="mailto:info@plush.be">info@plush.be</a></p>
-    </div>
-
-  <%= render :partial => 'devise/registrations/faq1' %>
-  </div>
+<% content_for :view_specific_css do %>
+  <%= stylesheet_link_tag "step2" %>
+<% end %>
+<div class="step2">
+<%= link_to root_path do %>
+  <%= image_tag "step2/logo.png" %>
+<% end %>
+</br>
+<div class="separator-part">
+  <div class="separator-line"></div>
+    <label class="separator-label"><%= t('.promotions.show.or') %></label>
+  <div class="separator-line"></div>
 </div>
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+<% if @samsung %>
+  <%= f.hidden_field(:samsung, :value => @samsung) %>
+<% else %>
+  <%= cookies[:code] ? f.hidden_field(:code, :value => cookies[:code]) : f.hidden_field(:code, :value => @default_code) %>
+<% end %>
+<%= f.hidden_field :abo, :value => params[:abo] %>
+<%= f.hidden_field :language, :value => Moovies.customer_languages[I18n.locale] %>
+<%= f.email_field :email, :class => 'text-field', :placeholder => t('.email') %>
+<%= f.password_field :password, :class => 'text-field', :placeholder => t('.password') %>
+<%= f.password_field :password_confirmation, :class => 'text-field', :placeholder => t('.confirmation_pass') %>
+<%= f.submit t('.sign_up', :default => "Sign up"), :class => "button-connenct-large" %>
+</div>
+<div class="links1">
+  <div class="customer_newsletter">
+    <%= f.check_box :newsletter, :checked => true %>
+    <label for="customer_newsletter">
+      <span></span>
+    </label>
+  </div>
+  <label class="customer_newsletter-label"><%= t('.newsletter') %></label>
+</div> 
+<div class="links2">
+  <div class="customer_newsletter_parnter">
+    <%= f.check_box :newsletter_parnter, :checked => true %>
+    <label for="customer_newsletter_parnter">
+      <span></span>
+    </label>
+  </div>
+  <label class="customer_newsletter_parnter-label"><%= t('.newsletter_parnter') %></label>
+</div>
+<% end %>
+    

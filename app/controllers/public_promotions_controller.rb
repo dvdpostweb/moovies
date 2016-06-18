@@ -10,7 +10,8 @@ class PublicPromotionsController < ApplicationController
     if params[:promotion] === "PHOTOBOX"
       render :text => photobox_path(:code => params[:promotion]);
     elsif params[:promotion] === "FREETRIAL"
-      render :text => freetrial_path(:code => params[:promotion]);
+      #render :text => freetrial_path(:code => params[:promotion]);
+      render :text => info_path(:page_name => "freetrial")
     elsif params[:promotion] === "CARREFOUR"
       render :text => carrefourbonus_path(:code => params[:promotion]);
     elsif discount.present?

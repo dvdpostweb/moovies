@@ -1,14 +1,14 @@
-<p class="check_login">
-  <%- if controller_name != 'sessions' %>
-    <%= link_to t('.sign_in'), new_session_path(resource_name) %><br />
-  <% end -%>
 
-  <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-    <%= link_to t('.sign_up'), info_path(:page_name => t('routes.infos.params.abo')) %><br />
+  <%- if controller_name != 'sessions' %>
+    <%= link_to t('.sign_in'), new_session_path(resource_name), class: "bottom-page-link" %><br />
   <% end -%>
 
   <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
-    <%= link_to t('.forget_password'), new_password_path(resource_name) %><br />
+    <%= link_to t('.forget_password'), new_password_path(resource_name), class: "bottom-page-link" %><br />
+  <% end -%>
+
+  <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+  <label class="bottom-page-label"><%= t('.promotions.show.toregistraniopage') %> <%= link_to t('.sign_up'), info_path(:page_name => t('routes.infos.params.alacarte')), class: "bottom-page-link" %></label><br />
   <% end -%>
 
   <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
@@ -24,4 +24,3 @@
       <%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider) %><br />
     <% end -%>
   <% end -%>
-</p>

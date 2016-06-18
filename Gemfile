@@ -21,6 +21,7 @@ group :development do
   gem 'spring'
   gem 'sextant'
   gem "letter_opener"
+  gem 'rails-footnotes', '~> 4.0'
 end
 
 gem 'cucumber-rails', :require => false
@@ -83,4 +84,7 @@ gem 'annotate'
 gem 'gon'
 gem 'puma', '~> 3.1', '>= 3.1.1'
 gem 'capistrano-slack', :git => 'https://github.com/j-mcnally/capistrano-slack.git'
+
+gem 'omniauth-facebook'
+gem "figaro"
 
