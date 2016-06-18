@@ -31,23 +31,56 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  #def redirect_after_registration(path = nil)
+  #  if current_customer && current_customer.step != 100 && params[:controller] != 'devise/sessions' && params[:controller] != 'customers/sessions' && params[:controller] != 'payment_methods' && !(params[:controller] == 'info' && params[:page_name] == t('routes.infos.params.conditions')) && params[:controller] != 'promotions' && params[:action] != 'back_to_tvod'
+  #    if current_customer.step.to_i == 31
+  #      if (params['controller'] == 'steps' && params[:id] == 'step2') || (params[:controller] == 'customers' && params[:action] == 'update')
+  #      else
+  #        redirect_to step_path(:id => 'step2')
+  #      end
+  #    elsif current_customer.step.to_i == 32
+  #      if (params['controller'] == 'steps' && params[:id] == 'invoice') || (params[:controller] == 'images' && params[:action] == 'create') || (params[:controller] == 'images' && params[:action] == 'create')
+  #      else
+  #        redirect_to step_path(:id => 'invoice')
+  #      end
+  #    elsif current_customer.step.to_i == 33
+  #      if (params['controller'] == 'steps' && params[:id] == 'step3') || (params[:controller] == 'ogones')
+  #      else
+  #        redirect_to step_path(:id => 'step3')
+  #      end
+  #    elsif current_customer.step.to_i == 90
+  #      if (params['controller'] == 'info' && params[:page_name] == t('routes.infos.params.abo')) || (params[:controller] == 'customers' && params[:action] == 'update')
+  #      else
+  #      redirect_to info_path(:page_name => t('routes.infos.params.abo'))#step_path(:id => 'old')
+  #      end
+  #    elsif path
+  #      redirect_to path
+  #    end
+  #  end
+  #end
+
   def redirect_after_registration(path = nil)
     if current_customer && current_customer.step != 100 && params[:controller] != 'devise/sessions' && params[:controller] != 'customers/sessions' && params[:controller] != 'payment_methods' && !(params[:controller] == 'info' && params[:page_name] == t('routes.infos.params.conditions')) && params[:controller] != 'promotions' && params[:action] != 'back_to_tvod'
+      #if current_customer.step.to_i == 31
+      #  if (params['controller'] == 'steps' && params[:id] == 'step2') || (params[:controller] == 'customers' && params[:action] == 'update')
+      #  else
+      #    redirect_to step_path(:id => 'step2')
+      #  end
       if current_customer.step.to_i == 31
-        if (params['controller'] == 'steps' && params[:id] == 'step2') || (params[:controller] == 'customers' && params[:action] == 'update')
+        if (params['controller'] == 'steps' && params[:id] == 'step3') || (params[:controller] == 'ogones')
         else
-          redirect_to step_path(:id => 'step2')
+          redirect_to step_path(:id => 'step3')
         end
       elsif current_customer.step.to_i == 32
         if (params['controller'] == 'steps' && params[:id] == 'invoice') || (params[:controller] == 'images' && params[:action] == 'create') || (params[:controller] == 'images' && params[:action] == 'create')
         else
           redirect_to step_path(:id => 'invoice')
         end
-      elsif current_customer.step.to_i == 33
-        if (params['controller'] == 'steps' && params[:id] == 'step3') || (params[:controller] == 'ogones')
-        else
-          redirect_to step_path(:id => 'step3')
-        end
+      #elsif current_customer.step.to_i == 33
+      #  if (params['controller'] == 'steps' && params[:id] == 'step3') || (params[:controller] == 'ogones')
+      #  else
+      #    redirect_to step_path(:id => 'step3')
+      #  end
       elsif current_customer.step.to_i == 90
         if (params['controller'] == 'info' && params[:page_name] == t('routes.infos.params.abo')) || (params[:controller] == 'customers' && params[:action] == 'update')
         else
