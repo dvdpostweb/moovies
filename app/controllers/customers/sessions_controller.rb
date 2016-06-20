@@ -1,5 +1,6 @@
 class Customers::SessionsController < Devise::SessionsController
   prepend_before_filter :check_code, only: [:create]
+  
   def new
     @meta_title = t("sessions.new.meta_title", :default => '')
     @meta_description = t("sessions.new.meta_description", :default => '')
@@ -46,37 +47,40 @@ class Customers::SessionsController < Devise::SessionsController
     respond_with resource, :location => after_sign_in_path_for(resource)
     
   end
-  private
-    def create?
-      params[:action] == 'create'
-    end
 
-    def check_code
-      if params[:code]
-        @discount = Discount.by_name(params[:code]).available.first
-        @activation = Activation.by_name(params[:code]).available.first
-        if @discount
-          @promotion = @discount
-        elsif @activation
-          @promotion = @activation
-        else
-          @promotion = nil
-          redirect_to params[:return_url], :alert => t('session.error_wrong_code') and return
+  private
+
+  def create?
+    params[:action] == 'create'
+  end
+
+  def check_code
+    if params[:code]
+      @discount = Discount.by_name(params[:code]).available.first
+      @activation = Activation.by_name(params[:code]).available.first
+      if @discount
+        @promotion = @discount
+      elsif @activation
+        @promotion = @activation
+      else
+        @promotion = nil
+        redirect_to params[:return_url], :alert => t('session.error_wrong_code') and return
+      end
+      cookies[:code] = { value: params[:code], expires: 15.days.from_now }
+      customer = Customer.where(:email => params[:customer][:email]).first if params[:customer] && params[:customer][:email]
+      if @activation || (@discount && customer && customer.discount_reuse?(@discount.month_before_reuse))
+        if customer.abo_active == 1 && customer.svod? && ((@activation && !@activation.all_cust? ) || @activation.nil?)
+          # VEC IMA SUBSKRIPCIJU!!!
+          redirect_to params[:return_url], :alert => t('session.error_already_customer') and return
         end
-        cookies[:code] = { value: params[:code], expires: 15.days.from_now }
-        customer = Customer.where(:email => params[:customer][:email]).first if params[:customer] && params[:customer][:email]
-        if @activation || (@discount && customer && customer.discount_reuse?(@discount.month_before_reuse))
-          if customer.abo_active == 1 && customer.svod? && ((@activation && !@activation.all_cust? ) || @activation.nil?)
-            # VEC IMA SUBSKRIPCIJU!!!
-            redirect_to params[:return_url], :alert => t('session.error_already_customer') and return
-          end
-        elsif @activation || (@discount && customer.tvod_only? && customer.discount_reuse?(@discount.month_before_reuse))
-          # STEP 3!!!
-          redirect_to step_path(:id => 'step3') and return
-        else
-          # KOD JE VEC ISKORISTEN!!!
-          redirect_to params[:return_url], :alert => t('session.error_discount_reused') and return
-        end
+      elsif @activation || (@discount && customer.tvod_only? && customer.discount_reuse?(@discount.month_before_reuse))
+        # STEP 3!!!
+        redirect_to step_path(:id => 'step3') and return
+      else
+        # KOD JE VEC ISKORISTEN!!!
+        redirect_to params[:return_url], :alert => t('session.error_discount_reused') and return
       end
     end
+  end
+
 end
