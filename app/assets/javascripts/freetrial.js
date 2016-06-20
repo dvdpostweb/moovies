@@ -18,7 +18,7 @@ $(document).ready(function() {
 	                dataType: 'json',
 	                success: function (response) {
 	                    if (1 === response.status) {
-	                    	window.location.href = "/en/steps/step2"
+	                    	window.location.href = "/en/steps/step3"
 	                    }
 	                },
 	                error: function (response) {
@@ -39,7 +39,7 @@ $(document).ready(function() {
 	                dataType: 'json',
 	                success: function (response) {
 	                    if (1 === response.status) {
-	                        window.location.href = "/en/steps/step2"
+	                        window.location.href = "/en/steps/step3"
 	                    }
 	                },
 	                error: function (response) {
@@ -60,7 +60,7 @@ $(document).ready(function() {
 	                dataType: 'json',
 	                success: function (response) {
 	                    if (1 === response.status) {
-	                        window.location.href = "/en/steps/step2"
+	                        window.location.href = "/en/steps/step3"
 	                    }
 	                },
 	                error: function (response) {

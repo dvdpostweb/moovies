@@ -1,91 +1,98 @@
-<div id="step_wrap">
-  <div id="step_container">
-    <div class="step_form">
-      <%= form_for(:customer, :url => customer_payment_methods_path(:customer_id => current_customer.to_param), :html => { :method => :put, :id => "form_step3" }) do |f| %>
-      <div class="step_3 step <%= I18n.locale %>" align="center"></div>
+<% content_for :view_specific_css do %>
+    <%= stylesheet_link_tag "step3" %>
+<% end %>
+<div class="step">
+  <div class="logo-page"></div>
+  <label class="log-out"><%= t('promotion.newstep3.signout').html_safe %></label>
 
-      <h3><%= t('.subscription') %></h3>
-
-      <table height="55" cellspacing="0" cellpadding="0" border="0" bgcolor="#FFFFFF" style="margin-bottom:10px;color:#212A31;">
-        <tbody><tr>
-          <td style="padding-left:10px; "><%= t('.abonement_choosen') %> </td>
-          <td style="padding-right:10px;padding-left:10px; "><%= current_customer.subscription_type.description %> <%= t('.for') %> <%= number_to_currency(current_customer.subscription_type.price, :unit => '', :separator => ',') %>€ <%= t('.per_month') %></td>
-        </tr>
-        <% unless @promo.text(I18n.locale).empty? || current_customer.subscription_type.price.to_f == @promo.promo_price.to_f %>
-        <tr>
-          <td style="padding-left:10px;"><strong><%= t('.promotion') %></strong> </td>
-          <td style="padding-right:10px;padding-left:10px; "><strong><%= @promo.text(I18n.locale).html_safe %></strong></td>
-        </tr>
-        <% end %>
-      </tbody></table>
-      <h3><%= t('.payment') %></h3>
-      <div class="freetrial">
-        <%= t(".#{@promo.comment.downcase}", :default => '') %>
-        <% if @promo.payable == 2 %>
-          <%= t('.freetrial1').html_safe %>
-          <%= link_to t('.go'), ogone_path(:skip => 1), :method => :post %><br/><br/><%= t('.freetrial2').html_safe %>
-        <% end %>
-        <% if @promo.payable != 2 && @promo.promo_price == 0 %>
-          <%= t('.reminder') %>
-        <% end %>
+  <div class="main-block">
+    <label class="main-caption"><%= t('promotion.newstep3.line1').html_safe %></label>
+    <label class="main-text"><%= t('promotion.newstep3.line2').html_safe %></label>
+    <ul class="main-list">
+      <li><%= t('promotion.newstep3.line3').html_safe %></li>
+      <li><%= t('promotion.newstep3.line4').html_safe %></li>
+      <li><%= t('promotion.newstep3.line5').html_safe %></li>
+    </ul>
+    <div class="lock-block">
+      <div class="lock-img"></div>
+      <div class="secure">
+        <label class="server"><%= t('promotion.newstep3.serversecure1').html_safe %></label>
+        <label class="plus"><%= t('promotion.newstep3.serversecure2').html_safe %></label>
       </div>
-      <div class="choice">
-        <table>
-          <tr>
-            <td>	
-              <input type="radio" value="visa" name="brand" id="visa">
-            </td>
-            <td align="center" valign="middle">
-              <%= image_tag "visa_icon.png" %><p>Visa</p>
-            </td>
-            <td><input type="radio" value="mastercard" name="brand" id="master"></td>
-            <td align="center" valign="middle">
-              <%= image_tag "master_card_icon.png" %>
-              <p>Master Card </p>
-            </td>
-            <td>
-              <input type="radio" value="american Express" name="brand" id="amex">
-            </td>
-            <td align="center" valign="middle">
-              <%= image_tag "american-express_icon.png" %>
-              <p>American Express</p>
-            </td>
-          </tr>
-        </table>
-
-      </div>
-      <div class="securitypaiment"><%= t('.securised') %></div>
-      <div class="clearfix"></div>
-      <table cellpadding="2" class="padding_button">
-        <tr>
-          <td>
-            <%= link_to t('.back'), url_for, :method => :put, :class => :sub_black_link2 %>
-          </td>
-          <td>
-            &nbsp;
-            <%= image_tag "bg-top-nav-sep.png" %>
-            &nbsp;
-          </td>
-          <td>
-            <input type="submit" name ="sent" value= "<%= t '.confirm' %>" class="promo_button step3" />
-            <% if current_customer.subscription && current_customer.subscription.product_id == 6 %>
-              <%= link_to t('tvod_only_back'), back_to_tvod_path() %>
-            <% end %>
-            
-          </td>
-        </tr>
-      </table>
     </div>
-    <% end %>
-    <p align="center" style="padding-top:15px;">
-      <a href="">
-        <%= image_tag("#{I18n.locale}/info_tel.jpg") %>
-      </a>
-    </p>
 
+    <div id="accordion">
+      <section id="item1">
+        <p class="pointer">&#9654;</p>
+        <h1><a href="#"><%= t('promotion.newstep3.paymentoption1').html_safe %></a></h1>
+        <%= form_for(:customer, :url => customer_payment_methods_path(:customer_id => current_customer.to_param), :html => {:method => :put, :id => "form_step3"}) do |f| %>
+          <div class="grid grid-pad">
+              <div class="col-1-4">
+                 <div class="content">
+                   <table>
+                    <tr>
+                      <td>
+                        <input type="radio" value="visa" name="brand" id="visa"> <%= image_tag "visa_icon.png" %> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Visa</p>
+                      </td>
+                    </tr>
+                  </table>
+                 </div>
+              </div>
+              <div class="col-1-4">
+                 <div class="content">
+                    <table>
+                      <tr>
+                        <td><input type="radio" value="mastercard" name="brand" id="master"> <%= image_tag "master_card_icon.png" %> <p>&nbsp;&nbsp;Master Card</p></td>
+                      </tr>
+                    </table>
+                 </div>
+              </div>
+              <div class="col-1-4">
+                 <div class="content">
+                    <table>
+                      <tr>
+                        <td>
+                          <input type="radio" value="american Express" name="brand" id="amex"> <%= image_tag "american-express_icon.png" %> <p>American Express</p>
+                        </td>
+                      </tr>
+                    </table>
+                 </div>
+              </div>
+              <div class="col-1-4">
+                 <div class="content">
+                   <input type="submit" name="sent" value="<%= t '.confirm' %>" class="button-connenct"/>
+                 </div>
+              </div>
+          </div>
+        <% end %>
+      </section>
+      <section id="item2" class="ac_hidden">
+        <p class="pointer">&#9654;</p>
+        <h1><a href="#"><%= t('promotion.newstep3.paymentoption2').html_safe %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= image_tag "step3/paypal.png" %></a>
+        </h1>
+        <p>Pellentesque habitant... </p>
+      </section>
+      <section id="item3" class="ac_hidden">
+        <p class="pointer">&#9654;</p>
+        <h1>
+          <a href="#"><%= t('promotion.newstep3.paymentoption3').html_safe %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= image_tag "step3/virement.png" %></a>
+        </h1>
+        <p>Pellentesque habitant... </p>
+        <p>Pellentesque habitant... </p>
+      </section>
+    </div>
+
+    <label class="phone-number"><%= t('promotion.newstep3.supportinfo').html_safe %></label>
+    <a href="" class="phone-number"><%= link_to t('promotion.newstep3.conditions').html_safe, info_path(:page_name => t('routes.infos.params.conditions')) %></a>
   </div>
-  <%= render :partial => 'devise/registrations/faq1' %>
 </div>
-<div id='alert_cc' style="display:none">
-  <%= t('.alert_cc') %>
-</div>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script>
+  $(document).ready(function () {
+    $("#accordion section h1").click(function (e) {
+      $(this).parents().siblings("section").addClass("ac_hidden");
+      $(this).parents("section").removeClass("ac_hidden");
+      e.preventDefault();
+    });
+  });
+</script>
