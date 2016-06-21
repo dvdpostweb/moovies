@@ -9,8 +9,6 @@
     <label class="main-caption"><%= t('promotion.newstep3.line1').html_safe %></label>
     <label class="main-text"><%= t('promotion.newstep3.line2').html_safe %></label>
     <ul class="main-list">
-      <li><%= t('.abonement_choosen') %> </li>
-      <li><%= current_customer.subscription_type.description %> <%= t('.for') %> <%= number_to_currency(current_customer.subscription_type.price, :unit => '', :separator => ',') %>€ <%= t('.per_month') %></li>
       <li><%= t('promotion.newstep3.line3').html_safe %></li>
       <li><%= t('promotion.newstep3.line4').html_safe %></li>
       <li><%= t('promotion.newstep3.line5').html_safe %></li>
