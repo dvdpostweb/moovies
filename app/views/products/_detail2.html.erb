@@ -11,13 +11,20 @@
     <% end %>
     <% image = image_tag(product.image, :width => 145, :height => 217) rescue "<p>No image</p>" %>
     <%= link_to image, product_path(:id => product.to_param, :source => source), 'data-url' => product_data_path(:product_id => product.to_param, :source => source, :response_id => @response_id, :div_id => div_id), :class => :cover %>
-    <div class="tooltips" style="display:none">
-      <p class="tooltips_title"><%= product.smart_title %> (<%= product.year %>)</p>
-      <p class="tooltips_description"><%= truncate_html((data[:description].text rescue '...'), :length => 500) %> </p>
-      <div class="tooltips_other" id='<%= div_id %>'>loading</div>
+    <% content_for :view_specific_css do %>
+      <%= stylesheet_link_tag "popup" %>
+    <% end %>
+    <div class="tooltips" style="margin-top: 100px; display:none">
+      <div class="main-part">
+        <p class="tooltips_title"><%= product.smart_title %> (<%= product.year %>)</p>
+        <div class="tooltips_other" id='<%= div_id %>'>loading</div>
+        <p class="tooltips_description"><%= truncate_html((data[:description].text rescue '...'), :length => 500) %> </p>
+      </div>
+      <div class="footer-green">
+        <label><u>Abonnez-vous</u></label>
+        <label>et regardez ce film pour seulement <b>3,99€</b></label>
+      </div>
     </div>
-    
   </div>
-  
 </div>
 <% end %>
