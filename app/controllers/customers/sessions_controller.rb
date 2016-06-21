@@ -70,14 +70,11 @@ class Customers::SessionsController < Devise::SessionsController
       customer = Customer.where(:email => params[:customer][:email]).first if params[:customer] && params[:customer][:email]
       if @activation || (@discount && customer && customer.discount_reuse?(@discount.month_before_reuse))
         if customer.abo_active == 1 && customer.svod? && ((@activation && !@activation.all_cust? ) || @activation.nil?)
-          # VEC IMA SUBSKRIPCIJU!!!
           redirect_to params[:return_url], :alert => t('session.error_already_customer') and return
         end
       elsif @activation || (@discount && customer.tvod_only? && customer.discount_reuse?(@discount.month_before_reuse))
-        # STEP 3!!!
         redirect_to step_path(:id => 'step3') and return
       else
-        # KOD JE VEC ISKORISTEN!!!
         redirect_to params[:return_url], :alert => t('session.error_discount_reused') and return
       end
     end
