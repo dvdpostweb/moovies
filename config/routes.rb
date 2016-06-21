@@ -18,7 +18,7 @@ Moovies::Application.routes.draw do
     localized do
       devise_for :customers, :controllers => { 
         :registrations => "customers/registrations", 
-        :confirmations => "customers/confirmations", 
+        #:confirmations => "customers/confirmations", 
         :sessions => "customers/sessions" }
       resources :customers do
         match 'newsletter' => 'customers#newsletter', :only => [:update]
