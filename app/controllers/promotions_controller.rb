@@ -22,7 +22,7 @@ class PromotionsController < ApplicationController
       if !params[:code].nil?
         @code_samsung = params[:code]
         if SamsungCode.available.find_by_code(@code_samsung)
-          redirect_to new_customer_registration_path(:samsung => @code_samsung)
+          redirect_to customers_reactive_path(:samsung => @code_samsung)
         else
           @error = true
           flash.discard
@@ -117,7 +117,7 @@ class PromotionsController < ApplicationController
                   redirect_to step_path(:id => 'step4') and return
                 end
               else
-                redirect_to step_path(:id => 'step2')
+                redirect_to step_path(:id => 'step3')
               end
             else
               flash[:alert] = t('session.error_already_customer')
@@ -130,7 +130,7 @@ class PromotionsController < ApplicationController
             render :show
           end
         else
-          redirect_to new_customer_registration_path(:code => code)
+          redirect_to customers_reactive_path(:code => code)
         end
       else
         flash[:alert] = t('session.error_wrong_code')
