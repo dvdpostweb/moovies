@@ -159,6 +159,12 @@ class Customer < ActiveRecord::Base
   has_many :authentications, :dependent => :delete_all
   has_one :mobistar
 
+  after_create :setup_step
+
+  #def after_database_authentication
+  #  self.update_attribute(:invite_code, nil)
+  #end
+
   def apply_omniauth(auth)
     self.email = auth['extra']['raw_info']['email']
     self.customers_firstname = auth['extra']['raw_info']['first_name'] if auth['extra']['raw_info']['first_name'].present?
@@ -628,6 +634,10 @@ class Customer < ActiveRecord::Base
 
   def password_required?
     !persisted? || !password.nil? || !password_confirmation.nil?
+  end
+
+  def setup_step
+    self.update_attribute(:customers_registration_step, 33)
   end
 
 end
