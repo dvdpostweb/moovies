@@ -1,8 +1,12 @@
 class CustomersController < ApplicationController
   before_filter :authenticate_customer!, :unless => :no_customer?
+  
+  layout :resolve_layout
+
   def index
     redirect_to customer_path(:id => current_customer)
   end
+
   def show
     @body_id = 'moncompte'
     @customer = current_customer
@@ -74,6 +78,7 @@ class CustomersController < ApplicationController
       end
     end
   end
+
   def promotion
     @hide_menu = true
     if params[:code]
@@ -155,8 +160,22 @@ class CustomersController < ApplicationController
     end
     redirect_to root_localize_path
   end
+
   protected
-   def no_customer?
-     params[:action] == 'reactive' || params[:action] == 'promotion'
-   end
+
+  def no_customer?
+    params[:action] == 'reactive' || params[:action] == 'promotion'
+  end
+
+  private
+
+  def resolve_layout
+    case action_name
+    when "reactive"
+      "devise_layout"
+    else
+      "application"
+    end
+  end
+
 end
