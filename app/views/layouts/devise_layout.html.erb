@@ -82,6 +82,31 @@
             }
           });
 
+        } else if (window.location.pathname == "/" + gon.locale + "/customers/reactive") {
+            console.log("WELCOME TO STEP2!!!!!!!");
+
+            $("#login2").validate({
+              rules: {
+                'customer[email]': {
+                  required: true,
+                  email: true,
+                  remote: "/api/v1/check_presence_of_customer_email"
+                },
+                'customer[password]': {
+                  required: true
+                }
+              },
+              messages: {
+                'customer[email]': {
+                  required: required_message(),
+                  email: email_message(),
+                  remote: remote_message()
+                },
+                'customer[password]': {
+                  required: login_password()
+                }
+              }
+            });
         }
 
       });
