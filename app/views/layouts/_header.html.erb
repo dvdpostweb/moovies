@@ -18,7 +18,7 @@
     <% end %>
   </li>
 </ul>
-<div id="wrap"> 
+<div id="wrap">
   <% if current_customer && current_customer.tvod_free > 0 && params[:controller] != 'steps' %>
   <div class='flash_message'>
     <div class="notice">
@@ -35,7 +35,7 @@
       <%= t('.tvod_free', :tvod_free => current_customer.tvod_free).html_safe %>
     <% end %>
 
-      
+
     </div>
   </div>
   <% elsif if current_customer && current_customer.tvod_free == 0 && params[:controller] != 'steps' %>
@@ -43,14 +43,14 @@
     <div class="notice">
 
     <% if current_customer.abo_type_id == 6 && current_customer.activation_discount_code_type == "A" && Mobistar.find_by_activation_id(current_customer.activation_discount_code_id) %>
-      
+
       <% if current_customer.tvod_free == 0 %>
         <%= t('.header_mb_4').html_safe %>
       <% end %>
     <% else %>
       <%= t('.tvod_free', :tvod_free => current_customer.tvod_free).html_safe %>
     <% end %>
-  
+
     </div>
   </div>
   <% end %>
@@ -70,10 +70,10 @@
     </div>
 	</div>
   <% end %>
-  
+
   <!--   ==============   HEADER   ==============   -->
   <div id="header" >
     <div><%= link_to t('.tagline'), root_localize_path, :class => 'f-btn' %></div>
     <%= render :partial => 'layouts/menu' %>
   </div>
-  <!--   ==============   END HEADER   ==============   --> 
+  <!--   ==============   END HEADER   ==============   -->

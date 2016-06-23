@@ -253,10 +253,6 @@ class Customer < ActiveRecord::Base
     end
   end
 
-  def no_payment_method_mobistar?
-    (tvod_only? && payable?)
-  end
-
   def active?
     (abo_active? && suspension_status == 0)
   end

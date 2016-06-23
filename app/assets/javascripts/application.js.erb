@@ -31,12 +31,15 @@
 //= require photobox
 //= require freetrial
 //= require alacarte
+//= require modernizr.custom
+//= require classie
+//= require notificationFx
 
 $(function() {
     var options_norm = {
     success: show_add_norm,
     dataType: 'html'
-    
+
   }
   function show_add_norm(responseText, statusText){
     if(jQuery.trim(statusText) == "success"){
@@ -54,7 +57,7 @@ $(function() {
       html_item.html(content);
     }
   };
-  
+
   $("body").delegate(".public_promo_btn","click", function() {
     if ($("#promotion").val()!=""){
       loader = 'ajax-loader.gif';
@@ -69,7 +72,7 @@ $(function() {
       html_item =  $("#public_promo #status").html('')
     }
       return false; // prevent default behaviour
-    
+
   });
   $('body').delegate('#codePromo, #codePromo2','click', function(){
     url = $(this).attr('href');
@@ -108,7 +111,7 @@ $(function() {
     });
   }
   $("#checkout_confirmation").submit();
-	
+
   $('body').delegate('.facebox', 'click', function() {
     url = $(this).attr('href')
     jQuery.facebox(function() {
@@ -167,7 +170,7 @@ $(function() {
     url = $(this).parent().attr('href');
     var value = querySt(url,'value');
     $('#review_rating').val(value);
-    image = 'star-voted-';    
+    image = 'star-voted-';
     for(var i=1; i<=5; i++)
     {
       if(i <= value){
@@ -176,7 +179,7 @@ $(function() {
         full_image = image+'off';
       }
       $('#new_review #star_'+product_id+"_"+i).attr('name', full_image+'.png');
-      
+
     }
     return false;
   });
@@ -212,7 +215,7 @@ $(function() {
      $("#review_submit").parent().html("<div style='height:42px'><img src='/assets/ajax-loader.gif'/></div>")
      return false;
    });
-   
+
    $('body').delegate(".stars .star", "click", function() {
      url = $(this).parent().attr('href');
      html_item = $(this).parent().parent();
@@ -233,11 +236,11 @@ $(function() {
          if (url.match(/replace=homepage/)){
            if(data.match(/user-movies-wrap/))
            {
-             html_item.parent().parent().parent().parent().replaceWith(data);  
+             html_item.parent().parent().parent().parent().replaceWith(data);
            }
            else
            {
-             html_item.parent().parent().parent().replaceWith(data);  
+             html_item.parent().parent().parent().replaceWith(data);
            }
          }else{
            html_item.html(data);
@@ -284,10 +287,10 @@ $(function() {
            url: url,
            dataType: 'html',
            type: 'GET',
-           success: function(data) 
-           { 
+           success: function(data)
+           {
 
-             jQuery.facebox(data); 
+             jQuery.facebox(data);
            }
          });
      });
@@ -308,7 +311,7 @@ $(function() {
     if($('#search-field').val() == '' || $('#search-field').val() == $('#search_init').html()){
       return false
     }
-    
+
   })
   $('body').delegate('.action_btn', 'click', function (){
     $.ajax({dataType: 'script',
@@ -332,7 +335,7 @@ $(function() {
       $('.tooltips_tvod').hide()
     	$(this).stop(true,true).show();
     });
-  
+
 });
 function querySt(hu ,ji) {
   gy = hu.split("&");
@@ -345,11 +348,11 @@ function querySt(hu ,ji) {
 }
 function set_page(url)
 {
-  
+
 }
 function send_event(arg1,arg2,arg3,arg4)
 {
-  
+
 }
 
 $(window).scroll(function(){
@@ -358,6 +361,6 @@ $(window).scroll(function(){
       $('#socialbox-float').css('position','fixed').css('top', '0');
     } else {
       $('#socialbox-float').css('position','absolute').css('top', social_top);
-    }    
+    }
   }
 });

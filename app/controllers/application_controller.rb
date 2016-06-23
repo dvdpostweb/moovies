@@ -44,20 +44,9 @@ class ApplicationController < ActionController::Base
         end
       elsif current_customer.step.to_i == 33
         if (params['controller'] == 'steps' && params[:id] == 'step3') || (params[:controller] == 'ogones')
-        elsif (params['controller'] == 'info' && params[:page_name] == t('routes.infos.params.alacarte'))
-        elsif (params['controller'] == 'info' && params[:page_name] == t('routes.infos.params.unlimited'))
-        elsif (params['controller'] == 'info' && params[:page_name] == t('routes.infos.params.adult'))
         else
           redirect_to step_path(:id => 'step3')
         end
-      #elsif current_customer.step.to_i == 33 && no_payment_method_mobistar?
-      #  if (params['controller'] == 'steps' && params[:id] == 'step3') || (params[:controller] == 'ogones')
-      #  elsif (params['controller'] == 'info' && params[:page_name] == t('routes.infos.params.alacarte'))
-      #  elsif (params['controller'] == 'info' && params[:page_name] == t('routes.infos.params.unlimited'))
-      #  elsif (params['controller'] == 'info' && params[:page_name] == t('routes.infos.params.adult'))
-      #  else
-      #    redirect_to info_path(:page_name => t('routes.infos.params.alacarte'))
-      #  end
       elsif current_customer.step.to_i == 90
         if (params['controller'] == 'info' && params[:page_name] == t('routes.infos.params.abo')) || (params[:controller] == 'customers' && params[:action] == 'update')
         else
