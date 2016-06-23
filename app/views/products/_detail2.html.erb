@@ -21,8 +21,8 @@
         <p class="tooltips_description"><%= truncate_html((data[:description].text rescue '...'), :length => 500) %> </p>
       </div>
       <div class="footer-green">
-        <label><u>Abonnez-vous</u></label>
-        <label>et regardez ce film pour seulement <b>3,99€</b></label>
+        <label><u><%= link_to t('homepage.popup6').html_safe, info_path(:page_name => t('routes.infos.params.alacarte')) %></u></label>
+        <label><%= t('homepage.popup7').html_safe %> <b>3,99€</b></label>
       </div>
     </div>
   </div>

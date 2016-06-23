@@ -1,14 +1,14 @@
 $(document).ready(function(){
 
     //if (gon.alacarte == "alacarte") {
-    	$('#alacarte-2-films').on('click', function(e) {  
+    	$('#alacarte-2-films').on('click', function(e) {
     		$(".ns-box").hide();
     		$(".list-default-2-films").hide();
 	    	$("#alacarte-button-default").hide();
 	    	$("#default").hide();
 	    	$(".ALBTN").hide();
 
-            $("#default-3-1").hide();
+        $("#default-3-1").hide();
 	    	$("#default-3-2").hide();
 	    	$("#default-3-3").hide();
 	    	$("#default-3-4").hide();
@@ -17,32 +17,32 @@ $(document).ready(function(){
 	    	$("#green-3-1").show();
 	    	$("#green-3-2").show();
 	    	$("#green-3-3").show();
-            $("#green-3-4").show();
-            $("#red-3-5").show();
+        $("#green-3-4").show();
+        $("#red-3-5").show();
 
             // ----------------------------------------
-            
-            $("#green-7-1").hide();
+
+        $("#green-7-1").hide();
 	    	$("#green-7-2").hide();
 	    	$("#green-7-3").hide();
-            $("#green-7-4").hide();
-            $("#red-7-5").hide()
+        $("#green-7-4").hide();
+        $("#red-7-5").hide()
 
-            $("#default-7-1").show();
+        $("#default-7-1").show();
 	    	$("#default-7-2").show();
 	    	$("#default-7-3").show();
 	    	$("#default-7-4").show();
 	    	$("#default-7-5").show();
 
             //-----------------------------------------
-            
-            $("#green-11-1").hide();
+
+        $("#green-11-1").hide();
 	    	$("#green-11-2").hide();
 	    	$("#green-11-3").hide();
-            $("#green-11-4").hide();
-            $("#red-11-5").hide()
+        $("#green-11-4").hide();
+        $("#red-11-5").hide()
 
-            $("#default-11-1").show();
+        $("#default-11-1").show();
 	    	$("#default-11-2").show();
 	    	$("#default-11-3").show();
 	    	$("#default-11-4").show();
@@ -50,21 +50,21 @@ $(document).ready(function(){
 
             //-----------------------------------------
 
-	        $(this).addClass("film-box-darker");
-	        $("#3euro").addClass("green-text");
-	        $("#3euroil").addClass("green-text");
+	      $(this).addClass("film-box-darker");
+	      $("#3euro").addClass("green-text");
+	      $("#3euroil").addClass("green-text");
 
-	        $('#alacarte-4-films').removeClass("film-box-darker");
-	        $('#alacarte-6-films').removeClass("film-box-darker");
+	      $('#alacarte-4-films').removeClass("film-box-darker");
+	      $('#alacarte-6-films').removeClass("film-box-darker");
 
-	        $('#7euro').removeClass("green-text");
-	        $('#11euro').removeClass("green-text");
+	      $('#7euro').removeClass("green-text");
+	      $('#11euro').removeClass("green-text");
 
-	        $('#7euroil').removeClass("green-text");
-	        $('#11euroil').removeClass("green-text");
-	        
-	        $('body').animate({
-		        scrollTop: eval($('#' + $(this).attr('target')).offset().top - 70)
+	      $('#7euroil').removeClass("green-text");
+	      $('#11euroil').removeClass("green-text");
+
+	      $('body').animate({
+          scrollTop: eval($('#' + $(this).attr('target')).offset().top - 70)
 		    }, 1000);
 		    if (gon.locale === "fr") {
 		    	$("#alacarte-button-CF4FILMS-FR").show();
@@ -77,7 +77,7 @@ $(document).ready(function(){
 		    }
 	    });
 
-	    $('#alacarte-4-films').on('click', function(e) {  
+	    $('#alacarte-4-films').on('click', function(e) {
 	    	$(".ns-box").hide();
 	    	$(".list-default-4-films").hide();
 	    	$("#alacarte-button-default").hide();
@@ -97,7 +97,7 @@ $(document).ready(function(){
             $("#red-7-5").show();
 
             // ----------------------------------------
-            
+
             $("#green-3-1").hide();
 	    	$("#green-3-2").hide();
 	    	$("#green-3-3").hide();
@@ -111,7 +111,7 @@ $(document).ready(function(){
 	    	$("#default-3-5").show();
 
             //-----------------------------------------
-            
+
             $("#green-11-1").hide();
 	    	$("#green-11-2").hide();
 	    	$("#green-11-3").hide();
@@ -153,7 +153,7 @@ $(document).ready(function(){
 		    }
 	    });
 
-	    $('#alacarte-6-films').on('click', function(e) {  
+	    $('#alacarte-6-films').on('click', function(e) {
 	    	$(".ns-box").hide();
 	    	$(".list-default-6-films").hide();
 	    	$("#alacarte-button-default").hide();
@@ -172,7 +172,7 @@ $(document).ready(function(){
             $("#red-11-5").show();
 
             // ----------------------------------------
-            
+
             $("#green-3-1").hide();
 	    	$("#green-3-2").hide();
 	    	$("#green-3-3").hide();
@@ -186,7 +186,7 @@ $(document).ready(function(){
 	    	$("#default-3-5").show();
 
             //-----------------------------------------
-            
+
             $("#green-7-1").hide();
 	    	$("#green-7-2").hide();
 	    	$("#green-7-3").hide();
@@ -244,11 +244,11 @@ $(document).ready(function(){
 		//    }, 1000);
 		//});
 
-	
+
 
     //} else if (gon.facebook == "neactive") {
 
-    //    $('#alacarte-2-films').on('click', function(e) {  
+    //    $('#alacarte-2-films').on('click', function(e) {
     //		$(".ns-box").hide();
     //		$(".list-default-2-films").hide();
 	//    	$("#alacarte-button-default").hide();
@@ -268,7 +268,7 @@ $(document).ready(function(){
     //        $("#red-3-5").show();
 
             // ----------------------------------------
-            
+
     //        $("#green-7-1").hide();
 	//    	$("#green-7-2").hide();
 	//    	$("#green-7-3").hide();
@@ -282,7 +282,7 @@ $(document).ready(function(){
 	//    	$("#default-7-5").show();
 
             //-----------------------------------------
-            
+
     //        $("#green-11-1").hide();
 	//    	$("#green-11-2").hide();
 	//    	$("#green-11-3").hide();
@@ -309,7 +309,7 @@ $(document).ready(function(){
 
 	//        $('#7euroil').removeClass("green-text");
 	//        $('#11euroil').removeClass("green-text");
-	        
+
 	//        $('body').animate({
 	//	        scrollTop: eval($('#' + $(this).attr('target')).offset().top - 70)
 	//	    }, 1000);
@@ -324,7 +324,7 @@ $(document).ready(function(){
 	//	    }
 	//    });
 
-	//    $('#alacarte-4-films').on('click', function(e) {  
+	//    $('#alacarte-4-films').on('click', function(e) {
 	//    	$(".ns-box").hide();
 	//    	$(".list-default-4-films").hide();
 	//    	$("#alacarte-button-default").hide();
@@ -344,7 +344,7 @@ $(document).ready(function(){
     //        $("#red-7-5").show();
 
             // ----------------------------------------
-            
+
     //        $("#green-3-1").hide();
 	//    	$("#green-3-2").hide();
 	//    	$("#green-3-3").hide();
@@ -358,7 +358,7 @@ $(document).ready(function(){
 	//    	$("#default-3-5").show();
 
             //-----------------------------------------
-            
+
     //        $("#green-11-1").hide();
 	//    	$("#green-11-2").hide();
 	//    	$("#green-11-3").hide();
@@ -400,7 +400,7 @@ $(document).ready(function(){
 	//	    }
 	//    });
 
-	//    $('#alacarte-6-films').on('click', function(e) {  
+	//    $('#alacarte-6-films').on('click', function(e) {
 	//    	$(".ns-box").hide();
 	//    	$(".list-default-6-films").hide();
 	//    	$("#alacarte-button-default").hide();
@@ -419,7 +419,7 @@ $(document).ready(function(){
     //        $("#red-11-5").show();
 
             // ----------------------------------------
-            
+
     //        $("#green-3-1").hide();
 	//    	$("#green-3-2").hide();
 	//    	$("#green-3-3").hide();
@@ -433,7 +433,7 @@ $(document).ready(function(){
 	//    	$("#default-3-5").show();
 
             //-----------------------------------------
-            
+
     //        $("#green-7-1").hide();
 	//    	$("#green-7-2").hide();
 	//    	$("#green-7-3").hide();

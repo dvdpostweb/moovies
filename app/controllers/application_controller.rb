@@ -2,13 +2,13 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper :all
   before_filter :set_locale, :unless => :flag?
-  before_filter :init, :unless => :flag? 
+  before_filter :init, :unless => :flag?
   before_filter :set_gon
   before_filter :redirect_after_registration, :unless => :flag?
   before_filter :get_wishlist_source, :unless => :flag?
   before_filter :validation_adult, :unless => :flag?
   before_filter :authenticate, :if => :staging?
-  
+
   #before_filter :set_cache_buster
 
   layout :layout_by_resource
@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
     gon.current_customer = current_customer
     gon.locale = I18n.locale
   end
-  
+
   def handle_unverified_request
     raise ActionController::InvalidAuthenticityToken
   end
@@ -44,13 +44,24 @@ class ApplicationController < ActionController::Base
         end
       elsif current_customer.step.to_i == 33
         if (params['controller'] == 'steps' && params[:id] == 'step3') || (params[:controller] == 'ogones')
+        elsif (params['controller'] == 'info' && params[:page_name] == t('routes.infos.params.alacarte'))
+        elsif (params['controller'] == 'info' && params[:page_name] == t('routes.infos.params.unlimited'))
+        elsif (params['controller'] == 'info' && params[:page_name] == t('routes.infos.params.adult'))
         else
           redirect_to step_path(:id => 'step3')
         end
+      #elsif current_customer.step.to_i == 33 && no_payment_method_mobistar?
+      #  if (params['controller'] == 'steps' && params[:id] == 'step3') || (params[:controller] == 'ogones')
+      #  elsif (params['controller'] == 'info' && params[:page_name] == t('routes.infos.params.alacarte'))
+      #  elsif (params['controller'] == 'info' && params[:page_name] == t('routes.infos.params.unlimited'))
+      #  elsif (params['controller'] == 'info' && params[:page_name] == t('routes.infos.params.adult'))
+      #  else
+      #    redirect_to info_path(:page_name => t('routes.infos.params.alacarte'))
+      #  end
       elsif current_customer.step.to_i == 90
         if (params['controller'] == 'info' && params[:page_name] == t('routes.infos.params.abo')) || (params[:controller] == 'customers' && params[:action] == 'update')
         else
-        redirect_to info_path(:page_name => t('routes.infos.params.abo'))#step_path(:id => 'old')
+        redirect_to info_path(:page_name => t('routes.infos.params.abo'))
         end
       elsif path
         redirect_to path
@@ -75,7 +86,7 @@ class ApplicationController < ActionController::Base
       "devise_layout"
     elsif params[:controller] == 'promotions'
       'promo'
-    elsif params[:controller] == 'errors' 
+    elsif params[:controller] == 'errors'
       'errors'
     else
       "application"
@@ -86,7 +97,7 @@ class ApplicationController < ActionController::Base
     if params[:controller] != 'ogones'
       I18n.locale = params[:locale] || cookies[:locale] || extract_locale_from_accept_language_header || I18n.default_locale
       if I18n.available_locales.include?(I18n.locale)
-        cookies.permanent[:locale] = I18n.locale 
+        cookies.permanent[:locale] = I18n.locale
       else
         I18n.locale = :fr
       end
@@ -133,7 +144,7 @@ class ApplicationController < ActionController::Base
         c = GeoIP.new('GeoIP.dat').country(my_ip)
         session[:my_ip] = my_ip
         if c.country_code == 0 && Rails.env == "production" && ! /^192(.*)/.match(my_ip) && ! /^172(.*)/.match(my_ip) && ! /^10\.(.*)/.match(my_ip) && ! /^127(.*)/.match(my_ip)
-          notify_hoptoad("country code is empty ip : #{my_ip}") 
+          notify_hoptoad("country code is empty ip : #{my_ip}")
         end
         if cf && (cf.country_code == 22 || cf.country_code == 161 || cf.country_code == 131)
           session[:country_id] = cf.country_code

@@ -161,9 +161,9 @@ class Customer < ActiveRecord::Base
 
   after_create :setup_step
 
-  #def after_database_authentication
-  #  self.update_attribute(:invite_code, nil)
-  #end
+  def after_database_authentication
+    self.update_attribute(:customers_registration_step, 33) if self.customers_registration_step != 100 && self.customers_abo != 1
+  end
 
   def apply_omniauth(auth)
     self.email = auth['extra']['raw_info']['email']
@@ -251,6 +251,10 @@ class Customer < ActiveRecord::Base
     else
       rated_products.exists?(product)
     end
+  end
+
+  def no_payment_method_mobistar?
+    (tvod_only? && payable?)
   end
 
   def active?
@@ -542,7 +546,7 @@ class Customer < ActiveRecord::Base
         #total = price - X%
         when 1
           price = (abo_price - (disc.value / 100 * abo_price)).round(2)
-        # tot = X € 
+        # tot = X €
         when 2
           price = disc.value
         # tot = price - X€
