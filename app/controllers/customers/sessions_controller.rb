@@ -18,7 +18,7 @@ class Customers::SessionsController < Devise::SessionsController
         customer.abo_history(38, customer.abo_type_id, @activation.to_param)
         @activation.update_attributes(:customers_id => customer.to_param, :created_at => Time.now.localtime)
       else
-        customer.step = @promotion.nil? ? 31 : @promotion.goto_step
+        customer.step = 33
         customer.tvod_free = @promotion.tvod_free if @promotion && @promotion.tvod_free && @promotion.tvod_free > 0
         customer.abo_active = 1 if @promotion && @promotion.goto_step.to_i == 100
         if @promotion.tvod_only
