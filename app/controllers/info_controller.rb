@@ -1,5 +1,24 @@
 class InfoController < ApplicationController
   def index
+
+    #if customer_signed_in? && current_customer.facebook_activation == 0
+    #  gon.facebook = "neactive"
+    if customer_signed_in? && params[:page_name] == t('routes.infos.params.alacarte')
+      gon.alacarte = "alacarte"
+    elsif customer_signed_in? && params[:page_name] == t('routes.infos.params.alacarte')
+      gon.abo = "abo"
+    elsif customer_signed_in? && params[:page_name] == t('routes.infos.params.unlimited')
+      gon.unlimited = "unlimited"
+    elsif customer_signed_in? && params[:page_name] == t('routes.infos.params.adult')
+      gon.adult = "adult"
+    elsif customer_signed_in? && params[:page_name] == t('routes.infos.params.freetrial')
+      gon.freetrial = "freetrial"
+    elsif params[:page_name] == t('routes.infos.params.alacarte')
+      gon.alacarte = "alacarte_not_signed_in"
+    elsif params[:page_name] == t('routes.infos.params.abo')
+      gon.abo = "abo_not_signed_in"
+    end
+
     if params[:page_name] == t('routes.infos.params.vod')
       params[:page_name] = 'vod'
     elsif params[:page_name] == t('routes.infos.params.abo')

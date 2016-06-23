@@ -16,9 +16,9 @@ Moovies::Application.routes.draw do
   resources :prospects, :only => [:create, :new]
   scope '(:kind)', :kind => /normal|adult/ do
     localized do
-      devise_for :customers, :controllers => { 
-        :registrations => "customers/registrations", 
-        #:confirmations => "customers/confirmations", 
+      devise_for :customers, :controllers => {
+        :registrations => "customers/registrations",
+        #:confirmations => "customers/confirmations",
         :sessions => "customers/sessions" }
       resources :customers do
         match 'newsletter' => 'customers#newsletter', :only => [:update]
@@ -49,7 +49,7 @@ Moovies::Application.routes.draw do
         match 'action' => 'products#action'
         match 'log' => 'products#log'
         match 'data' => 'products#data'
-        match 'sign_up' => 'products#sign_up' 
+        match 'sign_up' => 'products#sign_up'
       end
       match 'products(/:package)(/:view_mode)' => 'products#index', :as => :products_short
       resources :phone_requests, :only => [:new, :create, :index]
@@ -79,7 +79,7 @@ Moovies::Application.routes.draw do
       resources :reviews, :only => [:index]
     end
     match 'info/:page_name' => 'info#index', :as => :info_old
-    
+
     resources :products, :only => [:index, :show], :as => :old_products do
       resource :rating, :only => :create
       resources :reviews, :only => [:new, :create]
@@ -110,7 +110,7 @@ Moovies::Application.routes.draw do
     resources :directors, :only => [], concerns: :productable, :as => :old_directors
     resources :studios, :only => [:index], concerns: :productable
     get 'faq', :to => 'messages#faq'
-    
+
     resources :steps, :only => [:show, :update]
     resources :watchlists, :as => :vod_wishlists
     match 'display_vod' => 'watchlists#display_vod'
@@ -126,10 +126,10 @@ Moovies::Application.routes.draw do
     #match ':id' => "promotions#show", :as => :promotion_localize, constraints: lambda { |request| Promotion.find_by_name(request.path_parameters[:id]) || 'samsung' }
     get ':id' => "promotions#show", :as => :promotion_localize, :id => /samsung|promotion/
     post ':id' => "promotions#create", :as => :promotion_localize, :id => /samsung|promotion/
-    
+
   end
-  
-  
+
+
   get ':id' => "promotions#show", defaults: { format: 'choose' }, :as => :promotion, :id => /smarttv|radio_contact|samsung|nostalgie|playstation/, :as => :short_promotion
   post ':id' => "promotions#show", defaults: { format: 'choose' }, :as => :promotion, :id => /smarttv|radio_contact|samsung|nostalgie/, :as => :short_promotion
   resources :promotions, defaults: { format: 'choose' }, :only => [:show], :as => :root_promotion
@@ -140,9 +140,10 @@ Moovies::Application.routes.draw do
   namespace :api do
     namespace :v1 do
       match "check_presence_of_customer_email" => "validator#check_presence_of_customer_email"
+      match "activate_new_plan" => "validator#set_plan"
     end
   end
-  
+
   #unless Rails.application.config.consider_all_requests_local
   #      match '*not_found', to: 'errors#error_404'
   #end
@@ -202,5 +203,5 @@ Moovies::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id(.:format)))'
-  
+
 end
