@@ -1,3 +1,8 @@
+body{
+	background: #212a31;
+	font-family: Helvetica, sans-serif;
+}
+
 ul{
 	list-style: none;
 	padding: 0;
@@ -19,7 +24,7 @@ h3{
 }
 
 label {
-	font-family: Arial,Helvetica, sans-serif;
+	font-family: 'Helvetica', sans-serif;
 	font-weight: bold;
 	font-size: 26px;
 	color: #5da50e;
@@ -54,8 +59,8 @@ label {
 	color: #6acccb;
 }
 
-.header-nav li.eighteen a {
-	color: #C12283; /*#843091;*/
+.header-nav li.eighteen {
+	color: #843091;
 	margin-left: 35px;
 }
 
@@ -89,7 +94,7 @@ label {
 
 .list-block li {
 	border-bottom: 2px solid #dedddd;
-	padding: 3px 0;
+	padding: 10px 0;
 }
 
 .list-block li:last-child {
@@ -100,9 +105,7 @@ label {
 	width: 325px;
 	height: auto;
 	font-size: 22px;
-	line-height: 22px;
 	font-weight: normal;
-	font-family: Arial,Helvetica, sans-serif;
 	color: #000;
 	display: inline-block;
 }
@@ -133,9 +136,7 @@ label {
 }
 
 .description-block {
-	line-height: 22px;
 	font-size: 18px;
-	font-weight: normal;
 	color: #837f7f;
 }
 
@@ -145,17 +146,17 @@ label {
 
 .description-block.description-block-main {
 	font-size: 22px;
-	margin-bottom: 15px;
+	margin-bottom: 30px;
 }
 
 .footer-block {
-	margin-top: 30px;
+	margin-top: 60px;
 }
 
 .footer-block button {
 	width: 255px;
 	height: 55px;
-	margin: 35px 0 30px 0;
+	margin: 40px 0 35px 0;
 	border: 1px solid #3c492e;
 	background: linear-gradient(to top, rgba(100,171,24,1) 0%,rgba(151,215,81,1) 100%);
 	font-size: 27px;
@@ -209,22 +210,4 @@ label {
 #red-3-5, #red-7-5, #red-11-5 {
 	color: #FF0000;
 	display: none;
-}
-
-/* Grow */
-.hvr-grow {
-    display: inline-block;
-    vertical-align: middle;
-    transform: translateZ(0);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-    backface-visibility: hidden;
-    -moz-osx-font-smoothing: grayscale;
-    transition-duration: 0.3s;
-    transition-property: transform;
-}
-
-.hvr-grow:hover,
-.hvr-grow:focus,
-.hvr-grow:active {
-    transform: scale(1.1);
 }

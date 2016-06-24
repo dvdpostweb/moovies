@@ -1,3 +1,14 @@
+/* FONTS 
+	- OpenSuns CondensedBold, sans-serif;
+	- Arial,Helvetica, sans-serif;
+
+*/
+
+body{
+	background: #212a31;
+	font-family: Helvetica, sans-serif;
+}
+
 ul{
 	list-style: none;
 	padding: 0;
@@ -93,7 +104,7 @@ label {
 
 .list-block li {
 	border-bottom: 2px solid #dedddd;
-	padding: 3px 0;
+	padding: 10px 0;
 }
 
 .list-block li:last-child {
@@ -146,11 +157,11 @@ label {
 
 .description-block.description-block-main {
 	font-size: 22px;
-	margin-bottom: 15px;
+	margin-bottom: 30px;
 }
 
 .footer-block {
-	margin-top: 30px;
+	margin-top: 60px;
 }
 
 .footer-block button {
