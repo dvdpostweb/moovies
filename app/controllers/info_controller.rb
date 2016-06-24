@@ -5,13 +5,13 @@ class InfoController < ApplicationController
     #  gon.facebook = "neactive"
     if customer_signed_in? && params[:page_name] == t('routes.infos.params.alacarte')
       gon.alacarte = "alacarte"
-    elsif customer_signed_in? && params[:page_name] == t('routes.infos.params.alacarte')
+    elsif customer_signed_in? && params[:page_name] == t('routes.infos.params.abo')
       gon.abo = "abo"
     elsif customer_signed_in? && params[:page_name] == t('routes.infos.params.unlimited')
       gon.unlimited = "unlimited"
     elsif customer_signed_in? && params[:page_name] == t('routes.infos.params.adult')
       gon.adult = "adult"
-    elsif customer_signed_in? && params[:page_name] == t('routes.infos.params.freetrial')
+    elsif params[:page_name] == t('routes.infos.params.freetrial')
       gon.freetrial = "freetrial"
     elsif params[:page_name] == t('routes.infos.params.alacarte')
       gon.alacarte = "alacarte_not_signed_in"
