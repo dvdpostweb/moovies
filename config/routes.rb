@@ -1,5 +1,10 @@
 Moovies::Application.routes.draw do
 
+  match "social_activation" => "social_activation#activate"
+
+  match '/auth/:provider/callback' => 'authentications#create'
+  match 'canvas' => 'canvas#index'
+
   concern :productable do
     resources :products, :only => :index
   end

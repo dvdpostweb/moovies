@@ -28,4 +28,3 @@ config/development.sphinx.conf
 db/schema.rb
 rerun.txt
 GeoIP.dat
-#config/database.yml

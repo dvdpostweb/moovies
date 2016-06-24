@@ -2,7 +2,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper :all
   before_filter :set_locale, :unless => :flag?
-  before_filter :init, :unless => :flag? 
+  before_filter :init, :unless => :flag?
+  before_filter :set_gon
   before_filter :redirect_after_registration, :unless => :flag?
   before_filter :get_wishlist_source, :unless => :flag?
   before_filter :validation_adult, :unless => :flag?
@@ -13,8 +14,13 @@ class ApplicationController < ActionController::Base
 
   layout :layout_by_resource
   
-  def handle_unverified_request
-    raise ActionController::InvalidAuthenticityToken
+  #def handle_unverified_request
+  #  raise ActionController::InvalidAuthenticityToken
+  #end
+
+  def set_gon
+    gon.current_customer = current_customer
+    gon.locale = I18n.locale
   end
 
   def default_url_options
@@ -207,18 +213,6 @@ class ApplicationController < ActionController::Base
       prefix = "http://"
       session['current_uri'] = prefix + request.host_with_port + request.fullpath
       redirect_to validation_path
-    end
-  end
-
-  def choose_layout_popac
-    choose_layout_by_controller('popac')
-  end
-
-  def choose_layout_by_controller(layout)
-    if params[:controller] == 'photobox' || params[:controller] == 'freetrial'
-      layout
-    else
-      "application"
     end
   end
 

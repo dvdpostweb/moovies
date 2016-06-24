@@ -1,5 +1,18 @@
 <% if current_customer && !current_customer.payable? && current_customer.step != 90 %>
-    <p><%= t('info.index.price_public.only_tel_no_cc').html_safe %><br /><br /><%= link_to t('info.index.price_public.payment_method_change'), edit_customer_payment_methods_path(:customer_id => current_customer.to_param, :type => :credit_card), :class => :add_credit_card %></p>
+<% content_for :view_specific_css do %>
+    <%= stylesheet_link_tag "empty-payment" %>
+<% end %>
+
+<div class="main">
+
+        <div class="example-wrapper clearfix">
+          <h3><%= t('info.index.price_public.only_tel_no_cc').html_safe %></h3>
+          <div class="demo-wrapper">
+            <%= link_to t('info.index.price_public.payment_method_change'), edit_customer_payment_methods_path(:customer_id => current_customer.to_param, :type => :credit_card), :class => :modern %>
+          </div>
+        </div>
+</div>
+  
   <% elsif current_customer && current_customer.promo_id == 10 && current_customer.step != 90  #samsung %>
     <h3><%= t('info.index.price_public.only_tel_samsung').html_safe %></h3>
   <% elsif current_customer && current_customer.locked == 1 && current_customer.step != 90  %>

@@ -7,7 +7,7 @@
 }
 <% if @promo.params[:brand_logo] %>
 .canvas1 #header h2,.canvas1 #header h2 a {
-  background: url('http://www.dvdpost.be/images/promotions_plush/<%= @promo.params[:brand_logo] %>') no-repeat scroll 0 0 transparent;
+  background: url('http://www.dvdpost.be/images/promotions_plush/<%= "#{I18n.locale}" %>/<%= @promo.params[:brand_logo] %>') no-repeat scroll 0 0 transparent;
   height: 57px;
   width: 500px;
     position: absolute;

@@ -12,6 +12,7 @@
     
   </head>
   <body id="<%= @body_id %>" class="<%= params[:kind] %> <%= current_customer ? :private : :public %>">
+  <%= render :partial => 'layouts/google_analytics' %>
       <%= yield %>
   </body>
 </html>

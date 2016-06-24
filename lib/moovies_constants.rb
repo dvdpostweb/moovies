@@ -289,7 +289,7 @@ module Moovies
     end
     def data_sample
       HashWithIndifferentAccess.new.merge({
-        :normal => {:imdb_id =>1, :product_id => 129769},
+        :normal => {:imdb_id =>1, :product_id => 134728},
         :adult =>  {:imdb_id =>2, :product_id => 130546}
       })
     end

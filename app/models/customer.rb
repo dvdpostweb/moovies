@@ -94,6 +94,8 @@ class Customer < ActiveRecord::Base
   alias_attribute :recurring_until, :customers_abo_discount_recurring_to_date
 
   alias_attribute :step, :customers_registration_step
+  alias_attribute :social, :social_network_tag
+  alias_attribute :fbactive, :facebook_activation
   alias_attribute :locked, :customers_locked__for_reconduction
   validates_length_of :first_name, :minimum => 2, :on => :publish, :if => :svod?
   validates_length_of :last_name, :minimum => 2, :on => :publish, :if => :svod?
@@ -155,8 +157,18 @@ class Customer < ActiveRecord::Base
 
   has_and_belongs_to_many :seen_products, :class_name => 'Product', :join_table => :products_seen, :uniq => true
   has_many :products, :through => :vod_wishlists
-
+  has_many :authentications, :dependent => :delete_all
   has_one :mobistar
+
+  def apply_omniauth(auth)
+    self.email = auth['extra']['raw_info']['email']
+    self.customers_firstname = auth['extra']['raw_info']['first_name'] if auth['extra']['raw_info']['first_name'].present?
+    self.customers_lastname = auth['extra']['raw_info']['last_name'] if auth['extra']['raw_info']['last_name'].present?
+    self.customers_gender = auth['extra']['raw_info']['gender'] if auth['extra']['raw_info']['gender'].present?
+    self.social_network_tag = auth['provider']
+    self.facebook_activation = 0
+    authentications.build(:provider => auth['provider'], :uid => auth['uid'], :token => auth['credentials']['token'], :email => auth['extra']['raw_info']['email'])
+  end
 
   def get_code_from_samsung
     if self.samsung
