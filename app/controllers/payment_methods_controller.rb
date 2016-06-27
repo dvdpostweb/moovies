@@ -43,19 +43,19 @@ class PaymentMethodsController < ApplicationController
       imdb_id = @product.imdb_id
       season_id = @product.season_id
       episode_id = @product.episode_id
-    elsif params[:type] == '2016'
+    #elsif params[:type] == '2016'
 
-      @com= t 'payment_methods.ogone'
-      if current_customer.promo_type == 'D'
-        @promo = Discount.find(current_customer.promo_id)
-        internal_com = 'new_discount'
-      else
-        @promo = Activation.find(current_customer.promo_id)
-        internal_com = 'new_activation'
-      end
-      @price = @promo.promo_price
+    # @com= t 'payment_methods.ogone'
+    #  if current_customer.promo_type == 'D'
+    #    @promo = Discount.find(current_customer.promo_id)
+    #    internal_com = 'new_discount'
+    #  else
+    #    @promo = Activation.find(current_customer.promo_id)
+    #    internal_com = 'new_activation'
+    #  end
+    #  @price = @promo.promo_price
 
-      @url_back = root_localize_path()
+    #  @url_back = root_localize_path()
 
     else
       @com= t 'payment_methods.ogone'
@@ -67,7 +67,7 @@ class PaymentMethodsController < ApplicationController
         internal_com = 'new_activation'
       end
       @price = @promo.promo_price
-      @url_back = url_for(:controller => 'steps', :action => :show, :id => 'step3', :only_path => false, :protocol => 'http')
+      @url_back = root_localize_path() #url_for(:controller => 'steps', :action => :show, :id => 'step3', :only_path => false, :protocol => 'http')
       @url_ok = url_for(:controller => 'steps', :action => :show, :id => 'step4', :only_path => false, :protocol => 'http')
       
       product_id = 0
