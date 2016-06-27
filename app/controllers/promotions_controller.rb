@@ -81,6 +81,7 @@ class PromotionsController < ApplicationController
           if @activation || (@discount && current_customer.discount_reuse?(@discount.month_before_reuse))
             if current_customer.abo_active == 1 && @activation && (@activation.all_cust? || current_customer.tvod_only?)
               current_customer.tvod_free = current_customer.tvod_free + @activation.tvod_free if @activation && @activation.tvod_free && @activation.tvod_free > 0
+              customer.code = code
               current_customer.save(:validate => false)
               current_customer.abo_history(38, current_customer.abo_type_id, @activation.to_param)
               @activation.update_attributes(:customers_id => current_customer.to_param, :created_at => Time.now.localtime)
