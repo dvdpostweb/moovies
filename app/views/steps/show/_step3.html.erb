@@ -1,3 +1,97 @@
+<div id="step_wrap">
+  <div id="step_container">
+    <div class="step_form">
+      <%= form_for(:customer, :url => customer_payment_methods_path(:customer_id => current_customer.to_param), :html => { :method => :put, :id => "form_step3" }) do |f| %>
+      <div class="step_3 step <%= I18n.locale %>" align="center"></div>
+
+      <h3><%= t('.subscription') %></h3>
+
+      <table height="55" cellspacing="0" cellpadding="0" border="0" bgcolor="#FFFFFF" style="margin-bottom:10px;color:#212A31;">
+        <tbody><tr>
+          <td style="padding-left:10px; "><%= t('.abonement_choosen') %> </td>
+          <td style="padding-right:10px;padding-left:10px; "><%= current_customer.subscription_type.description %> <%= t('.for') %> <%= number_to_currency(current_customer.subscription_type.price, :unit => '', :separator => ',') %>€ <%= t('.per_month') %></td>
+        </tr>
+        <% unless @promo.text(I18n.locale).empty? || current_customer.subscription_type.price.to_f == @promo.promo_price.to_f %>
+        <tr>
+          <td style="padding-left:10px;"><strong><%= t('.promotion') %></strong> </td>
+          <td style="padding-right:10px;padding-left:10px; "><strong><%= @promo.text(I18n.locale).html_safe %></strong></td>
+        </tr>
+        <% end %>
+      </tbody></table>
+      <h3><%= t('.payment') %></h3>
+      <div class="freetrial">
+        <%= t(".#{@promo.comment.downcase}", :default => '') %>
+        <% if @promo.payable == 2 %>
+          <%= t('.freetrial1').html_safe %>
+          <%= link_to t('.go'), ogone_path(:skip => 1), :method => :post %><br/><br/><%= t('.freetrial2').html_safe %>
+        <% end %>
+        <% if @promo.payable != 2 && @promo.promo_price == 0 %>
+          <%= t('.reminder') %>
+        <% end %>
+      </div>
+      <div class="choice">
+        <table>
+          <tr>
+            <td>  
+              <input type="radio" value="visa" name="brand" id="visa">
+            </td>
+            <td align="center" valign="middle">
+              <%= image_tag "visa_icon.png" %><p>Visa</p>
+            </td>
+            <td><input type="radio" value="mastercard" name="brand" id="master"></td>
+            <td align="center" valign="middle">
+              <%= image_tag "master_card_icon.png" %>
+              <p>Master Card </p>
+            </td>
+            <td>
+              <input type="radio" value="american Express" name="brand" id="amex">
+            </td>
+            <td align="center" valign="middle">
+              <%= image_tag "american-express_icon.png" %>
+              <p>American Express</p>
+            </td>
+          </tr>
+        </table>
+
+      </div>
+      <div class="securitypaiment"><%= t('.securised') %></div>
+      <div class="clearfix"></div>
+      <table cellpadding="2" class="padding_button">
+        <tr>
+          <td>
+            <%= link_to t('.back'), url_for, :method => :put, :class => :sub_black_link2 %>
+          </td>
+          <td>
+            &nbsp;
+            <%= image_tag "bg-top-nav-sep.png" %>
+            &nbsp;
+          </td>
+          <td>
+            <input type="submit" name ="sent" value= "<%= t '.confirm' %>" class="promo_button step3" />
+            <% if current_customer.subscription && current_customer.subscription.product_id == 6 %>
+              <%= link_to t('tvod_only_back'), back_to_tvod_path() %>
+            <% end %>
+            
+          </td>
+        </tr>
+      </table>
+    </div>
+    <% end %>
+    <p align="center" style="padding-top:15px;">
+      <a href="">
+        <%= image_tag("#{I18n.locale}/info_tel.jpg") %>
+      </a>
+    </p>
+
+  </div>
+  <%= render :partial => 'devise/registrations/faq1' %>
+</div>
+<div id='alert_cc' style="display:none">
+  <%= t('.alert_cc') %>
+</div>
+
+
+
 <% content_for :view_specific_css do %>
     <%= stylesheet_link_tag "step3" %>
 <% end %>
