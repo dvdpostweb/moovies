@@ -1,9 +1,11 @@
 class PaymentMethodsController < ApplicationController
   before_filter :authenticate_customer!
+
   def show
     @choose_partial = params[:type] || 'index'
     @body_id = @choose_partial
   end
+
   def edit
     if params[:product_id]
       @product = Product.find(params[:product_id]) 
@@ -41,6 +43,20 @@ class PaymentMethodsController < ApplicationController
       imdb_id = @product.imdb_id
       season_id = @product.season_id
       episode_id = @product.episode_id
+    elsif params[:type] == '2016'
+
+      @com= t 'payment_methods.ogone'
+      if current_customer.promo_type == 'D'
+        @promo = Discount.find(current_customer.promo_id)
+        internal_com = 'new_discount'
+      else
+        @promo = Activation.find(current_customer.promo_id)
+        internal_com = 'new_activation'
+      end
+      @price = @promo.promo_price
+
+      @url_back = root_localize_path()
+
     else
       @com= t 'payment_methods.ogone'
       if current_customer.promo_type == 'D'
@@ -74,6 +90,7 @@ class PaymentMethodsController < ApplicationController
     		@ogone_language = 'en_US'
     		@template_ogone = URI.join(root_url, 'template_en.htm')
     end
+
     if params[:brand]
       @brand = params[:brand]
       @pm = case @brand
