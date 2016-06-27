@@ -26,7 +26,6 @@
         <p class="pointer">&#9654;</p>
         <h1><a href="#"><%= t('promotion.newstep3.paymentoption1').html_safe %></a></h1>
         <%= form_for(:customer, :url => customer_payment_methods_path(:customer_id => current_customer.to_param), :html => {:method => :put, :id => "form_step3"}) do |f| %>
-        <%= hidden_field_tag(:type, '2016') %>
           <div class="grid grid-pad">
               <div class="col-1-4">
                  <div class="content">
