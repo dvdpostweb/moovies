@@ -88,7 +88,7 @@ class PromotionsController < ApplicationController
               redirect_to root_localize_path, notice: t('session.promotion.sucess') and return
             elsif current_customer.abo_active == 0 || (current_customer.abo_active == 1 && current_customer.tvod_only?)
               customer = current_customer
-              customer.step = @promotion.nil? ? 31 : @promotion.goto_step
+              customer.step = 33 #@promotion.nil? ? 31 : @promotion.goto_step
               customer.tvod_free = @promotion.tvod_free if @promotion && @promotion.tvod_free && @promotion.tvod_free > 0
               customer.code = code
               customer.abo_active = 1 if @promotion && @promotion.goto_step.to_i == 100
