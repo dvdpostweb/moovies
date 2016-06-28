@@ -14,13 +14,15 @@ class PublicPromotionsController < ApplicationController
       render :text => info_path(:page_name => "freetrial")
     elsif params[:promotion] === "CARREFOUR"
       render :text => carrefourbonus_path(:code => params[:promotion]);
+    elsif params[:promotion] === "POPAC"
+      render :text => "POPAC"
     elsif discount.present?
-      render :text => new_customer_registration_path(:code => params[:promotion]);
+      render :text => customers_reactive_path(:code => params[:promotion]);
     elsif activation.present?
       if activation.abo_type_id == 0 #carrefour promotion
         render :text => carrefour_path(:carrefour_code => params[:promotion]);
       else
-        render :text => new_customer_registration_path(:code => params[:promotion]);
+        render :text => customers_reactive_path(:code => params[:promotion]);
       end
     else
       respond_to do |format|
