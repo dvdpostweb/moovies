@@ -30,6 +30,10 @@
         <%= t('.header_mb_2').html_safe %>
       <% elsif current_customer.tvod_free == 3 %>
         <%= t('.header_mb_3').html_safe %>
+      <% elsif current_customer.tvod_free > 9 %>
+        <%= "Vous avez encore #{current_customer.tvod_free / 3} film(s) à la Carte offert(s)" if I18n.locale == :fr %>
+        <%= "U kan nog #{current_customer.tvod_free / 3} à la carte film(s) gratis bekijken" if I18n.locale == :nl %>
+        <%= "You can still watch #{current_customer.tvod_free / 3} movie(s) for free" if I18n.locale == :en %>
       <% end %>
     <% else %>
       <%= t('.tvod_free', :tvod_free => current_customer.tvod_free).html_safe %>
