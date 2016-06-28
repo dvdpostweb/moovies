@@ -64,11 +64,11 @@ class PromotionsController < ApplicationController
     elsif params[:id] == "orange"
       if params[:code].present?
         activation = Activation.find_by_activation_code(params[:code])
-        already_used_code = Customer.find_by_activation_discount_code_id(activation.id)
+        code = Customer.find_by_activation_discount_code_id(activation.id)
         if activation.present?
           if customer_signed_in?
-            if !already_used_code && activation.activation_code_validto_date < Date.today
-              flash[:alert] = t(' session.error_alreadyused_code')
+            if code.present? || activation.activation_code_validto_date < Date.today
+              flash[:alert] = t('session.error_alreadyused_code')
             else
               customer = current_customer
               customer.tvod_free = current_customer.tvod_free + activation.tvod_free if customer.tvod_only?
@@ -80,7 +80,7 @@ class PromotionsController < ApplicationController
               end
             end
           else
-            if !already_used_code && activation.activation_code_validto_date < Date.today
+            if code.present? || activation.activation_code_validto_date < Date.today
               flash[:alert] = t(' session.error_alreadyused_code')
             else
               redirect_to customers_reactive_path(:code => params[:code])
