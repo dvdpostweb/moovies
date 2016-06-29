@@ -10,10 +10,9 @@ class PublicPromotionsController < ApplicationController
 
       if params[:promotion].present?
         activation = Activation.find_by_activation_code(params[:promotion])
-        code = Customer.find_by_activation_discount_code_id(activation.id)
         if activation.present?
           if customer_signed_in?
-            if code.present? || activation.activation_code_validto_date < Date.today
+            if current_customer.activation_discount_code_id == params[:promotion] || activation.activation_code_validto_date < Date.today
               render :text => t('session.error_alreadyused_code')
             else
               customer = current_customer
@@ -26,7 +25,7 @@ class PublicPromotionsController < ApplicationController
               end
             end
           else
-            if code.present? || activation.activation_code_validto_date < Date.today
+            if current_customer.activation_discount_code_id == params[:promotion] || activation.activation_code_validto_date < Date.today
               render :text =>  t(' session.error_alreadyused_code')
             else
               redirect_to customers_reactive_path(:code => params[:code])
