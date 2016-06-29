@@ -66,9 +66,9 @@ class Customers::SessionsController < Devise::SessionsController
         cookies[:code] = { value: params[:code], expires: 15.days.from_now }
         customer = Customer.where(:email => params[:customer][:email]).first if params[:customer] && params[:customer][:email]
         if @activation || (@discount && customer && customer.discount_reuse?(@discount.month_before_reuse))
-          if customer.abo_active == 1 && customer.svod? && ((@activation && !@activation.all_cust? ) || @activation.nil?)
-            redirect_to params[:return_url], :alert => t('session.error_already_customer') and return
-          end
+          #if customer.abo_active == 1 && customer.svod? && ((@activation && !@activation.all_cust? ) || @activation.nil?)
+          redirect_to params[:return_url], :alert => t('session.error_already_customer') and return
+          #end
         elsif @activation || (@discount && customer.tvod_only? && customer.discount_reuse?(@discount.month_before_reuse))
           redirect_to step_path(:id => 'step2') and return
         else
