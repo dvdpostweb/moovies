@@ -6,22 +6,87 @@
   </title>
   <%= include_gon(namespace: 'Plush') %>
   <%= Gon::Base.render_data %>
-  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+  <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
   <meta name="description" content="<%= @meta_description.blank? ? '' : @meta_description %>">
   <%= stylesheet_link_tag :login %>
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700' rel='stylesheet' type='text/css' />
-  <% if false %><%= javascript_include_tag :defaults %><% end %>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700' rel='stylesheet' type='text/css'/>
+  <% if false %><%= javascript_include_tag :defaults %>
+  <% end %>
   <%= csrf_meta_tag %>
   <%= render :partial => 'layouts/google_analytics' %>
   <%= render :partial => 'layouts/apple' %>
+  <style type="text/css">
+    .back-link a {
+      color: #4ca340;
+      text-decoration: none;
+      border-bottom: 1px #4ca340 solid;
+    }
+
+    .back-link a:hover,
+    .back-link a:focus {
+      color: #408536;
+      text-decoration: none;
+      border-bottom: 1px #408536 solid;
+    }
+
+    h1 {
+      height: 100%;
+      /* The html and body elements cannot have any padding or margin. */
+      margin: 0;
+      font-size: 14px;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 32px;
+      margin-bottom: 3px;
+    }
+
+    .entry-header {
+      text-align: left;
+      margin: 0 auto 50px auto;
+      width: 80%;
+      max-width: 978px;
+      position: relative;
+      z-index: 10001;
+    }
+
+    #demo-content {
+      padding-top: 100px;
+    }
+  </style>
 </head>
-<body>
-    <div id="header_login"> 
-      <ul id="lang">
-        <li> <%= link_to t('.home').upcase, root_localize_path %> </li>
-        <li><%= switch_locale_link(params) %></li>
-      </ul>
-    </div>
+<body class="demo">
+<div id="demo-content">
+
+
+<div id="myNav" class="overlay">
+
+  <!-- Overlay content -->
+  <div class="overlay-content">
+    <div id="promo_logo">
+      <%= image_tag "step2/logo.png", height: '100', width: '100' %>
+    </div> 
+    </br>
+    <a><%= @success_promotion_message %></a>
+  </div>
+
+</div>
+
+
+  <div id="header_login">
+    <ul id="lang">
+      <li> <%= link_to t('.home').upcase, root_localize_path %> </li>
+      <li><%= switch_locale_link(params) %></li>
+    </ul>
+  </div>
+
+  <div id="loader-wrapper">
+    <div id="loader"></div>
+
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+
+  </div>
+
+  <div id="content">
     <% if flash[:notice] %>
         <%= flash[:notice] %>
     <% end %>
@@ -29,128 +94,152 @@
     <% if flash[:error] %>
         <%= flash[:error] %>
     <% end %>
+    <%= yield %>
 
-    <%= yield %>  
-    
-    <script   src="https://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>
-    <script   src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.js"></script>
+  </div>
 
-    <script>
-      $( document ).ready(function() {
+</div>
+<!-- /Demo content -->
 
-        if ((window.location.pathname == "/fr/mon-compte/password/nouveau") || (window.location.pathname == "/nl/mijn-account/password/nieuw") || (window.location.pathname == "/en/my-account/password/new")) {
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.js"></script>
 
-          $("#new_customer").validate({
-            rules: {
-              'customer[email]': {
-                required: true,
-                email: true,
-                remote: "/api/v1/check_presence_of_customer_email"
-              }
-            },
-            messages: {
-              'customer[email]': {
-                required: required_message(),
-                email: email_message(),
-                remote: remote_message()
-              }
-            }
-          });
+<script>
+  $(document).ready(function () {
 
-        } else if ((window.location.pathname == "/fr/mon-compte/connectez-vous") || (window.location.pathname == "/nl/mijn-account/log-in") || (window.location.pathname == "/en/my-account/log-in")) {
+    setTimeout(function () {
+      $('body').addClass('loaded');
+      $('h1').css('color', '#222222');
+    }, 1000);
 
-          $("#new_customer").validate({
-            rules: {
-              'customer[email]': {
-                required: true,
-                email: true,
-                remote: "/api/v1/check_presence_of_customer_email"
-              },
-              'customer[password]': {
-                required: true
-              }
-            },
-            messages: {
-              'customer[email]': {
-                required: required_message(),
-                email: email_message(),
-                remote: remote_message()
-              },
-              'customer[password]': {
-                required: login_password()
-              }
-            }
-          });
+    if ((window.location.pathname == "/fr/mon-compte/password/nouveau") || (window.location.pathname == "/nl/mijn-account/password/nieuw") || (window.location.pathname == "/en/my-account/password/new")) {
 
-        } else if (window.location.pathname == "/" + gon.locale + "/customers/reactive") {
-            console.log("WELCOME TO STEP2!!!!!!!");
-
-            $("#login2").validate({
-              rules: {
-                'customer[email]': {
-                  required: true,
-                  email: true,
-                  remote: "/api/v1/check_presence_of_customer_email"
-                },
-                'customer[password]': {
-                  required: true
-                }
-              },
-              messages: {
-                'customer[email]': {
-                  required: required_message(),
-                  email: email_message(),
-                  remote: remote_message()
-                },
-                'customer[password]': {
-                  required: login_password()
-                }
-              }
-            });
+      $("#new_customer").validate({
+        rules: {
+          'customer[email]': {
+            required: true,
+            email: true,
+            remote: "/api/v1/check_presence_of_customer_email"
+          }
+        },
+        messages: {
+          'customer[email]': {
+            required: required_message(),
+            email: email_message(),
+            remote: remote_message()
+          }
         }
-
       });
 
-      function required_message() {
-        if (gon.locale == "fr") {
-          return "Adresse e-mail est nécessaire."
-        } else if (gon.locale == "nl") {
-          return "E-mailadres is verplicht."
-        } else if (gon.locale == "en") {
-          return "Email address is required."
-        }
-      }
+    } else if ((window.location.pathname == "/fr/mon-compte/connectez-vous") || (window.location.pathname == "/nl/mijn-account/log-in") || (window.location.pathname == "/en/my-account/log-in")) {
 
-      function email_message() {
-        if (gon.locale == "fr") {
-          return "Format votre adresse email doit être correcte."
-        } else if (gon.locale == "nl") {
-          return "Formatteren uw e-mail adres moet correct zijn."
-        } else if (gon.locale == "en") {
-          return "Format your email address must be correct."
-        }
-      }
+      $("#new_customer").validate({
+        rules: {
+          'customer[email]': {
+            required: true,
+            email: true,
+            remote: "/api/v1/check_presence_of_customer_email"
+          },
+          'customer[password]': {
+            required: true
+          }
+        },
+        messages: {
+          'customer[email]': {
+            required: required_message(),
+            email: email_message(),
+            remote: remote_message()
+          },
+          'customer[password]': {
+            required: login_password()
+          }
+        },
+        submitHandler: function (form) {
 
-      function remote_message() {
-        if (gon.locale == "fr") {
-          return "Adresse e-mail ne se trouve pas dans le système."
-        } else if (gon.locale == "nl") {
-          return "E-mail adres is niet gevonden in het systeem."
-        } else if (gon.locale == "en") {
-          return "Email address is not found in the system."
-        }
-      }
+          $.ajax({
+            method: 'POST',
+            url: '/api/v1/login',
+            data: {
+              'email': $("#customer_email").val(),
+              'password': $("#customer_password").val(),
+              'code': gon.code
+            },
+            dataType: 'json',
+            success: function (response) {
+              if (0 === response.status) {
+                $("#password_info").show().fadeOut(3000);
+                $("#password_message").text("");
+                $("#password_message").append(response.message);
+              } else if (1 === response.status) {
+                window.location.href = gon.root_localize_path
+              } else if (3 === response.status) {
+                $("#code_info").show().fadeOut(3000);
+                $("#code_message").text("");
+                $("#code_message").append(response.message);
+              } else if (5 === response.status) {
+                $("#code_info").show().fadeOut(3000);
+                $("#code_message").text("");
+                $("#code_message").append(response.message);
+              } else if (4 === response.status) {
+                document.getElementById("myNav").style.width = "100%";
+                setTimeout(function () {
+                  window.location.href = gon.root_localize_path
+                }, 1000);
+              }
+            },
+            error: function (response) {
+              console.log('CHECKED AJAX ERROR!!!');
+            }
+          });
 
-      function login_password() {
-        if (gon.locale == "fr") {
-          return "Champ Mot de passe est nécessaire."
-        } else if (gon.locale == "nl") {
-          return "Password veld is verplicht."
-        } else if (gon.locale == "en") {
-          return "Password field is required."
         }
-      }
+      });
 
-    </script>
+    }
+
+  });
+
+  function required_message() {
+    if (gon.locale == "fr") {
+      return "Adresse e-mail est nécessaire."
+    } else if (gon.locale == "nl") {
+      return "E-mailadres is verplicht."
+    } else if (gon.locale == "en") {
+      return "Email address is required."
+    }
+  }
+
+  function email_message() {
+    if (gon.locale == "fr") {
+      return "Format votre adresse email doit être correcte."
+    } else if (gon.locale == "nl") {
+      return "Formatteren uw e-mail adres moet correct zijn."
+    } else if (gon.locale == "en") {
+      return "Format your email address must be correct."
+    }
+  }
+
+  function remote_message() {
+    if (gon.locale == "fr") {
+      return "Adresse e-mail ne se trouve pas dans le système."
+    } else if (gon.locale == "nl") {
+      return "E-mail adres is niet gevonden in het systeem."
+    } else if (gon.locale == "en") {
+      return "Email address is not found in the system."
+    }
+  }
+
+  function login_password() {
+    if (gon.locale == "fr") {
+      return "Champ Mot de passe est nécessaire."
+    } else if (gon.locale == "nl") {
+      return "Password veld is verplicht."
+    } else if (gon.locale == "en") {
+      return "Password field is required."
+    }
+  }
+
+</script>
+
 </body>
 </html>

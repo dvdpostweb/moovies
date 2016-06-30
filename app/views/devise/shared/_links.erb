@@ -8,7 +8,7 @@
   <% end -%>
 
   <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <label class="bottom-page-label"><%= t('.promotions.show.toregistraniopage') %> <%= link_to t('.sign_up'), info_path(:page_name => t('routes.infos.params.alacarte')), class: "bottom-page-link" %></label><br />
+  <label class="bottom-page-label"><%= t('.promotions.show.toregistraniopage') %> <%= link_to t('.sign_up'), new_customer_registration_path(:code => params[:code]), class: "bottom-page-link" %></label><br />
   <% end -%>
 
   <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>

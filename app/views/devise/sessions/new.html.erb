@@ -13,8 +13,10 @@
 <% if alert && !alert.empty?%>
   <%= alert %> 
 <% end %>
+<div id="code_info"><div id="code_message"></div></div>
 <%= f.text_field :email, :class => 'text-field', :tye => 'text', :placeholder => t('.email_label') %>
 <%= f.password_field :password, :class => 'text-field', :maxlength => '40', :placeholder => t('.pass_label') %>
+<div id="password_info"><div id="password_message"></div></div>
 </br>
 <% if devise_mapping.rememberable? -%>
     <div class="customer_remember_me hvr-grow">

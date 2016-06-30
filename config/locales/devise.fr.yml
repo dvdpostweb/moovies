@@ -44,6 +44,7 @@ fr:
     sessions:
       signed_in: "Connecté."
       signed_out: "Déconnecté."
+      invalid: "Invalid email or password."
       new:
         home: Accueil
         help: Aide
