@@ -96,6 +96,7 @@ en:
     sessions:
       signed_in: "Signed in successfully."
       signed_out: "Signed out successfully."
+      invalid: "Invalid email or password."
       new:
         home: Home
         help: Help

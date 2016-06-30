@@ -1,4 +1,6 @@
 class Customers::RegistrationsController < Devise::RegistrationsController
+
+  layout :resolve_layout
   
   def new
     @hide_footer = true
@@ -198,6 +200,17 @@ class Customers::RegistrationsController < Devise::RegistrationsController
     #customer_registration_path
     #return_url
     root_localize_path(:sing_up_failed => 1)
+  end
+
+  private
+
+  def resolve_layout
+    case action_name
+    when "new"
+      "devise_layout"
+    else
+      "application"
+    end
   end
 
 end

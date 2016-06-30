@@ -11,8 +11,8 @@ class InfoController < ApplicationController
       gon.unlimited = "unlimited"
     elsif customer_signed_in? && params[:page_name] == t('routes.infos.params.adult')
       gon.adult = "adult"
-    elsif params[:page_name] == t('routes.infos.params.freetrial')
-      gon.freetrial = "freetrial"
+    #elsif params[:page_name] == t('routes.infos.params.freetrial')
+    #  gon.freetrial = "freetrial"
     elsif params[:page_name] == t('routes.infos.params.alacarte')
       gon.alacarte = "alacarte_not_signed_in"
     elsif params[:page_name] == t('routes.infos.params.abo')

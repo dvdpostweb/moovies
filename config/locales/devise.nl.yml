@@ -42,6 +42,7 @@ nl:
       timeout: 'Uw sessie is verlopen, gelieve opnieuw in te loggen.'
       inactive: 'Uw account is nog niet geactiveerd.'
     sessions:
+      invalid: "Invalid email or password."
       new:
         home: Home
         help: Help

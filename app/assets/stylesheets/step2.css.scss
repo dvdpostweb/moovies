@@ -143,43 +143,6 @@ label {
 	text-decoration: none;
 }
 
-.customer_newsletter {
-	width: 30px;
-    height: 30px;
-	margin: 23px 0 0 0;
-	display: inline-block;
-	float: left;
-	/*margin: 25px auto 0;*/
-}
-
-.customer_newsletter-label {
-	width: 430px; 
-	text-align: left;
-	margin: 30px 0 0 10px;
-	color: #7e7e7e;
-	font-size: 15px;
-	font-weight: normal;
-	float: left;
-}
-
-.customer_newsletter_parnter {
-	width: 30px;
-    height: 30px;
-	margin: 23px 0 0 0;
-	display: inline-block;
-	float: left;
-	/*margin: 25px auto 0;*/
-}
-
-.customer_newsletter_parnter-label {
-	width: 430px;
-	margin: 30px 0 0 10px;
-	color: #7e7e7e;
-	font-size: 15px;
-	font-weight: normal;
-	float: left;
-}
-
 input[type="checkbox"] {
     display:none;
 }
@@ -208,24 +171,6 @@ input[type="checkbox"]:checked + label span {
 #header {
 	display: none;
 }
-
-.links1 {
-    width: 50%;
-	height: auto;
-	margin: 0 auto;
-	padding: 1px 250px 10px 250px;
-	background-color: transparent;
-	text-align: center 
- }
-
- .links2 {
-    width: 50%;
-	height: auto;
-	margin: 0 auto;
-	padding: 50px 250px 150px 250px;
-	background-color: transparent;
-	text-align: center 
- } 
 
  .flash_message {
  	display: none; 
