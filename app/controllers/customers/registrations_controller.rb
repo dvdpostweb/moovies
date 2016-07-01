@@ -1,6 +1,6 @@
 class Customers::RegistrationsController < Devise::RegistrationsController
 
-  layout :resolve_layout
+  #layout :resolve_layout
   
   def new
     @hide_footer = true
