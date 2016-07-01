@@ -85,7 +85,7 @@
     </div>
 
     <label class="phone-number"><%= t('promotion.newstep3.supportinfo').html_safe %></label>
-    <a href="" class="phone-number"><%= link_to t('promotion.newstep3.conditions').html_safe, info_path(:page_name => t('routes.infos.params.conditions')) %></a>
+    <%= link_to t('promotion.newstep3.conditions').html_safe, info_path(:page_name => t('routes.infos.params.conditions')), class: "conditions-d-utilisation" %>
   </div>
 </div>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>

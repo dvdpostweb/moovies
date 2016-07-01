@@ -1,6 +1,12 @@
+/* FONTS 
+	- OpenSuns CondensedBold, sans-serif;
+	- Arial,Helvetica, sans-serif;
+
+*/
+
 body{
 	background: #212a31;
-	font-family: Helvetica, sans-serif;
+	font-family: Arial,Helvetica, sans-serif;
 }
 
 ul{
@@ -24,9 +30,9 @@ h3{
 }
 
 label {
-	font-family: 'Helvetica', sans-serif;
+	font-family: Arial,Helvetica, sans-serif;
 	font-weight: bold;
-	font-size: 26px;
+	font-size: 24px;
 	color: #5da50e;
 }
 
@@ -59,8 +65,8 @@ label {
 	color: #6acccb;
 }
 
-.header-nav li.eighteen {
-	color: #843091;
+.header-nav li.eighteen a {
+	color: #C12283; /*#843091;*/
 	margin-left: 35px;
 }
 
@@ -78,6 +84,11 @@ label {
 	display: inline-block;
 	background-color: #a9eb60;
 	text-align: center;
+	font-size: 26px;
+}
+
+.film-block .film-box p {
+	padding: 0 5px;
 }
 
 .film-block .film-box.film-box-darker {
@@ -94,7 +105,7 @@ label {
 
 .list-block li {
 	border-bottom: 2px solid #dedddd;
-	padding: 10px 0;
+	padding: 13px 0;
 }
 
 .list-block li:last-child {
@@ -104,8 +115,10 @@ label {
 .list-block .list-text {
 	width: 325px;
 	height: auto;
-	font-size: 22px;
+	font-size: 20px;
+	line-height: 20px;
 	font-weight: normal;
+	font-family: Arial,Helvetica, sans-serif;
 	color: #000;
 	display: inline-block;
 }
@@ -121,6 +134,7 @@ label {
 	text-align: center;
 	font-weight: normal;
 	color: #999797;
+	font-size: 24px;
 }
 
 .list-block .list-number:last-child {
@@ -136,16 +150,19 @@ label {
 }
 
 .description-block {
-	font-size: 18px;
+	line-height: 22px;
+	font-size: 16px;
+	font-weight: normal;
 	color: #837f7f;
 }
 
 .description-block a {
 	color: #837f7f;
+	text-decoration: underline;
 }
 
 .description-block.description-block-main {
-	font-size: 22px;
+	font-size: 20px;
 	margin-bottom: 30px;
 }
 
@@ -156,10 +173,10 @@ label {
 .footer-block button {
 	width: 255px;
 	height: 55px;
-	margin: 40px 0 35px 0;
+	margin: 35px 0 30px 0;
 	border: 1px solid #3c492e;
 	background: linear-gradient(to top, rgba(100,171,24,1) 0%,rgba(151,215,81,1) 100%);
-	font-size: 27px;
+	font-size: 25px;
 	color: #fff;
 	font-weight: bold;
 }
@@ -210,4 +227,8 @@ label {
 #red-3-5, #red-7-5, #red-11-5 {
 	color: #FF0000;
 	display: none;
+}
+
+#adult {
+	color: #823d8d;
 }

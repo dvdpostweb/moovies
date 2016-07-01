@@ -6,7 +6,7 @@
 
 body{
 	background: #212a31;
-	font-family: Helvetica, sans-serif;
+	font-family: Arial,Helvetica, sans-serif;
 }
 
 ul{
@@ -30,9 +30,9 @@ h3{
 }
 
 label {
-	font-family: 'Helvetica', sans-serif;
+	font-family: Arial,Helvetica, sans-serif;
 	font-weight: bold;
-	font-size: 26px;
+	font-size: 24px;
 	color: #5cb3b2;
 }
 
@@ -84,6 +84,11 @@ label {
 	display: inline-block;
 	background-color: #6dcbcc;
 	text-align: center;
+	font-size: 26px;
+}
+
+.film-block .film-box p {
+	padding: 0 5px;
 }
 
 .film-block .film-box.film-box-darker {
@@ -104,7 +109,7 @@ label {
 
 .list-block li {
 	border-bottom: 2px solid #dedddd;
-	padding: 10px 0;
+	padding: 13px 0;
 }
 
 .list-block li:last-child {
@@ -114,7 +119,7 @@ label {
 .list-block .list-text {
 	width: 440px;
 	height: auto;
-	font-size: 22px;
+	font-size: 20px;
 	font-weight: normal;
 	color: #000;
 	display: inline-block;
@@ -132,6 +137,7 @@ label {
 	text-align: center;
 	font-weight: normal;
 	color: #38b3b5;
+	font-size: 24px;
 }
 
 .list-block .list-number.list-number-align {
@@ -147,16 +153,19 @@ label {
 }
 
 .description-block {
-	font-size: 18px;
+	font-size: 16px;
 	color: #837f7f;
+	line-height: 22px;
+	font-weight: normal;
 }
 
 .description-block a {
 	color: #837f7f;
+	text-decoration: underline;
 }
 
 .description-block.description-block-main {
-	font-size: 22px;
+	font-size: 20px;
 	margin-bottom: 30px;
 }
 
@@ -170,11 +179,19 @@ label {
 	margin: 40px 0 35px 0;
 	border: 1px solid #2b3e3f;
 	background: linear-gradient(to top, rgba(65,164,166,1) 0%,rgba(127,214,215,1) 100%);
-	font-size: 27px;
+	font-size: 25px;
 	color: #fff;
 	font-weight: bold;
 }
 
 #alacarte-kvadrat {
 	padding-top: 30px;
+}
+
+a {
+    color: #fff;
+}
+
+#adult {
+	color: #823d8d;
 }
