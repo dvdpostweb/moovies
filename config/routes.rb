@@ -142,6 +142,7 @@ Moovies::Application.routes.draw do
       match "check_presence_of_customer_email" => "validator#check_presence_of_customer_email"
       match "activate_new_plan" => "validator#set_plan"
       match "login" => "login#login"
+      match "facebook_activation" => "facebook#activation"
     end
   end
 

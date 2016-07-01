@@ -50,7 +50,7 @@
     <% if customer_signed_in? %>
       <% if current_customer.social_network_tag == "facebook" && current_customer.facebook_activation == 0 && params[:controller] != "freetrial" %>
       <script type="text/javascript">
-        window.location.href = "/" + gon.locale + "/freetrial"
+        window.location.href = "/" + gon.locale + "/steps/step3"
       </script>
       <% end %>
     <% end %>
