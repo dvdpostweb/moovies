@@ -1,8 +1,15 @@
-<div style='height:75px;width:970px'>
-  <div style='margin: 15px 0pt; text-align: center;'><%= t '.redirection' %></div>
-  <div style='width: 32px; height: 32px; margin: 6px auto;'>
-    <%= image_tag 'loading.gif', :title => 'loading' %>
-  </div></div>
+<div id="myNav" class="overlay" style="width: 100%;">
+  <div class="overlay-content">
+    <div id="promo_logo">
+      <%= image_tag "step2/logo.png", height: '100', width: '100' %>
+    </div> 
+    </br>
+    <a id="redirection_text"><%= t '.redirection' %></a>
+    </br>
+    <a><%= image_tag 'loading.gif', :title => 'loading' %></a>
+  </div>
+</div>
+
 <form name="checkout_confirmation" id="checkout_confirmation" method="post" action="https://secure.ogone.com/ncol/<%= Moovies.ogone_url[Rails.env] %>/orderstandard_utf8.asp">
 <input type="hidden" name="prod" value="">
 <input type="hidden" name="orderID" value="<%= @order_id %>">
