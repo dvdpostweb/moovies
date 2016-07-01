@@ -8,7 +8,7 @@ class SocialActivationController < ApplicationController
       customer.customers_abo_type = params[:customers_abo_type]
       customer.customers_next_abo_type = params[:customers_next_abo_type]
       customer.tvod_free = params[:tvod_free]
-  	  customer.customers_registration_step = 31
+  	  customer.customers_registration_step = 33
   	  customer.facebook_activation = 1
   	  if customer.save!
         render :json => { :status => 1 }
