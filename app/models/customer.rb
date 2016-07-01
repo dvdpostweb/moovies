@@ -161,9 +161,17 @@ class Customer < ActiveRecord::Base
 
   after_create :setup_step
 
-  def after_database_authentication
-    self.update_attribute(:customers_registration_step, 33) if self.customers_registration_step != 100 && self.customers_abo != 1
-  end
+  #def after_database_authentication
+    #discount = Discount.find_by_discount_code(self.activation_discount_code_id)
+    #activation = Activation.find_by_activation_code(self.activation_discount_code_id)
+    #if discount.discount_status == 0
+    #  self.update_attribute(:customers_registration_step, 90)
+    #elsif activation.activation_code_validto_date < Date.today
+    #  self.update_attribute(:customers_registration_step, 90)
+    #else
+  #    self.update_attribute(:customers_registration_step, 90)
+    #end 
+  #end
 
   def apply_omniauth(auth)
     self.email = auth['extra']['raw_info']['email']

@@ -48,9 +48,9 @@ class ApplicationController < ActionController::Base
           redirect_to step_path(:id => 'step3')
         end
       elsif current_customer.step.to_i == 90
-        if (params['controller'] == 'info' && params[:page_name] == t('routes.infos.params.abo')) || (params[:controller] == 'customers' && params[:action] == 'update')
+        if (params['controller'] == 'info' && params[:page_name] == t('routes.infos.params.alacarte')) || (params[:controller] == 'customers' && params[:action] == 'update')
         else
-        redirect_to info_path(:page_name => t('routes.infos.params.abo'))
+        redirect_to info_path(:page_name => t('routes.infos.params.alacarte'))
         end
       elsif path
         redirect_to path
