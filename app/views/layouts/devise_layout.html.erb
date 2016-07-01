@@ -133,6 +133,25 @@
 
     } else if ((window.location.pathname == "/fr/mon-compte/connectez-vous") || (window.location.pathname == "/nl/mijn-account/log-in") || (window.location.pathname == "/en/my-account/log-in")) {
 
+      $("#fb_connect_login").click(function() {
+
+        $.ajax({
+            method: 'POST',
+            url: '/api/v1/facebook_activation',
+            data: { 'code': gon.code },
+            dataType: 'json',
+            success: function (response) {
+              if (9 === response.status) {
+                window.location.href = "/auth/facebook/"
+              } 
+            },
+            error: function (response) {
+              console.log('CHECKED AJAX ERROR!!!');
+            }
+          });
+
+      });
+
       $("#new_customer").validate({
         rules: {
           'customer[email]': {
