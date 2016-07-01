@@ -99,7 +99,7 @@
       <%= yield %>
     </div>
     </div>
-     <% unless params[:controller] == "customers/registrations" || (params[:controller] == "payment_methods" && params[:action] == "update") || (params[:controller] == "customers" && params[:action] == "reactive") %>
+     <% unless params[:controller] == "customers/registrations" || (params[:controller] == "payment_methods" && params[:action] == "update") || (params[:controller] == "customers" && params[:action] == "reactive" || params[:controller] == "steps") %>
     <!--   ==============   FOOTER   ==============   -->
     <div id="footer" >
       <div class="wrap">
