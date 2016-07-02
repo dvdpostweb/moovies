@@ -22,7 +22,7 @@ class Api::V1::LoginController < ApplicationController
           else
             @customer.tvod_free = @customer.tvod_free + activation.tvod_free if @customer.abo_type_id == 6
             @customer.abo_history(38, @customer.abo_type_id, activation.to_param)
-            @customer.code = params[:promotion]
+            @customer.code = params[:code]
             @customer.step = 33
             if @customer.save!
               if activation.update_attributes(:customers_id => @customer.to_param, :created_at => Time.now.localtime)
@@ -41,7 +41,7 @@ class Api::V1::LoginController < ApplicationController
             resource_discount = Customer.find_for_database_authentication(email: params[:email])
             customer.tvod_free = customer.tvod_free + activation.tvod_free if customer.abo_type_id == 6
             customer.abo_history(38, customer.abo_type_id, discount.to_param)
-            customer.code = params[:promotion]
+            customer.code = params[:code]
             customer.step = 33
             if customer.save!
               if DiscountUse.create(:discount_code_id => discount.id, :customer_id => customer.to_param, :discount_use_date => Time.now)
