@@ -4,17 +4,17 @@ class FreetrialController < ApplicationController
 
   def plans
 
-  	gon.case2FILMSFREE = "customers/reactive?code=2FILMSFREE" if I18n.locale == :fr
-  	gon.case2FILMSFREE = "customers/reactive?code=2FILMSFREE" if I18n.locale == :nl
-  	gon.case2FILMSFREE = "customers/reactive?code=2FILMSFREE" if I18n.locale == :en
+  	gon.case2FILMSFREE = "mon-compte/connectez-vous?code=2FILMSFREE" if I18n.locale == :fr
+  	gon.case2FILMSFREE = "mijn-account/log-in?code=2FILMSFREE" if I18n.locale == :nl
+  	gon.case2FILMSFREE = "my-account/log-in?code=2FILMSFREE" if I18n.locale == :en
 
-  	gon.case4FILMSFREE = "customers/reactive?code=4FILMSFREE" if I18n.locale == :fr
-  	gon.case4FILMSFREE = "customers/reactive?code=4FILMSFREE" if I18n.locale == :nl
-  	gon.case4FILMSFREE = "customers/reactive?code=4FILMSFREE" if I18n.locale == :en
+  	gon.case4FILMSFREE = "mon-compte/connectez-vous?code=4FILMSFREE" if I18n.locale == :fr
+  	gon.case4FILMSFREE = "mijn-account/log-in?code=4FILMSFREE" if I18n.locale == :nl
+  	gon.case4FILMSFREE = "my-account/log-in?code=4FILMSFREE" if I18n.locale == :en
 
-  	gon.case6FILMSFREE = "customers/reactive?code=6FILMSFREE" if I18n.locale == :fr
-  	gon.case6FILMSFREE = "customers/reactive?code=6FILMSFREE" if I18n.locale == :nl
-  	gon.case6FILMSFREE = "customers/reactive?code=6FILMSFREE" if I18n.locale == :en
+  	gon.case6FILMSFREE = "mon-compte/connectez-vous?code=6FILMSFREE" if I18n.locale == :fr
+  	gon.case6FILMSFREE = "mijn-account/log-in?code=6FILMSFREE" if I18n.locale == :nl
+  	gon.case6FILMSFREE = "my-account/log-in?code=6FILMSFREE" if I18n.locale == :en
 
     entxt if I18n.locale == :en
     nltxt if I18n.locale == :nl
