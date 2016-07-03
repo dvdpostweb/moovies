@@ -9,7 +9,7 @@ class CarrefourbonusController < ApplicationController
         @error_abo = true
       end
       if @error_code == false && @error_abo == false
-        redirect_to customers_reactive_path( :code => params[:abo]) and return 
+        redirect_to new_customer_session_path(:code => params[:abo]) and return 
       end
     end
   end
