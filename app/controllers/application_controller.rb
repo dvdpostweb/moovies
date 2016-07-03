@@ -18,9 +18,9 @@ class ApplicationController < ActionController::Base
     gon.locale = I18n.locale
   end
 
-  #def handle_unverified_request
-  #  raise ActionController::InvalidAuthenticityToken
-  #end
+  def handle_unverified_request
+    raise ActionController::InvalidAuthenticityToken
+  end
 
   def default_url_options
     if params[:kind] == :normal
@@ -212,18 +212,6 @@ class ApplicationController < ActionController::Base
       prefix = "http://"
       session['current_uri'] = prefix + request.host_with_port + request.fullpath
       redirect_to validation_path
-    end
-  end
-
-  def choose_layout_popac
-    choose_layout_by_controller('popac')
-  end
-
-  def choose_layout_by_controller(layout)
-    if params[:controller] == 'photobox' || params[:controller] == 'freetrial'
-      layout
-    else
-      "application"
     end
   end
 
