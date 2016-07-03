@@ -2,8 +2,8 @@ class Api::V1::LoginController < ApplicationController
 
   def login
     if request.xhr?
-      resource = Customer.find_for_database_authentication(email: params[:email])
       if params[:email].present? && params[:password].present? && !params[:code].present?
+        resource = Customer.find_for_database_authentication(email: params[:email])
         return invalid_login_attempt unless resource
         if resource.valid_password?(params[:password])
           sign_in :customer, resource
