@@ -38,7 +38,7 @@
     <!--
      <#%= content_for :head if content_for? :head %>
      -->
-	  
+
     <%= stylesheet_link_tag "application", :media => "all" %>
     <%= yield :view_specific_css %>
     <%= render :partial => 'layouts/apple' %>
@@ -64,7 +64,7 @@
       </ul>
     </div>
     <% end %>
-    
+
       <%= render(:partial => 'layouts/header') %>
 
     <div class="container clearfix">
@@ -148,6 +148,5 @@
   </div>
   <%= javascript_include_tag "application" %>
   <%= javascript_include_tag "jquery.ui.datepicker-#{I18n.locale}" %>
-  <%= javascript_include_tag "#{@dynamic_link}" %>
   </body>
 </html>
