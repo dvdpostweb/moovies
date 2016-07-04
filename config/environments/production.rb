@@ -61,6 +61,7 @@ Moovies::Application.configure do
   step2.css
   step3.css
   popup.css
+  alacarte.js
   )
   #config.assets.precompile += %w( photobox.css )
 
