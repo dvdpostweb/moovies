@@ -12,7 +12,7 @@ class PromotionsController < ApplicationController
       @meta_image = @promo.params[:image]
     end
     @meta_title = t("promotions.title_#{@promo.id}", :default => '') if @promo
-    
+
   end
 
   def create
@@ -57,7 +57,7 @@ class PromotionsController < ApplicationController
         else
           Prospect.create(:email => params[:email], :newsletters => marketing, :newsletters_partners => marketing_partners, :locale_id => Moovies.customer_languages[I18n.locale])
         end
-        
+
       else
         render :show
       end
@@ -127,9 +127,9 @@ class PromotionsController < ApplicationController
                 customer.subscription_expiration_date = nil
               end
               customer.save(:validate => false)
-              action = 
+              action =
               if @promotion && @promotion.goto_step.to_i == 100
-                @promotion.class.to_s == 'Activation' ? 8 : 6 
+                @promotion.class.to_s == 'Activation' ? 8 : 6
               else
                 35
               end
@@ -161,7 +161,7 @@ class PromotionsController < ApplicationController
             render :show
           end
         else
-          redirect_to customers_reactive_path(:code => code)
+          redirect_to new_customer_session_path(:code => code)
         end
       else
         flash[:alert] = t('session.error_wrong_code')
@@ -176,7 +176,7 @@ class PromotionsController < ApplicationController
     params[:id] = 'smarttv' if params[:id] == 'radio_contact' ||  params[:id] == 'nostalgie'
     @checked = true if params[:checked]
     id = params[:id].gsub(/[^0-9a-zA-Z-]/,'')
-    
+
     @promo = Promotion.find_by_name(id)
     if @promo
       @partial = 'canvas'
@@ -194,7 +194,7 @@ class PromotionsController < ApplicationController
       @partial = params[:id]
       @partial += "_#{params[:format]}" if params[:format]
     end
-    
+
     @body_id = @partial
     @code_samsung = t('promotions.show.samsung.default')
     if params[:email]
