@@ -63,7 +63,7 @@
   <div class="overlay-content">
     <div id="promo_logo">
       <%= image_tag "step2/logo.png", height: '100', width: '100' %>
-    </div> 
+    </div>
     </br>
     <a><%= @success_promotion_message %></a>
   </div>
@@ -133,6 +133,17 @@
 
     } else if ((window.location.pathname == "/fr/mon-compte/connectez-vous") || (window.location.pathname == "/nl/mijn-account/log-in") || (window.location.pathname == "/en/my-account/log-in")) {
 
+      $('#customer_email').val("");
+      $('#customer_password').val("");
+
+      $('#customer_email').bind("cut copy paste",function(e) {
+          e.preventDefault();
+      });
+
+      $('#customer_password').bind("cut copy paste",function(e) {
+          e.preventDefault();
+      });
+
       $("#fb_connect_login").click(function() {
 
         $.ajax({
@@ -143,7 +154,7 @@
             success: function (response) {
               if (9 === response.status) {
                 window.location.href = "/auth/facebook/"
-              } 
+              }
             },
             error: function (response) {
               console.log('CHECKED AJAX ERROR!!!');
@@ -214,7 +225,7 @@
         }
       });
 
-    } 
+    }
 
   });
 
