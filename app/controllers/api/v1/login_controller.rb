@@ -45,7 +45,7 @@ class Api::V1::LoginController < ApplicationController
     if discount.discount_status == 0
       invalid_discount_code_message
     else
-      resource.tvod_free = customer.tvod_free + discount.tvod_free if resource.abo_type_id == 6
+      resource.tvod_free = resource.tvod_free + discount.tvod_free if resource.abo_type_id == 6
       resource.abo_history(38, resource.abo_type_id, discount.to_param)
       resource.code = params[:code]
       resource.step = 33
