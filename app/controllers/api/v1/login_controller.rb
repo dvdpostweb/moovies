@@ -2,62 +2,86 @@ class Api::V1::LoginController < ApplicationController
 
   def login
     if request.xhr?
-      @resource = Customer.find_for_database_authentication(email: params[:email])
+      resource = Customer.find_for_database_authentication(email: params[:email])
       if params[:email].present? && params[:password].present? && !params[:code].present?
-        @customer_regular_login = Customer.find_for_database_authentication(email: params[:email])
-        return invalid_login_attempt unless @customer_regular_login
-        if @customer_regular_login.valid_password?(params[:password])
-          sign_in :customer, @customer_regular_login
-          return render json: { status: 1, message: "login_action_success" }
-        end
-        invalid_login_attempt
+        regular_login(params[:email], params[:password])
       elsif params[:email].present? && params[:password].present? && params[:code].present?
-        if !@resource.valid_password?(params[:password])
+        if !resource.valid_password?(params[:password])
           invalid_login_attempt
-        elsif (@activation = Activation.find_by_activation_code(params[:code]))
-          @customer = Customer.find_by_activation_discount_code_id(activation.id)
-          @customer = Customer.find_by_email(params[:email])
-          @resource_activation = Customer.find_for_database_authentication(email: params[:email])
-          if @customer.present? || @activation.activation_code_validto_date < Date.today
-            render json: { status: 3, message: arleady_used_code_messages }
-          else
-            @customer.tvod_free = @customer.tvod_free + @activation.tvod_free if @customer.abo_type_id == 6
-            @customer.abo_history(38, @customer.abo_type_id, @activation.to_param)
-            @customer.code = params[:code]
-            @customer.step = 33
-            if @customer.save!
-              if @activation.update_attributes(:customers_id => @customer.to_param, :created_at => Time.now.localtime)
-                if @resource_activation.valid_password?(params[:password])
-                  sign_in :customer, @resource_activation
-                  return render json: { status: 4 }
-                end
-              end
-            end
-          end
-        elsif (@discount = Discount.find_by_discount_code(params[:code]))
-          if @discount.discount_status == 0
-            render json: { status: 5, message: arleady_used_code_messages }
-          else
-            @customer = Customer.find_by_email(params[:email])
-            @resource_discount = Customer.find_for_database_authentication(email: params[:email])
-            @customer.tvod_free = customer.tvod_free + @activation.tvod_free if @customer.abo_type_id == 6
-            @customer.abo_history(38, @customer.abo_type_id, @discount.to_param)
-            @customer.code = params[:code]
-            @customer.step = 33
-            if @customer.save!
-              if DiscountUse.create(:discount_code_id => @discount.id, :customer_id => @customer.to_param, :discount_use_date => Time.now)
-                if @resource_discount.valid_password?(params[:password])
-                  sign_in :customer, @resource_discount
-                  return render json: { status: 4 }
-                end
-              end
-            end
-          end
+        elsif (activation = Activation.find_by_activation_code(params[:code]))
+          activation_code_account_activation(activation, resource, params[:password])
+        elsif (discount = Discount.find_by_discount_code(params[:code]))
+          discount_code_account_activation(discount, resource, params[:password])
         end
       end
     else
       raise ActionController::RoutingError.new('Not Found')
     end
+  end
+
+  private
+
+  def activation_code_account_activation(activation, resource, password)
+    customer = Customer.find_by_activation_discount_code_id(activation.id)
+    if customer.present? || activation.activation_code_validto_date < Date.today
+      invalid_activation_code_message
+    else
+      resource.tvod_free = resource.tvod_free + activation.tvod_free if resource.abo_type_id == 6
+      resource.abo_history(38, resource.abo_type_id, activation.to_param)
+      resource.code = params[:code]
+      resource.step = 33
+      if resource.save!
+        if activation.update_attributes(:customers_id => resource.to_param, :created_at => Time.now.localtime)
+          if resource.valid_password?(password)
+            sign_in :customer, resource
+            success_activation_message
+          end
+        end
+      end
+    end
+  end
+
+  def discount_code_account_activation(discount, resource, password)
+    if discount.discount_status == 0
+      invalid_discount_code_message
+    else
+      resource.tvod_free = customer.tvod_free + discount.tvod_free if resource.abo_type_id == 6
+      resource.abo_history(38, resource.abo_type_id, discount.to_param)
+      resource.code = params[:code]
+      resource.step = 33
+      if resource.save!
+        if DiscountUse.create(:discount_code_id => discount.id, :customer_id => resource.to_param, :discount_use_date => Time.now)
+          if resource.valid_password?(password)
+            sign_in :customer, resource
+            success_activation_message
+          end
+        end
+      end
+    end
+  end
+
+  def regular_login(email, password)
+    resource = Customer.find_for_database_authentication(email: email)
+    if resource.valid_password?(password)
+      sign_in :customer, resource
+      success_login_message
+    end
+  end
+
+  def success_activation_message
+    return render json: { status: 4 }
+  end
+
+  def success_login_message
+    return render json: { status: 1, message: "login_action_success" }
+  end
+
+  def invalid_discount_code_message
+    render json: { status: 5, message: arleady_used_code_messages }
+  end
+
+  def invalid_activation_code_message
+    render json: { status: 3, message: arleady_used_code_messages }
   end
 
   def invalid_login_attempt
