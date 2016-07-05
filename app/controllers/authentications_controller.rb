@@ -10,7 +10,7 @@ class AuthenticationsController < ApplicationController
 	  else
 	  	if user.present?
 	  	  flash[:notice] = "Signed in successfully."
-	  	  new_auth = Authentication.new 
+	  	  new_auth = Authentication.new
 	  	  new_auth.customer_id = user.customers_id
 	  	  new_auth.provider = auth['provider']
 	  	  new_auth.uid = auth['uid']
@@ -23,9 +23,9 @@ class AuthenticationsController < ApplicationController
             auth = Authentication.find_by_provider_and_uid_and_email(auth['provider'], auth['uid'], auth['extra']['raw_info']['email'])
             if cookies[:code].present?
               discount = Discount.find_by_discount_code(cookies[:code])
-		  	  activation = Activation.find_by_activation_code(cookies[:code])
+		  	      activation = Activation.find_by_activation_code(cookies[:code])
 	  	  	  if discount.present?
-	  	  	    auth.customer.tvod_free = auth.customer.tvod_free + discount.tvod_free if auth.customer.abo_type_id == 6	
+	  	  	    auth.customer.tvod_free = auth.customer.tvod_free + discount.tvod_free if auth.customer.abo_type_id == 6
 	  	  	    DiscountUse.create(:discount_code_id => discount.id, :customer_id => auth.customer.to_param, :discount_use_date => Time.now)
 	  	  	  elsif activation.present?
 	  	  	    auth.customer.tvod_free = auth.customer.tvod_free + activation.tvod_free if auth.customer.abo_type_id == 6
@@ -50,7 +50,7 @@ class AuthenticationsController < ApplicationController
 	  	  	activation = Activation.find_by_activation_code(cookies[:code])
 
 	  	  	if discount.present?
-	  	  	  customer.tvod_free = customer.tvod_free + discount.tvod_free if customer.abo_type_id == 6	
+	  	  	  customer.tvod_free = customer.tvod_free + discount.tvod_free if customer.abo_type_id == 6
 	  	  	  DiscountUse.create(:discount_code_id => discount.id, :customer_id => customer.to_param, :discount_use_date => Time.now)
 	  	  	elsif activation.present?
 	  	  	  customer.tvod_free = customer.tvod_free + activation.tvod_free if customer.abo_type_id == 6

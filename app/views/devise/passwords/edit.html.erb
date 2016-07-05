@@ -1,16 +1,21 @@
-<div id="title"><%= t '.change_pass' %></div>
-<div class="signup_forms" align="center">
-  <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
-    <%= devise_error_messages! %>
-    <%= f.hidden_field :reset_password_token %>
-
-    <div><%= f.label :password, t('.pass') %><br />
-    <%= f.password_field :password, :autofocus => true %></div>
-
-    <div><%= f.label :password_confirmation, t('.confirm_pass') %><br />
-    <%= f.password_field :password_confirmation %></div>
-
-    <div><%= f.submit t('.sent'), :id => :submit_button %></div>
+<div class="step2">
+<%= link_to root_path do %>
+  <%= image_tag "step2/logo.png" %>
   <% end %>
+</br>
+<div class="separator-part">
+  <div class="separator-line"></div>
+    <label class="separator-label"><%= t('.promotions.show.or') %></label>
+  <div class="separator-line"></div>
 </div>
-<%= render "devise/shared/links" %>
+<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
+  <%= devise_error_messages! %>
+  <%= f.hidden_field :reset_password_token %>
+  <%= f.password_field :password, :class => 'text-field', :placeholder => t('.pass') %>
+  <%= f.password_field :password_confirmation, :class => 'text-field', :placeholder => t('.confirm_pass') %>
+  <%= f.submit t('.sent'), :id => :submit_button, :class => "button-connenct-large" %>
+<% end %>
+</div>
+<div class="links">
+  <%= render "devise/shared/links" %>
+</div>
