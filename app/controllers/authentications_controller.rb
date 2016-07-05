@@ -41,10 +41,8 @@ class AuthenticationsController < ApplicationController
 	        sign_in_and_redirect(:customer, auth.customer)
 	      end
 	  	else
-
 	  	  customer = Customer.new
 	      customer.apply_omniauth(auth)
-
 	  	  if cookies[:code].present?
 	  	  	discount = Discount.find_by_discount_code(cookies[:code])
 	  	  	activation = Activation.find_by_activation_code(cookies[:code])
@@ -56,11 +54,9 @@ class AuthenticationsController < ApplicationController
 	  	  	  customer.tvod_free = customer.tvod_free + activation.tvod_free if customer.abo_type_id == 6
 	  	  	  activation.update_attributes(:customers_id => customer.to_param, :created_at => Time.now.localtime)
 	  	  	end
-
-	  	  	customer.code = cookies[:code]
-          else
-          	discount = Discount.find_by_discount_code("2FILMSFREE")
-          	customer.code = "2FILMSFREE"
+	  	  	ustomer.code = cookies[:code]
+        else
+          customer.code = "2FILMSFREE"
 	  	  end
 	  	  customer.facebook_activation = 1
 	  	  customer.step = 33
