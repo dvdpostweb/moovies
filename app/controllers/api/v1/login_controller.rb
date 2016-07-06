@@ -27,7 +27,7 @@ class Api::V1::LoginController < ApplicationController
       invalid_activation_code_message
     else
       resource.tvod_free = resource.tvod_free + activation.tvod_free if resource.abo_type_id == 6
-      resource.abo_history(38, resource.abo_type_id, activation.to_param)
+      resource.abo_history(6, resource.abo_type_id, activation.to_param)
       resource.code = params[:code]
       resource.step = 33
       if resource.save!
