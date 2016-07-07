@@ -15,75 +15,14 @@
   <%= csrf_meta_tag %>
   <%= render :partial => 'layouts/google_analytics' %>
   <%= render :partial => 'layouts/apple' %>
-  <style type="text/css">
-    .back-link a {
-      color: #4ca340;
-      text-decoration: none;
-      border-bottom: 1px #4ca340 solid;
-    }
-
-    .back-link a:hover,
-    .back-link a:focus {
-      color: #408536;
-      text-decoration: none;
-      border-bottom: 1px #408536 solid;
-    }
-
-    h1 {
-      height: 100%;
-      /* The html and body elements cannot have any padding or margin. */
-      margin: 0;
-      font-size: 14px;
-      font-family: 'Open Sans', sans-serif;
-      font-size: 32px;
-      margin-bottom: 3px;
-    }
-
-    .entry-header {
-      text-align: left;
-      margin: 0 auto 50px auto;
-      width: 80%;
-      max-width: 978px;
-      position: relative;
-      z-index: 10001;
-    }
-
-    #demo-content {
-      padding-top: 100px;
-    }
-  </style>
 </head>
-<body class="demo">
-<div id="demo-content">
-
-
-<div id="myNav" class="overlay">
-
-  <!-- Overlay content -->
-  <div class="overlay-content">
-    <div id="promo_logo">
-      <%= image_tag "step2/logo.png", height: '100', width: '100' %>
-    </div>
-    </br>
-    <a><%= @success_promotion_message %></a>
-  </div>
-
-</div>
-
+<body>
 
   <div id="header_login">
     <ul id="lang">
       <li> <%= link_to t('.home').upcase, root_localize_path %> </li>
       <li><%= switch_locale_link(params) %></li>
     </ul>
-  </div>
-
-  <div id="loader-wrapper">
-    <div id="loader"></div>
-
-    <div class="loader-section section-left"></div>
-    <div class="loader-section section-right"></div>
-
   </div>
 
   <div id="content">
@@ -98,8 +37,6 @@
 
   </div>
 
-</div>
-<!-- /Demo content -->
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.js"></script>
@@ -107,10 +44,10 @@
 <script>
   $(document).ready(function () {
 
-    setTimeout(function () {
-      $('body').addClass('loaded');
-      $('h1').css('color', '#222222');
-    }, 1000);
+    //setTimeout(function () {
+    //  $('body').addClass('loaded');
+    //  $('h1').css('color', '#222222');
+    //}, 1000);
 
     if ((window.location.pathname == "/fr/mon-compte/password/nouveau") || (window.location.pathname == "/nl/mijn-account/password/nieuw") || (window.location.pathname == "/en/my-account/password/new")) {
 
@@ -211,10 +148,10 @@
                 $("#code_message").text("");
                 $("#code_message").append(response.message);
               } else if (4 === response.status) {
-                document.getElementById("myNav").style.width = "100%";
-                setTimeout(function () {
-                  window.location.href = gon.root_localize_path
-                }, 1000);
+                //document.getElementById("myNav").style.width = "100%";
+                //setTimeout(function () {
+                window.location.href = gon.root_localize_path
+                //}, 1000);
               }
             },
             error: function (response) {
