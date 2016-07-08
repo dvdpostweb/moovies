@@ -170,7 +170,7 @@ class Customer < ActiveRecord::Base
     #  self.update_attribute(:customers_registration_step, 90)
     #else
   #    self.update_attribute(:customers_registration_step, 90)
-    #end 
+    #end
   #end
 
   def apply_omniauth(auth)
@@ -645,7 +645,7 @@ class Customer < ActiveRecord::Base
   end
 
   def setup_step
-    self.update_attribute(:customers_registration_step, 33)
+    self.update_attribute(:customers_registration_step, 33) if self.abo_type_id != 6
   end
 
 end
