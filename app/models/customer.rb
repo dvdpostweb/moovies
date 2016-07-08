@@ -174,7 +174,7 @@ class Customer < ActiveRecord::Base
   #end
 
   def apply_omniauth(auth)
-    self.email = auth['extra']['raw_info']['email']
+    self.email = auth['extra']['raw_info']['email'] if  auth['extra']['raw_info']['email'].present?
     self.customers_firstname = auth['extra']['raw_info']['first_name'] if auth['extra']['raw_info']['first_name'].present?
     self.customers_lastname = auth['extra']['raw_info']['last_name'] if auth['extra']['raw_info']['last_name'].present?
     self.customers_gender = auth['extra']['raw_info']['gender'] if auth['extra']['raw_info']['gender'].present?
