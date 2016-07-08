@@ -645,7 +645,7 @@ class Customer < ActiveRecord::Base
   end
 
   def setup_step
-    self.update_attribute(:customers_registration_step, 33) if self.abo_type_id != 6
+    self.update_attribute(:customers_registration_step, 33)
   end
 
 end
