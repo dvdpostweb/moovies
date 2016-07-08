@@ -29,7 +29,7 @@ class Api::V1::LoginController < ApplicationController
       resource.tvod_free = resource.tvod_free + activation.tvod_free if resource.abo_type_id == 6
       resource.abo_history(38, resource.abo_type_id, activation.to_param)
       resource.code = params[:code]
-      resource.step = 33
+      resource.step = 33 if resource.abo_type_id != 6
       if resource.save!
         if activation.update_attributes(:customers_id => resource.to_param, :created_at => Time.now.localtime)
           if resource.valid_password?(password)
@@ -48,7 +48,7 @@ class Api::V1::LoginController < ApplicationController
       resource.tvod_free = resource.tvod_free + discount.tvod_free if resource.abo_type_id == 6
       resource.abo_history(38, resource.abo_type_id, discount.to_param)
       resource.code = params[:code]
-      resource.step = 33
+      resource.step = 33 if resource.abo_type_id != 6
       if resource.save!
         if DiscountUse.create(:discount_code_id => discount.id, :customer_id => resource.to_param, :discount_use_date => Time.now)
           if resource.valid_password?(password)
