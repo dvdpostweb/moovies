@@ -29,7 +29,7 @@ class Api::V1::LoginController < ApplicationController
       resource.tvod_free = resource.tvod_free + activation.tvod_free if resource.abo_type_id == 6
       resource.abo_history(38, resource.abo_type_id, activation.to_param)
       resource.code = params[:code]
-      unless resource.abo_type_id == 6
+      if resource.svod?
         resource.step = 33
       end
       if resource.save!
