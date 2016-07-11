@@ -4,7 +4,11 @@ class Api::V1::LoginController < ApplicationController
     if request.xhr?
       resource = Customer.find_for_database_authentication(email: params[:email])
       if params[:email].present? && params[:password].present? && !params[:code].present?
-        regular_login(resource, params[:email], params[:password])
+        if !resource.valid_password?(params[:password])
+          invalid_login_attempt
+        else
+          regular_login(resource, params[:email], params[:password])
+        end
       elsif params[:email].present? && params[:password].present? && params[:code].present?
         if !resource.valid_password?(params[:password])
           invalid_login_attempt
