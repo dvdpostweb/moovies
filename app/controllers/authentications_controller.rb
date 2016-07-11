@@ -32,8 +32,11 @@ class AuthenticationsController < ApplicationController
 	  	  	    activation.update_attributes(:customers_id => auth.customer.to_param, :created_at => Time.now.localtime)
 	  	  	  end
 		  	  auth.customer.facebook_activation = 1
-					unless auth.abo_type_id == 6
-		        auth.step = 33
+					if auth.resource.abo_type_id != 6
+						if discount
+							auth.step = discount.goto_step
+		          #auth.step = 33
+						end
 		      end
 		  	  if auth.customer.save(:validate => false)
 		  	  	sign_in_and_redirect(:customer, auth.customer)
