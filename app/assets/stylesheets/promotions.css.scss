@@ -5,7 +5,7 @@
  //= require reset
  */
  @import "compass/css3/images";
- 
+
  .osc, h1, h2, h3, h4, h5 {
  	font-family: 'Open Sans Condensed', sans-serif;
  }
@@ -38,7 +38,7 @@ div.flash_error {
 
 }
 .choice_language .button_languages {
-  background-color: #D55023; 
+  background-color: #D55023;
   @include filter-gradient(#EE8419, #E26417, vertical);
   @include background-image(linear-gradient(top, #EE8419 0%,#E26417 100%));
 
@@ -146,9 +146,9 @@ div.flash_error {
     background: -ms-linear-gradient(top,  #f8b500 1%,#ef8b00 99%); /* IE10+ */
     background: linear-gradient(to bottom,  #f8b500 1%,#ef8b00 99%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8b500', endColorstr='#ef8b00',GradientType=0 ); /* IE6-9 */
-  
+
      border: 1px solid #ffb503;
-     
+
 }
 
 
@@ -202,7 +202,7 @@ background: url(image_path('en/info_tel.jpg')) no-repeat scroll 0 0 transparent
 /* for mobile */
 
 @media screen and (max-width: 480px) {
-  
+
 .canvas3 #wrap {
     background: none repeat scroll 0 0 #FFFFFF;
     box-shadow: 0 0 45px #000000;
@@ -214,7 +214,7 @@ background: url(image_path('en/info_tel.jpg')) no-repeat scroll 0 0 transparent
    background: none!important;
     background-color:#94cc2b;
     min-height: 360px !important;
-       
+
      margin: 0 auto;
     width: 320px!important;
     margin-bottom:12px;
@@ -285,22 +285,22 @@ background: url(image_path('en/info_tel.jpg')) no-repeat scroll 0 0 transparent
       margin: 6px 0 24px 18px;
     font-size: 20px;
     padding: 5px;
-  
+
 }
 .canvas3 #promo_form .inputs_promo_code {
     width: 200px;
 }
 .canvas3 #promo_form .email, .canvas3 #promo_form .promocode {
-  float:none;  
-  padding-left:19px; 
+  float:none;
+  padding-left:19px;
   font-size: 16px;
-  
+
 }
 .canvas3 .telfooter {
   height:100%;
     width: 320px;
-  
-  
+
+
 }
 
 
@@ -348,7 +348,7 @@ width: 926px;
 }
 .canvas4 body {
     font-family:Arial, Helvetica, sans-serif;
-   
+
 }
 #vp_header, #vp_top_header, #vp_social, #vp_menu, #vp_products, #vp_footer, .vp-footer-sc {
     margin: 0 auto;
@@ -648,14 +648,14 @@ width: 926px;
     z-index: 10;
 }
 .canvas4 #vp_products .column.gold h2 {
-   
+
     color: #c09246;}
-    
-	
+
+
 .canvas4 #vp_products .column.silver h2 {
-   
+
     color: #a2a6b4;}
-    
+
 
 
 .canvas4 #vp_products .column h3 {
@@ -673,13 +673,13 @@ width: 926px;
 }
 
 .canvas4 #vp_products .column.gold h3 {
-   
+
     color: #c09246;}
-	
+
 .canvas4 #vp_products .column.silver h3 {
-   
+
     color: #a2a6b4;}
-    
+
 
 
 
@@ -783,7 +783,7 @@ background: -ms-linear-gradient(top,  #bf995b 0%,#ba6c00 100%); /* IE10+ */
 background: linear-gradient(to bottom,  #bf995b 0%,#ba6c00 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bf995b', endColorstr='#ba6c00',GradientType=0 ); /* IE6-9 */
 text-shadow: 0 -1px 0 #B76800;
-border: 1px solid #B76800; 
+border: 1px solid #B76800;
 }
 
 .canvas4 #vp_products .column p + p, #vp_products .column.gold p + p, #vp_products .column.silver p + p  {
@@ -915,7 +915,7 @@ color: #212A31;
   float: left;
   height: 39px;
   margin: 15px 0 0 20px;
-} 
+}
 #header h2 {
   float: left;
   height: 42px;
@@ -1005,7 +1005,7 @@ html, body{
 }
 .canvas2 .inputs_codes {
   line-height: 17px;
-  
+
 }
 
 
@@ -1145,7 +1145,7 @@ h1, h2, h3, h4, h5 {
 }
 
 #promo_content #promo_form .promo_button, #area_promo .promo_button {
-  background-color: #D55023; 
+  background-color: #D55023;
   @include filter-gradient(#EE8419, #E26417, vertical);
   @include background-image(linear-gradient(top, #EE8419 0%,#E26417 100%));
 
@@ -1379,7 +1379,7 @@ background:url(image_path('promotions/googleplus.gif'));
 }
 
 .canvas8 #header .social-content {
- 
+
 }
 
 
@@ -1437,4 +1437,24 @@ text-transform: uppercase;
 .canvas1 #promo_date li, .canvas2 #promo_date li, .canvas3 #promo_date li, .canvas5 #promo_date li, .canvas7 #promo_date li
 {
     color: #000;
+}
+
+.error {
+  padding:15px 10px 15px 10px;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ff670f+0,ff670f+100;Orange+Flat+%231 */
+  background: #ff670f; /* Old browsers */
+  background: -moz-linear-gradient(top,  #ff670f 0%, #ff670f 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  #ff670f 0%,#ff670f 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  #ff670f 0%,#ff670f 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff670f', endColorstr='#ff670f',GradientType=0 ); /* IE6-9 */
+}
+
+.error {
+  color: #fff;
+}
+
+#code3-error {
+  display: block;
+  margin-left: 15%;
+  margin-right: 15%;
 }

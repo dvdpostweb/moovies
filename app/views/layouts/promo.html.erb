@@ -4,6 +4,8 @@
     <title>
       <%= h @meta_title.blank? ? t('layouts.application.title') : @meta_title %>
     </title>
+    <%= include_gon(namespace: 'Plush') %>
+    <%= Gon::Base.render_data %>
     <% if @meta_image %>
     <meta name='og:image' content='<%= @meta_image %>'>
     <% end %>
@@ -14,11 +16,11 @@
   	<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700' rel='stylesheet' type='text/css' />
     <%= javascript_include_tag "promotions" %>
     <%= stylesheet_link_tag "promotions", :media => "all" %>
-    
+
     <%= csrf_meta_tags %>
   </head>
   <body id="<%= @body_id %>" class="<%= params[:kind] %> <%= current_customer ? :private : :public %> <%= @body_class %>">
-  <div id="wrap2"> 
+  <div id="wrap2">
     <% if flash[:notice] %>
     <div class='flash_message'>
       <div class="notice">

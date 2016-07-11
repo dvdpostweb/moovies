@@ -84,7 +84,7 @@
       </div>
     </div>
 
-    
+
       <div id="commentcamarche_content">
         <h2><%= t('.plush') %></h2>
         <% if !@promo.params[:hide_svod] == true %>
@@ -144,3 +144,48 @@
 </div>
 <div style="display:none" id='text_error_conditions'><%= t('.error_conditions') %></div>
 <div id="default" style="display:none"><%= t '.default' %></div>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.js"></script>
+
+<script>
+  $(document).ready(function () {
+
+      $("#form_step").validate({
+        rules: {
+          'code': {
+            required: true,
+            remote: "/api/v1/check_presence_of_activation_code"
+          }
+        },
+        messages: {
+          'code': {
+            required: required_message(),
+            remote: remote_message()
+          }
+        }
+      });
+
+  });
+
+  function required_message() {
+    if (gon.locale == "fr") {
+      return "Code d'activation est nécessaire."
+    } else if (gon.locale == "nl") {
+      return "Activatie code is verplicht."
+    } else if (gon.locale == "en") {
+      return "Activation code is required."
+    }
+  }
+
+  function remote_message() {
+    if (gon.locale == "fr") {
+      return "Code d'activation ne se trouve pas dans le système."
+    } else if (gon.locale == "nl") {
+      return "Activatie code is niet gevonden in het systeem."
+    } else if (gon.locale == "en") {
+      return "Activation cod is not found in the system."
+    }
+  }
+
+</script>

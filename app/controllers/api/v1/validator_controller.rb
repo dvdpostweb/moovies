@@ -13,6 +13,19 @@ class Api::V1::ValidatorController < ApplicationController
     end
   end
 
+  def check_activation_code_presence
+    if request.xhr?
+      code = Activation.find_by_activation_code(params[:code])
+      if code.present?
+        render json: TRUE
+      else
+        render json: FALSE
+      end
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
+
   def set_plan
     if request.xhr?
       if params[:discount_code].present?
