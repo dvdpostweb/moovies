@@ -4,7 +4,7 @@ class Api::V1::LoginController < ApplicationController
     if request.xhr?
       resource = Customer.find_for_database_authentication(email: params[:email])
       if params[:email].present? && params[:password].present? && !params[:code].present?
-        regular_login(params[:email], params[:password])
+        regular_login(resource, params[:email], params[:password])
       elsif params[:email].present? && params[:password].present? && params[:code].present?
         if !resource.valid_password?(params[:password])
           invalid_login_attempt
@@ -29,7 +29,7 @@ class Api::V1::LoginController < ApplicationController
       resource.tvod_free = resource.tvod_free + activation.tvod_free if resource.abo_type_id == 6
       resource.abo_history(38, resource.abo_type_id, activation.to_param)
       resource.code = params[:code]
-      if resource.svod?
+      if resource.abo_type_id != 6
         resource.step = 33
       end
       if resource.save!
@@ -62,8 +62,7 @@ class Api::V1::LoginController < ApplicationController
     end
   end
 
-  def regular_login(email, password)
-    resource = Customer.find_for_database_authentication(email: email)
+  def regular_login(resource, email, password)
     if resource.valid_password?(password)
       sign_in :customer, resource
       success_login_message
