@@ -53,7 +53,7 @@ class Api::V1::LoginController < ApplicationController
       if resource.abo_type_id == 6
         resource.tvod_free = resource.tvod_free + discount.tvod_free
       else
-        resource.tvod_free = activation.tvod_free
+        resource.tvod_free = discount.tvod_free
       end
       resource.abo_history(38, resource.abo_type_id, discount.to_param)
       resource.code = params[:code]
