@@ -26,22 +26,21 @@ class Api::V1::LoginController < ApplicationController
   private
 
   def activation_code_account_activation(activation, resource, password)
-    customer = Customer.find_by_activation_discount_code_id(activation.id)
-    if customer.present? || activation.activation_code_validto_date < Date.today
-      invalid_activation_code_message
+    if resource.abo_type_id == 6
+      resource.tvod_free = resource.tvod_free + activation.tvod_free
     else
-      resource.tvod_free = resource.tvod_free + activation.tvod_free if resource.abo_type_id == 6
-      resource.abo_history(38, resource.abo_type_id, activation.to_param)
-      resource.code = params[:code]
-      if resource.abo_type_id != 6
-        resource.step = 33
-      end
-      if resource.save!
-        if activation.update_attributes(:customers_id => resource.to_param, :created_at => Time.now.localtime)
-          if resource.valid_password?(password)
-            sign_in :customer, resource
-            success_activation_message
-          end
+      resource.tvod_free = activation.tvod_free
+    end
+    resource.abo_history(38, resource.abo_type_id, activation.to_param)
+    resource.code = params[:code]
+    if resource.abo_type_id != 6
+      resource.step = 33
+    end
+    if resource.save!
+      if activation.update_attributes(:customers_id => resource.to_param, :created_at => Time.now.localtime)
+        if resource.valid_password?(password)
+          sign_in :customer, resource
+          success_activation_message
         end
       end
     end
@@ -51,7 +50,11 @@ class Api::V1::LoginController < ApplicationController
     if discount.discount_status == 0
       invalid_discount_code_message
     else
-      resource.tvod_free = resource.tvod_free + discount.tvod_free if resource.abo_type_id == 6
+      if resource.abo_type_id == 6
+        resource.tvod_free = resource.tvod_free + discount.tvod_free
+      else
+        resource.tvod_free = activation.tvod_free
+      end
       resource.abo_history(38, resource.abo_type_id, discount.to_param)
       resource.code = params[:code]
       resource.step = discount.goto_step

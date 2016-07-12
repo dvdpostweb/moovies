@@ -25,17 +25,26 @@ class AuthenticationsController < ApplicationController
               discount = Discount.find_by_discount_code(cookies[:code])
 		  	      activation = Activation.find_by_activation_code(cookies[:code])
 	  	  	  if discount.present?
-	  	  	    auth.customer.tvod_free = auth.customer.tvod_free + discount.tvod_free if auth.customer.abo_type_id == 6
+							if auth.customer.abo_type_id == 6
+			          auth.customer.tvod_free = auth.customer.tvod_free + discount.tvod_free
+			        else
+			          auth.customer.tvod_free = discount.tvod_free
+			        end
 	  	  	    DiscountUse.create(:discount_code_id => discount.id, :customer_id => auth.customer.to_param, :discount_use_date => Time.now)
 	  	  	  elsif activation.present?
-	  	  	    auth.customer.tvod_free = auth.customer.tvod_free + activation.tvod_free if auth.customer.abo_type_id == 6
+							if auth.customer.abo_type_id == 6
+			          auth.customer.tvod_free = auth.customer.tvod_free + activation.tvod_free
+			        else
+			          auth.customer.tvod_free = activation.tvod_free
+			        end
 	  	  	    activation.update_attributes(:customers_id => auth.customer.to_param, :created_at => Time.now.localtime)
 	  	  	  end
 		  	  auth.customer.facebook_activation = 1
-					if auth.resource.abo_type_id != 6
+					if auth.customer.abo_type_id != 6
 						if discount
-							auth.step = discount.goto_step
-		          #auth.step = 33
+							auth.customer.step = discount.goto_step
+						elsif activation
+							auth.customer.step = 33
 						end
 		      end
 		  	  if auth.customer.save(:validate => false)
