@@ -68,7 +68,7 @@ class AuthenticationsController < ApplicationController
 	  	  	  customer.tvod_free = customer.tvod_free + activation.tvod_free if customer.abo_type_id == 6
 	  	  	  activation.update_attributes(:customers_id => customer.to_param, :created_at => Time.now.localtime)
 	  	  	end
-	  	  	ustomer.code = cookies[:code]
+	  	  	customer.code = cookies[:code]
         else
           customer.code = "2FILMSFREE"
 	  	  end
