@@ -44,9 +44,10 @@ class AuthenticationsController < ApplicationController
 						if discount
 							auth.customer.step = discount.goto_step
 						elsif activation
-							auth.customer.step = 33
+							auth.customer.step = 100
 						end
 		      end
+					auth.customer.code = cookies[:code]
 		  	  if auth.customer.save(:validate => false)
 		  	  	sign_in_and_redirect(:customer, auth.customer)
 		  	  	flash[:notice] = t('session.promotion.sucess')
