@@ -1,8 +1,11 @@
+<% set_evercookie(:code, params[:code]) if params[:code].present? %>
 <div class="step2">
 <%= link_to root_path do %>
   <%= image_tag "step2/logo.png" %>
 <% end %>
-<button id="fb_connect_login" class="face-button"><%= t('.social.network.fbconnect') %></button>
+<!--
+<button id="fb_connect_login" class="face-button"><#%= t('.social.network.fbconnect') %></button>
+-->
 </br>
 <div class="separator-part">
   <div class="separator-line"></div>
