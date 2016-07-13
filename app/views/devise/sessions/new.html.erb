@@ -7,11 +7,13 @@
 <button id="fb_connect_login" class="face-button"><#%= t('.social.network.fbconnect') %></button>
 -->
 </br>
+<!--
 <div class="separator-part">
   <div class="separator-line"></div>
     <label class="separator-label">OU</label>
   <div class="separator-line"></div>
 </div>
+-->
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
 <% if alert && !alert.empty?%>
   <%= alert %>
