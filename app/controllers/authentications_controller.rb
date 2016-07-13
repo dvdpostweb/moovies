@@ -26,9 +26,6 @@ class AuthenticationsController < ApplicationController
       else
         customer = Customer.new
         customer.apply_omniauth(auth)
-        customer.skip_confirmation!
-        customer.customers_registration_step = 777
-        customer.activation_discount_code_type = "D"
         if customer.save(:validate => false)
           flash[:notice] = t('.social.network.fbconnect.registration.new')
           sign_in_and_redirect(:customer, customer)
