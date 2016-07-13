@@ -87,4 +87,5 @@ gem 'capistrano-slack', :git => 'https://github.com/j-mcnally/capistrano-slack.g
 
 gem 'omniauth-facebook'
 gem "figaro"
+gem 'evercookie'
 

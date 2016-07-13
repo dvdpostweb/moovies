@@ -141,6 +141,9 @@ GEM
     diff-lcs (1.2.4)
     dynamic_form (1.1.4)
     erubis (2.7.0)
+    evercookie (0.1.2)
+      chunky_png
+      rails (>= 3.1)
     execjs (1.4.0)
       multi_json (~> 1.0)
     factory_girl (4.3.0)
@@ -364,6 +367,7 @@ DEPENDENCIES
   date_validator
   devise
   dynamic_form
+  evercookie
   execjs
   factory_girl_rails
   faker
