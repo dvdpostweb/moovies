@@ -81,24 +81,24 @@
           e.preventDefault();
       });
 
-      $("#fb_connect_login").click(function() {
+      //$("#fb_connect_login").click(function() {
 
-        $.ajax({
-            method: 'POST',
-            url: '/api/v1/facebook_activation',
-            data: { 'code': gon.code },
-            dataType: 'json',
-            success: function (response) {
-              if (9 === response.status) {
-                window.location.href = "/auth/facebook/"
-              }
-            },
-            error: function (response) {
-              console.log('CHECKED AJAX ERROR!!!');
-            }
-          });
+      //  $.ajax({
+      //      method: 'POST',
+      //      url: '/api/v1/facebook_activation',
+      //      data: { 'code': gon.code },
+      //      dataType: 'json',
+      //      success: function (response) {
+      //        if (9 === response.status) {
+      //          window.location.href = "/auth/facebook/"
+      //        }
+      //      },
+      //      error: function (response) {
+      //        console.log('CHECKED AJAX ERROR!!!');
+      //      }
+      //    });
 
-      });
+      //});
 
       $("#new_customer").validate({
         rules: {

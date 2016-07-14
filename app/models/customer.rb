@@ -160,6 +160,7 @@ class Customer < ActiveRecord::Base
   has_one :mobistar
 
   after_create :setup_step
+  #after_create :setup_facebook_credits
 
   #def after_database_authentication
     #discount = Discount.find_by_discount_code(self.activation_discount_code_id)
@@ -179,7 +180,6 @@ class Customer < ActiveRecord::Base
     self.customers_lastname = auth['extra']['raw_info']['last_name'] if auth['extra']['raw_info']['last_name'].present?
     self.customers_gender = auth['extra']['raw_info']['gender'] if auth['extra']['raw_info']['gender'].present?
     self.social_network_tag = auth['provider']
-    self.facebook_activation = 0
     authentications.build(:provider => auth['provider'], :uid => auth['uid'], :token => auth['credentials']['token'], :email => auth['extra']['raw_info']['email'])
   end
 
@@ -645,7 +645,16 @@ class Customer < ActiveRecord::Base
   end
 
   def setup_step
-    self.update_attribute(:customers_registration_step, 33) if self.promo_type == 'D'
+    self.update_attribute(:customers_registration_step, 33) if self.promo_type == 'D' && self.social_network_tag != "facebook"
   end
+
+  #def setup_facebook_credits
+  #  discount = Discount.find_by_discount_code(self.activation_discount_code_id)
+  #  activation = Activation.find_by_activation_code(self.activation_discount_code_id)
+  #  if discount.present?
+  #    self.update_attribute(:tvod_free, discount.tvod_free)
+  #    self.update_attribute(:customers_registration_step, discount.goto_step)
+  #  end
+  #end
 
 end
