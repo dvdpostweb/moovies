@@ -40,7 +40,7 @@ class AuthenticationsController < ApplicationController
               SQL
               dresold = ActiveRecord::Base.connection.exec_query(dqueryold)
 
-              if aresold
+              if aresold.present?
                 aresold.each do |r|
                   auth.customer.customers_registration_step = 100
                   auth.customer.activation_discount_code_type = 'A'
@@ -64,8 +64,8 @@ class AuthenticationsController < ApplicationController
                 end
               end
 
-              if dres.present?
-                dres.each do |r|
+              if dresold.present?
+                dresold.each do |r|
                   auth.customer.customers_registration_step = r["goto_step"]
                   auth.customer.activation_discount_code_type = 'D'
                   auth.customer.activation_discount_code_id = r["discount_code_id"]
@@ -113,7 +113,7 @@ class AuthenticationsController < ApplicationController
           SQL
           dres = ActiveRecord::Base.connection.exec_query(dquery)
 
-          if ares
+          if ares.present?
             ares.each do |r|
               customer.customers_registration_step = 100
               customer.activation_discount_code_type = 'A'
