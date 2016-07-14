@@ -39,6 +39,8 @@ class AuthenticationsController < ApplicationController
               user.tvod_free = r["tvod_free"]
             end
             if user.save(:validate => false)
+              activation = Activation.find_by_activation_code(code)
+              activation.update_attributes(:customers_id => user.to_param, :created_at => Time.now.localtime)
               flash[:notice] = t('.social.network.fbconnect.registration.new')
               sign_in_and_redirect(:customer, authentication.customer)
             else
@@ -62,6 +64,7 @@ class AuthenticationsController < ApplicationController
               user.tvod_free = r["tvod_free"]
             end
             if user.save(:validate => false)
+              DiscountUse.create(:discount_code_id => r["discount_code_id"], :customer_id => user.to_param, :discount_use_date => Time.now)
               flash[:notice] = t('.social.network.fbconnect.registration.new')
               sign_in_and_redirect(:customer, authentication.customer)
             else
@@ -91,7 +94,7 @@ class AuthenticationsController < ApplicationController
         new_auth.email = auth['extra']['raw_info']['email']
         if new_auth.save
             auth = Authentication.find_by_provider_and_uid_and_email(auth['provider'], auth['uid'], auth['extra']['raw_info']['email'])
-            #sign_in_and_redirect(:customer, auth.customer)  
+            #sign_in_and_redirect(:customer, auth.customer)
         end
       else
 
@@ -125,6 +128,8 @@ class AuthenticationsController < ApplicationController
               customer.customers_next_discount_code = r["next_discount"]
               customer.tvod_free = r["tvod_free"]
               if customer.save(:validate => false)
+                activation = Activation.find_by_activation_code(code)
+                activation.update_attributes(:customers_id => customer.to_param, :created_at => Time.now.localtime)
                 flash[:notice] = t('.social.network.fbconnect.registration.new')
                 sign_in_and_redirect(:customer, customer)
               else
@@ -144,6 +149,7 @@ class AuthenticationsController < ApplicationController
               customer.group_id = r["group_id"]
               customer.tvod_free = r["tvod_free"]
               if customer.save(:validate => false)
+                DiscountUse.create(:discount_code_id => r["discount_code_id"], :customer_id => customer.to_param, :discount_use_date => Time.now)
                 flash[:notice] = t('.social.network.fbconnect.registration.new')
                 sign_in_and_redirect(:customer, customer)
               else
@@ -164,6 +170,7 @@ class AuthenticationsController < ApplicationController
             customer.code = code
           end
           if customer.save(:validate => false)
+            DiscountUse.create(:discount_code_id => discount_default.id, :customer_id => customer.to_param, :discount_use_date => Time.now)
             flash[:notice] = t('.social.network.fbconnect.registration.new')
             sign_in_and_redirect(:customer, customer)
           else
