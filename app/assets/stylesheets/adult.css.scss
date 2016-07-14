@@ -81,14 +81,16 @@ label {
 	width: 145px;
 	height: 125px;
 	margin: 0 35px 45px 50px;
-	display: inline-block;
+	display: table;
 	background-color: #823d8d;
 	text-align: center;
 	font-size: 26px;
 }
 
 .film-block .film-box p {
-	padding: 0 5px;
+	display: table-cell;
+    vertical-align: middle;
+    text-align: center;
 }
 
 .film-block .film-box.film-box-darker {
@@ -185,7 +187,7 @@ label {
 }
 
 #alacarte-kvadrat {
-	padding-top: 30px;
+	
 }
 
 a {
