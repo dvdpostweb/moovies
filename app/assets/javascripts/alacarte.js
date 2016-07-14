@@ -187,7 +187,7 @@ $(document).ready(function(){
 		          scrollTop: eval($('#' + $(this).attr('target')).offset().top - 70)
 		      }, 1000);
 		  });
-    } else if (gon.alacarte == "alacarte") {
+    } else if (gon.alacarte == "alacarte" || gon.abo == "abo") {
       $('#alacarte-2-films').on('click', function(e) {
     		$(".ns-box").hide();
     		$(".list-default-2-films").hide();
