@@ -26,11 +26,11 @@ class Api::V1::LoginController < ApplicationController
   private
 
   def activation_code_account_activation(activation, resource, password)
-    if resource.abo_type_id == 6
-      resource.tvod_free = resource.tvod_free + activation.tvod_free
-    else
-      resource.tvod_free = activation.tvod_free
-    end
+    #if resource.abo_type_id == 6
+    resource.tvod_free = resource.tvod_free + activation.tvod_free
+    #else
+    #  resource.tvod_free = activation.tvod_free
+    #end
     resource.abo_history(38, resource.abo_type_id, activation.to_param)
     resource.code = params[:code]
     if resource.abo_type_id != 6
@@ -50,11 +50,11 @@ class Api::V1::LoginController < ApplicationController
     if discount.discount_status == 0
       invalid_discount_code_message
     else
-      if resource.abo_type_id == 6
+      #if resource.abo_type_id == 6
         resource.tvod_free = resource.tvod_free + discount.tvod_free
-      else
-        resource.tvod_free = discount.tvod_free
-      end
+      #else
+      #  resource.tvod_free = discount.tvod_free
+      #end
       resource.abo_history(38, resource.abo_type_id, discount.to_param)
       resource.code = params[:code]
       resource.step = discount.goto_step
