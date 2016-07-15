@@ -29,7 +29,7 @@ class Api::V1::ValidatorController < ApplicationController
   def set_plan
     if request.xhr?
       if params[:discount_code].present?
-        discount = Discount.find_by_discount_code(params[:code])
+        discount = Discount.find_by_discount_code(params[:discount_code])
     	  customer = current_customer
     	  customer.code = params[:discount_code]
     	  customer.step = discount.goto_step
