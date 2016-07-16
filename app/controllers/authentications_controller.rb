@@ -94,7 +94,7 @@ class AuthenticationsController < ApplicationController
         new_auth.email = auth['extra']['raw_info']['email']
         if new_auth.save
             auth = Authentication.find_by_provider_and_uid_and_email(auth['provider'], auth['uid'], auth['extra']['raw_info']['email'])
-            #sign_in_and_redirect(:customer, auth.customer)
+            sign_in_and_redirect(:customer, auth.customer)
         end
       else
 
