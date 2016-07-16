@@ -74,12 +74,13 @@ class AuthenticationsController < ApplicationController
           end
         end
 
-      #else
-      #  sign_in_and_redirect(:customer, authentication.customer)
+      else
+        sign_in_and_redirect(:customer, authentication.customer)
       end
 
-      flash[:notice] = "Signed in successfully."
-      sign_in_and_redirect(:customer, authentication.customer)
+      #flash[:notice] = "Signed in successfully."
+      #sign_in_and_redirect(:customer, authentication.customer)
+
     else
       if user.present?
         flash[:notice] = "Signed in successfully."
