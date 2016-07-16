@@ -94,78 +94,9 @@ class AuthenticationsController < ApplicationController
         #############################################################
         new_auth.email = auth['extra']['raw_info']['email']
         if new_auth.save
+					
             auth = Authentication.find_by_provider_and_uid_and_email(auth['provider'], auth['uid'], auth['extra']['raw_info']['email'])
-            #sign_in_and_redirect(:customer, auth.customer)
-
-            if code.present?
-
-              aqueryold1 = <<-SQL
-              SELECT activation_id, activation_products_id, next_abo_type, activation_group, next_discount, tvod_free
-              FROM activation_code
-              WHERE activation_code='#{code}'
-              SQL
-              aresold1 = ActiveRecord::Base.connection.exec_query(aqueryold1)
-
-              dqueryold1 = <<-SQL
-              SELECT discount_code_id, listing_products_allowed, next_abo_type, group_id, tvod_free, goto_step
-              FROM discount_code
-              WHERE discount_code='#{code}'
-              SQL
-              dresold1 = ActiveRecord::Base.connection.exec_query(dqueryold1)
-
-              if aresold1.present?
-                aresold1.each do |r|
-                  auth.customer.customers_registration_step = 100
-                  auth.customer.activation_discount_code_type = 'A'
-                  auth.customer.activation_discount_code_id = r["activation_id"]
-                  auth.customer.customers_abo_type = r["activation_products_id"]
-                  auth.customer.customers_next_abo_type = r["next_abo_type"]
-                  auth.customer.group_id = r["activation_group"]
-                  auth.customer.customers_next_discount_code = r["next_discount"]
-                  #if user.customers_abo_type == 6
-                  auth.customer.tvod_free = auth.customer.tvod_free + r["tvod_free"]
-                  #else
-                  #  user.tvod_free = r["tvod_free"]
-                  #end
-                  if auth.customer.save(:validate => false)
-                    activation = Activation.find_by_activation_code(code)
-                    activation.update_attributes(:customers_id => auth.customer.to_param, :created_at => Time.now.localtime)
-                    flash[:notice] = t('.social.network.fbconnect.registration.new')
-                    sign_in_and_redirect(:customer, auth.customer)
-                  else
-                    flash[:error] = "Error while creating a user account. Please try again."
-                    redirect_to root_url
-                  end
-                end
-              end
-
-              if dresold1.present?
-                dresold1.each do |r|
-                  auth.customer.customers_registration_step = r["goto_step"]
-                  auth.customer.activation_discount_code_type = 'D'
-                  auth.customer.activation_discount_code_id = r["discount_code_id"]
-                  auth.customer.customers_abo_type = r["listing_products_allowed"]
-                  auth.customer.customers_next_abo_type = r["next_abo_type"]
-                  auth.customer.group_id = r["group_id"]
-                  #if user.customers_abo_type == 6
-                  auth.customer.tvod_free = auth.customer.tvod_free + r["tvod_free"]
-                  #else
-                  #  user.tvod_free = r["tvod_free"]
-                  #end
-                  if auth.customer.save(:validate => false)
-                    DiscountUse.create(:discount_code_id => r["discount_code_id"], :customer_id => auth.customer.to_param, :discount_use_date => Time.now)
-                    flash[:notice] = t('.social.network.fbconnect.registration.new')
-                    sign_in_and_redirect(:customer, auth.customer)
-                  else
-                    flash[:error] = "Error while creating a user account. Please try again."
-                    redirect_to root_url
-                  end
-                end
-              end
-
-            else
-              sign_in_and_redirect(:customer, auth.customer)
-            end
+            sign_in_and_redirect(:customer, auth.customer)
 
         end
       else
