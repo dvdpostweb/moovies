@@ -18,11 +18,11 @@ class PublicPromotionsController < ApplicationController
               customer = current_customer
               customer.tvod_free = current_customer.tvod_free + activation.tvod_free
               customer.code = params[:promotion]
-              if customer.abo_type_id == 6
-                customer.step = 100
-              else
-                customer.step = 33
-              end
+              #if customer.abo_type_id == 6
+              customer.step = 100
+              #else
+              #  customer.step = 33
+              #end
               if customer.save!
                 current_customer.abo_history(38, current_customer.abo_type_id, activation.to_param)
                 activation.update_attributes(:customers_id => current_customer.to_param, :created_at => Time.now.localtime)
