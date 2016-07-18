@@ -5,10 +5,6 @@
 
       <div class="header-nav">
         <label><%= t('info.index.price_public.choose_tvod_tvod').html_safe %></label>
-        <ul>
-          <li class="plush"><%= link_to t('info.index.price_public.choose_svod_svod').html_safe, info_path(:page_name => "unlimited"), :id => 'unlimited', :class => params[:page_name] == 'unlimited' ? :active : :inactive %></li>
-          <li class="eighteen"><%= link_to t('info.index.price_public.choose_svod_adult').html_safe, info_path(:page_name => "adult"), :id => 'adult', :class => params[:page_name] == 'adult' ? :active : :inactive %></li>
-        </ul>
       </div>
       <div class="film-block">
         <div id="alacarte-2-films" class="film-box" target="alacarte-subscribe">
