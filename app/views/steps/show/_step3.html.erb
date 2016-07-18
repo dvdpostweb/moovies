@@ -3,7 +3,9 @@
 <% end %>
 <div class="step">
   <div class="logo-page"></div>
-  <label class="log-out"><%= t('promotion.newstep3.signout').html_safe %></label>
+  <%= link_to destroy_customer_session_path, :method => :delete do %>
+    <label class="log-out"><%= t('promotion.newstep3.signout') %></label>
+  <% end %>
 
   <div class="main-block">
     <label class="main-caption"><%= t('promotion.newstep3.line1').html_safe %></label>
