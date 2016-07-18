@@ -8,7 +8,7 @@ class HomeController < ApplicationController
     @new_tvod = HomeProduct.where(:country => Product.country_short_name(session[:country_id]), :kind => "tvod#{params[:kind] == :adult ? '_adult' : ''}", :locale_id => Moovies.languages[I18n.locale]).order('id asc').includes(:product => [Product.get_vod_online_name(session[:country_id]),"descriptions_#{I18n.locale}", :svod_dates])
     @discount_bottom = Discount.find(Moovies.discount["hp_bottom_#{I18n.locale}_#{params[:kind]}"])
     @newsletter = PublicNewsletter.new(params[:public_newsletter])
-    @svod_id = params[:kind] == :adult ? 4 : 1 
+    @svod_id = params[:kind] == :adult ? 4 : 1
     @tvod_id = params[:kind] == :adult ? 5 : 2
     @carousel = Landing.by_language(I18n.locale).not_expirated.order_id
     if current_customer
@@ -51,15 +51,15 @@ class HomeController < ApplicationController
       if params[:abo].blank? || ![7,8,9,10,11].include?(params[:abo].to_i)
         @error_abo = true
       end
-      if params[:carrefour_code] === "CARREFOUR" && params[:abo] === "7"
+      if params[:abo] === "7"
         redirect_to new_customer_session_path( :code => "CFB2FILMS")
-      elsif params[:carrefour_code] === "CARREFOUR" && params[:abo] === "8"
+      elsif params[:abo] === "8"
         redirect_to new_customer_session_path( :code => "CFB4FILMS")
-      elsif params[:carrefour_code] === "CARREFOUR" && params[:abo] === "9"
+      elsif params[:abo] === "9"
         redirect_to new_customer_session_path( :code => "CFB6FILMS")
-      elsif params[:carrefour_code] === "CARREFOUR" && params[:abo] === "10"
+      elsif params[:abo] === "10"
         redirect_to new_customer_session_path( :code => "CFB8FILMS")
-      elsif params[:carrefour_code] === "CARREFOUR" && params[:abo] === "11"
+      elsif params[:abo] === "11"
         redirect_to new_customer_session_path( :code => "CFB10FILMS")
       elsif params[:carrefour_code].present? && params[:carrefour_code] != "CARREFOUR"
         activation = Activation.by_name(params[:carrefour_code]).available.first
@@ -69,9 +69,9 @@ class HomeController < ApplicationController
       elsif
         @error_code = true
       end
-      if @error_code == false && @error_abo == false && params[:carrefour_code] != "CARREFOUR"
-        redirect_to new_customer_session_path( :code => params[:carrefour_code], :abo => params[:abo]) and return 
-      end
+      #if @error_code == false && @error_abo == false && params[:carrefour_code] != "CARREFOUR"
+      #  redirect_to new_customer_session_path( :code => params[:carrefour_code], :abo => params[:abo]) and return
+      #end
     end
   end
 
@@ -83,14 +83,14 @@ class HomeController < ApplicationController
     new_params = session[:sexuality] == 0 ? params.merge(:per_page => per_page, :country_id => session[:country_id], :hetero => 1, :includes => ["descriptions_#{I18n.locale}", 'vod_online_be']) : params.merge(:per_page => 50, :country_id => session[:country_id], :includes => ["descriptions_#{I18n.locale}", 'vod_online_be'])
     tvod_package_id = params[:kind] == :adult ? 5 : 2
     svod_package_id = params[:kind] == :adult ? 4 : 1
-    
+
     respond_to do |format|
-      format.html do 
+      format.html do
         @country =        Product.filter(nil, new_params.merge(:belgium => 1,  :package => Moovies.packages.invert[tvod_package_id]))
         @actor =          Product.filter(nil, new_params.merge(:belgium => 2,  :package => Moovies.packages.invert[tvod_package_id]))
         @director =       Product.filter(nil, new_params.merge(:belgium => 3,  :package => Moovies.packages.invert[tvod_package_id]))
         @land =           Product.filter(nil, new_params.merge(:belgium => 4,  :package => Moovies.packages.invert[tvod_package_id]))
-      end 
+      end
       format.json
         case params[:type]
         when "actor"
