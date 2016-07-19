@@ -36,9 +36,9 @@ module ApplicationHelper
     message = email_data_replace(mail_object.body, options)
     Emailer.public_email(email, subject, message, Rails.env == 'development' ? true : false).deliver
   end
-  
+
   def email_data_replace(text,options)
-    options.each {|key, value| 
+    options.each {|key, value|
       r = Regexp.new(key, true)
       text = text.gsub(r, value.to_s)
     }
@@ -46,7 +46,7 @@ module ApplicationHelper
   end
 
   def streaming_access?
-    session[:country_id] == 22 || session[:country_id] == 131 || session[:country_id] == 0 || session[:country_id] == 161 || (current_customer && current_customer.super_user?)
+    session[:country_id] == 22 || session[:country_id] == 131 || session[:country_id] == 0 || session[:country_id] == 161 || session[:country_id] == 381 || (current_customer && current_customer.super_user?)
   end
 
   def sort_review_for_select
@@ -133,7 +133,7 @@ module ApplicationHelper
     end
     current_filter
   end
-  
+
   def image_url(source)
     URI.join(root_url, image_path(source))
   end
@@ -180,7 +180,7 @@ module ApplicationHelper
       image = FileTest.exist?("/images/#{src}") ? image_tag(src, :size => '942x188', :alt => t(products_alt_banner)) : image_tag(src_norm, :size => '942x188', :alt => t(products_alt_banner))
 
     end
-    
+
     link_to image, path#, :target => "_blank"
 
   end
