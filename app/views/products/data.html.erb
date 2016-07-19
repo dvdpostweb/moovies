@@ -1,35 +1,42 @@
 #<%= params[:div_id]%>|||<p class="tooltips_rating stars"><%= render :partial => 'products/rating', :locals => {:product => @product, :background => @rating_color, :size => :long, :source => @source, :response_id => @response_id} %></p>
-<p class="tooltips_title currency">4,99€</p>
-<p class="tooltips_title sub-title"><%= t('homepage.popup1').html_safe %> <u><%= link_to t('homepage.popup2').html_safe, info_path(:page_name => t('routes.infos.params.abo')) %></u></p>
-<div class="play-button">
-  <div class="play-img"></div>
-  <label><%= link_to t('homepage.popup3').html_safe, info_path(:page_name => t('routes.infos.params.abo')), :id => 'abo', :class => params[:page_name] == 'abo' ? :active : :inactive %></label>
+<p class="tooltips_runtime"><%= t('products.show.product.duration') %> <%= @product.runtime %> <%= t('products.show.minutes') %></p>
+<% if @product.director && !@product.adult? %>
+<div class="director">
+  <h3><%= t('products.show.product.directed_by') %></h3>
+  <%= link_to @product.director.name, director_products_path(:director_id => @product.director.to_param) if @product.director %>
 </div>
-
-
-
-
+<% end %>
+<% if @product.adult? && @product.studio %>
+<div class="director">
+  <h3><%= t 'products.show.product.studio' %></h3>
+  <div><%= link_to @product.studio.name, studio_products_path(:studio_id => @product.studio.to_param) %></div>
+</div>
+<% end %>
+<% if !@product.actors.empty?  %>
+<div class="actors">
+   <h3><%= t 'products.show.product.actors' %></h3>
+   <%= @product.actors.collect{|actor| link_to actor.name, actor_products_path(:actor_id => actor.to_param)}.join(', ').html_safe %>
+</div>
+<% end %>
+<div class="categories">
+  <h3>
+  <%= @product.categories.collect(&:name).join(' | ') if @product.categories %>
+  </h3>
+</div>
 <div class="clear"></div>
-
-
-<div class="button-area clear-float">
-
+<% if !@product.series? %>
+<ul class="btns osc jacket">
+  <li>
+    <%= render :partial => 'products/streaming',  :locals => {:product => @product, :source => @source, :popup => false} %>
+  </li>
+  <li>
+    <%= render :partial => 'products/vod_list',  :locals => {:product => @product, :source => @source, :response_id => @response_id} %>
+  </li>
+  <% end %>
   <% if @product.trailer? %>
-    <div class="button-popup">
-      <%= link_to(t('.trailer'), product_trailer_path(:product_id => @product.to_param, :source => @source, :response_id => @response_id), :class => 'trailer', :target => :_blank) %>
-    </div>
+  <li>
+    <%= link_to(t('.trailer'), product_trailer_path(:product_id => @product.to_param, :source => @source, :response_id => @response_id), :class => 'trailer', :target => :_blank) %>
+  </li>
   <% end %>
 
-  <% if !@product.series? %>
-    <div class="button-popup button-gray">
-      <%= render :partial => 'products/vod_list',  :locals => {:product => @product, :source => @source, :response_id => @response_id} %>
-    </div>
-  <% end %>
-
-  <% if !@product.series? %>
-    <div class="button-popup1">
-      <%= render :partial => 'products/streaming',  :locals => {:product => @product, :source => @source, :popup => false} %>
-    </div>
-  <% end %>
-
-</div>
+</ul>
