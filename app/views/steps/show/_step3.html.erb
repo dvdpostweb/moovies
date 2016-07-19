@@ -19,14 +19,14 @@
       <div class="lock-img"></div>
       <div class="secure">
         <label class="server"><%= t('promotion.newstep3.serversecure1').html_safe %></label>
-        <label class="plus"><%= t('promotion.newstep3.serversecure2').html_safe %></label>
+        <label class="plus"><a href="https://payment-services.ingenico.com/be/en/online-payment-services-solutions/e-commerce" target="blank" id="secure_payment_link"><%= t('promotion.newstep3.serversecure2').html_safe %></a></label>
       </div>
     </div>
 
     <div id="accordion">
       <section id="item1">
         <p class="pointer">&#9654;</p>
-        <h1><a href="#"><%= t('promotion.newstep3.paymentoption1').html_safe %></a></h1>
+        <h1><a href=""><%= t('promotion.newstep3.paymentoption1').html_safe %></a></h1>
         <%= form_for(:customer, :url => customer_payment_methods_path(:customer_id => current_customer.to_param), :html => {:method => :put, :id => "form_step3"}) do |f| %>
           <div class="grid grid-pad">
               <div class="col-1-4">
