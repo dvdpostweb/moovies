@@ -245,7 +245,7 @@ module Moovies
     end
 
     def super_user
-      [1,2,131]
+      [1,2,61277,61248]
     end
 
     def dvdpost_ip
