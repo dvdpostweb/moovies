@@ -1,5 +1,7 @@
 class Api::V1::LoginController < ApplicationController
 
+  skip_before_filter :verify_authenticity_token
+
   def login
     if request.xhr?
       resource = Customer.find_for_database_authentication(email: params[:email])
