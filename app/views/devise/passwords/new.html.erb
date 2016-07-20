@@ -1,13 +1,25 @@
+<style>
+.text-field {
+	width: calc(100% - 44px);
+	height: 40px;
+	margin-bottom: 15px;
+	padding: 5px 20px;
+	border: 2px solid #e1e1e1;
+	color: #bdbaba;
+	font-family: Arial,Helvetica, sans-serif;
+	font-size: 19px;
+}
+
+.text-field:focus {
+	border: 2px solid #76c71e;
+	outline: none;
+}
+</style>
 <div class="step2">
 <%= link_to root_path do %>
   <%= image_tag "step2/logo.png" %>
   <% end %>
 </br>
-<div class="separator-part">
-  <div class="separator-line"></div>
-    <label class="separator-label"><%= t('.promotions.show.or') %></label>
-  <div class="separator-line"></div>
-</div>
 <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
   <%= f.email_field :email, :class => 'text-field', :placeholder => t('.email') %>
 

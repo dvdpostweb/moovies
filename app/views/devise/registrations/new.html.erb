@@ -6,11 +6,6 @@
   <%= image_tag "step2/logo.png" %>
 <% end %>
 </br>
-<div class="separator-part">
-  <div class="separator-line"></div>
-    <label class="separator-label"><%= t('.promotions.show.or') %></label>
-  <div class="separator-line"></div>
-</div>
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
 <% if @samsung %>
   <%= f.hidden_field(:samsung, :value => @samsung) %>
@@ -32,7 +27,7 @@
     </label>
   </div>
   <label class="customer_newsletter-label"><%= t('.newsletter') %></label>
-</div> 
+</div>
 <div class="links2">
   <div class="customer_newsletter_parnter">
     <%= f.check_box :newsletter_parnter, :checked => true %>
@@ -43,4 +38,3 @@
   <label class="customer_newsletter_parnter-label"><%= t('.newsletter_parnter') %></label>
 </div>
 <% end %>
-    
