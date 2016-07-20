@@ -19,6 +19,11 @@
 <%= link_to root_path do %>
   <%= image_tag "step2/logo.png" %>
   <% end %>
+	<div class="separator-part">
+		<div class="separator-line"></div>
+		<label class="separator-label"><%= t('promotions.show.or') %></label>
+		<div class="separator-line"></div>
+	</div>
 </br>
 <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
   <%= f.email_field :email, :class => 'text-field', :placeholder => t('.email') %>

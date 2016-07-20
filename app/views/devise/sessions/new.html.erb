@@ -20,6 +20,11 @@
   <%= image_tag "step2/logo.png" %>
 <% end %>
 <a href="/auth/facebook?code=<%= params[:code] %>"><button id="fb_connect_login" class="face-button"><%= t('.social.network.fbconnect') %></button></a>
+<div class="separator-part">
+	<div class="separator-line"></div>
+	<label class="separator-label"><%= t('promotions.show.or') %></label>
+	<div class="separator-line"></div>
+</div>
 </br>
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
 <% if alert && !alert.empty?%>

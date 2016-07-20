@@ -3,11 +3,6 @@
   <%= image_tag "step2/logo.png" %>
   <% end %>
 </br>
-<div class="separator-part">
-  <div class="separator-line"></div>
-    <label class="separator-label"><%= t('.promotions.show.or') %></label>
-  <div class="separator-line"></div>
-</div>
 <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
   <%= devise_error_messages! %>
   <%= f.hidden_field :reset_password_token %>
