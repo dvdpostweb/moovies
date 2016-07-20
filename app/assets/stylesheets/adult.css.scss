@@ -1,4 +1,4 @@
-/* FONTS 
+/* FONTS
 	- OpenSuns CondensedBold, sans-serif;
 	- Arial,Helvetica, sans-serif;
 
@@ -84,7 +84,9 @@ label {
 	display: table;
 	background-color: #823d8d;
 	text-align: center;
-	font-size: 26px;
+	font-family: Arial,Helvetica, sans-serif;
+	font-size: 21,7px;
+	font-weight: bold;
 }
 
 .film-block .film-box p {
@@ -121,8 +123,9 @@ label {
 .list-block .list-text {
 	width: 440px;
 	height: auto;
-	font-size: 20px;
+	font-size: 19px;
 	font-weight: normal;
+	font-family: Arial,Helvetica, sans-serif;
 	color: #000;
 	display: inline-block;
 }
@@ -139,7 +142,9 @@ label {
 	text-align: center;
 	font-weight: normal;
 	color: #823d8d;
-	font-size: 24px;
+	font-family: Arial,Helvetica, sans-serif;
+	font-size: 19px;
+	font-weight: bold;
 }
 
 .list-block .list-number.list-number-align {
@@ -187,9 +192,27 @@ label {
 }
 
 #alacarte-kvadrat {
-	
+
 }
 
 a {
     color: #fff;
+}
+
+#plush-a-la-carte {
+	font-family: Arial,Helvetica, sans-serif;
+	font-size: 26px;
+	font-weight: bold;
+}
+
+.questions {
+	font-family: Arial,Helvetica, sans-serif;
+	font-size: 21,71px;
+	font-weight: normal;
+}
+
+.conditions {
+	font-family: Arial,Helvetica, sans-serif;
+	font-size: 19px;
+	font-weight: normal;
 }
