@@ -62,7 +62,7 @@ module Moovies
         :nl => "https://plus.google.com/u/0/b/107615603373625685175/107615603373625685175"
       })
     end
-    
+
     def twitter_url
       HashWithIndifferentAccess.new.merge({
         :fr => "https://twitter.com/PlushBelgique",
@@ -126,7 +126,7 @@ module Moovies
       else
         time = 172800
       end
-      
+
       url = "http://wesecure.alphanetworks.be/Webservice?method=createToken&key=acac0d12ed9061049880bf68f20519e65aa8ecb7&filename=#{filename}&lifetime=#{time}&simultIp=1&test=#{test}"
       data = open(url, :http_basic_authentication => ["dvdpost", "sup3rnov4$$"])
       node = Hpricot(data).search('//createtoken')
@@ -136,7 +136,7 @@ module Moovies
         false
       end
     end
-    
+
     def packages
       HashWithIndifferentAccess.new.merge({
         :unlimited => 1,
@@ -239,7 +239,8 @@ module Moovies
        22 => 'be',
        131 => 'nl',
        161 => 'lu',
-       0 => 'be'
+       0 => 'be',
+       381 => 'rs'
       })
     end
 
@@ -253,7 +254,7 @@ module Moovies
         :internal => '127.0.0.2'
       })
     end
-    
+
     def ogone_pspid
       HashWithIndifferentAccess.new.merge({
         :development => 'dvdpostogonetest',
@@ -293,7 +294,7 @@ module Moovies
         :adult =>  {:imdb_id =>2, :product_id => 130546}
       })
     end
-    
+
     def hls_url(token, audio, sub)
       "http://vod.dvdpost.be/#{token}_#{audio}_#{sub}.m3u8"
     end
