@@ -18,7 +18,6 @@ Moovies::Application.routes.draw do
     localized do
       devise_for :customers, :controllers => {
         :registrations => "customers/registrations",
-        #:confirmations => "customers/confirmations",
         :sessions => "customers/sessions" }
       resources :customers do
         match 'newsletter' => 'customers#newsletter', :only => [:update]
@@ -66,7 +65,6 @@ Moovies::Application.routes.draw do
     resource :public_promotion, :only => [:edit, :update]
     match "/" => 'products#index', :as => :root_localize
     match "validation" => 'home#validation'
-    #match 'customers/reactive' => "customers#reactive"
     match 'customers/promotion' => "customers#promotion"
     devise_for :customers, :controllers => { :registrations => "customers/registrations", :confirmations => "customers/confirmations" }, :as => :old_customers
     resources :customers, :as => :old_customer do

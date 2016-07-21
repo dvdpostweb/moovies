@@ -1,5 +1,5 @@
 class StepsController < ApplicationController
-  before_filter :authenticate_customer!, :unless => :confirmation?
+  before_filter :authenticate_customer!#, :unless => :confirmation?
   before_filter :promo
   def show
     @body_id = params[:id]
@@ -32,9 +32,9 @@ class StepsController < ApplicationController
   end
 
   protected
-  def confirmation?
-    params[:id] == 'confirm'
-  end
+  #def confirmation?
+  #  params[:id] == 'confirm'
+  #end
 
   def promo
     if params[:id] == 'step3'
@@ -43,13 +43,13 @@ class StepsController < ApplicationController
       else
         @promo = Activation.find(current_customer.promo_id)
       end
-    elsif params[:id] == 'confirm'
-      if cookies[:code]
-        @promo = Discount.by_name(cookies[:code]).available.first
-        if @promo.nil?
-          @promo = Activation.by_name(cookies[:code]).available.first
-        end
-      end
-    end
+    #elsif params[:id] == 'confirm'
+    #  if cookies[:code]
+    #    @promo = Discount.by_name(cookies[:code]).available.first
+    #    if @promo.nil?
+    #      @promo = Activation.by_name(cookies[:code]).available.first
+    #    end
+    #  end
+    #end
   end
 end
