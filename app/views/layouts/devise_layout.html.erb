@@ -138,7 +138,17 @@
                 $("#password_message").text("");
                 $("#password_message").append(response.message);
               } else if (1 === response.status) {
-                window.location.href = gon.root_localize_path
+                //if (gon.moovie_id) {
+                //  if (gon.locale == "fr") {
+                //    window.location.href = "/" + gon.locale + "/nieuw/" + gon.moovie_id
+                //  } else if (gon.locale == "nl") {
+                //    window.location.href = "/" + gon.locale + "/films/" + gon.moovie_id
+                //  } else if (gon.locale == "en") {
+                //    window.location.href = "/" + gon.locale + "/movies/" + gon.moovie_id
+                //  }
+                //} else {
+                  window.location.href = gon.root_localize_path
+                //}
               } else if (3 === response.status) {
                 $("#code_info").show().fadeOut(3000);
                 $("#code_message").text("");
