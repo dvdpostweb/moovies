@@ -1,6 +1,6 @@
 class CustomersController < ApplicationController
   before_filter :authenticate_customer!, :unless => :no_customer?
-  
+
   layout :resolve_layout
 
   def index
@@ -60,25 +60,6 @@ class CustomersController < ApplicationController
     end
   end
 
-  def reactive
-    @hide_menu = true
-    if params[:code] || cookies[:code]
-      code = params[:code] || cookies[:code]
-      @discount = Discount.by_name(code).available.first
-      @activation = Activation.by_name(code).available.first
-      if @discount
-        @promo = @discount
-        cookies[:code] = { value: code, expires: 15.days.from_now }
-      elsif @activation
-        @promo = @activation
-        cookies[:code] = { value: code, expires: 15.days.from_now }
-      else
-        @default_code = Discount.find(Moovies.discount["svod_#{I18n.locale}"]).name
-        cookies[:code] = { value: @default_code, expires: 15.days.from_now } 
-      end
-    end
-  end
-
   def promotion
     @hide_menu = true
     if params[:code]
@@ -107,7 +88,7 @@ class CustomersController < ApplicationController
       redirect_to customer_path(:id => current_customer.to_param)
     end
   end
-  
+
   def newsletters_x
     #to do
     @customer = current_customer
@@ -119,14 +100,14 @@ class CustomersController < ApplicationController
       format.js {render :partial => 'customers/show/newsletters_x', :locals => {:newsletters_x => @customer.newsletters_x}}
     end
   end
-  
+
   def newsletter_x
     respond_to do |format|
-      format.html 
+      format.html
       format.js {render :layout => false}
     end
   end
-  
+
   def sexuality
     @customer = current_customer
     @customer.update_attribute(:sexuality, params[:value])
@@ -144,7 +125,7 @@ class CustomersController < ApplicationController
       if vision
         vision.update_attribute(:newsletters_partners, false)
       end
-      
+
     end
   end
 
