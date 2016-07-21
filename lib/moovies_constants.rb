@@ -239,13 +239,12 @@ module Moovies
        22 => 'be',
        131 => 'nl',
        161 => 'lu',
-       0 => 'be',
-       381 => 'rs'
+       0 => 'be'
       })
     end
 
     def super_user
-      [1,2,61277,61248,1608]
+      [1,2,61277,61248,1608,1627]
     end
 
     def dvdpost_ip
