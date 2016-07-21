@@ -4,6 +4,7 @@ class AuthenticationsController < ApplicationController
     auth = request.env["omniauth.auth"]
     params = request.env["omniauth.params"]
     code = params["code"]
+    moovie_id = params["moovie_id"]
     authentication = Authentication.find_by_provider_and_uid_and_email(auth['provider'], auth['uid'], auth['extra']['raw_info']['email'])
     user = Customer.find_by_email(auth['extra']['raw_info']['email'])
     if authentication.present?
@@ -75,7 +76,16 @@ class AuthenticationsController < ApplicationController
         end
 
       else
-        sign_in_and_redirect(:customer, authentication.customer)
+
+        product = Product.where(:products_id  => moovie_id).first
+
+        if product
+          sign_in(:customer, authentication.customer)
+          redirect_to product_path(:id => product.to_param)
+        else
+          sign_in_and_redirect(:customer, authentication.customer)
+        end
+
       end
 
     else
@@ -162,7 +172,16 @@ class AuthenticationsController < ApplicationController
 			        end
 
 			      else
-			        sign_in_and_redirect(:customer, auth.customer)
+
+              product = Product.where(:products_id  => moovie_id).first
+
+              if product
+                sign_in(:customer, auth.customer)
+                redirect_to product_path(:id => product.to_param)
+              else
+                sign_in_and_redirect(:customer, auth.customer)
+              end
+
 			      end
 
         end
@@ -242,7 +261,14 @@ class AuthenticationsController < ApplicationController
           if customer.save(:validate => false)
             DiscountUse.create(:discount_code_id => discount_default.id, :customer_id => customer.to_param, :discount_use_date => Time.now)
             #flash[:notice] = t('.social.network.fbconnect.registration.new')
-            sign_in_and_redirect(:customer, customer)
+            product = Product.where(:products_id  => moovie_id).first
+
+            if product
+              sign_in(:customer, customer)
+              redirect_to product_path(:id => product.to_param)
+            else
+              sign_in_and_redirect(:customer, customer)
+            end
           else
             flash[:error] = "Error while creating a user account. Please try again."
             redirect_to root_url
