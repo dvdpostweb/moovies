@@ -19,7 +19,7 @@
 <%= link_to root_path do %>
   <%= image_tag "step2/logo.png" %>
 <% end %>
-<a href="/auth/facebook?code=<%= params[:code] %>"><button id="fb_connect_login" class="face-button"><%= t('.social.network.fbconnect') %></button></a>
+<a href="/auth/facebook?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>"><button id="fb_connect_login" class="face-button"><%= t('.social.network.fbconnect') %></button></a>
 <div class="separator-part">
 	<div class="separator-line"></div>
 	<label class="separator-label"><%= t('promotions.show.or') %></label>
