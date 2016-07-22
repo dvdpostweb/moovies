@@ -1,7 +1,7 @@
 class Customers::RegistrationsController < Devise::RegistrationsController
 
   #layout :resolve_layout
-  
+
   def new
     @hide_footer = true
     @hide_menu = true
@@ -22,7 +22,7 @@ class Customers::RegistrationsController < Devise::RegistrationsController
         cookies[:code] = { value: code, expires: 15.days.from_now }
       else
         @default_code = Discount.find(Moovies.discount["svod_#{I18n.locale}"]).name
-        cookies[:code] = { value: @default_code, expires: 15.days.from_now } 
+        cookies[:code] = { value: @default_code, expires: 15.days.from_now }
       end
     end
     super
@@ -72,7 +72,7 @@ class Customers::RegistrationsController < Devise::RegistrationsController
               @user.save(:validate => false)
               action =
               if @promotion && @promotion.goto_step.to_i == 100
-                @promotion.class.to_s == 'Activation' ? 8 : 6 
+                @promotion.class.to_s == 'Activation' ? 8 : 6
               else
                 35
               end
@@ -127,7 +127,7 @@ class Customers::RegistrationsController < Devise::RegistrationsController
         resource.abo_active = 1 if @promotion.goto_step.to_i == 100
       end
     end
-    
+
     if resource.save
       action =
       if @promotion && @promotion.goto_step.to_i == 100
@@ -183,12 +183,12 @@ class Customers::RegistrationsController < Devise::RegistrationsController
           else
             @email = nil
           end
-        render :template => 'promotions/show', :layout => 'promo' 
+        render :template => 'promotions/show', :layout => 'promo'
       else
         respond_with resource
       end
-    end    
-    
+    end
+
   end
   protected
 

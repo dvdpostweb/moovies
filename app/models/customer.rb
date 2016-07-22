@@ -159,7 +159,7 @@ class Customer < ActiveRecord::Base
   has_many :authentications, :dependent => :delete_all
   has_one :mobistar
 
-  after_create :setup_step
+  #after_create :setup_step
 
   def apply_omniauth(auth)
     self.email = auth['extra']['raw_info']['email'] if  auth['extra']['raw_info']['email'].present?
