@@ -635,13 +635,4 @@ class Customer < ActiveRecord::Base
     self.update_attribute(:customers_registration_step, 33) if self.promo_type == 'D' && self.social_network_tag != "facebook"
   end
 
-  #def setup_facebook_credits
-  #  discount = Discount.find_by_discount_code(self.activation_discount_code_id)
-  #  activation = Activation.find_by_activation_code(self.activation_discount_code_id)
-  #  if discount.present?
-  #    self.update_attribute(:tvod_free, discount.tvod_free)
-  #    self.update_attribute(:customers_registration_step, discount.goto_step)
-  #  end
-  #end
-
 end

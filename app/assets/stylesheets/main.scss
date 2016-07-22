@@ -1796,3 +1796,107 @@ div.notice {
  .mcp {
   color: #fff;
 }
+
+/* cupid green (inspired by okcupid.com)
+*******************************************************************************/
+button.cupid-green {
+  background-color: #7fbf4d;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #7fbf4d), color-stop(100%, #63a62f));
+  background-image: -webkit-linear-gradient(top, #7fbf4d, #63a62f);
+  background-image: -moz-linear-gradient(top, #7fbf4d, #63a62f);
+  background-image: -ms-linear-gradient(top, #7fbf4d, #63a62f);
+  background-image: -o-linear-gradient(top, #7fbf4d, #63a62f);
+  background-image: linear-gradient(top, #7fbf4d, #63a62f);
+  border: 1px solid #63a62f;
+  border-bottom: 1px solid #5b992b;
+  border-radius: 3px;
+  -webkit-box-shadow: inset 0 1px 0 0 #96ca6d;
+  box-shadow: inset 0 1px 0 0 #96ca6d;
+  color: #fff;
+  font: bold 11px/1 "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+  text-shadow: 0 -1px 0 #4c9021;
+  width: 100%; }
+  button.cupid-green:hover {
+    background-color: #76b347;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #76b347), color-stop(100%, #5e9e2e));
+    background-image: -webkit-linear-gradient(top, #76b347, #5e9e2e);
+    background-image: -moz-linear-gradient(top, #76b347, #5e9e2e);
+    background-image: -ms-linear-gradient(top, #76b347, #5e9e2e);
+    background-image: -o-linear-gradient(top, #76b347, #5e9e2e);
+    background-image: linear-gradient(top, #76b347, #5e9e2e);
+    -webkit-box-shadow: inset 0 1px 0 0 #8dbf67;
+    box-shadow: inset 0 1px 0 0 #8dbf67;
+    cursor: pointer; }
+  button.cupid-green:active {
+    border: 1px solid #5b992b;
+    border-bottom: 1px solid #538c27;
+    -webkit-box-shadow: inset 0 0 8px 4px #548c29, 0 1px 0 0 #eeeeee;
+    box-shadow: inset 0 0 8px 4px #548c29, 0 1px 0 0 #eeeeee; }
+
+.icon-lock {
+  width: 48px;
+  height: 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.icon-lock .lock-top-1 {
+  width: 40%;
+  height: 40%;
+  position: absolute;
+  left: 50%;
+  margin-left: -20%;
+  top: 14%;
+  background-color: #000;
+  border-radius: 40%;
+}
+
+.icon-lock .lock-top-2 {
+  width: 24%;
+  height: 40%;
+  position: absolute;
+  left: 50%;
+  margin-left: -12%;
+  top: 22%;
+  background-color: #151517;
+  border-radius: 25%;
+}
+
+.icon-lock .lock-body {
+  width: 60%;
+  height: 48%;
+  position: absolute;
+  left: 50%;
+  margin-left: -30%;
+  bottom: 11%;
+  background-color: #000;
+  border-radius: 15%;
+}
+
+.icon-lock .lock-hole {
+  width: 16%;
+  height: 16%;
+  position: absolute;
+  left: 50%;
+  margin-left: -8%;
+  top: 51%;
+  border-radius: 100%;
+  background-color: #151517;
+}
+
+.icon-lock .lock-hole:after {
+  content: "";
+  width: 43%;
+  height: 78%;
+  position: absolute;
+  left: 50%;
+  margin-left: -20%;
+  top: 100%;
+  background-color: inherit;
+}
+
+#popup_login_text {
+	padding-top: 13px;
+	padding-right: 50px;
+	font-size: 19px;
+}
