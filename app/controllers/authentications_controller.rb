@@ -251,18 +251,20 @@ class AuthenticationsController < ApplicationController
         end
 
         if !code.present?
-          discount_code_default = "6FILMSFREE"
+          discount_code_default = "2FILMS"
           discount_default = Discount.by_name(discount_code_default).available.first
+          product = Product.where(:products_id  => moovie_id).first
           if discount_default.present?
             customer.tvod_free = discount_default.tvod_free
-            customer.step = discount_default.goto_step
+            if product
+              customer.step = 100
+            else
+              customer.step = discount_default.goto_step
+            end
             customer.code = code
           end
           if customer.save(:validate => false)
             DiscountUse.create(:discount_code_id => discount_default.id, :customer_id => customer.to_param, :discount_use_date => Time.now)
-            #flash[:notice] = t('.social.network.fbconnect.registration.new')
-            product = Product.where(:products_id  => moovie_id).first
-
             if product
               sign_in(:customer, customer)
               redirect_to product_path(:id => product.to_param)
