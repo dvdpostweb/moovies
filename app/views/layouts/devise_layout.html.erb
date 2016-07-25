@@ -107,7 +107,8 @@
               'password': $("#customer_password").val(),
               'code': gon.code,
               'moovie_id': gon.moovie_id,
-              'activation': gon.activation
+              'activation': gon.activation,
+              'samsung': gon.samsung
             },
             dataType: 'json',
             success: function (response) {
@@ -139,7 +140,7 @@
 
     } else if ((window.location.pathname == "/fr/mon-compte/sign_up") || (window.location.pathname == "/nl/mijn-account/sign_up") || (window.location.pathname == "/en/my-account/sign_up")) {
 
-      
+
 
       $("#new_customer").validate({
         rules: {
