@@ -80,10 +80,8 @@ class PromotionsController < ApplicationController
               end
             end
           else
-            if code.present? || activation.activation_code_validto_date < Date.today
-              flash[:alert] = t('session.error_alreadyused_code')
-            else
-            redirect_to new_customer_session_path(:code => params[:code])
+            if params[:code].present?
+              redirect_to new_customer_session_path(:code => params[:code])
             end
           end
         else
