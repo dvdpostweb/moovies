@@ -68,7 +68,8 @@ class Api::V1::LoginController < ApplicationController
             if activation
               activation.update_attributes(:customers_id => current_customer.to_param, :created_at => Time.now.localtime)
             end
-            success_activation_message
+            redirect_to_root_path = root_path
+            render json: { status: 4, message: redirect_to_root_path }
           end
         end
       end
