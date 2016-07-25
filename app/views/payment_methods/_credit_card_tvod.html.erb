@@ -1,3 +1,110 @@
+<% content_for :view_specific_css do %>
+    <%= stylesheet_link_tag "tvod_only_payment_step" %>
+<% end %>
+<div class="step">
+  <div class="logo-page"></div>
+  <%= link_to destroy_customer_session_path, :method => :delete do %>
+    <label class="log-out"><%= t('promotion.newstep3.signout') %></label>
+  <% end %>
+
+  <div class="main-block">
+    <label class="main-caption"><%= t('promotion.newstep3.line1').html_safe %></label>
+    <label class="main-text"><%= t('promotion.newstep3.line2').html_safe %></label>
+    <ul class="main-list">
+      <li><%= t('promotion.newstep3.line3').html_safe %> (<%= 1.month.from_now.strftime("%d/%m/%Y") %>)</li>
+      <li><%= t('promotion.newstep3.line4').html_safe %></li>
+      <li><%= t('promotion.newstep3.line5').html_safe %></li>
+    </ul>
+    <div class="lock-block">
+      <div class="lock-img"></div>
+      <div class="secure">
+        <label class="server"><%= t('promotion.newstep3.serversecure1').html_safe %></label>
+        <label class="plus"><a href="https://payment-services.ingenico.com/be/en/online-payment-services-solutions/e-commerce" target="blank" id="secure_payment_link"><%= t('promotion.newstep3.serversecure2').html_safe %></a></label>
+      </div>
+    </div>
+
+    <div id="accordion">
+      <section id="item1">
+        <p class="pointer">&#9654;</p>
+        <h1><a href=""><%= t('promotion.newstep3.paymentoption1').html_safe %></a></h1>
+        <%= form_for(:customer, :url => customer_payment_methods_path(:customer_id => current_customer.to_param), :html => {:method => :put, :id => "form_step3"}) do |f| %>
+          <div class="grid grid-pad">
+              <div class="col-1-3">
+                 <div class="content">
+                   <table>
+                    <tr>
+                      <td>
+                      <%= link_to(image_tag('visa_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'visa', :source => params[:source]
+                      ), :method => :put) %>                      </td>
+                    </tr>
+                  </table>
+                 </div>
+              </div>
+              <div class="col-1-3">
+                 <div class="content">
+                    <table>
+                      <tr>
+                      <%= link_to(image_tag('mastercard_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'mastercard', :source => params[:source]
+                      ), :method => :put) %>                      </tr>
+                    </table>
+                 </div>
+              </div>
+              <div class="col-1-3">
+                 <div class="content">
+                    <table>
+                      <tr>
+                        <td>
+                        <%= link_to(image_tag('amex_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'american Express', :source => params[:source]
+                        ), :method => :put) %>                        </td>
+                      </tr>
+                    </table>
+                 </div>
+              </div>
+          </div>
+        <% end %>
+      </section>
+      <!--
+      <section id="item2" class="ac_hidden">
+        <p class="pointer">&#9654;</p>
+        <h1><a href="#"><%= t('promotion.newstep3.paymentoption2').html_safe %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= image_tag "step3/paypal.png" %></a>
+        </h1>
+        <p>Pellentesque habitant... </p>
+      </section>
+      <section id="item3" class="ac_hidden">
+        <p class="pointer">&#9654;</p>
+        <h1>
+          <a href="#"><%= t('promotion.newstep3.paymentoption3').html_safe %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= image_tag "step3/virement.png" %></a>
+        </h1>
+        <p>Pellentesque habitant... </p>
+        <p>Pellentesque habitant... </p>
+      </section>
+    -->
+    </div>
+
+    <label class="phone-number"><%= t('promotion.newstep3.supportinfo').html_safe %></label>
+    <%= link_to t('promotion.newstep3.conditions').html_safe, info_path(:page_name => t('routes.infos.params.conditions')), class: "conditions-d-utilisation" %>
+  </div>
+</div>
+<div id='alert_cc' style="display:none">
+  <%= t('.alert_cc') %>
+</div>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script>
+  $(document).ready(function () {
+    $("#accordion section h1").click(function (e) {
+      $(this).parents().siblings("section").addClass("ac_hidden");
+      $(this).parents("section").removeClass("ac_hidden");
+      e.preventDefault();
+    });
+  });
+</script>
+
+
+
+<!--
+
+
+
 <% data = @product.description_data(true) %>
 <% product_title = data[:title] %>
 <% product_image = data[:image] %>

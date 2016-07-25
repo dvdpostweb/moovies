@@ -43,7 +43,7 @@ class ProductsController < ApplicationController
       @people = Director.find(params['director_id'])
       params['director_id'] = @people.id
     end
-    
+
     if params[:package] == Moovies.packages.invert[1]
       @meta_title = t('products.index.unlimited.meta_title')
       @meta_description = t('products.index.unlimited.meta_description')
@@ -80,20 +80,20 @@ class ProductsController < ApplicationController
         new_params = new_params.merge(:hetero => 1) if session[:sexuality] == 0
         @products = Product.filter_online(nil, new_params)
         if params[:filters]
-          @selected_countries = ProductCountry.where(:countries_id => params[:filters][:country_id]) 
+          @selected_countries = ProductCountry.where(:countries_id => params[:filters][:country_id])
           @languages = Language.by_language(I18n.locale).find(params[:filters][:audio].reject(&:empty?)).collect(&:name).join(', ') if Product.audio?(params[:filters][:audio])
           @subtitles = Subtitle.by_language(I18n.locale).find(params[:filters][:subtitles].reject(&:empty?)).collect(&:name).join(', ') if Product.subtitle?(params[:filters][:subtitles])
         end
       end
     #else
-    #  
+    #
     #  @filter = view_context.get_current_filter({})
     #  new_params = session[:sexuality] == 0 ? params.merge(:per_page => 15, :country_id => session[:country_id], :hetero => 1) : params.merge(:per_page => 15, :country_id => session[:country_id])
     #  @products = Product.filter(@filter, new_params)
     #end
     @target = cookies[:endless] == 'deactive' ?  '_self' : '_blank'
     @carousels = Landing.hit.by_language(I18n.locale).not_expirated
-    
+
     if params[:endless]
       cookies.permanent[:endless] = params[:endless]
     end
@@ -104,7 +104,7 @@ class ProductsController < ApplicationController
     if request.xhr?
       render :layout => false
     end
-      
+
   end
 
   def show
@@ -132,9 +132,9 @@ class ProductsController < ApplicationController
     @recommendations = @product.recommendations_products.includes(["descriptions_#{I18n.locale}", 'vod_online_be']).ordered
     @meta_title = t('products.show.meta_title', :name => @product_title, :default => '')
     @meta_description = t('products.show.meta_description', :name => @product_title, :default => '')
-    
+
     @response_id = params[:response_id]
-    
+
     if !request.xhr? || (request.xhr? && (params[:reviews_page] || params[:sort]))
       reviews_data = view_context.get_reviews()
       @reviews = reviews_data[:reviews]

@@ -13,9 +13,35 @@ class Api::V1::ValidatorController < ApplicationController
     end
   end
 
+  def check_presence_of_customer_email_registration
+    if request.xhr?
+      email = Customer.find_by_email(params[:customer][:email])
+      if email.present?
+        render json: FALSE
+      else
+        render json: TRUE
+      end
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
+
   def check_activation_code_presence
     if request.xhr?
-      code = Activation.find_by_activation_code(params[:code])
+      code = Activation.where(:activation_code => params[:code]).where(:customers_id => 0).first
+      if code.present?
+        render json: TRUE
+      else
+        render json: FALSE
+      end
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
+
+  def check_activation_code_presence_carrefour
+    if request.xhr?
+      code = Activation.where(:activation_code => params[:carrefour_code]).where(:customers_id => 0).first
       if code.present?
         render json: TRUE
       else

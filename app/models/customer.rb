@@ -95,6 +95,7 @@ class Customer < ActiveRecord::Base
 
   alias_attribute :step, :customers_registration_step
   alias_attribute :locked, :customers_locked__for_reconduction
+  alias_attribute :preselected_moovie, :preselected_registration_moovie_id
   validates_length_of :first_name, :minimum => 2, :on => :publish, :if => :svod?
   validates_length_of :last_name, :minimum => 2, :on => :publish, :if => :svod?
   validates_format_of :phone, :with => /^(\+)?[0-9 \-\/.]+$/, :on => :publish, :if => :svod?
@@ -217,6 +218,32 @@ class Customer < ActiveRecord::Base
       self.next_abo_type_id = @activation.next_abo_type_id
       self.group_id = @activation.group_id
       self.next_promo_id = @activation.next_discount_id
+    end
+  end
+
+  def registration_code=(code)
+    @code = code
+    @discount = Discount.by_name(code).available.first
+    @activation = Activation.by_name(code).available.first
+    if @discount
+      self.promo_type = 'D'
+      self.promo_id = @discount.id
+      self.abo_type_id = @discount.abo_type_id
+      self.next_abo_type_id = @discount.next_abo_type_id
+      self.group_id = @discount.group_id
+      self.step = @discount.goto_step
+      self.tvod_free = @discount.tvod_free
+      self.customers_abo = 1
+    elsif @activation
+      self.promo_type = 'A'
+      self.promo_id = @activation.id
+      self.abo_type_id = @activation.abo_type_id
+      self.next_abo_type_id = @activation.next_abo_type_id
+      self.group_id = @activation.group_id
+      self.next_promo_id = @activation.next_discount_id
+      self.step = 100
+      self.tvod_free = @activation.tvod_free
+      self.customers_abo = 1
     end
   end
 
