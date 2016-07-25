@@ -28,14 +28,14 @@ class Api::V1::RegistrationController < ApplicationController
         aqueryold = <<-SQL
         SELECT activation_id, activation_products_id, next_abo_type, activation_group, next_discount, tvod_free
         FROM activation_code
-        WHERE activation_code='#{code}'
+        WHERE activation_code='#{params[:code]}'
         SQL
         aresold = ActiveRecord::Base.connection.exec_query(aqueryold)
 
         dqueryold = <<-SQL
         SELECT discount_code_id, listing_products_allowed, next_abo_type, group_id, tvod_free, goto_step
         FROM discount_code
-        WHERE discount_code='#{code}'
+        WHERE discount_code='#{params[:code]}'
         SQL
         dresold = ActiveRecord::Base.connection.exec_query(dqueryold)
 
