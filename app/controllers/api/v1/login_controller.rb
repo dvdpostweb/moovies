@@ -28,16 +28,24 @@ class Api::V1::LoginController < ApplicationController
   private
 
   def activation_code_account_activation(activation, resource, password)
-    resource.tvod_free = resource.tvod_free + activation.tvod_free
-    resource.code = params[:code]
-    resource.customers_abo = 1
-    resource.step = 100
-    if resource.save!
-      if activation.update_attributes(:customers_id => resource.to_param, :created_at => Time.now.localtime)
-        if resource.valid_password?(password)
-          sign_in :customer, resource
-          resource.abo_history(38, resource.abo_type_id, activation.to_param)
-          success_activation_message
+    resource.customers_registration_step = 100
+    resource.activation_discount_code_type = 'A'
+    resource.activation_discount_code_id = activation.activation_id
+    resource.customers_abo_type = activation.activation_products_id
+    resource.customers_next_abo_type = activation.next_abo_type
+    resource.group_id = activation.activation_group
+    resource.customers_next_discount_code = activation.next_discount
+    if resource.save(validate: false)
+      resource.tvod_free = resource.tvod_free + activation.tvod_free
+      if resource.save(validate: false)
+        if activation.update_attributes(:customers_id => resource.to_param, :created_at => Time.now.localtime)
+          if resource.abo_history(38, resource.abo_type_id, activation.to_param)
+            if resource.valid_password?(password)
+              sign_in :customer, resource
+              redirect_to_root_path = root_path
+              render json: { status: 4, message: redirect_to_root_path }
+            end
+          end
         end
       end
     end
