@@ -34,9 +34,9 @@ class Api::V1::LoginController < ApplicationController
     resource.step = 100
     if resource.save!
       if activation.update_attributes(:customers_id => resource.to_param, :created_at => Time.now.localtime)
-        resource.abo_history(38, resource.abo_type_id, activation.to_param)
         if resource.valid_password?(password)
           sign_in :customer, resource
+          resource.abo_history(38, resource.abo_type_id, activation.to_param)
           success_activation_message
         end
       end
