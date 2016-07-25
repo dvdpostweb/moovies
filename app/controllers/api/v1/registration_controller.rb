@@ -50,6 +50,7 @@ class Api::V1::RegistrationController < ApplicationController
             customer.customers_next_discount_code = r["next_discount"]
             customer.tvod_free = r["tvod_free"]
             if customer.save(:validate => false)
+              sign_in :customer, customer 
               activation = Activation.find_by_activation_code(params[:code])
               activation.update_attributes(:customers_id => customer.to_param, :created_at => Time.now.localtime)
               redirect_to_root_path = root_path
@@ -71,6 +72,7 @@ class Api::V1::RegistrationController < ApplicationController
             customer.group_id = r["group_id"]
             customer.tvod_free = r["tvod_free"]
             if customer.save(:validate => false)
+              sign_in :customer, customer
               DiscountUse.create(:discount_code_id => r["discount_code_id"], :customer_id => customer.to_param, :discount_use_date => Time.now)
               redirect_to_root_path = root_path
               render json: { status: 9, message: redirect_to_root_path }
