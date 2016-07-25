@@ -62,6 +62,7 @@ Moovies::Application.configure do
   step3.css
   popup.css
   alacarte.js
+  tvod_only_payment_step.css
   )
   #config.assets.precompile += %w( photobox.css )
 

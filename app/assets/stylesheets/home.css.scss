@@ -328,7 +328,7 @@ font-weight: bold;
      font-weight: bold;
      padding-left: 27px;
  }
- 
+
 #new-alacarte-wrap .more_movies a {
       background: url(image_path('play_alacarte.gif')) no-repeat scroll 0 0 transparent;
       color: #66CCCC;
@@ -336,9 +336,9 @@ font-weight: bold;
       font-weight: bold;
       padding-left: 27px;
   }
-  
-  
-  
+
+
+
  .adult #new-infinity-wrap .more_movies a {
        background: url(image_path('play_adult.gif')) no-repeat scroll 0 0 transparent;
        color: #993399;
@@ -439,7 +439,7 @@ color:  #98d321;
 .popup.validation #movix_explain {
   color:#212A31;
     padding-top:20px;
-  
+
 }
 
 .popup.validation  #movix_explain .attention_movix {
@@ -449,7 +449,7 @@ font-family: 'Open Sans Condensed',sans-serif;
 line-height:40px;
 
  }
-  
+
 #home .load2
 {
   width:139px;
@@ -475,18 +475,18 @@ float:left;
   font-size: 30px;
     padding-left: 10px;
  }
- 
+
  #movie-free .text-explain h1 span{
   text-transform: uppercase;
   }
- 
+
   #movie-free .text-explain h2{
    color:#20400c;
     font-size: 22px;
      line-height: 24px;
        padding-left: 10px;
    }
-   
+
     #movie-free .text-explain  a.filmgratuit {
    background: #fa6818; /* Old browsers */
    background: -moz-linear-gradient(top,  #fa6818 0%, #df3a14 100%); /* FF3.6+ */
@@ -516,12 +516,12 @@ float:left;
        text-transform: uppercase;
        width: 223px;
    }
-   
-   
+
+
 
 /*   ============   for mobile   ============   */
 
-@media screen and (max-width: 480px) { 
+@media screen and (max-width: 480px) {
 
 
 
@@ -573,7 +573,7 @@ float:left;
     width: 130px;
 }
 #subscribe-wrap img {
- 
+
     display: none;
 }
 #subscribe-wrap {
@@ -597,7 +597,7 @@ float:left;
 }
 
 /* carrefour css page */
-/* FONTS 
+/* FONTS
   - OpenSuns CondensedBold, sans-serif;
   - Arial,Helvetica, sans-serif;
 
@@ -899,7 +899,7 @@ input[type="checkbox"]:checked + label span {
   width: 100%;
   font-size: 12px;
   font-family: Arial,Helvetica, sans-serif;
-  
+
 }
 .error
 {
@@ -920,4 +920,23 @@ input[type="checkbox"]:checked + label span {
 
 #carrefour-select-offer-2, #carrefour-select-offer-4, #carrefour-select-offer-6, #carrefour-select-offer-8, #carrefour-select-offer-10 {
     display:none;
+}
+
+.error {
+  width: 250px;
+  padding:15px 10px 15px 10px;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ff7400+0,ff7400+100;Orange+Flat */
+  background: #ff7400; /* Old browsers */
+  background: -moz-linear-gradient(top,  #ff7400 0%, #ff7400 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  #ff7400 0%,#ff7400 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  #ff7400 0%,#ff7400 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff7400', endColorstr='#ff7400',GradientType=0 ); /* IE6-9 */
+}
+
+.error {
+  color: #fff;
+}
+
+#carrefour_code-error {
+  display: block;
 }

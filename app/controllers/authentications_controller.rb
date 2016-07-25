@@ -39,6 +39,7 @@ class AuthenticationsController < ApplicationController
             #else
             #  user.tvod_free = r["tvod_free"]
             #end
+            user.customers_abo = 1
             if user.save(:validate => false)
               activation = Activation.find_by_activation_code(code)
               activation.update_attributes(:customers_id => user.to_param, :created_at => Time.now.localtime)
@@ -64,6 +65,7 @@ class AuthenticationsController < ApplicationController
             #else
             #  user.tvod_free = r["tvod_free"]
             #end
+            user.customers_abo = 1
             if user.save(:validate => false)
               DiscountUse.create(:discount_code_id => r["discount_code_id"], :customer_id => user.to_param, :discount_use_date => Time.now)
               #flash[:notice] = t('.social.network.fbconnect.registration.new')
@@ -135,6 +137,7 @@ class AuthenticationsController < ApplicationController
 			            #else
 			            #  user.tvod_free = r["tvod_free"]
 			            #end
+                  user.customers_abo = 1
 			            if user.save(:validate => false)
 			              activation = Activation.find_by_activation_code(code)
 			              activation.update_attributes(:customers_id => user.to_param, :created_at => Time.now.localtime)
@@ -160,6 +163,7 @@ class AuthenticationsController < ApplicationController
 			            #else
 			            #  user.tvod_free = r["tvod_free"]
 			            #end
+                  user.customers_abo = 1
 			            if user.save(:validate => false)
 			              DiscountUse.create(:discount_code_id => r["discount_code_id"], :customer_id => user.to_param, :discount_use_date => Time.now)
 			              #flash[:notice] = t('.social.network.fbconnect.registration.new')
@@ -216,6 +220,7 @@ class AuthenticationsController < ApplicationController
               customer.group_id = r["activation_group"]
               customer.customers_next_discount_code = r["next_discount"]
               customer.tvod_free = r["tvod_free"]
+              customer.customers_abo = 1
               if customer.save(:validate => false)
                 activation = Activation.find_by_activation_code(code)
                 activation.update_attributes(:customers_id => customer.to_param, :created_at => Time.now.localtime)
@@ -237,6 +242,7 @@ class AuthenticationsController < ApplicationController
               customer.customers_next_abo_type = r["next_abo_type"]
               customer.group_id = r["group_id"]
               customer.tvod_free = r["tvod_free"]
+              customer.customers_abo = 1
               if customer.save(:validate => false)
                 DiscountUse.create(:discount_code_id => r["discount_code_id"], :customer_id => customer.to_param, :discount_use_date => Time.now)
                 #flash[:notice] = t('.social.network.fbconnect.registration.new')
@@ -251,20 +257,12 @@ class AuthenticationsController < ApplicationController
         end
 
         if !code.present?
-          discount_code_default = "2FILMS"
-          discount_default = Discount.by_name(discount_code_default).available.first
-          product = Product.where(:products_id  => moovie_id).first
-          if discount_default.present?
-            customer.tvod_free = discount_default.tvod_free
-            if product
-              customer.step = 100
-            else
-              customer.step = discount_default.goto_step
-            end
-            customer.code = code
-          end
+          customer.customers_abo = 1
+          customer.step = 100
+          customer.customers_abo_type = 6
+          customer.customers_next_abo_type = 6
+          customer.customers_abo_validityto = nil
           if customer.save(:validate => false)
-            DiscountUse.create(:discount_code_id => discount_default.id, :customer_id => customer.to_param, :discount_use_date => Time.now)
             if product
               sign_in(:customer, customer)
               redirect_to product_path(:id => product.to_param)
