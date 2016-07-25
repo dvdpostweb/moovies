@@ -26,7 +26,14 @@ class Api::V1::RegistrationController < ApplicationController
       elsif !params[:activation].present? && params[:code].present?
         discount = Discount.by_name(params[:code]).available.first
         activation = Activation.by_name(params[:code]).available.first
-        customer.registration_code = params[:code]
+        customer.customers_registration_step = 100
+        customer.activation_discount_code_type = 'A'
+        customer.activation_discount_code_id = activation.activation_id
+        customer.customers_abo_type = activation.activation_products_id
+        customer.customers_next_abo_type = activation.next_abo_type
+        customer.group_id = activation.activation_group
+        customer.customers_next_discount_code = activation.next_discount
+        customer.tvod_free = user.tvod_free + r["tvod_free"]
         if customer.save(validate: false)
           sign_in :customer, customer
           if discount.present?
