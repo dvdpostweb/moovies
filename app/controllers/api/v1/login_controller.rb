@@ -28,11 +28,7 @@ class Api::V1::LoginController < ApplicationController
   private
 
   def activation_code_account_activation(activation, resource, password)
-    #if resource.abo_type_id == 6
     resource.tvod_free = resource.tvod_free + activation.tvod_free
-    #else
-    #  resource.tvod_free = activation.tvod_free
-    #end
     resource.abo_history(38, resource.abo_type_id, activation.to_param)
     resource.code = params[:code]
     resource.customers_abo = 1
@@ -54,11 +50,7 @@ class Api::V1::LoginController < ApplicationController
     if discount.discount_status == 0
       invalid_discount_code_message
     else
-      #if resource.abo_type_id == 6
       resource.tvod_free = resource.tvod_free + discount.tvod_free
-      #else
-      #  resource.tvod_free = discount.tvod_free
-      #end
       resource.abo_history(38, resource.abo_type_id, discount.to_param)
       resource.code = params[:code]
       resource.step = discount.goto_step
@@ -105,7 +97,7 @@ class Api::V1::LoginController < ApplicationController
         end
       else
         sign_in :customer, resource
-        if current_customer.preselected_registration_moovie_id? && current_customer.step == 100 # && current_customer.payment_method == 0
+        if current_customer.preselected_registration_moovie_id? && current_customer.step == 100
           p = Product.where(:products_id => current_customer.preselected_moovie).first
           if p.present?
             redirect_to_p_path = product_path(:id => p.to_param)
@@ -114,7 +106,7 @@ class Api::V1::LoginController < ApplicationController
             redirect_to_root_localize_path = root_localize_path
             render json: { status: 1, message: redirect_to_root_localize_path }
           end
-        else #if current_customer.preselected_registration_moovie_id == 0 && current_customer.step == 100
+        else
           redirect_to_root_localize_path = root_localize_path
           render json: { status: 1, message: redirect_to_root_localize_path }
         end
