@@ -127,7 +127,7 @@
                 $("#code_message").text("");
                 $("#code_message").append(response.message);
               } else if (4 === response.status) {
-                window.location.href = gon.root_localize_path
+                window.location.href = response.message
               }
             },
             error: function (response) {
