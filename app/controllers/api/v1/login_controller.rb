@@ -9,7 +9,7 @@ class Api::V1::LoginController < ApplicationController
         if !resource.valid_password?(params[:password])
           invalid_login_attempt
         else
-          regular_login(resource, params[:email], params[:password], (params[:moovie_id] if params[:moovie_id].present?))
+          regular_login(resource, params[:email], params[:password], (params[:moovie_id] if params[:moovie_id].present?), (params[:samsung] if params[:samsung].present?))
         end
       elsif params[:email].present? && params[:password].present? && params[:code].present?
         if !resource.valid_password?(params[:password])
@@ -77,7 +77,7 @@ class Api::V1::LoginController < ApplicationController
     end
   end
 
-  def regular_login(resource, email, password, moovie_id = nil)
+  def regular_login(resource, email, password, moovie_id = nil, samsung = nil)
     if resource.valid_password?(password)
       if moovie_id.present?
         sign_in :customer, resource
@@ -87,6 +87,21 @@ class Api::V1::LoginController < ApplicationController
           product = Product.where(:products_id => current_customer.preselected_registration_moovie_id).first
           redirect_to_product_path = product_path(:id => product.to_param)
           render json: { status: 1, message: redirect_to_product_path }
+        end
+      elsif samsung.present?
+        sAMSUNG = SamsungCode.available.find_by_code(samsung)
+        sign_in :customer, resource
+        customer = current_customer
+        customer.customers_abo = 1
+        customer.step = 100
+        customer.customers_abo_type = 1
+        customer.customers_next_abo_type = 1
+        customer.customers_abo_validityto = 1.year.from_now
+        if customer.save(validate: false)
+          sign_in :customer, customer
+          sAMSUNG.update_attributes(:customer_id => current_customer.to_param, :used_at => Time.now.localtime)
+          redirect_to_root_path_samsung = root_path
+          render json: { status: 9, message: redirect_to_root_path_samsung }
         end
       else
         sign_in :customer, resource
