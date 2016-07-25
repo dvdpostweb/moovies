@@ -59,11 +59,8 @@ class Api::V1::ValidatorController < ApplicationController
     	  customer = current_customer
     	  customer.code = params[:discount_code]
     	  customer.step = discount.goto_step
-        #if customer.abo_type_id == 6
+        customer.customers_abo = 1
         customer.tvod_free = customer.tvod_free + discount.tvod_free
-        #else
-        #  customer.tvod_free = discount.tvod_free
-        #end
         customer.abo_history(38, customer.abo_type_id, discount.to_param)
     	  if customer.save!
           if DiscountUse.create(:discount_code_id => current_customer.activation_discount_code_id, :customer_id => current_customer.id, :discount_use_date => Time.now.localtime)
