@@ -73,6 +73,7 @@ class PromotionsController < ApplicationController
               customer = current_customer
               customer.tvod_free = current_customer.tvod_free + activation.tvod_free if customer.tvod_only?
               customer.code = params[:code]
+              customer.customers_abo = 1
               if customer.save!
                 current_customer.abo_history(38, current_customer.abo_type_id, activation.to_param)
                 activation.update_attributes(:customers_id => current_customer.to_param, :created_at => Time.now.localtime)
