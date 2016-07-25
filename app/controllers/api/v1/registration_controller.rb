@@ -25,7 +25,7 @@ class Api::V1::RegistrationController < ApplicationController
         end
       elsif !params[:activation].present? && params[:code].present?
         discount = Discount.by_name(params[:code]).available.first
-        activation = Activation.by_name(params[:code]).available.first
+        activation = Activation.where(:activation_code => params[:code]).first
         customer.customers_registration_step = 100
         customer.activation_discount_code_type = 'A'
         customer.activation_discount_code_id = activation.activation_id
