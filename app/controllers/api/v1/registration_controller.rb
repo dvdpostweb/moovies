@@ -41,18 +41,17 @@ class Api::V1::RegistrationController < ApplicationController
 
         if aresold.present?
           aresold.each do |r|
-            user.customers_registration_step = 100
-            user.activation_discount_code_type = 'A'
-            user.activation_discount_code_id = r["activation_id"]
-            user.customers_abo_type = r["activation_products_id"]
-            user.customers_next_abo_type = r["next_abo_type"]
-            user.group_id = r["activation_group"]
-            user.customers_next_discount_code = r["next_discount"]
-            user.tvod_free = user.tvod_free + r["tvod_free"]
-            user.customers_abo = 1
-            if user.save(:validate => false)
-              activation = Activation.find_by_activation_code(code)
-              activation.update_attributes(:customers_id => user.to_param, :created_at => Time.now.localtime)
+            customer.customers_registration_step = 100
+            customer.activation_discount_code_type = 'A'
+            customer.activation_discount_code_id = r["activation_id"]
+            customer.customers_abo_type = r["activation_products_id"]
+            customer.customers_next_abo_type = r["next_abo_type"]
+            customer.group_id = r["activation_group"]
+            customer.customers_next_discount_code = r["next_discount"]
+            customer.tvod_free = r["tvod_free"]
+            if customer.save(:validate => false)
+              activation = Activation.find_by_activation_code(params[:code])
+              activation.update_attributes(:customers_id => customer.to_param, :created_at => Time.now.localtime)
               redirect_to_root_path = root_path
               render json: { status: 9, message: redirect_to_root_path }
             else
@@ -64,16 +63,15 @@ class Api::V1::RegistrationController < ApplicationController
 
         if dresold.present?
           dresold.each do |r|
-            user.customers_registration_step = r["goto_step"]
-            user.activation_discount_code_type = 'D'
-            user.activation_discount_code_id = r["discount_code_id"]
-            user.customers_abo_type = r["listing_products_allowed"]
-            user.customers_next_abo_type = r["next_abo_type"]
-            user.group_id = r["group_id"]
-            user.tvod_free = user.tvod_free + r["tvod_free"]
-            user.customers_abo = 1
-            if user.save(:validate => false)
-              DiscountUse.create(:discount_code_id => r["discount_code_id"], :customer_id => user.to_param, :discount_use_date => Time.now)
+            customer.customers_registration_step = r["goto_step"]
+            customer.activation_discount_code_type = 'D'
+            customer.activation_discount_code_id = r["discount_code_id"]
+            customer.customers_abo_type = r["listing_products_allowed"]
+            customer.customers_next_abo_type = r["next_abo_type"]
+            customer.group_id = r["group_id"]
+            customer.tvod_free = r["tvod_free"]
+            if customer.save(:validate => false)
+              DiscountUse.create(:discount_code_id => r["discount_code_id"], :customer_id => customer.to_param, :discount_use_date => Time.now)
               redirect_to_root_path = root_path
               render json: { status: 9, message: redirect_to_root_path }
             else
