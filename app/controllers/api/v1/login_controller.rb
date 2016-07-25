@@ -29,14 +29,12 @@ class Api::V1::LoginController < ApplicationController
 
   def activation_code_account_activation(activation, resource, password)
     resource.tvod_free = resource.tvod_free + activation.tvod_free
-    resource.abo_history(38, resource.abo_type_id, activation.to_param)
     resource.code = params[:code]
     resource.customers_abo = 1
-    if resource.abo_type_id != 6
-      resource.step = 33
-    end
+    resource.step = 100
     if resource.save!
       if activation.update_attributes(:customers_id => resource.to_param, :created_at => Time.now.localtime)
+        resource.abo_history(38, resource.abo_type_id, activation.to_param)
         if resource.valid_password?(password)
           sign_in :customer, resource
           success_activation_message
