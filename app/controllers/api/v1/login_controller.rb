@@ -104,11 +104,16 @@ class Api::V1::LoginController < ApplicationController
         end
       else
         sign_in :customer, resource
-        if current_customer.preselected_registration_moovie_id? && current_customer.step == 100
+        if current_customer.preselected_registration_moovie_id? #&& current_customer.step == 100
           p = Product.where(:products_id => current_customer.preselected_moovie).first
           if p.present?
-            redirect_to_p_path = product_path(:id => p.to_param)
-            render json: { status: 1, message: redirect_to_p_path }
+            if current_customer.customers_abo_payment_method != 0
+              redirect_to_p_path = root_path #product_path(:id => p.to_param)
+              render json: { status: 1, message: redirect_to_p_path }
+            else
+              redirect_to_payment_path = edit_customer_payment_methods_path(:customer_id => current_customer.to_param, :type => :credit_card_tvod, :product_id => p.to_param)
+              render json: { status: 1, message: redirect_to_payment_path }
+            end
           else
             redirect_to_root_localize_path = root_localize_path
             render json: { status: 1, message: redirect_to_root_localize_path }
