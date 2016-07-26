@@ -205,7 +205,7 @@
     </div>
 
     <label class="phone-number"><%= t('promotion.newstep3.supportinfo').html_safe %></label>
-    <%= link_to t('promotion.newstep3.conditions').html_safe, info_path(:page_name => t('routes.infos.params.conditions')), class: "conditions-d-utilisation" %>
+    <%= link_to t('promotion.newstep3.conditions').html_safe, info_path(:page_name => t('routes.infos.params.conditions')), class: "conditions-d-utilisation", target: "blank" %>
   </div>
 </div>
 <div id='alert_cc' style="display:none">
