@@ -28,7 +28,7 @@ class Api::V1::ValidatorController < ApplicationController
 
   def check_activation_code_presence
     if request.xhr?
-      code = Activation.where(:activation_code => params[:code]).where(:customers_id => 0).first
+      code = Activation.where(:activation_code => params[:code]).where(:customers_id => 0).orange.first
       if code.present?
         render json: TRUE
       else
@@ -41,7 +41,7 @@ class Api::V1::ValidatorController < ApplicationController
 
   def check_activation_code_presence_carrefour
     if request.xhr?
-      code = Activation.where(:activation_code => params[:carrefour_code]).where(:customers_id => 0).first
+      code = Activation.where(:activation_code => params[:carrefour_code]).where(:customers_id => 0).where(:activation_group => 21).first
       if code.present?
         render json: TRUE
       else
