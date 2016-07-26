@@ -28,10 +28,10 @@ class PaymentMethodsController < ApplicationController
       episode_id = 0
     elsif params[:type] == 'tvod'
       internal_com = 'tvod'
-      @product = Product.find(params[:product_id]) 
-      if @product.svod?
-        redirect_to root_localize_path() and return
-      end
+      #@product = Product.find(params[:product_id]) 
+      #if @product.svod?
+      #  redirect_to root_localize_path() and return
+      #end
       @product = Product.find(params[:product_id])
       @url_back = product_url(:id => @product.id)
       @url_ok = streaming_product_url(:id => @product.imdb_id, :season_id => @product.season_id, :episode_id => @product.episode_id)
