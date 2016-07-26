@@ -111,7 +111,7 @@ class Api::V1::LoginController < ApplicationController
               redirect_to_p_path = root_path #product_path(:id => p.to_param)
               render json: { status: 1, message: redirect_to_p_path }
             else
-              redirect_to_payment_path = edit_customer_payment_methods_path(:customer_id => current_customer.to_param, :type => :tvod, :product_id => p.to_param)
+              redirect_to_payment_path = edit_customer_payment_methods_path(:customer_id => current_customer.to_param, :type => :tvod, :product_id => p.id)
               render json: { status: 1, message: redirect_to_payment_path }
             end
           else
