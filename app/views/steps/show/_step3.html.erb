@@ -2,7 +2,9 @@
     <%= stylesheet_link_tag "step3" %>
 <% end %>
 <div class="step">
-  <div class="logo-page"></div>
+  <div class="logo-page">
+    <%= image_tag "plush_logo_fixed.jpg", height: '71', width: '129' %>
+  </div>
   <%= link_to destroy_customer_session_path, :method => :delete do %>
     <label class="log-out"><%= t('promotion.newstep3.signout') %></label>
   <% end %>

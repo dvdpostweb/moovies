@@ -39,13 +39,12 @@ label {
 	width: 129px;
 	height: 71px;
 	margin-bottom: 25px;
-	background-image: url(step3/logo.png);
 	display: inline-block;
 }
 
 .log-out {
 	font-family: Arial,Helvetica, sans-serif;
-	font-size: 19px;
+	font-size: 16px;
 	margin-top: 50px;
 	font-weight: bold;
 	display: inline-block;
@@ -65,7 +64,7 @@ label {
 	display: block;
 	color: #000;
 	font-family: Arial,Helvetica, sans-serif;
-	font-size: 26px;
+	font-size: 20px;
 	font-weight: normal;
 }
 
@@ -75,7 +74,7 @@ label {
 	display: block;
 	color: #000;
 	font-family: Arial,Helvetica, sans-serif;
-	font-size: 19px;
+	font-size: 16px;
 	font-weight: bold;
 }
 
@@ -85,7 +84,7 @@ label {
 
 .main-list li {
 	font-family: Arial,Helvetica, sans-serif;
-	font-size: 19px;
+	font-size: 15px;
 	font-weight: normal;
 	color: #000;
 	margin-bottom: 5px;
@@ -112,12 +111,12 @@ label {
 
 .secure .server {
 	display: block;
-	font-size: 20px;
+	font-size: 15px;
 	color: #000;
 }
 
 .secure .plus {
-	color: #0a4df8;
+	color: #5da50e;
 	display: block;
 	font-size: 15px;
 	font-weight: normal;
@@ -153,7 +152,7 @@ label {
 .conditions-d-utilisation {
 	margin-top: 25px;
 	display: block;
-	font-size: 19px;
+	font-size: 16px;
 	font-weight: normal;
 	color: #837f7f;
 }
@@ -165,7 +164,7 @@ label {
 #accordion h1 a {
 	color: #000;
 	font-family: Arial,Helvetica, sans-serif;
-	font-size: 19px;
+	font-size: 16px;
 	font-weight: normal;
 }
 
@@ -185,7 +184,7 @@ label {
   background-color: #fff;
   margin:0;
   padding: 20px 50px;
-  height: 32px;
+  height: 50px;
 }
 
 #accordion h1 a {
@@ -193,7 +192,7 @@ label {
 }
 #accordion section {
   overflow:hidden;
-  height:160px;
+  height:220px;
   border: 2px solid #c2c2c2;
   margin-bottom: 20px;
 }
@@ -242,7 +241,7 @@ label {
 	cursor: pointer;
 }
 
-#header, #footer {
+#header {
 	display: none;
 }
 
@@ -250,6 +249,10 @@ label {
 	color: #0000CD;
 }
 
-.flash_message, .wrap {
-  display: none;
+.wrap, .flash_message {
+    display: none;
+}
+
+#footer {
+	display: none;
 }

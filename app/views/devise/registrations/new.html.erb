@@ -74,7 +74,7 @@
 <% end %>
 <div class="step2">
 <%= link_to root_path do %>
-  <%= image_tag "step2/logo.png" %>
+  <%= image_tag "plush_logo_fixed.jpg", height: '71', width: '129' %>
 <% end %>
 <% if params[:activation].blank? %>
 <a href="/auth/facebook?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>"><button id="fb_connect_login" class="face-button"><%= t('.social.network.fbconnect') %></button></a>

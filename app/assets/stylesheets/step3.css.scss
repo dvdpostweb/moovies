@@ -39,13 +39,12 @@ label {
 	width: 129px;
 	height: 71px;
 	margin-bottom: 25px;
-	background-image: url(step3/logo.png);
 	display: inline-block;
 }
 
 .log-out {
 	font-family: Arial,Helvetica, sans-serif;
-	font-size: 19px;
+	font-size: 16px;
 	margin-top: 50px;
 	font-weight: bold;
 	display: inline-block;
@@ -65,7 +64,7 @@ label {
 	display: block;
 	color: #000;
 	font-family: Arial,Helvetica, sans-serif;
-	font-size: 26px;
+	font-size: 20px;
 	font-weight: normal;
 }
 
@@ -75,7 +74,7 @@ label {
 	display: block;
 	color: #000;
 	font-family: Arial,Helvetica, sans-serif;
-	font-size: 19px;
+	font-size: 16px;
 	font-weight: bold;
 }
 
@@ -85,7 +84,7 @@ label {
 
 .main-list li {
 	font-family: Arial,Helvetica, sans-serif;
-	font-size: 19px;
+	font-size: 15px;
 	font-weight: normal;
 	color: #000;
 	margin-bottom: 5px;
@@ -112,7 +111,7 @@ label {
 
 .secure .server {
 	display: block;
-	font-size: 20px;
+	font-size: 15px;
 	color: #000;
 }
 
@@ -153,7 +152,7 @@ label {
 .conditions-d-utilisation {
 	margin-top: 25px;
 	display: block;
-	font-size: 19px;
+	font-size: 16px;
 	font-weight: normal;
 	color: #837f7f;
 }
@@ -165,7 +164,7 @@ label {
 #accordion h1 a {
 	color: #000;
 	font-family: Arial,Helvetica, sans-serif;
-	font-size: 19px;
+	font-size: 16px;
 	font-weight: normal;
 }
 
@@ -247,4 +246,8 @@ label {
 
 #secure_payment_link {
 	color: #0000CD;
+}
+
+#lang {
+	font-size:15px;
 }
