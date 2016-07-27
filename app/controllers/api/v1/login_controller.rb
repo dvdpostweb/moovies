@@ -53,7 +53,7 @@ class Api::V1::LoginController < ApplicationController
 
   def discount_code_account_activation(discount, resource, password, activation = nil)
     activation = Activation.by_name(activation).available.first
-    if discount.discount_status == 0
+    if !resource.discount_reuse?(discount.month_before_reuse)
       invalid_discount_code_message
     else
       resource.tvod_free = resource.tvod_free + discount.tvod_free
