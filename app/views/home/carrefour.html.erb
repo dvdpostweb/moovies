@@ -1,3 +1,23 @@
+<style>
+  .error {
+  width: 250px;
+  padding:15px 10px 15px 10px;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ff7400+0,ff7400+100;Orange+Flat */
+  background: #ff7400; /* Old browsers */
+  background: -moz-linear-gradient(top,  #ff7400 0%, #ff7400 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  #ff7400 0%,#ff7400 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  #ff7400 0%,#ff7400 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff7400', endColorstr='#ff7400',GradientType=0 ); /* IE6-9 */
+}
+
+.error {
+  color: #fff;
+}
+
+#carrefour_code-error {
+  display: block;
+}
+</style>
 <div class="landing-page">
       <div class="special">
         <div class="special-offer">
@@ -25,6 +45,11 @@
         <% if @error_abo %>
           <div class='error'>
             <%= t('.abo_error') %>
+          </div>
+        <% end %>
+        <% if @error_discount_reused %>
+          <div class='error'>
+            <%= t('.error_discount_reused') %>
           </div>
         <% end %>
         <div class="choise-offer">

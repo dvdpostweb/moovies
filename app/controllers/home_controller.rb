@@ -43,35 +43,146 @@ class HomeController < ApplicationController
   end
 
   def carrefour
-    @hide_menu = true
-    @body_id = 'carrefour'
-    @error_abo = false
+    if customer_signed_in?
+      gon.carrefour_activation_code = params[:carrefour_activation_code]
+      customer = current_customer
+      @hide_menu = true
+      @body_id = 'carrefour'
+      @error_abo = false
       @error_code = false
-    if request.post?
-      if params[:abo].blank? || ![7,8,9,10,11].include?(params[:abo].to_i)
-        @error_abo = true
+      @error_discount_reused = false
+      if request.post?
+        if params[:abo].blank? || ![7,8,9,10,11].include?(params[:abo].to_i)
+          @error_abo = true
+        end
+        if params[:abo] === "7"
+          activation = Activation.find_by_activation_code(params[:carrefour_code])
+          discount = Discount.find_by_discount_code("CFB2FILMS")
+          if !customer.discount_reuse?(discount.month_before_reuse)
+            @error_discount_reused = true
+          else
+            customer.tvod_free = customer.tvod_free + discount.tvod_free
+            customer.abo_history(38, customer.abo_type_id, discount.to_param)
+            customer.code = "CFB2FILMS"
+            customer.step = discount.goto_step
+            customer.customers_abo = 1
+            if customer.save!
+              if DiscountUse.create(:discount_code_id => discount.id, :customer_id => customer.to_param, :discount_use_date => Time.now)
+                if activation.update_attributes(:customers_id => customer.to_param, :created_at => Time.now.localtime)
+                  redirect_to root_path
+                end
+              end
+            end
+          end
+        elsif params[:abo] === "8"
+          activation = Activation.find_by_activation_code(params[:carrefour_code])
+          discount = Discount.find_by_discount_code("CFB4FILMS")
+          if !customer.discount_reuse?(discount.month_before_reuse)
+            @error_discount_reused = true
+          else
+            customer.tvod_free = customer.tvod_free + discount.tvod_free
+            customer.abo_history(38, customer.abo_type_id, discount.to_param)
+            customer.code = "CFB4FILMS"
+            customer.step = discount.goto_step
+            customer.customers_abo = 1
+            if customer.save!
+              if DiscountUse.create(:discount_code_id => discount.id, :customer_id => customer.to_param, :discount_use_date => Time.now)
+                if activation.update_attributes(:customers_id => customer.to_param, :created_at => Time.now.localtime)
+                  redirect_to root_path
+                end
+              end
+            end
+          end
+        elsif params[:abo] === "9"
+          activation = Activation.find_by_activation_code(params[:carrefour_code])
+          discount = Discount.find_by_discount_code("CFB6FILMS")
+          if !customer.discount_reuse?(discount.month_before_reuse)
+            @error_discount_reused = true
+          else
+            customer.tvod_free = customer.tvod_free + discount.tvod_free
+            customer.abo_history(38, customer.abo_type_id, discount.to_param)
+            customer.code = "CFB6FILMS"
+            customer.step = discount.goto_step
+            customer.customers_abo = 1
+            if customer.save!
+              if DiscountUse.create(:discount_code_id => discount.id, :customer_id => customer.to_param, :discount_use_date => Time.now)
+                if activation.update_attributes(:customers_id => customer.to_param, :created_at => Time.now.localtime)
+                  redirect_to root_path
+                end
+              end
+            end
+          end
+        elsif params[:abo] === "10"
+          activation = Activation.find_by_activation_code(params[:carrefour_code])
+          discount = Discount.find_by_discount_code("CFB8FILMS")
+          if !customer.discount_reuse?(discount.month_before_reuse)
+            @error_discount_reused = true
+          else
+            customer.tvod_free = customer.tvod_free + discount.tvod_free
+            customer.abo_history(38, customer.abo_type_id, discount.to_param)
+            customer.code = "CFB8FILMS"
+            customer.step = discount.goto_step
+            customer.customers_abo = 1
+            if customer.save!
+              if DiscountUse.create(:discount_code_id => discount.id, :customer_id => customer.to_param, :discount_use_date => Time.now)
+                if activation.update_attributes(:customers_id => customer.to_param, :created_at => Time.now.localtime)
+                  redirect_to root_path
+                end
+              end
+            end
+          end
+        elsif params[:abo] === "11"
+          activation = Activation.find_by_activation_code(params[:carrefour_code])
+          discount = Discount.find_by_discount_code("CFB10FILMS")
+          if !customer.discount_reuse?(discount.month_before_reuse)
+            @error_discount_reused = true
+          else
+            customer.tvod_free = customer.tvod_free + discount.tvod_free
+            customer.abo_history(38, customer.abo_type_id, discount.to_param)
+            customer.code = "CFB10FILMS"
+            customer.step = discount.goto_step
+            customer.customers_abo = 1
+            if customer.save!
+              if DiscountUse.create(:discount_code_id => discount.id, :customer_id => customer.to_param, :discount_use_date => Time.now)
+                if activation.update_attributes(:customers_id => customer.to_param, :created_at => Time.now.localtime)
+                  redirect_to root_path
+                end
+              end
+            end
+          end
+        end
       end
-      if params[:abo] === "7"
-        redirect_to new_customer_session_path( :activation => params[:carrefour_code], :code => "CFB2FILMS")
-      elsif params[:abo] === "8"
-        redirect_to new_customer_session_path( :activation => params[:carrefour_code], :code => "CFB4FILMS")
-      elsif params[:abo] === "9"
-        redirect_to new_customer_session_path( :activation => params[:carrefour_code], :code => "CFB6FILMS")
-      elsif params[:abo] === "10"
-        redirect_to new_customer_session_path( :activation => params[:carrefour_code], :code => "CFB8FILMS")
-      elsif params[:abo] === "11"
-        redirect_to new_customer_session_path( :activation => params[:carrefour_code], :code => "CFB10FILMS")
-      elsif params[:carrefour_code].present? && params[:carrefour_code] != "CARREFOUR"
-        activation = Activation.by_name(params[:carrefour_code]).available.first
-        unless activation
+    else
+      @hide_menu = true
+      @body_id = 'carrefour'
+      @error_abo = false
+        @error_code = false
+      if request.post?
+        if params[:abo].blank? || ![7,8,9,10,11].include?(params[:abo].to_i)
+          @error_abo = true
+        end
+        if params[:abo] === "7"
+          redirect_to new_customer_session_path( :activation => params[:carrefour_code], :code => "CFB2FILMS")
+        elsif params[:abo] === "8"
+          redirect_to new_customer_session_path( :activation => params[:carrefour_code], :code => "CFB4FILMS")
+        elsif params[:abo] === "9"
+          redirect_to new_customer_session_path( :activation => params[:carrefour_code], :code => "CFB6FILMS")
+        elsif params[:abo] === "10"
+          redirect_to new_customer_session_path( :activation => params[:carrefour_code], :code => "CFB8FILMS")
+        elsif params[:abo] === "11"
+          redirect_to new_customer_session_path( :activation => params[:carrefour_code], :code => "CFB10FILMS")
+        elsif params[:carrefour_code].present? && params[:carrefour_code] != "CARREFOUR"
+          activation = Activation.by_name(params[:carrefour_code]).available.first
+          unless activation
+            @error_code = true
+          end
+        elsif
           @error_code = true
         end
-      elsif
-        @error_code = true
+        #if @error_code == false && @error_abo == false && params[:carrefour_code] != "CARREFOUR"
+        #  redirect_to new_customer_session_path( :code => params[:carrefour_code], :abo => params[:abo]) and return
+        #end
       end
-      #if @error_code == false && @error_abo == false && params[:carrefour_code] != "CARREFOUR"
-      #  redirect_to new_customer_session_path( :code => params[:carrefour_code], :abo => params[:abo]) and return
-      #end
     end
   end
 
