@@ -160,6 +160,8 @@ class Customer < ActiveRecord::Base
   has_many :authentications, :dependent => :delete_all
   has_one :mobistar
 
+  #scope :freetrial_used_codes, :conditions=>['activation_discount_code_id = 263 OR activation_discount_code_id = 264 OR activation_discount_code_id = 264']
+
   #after_create :setup_step
 
   def apply_omniauth(auth)

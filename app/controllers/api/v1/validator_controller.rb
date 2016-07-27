@@ -39,6 +39,22 @@ class Api::V1::ValidatorController < ApplicationController
     end
   end
 
+  def check_activation_code_presence_logedin
+    if request.xhr?
+      orange = Activation.where(:activation_code => params[:promotion]).where(:customers_id => 0).orange.first
+      careefour = Activation.where(:activation_code => params[:promotion]).where(:customers_id => 0).where(:activation_group => 21).first
+      if orange.present?
+        render json: TRUE
+      elsif !orange.present?
+        render json: FALSE
+      elsif careefour.present?
+        render :text => carrefour_path(:carrefour_activation_code => params[:promotion]); 
+      end
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
+
   def check_activation_code_presence_carrefour
     if request.xhr?
       code = Activation.where(:activation_code => params[:carrefour_code]).where(:customers_id => 0).where(:activation_group => 21).first

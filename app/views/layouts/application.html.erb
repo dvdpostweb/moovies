@@ -112,6 +112,11 @@
 
       if (window.location.pathname == "/" + gon.locale + "/carrefour") {
 
+        if (gon.carrefour_activation_code) {
+          $('.code-input').val("");
+          $('.code-input').val($('.code-input').val() + gon.carrefour_activation_code);
+        }
+
         $("#form_carrefour").validate({
           rules: {
             'carrefour_code': {
@@ -153,6 +158,8 @@
     }
 
   </script>
+
+
 
   </body>
 </html>

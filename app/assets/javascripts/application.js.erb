@@ -70,7 +70,13 @@ $(function() {
     }
     else
     {
-      html_item =  $("#public_promo #status").html('')
+      loader = 'ajax-loader.gif';
+      $("#public_promo").ajaxSubmit(options_norm);
+      html_item =  $("#public_promo #status")
+      content = html_item.html();
+      loader = 'ajax-loader.gif';
+      html_item.html("<div style='height:42px'><img src='/assets/"+loader+"'/></div>");
+      //html_item =  $("#public_promo #status").html('')
     }
       return false; // prevent default behaviour
 

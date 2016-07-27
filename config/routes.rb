@@ -140,6 +140,7 @@ Moovies::Application.routes.draw do
       match "check_presence_of_customer_email" => "validator#check_presence_of_customer_email"
       match "check_presence_of_customer_email_registration" => "validator#check_presence_of_customer_email_registration"
       match "check_presence_of_activation_code" => "validator#check_activation_code_presence"
+      match "check_presence_of_activation_code_logedin" => "validator#check_activation_code_presence_logedin"
       match "check_presence_of_activation_code_carrefour" => "validator#check_activation_code_presence_carrefour"
       match "activate_new_plan" => "validator#set_plan"
       match "login" => "login#login"
