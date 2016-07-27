@@ -9,6 +9,8 @@ class Api::V1::RegistrationController < ApplicationController
       customer.password = params[:password] if params[:password].present?
       customer.password_confirmation = params[:password_confirmation] if params[:password_confirmation].present?
       customer.customers_abo = 1
+      customer.customers_newsletter = params[:customers_newsletter] if params[:customers_newsletter].present?
+      customer.customers_newsletterpartner = params[:customers_newsletterpartner] if params[:customers_newsletterpartner].present?
       if params[:moovie_id].present?
         product = Product.where(:products_id => params[:moovie_id]).first
         if product

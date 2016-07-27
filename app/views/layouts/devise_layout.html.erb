@@ -140,7 +140,27 @@
 
     } else if ((window.location.pathname == "/fr/mon-compte/sign_up") || (window.location.pathname == "/nl/mijn-account/sign_up") || (window.location.pathname == "/en/my-account/sign_up")) {
 
+      if ($("#customer_newsletter").is(':checked')) {
+        customers_newsletter = 1
+        $("#customer_newsletter").click(function() {
+          if ($(this).is(':checked')) {
+            customers_newsletter = 1
+          } else {
+            customers_newsletter = 0
+          }
+        });
+      }
 
+      if ($("#customer_newsletter_parnter").is(':checked')) {
+        customers_newsletterpartner = 1
+        $("#customer_newsletter_parnter").click(function() {
+          if ($(this).is(':checked')) {
+            customers_newsletterpartner = 1
+          } else {
+            customers_newsletterpartner = 0
+          }
+        });
+      }
 
       $("#new_customer").validate({
         rules: {
@@ -186,7 +206,9 @@
               'password_confirmation': $("#customer_password_confirmation").val(),
               'code': gon.code,
               'moovie_id': gon.moovie_id,
-              'activation': gon.activation
+              'activation': gon.activation,
+              'customers_newsletter': customers_newsletter,
+              'customers_newsletterpartner': customers_newsletterpartner
             },
             dataType: 'json',
             success: function (response) {
