@@ -1,6 +1,6 @@
 
   <%- if controller_name != 'sessions' %>
-    <%= link_to t('.sign_in'), new_session_path(resource_name, :code => params[:code], :activation => params[:activation]), class: "bottom-page-link" %><br />
+    <%= link_to t('.sign_in'), new_session_path(resource_name, :code => params[:code], :activation => params[:activation]), class: "bottom-page-link" %><br /><br />
   <% end -%>
 
   <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
