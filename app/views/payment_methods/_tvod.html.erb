@@ -8,7 +8,29 @@
   <% end %>
 
   <div class="main-block">
+
+    <% data = @product.description_data(true) %>
+    <% product_title = data[:title] %>
+    <% product_image = data[:image] %>
+    <div id="step_wrap">
+    <div class="paiement_form">
+    <div class="film_infos" >
+      <div id="left_part">
+        <%= link_to(image_tag(product_image, :size => '100x150') ,product_path(:id => @product.to_param)) %>
+      </div>
+      <div id="right_part">
+        <p><%= t('.location') %> <strong><%= !@product.series? ? product_title : @product.episode_title %></strong> </p>
+        <p><%= t('.price') %> <strong> <%= current_customer && current_customer.tvod_only? ? @product.get_vod_online(session[:country_id]).first.tvod_price : @product.get_vod_online(session[:country_id]).first.ppv_price %>€</strong></p>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    </div>
+    </div>
+    </br>
+    </br>
+    </br>
     <label class="main-caption"><%= t('promotion.newstep3.line1').html_safe %></label>
+
     <div class="lock-block">
       <div class="lock-img"></div>
       <div class="secure">
