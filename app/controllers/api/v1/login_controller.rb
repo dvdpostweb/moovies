@@ -54,7 +54,7 @@ class Api::V1::LoginController < ApplicationController
   def discount_code_account_activation(discount, resource, password, activation = nil)
     activation = Activation.by_name(activation).available.first
     if !resource.discount_reuse?(discount.month_before_reuse)
-      invalid_discount_code_message
+      invalid_discount_code_message_reused
     else
       resource.tvod_free = resource.tvod_free + discount.tvod_free
       resource.abo_history(38, resource.abo_type_id, discount.to_param)
@@ -138,6 +138,10 @@ class Api::V1::LoginController < ApplicationController
     render json: { status: 5, message: arleady_used_code_messages }
   end
 
+  def invalid_discount_code_message_reused
+    render json: { status: 5, message: discount_code_reused_messages }
+  end
+
   def invalid_activation_code_message
     render json: { status: 3, message: arleady_used_code_messages }
   end
@@ -156,6 +160,12 @@ class Api::V1::LoginController < ApplicationController
     return "Le code est pas valide" if I18n.locale == :fr
     return "De code is niet geldig" if I18n.locale == :nl
     return "The code is not valid" if I18n.locale == :en
+  end
+
+  def discount_code_reused_messages
+    return "Vous ne pouvez pas bénéficier de cette promotion" if I18n.locale == :fr
+    return "Je kunt niet profiteren van deze promotie" if I18n.locale == :nl
+    return "You can not benefit from this promotion" if I18n.locale == :en
   end
 
 end

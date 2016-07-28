@@ -388,6 +388,14 @@ $(document).ready(function(){
             success: function (response) {
               if (1 === response.status) {
                 window.location.href = "/" + gon.locale + "/steps/step3"
+              } else if (2 === response.status) {
+              	$.toast({
+				    heading: infoMessage(),
+				    text: textMessage(),
+				    icon: 'info',
+				    loader: true,
+				    loaderBg: '#9EC600'
+				})
               }
             },
             error: function (response) {
@@ -403,12 +411,20 @@ $(document).ready(function(){
             url: '/api/v1/activate_new_plan',
             data: {
               'customer_email': gon.current_customer.email,
-              'discount_code': "6FILMS"
+              'discount_code': "4FILMS"
             },
             dataType: 'json',
             success: function (response) {
               if (1 === response.status) {
                 window.location.href = "/" + gon.locale + "/steps/step3"
+              } else if (2 === response.status) {
+              	$.toast({
+				    heading: infoMessage(),
+				    text: textMessage(),
+				    icon: 'info',
+				    loader: true,        
+				    loaderBg: '#9EC600'
+				})
               }
             },
             error: function (response) {
@@ -424,12 +440,20 @@ $(document).ready(function(){
             url: '/api/v1/activate_new_plan',
             data: {
               'customer_email': gon.current_customer.email,
-              'discount_code': "8FILMS"
+              'discount_code': "6FILMS"
             },
             dataType: 'json',
             success: function (response) {
               if (1 === response.status) {
                 window.location.href = "/" + gon.locale + "/steps/step3"
+              } else if (2 === response.status) {
+              	$.toast({
+				    heading: infoMessage(),
+				    text: textMessage(),
+				    icon: 'info',
+				    loader: true,       
+				    loaderBg: '#9EC600' 
+				})
               }
             },
             error: function (response) {
@@ -451,6 +475,14 @@ $(document).ready(function(){
           success: function (response) {
             if (1 === response.status) {
               window.location.href = "/" + gon.locale + "/steps/step3"
+            } else if (2 === response.status) {
+              	$.toast({
+				    heading: infoMessage(),
+				    text: textMessage(),
+				    icon: 'info',
+				    loader: true, 
+				    loaderBg: '#9EC600'
+				})
             }
           },
           error: function (response) {
@@ -471,6 +503,14 @@ $(document).ready(function(){
           success: function (response) {
             if (1 === response.status) {
               window.location.href = "/" + gon.locale + "/steps/step3"
+            } else if (2 === response.status) {
+              	$.toast({
+				    heading: infoMessage(),
+				    text: textMessage(),
+				    icon: 'info',
+				    loader: true,        
+				    loaderBg: '#9EC600'
+				})
             }
           },
           error: function (response) {
@@ -668,3 +708,23 @@ $(document).ready(function(){
 		  });
     }
 });
+
+function infoMessage() {
+if (gon.locale == "fr") {
+  return "INFO"
+} else if (gon.locale == "nl") {
+  return "INFO"
+} else if (gon.locale == "en") {
+  return "INFO"
+}
+}
+
+function textMessage() {
+if (gon.locale == "fr") {
+  return "Vous ne pouvez pas bénéficier de cette promotion"
+} else if (gon.locale == "nl") {
+  return "Je kunt niet profiteren van deze promotie"
+} else if (gon.locale == "en") {
+  return "You can not benefit from this promotion"
+}
+}
