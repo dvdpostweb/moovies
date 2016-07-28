@@ -39,22 +39,6 @@ class Api::V1::ValidatorController < ApplicationController
     end
   end
 
-  def check_activation_code_presence_logedin
-    if request.xhr?
-      orange = Activation.where(:activation_code => params[:promotion]).where(:customers_id => 0).orange.first
-      careefour = Activation.where(:activation_code => params[:promotion]).where(:customers_id => 0).where(:activation_group => 21).first
-      if orange.present?
-        render json: TRUE
-      elsif !orange.present?
-        render json: FALSE
-      elsif careefour.present?
-        render :text => carrefour_path(:carrefour_activation_code => params[:promotion]); 
-      end
-    else
-      raise ActionController::RoutingError.new('Not Found')
-    end
-  end
-
   def check_activation_code_presence_carrefour
     if request.xhr?
       code = Activation.where(:activation_code => params[:carrefour_code]).where(:customers_id => 0).where(:activation_group => 21).first
@@ -73,17 +57,21 @@ class Api::V1::ValidatorController < ApplicationController
       if params[:discount_code].present?
         discount = Discount.find_by_discount_code(params[:discount_code])
     	  customer = current_customer
-    	  customer.code = params[:discount_code]
-    	  customer.step = discount.goto_step
-        customer.customers_abo = 1
-        customer.tvod_free = customer.tvod_free + discount.tvod_free
-        customer.abo_history(38, customer.abo_type_id, discount.to_param)
-    	  if customer.save!
-          if DiscountUse.create(:discount_code_id => current_customer.activation_discount_code_id, :customer_id => current_customer.id, :discount_use_date => Time.now.localtime)
-            render :json => { :status => 1 }
-          end
+        if !customer.discount_reuse?(discount.month_before_reuse)
+          render :json => { :status => 2 }
         else
-          render :json => { :status => 0 }
+          customer.code = params[:discount_code]
+          customer.step = discount.goto_step
+          customer.customers_abo = 1
+          customer.tvod_free = customer.tvod_free + discount.tvod_free
+          customer.abo_history(38, customer.abo_type_id, discount.to_param)
+          if customer.save!
+            if DiscountUse.create(:discount_code_id => current_customer.activation_discount_code_id, :customer_id => current_customer.id, :discount_use_date => Time.now.localtime)
+              render :json => { :status => 1 }
+            end
+          else
+            render :json => { :status => 0 }
+          end
         end
       end
     else
