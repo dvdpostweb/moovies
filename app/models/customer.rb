@@ -162,6 +162,10 @@ class Customer < ActiveRecord::Base
 
   #scope :freetrial_used_codes, :conditions=>['activation_discount_code_id = 263 OR activation_discount_code_id = 264 OR activation_discount_code_id = 264']
 
+  def have_freetrial_codes?
+    (activation_discount_code_id == 263 || activation_discount_code_id == 264 || activation_discount_code_id == 264)
+  end
+
   #after_create :setup_step
 
   def apply_omniauth(auth)

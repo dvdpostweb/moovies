@@ -11,9 +11,13 @@
 
   <div class="main-block">
     <label class="main-caption"><%= t('promotion.newstep3.line1').html_safe %></label>
-    <label class="main-text"><%= t('promotion.newstep3.line2').html_safe %></label>
+    <% if current_customer.have_freetrial_codes? %>
+      <label class="main-text"><%= t('promotion.newstep3.line2').html_safe %></label>
+    <% end %>
     <ul class="main-list">
-      <li><%= t('promotion.newstep3.line3').html_safe %> (<%= 1.month.from_now.strftime("%d/%m/%Y") %>)</li>
+      <% if current_customer.have_freetrial_codes? %>
+        <li><%= t('promotion.newstep3.line3').html_safe %> (<%= 1.month.from_now.strftime("%d/%m/%Y") %>)</li>
+      <% end %>
       <li><%= t('promotion.newstep3.line4').html_safe %></li>
       <li><%= t('promotion.newstep3.line5').html_safe %></li>
     </ul>
