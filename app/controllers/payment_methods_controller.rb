@@ -34,7 +34,7 @@ class PaymentMethodsController < ApplicationController
       end
       @product = Product.find(params[:product_id])
       @url_back = product_url(:id => @product.id)
-      @url_ok = product_url(:id => @product.id) #streaming_product_url(:id => @product.imdb_id, :season_id => @product.season_id, :episode_id => @product.episode_id)
+      @url_ok = streaming_product_url(:id => @product.imdb_id, :season_id => @product.season_id, :episode_id => @product.episode_id)
       @price = @product.get_vod_online(session[:country_id]).first.tvod_price
       @com = t 'payment_methods.tvod', :default => 'payment plush tvod'
       product_id = @product.imdb_id
