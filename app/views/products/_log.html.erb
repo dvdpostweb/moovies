@@ -1,3 +1,4 @@
+<% if streaming_access? %>
 <a href="/auth/facebook?moovie_id=<%= @product.products_id %>"><button id="fb_connect_login" class="face-button-popup"><%= t('.social.network.fbconnect') %></button></a>
 <h2><%= t('.log') %></h2> <br>
 <%= link_to t('.login'), new_customer_session_path(:moovie_id => @product.products_id), :id => :login %><br /><br />
@@ -17,14 +18,6 @@
       <div id="status"></div>
   <% end %>
 
-<!--
-<script>
-	$(document).ready(function() {
-		$('#button_new_account').click(function(){
-			if($.trim($('#promotion').val()) == ''){
-				alert('Input can not be left blank');
-			}
-		});
-	});
-</script>
--->
+<% else %>
+ <%= render "no_access" %>
+<% end %>
