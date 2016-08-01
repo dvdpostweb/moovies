@@ -1,12 +1,12 @@
 <div id="infostvod">
 
   <p>
-    <%= link_to  t('.sign_up').html_safe, edit_customer_payment_methods_path(:customer_id => current_customer.to_param, :type => :tvod, :product_id => @product.id, :source => params[:source]), :class => 'essaigratuit osc btn' %>
+    <%= link_to  t('.sign_up').html_safe, edit_customer_payment_methods_path(:customer_id => current_customer.to_param, :type => :tvod, :product_id => @product.id, :source => 0), :class => 'essaigratuit osc btn' %>
   </p>
   <!--
-  <h1><%= t('.tvod_title') %></h1>
-  <%= t(".tvod_price_#{params[:kind]}", :link => info_path(:page_name => t('routes.infos.params.abo'))).html_safe %>
-  <%= link_to  t('.click_here', :price => @product.get_vod_online(session[:country_id]).first.tvod_price).html_safe, edit_customer_payment_methods_path(:customer_id => current_customer.to_param, :type => :credit_card_tvod, :product_id => @product.id, :source => params[:source]), :class => 'alacarte price' %>
+  <h1><#%= t('.tvod_title') %></h1>
+  <#%= t(".tvod_price_#{params[:kind]}", :link => info_path(:page_name => t('routes.infos.params.abo'))).html_safe %>
+  <#%= link_to  t('.click_here', :price => @product.get_vod_online(session[:country_id]).first.tvod_price).html_safe, edit_customer_payment_methods_path(:customer_id => current_customer.to_param, :type => :credit_card_tvod, :product_id => @product.id, :source => params[:source]), :class => 'alacarte price' %>
 -->
 
 </div>

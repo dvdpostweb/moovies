@@ -21,12 +21,12 @@
     <div class="tooltips_tvod" style='display:none'>
       <p class="tooltips_description">
         <!--
-        <%= t("products.sign_up.tvod_price_description_#{params[:kind]}").html_safe %><br/> <br/>
+        <#%= t("products.sign_up.tvod_price_description_#{params[:kind]}").html_safe %><br/> <br/>
         <!--
-        <%= link_to t('products.sign_up.sign_up'), info_path(:page_name => t('routes.infos.params.abo')), :class => 'essaigratuit osc btn' %>
+        <#%= link_to t('products.sign_up.sign_up'), info_path(:page_name => t('routes.infos.params.abo')), :class => 'essaigratuit osc btn' %>
         -->
         <% if @product.present? %>
-        <%= link_to  t('.sign_up').html_safe, edit_customer_payment_methods_path(:customer_id => current_customer.to_param, :type => :tvod, :product_id => @product.id, :source => params[:source]), :class => 'essaigratuit osc btn' %>
+        <%= link_to  t('.sign_up').html_safe, edit_customer_payment_methods_path(:customer_id => current_customer.to_param, :type => :tvod, :product_id => @product.id, :source => 0), :class => 'essaigratuit osc btn' %>
         <% end %>
       </p>
     </div>
