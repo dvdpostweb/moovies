@@ -70,7 +70,7 @@ class Customer < ActiveRecord::Base
   after_save :set_samsung
   before_save :get_code_from_samsung
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable#, :trackable
+         :recoverable, :rememberable, :trackable
 
   alias_attribute :abo_active, :customers_abo
   alias_attribute :last_name, :customers_lastname
