@@ -47,7 +47,7 @@ role :db, domain,  :primary => true
 #############################################################
 
 set :scm, :git
-set :branch, "production_2"
+set :branch, "production"
 set :scm_user, 'it@dvdpost.be'
 set :scm_passphrase, "[y'|\E7U158]9*"
 set :repository, "git@github.com:dvdpost/moovies.git"
