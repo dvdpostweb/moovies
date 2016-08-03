@@ -13,9 +13,15 @@
         <%= product_image_tag product_image, :width => 125 %>
       <% end %>
       <div class="tooltips" style="display:none">
-        <p class="tooltips_title"><%= product.smart_title %> (<%= product.year %>)</p>
-        <p class="tooltips_description"><%= truncate_html(data[:description].text, :length => 500) if data[:description] %> </p>
-        <div class="tooltips_other" id = "<%= div_id %>">loading</div>
+        <div class="main-part">
+          <p class="tooltips_title"><%= product.smart_title %> (<%= product.year %>)</p>
+          <p class="tooltips_description"><%= truncate_html(data[:description].text, :length => 500) if data[:description] %> </p>
+          <div class="tooltips_other" id = "<%= div_id %>">loading</div>
+       </div>
+       <div class="footer-green">
+ 				<label><u>Abonnez-vous</u></label>
+ 				<label>et regardez ce film pour seulement <b>3,99€</b></label>
+ 			</div>
       </div>
     </div>
 </div>

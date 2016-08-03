@@ -1,4 +1,58 @@
-#<%= params[:div_id]%>|||<p class="tooltips_rating stars"><%= render :partial => 'products/rating', :locals => {:product => @product, :background => @rating_color, :size => :long, :source => @source, :response_id => @response_id} %></p>
+#<%= params[:div_id]%>|||<p class="tooltips_title head-title">Nous Trois ou Rien (2015)</p>
+<p class="tooltips_rating stars">
+  <img alt="Star-on" class="" height="19" id="star_134763_1" name="star-on.png" src="/assets/star-on-cb2bcda30c074690781015157514ea2a.png" width="19">
+  <img alt="Star-on" class="" height="19" id="star_134763_2" name="star-on.png" src="/assets/star-on-cb2bcda30c074690781015157514ea2a.png" width="19">
+  <img alt="Star-on" class="" height="19" id="star_134763_3" name="star-on.png" src="/assets/star-on-cb2bcda30c074690781015157514ea2a.png" width="19">
+  <img alt="Star-on" class="" height="19" id="star_134763_4" name="star-on.png" src="/assets/star-on-cb2bcda30c074690781015157514ea2a.png" width="19">
+  <img alt="Star-off" class="" height="19" id="star_134763_5" name="star-off.png" src="/assets/star-off-346c08ea1716045f68dc6f21b195ba6f.png" width="19">
+</p>
+<p class="tooltips_title currency">4,99€</p>
+<p class="tooltips_title sub-title">ou 3,99€ via <u>abonnement</u></p>
+<div class="play-button">
+  <div class="play-img"></div>
+  <label>Regarder</label>
+</div>
+<p class="tooltips_description">Le destin exceptionnel d'Hibat et Fereshteh Tabib, les parents de Kheiron,
+                resistants iraniens face a la dictature du Shah puis a celle des islamistes.
+                Des confins de l'Iran aux banlieues parisiennes, une autobiographie aux airs
+                deconte universel qui evoque avec humour et emotion l'amour familial,
+                le don de soi et surtout l'ideal d'un vivre ensemble pour lequel Hibat
+                et Fereshteh ont mene un combat sans merci depuis plus de 40 ans.
+</p>
+<div class="tooltips_other" id="134763943">
+  <div class="button-area clear-float">
+    <div class="button-popup">
+      <a href="/en/movies/134763-the-martian/trailer?source=64" class="button-trailer">Trailer</a>
+    </div>
+    <div class="button-popup button-gray">
+      Ajouter a ma selection
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
+
+<p class="tooltips_rating stars"><%= render :partial => 'products/rating', :locals => {:product => @product, :background => @rating_color, :size => :long, :source => @source, :response_id => @response_id} %></p>
 <p class="tooltips_runtime"><%= t('products.show.product.duration') %> <%= @product.runtime %> <%= t('products.show.minutes') %></p>
 <% if @product.director && !@product.adult? %>
 <div class="director">
