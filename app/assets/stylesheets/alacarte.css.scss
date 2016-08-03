@@ -1,12 +1,8 @@
-/* FONTS
-	- OpenSuns CondensedBold, sans-serif;
-	- Arial,Helvetica, sans-serif;
-
-*/
+@import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300);
 
 body{
 	background: #212a31;
-	font-family: Arial,Helvetica, sans-serif;
+	font-family: Open Sans Condensed;
 }
 
 ul{
@@ -30,7 +26,7 @@ h3{
 }
 
 label {
-	font-family: Arial,Helvetica, sans-serif;
+	font-family: Open Sans Condensed;
 	font-weight: bold;
 	font-size: 24px;
 	color: #5da50e;
@@ -84,8 +80,8 @@ label {
 	display: inline-block;
 	background-color: #a9eb60;
 	text-align: center;
-	font-family: Arial,Helvetica, sans-serif;
-	font-size: 25px;
+	font-family: Open Sans Condensed;
+	font-size: 23px;
 	font-weight: bold;
 }
 
@@ -119,7 +115,7 @@ label {
 	height: auto;
 	font-size: 19px;
 	font-weight: normal;
-	font-family: Arial,Helvetica, sans-serif;
+	font-family: Open Sans Condensed;
 	color: #000;
 	display: inline-block;
 }
@@ -135,7 +131,7 @@ label {
 	text-align: center;
 	font-weight: normal;
 	color: #999797;
-	font-family: Arial,Helvetica, sans-serif;
+	font-family: Open Sans Condensed;
 	font-size: 19px;
 	font-weight: bold;
 }
@@ -165,7 +161,7 @@ label {
 }
 
 .description-block.description-block-main {
-	font-family: Arial,Helvetica, sans-serif;
+	font-family: Open Sans Condensed;
 	font-size: 18px;
 	font-weight: normal;
 	margin-bottom: 30px;
@@ -239,19 +235,19 @@ label {
 }
 
 #plush-a-la-carte {
-	font-family: Arial,Helvetica, sans-serif;
+	font-family: Open Sans Condensed;
 	font-size: 26px;
 	font-weight: bold;
 }
 
 .questions {
-	font-family: Arial,Helvetica, sans-serif;
+	font-family: Open Sans Condensed;
 	font-size: 21,71px;
 	font-weight: normal;
 }
 
 .conditions {
-	font-family: Arial,Helvetica, sans-serif;
+	font-family: Open Sans Condensed;
 	font-size: 19px;
 	font-weight: normal;
 }
