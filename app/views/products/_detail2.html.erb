@@ -16,10 +16,10 @@
         <div class="tooltips_other" id='<%= div_id %>'>loading</div>
       </div>
       <div class="footer-green">
-        <%= link_to new_customer_session_path( :moovie_id => @product.id ) do %>
+        <%= link_to new_customer_session_path( :moovie_id => product.id ) do %>
           <label><u>Abonnez-vous</u></label>
         <% end %>
-				<label>et regardez ce film pour seulement <b>3,99€</b></label>
+				<label>et regardez ce film pour seulement <b><%= product.get_vod_online(session[:country_id]).first.tvod_price %>€</b></label>
 			</div>
     </div>
 
