@@ -99,7 +99,7 @@ display: inline-block;
 width: 11px;
 height: 11px;
 background: url(image_path('list-show-by.png')) no-repeat right bottom;
-text-indent: -10000px; 
+text-indent: -10000px;
 vertical-align: middle;
 }
 .list-show-by .gallery.selected, .list-show-by .gallery:hover{
@@ -110,7 +110,7 @@ display: inline-block;
 width: 11px;
 height: 11px;
 background: url(image_path('list-show-by.png')) no-repeat left bottom;
-text-indent: -10000px; 
+text-indent: -10000px;
 vertical-align: middle;
 margin: 0 2px 0 8px;
 }
@@ -162,6 +162,7 @@ vertical-align: middle;
 margin: 0 12px 0 0;
 text-align: center;
 }
+
 #ready.gallery .status .streaming_btn, #ready.gallery .streaming_btn_replay, .gallery .streaming_btn_replay {
   margin: 0 !important;
 }
@@ -172,7 +173,7 @@ text-align: center;
 #in-progress .status .streaming_btn_replay
 {
   margin: 6px 26px 0 0;
-  
+
 }
 #ready .status .rent{
 display: inline-block;
@@ -279,6 +280,6 @@ float: left;
 }
 #mywhishlist .vod_series
 {
-  clear:both; 
+  clear:both;
   margin: 10px 0 10px 44px;
 }
