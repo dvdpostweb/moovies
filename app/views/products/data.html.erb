@@ -1,7 +1,7 @@
 #<%= params[:div_id]%>|||<p class="tooltips_title head-title"><%= @product.title %> (<%= @product.year %>)</p>
 <p class="tooltips_rating stars"><%= render :partial => 'products/rating', :locals => {:product => @product, :background => @rating_color, :size => :long, :source => @source, :response_id => @response_id} %></p>
 <p class="tooltips_title currency">4,99€</p>
-<p class="tooltips_title sub-title">ou 3,99€ via <u>abonnement</u></p>
+<p class="tooltips_title sub-title">ou 3,99€ via <u><%= link_to "abonnement", new_customer_session_path( :moovie_id => @product.id ) %></u></p>
 <div class="play-button">
   <div class="play-img"></div>
   <% if customer_signed_in? %>
@@ -18,11 +18,21 @@
 <div class="tooltips_other">
   <div class="button-area clear-float">
     <div class="button-popup">
-      <a href="/en/movies/134763-the-martian/trailer?source=64" class="button-trailer">Trailer</a>
+      <% if @product.trailer? %>
+        <%= link_to(t('.trailer'), product_trailer_path(:product_id => @product.to_param, :source => @source, :response_id => @response_id), :class => 'trailer', :target => :_blank) %>
+      <% end %>
     </div>
-    <div class="button-popup button-gray">
-      Ajouter a ma selection
-    </div>
+      <% if !@product.series? %>
+        <% if customer_signed_in? %>
+          <div class="button-popup button-gray">
+            <%= render :partial => 'products/vod_list',  :locals => {:product => @product, :source => @source, :response_id => @response_id} %>
+          </div>
+        <% else %>
+          <div class="button-popup button-gray-1">
+            <%= link_to t('.products.vod_list.add'), new_customer_session_path( :moovie_id => @product.id ) %>
+          </div>
+        <% end %>
+      <% end %>
   </div>
 </div>
 
@@ -44,8 +54,8 @@
 
 
 
-
 <!--
+
 
 
 <p class="tooltips_rating stars"><%= render :partial => 'products/rating', :locals => {:product => @product, :background => @rating_color, :size => :long, :source => @source, :response_id => @response_id} %></p>

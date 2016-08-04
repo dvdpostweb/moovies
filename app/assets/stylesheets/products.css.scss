@@ -2216,7 +2216,18 @@ ul#ratings_labels li:last-child {
 	margin-right: 0;
 	width: 153px;
 	line-height: 32px;
-	background-color: #9e9e98;
+	color: #fff;
+	font-family: 'Open Sans Condensed',sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	letter-spacing: -0.4px;
+}
+
+.button-popup.button-gray-1 {
+  background-color: #9e9e98;
+	margin-right: 0;
+	width: 153px;
+	line-height: 32px;
 	color: #fff;
 	font-family: 'Open Sans Condensed',sans-serif;
 	font-size: 14px;

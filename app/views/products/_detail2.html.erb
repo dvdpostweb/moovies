@@ -16,7 +16,9 @@
         <div class="tooltips_other" id='<%= div_id %>'>loading</div>
       </div>
       <div class="footer-green">
-				<label><u>Abonnez-vous</u></label>
+        <%= link_to new_customer_session_path( :moovie_id => @product.id ) do %>
+          <label><u>Abonnez-vous</u></label>
+        <% end %>
 				<label>et regardez ce film pour seulement <b>3,99€</b></label>
 			</div>
     </div>
