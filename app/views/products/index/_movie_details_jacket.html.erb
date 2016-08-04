@@ -14,14 +14,36 @@
       <% end %>
       <div class="tooltips" style="display:none">
         <div class="main-part">
-          <div class="tooltips_other" id = "<%= div_id %>">loading</div>
-       </div>
-       <div class="footer-green">
-         <%= link_to new_customer_session_path( :moovie_id => product.id ) do %>
-           <label><u>Abonnez-vous</u></label>
-         <% end %>
- 				<label>et regardez ce film pour seulement <b>3,99€</b></label>
- 			</div>
+          <p class="tooltips_title head-title"><%= product.smart_title %> (<%= product.year %>)</p>
+          <p class="tooltips_rating stars"><%= render :partial => 'products/rating', :locals => {:product => product, :background => @rating_color, :size => :long, :source => @source, :response_id => @response_id} %></p>
+          <% if product.streaming_products.any? %>
+            <p class="tooltips_title currency"><%= product.streaming_products.first.tvod_price %>€</p>
+          <% else %>
+            </br>
+          <% end %>
+          <% if product.streaming_products.any? %>
+            <p class="tooltips_title sub-title">ou <%= product.streaming_products.first.ppv_price %>€ via <u><%= link_to "abonnement", new_customer_session_path( :moovie_id => product.id ) %></u></p>
+          <% end %>
+          <div class="play-button">
+            <div class="play-img"></div>
+            <% if customer_signed_in? %>
+            <% else %>
+              <%= link_to new_customer_session_path( :moovie_id => product.id ) do %>
+                <label>Regarder</label>
+              <% end %>
+            <% end %>
+          </div>
+          <p class="tooltips_description"><%= truncate_html((data[:description].text rescue '...'), :length => 500) %></p>
+          <div class="tooltips_other" id='<%= div_id %>'>loading</div>
+        </div>
+        <% if product.streaming_products.any? %>
+        <div class="footer-green">
+          <%= link_to new_customer_session_path( :moovie_id => product.id ) do %>
+            <label><u>Abonnez-vous</u></label>
+          <% end %>
+  				<label>et regardez ce film pour seulement <b><%= product.streaming_products.first.ppv_price %>€</b></label>
+  			</div>
+        <% end %>
       </div>
     </div>
 </div>
