@@ -2210,6 +2210,7 @@ ul#ratings_labels li:last-child {
 	margin-right: 10px;
 	float: left;
   text-align: center;
+  color: #fff;
 }
 
 .button-popup.button-gray {
@@ -2233,6 +2234,11 @@ ul#ratings_labels li:last-child {
 	font-size: 14px;
 	font-weight: bold;
 	letter-spacing: -0.4px;
+
+}
+
+.button-gray-1 a:link {
+	color: #fff;
 }
 
 .button-popup .button-watch,
