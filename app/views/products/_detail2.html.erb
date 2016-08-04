@@ -27,7 +27,7 @@
           <div class="play-img"></div>
           <% if customer_signed_in? %>
           <% else %>
-            <%= link_to new_customer_session_path( :moovie_id => product.to_param ) do %>
+            <%= link_to new_customer_session_path( :moovie_id => product.id ) do %>
               <label>Regarder</label>
             <% end %>
           <% end %>
