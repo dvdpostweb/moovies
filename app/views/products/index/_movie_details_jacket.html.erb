@@ -22,14 +22,14 @@
             </br>
           <% end %>
           <% if product.streaming_products.any? %>
-            <p class="tooltips_title sub-title">ou <%= product.streaming_products.first.ppv_price %>€ via <u><%= link_to "abonnement", new_customer_session_path( :moovie_id => product.id ) %></u></p>
+            <p class="tooltips_title sub-title"><%= t('products.show.product.popup_chose')%> <%= product.streaming_products.first.ppv_price %>€ <%= t('products.show.product.popup_via') %> <u><%= link_to t('products.show.product.popup2'), info_path(:page_name => t('routes.infos.params.alacarte')) %></u></p>
           <% end %>
           <div class="play-button">
             <div class="play-img"></div>
             <% if customer_signed_in? %>
             <% else %>
               <%= link_to new_customer_session_path( :moovie_id => product.id ) do %>
-                <label>Regarder</label>
+                <label><%= t('products.show.product.popup3') %></label>
               <% end %>
             <% end %>
           </div>
@@ -38,10 +38,10 @@
         </div>
         <% if product.streaming_products.any? %>
         <div class="footer-green">
-          <%= link_to new_customer_session_path( :moovie_id => product.id ) do %>
-            <label><u>Abonnez-vous</u></label>
+          <%= link_to info_path(:page_name => t('routes.infos.params.alacarte')) do %>
+            <label><u><%= t('products.show.product.popup6') %></u></label>
           <% end %>
-  				<label>et regardez ce film pour seulement <b><%= product.streaming_products.first.ppv_price %>€</b></label>
+  				<label><%= t('products.show.product.popup7') %> <b><%= product.streaming_products.first.ppv_price %>€</b></label>
   			</div>
         <% end %>
       </div>
