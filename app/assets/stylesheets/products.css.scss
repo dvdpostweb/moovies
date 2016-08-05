@@ -2315,6 +2315,31 @@ ul#ratings_labels li:last-child {
   color: #fff;
 }
 
+.play-button-pink {
+	width: 165px;
+	height: 35px;
+	margin: 0 auto 15px;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e570e7+0,c85ec7+47,a849a3+100;Pink+3D+%233 */
+  background: #e570e7; /* Old browsers */
+  background: -moz-linear-gradient(top,  #e570e7 0%, #c85ec7 47%, #a849a3 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  #e570e7 0%,#c85ec7 47%,#a849a3 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  #e570e7 0%,#c85ec7 47%,#a849a3 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e570e7', endColorstr='#a849a3',GradientType=0 ); /* IE6-9 */
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	color: #fff;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+.play-button-pink label {
+	display: inline-block;
+	margin: 4px 20px 7px 0;
+	vertical-align: top;
+	font-weight: bold;
+  color: #fff;
+}
+
 .play-img {
 	width: 25px;
 	height: 25px;
@@ -2330,6 +2355,55 @@ ul#ratings_labels li:last-child {
 	background-color: #a3dd5a;
 }
 
+.footer-pink {
+	height: 80px;
+	border-top: 1px solid #b5b5b5;
+	display: block;
+	background-color: #C36EC3;
+}
+
+.footer-green-header {
+	height: 38px;
+	border-top: 1px solid #b5b5b5;
+	display: block;
+	background-color: #a3dd5a;
+  padding-top: 10px;
+}
+
+.footer-green-header label,
+.footer-green-header label u {
+	font-size: 17px;
+	margin-top: 10px;
+	color: #000;
+  text-align: center;
+}
+
+.footer-green-header label {
+	font-weight: normal;
+	margin-top: 9px;
+}
+
+.footer-pink-header {
+	height: 38px;
+	border-top: 1px solid #b5b5b5;
+	display: block;
+	background-color: #C36EC3;
+  padding-top: 10px;
+}
+
+.footer-pink-header label,
+.footer-pink-header label u {
+	font-size: 17px;
+	margin-top: 10px;
+	color: #000;
+  text-align: center;
+}
+
+.footer-pink-header label {
+	font-weight: normal;
+	margin-top: 9px;
+}
+
 .footer-green label,
 .footer-green label u {
 	font-size: 17px;
@@ -2341,6 +2415,21 @@ ul#ratings_labels li:last-child {
 }
 
 .footer-green label {
+	font-weight: normal;
+	margin-top: 0;
+}
+
+.footer-pink label,
+.footer-pink label u {
+	font-size: 17px;
+	font-weight: bold;
+	display: block;
+	margin-top: 20px;
+	color: #000;
+  text-align: center;
+}
+
+.footer-pink label {
 	font-weight: normal;
 	margin-top: 0;
 }
