@@ -44,10 +44,7 @@ $(document).ready(function(){
 	      $('#7euro').removeClass("green-text");
 	      $('#11euro').removeClass("green-text");
 	      $('#7euroil').removeClass("green-text");
-	      $('#11euroil').removeClass("green-text")
-	      $('body').animate({
-          scrollTop: eval($('#' + $(this).attr('target')).offset().top - 70)
-		    }, 1000);
+	      $('#11euroil').removeClass("green-text");
 		    if (gon.locale === "fr") {
 		    	$("#alacarte-button-CF4FILMS-FR").show();
 		    }
@@ -102,9 +99,6 @@ $(document).ready(function(){
 	      $('#11euro').removeClass("green-text");
 	      $('#3euroil').removeClass("green-text");
 	      $('#11euroil').removeClass("green-text");
-	      $('body').animate({
-		        scrollTop: eval($('#' + $(this).attr('target')).offset().top - 70)
-		    }, 1000);
 		    if (gon.locale === "fr") {
 		    	$("#alacarte-button-CF6FILMS-FR").show();
 		    }
@@ -159,9 +153,6 @@ $(document).ready(function(){
 	      $('#7euro').removeClass("green-text");
 	      $('#3euroil').removeClass("green-text");
 	      $('#7euroil').removeClass("green-text");
-	      $('body').animate({
-		      scrollTop: eval($('#' + $(this).attr('target')).offset().top - 70)
-		    }, 1000);
 		    if (gon.locale === "fr") {
 		    	$("#alacarte-button-CF8FILMS-FR").show();
 		    }
@@ -172,21 +163,6 @@ $(document).ready(function(){
 		    	$("#alacarte-button-CF8FILMS-EN").show();
 		    }
 	    });
-	    var bttn = document.getElementById( 'alacarte-button-default' );
-		  bttn.addEventListener( 'click', function() {
-		  	setTimeout( function() {
-		  		var notification = new NotificationFx({
-		  			message : '<h1 id="alacarte-error-msg">Please select the package</h1>',
-		  			layout : 'bar',
-		  			effect : 'slidetop',
-		  			type : 'notice'
-		  		});
-		  		notification.show();
-		  	}, 1200 );
-		  	$('body').animate({
-		          scrollTop: eval($('#' + $(this).attr('target')).offset().top - 70)
-		      }, 1000);
-		  });
     } else if (gon.alacarte == "alacarte" || gon.abo == "abo") {
       $('#alacarte-2-films').on('click', function(e) {
     		$(".ns-box").hide();
@@ -232,10 +208,7 @@ $(document).ready(function(){
 	      $('#7euro').removeClass("green-text");
 	      $('#11euro').removeClass("green-text");
 	      $('#7euroil').removeClass("green-text");
-	      $('#11euroil').removeClass("green-text")
-	      $('body').animate({
-          scrollTop: eval($('#' + $(this).attr('target')).offset().top - 70)
-		    }, 1000);
+	      $('#11euroil').removeClass("green-text");
 		    if (gon.locale === "fr") {
 		    	$("#alacarte-button-CF4FILMS-FR").show();
 		    }
@@ -290,9 +263,9 @@ $(document).ready(function(){
 	      $('#11euro').removeClass("green-text");
 	      $('#3euroil').removeClass("green-text");
 	      $('#11euroil').removeClass("green-text");
-	      $('body').animate({
-		        scrollTop: eval($('#' + $(this).attr('target')).offset().top - 70)
-		    }, 1000);
+	      //$('body').animate({
+		    //    scrollTop: eval($('#' + $(this).attr('target')).offset().top - 70)
+		    //}, 1000);
 		    if (gon.locale === "fr") {
 		    	$("#alacarte-button-CF6FILMS-FR").show();
 		    }
@@ -347,9 +320,6 @@ $(document).ready(function(){
 	      $('#7euro').removeClass("green-text");
 	      $('#3euroil').removeClass("green-text");
 	      $('#7euroil').removeClass("green-text");
-	      $('body').animate({
-		      scrollTop: eval($('#' + $(this).attr('target')).offset().top - 70)
-		    }, 1000);
 		    if (gon.locale === "fr") {
 		    	$("#alacarte-button-CF8FILMS-FR").show();
 		    }
@@ -360,21 +330,6 @@ $(document).ready(function(){
 		    	$("#alacarte-button-CF8FILMS-EN").show();
 		    }
 	    });
-	    var bttn = document.getElementById( 'alacarte-button-default' );
-		  bttn.addEventListener( 'click', function() {
-		  	setTimeout( function() {
-		  		var notification = new NotificationFx({
-		  			message : '<h1 id="alacarte-error-msg">Please select the package</h1>',
-		  			layout : 'bar',
-		  			effect : 'slidetop',
-		  			type : 'notice'
-		  		});
-		  		notification.show();
-		  	}, 1200 );
-		  	$('body').animate({
-		          scrollTop: eval($('#' + $(this).attr('target')).offset().top - 70)
-		      }, 1000);
-		  });
       $("#alacarte-button-CF4FILMS-FR, #alacarte-button-CF4FILMS-NL, #alacarte-button-CF4FILMS-EN").each(function() {
         $(this).click(function() {
           $.ajax({
@@ -422,7 +377,7 @@ $(document).ready(function(){
 				    heading: infoMessage(),
 				    text: textMessage(),
 				    icon: 'info',
-				    loader: true,        
+				    loader: true,
 				    loaderBg: '#9EC600'
 				})
               }
@@ -451,8 +406,8 @@ $(document).ready(function(){
 				    heading: infoMessage(),
 				    text: textMessage(),
 				    icon: 'info',
-				    loader: true,       
-				    loaderBg: '#9EC600' 
+				    loader: true,
+				    loaderBg: '#9EC600'
 				})
               }
             },
@@ -480,7 +435,7 @@ $(document).ready(function(){
 				    heading: infoMessage(),
 				    text: textMessage(),
 				    icon: 'info',
-				    loader: true, 
+				    loader: true,
 				    loaderBg: '#9EC600'
 				})
             }
@@ -508,7 +463,7 @@ $(document).ready(function(){
 				    heading: infoMessage(),
 				    text: textMessage(),
 				    icon: 'info',
-				    loader: true,        
+				    loader: true,
 				    loaderBg: '#9EC600'
 				})
             }
@@ -564,9 +519,6 @@ $(document).ready(function(){
 	      $('#11euro').removeClass("green-text");
 	      $('#7euroil').removeClass("green-text");
 	      $('#11euroil').removeClass("green-text")
-	      $('body').animate({
-          scrollTop: eval($('#' + $(this).attr('target')).offset().top - 70)
-		    }, 1000);
 		    if (gon.locale === "fr") {
 		    	$("#alacarte-button-CF4FILMS-FR").show();
 		    }
@@ -621,9 +573,6 @@ $(document).ready(function(){
 	      $('#11euro').removeClass("green-text");
 	      $('#3euroil').removeClass("green-text");
 	      $('#11euroil').removeClass("green-text");
-	      $('body').animate({
-		        scrollTop: eval($('#' + $(this).attr('target')).offset().top - 70)
-		    }, 1000);
 		    if (gon.locale === "fr") {
 		    	$("#alacarte-button-CF6FILMS-FR").show();
 		    }
@@ -678,9 +627,6 @@ $(document).ready(function(){
 	      $('#7euro').removeClass("green-text");
 	      $('#3euroil').removeClass("green-text");
 	      $('#7euroil').removeClass("green-text");
-	      $('body').animate({
-		      scrollTop: eval($('#' + $(this).attr('target')).offset().top - 70)
-		    }, 1000);
 		    if (gon.locale === "fr") {
 		    	$("#alacarte-button-CF8FILMS-FR").show();
 		    }
@@ -691,21 +637,6 @@ $(document).ready(function(){
 		    	$("#alacarte-button-CF8FILMS-EN").show();
 		    }
 	    });
-	    var bttn = document.getElementById( 'alacarte-button-default' );
-		  bttn.addEventListener( 'click', function() {
-		  	setTimeout( function() {
-		  		var notification = new NotificationFx({
-		  			message : '<h1 id="alacarte-error-msg">Please select the package</h1>',
-		  			layout : 'bar',
-		  			effect : 'slidetop',
-		  			type : 'notice'
-		  		});
-		  		notification.show();
-		  	}, 1200 );
-		  	$('body').animate({
-		          scrollTop: eval($('#' + $(this).attr('target')).offset().top - 70)
-		      }, 1000);
-		  });
     }
 });
 
