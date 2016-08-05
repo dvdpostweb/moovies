@@ -162,6 +162,17 @@ class Customer < ActiveRecord::Base
 
   #scope :freetrial_used_codes, :conditions=>['activation_discount_code_id = 263 OR activation_discount_code_id = 264 OR activation_discount_code_id = 264']
 
+  def unlimted_subscriber?
+    (customers_abo_type == 1 || customers_abo_type == 2 || customers_abo_type == 3 || customers_abo_type == 4 || customers_abo_type == 5)
+  end
+
+  def plush_la_carte_subscriber?
+    (customers_abo_type == 7 || customers_abo_type == 8 || customers_abo_type == 9 || customers_abo_type == 10 || customers_abo_type == 11)
+  end
+
+  #def unlimted_subscriber
+  #end
+
   def have_freetrial_codes?
     (activation_discount_code_id == 263 || activation_discount_code_id == 264 || activation_discount_code_id == 264)
   end

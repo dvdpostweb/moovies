@@ -1,23 +1,7 @@
 <div id="infostvod">
-
-  <% if current_customer.customers_abo_payment_method == 0 %>
-
+  <h1><%= t('.tvod_title') %></h1>
   <p>
-    <%= link_to  t('.sign_up').html_safe, edit_customer_payment_methods_path(:customer_id => current_customer.to_param, :type => :tvod, :product_id => @product.id, :source => 0), :class => 'essaigratuit osc btn' %>
+    <%= t(".tvod_price_#{params[:kind]}", :link => info_path(:page_name => t('routes.infos.params.abo'))).html_safe %>
   </p>
-<!--
-  <#% else %>
-
-  <%= t('.tvod_price', :price => product.get_vod_online(session[:country_id]).first.ppv_price).html_safe %>
-  <br /><br />
-  <%= params[:hide_btn] != "1" ? link_to(t('.click_here'), streaming_product_path(:id => product.imdb_id, :source => @source, :season_id => product.season_id, :episode_id => product.episode_id), :id => 'streaming_btn', :class => 'alacarte') :
-   "<div id='streaming_btn' class ='alacarte facebox_close'>#{t('.close_button')}</div>".html_safe %>
--->
-  <% end %>
-  <!--
-  <h1><#%= t('.tvod_title') %></h1>
-  <#%= t(".tvod_price_#{params[:kind]}", :link => info_path(:page_name => t('routes.infos.params.abo'))).html_safe %>
-  <#%= link_to  t('.click_here', :price => @product.get_vod_online(session[:country_id]).first.tvod_price).html_safe, edit_customer_payment_methods_path(:customer_id => current_customer.to_param, :type => :credit_card_tvod, :product_id => @product.id, :source => params[:source]), :class => 'alacarte price' %>
--->
-
+  <%= link_to  t('.click_here', :price => @product.get_vod_online(session[:country_id]).first.tvod_price).html_safe, edit_customer_payment_methods_path(:customer_id => current_customer.to_param, :type => :credit_card_tvod, :product_id => @product.id, :source => params[:source]), :class => 'alacarte price' %>
 </div>
