@@ -104,24 +104,14 @@ class Api::V1::LoginController < ApplicationController
         end
       else
         sign_in :customer, resource
-        if current_customer.preselected_registration_moovie_id? #&& current_customer.step == 100
-          p = Product.where(:products_id => current_customer.preselected_moovie).first
-          if p.present?
-            if current_customer.customers_abo_payment_method != 0
-              redirect_to_p_path = root_path #product_path(:id => p.to_param)
-              render json: { status: 1, message: redirect_to_p_path }
-            else
-              redirect_to_payment_path = edit_customer_payment_methods_path(:customer_id => current_customer.to_param, :type => :tvod, :product_id => p.id)
-              render json: { status: 1, message: redirect_to_payment_path }
-            end
-          else
-            redirect_to_root_localize_path = root_localize_path
-            render json: { status: 1, message: redirect_to_root_localize_path }
-          end
-        else
+        #if current_customer.preselected_registration_moovie_id?# && current_customer.customers_abo_payment_method == 0 && current_customer.customers_abo_type != 6
+        #  pRODUCT = Product.where(:products_id => current_customer.preselected_moovie).first
+        #  redirect_to_payment_path = edit_customer_payment_methods_path(:customer_id => resource.to_param, :type => :tvod, :product_id => pRODUCT.id, :source => 0)
+        #  render json: { status: 1, message: redirect_to_payment_path }
+        #else
           redirect_to_root_localize_path = root_localize_path
           render json: { status: 1, message: redirect_to_root_localize_path }
-        end
+        #end
       end
     end
   end
