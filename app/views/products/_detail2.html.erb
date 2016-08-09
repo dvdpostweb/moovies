@@ -33,7 +33,7 @@
               <% end %>
             <% else %>
               <label><%= t('products.show.product.tvod_free', :tvod_free => current_customer.tvod_free).html_safe %>
-                <% unless (current_customer.unlimted_subscriber? && current_customer.have_credits?) %>
+                <% unless current_customer.unlimted_subscriber? %>
                   <% if current_customer.tvod_only? %>
                     <%= link_to info_path(:page_name => t('routes.infos.params.alacarte')) do %>
                     (<label><%= t('products.show.product.popup4').html_safe %></label>)
@@ -42,7 +42,6 @@
                     (<label onclick='jQuery.facebox("<%= escape_javascript(render(:partial => 'products/tvod_credits_only', :locals => {:product => product, :season_id => product.season_id, :episode_id => product.episode_id, :source => @source})) %>");'><%= t('products.show.product.popup4').html_safe %></label>)
                   <% end %>
                 <% end %>
-                </label>
             <% end %>
           </div>
         <% end %>
