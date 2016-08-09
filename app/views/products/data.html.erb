@@ -4,17 +4,17 @@
       <%= link_to(t('.trailer'), product_trailer_path(:product_id => @product.to_param, :source => @source, :response_id => @response_id), :class => 'trailer', :target => :_blank) %>
     <% end %>
   </div>
-    <% if !@product.series? %>
-      <% if customer_signed_in? %>
-        <div class="button-popup button-gray">
-          <%= render :partial => 'products/vod_list',  :locals => {:product => @product, :source => @source, :response_id => @response_id} %>
-        </div>
-      <% else %>
-        <div class="button-popup button-gray-1">
-          <%= link_to t('.products.vod_list.add'), new_customer_session_path( :moovie_id => @product.id ) %>
-        </div>
-      <% end %>
+  <% if !@product.series? %>
+    <% if customer_signed_in? %>
+      <div class="button-popup button-gray">
+        <%= render :partial => 'products/vod_list',  :locals => {:product => @product, :source => @source, :response_id => @response_id} %>
+      </div>
+    <% else %>
+      <div class="button-popup button-gray-1">
+        <%= link_to t('.products.vod_list.add'), new_customer_session_path( :moovie_id => @product.id ), class: "streaming_btn streaming_soon_btn add" %>
+      </div>
     <% end %>
+  <% end %>
 </div>
 
 
