@@ -11,32 +11,48 @@
 
   <table border="0" cellpadding="0" cellspacing="0">
     <tr>
-      <td width="90"><%= t'.audio' %></td>
-      <td width="90"><%= t '.subtitles' %></td>
-      
-      <td width="130"><strong><%= (current_customer && current_customer.tvod_only?) || !current_customer ? t('.price_customer') : t('.price') unless product.svod? %></strong></td>
-      <% if !product.svod? && ((current_customer && current_customer.tvod_only?) || !current_customer) %><td width="130"><strong><%= t('.price_tvod')  %></strong></td><% end %>
-      <td></td>
+      <thead>
+        <th width="90"><%= t'.audio' %></th>
+        <th width="90"><%= t '.subtitles' %></th>
+        <th width="90"></th>
+        <th></th>
+      <thead>
     </tr>
     <tr>
       <td colspan="5"><div class="lineformat"></div></td>
     </tr>
     <% product.get_vod(session[:country]).each do |vod| %>
     <tr>
-      <td><%= vod.language.by_language(I18n.locale).first.name %></td>
-      <td><%= vod.subtitle.by_language(I18n.locale).first ? vod.subtitle.by_language(I18n.locale).first.name : t('.no_subtitle') %></td>
-      <% if !product.svod? && ((current_customer && current_customer.tvod_only?) || !current_customer) %>
-      <td>
-        <%= render :partial => 'products/streaming_promo',  :locals => {:product => product, :source => @source, :popup => false} if vod.available? %>
-        <%= render :partial => 'products/vod_list',  :locals => {:product => product, :source => @source, :response_id => @response_id} %>
-      </td>
-      <% end %>
-      <td>
-        <%= render :partial => 'products/streaming',  :locals => {:product => product, :source => @source, :popup => false, :max_price => true} if vod.available? %>
-
-        <%= render :partial => 'products/vod_list',  :locals => {:product => product, :source => @source, :response_id => @response_id} %>
-      </td>
-      
+      <tbody>
+        <td><%= vod.language.by_language(I18n.locale).first.name %></td>
+        <td><%= vod.subtitle.by_language(I18n.locale).first ? vod.subtitle.by_language(I18n.locale).first.name : t('.no_subtitle') %></td>
+        <% if customer_signed_in? %>
+          <td align="center">
+            <% if current_customer.unlimted_subscriber? %>
+              <% if current_customer.payable? %>
+                <% if product.streaming_products.any? %>
+                  <%= product.streaming_products.first.ppv_price %>€
+                <% end %>
+              <% else %>
+                <% if product.streaming_products.any? %>
+                  <%= product.streaming_products.first.tvod_price %>€
+                <% end %>
+              <% end %>
+            <% elsif current_customer.plush_la_carte_subscriber? %>
+              <%= product.streaming_products.first.tvod_credits %> credits
+            <% end %>
+          </td>
+        <% else %>
+          <td align="center">
+            <% if product.streaming_products.any? %>
+              <%= product.streaming_products.first.tvod_price %>€
+            <% end %>
+          </td>
+        <% end %>
+        <td>
+          <%= render :partial => 'products/streaming',  :locals => {:product => product, :source => @source, :popup => false, :max_price => true} if vod.available? %>
+        </td>
+      </tbody>
       <%= get_vod_message(vod, svod_date, params[:kind].to_s, Moovies.packages.invert[product.package_id]) %>
     </tr>
     <% end %>
