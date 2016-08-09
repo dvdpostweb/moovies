@@ -1,9 +1,7 @@
 #<%= params[:div_id]%>|||<div class="button-area clear-float">
   <div class="button-popup">
     <% if @product.trailer? %>
-
       <%= link_to(t('.trailer'), product_trailer_path(:product_id => @product.to_param, :source => @source, :response_id => @response_id), :class => 'trailer', :target => :_blank) %>
-
     <% end %>
   </div>
   <% if !@product.series? %>
