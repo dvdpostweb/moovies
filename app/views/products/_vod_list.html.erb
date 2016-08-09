@@ -28,7 +28,5 @@
   <% end %>
 </div>
 <% else %>
-<!--
-  <#%= link_to t('.add'), product_log_path(:product_id => product.id, :media => 'vod'), :class => "streaming_btn streaming_soon_btn facebox add" %>
--->
+  <%= link_to t('.add'), product_log_path(:product_id => product.id, :media => 'vod'), :class => "streaming_btn streaming_soon_btn facebox add" %>
 <% end %>
