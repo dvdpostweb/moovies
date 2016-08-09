@@ -1,7 +1,10 @@
 class RenewMonthlySubscriptionController < ApplicationController
 
   def renew_monthly_credits_for_a_la_carte
-    #if params[:product].present?
+    if current_customer.customers_locked__for_reconduction == 1
+      redirect_to root_path
+      flash[:error] = t('streaming_products.renew_subscription_error')
+    else
       product_abo = ProductAbo.find_by_products_id(current_customer.customers_next_abo_type)
       customer = current_customer
       customer.tvod_free = current_customer.tvod_free + product_abo.tvod_credits
@@ -15,7 +18,7 @@ class RenewMonthlySubscriptionController < ApplicationController
           redirect_to root_path
         end
       end
-    #end
+    end
   end
 
 end
