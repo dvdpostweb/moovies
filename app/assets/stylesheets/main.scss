@@ -9,7 +9,7 @@ html, body{
 }
 body {
 	color: #4a5863;
-	font-family: Open Sans Condensed;
+	font-family: Arial, Helvetica, sans-serif;
 	font-size: 1.2em;
 	background: #202c37 url(asset-path("bg.jpg", image));
 }
@@ -29,7 +29,7 @@ body {
 	background: #202c37 url(asset-path("bg.jpg", image));
 }
 .osc, h1, h2, h3, h4, h5 {
-	font-family: Open Sans Condensed;
+	font-family: 'Open Sans Condensed', sans-serif;
 }
 
 h1, h2, h3, h4, h5 {
@@ -564,7 +564,7 @@ margin-top:10px;
 
 
 .popup.validation #addwishlist_title {
-	font-family: Open Sans Condensed;
+	font-family: 'Open Sans Condensed',sans-serif;
 	font-size: 28px;
 	left: 0;
 	text-align: center;
@@ -576,7 +576,7 @@ margin-top:10px;
 }
 
 #addwishlist_title {
-	font-family: Open Sans Condensed;
+	font-family: 'Open Sans Condensed',sans-serif;
 	font-size: 28px;
 	left: 0;
 	text-align: center;
@@ -588,7 +588,7 @@ margin-top:10px;
 }
 #addwishlist_explain {
 	color: #454545;
-	font-family: Open Sans Condensed;
+	font-family: Arial,Helvetica,sans-serif;
 	font-size: 12px;
 	margin-bottom: 15px;
 	margin-top: 15px;
@@ -635,7 +635,7 @@ div.flash_error {
 #critical_title {
 	border-bottom: 1px solid #454545;
 	color: #454545;
-	font-family: Open Sans Condensed;
+	font-family: Arial,Helvetica,sans-serif;
 	font-size: 24px;
 	font-weight: bold;
 	left: 0;
@@ -690,7 +690,7 @@ div.flash_error {
 	font-weight: bold;
 	font-size: 30px;
 	line-height: 36px;
-	font-family: Open Sans Condensed;
+	font-family: 'Open Sans Condensed', sans-serif;
 }
 #subscribe-wrap #promo {
 	color: white;
@@ -787,7 +787,7 @@ font-size: 1em;
 	height: 40px;
 	padding: 2px 0;
 	font-size: 32px;
-	font-family: Open Sans Condensed;
+	font-family: 'Open Sans Condensed', sans-serif;
 }
 #form_pass
 {
@@ -870,7 +870,7 @@ display: block;
     margin: 0px 5px 2px;
     font-size: 15px;
     font-weight: bold;
-    font-family: Open Sans Condensed;
+    font-family: 'Open Sans Condensed', sans-serif;
     color: #6acccb;
     float: left;
     text-align: left;
@@ -905,13 +905,19 @@ display: block;
 .alacarte{
 	width: 165px;
 	height: 35px;
+	line-height: 35px;
 	margin: 0 auto 15px;
-	background: linear-gradient(to top, rgba(129,176,45,1) 0%,rgba(177,227,88,1) 100%);
-	border: 1px solid #ccc;
+	display: inline-block;
 	border-radius: 4px;
 	color: #fff;
 	font-size: 20px;
+	font-weight: bold;
 	cursor: pointer;
+	background-image: url(play_button.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	text-align: center;
+	padding-left: 15px
 }
 
 .normal.private .alacarte.popup{

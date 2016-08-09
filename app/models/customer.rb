@@ -170,11 +170,16 @@ class Customer < ActiveRecord::Base
     (customers_abo_type == 7 || customers_abo_type == 8 || customers_abo_type == 9 || customers_abo_type == 10 || customers_abo_type == 11)
   end
 
-  #def unlimted_subscriber
-  #end
-
   def have_freetrial_codes?
     (activation_discount_code_id == 263 || activation_discount_code_id == 264 || activation_discount_code_id == 264)
+  end
+
+  def dont_have_credits?
+    tvod_free == 0
+  end
+
+  def have_credits?
+    tvod_free > 0
   end
 
   #after_create :setup_step
