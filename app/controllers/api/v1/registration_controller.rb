@@ -15,9 +15,9 @@ class Api::V1::RegistrationController < ApplicationController
         product = Product.where(:products_id => params[:moovie_id]).first
         if product
           customer.step = 100
-          customer.customers_abo_type = 1
-          customer.customers_next_abo_type = 1
-          #customer.customers_abo_validityto = nil
+          customer.customers_abo_type = 6
+          customer.customers_next_abo_type = 6
+          customer.customers_abo_validityto = nil
           customer.preselected_registration_moovie_id = product.to_param
           if customer.save(validate: false)
             sign_in :customer, customer
@@ -98,9 +98,9 @@ class Api::V1::RegistrationController < ApplicationController
         end
       elsif !params[:activation].present? && !params[:code].present? && !params[:moovie_id].present?
         customer.step = 100
-        customer.customers_abo_type = 1
-        customer.customers_next_abo_type = 1
-        #customer.customers_abo_validityto = nil
+        customer.customers_abo_type = 6
+        customer.customers_next_abo_type = 6
+        customer.customers_abo_validityto = nil
         if customer.save(validate: false)
           sign_in :customer, customer
           redirect_to_home_path = root_path
