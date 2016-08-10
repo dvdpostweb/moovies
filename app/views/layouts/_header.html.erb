@@ -22,7 +22,7 @@
 </ul>
 <div id="wrap">
 
-  <% unless (customer_signed_in? && current_customer.unlimted_subscriber? && current_customer.dont_have_credits?) %>
+  <% unless (customer_signed_in? && current_customer.unlimted_subscriber?) %>
 
   <% if current_customer && current_customer.tvod_free > 0 && params[:controller] != 'steps' %>
   <div class='flash_message'>

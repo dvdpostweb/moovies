@@ -14,8 +14,6 @@
       <thead>
         <th width="90"><%= t'.audio' %></th>
         <th width="90"><%= t '.subtitles' %></th>
-        <th width="90"></th>
-        <th></th>
       <thead>
     </tr>
     <tr>
@@ -27,21 +25,23 @@
         <td><%= vod.language.by_language(I18n.locale).first.name %></td>
         <td><%= vod.subtitle.by_language(I18n.locale).first ? vod.subtitle.by_language(I18n.locale).first.name : t('.no_subtitle') %></td>
         <% if customer_signed_in? %>
-          <td align="center">
-            <% if current_customer.unlimted_subscriber? %>
-              <% if current_customer.payable? %>
-                <% if product.streaming_products.any? %>
-                  <%= product.streaming_products.first.ppv_price %>€
+          <% unless current_customer.abo_type_id == 6 && current_customer.activation_discount_code_type == "A" && Mobistar.find_by_activation_id(current_customer.activation_discount_code_id) %>
+            <td align="center">
+              <% if current_customer.unlimted_subscriber? %>
+                <% if current_customer.payable? %>
+                  <% if product.streaming_products.any? %>
+                    <%= product.streaming_products.first.ppv_price %>€
+                  <% end %>
+                <% else %>
+                  <% if product.streaming_products.any? %>
+                    <%= product.streaming_products.first.tvod_price %>€
+                  <% end %>
                 <% end %>
-              <% else %>
-                <% if product.streaming_products.any? %>
-                  <%= product.streaming_products.first.tvod_price %>€
-                <% end %>
+              <% elsif current_customer.plush_la_carte_subscriber? || current_customer.customers_abo_type == 6 %>
+                <%= product.streaming_products.first.tvod_credits %> credits
               <% end %>
-            <% elsif current_customer.plush_la_carte_subscriber? || current_customer.customers_abo_type == 6 %>
-              <%= product.streaming_products.first.tvod_credits %> credits
-            <% end %>
-          </td>
+            </td>
+          <% end %>
         <% else %>
           <td align="center">
             <% if product.streaming_products.any? %>
