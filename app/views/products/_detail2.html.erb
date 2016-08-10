@@ -60,7 +60,7 @@
                   <p class="tooltips_title currency"><%= product.streaming_products.first.tvod_price %>€</p>
                 <% end %>
               <% end %>
-          <% elsif current_customer.plush_la_carte_subscriber? %>
+          <% elsif current_customer.plush_la_carte_subscriber? || current_customer.customers_abo_type == 6 %>
             <% if product.streaming_products.any? %>
               <p class="tooltips_title currency"><%= product.streaming_products.first.tvod_credits %> credits</p>
             <% end %>
