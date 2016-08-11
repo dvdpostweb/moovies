@@ -93,13 +93,13 @@
               <label onclick='jQuery.facebox("<%= escape_javascript(render(:partial => 'products/tvod_credits_only', :locals => {:product => product, :season_id => product.season_id, :episode_id => product.episode_id, :source => @source})) %>");'><%= t('products.show.product.popup4').html_safe %></label>
             <% end %>
           <% else %>
-            <% if product.tvod? %>
+            <% if product.svod? %>
               <%= link_to info_path(:page_name => t('routes.infos.params.unlimited')) do %>
                 <label><u><%= t('products.show.product.popup9').html_safe %></u></label>
               <% end %>
               <label><%= t('products.show.product.popup10').html_safe %></label>
             <% end %>
-            <% if product.svod? %>
+            <% if product.tvod? %>
               <%= link_to info_path(:page_name => t('routes.infos.params.alacarte')) do %>
                 <label><u><%= t('products.show.product.popup6').html_safe %></u></label>
               <% end %>
