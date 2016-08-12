@@ -2,7 +2,7 @@
 <% if !product.get_vod_online(session[:country_id]).empty? %>
   <% if product.svod? %>
     <% title = t('.watch_svod') %>
-    <% class_name = "watch action_btn" %>
+    <% class_name = "alacarte action_btn" %>
   <% else %>
     <% if (customer_signed_in? && current_customer.tvod_credits?) || hide_price %>
      <% key = '.watch_tvod_free' %>
