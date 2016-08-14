@@ -26,7 +26,13 @@
 						<% end %>
 					<% end %>
 		    <% else %>
-		      jQuery.facebox('<%= escape_javascript(render(:partial => 'products/wrong_package')) %>')
+					<% if current_customer.customers_abo_type == 6 %>
+						<% if params[:origin] == 'products' %>
+							window.location.href = '<%= streaming_product_path(:id => @product.imdb_id, :season_id => @product.season_id, :episode_id => @product.episode_id, :source => @source) %>'
+						<% end %>
+					<% else %>
+					  jQuery.facebox('<%= escape_javascript(render(:partial => 'products/wrong_package')) %>')
+					<% end %>
 		    <% end %>
 			<% else %>
 				jQuery.facebox('<%= escape_javascript(render(:partial => 'products/suspended')) %>')
