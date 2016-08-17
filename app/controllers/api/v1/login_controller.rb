@@ -84,7 +84,7 @@ class Api::V1::LoginController < ApplicationController
         customer.preselected_registration_moovie_id = moovie_id
         if customer.save(validate: false)
           product = Product.where(:products_id => current_customer.preselected_registration_moovie_id).first
-          if current_customer.customers_abo_payment_method == 0 && current_customer.customers_abo_type != 6
+          if ((current_customer.customers_abo_payment_method == 0 && current_customer.customers_abo_type != 6) || (current_customer.customers_abo_payment_method == 0))
             redirect_to_payment_path = edit_customer_payment_methods_path(:customer_id => customer.to_param, :type => :credit_card_tvod, :product_id => product.id, :source => 0)
             render json: { status: 1, message: redirect_to_payment_path }
           else
