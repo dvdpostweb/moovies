@@ -51,16 +51,11 @@
         <p class="tooltips_rating stars"><%= render :partial => 'products/rating', :locals => {:product => product, :background => @rating_color, :size => :long, :source => @source, :response_id => @response_id} %></p>
         <% if customer_signed_in? %>
           <% if current_customer.unlimted_subscriber? %>
-          <!--
-            <% if current_customer.payable? %>
+            <% if product.tvod? %>
               <% if product.streaming_products.any? %>
-                <p class="tooltips_title currency"><%= product.streaming_products.first.ppv_price %>€</p>
+                <p class="tooltips_title currency"><%= product.streaming_products.first.tvod_price %>€</p>
               <% end %>
-              <% else %>
-                <% if product.streaming_products.any? %>
-                  <p class="tooltips_title currency"><%= product.streaming_products.first.tvod_price %>€</p>
-                <% end %>
-              <% end %>-->
+            <% end %>
           <% elsif current_customer.plush_la_carte_subscriber? || current_customer.customers_abo_type == 6 %>
             <% unless current_customer.abo_type_id == 6 && current_customer.activation_discount_code_type == "A" && Mobistar.find_by_activation_id(current_customer.activation_discount_code_id) %>
               <% if product.streaming_products.any? %>
