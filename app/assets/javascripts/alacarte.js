@@ -424,7 +424,7 @@ $(document).ready(function(){
           url: '/api/v1/activate_new_plan',
           data: {
             'customer_email': gon.current_customer.email,
-            'discount_code': "SVOD"
+            'discount_code': gon.ds_Code
           },
           dataType: 'json',
           success: function (response) {
