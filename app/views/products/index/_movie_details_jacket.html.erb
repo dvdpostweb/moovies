@@ -82,6 +82,13 @@
               <p class="tooltips_title sub-title"><%= t('products.show.product.popup_chose')%> <%= product.streaming_products.first.ppv_price %>€ <%= t('products.show.product.popup_via') %> <u><%= link_to t('products.show.product.popup2'), info_path(:page_name => t('routes.infos.params.alacarte')) %></u></p>
             <% end %>
           <% end %>
+          <% if customer_signed_in? %>
+            <% unless current_customer.abo_type_id == 6 && current_customer.activation_discount_code_type == "A" && Mobistar.find_by_activation_id(current_customer.activation_discount_code_id)  && current_customer.tvod_free > 0 %>
+              <% if product.streaming_products.any? %>
+                <p class="tooltips_title sub-title"><%= t('products.show.product.popup_chose')%> <%= product.streaming_products.first.ppv_price %>€ <%= t('products.show.product.popup_via') %> <u><%= link_to t('products.show.product.popup2'), info_path(:page_name => t('routes.infos.params.alacarte')) %></u></p>
+              <% end %>
+            <% end %>
+          <% end %>
           <div id="pbtn">
             <%= render :partial => 'products/streaming',  :locals => {:product => product, :source => @source, :popup => false} %>
           </div>
@@ -93,8 +100,23 @@
           <div class=<%= params[:kind] == :adult ? ("footer-pink") : ("footer-green") %>>
             <% if customer_signed_in? %>
               <% if current_customer.tvod_only? %>
-                <%= link_to info_path(:page_name => t('routes.infos.params.alacarte')) do %>
-                  <label><u><%= t('products.show.product.popup4').html_safe %></u></label>
+                <% if (current_customer.abo_type_id == 6 && current_customer.activation_discount_code_type == "A" && Mobistar.find_by_activation_id(current_customer.activation_discount_code_id)  && current_customer.tvod_free > 0) %>
+                  <%= link_to info_path(:page_name => t('routes.infos.params.alacarte')) do %>
+                    <label><u><%= t('products.show.product.popup4').html_safe %></u></label>
+                  <% end %>
+                <% else %>
+                  <% if product.svod? %>
+                    <%= link_to info_path(:page_name => t('routes.infos.params.unlimited')) do %>
+                      <label><u><%= t('products.show.product.popup9').html_safe %></u></label>
+                    <% end %>
+                    <label><%= t('products.show.product.popup10').html_safe %></label>
+                  <% end %>
+                  <% if product.tvod? %>
+                    <%= link_to info_path(:page_name => t('routes.infos.params.alacarte')) do %>
+                      <label><u><%= t('products.show.product.popup6').html_safe %></u></label>
+                    <% end %>
+                    <label><%= t('products.show.product.popup7').html_safe %> <b><%= product.streaming_products.first.ppv_price %>€</b></label>
+                  <% end %>
                 <% end %>
               <% elsif current_customer.plush_la_carte_subscriber? %>
                 <label onclick='jQuery.facebox("<%= escape_javascript(render(:partial => 'products/tvod_credits_only', :locals => {:product => product, :season_id => product.season_id, :episode_id => product.episode_id, :source => @source})) %>");'><%= t('products.show.product.popup4').html_safe %></label>
