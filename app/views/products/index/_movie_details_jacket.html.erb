@@ -58,7 +58,7 @@
                 <% end %>
               <% end %>
             <% elsif current_customer.plush_la_carte_subscriber? || current_customer.customers_abo_type == 6 %>
-              <% unless current_customer.abo_type_id == 6 && current_customer.activation_discount_code_type == "A" && Mobistar.find_by_activation_id(current_customer.activation_discount_code_id) %>
+              <% unless ((current_customer.abo_type_id == 6 && current_customer.activation_discount_code_type == "A" && Mobistar.find_by_activation_id(current_customer.activation_discount_code_id)  && current_customer.tvod_free > 0) || (current_customer.unlimted_subscriber? && product.svod?)) %>
                 <% if product.streaming_products.any? %>
                   <% if current_customer.customers_abo_type == 6 && current_customer.tvod_free == 0 %>
                     <p class="tooltips_title currency"><%= product.streaming_products.first.tvod_price %>€</p>
