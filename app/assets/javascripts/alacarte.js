@@ -349,7 +349,8 @@ $(document).ready(function(){
 				    text: textMessage(),
 				    icon: 'info',
 				    loader: true,
-				    loaderBg: '#9EC600'
+				    loaderBg: '#9EC600',
+            position: 'top-center'
 				})
               }
             },
@@ -378,7 +379,8 @@ $(document).ready(function(){
 				    text: textMessage(),
 				    icon: 'info',
 				    loader: true,
-				    loaderBg: '#9EC600'
+				    loaderBg: '#9EC600',
+            position: 'top-center'
 				})
               }
             },
@@ -407,7 +409,8 @@ $(document).ready(function(){
 				    text: textMessage(),
 				    icon: 'info',
 				    loader: true,
-				    loaderBg: '#9EC600'
+				    loaderBg: '#9EC600',
+            position: 'top-center'
 				})
               }
             },
@@ -424,7 +427,7 @@ $(document).ready(function(){
           url: '/api/v1/activate_new_plan',
           data: {
             'customer_email': gon.current_customer.email,
-            'discount_code': "SVOD"
+            'discount_code': gon.ds_Code
           },
           dataType: 'json',
           success: function (response) {
@@ -436,7 +439,8 @@ $(document).ready(function(){
 				    text: textMessage(),
 				    icon: 'info',
 				    loader: true,
-				    loaderBg: '#9EC600'
+				    loaderBg: '#9EC600',
+            position: 'top-center'
 				})
             }
           },
@@ -464,7 +468,8 @@ $(document).ready(function(){
 				    text: textMessage(),
 				    icon: 'info',
 				    loader: true,
-				    loaderBg: '#9EC600'
+				    loaderBg: '#9EC600',
+            position: 'top-center'
 				})
             }
           },

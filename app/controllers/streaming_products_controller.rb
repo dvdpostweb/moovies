@@ -28,13 +28,15 @@ class StreamingProductsController < ApplicationController
       redirect_to root_localize_path and return
       end
     end
-    if current_customer && current_customer.tvod_only? && !(@token_valid == true || @streaming.prepaid_all? || current_customer.tvod_free >= @streaming.tvod_credits)
-      flash[:error] = t('streaming_products.tvod_no_token')
-      redirect_to root_localize_path and return
-    end
-    if current_customer && current_customer.tvod_credits? && !(@token_valid == true || @streaming.prepaid_all? || current_customer.tvod_free >= @streaming.tvod_credits || @product.svod?)
-      flash[:error] = t('streaming_products.tvod_no_token')
-      redirect_to root_localize_path and return
+    unless Rails.env.development?
+      if current_customer && current_customer.tvod_only? && !(@token_valid == true || @streaming.prepaid_all? || current_customer.tvod_free >= @streaming.tvod_credits)
+        flash[:error] = t('streaming_products.tvod_no_token')
+        redirect_to root_localize_path and return
+      end
+      if current_customer && current_customer.tvod_credits? && !(@token_valid == true || @streaming.prepaid_all? || current_customer.tvod_free >= @streaming.tvod_credits || @product.svod?)
+        flash[:error] = t('streaming_products.tvod_no_token')
+        redirect_to root_localize_path and return
+      end
     end
 
     if !current_customer
@@ -52,23 +54,23 @@ class StreamingProductsController < ApplicationController
       if !request.xhr?
         if @product
           if @vod_disable == "1"
-            if view_context.streaming_access?
-              if (current_customer.actived? && !current_customer.suspended? && (current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s) || @streaming.prepaid_all?) && (@product.svod? || (@product.tvod? && current_customer.payable?) || @token_valid || current_customer.tvod_free >= @streaming.tvod_credits))
-                if !@streaming_prefered.blank? || !@streaming_not_prefered.blank?
+            #if view_context.streaming_access?
+              #if (current_customer.actived? && !current_customer.suspended? && (current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s) || @streaming.prepaid_all?) && (@product.svod? || (@product.tvod? && current_customer.payable?) || @token_valid || current_customer.tvod_free >= @streaming.tvod_credits))
+                #if !@streaming_prefered.blank? || !@streaming_not_prefered.blank?
                   if @token_valid == false && @vod_create_token == "0" && Rails.env != "pre_production"
                     error = t('streaming_products.not_available.offline')
                     show_error(error)
                   else
                     render :action => :show
                   end
-                else
-                  error = t('streaming_products.not_available.not_available')
-                  show_error(error)
-                end
-              else
-                error = t('streaming_products.no_access.problem')
-                show_error(error)
-              end
+                #else
+                #  error = t('streaming_products.not_available.not_available')
+                #  show_error(error)
+                #end
+              #else
+              #  error = t('streaming_products.no_access.problem')
+              #  show_error(error)
+              #end
             else
                error = t('streaming_products.no_access.no_access')
                show_error(error)
@@ -77,10 +79,10 @@ class StreamingProductsController < ApplicationController
             error = t('streaming_products.not_available.offline')
             show_error(error)
           end
-        else
-          error = t('streaming_products.not_available.not_available')
-          show_error(error)
-        end
+        #else
+        #  error = t('streaming_products.not_available.not_available')
+        #  show_error(error)
+        #end
       else
         if view_context.streaming_access?
           streaming_version = StreamingProduct.find_by_id(params[:streaming_product_id])

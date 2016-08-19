@@ -9,6 +9,11 @@ class InfoController < ApplicationController
       gon.abo = "abo"
     elsif customer_signed_in? && params[:page_name] == t('routes.infos.params.unlimited')
       gon.unlimited = "unlimited"
+      if params[:kind] == :adult
+        gon.ds_Code = "SVOD_ADULT"
+      else
+        gon.ds_Code = "SVOD"
+      end
     elsif customer_signed_in? && params[:page_name] == t('routes.infos.params.adult')
       gon.adult = "adult"
     #elsif params[:page_name] == t('routes.infos.params.freetrial')

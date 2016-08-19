@@ -57,7 +57,7 @@ class Api::V1::ValidatorController < ApplicationController
       if params[:discount_code].present?
         discount = Discount.find_by_discount_code(params[:discount_code])
     	  customer = current_customer
-        if !customer.discount_reuse?(discount.month_before_reuse)
+        if !customer.discount_reuse?(discount.month_before_reuse) && discount.bypass_discountuse == 0
           render :json => { :status => 2 }
         else
           customer.code = params[:discount_code]

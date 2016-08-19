@@ -44,7 +44,7 @@
 <script>
   $(document).ready(function () {
 
-    if ((window.location.pathname == "/fr/mon-compte/password/nouveau") || (window.location.pathname == "/nl/mijn-account/password/nieuw") || (window.location.pathname == "/en/my-account/password/new")) {
+    if ((window.location.pathname == "/fr/mon-compte/password/nouveau") || (window.location.pathname == "/nl/mijn-account/password/nieuw") || (window.location.pathname == "/en/my-account/password/new") || (window.location.pathname == "/fr/adult/mon-compte/password/nouveau") || (window.location.pathname == "/nl/adult/mijn-account/password/nieuw") || (window.location.pathname == "/en/adult/my-account/password/new")) {
 
       $("#new_customer").validate({
         rules: {
@@ -63,7 +63,7 @@
         }
       });
 
-    } else if ((window.location.pathname == "/fr/mon-compte/connectez-vous") || (window.location.pathname == "/nl/mijn-account/log-in") || (window.location.pathname == "/en/my-account/log-in")) {
+    } else if ((window.location.pathname == "/fr/mon-compte/connectez-vous") || (window.location.pathname == "/nl/mijn-account/log-in") || (window.location.pathname == "/en/my-account/log-in") || (window.location.pathname == "/fr/adult/mon-compte/connectez-vous") || (window.location.pathname == "/nl/adult/mijn-account/log-in") || (window.location.pathname == "/en/adult/my-account/log-in")) {
 
       $('#customer_email').val("");
       $('#customer_password').val("");
@@ -108,7 +108,8 @@
               'code': gon.code,
               'moovie_id': gon.moovie_id,
               'activation': gon.activation,
-              'samsung': gon.samsung
+              'samsung': gon.samsung,
+              'kind': gon.kind
             },
             dataType: 'json',
             success: function (response) {
@@ -138,7 +139,7 @@
         }
       });
 
-    } else if ((window.location.pathname == "/fr/mon-compte/sign_up") || (window.location.pathname == "/nl/mijn-account/sign_up") || (window.location.pathname == "/en/my-account/sign_up")) {
+    } else if ((window.location.pathname == "/fr/mon-compte/sign_up") || (window.location.pathname == "/nl/mijn-account/sign_up") || (window.location.pathname == "/en/my-account/sign_up") || (window.location.pathname == "/fr/adult/mon-compte/sign_up") || (window.location.pathname == "/nl/adult/mijn-account/sign_up") || (window.location.pathname == "/en/adult/my-account/sign_up")) {
 
       if ($("#customer_newsletter").is(':checked')) {
         customers_newsletter = 1

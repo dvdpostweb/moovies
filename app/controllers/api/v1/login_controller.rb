@@ -84,8 +84,13 @@ class Api::V1::LoginController < ApplicationController
         customer.preselected_registration_moovie_id = moovie_id
         if customer.save(validate: false)
           product = Product.where(:products_id => current_customer.preselected_registration_moovie_id).first
-          redirect_to_product_path = product_path(:id => product.to_param)
-          render json: { status: 1, message: redirect_to_product_path }
+          if ((current_customer.customers_abo_payment_method == 0 && current_customer.customers_abo_type != 6) || (current_customer.tvod_free == 0 && current_customer.customers_abo_type == 6) || (current_customer.customers_abo_payment_method == 0 && current_customer.unlimted_subscriber?) || (current_customer.customers_abo_payment_method == 0 && current_customer.plush_la_carte_subscriber?))
+            redirect_to_payment_path = edit_customer_payment_methods_path(:customer_id => customer.to_param, :type => :credit_card_tvod, :product_id => product.id, :source => 0)
+            render json: { status: 1, message: redirect_to_payment_path }
+          else
+            redirect_to_product_path = product_path(:id => product.to_param)
+            render json: { status: 1, message: redirect_to_product_path }
+          end
         end
       elsif samsung.present?
         sAMSUNG = SamsungCode.available.find_by_code(samsung)
@@ -104,14 +109,8 @@ class Api::V1::LoginController < ApplicationController
         end
       else
         sign_in :customer, resource
-        #if current_customer.preselected_registration_moovie_id?# && current_customer.customers_abo_payment_method == 0 && current_customer.customers_abo_type != 6
-        #  pRODUCT = Product.where(:products_id => current_customer.preselected_moovie).first
-        #  redirect_to_payment_path = edit_customer_payment_methods_path(:customer_id => resource.to_param, :type => :tvod, :product_id => pRODUCT.id, :source => 0)
-        #  render json: { status: 1, message: redirect_to_payment_path }
-        #else
-          redirect_to_root_localize_path = root_localize_path
-          render json: { status: 1, message: redirect_to_root_localize_path }
-        #end
+        redirect_to_root_localize_path = root_localize_path
+        render json: { status: 1, message: redirect_to_root_localize_path }
       end
     end
   end
