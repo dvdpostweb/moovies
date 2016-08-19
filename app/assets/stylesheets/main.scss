@@ -833,17 +833,21 @@ font-size: 1em;
 
 
 .adult .alacarte {
-background-image: url(image_path('button_streamingppv_adult.gif'));
-font-size: 14px;
-font-weight: bold;
-height: 32px;
-line-height: 30px;
-padding-left: 28px;
-text-align: left;
-width: 117px;
-color:#fff;
-
-display: block;
+	width: 165px;
+	height: 35px;
+	line-height: 35px;
+	margin: 0 auto 15px;
+	display: inline-block;
+	border-radius: 4px;
+	color: #fff;
+	font-size: 20px;
+	font-weight: bold;
+	cursor: pointer;
+	background-image: url(play-button-adult.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	text-align: center;
+	padding-left: 15px
 }
 
 .jacket .watch {
@@ -903,16 +907,21 @@ display: block;
 
 
 .alacarte{
-background-image: url(image_path('button_streamingppv.gif'));
- color: #FFFFFF;
-    display: block;
-    font-size: 13px;
-    font-weight: bold;
-    height: 32px;
-    line-height: 31px;
-    padding-left: 25px;
-    text-align: left;
-    width: 120px;
+	width: 165px;
+	height: 35px;
+	line-height: 35px;
+	margin: 0 auto 15px;
+	display: inline-block;
+	border-radius: 4px;
+	color: #fff;
+	font-size: 20px;
+	font-weight: bold;
+	cursor: pointer;
+	background-image: url(play_button.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	text-align: center;
+	padding-left: 15px
 }
 
 .normal.private .alacarte.popup{
@@ -1497,4 +1506,8 @@ div.notice {
 
 #promotion_hiden_trigger_button {
 	display: none;
+}
+
+#pbtn {
+	text-align: center;
 }

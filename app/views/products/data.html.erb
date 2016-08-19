@@ -1,4 +1,46 @@
-#<%= params[:div_id]%>|||<p class="tooltips_rating stars"><%= render :partial => 'products/rating', :locals => {:product => @product, :background => @rating_color, :size => :long, :source => @source, :response_id => @response_id} %></p>
+#<%= params[:div_id]%>|||<div class="button-area clear-float">
+  <div class="button-popup">
+    <% if @product.trailer? %>
+      <%= link_to(t('.trailer'), product_trailer_path(:product_id => @product.to_param, :source => @source, :response_id => @response_id), :class => 'trailer', :target => :_blank) %>
+    <% end %>
+  </div>
+  <% if !@product.series? %>
+    <% if customer_signed_in? %>
+      <div class="button-popup button-gray">
+        <%= render :partial => 'products/vod_list',  :locals => {:product => @product, :source => @source, :response_id => @response_id} %>
+      </div>
+    <% else %>
+      <div class="button-popup button-gray-1">
+        <%= link_to t('products.show.product.add_button'), new_customer_session_path( :moovie_id => @product.id ), class: "streaming_btn streaming_soon_btn add", :style => 'text-align:center;' %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
+
+
+<p class="tooltips_rating stars"><%= render :partial => 'products/rating', :locals => {:product => @product, :background => @rating_color, :size => :long, :source => @source, :response_id => @response_id} %></p>
 <p class="tooltips_runtime"><%= t('products.show.product.duration') %> <%= @product.runtime %> <%= t('products.show.minutes') %></p>
 <% if @product.director && !@product.adult? %>
 <div class="director">

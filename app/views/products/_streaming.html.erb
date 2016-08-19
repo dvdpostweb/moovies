@@ -2,18 +2,15 @@
 <% if !product.get_vod_online(session[:country_id]).empty? %>
   <% if product.svod? %>
     <% title = t('.watch_svod') %>
-    <% class_name = "watch action_btn" %>
+    <% class_name = "alacarte action_btn" %>
   <% else %>
-    <% credit = product.streaming_products.first.tvod_credits %>
-    <% if (current_customer && (current_customer.tvod_free >= credit || current_customer.tvod_credits?) ) || hide_price %>
+    <% if (customer_signed_in? && current_customer.tvod_credits?) || hide_price %>
      <% key = '.watch_tvod_free' %>
-     <% credit = "#{t('products.cost')}#{credit} #{credit > 1 ? t('products.credits') : t('products.credit') }" %>
      <% popup = false %>
     <% else %>
       <% key = '.watch_tvod' %>
-      <% credit = '' %>
     <% end %>
-     <% title = raw t(key, :price => (current_customer && current_customer.tvod_only?) || !current_customer && local_assigns.has_key?(:max_price)  ? product.get_vod_online(session[:country_id]).first.tvod_price : product.get_vod_online(session[:country_id]).first.ppv_price) %>
+     <% title = t('.watch_svod') %>
     <% class_name = popup == true ? "alacarte action_btn popup" : 'alacarte action_btn' %>
   <% end %>
   <% if current_customer && current_customer.tvod_only? && !product.svod? && popup == true %>
@@ -26,6 +23,4 @@
     </div>
  <% end %>
   <%= link_to  title, product_action_path(:product_id => product.to_param, :origin => :products, :source => source), :class => class_name %>
-  
-  <span class="film-price"><%= credit %></span>
 <% end %>

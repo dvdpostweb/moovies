@@ -26,7 +26,7 @@
 						<% end %>
 					<% end %>
 		    <% else %>
-		      jQuery.facebox('<%= escape_javascript(render(:partial => 'products/wrong_package')) %>')
+					  jQuery.facebox('<%= escape_javascript(render(:partial => 'products/wrong_package')) %>')
 		    <% end %>
 			<% else %>
 				jQuery.facebox('<%= escape_javascript(render(:partial => 'products/suspended')) %>')
@@ -38,5 +38,6 @@
 		jQuery.facebox('<%= escape_javascript(render(:partial => 'products/no_access')) %>')
 	<% end %>
 <% else %>
-  jQuery.facebox('<%= escape_javascript(render(:partial => 'products/log')) %>')
+  //jQuery.facebox('<%= escape_javascript(render(:partial => 'products/log')) %>')
+	window.location.href = '<%= new_customer_session_path(:moovie_id => @product.products_id) %>'
 <% end %>
