@@ -89,7 +89,7 @@
           <% if customer_signed_in? %>
             <% unless current_customer.abo_type_id == 6 && current_customer.activation_discount_code_type == "A" && Mobistar.find_by_activation_id(current_customer.activation_discount_code_id)  && current_customer.tvod_free > 0 %>
               <% if product.streaming_products.any? %>
-                <% unless current_customer.unlimted_subscriber? %>
+                <% unless current_customer.unlimted_subscriber? || current_customer.plush_la_carte_subscriber? %>
                   <p class="tooltips_title sub-title"><%= t('products.show.product.popup_chose')%> <%= product.streaming_products.first.ppv_price %>€ <%= t('products.show.product.popup_via') %> <u><%= link_to t('products.show.product.popup2'), info_path(:page_name => t('routes.infos.params.alacarte')) %></u></p>
                 <% end %>
               <% end %>
