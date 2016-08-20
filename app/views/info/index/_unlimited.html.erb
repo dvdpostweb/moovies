@@ -101,11 +101,7 @@
       <div class="description-block"><%= t('info.index.price_public.svod_explanation_1').html_safe %>, <%= link_to t('info.index.price_public.choose_svod_explanation_link').html_safe, info_path(:page_name => t('routes.infos.params.vod')), :id => :multi %>.
                        <%= t('info.index.price_public.svod_explanation_2').html_safe %>.
       </div>
-      <% if params[:kind] == :adult %>
-        <button><%= link_to t('info.index.price_public.svod_button').html_safe, new_customer_session_path( :code => "SVOD_ADULT" ) %></button>
-      <% else %>
         <button><%= link_to t('info.index.price_public.svod_button').html_safe, new_customer_session_path( :code => "SVOD" ) %></button>
-      <% end %>
       <div class="description-block description-block-main questions"><%= t('info.index.price_public.svod_support_info').html_safe %></div>
       <div class="description-block conditions"><%= link_to t('info.index.price_public.svod_conditions').html_safe, info_path(:page_name => t('routes.infos.params.conditions')) %></div>
     </div>
