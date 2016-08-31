@@ -11,6 +11,8 @@ class Api::V1::RegistrationController < ApplicationController
       customer.customers_abo = 1
       customer.customers_newsletter = params[:customers_newsletter] if params[:customers_newsletter].present?
       customer.customers_newsletterpartner = params[:customers_newsletterpartner] if params[:customers_newsletterpartner].present?
+      customer.activation_discount_code_id = 0
+      customer.activation_discount_code_type = "D" 
       if params[:moovie_id].present?
         product = Product.where(:products_id => params[:moovie_id]).first
         if product

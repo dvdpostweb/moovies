@@ -68,8 +68,10 @@
       (<label onclick='jQuery.facebox("<%= escape_javascript(render(:partial => 'products/alert_header_alacarte')) %>");'><%= t('products.show.product.popup4').html_safe %></label>)
       <% else %>
         <%= t('.tvod_free', :tvod_free => current_customer.tvod_free).html_safe %>
-        <%= link_to info_path(:page_name => t('routes.infos.params.alacarte')) do %>
-        (<label><%= t('products.show.product.popup4').html_safe %></label>)
+          <% unless current_customer.tvod_free > 0 %>
+          <%= link_to info_path(:page_name => t('routes.infos.params.alacarte')) do %>
+          (<label><%= t('products.show.product.popup4').html_safe %></label>)
+          <% end %>
         <% end %>
       <% end %>
     <% end %>
