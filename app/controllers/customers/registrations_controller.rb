@@ -1,5 +1,7 @@
 class Customers::RegistrationsController < Devise::RegistrationsController
 
+  caches_page :new
+
   layout :resolve_layout
 
   def new

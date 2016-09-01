@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
 
+  caches_page :index, :carrefour, :belgium
+
   def index
     @body_id = 'home'
     @meta_title = t("home.index.meta_title", :default => '')
