@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<head>
+  <link href="/assets/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+  <title>
+    * The largest VOD catalog for only 1,99€ per movie
+  </title>
+  <script>
+//<![CDATA[
+window.Plush={};Plush.global={"current_customer":null};Plush.current_customer=null;Plush.locale="en";Plush.code=null;Plush.moovie_id=null;Plush.activation=null;Plush.samsung=null;
+//]]>
+</script>
+  <script>
+//<![CDATA[
+window.gon={};gon.global={"current_customer":null};gon.current_customer=null;gon.locale="en";gon.code=null;gon.moovie_id=null;gon.activation=null;gon.samsung=null;
+//]]>
+</script>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+  <meta name="description" content="">
+  <link href="/assets/login.css?body=1" media="screen" rel="stylesheet" type="text/css" />
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700' rel='stylesheet' type='text/css'/>
+    <meta content="authenticity_token" name="csrf-param" />
+<meta content="fy7CbRmiB4QYGI7qEBhE3soE94VG/Mtg1+YzzS8MoF4=" name="csrf-token" />
+  <script>
+    dataLayer = [];
+</script>
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-NH8TTB"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NH8TTB');</script>
+
+  <link rel="apple-touch-icon" href="/touch-icon-iphone.png" />
+<link rel="apple-touch-icon" href="/touch-icon-ipad.png" />
+<link rel="apple-touch-icon" href="/touch-icon-iphone4.png" />
+</head>
+<body>
+
+  <div id="header_login">
+    <ul id="lang">
+      <li> <a href="/en">HOME</a> </li>
+      <li><li><a href="/fr/mon-compte/connectez-vous" class="nothing">FR</a></li><li><a href="/nl/mijn-account/log-in" class="nothing">NL</a></li><li><a href="/en/my-account/log-in" class="active">EN</a></li></li>
+    </ul>
+  </div>
+
+  <div id="content">
+
+    <style>
+.text-field {
+	width: calc(100% - 44px);
+	height: 40px;
+	margin-bottom: 15px;
+	padding: 5px 20px;
+	border: 2px solid #e1e1e1;
+	color: #bdbaba;
+	font-family: Arial,Helvetica, sans-serif;
+	font-size: 19px;
+}
+
+.text-field:focus {
+	border: 2px solid #76c71e;
+	outline: none;
+}
+</style>
+<div class="step2">
+<a href="/?locale=en">
+  <img alt="Plush_logo_fixed" height="71" src="/assets/plush_logo_fixed.jpg" width="129" />
+</a><a href="/auth/facebook?code=;moovie_id="><button id="fb_connect_login" class="face-button">FB Connect</button></a>
+<div class="separator-part">
+	<div class="separator-line"></div>
+	<label class="separator-label">OR</label>
+	<div class="separator-line"></div>
+</div>
+</br>
+<form accept-charset="UTF-8" action="/en/my-account/log-in?locale=en" class="new_customer" id="new_customer" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="fy7CbRmiB4QYGI7qEBhE3soE94VG/Mtg1+YzzS8MoF4=" /></div>
+<div id="code_info"><div id="code_message"></div></div>
+<input autocomplete="off" class="text-field" id="customer_email" name="customer[email]" placeholder="Email-address" size="30" tye="text" type="text" />
+<input autocomplete="off" class="text-field" id="customer_password" maxlength="40" name="customer[password]" placeholder="Password" size="40" type="password" />
+<div id="password_info"><div id="password_message"></div></div>
+</br>
+    <div class="customer_remember_me hvr-grow">
+      <input name="customer[remember_me]" type="hidden" value="0" /><input checked="checked" id="customer_remember_me" name="customer[remember_me]" type="checkbox" value="1" />
+      <label for="customer_remember_me">
+        <span></span>
+      </label>
+    </div>
+    <label class="customer_remember_me_label">Remember Me</label>
+<input class="button-connenct" id="submit_button" name="commit" type="submit" value="Connect" />
+</form></div>
+<div class="links">
+  
+
+    <a href="/en/my-account/password/new?locale=en" class="bottom-page-link">Forgot your password?</a><br />
+
+  <label class="bottom-page-label">Don&#x27;t have account? <a href="/en/my-account/sign_up" class="bottom-page-link">Sign up</a></label><br />
+
+
+
+
+</div>
+
+
+  </div>
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.js"></script>
+
+<script>
+  $(document).ready(function () {
+
+    if ((window.location.pathname == "/fr/mon-compte/password/nouveau") || (window.location.pathname == "/nl/mijn-account/password/nieuw") || (window.location.pathname == "/en/my-account/password/new") || (window.location.pathname == "/fr/adult/mon-compte/password/nouveau") || (window.location.pathname == "/nl/adult/mijn-account/password/nieuw") || (window.location.pathname == "/en/adult/my-account/password/new")) {
+
+      $("#new_customer").validate({
+        rules: {
+          'customer[email]': {
+            required: true,
+            email: true,
+            remote: "/api/v1/check_presence_of_customer_email"
+          }
+        },
+        messages: {
+          'customer[email]': {
+            required: required_message(),
+            email: email_message(),
+            remote: remote_message()
+          }
+        }
+      });
+
+    } else if ((window.location.pathname == "/fr/mon-compte/connectez-vous") || (window.location.pathname == "/nl/mijn-account/log-in") || (window.location.pathname == "/en/my-account/log-in") || (window.location.pathname == "/fr/adult/mon-compte/connectez-vous") || (window.location.pathname == "/nl/adult/mijn-account/log-in") || (window.location.pathname == "/en/adult/my-account/log-in")) {
+
+      $('#customer_email').val("");
+      $('#customer_password').val("");
+
+      $('#customer_email').bind("cut copy paste",function(e) {
+          e.preventDefault();
+      });
+
+      $('#customer_password').bind("cut copy paste",function(e) {
+          e.preventDefault();
+      });
+
+      $("#new_customer").validate({
+        rules: {
+          'customer[email]': {
+            required: true,
+            email: true,
+            remote: "/api/v1/check_presence_of_customer_email"
+          },
+          'customer[password]': {
+            required: true
+          }
+        },
+        messages: {
+          'customer[email]': {
+            required: required_message(),
+            email: email_message(),
+            remote: remote_message()
+          },
+          'customer[password]': {
+            required: login_password()
+          }
+        },
+        submitHandler: function (form) {
+
+          $.ajax({
+            method: 'POST',
+            url: '/api/v1/login',
+            data: {
+              'email': $("#customer_email").val(),
+              'password': $("#customer_password").val(),
+              'code': gon.code,
+              'moovie_id': gon.moovie_id,
+              'activation': gon.activation,
+              'samsung': gon.samsung,
+              'kind': gon.kind
+            },
+            dataType: 'json',
+            success: function (response) {
+              if (0 === response.status) {
+                $("#password_info").show().fadeOut(3000);
+                $("#password_message").text("");
+                $("#password_message").append(response.message);
+              } else if (1 === response.status) {
+                  window.location.href = response.message
+              } else if (3 === response.status) {
+                $("#code_info").show().fadeOut(3000);
+                $("#code_message").text("");
+                $("#code_message").append(response.message);
+              } else if (5 === response.status) {
+                $("#code_info").show().fadeOut(3000);
+                $("#code_message").text("");
+                $("#code_message").append(response.message);
+              } else if (4 === response.status) {
+                window.location.href = response.message
+              }
+            },
+            error: function (response) {
+              console.log('CHECKED AJAX ERROR!!!');
+            }
+          });
+
+        }
+      });
+
+    } else if ((window.location.pathname == "/fr/mon-compte/sign_up") || (window.location.pathname == "/nl/mijn-account/sign_up") || (window.location.pathname == "/en/my-account/sign_up") || (window.location.pathname == "/fr/adult/mon-compte/sign_up") || (window.location.pathname == "/nl/adult/mijn-account/sign_up") || (window.location.pathname == "/en/adult/my-account/sign_up")) {
+
+      if ($("#customer_newsletter").is(':checked')) {
+        customers_newsletter = 1
+        $("#customer_newsletter").click(function() {
+          if ($(this).is(':checked')) {
+            customers_newsletter = 1
+          } else {
+            customers_newsletter = 0
+          }
+        });
+      }
+
+      if ($("#customer_newsletter_parnter").is(':checked')) {
+        customers_newsletterpartner = 1
+        $("#customer_newsletter_parnter").click(function() {
+          if ($(this).is(':checked')) {
+            customers_newsletterpartner = 1
+          } else {
+            customers_newsletterpartner = 0
+          }
+        });
+      }
+
+      $("#new_customer").validate({
+        rules: {
+          'customer[email]': {
+            required: true,
+            email: true,
+            remote: "/api/v1/check_presence_of_customer_email_registration"
+          },
+          'customer[password]': {
+            required: true,
+            minlength: 8
+          },
+          'customer[password_confirmation]': {
+            required: true,
+            minlength: 8,
+            equalTo: "#customer_password"
+          }
+        },
+        messages: {
+          'customer[email]': {
+            required: required_message(),
+            email: email_message(),
+            remote: remote_message_register()
+          },
+          'customer[password]': {
+            required: required_message_password(),
+            minlength: min_characters()
+          },
+          'customer[password_confirmation]': {
+            required: required_message_password_confirmation(),
+            minlength: min_characters(),
+            equalTo: equalToMessage()
+          }
+        },
+        submitHandler: function (form) {
+
+          $.ajax({
+            method: 'POST',
+            url: '/api/v1/register',
+            data: {
+              'email': $("#customer_email").val(),
+              'password': $("#customer_password").val(),
+              'password_confirmation': $("#customer_password_confirmation").val(),
+              'code': gon.code,
+              'moovie_id': gon.moovie_id,
+              'activation': gon.activation,
+              'customers_newsletter': customers_newsletter,
+              'customers_newsletterpartner': customers_newsletterpartner
+            },
+            dataType: 'json',
+            success: function (response) {
+              if (9 === response.status) {
+                window.location.href = response.message
+              }
+            },
+            error: function (response) {
+              console.log('CHECKED AJAX ERROR!!!');
+            }
+          });
+
+        }
+      });
+
+    }
+
+  });
+
+  function min_characters() {
+    if (gon.locale == "fr") {
+      return "S'il vous plaît entrer au moins 8 caractères."
+    } else if (gon.locale == "nl") {
+      return "Voer ten minste 8 tekens."
+    } else if (gon.locale == "en") {
+      return "Please enter at least 8 characters."
+    }
+  }
+
+  function equalToMessage() {
+    if (gon.locale == "fr") {
+      return "Entrez à nouveau la même valeur s'il vous plait."
+    } else if (gon.locale == "nl") {
+      return "Vul dezelfde waarde opnieuw."
+    } else if (gon.locale == "en") {
+      return "Please enter the same value again."
+    }
+  }
+
+  function required_message() {
+    if (gon.locale == "fr") {
+      return "Adresse e-mail est nécessaire."
+    } else if (gon.locale == "nl") {
+      return "E-mailadres is verplicht."
+    } else if (gon.locale == "en") {
+      return "Email address is required."
+    }
+  }
+
+  function required_message_password() {
+    if (gon.locale == "fr") {
+      return "Mot de passe requis."
+    } else if (gon.locale == "nl") {
+      return "Een wachtwoord is verplicht."
+    } else if (gon.locale == "en") {
+      return "Password is required."
+    }
+  }
+
+  function required_message_password_confirmation() {
+    if (gon.locale == "fr") {
+      return "Confirmation mot de passe est nécessaire."
+    } else if (gon.locale == "nl") {
+      return "Wachtwoord bevestiging nodig is."
+    } else if (gon.locale == "en") {
+      return "Password confirmation is required."
+    }
+  }
+
+  function email_message() {
+    if (gon.locale == "fr") {
+      return "Format votre adresse email doit être correcte."
+    } else if (gon.locale == "nl") {
+      return "Formatteren uw e-mail adres moet correct zijn."
+    } else if (gon.locale == "en") {
+      return "Format your email address must be correct."
+    }
+  }
+
+  function remote_message() {
+    if (gon.locale == "fr") {
+      return "Adresse e-mail ne se trouve pas dans le système."
+    } else if (gon.locale == "nl") {
+      return "E-mail adres is niet gevonden in het systeem."
+    } else if (gon.locale == "en") {
+      return "Email address is not found in the system."
+    }
+  }
+
+  function remote_message_register() {
+    if (gon.locale == "fr") {
+      return "Adresse e-mail existe dans le système."
+    } else if (gon.locale == "nl") {
+      return "E-mailadres bestaat in het systeem."
+    } else if (gon.locale == "en") {
+      return "Email address exists in the system."
+    }
+  }
+
+  function login_password() {
+    if (gon.locale == "fr") {
+      return "Champ Mot de passe est nécessaire."
+    } else if (gon.locale == "nl") {
+      return "Password veld is verplicht."
+    } else if (gon.locale == "en") {
+      return "Password field is required."
+    }
+  }
+
+</script>
+
+</body>
+</html>
