@@ -1,3 +1,4 @@
+<% cache(action_suffix: "home_index_carousel_public_item") do %>
 <% key = current_customer && current_customer.tvod_free > 0 ? '.withouy_price' : '.price' %>
 <% if carousel_public_item.product.get_vod_online(session[:country_id]).first %>
   <% path =  carousel_path(carousel_public_item, true) %>
@@ -11,4 +12,5 @@
       <h2><a href="<%= path %>"><%= carousel_public_item.product.title %></a></h2>
     </div>
   </li>
+<% end %>
 <% end %>

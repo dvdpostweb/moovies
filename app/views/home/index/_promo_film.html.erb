@@ -1,3 +1,4 @@
+<% cache(action_suffix: "home_index_promo_film") do %>
 <!-- movie Free-->
 <div id="movie-free">
   <div class="movie"><a href="<%= promotion_path(:id => 'film-site')%>"><img src="http://www.dvdpost.be/images/plush/movie_free/129693.jpg" alt='<%= t('.promo_film_title').html_safe %>' /></a></div>
@@ -11,3 +12,4 @@
   <div class="clearfix"></div>
 </div>
 <!-- Services -->
+<% end %>
