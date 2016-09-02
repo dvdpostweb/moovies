@@ -1,6 +1,5 @@
 class Customers::SessionsController < Devise::SessionsController
 
-
   def new
     gon.code = params[:code]
     gon.moovie_id = params[:moovie_id]
