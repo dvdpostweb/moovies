@@ -1,6 +1,5 @@
 class Customers::SessionsController < Devise::SessionsController
 
-  caches_page :new
 
   def new
     gon.code = params[:code]
