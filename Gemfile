@@ -22,6 +22,7 @@ group :development do
   gem 'sextant'
   gem "letter_opener"
   gem 'rails-footnotes', '~> 4.0'
+  gem 'thin'
 end
 
 gem 'cucumber-rails', :require => false
