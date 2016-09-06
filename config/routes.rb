@@ -7,7 +7,7 @@ Moovies::Application.routes.draw do
     resources :products, :only => :index
   end
 
-  root :to => redirect("/#{I18n.default_locale}(/movies")
+  root :to => "#{I18n.default_locale}/products#index"
   resource :ogone, :only => [:create]
   resource :home_products, :only => [:update, :edit]
   resource :list, :only => [:new, :create]
