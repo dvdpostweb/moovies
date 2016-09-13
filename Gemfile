@@ -20,9 +20,7 @@ group :development do
   gem 'quiet_assets'
   gem 'spring'
   gem 'sextant'
-  gem "letter_opener"
-  gem 'rails-footnotes', '~> 4.0'
-  gem 'thin'
+  gem 'capistrano-slack', :git => 'https://github.com/j-mcnally/capistrano-slack.git'
 end
 
 gem 'cucumber-rails', :require => false
@@ -83,10 +81,9 @@ gem "rest-client"
 gem "jbuilder"
 gem 'annotate'
 gem 'gon'
-gem 'puma', '~> 3.1', '>= 3.1.1'
-gem 'capistrano-slack', :git => 'https://github.com/j-mcnally/capistrano-slack.git'
 
 gem 'omniauth-facebook'
 gem "figaro"
-gem 'evercookie'
+
+gem 'thin'
 

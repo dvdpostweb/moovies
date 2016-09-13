@@ -48,7 +48,11 @@
       <% end %>
       <div class="main-part">
         <p class="tooltips_title head-title"><%= product.smart_title %> (<%= product.year %>)</p>
-        <p class="tooltips_rating stars"><%= render :partial => 'products/rating', :locals => {:product => product, :background => @rating_color, :size => :long, :source => @source, :response_id => @response_id} %></p>
+        <p class="tooltips_rating stars">
+          <% cache("tooltips_rating_detail2_#{product.id}", :expires_in => 1.hour) do %>
+            <%= render :partial => 'products/rating', :locals => {:product => product, :background => @rating_color, :size => :long, :source => @source, :response_id => @response_id} %>
+          <% end %>
+        </p>
         <% if customer_signed_in? %>
           <% if current_customer.unlimted_subscriber? %>
             <% if product.tvod? %>
