@@ -85,3 +85,6 @@ gem 'gon'
 gem 'omniauth-facebook'
 gem "figaro"
 
+gem 'thin'
+gem 'rails-footnotes', '~> 4.0'
+

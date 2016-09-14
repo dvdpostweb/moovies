@@ -3,6 +3,11 @@ class ProductsController < ApplicationController
   before_filter :find_product, :except => [:index, :drop_cached]
 
   def index
+    if customer_signed_in?
+      cookies[:customer_identificator] = "#{current_customer.encrypted_password}_customer_identificator"
+    else 
+      cookies.delete :customer_identificator
+    end
     if params[:category_id] && params[:filters].nil? || (params[:filters] && params[:filters][:category_id].nil?)
       params[:filters] = Hash.new if params[:filters].nil?
       params[:filters][:category_id] = params[:category_id]
