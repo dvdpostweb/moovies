@@ -1,6 +1,6 @@
 require 'i18n/backend/active_record'
 require 'i18n_cache_backend'
-I18n.default_locale = :en
+I18n.default_locale = :fr
 I18n.backend.class.send(:include, I18n::Backend::Fallbacks)
 active_record_backend = I18n::Backend::ActiveRecord.new
 active_record_backend.class.send(:include, I18n::Backend::Fallbacks)

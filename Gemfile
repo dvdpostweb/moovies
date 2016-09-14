@@ -85,5 +85,3 @@ gem 'gon'
 gem 'omniauth-facebook'
 gem "figaro"
 
-gem 'thin'
-
