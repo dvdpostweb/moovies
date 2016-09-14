@@ -7,11 +7,8 @@ Moovies::Application.routes.draw do
     resources :products, :only => :index
   end
 
-  root to: redirect("/#{I18n.default_locale}", status: 302), as: :redirected_root
+  root to: 'products#index'
 
-  #root to: 'products#index'
-
-  #root :to => "#{I18n.default_locale}/products#index"
   resource :ogone, :only => [:create]
   resource :home_products, :only => [:update, :edit]
   resource :list, :only => [:new, :create]
@@ -60,8 +57,11 @@ Moovies::Application.routes.draw do
       resources :directors, :only => [], concerns: :productable
     end
   end
+
+  root_path = 'products#index'
+
   scope ':locale/(:kind)', :locale => /en|fr|nl/, :kind => /normal|adult/ do
-    root to: 'products#index'
+    #root to: 'products#index'
   	match "carrefourbonus" => "carrefourbonus#plans"
     match "freetrial" => "freetrial#plans"
     match "photobox" => "photobox#plans"

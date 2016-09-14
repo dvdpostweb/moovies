@@ -1,4 +1,5 @@
-<% cache("products_index", :expires_in => 15.minutes) do %>
+<!--
+<#% cache("products_index", :expires_in => 15.minutes) do %> -->
 
   <% if params[:kind] != :adult && @carousels && @carousels.size > 0 %>
   <div id="movies_banners<%= @carousels.size %>">
@@ -27,4 +28,4 @@
   <% end %>
   <!--   ==============   END MAIN CONTENT   ==============   --> 
 
-<% end %>
+<!--<#% end %>-->
