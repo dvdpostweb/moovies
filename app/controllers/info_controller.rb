@@ -1,5 +1,5 @@
 class InfoController < ApplicationController
-  caches_page :index
+  
   def index
 
     #if customer_signed_in? && current_customer.facebook_activation == 0
