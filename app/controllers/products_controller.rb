@@ -1,7 +1,5 @@
 class ProductsController < ApplicationController
 
-  caches_page :show
-
   before_filter :find_product, :except => [:index, :drop_cached]
 
   def index
