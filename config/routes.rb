@@ -1,4 +1,8 @@
 Moovies::Application.routes.draw do
+  devise_scope :customer do
+    get 'logout_via_javascript' => 'devise/sessions#destroy'
+  end
+
   match "renew_monthly_credits_for_a_la_carte" => "renew_monthly_subscription#renew_monthly_credits_for_a_la_carte"
   match "social_activation" => "social_activation#activate"
   match '/auth/:provider/callback' => 'authentications#create'

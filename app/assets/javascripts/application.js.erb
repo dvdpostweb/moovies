@@ -345,6 +345,11 @@ $(function() {
 
   $('#alacarte-4-films').trigger("click");
 
+  if (gon && gon.current_customer) {
+    var link_to_logout = "<a href=\"/logout_via_javascript\">" + logout_text_with_locale() + "</a> <span>" + gon.current_customer.email + "</span>";
+    $(".jcl").append(link_to_logout);
+  }
+
 });
 function querySt(hu ,ji) {
   gy = hu.split("&");
@@ -373,3 +378,13 @@ $(window).scroll(function(){
     }
   }
 });
+
+function logout_text_with_locale() {
+  if (gon.locale == "fr") {
+    return "Déconnexion"
+  } else if (gon.locale == "nl") {
+    return "Uitloggen"
+  } else if (gon.locale == "en") {
+    return "Log Out"
+  }
+}
