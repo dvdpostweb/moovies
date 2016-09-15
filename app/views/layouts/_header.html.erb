@@ -1,9 +1,8 @@
 <div id="top" class="<%= "promo" if !current_customer && cookies['url_promo'] %>">
-  <div class="wrap">
+  <div class="wrap jcl">
     <% if current_customer %>
       <% unless params[:controller] == "steps" %>
         <%= link_to t('.compte'), customer_path(:id => current_customer) %>
-        <%= "#{link_to t('.logout'), destroy_customer_session_path, :id => :logout, :method => :delete} <span>(#{current_customer.email})</span>".html_safe %>
       <% end %>
     <% else %>
     &nbsp;
