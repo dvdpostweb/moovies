@@ -45,6 +45,7 @@ class AuthenticationsController < ApplicationController
               activation.update_attributes(:customers_id => user.to_param, :created_at => Time.now.localtime)
               #flash[:notice] = t('.social.network.fbconnect.registration.new')
               sign_in_and_redirect(:customer, authentication.customer)
+              cookies[:customer_identificator] = "#{current_customer.encrypted_password}_customer_identificator"
             else
               flash[:error] = "Error while creating a user account. Please try again."
               redirect_to root_url
@@ -70,6 +71,7 @@ class AuthenticationsController < ApplicationController
               DiscountUse.create(:discount_code_id => r["discount_code_id"], :customer_id => user.to_param, :discount_use_date => Time.now)
               #flash[:notice] = t('.social.network.fbconnect.registration.new')
               sign_in_and_redirect(:customer, authentication.customer)
+              cookies[:customer_identificator] = "#{current_customer.encrypted_password}_customer_identificator"
             else
               flash[:error] = "Error while creating a user account. Please try again."
               redirect_to root_url
@@ -86,6 +88,7 @@ class AuthenticationsController < ApplicationController
           redirect_to product_path(:id => product.to_param)
         else
           sign_in_and_redirect(:customer, authentication.customer)
+          cookies[:customer_identificator] = "#{current_customer.encrypted_password}_customer_identificator"
         end
 
       end
@@ -143,6 +146,7 @@ class AuthenticationsController < ApplicationController
 			              activation.update_attributes(:customers_id => user.to_param, :created_at => Time.now.localtime)
 			              #flash[:notice] = t('.social.network.fbconnect.registration.new')
 			              sign_in_and_redirect(:customer, auth.customer)
+                    cookies[:customer_identificator] = "#{current_customer.encrypted_password}_customer_identificator"
 			            else
 			              flash[:error] = "Error while creating a user account. Please try again."
 			              redirect_to root_url
@@ -168,6 +172,7 @@ class AuthenticationsController < ApplicationController
 			              DiscountUse.create(:discount_code_id => r["discount_code_id"], :customer_id => user.to_param, :discount_use_date => Time.now)
 			              #flash[:notice] = t('.social.network.fbconnect.registration.new')
 			              sign_in_and_redirect(:customer, auth.customer)
+                    cookies[:customer_identificator] = "#{current_customer.encrypted_password}_customer_identificator"
 			            else
 			              flash[:error] = "Error while creating a user account. Please try again."
 			              redirect_to root_url
@@ -181,9 +186,11 @@ class AuthenticationsController < ApplicationController
 
               if product
                 sign_in(:customer, auth.customer)
+                cookies[:customer_identificator] = "#{current_customer.encrypted_password}_customer_identificator"
                 redirect_to product_path(:id => product.to_param)
               else
                 sign_in_and_redirect(:customer, auth.customer)
+                cookies[:customer_identificator] = "#{current_customer.encrypted_password}_customer_identificator"
               end
 
 			      end
@@ -226,6 +233,7 @@ class AuthenticationsController < ApplicationController
                 activation.update_attributes(:customers_id => customer.to_param, :created_at => Time.now.localtime)
                 #flash[:notice] = t('.social.network.fbconnect.registration.new')
                 sign_in_and_redirect(:customer, customer)
+                cookies[:customer_identificator] = "#{current_customer.encrypted_password}_customer_identificator"
               else
                 flash[:error] = "Error while creating a user account. Please try again."
                 redirect_to root_url
@@ -247,6 +255,7 @@ class AuthenticationsController < ApplicationController
                 DiscountUse.create(:discount_code_id => r["discount_code_id"], :customer_id => customer.to_param, :discount_use_date => Time.now)
                 #flash[:notice] = t('.social.network.fbconnect.registration.new')
                 sign_in_and_redirect(:customer, customer)
+                cookies[:customer_identificator] = "#{current_customer.encrypted_password}_customer_identificator"
               else
                 flash[:error] = "Error while creating a user account. Please try again."
                 redirect_to root_url
@@ -265,9 +274,11 @@ class AuthenticationsController < ApplicationController
           if customer.save(:validate => false)
             if product
               sign_in(:customer, customer)
+              cookies[:customer_identificator] = "#{current_customer.encrypted_password}_customer_identificator"
               redirect_to product_path(:id => product.to_param)
             else
               sign_in_and_redirect(:customer, customer)
+              cookies[:customer_identificator] = "#{current_customer.encrypted_password}_customer_identificator"
             end
           else
             flash[:error] = "Error while creating a user account. Please try again."
