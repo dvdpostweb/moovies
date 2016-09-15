@@ -42,6 +42,7 @@ class Api::V1::LoginController < ApplicationController
           if resource.abo_history(38, resource.abo_type_id, activation.to_param)
             if resource.valid_password?(password)
               sign_in :customer, resource
+              cookies[:customer_identificator] = "#{current_customer.encrypted_password}_customer_identificator"
               redirect_to_root_path = root_path
               render json: { status: 4, message: redirect_to_root_path }
             end
