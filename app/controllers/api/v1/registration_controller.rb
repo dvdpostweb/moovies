@@ -23,7 +23,7 @@ class Api::V1::RegistrationController < ApplicationController
           customer.preselected_registration_moovie_id = product.to_param
           if customer.save(validate: false)
             sign_in :customer, customer
-            cookies[:customer_identificator] = "#{current_customer.encrypted_password}_customer_identificator"
+            #cookies[:customer_identificator] = "#{current_customer.encrypted_password}_customer_identificator"
             redirect_to_product_path = edit_customer_payment_methods_path(:customer_id => customer.to_param, :type => :credit_card_tvod, :product_id => product.id, :source => 0)
             render json: { status: 9, message: redirect_to_product_path }
           end
@@ -56,7 +56,7 @@ class Api::V1::RegistrationController < ApplicationController
             customer.tvod_free = r["tvod_free"]
             if customer.save(:validate => false)
               sign_in :customer, customer
-              cookies[:customer_identificator] = "#{current_customer.encrypted_password}_customer_identificator"
+              #cookies[:customer_identificator] = "#{current_customer.encrypted_password}_customer_identificator"
               activation = Activation.find_by_activation_code(params[:code])
               activation.update_attributes(:customers_id => customer.to_param, :created_at => Time.now.localtime)
               redirect_to_root_path = root_path
@@ -96,7 +96,7 @@ class Api::V1::RegistrationController < ApplicationController
         customer.registration_code = params[:code]
         if customer.save(validate: false)
           sign_in :customer, customer
-          cookies[:customer_identificator] = "#{current_customer.encrypted_password}_customer_identificator"
+          #cookies[:customer_identificator] = "#{current_customer.encrypted_password}_customer_identificator"
           DiscountUse.create(:discount_code_id => discount.id, :customer_id => current_customer.to_param, :discount_use_date => Time.now)
           activation.update_attributes(:customers_id => current_customer.to_param, :created_at => Time.now.localtime)
           redirect_to_root_path = root_path
@@ -109,7 +109,7 @@ class Api::V1::RegistrationController < ApplicationController
         customer.customers_abo_validityto = nil
         if customer.save(validate: false)
           sign_in :customer, customer
-          cookies[:customer_identificator] = "#{current_customer.encrypted_password}_customer_identificator"
+          #cookies[:customer_identificator] = "#{current_customer.encrypted_password}_customer_identificator"
           redirect_to_home_path = root_path
           render json: { status: 9, message: redirect_to_home_path }
         end

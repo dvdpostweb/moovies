@@ -42,7 +42,7 @@ class Api::V1::LoginController < ApplicationController
           if resource.abo_history(38, resource.abo_type_id, activation.to_param)
             if resource.valid_password?(password)
               sign_in :customer, resource
-              cookies[:customer_identificator] = "#{current_customer.encrypted_password}_customer_identificator"
+              #cookies[:customer_identificator] = "#{current_customer.encrypted_password}_customer_identificator"
               redirect_to_root_path = root_path
               render json: { status: 4, message: redirect_to_root_path }
             end
@@ -66,7 +66,7 @@ class Api::V1::LoginController < ApplicationController
         if DiscountUse.create(:discount_code_id => discount.id, :customer_id => resource.to_param, :discount_use_date => Time.now)
           if resource.valid_password?(password)
             sign_in :customer, resource
-            cookies[:customer_identificator] = "#{current_customer.encrypted_password}_customer_identificator"
+            #cookies[:customer_identificator] = "#{current_customer.encrypted_password}_customer_identificator"
             if activation
               activation.update_attributes(:customers_id => current_customer.to_param, :created_at => Time.now.localtime)
             end
@@ -82,7 +82,7 @@ class Api::V1::LoginController < ApplicationController
     if resource.valid_password?(password)
       if moovie_id.present?
         sign_in :customer, resource
-        cookies[:customer_identificator] = "#{current_customer.encrypted_password}_customer_identificator"
+        #cookies[:customer_identificator] = "#{current_customer.encrypted_password}_customer_identificator"
         customer = current_customer
         customer.preselected_registration_moovie_id = moovie_id
         if customer.save(validate: false)
@@ -112,7 +112,7 @@ class Api::V1::LoginController < ApplicationController
         end
       else
         sign_in :customer, resource
-        cookies[:customer_identificator] = "#{current_customer.encrypted_password}_customer_identificator"
+        #cookies[:customer_identificator] = "#{current_customer.encrypted_password}_customer_identificator"
         redirect_to_root_localize_path = root_localize_path
         render json: { status: 1, message: redirect_to_root_localize_path }
       end

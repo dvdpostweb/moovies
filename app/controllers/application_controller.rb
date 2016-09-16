@@ -161,7 +161,7 @@ class ApplicationController < ActionController::Base
 
 
   def after_sign_out_path_for(resource_or_scope)
-    cookies.delete :customer_identificator
+    #cookies.delete :customer_identificator
     root_localize_path
   end
 
