@@ -41,7 +41,7 @@ class AuthenticationsController < ApplicationController
             #end
             user.customers_abo = 1
             if user.save(:validate => false)
-              cookies[:customer_identificator] = "#{user.social_network_tag}_customer_identificator"
+              #cookies[:customer_identificator] = "#{user.social_network_tag}_customer_identificator"
               activation = Activation.find_by_activation_code(code)
               activation.update_attributes(:customers_id => user.to_param, :created_at => Time.now.localtime)
               #flash[:notice] = t('.social.network.fbconnect.registration.new')
@@ -69,7 +69,7 @@ class AuthenticationsController < ApplicationController
             #end
             user.customers_abo = 1
             if user.save(:validate => false)
-              cookies[:customer_identificator] = "#{user.social_network_tag}_customer_identificator"
+              #cookies[:customer_identificator] = "#{user.social_network_tag}_customer_identificator"
               DiscountUse.create(:discount_code_id => r["discount_code_id"], :customer_id => user.to_param, :discount_use_date => Time.now)
               #flash[:notice] = t('.social.network.fbconnect.registration.new')
               sign_in(:customer, authentication.customer)
@@ -83,7 +83,7 @@ class AuthenticationsController < ApplicationController
 
       else
 
-        cookies[:customer_identificator] = "#{user.social_network_tag}_customer_identificator"
+        #cookies[:customer_identificator] = "#{user.social_network_tag}_customer_identificator"
 
         product = Product.where(:products_id  => moovie_id).first
 
@@ -146,7 +146,7 @@ class AuthenticationsController < ApplicationController
 			            #end
                   user.customers_abo = 1
 			            if user.save(:validate => false)
-                    cookies[:customer_identificator] = "#{user.social_network_tag}_customer_identificator"
+                    #cookies[:customer_identificator] = "#{user.social_network_tag}_customer_identificator"
 			              activation = Activation.find_by_activation_code(code)
 			              activation.update_attributes(:customers_id => user.to_param, :created_at => Time.now.localtime)
 			              #flash[:notice] = t('.social.network.fbconnect.registration.new')
@@ -174,7 +174,7 @@ class AuthenticationsController < ApplicationController
 			            #end
                   user.customers_abo = 1
 			            if user.save(:validate => false)
-                    cookies[:customer_identificator] = "#{user.social_network_tag}_customer_identificator"
+                    #cookies[:customer_identificator] = "#{user.social_network_tag}_customer_identificator"
 			              DiscountUse.create(:discount_code_id => r["discount_code_id"], :customer_id => user.to_param, :discount_use_date => Time.now)
 			              #flash[:notice] = t('.social.network.fbconnect.registration.new')
 			              sign_in(:customer, auth.customer)
@@ -188,7 +188,7 @@ class AuthenticationsController < ApplicationController
 
 			      else
 
-              cookies[:customer_identificator] = "#{user.social_network_tag}_customer_identificator"
+              #cookies[:customer_identificator] = "#{user.social_network_tag}_customer_identificator"
 
               product = Product.where(:products_id  => moovie_id).first
 
@@ -236,7 +236,7 @@ class AuthenticationsController < ApplicationController
               customer.tvod_free = r["tvod_free"]
               customer.customers_abo = 1
               if customer.save(:validate => false)
-                cookies[:customer_identificator] = "#{customer.social_network_tag}_customer_identificator"
+                #cookies[:customer_identificator] = "#{customer.social_network_tag}_customer_identificator"
                 activation = Activation.find_by_activation_code(code)
                 activation.update_attributes(:customers_id => customer.to_param, :created_at => Time.now.localtime)
                 #flash[:notice] = t('.social.network.fbconnect.registration.new')
@@ -260,7 +260,7 @@ class AuthenticationsController < ApplicationController
               customer.tvod_free = r["tvod_free"]
               customer.customers_abo = 1
               if customer.save(:validate => false)
-                cookies[:customer_identificator] = "#{customer.social_network_tag}_customer_identificator"
+                #cookies[:customer_identificator] = "#{customer.social_network_tag}_customer_identificator"
                 DiscountUse.create(:discount_code_id => r["discount_code_id"], :customer_id => customer.to_param, :discount_use_date => Time.now)
                 #flash[:notice] = t('.social.network.fbconnect.registration.new')
                 sign_in(:customer, customer)
@@ -281,7 +281,7 @@ class AuthenticationsController < ApplicationController
           customer.customers_next_abo_type = 6
           customer.customers_abo_validityto = nil
           if customer.save(:validate => false)
-            cookies[:customer_identificator] = "#{customer.social_network_tag}_customer_identificator"
+            #cookies[:customer_identificator] = "#{customer.social_network_tag}_customer_identificator"
             if product
               sign_in(:customer, customer)
               redirect_to product_path(:id => product.to_param)
