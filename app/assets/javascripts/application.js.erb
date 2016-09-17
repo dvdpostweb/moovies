@@ -345,6 +345,15 @@ $(function() {
 
   $('#alacarte-4-films').trigger("click");
 
+  var greenBannerOpen = $('.greenBannerOpen');
+  var greenBannerTop = $('.greenBannerTop');
+  $('a.greenToggle').on('click', function(){
+    greenBannerOpen.toggleClass('_open_');
+    greenBannerTop.toggleClass('_open_');
+
+    return false;
+  });
+
 });
 function querySt(hu ,ji) {
   gy = hu.split("&");
