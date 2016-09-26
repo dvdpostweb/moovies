@@ -12,10 +12,10 @@ class Customers::RegistrationsController < Devise::RegistrationsController
 
   def resolve_layout
     case action_name
-    when "new"
-      "devise_layout"
-    else
-      "application"
+      when "new"
+        "devise_layout"
+      else
+        "application"
     end
   end
 

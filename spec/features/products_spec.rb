@@ -11,7 +11,7 @@ describe "products" do
       login_as(Customer.find(1), :scope => :customer)
       visit new_product_review_path(:product_id => 120171, :locale => :fr)
       find(:xpath, "//input[@id='review_rating']").set "3"
-      fill_in('review_text', :with => Faker::Lorem.sentence(3) )
+      fill_in('review_text', :with => Faker::Lorem.sentence(3))
       click_button 'review_submit'
       page.should have_content("Your review has been saved")
     end

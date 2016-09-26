@@ -3,129 +3,138 @@
     <div class="step_form">
       <div class="step_2 step <%= I18n.locale %>" align="center"></div>
       <h3><%= t('.title') %></h3>
-      <%= form_for(current_customer, :url => customer_path(:id => current_customer.to_param), :id => :form_account, :html => {:method => :put, id: 'edit_customer' }, :validate => true) do |f| %>
-      <table width="630" border="0" cellspacing="0" cellpadding="0" class="form_step">
-          <fieldset>
-            <table class='step2form' cellpadding="2" cellspacing="0" border="0" align="center" width="100%">
-              <tr>
-                <td colspan="3">
-                   <%= error_messages_for :customer, :header_message => '', :message => '' %>
-                </td>
-              </tr>
-              <tr>
-                <td align="right" width="150"><span class="explain_text"><%= t('.gender')%><span class="asterisk_step">*</span></span></td>
-                <td align="left" class="explain_text_gender" width='480'>
-                  <span><%= f.radio_button :gender, 'f' %><%= t '.miss' %></span>
-                  <span><%= f.radio_button :gender, 'm' %><%= t '.mister' %></span>
-                </td>
-              </tr>
-              <tr>
-                <td align="right">
-                  <span class="explain_text"><%= t '.first_name' %> <span class="asterisk_step">*</span></span>							
-                </td>
-                <td>
-                  <%= f.text_field :first_name, :class => :new_step_input, :validate => true %>
-                </td>
-              </tr>
-              <tr>
-                <td align="right">
-                  <span class="explain_text"><%= t '.last_name' %> <span class="asterisk_step">*</span></span>
-                </td>
-                <td>
-                  <%= f.text_field :last_name, :class => :new_step_input, :validate => true %>
-                </td>
-                
-              </tr>
-              <tr height='45'>
-                <td align="right">
-                  <span class="explain_text"><%= t('.birthday') %> <span class="asterisk_step">*</span></span>
-                </td>
-                <td>
-                  <div>
-                  <%= f.date_select :customers_dob, :start_year => 18.years.ago.year, :end_year => 100.years.ago.year, use_month_numbers: true, prompt: { day: t('.day'), month: t('.month'), year: t('.year') }, :order => [:day, :month, :year], :validate => true %>
-                  <label for="customer_birthday" class="message"></label>
-                  </div>
-                </td>
-              </tr>
-              <%= f.fields_for :address do |af| %>
-              <tr>
-                <td align="right">
-                  <span class="explain_text"><%= t('.street') %> <span class="asterisk_step">*</span></span>
-                </td>
-                <td>
-                  <%= af.text_field :street, :class => "new_step_input" %>
-                </td>
-              </tr>
-              <tr>
-                <td align="right">
-                  <span class="explain_text"><%= t('.zip') %> <span class="asterisk_step">*</span></span>
-                </td>
-                <td>
-                  <%= af.text_field :postal_code, :class => :new_step_input %>
-                </td>
-              </tr>
-              <tr>
-                <td align="right"><span class="explain_text"><%= t('.city') %> <span class="asterisk_step">*</span></span></td>
-                <td>
-                  <%= af.text_field :city, :class => :new_step_input %>
-                </td>
-              </tr>
-              <tr height="45">
-                <td align="right">
-                  <span class="explain_text"><%= t('.country') %> <span class="asterisk_step">*</span></span>
-                </td>
-                <td>
-                  <%= af.select :entry_country_id, @countries.collect{|country| [t(".country_#{country.id}"), country.id]}, :class => :new_step_select %>
-                </td>
-                <td align="right" class="explain_text">
-                  <div id='check_country' class=""><div id="text"></div> </div>
-                </td>
-              </tr>
-              <%= af.hidden_field :id, :value => af.object.id %>
-              <% end %>
-              <tr>
-                <td align="right">
-                  <span class="explain_text"><%= t('.phone')%></span><span class="asterisk_step">*</span>
-                </td>
-                <td>
-                  <%= f.text_field :phone, :class => :new_step_input, :validate => true %>
-                </td>
-              </tr>               
-              <tr>
-                <td>&nbsp;</td>
-                <td  class="asterisk_explain_step">*<%= t('.require') %></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td align="left">
-                  <p><INPUT type="checkbox"  name="conditions" id ='condition'>
-                    <%= link_to t('.conditions'), info_path(:page_name => t('routes.infos.params.conditions')), :class => "blue_link, smaller", :target => "_blank" %>
-                    <br />
-                  </p>
-                </td>
-              </tr>
-              <tr> 
-                <td></td>
-                <td class="subscription_payement_footer"><div id='check_payment' class=""><div id="text"><br /></div></div></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td colspan='2'>
-                  <input type="submit" name ="sent" value= "<%= t('.confirm') %>" class="promo_button" />
-                  <% if current_customer.subscription && current_customer.subscription.product_id == 6 %>
-                    <%= link_to t('tvod_only_back'), back_to_tvod_path() %>
-                  <% end %>
-                </td>
-              </tr>
-            </table>
-          </fieldset>
-      </table>
+      <%= form_for(current_customer, :url => customer_path(:id => current_customer.to_param), :id => :form_account, :html => {:method => :put, id: 'edit_customer'}, :validate => true) do |f| %>
+          <table width="630" border="0" cellspacing="0" cellpadding="0" class="form_step">
+            <fieldset>
+              <table class='step2form' cellpadding="2" cellspacing="0" border="0" align="center" width="100%">
+                <tr>
+                  <td colspan="3">
+                    <%= error_messages_for :customer, :header_message => '', :message => '' %>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right" width="150">
+                    <span class="explain_text"><%= t('.gender') %><span class="asterisk_step">*</span></span></td>
+                  <td align="left" class="explain_text_gender" width='480'>
+                    <span><%= f.radio_button :gender, 'f' %><%= t '.miss' %></span>
+                    <span><%= f.radio_button :gender, 'm' %><%= t '.mister' %></span>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <span class="explain_text"><%= t '.first_name' %> <span class="asterisk_step">*</span></span>
+                  </td>
+                  <td>
+                    <%= f.text_field :first_name, :class => :new_step_input, :validate => true %>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <span class="explain_text"><%= t '.last_name' %> <span class="asterisk_step">*</span></span>
+                  </td>
+                  <td>
+                    <%= f.text_field :last_name, :class => :new_step_input, :validate => true %>
+                  </td>
+
+                </tr>
+                <tr height='45'>
+                  <td align="right">
+                    <span class="explain_text"><%= t('.birthday') %> <span class="asterisk_step">*</span></span>
+                  </td>
+                  <td>
+                    <div>
+                      <%= f.date_select :customers_dob, :start_year => 18.years.ago.year, :end_year => 100.years.ago.year, use_month_numbers: true, prompt: {day: t('.day'), month: t('.month'), year: t('.year')}, :order => [:day, :month, :year], :validate => true %>
+                      <label for="customer_birthday" class="message"></label>
+                    </div>
+                  </td>
+                </tr>
+                <%= f.fields_for :address do |af| %>
+                    <tr>
+                      <td align="right">
+                        <span class="explain_text"><%= t('.street') %> <span class="asterisk_step">*</span></span>
+                      </td>
+                      <td>
+                        <%= af.text_field :street, :class => "new_step_input" %>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="right">
+                        <span class="explain_text"><%= t('.zip') %> <span class="asterisk_step">*</span></span>
+                      </td>
+                      <td>
+                        <%= af.text_field :postal_code, :class => :new_step_input %>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="right">
+                        <span class="explain_text"><%= t('.city') %> <span class="asterisk_step">*</span></span></td>
+                      <td>
+                        <%= af.text_field :city, :class => :new_step_input %>
+                      </td>
+                    </tr>
+                    <tr height="45">
+                      <td align="right">
+                        <span class="explain_text"><%= t('.country') %> <span class="asterisk_step">*</span></span>
+                      </td>
+                      <td>
+                        <%= af.select :entry_country_id, @countries.collect { |country| [t(".country_#{country.id}"), country.id] }, :class => :new_step_select %>
+                      </td>
+                      <td align="right" class="explain_text">
+                        <div id='check_country' class="">
+                          <div id="text"></div>
+                        </div>
+                      </td>
+                    </tr>
+                    <%= af.hidden_field :id, :value => af.object.id %>
+                <% end %>
+                <tr>
+                  <td align="right">
+                    <span class="explain_text"><%= t('.phone') %></span><span class="asterisk_step">*</span>
+                  </td>
+                  <td>
+                    <%= f.text_field :phone, :class => :new_step_input, :validate => true %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td class="asterisk_explain_step">*<%= t('.require') %></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td align="left">
+                    <p><INPUT type="checkbox" name="conditions" id='condition'>
+                      <%= link_to t('.conditions'), info_path(:page_name => t('routes.infos.params.conditions')), :class => "blue_link, smaller", :target => "_blank" %>
+                      <br/>
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td class="subscription_payement_footer">
+                    <div id='check_payment' class="">
+                      <div id="text"><br/></div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td colspan='2'>
+                    <input type="submit" name="sent" value="<%= t('.confirm') %>" class="promo_button"/>
+                    <% if current_customer.subscription && current_customer.subscription.product_id == 6 %>
+                        <%= link_to t('tvod_only_back'), back_to_tvod_path() %>
+                    <% end %>
+                  </td>
+                </tr>
+              </table>
+            </fieldset>
+          </table>
       <% end %>
     </div>
-    <p align="center" class="telfooter"><a class="f-btn <%= I18n.locale %>" href="mailto:info@plush.be">info@plush.be</a></p>
+    <p align="center" class="telfooter">
+      <a class="f-btn <%= I18n.locale %>" href="mailto:info@plush.be">info@plush.be</a></p>
   </div>
   <%= render :partial => 'devise/registrations/faq2' %>
 </div>
-<div style="display:none" id ='date_invalid'><%= t('.date_invalid') %></div>
-<div style="display:none" id ='date_kid'><%= t('.date_kid') %></div>
-<div style="display:none" id ='promotions_alert'><%= t('.conditions_alert') %></div>
+<div style="display:none" id='date_invalid'><%= t('.date_invalid') %></div>
+<div style="display:none" id='date_kid'><%= t('.date_kid') %></div>
+<div style="display:none" id='promotions_alert'><%= t('.conditions_alert') %></div>

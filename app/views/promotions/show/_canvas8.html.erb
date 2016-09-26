@@ -1,85 +1,93 @@
 <style>
 
-.canvas8 #promo_content {
-  background: url('http://www.dvdpost.be/images/promotions_plush/<%= @promo.params[:background_locale] ? "#{I18n.locale}/" : '' %><%= @promo.params[:background] %>') no-repeat scroll 0 0 transparent;
-  margin: 0 auto;
-  width: 970px;
-  min-height: 600px;
-}
-<% if @promo.params[:brand_logo] %>
-.canvas8 #header h2{
-  background: url('http://www.dvdpost.be/images/promotions_plush/<%= @promo.params[:brand_logo] %>') repeat scroll 0 0 transparent;
-  height: 60px;
-  width: 224px;
-}
-<% end %>
-.canvas8 #header h2
-{
-  width:224px;
-}
+  .canvas8 #promo_content {
+    background: url('http://www.dvdpost.be/images/promotions_plush/<%= @promo.params[:background_locale] ? "#{I18n.locale}/" : '' %><%= @promo.params[:background] %>') no-repeat scroll 0 0 transparent;
+    margin: 0 auto;
+    width: 970px;
+    min-height: 600px;
+  }
+
+  <% if @promo.params[:brand_logo] %>
+  .canvas8 #header h2 {
+    background: url('http://www.dvdpost.be/images/promotions_plush/<%= @promo.params[:brand_logo] %>') repeat scroll 0 0 transparent;
+    height: 60px;
+    width: 224px;
+  }
+
+  <% end %>
+  .canvas8 #header h2 {
+    width: 224px;
+  }
 </style>
 <div id="wrap">
-  <div id="header" >
+  <div id="header">
     <h1>
       <%= link_to 'plush.be', root_localize_path(), :class => 'f-btn' %>
     </h1>
-    
+
     <h2>
       <%= !@promo.params[:brand_url] ? '' : link_to(@promo.params[:brand_url], @promo.params[:brand_url], :class => 'f-btn', :target => '_blank') %>
     </h2>
-    
+
     <div class="social-content">
-    	<h1><%= t('.social_title') %></h1>
-    	<ul>
-    	  <li class="share-facebook"><a title="Partager sur Facebook" href="https://www.facebook.com/sharer/sharer.php?u=<%= "#{request.protocol}#{request.host_with_port}#{request.fullpath}" %>" target="_blank"></a></li>
-    	  <li class="share-google-plus"><a title="Partager sur Google +" href="https://plus.google.com/share?url=<%= "#{request.protocol}#{request.host_with_port}#{request.fullpath}" %>" target="_blank"></a></li>
-    	  <li class="share-twitter"><a title="Partager sur Twitter " href="https://twitter.com/home?status=<%= "#{request.protocol}#{request.host_with_port}#{request.fullpath}" %>" target="_blank"></a></li>
-    	</ul>
+      <h1><%= t('.social_title') %></h1>
+      <ul>
+        <li class="share-facebook">
+          <a title="Partager sur Facebook" href="https://www.facebook.com/sharer/sharer.php?u=<%= "#{request.protocol}#{request.host_with_port}#{request.fullpath}" %>" target="_blank"></a>
+        </li>
+        <li class="share-google-plus">
+          <a title="Partager sur Google +" href="https://plus.google.com/share?url=<%= "#{request.protocol}#{request.host_with_port}#{request.fullpath}" %>" target="_blank"></a>
+        </li>
+        <li class="share-twitter">
+          <a title="Partager sur Twitter " href="https://twitter.com/home?status=<%= "#{request.protocol}#{request.host_with_port}#{request.fullpath}" %>" target="_blank"></a>
+        </li>
+      </ul>
     </div>
   </div>
   <div class="container clearfix">
     <div id="promo_content">
       <h1><%= t2('.title', @promo.params[:key]).html_safe %><br/>
-      <span><%= t2('.title_promo', @promo.params[:key]).html_safe %></span></h1>
+        <span><%= t2('.title_promo', @promo.params[:key]).html_safe %></span></h1>
       <div id="promo_form">
-      <% if @error == '' %>
-      <div class="explain_promo">
-        <% if @streaming_code.mail_id.nil? %>
-          <%= t('.gratz_without_verification').html_safe %>
-          <%= link_to(t('.movie_link'), streaming_product_path(:id => 1645155, :email => params[:email], :streaming_code => params[:streaming_code]), :class => 'btn_watch') %>
+        <% if @error == '' %>
+            <div class="explain_promo">
+              <% if @streaming_code.mail_id.nil? %>
+                  <%= t('.gratz_without_verification').html_safe %>
+                  <%= link_to(t('.movie_link'), streaming_product_path(:id => 1645155, :email => params[:email], :streaming_code => params[:streaming_code]), :class => 'btn_watch') %>
+              <% else %>
+                  <%= t('.gratz').html_safe %>
+              <% end %>
+            </div>
         <% else %>
-          <%= t('.gratz').html_safe %>
+            <%= form_tag promotion_canva_path(:id => params[:id]), :id => 'form_step' do %>
+
+                <p class="step1"><%= t('.intro') %></p>
+                <p class="email"><%= label_tag :email, t('.email_label') %>:<br/>
+                  <%= text_field_tag :email, params[:email], :class => 'inputs_promo_code', :size => '40', :tye => 'text' %>
+                </p>
+                <%= hidden_field_tag(:streaming_code, @internal_code) %><br/>
+
+                <div style="clear:both;"></div>
+                <div class="news">
+                  <%= "<div id='error'>#{@error.html_safe}</div>".html_safe if @error %>
+                  <%= check_box_tag 'marketing', 1, @checked, :class => :marketing3, :id => 'marketing' %>
+                  <%= t('.marketing') %>
+                </div>
+                <div class="news">
+                  <%= check_box_tag 'marketing_partners', 1, @checked_partners, :class => :marketing3, :id => 'marketing' %>
+                  <%= t('.marketing_partners') %>
+                </div>
+                <p>
+                  <input type="submit" border="0" align="absmiddle" id="submit_id3" class="promo_button" name="sent" value="<%= t('.send') %>"/>
+                </p>
+            <% end %>
         <% end %>
-        </div>
-      <% else %>
-        <%= form_tag promotion_canva_path(:id => params[:id]), :id => 'form_step' do %>
-     
-        <p class="step1"><%= t('.intro') %></p>
-          <p class="email"><%= label_tag :email, t('.email_label') %>:<br />
-            <%= text_field_tag :email, params[:email], :class => 'inputs_promo_code', :size => '40', :tye => 'text' %>
-          </p>
-            <%= hidden_field_tag(:streaming_code, @internal_code) %><br />
-    
-          <div style="clear:both;"></div>
-          <div class="news">
-            <%= "<div id='error'>#{@error.html_safe}</div>".html_safe if @error %>
-            <%= check_box_tag 'marketing', 1, @checked, :class => :marketing3, :id => 'marketing' %>
-            <%= t('.marketing') %>
-          </div>
-          <div class="news">
-            <%= check_box_tag 'marketing_partners', 1, @checked_partners, :class => :marketing3, :id => 'marketing' %>
-            <%= t('.marketing_partners') %>
-          </div>
-          <p>
-            <input type="submit" border="0" align="absmiddle" id="submit_id3" class="promo_button" name="sent" value="<%= t('.send') %>" />
-          </p>
-        <% end %>
-      <% end %>
+      </div>
     </div>
+    <p align="center" class="telfooter">
+      <a href="mailto:info@plush.be" class="f-btn <%= I18n.locale %>">info@plush.be</a></p>
+    <div id="promo_footer"><%= t2('.conditions', @promo.params[:key]).html_safe %></div>
   </div>
-  <p align="center" class="telfooter"><a href="mailto:info@plush.be" class="f-btn <%= I18n.locale %>">info@plush.be</a></p>
-  <div id="promo_footer"><%= t2('.conditions', @promo.params[:key]).html_safe %></div>
-</div>
 </div>
 </div>
 </div>

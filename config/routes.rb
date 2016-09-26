@@ -22,8 +22,8 @@ Moovies::Application.routes.draw do
   scope '(:kind)', :kind => /normal|adult/ do
     localized do
       devise_for :customers, :controllers => {
-        :registrations => "customers/registrations",
-        :sessions => "customers/sessions" }
+          :registrations => "customers/registrations",
+          :sessions => "customers/sessions"}
       resources :customers do
         match 'newsletter' => 'customers#newsletter', :only => [:update]
         resource 'addresses', :only => [:edit, :update, :create]
@@ -40,13 +40,13 @@ Moovies::Application.routes.draw do
         match 'subtitle' => 'streaming_products#subtitle'
         match 'versions' => 'streaming_products#versions'
       end
-      resources :products, :only => [:show], constraints: { :id => /[0-9]+[0-9a-zA-Z\-_]*/ }
-      resources :products, :only => [], constraints: { :product_id => /[0-9]+[0-9a-zA-Z\-_]*/ } do
+      resources :products, :only => [:show], constraints: {:id => /[0-9]+[0-9a-zA-Z\-_]*/}
+      resources :products, :only => [], constraints: {:product_id => /[0-9]+[0-9a-zA-Z\-_]*/} do
         resource :rating, :only => :create
         resources :reviews, :only => [:new, :create]
         #resources :tokens, :only => [:new, :create]
         match 'step' => 'products#step'
-        match 'awards'=> 'products#awards'
+        match 'awards' => 'products#awards'
         match 'seen' => 'products#seen'
         match 'trailer' => 'products#trailer'
         match 'uninterested' => 'products#uninterested'
@@ -66,7 +66,7 @@ Moovies::Application.routes.draw do
 
   scope ':locale/(:kind)', :locale => /en|fr|nl/, :kind => /normal|adult/ do
     #root to: 'products#index'
-  	match "carrefourbonus" => "carrefourbonus#plans"
+    match "carrefourbonus" => "carrefourbonus#plans"
     match "freetrial" => "freetrial#plans"
     match "photobox" => "photobox#plans"
     match 'carrefour' => 'home#carrefour'
@@ -75,7 +75,7 @@ Moovies::Application.routes.draw do
     match "/" => 'products#index', :as => :root_localize
     match "validation" => 'home#validation'
     match 'customers/promotion' => "customers#promotion"
-    devise_for :customers, :controllers => { :registrations => "customers/registrations", :confirmations => "customers/confirmations" }, :as => :old_customers
+    devise_for :customers, :controllers => {:registrations => "customers/registrations", :confirmations => "customers/confirmations"}, :as => :old_customers
     resources :customers, :as => :old_customer do
       match 'newsletter' => 'customers#newsletter', :only => [:update]
       resource 'addresses', :only => [:edit, :update, :create]
@@ -91,7 +91,7 @@ Moovies::Application.routes.draw do
       resource :rating, :only => :create
       resources :reviews, :only => [:new, :create]
       resources :tokens, :only => [:new, :create]
-      match 'awards'=> 'products#awards'
+      match 'awards' => 'products#awards'
       match 'seen' => 'products#seen'
       match 'trailer' => 'products#trailer'
       match 'uninterested' => 'products#uninterested'
@@ -137,9 +137,9 @@ Moovies::Application.routes.draw do
   end
 
 
-  get ':id' => "promotions#show", defaults: { format: 'choose' }, :as => :promotion, :id => /smarttv|radio_contact|samsung|nostalgie|playstation/, :as => :short_promotion
-  post ':id' => "promotions#show", defaults: { format: 'choose' }, :as => :promotion, :id => /smarttv|radio_contact|samsung|nostalgie/, :as => :short_promotion
-  resources :promotions, defaults: { format: 'choose' }, :only => [:show], :as => :root_promotion
+  get ':id' => "promotions#show", defaults: {format: 'choose'}, :as => :promotion, :id => /smarttv|radio_contact|samsung|nostalgie|playstation/, :as => :short_promotion
+  post ':id' => "promotions#show", defaults: {format: 'choose'}, :as => :promotion, :id => /smarttv|radio_contact|samsung|nostalgie/, :as => :short_promotion
+  resources :promotions, defaults: {format: 'choose'}, :only => [:show], :as => :root_promotion
 
   match "/404", :to => "errors#not_found"
   match "/500", :to => "errors#not_found"

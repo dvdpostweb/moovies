@@ -2,26 +2,26 @@
 <% product = review.product %>
 <% product_title = review.product.title %>
 <div class="movie-wrap">
-	<div class="movie-ttl">
-  	<h3>
-      <%= link_to product_title, path %> 
+  <div class="movie-ttl">
+    <h3>
+      <%= link_to product_title, path %>
       <span class="publish">
         (<%= "#{t '.published_on', :default => 'published on'} #{review.created_at.strftime("%d/%m/%Y")}" %>)
       </span>
     </h3>
-      <div class="stars vote" id="rating-stars-<%= review.product.to_param %>" product_id="<%= review.product.to_param %>">
-        <%= render :partial => 'products/rating', :locals => {:product => product, :background => :white, :size => :long, :source => source, :response_id => @response_id} %>
-      </div>
-  </div>    
+    <div class="stars vote" id="rating-stars-<%= review.product.to_param %>" product_id="<%= review.product.to_param %>">
+      <%= render :partial => 'products/rating', :locals => {:product => product, :background => :white, :size => :long, :source => source, :response_id => @response_id} %>
+    </div>
+  </div>
   <div class="movie-content">
-  	<div class="movie-descr">
-    	<p>
+    <div class="movie-descr">
+      <p>
         <b><%= t '.rating' %> : </b>
         <span class="stars"><%= product_review_stars(review, params[:kind]).html_safe %></span>
       </p>
 
       <p>
-        <strong><%= t '.critic' %> :</strong> 
+        <strong><%= t '.critic' %> :</strong>
         <%= review.text %>
       </p>
       <p>
@@ -29,25 +29,25 @@
       </p>
       <div class="thumb-wrap">
         <%= link_to path, :class => :cover, :alt => product_title do %>
-          <%= product_image_tag product.image, :width => 100 %>
+            <%= product_image_tag product.image, :width => 100 %>
         <% end %>
       </div>
-    </div>  
+    </div>
     <div class="oters">
       <div class="links" id="seen-uninterested-<%= product.to_param %>">
         <%= render :partial => 'products/show/seen_uninterested', :locals => {:product => product, :source => source, :response_id => @response_id} if current_customer %>
       </div>
       <ul class="btns osc">
         <li>
-        <%= render :partial => 'products/streaming',  :locals => {:product => product, :source => @source, :popup => false} %>
-        <br />
-        <%= render :partial => 'products/vod_list',  :locals => {:product => product, :source => @source, :response_id => @response_id} %>
-        
+          <%= render :partial => 'products/streaming', :locals => {:product => product, :source => @source, :popup => false} %>
+          <br/>
+          <%= render :partial => 'products/vod_list', :locals => {:product => product, :source => @source, :response_id => @response_id} %>
+
         </li>
         <% if product.trailer? %>
-          <li>
-            <%= link_to(t('.trailer'), product_trailer_path(:product_id => product.to_param, :source => source), :class => 'trailer', :target => :_blank) %>
-          </li>
+            <li>
+              <%= link_to(t('.trailer'), product_trailer_path(:product_id => product.to_param, :source => source), :class => 'trailer', :target => :_blank) %>
+            </li>
         <% end %>
       </ul>
     </div><!-- .oters -->

@@ -1,44 +1,44 @@
 <%= form_tag home_products_path, :method => :put do %>
-  <div style="float:left">
-  svod fr
-  <% HomeProduct.kind('svod').country('be').locale('1').ordered.each_with_index do |item, i| %>
-    <div>
-      <%= text_field_tag "svod_1_#{i}", item.product_id %>
+    <div style="float:left">
+      svod fr
+      <% HomeProduct.kind('svod').country('be').locale('1').ordered.each_with_index do |item, i| %>
+          <div>
+            <%= text_field_tag "svod_1_#{i}", item.product_id %>
+          </div>
+      <% end %>
+      svod nl
+      <% HomeProduct.kind('svod').country('be').locale('2').ordered.each_with_index do |item, i| %>
+          <div>
+            <%= text_field_tag "svod_2_#{i}", item.product_id %>
+          </div>
+      <% end %>
+      svod en
+      <% HomeProduct.kind('svod').country('be').locale('3').ordered.each_with_index do |item, i| %>
+          <div>
+            <%= text_field_tag "svod_3_#{i}", item.product_id %>
+          </div>
+      <% end %>
     </div>
-  <% end %> 
-  svod nl
-  <% HomeProduct.kind('svod').country('be').locale('2').ordered.each_with_index do |item, i| %>
-    <div>
-      <%= text_field_tag "svod_2_#{i}", item.product_id %>
+    <div style="float:left">
+      tvod fr
+      <% HomeProduct.kind('tvod').country('be').locale('1').ordered.each_with_index do |item, i| %>
+          <div>
+            <%= text_field_tag "tvod_1_#{i}", item.product_id %>
+          </div>
+      <% end %>
+
+      tvod nl
+      <% HomeProduct.kind('tvod').country('be').locale('2').ordered.each_with_index do |item, i| %>
+          <div>
+            <%= text_field_tag "tvod_2_#{i}", item.product_id %>
+          </div>
+      <% end %>
+      tvod en
+      <% HomeProduct.kind('tvod').country('be').locale('3').ordered.each_with_index do |item, i| %>
+          <div>
+            <%= text_field_tag "tvod_3_#{i}", item.product_id %>
+          </div>
+      <% end %>
     </div>
-  <% end %> 
-  svod en
-  <% HomeProduct.kind('svod').country('be').locale('3').ordered.each_with_index do |item, i| %>
-    <div>
-      <%= text_field_tag "svod_3_#{i}", item.product_id %>
-    </div>
-  <% end %> 
-  </div>
-  <div style="float:left">
-  tvod fr
-  <% HomeProduct.kind('tvod').country('be').locale('1').ordered.each_with_index do |item, i| %>
-    <div>
-      <%= text_field_tag "tvod_1_#{i}", item.product_id %>
-    </div>
-  <% end %> 
-  
-  tvod nl
-  <% HomeProduct.kind('tvod').country('be').locale('2').ordered.each_with_index do |item, i| %>
-    <div>
-      <%= text_field_tag "tvod_2_#{i}", item.product_id %>
-    </div>
-  <% end %> 
-  tvod en
-  <% HomeProduct.kind('tvod').country('be').locale('3').ordered.each_with_index do |item, i| %>
-    <div>
-      <%= text_field_tag "tvod_3_#{i}", item.product_id %>
-    </div>
-  <% end %> 
-  </div>
-  <input type="submit" name="" value="change">  
+    <input type="submit" name="" value="change">
 <% end %>

@@ -1,38 +1,38 @@
 <% content_for :view_specific_css do %>
-  <%= stylesheet_link_tag "step2" %>
+    <%= stylesheet_link_tag "step2" %>
 <% end %>
 <div class="step2">
-<%= link_to root_path do %>
-  <%= image_tag "step2/logo.png" %>
-<% end %>
-<%= button_to t('.social.network.fbconnect'), '/auth/facebook/', :class => 'face-button' %>
-</br>
-<div class="separator-part">
-  <div class="separator-line"></div>
-    <label class="separator-label"><%= t('.promotions.show.or') %></label>
-  <div class="separator-line"></div>
-</div>
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:id => 'login2'}) do |f| %>
-  <%= devise_error_messages! %>
-  <%= "<div id='error'>#{alert}</div>".html_safe if alert && !alert.empty? %>
-  <%= f.text_field :email, :value => params[:email], :class => 'text-field', :tye => 'text', :placeholder => t('promotions.show.canvas2.email_label') %>
-  <%= f.password_field :password, :class => 'text-field', :maxlength => '40', :placeholder => t('promotions.show.canvas2.pass_label') %>
-  <%= cookies[:code] ? hidden_field_tag(:code, cookies[:code], :id => 'code') : hidden_field_tag(:code, @default_code, :id => 'code') %>
-  <%= hidden_field_tag :return_url, customers_reactive_path(:email => params[:email], :code => cookies[:code] ? cookies[:code] : @default_code) %>
+  <%= link_to root_path do %>
+      <%= image_tag "step2/logo.png" %>
+  <% end %>
+  <%= button_to t('.social.network.fbconnect'), '/auth/facebook/', :class => 'face-button' %>
   </br>
-<% if devise_mapping.rememberable? -%>
-    <div class="customer_remember_me hvr-grow">
-      <%= f.check_box :remember_me, :checked => true %>
-      <label for="customer_remember_me">
-        <span></span>
-      </label>
-    </div>
-    <label class="customer_remember_me_label"><%= t('.remember_me') %></label>
-<% end -%>
-  <%= f.submit t('.sign_in'), :class => 'button-connenct' %>
-<% end %>
+  <div class="separator-part">
+    <div class="separator-line"></div>
+    <label class="separator-label"><%= t('.promotions.show.or') %></label>
+    <div class="separator-line"></div>
+  </div>
+  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:id => 'login2'}) do |f| %>
+      <%= devise_error_messages! %>
+      <%= "<div id='error'>#{alert}</div>".html_safe if alert && !alert.empty? %>
+      <%= f.text_field :email, :value => params[:email], :class => 'text-field', :tye => 'text', :placeholder => t('promotions.show.canvas2.email_label') %>
+      <%= f.password_field :password, :class => 'text-field', :maxlength => '40', :placeholder => t('promotions.show.canvas2.pass_label') %>
+      <%= cookies[:code] ? hidden_field_tag(:code, cookies[:code], :id => 'code') : hidden_field_tag(:code, @default_code, :id => 'code') %>
+      <%= hidden_field_tag :return_url, customers_reactive_path(:email => params[:email], :code => cookies[:code] ? cookies[:code] : @default_code) %>
+      </br>
+      <% if devise_mapping.rememberable? -%>
+          <div class="customer_remember_me hvr-grow">
+            <%= f.check_box :remember_me, :checked => true %>
+            <label for="customer_remember_me">
+              <span></span>
+            </label>
+          </div>
+          <label class="customer_remember_me_label"><%= t('.remember_me') %></label>
+      <% end -%>
+      <%= f.submit t('.sign_in'), :class => 'button-connenct' %>
+  <% end %>
 </div>
 <div class="links">
-  <%= link_to t('.forget_password'), new_password_path(resource_name), class: "bottom-page-link" %><br />
-  <label class="bottom-page-label"><%= t('.promotions.show.toregistraniopage') %> <%= link_to t('.sign_up'), new_customer_registration_path(:code => params[:code]), class: "bottom-page-link" %></label><br />
+  <%= link_to t('.forget_password'), new_password_path(resource_name), class: "bottom-page-link" %><br/>
+  <label class="bottom-page-label"><%= t('.promotions.show.toregistraniopage') %> <%= link_to t('.sign_up'), new_customer_registration_path(:code => params[:code]), class: "bottom-page-link" %></label><br/>
 </div>

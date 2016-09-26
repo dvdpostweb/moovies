@@ -2,15 +2,15 @@
   <%= render :partial => "actors/menu_#{params[:kind]}" %>
   <p id="letters">
     <% ('a'..'z').each do |l| %>
-      <%= link_to l.upcase, actors_path(:letter => l) %> |
+        <%= link_to l.upcase, actors_path(:letter => l) %> |
     <% end %>
   </p>
-  <ul id="search-performers" class ="<%= params[:letter] ? :letter : :all %>">
-  <% if @actors %>
-  <% ('a'..'z').each do |l| %>
-  <% value = @actors[l]%>
-    <%= render :partial => 'actors/index/actors', :locals => { :details => value, :letter => l, :type => params[:letter] ? :letter : :all} %>
-  <% end %>
-  <% end %>
+  <ul id="search-performers" class="<%= params[:letter] ? :letter : :all %>">
+    <% if @actors %>
+        <% ('a'..'z').each do |l| %>
+            <% value = @actors[l] %>
+            <%= render :partial => 'actors/index/actors', :locals => {:details => value, :letter => l, :type => params[:letter] ? :letter : :all} %>
+        <% end %>
+    <% end %>
   </ul>
 </div>

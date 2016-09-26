@@ -1,5 +1,6 @@
 class SuspensionsController < ApplicationController
   before_filter :authenticate_customer!
+
   def new
     @already_suspended = current_customer.suspended?
     if @already_suspended
@@ -14,7 +15,7 @@ class SuspensionsController < ApplicationController
     if request.xhr?
       render :layout => false
     end
-      
+
   end
 
   def create
@@ -32,11 +33,11 @@ class SuspensionsController < ApplicationController
       if request.xhr?
         if @error == false
           render :layout => false
-        else  
+        else
           render :layout => false, :status => false
         end
       end
-      
+
     end
   end
 

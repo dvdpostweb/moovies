@@ -2,29 +2,29 @@
   <h1><%= t('.title').html_safe %></h1>
   <div id="playstation_form">
     <h2><%= t('.subtitle').html_safe %></h2>
-      <ul>
-        <%= t('.li').html_safe %>
-      </ul>
-      <p style="padding-top:5px;">
-        <%= link_to t('.try'), new_customer_registration_path(:code => @discount.name), :class => 'promo_button' %>
-      </p>
-    </form>      
+    <ul>
+      <%= t('.li').html_safe %>
+    </ul>
+    <p style="padding-top:5px;">
+      <%= link_to t('.try'), new_customer_registration_path(:code => @discount.name), :class => 'promo_button' %>
+    </p>
+    </form>
   </div>
 </div>
 <div id="commentcamarche_contentps">
   <h2><%= t('.how') %></h2>
-    <div class="section six">
-      <div id="ps3">
-        <div class="device_title"> 
-          <%= image_tag 'logo_ps3.jpg' %>
-        </div>
-        <div class="device_infos">
-          <div class="ps_title"> <%= t('info.index.vod.ps3_title').html_safe %> </div>
-          <%= t('info.index.vod.ps3_desc').html_safe %>
-        </div>
-        <div class="clear"></div>
+  <div class="section six">
+    <div id="ps3">
+      <div class="device_title">
+        <%= image_tag 'logo_ps3.jpg' %>
       </div>
-      <div id="ps4">
+      <div class="device_infos">
+        <div class="ps_title"> <%= t('info.index.vod.ps3_title').html_safe %> </div>
+        <%= t('info.index.vod.ps3_desc').html_safe %>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div id="ps4">
       <div class="device_title">
         <%= image_tag 'logo_ps4.jpg' %>
       </div>
@@ -36,4 +36,8 @@
     </div>
   </div>
 </div>
-<div class="footer_playstation">"<img src="http://www.dvdpost.be/images/plush/emails/ImageProxy.png"> ", "PlayStation", " <img src="http://www.dvdpost.be/images/plush/emails/ImageProxy1.png"> " and "<img src="http://www.dvdpost.be/images/plush/emails/ImageProxy2.png">" are trademarks or registered trademarks of Sony Computer Entertainment Inc. All other trademarks are property of their respective owners.</div>
+<div class="footer_playstation">"<img src="http://www.dvdpost.be/images/plush/emails/ImageProxy.png"> ", "PlayStation",
+  " <img src="http://www.dvdpost.be/images/plush/emails/ImageProxy1.png"> " and
+  "<img src="http://www.dvdpost.be/images/plush/emails/ImageProxy2.png">" are trademarks or registered trademarks of
+  Sony Computer Entertainment Inc. All other trademarks are property of their respective owners.
+</div>

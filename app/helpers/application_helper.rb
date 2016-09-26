@@ -5,40 +5,40 @@ module ApplicationHelper
     mail_object = Email.by_language(locale).find(mail_id)
     recipient = customer
     if 1==1 || mail_object.force_copy
-      mail_history= MailHistory.create(:date => Time.now().to_s(:db), :customers_id => customer.to_param, :mail_messages_id => mail_id, :language_id => Moovies.customer_languages[locale], :customers_email_address=> customer.email)
+      mail_history= MailHistory.create(:date => Time.now().to_s(:db), :customers_id => customer.to_param, :mail_messages_id => mail_id, :language_id => Moovies.customer_languages[locale], :customers_email_address => customer.email)
       options["\\$\\$\\$mail_messages_sent_history_id\\$\\$\\$"] = mail_history.to_param
     else
       options["\\$\\$\\$mail_messages_sent_history_id\\$\\$\\$"] = 0
     end
-      list = ""
-      options.each {|k, v|  list << "#{k.to_s.tr("\\","")}:::#{v};;;"}
-      email_data_replace(mail_object.subject, options)
-      subject = email_data_replace(mail_object.subject, options)
-      message = email_data_replace(mail_object.body, options)
-      mail_history.update_attributes(:lstvariable => list)
-      Emailer.welcome_email(recipient, subject, message, Rails.env == 'development' ? true : false).deliver
-      @ticket = Ticket.new(:customer_id => customer.to_param, :category_ticket_id => mail_object.category_id)
-      @ticket.save
-      if mail_history
-        @message = MessageTicket.new(:ticket => @ticket, :mail_id => mail_id, :data => list, :user_id => 55, :mail_history_id => mail_history.to_param)
-      else
-        @message = MessageTicket.new(:ticket => @ticket, :mail_id => mail_id, :data => list, :user_id => 55)
-      end
-      @message.save
+    list = ""
+    options.each { |k, v| list << "#{k.to_s.tr("\\", "")}:::#{v};;;" }
+    email_data_replace(mail_object.subject, options)
+    subject = email_data_replace(mail_object.subject, options)
+    message = email_data_replace(mail_object.body, options)
+    mail_history.update_attributes(:lstvariable => list)
+    Emailer.welcome_email(recipient, subject, message, Rails.env == 'development' ? true : false).deliver
+    @ticket = Ticket.new(:customer_id => customer.to_param, :category_ticket_id => mail_object.category_id)
+    @ticket.save
+    if mail_history
+      @message = MessageTicket.new(:ticket => @ticket, :mail_id => mail_id, :data => list, :user_id => 55, :mail_history_id => mail_history.to_param)
+    else
+      @message = MessageTicket.new(:ticket => @ticket, :mail_id => mail_id, :data => list, :user_id => 55)
+    end
+    @message.save
   end
 
   def send_message_public(mail_id, options, locale, email)
     mail_object = Email.by_language(locale).find(mail_id)
     list = ""
-    options.each {|k, v|  list << "#{k.to_s.tr("\\","")}:::#{v};;;"}
+    options.each { |k, v| list << "#{k.to_s.tr("\\", "")}:::#{v};;;" }
     email_data_replace(mail_object.subject, options)
     subject = email_data_replace(mail_object.subject, options)
     message = email_data_replace(mail_object.body, options)
     Emailer.public_email(email, subject, message, Rails.env == 'development' ? true : false).deliver
   end
 
-  def email_data_replace(text,options)
-    options.each {|key, value|
+  def email_data_replace(text, options)
+    options.each { |key, value|
       r = Regexp.new(key, true)
       text = text.gsub(r, value.to_s)
     }
@@ -52,14 +52,14 @@ module ApplicationHelper
   def sort_review_for_select
     options = []
     codes_hash = Review.sort
-    codes_hash.each {|key, code| options.push [t(".#{key}"), key]}
+    codes_hash.each { |key, code| options.push [t(".#{key}"), key] }
     options
   end
 
   def sort_review2_for_select
     options = []
     codes_hash = Review.sort2
-    codes_hash.each {|key, code| options.push [t(".#{key}"), key]}
+    codes_hash.each { |key, code| options.push [t(".#{key}"), key] }
     options
   end
 
@@ -76,7 +76,7 @@ module ApplicationHelper
   end
 
   def streaming_btn_title(type, text)
-    if(type == :replay)
+    if (type == :replay)
       text == :short ? t('.replay_short') : t('.replay')
     else
       text == :short ? t('.buy_short') : t('.buy')
@@ -115,7 +115,7 @@ module ApplicationHelper
       end
     else
       if current_customer && current_customer.filter_id
-        cookies[:filter_id] = { :value => current_customer.filter_id, :expires => 1.year.from_now }
+        cookies[:filter_id] = {:value => current_customer.filter_id, :expires => 1.year.from_now}
         current_filter = SearchFilter.get_filter(current_customer.filter_id)
         unless current_filter.to_param
           current_customer.update_attributes(:filter_id => nil) if current_customer
@@ -127,7 +127,7 @@ module ApplicationHelper
       else
         current_filter = SearchFilter.get_filter(nil)
         current_filter.update_with_defaults(options)
-        cookies[:filter_id] = { :value => current_filter.to_param, :expires => 1.year.from_now }
+        cookies[:filter_id] = {:value => current_filter.to_param, :expires => 1.year.from_now}
         current_customer.update_attributes(:filter_id => current_filter.to_param) if current_customer
       end
     end
@@ -152,16 +152,17 @@ module ApplicationHelper
   end
 
   def resource_name
-     :customer
+    :customer
   end
 
   def resource
-     @resource ||= Customer.new
+    @resource ||= Customer.new
   end
 
   def devise_mapping
-     @devise_mapping ||= Devise.mappings[:customer]
+    @devise_mapping ||= Devise.mappings[:customer]
   end
+
   def landing_img(code, promotion, params, products_alt_banner, discount_top)
     if params[:kind] == :adult
       path = info_path(:page_name => t('routes.infos.params.abo')) #code ? promotion_path(:id => :mobistar2) : new_customer_registration_path(:code => get_code(discount_top.name))
@@ -181,7 +182,7 @@ module ApplicationHelper
 
     end
 
-    link_to image, path#, :target => "_blank"
+    link_to image, path #, :target => "_blank"
 
   end
 

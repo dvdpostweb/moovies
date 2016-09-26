@@ -1,26 +1,26 @@
 <% hide_price = false unless defined? hide_price %>
 <% if !product.get_vod_online(session[:country_id]).empty? %>
-  <% if product.svod? %>
-    <% title = t('.watch_svod') %>
-    <% class_name = "alacarte action_btn" %>
-  <% else %>
-    <% if (customer_signed_in? && current_customer.tvod_credits?) || hide_price %>
-     <% key = '.watch_tvod_free' %>
-     <% popup = false %>
+    <% if product.svod? %>
+        <% title = t('.watch_svod') %>
+        <% class_name = "alacarte action_btn" %>
     <% else %>
-      <% key = '.watch_tvod' %>
+        <% if (customer_signed_in? && current_customer.tvod_credits?) || hide_price %>
+            <% key = '.watch_tvod_free' %>
+            <% popup = false %>
+        <% else %>
+            <% key = '.watch_tvod' %>
+        <% end %>
+        <% title = t('.watch_svod') %>
+        <% class_name = popup == true ? "alacarte action_btn popup" : 'alacarte action_btn' %>
     <% end %>
-     <% title = t('.watch_svod') %>
-    <% class_name = popup == true ? "alacarte action_btn popup" : 'alacarte action_btn' %>
-  <% end %>
-  <% if current_customer && current_customer.tvod_only? && !product.svod? && popup == true %>
-    <span class="infotvod"></span>
-    <div class="tooltips_tvod" style='display:none'>
-      <p class="tooltips_description">
-        <%= t("products.sign_up.tvod_price_description_#{params[:kind]}").html_safe %><br/> <br/>
-        <%= link_to t('products.sign_up.sign_up'), info_path(:page_name => t('routes.infos.params.abo')), :class => 'essaigratuit osc btn' %>
-      </p>
-    </div>
- <% end %>
-  <%= link_to  title, product_action_path(:product_id => product.to_param, :origin => :products, :source => source), :class => class_name %>
+    <% if current_customer && current_customer.tvod_only? && !product.svod? && popup == true %>
+        <span class="infotvod"></span>
+        <div class="tooltips_tvod" style='display:none'>
+          <p class="tooltips_description">
+            <%= t("products.sign_up.tvod_price_description_#{params[:kind]}").html_safe %><br/> <br/>
+            <%= link_to t('products.sign_up.sign_up'), info_path(:page_name => t('routes.infos.params.abo')), :class => 'essaigratuit osc btn' %>
+          </p>
+        </div>
+    <% end %>
+    <%= link_to title, product_action_path(:product_id => product.to_param, :origin => :products, :source => source), :class => class_name %>
 <% end %>

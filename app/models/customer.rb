@@ -185,7 +185,7 @@ class Customer < ActiveRecord::Base
   #after_create :setup_step
 
   def apply_omniauth(auth)
-    self.email = auth['extra']['raw_info']['email'] if  auth['extra']['raw_info']['email'].present?
+    self.email = auth['extra']['raw_info']['email'] if auth['extra']['raw_info']['email'].present?
     self.customers_firstname = auth['extra']['raw_info']['first_name'] if auth['extra']['raw_info']['first_name'].present?
     self.customers_lastname = auth['extra']['raw_info']['last_name'] if auth['extra']['raw_info']['last_name'].present?
     self.customers_gender = auth['extra']['raw_info']['gender'] if auth['extra']['raw_info']['gender'].present?
@@ -324,8 +324,9 @@ class Customer < ActiveRecord::Base
   def svod?
     abo_type_id != 6
   end
+
   def abo_svod?
-    subscription_type.packages_ids.split(',').include?([1,4])
+    subscription_type.packages_ids.split(',').include?([1, 4])
   end
 
   def name

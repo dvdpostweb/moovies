@@ -1,79 +1,97 @@
 <div class="photobox-page">
-<div class="special-freetrial">
-	<div class="special-offer-freetrial">
-		<div class="special-offer-headline"><%= t('home.freetrial.offer') %></div>
-		<h3><%= @text.html_safe %></h3>
-		</br>
-		<h3><%= t('home.freetrial.discount.title') %></h3>
-	</div>
-</div>
-	
-	<div class="choise">
-		<div class="choise-offer">
-			<div class="choise-offer-select">
-				<div class="offer-film">
-					<div class="offer-film-number">2 <%= t('home.photobox.films').html_safe %><div class="badge"><div class="badge-text"><%= t('home.photobox.most_popular').html_safe %></div></div></div>
-					<div class="first-month">0€</div>
-					<div class="first-month-text"><%= t('home.photobox.first_month').html_safe %></div>
-					<div class="next-month-text">(<%= t('home.photobox.original_price').html_safe %> <span><strike>3,99€</strike></span>)</div>
-					<div class="offer-film-checkbox">
-						<input type="radio" name="offer" id="select-offer-2"/>
-						<label for="select-offer-2">
-							<span></span>
-						</label>
-					</div>
-				</div>
-					<div class="vertical-line"></div>
-				<div class="offer-film">
-					<div class="offer-film-number">
-						4 <%= t('home.photobox.films').html_safe %>
-						<div class="badge active">
-							<div class="badge-text"><%= t('home.photobox.most_popular').html_safe %></div>
-						</div>
-					</div>
-					<div class="first-month">0€</div>
-					<div class="first-month-text"><%= t('home.photobox.first_month').html_safe %></div>
-					<div class="next-month-text">(<%= t('home.photobox.original_price').html_safe %> <span><strike>7,99€</strike></span>)</div>
-					<div class="offer-film-checkbox">
-						<input type="radio" name="offer" id="select-offer-4"/>
-						<label for="select-offer-4">
-							<span></span>
-						</label>
-					</div>
-				</div>
-					<div class="vertical-line"></div>
-				<div class="offer-film">
-					<div class="offer-film-number">6 <%= t('home.photobox.films').html_safe %><div class="badge"><div class="badge-text"><%= t('home.photobox.most_popular').html_safe %></div></div></div>
-					<div class="first-month">0€</div>
-					<div class="first-month-text"><%= t('home.photobox.first_month').html_safe %></div>
-					<div class="next-month-text">(<%= t('home.photobox.original_price').html_safe %> <span><strike>11,99€</strike></span>)</div>
-					<div class="offer-film-checkbox">
-						<input type="radio" name="offer" id="select-offer-6"/>
-						<label for="select-offer-6">
-							<span></span>
-						</label>
-					</div>
-				</div>
-			</div>
-			<div class="choise-offer-list">
-				<div class="choise-offer-list-style button-box">
-				    <div class="photobox-error"><%= t('home.photobox.error').html_safe %></div>
-					<button id="photobox-btn" class="code-button"><%= t('home.photobox.valid').html_safe %></button>
-				</div>
-				<div class="choise-offer-list-style list-box">
-					<ul>
-						<li><div class="list-style-blue"></div><%= t('home.photobox.catalog').html_safe %></li>
-						<li><div class="list-style-blue"></div><%= t('home.photobox.free').html_safe %></u></li>
-						<li><div class="list-style-blue"></div><%= t('home.photobox.increase').html_safe %></li>
-            <li><div class="list-style-blue"></div><%= t('home.photobox.2_credits').html_safe %></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
+  <div class="special-freetrial">
+    <div class="special-offer-freetrial">
+      <div class="special-offer-headline"><%= t('home.freetrial.offer') %></div>
+      <h3><%= @text.html_safe %></h3>
+      </br>
+      <h3><%= t('home.freetrial.discount.title') %></h3>
+    </div>
+  </div>
 
-	<div class="cards">
-		<%= image_tag("photobox/pay-cards.png", alt: "pay-cards") %>
-		<center><span class="cards-bottom-text">Secured online transactions managed by Ingenico</span></center>
-	</div>
+  <div class="choise">
+    <div class="choise-offer">
+      <div class="choise-offer-select">
+        <div class="offer-film">
+          <div class="offer-film-number">2 <%= t('home.photobox.films').html_safe %>
+            <div class="badge">
+              <div class="badge-text"><%= t('home.photobox.most_popular').html_safe %></div>
+            </div>
+          </div>
+          <div class="first-month">0€</div>
+          <div class="first-month-text"><%= t('home.photobox.first_month').html_safe %></div>
+          <div class="next-month-text">(<%= t('home.photobox.original_price').html_safe %>
+            <span><strike>3,99€</strike></span>)
+          </div>
+          <div class="offer-film-checkbox">
+            <input type="radio" name="offer" id="select-offer-2"/>
+            <label for="select-offer-2">
+              <span></span>
+            </label>
+          </div>
+        </div>
+        <div class="vertical-line"></div>
+        <div class="offer-film">
+          <div class="offer-film-number">
+            4 <%= t('home.photobox.films').html_safe %>
+            <div class="badge active">
+              <div class="badge-text"><%= t('home.photobox.most_popular').html_safe %></div>
+            </div>
+          </div>
+          <div class="first-month">0€</div>
+          <div class="first-month-text"><%= t('home.photobox.first_month').html_safe %></div>
+          <div class="next-month-text">(<%= t('home.photobox.original_price').html_safe %>
+            <span><strike>7,99€</strike></span>)
+          </div>
+          <div class="offer-film-checkbox">
+            <input type="radio" name="offer" id="select-offer-4"/>
+            <label for="select-offer-4">
+              <span></span>
+            </label>
+          </div>
+        </div>
+        <div class="vertical-line"></div>
+        <div class="offer-film">
+          <div class="offer-film-number">6 <%= t('home.photobox.films').html_safe %>
+            <div class="badge">
+              <div class="badge-text"><%= t('home.photobox.most_popular').html_safe %></div>
+            </div>
+          </div>
+          <div class="first-month">0€</div>
+          <div class="first-month-text"><%= t('home.photobox.first_month').html_safe %></div>
+          <div class="next-month-text">(<%= t('home.photobox.original_price').html_safe %>
+            <span><strike>11,99€</strike></span>)
+          </div>
+          <div class="offer-film-checkbox">
+            <input type="radio" name="offer" id="select-offer-6"/>
+            <label for="select-offer-6">
+              <span></span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="choise-offer-list">
+        <div class="choise-offer-list-style button-box">
+          <div class="photobox-error"><%= t('home.photobox.error').html_safe %></div>
+          <button id="photobox-btn" class="code-button"><%= t('home.photobox.valid').html_safe %></button>
+        </div>
+        <div class="choise-offer-list-style list-box">
+          <ul>
+            <li>
+              <div class="list-style-blue"></div><%= t('home.photobox.catalog').html_safe %></li>
+            <li>
+              <div class="list-style-blue"></div><%= t('home.photobox.free').html_safe %></u></li>
+            <li>
+              <div class="list-style-blue"></div><%= t('home.photobox.increase').html_safe %></li>
+            <li>
+              <div class="list-style-blue"></div><%= t('home.photobox.2_credits').html_safe %></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cards">
+    <%= image_tag("photobox/pay-cards.png", alt: "pay-cards") %>
+    <center><span class="cards-bottom-text">Secured online transactions managed by Ingenico</span></center>
+  </div>
 </div>

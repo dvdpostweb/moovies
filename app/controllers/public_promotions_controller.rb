@@ -4,7 +4,7 @@ class PublicPromotionsController < ApplicationController
     render :layout => false
   end
 
-   def update
+  def update
 
     if customer_signed_in?
 
@@ -13,7 +13,7 @@ class PublicPromotionsController < ApplicationController
         if !activation.present?
           careefour = Activation.where(:activation_code => params[:promotion]).where(:customers_id => 0).where(:activation_group => 21).first
           if careefour.present?
-            render :text => carrefour_path(:carrefour_activation_code => params[:promotion]); 
+            render :text => carrefour_path(:carrefour_activation_code => params[:promotion]);
           else
             render :text => t('session.error_alreadyused_code')
           end
@@ -53,8 +53,8 @@ class PublicPromotionsController < ApplicationController
         end
       else
         respond_to do |format|
-          format.html {render :text => t('public_promotion.update.error')}
-          format.js {render :text => t('public_promotion.update.error')}
+          format.html { render :text => t('public_promotion.update.error') }
+          format.js { render :text => t('public_promotion.update.error') }
         end
       end
 

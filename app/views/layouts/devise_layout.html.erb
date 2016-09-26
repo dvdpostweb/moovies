@@ -18,24 +18,24 @@
 </head>
 <body>
 
-  <div id="header_login">
-    <ul id="lang">
-      <li> <%= link_to t('.home').upcase, root_localize_path %> </li>
-      <li><%= switch_locale_link(params) %></li>
-    </ul>
-  </div>
+<div id="header_login">
+  <ul id="lang">
+    <li> <%= link_to t('.home').upcase, root_localize_path %> </li>
+    <li><%= switch_locale_link(params) %></li>
+  </ul>
+</div>
 
-  <div id="content">
-    <% if flash[:notice] %>
-        <%= flash[:notice] %>
-    <% end %>
+<div id="content">
+  <% if flash[:notice] %>
+      <%= flash[:notice] %>
+  <% end %>
 
-    <% if flash[:error] %>
-        <%= flash[:error] %>
-    <% end %>
-    <%= yield %>
+  <% if flash[:error] %>
+      <%= flash[:error] %>
+  <% end %>
+  <%= yield %>
 
-  </div>
+</div>
 
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
@@ -68,12 +68,12 @@
       $('#customer_email').val("");
       $('#customer_password').val("");
 
-      $('#customer_email').bind("cut copy paste",function(e) {
-          e.preventDefault();
+      $('#customer_email').bind("cut copy paste", function (e) {
+        e.preventDefault();
       });
 
-      $('#customer_password').bind("cut copy paste",function(e) {
-          e.preventDefault();
+      $('#customer_password').bind("cut copy paste", function (e) {
+        e.preventDefault();
       });
 
       $("#new_customer").validate({
@@ -118,7 +118,7 @@
                 $("#password_message").text("");
                 $("#password_message").append(response.message);
               } else if (1 === response.status) {
-                  window.location.href = response.message
+                window.location.href = response.message
               } else if (3 === response.status) {
                 $("#code_info").show().fadeOut(3000);
                 $("#code_message").text("");
@@ -143,7 +143,7 @@
 
       if ($("#customer_newsletter").is(':checked')) {
         customers_newsletter = 1
-        $("#customer_newsletter").click(function() {
+        $("#customer_newsletter").click(function () {
           if ($(this).is(':checked')) {
             customers_newsletter = 1
           } else {
@@ -154,7 +154,7 @@
 
       if ($("#customer_newsletter_parnter").is(':checked')) {
         customers_newsletterpartner = 1
-        $("#customer_newsletter_parnter").click(function() {
+        $("#customer_newsletter_parnter").click(function () {
           if ($(this).is(':checked')) {
             customers_newsletterpartner = 1
           } else {

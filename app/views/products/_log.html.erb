@@ -1,23 +1,25 @@
 <% if streaming_access? %>
-<a href="/auth/facebook?moovie_id=<%= @product.products_id %>"><button id="fb_connect_login" class="face-button-popup"><%= t('.social.network.fbconnect') %></button></a>
-<h2><%= t('.log') %></h2> <br>
-<%= link_to t('.login'), new_customer_session_path(:moovie_id => @product.products_id), :id => :login %><br /><br />
-<hr />
-<h2><%= t('.sign_up') %></h2>
-<%= t('.sign_up_desc') %><br><br>
-<%= link_to t('.sign_up_btn'), new_customer_registration_path(:moovie_id => @product.products_id), :id => :button_new_account %>
-<br /><br />
-<hr />
-<h2 ><%= t('.title').html_safe %></h2>
-  <%= form_tag public_promotion_path(), {:method => :put, :id => :public_promo, :class => 'align_left'} do %>
-    <%= t('.code_desc') %><br></br />
-    <%= text_field_tag "promotion" %>
-    <br /><br />
-      <input id="button_new_account" class= 'public_promo_btn' name="imageField" type="submit" align="absmiddle" border="0" value ='GO'>
-      <br />
-      <div id="status"></div>
-  <% end %>
+    <a href="/auth/facebook?moovie_id=<%= @product.products_id %>">
+      <button id="fb_connect_login" class="face-button-popup"><%= t('.social.network.fbconnect') %></button>
+    </a>
+    <h2><%= t('.log') %></h2> <br>
+    <%= link_to t('.login'), new_customer_session_path(:moovie_id => @product.products_id), :id => :login %><br/><br/>
+    <hr/>
+    <h2><%= t('.sign_up') %></h2>
+    <%= t('.sign_up_desc') %><br><br>
+    <%= link_to t('.sign_up_btn'), new_customer_registration_path(:moovie_id => @product.products_id), :id => :button_new_account %>
+    <br/><br/>
+    <hr/>
+    <h2><%= t('.title').html_safe %></h2>
+    <%= form_tag public_promotion_path(), {:method => :put, :id => :public_promo, :class => 'align_left'} do %>
+        <%= t('.code_desc') %><br></br />
+        <%= text_field_tag "promotion" %>
+        <br/><br/>
+        <input id="button_new_account" class='public_promo_btn' name="imageField" type="submit" align="absmiddle" border="0" value='GO'>
+        <br/>
+        <div id="status"></div>
+    <% end %>
 
 <% else %>
- <%= render "no_access" %>
+    <%= render "no_access" %>
 <% end %>

@@ -17,9 +17,9 @@ class CategoriesController < ApplicationController
         @categories.push(l, Category.search(:order => "name_#{I18n.locale} asc", :with => {:parent_id => 0, :type => Zlib::crc32(Moovies.product_kinds[params[:kind]]), "first_#{I18n.locale}_int" => Zlib::crc32(l.upcase)}, :without => {"#{@not_empty}" => 0}))
       end
     else
-      
+
       @categories = Category.search(:order => "name_#{I18n.locale} asc", :with => {:active => 1, :parent_id => 0, :type => Zlib::crc32(Moovies.product_kinds[params[:kind]])}, :without => {"#{@not_empty}" => 0})
-      
+
     end
   end
 end

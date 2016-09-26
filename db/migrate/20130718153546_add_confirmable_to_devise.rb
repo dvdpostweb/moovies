@@ -6,6 +6,7 @@ class AddConfirmableToDevise < ActiveRecord::Migration
     #add_column :customers, :unconfirmed_email, :string
     #add_index  :customers, :confirmation_token, :unique => true
   end
+
   def self.down
     #remove_index  :customers, :confirmation_token
     #

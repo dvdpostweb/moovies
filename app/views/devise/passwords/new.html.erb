@@ -1,30 +1,30 @@
 <style>
-.text-field {
-	width: calc(100% - 44px);
-	height: 40px;
-	margin-bottom: 15px;
-	padding: 5px 20px;
-	border: 2px solid #e1e1e1;
-	color: #bdbaba;
-	font-family: Arial,Helvetica, sans-serif;
-	font-size: 19px;
-}
+  .text-field {
+    width: calc(100% - 44px);
+    height: 40px;
+    margin-bottom: 15px;
+    padding: 5px 20px;
+    border: 2px solid #e1e1e1;
+    color: #bdbaba;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 19px;
+  }
 
-.text-field:focus {
-	border: 2px solid #76c71e;
-	outline: none;
-}
+  .text-field:focus {
+    border: 2px solid #76c71e;
+    outline: none;
+  }
 </style>
 <div class="step2">
-<%= link_to root_path do %>
-  <%= image_tag "plush_logo_fixed.jpg", height: '71', width: '129' %>
-<% end %>
-</br>
-<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
-  <%= f.email_field :email, :class => 'text-field', :placeholder => t('.email') %>
+  <%= link_to root_path do %>
+      <%= image_tag "plush_logo_fixed.jpg", height: '71', width: '129' %>
+  <% end %>
+  </br>
+  <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => {:method => :post}) do |f| %>
+      <%= f.email_field :email, :class => 'text-field', :placeholder => t('.email') %>
 
-  <%= f.submit t('.sent'), :id => :submit_button, :class => "button-connenct-large" %>
-<% end %>
+      <%= f.submit t('.sent'), :id => :submit_button, :class => "button-connenct-large" %>
+  <% end %>
 </div>
 <div class="links">
   <%= render "devise/shared/links" %>

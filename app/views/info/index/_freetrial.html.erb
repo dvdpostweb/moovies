@@ -1,191 +1,222 @@
 <% content_for :view_specific_css do %>
     <%= stylesheet_link_tag "alacarte" %>
-  <% end %>
-        <div class="alacarte_1">
+<% end %>
+<div class="alacarte_1">
 
-      <div class="header-nav">
-        <label><%= t('info.index.price_public.choose_tvod_tvod').html_safe %></label>
-      </div>
-      <div class="film-block">
-        <div id="alacarte-2-films" class="film-box" target="alacarte-subscribe">
-          <p id="alacarte-kvadrat"><%= t('info.index.price_public.choose_tvod_plan_one').html_safe %></p>
-        </div>
-        <div id="alacarte-4-films" class="film-box" target="alacarte-subscribe">
-          <p id="alacarte-kvadrat"><%= t('info.index.price_public.choose_tvod_plan_two').html_safe %></p>
-        </div>
-        <div id="alacarte-6-films" class="film-box" target="alacarte-subscribe">
-          <p id="alacarte-kvadrat"><%= t('info.index.price_public.choose_tvod_plan_three').html_safe %></p>
-        </div>
-      </div>
-      </br>
-      <div id="alacarte-subscribe" class="list-block">
-        <ul>
-          <li>
-            <label class="list-text"><%= t('info.index.price_public.tvod_freetrial_line_one').html_safe %> (<%= 1.month.from_now.strftime("%d/%m/%Y") %>)</label>
-            <label class="list-number"><div id="3euro"><%= t('info.index.price_public.tvod_plan_price_3').html_safe %></div></label>
-            <label class="list-number"><div id="7euro"><%= t('info.index.price_public.tvod_plan_price_7').html_safe %></div></label>
-            <label class="list-number"><div id="11euro"><%= t('info.index.price_public.tvod_plan_price_9').html_safe %></div></label>
-          </li>
-          <li class="">
-            <label class="list-text"><%= t('info.index.price_public.tvod_hd').html_safe %></label>
-            <label class="list-number">
-              <div id="default-3-1">
-                <%= image_tag "alacarte/ok-grey.png" %>
-              </div>
-              <div id="green-3-1">
-                <%= image_tag "alacarte/ok-green.png" %>
-              </div>
-            </label>
-            <label class="list-number">
-              <div id="default-7-1">
-                <%= image_tag "alacarte/ok-grey.png" %>
-              </div>
-              <div id="green-7-1">
-                <%= image_tag "alacarte/ok-green.png" %>
-              </div>
-            </label>
-            <label class="list-number">
-              <div id="default-11-1">
-                <%= image_tag "alacarte/ok-grey.png" %>
-              </div>
-              <div id="green-11-1">
-                <%= image_tag "alacarte/ok-green.png" %>
-              </div>
-            </label>
-          </li>
-          <li class="">
-            <label class="list-text"><%= t('info.index.price_public.tvod_access_devices').html_safe %></label>
-            <label class="list-number">
-              <div id="default-3-2">
-                <%= image_tag "alacarte/ok-grey.png" %>
-              </div>
-              <div id="green-3-2">
-                <%= image_tag "alacarte/ok-green.png" %>
-              </div>
-            </label>
-            <label class="list-number">
-              <div id="default-7-2">
-                <%= image_tag "alacarte/ok-grey.png" %>
-              </div>
-              <div id="green-7-2">
-                <%= image_tag "alacarte/ok-green.png" %>
-              </div>
-            </label>
-            <label class="list-number">
-              <div id="default-11-2">
-                <%= image_tag "alacarte/ok-grey.png" %>
-              </div>
-              <div id="green-11-2">
-                <%= image_tag "alacarte/ok-green.png" %>
-              </div>
-            </label>
-          </li>
-          <li class="">
-            <label class="list-text"><%= t('info.index.price_public.tvod_simultaneus').html_safe %></label>
-            <label class="list-number"><div id="3euroil"><%= t('customers.show.old_pricing.unlimited') %></div></label>
-            <label class="list-number"><div id="7euroil"><%= t('customers.show.old_pricing.unlimited') %></div></label>
-            <label class="list-number"><div id="11euroil"><%= t('customers.show.old_pricing.unlimited') %></div></label>
-          </li>
-          <li class="">
-            <label class="list-text"><%= t('info.index.price_public.tvod_cancellable').html_safe %></label>
-            <label class="list-number">
-              <div id="default-3-3">
-                <%= image_tag "alacarte/ok-grey.png" %>
-              </div>
-              <div id="green-3-3">
-                <%= image_tag "alacarte/ok-green.png" %>
-              </div>
-            </label>
-            <label class="list-number">
-              <div id="default-7-3">
-                <%= image_tag "alacarte/ok-grey.png" %>
-              </div>
-              <div id="green-7-3">
-                <%= image_tag "alacarte/ok-green.png" %>
-              </div>
-            </label>
-            <label class="list-number">
-              <div id="default-11-3">
-                <%= image_tag "alacarte/ok-grey.png" %>
-              </div>
-              <div id="green-11-3">
-                <%= image_tag "alacarte/ok-green.png" %>
-              </div>
-            </label>
-          </li>
-          <li class="">
-            <label class="list-text"><%= t('info.index.price_public.tvod_freetrial').html_safe %></label>
-            <label class="list-number">
-              <div id="default-3-4">
-                <%= image_tag "alacarte/ok-grey.png" %>
-              </div>
-              <div id="green-3-4">
-                <div id="dolar">
-                  <%= image_tag "alacarte/ok-green.png" %>
-                </div>
-              </div>
-            </label>
-            <label class="list-number">
-              <div id="default-7-4">
-                <%= image_tag "alacarte/ok-grey.png" %>
-              </div>
-              <div id="green-7-4">
-                <div id="dolar">
-                  <%= image_tag "alacarte/ok-green.png" %>
-                </div>
-              </div>
-            </label>
-            <label class="list-number">
-              <div id="default-11-4">
-                <%= image_tag "alacarte/ok-grey.png" %>
-              </div>
-              <div id="green-11-4">
-                <div id="dolar">
-                <%= image_tag "alacarte/ok-green.png" %>
-                </div>
-              </div>
-            </label>
-          </li>
-          <li class="">
-            <label class="list-text"><%= t('info.index.price_public.tvod_access_illimitie').html_safe %> <%= link_to t('info.index.price_public.choose_svod_svod').html_safe, info_path(:page_name => "unlimited"), :id => 'unlimited', :class => params[:page_name] == 'unlimited' ? :active : :inactive %></label>
-            <label class="list-number">
-              <div id="default-3-5">X</div>
-              <div id="red-3-5">X</div>
-            </label>
-            <label class="list-number">
-              <div id="default-7-5">X</div>
-              <div id="red-7-5">X</div>
-            </label>
-            <label class="list-number">
-              <div id="default-11-5">X</div>
-              <div id="red-11-5">X</div
-            </label>
-          </li>
-        </ul>
-      </div>
-
-      <div class="footer-block">
-        <div id="alacarte-subscribe" class="description-block"><%= t('info.index.price_public.tvod_explanation_1').html_safe %> <%= link_to t('info.index.price_public.tvod_explanation_link').html_safe, info_path(:page_name => t('routes.infos.params.vod')), :id => :multi %>
-                         <%= t('info.index.price_public.tvod_explanation_2').html_safe %>
-        </div>
-        <button id="alacarte-button-default" class="ALBTN" target="top"><%= t('info.index.price_public.choose_tvod_button').html_safe %></button>
-        <a href="/fr/mon-compte/connectez-vous?code=2FILMSFREE"><button id="alacarte-button-CF4FILMS-FR" class="ALBTN"><%= t('info.index.price_public.tvod_button').html_safe %></button></a>
-        <a href="/nl/mijn-account/log-in?code=2FILMSFREE"><button id="alacarte-button-CF4FILMS-NL" class="ALBTN"><%= t('info.index.price_public.tvod_button').html_safe %></button></a>
-        <a href="/en/my-account/log-in?code=2FILMSFREE"><button id="alacarte-button-CF4FILMS-EN" class="ALBTN"><%= t('info.index.price_public.tvod_button').html_safe %></button></a>
-        <a href="/fr/mon-compte/connectez-vous?code=4FILMSFREE"><button id="alacarte-button-CF6FILMS-FR" class="ALBTN"><%= t('info.index.price_public.tvod_button').html_safe %></button></a>
-        <a href="/nl/mijn-account/log-in?code=4FILMSFREE"><button id="alacarte-button-CF6FILMS-NL" class="ALBTN"><%= t('info.index.price_public.tvod_button').html_safe %></button></a>
-        <a href="/en/my-account/log-in?code=4FILMSFREE"><button id="alacarte-button-CF6FILMS-EN" class="ALBTN"><%= t('info.index.price_public.tvod_button').html_safe %></button></a>
-        <a href="/fr/mon-compte/connectez-vous?code=6FILMSFREE"><button id="alacarte-button-CF8FILMS-FR" class="ALBTN"><%= t('info.index.price_public.tvod_button').html_safe %></button></a>
-        <a href="/nl/mijn-account/log-in?code=6FILMSFREE"><button id="alacarte-button-CF8FILMS-NL" class="ALBTN"><%= t('info.index.price_public.tvod_button').html_safe %></button></a>
-        <a href="/en/my-account/log-in?code=6FILMSFREE"><button id="alacarte-button-CF8FILMS-EN" class="ALBTN"><%= t('info.index.price_public.tvod_button').html_safe %></button></a>
-        <div class="description-block description-block-main"><%= t('info.index.price_public.choose_tvod_support_info').html_safe %></div>
-        <div class="description-block"><%= link_to t('info.index.price_public.tvod_conditions').html_safe, info_path(:page_name => t('routes.infos.params.conditions')) %></div>
-      </div>
+  <div class="header-nav">
+    <label><%= t('info.index.price_public.choose_tvod_tvod').html_safe %></label>
+  </div>
+  <div class="film-block">
+    <div id="alacarte-2-films" class="film-box" target="alacarte-subscribe">
+      <p id="alacarte-kvadrat"><%= t('info.index.price_public.choose_tvod_plan_one').html_safe %></p>
     </div>
+    <div id="alacarte-4-films" class="film-box" target="alacarte-subscribe">
+      <p id="alacarte-kvadrat"><%= t('info.index.price_public.choose_tvod_plan_two').html_safe %></p>
+    </div>
+    <div id="alacarte-6-films" class="film-box" target="alacarte-subscribe">
+      <p id="alacarte-kvadrat"><%= t('info.index.price_public.choose_tvod_plan_three').html_safe %></p>
+    </div>
+  </div>
+  </br>
+  <div id="alacarte-subscribe" class="list-block">
+    <ul>
+      <li>
+        <label class="list-text"><%= t('info.index.price_public.tvod_freetrial_line_one').html_safe %>
+          (<%= 1.month.from_now.strftime("%d/%m/%Y") %>)</label>
+        <label class="list-number">
+          <div id="3euro"><%= t('info.index.price_public.tvod_plan_price_3').html_safe %></div>
+        </label>
+        <label class="list-number">
+          <div id="7euro"><%= t('info.index.price_public.tvod_plan_price_7').html_safe %></div>
+        </label>
+        <label class="list-number">
+          <div id="11euro"><%= t('info.index.price_public.tvod_plan_price_9').html_safe %></div>
+        </label>
+      </li>
+      <li class="">
+        <label class="list-text"><%= t('info.index.price_public.tvod_hd').html_safe %></label>
+        <label class="list-number">
+          <div id="default-3-1">
+            <%= image_tag "alacarte/ok-grey.png" %>
+          </div>
+          <div id="green-3-1">
+            <%= image_tag "alacarte/ok-green.png" %>
+          </div>
+        </label>
+        <label class="list-number">
+          <div id="default-7-1">
+            <%= image_tag "alacarte/ok-grey.png" %>
+          </div>
+          <div id="green-7-1">
+            <%= image_tag "alacarte/ok-green.png" %>
+          </div>
+        </label>
+        <label class="list-number">
+          <div id="default-11-1">
+            <%= image_tag "alacarte/ok-grey.png" %>
+          </div>
+          <div id="green-11-1">
+            <%= image_tag "alacarte/ok-green.png" %>
+          </div>
+        </label>
+      </li>
+      <li class="">
+        <label class="list-text"><%= t('info.index.price_public.tvod_access_devices').html_safe %></label>
+        <label class="list-number">
+          <div id="default-3-2">
+            <%= image_tag "alacarte/ok-grey.png" %>
+          </div>
+          <div id="green-3-2">
+            <%= image_tag "alacarte/ok-green.png" %>
+          </div>
+        </label>
+        <label class="list-number">
+          <div id="default-7-2">
+            <%= image_tag "alacarte/ok-grey.png" %>
+          </div>
+          <div id="green-7-2">
+            <%= image_tag "alacarte/ok-green.png" %>
+          </div>
+        </label>
+        <label class="list-number">
+          <div id="default-11-2">
+            <%= image_tag "alacarte/ok-grey.png" %>
+          </div>
+          <div id="green-11-2">
+            <%= image_tag "alacarte/ok-green.png" %>
+          </div>
+        </label>
+      </li>
+      <li class="">
+        <label class="list-text"><%= t('info.index.price_public.tvod_simultaneus').html_safe %></label>
+        <label class="list-number">
+          <div id="3euroil"><%= t('customers.show.old_pricing.unlimited') %></div>
+        </label>
+        <label class="list-number">
+          <div id="7euroil"><%= t('customers.show.old_pricing.unlimited') %></div>
+        </label>
+        <label class="list-number">
+          <div id="11euroil"><%= t('customers.show.old_pricing.unlimited') %></div>
+        </label>
+      </li>
+      <li class="">
+        <label class="list-text"><%= t('info.index.price_public.tvod_cancellable').html_safe %></label>
+        <label class="list-number">
+          <div id="default-3-3">
+            <%= image_tag "alacarte/ok-grey.png" %>
+          </div>
+          <div id="green-3-3">
+            <%= image_tag "alacarte/ok-green.png" %>
+          </div>
+        </label>
+        <label class="list-number">
+          <div id="default-7-3">
+            <%= image_tag "alacarte/ok-grey.png" %>
+          </div>
+          <div id="green-7-3">
+            <%= image_tag "alacarte/ok-green.png" %>
+          </div>
+        </label>
+        <label class="list-number">
+          <div id="default-11-3">
+            <%= image_tag "alacarte/ok-grey.png" %>
+          </div>
+          <div id="green-11-3">
+            <%= image_tag "alacarte/ok-green.png" %>
+          </div>
+        </label>
+      </li>
+      <li class="">
+        <label class="list-text"><%= t('info.index.price_public.tvod_freetrial').html_safe %></label>
+        <label class="list-number">
+          <div id="default-3-4">
+            <%= image_tag "alacarte/ok-grey.png" %>
+          </div>
+          <div id="green-3-4">
+            <div id="dolar">
+              <%= image_tag "alacarte/ok-green.png" %>
+            </div>
+          </div>
+        </label>
+        <label class="list-number">
+          <div id="default-7-4">
+            <%= image_tag "alacarte/ok-grey.png" %>
+          </div>
+          <div id="green-7-4">
+            <div id="dolar">
+              <%= image_tag "alacarte/ok-green.png" %>
+            </div>
+          </div>
+        </label>
+        <label class="list-number">
+          <div id="default-11-4">
+            <%= image_tag "alacarte/ok-grey.png" %>
+          </div>
+          <div id="green-11-4">
+            <div id="dolar">
+              <%= image_tag "alacarte/ok-green.png" %>
+            </div>
+          </div>
+        </label>
+      </li>
+      <li class="">
+        <label class="list-text"><%= t('info.index.price_public.tvod_access_illimitie').html_safe %> <%= link_to t('info.index.price_public.choose_svod_svod').html_safe, info_path(:page_name => "unlimited"), :id => 'unlimited', :class => params[:page_name] == 'unlimited' ? :active : :inactive %></label>
+        <label class="list-number">
+          <div id="default-3-5">X</div>
+          <div id="red-3-5">X</div>
+        </label>
+        <label class="list-number">
+          <div id="default-7-5">X</div>
+          <div id="red-7-5">X</div>
+        </label>
+        <label class="list-number">
+          <div id="default-11-5">X</div>
+          <div id="red-11-5">X</div
+        </label>
+      </li>
+    </ul>
+  </div>
 
-<script   src="https://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>
+  <div class="footer-block">
+    <div id="alacarte-subscribe" class="description-block"><%= t('info.index.price_public.tvod_explanation_1').html_safe %> <%= link_to t('info.index.price_public.tvod_explanation_link').html_safe, info_path(:page_name => t('routes.infos.params.vod')), :id => :multi %>
+      <%= t('info.index.price_public.tvod_explanation_2').html_safe %>
+    </div>
+    <button id="alacarte-button-default" class="ALBTN" target="top"><%= t('info.index.price_public.choose_tvod_button').html_safe %></button>
+    <a href="/fr/mon-compte/connectez-vous?code=2FILMSFREE">
+      <button id="alacarte-button-CF4FILMS-FR" class="ALBTN"><%= t('info.index.price_public.tvod_button').html_safe %></button>
+    </a>
+    <a href="/nl/mijn-account/log-in?code=2FILMSFREE">
+      <button id="alacarte-button-CF4FILMS-NL" class="ALBTN"><%= t('info.index.price_public.tvod_button').html_safe %></button>
+    </a>
+    <a href="/en/my-account/log-in?code=2FILMSFREE">
+      <button id="alacarte-button-CF4FILMS-EN" class="ALBTN"><%= t('info.index.price_public.tvod_button').html_safe %></button>
+    </a>
+    <a href="/fr/mon-compte/connectez-vous?code=4FILMSFREE">
+      <button id="alacarte-button-CF6FILMS-FR" class="ALBTN"><%= t('info.index.price_public.tvod_button').html_safe %></button>
+    </a>
+    <a href="/nl/mijn-account/log-in?code=4FILMSFREE">
+      <button id="alacarte-button-CF6FILMS-NL" class="ALBTN"><%= t('info.index.price_public.tvod_button').html_safe %></button>
+    </a>
+    <a href="/en/my-account/log-in?code=4FILMSFREE">
+      <button id="alacarte-button-CF6FILMS-EN" class="ALBTN"><%= t('info.index.price_public.tvod_button').html_safe %></button>
+    </a>
+    <a href="/fr/mon-compte/connectez-vous?code=6FILMSFREE">
+      <button id="alacarte-button-CF8FILMS-FR" class="ALBTN"><%= t('info.index.price_public.tvod_button').html_safe %></button>
+    </a>
+    <a href="/nl/mijn-account/log-in?code=6FILMSFREE">
+      <button id="alacarte-button-CF8FILMS-NL" class="ALBTN"><%= t('info.index.price_public.tvod_button').html_safe %></button>
+    </a>
+    <a href="/en/my-account/log-in?code=6FILMSFREE">
+      <button id="alacarte-button-CF8FILMS-EN" class="ALBTN"><%= t('info.index.price_public.tvod_button').html_safe %></button>
+    </a>
+    <div class="description-block description-block-main"><%= t('info.index.price_public.choose_tvod_support_info').html_safe %></div>
+    <div class="description-block"><%= link_to t('info.index.price_public.tvod_conditions').html_safe, info_path(:page_name => t('routes.infos.params.conditions')) %></div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script>
-  $(document).ready(function() {
+  $(document).ready(function () {
     gon.freetrial = "freetrial"
   });
 </script>

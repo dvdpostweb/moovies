@@ -1,32 +1,32 @@
 <div class="critiqueur_area">
   <div class="reviews" id="title">
-  <% reviews_count = @reviews_count %>
-  <% if reviews_count > 1 %>
-    <%= t('.critics', :nickname =>  @customer.nickname, :count => reviews_count, :default => "les %{count} critiques de %{nickname}") %>
-  <% else %>
-    <%= t('.critic', :nickname =>  @customer.nickname, :count => reviews_count, :default => "les %{count} critiques de %{nickname}") %>
-  <% end %>
+    <% reviews_count = @reviews_count %>
+    <% if reviews_count > 1 %>
+        <%= t('.critics', :nickname => @customer.nickname, :count => reviews_count, :default => "les %{count} critiques de %{nickname}") %>
+    <% else %>
+        <%= t('.critic', :nickname => @customer.nickname, :count => reviews_count, :default => "les %{count} critiques de %{nickname}") %>
+    <% end %>
   </div>
-  
+
   <div class="clear"></div>
 
 
-<div class="bysort">
-  <div class="bysort_title"><%= t '.sorting' %> : </div>
-  <div class="bysort_choice">
-    <% var = params[:sort] || 'date' %>
-    <%= form_for(:review, :html => { :method => :get, :id => :sort_form  } ) do |f| %>
-      <%= select_tag(:sort, options_for_select(sort_review_for_select, var.to_sym), { :onchange => '$("#sort_form").submit();'}) %>
-    <% end %>
+  <div class="bysort">
+    <div class="bysort_title"><%= t '.sorting' %> :</div>
+    <div class="bysort_choice">
+      <% var = params[:sort] || 'date' %>
+      <%= form_for(:review, :html => {:method => :get, :id => :sort_form}) do |f| %>
+          <%= select_tag(:sort, options_for_select(sort_review_for_select, var.to_sym), {:onchange => '$("#sort_form").submit();'}) %>
+      <% end %>
+    </div>
+    <div style="clear:both"></div>
   </div>
-  <div style="clear:both"></div>
-</div>
 </div>
 
 <div id="titles-wrap" class="reviews customer_reviews">
   <div class="top"></div>
-  
-    <%= render :partial => 'reviews/index/review', :collection => @reviews, :locals => {:source => @source} %>
+
+  <%= render :partial => 'reviews/index/review', :collection => @reviews, :locals => {:source => @source} %>
   <div class="end"></div>
 </div>
 <%= will_paginate @reviews, :class => 'products-pagination', :previous_label => '&nbsp;', :next_label => '&nbsp;' %>

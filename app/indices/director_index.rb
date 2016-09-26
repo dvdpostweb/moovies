@@ -1,5 +1,5 @@
 ThinkingSphinx::Index.define :director, :with => :active_record do
-  indexes directors_name,                 :as => :directors_name, :sortable => true
+  indexes directors_name, :as => :directors_name, :sortable => true
 
   set_property :enable_star => true
   set_property :min_prefix_len => 2

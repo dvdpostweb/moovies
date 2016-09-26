@@ -1,23 +1,23 @@
 <% if categories.count > 0 %>
-<li id="numbers"> 
-  <span class="letter"><%= letter == 0 ? "0-9" : letter.upcase %></span>
-  <ol>
-    <% categories.collect do |category| %>
-      <li>
-        <%= link_to "#{category.name}", category_products_path(:category_id => category.to_param, :package => params[:package]), :class => "studios", :id => "#{letter}_#{category.to_param}" %>
-        <% children = Category.search(:order => "name_#{I18n.locale} asc", :with => {:active => 1, :parent_id => category.id, :type => Zlib::crc32(Moovies.product_kinds[params[:kind]])}, :without => {"#{@not_empty}" => 0}) %>
-        <% if children.count > 0 %>
-        <ul>
-          <% children.collect do |category| %>
+    <li id="numbers">
+      <span class="letter"><%= letter == 0 ? "0-9" : letter.upcase %></span>
+      <ol>
+        <% categories.collect do |category| %>
             <li>
-              &nbsp;&nbsp;&bull; <%= link_to "#{category.name}", category_products_path(:category_id => category.to_param, :package => params[:package]), :class => "studios", :id => "#{letter}_#{category.to_param}" %>
+              <%= link_to "#{category.name}", category_products_path(:category_id => category.to_param, :package => params[:package]), :class => "studios", :id => "#{letter}_#{category.to_param}" %>
+              <% children = Category.search(:order => "name_#{I18n.locale} asc", :with => {:active => 1, :parent_id => category.id, :type => Zlib::crc32(Moovies.product_kinds[params[:kind]])}, :without => {"#{@not_empty}" => 0}) %>
+              <% if children.count > 0 %>
+                  <ul>
+                    <% children.collect do |category| %>
+                        <li>
+                          &nbsp;&nbsp;&bull; <%= link_to "#{category.name}", category_products_path(:category_id => category.to_param, :package => params[:package]), :class => "studios", :id => "#{letter}_#{category.to_param}" %>
+                        </li>
+                    <% end %>
+                  </ul>
+              <% end %>
             </li>
-          <% end %>
-        </ul>
         <% end %>
-      </li>
-    <% end %>
-  </ol>
+      </ol>
 
-</li>
+    </li>
 <% end %>

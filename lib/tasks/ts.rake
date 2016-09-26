@@ -9,7 +9,7 @@ namespace :ts do
     end
 
     Signal.trap('TERM') { Process.kill('TERM', pid) }
-    Signal.trap('INT')  { Process.kill('INT', pid) }
+    Signal.trap('INT') { Process.kill('INT', pid) }
     Process.wait(pid)
   end
 end

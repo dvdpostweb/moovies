@@ -43,7 +43,7 @@ class Api::V1::LoginController < ApplicationController
             if resource.valid_password?(password)
               sign_in :customer, resource
               redirect_to_root_path = root_path
-              render json: { status: 4, message: redirect_to_root_path }
+              render json: {status: 4, message: redirect_to_root_path}
             end
           end
         end
@@ -69,7 +69,7 @@ class Api::V1::LoginController < ApplicationController
               activation.update_attributes(:customers_id => current_customer.to_param, :created_at => Time.now.localtime)
             end
             redirect_to_root_path = root_path
-            render json: { status: 4, message: redirect_to_root_path }
+            render json: {status: 4, message: redirect_to_root_path}
           end
         end
       end
@@ -86,10 +86,10 @@ class Api::V1::LoginController < ApplicationController
           product = Product.where(:products_id => current_customer.preselected_registration_moovie_id).first
           if ((current_customer.customers_abo_payment_method == 0 && current_customer.customers_abo_type != 6) || (current_customer.tvod_free == 0 && current_customer.customers_abo_type == 6) || (current_customer.customers_abo_payment_method == 0 && current_customer.unlimted_subscriber?) || (current_customer.customers_abo_payment_method == 0 && current_customer.plush_la_carte_subscriber?))
             redirect_to_payment_path = edit_customer_payment_methods_path(:customer_id => customer.to_param, :type => :credit_card_tvod, :product_id => product.id, :source => 0)
-            render json: { status: 1, message: redirect_to_payment_path }
+            render json: {status: 1, message: redirect_to_payment_path}
           else
             redirect_to_product_path = product_path(:id => product.to_param)
-            render json: { status: 1, message: redirect_to_product_path }
+            render json: {status: 1, message: redirect_to_product_path}
           end
         end
       elsif samsung.present?
@@ -105,34 +105,34 @@ class Api::V1::LoginController < ApplicationController
           sign_in :customer, customer
           sAMSUNG.update_attributes(:customer_id => current_customer.to_param, :used_at => Time.now.localtime)
           redirect_to_root_path_samsung = root_path
-          render json: { status: 9, message: redirect_to_root_path_samsung }
+          render json: {status: 9, message: redirect_to_root_path_samsung}
         end
       else
         sign_in :customer, resource
         redirect_to_root_localize_path = root_localize_path
-        render json: { status: 1, message: redirect_to_root_localize_path }
+        render json: {status: 1, message: redirect_to_root_localize_path}
       end
     end
   end
 
   def success_activation_message
-    return render json: { status: 4 }
+    return render json: {status: 4}
   end
 
   def success_login_message
-    return render json: { status: 1, message: "login_action_success" }
+    return render json: {status: 1, message: "login_action_success"}
   end
 
   def invalid_discount_code_message
-    render json: { status: 5, message: arleady_used_code_messages }
+    render json: {status: 5, message: arleady_used_code_messages}
   end
 
   def invalid_activation_code_message
-    render json: { status: 3, message: arleady_used_code_messages }
+    render json: {status: 3, message: arleady_used_code_messages}
   end
 
   def invalid_login_attempt
-    render json: { status: 0, message: password_message }
+    render json: {status: 0, message: password_message}
   end
 
   def password_message

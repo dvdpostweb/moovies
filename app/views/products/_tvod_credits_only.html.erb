@@ -6,6 +6,6 @@
   </p>
   -->
   <% if current_customer.plush_la_carte_subscriber? %>
-      <%= link_to t('products.show.product.credits_reneval'), renew_monthly_credits_for_a_la_carte_path(:product => product.id) , {:class => 'essaigratuit osc bt', :style=>'width:100%;'}, :method => :put %>
+      <%= link_to t('products.show.product.credits_reneval'), renew_monthly_credits_for_a_la_carte_path(:product => product.id), {:class => 'essaigratuit osc bt', :style => 'width:100%;'}, :method => :put %>
   <% end %>
 </div>

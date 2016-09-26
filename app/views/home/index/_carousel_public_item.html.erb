@@ -1,14 +1,14 @@
 <% key = current_customer && current_customer.tvod_free > 0 ? '.withouy_price' : '.price' %>
 <% if carousel_public_item.product.get_vod_online(session[:country_id]).first %>
-  <% path =  carousel_path(carousel_public_item, true) %>
-  <% image = image_tag(carousel_public_item.image, :alt => carousel_public_item.product.title, :size => '585x328') %>
-  <li>
-    <a href="<%= path %>" class="regarder"><%= t(key, :price => carousel_public_item.product.get_vod_online(session[:country_id]).first.ppv_price).html_safe %></a>
-    <a href="<%= path %>" class="image">
-      <%= image %>
-    </a>
-    <div class="caption osc">
-      <h2><a href="<%= path %>"><%= carousel_public_item.product.title %></a></h2>
-    </div>
-  </li>
+    <% path = carousel_path(carousel_public_item, true) %>
+    <% image = image_tag(carousel_public_item.image, :alt => carousel_public_item.product.title, :size => '585x328') %>
+    <li>
+      <a href="<%= path %>" class="regarder"><%= t(key, :price => carousel_public_item.product.get_vod_online(session[:country_id]).first.ppv_price).html_safe %></a>
+      <a href="<%= path %>" class="image">
+        <%= image %>
+      </a>
+      <div class="caption osc">
+        <h2><a href="<%= path %>"><%= carousel_public_item.product.title %></a></h2>
+      </div>
+    </li>
 <% end %>

@@ -1,24 +1,24 @@
 <% if sub = version.subtitles.by_language(I18n.locale).first %>
-  <% sub_title = sub.name %>
+    <% sub_title = sub.name %>
 <% else %>
-  <% sub_title = t('streaming_products.show.kind.without_subtitle').downcase %>
+    <% sub_title = t('streaming_products.show.kind.without_subtitle').downcase %>
 <% end %>
 <% audio_title = version.languages.by_language(I18n.locale).first.name %>
 
 <tr>
-	<td width="<%= 435 %>">
-	  <p class="select_version">
-	     <%= t 'streaming_products.show.kinds_alpha.audio_title' %> 
-	    <%= image_tag 'sound_icon.gif', :align => :absmiddle, :alt => 'icon sons' %>
-	    <strong><%= audio_title %></strong>|
-	    <%= t 'streaming_products.show.kinds_alpha.sub_title' %>
-	    <%= image_tag 'subtitles_icon.gif', :align => :absmiddle, :alt => 'icon subtitle' %>
-	    <strong><%= sub_title.capitalize %></strong>
-	  </p>
-	</td>
-	<td width="<%= 261 %>">
-	  <p>
-	    <%= link_to "<strong>#{t('.launch')}</strong>".html_safe, product_trailer_path(:streamin_trailer_id => version.id), :class => "btn_play  qualityvod #{current_trailer == version ? :current : :other}" %>
-	  </p>
-	</td>
+  <td width="<%= 435 %>">
+    <p class="select_version">
+      <%= t 'streaming_products.show.kinds_alpha.audio_title' %>
+      <%= image_tag 'sound_icon.gif', :align => :absmiddle, :alt => 'icon sons' %>
+      <strong><%= audio_title %></strong>|
+      <%= t 'streaming_products.show.kinds_alpha.sub_title' %>
+      <%= image_tag 'subtitles_icon.gif', :align => :absmiddle, :alt => 'icon subtitle' %>
+      <strong><%= sub_title.capitalize %></strong>
+    </p>
+  </td>
+  <td width="<%= 261 %>">
+    <p>
+      <%= link_to "<strong>#{t('.launch')}</strong>".html_safe, product_trailer_path(:streamin_trailer_id => version.id), :class => "btn_play  qualityvod #{current_trailer == version ? :current : :other}" %>
+    </p>
+  </td>
 </tr>

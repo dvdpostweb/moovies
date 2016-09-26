@@ -1,25 +1,25 @@
 ThinkingSphinx::Index.define :product, :with => :active_record, :name => 'product_lu' do
   indexes descriptions('products_description.`products_name`'), :as => :descriptions_title, :sortage => true, :type => :string, :multi => true
-  
+
   has "CRC32(products_type)", :as => :kind, :type => :integer
-  has products_countries_id,      :as => :country_id
-  has products_date_available,    :as => :available_at
-  has products_date_added,        :as => :created_at
-  has products_id,                :as => :product_id
+  has products_countries_id, :as => :country_id
+  has products_date_available, :as => :available_at
+  has products_date_added, :as => :created_at
+  has products_id, :as => :product_id
   has "CAST(vod_next AS SIGNED)", :type => :integer, :as => :vod_next
   has "CAST(vod_next_lux AS SIGNED)", :type => :integer, :as => :vod_next_lux
   has "CAST(vod_next_nl AS SIGNED)", :type => :integer, :as => :vod_next_nl
-  
-  has products_public,            :as => :audience
-  has products_year,              :as => :year
-  has products_rating,            :as => :dvdpost_rating
+
+  has products_public, :as => :audience
+  has products_year, :as => :year
+  has products_rating, :as => :dvdpost_rating
   has imdb_id
   has package_id
   has "case when  products_status = -1 then 99 else products_status end", :type => :integer, :as => :state
-  has actors('actors.`actors_id`'),         :as => :actors_id, :type => :integer, :multi => true
+  has actors('actors.`actors_id`'), :as => :actors_id, :type => :integer, :multi => true
   has categories('categories.categories_id'), :as => :category_id, :type => :integer, :multi => true
-  has director(:directors_id),    :as => :director_id
-  has studio(:studio_id),         :as => :studio_id
+  has director(:directors_id), :as => :director_id
+  has studio(:studio_id), :as => :studio_id
   has serie_id
   has season_id
   has episode_id
@@ -111,7 +111,7 @@ ThinkingSphinx::Index.define :product, :with => :active_record, :name => 'produc
   #has 'concat(if(products_quantity>0 or (  select count(*) > 0 from products p
   #      join streaming_products on streaming_products.imdb_id = p.imdb_id
   #      where  ((country="NL" and streaming_products.status = "online_test_ok" and ((streaming_products.available_from <= date(now()) and streaming_products.expire_at >= date(now())) or (streaming_products.available_backcatalogue_from <= date(now()) and streaming_products.expire_backcatalogue_at >= date(now()))) and available = 1) or p.vod_next_nl=1 or streaming_products.imdb_id is null)  and p.products_id =  products.products_id),1,0),date_format(products_date_available,"%Y%m%d"))', :type => :integer, :as => :default_order_nl
-  
+
   set_property :enable_star => true
   set_property :min_prefix_len => 3
   set_property :charset_type => 'utf-8'

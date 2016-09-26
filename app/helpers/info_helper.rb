@@ -14,7 +14,7 @@ module InfoHelper
     if customer
       text = type == 'tvod' ? t('info.index.abo.change') : t('products.show.recommendation.add')
       if current_customer.step == 90
-        link_to text, promotion_canva_path(:code => code, :return_url => info_path(:page_name => t('routes.infos.params.abo')), :id => 'old'), :method => :post, :class =>  'offer-film-button' 
+        link_to text, promotion_canva_path(:code => code, :return_url => info_path(:page_name => t('routes.infos.params.abo')), :id => 'old'), :method => :post, :class => 'offer-film-button'
       else
         a = SubscriptionType.find(abo)
         logger.debug("#{customer.next_subscription_type.packages_ids} == #{a.packages_ids} #{type}")
@@ -22,11 +22,11 @@ module InfoHelper
           "<div class='current_abo'>#{t('info.index.price_public.current_abo')}</div>".html_safe
         else
           params = customer.tvod_only? ? {:code => code} : {:abo_id => abo}
-          link_to text, subscription_path(params), :method => :put, :class =>  'offer-film-button' 
+          link_to text, subscription_path(params), :method => :put, :class => 'offer-film-button'
         end
       end
     else
-      link_to t('info.index.price_public.buy'), new_customer_registration_path( :code => code), :class =>  'offer-film-button'
+      link_to t('info.index.price_public.buy'), new_customer_registration_path(:code => code), :class => 'offer-film-button'
     end
   end
 end

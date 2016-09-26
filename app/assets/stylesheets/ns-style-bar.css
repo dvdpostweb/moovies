@@ -1,26 +1,26 @@
 /* To bar notifications */
 .ns-box.ns-bar {
-	top: 0;
-	left: 0;
-	width: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
 }
 
 .ns-bar .ns-close {
-	background: transparent;
-	top: 50%;
-	right: 20px;
-	-webkit-transform: translateY(-50%);
-	transform: translateY(-50%);
+    background: transparent;
+    top: 50%;
+    right: 20px;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
 
 .ns-bar .ns-close::before,
 .ns-bar .ns-close::after {
-	background: #b7b5b3;
+    background: #b7b5b3;
 }
 
 [class^="ns-effect-"].ns-bar.ns-hide,
 [class*=" ns-effect-"].ns-bar.ns-hide {
-	-webkit-animation-direction: reverse;
-	animation-direction: reverse;
+    -webkit-animation-direction: reverse;
+    animation-direction: reverse;
 }
 

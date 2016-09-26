@@ -16,10 +16,11 @@
   padding: 0 20px;
   font-size: 24px;
   color: #afb7bf;
- 
+
 }
+
 #critics-wrap .tab a {
-padding: 0px;
+  padding: 0px;
 }
 
 .tab a:hover {
@@ -28,22 +29,23 @@ padding: 0px;
 }
 
 .tab a.active {
-  background-color:#fff;
+  background-color: #fff;
   border: 1px solid #212A31;
-   color: #212A31;
+  color: #212A31;
   cursor: default;
 }
 
 #film-details .tab-container .panel-container {
-  
+
   min-height: 202px;
   padding: 20px 20px 12px;
   position: relative;
   overflow: hidden;
   color: #1b2228;
 }
+
 #critics-wrap .panel-container {
-      border: 1px solid #C4C4C0;
+  border: 1px solid #C4C4C0;
 }
 
 #film-details .tab-container {
@@ -72,7 +74,7 @@ padding: 0px;
   font-weight: bold;
   color: #a3c41b;
 }
-#c-nina p
-{
+
+#c-nina p {
   font-size: 14px;
 }

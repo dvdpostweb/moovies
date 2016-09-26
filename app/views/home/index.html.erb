@@ -4,10 +4,10 @@
   <div class="wrap" id="vod-ppv">
     <h3><%= t ".unlinmited#{params[:kind] == :adult ? '_adult' : ''}" %></h3>
     <center>
-        <%= link_to image_tag("#{I18n.locale}/#{t('.vod_unlimited_img')}#{params[:kind]==:adult ? '-adult' : ''}.gif", :size => '200x95', :alt => t('.vod_unlimited')), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[@svod_id]}"), :tag => 2) %>
+      <%= link_to image_tag("#{I18n.locale}/#{t('.vod_unlimited_img')}#{params[:kind]==:adult ? '-adult' : ''}.gif", :size => '200x95', :alt => t('.vod_unlimited')), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[@svod_id]}"), :tag => 2) %>
     </center>
-    • <%= t ".unlinmited1#{params[:kind] == :adult ? '_adult' : ''}" %><br />
-    • <%= t ".unlinmited2#{params[:kind] == :adult ? '_adult' : ''}" %><br />
+    • <%= t ".unlinmited1#{params[:kind] == :adult ? '_adult' : ''}" %><br/>
+    • <%= t ".unlinmited2#{params[:kind] == :adult ? '_adult' : ''}" %><br/>
     • <%= raw t ".unlinmited3#{params[:kind] == :adult ? '_adult' : ''}" %>
     <ul class="osc">
       <li><%= link_to t('.discover'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[@svod_id]}"), :tag => 2) %></li>
@@ -18,8 +18,8 @@
     <center>
       <%= link_to image_tag("#{I18n.locale}/pay-per-view#{params[:kind]==:adult ? '-adult' : ''}.gif", :size => '200x95', :alt => 'pay per view'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[@tvod_id]}"), :tag => 2) %>
     </center>
-    • <%= t ".tvod1#{params[:kind] == :adult ? '_adult' : ''}" %><br />
-    • <%= t ".tvod2#{params[:kind] == :adult ? '_adult' : ''}" %><br />
+    • <%= t ".tvod1#{params[:kind] == :adult ? '_adult' : ''}" %><br/>
+    • <%= t ".tvod2#{params[:kind] == :adult ? '_adult' : ''}" %><br/>
     • <%= raw t ".tvod3#{params[:kind] == :adult ? '_adult' : ''}" %>
     <ul class="osc">
       <li><%= link_to t('.discover'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[@tvod_id]}"), :tag => 2) %></li>
@@ -30,8 +30,8 @@
     <center>
       <%= link_to image_tag("#{I18n.locale}/video-on-demand#{params[:kind]==:adult ? '-adult' : ''}.gif", :size => '200x95', :alt => 'video on demand'), info_path(:page_name => t('routes.infos.params.vod')) %>
     </center>
-    • <%= t '.multi1' %><br />
-    • <%= t '.multi2' %><br />
+    • <%= t '.multi1' %><br/>
+    • <%= t '.multi2' %><br/>
     • <%= raw t '.multi3' %>
     <ul class="osc">
       <li><%= link_to t('.discover'), info_path(:page_name => t('routes.infos.params.vod')) %></li>
@@ -41,22 +41,22 @@
     <h3 class="<%= I18n.locale %>"><%= t '.newsletter' %></h3>
 
     <%= form_for @newsletter do |f| %>
-    <center>
-        <%= f.error_messages :header_message => "", :message => "", :header_tag => :h3 %>
-        <%= f.hidden_field :language_id, :value => Moovies.customer_languages[I18n.locale] %>
-        <%= hidden_field_tag :promo, params[:code] %>
-        <%= f.text_field :email, :size => 30, :value => 'Philippe@gmail.com' %>
-    </center>
-    • <%= t '.newsletter1' %><br />
-    • <%= t '.newsletter2' %><br />
-    • <%= raw t '.newsletter3' %><br />
-    <ul class="osc">
-      <li>
-        <%= submit_tag t('.valid', :default => 'JE valide'), :id => 'newsletter_input' %>
-      </li>
-    </ul>
+        <center>
+          <%= f.error_messages :header_message => "", :message => "", :header_tag => :h3 %>
+          <%= f.hidden_field :language_id, :value => Moovies.customer_languages[I18n.locale] %>
+          <%= hidden_field_tag :promo, params[:code] %>
+          <%= f.text_field :email, :size => 30, :value => 'Philippe@gmail.com' %>
+        </center>
+        • <%= t '.newsletter1' %><br/>
+        • <%= t '.newsletter2' %><br/>
+        • <%= raw t '.newsletter3' %><br/>
+        <ul class="osc">
+          <li>
+            <%= submit_tag t('.valid', :default => 'JE valide'), :id => 'newsletter_input' %>
+          </li>
+        </ul>
     <% end %>
-    
+
   </div>
 </div>
 <%= render :partial => 'home/index/lists', :locale => {:type => 'hp'} %>

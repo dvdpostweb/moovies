@@ -1,0 +1,95 @@
+<div class="greenBanner">
+  <div class="greenBannerTop">
+    <div>
+      <%= image_tag("greenBannerLine.png", alt: "line", class: '_toggleImage1_') %>
+      <%= image_tag("greenBannerPhone.png", alt: "line", class: '_toggleImage2_') %>
+      <a href="#" class='greenToggle'>
+        <span class="_toggleSpan1_ _underline_">(minimiser)</span>
+        <span class="_toggleSpan2_">(voir tout)</span>
+      </a>
+    </div>
+    <div>
+      <h2>Vous avez <span class="_bold_">5	crédits disponibles</span> <a href="#" class='greenToggle'>(détails)</a>
+      </h2>
+    </div>
+    <div>
+      <!--
+        <div class="greenBannerInlineBlock">	Vous êtes 	client Delhaize?<br>
+          <a href="#" class='_underline_'>Cliquez ici</a>
+        </div>
+        <%= image_tag("greenBannerLion.png", alt: "lion", class: 'greenBannerInlineBlock') %>
+        -->
+    </div>
+  </div>
+
+  <div class="greenBannerOpen">
+    <div>
+      <ul>
+        <li><a href="#" class='_blueColor_ _underline_'>Plush à la Carte</a></li>
+        <li>Crédits disponibles: 0</li>
+        <li>Votre abonnement: <span class="_bold_">pas d’abonnement actif</span>
+          <a href="#" class='_blueColor_ _underline_'>(souscrire)</a></li>
+      </ul>
+      <ul>
+        <li><a href="#" class='_greenColor_ _underline_'>Plush Unlimited</a></li>
+        <li>Votre abonnement: <span class="_bold_">pas d’abonnement actif</span>
+          <a href="#" class='_greenColor_ _underline_'>(souscrire)</a></li>
+      </ul>
+    </div>
+    <div>
+      <table class='_hidden_'>
+        <thead>
+        <tr>
+          <td collspan=2><a href="#" class='_underline_ _redColor_ _bold_'>Votre compte Carte-Plus Delhaize</a></td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>Votre numéro de Carte-Plus:</td>
+          <td>
+            <span class="_bold_">5304338348939 <a href="#" class='_underline_ _redColor_ _normal_'>(modifier)</a></span>
+          </td>
+        </tr>
+        <tr>
+          <td>Votre solde points-Plus:</td>
+          <td><span class="_bold_">800</span></td>
+        </tr>
+        <tr>
+          <td>Crédits films disponibles:</td>
+          <td><span class='_bold_'>5</span></td>
+        </tr>
+        <tr>
+          <td>Valeur de vos crédits films</td>
+          <td><span class="_bold_">&#8364;</span></td>
+        </tr>
+        </tbody>
+      </table>
+      <form action="">
+        <label for=""><span class="_bold_">Vous avez un code promotion?</span></label>
+        <div class="_inputContainer">
+          <input type="text" placeholder="Votre code promotion">
+          <input type="submit" value='Valider'>
+          <div class="_errorMessage_ _hidden_">
+            Invalid code
+          </div>
+        </div>
+      </form>
+      <!--
+        <form action="#" class='mt44'>
+          <%= image_tag("greenBannerLion.png") %>
+          <label for="">
+            <span class="_bold_">Vous possédez une Carte-Plus Delhaize?</span><br>
+          Introduisez votre numéro de carte ci-dessous et louez des films avec vos Points-Plus
+            </label>
+          <div class="_inputContainer">
+            <input type="text" placeholder="Votre numéro de Carte-Plus">
+            <input type="submit" value='Valider' class='_redBackground_'>
+            <div class="_errorMessage_ _hidden_">
+              Invalid code
+            </div>
+          </div>
+        </form>
+      -->
+    </div>
+  </div>
+</div>

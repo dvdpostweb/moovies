@@ -1,7 +1,8 @@
 class OgonesController < ApplicationController
-  skip_before_filter  :verify_authenticity_token
+  skip_before_filter :verify_authenticity_token
+
   def create
-    if params[:skip] 
+    if params[:skip]
       customer = current_customer
       if current_customer.promo_type == 'D'
         @promo = Discount.find(current_customer.promo_id)
@@ -28,7 +29,7 @@ class OgonesController < ApplicationController
       else
         customer.update_attributes(:customers_abo_payment_method => 1, :ogone_owner => params[:CN], :ogone_exp_date => params[:ED], :ogone_card_no => params[:CARDNO], :ogone_card_type => params[:BRAND])
       end
-      
+
       case context
         when 'new_discount'
           if customer.promo_id > 0
@@ -46,7 +47,7 @@ class OgonesController < ApplicationController
             auto_stop = 0
             recurring = nil
           end
-          
+
           price = @promo.promo_price
           if price > 0
             abo_action = 7
@@ -68,10 +69,10 @@ class OgonesController < ApplicationController
           duration = activation.duration
           auto_stop = activation.auto_stop
           recurring = nil
-        	abo_action = 17
+          abo_action = 17
           activation.update_attributes(:created_at => Time.now.localtime.to_s(:db), :customers_id => customer.to_param)
           customer.abo_history(abo_action, customer.next_abo_type_id)
-          
+
       end
       if customer.samsung_codes.unvalidated.empty?
         cust_abo = 1
@@ -80,24 +81,24 @@ class OgonesController < ApplicationController
       end
       customer.update_attributes(:customers_abo => cust_abo, :customers_registration_step => 100, :subscription_expiration_date => duration, :auto_stop => auto_stop, :customers_abo_discount_recurring_to_date => recurring)
       customer.abo_history(action, customer.next_abo_type_id)
-      
-      if customer.gender == 'm' 
+
+      if customer.gender == 'm'
         gender = t('mails.gender_male')
       else
         gender = t('mails.gender_female')
       end
       #to do
       options = {
-        "\\$\\$\\$customers_name\\$\\$\\$" => "#{customer.first_name.capitalize} #{customer.last_name.capitalize}", 
-        "\\$\\$\\$email\\$\\$\\$" => "#{customer.email}",
-        "\\$\\$\\$gender_simple\\$\\$\\$" => gender,
-        "\\$\\$\\$promotion\\$\\$\\$" => @promo.text(customer.locale).html_safe,
-        "\\$\\$\\$subscription\\$\\$\\$" => customer.subscription_type.description,
-        "\\$\\$\\$root_url\\$\\$\\$" => root_url(:locale => nil),
-        "\\$\\$\\$abo_price\\$\\$\\$" => customer.subscription_type.product.price,
-        "\\$\\$\\$general_conditions\\$\\$\\$" => t('info.index.conditions.info')
-        
-        }
+          "\\$\\$\\$customers_name\\$\\$\\$" => "#{customer.first_name.capitalize} #{customer.last_name.capitalize}",
+          "\\$\\$\\$email\\$\\$\\$" => "#{customer.email}",
+          "\\$\\$\\$gender_simple\\$\\$\\$" => gender,
+          "\\$\\$\\$promotion\\$\\$\\$" => @promo.text(customer.locale).html_safe,
+          "\\$\\$\\$subscription\\$\\$\\$" => customer.subscription_type.description,
+          "\\$\\$\\$root_url\\$\\$\\$" => root_url(:locale => nil),
+          "\\$\\$\\$abo_price\\$\\$\\$" => customer.subscription_type.product.price,
+          "\\$\\$\\$general_conditions\\$\\$\\$" => t('info.index.conditions.info')
+
+      }
       view_context.send_message(Moovies.email[:welcome], options, params[:locale], customer)
       #to do 
       #sponsor = Sponsorship.find_by_son_id(customer.to_param)

@@ -15,7 +15,7 @@ ThinkingSphinx::Index.define :category, :with => :active_record do
   has '(select categories_name  from `categories_description` cd where cd.categories_id= `categories`.`categories_id` and cd.language_id = 1 limit 1)', :as => :name_fr, :type => :string
   has '(select categories_name  from `categories_description` cd where cd.categories_id= `categories`.`categories_id` and cd.language_id = 2 limit 1)', :as => :name_nl, :type => :string
   has '(select categories_name  from `categories_description` cd where cd.categories_id= `categories`.`categories_id` and cd.language_id = 2 limit 1)', :as => :name_en, :type => :string
-  
+
   set_property :enable_star => true
   set_property :min_prefix_len => 2
   set_property :charset_type => 'utf-8'

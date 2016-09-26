@@ -1,61 +1,65 @@
 <style>
   .error {
-  width: 250px;
-  padding:15px 10px 15px 10px;
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ff7400+0,ff7400+100;Orange+Flat */
-  background: #ff7400; /* Old browsers */
-  background: -moz-linear-gradient(top,  #ff7400 0%, #ff7400 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(top,  #ff7400 0%,#ff7400 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom,  #ff7400 0%,#ff7400 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff7400', endColorstr='#ff7400',GradientType=0 ); /* IE6-9 */
-}
+    width: 250px;
+    padding: 15px 10px 15px 10px;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ff7400+0,ff7400+100;Orange+Flat */
+    background: #ff7400; /* Old browsers */
+    background: -moz-linear-gradient(top, #ff7400 0%, #ff7400 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #ff7400 0%, #ff7400 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #ff7400 0%, #ff7400 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff7400', endColorstr='#ff7400', GradientType=0); /* IE6-9 */
+  }
 
-.error {
-  color: #fff;
-}
+  .error {
+    color: #fff;
+  }
 
-#carrefour_code-error {
-  display: block;
-}
+  #carrefour_code-error {
+    display: block;
+  }
 </style>
 <div class="landing-page">
-      <div class="special">
-        <div class="special-offer">
-          <div class="special-offer-headline"><%= t('.offer') %></div>
-          <div class="special-offer-image">
-            <%= image_tag('carrefour/carrefour.png') %>
-          </div>
-          <h3><%= t('.customer').html_safe %></h3>
-          <ul>
-            <li>
-              <%= image_tag('carrefour/list-logo.png') %>
-              <p><%= t('.4loc').html_safe %></p>
-            </li>
-            <li>
-              <%= image_tag('carrefour/list-logo.png') %>
-              <p><%= t('.first').html_safe %></p>
-            </li>
-          </ul>
-        </div>
-        <div class="logo-card"></div>
+  <div class="special">
+    <div class="special-offer">
+      <div class="special-offer-headline"><%= t('.offer') %></div>
+      <div class="special-offer-image">
+        <%= image_tag('carrefour/carrefour.png') %>
       </div>
-      <%= form_tag carrefour_path(), :id => 'form_carrefour' do %>
+      <h3><%= t('.customer').html_safe %></h3>
+      <ul>
+        <li>
+          <%= image_tag('carrefour/list-logo.png') %>
+          <p><%= t('.4loc').html_safe %></p>
+        </li>
+        <li>
+          <%= image_tag('carrefour/list-logo.png') %>
+          <p><%= t('.first').html_safe %></p>
+        </li>
+      </ul>
+    </div>
+    <div class="logo-card"></div>
+  </div>
+  <%= form_tag carrefour_path(), :id => 'form_carrefour' do %>
       <div class="choise">
         <div class="headline"><h2><%= t('.choose_formula') %></h2></div>
         <% if @error_abo %>
-          <div class='error'>
-            <%= t('.abo_error') %>
-          </div>
+            <div class='error'>
+              <%= t('.abo_error') %>
+            </div>
         <% end %>
         <% if @error_discount_reused %>
-          <div class='error'>
-            <%= t('session.error_discount_reused') %>
-          </div>
+            <div class='error'>
+              <%= t('session.error_discount_reused') %>
+            </div>
         <% end %>
         <div class="choise-offer">
           <div class="choise-offer-select">
             <div class="offer-film">
-              <div class="offer-film-number">2 <%= t('.films') %><div class="badge"><div class="badge-text"><%= t('.most_popular') %></div></div></div>
+              <div class="offer-film-number">2 <%= t('.films') %>
+                <div class="badge">
+                  <div class="badge-text"><%= t('.most_popular') %></div>
+                </div>
+              </div>
               <div class="first-month">0€</div>
               <div class="first-month-text"><%= t('.first_month') %></div>
               <div class="next-month">3,99€</div>
@@ -67,7 +71,7 @@
                 </label>
               </div>
             </div>
-              <div class="vertical-line"></div>
+            <div class="vertical-line"></div>
             <div class="offer-film offer-film-checked">  <!-- Class offer-film-checked add through javascript, when checkbox is checked, so the background becomes blue -->
               <div class="offer-film-number">
                 4 <%= t('.films') %>
@@ -80,7 +84,7 @@
               <div class="next-month">7,99€</div>
               <div class="next-month-text"><%= t('.next_month') %></div>
               <div class="offer-film-checkbox">
-                <input type="radio" id="carrefour-select-offer-4" name="abo" value = '8' <%= "checked='checked'" if params[:abo]== "8" %>/>
+                <input type="radio" id="carrefour-select-offer-4" name="abo" value='8' <%= "checked='checked'" if params[:abo]== "8" %>/>
                 <label for="carrefour-select-offer-4">
                   <span></span>
                 </label>
@@ -88,13 +92,17 @@
             </div>
             <div class="vertical-line"></div>
             <div class="offer-film">
-              <div class="offer-film-number">6 <%= t('.films') %><div class="badge"><div class="badge-text"><%= t('.most_popular') %></div></div></div>
+              <div class="offer-film-number">6 <%= t('.films') %>
+                <div class="badge">
+                  <div class="badge-text"><%= t('.most_popular') %></div>
+                </div>
+              </div>
               <div class="first-month">7,99€</div>
               <div class="first-month-text"><%= t('.first_month') %></div>
               <div class="next-month">11,99€</div>
               <div class="next-month-text"><%= t('.next_month') %></div>
               <div class="offer-film-checkbox">
-                <input type="radio" id="carrefour-select-offer-6" name="abo" value = '9' <%= "checked='checked'" if params[:abo] == "9" %>/>
+                <input type="radio" id="carrefour-select-offer-6" name="abo" value='9' <%= "checked='checked'" if params[:abo] == "9" %>/>
                 <label for="carrefour-select-offer-6">
                   <span></span>
                 </label>
@@ -102,13 +110,17 @@
             </div>
             <div class="vertical-line"></div>
             <div class="offer-film">
-              <div class="offer-film-number">8 <%= t('.films') %><div class="badge"><div class="badge-text"><%= t('.most_popular') %></div></div></div>
+              <div class="offer-film-number">8 <%= t('.films') %>
+                <div class="badge">
+                  <div class="badge-text"><%= t('.most_popular') %></div>
+                </div>
+              </div>
               <div class="first-month">10,99€</div>
               <div class="first-month-text"><%= t('.first_month') %></div>
               <div class="next-month">14,99€</div>
               <div class="next-month-text"><%= t('.next_month') %></div>
               <div class="offer-film-checkbox">
-                <input type="radio" id="carrefour-select-offer-8" name="abo" value = '10' <%= "checked='checked'" if params[:abo] == "10" %>/>
+                <input type="radio" id="carrefour-select-offer-8" name="abo" value='10' <%= "checked='checked'" if params[:abo] == "10" %>/>
                 <label for="carrefour-select-offer-8">
                   <span></span>
                 </label>
@@ -116,13 +128,17 @@
             </div>
             <div class="vertical-line"></div>
             <div class="offer-film">
-              <div class="offer-film-number">10 <%= t('.films') %><div class="badge"><div class="badge-text"><%= t('.most_popular') %></div></div></div>
+              <div class="offer-film-number">10 <%= t('.films') %>
+                <div class="badge">
+                  <div class="badge-text"><%= t('.most_popular') %></div>
+                </div>
+              </div>
               <div class="first-month">13,99€</div>
               <div class="first-month-text"><%= t('.first_month') %></div>
               <div class="next-month">17,99€</div>
               <div class="next-month-text"><%= t('.next_month') %></div>
               <div class="offer-film-checkbox">
-                <input type="radio" id="carrefour-select-offer-10" name="abo" value = '11' <%= "checked='checked'" if params[:abo] == "11" %>/>
+                <input type="radio" id="carrefour-select-offer-10" name="abo" value='11' <%= "checked='checked'" if params[:abo] == "11" %>/>
                 <label for="carrefour-select-offer-10">
                   <span></span>
                 </label>
@@ -131,10 +147,14 @@
           </div>
           <div class="choise-offer-list">
             <ul>
-              <li><div class="list-style-blue"></div><%= t('.catalog').html_safe %></li>
-              <li><div class="list-style-blue"></div><%= t('.free').html_safe %></li>
-              <li><div class="list-style-blue"></div><%= t('.increase').html_safe %></li>
-              <li><div class="list-style-blue"></div><%= t('.2_credits').html_safe %></li>
+              <li>
+                <div class="list-style-blue"></div><%= t('.catalog').html_safe %></li>
+              <li>
+                <div class="list-style-blue"></div><%= t('.free').html_safe %></li>
+              <li>
+                <div class="list-style-blue"></div><%= t('.increase').html_safe %></li>
+              <li>
+                <div class="list-style-blue"></div><%= t('.2_credits').html_safe %></li>
             </ul>
           </div>
         </div>
@@ -143,22 +163,22 @@
       <div class="code">
         <div class="headline"><h2><%= t('.fill_in_code') %></h2></div>
         <% if @error_code %>
-          <div class='error code'><%= t('.code_error') %></div>
+            <div class='error code'><%= t('.code_error') %></div>
         <% end %>
-        <input type="text" class="code-input<%= " input-error" if @error_code %>" name='carrefour_code' value='<%= params[:carrefour_code]%>'><br>
+        <input type="text" class="code-input<%= " input-error" if @error_code %>" name='carrefour_code' value='<%= params[:carrefour_code] %>'><br>
         <button class="code-button"><%= t('.valid') %></button>
       </div>
-      <% end %>
-      <div class="cards">
-        <ul>
-          <li><%= image_tag('carrefour/mastercard.png') %></li>
-          <li><%= image_tag('carrefour/visa.png') %></li>
-          <li><%= image_tag('carrefour/amex.png') %></li>
-          <li><%= image_tag('carrefour/atos.png') %></li>
-          <li><%= image_tag('carrefour/paypal.png') %></li>
-          <li><%= image_tag('carrefour/norton.png') %></li>
-          <li><%= image_tag('carrefour/verisign.png') %></li>
-        </ul>
-        <center><span class="cards-bottom-text">Secured online transactions managed by Ingenico</span></center>
-      </div>
-    </div>
+  <% end %>
+  <div class="cards">
+    <ul>
+      <li><%= image_tag('carrefour/mastercard.png') %></li>
+      <li><%= image_tag('carrefour/visa.png') %></li>
+      <li><%= image_tag('carrefour/amex.png') %></li>
+      <li><%= image_tag('carrefour/atos.png') %></li>
+      <li><%= image_tag('carrefour/paypal.png') %></li>
+      <li><%= image_tag('carrefour/norton.png') %></li>
+      <li><%= image_tag('carrefour/verisign.png') %></li>
+    </ul>
+    <center><span class="cards-bottom-text">Secured online transactions managed by Ingenico</span></center>
+  </div>
+</div>

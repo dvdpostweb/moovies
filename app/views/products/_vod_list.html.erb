@@ -1,32 +1,32 @@
 <% if current_customer %>
-<div id = "vod_list_<%= product.to_param %>" class="<%= product.series? ? "serie_list" : "vod_list" %>">
-  <% if @vod_wishlist && @vod_wishlist.include?( product.id) || @vod_wishlist.nil? %>
-      <% item = current_customer.vod_wishlists.where(imdb_id: product.imdb_id, season_id: product.season_id, episode_id: product.episode_id).first %>
-  <% end %>
-  <% if item %>
-    <%= form_for(:vod_wishlist, :url => vod_wishlist_path(:id => item.to_param), :html => {:method => :delete}) do |f| %>
-      <%= f.hidden_field :product_id, :value => product.to_param %>
-      <%= f.hidden_field :submit_id, :value => "vod_list_#{product.to_param}" %>
-      <%= hidden_field_tag :source, source %>
-      <%= hidden_field_tag :response_id, response_id %>
+    <div id="vod_list_<%= product.to_param %>" class="<%= product.series? ? "serie_list" : "vod_list" %>">
+      <% if @vod_wishlist && @vod_wishlist.include?(product.id) || @vod_wishlist.nil? %>
+          <% item = current_customer.vod_wishlists.where(imdb_id: product.imdb_id, season_id: product.season_id, episode_id: product.episode_id).first %>
+      <% end %>
+      <% if item %>
+          <%= form_for(:vod_wishlist, :url => vod_wishlist_path(:id => item.to_param), :html => {:method => :delete}) do |f| %>
+              <%= f.hidden_field :product_id, :value => product.to_param %>
+              <%= f.hidden_field :submit_id, :value => "vod_list_#{product.to_param}" %>
+              <%= hidden_field_tag :source, source %>
+              <%= hidden_field_tag :response_id, response_id %>
 
-      <%= submit_tag t('.drop'), :class => 'btn_remove_form streaming_remove_list add', :style => 'border:0px;cursor:pointer;text-align:center;' %>
-    <% end %>
-  <% else %>
-    <%= form_for :vod_wishlist, :url => vod_wishlists_path() do |f| %>
-      <%= f.hidden_field :imdb_id, :value => product.imdb_id %>
-      <%= f.hidden_field :season_id, :value => product.season_id %>
-      <%= f.hidden_field :episode_id, :value => product.episode_id %>
-      <%= f.hidden_field :product_id, :value => product.to_param %>
-      <%= f.hidden_field :submit_id, :value => "vod_list_#{product.to_param}" %>
-      <%= hidden_field_tag :source, source %>
-      <%= hidden_field_tag :response_id, response_id %>
-      <% text = t('.add')  %>
-      <% class_name = 'streaming_soon_btn' %>
-      <%= submit_tag text, :class => "#{class_name} streaming_add_list add", :style => 'border:0px;cursor:pointer;text-align:center;' %>
-    <% end %>
-  <% end %>
-</div>
+              <%= submit_tag t('.drop'), :class => 'btn_remove_form streaming_remove_list add', :style => 'border:0px;cursor:pointer;text-align:center;' %>
+          <% end %>
+      <% else %>
+          <%= form_for :vod_wishlist, :url => vod_wishlists_path() do |f| %>
+              <%= f.hidden_field :imdb_id, :value => product.imdb_id %>
+              <%= f.hidden_field :season_id, :value => product.season_id %>
+              <%= f.hidden_field :episode_id, :value => product.episode_id %>
+              <%= f.hidden_field :product_id, :value => product.to_param %>
+              <%= f.hidden_field :submit_id, :value => "vod_list_#{product.to_param}" %>
+              <%= hidden_field_tag :source, source %>
+              <%= hidden_field_tag :response_id, response_id %>
+              <% text = t('.add') %>
+              <% class_name = 'streaming_soon_btn' %>
+              <%= submit_tag text, :class => "#{class_name} streaming_add_list add", :style => 'border:0px;cursor:pointer;text-align:center;' %>
+          <% end %>
+      <% end %>
+    </div>
 <% else %>
-  <%= link_to t('.add'), product_log_path(:product_id => product.id, :media => 'vod'), :class => "streaming_btn streaming_soon_btn facebox add" %>
+    <%= link_to t('.add'), product_log_path(:product_id => product.id, :media => 'vod'), :class => "streaming_btn streaming_soon_btn facebox add" %>
 <% end %>

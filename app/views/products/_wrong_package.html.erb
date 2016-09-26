@@ -1,9 +1,9 @@
 <% if current_customer.tvod_only? %>
-  <%= t('.no_package').html_safe %>
-  <br /><br />
-  <%= link_to t('create'), info_path(:page_name => t('routes.infos.params.abo')),:class => :watch %></a>
+    <%= t('.no_package').html_safe %>
+    <br/><br/>
+    <%= link_to t('create'), info_path(:page_name => t('routes.infos.params.abo')), :class => :watch %></a>
 <% else %>
-  <%= t('.wrong_package').html_safe %>
-  <br /><br />
-  <%= link_to t('change'), info_path(:page_name => t('routes.infos.params.abo')),:class => :watch %></a>
+    <%= t('.wrong_package').html_safe %>
+    <br/><br/>
+    <%= link_to t('change'), info_path(:page_name => t('routes.infos.params.abo')), :class => :watch %></a>
 <% end %>

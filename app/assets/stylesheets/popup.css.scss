@@ -1,14 +1,13 @@
-
-/* 
+/*
     POPUP NEW!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 */
 
-.button-area{
+.button-area {
   width: 100%;
   padding: 10px 0px 1px 0px;
 }
 
-.button-popup{
+.button-popup {
   display: inline-block;
   width: 145px;
   height: 32px;
@@ -22,7 +21,7 @@
   line-height: 32px;
   background-color: #9e9e98;
   color: #fff;
-  font-family: 'Open Sans Condensed',sans-serif;
+  font-family: 'Open Sans Condensed', sans-serif;
   font-size: 14px;
   font-weight: bold;
   letter-spacing: -0.4px;
@@ -30,7 +29,7 @@
 
 .button-popup .button-watch,
 .button-popup .button-watch-list,
-.button-popup .button-trailer{
+.button-popup .button-trailer {
   background-image: url("img/watch.gif");
   background-repeat: no-repeat;
   color: #fff;
@@ -44,11 +43,11 @@
   font-family: 'Open Sans Condensed', sans-serif;
 }
 
-.button-popup .button-watch-list{
+.button-popup .button-watch-list {
   background-image: url("img/watch-list.gif");
 }
 
-.film-price{
+.film-price {
   width: 100%;
   margin: 5px 5px 15px;
   font-size: 15px;
@@ -59,17 +58,17 @@
   text-align: left;
 }
 
-.button-popup .button-trailer{
+.button-popup .button-trailer {
   background-image: url(popup/button-trailer.png);
   color: #000;
   padding-left: 35px;
 }
 
-.clear-float:after { 
-   content: " ";
-   display: block; 
-   height: 0; 
-   clear: both;
+.clear-float:after {
+  content: " ";
+  display: block;
+  height: 0;
+  clear: both;
 }
 
 .tooltips .tooltips_rating {
@@ -92,7 +91,7 @@
   width: 165px;
   height: 35px;
   margin: 0 auto 15px;
-  background: linear-gradient(to top, rgba(129,176,45,1) 0%,rgba(177,227,88,1) 100%);
+  background: linear-gradient(to top, rgba(129, 176, 45, 1) 0%, rgba(177, 227, 88, 1) 100%);
   border: 1px solid #ccc;
   border-radius: 4px;
   color: #fff;
@@ -115,7 +114,7 @@
   background-image: url(popup/play-button.png);
 }
 
-.tooltips .tooltips_description{
+.tooltips .tooltips_description {
   color: #4a5862;
 }
 

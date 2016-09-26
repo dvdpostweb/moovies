@@ -1,7 +1,7 @@
 <div id="gauche">
   <div id="title">
     <strong><%= t '.title' %></strong>
-  </div> 
+  </div>
   <div id="content_gauche">
     <table cellpadding="1" cellspacing="0">
       <tr>
@@ -21,16 +21,16 @@
         <td align="left"><%= customer.first_name %></td>
       </tr>
       <tr>
-         <td align="right"><strong><%= t '.phone' %> :</strong></td>
-         <td align="left"><%= customer.phone %></td>
-       </tr>
-     
+        <td align="right"><strong><%= t '.phone' %> :</strong></td>
+        <td align="left"><%= customer.phone %></td>
+      </tr>
+
       <tr>
         <td align="right" valign="top" class="adresse"></td>
         <td align="right" valign="top" id="modif">
           <ul>
             <li class="links">
-               <%= link_to t('.customer_edit'), edit_customer_path(), :class => 'modification_account facebox' %>
+              <%= link_to t('.customer_edit'), edit_customer_path(), :class => 'modification_account facebox' %>
             </li>
           </ul>
         </td>
@@ -39,9 +39,9 @@
         <td align="right" valign="top" class="adresse"><strong><%= t '.address' %></strong></td>
         <td align="left" valign="top" class="adresse">
           <% if customer.address %>
-          <%= customer.address.name %><br/>
-          <%= customer.address.street %><br/>
-          <%= "#{customer.address.postal_code} #{customer.address.city}" %>
+              <%= customer.address.name %><br/>
+              <%= customer.address.street %><br/>
+              <%= "#{customer.address.postal_code} #{customer.address.city}" %>
           <% end %>
         </td>
       </tr>
@@ -55,34 +55,39 @@
           </ul>
         </td>
       </tr>
-    
+
       <tr>
-        <td colspan="2"><div class="ligne"></div></td>
+        <td colspan="2">
+          <div class="ligne"></div>
+        </td>
       </tr>
-        <tr>
-          <td align="right" class="adresse"><strong><%= t '.cotations' %></strong></td>
-          <td align="left" class="adresse"><%= customer.ratings.count %></td>
-        </tr>
-         <tr>
-            <td align="right"><strong><%= t '.critiques' %></strong></td>
-            <td align="left"><%= @review_count %> 
-              <% if @review_count > 0 %>
-              (<%= link_to t('.see_all'), customer_reviews_path(:customer_id => current_customer.to_param), :class => :modif %>)
-              <% end %>
-            </td>
-          </tr>
-          
-      <%= render :partial => 'customers/show/nickname', :locals => { :customer => customer } %>
       <tr>
-        <td colspan="2"><div class="ligne"></div></td>
+        <td align="right" class="adresse"><strong><%= t '.cotations' %></strong></td>
+        <td align="left" class="adresse"><%= customer.ratings.count %></td>
       </tr>
-      
-    
+      <tr>
+        <td align="right"><strong><%= t '.critiques' %></strong></td>
+        <td align="left"><%= @review_count %>
+          <% if @review_count > 0 %>
+              (<%= link_to t('.see_all'), customer_reviews_path(:customer_id => current_customer.to_param), :class => :modif %>
+              )
+          <% end %>
+        </td>
+      </tr>
+
+      <%= render :partial => 'customers/show/nickname', :locals => {:customer => customer} %>
+      <tr>
+        <td colspan="2">
+          <div class="ligne"></div>
+        </td>
+      </tr>
+
+
       <tr>
         <td align="right" class="adresse"><strong><%= t '.newsletters' %></strong></td>
         <td align="left" class="adresse">
           <div>
-          <%= render :partial => 'customers/show/active', :locals => {:active => customer.newsletter, :type => 'newsletter'} %>
+            <%= render :partial => 'customers/show/active', :locals => {:active => customer.newsletter, :type => 'newsletter'} %>
           </div>
         </td>
       </tr>
@@ -90,16 +95,16 @@
         <td align="right"><strong><%= t '.newsletters_partner' %></strong></td>
         <td align="left">
           <div>
-          <%= render :partial => 'customers/show/active', :locals => {:active => customer.newsletter_parnter, :type => 'newsletter_parnter'} %>
+            <%= render :partial => 'customers/show/active', :locals => {:active => customer.newsletter_parnter, :type => 'newsletter_parnter'} %>
           </div>
         </td>
       </tr>
-      
+
       <tr>
         <td align="right"><strong>Newsletter adulte :</strong></td>
         <td align="left">
           <div>
-          <%= render :partial => 'customers/show/active', :locals => {:active => customer.newsletter_parnter, :type => 'newsletter_parnter'} %>
+            <%= render :partial => 'customers/show/active', :locals => {:active => customer.newsletter_parnter, :type => 'newsletter_parnter'} %>
           </div>
         </td>
       </tr>

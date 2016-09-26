@@ -1,80 +1,80 @@
 <%= form_for filter, :url => search_filters_path(:package => params[:package], :list_id => params[:list_id], :category_id => params[:category_id], :actor_id => params[:actor_id], :director_id => params[:director_id], :filter => params[:filter], :studio_id => params[:studio_id], :kind => params[:kind]), :html => {:method => :put} do |f| %>
-<div id="filters">
-  <h3>
-    <%= t '.refine' %>
-  </h3>
-  <fieldset>
-    <ul id="main">
-      <li class="audience<%= ' open' if filter.audience? %>">
-        <%= link_to t('.public'), products_short_path(:audience => 1) %>
-        <div id="audience-slider" <%= "style=display:none" unless filter.audience? %>>
-          <%= f.hidden_field :audience_min, :value => filter.audience_min || 0 %>
-          <%= f.hidden_field :audience_max, :value => filter.audience_max || 18 %>
-          <ul id="audience_labels">
-            <% ['ALL', '-10', '-12', '-16', '-18'].collect do |p| %>
-              <li><%= p %></li>
-            <% end %>
-          </ul>
-          
-        </div>
-        <div id="audience-slider-range" <%= "style=display:none" unless filter.audience? %>></div>
-      </li>
-      <li class="country<%= ' open' if filter.country_id? %>">
-        <%= link_to t('.countries'), products_short_path(:countries => 1) %>
-        <div <%= "style=display:none" unless filter.country_id? %>>
-          <%= f.select :country_id, countries.collect{|country| [country.name, country.id]}, {:include_blank => true} %>
-        </div>
-      </li>
-      <li class="year<%= ' open' if filter.year? %>">
-        <%= link_to t('.year'), products_short_path(:year => 1) %>
-        <% max = Time.now.year + 1 %>
-        <% max_year = filter.year_max && filter.year_max <= max ? filter.year_max : max %>
-        <div <%= "style=display:none" unless filter.year? %>>
-          <%= t '.from' %>
-          <%= select_year (filter.year_min || 1910) , :field_name => 'year_min', :start_year => 1910, :end_year => max %>
-          <%= t '.to' %>
-          <%= select_year max_year , :field_name => 'year_max', :start_year => 1910, :end_year => max %>
-        </div>
-      </li>
-      <li class="ratings<%= ' open' if filter.rating? %>">
-        <%= link_to t('.ratings'), products_short_path(:rating => 1) %>
-        <div id="ratings-slider" <%= "style=display:none" unless filter.rating? %>>
-          <%= f.hidden_field :rating_min, :value => filter.rating_min || 1 %>
-          <%= f.hidden_field :rating_max, :value => filter.rating_max || 5 %>
-          <ul id="ratings_labels">
-            <% ['1', '2', '3', '4', '5'].collect do |rating| %>
-              <li><%= rating %></li>
-            <% end %>
-          </ul>
-        </div>
-        <div id="ratings-slider-range" <%= "style=display:none" unless filter.rating? %>></div>
-      </li>
-      <li class="audio<%= ' open' if filter.audio? %>">
-        <%= link_to t('.audio'), products_short_path(:audio => 1) %>
-        <div <%= "style=display:none" unless filter.audio? %>>
-          <% Language.by_language(I18n.locale).each do |track| %>
-            <label>
-              <%= filter_checkbox_tag :audio, track.to_param, (filter.audio? && filter.audio.include?(track.to_param.to_i)) %>
-              <%= track.name %>
-            </label>
-          <% end %>
-        </div>
-      </li>
-      <li class="subtitles<%= ' open' if filter.subtitles? %>">
-        <%= link_to t('.subtitles'), products_short_path(:subtitles => 1) %>
-        <div <%= "style=display:none" unless filter.subtitles? %>>
-          <% Subtitle.by_language(I18n.locale).each do |sub| %>
-            <label>
-              <%= filter_checkbox_tag :subtitles, sub.to_param, (filter.subtitles? && filter.subtitles.include?(sub.to_param.to_i)) %>
-              <%= truncate sub.name, :length => 25  %>
-            </label>
-          <% end %>
-        </div>
-      </li>
-      <li class='li_submit'>
-        <%= f.submit t('.apply'), :name => nil, :class => 'submit' %>
-      </li>
-    </ul>
-  </fieldset>
-</div>
+    <div id="filters">
+      <h3>
+        <%= t '.refine' %>
+      </h3>
+      <fieldset>
+        <ul id="main">
+          <li class="audience<%= ' open' if filter.audience? %>">
+            <%= link_to t('.public'), products_short_path(:audience => 1) %>
+            <div id="audience-slider" <%= "style=display:none" unless filter.audience? %>>
+              <%= f.hidden_field :audience_min, :value => filter.audience_min || 0 %>
+              <%= f.hidden_field :audience_max, :value => filter.audience_max || 18 %>
+              <ul id="audience_labels">
+                <% ['ALL', '-10', '-12', '-16', '-18'].collect do |p| %>
+                    <li><%= p %></li>
+                <% end %>
+              </ul>
+
+            </div>
+            <div id="audience-slider-range" <%= "style=display:none" unless filter.audience? %>></div>
+          </li>
+          <li class="country<%= ' open' if filter.country_id? %>">
+            <%= link_to t('.countries'), products_short_path(:countries => 1) %>
+            <div <%= "style=display:none" unless filter.country_id? %>>
+              <%= f.select :country_id, countries.collect { |country| [country.name, country.id] }, {:include_blank => true} %>
+            </div>
+          </li>
+          <li class="year<%= ' open' if filter.year? %>">
+            <%= link_to t('.year'), products_short_path(:year => 1) %>
+            <% max = Time.now.year + 1 %>
+            <% max_year = filter.year_max && filter.year_max <= max ? filter.year_max : max %>
+            <div <%= "style=display:none" unless filter.year? %>>
+              <%= t '.from' %>
+              <%= select_year (filter.year_min || 1910), :field_name => 'year_min', :start_year => 1910, :end_year => max %>
+              <%= t '.to' %>
+              <%= select_year max_year, :field_name => 'year_max', :start_year => 1910, :end_year => max %>
+            </div>
+          </li>
+          <li class="ratings<%= ' open' if filter.rating? %>">
+            <%= link_to t('.ratings'), products_short_path(:rating => 1) %>
+            <div id="ratings-slider" <%= "style=display:none" unless filter.rating? %>>
+              <%= f.hidden_field :rating_min, :value => filter.rating_min || 1 %>
+              <%= f.hidden_field :rating_max, :value => filter.rating_max || 5 %>
+              <ul id="ratings_labels">
+                <% ['1', '2', '3', '4', '5'].collect do |rating| %>
+                    <li><%= rating %></li>
+                <% end %>
+              </ul>
+            </div>
+            <div id="ratings-slider-range" <%= "style=display:none" unless filter.rating? %>></div>
+          </li>
+          <li class="audio<%= ' open' if filter.audio? %>">
+            <%= link_to t('.audio'), products_short_path(:audio => 1) %>
+            <div <%= "style=display:none" unless filter.audio? %>>
+              <% Language.by_language(I18n.locale).each do |track| %>
+                  <label>
+                    <%= filter_checkbox_tag :audio, track.to_param, (filter.audio? && filter.audio.include?(track.to_param.to_i)) %>
+                    <%= track.name %>
+                  </label>
+              <% end %>
+            </div>
+          </li>
+          <li class="subtitles<%= ' open' if filter.subtitles? %>">
+            <%= link_to t('.subtitles'), products_short_path(:subtitles => 1) %>
+            <div <%= "style=display:none" unless filter.subtitles? %>>
+              <% Subtitle.by_language(I18n.locale).each do |sub| %>
+                  <label>
+                    <%= filter_checkbox_tag :subtitles, sub.to_param, (filter.subtitles? && filter.subtitles.include?(sub.to_param.to_i)) %>
+                    <%= truncate sub.name, :length => 25 %>
+                  </label>
+              <% end %>
+            </div>
+          </li>
+          <li class='li_submit'>
+            <%= f.submit t('.apply'), :name => nil, :class => 'submit' %>
+          </li>
+        </ul>
+      </fieldset>
+    </div>
 <% end %>

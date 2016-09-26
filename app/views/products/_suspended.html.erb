@@ -1,4 +1,5 @@
 <%= t('.suspended').html_safe %>
 <% if current_customer.payment_suspended? %>
-  <br /><br /><%= link_to t('.ogone_payment_method_change'), edit_customer_payment_methods_path(:customer_id => current_customer.to_param, :type => :credit_card_modification), :class => :credit_card_suspended %>
+    <br/>
+    <br/><%= link_to t('.ogone_payment_method_change'), edit_customer_payment_methods_path(:customer_id => current_customer.to_param, :type => :credit_card_modification), :class => :credit_card_suspended %>
 <% end %>

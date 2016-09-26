@@ -1,98 +1,101 @@
 <style>
-.step2 {
-  width: 470px;
-  height: 750px;
-  margin: 0 auto;
-  padding: 50px 250px 95px 250px;
-  background-color: #fff;
-  text-align: center;
-}
-.customer_newsletter {
+  .step2 {
+    width: 470px;
+    height: 750px;
+    margin: 0 auto;
+    padding: 50px 250px 95px 250px;
+    background-color: #fff;
+    text-align: center;
+  }
+
+  .customer_newsletter {
     width: 30px;
     height: 30px;
     margin: 23px 0 0 0;
     display: inline-block;
     float: left;
     /*margin: 25px auto 0;*/
-}
+  }
 
-.customer_newsletter-label {
+  .customer_newsletter-label {
     width: 430px;
     text-align: left;
     margin: 25px 0 0 5px;
     color: #7e7e7e;
-		font-family: Arial,Helvetica, sans-serif;
-		font-size: 16px;
-		font-weight: normal;
-    float: left;
-    text-align: left;
-    padding-left: 5px;
-}
-
-.customer_newsletter_parnter {
-    width: 30px;
-    height: 30px;
-    margin: 23px 0 0 0;
-    display: inline-block;
-    float: left;
-    /*margin: 25px auto 0;*/
-}
-
-.customer_newsletter_parnter-label {
-    width: 430px;
-    margin: 25px 0 0 5px;
-    color: #7e7e7e;
-		font-family: Arial,Helvetica, sans-serif;
-		font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
     font-weight: normal;
     float: left;
     text-align: left;
     padding-left: 5px;
-}
+  }
+
+  .customer_newsletter_parnter {
+    width: 30px;
+    height: 30px;
+    margin: 23px 0 0 0;
+    display: inline-block;
+    float: left;
+    /*margin: 25px auto 0;*/
+  }
+
+  .customer_newsletter_parnter-label {
+    width: 430px;
+    margin: 25px 0 0 5px;
+    color: #7e7e7e;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    float: left;
+    text-align: left;
+    padding-left: 5px;
+  }
 </style>
 <% content_for :view_specific_css do %>
-  <%= stylesheet_link_tag "step2" %>
+    <%= stylesheet_link_tag "step2" %>
 <% end %>
 <div class="step2">
-<%= link_to root_path do %>
-  <%= image_tag "plush_logo_fixed.jpg", height: '71', width: '129' %>
-<% end %>
-<% if params[:activation].blank? %>
-<a href="/auth/facebook?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>"><button id="fb_connect_login" class="face-button"><%= t('.social.network.fbconnect') %></button></a>
-<div class="separator-part">
-	<div class="separator-line"></div>
-	<label class="separator-label"><%= t('promotions.show.or') %></label>
-	<div class="separator-line"></div>
-</div>
-<% end %>
-</br>
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-<% if @samsung %>
-  <%= f.hidden_field(:samsung, :value => @samsung) %>
-<% else %>
-  <%= cookies[:code] ? f.hidden_field(:code, :value => cookies[:code]) : f.hidden_field(:code, :value => @default_code) %>
-<% end %>
-<%= f.hidden_field :abo, :value => params[:abo] %>
-<%= f.hidden_field :language, :value => Moovies.customer_languages[I18n.locale] %>
-<%= f.email_field :email, :class => 'text-field', :placeholder => t('.email') %>
-<%= f.password_field :password, :class => 'text-field', :placeholder => t('.password') %>
-<%= f.password_field :password_confirmation, :class => 'text-field', :placeholder => t('.confirmation_pass') %>
-<%= f.submit t('.sign_up', :default => "Sign up"), :class => "button-connenct-large" %>
-  <%= render "devise/shared/links" %>
+  <%= link_to root_path do %>
+      <%= image_tag "plush_logo_fixed.jpg", height: '71', width: '129' %>
+  <% end %>
+  <% if params[:activation].blank? %>
+      <a href="/auth/facebook?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>">
+        <button id="fb_connect_login" class="face-button"><%= t('.social.network.fbconnect') %></button>
+      </a>
+      <div class="separator-part">
+        <div class="separator-line"></div>
+        <label class="separator-label"><%= t('promotions.show.or') %></label>
+        <div class="separator-line"></div>
+      </div>
+  <% end %>
+  </br>
+  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+      <% if @samsung %>
+          <%= f.hidden_field(:samsung, :value => @samsung) %>
+      <% else %>
+          <%= cookies[:code] ? f.hidden_field(:code, :value => cookies[:code]) : f.hidden_field(:code, :value => @default_code) %>
+      <% end %>
+      <%= f.hidden_field :abo, :value => params[:abo] %>
+      <%= f.hidden_field :language, :value => Moovies.customer_languages[I18n.locale] %>
+      <%= f.email_field :email, :class => 'text-field', :placeholder => t('.email') %>
+      <%= f.password_field :password, :class => 'text-field', :placeholder => t('.password') %>
+      <%= f.password_field :password_confirmation, :class => 'text-field', :placeholder => t('.confirmation_pass') %>
+      <%= f.submit t('.sign_up', :default => "Sign up"), :class => "button-connenct-large" %>
+      <%= render "devise/shared/links" %>
 
-<div class="customer_newsletter">
-    <%= f.check_box :newsletter, :checked => true %>
-    <label for="customer_newsletter">
-      <span></span>
-    </label>
-  </div>
-  <label class="customer_newsletter-label"><%= t('.newsletter') %></label>
-<div class="customer_newsletter_parnter">
-    <%= f.check_box :newsletter_parnter, :checked => true %>
-    <label for="customer_newsletter_parnter">
-      <span></span>
-    </label>
-  </div>
-  <label class="customer_newsletter_parnter-label"><%= t('.newsletter_parnter') %></label>
-</div>
-<% end %>
+      <div class="customer_newsletter">
+        <%= f.check_box :newsletter, :checked => true %>
+        <label for="customer_newsletter">
+          <span></span>
+        </label>
+      </div>
+      <label class="customer_newsletter-label"><%= t('.newsletter') %></label>
+      <div class="customer_newsletter_parnter">
+        <%= f.check_box :newsletter_parnter, :checked => true %>
+        <label for="customer_newsletter_parnter">
+          <span></span>
+        </label>
+      </div>
+      <label class="customer_newsletter_parnter-label"><%= t('.newsletter_parnter') %></label>
+      </div>
+  <% end %>

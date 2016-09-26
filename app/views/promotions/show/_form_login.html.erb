@@ -1,40 +1,42 @@
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:id => 'login'}) do |f| %>
-<div align="center">
+    <div align="center">
   <span>
     <%= "<div id='error'>#{alert}</div>".html_safe if alert && !alert.empty? %>
     <p class="inputs_codes">
-      <%= f.label :email, t('promotions.show.canvas2.email_label') %>:<br />
+      <%= f.label :email, t('promotions.show.canvas2.email_label') %>:<br/>
       <%= f.text_field :email, :value => params[:email], :class => 'inputs_promo_code', :size => '35', :tye => 'text' %>
     </p>
     <p class="inputs_codes" align="center">
-      <%= f.label :password, t('promotions.show.canvas2.pass_label') %>:<br />
-      <%= f.password_field :password, :class => 'inputs_promo_code', :size => '35', :maxlength => '40'%>
+      <%= f.label :password, t('promotions.show.canvas2.pass_label') %>:<br/>
+      <%= f.password_field :password, :class => 'inputs_promo_code', :size => '35', :maxlength => '40' %>
     </p>
-    <%= hidden_field_tag(:code, @code, :id => 'code') %><br />
-    <%= hidden_field_tag(:imdb_id, params[:imdb_id] ) if params[:imdb_id] %>
-    
-    <%= hidden_field_tag :return_url, promotion_canva_path(:id => params[:id], :email => params[:email], :checked => 1, :imdb_id =>params[:imdb_id]) %>
+    <%= hidden_field_tag(:code, @code, :id => 'code') %><br/>
+    <%= hidden_field_tag(:imdb_id, params[:imdb_id]) if params[:imdb_id] %>
+
+    <%= hidden_field_tag :return_url, promotion_canva_path(:id => params[:id], :email => params[:email], :checked => 1, :imdb_id => params[:imdb_id]) %>
     <%= hidden_field_tag :id, params[:id] %>
     <div style="clear:both;"></div>
     
   </span>
-</div>
-<div class="garanties">
-  <h4><%= t('promotions.show.canvas2.garanties') %></h4>
-  <ul>
-    <li class="engagement"><%= t2('promotions.show.canvas2.engagement', @promo.params[:key]) %></li>
-    <li class="stop"><%= t2('promotions.show.canvas2.stop', @promo.params[:key]) %></li>
-    <li class="security"><%= t('promotions.show.canvas2.securite') %></li>
-  </ul>
-</div>
-<div class="avantages">
-  <h4><%= t('promotions.show.canvas2.avantages') %></h4>
-  <ul>
-    <li class="film"><%= t('promotions.show.canvas2.film') %></li>
-    <li class="home"><%= t('promotions.show.canvas2.home') %></li>
-    <li class="platform"><%= t('promotions.show.canvas2.platform') %></li>
-  </ul>
-</div>
-<div style="clear:both;"></div>
-<p style="padding-top:5px;"><input type="submit" border="0" align="absmiddle" id="submit_id3" class="promo_button" name="sent" value="<%= t2('promotions.show.canvas2.essayer', @promo.params[:key]) %>" /></p>
+    </div>
+    <div class="garanties">
+      <h4><%= t('promotions.show.canvas2.garanties') %></h4>
+      <ul>
+        <li class="engagement"><%= t2('promotions.show.canvas2.engagement', @promo.params[:key]) %></li>
+        <li class="stop"><%= t2('promotions.show.canvas2.stop', @promo.params[:key]) %></li>
+        <li class="security"><%= t('promotions.show.canvas2.securite') %></li>
+      </ul>
+    </div>
+    <div class="avantages">
+      <h4><%= t('promotions.show.canvas2.avantages') %></h4>
+      <ul>
+        <li class="film"><%= t('promotions.show.canvas2.film') %></li>
+        <li class="home"><%= t('promotions.show.canvas2.home') %></li>
+        <li class="platform"><%= t('promotions.show.canvas2.platform') %></li>
+      </ul>
+    </div>
+    <div style="clear:both;"></div>
+    <p style="padding-top:5px;">
+      <input type="submit" border="0" align="absmiddle" id="submit_id3" class="promo_button" name="sent" value="<%= t2('promotions.show.canvas2.essayer', @promo.params[:key]) %>"/>
+    </p>
 <% end %>

@@ -1,11 +1,11 @@
-ActionMailer::Base.smtp_settings = {  
-  :address              => "email-smtp.eu-west-1.amazonaws.com", 
-  :port                 => 465,
-  :domain               => "plush.be",
-  :authentication       => "login",
-  :user_name            => "AKIAICQS7KIVA5N62SKQ",
-  :password             => "Au/ZyAC8yBAZGGSPdGDNEz00v2biQZPjUnxpd+qLl3Xn",
-  :enable_starttls_auto => true
+ActionMailer::Base.smtp_settings = {
+    :address => "email-smtp.eu-west-1.amazonaws.com",
+    :port => 465,
+    :domain => "plush.be",
+    :authentication => "login",
+    :user_name => "AKIAICQS7KIVA5N62SKQ",
+    :password => "Au/ZyAC8yBAZGGSPdGDNEz00v2biQZPjUnxpd+qLl3Xn",
+    :enable_starttls_auto => true
 }
 #ActionMailer::Base.smtp_settings = {  
 #  :openssl_verify_mode  => OpenSSL::SSL::VERIFY_NONE,

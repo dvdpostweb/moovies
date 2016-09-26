@@ -8,6 +8,7 @@ class CustomFailure < Devise::FailureApp
       super
     end
   end
+
   def respond
     if http_auth?
       http_auth

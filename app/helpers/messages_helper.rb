@@ -10,21 +10,21 @@ module MessagesHelper
   def offline_payment_type(type)
     case type
       when 1
-  			t '.message_payment_ogone_failed'
-  		when 3
-  			t '.message_payment_bank_transfer_failed'
-  		when 2
-  			t '.message_payment_dom_failed'
-  		else
-  			t '.unspecified'
-  	end
+        t '.message_payment_ogone_failed'
+      when 3
+        t '.message_payment_bank_transfer_failed'
+      when 2
+        t '.message_payment_dom_failed'
+      else
+        t '.unspecified'
+    end
   end
 
   def message_title(kind)
     case kind
-      when :number 
+      when :number
         t('messages.index.radio_question.labels.number')
-      when :billing_price 
+      when :billing_price
         t('messages.index.radio_question.labels.billing_price')
       when :billing_dvd
         t('messages.index.radio_question.labels.billing_dvd')
@@ -37,10 +37,10 @@ module MessagesHelper
     extracts = variables.split(';;;')
     extracts.collect do |extract|
       raw = extract.split(':::')
-      s = raw[0].gsub(/\$/,'\$')
+      s = raw[0].gsub(/\$/, '\$')
       r = Regexp.new(s, true)
       raw[1] = '' if !raw[1]
-      body = body.gsub(r, raw[1]) 
+      body = body.gsub(r, raw[1])
     end
     body.html_safe
   end
@@ -54,11 +54,11 @@ module MessagesHelper
   end
 
 
-  def get_data(variable ,variables)
+  def get_data(variable, variables)
     extracts = variables.split(';;;')
     extracts.collect do |extract|
       raw = extract.split(':::')
-      if raw[0] == "$$$#{variable}$$$" 
+      if raw[0] == "$$$#{variable}$$$"
         return raw[1]
       end
     end

@@ -1,27 +1,27 @@
 <% Product.where(serie_id: product.serie_id).group(:season_id).each_with_index do |season, i| %>
-<div class="season">
-  <div class="details">
-    <div class="season_title"><%= "Season #{ season.season_id}" %></div>
-    <div class='message'>
-       <%= get_vod_message(season.get_vod(session[:country]).first, svod_date, params[:kind].to_s, Moovies.packages.invert[product.package_id]) if !season.get_vod(session[:country]).empty? %>
-    </div>
-    <div class="oters">
-      <div class="lang">
-        <%= bubbles(season).html_safe %>
+    <div class="season">
+      <div class="details">
+        <div class="season_title"><%= "Season #{ season.season_id}" %></div>
+        <div class='message'>
+          <%= get_vod_message(season.get_vod(session[:country]).first, svod_date, params[:kind].to_s, Moovies.packages.invert[product.package_id]) if !season.get_vod(session[:country]).empty? %>
+        </div>
+        <div class="oters">
+          <div class="lang">
+            <%= bubbles(season).html_safe %>
+          </div>
+        </div>
+      </div>
+      <div class="arrow arrow-<%= i == 0 ? 'down' : 'right' %>"></div>
+      <div class='episodes' style="display:<%= i == 0 ? 'bock' : 'none' %>">
+        <% Product.where(serie_id: product.serie_id, season_id: season.season_id).group(:episode_id).each do |episode| %>
+            <div class="episode">
+              <%= "Ep #{ episode.episode_id} : #{episode.title}" %>
+              <div class="actions">
+                <%= render :partial => 'products/streaming', :locals => {:product => episode, :source => @source, :popup => false} %>
+                <%= render :partial => 'products/vod_list', :locals => {:product => episode, :source => @source, :response_id => @response_id} %>
+              </div>
+            </div>
+        <% end %>
       </div>
     </div>
-  </div>
-  <div class="arrow arrow-<%= i == 0 ? 'down' : 'right' %>"></div>
-  <div class='episodes'  style="display:<%= i == 0 ? 'bock' : 'none' %>">
-  <% Product.where(serie_id: product.serie_id, season_id: season.season_id).group(:episode_id).each do |episode| %>
-    <div class="episode">
-      <%= "Ep #{ episode.episode_id} : #{episode.title}" %>
-      <div class="actions">
-        <%= render :partial => 'products/streaming',  :locals => {:product => episode, :source => @source, :popup => false} %>
-        <%= render :partial => 'products/vod_list',  :locals => {:product => episode, :source => @source, :response_id => @response_id} %>
-      </div>
-    </div>
-  <% end %>
-  </div>
-</div>
 <% end %>

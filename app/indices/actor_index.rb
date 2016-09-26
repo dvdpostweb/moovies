@@ -1,8 +1,8 @@
 ThinkingSphinx::Index.define :actor, :with => :active_record do
-  indexes actors_name,                 :as => :actors_name, :sortable => true
-  has actors_type,          :as => :kind, :type => :string
+  indexes actors_name, :as => :actors_name, :sortable => true
+  has actors_type, :as => :kind, :type => :string
   has "if(actors_type='dvd_adult',0,1)", :type => :integer, :as => :kind_int
-  has image_active,          :type => :integer
+  has image_active, :type => :integer
   set_property :enable_star => true
   set_property :min_prefix_len => 2
   set_property :charset_type => 'utf-8'

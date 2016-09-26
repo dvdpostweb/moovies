@@ -5,7 +5,7 @@ json.array!(@list) do |product|
   json.rating product.rating[:rating]
   json.categories product.categories, :categories_id, :name
   json.tvod product.tvod?
-  json.price product.get_vod_online(0).first.tvod_price  if product.get_vod_online(0).size > 0
+  json.price product.get_vod_online(0).first.tvod_price if product.get_vod_online(0).size > 0
   json.set! :previews do
     json.set! :preview1 do
       json.small product.preview_image(1, :normal)

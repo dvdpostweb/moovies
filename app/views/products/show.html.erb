@@ -1,122 +1,124 @@
 <!--   ==============   MAIN CONTENT   ==============   -->
-  <div id="maincontent">
-    <div class="ttl-wrap">
-      <div class="ttl osc">
-        <h2><%= "#{@product_title} (#{@product.year})" %><meta itemprop="name" content="<%= @product_title %>" /></h2>
-        
-        <h3><%= @product.categories.active(params[:kind]).collect{|category| "<span itemprop='genre'>#{link_to(category.name, category_products_path(:category_id => category))}</span>"}.join(', ').html_safe %></h3>
-      </div>
-     
-      <div id="votes-wrap" itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">
-        <div id="votes">
+<div id="maincontent">
+  <div class="ttl-wrap">
+    <div class="ttl osc">
+      <h2><%= "#{@product_title} (#{@product.year})" %>
+        <meta itemprop="name" content="<%= @product_title %>"/>
+      </h2>
 
-          <div class="stars" id="rating-stars-<%= @product.to_param %>" product_id ="<%= @product.to_param %>" >
-            <%= render :partial => 'products/rating', :locals => {:product => @product, :background => @rating_color, :size => :long, :source => @source, :response_id => @response_id} %>
-          </div>
-          <span class="osc" data-prop="ratingCount" itemprop="ratingCount"><%= "(#{@product.rating_count} #{t('.count')})".html_safe %></span>
+      <h3><%= @product.categories.active(params[:kind]).collect { |category| "<span itemprop='genre'>#{link_to(category.name, category_products_path(:category_id => category))}</span>" }.join(', ').html_safe %></h3>
+    </div>
 
-          <div id="uninterested"><%= render :partial => 'products/show/seen_uninterested', :locals => {:product => @product, :source => @source, :response_id => @response_id} if current_customer %></div>
+    <div id="votes-wrap" itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">
+      <div id="votes">
+
+        <div class="stars" id="rating-stars-<%= @product.to_param %>" product_id="<%= @product.to_param %>">
+          <%= render :partial => 'products/rating', :locals => {:product => @product, :background => @rating_color, :size => :long, :source => @source, :response_id => @response_id} %>
         </div>
-      </div><!-- #votes-wrap -->
-       
-    </div><!-- .ttl-wrap -->
-    <div id="film-info">
-      <div id="film-wrap">
+        <span class="osc" data-prop="ratingCount" itemprop="ratingCount"><%= "(#{@product.rating_count} #{t('.count')})".html_safe %></span>
+
+        <div id="uninterested"><%= render :partial => 'products/show/seen_uninterested', :locals => {:product => @product, :source => @source, :response_id => @response_id} if current_customer %></div>
+      </div>
+    </div><!-- #votes-wrap -->
+
+  </div><!-- .ttl-wrap -->
+  <div id="film-info">
+    <div id="film-wrap">
       <div id="film-img-wrap">
         <%= "<span class='hd'></span>".html_safe if @product.hd?(session[:country_id]) %>
         <%= product_image_tag @product_image, :width => 160, :alt => "#{@product_title} (#{@product.year})", :itemprop => "image" %>
         <%= content_tag(:span, '', :class => 'new') if @product.is_new? %>
       </div>
     </div>
-      <div id="film-descr">
+    <div id="film-descr">
 
-        <% actors = @product.actors.collect{|actor| link_to actor.name, actor_products_path(:actor_id => actor.to_param) }.join(', ').html_safe %>
-        <% if actors.size > 0 %>
-        <div id="actors">
-          <h3><%= t '.actors' %></h3>
-          <%= actors %>
-        </div>
-        <% end %>
-        <% if @product.studio && @product.adult? %>
-        <div id="studio">
-          <h3><%= t('.studio') %></h3>
-          <%= link_to @product.studio.name, studio_products_path(:studio_id => @product.studio.to_param)%>
-        </div>
-        <% end %>
-        <% if @product.director && !@product.adult? %>
-        <div id="directors" class="<%= I18n.locale.to_s %>">
-          <h3><%= t('.directed_by') %></h3>
-          <%= link_to @product.director.name, director_products_path(:director_id => @product.director.to_param) %>
-        </div>
-        <% end %>
+      <% actors = @product.actors.collect { |actor| link_to actor.name, actor_products_path(:actor_id => actor.to_param) }.join(', ').html_safe %>
+      <% if actors.size > 0 %>
+          <div id="actors">
+            <h3><%= t '.actors' %></h3>
+            <%= actors %>
+          </div>
+      <% end %>
+      <% if @product.studio && @product.adult? %>
+          <div id="studio">
+            <h3><%= t('.studio') %></h3>
+            <%= link_to @product.studio.name, studio_products_path(:studio_id => @product.studio.to_param) %>
+          </div>
+      <% end %>
+      <% if @product.director && !@product.adult? %>
+          <div id="directors" class="<%= I18n.locale.to_s %>">
+            <h3><%= t('.directed_by') %></h3>
+            <%= link_to @product.director.name, director_products_path(:director_id => @product.director.to_param) %>
+          </div>
+      <% end %>
 
-        <div id="country">
-          <h3><%= t '.country' %></h3>
-          <%= @product.country.name if @product.country %>
-        </div>
-        <div id="audience">
-          <h3><%= t '.audience' %></h3>
-          <%= @product.public.name %>
-        </div>
-        <div id="duration">
-          <h3><%= t '.duration' %></h3>
+      <div id="country">
+        <h3><%= t '.country' %></h3>
+        <%= @product.country.name if @product.country %>
+      </div>
+      <div id="audience">
+        <h3><%= t '.audience' %></h3>
+        <%= @product.public.name %>
+      </div>
+      <div id="duration">
+        <h3><%= t '.duration' %></h3>
           <span itemprop="duration" content="<%= prop_duration(@product.runtime) %>">
             <%= "#{@product.runtime} #{t '.minutes'}" %>
           </span>
-        </div>
-        <div id="picture">
-          <h3><%= t '.picture' %></h3>
-          <%= @product.picture_format.name if @product.picture_format %>
-        </div>
-        <div id="sound">
-          <h3><%= t '.sound' %></h3>
-          <%= @product.soundtracks.collect{|soundtrack| soundtrack.name}.join(', ') %>
-        </div>
-        <% if !@product_description.products_awards.empty? %>
-        <div id="festival">
-          <h3><%= t('.awards') %></h3>
-          <%= render :partial => 'products/show/awards', :locals => {:product => @product , :size => 'small'} %>
-        </div>
-        <% end %>
       </div>
-      <div class="clearfix"></div>
-      <h3>
-        <%= t '.synopsis' %>
-      </h3>
-      <p itemprop="description"><%= @product_description.text.to_s.html_safe %></p>
-      <div id="btns-wrap" class="osc">
-        <% if @trailer %>
-        <%= link_to(t('.trailer'), product_trailer_path(:product_id => @product.to_param, :source => @source, :response_id => @response_id), {:class => 'trailer', :id => 'trailer', :target => :_blank}) %>
-        <% end %>
-        <div class="clearfix"></div>
+      <div id="picture">
+        <h3><%= t '.picture' %></h3>
+        <%= @product.picture_format.name if @product.picture_format %>
       </div>
-      <% if @product.series? %>
-        <%= render :partial => 'products/show/serie_formats', :locals => {:product => @product, :svod_date => @svod_date} %>
-      <% else %>
-        <%= render :partial => 'products/show/formats', :locals => {:product => @product, :svod_date => @svod_date}%>
+      <div id="sound">
+        <h3><%= t '.sound' %></h3>
+        <%= @product.soundtracks.collect { |soundtrack| soundtrack.name }.join(', ') %>
+      </div>
+      <% if !@product_description.products_awards.empty? %>
+          <div id="festival">
+            <h3><%= t('.awards') %></h3>
+            <%= render :partial => 'products/show/awards', :locals => {:product => @product, :size => 'small'} %>
+          </div>
       <% end %>
-      <%= render :partial => 'products/index/hp_list', :locals => {:data => @recommendations, :title => :recommendations, :type => :none, :view_mode => :none, :source => 4, :belgium => nil} if @recommendations.size > 0 %>
-      <div id="thumbs-wrap">
-        <h3><%= t '.photo' %></h3>
-        <div>
-          <%= render :partial => 'products/show/preview', :locals => {:product => @product, :type => params[:kind], :source => @source, :response_id => @response_id} %>
-        </div>
+    </div>
+    <div class="clearfix"></div>
+    <h3>
+      <%= t '.synopsis' %>
+    </h3>
+    <p itemprop="description"><%= @product_description.text.to_s.html_safe %></p>
+    <div id="btns-wrap" class="osc">
+      <% if @trailer %>
+          <%= link_to(t('.trailer'), product_trailer_path(:product_id => @product.to_param, :source => @source, :response_id => @response_id), {:class => 'trailer', :id => 'trailer', :target => :_blank}) %>
+      <% end %>
+      <div class="clearfix"></div>
+    </div>
+    <% if @product.series? %>
+        <%= render :partial => 'products/show/serie_formats', :locals => {:product => @product, :svod_date => @svod_date} %>
+    <% else %>
+        <%= render :partial => 'products/show/formats', :locals => {:product => @product, :svod_date => @svod_date} %>
+    <% end %>
+    <%= render :partial => 'products/index/hp_list', :locals => {:data => @recommendations, :title => :recommendations, :type => :none, :view_mode => :none, :source => 4, :belgium => nil} if @recommendations.size > 0 %>
+    <div id="thumbs-wrap">
+      <h3><%= t '.photo' %></h3>
+      <div>
+        <%= render :partial => 'products/show/preview', :locals => {:product => @product, :type => params[:kind], :source => @source, :response_id => @response_id} %>
       </div>
-      <%= render :partial => 'products/show/critics', :locals => {:product => @product, :reviews_count => @reviews_count, :reviews => @reviews, :review_sort => @review_sort, :product_title => @product_title, :source => @source, :response_id => @response_id} %>
-    </div><!-- #film-info -->
-  </div>
-  <!--   ==============   END MAIN CONTENT   ==============   -->
-  <%= render :partial => 'products/index/filters_online', :locals => { :countries => @countries} %>  
-  
-  <% if params[:add].to_i == 1 %>
-  <% submit_id = "p_#{@product.to_param}_#{rand(10)}"%>
-  <div id='add_p' style='display:none' class='action_face_js'><%= product_action_path(:product_id => @product.to_param, :origin => 'products') %></div>
-  <% end %>
-  <% if params[:review].to_i == 1 %>
-  <div id='review' style='display:none' class='action_face'><%= new_product_review_path(:product_id => @product.to_param) %></div>
-  <% end %>
-  <% if params[:trailer].to_i == 1 && @product.trailer? %>
-  <div id='rating' style='display:none' class='action_face'><%= product_trailer_path(:product_id => @product.to_param, :source => @source, :response_id => @response_id) %></div>
-  <% end %>
+    </div>
+    <%= render :partial => 'products/show/critics', :locals => {:product => @product, :reviews_count => @reviews_count, :reviews => @reviews, :review_sort => @review_sort, :product_title => @product_title, :source => @source, :response_id => @response_id} %>
+  </div><!-- #film-info -->
+</div>
+<!--   ==============   END MAIN CONTENT   ==============   -->
+<%= render :partial => 'products/index/filters_online', :locals => {:countries => @countries} %>
+
+<% if params[:add].to_i == 1 %>
+    <% submit_id = "p_#{@product.to_param}_#{rand(10)}" %>
+    <div id='add_p' style='display:none' class='action_face_js'><%= product_action_path(:product_id => @product.to_param, :origin => 'products') %></div>
+<% end %>
+<% if params[:review].to_i == 1 %>
+    <div id='review' style='display:none' class='action_face'><%= new_product_review_path(:product_id => @product.to_param) %></div>
+<% end %>
+<% if params[:trailer].to_i == 1 && @product.trailer? %>
+    <div id='rating' style='display:none' class='action_face'><%= product_trailer_path(:product_id => @product.to_param, :source => @source, :response_id => @response_id) %></div>
+<% end %>
   
  

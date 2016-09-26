@@ -4,7 +4,7 @@
 <div class="step">
   <div class="logo-page"></div>
   <%= link_to destroy_customer_session_path, :method => :delete do %>
-    <label class="log-out"><%= t('promotion.newstep3.signout') %></label>
+      <label class="log-out"><%= t('promotion.newstep3.signout') %></label>
   <% end %>
 
   <div class="main-block">
@@ -13,20 +13,23 @@
     <% product_title = data[:title] %>
     <% product_image = data[:image] %>
     <div id="step_wrap">
-    <div class="paiement_form">
-    <div class="film_infos" >
-      <div id="left_part">
-        <%= link_to(image_tag(product_image, :size => '100x150') ,product_path(:id => @product.to_param)) %>
+      <div class="paiement_form">
+        <div class="film_infos">
+          <div id="left_part">
+            <%= link_to(image_tag(product_image, :size => '100x150'), product_path(:id => @product.to_param)) %>
+          </div>
+          <div id="right_part">
+            <p><%= t('.location') %> <strong><%= !@product.series? ? product_title : @product.episode_title %></strong>
+            </p>
+            <% unless Rails.env.development? %>
+                <p><%= t('.price') %>
+                  <strong> <%= current_customer && current_customer.tvod_only? ? @product.get_vod_online(session[:country_id]).first.tvod_price : @product.get_vod_online(session[:country_id]).first.ppv_price %>
+                    €</strong></p>
+            <% end %>
+          </div>
+          <div class="clearfix"></div>
+        </div>
       </div>
-      <div id="right_part">
-        <p><%= t('.location') %> <strong><%= !@product.series? ? product_title : @product.episode_title %></strong> </p>
-        <% unless Rails.env.development? %>
-          <p><%= t('.price') %> <strong> <%= current_customer && current_customer.tvod_only? ? @product.get_vod_online(session[:country_id]).first.tvod_price : @product.get_vod_online(session[:country_id]).first.ppv_price %>€</strong></p>
-        <% end %>
-      </div>
-      <div class="clearfix"></div>
-    </div>
-    </div>
     </div>
     </br>
     </br>
@@ -45,42 +48,42 @@
       <section>
         <p class="pointer">&#9654;</p>
         <h1><a href=""><%= t('promotion.newstep3.paymentoption1').html_safe %></a></h1>
-          <div class="grid grid-pad">
-              <div class="col-1-3">
-                 <div class="content">
-                   <table>
-                    <tr>
-                      <td>
-                      <%= link_to(image_tag('visa_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'visa', :source => params[:source]
-                      ), :method => :put) %>                      </td>
-                    </tr>
-                  </table>
-                 </div>
-              </div>
-              <div class="col-1-3">
-                 <div class="content">
-                    <table>
-                      <tr>
-                      <td>
-                      <%= link_to(image_tag('mastercard_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'mastercard', :source => params[:source]
-                      ), :method => :put) %>
-                      </td>
-                      </tr>
-                    </table>
-                 </div>
-              </div>
-              <div class="col-1-3">
-                 <div class="content">
-                    <table>
-                      <tr>
-                        <td>
-                        <%= link_to(image_tag('amex_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'american Express', :source => params[:source]
-                        ), :method => :put) %>                        </td>
-                      </tr>
-                    </table>
-                 </div>
-              </div>
+        <div class="grid grid-pad">
+          <div class="col-1-3">
+            <div class="content">
+              <table>
+                <tr>
+                  <td>
+                    <%= link_to(image_tag('visa_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'visa', :source => params[:source]
+                    ), :method => :put) %>                      </td>
+                </tr>
+              </table>
+            </div>
           </div>
+          <div class="col-1-3">
+            <div class="content">
+              <table>
+                <tr>
+                  <td>
+                    <%= link_to(image_tag('mastercard_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'mastercard', :source => params[:source]
+                    ), :method => :put) %>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="col-1-3">
+            <div class="content">
+              <table>
+                <tr>
+                  <td>
+                    <%= link_to(image_tag('amex_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'american Express', :source => params[:source]
+                    ), :method => :put) %>                        </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section class="ac_hidden">
@@ -88,34 +91,34 @@
         <h1><a href="#"><%= t('promotion.newstep3.paymentoption2').html_safe %></a>
         </h1>
         <div class="grid grid-pad">
-              <div class="col-1-3">
-                 <div class="content">
-                   <table>
-                    <tr>
-                      <td><%= link_to(image_tag('paypal_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'PAYPAL', :source => params[:source]
-), :method => :put) %></td>
-                    </tr>
-                  </table>
-                 </div>
-              </div>
-              <div class="col-1-3">
-                 <div class="content">
-                    <table>
-                      <tr>
-                        <td></td>
-                      </tr>
-                    </table>
-                 </div>
-              </div>
-              <div class="col-1-3">
-                 <div class="content">
-                    <table>
-                      <tr>
-                        <td></td>
-                      </tr>
-                    </table>
-                 </div>
-              </div>
+          <div class="col-1-3">
+            <div class="content">
+              <table>
+                <tr>
+                  <td><%= link_to(image_tag('paypal_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'PAYPAL', :source => params[:source]
+                  ), :method => :put) %></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="col-1-3">
+            <div class="content">
+              <table>
+                <tr>
+                  <td></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="col-1-3">
+            <div class="content">
+              <table>
+                <tr>
+                  <td></td>
+                </tr>
+              </table>
+            </div>
+          </div>
       </section>
 
       <section class="ac_hidden">
@@ -123,34 +126,34 @@
         <h1><a href="#">Mister cash</a>
         </h1>
         <div class="grid grid-pad">
-              <div class="col-1-3">
-                 <div class="content">
-                   <table>
-                    <tr>
-                      <td><%= link_to(image_tag('bancontact_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'Bancontact/Mister Cash', :source => params[:source]
-), :method => :put) %></td>
-                    </tr>
-                  </table>
-                 </div>
-              </div>
-              <div class="col-1-3">
-                 <div class="content">
-                    <table>
-                      <tr>
-                        <td></td>
-                      </tr>
-                    </table>
-                 </div>
-              </div>
-              <div class="col-1-3">
-                 <div class="content">
-                    <table>
-                      <tr>
-                        <td></td>
-                      </tr>
-                    </table>
-                 </div>
-              </div>
+          <div class="col-1-3">
+            <div class="content">
+              <table>
+                <tr>
+                  <td><%= link_to(image_tag('bancontact_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'Bancontact/Mister Cash', :source => params[:source]
+                  ), :method => :put) %></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="col-1-3">
+            <div class="content">
+              <table>
+                <tr>
+                  <td></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="col-1-3">
+            <div class="content">
+              <table>
+                <tr>
+                  <td></td>
+                </tr>
+              </table>
+            </div>
+          </div>
       </section>
 
       <section class="ac_hidden">
@@ -158,36 +161,36 @@
         <h1><a href="#">Web-Banking</a>
         </h1>
         <div class="grid grid-pad">
-              <div class="col-1-3">
-                 <div class="content">
-                   <table>
-                    <tr>
-                      <td><%= link_to(image_tag('ideal_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'iDEAL', :source => params[:source]
-), :method => :put) %></td>
-                    </tr>
-                  </table>
-                 </div>
-              </div>
-              <div class="col-1-3">
-                 <div class="content">
-                    <table>
-                      <tr>
-                        <td><%= link_to(image_tag('belfius_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'Belfius Direct Net', :source => params[:source]
-), :method => :put) %></td>
-                      </tr>
-                    </table>
-                 </div>
-              </div>
-              <div class="col-1-3">
-                 <div class="content">
-                    <table>
-                      <tr>
-                        <td><%= link_to(image_tag('ing_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'ING HomePay', :source => params[:source]
-), :method => :put) %></td>
-                      </tr>
-                    </table>
-                 </div>
-              </div>
+          <div class="col-1-3">
+            <div class="content">
+              <table>
+                <tr>
+                  <td><%= link_to(image_tag('ideal_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'iDEAL', :source => params[:source]
+                  ), :method => :put) %></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="col-1-3">
+            <div class="content">
+              <table>
+                <tr>
+                  <td><%= link_to(image_tag('belfius_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'Belfius Direct Net', :source => params[:source]
+                  ), :method => :put) %></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="col-1-3">
+            <div class="content">
+              <table>
+                <tr>
+                  <td><%= link_to(image_tag('ing_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'ING HomePay', :source => params[:source]
+                  ), :method => :put) %></td>
+                </tr>
+              </table>
+            </div>
+          </div>
       </section>
 
       <section class="ac_hidden">
@@ -195,35 +198,35 @@
         <h1><a href="#">Web-Banking via Sofort</a>
         </h1>
         <div class="grid grid-pad">
-              <div class="col-1-3">
-                 <div class="content">
-                   <table>
-                    <tr>
-                      <td><%= link_to(image_tag('sofortbelgium_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'DirectEbankingBE', :source => params[:source]
-), :method => :put) %></td>
-                    </tr>
-                  </table>
-                 </div>
-              </div>
-              <div class="col-1-3">
-                 <div class="content">
-                    <table>
-                      <tr>
-                        <td><%= link_to(image_tag('sofortlux_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'DirectEbankingNL', :source => params[:source]
-), :method => :put) %></td>
-                      </tr>
-                    </table>
-                 </div>
-              </div>
-              <div class="col-1-3">
-                 <div class="content">
-                    <table>
-                      <tr>
-                        <td></td>
-                      </tr>
-                    </table>
-                 </div>
-              </div>
+          <div class="col-1-3">
+            <div class="content">
+              <table>
+                <tr>
+                  <td><%= link_to(image_tag('sofortbelgium_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'DirectEbankingBE', :source => params[:source]
+                  ), :method => :put) %></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="col-1-3">
+            <div class="content">
+              <table>
+                <tr>
+                  <td><%= link_to(image_tag('sofortlux_iconpaiement.gif', :size => '100x38'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'DirectEbankingNL', :source => params[:source]
+                  ), :method => :put) %></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="col-1-3">
+            <div class="content">
+              <table>
+                <tr>
+                  <td></td>
+                </tr>
+              </table>
+            </div>
+          </div>
       </section>
 
     </div>

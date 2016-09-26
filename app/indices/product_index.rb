@@ -4,24 +4,24 @@ ThinkingSphinx::Index.define :product, :with => :active_record, :name => 'produc
   indexes serie("name_nl"), :as => :serie_title_nl, :type => :string
   indexes serie("name_en"), :as => :serie_title_en, :type => :string
   has "CRC32(products_type)", :as => :kind, :type => :integer
-  has products_countries_id,      :as => :country_id
-  has products_date_available,    :as => :available_at
-  has products_date_added,        :as => :created_at
-  has products_id,                :as => :product_id
+  has products_countries_id, :as => :country_id
+  has products_date_available, :as => :available_at
+  has products_date_added, :as => :created_at
+  has products_id, :as => :product_id
   has "CAST(vod_next AS SIGNED)", :type => :integer, :as => :vod_next
   has "CAST(vod_next_lux AS SIGNED)", :type => :integer, :as => :vod_next_lux
   has "CAST(vod_next_nl AS SIGNED)", :type => :integer, :as => :vod_next_nl
-  
-  has products_public,            :as => :audience
-  has products_year,              :as => :year
-  has products_rating,            :as => :dvdpost_rating
+
+  has products_public, :as => :audience
+  has products_year, :as => :year
+  has products_rating, :as => :dvdpost_rating
   has imdb_id
   has package_id
   has "case when  products_status = -1 then 99 else products_status end", :type => :integer, :as => :state
-  has actors('actors.`actors_id`'),         :as => :actors_id, :type => :integer, :multi => true
+  has actors('actors.`actors_id`'), :as => :actors_id, :type => :integer, :multi => true
   has categories('categories.categories_id'), :as => :category_id, :type => :integer, :multi => true
-  has director(:directors_id),    :as => :director_id
-  has studio(:studio_id),         :as => :studio_id
+  has director(:directors_id), :as => :director_id
+  has studio(:studio_id), :as => :studio_id
   has serie_id
   has season_id
   has episode_id
@@ -39,12 +39,12 @@ ThinkingSphinx::Index.define :product, :with => :active_record, :name => 'produc
   has 'find_in_set("2", cast(belgium_ids as char)) > 0', :type => :integer, :as => :belgium_actor
   has 'find_in_set("3", cast(belgium_ids as char)) > 0', :type => :integer, :as => :belgium_director
   has 'find_in_set("4", cast(belgium_ids as char)) > 0', :type => :integer, :as => :belgium_land
-  
+
   has "(select count(*) c from tokens where tokens.imdb_id = products.imdb_id and (datediff(now(),created_at) < 40))", :type => :integer, :as => :count_tokens
   has "(select if(min(available_backcatalogue_from) < now() and (min(expire_backcatalogue_at)) > now() and (min(available_backcatalogue_from)) > (start_on),min(available_backcatalogue_from),start_on) start_on from products p left join svod_dates sd on sd.imdb_id = p.imdb_id and (start_on >= date(now()) or end_on >= date(now())) join streaming_products sp on sp.imdb_id = p.imdb_id where p.imdb_id = products.imdb_id group by p.imdb_id order by sd.start_on limit 1)", :as => :svod_start, :type => :timestamp
   has "(select if(min(expire_at) > now() and min(expire_at) < end_on,min(expire_at),if(min(expire_backcatalogue_at) > now() and min(expire_backcatalogue_at) < end_on,min(expire_backcatalogue_at),(end_on))) from products p left join svod_dates sd on sd.imdb_id = p.imdb_id and (start_on >= date(now()) or end_on >= date(now())) join streaming_products sp on sp.imdb_id = p.imdb_id where p.imdb_id =products.imdb_id order by sd.start_on limit 1)", :as => :svod_end, :type => :timestamp
   #has "(select if(min(expire_at) > now() and min(expire_at) != min(expire_backcatalogue_at) and min(expire_at) < end_on,min(expire_at), if(min(expire_backcatalogue_at) > now() and min(expire_backcatalogue_at) < end_on,min(expire_backcatalogue_at), (end_on))) from products p left join svod_dates sd on sd.imdb_id = p.imdb_id and (start_on >= date(now()) or end_on >= date(now())) join streaming_products sp on sp.imdb_id = p.imdb_id where p.imdb_id =products.imdb_id order by sd.start_on limit 1)", :as => :svod_end, :type => :timestamp
-  
+
   has "(select ifnull(end_on,ifnull((select end_on from svod_dates where imdb_id=products.imdb_id and svod_dates.start_on < date(now()) order by start_on desc limit 1),if(expire_at >= date(now()) and available_from <=date(now()),min(available_from),min(available_backcatalogue_from)))) svod_start from products p join `streaming_products` sp on p.imdb_id = sp.imdb_id and available =1 and status  in ('uploaded','soon','online_test_ok') and country ='BE' left join svod_dates sd on sd.imdb_id = p.imdb_id and ( start_on <= date(now()) and end_on>= date(now())) where p.imdb_id = products.imdb_id order by sd.start_on limit 1)", :as => :tvod_start, :type => :timestamp
   has "(select if(end_on,null,ifnull((select start_on from svod_dates where imdb_id= products.imdb_id and svod_dates.start_on > date(now()) order by start_on desc limit 1),if(expire_at >= date(now()) and available_from <=date(now()) and (DATEDIFF(available_backcatalogue_from,expire_at) > 6 or expire_backcatalogue_at is null) ,min(expire_at),min(expire_backcatalogue_at)))) svod_end from products p join `streaming_products` sp on p.imdb_id = sp.imdb_id and available =1 and status  in ('uploaded','soon','online_test_ok') and country ='BE' left join svod_dates sd on sd.imdb_id = p.imdb_id and ( start_on <= date(now()) and end_on>= date(now())) where p.imdb_id = products.imdb_id group by sp.id order by sd.start_on,svod_end desc limit 1)", :as => :tvod_end, :type => :timestamp
   #has descriptions_fr.products_name,         :as => :descriptions_title_fr, :sortage => true
@@ -115,7 +115,7 @@ ThinkingSphinx::Index.define :product, :with => :active_record, :name => 'produc
   #has 'concat(if(products_quantity>0 or (  select count(*) > 0 from products p
   #      join streaming_products on streaming_products.imdb_id = p.imdb_id
   #      where  ((country="NL" and streaming_products.status = "online_test_ok" and ((streaming_products.available_from <= date(now()) and streaming_products.expire_at >= date(now())) or (streaming_products.available_backcatalogue_from <= date(now()) and streaming_products.expire_backcatalogue_at >= date(now()))) and available = 1) or p.vod_next_nl=1 or streaming_products.imdb_id is null)  and p.products_id =  products.products_id),1,0),date_format(products_date_available,"%Y%m%d"))', :type => :integer, :as => :default_order_nl
-  
+
   set_property :enable_star => true
   set_property :min_prefix_len => 3
   set_property :charset_type => 'utf-8'

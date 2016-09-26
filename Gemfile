@@ -5,12 +5,12 @@ gem 'rails', '3.2.14'
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2',          '0.3.13'
+gem 'mysql2', '0.3.13'
 gem 'json'
 gem 'will_paginate'
 gem 'i18n-active_record',
-      :git => 'git://github.com/svenfuchs/i18n-active_record.git',
-      :require => 'i18n/active_record'
+    :git => 'git://github.com/svenfuchs/i18n-active_record.git',
+    :require => 'i18n/active_record'
 gem "memcache-client", "~> 1.8.5"
 gem 'orderedhash'
 
@@ -25,7 +25,7 @@ end
 
 gem 'cucumber-rails', :require => false
 
-group  :development, :test do
+group :development, :test do
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'capybara'
@@ -87,4 +87,6 @@ gem "figaro"
 
 gem 'thin'
 gem 'rails-footnotes', '~> 4.0'
+
+gem 'redis-rails'
 

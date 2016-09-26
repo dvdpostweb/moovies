@@ -1,43 +1,43 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
 <html>
-  <head>
-    <title>
-      <%= h @meta_title.blank? ? t('layouts.application.title') : @meta_title %>
-    </title>
-    <%= include_gon(namespace: 'Plush') %>
-    <%= Gon::Base.render_data %>
-    <% if @meta_image %>
-    <meta name='og:image' content='<%= @meta_image %>'>
-    <% end %>
-    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-    <%= favicon_link_tag "favicon.ico" %>
-    <%= render :partial => 'layouts/google_analytics' %>
-    <%= render :partial => 'layouts/apple' %>
-  	<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700' rel='stylesheet' type='text/css' />
-    <%= javascript_include_tag "promotions" %>
-    <%= stylesheet_link_tag "promotions", :media => "all" %>
+<head>
+  <title>
+    <%= h @meta_title.blank? ? t('layouts.application.title') : @meta_title %>
+  </title>
+  <%= include_gon(namespace: 'Plush') %>
+  <%= Gon::Base.render_data %>
+  <% if @meta_image %>
+      <meta name='og:image' content='<%= @meta_image %>'>
+  <% end %>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+  <%= favicon_link_tag "favicon.ico" %>
+  <%= render :partial => 'layouts/google_analytics' %>
+  <%= render :partial => 'layouts/apple' %>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700' rel='stylesheet' type='text/css'/>
+  <%= javascript_include_tag "promotions" %>
+  <%= stylesheet_link_tag "promotions", :media => "all" %>
 
-    <%= csrf_meta_tags %>
-  </head>
-  <body id="<%= @body_id %>" class="<%= params[:kind] %> <%= current_customer ? :private : :public %> <%= @body_class %>">
-  <div id="wrap2">
-    <% if flash[:notice] %>
-    <div class='flash_message'>
-      <div class="notice">
-        <%= flash[:notice] %>
+  <%= csrf_meta_tags %>
+</head>
+<body id="<%= @body_id %>" class="<%= params[:kind] %> <%= current_customer ? :private : :public %> <%= @body_class %>">
+<div id="wrap2">
+  <% if flash[:notice] %>
+      <div class='flash_message'>
+        <div class="notice">
+          <%= flash[:notice] %>
+        </div>
       </div>
-    </div>
-    <% end %>
-    <% if flash[:error] || flash[:alert] %>
-    <div class='flash_message'>
-      <div class="flash_error">
-        <%= flash[:error] %>
-        <%= flash[:alert] %>
+  <% end %>
+  <% if flash[:error] || flash[:alert] %>
+      <div class='flash_message'>
+        <div class="flash_error">
+          <%= flash[:error] %>
+          <%= flash[:alert] %>
+        </div>
       </div>
-    </div>
-  </div>
+      </div>
   <% end %>
 
-      <%= yield %>
+  <%= yield %>
   </body>
 </html>

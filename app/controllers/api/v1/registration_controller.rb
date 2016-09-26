@@ -12,7 +12,7 @@ class Api::V1::RegistrationController < ApplicationController
       customer.customers_newsletter = params[:customers_newsletter] if params[:customers_newsletter].present?
       customer.customers_newsletterpartner = params[:customers_newsletterpartner] if params[:customers_newsletterpartner].present?
       customer.activation_discount_code_id = 0
-      customer.activation_discount_code_type = "D" 
+      customer.activation_discount_code_type = "D"
       if params[:moovie_id].present?
         product = Product.where(:products_id => params[:moovie_id]).first
         if product
@@ -24,7 +24,7 @@ class Api::V1::RegistrationController < ApplicationController
           if customer.save(validate: false)
             sign_in :customer, customer
             redirect_to_product_path = edit_customer_payment_methods_path(:customer_id => customer.to_param, :type => :credit_card_tvod, :product_id => product.id, :source => 0)
-            render json: { status: 9, message: redirect_to_product_path }
+            render json: {status: 9, message: redirect_to_product_path}
           end
         end
       elsif !params[:activation].present? && params[:code].present?
@@ -58,7 +58,7 @@ class Api::V1::RegistrationController < ApplicationController
               activation = Activation.find_by_activation_code(params[:code])
               activation.update_attributes(:customers_id => customer.to_param, :created_at => Time.now.localtime)
               redirect_to_root_path = root_path
-              render json: { status: 9, message: redirect_to_root_path }
+              render json: {status: 9, message: redirect_to_root_path}
             else
               flash[:error] = "Error while creating a user account. Please try again."
               redirect_to root_url
@@ -79,7 +79,7 @@ class Api::V1::RegistrationController < ApplicationController
               sign_in :customer, customer
               DiscountUse.create(:discount_code_id => r["discount_code_id"], :customer_id => customer.to_param, :discount_use_date => Time.now)
               redirect_to_root_path = root_path
-              render json: { status: 9, message: redirect_to_root_path }
+              render json: {status: 9, message: redirect_to_root_path}
             else
               flash[:error] = "Error while creating a user account. Please try again."
               redirect_to root_url
@@ -96,7 +96,7 @@ class Api::V1::RegistrationController < ApplicationController
           DiscountUse.create(:discount_code_id => discount.id, :customer_id => current_customer.to_param, :discount_use_date => Time.now)
           activation.update_attributes(:customers_id => current_customer.to_param, :created_at => Time.now.localtime)
           redirect_to_root_path = root_path
-          render json: { status: 9, message: redirect_to_root_path }
+          render json: {status: 9, message: redirect_to_root_path}
         end
       elsif !params[:activation].present? && !params[:code].present? && !params[:moovie_id].present?
         customer.step = 100
@@ -106,7 +106,7 @@ class Api::V1::RegistrationController < ApplicationController
         if customer.save(validate: false)
           sign_in :customer, customer
           redirect_to_home_path = root_path
-          render json: { status: 9, message: redirect_to_home_path }
+          render json: {status: 9, message: redirect_to_home_path}
         end
       end
     else

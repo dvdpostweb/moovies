@@ -1,15 +1,15 @@
 <div class="step2">
-<%= link_to root_path do %>
-  <%= image_tag "step2/logo.png" %>
+  <%= link_to root_path do %>
+      <%= image_tag "step2/logo.png" %>
   <% end %>
-</br>
-<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
-  <%= devise_error_messages! %>
-  <%= f.hidden_field :reset_password_token %>
-  <%= f.password_field :password, :class => 'text-field', :placeholder => t('.pass') %>
-  <%= f.password_field :password_confirmation, :class => 'text-field', :placeholder => t('.confirm_pass') %>
-  <%= f.submit t('.sent'), :id => :submit_button, :class => "button-connenct-large" %>
-<% end %>
+  </br>
+  <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => {:method => :put}) do |f| %>
+      <%= devise_error_messages! %>
+      <%= f.hidden_field :reset_password_token %>
+      <%= f.password_field :password, :class => 'text-field', :placeholder => t('.pass') %>
+      <%= f.password_field :password_confirmation, :class => 'text-field', :placeholder => t('.confirm_pass') %>
+      <%= f.submit t('.sent'), :id => :submit_button, :class => "button-connenct-large" %>
+  <% end %>
 </div>
 <div class="links">
   <%= render "devise/shared/links" %>

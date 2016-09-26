@@ -24,9 +24,9 @@ class ApplicationController < ActionController::Base
 
   def default_url_options
     if params[:kind] == :normal
-      { :locale => I18n.locale }
+      {:locale => I18n.locale}
     else
-      { :locale => I18n.locale, :kind => params[:kind] }
+      {:locale => I18n.locale, :kind => params[:kind]}
     end
   end
 
@@ -50,7 +50,7 @@ class ApplicationController < ActionController::Base
       elsif current_customer.step.to_i == 90
         if (params['controller'] == 'info' && params[:page_name] == t('routes.infos.params.alacarte')) || (params[:controller] == 'customers' && params[:action] == 'update')
         else
-        redirect_to info_path(:page_name => t('routes.infos.params.alacarte'))
+          redirect_to info_path(:page_name => t('routes.infos.params.alacarte'))
         end
       elsif path
         redirect_to path
@@ -103,13 +103,13 @@ class ApplicationController < ActionController::Base
   end
 
   def init
-    cookies[:code] = { value: params[:code], expires: 15.days.from_now } if params[:code]
+    cookies[:code] = {value: params[:code], expires: 15.days.from_now} if params[:code]
     if cookies[:code].present?
       code = cookies[:code]
       @discount = Discount.by_name(code).available.first
       @activation = Activation.by_name(code).available.first
       if @discount
-          @promotion = @discount
+        @promotion = @discount
       elsif @activation
         @promotion = @activation
       end
@@ -128,11 +128,11 @@ class ApplicationController < ActionController::Base
       my_ip = request.remote_ip
       if session[:country_id].nil? || session[:country_id] == 20 || session[:my_ip] != my_ip
         ip_regex = /^([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])$/
-        my_forwarded_ip = request.env["HTTP_X_FORWARDED_FOR"] if !ip_regex.match(request.env["HTTP_X_FORWARDED_FOR"]).nil? && ! /^192(.*)/.match(request.env["HTTP_X_FORWARDED_FOR"]) && ! /^172(.*)/.match(request.env["HTTP_X_FORWARDED_FOR"]) && ! /^10\.(.*)/.match(request.env["HTTP_X_FORWARDED_FOR"])
+        my_forwarded_ip = request.env["HTTP_X_FORWARDED_FOR"] if !ip_regex.match(request.env["HTTP_X_FORWARDED_FOR"]).nil? && !/^192(.*)/.match(request.env["HTTP_X_FORWARDED_FOR"]) && !/^172(.*)/.match(request.env["HTTP_X_FORWARDED_FOR"]) && !/^10\.(.*)/.match(request.env["HTTP_X_FORWARDED_FOR"])
         cf = GeoIP.new('GeoIP.dat').country(my_forwarded_ip) if my_forwarded_ip
         c = GeoIP.new('GeoIP.dat').country(my_ip)
         session[:my_ip] = my_ip
-        if c.country_code == 0 && Rails.env == "production" && ! /^192(.*)/.match(my_ip) && ! /^172(.*)/.match(my_ip) && ! /^10\.(.*)/.match(my_ip) && ! /^127(.*)/.match(my_ip)
+        if c.country_code == 0 && Rails.env == "production" && !/^192(.*)/.match(my_ip) && !/^172(.*)/.match(my_ip) && !/^10\.(.*)/.match(my_ip) && !/^127(.*)/.match(my_ip)
           notify_hoptoad("country code is empty ip : #{my_ip}")
         end
         if cf && (cf.country_code == 22 || cf.country_code == 161 || cf.country_code == 131)
@@ -161,7 +161,6 @@ class ApplicationController < ActionController::Base
 
 
   def after_sign_out_path_for(resource_or_scope)
-    #cookies.delete :customer_identificator
     root_localize_path
   end
 

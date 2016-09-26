@@ -35,12 +35,12 @@ set :keep_releases, 5
 #############################################################
 
 set :user, "plush"
-set :domain,  "217.112.190.50"
+set :domain, "217.112.190.50"
 set :port, 23051
 role :app, domain
 role :web, domain
 
-role :db, domain,  :primary => true
+role :db, domain, :primary => true
 
 #############################################################
 #	Git
@@ -67,14 +67,16 @@ namespace :deploy do
 
   [:start, :stop].each do |t|
     desc "#{t} task is a no-op with mod_rails"
-    task t, :roles => :app do ; end
+    task t, :roles => :app do
+      ;
+    end
   end
 
 end
 
 namespace :deploy do
   namespace :assets do
-    task :precompile, :roles => :web, :except => { :no_release => true } do
+    task :precompile, :roles => :web, :except => {:no_release => true} do
       from = source.next_revision(current_revision)
       if capture("cd #{latest_release} && #{source.local.log(from)} vendor/assets/ app/assets/ | wc -l").to_i > 0
         logger.info "precompile needed"

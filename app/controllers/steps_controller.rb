@@ -1,6 +1,7 @@
 class StepsController < ApplicationController
   before_filter :authenticate_customer!, :unless => :confirmation?
   before_filter :promo
+
   def show
     @body_id = params[:id]
     if params[:id] == 'step2'

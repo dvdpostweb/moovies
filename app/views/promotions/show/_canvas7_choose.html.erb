@@ -1,35 +1,36 @@
 <style>
-.canvas7 .choice_language {
+  .canvas7 .choice_language {
     background-image: url("http://www.dvdpost.be/images/promotions_plush/<%= @promo.params[:background_locale] ? "#{I18n.locale}/" : '' %><%= @promo.params[:background] %>");
     background-position: 0 0;
     background-repeat: no-repeat;
-     height: 662px;
-}
+    height: 662px;
+  }
 
-<% if @promo.params[:brand_logo] %>
-.canvas7 #header h2,.canvas7 #header h2 a {
-  background: url('http://www.dvdpost.be/images/promotions_plush/<%= @promo.params[:brand_logo] %>') no-repeat scroll 0 0 transparent;
-  height: 64px;
-  width: 224px;
-}
-<% end %>
+  <% if @promo.params[:brand_logo] %>
+  .canvas7 #header h2, .canvas7 #header h2 a {
+    background: url('http://www.dvdpost.be/images/promotions_plush/<%= @promo.params[:brand_logo] %>') no-repeat scroll 0 0 transparent;
+    height: 64px;
+    width: 224px;
+  }
+
+  <% end %>
 </style>
 <div id="wrap">
-    <div id="header" >
+  <div id="header">
     <h1>
       <%= link_to 'plush.be', root_localize_path(), :class => 'f-btn' %>
     </h1>
     <% if @promo.params[:brand_logo] %>
-    <h2>
-      <%= !@promo.params[:brand_url] ? '' : link_to(@promo.params[:brand_url], @promo.params[:brand_url], :class => 'f-btn', :target => '_blank') %>
-    </h2>
+        <h2>
+          <%= !@promo.params[:brand_url] ? '' : link_to(@promo.params[:brand_url], @promo.params[:brand_url], :class => 'f-btn', :target => '_blank') %>
+        </h2>
     <% end %>    </div>
-    <div class="choice_language">
-      <h3>Choisissez votre langue - Kies uw taalchoooose</h3>
-      <div align="center">
-    <a href="<%= promotion_path(:id => params[:id], :locale => :fr) %>" class="button_languages">Fran&ccedil;ais</a>
-	<a href="<%= promotion_path(:id => params[:id], :locale => :nl) %>" class="button_languages">Nederlands</a>
-	<a href="<%= promotion_path(:id => params[:id], :locale => :en) %>" class="button_languages">English</a>
-</div>
+  <div class="choice_language">
+    <h3>Choisissez votre langue - Kies uw taalchoooose</h3>
+    <div align="center">
+      <a href="<%= promotion_path(:id => params[:id], :locale => :fr) %>" class="button_languages">Fran&ccedil;ais</a>
+      <a href="<%= promotion_path(:id => params[:id], :locale => :nl) %>" class="button_languages">Nederlands</a>
+      <a href="<%= promotion_path(:id => params[:id], :locale => :en) %>" class="button_languages">English</a>
     </div>
   </div>
+</div>

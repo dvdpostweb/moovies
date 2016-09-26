@@ -10,8 +10,8 @@ class CustomersController < ApplicationController
   def show
     @body_id = 'moncompte'
     @customer = current_customer
-    env = Rails.env == 'staging' || Rails.env == 'development' ? 'staging' :  Rails.env
-    @review_count = current_customer.reviews.approved.joins("INNER JOIN plush_#{env}.products ON `products`.`imdb_id` = `reviews`.`imdb_id`").where(:products => {:products_type => Moovies.product_kinds[params[:kind]], :products_status => [-2,0,1]}).count
+    env = Rails.env == 'staging' || Rails.env == 'development' ? 'staging' : Rails.env
+    @review_count = current_customer.reviews.approved.joins("INNER JOIN plush_#{env}.products ON `products`.`imdb_id` = `reviews`.`imdb_id`").where(:products => {:products_type => Moovies.product_kinds[params[:kind]], :products_status => [-2, 0, 1]}).count
     @classic_count = current_customer.vod_wishlists.joins(:products, :streaming_products).where("streaming_products.available = 1 and products_status != -1 and products_type = :type and country = :country", {:type => Moovies.product_kinds[:normal], :country => Product.country_short_name(session[:country_id])}).count(:imdb_id, :distinct => true)
     @adult_count = current_customer.vod_wishlists.joins(:products, :streaming_products).where("streaming_products.available = 1 and products_status != -1 and products_type = :type and country = :country", {:type => Moovies.product_kinds[:adult], :country => Product.country_short_name(session[:country_id])}).count(:imdb_id, :distinct => true)
   end
@@ -97,14 +97,14 @@ class CustomersController < ApplicationController
       format.html do
         redirect_to customer_path(:id => current_customer.to_param)
       end
-      format.js {render :partial => 'customers/show/newsletters_x', :locals => {:newsletters_x => @customer.newsletters_x}}
+      format.js { render :partial => 'customers/show/newsletters_x', :locals => {:newsletters_x => @customer.newsletters_x} }
     end
   end
 
   def newsletter_x
     respond_to do |format|
       format.html
-      format.js {render :layout => false}
+      format.js { render :layout => false }
     end
   end
 
@@ -152,10 +152,10 @@ class CustomersController < ApplicationController
 
   def resolve_layout
     case action_name
-    when "reactive"
-      "devise_layout"
-    else
-      "application"
+      when "reactive"
+        "devise_layout"
+      else
+        "application"
     end
   end
 

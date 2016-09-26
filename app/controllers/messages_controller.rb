@@ -6,7 +6,7 @@ class MessagesController < ApplicationController
     @message.message_tickets.custer.collect do |message|
       message.update_attribute(:is_read, true)
     end
-    
+
     if request.xhr?
       render :layout => false
     end
@@ -37,28 +37,28 @@ class MessagesController < ApplicationController
       if params[:add_on]
         variable += params[:add_on]
       end
-      
+
       @message = MessageTicket.new(:ticket => @ticket, :mail_id => Moovies.email[:message_free], :data => variable)
       if @message.save
         flash[:notice] = t 'message.create.message_sent' #"Message sent successfully"
-      
+
         respond_to do |format|
           format.html { redirect_to messages_path }
-          format.js {@error = false}
+          format.js { @error = false }
         end
       else
         flash[:error] = t 'message.create.message_not_sent' # "Message not sent successfully"
         respond_to do |format|
-          format.html {redirect_to messages_path}
-          format.js {@error = true}
+          format.html { redirect_to messages_path }
+          format.js { @error = true }
         end
       end
     else
       flash[:error] = t 'message.create.message_not_sent' # "Message not sent successfully"
-      
+
       respond_to do |format|
-        format.html {redirect_to messages_path}
-        format.js {@error = true}
+        format.html { redirect_to messages_path }
+        format.js { @error = true }
       end
     end
   end
@@ -71,8 +71,8 @@ class MessagesController < ApplicationController
     @message = current_customer.tickets.find(params[:id])
     @message.update_attribute(:remove, true)
     respond_to do |format|
-      format.html {redirect_to messages_path}
-      format.js   {render :status => :ok, :nothing => true}
+      format.html { redirect_to messages_path }
+      format.js { render :status => :ok, :nothing => true }
     end
   end
 

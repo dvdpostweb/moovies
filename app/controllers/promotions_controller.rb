@@ -1,5 +1,6 @@
 class PromotionsController < ApplicationController
   before_filter :get_data
+
   def show
     if @promo && @promo.canva_id == 3
       @checked = true
@@ -45,7 +46,7 @@ class PromotionsController < ApplicationController
       if @error == ''
         if !@streaming_code.mail_id.nil?
           options = {
-            "\\$\\$\\$link\\$\\$\\$" => streaming_product_url(:id => 1645155, :email => params[:email], :streaming_code => params[:streaming_code])
+              "\\$\\$\\$link\\$\\$\\$" => streaming_product_url(:id => 1645155, :email => params[:email], :streaming_code => params[:streaming_code])
           }
           view_context.send_message_public(@streaming_code.mail_id, options, I18n.locale, params[:email])
         end
@@ -96,7 +97,7 @@ class PromotionsController < ApplicationController
       @discount = Discount.by_name(code).available.first
       @activation = Activation.by_name(code).available.first
       if @discount
-          @promotion = @discount
+        @promotion = @discount
       elsif @activation
         @promotion = @activation
       end
@@ -127,11 +128,11 @@ class PromotionsController < ApplicationController
               end
               customer.save(:validate => false)
               action =
-              if @promotion && @promotion.goto_step.to_i == 100
-                @promotion.class.to_s == 'Activation' ? 8 : 6
-              else
-                35
-              end
+                  if @promotion && @promotion.goto_step.to_i == 100
+                    @promotion.class.to_s == 'Activation' ? 8 : 6
+                  else
+                    35
+                  end
               customer.abo_history(action, customer.abo_type_id)
               DiscountUse.create(:discount_code_id => @discount.id, :customer_id => customer.to_param, :discount_use_date => Time.now.localtime) if @discount
               @activation.update_attributes(:customers_id => customer.to_param, :created_at => Time.now.localtime) if @activation
@@ -172,9 +173,9 @@ class PromotionsController < ApplicationController
 
 
   def get_data
-    params[:id] = 'smarttv' if params[:id] == 'radio_contact' ||  params[:id] == 'nostalgie'
+    params[:id] = 'smarttv' if params[:id] == 'radio_contact' || params[:id] == 'nostalgie'
     @checked = true if params[:checked]
-    id = params[:id].gsub(/[^0-9a-zA-Z-]/,'')
+    id = params[:id].gsub(/[^0-9a-zA-Z-]/, '')
 
     @promo = Promotion.find_by_name(id)
     if @promo

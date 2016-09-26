@@ -24,7 +24,7 @@ describe HomeController do
       response.should be_success
     end
   end
-  
+
 #  describe "GET 'show'" do
 #    before { controller.stub(:authenticate_user!).and_return true }
 #    it "should be successful" do

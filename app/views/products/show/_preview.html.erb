@@ -1,9 +1,9 @@
 <div id="preview">
   <% 6.times do |i| %>
-    <% t = i + 1 %>
-    <div class="preview_box" >
-    <%= image_tag product.preview_image(t, type), :class => "preview_item", :alt => "", :id => "image_#{i}" %>
-    </div>
+      <% t = i + 1 %>
+      <div class="preview_box">
+        <%= image_tag product.preview_image(t, type), :class => "preview_item", :alt => "", :id => "image_#{i}" %>
+      </div>
   <% end %>
   <div style="clear:both"></div>
 </div>

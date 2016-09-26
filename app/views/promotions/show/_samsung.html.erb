@@ -1,5 +1,5 @@
 <div id="wrap">
-  <div id="header" >
+  <div id="header">
     <h1>
       <%= link_to 'plush.be', root_localize_path(), :class => 'f-btn' %>
     </h1>
@@ -7,39 +7,42 @@
   </div>
   <div class="container clearfix">
     <div id="promo_content">
-      <h1 style="color: #212A31;"><%= t('.title') %><br/><font color="#98D321"><strong><%= t('.title_promo') %></strong></font></h1>
+      <h1 style="color: #212A31;"><%= t('.title') %><br/><font color="#98D321"><strong><%= t('.title_promo') %></strong></font>
+      </h1>
       <div id="promo_form">
         <h2><%= t('.subtitle').html_safe %></h2>
         <%= form_tag promotion_localize_path(:id => params[:id]), :id => 'form_step' do %>
-        <div align="center">
+            <div align="center">
           <span>
-           <%= t('.serie') %>  <br />
+           <%= t('.serie') %>  <br/>
             <%= "<div id='error'>#{t('.error')}</div>".html_safe if @error %>
-            <%= text_field_tag(:code, @code_samsung, :id => 'code3', :size => 20, :class => 'inputs_promo_code') %><br />
+            <%= text_field_tag(:code, @code_samsung, :id => 'code3', :size => 20, :class => 'inputs_promo_code') %><br/>
           </span>
-        </div>
-        <p class="news">
-          <%= check_box_tag 'marketing', 1, @checked, :class => :marketing3, :id => 'mark' %>
-          <%= t('.accepteconditions') %>
-        </p>
-        <div class="garanties">
-          <h4><%= t('.garanties') %></h4>
-          <ul>
-            <li class="engagement"><%= t('.engagement') %></li>
-            <li class="stop"><%= t('.stop') %></li>
-            <li class="security"><%= t('.securite') %></li>
-          </ul>
-        </div>
-        <div class="avantages">
-          <h4><%= t('.avantages') %></h4>
-          <ul>
-            <li class="film"><%= t('.film') %></li>
-            <li class="home"><%= t('.home') %></li>
-            <li class="platform"><%= t('.platform') %></li>
-          </ul>
-        </div>
-        <div style="clear:both;"></div>
-        <p style="padding-top:5px;"><input type="submit" border="0" align="absmiddle" id="submit_id3" class="promo_button" name="sent" value="<%= t('.essayer') %>" /></p>
+            </div>
+            <p class="news">
+              <%= check_box_tag 'marketing', 1, @checked, :class => :marketing3, :id => 'mark' %>
+              <%= t('.accepteconditions') %>
+            </p>
+            <div class="garanties">
+              <h4><%= t('.garanties') %></h4>
+              <ul>
+                <li class="engagement"><%= t('.engagement') %></li>
+                <li class="stop"><%= t('.stop') %></li>
+                <li class="security"><%= t('.securite') %></li>
+              </ul>
+            </div>
+            <div class="avantages">
+              <h4><%= t('.avantages') %></h4>
+              <ul>
+                <li class="film"><%= t('.film') %></li>
+                <li class="home"><%= t('.home') %></li>
+                <li class="platform"><%= t('.platform') %></li>
+              </ul>
+            </div>
+            <div style="clear:both;"></div>
+            <p style="padding-top:5px;">
+              <input type="submit" border="0" align="absmiddle" id="submit_id3" class="promo_button" name="sent" value="<%= t('.essayer') %>"/>
+            </p>
         <% end %>
       </div>
     </div>
@@ -50,7 +53,7 @@
         <table cellpadding="0" cellspacing="0" border="0">
           <tr id="promotions">
             <td><%= image_tag 'promotions/compte_plush.jpg' %></td>
-            <td><%= image_tag "promotions/plush_appli.jpg",  :style => 'padding-top:28px;' %></td>
+            <td><%= image_tag "promotions/plush_appli.jpg", :style => 'padding-top:28px;' %></td>
             <td><%= image_tag "promotions/loggin_plush.jpg", :style => 'padding-top:28px;' %></td>
             <td><%= image_tag "promotions/choice_movies.jpg", :style => 'padding-top:14px;' %></td>
           </tr>
@@ -67,10 +70,15 @@
         <h3><%= t('.illimite') %></h3>
         <table cellpadding="0" cellspacing="0" border="0">
           <tr id="vod">
-            <td><img src="<%= image_path "/assets/promotions/#{I18n.locale}/vod.jpg" %>" style="padding-left:20px;"/></td>
-            <td><img src="<%= image_path "/assets/promotions/#{I18n.locale}/streamingbutton.jpg" %>" style="padding-top:50px;"  /></td>
-            <td><img src="<%= image_path "/assets/promotions/#{I18n.locale}/icon_subtitles.gif" %>" style="padding-top:30px; padding-left:40px;" /></td>
-            <td><img src="<%= image_path "/assets/promotions/tv_vod.jpg" %>"  style="padding-top:14px;" /></td>
+            <td><img src="<%= image_path "/assets/promotions/#{I18n.locale}/vod.jpg" %>" style="padding-left:20px;"/>
+            </td>
+            <td>
+              <img src="<%= image_path "/assets/promotions/#{I18n.locale}/streamingbutton.jpg" %>" style="padding-top:50px;"/>
+            </td>
+            <td>
+              <img src="<%= image_path "/assets/promotions/#{I18n.locale}/icon_subtitles.gif" %>" style="padding-top:30px; padding-left:40px;"/>
+            </td>
+            <td><img src="<%= image_path "/assets/promotions/tv_vod.jpg" %>" style="padding-top:14px;"/></td>
           </tr>
           <tr id="vod">
             <td class="step1"><%= t('.istep1').html_safe %></td>
@@ -82,9 +90,14 @@
         <h3><%= t('.carte') %></h3>
         <table cellpadding="0" cellspacing="0" border="0">
           <tr id="dvd">
-            <td><img src="<%= image_path "/assets/promotions/#{I18n.locale}/vodppv.jpg" %>"style="padding-left:20px;"/></td>
-            <td><img src="<%= image_path "/assets/promotions/#{I18n.locale}/payperviewbutton.jpg" %>" style="padding-top:28px;" /></td>
-            <td><img src="<%= image_path "/assets/promotions/#{I18n.locale}/icon_subtitles.gif" %>" style="padding-top:30px; padding-left:40px;" /></td>
+            <td><img src="<%= image_path "/assets/promotions/#{I18n.locale}/vodppv.jpg" %>" style="padding-left:20px;"/>
+            </td>
+            <td>
+              <img src="<%= image_path "/assets/promotions/#{I18n.locale}/payperviewbutton.jpg" %>" style="padding-top:28px;"/>
+            </td>
+            <td>
+              <img src="<%= image_path "/assets/promotions/#{I18n.locale}/icon_subtitles.gif" %>" style="padding-top:30px; padding-left:40px;"/>
+            </td>
             <td><img src="<%= image_path "/assets/promotions/tv_vodppv.jpg" %>" style="padding-top:14px;"/></td>
           </tr>
           <tr id="dvd">
@@ -96,22 +109,26 @@
         </table>
       </div>
       <%= form_tag promotion_localize_path(:id => params[:id]), :id => 'form_step2' do %>
-      <div id="area_promo">
-        <h2><%= t('.promo').html_safe %></h2>
-        <div align="center"><%= t('.serie') %><br><%= "<div id='error'>#{t('.error')}</div>".html_safe if @error %><%= text_field_tag(:code, @code_samsung, :id => 'code4', :size => 20, :class => 'inputs_promo_code') %></div>
-        <p class="news_form">
-          <%= check_box_tag 'marketing', 1, @checked, :class => :marketing3, :id => 'mark2' %>
-          <%= t('.accepteconditions') %>
-        </p>
-        <div class="clearfix"></div>
-        <p align="center"><input type="submit" border="0" align="absmiddle" class="promo_button" id="submit_id4" name="sent" value="<%= t('.essayer') %>"></p>
-      </div>
+          <div id="area_promo">
+            <h2><%= t('.promo').html_safe %></h2>
+            <div align="center"><%= t('.serie') %>
+              <br><%= "<div id='error'>#{t('.error')}</div>".html_safe if @error %><%= text_field_tag(:code, @code_samsung, :id => 'code4', :size => 20, :class => 'inputs_promo_code') %>
+            </div>
+            <p class="news_form">
+              <%= check_box_tag 'marketing', 1, @checked, :class => :marketing3, :id => 'mark2' %>
+              <%= t('.accepteconditions') %>
+            </p>
+            <div class="clearfix"></div>
+            <p align="center">
+              <input type="submit" border="0" align="absmiddle" class="promo_button" id="submit_id4" name="sent" value="<%= t('.essayer') %>">
+            </p>
+          </div>
       <% end %>
       <p align="center"><%= image_tag "#{I18n.locale}/info_tel.jpg" %></p>
       <div id="promo_footer"><%= t('.conditions').html_safe %></div>
-      </div>
     </div>
   </div>
+</div>
 </div>
 <div style="display:none" id='text_error_conditions'><%= t('.error_conditions') %></div>
 <div id="default" style="display:none"><%= t '.default' %></div>

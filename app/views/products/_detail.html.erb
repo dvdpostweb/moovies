@@ -1,11 +1,11 @@
 <% product = detail.class.name == 'Product' ? detail : detail.product %>
 <li>
   <% cache(product.id, :expires_in => 2.hour) do %>
-    <%= "<span class='hd'></span>".html_safe if product.hd?(session[:country_id]) %>
+      <%= "<span class='hd'></span>".html_safe if product.hd?(session[:country_id]) %>
   <% end %>
   <%= link_to image_tag(product.image, :width => 145, :height => 217), product_path(:id => product.to_param, :source => source) %>
-  <br />
-  <%= render :partial => 'products/streaming',  :locals => {:product => product, :source => source, :popup => true} %>
-  <br />
-  <%= render :partial => 'products/vod_list',  :locals => {:product => product, :source => source, :response_id => @response_id} %>
+  <br/>
+  <%= render :partial => 'products/streaming', :locals => {:product => product, :source => source, :popup => true} %>
+  <br/>
+  <%= render :partial => 'products/vod_list', :locals => {:product => product, :source => source, :response_id => @response_id} %>
 </li>

@@ -14,7 +14,7 @@
       <div id="right_box">
         <p><%= t ('.buy').html_safe %></p>
         <p><%= t '.warning' %></p>
-        <p> </p>
+        <p></p>
         <p id="enjoy"><%= t('.enjoy').html_safe %></p>
       </div>
       <div class="clearfix"></div>
@@ -24,17 +24,17 @@
     </div>
     <div id="middle_box">
       <div class="options_box" id="box_output">
-       
+
         <div class="options_top step1">
           <img src="<%= image_path "tvconnect/computer.jpg" %>">
-          
+
           <h2><%= t '.verif1' %></h2>
-          
+
           <p><%= t '.select' %></p>
         </div>
         <ul class="list_options" id="guide_output">
           <li class="hdmi" id="out_hdmi">
-            <input type="radio" value="hdmi" id="out_hdmi" class="options_input" disabled="disabled" />
+            <input type="radio" value="hdmi" id="out_hdmi" class="options_input" disabled="disabled"/>
             <div class="guide_checkbox"></div>
             <p class="connector_type">HDMI</p>
           </li>
@@ -51,8 +51,8 @@
     </li>
     -->
           <li class="vga_<%= I18n.locale %> li_chosen" id="out_vga">
-            <input type="radio" value="vga" id="out_vga" class="options_input" />
-               <div class="guide_checkbox guide_chosen"></div>
+            <input type="radio" value="vga" id="out_vga" class="options_input"/>
+            <div class="guide_checkbox guide_chosen"></div>
             <p class="connector_type">VGA</p>
           </li>
           <!--<li id="out_svideo" class="svideo">
@@ -63,7 +63,7 @@
         </ul>
       </div>
       <div class="options_box" id="box_input">
-    
+
         <div class="options_top step2">
           <img src="<%= image_path "tvconnect/tv.jpg" %>">
           <h2><%= t '.verif2' %></h2>
@@ -72,7 +72,7 @@
         </div>
         <ul id="guide_input" class="list_options" style="display: block;">
           <li class="hdmi" id="in_hdmi" style="display: none;">
-            <input type="radio" value="hdmi" id="in_hdmi" class="options_input" disabled="disabled" />
+            <input type="radio" value="hdmi" id="in_hdmi" class="options_input" disabled="disabled"/>
             <div class="guide_checkbox"></div>
             <p class="connector_type">HDMI</p>
           </li>
@@ -82,17 +82,17 @@
     <p class="connector_type">DVI</p>
   </li>-->
           <li class="vga_<%= I18n.locale %>" id="in_vga" style="display: none;">
-            <input type="radio" value="vga" id="in_vga" class="options_input" />
+            <input type="radio" value="vga" id="in_vga" class="options_input"/>
             <div class="guide_checkbox guide_chosen"></div>
             <p class="connector_type">VGA</p>
           </li>
           <li class="component" id="in_component" style="display: none;">
-            <input type="radio" value="component" id="in_component" class="options_input" disabled="disabled" />
+            <input type="radio" value="component" id="in_component" class="options_input" disabled="disabled"/>
             <div class="guide_checkbox"></div>
             <p class="connector_type">Component</p>
           </li>
           <li class="scart" id="in_scart" style="display: none;">
-            <input type="radio" value="scart" id="in_scart" class="options_input" disabled="disabled" />
+            <input type="radio" value="scart" id="in_scart" class="options_input" disabled="disabled"/>
             <div class="guide_checkbox"></div>
             <p class="connector_type">PERITEL</p>
           </li>
@@ -109,7 +109,7 @@
         </ul>
       </div>
       <div class="options_box" id="option_last">
-    
+
         <div class="options_top step3">
           <img src="<%= image_path "tvconnect/connect.jpg" %>">
           <h2><%= t '.result' %></h2>
@@ -119,30 +119,32 @@
         <div id="video_suggestion" class="suggestion" style="display: none;">
           <h3><%= t '.connect_video' %>:</h3>
           <div id="video_result" class="guide_result">
-            <div id="video_output" class="result_card"> <img src="<%= image_path "tvconnect/res_vga.gif" %>" alt="VGA" />
+            <div id="video_output" class="result_card"><img src="<%= image_path "tvconnect/res_vga.gif" %>" alt="VGA"/>
               <p>VGA</p>
             </div>
-            <div id="video_input" class="result_card"> <img src="<%= image_path "tvconnect/res_vga.gif" %>" alt="VGA" />
+            <div id="video_input" class="result_card"><img src="<%= image_path "tvconnect/res_vga.gif" %>" alt="VGA"/>
               <p>VGA</p>
             </div>
             <div class="clearfix"></div>
           </div>
           <p class="cable_name"></p>
-          <a target="_blank" class="guide_buy" href=""><%= t '.buy_button' %></a> </div>
-        <div  style="display: none;" id="audio_suggestion" class="suggestion">
-        
+          <a target="_blank" class="guide_buy" href=""><%= t '.buy_button' %></a></div>
+        <div style="display: none;" id="audio_suggestion" class="suggestion">
+
           <h3><%= t '.conncet_sound' %></h3>
           <div class="guide_result" id="audio_result">
-            <div class="result_card" id="audio_output">  <img src="<%= image_path "tvconnect/minijack.gif" %>" alt="Mini Jack" />
+            <div class="result_card" id="audio_output">
+              <img src="<%= image_path "tvconnect/minijack.gif" %>" alt="Mini Jack"/>
               <p>Mini Jack</p>
             </div>
-            <div class="result_card" id="audio_input"> <img src="<%= image_path "tvconnect/rca.gif" %>" alt="RCA" />
+            <div class="result_card" id="audio_input"><img src="<%= image_path "tvconnect/rca.gif" %>" alt="RCA"/>
               <p>R/L RCA</p>
             </div>
             <div class="clearfix"></div>
           </div>
           <p class="cable_name">Audio Y-Cable</p>
-        <a class="guide_buy" href="http://www.pixmania.be/be/fr/168111/art/hama/cable-rca-jack-stereo-mal.html" title="Buy Mini Jack to RCA cable or adaptor" target="_blank"><%= t '.buy_button' %></a> </div>
+          <a class="guide_buy" href="http://www.pixmania.be/be/fr/168111/art/hama/cable-rca-jack-stereo-mal.html" title="Buy Mini Jack to RCA cable or adaptor" target="_blank"><%= t '.buy_button' %></a>
+        </div>
       </div>
       <div style='display:none'>
         <div id='locale_db'><%= I18n.locale %></div>

@@ -1,6 +1,6 @@
 <% audio_title = streaming.first.language.by_language(I18n.locale).first.name %>
 <p class="choice_valided">
-  <%= t 'streaming_products.show.kinds_alpha.audio_title' %> : <span class="selected"><%= audio_title %></span> | 
+  <%= t 'streaming_products.show.kinds_alpha.audio_title' %> : <span class="selected"><%= audio_title %></span> |
   <%= link_to t('.change'), streaming_product_path(:id => streaming.first.imdb_id), :id => 'change_step2' %>
 </p>
 

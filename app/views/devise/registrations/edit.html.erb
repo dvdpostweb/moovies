@@ -1,25 +1,27 @@
 <div id='content_info' class="change_pass">
   <h2><%= t('.title') %></h2>
 
-  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
-    <%= devise_error_messages! %>
+  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:method => :put}) do |f| %>
+      <%= devise_error_messages! %>
 
-    <div><%= f.label :email, t('.email') %><br />
-    <%= f.email_field :email, :autofocus => true %></div>
+      <div><%= f.label :email, t('.email') %><br/>
+        <%= f.email_field :email, :autofocus => true %></div>
 
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <div><%= t('.waiting', :default => 'Currently waiting confirmation for:') %> <%= resource.unconfirmed_email %></div>
-    <% end %>
-    <div><%= f.label :current_password, t('.current_pass') %> <i><%= t '.warning_current_pass', :default => "(we need your current password to confirm your changes)" %></i><br />
-    <%= f.password_field :current_password %></div>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div><%= t('.waiting', :default => 'Currently waiting confirmation for:') %> <%= resource.unconfirmed_email %></div>
+      <% end %>
+      <div><%= f.label :current_password, t('.current_pass') %>
+        <i><%= t '.warning_current_pass', :default => "(we need your current password to confirm your changes)" %></i><br/>
+        <%= f.password_field :current_password %></div>
 
-    <div><%= f.label :password, t('.pass') %> <i><%= t '.warning_new_pass', :default => "(leave blank if you don't want to change it)" %></i><br />
-    <%= f.password_field :password, :autocomplete => "off" %></div>
+      <div><%= f.label :password, t('.pass') %>
+        <i><%= t '.warning_new_pass', :default => "(leave blank if you don't want to change it)" %></i><br/>
+        <%= f.password_field :password, :autocomplete => "off" %></div>
 
-    <div><%= f.label :password_confirmation, t('.confirmation') %><br />
-    <%= f.password_field :password_confirmation %></div>
+      <div><%= f.label :password_confirmation, t('.confirmation') %><br/>
+        <%= f.password_field :password_confirmation %></div>
 
-    <div><%= f.submit t('.update'), :default => 'Update' %></div>
+      <div><%= f.submit t('.update'), :default => 'Update' %></div>
   <% end %>
 
   <%= link_to t('.back'), :back %>

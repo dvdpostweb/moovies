@@ -56,9 +56,9 @@ class Api::V1::ValidatorController < ApplicationController
     if request.xhr?
       if params[:discount_code].present?
         discount = Discount.find_by_discount_code(params[:discount_code])
-    	  customer = current_customer
+        customer = current_customer
         if !customer.discount_reuse?(discount.month_before_reuse) && discount.bypass_discountuse == 0
-          render :json => { :status => 2 }
+          render :json => {:status => 2}
         else
           customer.code = params[:discount_code]
           customer.step = discount.goto_step
@@ -67,10 +67,10 @@ class Api::V1::ValidatorController < ApplicationController
           customer.abo_history(38, customer.abo_type_id, discount.to_param)
           if customer.save!
             if DiscountUse.create(:discount_code_id => current_customer.activation_discount_code_id, :customer_id => current_customer.id, :discount_use_date => Time.now.localtime)
-              render :json => { :status => 1 }
+              render :json => {:status => 1}
             end
           else
-            render :json => { :status => 0 }
+            render :json => {:status => 0}
           end
         end
       end

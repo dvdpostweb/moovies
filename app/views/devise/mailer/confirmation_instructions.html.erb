@@ -1,70 +1,77 @@
-<table width="600" align="center" cellpadding="0" cellspacing="0" border="0" >
+<table width="600" align="center" cellpadding="0" cellspacing="0" border="0">
   <tr height="16">
-    <td colspan="3" bgcolor="#ffffff" ></td>
+    <td colspan="3" bgcolor="#ffffff"></td>
   </tr>
   <tr height="10">
     <td bgcolor="#ffffff" width="20"></td>
-    <td bgcolor="#ffffff" ></td>
+    <td bgcolor="#ffffff"></td>
     <td bgcolor="#ffffff" width="20"></td>
   </tr>
   <tr>
     <td bgcolor="#ffffff" width="20"></td>
-    <td bgcolor="#ffffff" ><font color="#2c3841" ><p><%= t('.grats', :email => @email).html_safe %><br/><br/></p>
+    <td bgcolor="#ffffff"><font color="#2c3841"><p><%= t('.grats', :email => @email).html_safe %><br/><br/></p>
       <p><%= t('.desc1') %><br/><br/></p>
       <p><%= t('.desc2') %><br/><br/></p></font></td>
-      <td bgcolor="#ffffff" width="20"></td>
-    </tr>
-    <tr height="20">
-      <td bgcolor="#ffffff" width="20"></td>
-      <td bgcolor="#ffffff" >
-        <table cellpadding="0" cellspacing="0" align="center" style="font-size:13px;">
-          <tr>
-            <td width="132"><img src="<%= image_url "mails/icon_infinity.gif" %>" align="middle" width="132" height="80" /></td>
-            <td width="10" rowspan="2"><img src="<%= image_url "mails/strip.gif" %>" align="middle" width="10" height="150" /></td>
-            <td width="132"><img src="<%= image_url "mails/icon_alacarte.gif" %>" align="middle" width="132" height="80" />
-            </td>
-            <td width="10" rowspan="2"><img src="<%= image_url "mails/strip.gif" %>" align="middle" width="10" height="150" /></td>
-            <td width="132"><img src="<%= image_url "mails/icon_plateform.gif" %>" align="middle" width="132" height="80" /></td>
-            <td width="10" rowspan="2"><img src="<%= image_url "mails/strip.gif" %>" align="middle" width="10" height="150" /></td>
-            <td width="132"><img src="<%= image_url "mails/icon_new.gif" %>" align="middle" width="132" height="80" />
-            </td>
-          </tr>
-          <tr>
-            <td width="132" valign="top" align="center">
-              <%= t('.slogan1').html_safe %>
-            </td>
+    <td bgcolor="#ffffff" width="20"></td>
+  </tr>
+  <tr height="20">
+    <td bgcolor="#ffffff" width="20"></td>
+    <td bgcolor="#ffffff">
+      <table cellpadding="0" cellspacing="0" align="center" style="font-size:13px;">
+        <tr>
+          <td width="132"><img src="<%= image_url "mails/icon_infinity.gif" %>" align="middle" width="132" height="80"/>
+          </td>
+          <td width="10" rowspan="2">
+            <img src="<%= image_url "mails/strip.gif" %>" align="middle" width="10" height="150"/></td>
+          <td width="132"><img src="<%= image_url "mails/icon_alacarte.gif" %>" align="middle" width="132" height="80"/>
+          </td>
+          <td width="10" rowspan="2">
+            <img src="<%= image_url "mails/strip.gif" %>" align="middle" width="10" height="150"/></td>
+          <td width="132">
+            <img src="<%= image_url "mails/icon_plateform.gif" %>" align="middle" width="132" height="80"/></td>
+          <td width="10" rowspan="2">
+            <img src="<%= image_url "mails/strip.gif" %>" align="middle" width="10" height="150"/></td>
+          <td width="132"><img src="<%= image_url "mails/icon_new.gif" %>" align="middle" width="132" height="80"/>
+          </td>
+        </tr>
+        <tr>
+          <td width="132" valign="top" align="center">
+            <%= t('.slogan1').html_safe %>
+          </td>
 
-            <td width="132" valign="top" align="center">
-              <%= t('.slogan2').html_safe %>
-            </td>
+          <td width="132" valign="top" align="center">
+            <%= t('.slogan2').html_safe %>
+          </td>
 
-            <td width="132" valign="top" align="center">
-              <%= t('.slogan3').html_safe %>
-            </td>
+          <td width="132" valign="top" align="center">
+            <%= t('.slogan3').html_safe %>
+          </td>
 
-            <td width="132" valign="top" align="center">
-              <%= t('.slogan4').html_safe %>
-            </td>
+          <td width="132" valign="top" align="center">
+            <%= t('.slogan4').html_safe %>
+          </td>
 
-          </tr>
-        </table>
+        </tr>
+      </table>
 
 
-      </td>
-      <td bgcolor="#ffffff" width="20"></td>
-    </tr>
-    <tr>
-      <td bgcolor="#ffffff" width="20"></td>
-      <td bgcolor="#ffffff" align="center" ><p><a href="<%= confirmation_url(@resource, :confirmation_token => @resource.confirmation_token, :locale => I18n.locale, :imdb_id => @imdb_id, :test => 1) %>" target="_blank"  title="Activez votre compte"><img src="<%= image_url "mails/boutton_activer_#{I18n.locale}.gif" %>" width="257" height="70" alt="<%= t('.active') %>" style="display: block; border: medium none; padding-bottom:15px; align:center;" /></a></p> 
-      </td>
-      <td bgcolor="#ffffff" width="20"></td>
-    </tr>
-    <tr height="20">
-      <td bgcolor="#ffffff" width="20"></td>
-      <td bgcolor="#ffffff" ></td>
-      <td bgcolor="#ffffff" width="20"></td>
-    </tr>
+    </td>
+    <td bgcolor="#ffffff" width="20"></td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" width="20"></td>
+    <td bgcolor="#ffffff" align="center"><p>
+      <a href="<%= confirmation_url(@resource, :confirmation_token => @resource.confirmation_token, :locale => I18n.locale, :imdb_id => @imdb_id, :test => 1) %>" target="_blank" title="Activez votre compte"><img src="<%= image_url "mails/boutton_activer_#{I18n.locale}.gif" %>" width="257" height="70" alt="<%= t('.active') %>" style="display: block; border: medium none; padding-bottom:15px; align:center;"/></a>
+    </p>
+    </td>
+    <td bgcolor="#ffffff" width="20"></td>
+  </tr>
+  <tr height="20">
+    <td bgcolor="#ffffff" width="20"></td>
+    <td bgcolor="#ffffff"></td>
+    <td bgcolor="#ffffff" width="20"></td>
+  </tr>
   <tr height="16">
-    <td colspan="3" bgcolor="#ffffff" ></td>
+    <td colspan="3" bgcolor="#ffffff"></td>
   </tr>
 </table>

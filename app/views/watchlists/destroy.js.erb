@@ -1,16 +1,14 @@
 <% if @div %>
-  $('#<%= @div %>').remove();
+$('#<%= @div %>').remove();
 <% else %>
-  <% if @product %>
-  if($('#film-details .vod_list').length)
-  {
-    $(".vod_list").replaceWith('<%= escape_javascript render :partial => 'products/vod_list', :locals => {:product => @product, :source => params[:source], :response_id => params[:response_id]} %>')  
-  }
-  else
-  {
-    $("#<%= @submit_id %>").replaceWith('<%= escape_javascript render :partial => 'products/vod_list', :locals => {:product => @product, :source => params[:source], :response_id => params[:response_id]} %>')  
-  }
-  
-  <% end %>
+<% if @product %>
+if ($('#film-details .vod_list').length) {
+  $(".vod_list").replaceWith('<%= escape_javascript render :partial => 'products/vod_list', :locals => {:product => @product, :source => params[:source], :response_id => params[:response_id]} %>')
+}
+else {
+  $("#<%= @submit_id %>").replaceWith('<%= escape_javascript render :partial => 'products/vod_list', :locals => {:product => @product, :source => params[:source], :response_id => params[:response_id]} %>')
+}
+
+<% end %>
 <% end %>
 jQuery(document).trigger('close.facebox');

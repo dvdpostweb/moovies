@@ -31,26 +31,27 @@ module ProductsHelper
       when 'SHOP'
         shop_path()
       when 'STUDIO'
-         studio_products_path(:studio_id => carousel.reference_id)
-     when 'STUDIO_VOD'
+        studio_products_path(:studio_id => carousel.reference_id)
+      when 'STUDIO_VOD'
         studio_products_path(:studio_id => carousel.reference_id, :filter => :vod)
       when 'SEARCH'
         search_path(:search => carousel.reference_id)
       when 'URL'
         eval(carousel.link(I18n.locale))
-      end
+    end
   end
+
   def get_reviews()
     if params[:sort]
       sort = Review.sort2[params[:sort].to_sym]
       review_sort = params[:sort].to_sym
-      cookies[:review_sort] = { :value => params[:sort], :expires => 1.year.from_now }
+      cookies[:review_sort] = {:value => params[:sort], :expires => 1.year.from_now}
     else
       if cookies[:review_sort]
-        sort =  Review.sort2[cookies[:review_sort].to_sym]
+        sort = Review.sort2[cookies[:review_sort].to_sym]
         review_sort = cookies[:review_sort].to_sym
       else
-        sort =  Review.sort2[:date]
+        sort = Review.sort2[:date]
         review_sort = :date
       end
     end
@@ -59,7 +60,7 @@ module ProductsHelper
     else
       reviews = @product.reviews.approved.ordered("(customers_best_rating - customers_bad_rating ) DESC, customers_best_rating desc, date_added DESC").by_language(I18n.locale).includes([:product, :customer]).paginate(:page => params[:reviews_page], :per_page => 3)
     end
-    {:review_sort => review_sort, :reviews =>reviews }
+    {:review_sort => review_sort, :reviews => reviews}
   end
 
   def hide_wishlist_if_seen
@@ -76,25 +77,25 @@ module ProductsHelper
 
   def audio_bubbles(product, additional_bubble = 0, content = :li)
     audio_count=0
-    total_bubble = 3 + additional_bubble 
+    total_bubble = 3 + additional_bubble
     preferred_audio = product.languages.preferred
     audio = Array.new
     unless preferred_audio.count == 0
-      audio = preferred_audio.collect{|language| 
+      audio = preferred_audio.collect { |language|
         audio_count +=1
         content_tag(content, language.short.upcase, :class => "left red osc", :alt => language.name, :title => language.name)
       }
     end
-  
+
     not_preferred_audio = product.languages.not_preferred
     unless not_preferred_audio.count == 0
-      audio << not_preferred_audio.collect{|language| 
+      audio << not_preferred_audio.collect { |language|
         audio_count +=1
         display = audio_count > total_bubble ? 'audio_hide' : ''
         if language.short
           content_tag(content, language.short.upcase, :class => "left red osc #{display}", :alt => language.name, :title => language.name)
         else
-          content_tag(content, language.name,:class => "#{language.class.name.underscore}_text #{display}")
+          content_tag(content, language.name, :class => "#{language.class.name.underscore}_text #{display}")
         end
       }
     end
@@ -106,25 +107,25 @@ module ProductsHelper
     end
     {:audio => audio, :hide => hide}
   end
-  
+
 
   def subtitle_bubbles(product, additional_bubble, content = :li)
     subtitle_count=0
-    total_bubble = 3 + additional_bubble 
+    total_bubble = 3 + additional_bubble
     preferred_subtitle = product.subtitles.preferred
     sub = Array.new
     unless preferred_subtitle.count == 0
-      sub = preferred_subtitle.preferred.collect{|subtitle| 
+      sub = preferred_subtitle.preferred.collect { |subtitle|
         subtitle_count += 1
         content_tag(content, subtitle.short.upcase, :class => "left gray osc", :alt => subtitle.name, :title => subtitle.name)
       }
     end
     if subtitle_count < total_bubble
-       not_preferred_sub = product.subtitles.not_preferred
-       unless not_preferred_sub.count == 0
-         sub << not_preferred_sub.collect{|subtitle| 
+      not_preferred_sub = product.subtitles.not_preferred
+      unless not_preferred_sub.count == 0
+        sub << not_preferred_sub.collect { |subtitle|
           subtitle_count += 1
-          display = subtitle_count > total_bubble ? 'subtitle_hide' : '' 
+          display = subtitle_count > total_bubble ? 'subtitle_hide' : ''
           if subtitle.short
             if subtitle.short.include?('_m')
               subtitle.short = subtitle.short.slice(0..1)
@@ -171,12 +172,12 @@ module ProductsHelper
     5.times do |i|
       i += 1
       image_name = if rating >= 2
-        "star-on.png"
-      elsif rating == 1
-        "star-half.png"
-      else
-        "star-off.png"
-      end
+                     "star-on.png"
+                   elsif rating == 1
+                     "star-half.png"
+                   else
+                     "star-off.png"
+                   end
       links << image_tag(image_name, :name => image_name, :size => '12x12')
       rating -= 2
     end
@@ -184,18 +185,18 @@ module ProductsHelper
   end
 
   def rating_image_links(product, background = nil, size = nil, replace = nil, recommendation = nil, response_id = nil, source = nil)
-   if product
-     rating_data = product.rating(current_customer) 
-     rating = rating_data[:rating]
-     rated = rating_data[:customer]
-     links = ""
-     5.times do |i|
-       i += 1
-       links += rating_image_link(product, rating, i, background, size, replace, recommendation, rated, response_id, source)
-       rating -= 2
-     end
-     links
-   end
+    if product
+      rating_data = product.rating(current_customer)
+      rating = rating_data[:rating]
+      rated = rating_data[:customer]
+      links = ""
+      5.times do |i|
+        i += 1
+        links += rating_image_link(product, rating, i, background, size, replace, recommendation, rated, response_id, source)
+        rating -= 2
+      end
+      links
+    end
   end
 
   def rating_image_link(product, rating, value, background = nil, size = nil, replace = nil, recommendation = nil, rated = nil, response_id = nil, source = nil)
@@ -209,22 +210,22 @@ module ProductsHelper
         class_name = 'star'
       end
     else
-       name = 'star'
-       class_name = ''
+      name = 'star'
+      class_name = ''
     end
 
     image_name = if rating >= 2
-      "#{name}-on"
-    elsif rating == 1
-      "#{name}-half"
-    else
-      "#{name}-off"
-    end
+                   "#{name}-on"
+                 elsif rating == 1
+                   "#{name}-half"
+                 else
+                   "#{name}-off"
+                 end
     image_name += '_adult' if params[:kind] == :adult
     image_name += '.png'
     s = size == :long || size == 'long' ? '19x19' : '12x12'
     image = image_tag(image_name, :class => class_name, :id => "star_#{product.id}_#{value}", :name => image_name, :size => s)
-    
+
     if current_customer && class_name == 'star'
       link_to(image, product_rating_path(:product_id => product.to_param, :value => value, :background => background, :size => size, :replace => replace, :recommendation => recommendation, :response_id => response_id, :source => source))
     else
@@ -314,7 +315,7 @@ module ProductsHelper
       else
         t('products.wishlist.add', :media => t("products.index.filters.#{media}"))
       end
-    end  
+    end
   end
 
   def title_add_all_to_wishlist(type_button)
@@ -322,7 +323,7 @@ module ProductsHelper
       t('.reserve_serie')
     else
       t('.add_serie')
-    end  
+    end
   end
 
   def title_remove_from_wishlist(type_text, media)
@@ -358,9 +359,9 @@ module ProductsHelper
       end
     end
     if current_customer
-    li_style = selected_category ? 'display:none' : ''
+      li_style = selected_category ? 'display:none' : ''
       html_content << content_tag(:li, :class => :cat, :style => li_style) do
-        kind == :adult ? link_to( t('.full_categories'), categories_path(:view_mode => view_mode), :id => 'catx') : link_to( t('.category_x'), root_localize_path(:kind => :adult), :id => 'catx')
+        kind == :adult ? link_to(t('.full_categories'), categories_path(:view_mode => view_mode), :id => 'catx') : link_to(t('.category_x'), root_localize_path(:kind => :adult), :id => 'catx')
       end
     end
     html_content
@@ -369,11 +370,11 @@ module ProductsHelper
   def streaming_audio_bublles(product, vod_next = false)
     content=''
     bubble = StreamingProduct.available_beta.where(:imdb_id => product.imdb_id, :season_id => product.season_id, :episode_id => product.episode_id).group('language_id')
-    bubble.collect{
-    |product|
+    bubble.collect {
+        |product|
       lang = product.language.by_language(I18n.locale).first
       if lang && lang.short
-        content += content_tag(:li, lang.short.upcase, :class => "left red osc", :alt => lang.name, :title => lang.name) 
+        content += content_tag(:li, lang.short.upcase, :class => "left red osc", :alt => lang.name, :title => lang.name)
       end
     }
     content
@@ -383,7 +384,7 @@ module ProductsHelper
     content=''
     bubble = StreamingProduct.available_beta.where(:imdb_id => product.imdb_id, :season_id => product.season_id, :episode_id => product.episode_id).group('subtitle_id')
     bubble.collect {
-    |product|
+        |product|
       lang = product.subtitle.by_language(I18n.locale).first
       if lang && lang.short
         short = lang.short
@@ -409,7 +410,7 @@ module ProductsHelper
     review.rating.times do
       images += image_tag "star-on.png", :size => '13x13'
     end
-      (5-review.rating).times do
+    (5-review.rating).times do
       images += image_tag "star-off.png", :size => '13x13'
     end
     images
@@ -420,7 +421,7 @@ module ProductsHelper
     rating.times do
       images += image_tag "green-star-on.png", :size => '21x20'
     end
-      (5-rating).times do
+    (5-rating).times do
       images += image_tag "green-star-off.png", :size => '21x20'
     end
     images
@@ -449,7 +450,7 @@ module ProductsHelper
       details =""
       details = "<strong>#{abo.qty_dvd_max} #{t '.films'}</strong> #{t '.all_formats'}"
       details += "<strong> + #{pluralize(abo.credits - abo.qty_dvd_max, t('.in_vod'), t('.in_vods'))}</strong>"
-      details += "<br /> #{image_tag "freeupgradelogo.gif"}" if abo.ordered == free_upgrade 
+      details += "<br /> #{image_tag "freeupgradelogo.gif"}" if abo.ordered == free_upgrade
     end
     details
   end
@@ -464,7 +465,7 @@ module ProductsHelper
     else
       ''
     end
-    
+
   end
 
   def human_death(people)
@@ -481,7 +482,7 @@ module ProductsHelper
     if cat
       cat.name
     else
-      if product.adult?  
+      if product.adult?
         product.categories.first.name unless product.categories.empty?
       else
         product.categories.active.first.name unless product.categories.active.empty?
@@ -492,7 +493,7 @@ module ProductsHelper
   def sort_collection_for_select
     options = []
     codes_hash = Product.list_sort
-    codes_hash.each {|key, code| options.push [t(".#{key}"), key]}
+    codes_hash.each { |key, code| options.push [t(".#{key}"), key] }
     options
   end
 
@@ -524,7 +525,7 @@ module ProductsHelper
 
   def get_vod_message(vod, svod_date, kind, package)
     if vod && vod.available?
-      
+
       if svod_date && svod_date.start_on > Date.today && svod_date.start_on < Date.today+30.days
         "<td class='goinfinite'>#{t('products.show.formats.soon_in_svod_' + kind, :days => (svod_date.start_on - Date.today).to_i).html_safe}</td>".html_safe
       elsif svod_date && svod_date.end_on > Date.today && svod_date.end_on < Date.today+30.days && vod.expire_at && vod.expire_at > Date.today
@@ -585,6 +586,7 @@ module ProductsHelper
     end
     list.join(', ')
   end
+
   def prop_duration(duration)
     if duration
       h = duration / 60

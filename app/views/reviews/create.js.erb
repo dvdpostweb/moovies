@@ -1,14 +1,15 @@
 <% if flash[:notice] || flash[:error] %>
 <% error = flash[:notice] ? flash[:notice] : flash[:error] %>
 <% class_name = flash[:notice] ? 'notice' : 'flash_error' %>
-  if ($('.flash_message').length == 0){
-    $(".container").prepend("<div class='flash_message'><div class='<%= class_name %>'><%= error %></div></div>")
-    $(".notice").css('height','1px')
-    $(".notice").css('padding','0')
-    $(".notice").animate({height:16, padding: 10}, 300, "linear", function(){} );
-  }else{
-    $(".container .flash_message").replaceWith("<div class='flash_message'><div class='<%= class_name %>'><%= error %></div></div>")
-  }
+if ($('.flash_message').length == 0) {
+  $(".container").prepend("<div class='flash_message'><div class='<%= class_name %>'><%= error %></div></div>")
+  $(".notice").css('height', '1px')
+  $(".notice").css('padding', '0')
+  $(".notice").animate({height: 16, padding: 10}, 300, "linear", function () {
+  });
+} else {
+  $(".container .flash_message").replaceWith("<div class='flash_message'><div class='<%= class_name %>'><%= error %></div></div>")
+}
 <% end %>
 jQuery(document).trigger('close.facebox');
 <% flash.discard %>

@@ -1,9 +1,9 @@
 module StreamingProductsHelper
   def flowplayer(source_file, source, streaming, token_name, browser, code = nil, season_id ='0', episode_id = '0')
-      audio = streaming.languages.by_language(:fr).first.short_alpha
-      sub = streaming.subtitles.count > 0 ? streaming.subtitles.by_language(:fr).first.short_alpha : 'non'
-      hd = streaming.hd? ? true : false
-      url = Moovies.akamai_hls_url(streaming.imdb_id, audio, sub, hd, streaming.videoland, streaming.akamai_folder, season_id , episode_id)
+    audio = streaming.languages.by_language(:fr).first.short_alpha
+    sub = streaming.subtitles.count > 0 ? streaming.subtitles.by_language(:fr).first.short_alpha : 'non'
+    hd = streaming.hd? ? true : false
+    url = Moovies.akamai_hls_url(streaming.imdb_id, audio, sub, hd, streaming.videoland, streaming.akamai_folder, season_id, episode_id)
     if browser.iphone? || browser.ipad? || browser.tablet?
       #url = code.nil? ? Moovies.hls_url(token_name, audio, sub) : Moovies.akamai_url(token_name, audio, sub)
       if browser.iphone? || (browser.tablet? && !browser.ipad?)
@@ -17,9 +17,9 @@ module StreamingProductsHelper
       end
     elsif 1==1 #!code.nil?
       audio = streaming.languages.by_language(:fr).first.short_alpha
-            sub = streaming.subtitles.count > 0 ? streaming.subtitles.by_language(:fr).first.short_alpha : 'non'
-            #url = Moovies.akamai_url(token_name, audio, sub)
-            script = <<-script
+      sub = streaming.subtitles.count > 0 ? streaming.subtitles.by_language(:fr).first.short_alpha : 'non'
+      #url = Moovies.akamai_url(token_name, audio, sub)
+      script = <<-script
             $('#player').html("<div id='player_hls'></div>")
             var parameters = {
                 src: "#{url}",
@@ -66,11 +66,11 @@ module StreamingProductsHelper
     distance_of_time_in_hours((stream.created_at + 48.hours), Time.now.localtime)
   end
 
-  def distance_of_time_in_hours(from_time,to_time)
+  def distance_of_time_in_hours(from_time, to_time)
     from_time = from_time.to_time if from_time.respond_to?(:to_time)
     to_time = to_time.to_time if to_time.respond_to?(:to_time)
     distance_in_hours = (((to_time - from_time).abs)/3600)
-    if(distance_in_hours<1)
+    if (distance_in_hours<1)
       "#{(((to_time - from_time).abs)/60).round} #{t('time.minutes')}"
     else
       distance_in_hours = distance_in_hours.round

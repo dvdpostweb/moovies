@@ -9,8 +9,8 @@ class ReviewsController < ApplicationController
     else
       sort = Review.sort[:date]
     end
-    @reviews = Review.by_customer_id(params[:customer_id]).approved.ordered("#{sort} DESC, (customers_best_rating - customers_bad_rating ) DESC, customers_best_rating DESC").joins("INNER JOIN plush_#{Rails.env != 'production' ? 'staging' : 'production'}.products ON `products`.`imdb_id` = `reviews`.`imdb_id`").where(:products => {:products_type => Moovies.product_kinds[params[:kind]], :products_status => [-2,0,1]}).paginate(:page => params[:page], :per_page => 10)
-    @reviews_count =  @reviews.total_entries
+    @reviews = Review.by_customer_id(params[:customer_id]).approved.ordered("#{sort} DESC, (customers_best_rating - customers_bad_rating ) DESC, customers_best_rating DESC").joins("INNER JOIN plush_#{Rails.env != 'production' ? 'staging' : 'production'}.products ON `products`.`imdb_id` = `reviews`.`imdb_id`").where(:products => {:products_type => Moovies.product_kinds[params[:kind]], :products_status => [-2, 0, 1]}).paginate(:page => params[:page], :per_page => 10)
+    @reviews_count = @reviews.total_entries
     params[:customer_id] = params[:old_customer_id] if params[:old_customer_id]
     @customer = Customer.find(params[:customer_id])
     @source = @wishlist_source[:reviews]
@@ -37,7 +37,7 @@ class ReviewsController < ApplicationController
   def create
     begin
       @product = Product.both_available.find(params[:product_id])
-      params[:review][:text] = params[:review][:text].gsub(/\n/, '').gsub(/\r/, '').gsub(//, "'").gsub(//,'"').gsub(//,'"').gsub(//,'...').gsub(//,'&oelig;').gsub(/«/,'"').gsub(/»/,'"')
+      params[:review][:text] = params[:review][:text].gsub(/\n/, '').gsub(/\r/, '').gsub(//, "'").gsub(//, '"').gsub(//, '"').gsub(//, '...').gsub(//, '&oelig;').gsub(/«/, '"').gsub(/»/, '"')
       review = @product.reviews.build(params[:review])
       review.customer = current_customer
       review.customers_name = current_customer.nickname
@@ -49,8 +49,8 @@ class ReviewsController < ApplicationController
         Customer.send_evidence('Rating', params[:product_id], current_customer, request.remote_ip, {:rating => params[:review][:rating]})
       end
       flash[:notice] = t('products.show.review.review_save')
-    
-    rescue Exception => e  
+
+    rescue Exception => e
       flash[:error] = t('products.show.review.review_not_save')
     end
     if request.xhr?
