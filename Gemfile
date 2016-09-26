@@ -76,3 +76,5 @@ gem "figaro"
 
 gem 'puma', '~> 3.6'
 
+gem 'redis-rails', '~> 3.2', '>= 3.2.4'
+

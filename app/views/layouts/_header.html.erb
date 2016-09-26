@@ -26,5 +26,7 @@
   <% end %>
   <div id="header">
     <div><%= link_to t('.tagline'), root_localize_path, :class => 'f-btn' %></div>
-    <%= render :partial => 'layouts/menu' %>
+    <% cache("layouts_menu", :expires_in => 1.hour) do %>
+      <%= render :partial => 'layouts/menu' %>
+    <% end %>
   </div>

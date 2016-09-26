@@ -1,4 +1,5 @@
 <% product = movie_details_jacket %>
+<% cache("#{product.id}_products_index_movie_details_jacket", :expires_in => 1.hour) do %>
 <% data = product.description_data(true) %>
 <% product_title = data[:title] %>
 <% product_image = data[:image] %>
@@ -167,3 +168,4 @@
     </div>
   </div>
 </div>
+<% end %>

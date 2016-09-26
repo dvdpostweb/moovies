@@ -1,3 +1,4 @@
+<% cache("#{product.id}_product_index_movide_details", :expires_in => 1.hour) do %>
 <% product = movie_details %>
 <% data = product.description_data(true) %>
 <% product_title = data[:title] %>
@@ -69,3 +70,4 @@
     </div><!-- .oters -->
   </div><!-- .movie-content -->
 </div><!-- .movie-wrap -->
+<% end %>

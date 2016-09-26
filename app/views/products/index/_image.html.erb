@@ -2,13 +2,17 @@
     <% if people.image_active %>
         <% 3.times do |i| %>
             <% i += 1 %>
-            <%= image_tag people.image(i), :width => 150 %>
+            <% cache("#{product.id}_adult_image", :expires_in => 1.hour) do %>
+              <%= image_tag people.image(i), :width => 150 %>
+            <%  end %>
         <% end %>
     <% end %>
 <% else %>
     <div class="detail-box">
       <div class="people">
-        <%= image_tag people.image(0), :height => 193 %>
+        <% cache("#{product.id}_not_adult_image", :expires_in => 1.hour) do %>
+          <%= image_tag people.image(0), :height => 193 %>
+        <% end %>
       </div>
       <div class="detail-text" align="justify">
         <div id="title"><%= people.name %></div>
