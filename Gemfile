@@ -1,9 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.14'
-
-# Bundle edge Rails instead:
-# gem 'rails',     :git => 'git://github.com/rails/rails.git'
+gem 'rails', '~> 3.2', '>= 3.2.22.5'
 
 gem 'mysql2', '0.3.13'
 gem 'json'
@@ -21,6 +18,7 @@ group :development do
   gem 'spring'
   gem 'sextant'
   gem 'capistrano-slack', :git => 'https://github.com/j-mcnally/capistrano-slack.git'
+  gem "bullet"
 end
 
 gem 'cucumber-rails', :require => false
@@ -45,15 +43,6 @@ end
 gem 'sass-rails'
 gem 'compass-rails'
 
-
-# Use unicorn as the web server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'ruby-debug'
 gem "devise"
 gem "airbrake", "~> 4"
 gem "jquery-rails"
@@ -85,8 +74,5 @@ gem 'gon'
 gem 'omniauth-facebook'
 gem "figaro"
 
-gem 'thin'
-gem 'rails-footnotes', '~> 4.0'
-
-gem 'redis-rails'
+gem 'puma', '~> 3.6'
 

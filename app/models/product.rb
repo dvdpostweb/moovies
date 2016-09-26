@@ -160,6 +160,8 @@ class Product < ActiveRecord::Base
   sphinx_scope(:group) { |group, sort| {:group_by => group, :group_function => :attr, :group_clause => sort} }
   sphinx_scope(:limit) { |limit| {:limit => limit} }
 
+  
+
   def self.list_sort
     sort = OrderedHash.new
     sort.push(:normal, 'normal')

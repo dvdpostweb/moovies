@@ -12,10 +12,8 @@ Moovies::Application.configure do
   # Show full error reports and disable caching
   config.consider_all_requests_local = true
   config.action_controller.perform_caching = true
-  #config.cache_store = :mem_cache_store, '127.0.0.1:11211'
-  config.cache_store = :redis_store
-  config.i18n_cache_store = ActiveSupport::Cache.lookup_store :redis_store
-  #config.i18n_cache_store = ActiveSupport::Cache.lookup_store(:mem_cache_store, '127.0.0.1:11211', :namespace => "development")
+  config.cache_store = :mem_cache_store, '127.0.0.1:11211'
+  config.i18n_cache_store = ActiveSupport::Cache.lookup_store(:mem_cache_store, '127.0.0.1:11211', :namespace => "development")
   config.i18n.enforce_available_locales = false
   I18n.config.enforce_available_locales = false
   # Don't care if the mailer can't send
@@ -43,4 +41,9 @@ Moovies::Application.configure do
   end
   config.assets.precompile += %w( jquery.ui.datepicker-fr.js jquery.ui.datepicker-nl.js jquery.ui.datepicker-en.js login.css promotions.css promotions.js errors.css )
   #BetterErrors.editor = :sublime
+
+  config.after_initialize do
+  Bullet.enable = true
+  Bullet.rails_logger = true
+end
 end
