@@ -1,7 +1,4 @@
-require 'capistrano/setup'
-require 'capistrano/deploy'
+load 'deploy'
+# Uncomment if you are using Rails' asset pipeline
 
-require 'capistrano/rails'
-require 'capistrano/bundler'
-require 'capistrano/rvm'
-require 'capistrano/puma'
+load 'config/deploy' # remove this line to skip loading any of the default task

@@ -17,11 +17,6 @@ group :development do
   gem 'quiet_assets'
   gem 'spring'
   gem 'sextant'
-  gem 'capistrano',         require: false
-  gem 'capistrano-rvm',     require: false
-  gem 'capistrano-rails',   require: false
-  gem 'capistrano-bundler', require: false
-  gem 'capistrano3-puma',   require: false
   gem 'capistrano-slack', :git => 'https://github.com/j-mcnally/capistrano-slack.git'
   gem "bullet"
 end
@@ -60,7 +55,8 @@ gem 'jquery-form-rails'
 gem 'thinking-sphinx', '3.0.6'
 gem "composite_primary_keys", "~> 5.0.13"
 gem "truncate_html", "~> 0.9.2"
-
+gem "capistrano", "~> 2.15.5"
+gem "capistrano-ext"
 gem 'client_side_validations', '~> 3.2.6'
 gem 'date_validator'
 gem 'whenever', "~> 0.9.0", :require => false
