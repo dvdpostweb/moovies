@@ -22,6 +22,12 @@
 </ul>
 <div id="wrap">
 
+<% if customer_signed_in? %>
+    <% unless params[:controller] == "payment_methods" || params[:controller] == "steps" || (params[:controller] == "home" && params[:action] == "carrefour") %>
+      <%= render partial: "layouts/green_banner" %>
+    <% end %>
+  <% end %>
+
   <!--   ==============   HEADER   ==============   -->
   <div id="header" >
     <div><%= link_to t('.tagline'), root_localize_path, :class => 'f-btn' %></div>

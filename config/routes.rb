@@ -144,17 +144,4 @@ Moovies::Application.routes.draw do
   match "/404", :to => "errors#not_found"
   match "/500", :to => "errors#not_found"
 
-  namespace :api do
-    namespace :v1 do
-      match "check_presence_of_customer_email" => "validator#check_presence_of_customer_email"
-      match "check_presence_of_customer_email_registration" => "validator#check_presence_of_customer_email_registration"
-      match "check_presence_of_activation_code" => "validator#check_activation_code_presence"
-      match "check_presence_of_activation_code_carrefour" => "validator#check_activation_code_presence_carrefour"
-      match "activate_new_plan" => "validator#set_plan"
-      match "login" => "login#login"
-      match "register" => "registration#register"
-      match "facebook_activation" => "facebook#activation"
-    end
-  end
-
 end
