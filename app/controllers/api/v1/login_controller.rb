@@ -42,7 +42,7 @@ class Api::V1::LoginController < ApplicationController
           if resource.abo_history(38, resource.abo_type_id, activation.to_param)
             if resource.valid_password?(password)
               sign_in :customer, resource
-              redirect_to_root_path = root_path
+              redirect_to_root_path = root_localize_path
               render json: { status: 4, message: redirect_to_root_path }
             end
           end
@@ -68,7 +68,7 @@ class Api::V1::LoginController < ApplicationController
             if activation
               activation.update_attributes(:customers_id => current_customer.to_param, :created_at => Time.now.localtime)
             end
-            redirect_to_root_path = root_path
+            redirect_to_root_path = root_localize_path
             render json: { status: 4, message: redirect_to_root_path }
           end
         end
@@ -104,7 +104,7 @@ class Api::V1::LoginController < ApplicationController
         if customer.save(validate: false)
           sign_in :customer, customer
           sAMSUNG.update_attributes(:customer_id => current_customer.to_param, :used_at => Time.now.localtime)
-          redirect_to_root_path_samsung = root_path
+          redirect_to_root_path_samsung = root_localize_path
           render json: { status: 9, message: redirect_to_root_path_samsung }
         end
       else

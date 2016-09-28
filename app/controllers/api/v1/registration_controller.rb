@@ -57,7 +57,7 @@ class Api::V1::RegistrationController < ApplicationController
               sign_in :customer, customer
               activation = Activation.find_by_activation_code(params[:code])
               activation.update_attributes(:customers_id => customer.to_param, :created_at => Time.now.localtime)
-              redirect_to_root_path = root_path
+              redirect_to_root_path = root_localize_path
               render json: { status: 9, message: redirect_to_root_path }
             else
               flash[:error] = "Error while creating a user account. Please try again."
@@ -78,7 +78,7 @@ class Api::V1::RegistrationController < ApplicationController
             if customer.save(:validate => false)
               sign_in :customer, customer
               DiscountUse.create(:discount_code_id => r["discount_code_id"], :customer_id => customer.to_param, :discount_use_date => Time.now)
-              redirect_to_root_path = root_path
+              redirect_to_root_path = root_localize_path
               render json: { status: 9, message: redirect_to_root_path }
             else
               flash[:error] = "Error while creating a user account. Please try again."
@@ -95,7 +95,7 @@ class Api::V1::RegistrationController < ApplicationController
           sign_in :customer, customer
           DiscountUse.create(:discount_code_id => discount.id, :customer_id => current_customer.to_param, :discount_use_date => Time.now)
           activation.update_attributes(:customers_id => current_customer.to_param, :created_at => Time.now.localtime)
-          redirect_to_root_path = root_path
+          redirect_to_root_path = root_localize_path
           render json: { status: 9, message: redirect_to_root_path }
         end
       elsif !params[:activation].present? && !params[:code].present? && !params[:moovie_id].present?
@@ -105,7 +105,7 @@ class Api::V1::RegistrationController < ApplicationController
         customer.customers_abo_validityto = nil
         if customer.save(validate: false)
           sign_in :customer, customer
-          redirect_to_home_path = root_path
+          redirect_to_home_path = root_localize_path
           render json: { status: 9, message: redirect_to_home_path }
         end
       end
