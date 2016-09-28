@@ -42,7 +42,7 @@
           <li><%= t('.top_part_2').capitalize %>: <%= current_customer.tvod_free %></li>
           <% if current_customer.tvod_free == 0 %>
             <li><%= t('.subscription') %>: <span class="_bold_"><%= t('.subscription_info') %></span>
-            (<%= link_to t('.subscribe'), info_path(:page_name => t('routes.infos.params.unlimited')), class: '_blueColor_ _underline_' %>)</li>
+            (<%= link_to t('.subscribe'), info_path(:page_name => t('routes.infos.params.alacarte')), class: '_blueColor_ _underline_' %>)</li>
           <% else %>
             <li><%= t('.subscription') %>: <span class="_bold_"><%= product.products_title %></span>
             <!--<a href="#" class='_blueColor_ _underline_'>(souscrire)</a>--></li>
