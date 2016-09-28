@@ -14,7 +14,7 @@
       </a>
     </div>
     <div>
-      <% if current_customer.abo_subscriber? || current_customer.plush_la_carte_subscriber? %>
+      <% if current_customer.abo_subscriber? || current_customer.plush_la_carte_subscriber? || current_customer.unlimted_subscriber? %>
         <h2><%= t('.top_part_1') %> <span class="_bold_"><%= current_customer.tvod_free %>	<%= t('.top_part_2') %></span> <a href="#" class='greenToggle'>(<%= t('.details') %>)</a>
         </h2>
       <% elsif current_customer.mobistar_subscriber? %>
@@ -42,7 +42,7 @@
           <li><%= t('.top_part_2').capitalize %>: <%= current_customer.tvod_free %></li>
           <% if current_customer.tvod_free == 0 %>
             <li><%= t('.subscription') %>: <span class="_bold_"><%= t('.subscription_info') %></span>
-            (<%= link_to t('.subscribe'), info_path(:page_name => t('routes.infos.params.alacarte')), class: '_blueColor_ _underline_' %>)</li>
+            (<%= link_to t('.subscribe'), info_path(:page_name => t('routes.infos.params.unlimited')), class: '_blueColor_ _underline_' %>)</li>
           <% else %>
             <li><%= t('.subscription') %>: <span class="_bold_"><%= product.products_title %></span>
             <!--<a href="#" class='_blueColor_ _underline_'>(souscrire)</a>--></li>
@@ -115,7 +115,6 @@
         </tr>
         </tbody>
       </table>
-      <% unless current_customer.unlimted_subscriber? %>
         <form id="green_banner_form">
           <label for=""><span class="_bold_"><%= t('.discount_code').capitalize %></span></label>
           <div class="_inputContainer">
@@ -125,7 +124,6 @@
             </div>
           </div>
         </form>
-      <% end %>
       <!--
         <form action="#" class='mt44'>
           <#%= image_tag("greenBannerLion.png") %>
