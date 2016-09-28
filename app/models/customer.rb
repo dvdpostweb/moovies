@@ -170,6 +170,14 @@ class Customer < ActiveRecord::Base
     (customers_abo_type == 7 || customers_abo_type == 8 || customers_abo_type == 9 || customers_abo_type == 10 || customers_abo_type == 11)
   end
 
+  def abo_subscriber?
+    (customers_abo_type == 6 && activation_discount_code_type == "D" || customers_abo_type == 6 && activation_discount_code_type == "A")
+  end
+
+  def mobistar_subscriber?
+    (customers_abo_type == 6 && self.activation_discount_code_type == "A" && Mobistar.find_by_activation_id(self.activation_discount_code_id))
+  end
+
   def have_freetrial_codes?
     (activation_discount_code_id == 263 || activation_discount_code_id == 264 || activation_discount_code_id == 264)
   end
