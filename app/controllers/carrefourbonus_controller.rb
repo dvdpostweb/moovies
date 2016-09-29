@@ -1,6 +1,4 @@
 class CarrefourbonusController < ApplicationController
-
-  caches_page :plans
   
   def plans
   	@hide_menu = true
