@@ -22,11 +22,7 @@
 </ul>
 <div id="wrap">
 
-<% if customer_signed_in? %>
-    <% unless params[:controller] == "payment_methods" || params[:controller] == "steps" || (params[:controller] == "home" && params[:action] == "carrefour") %>
-      <%= render partial: "layouts/green_banner" %>
-    <% end %>
-  <% end %>
+<%= render partial: "layouts/green_banner" %>
 
   <!--   ==============   HEADER   ==============   -->
   <div id="header" >
