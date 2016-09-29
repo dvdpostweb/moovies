@@ -110,24 +110,28 @@ class Api::V1::ValidatorController < ApplicationController
         raise ActionController::RoutingError.new('Not Found')
       end
     else
-      discount = Discount.by_name(params[:promotion]).available.first
-      activation = Activation.by_name(params[:promotion]).available.first
-      if params[:promotion] === "PHOTOBOX"
-        render :json => { :status => 2, :message => photobox_path(:code => params[:promotion]) }
-      elsif params[:promotion] === "FREETRIAL"
-        render :json => { :status => 2, :message => info_path(:page_name => "freetrial") }
-      elsif params[:promotion] === "CARREFOUR"
-        render :json => { :status => 2, :message => carrefourbonus_path(:code => params[:promotion]) }
-      elsif discount.present?
-        render :text => new_customer_session_path(:code => params[:promotion]);
-      elsif activation.present?
-        if activation.abo_type_id == 0 
-          render :json => { :status => 2, :message => carrefour_path(:carrefour_code => params[:promotion]) }
+      if request.xhr?
+        discount = Discount.by_name(params[:promotion]).available.first
+        activation = Activation.by_name(params[:promotion]).available.first
+        if params[:promotion] === "PHOTOBOX"
+          render :json => { :status => 2, :message => photobox_path(:code => params[:promotion]) }
+        elsif params[:promotion] === "FREETRIAL"
+          render :json => { :status => 2, :message => info_path(:page_name => "freetrial") }
+        elsif params[:promotion] === "CARREFOUR"
+          render :json => { :status => 2, :message => carrefourbonus_path(:code => params[:promotion]) }
+        elsif discount.present?
+          render :text => new_customer_session_path(:code => params[:promotion]);
+        elsif activation.present?
+          if activation.abo_type_id == 0 
+            render :json => { :status => 2, :message => carrefour_path(:carrefour_code => params[:promotion]) }
+          else
+            render :json => { :status => 2, :message => new_customer_session_path(:code => params[:promotion]) }
+          end
         else
-          render :json => { :status => 2, :message => new_customer_session_path(:code => params[:promotion]) }
+          render :json => { :status => 1, :message => t('public_promotion.update.error') }
         end
       else
-        render :json => { :status => 1, :message => t('public_promotion.update.error') }
+        raise ActionController::RoutingError.new('Not Found')
       end
     end
   end
