@@ -2,6 +2,7 @@
 
 
 <div class="greenBanner">
+
   <div class="greenBannerTop">
     <div>
       <%= image_tag("greenBannerLine.png", alt: "line", class: '_toggleImage1_') %>
@@ -12,7 +13,7 @@
       </a>
     </div>
     <div>
-      <% if current_customer.abo_subscriber? || current_customer.plush_la_carte_subscriber? || current_customer.unlimted_subscriber? %>
+      <% if current_customer.plush_la_carte_subscriber? || current_customer.abo_subscriber? %>
         <h2><%= t('.top_part_1') %> <span class="_bold_"><%= current_customer.tvod_free %>	<%= t('.top_part_2') %></span> <a href="#" class='greenToggle'>(<%= t('.details') %>)</a>
         </h2>
       <% elsif current_customer.mobistar_subscriber? %>
@@ -23,42 +24,17 @@
     </div>
     <div>
       <!--
-        <div class="greenBannerInlineBlock">	Vous êtes 	client Delhaize?<br>
-          <a href="#" class='_underline_'>Cliquez ici</a>
-        </div>
-        <@%= image_tag("greenBannerLion.png", alt: "lion", class: 'greenBannerInlineBlock') %>
-        -->
+      <div class="greenBannerInlineBlock">	Vous êtes 	client Delhaize?<br>
+        <a href="#" class='_underline_'>Cliquez ici</a>
+      </div>
+      <img src="img/greenBannerLion.png" alt="lion" class='greenBannerInlineBlock'>-->
     </div>
   </div>
 
   <div class="greenBannerOpen">
     <div>
-    <% product = Product.find_by_products_title(current_customer.customers_abo_type) %>
-      <% if current_customer.abo_subscriber? %>
-        <ul>
-          <li><a href="#" class='_blueColor_ _underline_ abo_subscriber'>Plush à la Carte</a></li>
-          <li><%= t('.top_part_2').capitalize %>: <%= current_customer.tvod_free %></li>
-          <% if current_customer.tvod_free == 0 %>
-            <li><%= t('.subscription') %>: <span class="_bold_"><%= t('.subscription_info') %></span>
-            (<%= link_to t('.subscribe'), info_path(:page_name => t('routes.infos.params.alacarte')), class: '_blueColor_ _underline_' %>)</li>
-          <% else %>
-            <li><%= t('.subscription') %>: <span class="_bold_"><%= product.products_title %></span>
-            <!--<a href="#" class='_blueColor_ _underline_'>(souscrire)</a>--></li>
-          <% end %>
-        </ul>
-      <% elsif current_customer.mobistar_subscriber? %>
-        <ul>
-          <li><a href="#" class='_blueColor_ _underline_ abo_subscriber'>Plush à la Carte</a></li>
-          <li><%= t('.top_part_2_6').capitalize %>: <%= current_customer.tvod_free / 3 %></li>
-          <% if current_customer.tvod_free == 0 %>
-            <li><%= t('.subscription') %>: <span class="_bold_"><%= t('.subscription_info') %></span>
-            (<%= link_to t('.subscribe'), info_path(:page_name => t('routes.infos.params.alacarte')), class: '_blueColor_ _underline_' %>)</li>
-          <% else %>
-            <li><%= t('.subscription') %>: <span class="_bold_"><%= product.products_title %></span>
-            <!--<a href="#" class='_blueColor_ _underline_'>(souscrire)</a>--></li>
-          <% end %>
-        </ul>
-      <% end %>
+    <% product = ProductAbo.find_by_products_id(current_customer.customers_abo_type) %>
+
       <% if current_customer.unlimted_subscriber? %>
         <ul>
           <li><a href="#" class='_greenColor_ _underline_ unlimited_subscriber'>Plush Unlimited</a></li>
@@ -66,11 +42,16 @@
             <li><%= t('.subscription') %>: <span class="_bold_"><%= t('.subscription_info') %></span>
             (<%= link_to t('.subscribe'), edit_customer_payment_methods_path(:customer_id => current_customer.to_param, :type => :credit_card), class: '_greenColor_ _underline_' %>)</li>
           <% else %>
-            <li><%= t('.subscription') %>: <span class="_bold_"><%= product.products_title %></span>
-            <!--<a href="#" class='_blueColor_ _underline_'>(souscrire)</a>--></li>
+            <li><%= t('.subscription') %>: <span class="_bold_"><%= product.description %></span></li>
           <% end %>
         </ul>
+        <ul>
+          <li><a href="#" class='_blueColor_ _underline_ abo_subscriber'>Plush à la Carte</a></li>
+          <li><%= t('.subscription') %>: <span class="_bold_"><%= t('.subscription_info') %></span>
+          (<%= link_to t('.subscribe'), api_v1_convert_unlimited_to_plush_a_la_carte_path, class: '_blueColor_ _underline_' %>)</li>
+        </ul>
       <% end %>
+
       <% if current_customer.plush_la_carte_subscriber? %>
         <ul>
           <li><a href="#" class='_blueColor_ _underline_ abo_subscriber'>Plush à la Carte</a></li>
@@ -79,65 +60,72 @@
             <li><%= t('.subscription') %>: <span class="_bold_"><%= t('.subscription_info') %></span>
             (<%= link_to t('.subscribe'), info_path(:page_name => t('routes.infos.params.alacarte')), class: '_blueColor_ _underline_' %>)</li>
           <% else %>
-            <li><%= t('.subscription') %>: <span class="_bold_"><%= product.products_title %></span>
-            <!--<a href="#" class='_blueColor_ _underline_'>(souscrire)</a>--></li>
+            <li><%= t('.subscription') %>: <span class="_bold_"><%= product.description %></span>
+            (<%= link_to t('.change_plan'), info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change"), class: '_blueColor_ _underline_' %>)</li>
+            <li><%= t('.valid_untill') %>: <span class="_bold_"><%= current_customer.customers_abo_validityto.strftime("%d/%m/%Y") if current_customer.customers_abo_validityto.present? %></span>
+            (<%= link_to t('.renew_now'), renew_monthly_credits_for_a_la_carte_path, class: '_blueColor_ _underline_' %>)</li>
           <% end %>
         </ul>
+        <ul>
+          <li><a href="#" class='_greenColor_ _underline_ unlimited_subscriber'>Plush Unlimited</a></li>
+          <li><%= t('.subscription') %>: <span class="_bold_"><%= t('.subscription_info') %></span>
+          (<%= link_to t('.subscribe'), api_v1_convert_plush_a_la_carte_to_unlimited_path, class: '_greenColor_ _underline_' %>)</li>
+        </ul>
       <% end %>
+
+      <% if current_customer.mobistar_subscriber? %>
+        <ul>
+          <li><a href="#" class='_blueColor_ _underline_ abo_subscriber'>Plush à la Carte</a></li>
+          <li><%= t('.top_part_2_6').capitalize %>: <%= current_customer.tvod_free / 3 %></li>
+          <% if current_customer.tvod_free == 0 %>
+            <li><%= t('.subscription') %>: <span class="_bold_"><%= t('.subscription_info') %></span>
+            (<%= link_to t('.subscribe'), info_path(:page_name => t('routes.infos.params.alacarte')), class: '_blueColor_ _underline_' %>)</li>
+          <% else %>
+            <li><%= t('.subscription') %>: <span class="_bold_"><%= product.description %></span>
+            (<%= link_to t('.change_plan'), info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change"), class: '_blueColor_ _underline_' %>)</li>
+            <li><%= t('.valid_untill') %>: <span class="_bold_"><%= current_customer.customers_abo_validityto.strftime("%d/%m/%Y") if current_customer.customers_abo_validityto.present? %></span>
+            (<%= link_to t('.renew_now'), renew_monthly_credits_for_a_la_carte_path, class: '_blueColor_ _underline_' %>)</li>
+          <% end %>
+        </ul>
+        <ul>
+          <li><a href="#" class='_greenColor_ _underline_ unlimited_subscriber'>Plush Unlimited</a></li>
+          <li><%= t('.subscription') %>: <span class="_bold_"><%= t('.subscription_info') %></span>
+          (<%= link_to t('.subscribe'), api_v1_convert_plush_a_la_carte_to_unlimited_path, class: '_greenColor_ _underline_' %>)</li>
+        </ul>
+      <% end %>
+
+      <% if current_customer.abo_subscriber? %>
+        <ul>
+          <li><a href="#" class='_blueColor_ _underline_ abo_subscriber'>Plush à la Carte</a></li>
+          <li><%= t('.top_part_2').capitalize %>: <%= current_customer.tvod_free %></li>
+          <% if current_customer.tvod_free == 0 %>
+            <li><%= t('.subscription') %>: <span class="_bold_"><%= t('.subscription_info') %></span>
+            (<%= link_to t('.subscribe'), info_path(:page_name => t('routes.infos.params.alacarte')), class: '_blueColor_ _underline_' %>)</li>
+          <% else %>
+            <li><%= t('.subscription') %>: <span class="_bold_"><%= product.description %></span>
+            (<%= link_to t('.change_plan'), info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change"), class: '_blueColor_ _underline_' %>)</li>
+            <li><%= t('.valid_untill') %>: <span class="_bold_"><%= current_customer.customers_abo_validityto.strftime("%d/%m/%Y") if current_customer.customers_abo_validityto.present? %></span>
+            (<%= link_to t('.renew_now'), renew_monthly_credits_for_a_la_carte_path, class: '_blueColor_ _underline_' %>)</li>
+          <% end %>
+        </ul>
+        <ul>
+          <li><a href="#" class='_greenColor_ _underline_ unlimited_subscriber'>Plush Unlimited</a></li>
+          <li><%= t('.subscription') %>: <span class="_bold_"><%= t('.subscription_info') %></span>
+          (<%= link_to t('.subscribe'), api_v1_convert_plush_a_la_carte_to_unlimited_path, class: '_greenColor_ _underline_' %>)</li>
+        </ul>
+      <% end %>
+
     </div>
     <div>
-      <table class='_hidden_'>
-        <thead>
-        <tr>
-          <td collspan=2><a href="#" class='_underline_ _redColor_ _bold_'>Votre compte Carte-Plus Delhaize</a></td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>Votre numéro de Carte-Plus:</td>
-          <td>
-            <span class="_bold_">5304338348939 <a href="#" class='_underline_ _redColor_ _normal_'>(modifier)</a></span>
-          </td>
-        </tr>
-        <tr>
-          <td>Votre solde points-Plus:</td>
-          <td><span class="_bold_">800</span></td>
-        </tr>
-        <tr>
-          <td>Crédits films disponibles:</td>
-          <td><span class='_bold_'>5</span></td>
-        </tr>
-        <tr>
-          <td>Valeur de vos crédits films</td>
-          <td><span class="_bold_">&#8364;</span></td>
-        </tr>
-        </tbody>
-      </table>
-        <form id="green_banner_form">
-          <label for=""><span class="_bold_"><%= t('.discount_code').capitalize %></span></label>
-          <div class="_inputContainer">
-            <input type="text" name="promotion" id="promotion" placeholder="<%= t('.subscription_info').capitalize %>">
-            <input type="submit"  value='<%= t('.validate').capitalize %>'>
-            <div id="promotion_response_message" class="_errorMessage_">
-            </div>
+      <form id="green_banner_form">
+        <label for=""><span class="_bold_"><%= t('.discount_code').capitalize %></span></label>
+        <div class="_inputContainer">
+          <input type="text" name="promotion" id="promotion" placeholder="<%= t('.subscription_info').capitalize %>">
+          <input type="submit"  value='<%= t('.validate').capitalize %>'>
+          <div id="promotion_response_message" class="_errorMessage_">
           </div>
-        </form>
-      <!--
-        <form action="#" class='mt44'>
-          <#%= image_tag("greenBannerLion.png") %>
-          <label for="">
-            <span class="_bold_">Vous possédez une Carte-Plus Delhaize?</span><br>
-          Introduisez votre numéro de carte ci-dessous et louez des films avec vos Points-Plus
-            </label>
-          <div class="_inputContainer">
-            <input type="text" placeholder="Votre numéro de Carte-Plus">
-            <input type="submit" value='Valider' class='_redBackground_'>
-            <div class="_errorMessage_ _hidden_">
-              Invalid code
-            </div>
-          </div>
-        </form>
-      -->
+        </div>
+      </form>
     </div>
   </div>
 </div>
@@ -229,8 +217,8 @@
             <div class="_errorMessage_ _hidden_">
               Invalid code
             </div>
-          </div>  
-        </form> 
+          </div>
+        </form>
         -->
       </div>
     </div>

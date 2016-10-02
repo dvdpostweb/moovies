@@ -21,9 +21,9 @@
   </li>
 </ul>
 <div id="wrap">
-
-<%= render partial: "layouts/green_banner" %>
-
+<% unless params[:controller] == "steps" %>
+  <%= render partial: "layouts/green_banner" %>
+<% end %>
   <!--   ==============   HEADER   ==============   -->
   <div id="header" >
     <div><%= link_to t('.tagline'), root_localize_path, :class => 'f-btn' %></div>

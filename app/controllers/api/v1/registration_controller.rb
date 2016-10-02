@@ -11,6 +11,7 @@ class Api::V1::RegistrationController < API::V1::BaseController
       customer.customers_newsletterpartner = params[:customers_newsletterpartner] if params[:customers_newsletterpartner].present?
       customer.activation_discount_code_id = 0
       customer.activation_discount_code_type = "D"
+      customer.customers_abo_validityto = Time.now
       if params[:moovie_id].present?
         product = Product.where(:products_id => params[:moovie_id]).first
         if product
