@@ -1,13 +1,13 @@
 <% if customer_signed_in? %>
 
 
-<div class="greenBanner">
+<div class="<%= params[:kind] == :adult ? ("pinkBanner") : ("greenBanner") %>">
 
-  <div class="greenBannerTop">
+  <div class="pinkBannerTop">
     <div>
       <%= image_tag("greenBannerLine.png", alt: "line", class: '_toggleImage1_') %>
       <%= image_tag("greenBannerPhone.png", alt: "line", class: '_toggleImage2_') %>
-      <a href="#" class='greenToggle'>
+      <a href="#" class='<%= params[:kind] == :adult ? ("pinkToggle") : ("greenToggle") %>'>
         <span class="_toggleSpan1_ _underline_">(<%= t('.close_banner') %>)</span>
         <span class="_toggleSpan2_">(<%= t('.open_banner') %>)</span>
       </a>
@@ -31,7 +31,7 @@
     </div>
   </div>
 
-  <div class="greenBannerOpen">
+  <div class="<%= params[:kind] == :adult ? ("pinkBannerOpen") : ("greenBannerOpen") %>">
     <div>
     <% product = ProductAbo.find_by_products_id(current_customer.customers_abo_type) %>
 
@@ -134,12 +134,12 @@
 <% else %>
 
 
-<div class="greenBanner">
-    <div class="greenBannerTop">
+<div class="<%= params[:kind] == :adult ? ("pinkBanner") : ("greenBanner") %>">
+    <div class="<%= params[:kind] == :adult ? ("pinkBannerTop") : ("greenBannerTop") %>">
       <div>
         <%= image_tag("greenBannerLine.png", alt: "line", class: '_toggleImage1_') %>
       <%= image_tag("greenBannerPhone.png", alt: "line", class: '_toggleImage2_') %>
-        <a href="#" class='greenToggle'>
+        <a href="#" class='<%= params[:kind] == :adult ? ("pinkToggle") : ("greenToggle") %>'>
           <span class="_toggleSpan1_ _underline_">(<%= t('.close_banner') %>)</span>
           <span class="_toggleSpan2_">(<%= t('.open_banner') %>)</span>
         </a>
@@ -157,7 +157,7 @@
       </div>
     </div>
 
-    <div class="greenBannerOpen">
+    <div class="<%= params[:kind] == :adult ? ("pinkBannerOpen") : ("greenBannerOpen") %>">
       <div>
         <ul>
           <li><a href="#" class='_blueColor_ _underline_ abo_subscriber'>Plush à la Carte</a></li>

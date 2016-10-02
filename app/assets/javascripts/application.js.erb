@@ -355,6 +355,15 @@ $(function() {
     return false;
   });
 
+  var pinkBannerOpen = $('.pinkBannerOpen');
+  var pinkBannerTop = $('.pinkBannerTop');
+  $('a.pinkToggle').on('click', function(){
+    pinkBannerOpen.toggleClass('_open_');
+    pinkBannerTop.toggleClass('_open_');
+
+    return false;
+  });
+
 });
 function querySt(hu ,ji) {
   gy = hu.split("&");
