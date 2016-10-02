@@ -54,9 +54,9 @@ class Api::V1::ValidatorController < API::V1::BaseController
 
   def set_plan
     if request.xhr?
-      if params[:discount_code].present?
+      if params[:discount_code].present? && !params[:subscription_action].present?
         discount = Discount.find_by_discount_code(params[:discount_code])
-    	  customer = current_customer
+        customer = current_customer
         if !customer.discount_reuse?(discount.month_before_reuse) && discount.bypass_discountuse == 0
           render :json => { :status => 2 }
         else
@@ -71,6 +71,25 @@ class Api::V1::ValidatorController < API::V1::BaseController
             end
           else
             render :json => { :status => 0 }
+          end
+        end
+      elsif params[:discount_code].present? && params[:subscription_action].present?
+        if (params[:subscription_action].present? && params[:subscription_action] == "subscription_change")
+          discount = Discount.find_by_discount_code(params[:discount_code])
+          customer = current_customer
+          if customer.can_change_subscription?
+            render :json => { :status => 4, :message => "#{t('session.change_plan_info')} #{current_customer.next_subscription_change_posibile_at.strftime("%d/%m/%Y")}" }
+          else
+            customer.code = params[:discount_code]
+            customer.customers_registration_step = 100
+            customer.customers_abo = 1
+            customer.tvod_free = customer.tvod_free + discount.tvod_free
+            customer.abo_history(38, customer.abo_type_id, discount.to_param)
+            customer.subscription_changed_at = Time.now.localtime
+            customer.next_subscription_change_posibile_at = 1.month.from_now
+            if customer.save(validate: false)
+              render :json => { :status => 3 }
+            end
           end
         end
       end
@@ -133,6 +152,31 @@ class Api::V1::ValidatorController < API::V1::BaseController
       else
         raise ActionController::RoutingError.new('Not Found')
       end
+    end
+  end
+
+  def convert_unlimited_to_plush_a_la_carte
+    customer = current_customer
+    customer.customers_abo_type = 7
+    customer.customers_next_abo_type = 7
+    if customer.save(validate: false)
+      product_abo = ProductAbo.find_by_products_id(current_customer.customers_next_abo_type)
+      customer.tvod_free = current_customer.tvod_free + product_abo.tvod_credits
+      customer.customers_abo_validityto = Time.now
+      customer.customers_locked__for_reconduction = 1
+      customer.credits_already_recieved = 1
+      if customer.save(validate: false)
+        redirect_to :back
+      end
+    end
+  end
+
+  def convert_plush_a_la_carte_to_unlimited
+    customer = current_customer
+    customer.customers_abo_type = 1
+    customer.customers_next_abo_type = 1
+    if customer.save(validate: false)
+      redirect_to :back
     end
   end
 

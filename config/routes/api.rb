@@ -9,6 +9,8 @@ Moovies::Application.routes.draw do
       match "login" => "login#login"
       match "register" => "registration#register"
       match "promotion_code_activation" => "validator#check_and_validate_public_promotions_activation_codes"
+      match "convert_unlimited_to_plush_a_la_carte" => "validator#convert_unlimited_to_plush_a_la_carte"
+      match "convert_plush_a_la_carte_to_unlimited" => "validator#convert_plush_a_la_carte_to_unlimited"
     end
   end
 end
