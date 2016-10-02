@@ -1,4 +1,4 @@
-class Api::V1::ValidatorController < ApplicationController
+class Api::V1::ValidatorController < API::V1::BaseController
 
   def check_presence_of_customer_email
     if request.xhr?
@@ -122,7 +122,7 @@ class Api::V1::ValidatorController < ApplicationController
         elsif discount.present?
           render :text => new_customer_session_path(:code => params[:promotion]);
         elsif activation.present?
-          if activation.abo_type_id == 0 
+          if activation.abo_type_id == 0
             render :json => { :status => 2, :message => carrefour_path(:carrefour_code => params[:promotion]) }
           else
             render :json => { :status => 2, :message => new_customer_session_path(:code => params[:promotion]) }
