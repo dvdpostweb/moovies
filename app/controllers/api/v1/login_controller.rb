@@ -1,6 +1,4 @@
-class Api::V1::LoginController < ApplicationController
-
-  skip_before_filter :verify_authenticity_token
+class Api::V1::LoginController < API::V1::BaseController
 
   def login
     if request.xhr?

@@ -1,6 +1,4 @@
-class Api::V1::RegistrationController < ApplicationController
-
-  skip_before_filter :verify_authenticity_token
+class Api::V1::RegistrationController < API::V1::BaseController
 
   def register
     if request.xhr?
@@ -12,7 +10,7 @@ class Api::V1::RegistrationController < ApplicationController
       customer.customers_newsletter = params[:customers_newsletter] if params[:customers_newsletter].present?
       customer.customers_newsletterpartner = params[:customers_newsletterpartner] if params[:customers_newsletterpartner].present?
       customer.activation_discount_code_id = 0
-      customer.activation_discount_code_type = "D" 
+      customer.activation_discount_code_type = "D"
       if params[:moovie_id].present?
         product = Product.where(:products_id => params[:moovie_id]).first
         if product
