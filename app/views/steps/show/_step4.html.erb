@@ -13,7 +13,7 @@
     <img src='http://fr.ptg.be/aimg/plush.gif' />
   <% end %>
   <% if [139].include?(current_customer.promo_id) %>
-    
+
     <!-- Begin Addiliate Tracking code with image-->
     <img src="http://www.addiliate.com/report.html?cp=<%= I18n.locale == :nl ? 'A3434599' : '43DHR5NP' %>&rId=<%= current_customer.id %>&orderId=[]&amount=[]" width="1" height="1" alt="" />
     <!-- End Addiliate Tracking code with image-->
@@ -42,43 +42,3 @@
       'revenue': '<%= price %>'
     }];
 </script>
-<!-- Google Code for Plush - Conversion Conversion Page svod -->
-<% if current_customer.tvod_only? %>
-<!-- Google Code for Plush - TVOD Conversion Page -->
-<script type="text/javascript">
-/* <![CDATA[ */
-var google_conversion_id = 1033549176;
-var google_conversion_language = "en";
-var google_conversion_format = "2";
-var google_conversion_color = "ffffff";
-var google_conversion_label = "mwNZCKjx2wgQ-Orq7AM";
-var google_remarketing_only = false;
-/* ]]> */
-</script>
-<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-</script>
-<noscript>
-<div style="display:inline;">
-<img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/1033549176/?label=mwNZCKjx2wgQ-Orq7AM&amp;guid=ON&amp;script=0"/>
-</div>
-</noscript>
-<% else %>
-<script type="text/javascript">
-/* <![CDATA[ */
-var google_conversion_id = 1033549176;
-var google_conversion_language = "en";
-var google_conversion_format = "3";
-var google_conversion_color = "ffffff";
-var google_conversion_label = "mW-yCIDZywYQ-Orq7AM";
-var google_conversion_value = 0;
-var google_remarketing_only = false;
-/* ]]> */
-</script>
-<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-</script>
-<noscript>
-<div style="display:inline;">
-<img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/1033549176/?value=0&amp;label=mW-yCIDZywYQ-Orq7AM&amp;guid=ON&amp;script=0"/>
-</div>
-</noscript>
-<% end %>
