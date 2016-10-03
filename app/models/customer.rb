@@ -201,9 +201,9 @@ class Customer < ActiveRecord::Base
     tvod_free > 0
   end
 
-  def can_change_subscription?
-    (self.next_subscription_change_posibile_at > self.subscription_changed_at)
-  end
+  #def can_change_subscription?
+  #  (self.next_subscription_change_posibile_at > self.subscription_changed_at)
+  #end
 
   #after_create :setup_step
 
