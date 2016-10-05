@@ -156,8 +156,7 @@ Moovies::Application.routes.draw do
       match "facebook_activation" => "facebook#activation"
 
       match "express_checkout" => "paypal#express_checkout"
-      match "return" => "paypal#return"
-      match "notification" => "paypal#notification"
+      match "express_checkout_return" => "paypal#express_checkout_return"
     end
   end
 
