@@ -1,5 +1,9 @@
 class Api::V1::PaypalController < ApplicationController
 
+  skip_before_filter :verify_authenticity_token
+  skip_before_filter :authenticate_customer!
+  protect_from_forgery except: [:express_checkout_return]
+
   API_USERNAME = ENV["API_USERNAME"]
   API_PASSWORD = ENV["API_PASSWORD"]
   API_SIGNATURE = ENV["API_SIGNATURE"]
@@ -28,7 +32,25 @@ class Api::V1::PaypalController < ApplicationController
   end
 
   def express_checkout_return
-    render json: params
+    if params[:token].present?
+      request = Paypal::Express::Request.new(
+        :username   => API_USERNAME,
+        :password   => API_PASSWORD,
+        :signature  => API_SIGNATURE
+      )
+      token = params[:token]
+      response = request.agree! token
+      #response.billing_agreement
+      #response.billing_agreement.identifier
+      customer = current_customer
+      customer.customers_abo_payment_method = 4
+      customer.customers_registration_step = 100
+      customers_abo = 1
+      customer.paypal_agreement_id = response.billing_agreement.identifier
+      if customer.save(validate: false)
+	      redirect_to step_path(:id => 'step4')
+	    end
+    end
   end
 
 end
