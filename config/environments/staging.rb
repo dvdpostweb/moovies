@@ -54,4 +54,5 @@ Moovies::Application.configure do
     config.force_locale = true
   end
 
+  Paypal.sandbox!
 end
