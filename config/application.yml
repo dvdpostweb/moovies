@@ -1,11 +1,20 @@
 development:
-  facebook_app_id: 541783899334178
-  facebook_app_secret: 71edfc7346ac464e68c7ef43e00e4c08
+  FACEBOOK_APP_ID: 541783899334178
+  FACEBOOK_APP_SECRET: 71edfc7346ac464e68c7ef43e00e4c08
+  API_USERNAME: aleksandar.popovic_api1.dvdpost.be
+  API_PASSWORD: D8E7LMD43KXC7Y7S
+  API_SIGNATURE: AFcWxV21C7fd0v3bYYYRCpSSRl31AJ2TkiC7osDf5Vnln60l.x17jJbL
+  BILLING_AGREEMENT_DESCRIPTION: Plush Development Agreement
+  APP_DOMAIN_URL: http://localhost:3000
 
 staging:
-  facebook_app_id: 820120514798274
-  facebook_app_secret: 5775a2f2c953ad8e2e3646804314f461
+  FACEBOOK_APP_ID: 820120514798274
+  FACEBOOK_APP_SECRET: 5775a2f2c953ad8e2e3646804314f461
+  API_USERNAME: aleksandar.popovic_api1.dvdpost.be
+  API_PASSWORD: D8E7LMD43KXC7Y7S
+  API_SIGNATURE: AFcWxV21C7fd0v3bYYYRCpSSRl31AJ2TkiC7osDf5Vnln60l.x17jJbL
+  APP_DOMAIN_URL: http://staging.plush.be
 
 production:
-  facebook_app_id: 246953642340322
-  facebook_app_secret: c48fe97d81d2469e58bf968a51e73fb5
+  FACEBOOK_APP_ID: 246953642340322
+  FACEBOOK_APP_SECRET: c48fe97d81d2469e58bf968a51e73fb5
