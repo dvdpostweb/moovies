@@ -53,6 +53,5 @@ Moovies::Application.configure do
   RouteTranslator.config do |config|
     config.force_locale = true
   end
-
-  Paypal.sandbox!
+  
 end
