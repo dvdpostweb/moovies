@@ -22,6 +22,102 @@
 </ul>
 <div id="wrap">
 
+  <% unless (customer_signed_in? && current_customer.unlimted_subscriber?) %>
+
+    <% if current_customer && current_customer.tvod_free > 0 && params[:controller] != 'steps' %>
+    <div class='flash_message'>
+      <div class="notice">
+
+      <% if current_customer.abo_type_id == 6 && current_customer.activation_discount_code_type == "A" && Mobistar.find_by_activation_id(current_customer.activation_discount_code_id) %>
+        <% if current_customer.tvod_free == 9 %>
+          <%= t('.header_mb_1').html_safe %>
+          <%= link_to info_path(:page_name => t('routes.infos.params.alacarte')) do %>
+          (<label><%= t('products.show.product.popup4').html_safe %></label>)
+          <% end %>
+        <% elsif current_customer.tvod_free == 6 %>
+          <%= t('.header_mb_2').html_safe %>
+          <%= link_to info_path(:page_name => t('routes.infos.params.alacarte')) do %>
+          (<label><%= t('products.show.product.popup4').html_safe %></label>)
+          <% end %>
+        <% elsif current_customer.tvod_free == 3 %>
+          <%= t('.header_mb_3').html_safe %>
+          <%= link_to info_path(:page_name => t('routes.infos.params.alacarte')) do %>
+          (<label><%= t('products.show.product.popup4').html_safe %></label>)
+          <% end %>
+        <% elsif current_customer.tvod_free > 9 %>
+          <% if I18n.locale == :fr %>
+            <%= "Vous avez encore #{current_customer.tvod_free / 3} film(s) à la Carte offert(s)" %>
+            <%= link_to info_path(:page_name => t('routes.infos.params.alacarte')) do %>
+            (<label><%= t('products.show.product.popup4').html_safe %></label>)
+            <% end %>
+          <% elsif I18n.locale == :nl %>
+            <%= "U kan nog #{current_customer.tvod_free / 3} à la carte film(s) gratis bekijken" %>
+            <%= link_to info_path(:page_name => t('routes.infos.params.alacarte')) do %>
+            (<label><%= t('products.show.product.popup4').html_safe %></label>)
+            <% end %>
+          <% elsif I18n.locale == :en %>
+            <%= "You can still watch #{current_customer.tvod_free / 3} movie(s) for free" if I18n.locale == :en %>
+            <%= link_to info_path(:page_name => t('routes.infos.params.alacarte')) do %>
+            (<label><%= t('products.show.product.popup4').html_safe %></label>)
+            <% end %>
+          <% end %>
+        <% end %>
+      <% else %>
+        <% if current_customer.plush_la_carte_subscriber? %>
+        <%= t('.tvod_free', :tvod_free => current_customer.tvod_free).html_safe %>
+        (<label onclick='jQuery.facebox("<%= escape_javascript(render(:partial => 'products/alert_header_alacarte')) %>");'><%= t('products.show.product.popup4').html_safe %></label>)
+        <% else %>
+          <%= t('.tvod_free', :tvod_free => current_customer.tvod_free).html_safe %>
+          <%= link_to info_path(:page_name => t('routes.infos.params.alacarte')) do %>
+          (<label><%= t('products.show.product.popup4').html_safe %></label>)
+          <% end %>
+        <% end %>
+      <% end %>
+
+
+      </div>
+    </div>
+    <% elsif if current_customer && current_customer.tvod_free == 0 && params[:controller] != 'steps' %>
+    <div class='flash_message'>
+      <div class="notice">
+
+      <% if current_customer.abo_type_id == 6 && current_customer.activation_discount_code_type == "A" && Mobistar.find_by_activation_id(current_customer.activation_discount_code_id) %>
+
+        <% if current_customer.tvod_free == 0 %>
+          <%= t('.header_mb_4').html_safe %>
+          <%= link_to info_path(:page_name => t('routes.infos.params.alacarte')) do %>
+          (<label><%= t('products.show.product.popup4').html_safe %></label>)
+          <% end %>
+        <% end %>
+      <% else %>
+        <%= t('.tvod_free', :tvod_free => current_customer.tvod_free).html_safe %>
+        <%= link_to info_path(:page_name => t('routes.infos.params.alacarte')) do %>
+        (<label><%= t('products.show.product.popup4').html_safe %></label>)
+        <% end %>
+      <% end %>
+
+      </div>
+    </div>
+    <% end %>
+    <% end %>
+
+    <% end %>
+
+    <% if flash[:notice] %>
+  	<div class='flash_message'>
+      <div class="notice">
+        <%= flash[:notice] %>
+      </div>
+  	</div>
+    <% end %>
+    <% if flash[:error] || flash[:alert]%>
+  	<div class='flash_message'>
+      <div class="flash_error">
+        <%= flash[:error] %><%= flash[:alert] %>
+      </div>
+  	</div>
+    <% end %>
+
   <!--   ==============   HEADER   ==============   -->
   <div id="header" >
     <div><%= link_to t('.tagline'), root_localize_path, :class => 'f-btn' %></div>
