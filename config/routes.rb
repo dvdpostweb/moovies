@@ -157,7 +157,7 @@ Moovies::Application.routes.draw do
 
       match "express_checkout" => "paypal#express_checkout"
       match "express_checkout_return" => "paypal#express_checkout_return"
-      match "express_checkout_notifications" => "paypal#express_checkout_notifications"
+      #match "express_checkout_notifications" => "paypal#express_checkout_notifications"
     end
   end
 
