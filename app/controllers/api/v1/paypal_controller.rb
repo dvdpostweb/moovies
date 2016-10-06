@@ -48,21 +48,9 @@ class Api::V1::PaypalController < ApplicationController
       customer.customers_locked__for_reconduction = 1
       customer.credits_already_recieved = 1
       if customer.save(validate: false)
-#        discount = Discount.find_by_discount_code_id(current_customer.activation_discount_code_id)
-#        payment = request.charge! current_customer.paypal_agreement_id, discount.discount_value, :currency_code => :EUR
-#        if payment
-#          if Payment.create({payment_method: customer.customers_abo_payment_method, date_added: Time.now, last_modified: Time.now, customers_id: customer.to_param, amount: payment.amount.total, payment_status: 1 })
-            redirect_to step_path(:id => 'step4')
-#          end
-#        end
+        redirect_to step_path(:id => 'step4')
 	    end
     end
   end
-
-  #def express_checkout_notifications
-  #  paypalipnnotification	= PaypalIpnNotification.new
-  #  paypalipnnotification.params = params
-	#  paypalipnnotification.save
-  #end
 
 end
