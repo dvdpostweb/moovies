@@ -2,7 +2,7 @@ class Api::V1::PaypalController < ApplicationController
 
   skip_before_filter :verify_authenticity_token
   skip_before_filter :authenticate_customer!
-  protect_from_forgery except: [:express_checkout_return]
+  protect_from_forgery except: [:express_checkout_return, :express_checkout_notifications]
 
   API_USERNAME = ENV["API_USERNAME"]
   API_PASSWORD = ENV["API_PASSWORD"]
@@ -10,6 +10,7 @@ class Api::V1::PaypalController < ApplicationController
   BILLING_AGREEMENT_DESCRIPTION = ENV["BILLING_AGREEMENT_DESCRIPTION"]
   RETURN_URL = "#{ENV["APP_DOMAIN_URL"]}/api/v1/express_checkout_return"
   CANCEL_RETURL_URL = "#{ENV["APP_DOMAIN_URL"]}/#{I18n.locale}/steps/step3"
+  NOTIFY_URL = "#{ENV["APP_DOMAIN_URL"]}/api/v1/express_checkout_notifications"
 
   def express_checkout
     request = Paypal::Express::Request.new(
@@ -47,9 +48,21 @@ class Api::V1::PaypalController < ApplicationController
       customer.customers_locked__for_reconduction = 1
       customer.credits_already_recieved = 1
       if customer.save(validate: false)
-	      redirect_to step_path(:id => 'step4')
+        discount = Discount.find_by_discount_code_id(current_customer.activation_discount_code_id)
+        payment = request.charge! current_customer.paypal_agreement_id, discount.discount_value, :currency_code => :EUR
+        if payment
+          if Payment.create({payment_method: customer.customers_abo_payment_method, date_added: Time.now, last_modified: Time.now, customers_id: customer.to_param, amount: payment.amount.total, payment_status: 1 })
+            redirect_to step_path(:id => 'step4')
+          end
+        end
 	    end
     end
+  end
+
+  def express_checkout_notifications
+    paypalipnnotification	= PaypalIpnNotification.new
+    paypalipnnotification.params = params
+	  paypalipnnotification.save
   end
 
 end
