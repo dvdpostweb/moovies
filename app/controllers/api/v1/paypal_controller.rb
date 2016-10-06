@@ -19,8 +19,6 @@ class Api::V1::PaypalController < ApplicationController
     )
     payment_request = Paypal::Payment::Request.new(
       :billing_type  => :MerchantInitiatedBilling,
-      # Or ":billing_type => :MerchantInitiatedBillingSingleAgreement"
-      # Read official document for details
       :billing_agreement_description => BILLING_AGREEMENT_DESCRIPTION
     )
     response = request.setup(
@@ -40,13 +38,14 @@ class Api::V1::PaypalController < ApplicationController
       )
       token = params[:token]
       response = request.agree! token
-      #response.billing_agreement
-      #response.billing_agreement.identifier
       customer = current_customer
       customer.customers_abo_payment_method = 4
       customer.customers_registration_step = 100
       customers_abo = 1
       customer.paypal_agreement_id = response.billing_agreement.identifier
+      customer.customers_abo_validityto = Time.now
+      customer.customers_locked__for_reconduction = 1
+      customer.credits_already_recieved = 1
       if customer.save(validate: false)
 	      redirect_to step_path(:id => 'step4')
 	    end
