@@ -1,4 +1,5 @@
 Moovies::Application.configure do
+
   # Settings specified here will take precedence over those in config/application.rb
 
   # In the development environment your application's code is reloaded on
@@ -36,7 +37,7 @@ Moovies::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 
-  config.action_mailer.default_url_options = { 
+  config.action_mailer.default_url_options = {
     :host => "staging.plush.be",
     :only_path => false
   }
@@ -52,5 +53,5 @@ Moovies::Application.configure do
   RouteTranslator.config do |config|
     config.force_locale = true
   end
-
+  
 end

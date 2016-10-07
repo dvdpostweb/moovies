@@ -88,3 +88,4 @@ gem "figaro"
 gem 'thin'
 gem 'rails-footnotes', '~> 4.0'
 
+gem 'paypal-express', '~> 0.8.1'
