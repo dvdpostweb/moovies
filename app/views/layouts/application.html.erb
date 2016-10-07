@@ -41,12 +41,16 @@
 
     <%= stylesheet_link_tag "application", :media => "all" %>
     <%= yield :view_specific_css %>
-    <%= render :partial => 'layouts/apple' %>
+    <% cache("layouts_apple", :expires_in => 1.hour) do %>
+      <%= render :partial => 'layouts/apple' %>
+    <% end %>
     <%= csrf_meta_tags %>
 
   </head>
   <body id="<%= @body_id %>" class="<%= params[:kind] %> <%= current_customer ? :private : :public %> <%= I18n.locale %> <%= @body_class %>">
-    <%= render :partial => 'layouts/google_analytics' %>
+    <% cache("layouts_google_analytics", :expires_in => 1.hour) do %>
+      <%= render :partial => 'layouts/google_analytics' %>
+    <% end %>
 
     <% if current_customer && current_customer.suspended? %>
     <div id='p_suspended'>
@@ -59,7 +63,9 @@
     </div>
     <% end %>
 
+    <% cache("layouts_header", :expires_in => 1.hour) do %>
       <%= render(:partial => 'layouts/header') %>
+    <% end %>
 
     <div class="container clearfix">
       <% if params[:controller] == 'products' && params[:action] == 'show' %>
@@ -96,7 +102,9 @@
     </div>
      <% unless params[:controller] == "customers/registrations" || (params[:controller] == "payment_methods" && params[:action] == "update") || (params[:controller] == "customers" && params[:action] == "reactive" || params[:controller] == "steps") %>
        <% unless @hide_footer %>
-         <%= render "layouts/footer" %>
+         <% cache("layouts_footer", :expires_in => 1.hour) do %>
+           <%= render "layouts/footer" %>
+         <% end %>
        <% end %>
      <% end %>
   <div id="close_face" style="display:none">
