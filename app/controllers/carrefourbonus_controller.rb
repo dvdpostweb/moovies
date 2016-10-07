@@ -1,7 +1,5 @@
 class CarrefourbonusController < ApplicationController
 
-  caches_page :plans
-  
   def plans
   	@hide_menu = true
     @body_id = 'carrefour'

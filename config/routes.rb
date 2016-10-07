@@ -154,6 +154,9 @@ Moovies::Application.routes.draw do
       match "login" => "login#login"
       match "register" => "registration#register"
       match "facebook_activation" => "facebook#activation"
+
+      match "express_checkout" => "paypal#express_checkout"
+      match "express_checkout_return" => "paypal#express_checkout_return"
     end
   end
 
