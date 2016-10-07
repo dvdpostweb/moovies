@@ -21,7 +21,7 @@
   </div>
   <% else %>
   <div id="all">
-    <% cache("products_index_all", :expires_in => 1.hour) do %
+    <% cache("products_index_all", :expires_in => 1.hour) do %>
       <%= render :partial => 'products/index/all' %>
     <% end %>
   </div>
