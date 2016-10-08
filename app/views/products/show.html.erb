@@ -1,12 +1,13 @@
+<% cache("#{@product}_index_hp_list_top_#{I18n.locale}", :expires_in => 1.hour) do %>
 <!--   ==============   MAIN CONTENT   ==============   -->
   <div id="maincontent">
     <div class="ttl-wrap">
       <div class="ttl osc">
         <h2><%= "#{@product_title} (#{@product.year})" %><meta itemprop="name" content="<%= @product_title %>" /></h2>
-        
+
         <h3><%= @product.categories.active(params[:kind]).collect{|category| "<span itemprop='genre'>#{link_to(category.name, category_products_path(:category_id => category))}</span>"}.join(', ').html_safe %></h3>
       </div>
-     
+
       <div id="votes-wrap" itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">
         <div id="votes">
 
@@ -18,7 +19,7 @@
           <div id="uninterested"><%= render :partial => 'products/show/seen_uninterested', :locals => {:product => @product, :source => @source, :response_id => @response_id} if current_customer %></div>
         </div>
       </div><!-- #votes-wrap -->
-       
+
     </div><!-- .ttl-wrap -->
     <div id="film-info">
       <div id="film-wrap">
@@ -106,8 +107,8 @@
     </div><!-- #film-info -->
   </div>
   <!--   ==============   END MAIN CONTENT   ==============   -->
-  <%= render :partial => 'products/index/filters_online', :locals => { :countries => @countries} %>  
-  
+  <%= render :partial => 'products/index/filters_online', :locals => { :countries => @countries} %>
+
   <% if params[:add].to_i == 1 %>
   <% submit_id = "p_#{@product.to_param}_#{rand(10)}"%>
   <div id='add_p' style='display:none' class='action_face_js'><%= product_action_path(:product_id => @product.to_param, :origin => 'products') %></div>
@@ -118,5 +119,5 @@
   <% if params[:trailer].to_i == 1 && @product.trailer? %>
   <div id='rating' style='display:none' class='action_face'><%= product_trailer_path(:product_id => @product.to_param, :source => @source, :response_id => @response_id) %></div>
   <% end %>
-  
- 
+
+ <% end %>
