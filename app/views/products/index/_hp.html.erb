@@ -78,7 +78,14 @@
   </div>
 </div>
 
-<% cache("products_filter_online_#{I18n.locale}", :expires_in => 1.hour) do %>
-<%= render :partial => 'products/index/filters_online', :locals => { :countries => @countries} %>
+<% if params[:kind] == :normal %>
+  <% cache("normal_products_filter_online_#{I18n.locale}", :expires_in => 1.hour) do %>
+    <%= render :partial => 'products/index/filters_online', :locals => { :countries => @countries} %>
+  <% end %>
+<% elsif params[:kind] == :adult %>
+  <% cache("adult_products_filter_online_#{I18n.locale}", :expires_in => 1.hour) do %>
+    <%= render :partial => 'products/index/filters_online', :locals => { :countries => @countries} %>
+  <% end %>
 <% end %>
+
 <div id='pagination_content'></div>
