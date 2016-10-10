@@ -41,7 +41,7 @@
 
     <%= stylesheet_link_tag "application", :media => "all" %>
     <%= yield :view_specific_css %>
-    <% cache("layouts_apple", :expires_in => 1.hour) do %>
+    <% cache("layouts_apple_#{I18n.locale}", :expires_in => 1.hour) do %>
       <%= render :partial => 'layouts/apple' %>
     <% end %>
     <%= csrf_meta_tags %>
@@ -100,10 +100,9 @@
     </div>
      <% unless params[:controller] == "customers/registrations" || (params[:controller] == "payment_methods" && params[:action] == "update") || (params[:controller] == "customers" && params[:action] == "reactive" || params[:controller] == "steps") %>
        <% unless @hide_footer %>
-      <!--   <#% cache("layouts_footer", :expires_in => 1.hour) do %>-->
+         <% cache("layouts_footer_#{I18n.locale}", :expires_in => 1.hour) do %>
            <%= render "layouts/footer" %>
-           <!--
-         <#% end %>-->
+         <% end %>
        <% end %>
      <% end %>
   <div id="close_face" style="display:none">
