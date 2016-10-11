@@ -208,7 +208,7 @@ GEM
     multi_test (0.0.3)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
-    mysql2 (0.3.13)
+    mysql2 (0.3.21)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-sftp (2.1.2)
@@ -389,7 +389,7 @@ DEPENDENCIES
   json
   launchy
   memcache-client (~> 1.8.5)
-  mysql2 (= 0.3.13)
+  mysql2 (~> 0.3.21)
   omniauth-facebook
   orderedhash
   paypal-express (~> 0.8.1)
@@ -413,4 +413,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   1.13.1
+   1.13.2
