@@ -96,7 +96,7 @@
       <% else %>
         <%= render :partial => 'products/show/formats', :locals => {:product => @product, :svod_date => @svod_date}%>
       <% end %>
-      <%= render :partial => 'products/index/hp_list', :locals => {:data => @recommendations, :title => :recommendations, :type => :none, :view_mode => :none, :source => 4, :belgium => nil} if @recommendations.size > 0 %>
+      <%= render :partial => 'products/index/single_movie_normal', :locals => {:data => @recommendations, :title => :recommendations, :type => :none, :view_mode => :none, :source => 4, :belgium => nil} if @recommendations.size > 0 %>
       <div id="thumbs-wrap">
         <h3><%= t '.photo' %></h3>
         <div>
@@ -119,5 +119,3 @@
   <% if params[:trailer].to_i == 1 && @product.trailer? %>
   <div id='rating' style='display:none' class='action_face'><%= product_trailer_path(:product_id => @product.to_param, :source => @source, :response_id => @response_id) %></div>
   <% end %>
-
- 
