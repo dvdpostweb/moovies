@@ -52,7 +52,7 @@
         <ul>
           <li><a href="#" class='_blueColor_ _underline_ abo_subscriber'>Plush à la Carte</a></li>
           <li><%= t('.subscription') %>: <span class="_bold_"><%= t('.subscription_info') %></span>
-          (<%= link_to t('.subscribe'), api_v1_convert_unlimited_to_plush_a_la_carte_path, class: '_blueColor_ _underline_' %>)</li>
+          (<%= link_to t('.subscribe'), info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change"), class: '_blueColor_ _underline_' %>)</li>
         </ul>
       <% end %>
 
@@ -60,9 +60,12 @@
         <ul>
           <li><a href="#" class='_blueColor_ _underline_ abo_subscriber'>Plush à la Carte</a></li>
           <li><%= t('.top_part_2').capitalize %>: <%= current_customer.tvod_free %></li>
-          <% if current_customer.tvod_free == 0 %>
+          <% if current_customer.tvod_free == 0 && !current_customer.payable? %>
             <li><%= t('.subscription') %>: <span class="_bold_"><%= t('.subscription_info') %></span>
             (<%= link_to t('.subscribe'), info_path(:page_name => t('routes.infos.params.alacarte')), class: '_blueColor_ _underline_' %>)</li>
+          <% elsif current_customer.payable? %>
+            <li><%= t('.subscription') %>: <span class="_bold_"><%= t('.subscription_info') %></span>
+            (<%= link_to t('.subscribe'), info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change"), class: '_blueColor_ _underline_' %>)</li>
           <% else %>
             <li><%= t('.subscription') %>: <span class="_bold_"><%= product.description %></span>
             (<%= link_to t('.change_plan'), info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change"), class: '_blueColor_ _underline_' %>)</li>
@@ -73,7 +76,7 @@
         <ul>
           <li><a href="#" class='_greenColor_ _underline_ unlimited_subscriber'>Plush Unlimited</a></li>
           <li><%= t('.subscription') %>: <span class="_bold_"><%= t('.subscription_info') %></span>
-          (<%= link_to t('.subscribe'), api_v1_convert_plush_a_la_carte_to_unlimited_path, class: '_greenColor_ _underline_' %>)</li>
+          (<%= link_to t('.subscribe'), info_path(:page_name => t('routes.infos.params.unlimited'), :subscription_action => "subscription_change"), class: '_greenColor_ _underline_' %>)</li>
         </ul>
       <% end %>
 
@@ -81,9 +84,12 @@
         <ul>
           <li><a href="#" class='_blueColor_ _underline_ abo_subscriber'>Plush à la Carte</a></li>
           <li><%= t('.top_part_2_6').capitalize %>: <%= current_customer.tvod_free / 3 %></li>
-          <% if current_customer.tvod_free == 0 %>
+          <% if current_customer.tvod_free == 0 && !current_customer.payable? %>
             <li><%= t('.subscription') %>: <span class="_bold_"><%= t('.subscription_info') %></span>
             (<%= link_to t('.subscribe'), info_path(:page_name => t('routes.infos.params.alacarte')), class: '_blueColor_ _underline_' %>)</li>
+          <% elsif current_customer.payable? %>
+            <li><%= t('.subscription') %>: <span class="_bold_"><%= t('.subscription_info') %></span>
+            (<%= link_to t('.subscribe'), info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change"), class: '_blueColor_ _underline_' %>)</li>
           <% else %>
             <li><%= t('.subscription') %>: <span class="_bold_"><%= product.description %></span>
             (<%= link_to t('.change_plan'), info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change"), class: '_blueColor_ _underline_' %>)</li>
@@ -94,7 +100,7 @@
         <ul>
           <li><a href="#" class='_greenColor_ _underline_ unlimited_subscriber'>Plush Unlimited</a></li>
           <li><%= t('.subscription') %>: <span class="_bold_"><%= t('.subscription_info') %></span>
-          (<%= link_to t('.subscribe'), api_v1_convert_plush_a_la_carte_to_unlimited_path, class: '_greenColor_ _underline_' %>)</li>
+          (<%= link_to t('.subscribe'), info_path(:page_name => t('routes.infos.params.unlimited'), :subscription_action => "subscription_change"), class: '_greenColor_ _underline_' %>)</li>
         </ul>
       <% end %>
 
@@ -102,9 +108,12 @@
         <ul>
           <li><a href="#" class='_blueColor_ _underline_ abo_subscriber'>Plush à la Carte</a></li>
           <li><%= t('.top_part_2').capitalize %>: <%= current_customer.tvod_free %></li>
-          <% if current_customer.tvod_free == 0 %>
+          <% if current_customer.tvod_free == 0 && !current_customer.payable? %>
             <li><%= t('.subscription') %>: <span class="_bold_"><%= t('.subscription_info') %></span>
             (<%= link_to t('.subscribe'), info_path(:page_name => t('routes.infos.params.alacarte')), class: '_blueColor_ _underline_' %>)</li>
+          <% elsif current_customer.payable? %>
+            <li><%= t('.subscription') %>: <span class="_bold_"><%= t('.subscription_info') %></span>
+            (<%= link_to t('.subscribe'), info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change"), class: '_blueColor_ _underline_' %>)</li>
           <% else %>
             <li><%= t('.subscription') %>: <span class="_bold_"><%= product.description %></span>
             (<%= link_to t('.change_plan'), info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change"), class: '_blueColor_ _underline_' %>)</li>
@@ -115,7 +124,7 @@
         <ul>
           <li><a href="#" class='_greenColor_ _underline_ unlimited_subscriber'>Plush Unlimited</a></li>
           <li><%= t('.subscription') %>: <span class="_bold_"><%= t('.subscription_info') %></span>
-          (<%= link_to t('.subscribe'), api_v1_convert_plush_a_la_carte_to_unlimited_path, class: '_greenColor_ _underline_' %>)</li>
+          (<%= link_to t('.subscribe'), info_path(:page_name => t('routes.infos.params.unlimited'), :subscription_action => "subscription_change"), class: '_greenColor_ _underline_' %>)</li>
         </ul>
       <% end %>
 
