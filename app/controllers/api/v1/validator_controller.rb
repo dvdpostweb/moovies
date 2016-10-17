@@ -77,16 +77,21 @@ class Api::V1::ValidatorController < API::V1::BaseController
         if (params[:subscription_action].present? && params[:subscription_action] == "subscription_change")
           discount = Discount.find_by_discount_code(params[:discount_code])
           customer = current_customer
-          if customer.customers_locked__for_reconduction == 1
-            render :json => { :status => 4, :message => t('session.change_plan_info') }
+          if current_customer.customers_locked__for_reconduction == 1
+            render json: { status: 4, message: t('streaming_products.renew_subscription_error') }
           else
             customer.code = params[:discount_code]
-            customer.customers_registration_step = 100
+            customer.step = 100
             customer.customers_abo = 1
             customer.tvod_free = customer.tvod_free + discount.tvod_free
+            customer.abo_history(38, customer.abo_type_id, discount.to_param)
+            customer.customers_abo_validityto = Time.now
             customer.customers_locked__for_reconduction = 1
+            customer.credits_already_recieved = 1
             if customer.save(validate: false)
-              render :json => { :status => 3 }
+              if DiscountUse.create(:discount_code_id => current_customer.activation_discount_code_id, :customer_id => current_customer.id, :discount_use_date => Time.now.localtime)
+                render :json => { :status => 3 }
+              end
             end
           end
         end

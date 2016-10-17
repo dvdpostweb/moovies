@@ -182,7 +182,7 @@ class Customer < ActiveRecord::Base
   end
 
   def abo_subscriber?
-    (customers_abo_type == 6 && activation_discount_code_type == "D" || customers_abo_type == 6 && activation_discount_code_type == "A")
+    (customers_abo_type == 6 && activation_discount_code_type == "D")
   end
 
   def mobistar_subscriber?
