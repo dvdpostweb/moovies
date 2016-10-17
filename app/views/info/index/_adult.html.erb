@@ -6,8 +6,20 @@
 	<div class="header-nav">
 		<label id="plush-a-la-carte"><%= t('info.index.price_public.choose_adult_adult').html_safe %></label>
 		<ul>
-			<li class="plush"><%= link_to t('info.index.price_public.choose_adult_tvod').html_safe, info_path(:page_name => t('routes.infos.params.alacarte')), :id => 'abo', :class => params[:page_name] == 'abo' ? :active : :inactive %></li>
-			<li class="eighteen"><%= link_to t('info.index.price_public.choose_adult_svod').html_safe, info_path(:page_name => "unlimited"), :id => 'unlimited', :class => params[:page_name] == 'unlimited' ? :active : :inactive %></li>
+      <li class="plush">
+      <% if params[:subscription_action].present? && params[:subscription_action] == "subscription_change" %>
+        <li class="plush"><%= link_to t('info.index.price_public.choose_svod_svod').html_safe, info_path(:page_name => "unlimited", :subscription_action => "subscription_change") %></li>
+      <% else %>
+        <li class="plush"><%= link_to t('info.index.price_public.choose_svod_svod').html_safe, info_path(:page_name => "unlimited") %></li>
+      <% end %>
+      </li>
+      <li class="eighteen">
+        <% if params[:subscription_action].present? && params[:subscription_action] == "subscription_change" %>
+          <a href=""><%= link_to t('info.index.price_public.choose_svod_tvod').html_safe, info_path(:page_name => "alacarte", :subscription_action => "subscription_change"), id: "adult" %></a>
+        <% else %>
+          <a href=""><%= link_to t('info.index.price_public.choose_svod_tvod').html_safe, info_path(:page_name => "alacarte"), id: "adult" %></a>
+        <% end %>
+      </li>
 		</ul>
 	</div>
 	<div class="film-block">

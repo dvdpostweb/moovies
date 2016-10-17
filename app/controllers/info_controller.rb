@@ -9,10 +9,13 @@ class InfoController < ApplicationController
       gon.subscription_action = params[:subscription_action] if params[:subscription_action].present?
     elsif customer_signed_in? && params[:page_name] == t('routes.infos.params.abo')
       gon.abo = "abo"
+      gon.subscription_action = params[:subscription_action] if params[:subscription_action].present?
     elsif customer_signed_in? && params[:page_name] == t('routes.infos.params.unlimited')
       gon.unlimited = "unlimited"
+      gon.subscription_action = params[:subscription_action] if params[:subscription_action].present?
     elsif customer_signed_in? && params[:page_name] == t('routes.infos.params.adult')
       gon.adult = "adult"
+      gon.subscription_action = params[:subscription_action] if params[:subscription_action].present?
     #elsif params[:page_name] == t('routes.infos.params.freetrial')
     #  gon.freetrial = "freetrial"
     elsif params[:page_name] == t('routes.infos.params.alacarte')
