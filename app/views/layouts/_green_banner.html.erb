@@ -143,12 +143,12 @@
         <%= image_tag("greenBannerLine.png", alt: "line", class: '_toggleImage1_') %>
       <%= image_tag("greenBannerPhone.png", alt: "line", class: '_toggleImage2_') %>
         <a href="#" class='<%= params[:kind] == :adult ? ("pinkToggle") : ("greenToggle") %>'>
-          <span class="_toggleSpan1_ _underline_">(<%= t('.close_banner') %>)</span>
-          <span class="_toggleSpan2_">(<%= t('.open_banner') %>)</span>
+          <span class="_toggleSpan1_ _underline_">(<u><%= t('.close_banner') %></u>)</span>
+          <span class="_toggleSpan2_">(<u><%= t('.open_banner') %></u>)</span>
         </a>
       </div>
       <div>
-        <h2><%= t('.top_part_1') %> <span class="_bold_"><%= t('.visitor_no_credits') %>  <%= t('.top_part_2') %></span> <a href="#" class='greenToggle'>(<%= t('.details') %>)</a></h2>
+        <h2><%= t('.top_part_1') %> <span class="_bold_"><%= t('.visitor_no_credits') %>  <%= t('.top_part_2') %></span> <a href="#" class='greenToggle'>(<u><%= t('.details') %></u>)</a></h2>
       </div>
       <div>
         <!--
