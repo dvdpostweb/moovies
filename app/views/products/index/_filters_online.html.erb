@@ -1,7 +1,7 @@
 <div id="online">
 <%= form_tag products_short_path(:package => params[:package].nil? ? Moovies.packages.invert[(params[:kind] == :adult ? 5 : 2)] : params[:package], :list_id => params[:list_id], :category_id => params[:category_id], :actor_id => params[:actor_id], :director_id => params[:director_id], :studio_id => params[:studio_id]), method: 'get', id: 'filter_online_form' do %>
 <div id="filters">
-  
+
   <fieldset>
     <ul id="main">
       <li class="package open">
@@ -33,9 +33,11 @@
         <br />
         <%= radio_button_tag('filters[view_mode]', "hd", params[:filters] && params[:filters][:view_mode] == 'hd' ? true : false, class: "links") %>
         <%= label_tag('filters[view_mode]_hd', t('products.left_column.svod_hd')) %>
+        <!--
         <br />
         <%= radio_button_tag('filters[view_mode]', "series", params[:filters] && params[:filters][:view_mode] == 'series' ? true : false, class: "links") %>
         <%= label_tag('filters[view_mode]_series', t('products.left_column.series')) %>
+        -->
       </li>
       <li>
         <hr />
@@ -79,7 +81,7 @@
           <%= select_year max_year , :field_name => 'filters[year_max]', :start_year => 1910, :end_year => max %>
         </div>
       </li>
-      
+
       <li class="audience open">
         <%= t('products.index.filters.public', :default => 'public') %>
         <div id="audience-slider">
@@ -90,7 +92,7 @@
               <li><%= p %></li>
             <% end %>
           </ul>
-          
+
         </div>
         <div id="audience-slider-range"></div>
       </li>
