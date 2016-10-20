@@ -43,15 +43,10 @@
         </ul>
         <ul>
           <li><a href="#" class='_greenColor_ _underline_ unlimited_subscriber'>Plush Unlimited</a></li>
-          <% if !current_customer.payable? %>
-            <li><%= t('.subscription') %>: <span class="_bold_"><%= t('.subscription_info') %></span>
-            (<%= link_to t('.subscribe'), edit_customer_payment_methods_path(:customer_id => current_customer.to_param, :type => :credit_card), class: '_greenColor_ _underline_' %>)</li>
-          <% else %>
-            <li><%= t('.top_part_2').capitalize %>: <%= current_customer.tvod_free %></li>
-            <li><%= t('.subscription') %>: <span class="_bold_"><%= product.description %></span>
-            (<%= link_to t('.change_plan'), info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change"), class: '_greenColor_ _underline_' %>)</li>
-            <li><%= t('.valid_untill') %>: <span class="_bold_"><%= current_customer.customers_abo_validityto.strftime("%d/%m/%Y") if current_customer.customers_abo_validityto.present? %></span>
-          <% end %>
+          <li><%= t('.top_part_2').capitalize %>: <%= current_customer.tvod_free %></li>
+          <li><%= t('.subscription') %>: <span class="_bold_"><%= product.description %></span>
+          (<%= link_to t('.change_plan'), info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change"), class: '_greenColor_ _underline_' %>)</li>
+          <li><%= t('.valid_untill') %>: <span class="_bold_"><%= current_customer.customers_abo_validityto.strftime("%d/%m/%Y") if current_customer.customers_abo_validityto.present? %></span>
         </ul>
       <% end %>
 
@@ -59,15 +54,10 @@
         <ul>
           <li><a href="#" class='_blueColor_ _underline_ abo_subscriber'>Plush à la Carte</a></li>
           <li><%= t('.top_part_2').capitalize %>: <%= current_customer.tvod_free %></li>
-          <% if !current_customer.payable? %>
-            <li><%= t('.subscription') %>: <span class="_bold_"><%= t('.subscription_info') %></span>
-            (<%= link_to t('.subscribe'), info_path(:page_name => t('routes.infos.params.alacarte')), class: '_blueColor_ _underline_' %>)</li>
-          <% else %>
-            <li><%= t('.subscription') %>: <span class="_bold_"><%= product.description %></span>
-            (<%= link_to t('.change_plan'), info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change"), class: '_blueColor_ _underline_' %>)</li>
-            <li><%= t('.valid_untill') %>: <span class="_bold_"><%= current_customer.customers_abo_validityto.strftime("%d/%m/%Y") if current_customer.customers_abo_validityto.present? %></span>
-            (<%= link_to t('.renew_now'), renew_monthly_credits_for_a_la_carte_path, class: '_blueColor_ _underline_' %>)</li>
-          <% end %>
+          <li><%= t('.subscription') %>: <span class="_bold_"><%= product.description %></span>
+          (<%= link_to t('.change_plan'), info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change"), class: '_blueColor_ _underline_' %>)</li>
+          <li><%= t('.valid_untill') %>: <span class="_bold_"><%= current_customer.customers_abo_validityto.strftime("%d/%m/%Y") if current_customer.customers_abo_validityto.present? %></span>
+          (<%= link_to t('.renew_now'), renew_monthly_credits_for_a_la_carte_path, class: '_blueColor_ _underline_' %>)</li>
         </ul>
         <ul>
           <li><a href="#" class='_greenColor_ _underline_ unlimited_subscriber'>Plush Unlimited</a></li>
@@ -80,15 +70,10 @@
         <ul>
           <li><a href="#" class='_blueColor_ _underline_ abo_subscriber'>Plush à la Carte</a></li>
           <li><%= t('.top_part_2_6').capitalize %>: <%= current_customer.tvod_free / 3 %></li>
-          <% if !current_customer.payable? %>
-            <li><%= t('.subscription') %>: <span class="_bold_"><%= t('.subscription_info') %></span>
-            (<%= link_to t('.subscribe'), info_path(:page_name => t('routes.infos.params.alacarte')), class: '_blueColor_ _underline_' %>)</li>
-          <% else %>
-            <li><%= t('.subscription') %>: <span class="_bold_"><%= product.description %></span>
-            (<%= link_to t('.change_plan'), info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change"), class: '_blueColor_ _underline_' %>)</li>
-            <li><%= t('.valid_untill') %>: <span class="_bold_"><%= current_customer.customers_abo_validityto.strftime("%d/%m/%Y") if current_customer.customers_abo_validityto.present? %></span>
-            (<%= link_to t('.renew_now'), renew_monthly_credits_for_a_la_carte_path, class: '_blueColor_ _underline_' %>)</li>
-          <% end %>
+          <li><%= t('.subscription') %>: <span class="_bold_"><%= product.description %></span>
+          (<%= link_to t('.change_plan'), info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change"), class: '_blueColor_ _underline_' %>)</li>
+          <li><%= t('.valid_untill') %>: <span class="_bold_"><%= current_customer.customers_abo_validityto.strftime("%d/%m/%Y") if current_customer.customers_abo_validityto.present? %></span>
+          (<%= link_to t('.renew_now'), renew_monthly_credits_for_a_la_carte_path, class: '_blueColor_ _underline_' %>)</li>
         </ul>
         <ul>
           <li><a href="#" class='_greenColor_ _underline_ unlimited_subscriber'>Plush Unlimited</a></li>
@@ -101,15 +86,10 @@
         <ul>
           <li><a href="#" class='_blueColor_ _underline_ abo_subscriber'>Plush à la Carte</a></li>
           <li><%= t('.top_part_2').capitalize %>: <%= current_customer.tvod_free %></li>
-          <% if !current_customer.payable? %>
-            <li><%= t('.subscription') %>: <span class="_bold_"><%= t('.subscription_info') %></span>
-            (<%= link_to t('.subscribe'), info_path(:page_name => t('routes.infos.params.alacarte')), class: '_blueColor_ _underline_' %>)</li>
-          <% else %>
-            <li><%= t('.subscription') %>: <span class="_bold_"><%= product.description %></span>
-            (<%= link_to t('.change_plan'), info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change"), class: '_blueColor_ _underline_' %>)</li>
-            <li><%= t('.valid_untill') %>: <span class="_bold_"><%= current_customer.customers_abo_validityto.strftime("%d/%m/%Y") if current_customer.customers_abo_validityto.present? %></span>
-            (<%= link_to t('.renew_now'), renew_monthly_credits_for_a_la_carte_path, class: '_blueColor_ _underline_' %>)</li>
-          <% end %>
+          <li><%= t('.subscription') %>: <span class="_bold_"><%= product.description %></span>
+          (<%= link_to t('.change_plan'), info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change"), class: '_blueColor_ _underline_' %>)</li>
+          <li><%= t('.valid_untill') %>: <span class="_bold_"><%= current_customer.customers_abo_validityto.strftime("%d/%m/%Y") if current_customer.customers_abo_validityto.present? %></span>
+          (<%= link_to t('.renew_now'), renew_monthly_credits_for_a_la_carte_path, class: '_blueColor_ _underline_' %>)</li>
         </ul>
         <ul>
           <li><a href="#" class='_greenColor_ _underline_ unlimited_subscriber'>Plush Unlimited</a></li>
