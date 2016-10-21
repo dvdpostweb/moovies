@@ -58,6 +58,7 @@ GEM
       activerecord (>= 2.3.0)
       rake (>= 0.8.7)
     arel (3.0.2)
+    attr_required (1.0.1)
     bcrypt-ruby (3.1.1)
     better_errors (0.9.0)
       coderay (>= 1.0.0)
@@ -207,7 +208,7 @@ GEM
     multi_test (0.0.3)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
-    mysql2 (0.3.13)
+    mysql2 (0.3.21)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-sftp (2.1.2)
@@ -233,6 +234,10 @@ GEM
       omniauth (~> 1.2)
     orderedhash (0.0.6)
     orm_adapter (0.4.0)
+    paypal-express (0.8.1)
+      activesupport (>= 2.3)
+      attr_required (>= 0.0.5)
+      rest-client
     polyglot (0.3.3)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
@@ -384,9 +389,10 @@ DEPENDENCIES
   json
   launchy
   memcache-client (~> 1.8.5)
-  mysql2 (= 0.3.13)
+  mysql2 (~> 0.3.21)
   omniauth-facebook
   orderedhash
+  paypal-express (~> 0.8.1)
   quiet_assets
   rails (= 3.2.14)
   rails-footnotes (~> 4.0)
@@ -407,4 +413,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   1.11.2
+   1.13.2
