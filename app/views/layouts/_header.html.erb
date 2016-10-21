@@ -22,7 +22,7 @@
 </ul>
 <div id="wrap">
 
-  <% if flash[:notice] %>
+    <% if flash[:notice] %>
   	<div class='flash_message'>
       <div class="notice">
         <%= flash[:notice] %>
@@ -40,6 +40,7 @@
 <% unless params[:controller] == "steps" %>
   <%= render partial: "layouts/green_banner" %>
 <% end %>
+
   <!--   ==============   HEADER   ==============   -->
   <div id="header" >
     <div><%= link_to t('.tagline'), root_localize_path, :class => 'f-btn' %></div>

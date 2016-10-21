@@ -38,6 +38,7 @@ class AuthenticationsController < ApplicationController
             user.customers_abo = 1
             if user.save(:validate => false)
               activation = Activation.find_by_activation_code(code)
+              user.abo_history(8, user.abo_type_id, activation.to_param)
               activation.update_attributes(:customers_id => user.to_param, :created_at => Time.now.localtime)
               sign_in(:customer, authentication.customer)
               redirect_to root_localize_path
@@ -59,6 +60,7 @@ class AuthenticationsController < ApplicationController
             user.tvod_free = user.tvod_free + r["tvod_free"]
             user.customers_abo = 1
             if user.save(:validate => false)
+              user.abo_history(6, user.abo_type_id, r["discount_code_id"])
               DiscountUse.create(:discount_code_id => r["discount_code_id"], :customer_id => user.to_param, :discount_use_date => Time.now)
               sign_in(:customer, authentication.customer)
               redirect_to root_localize_path
@@ -129,6 +131,7 @@ class AuthenticationsController < ApplicationController
                   user.customers_abo = 1
 			            if user.save(:validate => false)
 			              activation = Activation.find_by_activation_code(code)
+                    user.abo_history(8, user.abo_type_id, activation.to_param)
 			              activation.update_attributes(:customers_id => user.to_param, :created_at => Time.now.localtime)
 			              sign_in(:customer, auth.customer)
                     redirect_to root_localize_path
@@ -150,6 +153,7 @@ class AuthenticationsController < ApplicationController
 			            user.tvod_free = user.tvod_free + r["tvod_free"]
                   user.customers_abo = 1
 			            if user.save(:validate => false)
+                    user.abo_history(6, user.abo_type_id, r["discount_code_id"])
 			              DiscountUse.create(:discount_code_id => r["discount_code_id"], :customer_id => user.to_param, :discount_use_date => Time.now)
 			              sign_in(:customer, auth.customer)
                     redirect_to root_localize_path
@@ -210,6 +214,7 @@ class AuthenticationsController < ApplicationController
               customer.customers_abo = 1
               if customer.save(:validate => false)
                 activation = Activation.find_by_activation_code(code)
+                customer.abo_history(8, customer.abo_type_id, activation.to_param)
                 activation.update_attributes(:customers_id => customer.to_param, :created_at => Time.now.localtime)
                 sign_in(:customer, customer)
                 redirect_to root_localize_path
@@ -231,6 +236,7 @@ class AuthenticationsController < ApplicationController
               customer.tvod_free = r["tvod_free"]
               customer.customers_abo = 1
               if customer.save(:validate => false)
+                customer.abo_history(6, customer.abo_type_id, r["discount_code_id"])
                 DiscountUse.create(:discount_code_id => r["discount_code_id"], :customer_id => customer.to_param, :discount_use_date => Time.now)
                 sign_in(:customer, customer)
                 redirect_to root_localize_path

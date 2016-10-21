@@ -1,4 +1,5 @@
 Moovies::Application.configure do
+
   # Settings specified here will take precedence over those in config/application.rb
 
   # In the development environment your application's code is reloaded on
@@ -41,4 +42,5 @@ Moovies::Application.configure do
   end
   config.assets.precompile += %w( jquery.ui.datepicker-fr.js jquery.ui.datepicker-nl.js jquery.ui.datepicker-en.js login.css promotions.css promotions.js errors.css )
   #BetterErrors.editor = :sublime
+  Paypal.sandbox!
 end
