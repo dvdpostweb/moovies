@@ -27,7 +27,7 @@
 #  listing_products_allowed        :string(50)
 #  abo_auto_stop_next_reconduction :integer          default(0), not null
 #  goto_step                       :integer          default(31), not null
-#  banner                          :string(30)
+#  banner                          :string(40)
 #  Footer                          :string(25)       default("FREETRIAL"), not null
 #  free_upgrade_allowed            :integer          default(0), not null
 #  group_id                        :integer          default(0), not null

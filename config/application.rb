@@ -58,6 +58,10 @@ module Moovies
     config.assets.version = '1.0'
 
     config.autoload_paths += %W(#{config.root}/lib)
+
+    # Support for multiple routes
+    config.paths["config/routes"] += Dir[Rails.root.join("config/routes/*.rb")]
+
     config.to_prepare do
       Devise::Mailer.layout "email" # email.haml or email.erb
       Devise::Mailer.helper "application"
