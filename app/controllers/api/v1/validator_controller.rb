@@ -158,29 +158,4 @@ class Api::V1::ValidatorController < API::V1::BaseController
     end
   end
 
-  def convert_unlimited_to_plush_a_la_carte
-    customer = current_customer
-    customer.customers_abo_type = 7
-    customer.customers_next_abo_type = 7
-    if customer.save(validate: false)
-      product_abo = ProductAbo.find_by_products_id(current_customer.customers_next_abo_type)
-      customer.tvod_free = current_customer.tvod_free + product_abo.tvod_credits
-      customer.customers_abo_validityto = Time.now
-      customer.customers_locked__for_reconduction = 1
-      customer.credits_already_recieved = 1
-      if customer.save(validate: false)
-        redirect_to :back
-      end
-    end
-  end
-
-  def convert_plush_a_la_carte_to_unlimited
-    customer = current_customer
-    customer.customers_abo_type = 1
-    customer.customers_next_abo_type = 1
-    if customer.save(validate: false)
-      redirect_to :back
-    end
-  end
-
 end
