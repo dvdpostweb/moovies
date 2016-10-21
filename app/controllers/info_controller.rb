@@ -1,17 +1,21 @@
 class InfoController < ApplicationController
-  
+
   def index
 
     #if customer_signed_in? && current_customer.facebook_activation == 0
     #  gon.facebook = "neactive"
     if customer_signed_in? && params[:page_name] == t('routes.infos.params.alacarte')
       gon.alacarte = "alacarte"
+      gon.subscription_action = params[:subscription_action] if params[:subscription_action].present?
     elsif customer_signed_in? && params[:page_name] == t('routes.infos.params.abo')
       gon.abo = "abo"
+      gon.subscription_action = params[:subscription_action] if params[:subscription_action].present?
     elsif customer_signed_in? && params[:page_name] == t('routes.infos.params.unlimited')
       gon.unlimited = "unlimited"
+      gon.subscription_action = params[:subscription_action] if params[:subscription_action].present?
     elsif customer_signed_in? && params[:page_name] == t('routes.infos.params.adult')
       gon.adult = "adult"
+      gon.subscription_action = params[:subscription_action] if params[:subscription_action].present?
     #elsif params[:page_name] == t('routes.infos.params.freetrial')
     #  gon.freetrial = "freetrial"
     elsif params[:page_name] == t('routes.infos.params.alacarte')

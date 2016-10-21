@@ -337,7 +337,8 @@ $(document).ready(function(){
             url: '/api/v1/activate_new_plan',
             data: {
               'customer_email': gon.current_customer.email,
-              'discount_code': "2FILMS"
+              'discount_code': "2FILMS",
+              'subscription_action': gon.subscription_action
             },
             dataType: 'json',
             success: function (response) {
@@ -345,13 +346,24 @@ $(document).ready(function(){
                 window.location.href = "/" + gon.locale + "/steps/step3"
               } else if (2 === response.status) {
               	$.toast({
-				    heading: infoMessage(),
-				    text: textMessage(),
-				    icon: 'info',
-				    loader: true,
-				    loaderBg: '#9EC600',
-            position: 'top-center'
-				})
+                  heading: infoMessage(),
+                  text: textMessage(),
+                  icon: 'info',
+                  loader: true,
+                  loaderBg: '#9EC600',
+                  position: 'top-center'
+                })
+              } else if (3 === response.status) {
+                window.location.href = gon.root_localize_path
+              } else if (4 === response.status) {
+                $.toast({
+                  heading: infoMessage(),
+                  text: response.message,
+                  icon: 'info',
+                  loader: true,
+                  loaderBg: '#9EC600',
+                  position: 'top-center'
+                })
               }
             },
             error: function (response) {
@@ -367,7 +379,8 @@ $(document).ready(function(){
             url: '/api/v1/activate_new_plan',
             data: {
               'customer_email': gon.current_customer.email,
-              'discount_code': "4FILMS"
+              'discount_code': "4FILMS",
+              'subscription_action': gon.subscription_action
             },
             dataType: 'json',
             success: function (response) {
@@ -375,13 +388,24 @@ $(document).ready(function(){
                 window.location.href = "/" + gon.locale + "/steps/step3"
               } else if (2 === response.status) {
               	$.toast({
-				    heading: infoMessage(),
-				    text: textMessage(),
-				    icon: 'info',
-				    loader: true,
-				    loaderBg: '#9EC600',
-            position: 'top-center'
-				})
+                  heading: infoMessage(),
+                  text: textMessage(),
+                  icon: 'info',
+                  loader: true,
+                  loaderBg: '#9EC600',
+                  position: 'top-center'
+                })
+              } else if (3 === response.status) {
+                window.location.href = gon.root_localize_path
+              } else if (4 === response.status) {
+                $.toast({
+                  heading: infoMessage(),
+                  text: response.message,
+                  icon: 'info',
+                  loader: true,
+                  loaderBg: '#9EC600',
+                  position: 'top-center'
+                })
               }
             },
             error: function (response) {
@@ -397,7 +421,8 @@ $(document).ready(function(){
             url: '/api/v1/activate_new_plan',
             data: {
               'customer_email': gon.current_customer.email,
-              'discount_code': "6FILMS"
+              'discount_code': "6FILMS",
+              'subscription_action': gon.subscription_action
             },
             dataType: 'json',
             success: function (response) {
@@ -405,13 +430,24 @@ $(document).ready(function(){
                 window.location.href = "/" + gon.locale + "/steps/step3"
               } else if (2 === response.status) {
               	$.toast({
-				    heading: infoMessage(),
-				    text: textMessage(),
-				    icon: 'info',
-				    loader: true,
-				    loaderBg: '#9EC600',
-            position: 'top-center'
-				})
+                  heading: infoMessage(),
+                  text: textMessage(),
+                  icon: 'info',
+                  loader: true,
+                  loaderBg: '#9EC600',
+                  position: 'top-center'
+                })
+              } else if (3 === response.status) {
+                window.location.href = gon.root_localize_path
+              } else if (4 === response.status) {
+                $.toast({
+                  heading: infoMessage(),
+                  text: response.message,
+                  icon: 'info',
+                  loader: true,
+                  loaderBg: '#9EC600',
+                  position: 'top-center'
+                })
               }
             },
             error: function (response) {
@@ -427,7 +463,8 @@ $(document).ready(function(){
           url: '/api/v1/activate_new_plan',
           data: {
             'customer_email': gon.current_customer.email,
-            'discount_code': "SVOD"
+            'discount_code': "SVOD",
+            'subscription_action': gon.subscription_action
           },
           dataType: 'json',
           success: function (response) {
@@ -435,13 +472,24 @@ $(document).ready(function(){
               window.location.href = "/" + gon.locale + "/steps/step3"
             } else if (2 === response.status) {
               	$.toast({
-				    heading: infoMessage(),
-				    text: textMessage(),
-				    icon: 'info',
-				    loader: true,
-				    loaderBg: '#9EC600',
-            position: 'top-center'
-				})
+                  heading: infoMessage(),
+                  text: textMessage(),
+                  icon: 'info',
+                  loader: true,
+                  loaderBg: '#9EC600',
+                  position: 'top-center'
+                })
+            } else if (3 === response.status) {
+              window.location.href = gon.root_localize_path
+            } else if (4 === response.status) {
+              $.toast({
+                heading: infoMessage(),
+                text: response.message,
+                icon: 'info',
+                loader: true,
+                loaderBg: '#9EC600',
+                position: 'top-center'
+              })
             }
           },
           error: function (response) {
@@ -456,7 +504,8 @@ $(document).ready(function(){
           url: '/api/v1/activate_new_plan',
           data: {
             'customer_email': gon.current_customer.email,
-            'discount_code': "SVOD_ADULT"
+            'discount_code': "SVOD_ADULT",
+            'subscription_action': gon.subscription_action
           },
           dataType: 'json',
           success: function (response) {
@@ -464,13 +513,24 @@ $(document).ready(function(){
               window.location.href = "/" + gon.locale + "/steps/step3"
             } else if (2 === response.status) {
               	$.toast({
-				    heading: infoMessage(),
-				    text: textMessage(),
-				    icon: 'info',
-				    loader: true,
-				    loaderBg: '#9EC600',
-            position: 'top-center'
-				})
+                  heading: infoMessage(),
+                  text: textMessage(),
+                  icon: 'info',
+                  loader: true,
+                  loaderBg: '#9EC600',
+                  position: 'top-center'
+                })
+            } else if (3 === response.status) {
+              window.location.href = gon.root_localize_path
+            } else if (4 === response.status) {
+              $.toast({
+                heading: infoMessage(),
+                text: response.message,
+                icon: 'info',
+                loader: true,
+                loaderBg: '#9EC600',
+                position: 'top-center'
+              })
             }
           },
           error: function (response) {

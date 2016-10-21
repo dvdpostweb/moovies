@@ -1,6 +1,4 @@
-class Api::V1::RegistrationController < ApplicationController
-
-  skip_before_filter :verify_authenticity_token
+class Api::V1::RegistrationController < API::V1::BaseController
 
   def register
     if request.xhr?
@@ -13,6 +11,7 @@ class Api::V1::RegistrationController < ApplicationController
       customer.customers_newsletterpartner = params[:customers_newsletterpartner] if params[:customers_newsletterpartner].present?
       customer.activation_discount_code_id = 0
       customer.activation_discount_code_type = "D"
+      customer.customers_abo_validityto = Time.now
       if params[:moovie_id].present?
         product = Product.where(:products_id => params[:moovie_id]).first
         if product
@@ -56,7 +55,6 @@ class Api::V1::RegistrationController < ApplicationController
             if customer.save(:validate => false)
               sign_in :customer, customer
               activation = Activation.find_by_activation_code(params[:code])
-              customer.abo_history(8, customer.abo_type_id, activation.to_param)
               activation.update_attributes(:customers_id => customer.to_param, :created_at => Time.now.localtime)
               redirect_to_root_path = root_localize_path
               render json: { status: 9, message: redirect_to_root_path }
@@ -77,7 +75,6 @@ class Api::V1::RegistrationController < ApplicationController
             customer.group_id = r["group_id"]
             customer.tvod_free = r["tvod_free"]
             if customer.save(:validate => false)
-              customer.abo_history(6, customer.abo_type_id, r["discount_code_id"])
               sign_in :customer, customer
               DiscountUse.create(:discount_code_id => r["discount_code_id"], :customer_id => customer.to_param, :discount_use_date => Time.now)
               redirect_to_root_path = root_localize_path

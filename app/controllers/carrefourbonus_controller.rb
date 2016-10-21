@@ -1,5 +1,5 @@
 class CarrefourbonusController < ApplicationController
-
+  
   def plans
   	@hide_menu = true
     @body_id = 'carrefour'

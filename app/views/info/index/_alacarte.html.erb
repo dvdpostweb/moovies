@@ -1,33 +1,27 @@
 <% content_for :view_specific_css do %>
   <%= stylesheet_link_tag "alacarte" %>
 <% end %>
-<style>
-h3 {
-  font-family: Open Sans Condensed;
-  font-size: 18px;
-}
-</style>
         <div class="alacarte_1">
 
       <div class="header-nav">
         <label id="plush-a-la-carte"><%= t('info.index.price_public.choose_tvod_tvod').html_safe %></label>
         <ul>
-          <li class="plush"><%= link_to t('info.index.price_public.choose_svod_svod').html_safe, info_path(:page_name => "unlimited") %></li>
-          <li class="eighteen"><%= link_to t('info.index.price_public.choose_svod_adult').html_safe, info_path(:page_name => "adult"), id: "adult" %></li>
+          <li class="plush">
+          <% if params[:subscription_action].present? && params[:subscription_action] == "subscription_change" %>
+            <li class="plush"><%= link_to t('info.index.price_public.choose_svod_svod').html_safe, info_path(:page_name => "unlimited", :subscription_action => "subscription_change") %></li>
+          <% else %>
+            <li class="plush"><%= link_to t('info.index.price_public.choose_svod_svod').html_safe, info_path(:page_name => "unlimited") %></li>
+          <% end %>
+          </li>
+					<li class="eighteen">
+            <% if params[:subscription_action].present? && params[:subscription_action] == "subscription_change" %>
+              <a href=""><%= link_to t('info.index.price_public.choose_svod_adult').html_safe, info_path(:page_name => "adult", :subscription_action => "subscription_change"), id: "adult" %></a>
+            <% else %>
+              <a href=""><%= link_to t('info.index.price_public.choose_svod_adult').html_safe, info_path(:page_name => "adult"), id: "adult" %></a>
+            <% end %>
+          </li>
         </ul>
-        </br>
-        </br>
-        <% if I18n.locale == :fr %>
-          <h3><p>Vous pouvez louer films à la piéce directement à partir du <u><%= link_to "catalogue", products_short_path() %></u>, ou prendre un abonnement pour bénéficier de prix avantageux (<strong>1,99€</strong> au lieu de 2,99€ pour la plupart des films, et <strong>3,99€</strong> au lieu de 4,99€ pour les derniéres sorties).</p></h3>
-        <% elsif I18n.locale == :nl %>
-          <h3>U kunt uw films één per één rechtstreeks uit de <u><%= link_to "catalogus", products_short_path() %></u> huren, of een abonnement nemen om te genieten van uiterst voordelige prijzen (<strong>€ 1,99</strong> in plaats van € 2,99 voor de meeste films, en <strong>€ 3,99</strong> in plaats van € 4,99 voor de recente blockbusters).</h3>
-        <% elsif I18n.locale == :en %>
-          <h3>You can rent movie one by one directly from the <u><%= link_to "catalogue", products_short_path() %></u>, or subscribe to one of our plans and benefit from much lower prices (<strong>1,99€</strong> instead of 2,99€ for most of the titles, and <strong>3,99€</strong> instead of 4,99€ for latest blockbusters).</h3>
-        <% end %>
       </div>
-      </br>
-      </br>
-
       <div class="film-block">
         <div id="alacarte-2-films" class="film-box" target="alacarte-subscribe">
           <p id="alacarte-kvadrat"><%= t('info.index.price_public.choose_tvod_plan_one').html_safe %></p>

@@ -14,7 +14,15 @@
   			<% end %>
   		</ul>
   	</li>
-  	<li><%= link_to t('.abo'), info_path(:page_name => t('routes.infos.params.alacarte')), :id => 'alacarte', :class => params[:page_name] == 'alacarte' ? :active : :inactive %></li>
+  	<li>
+    <% if customer_signed_in? && current_customer.payable? %>
+      <%= link_to t('.abo'), info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change"), :id => 'alacarte', :class => params[:page_name] == 'alacarte' ? :active : :inactive %>
+    <% elsif customer_signed_in? && !current_customer.payable? %>
+      <%= link_to t('.abo'), info_path(:page_name => t('routes.infos.params.alacarte')), :id => 'alacarte', :class => params[:page_name] == 'alacarte' ? :active : :inactive %>
+    <% else %>
+      <%= link_to t('.abo'), info_path(:page_name => t('routes.infos.params.alacarte')), :id => 'alacarte', :class => params[:page_name] == 'alacarte' ? :active : :inactive %>
+    <% end %>
+   </li>
     <li><%= link_to t('.multi'), info_path(:page_name => t('routes.infos.params.vod')), :id => :multi %></li>
   	<li id='menu_account_li'><%= link_to t('.my_account'), current_customer ? customer_path(:id => current_customer) : customers_path, :id => 'account_menu', :class => params[:controller] == 'customers' || params[:controller] == 'watchlists' ? :active : :inactive %>
   		<ul id="account" class="dropdown" style="display:none">
