@@ -1,7 +1,7 @@
 class RenewMonthlySubscriptionController < ApplicationController
 
   def renew_monthly_credits_for_a_la_carte
-    if current_customer.customers_locked__for_reconduction == 1
+    if current_customer.customers_locked__for_reconduction == 1 && current_customer.tvod_free > 0
       redirect_to :back
       flash[:error] = t('streaming_products.renew_subscription_error')
     else
