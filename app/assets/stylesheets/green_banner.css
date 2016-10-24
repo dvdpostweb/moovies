@@ -26,7 +26,6 @@
       .greenBanner .greenBannerTop._open_ ._toggleImage2_, .greenBanner .greenBannerTop._open_ ._toggleSpan2_ {
         display: none !important; }
       .greenBanner .greenBannerTop._open_ > div:nth-child(2) {
-        width: 45%;
 
         opacity: 0; }
       .greenBanner .greenBannerTop._open_ > div:last-child {
@@ -64,7 +63,7 @@
       .greenBanner .greenBannerTop > div:first-child a {
         color: #181e25; }
     .greenBanner .greenBannerTop > div:nth-child(2) {
-      width: 40%;
+      width: 45%;
       text-align: center; }
     .greenBanner .greenBannerTop > div:last-child {
       width: 30%;

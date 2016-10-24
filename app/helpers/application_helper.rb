@@ -1,5 +1,21 @@
 module ApplicationHelper
 
+  def customer_plan_translator(customer_plan_id, locale)
+    product = ProductAbo.find_by_products_id(customer_plan_id)
+    if locale == "fr"
+      case product
+      when 1 then "Plush Illimité"
+      when 5 then "Plush 18+ Illimité"
+      when 6 then "Plush a La Carte"
+      when 7 then 2 "crédits film par mois"
+      when 8 then 4 "crédits film par mois"
+      when 9 then 6 "crédits film par mois"
+      end
+    elsif locale == "en"
+    elsif locale == "nl"
+    end
+  end
+
   def send_message(mail_id, options, locale, customer_default = nil)
     customer = customer_default ? customer_default : current_customer
     mail_object = Email.by_language(locale).find(mail_id)
