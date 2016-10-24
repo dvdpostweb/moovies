@@ -1,58 +1,40 @@
+#encoding: utf-8
 module ApplicationHelper
 
-  def customer_plan_translator(c, l)
+  def customer_plan_translator(l, c)
     p = ProductAbo.find_by_products_id(c)
-    if l == "fr"
-#      case p
-#      when 1
-#        "Plush Illimité"
-#      when 5
-#        "Plush 18+ Illimité"
-#      when 6
-#        "Plush a La Carte"
-#      when 7
-#        "2 crédits film par mois"
-#      when 8
-#        "4 crédits film par mois"
-#      when 9
-#        "6 crédits film par mois"
-#      else
-#        " "
-#      end
-    elsif l == "en"
-#      case p
-#      when 1
-#        "Plush Unlimited"
-#      when 5
-#        "Plush 18+ Unlimited"
-#      when 6
-#        "Plush a La Carte"
-#      when 7
-#        "2 film credits month"
-#      when 8
-#        "4 film credits month"
-#      when 9
-#        "6 film credits month"
-#      else
-#        " "
-#      end
-    elsif l == "nl"
-#      case p
-#      when 1
-#        "Plush Unlimited"
-#      when 5
-#        "Plush 18+ Unlimited"
-#      when 6
-#        "Plush a La Carte"
-#      when 7
-#        "2 credits film per maand"
-#      when 8
-#        "4 credits film per maand"
-#      when 9
-#        "6 credits film per maand"
-#      else
-#        " "
-#      end
+    if l == :fr
+      case p.products_id
+        when 1 then "Plush Illimité"
+        when 5 then "Plush 18+ Illimité"
+        when 6 then "Plush a La Carte"
+        when 7 then "2 crédits film par mois"
+        when 8 then "4 crédits film par mois"
+        when 9 then "6 crédits film par mois"
+        else " "
+      end
+     elsif l == :nl
+      n = case p.products_id
+        when 1 then "Plush Unlimited"
+        when 5 then "Plush 18+ Unlimited"
+        when 6 then "Plush a La Carte"
+        when 7 then "2 credits film per maand"
+        when 8 then "4 credits film per maand"
+        when 9 then "6 credits film per maand"
+        else " "
+      end
+      n
+     elsif l == :en
+      e = case p.products_id
+        when 1 then "Plush Unlimited"
+        when 5 then "Plush 18+ Unlimited"
+        when 6 then "Plush a La Carte"
+        when 7 then "2 film credits month"
+        when 8 then "4 film credits month"
+        when 9 then "6 film credits month"
+        else " "
+      end
+      e
     end
   end
 
