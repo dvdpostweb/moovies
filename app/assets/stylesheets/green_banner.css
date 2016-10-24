@@ -26,6 +26,8 @@
       .greenBanner .greenBannerTop._open_ ._toggleImage2_, .greenBanner .greenBannerTop._open_ ._toggleSpan2_ {
         display: none !important; }
       .greenBanner .greenBannerTop._open_ > div:nth-child(2) {
+        width: 45%;
+
         opacity: 0; }
       .greenBanner .greenBannerTop._open_ > div:last-child {
         opacity: 0; }
