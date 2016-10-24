@@ -356,14 +356,8 @@ $(document).ready(function(){
               } else if (3 === response.status) {
                 window.location.href = gon.root_localize_path
               } else if (4 === response.status) {
-                $.toast({
-                  heading: infoMessage(),
-                  text: response.message,
-                  icon: 'info',
-                  loader: true,
-                  loaderBg: '#9EC600',
-                  position: 'top-center'
-                })
+                $("#reconduction_div").show();
+                $("#reconduction_message").html(response.message);
               }
             },
             error: function (response) {
@@ -398,14 +392,8 @@ $(document).ready(function(){
               } else if (3 === response.status) {
                 window.location.href = gon.root_localize_path
               } else if (4 === response.status) {
-                $.toast({
-                  heading: infoMessage(),
-                  text: response.message,
-                  icon: 'info',
-                  loader: true,
-                  loaderBg: '#9EC600',
-                  position: 'top-center'
-                })
+                $("#reconduction_div").show();
+                $("#reconduction_message").html(response.message);
               }
             },
             error: function (response) {
@@ -440,14 +428,8 @@ $(document).ready(function(){
               } else if (3 === response.status) {
                 window.location.href = gon.root_localize_path
               } else if (4 === response.status) {
-                $.toast({
-                  heading: infoMessage(),
-                  text: response.message,
-                  icon: 'info',
-                  loader: true,
-                  loaderBg: '#9EC600',
-                  position: 'top-center'
-                })
+                $("#reconduction_div").show();
+                $("#reconduction_message").html(response.message);
               }
             },
             error: function (response) {
@@ -482,14 +464,8 @@ $(document).ready(function(){
             } else if (3 === response.status) {
               window.location.href = gon.root_localize_path
             } else if (4 === response.status) {
-              $.toast({
-                heading: infoMessage(),
-                text: response.message,
-                icon: 'info',
-                loader: true,
-                loaderBg: '#9EC600',
-                position: 'top-center'
-              })
+              $("#reconduction_div").show();
+              $("#reconduction_message").html(response.message);
             }
           },
           error: function (response) {
@@ -523,14 +499,8 @@ $(document).ready(function(){
             } else if (3 === response.status) {
               window.location.href = gon.root_localize_path
             } else if (4 === response.status) {
-              $.toast({
-                heading: infoMessage(),
-                text: response.message,
-                icon: 'info',
-                loader: true,
-                loaderBg: '#9EC600',
-                position: 'top-center'
-              })
+              $("#reconduction_div").show();
+              $("#reconduction_message").html(response.message);
             }
           },
           error: function (response) {
