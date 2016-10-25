@@ -21,7 +21,7 @@
     <% unless current_customer %>
 
     <div id="subscribe-wrap">
-      <%= link_to image_tag("#{I18n.locale}/#{t('home.index.banner_img')}#{params[:kind]==:adult ? '-adult' : ''}.jpg", :size => '942x188', :alt => t('home.index.banner_alt')), customers_reactive_path(:code => get_code(@discount_bottom.name)) %>
+      <%= link_to image_tag("#{I18n.locale}/#{t('home.index.banner_img')}#{params[:kind]==:adult ? '-adult' : ''}.jpg", :size => '942x188', :alt => t('home.index.banner_alt')), new_customer_session_path(:code => get_code(@discount_bottom.name)) %>
     </div>
     <% end %>
     <%= t('home.index.descritpion', :link_abo => info_path(:page_name => t('routes.infos.params.vod')), :link_svod => (params[:kind] == :adult ? products_short_path(:package => Moovies.packages.invert[4]) : products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}"), :tag => 5)), :link_tvod => (params[:kind] ==  :adult ? products_short_path(:package => Moovies.packages.invert[5]) : products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[2]}"), :tag => 5))).html_safe if params[:controller] == 'home' %>
