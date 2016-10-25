@@ -15,11 +15,38 @@
            <% @halloweenMovies = ProductDescription.where(products_id: product_id.products_id).where(language_id: 3) %>
          <% end %>
          <% @halloweenMovies.each do |product| %>
+           <% p = Product.find(product.products_id) %>
            <div class="movie-wrap-jacket">
-             <div class="thumb-wrap">
-                <%= link_to image_tag("http://www.dvdpost.be/images/#{product.products_image_big}"), product_path(:id => product.products_id) %>
-             </div>
-           </div>
+              <div class="thumb-wrap">
+                <a href="<%= product_path(:id => product.products_id) %>" alt="<%= product.products_name %>" class="cover" target="_blank"><img alt="<%= product.products_name %>" src="http://www.dvdpost.be/images/<%= product.products_image_big %>" width="125"></a>
+                <div class="tooltips" style="display: none;">
+                  <div class="main-part">
+                    </br>
+                    <p class="tooltips_title head-title"><%= p.products_title %></p>
+                    </br>
+                    <div id="pbtn">
+                      <a href="/en/movies/133044-le-grimoire-d-arkandias/action?origin=products&amp;source=49" class="alacarte action_btn">Watch</a>
+                    </div>
+                    <p class="tooltips_description"><%= product.products_description %></p>
+                    <div class="tooltips_other" id="133044950"><div class="button-area clear-float">
+                    <div class="button-popup">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="footer-green">
+                <a href="/en/information/alacarte">
+                  <% if I18n.locale == :fr %>
+                  <a href="/fr/information/alacarte"><label><u>Abonnez-vous</u></label></a><label>et regardez ce film pour seulement  <b>3.49€</b></label>
+                  <% elsif I18n.locale == :nl %>
+                  <a href="/nl/informatie/alacarte"><label><u>Inschrijven</u></label></a><label>en kijk deze film voor slechts <b>3.49€</b></label>
+                  <% elsif I18n.locale == :en %>
+                    <a href="/en/information/alacarte"><label><u>Subscribe</u></label></a><label>and watch this film for only <b>3.49€</b></label>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
          <% end %>
        <% end %>
     </div>
