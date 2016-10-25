@@ -71,6 +71,7 @@ Moovies::Application.routes.draw do
     match "photobox" => "photobox#plans"
     match 'carrefour' => 'home#carrefour'
     match 'belgium' => "home#belgium"
+    match 'halloween' => "halloween#collection"
     resource :public_promotion, :only => [:edit, :update]
     match "/" => 'products#index', :as => :root_localize
     match "validation" => 'home#validation'

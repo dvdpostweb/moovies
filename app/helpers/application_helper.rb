@@ -29,9 +29,9 @@ module ApplicationHelper
         when 1 then "Plush Unlimited"
         when 5 then "Plush 18+ Unlimited"
         when 6 then "Plush a La Carte"
-        when 7 then "2 film credits month"
-        when 8 then "4 film credits month"
-        when 9 then "6 film credits month"
+        when 7 then "2 film credits by month"
+        when 8 then "4 film credits by month"
+        when 9 then "6 film credits by month"
         else " "
       end
       e
