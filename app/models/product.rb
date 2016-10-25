@@ -152,6 +152,8 @@ class Product < ActiveRecord::Base
   sphinx_scope(:series) { {:with => {:serie_id => 1..1000000}} }
   sphinx_scope(:without_series) { {:with => {:serie_id => 0}} }
 
+  sphinx_scope(:halloween) { {:with => {:left_menu_selection => 1}} }
+
   sphinx_scope(:by_package) { |package_id| {:with => {:package_id => package_id}} }
   sphinx_scope(:random) { {:order => '@random'} }
   sphinx_scope(:by_new) { {:with => {:year => 2.years.ago.year..Date.today.year, :imdb_id_online => 1..3147483647}} }

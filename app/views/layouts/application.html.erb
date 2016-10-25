@@ -84,7 +84,7 @@
       </div>
       <% end %>
 
-      <% if !current_customer && (!(params[:controller] == 'home' && params[:action] =='validation') && params[:controller] != 'customers/registrations' && params[:controller] != 'steps' && params[:page_name] != 'abo' && params[:page_name] != 'price_public') && !(params[:controller] == 'promotions' && params[:id] == 'smarttv') && !(params[:controller] == 'info' && params[:page_name] == 'playstation') && !(params[:controller] == 'customers' && (params[:action] == 'reactive' || params[:action] == 'promotion')  ) && params[:action] != 'carrefour' && params[:controller] != 'photobox' && params[:controller] != 'freetrial' && params[:controller] != 'carrefourbonus' && params[:controller] != 'info' %>
+      <% if !current_customer && (!(params[:controller] == 'home' && params[:action] =='validation') && params[:controller] != 'customers/registrations' && params[:controller] != 'steps' && params[:page_name] != 'abo' && params[:page_name] != 'price_public') && !(params[:controller] == 'promotions' && params[:id] == 'smarttv') && !(params[:controller] == 'info' && params[:page_name] == 'playstation') && !(params[:controller] == 'customers' && (params[:action] == 'reactive' || params[:action] == 'promotion')  ) && params[:action] != 'carrefour' && params[:controller] != 'photobox' && params[:controller] != 'freetrial' && params[:controller] != 'carrefourbonus' && params[:controller] != 'info' && params[:controller] != 'halloween' %>
 
       <div id="subscribe-wrap">
         <%= landing_img(@code, @promotion, params, products_alt_banner, @discount_top) %>
@@ -110,6 +110,7 @@
   </div>
   <%= javascript_include_tag "application" %>
   <%= javascript_include_tag "jquery.ui.datepicker-#{I18n.locale}" %>
+  <%= yield :view_specific_javascript %>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.js"></script>
 
