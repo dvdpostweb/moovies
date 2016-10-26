@@ -45,8 +45,10 @@
       <%= text_field_tag :search, (params[:search] || t('.search')), {:id => 'search-field', :class => "search-field"} %>
       <%= submit_tag 'search', :id => 'search-btn' %>
     </div>
+    <!--
     <% if customer_signed_in? %>
       <a align='right' class="mcp" href="<%= edit_public_promotion_path() %>" id="codePromo"><%= t('layouts.menu.code_promo_mobistar')%></a>
     <% end %>
+  -->
   <% end %>
 <% end %>
