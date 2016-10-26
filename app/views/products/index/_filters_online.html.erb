@@ -8,11 +8,16 @@
         <%= hidden_field_tag :sort, params[:sort] %>
         <%= hidden_field_tag :belgium, params[:belgium] %>
         <%= link_to t("products.left_column.#{Moovies.packages.invert[(params[:kind] == :adult ? 4 : 1)]}"), products_short_path(:package => Moovies.packages.invert[(params[:kind] == :adult ? 4 : 1)]), :class => "svod packages #{params[:package] == Moovies.packages.invert[(params[:kind] == :adult ? 4 : 1)] ? 'current' : ''}" %>
-          <%= link_to t("products.left_column.#{Moovies.packages.invert[(params[:kind] == :adult ? 5 : 2)]}"), products_short_path(:package => Moovies.packages.invert[(params[:kind] == :adult ? 5 : 2)]), :class => "tvod packages #{params[:package] == Moovies.packages.invert[(params[:kind] == :adult ? 5 : 2)] ? 'current' : ''}" %>
-           <%= link_to t("products.left_column.adult"), products_short_path(:kind => :adult), :class => "adult packages" if params[:kind] != :adult %>
+        <%= link_to t("products.left_column.#{Moovies.packages.invert[(params[:kind] == :adult ? 5 : 2)]}"), products_short_path(:package => Moovies.packages.invert[(params[:kind] == :adult ? 5 : 2)]), :class => "tvod packages #{params[:package] == Moovies.packages.invert[(params[:kind] == :adult ? 5 : 2)] ? 'current' : ''}" %>
+        <%= link_to t("products.left_column.adult"), products_short_path(:kind => :adult), :class => "adult packages" if params[:kind] != :adult %>
       </li>
+
       <li>
         <div class="quick_links"><%= t('products.index.filters.link') %></div>
+        <% if General.where(CodeType: "LEFTMENU_ITEM_SHOW").where(CodeValue: 1).first %>
+          <%= link_to "Halloween", halloween_path, :id => :belgium_link, class: :halloween_link %>
+          <br />
+        <% end %>
         <%= radio_button_tag('filters[view_mode]', "last_added", params[:filters] && params[:filters][:view_mode] == 'last_added' ? true : false, class: "links") %>
         <%= label_tag('filters[view_mode]_last_added', t('products.left_column.svod_last_added')) %>
         <br />
@@ -40,11 +45,6 @@
       <li>
         <%= link_to t('.belgium'), belgium_path, :id => :belgium_link, :class => params[:belgium].present? ? 'checked' : '' %>
       </li>
-      <% if General.where(CodeType: "LEFTMENU_ITEM_SHOW").where(CodeValue: 1).first %>
-        <li>
-          <%= link_to "Halloween", halloween_path, :id => :belgium_link %>
-        </li>
-      <% end %>
       <li class="audio open">
         <%= t('products.index.filters.audio', :default => 'audio') %>
         <div>

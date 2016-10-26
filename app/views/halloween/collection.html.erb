@@ -1,10 +1,9 @@
 <% content_for :view_specific_css do %>
     <%= stylesheet_link_tag "halloween/halloween" %>
 <% end %>
-<div class="loading_bar" style="display:none"><%= image_tag 'loading.gif' %></div>
 <div id="maincontent" >
   <div id='filter_layout'></div>
-  <div id="products">
+  <div id="products" class="transparent">
      <div class="tvod"><h2>Halloween:</h2>
        <% @leftMenu.each do |product_id| %>
          <% if I18n.locale == :fr %>
@@ -18,14 +17,20 @@
            <% p = Product.find(product.products_id) %>
            <div class="movie-wrap-jacket">
               <div class="thumb-wrap">
-                <a href="<%= product_path(:id => product.products_id) %>" alt="<%= product.products_name %>" class="cover" target="_blank"><img alt="<%= product.products_name %>" src="http://www.dvdpost.be/images/<%= product.products_image_big %>" width="125"></a>
+                <a href="<%= product_path(:id => product.products_id, :halloween_action => :activated) %>" alt="<%= product.products_name %>" class="cover" target="_blank"><img alt="<%= product.products_name %>" src="http://www.dvdpost.be/images/<%= product.products_image_big %>" width="125"></a>
                 <div class="tooltips" style="display: none;">
                   <div class="main-part">
                     </br>
                     <p class="tooltips_title head-title"><%= p.products_title %></p>
                     </br>
                     <div id="pbtn">
-                      <a href="/en/movies/133044-le-grimoire-d-arkandias/action?origin=products&amp;source=49" class="alacarte action_btn">Watch</a>
+                      <% if I18n.locale == :fr %>
+                        <a href="/en/movies/133044-le-grimoire-d-arkandias/action?origin=products&amp;source=49" class="alacarte action_btn">Regarder</a>
+                      <% elsif I18n.locale == :nl %>
+                        <a href="/en/movies/133044-le-grimoire-d-arkandias/action?origin=products&amp;source=49" class="alacarte action_btn">Kijk nu</a>
+                      <% elsif I18n.locale == :en %>
+                        <a href="/en/movies/133044-le-grimoire-d-arkandias/action?origin=products&amp;source=49" class="alacarte action_btn">Watch</a>
+                      <% end %>
                     </div>
                     <p class="tooltips_description"><%= product.products_description %></p>
                     <div class="tooltips_other" id="133044950"><div class="button-area clear-float">
@@ -35,7 +40,6 @@
                 </div>
               </div>
               <div class="footer-green">
-                <a href="/en/information/alacarte">
                   <% if I18n.locale == :fr %>
                   <a href="/fr/information/alacarte"><label><u>Abonnez-vous</u></label></a><label>et regardez ce film pour seulement  <b>3.49€</b></label>
                   <% elsif I18n.locale == :nl %>
@@ -47,10 +51,11 @@
               </div>
             </div>
           </div>
+
+
          <% end %>
        <% end %>
     </div>
   </div>
 </div>
 <%= render :partial => 'products/index/filters_online', :locals => { :countries => @countries} %>
-<div id='pagination_content'></div>
