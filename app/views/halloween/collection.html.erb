@@ -19,7 +19,7 @@
            <% product_title = data[:title] %>
            <% product_image = data[:image] %>
            <% div_id = "#{product.id}#{Random.rand(1000)}"%>
-           <% path = product_path(:id => product.to_param, :source => @source, :response_id => @response_id) %>
+           <% path = product_path(:id => product.to_param, :source => @source, :response_id => @response_id, :halloween_action => "activated") %>
            <div class="movie-wrap-jacket">
                <div class="thumb-wrap">
                  <% cache(product.id, :expires_in => 2.hour) do %>
