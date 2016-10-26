@@ -38,3 +38,19 @@
 #reconduction_div {
   display: none;
 }
+
+.halloween_link {
+  color: #fa6818;
+  padding: 0 0 0 25px;
+  font-size: 17px;
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #49ff18, 0 0 30px #49ff18, 0 0 40px #49ff18, 0 0 55px #49ff18, 0 0 75px #49ff18
+}
+
+.halloween_link::before {
+  border: 1px solid #9F9E98;
+  margin-left:20px;
+}
+
+.halloween_link.checked::before {
+  background: #212A31;
+}

@@ -1,3 +1,9 @@
+<% if params[:halloween_action].present? && params[:halloween_action] == "activated" %>
+  <% content_for :view_specific_css do %>
+    <%= stylesheet_link_tag "halloween/halloween" %>
+  <% end %>
+<% end %>
+
 
 <!--   ==============   MAIN CONTENT   ==============   -->
   <div id="maincontent">
