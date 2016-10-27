@@ -46,14 +46,252 @@ body {
   width: 100px;
 }
 
-
-
-#wrap, #main, #online {
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffaf4b+0,ff920a+100;Orange+3D+%231 */
-  background: rgb(255,175,75); /* Old browsers */
-  background: -moz-linear-gradient(top,  rgba(255,175,75,1) 0%, rgba(255,146,10,1) 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(top,  rgba(255,175,75,1) 0%,rgba(255,146,10,1) 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom,  rgba(255,175,75,1) 0%,rgba(255,146,10,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffaf4b', endColorstr='#ff920a',GradientType=0 ); /* IE6-9 */
-
+#products_index #filters, #products_belgium #filters, #film-details #filters, #categories #filters, #studios #filters {
+    background: none repeat scroll 0 0 #FF7F50;
+    margin-left: 14px;
+    color: #bfbeba;
+    line-height: 27px;
+    padding: 0 32px 0 5px;
+    width: 162px;
 }
+
+#filters ul#main {
+    color: #FF7F50;
+    padding: 4px 1px 5px;
+    width: 178px;
+    background: #FF7F50;
+}
+
+#wrap {
+    margin: 0 auto 100px;
+    text-align: left;
+    width: 970px;
+    -moz-box-shadow: 0px 0px 45px #000000;
+    -webkit-box-shadow: 0px 0px 45px #000000;
+    box-shadow: 0px 0px 45px #000000;
+    background: #FF7F50;
+}
+
+.footer-green {
+  background-color: #FF7F50;
+}
+
+.greenBanner {
+  overflow: hidden;
+  position: relative;
+  min-height: 54px;
+  width: 970px;
+  margin: 0px auto;
+  font-family: 'Helvetica','Open Sans Condensed', sans-serif !important; }
+  .greenBanner ._toggleImage1_, .greenBanner ._toggleSpan1_ {
+    display: none !important; }
+  .greenBanner .greenBannerTop {
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    height: 54px;
+    background: #FF7F50;
+    display: table;
+    width: 100%;
+    -webkit-transition: all 0.6s linear;
+       -moz-transition: all 0.6s linear;
+         -o-transition: all 0.6s linear;
+            transition: all 0.6s linear; }
+    .greenBanner .greenBannerTop._open_ {
+      height: 30px; }
+      .greenBanner .greenBannerTop._open_ ._toggleImage1_, .greenBanner .greenBannerTop._open_ ._toggleSpan1_ {
+        display: inline-block !important; }
+      .greenBanner .greenBannerTop._open_ ._toggleImage2_, .greenBanner .greenBannerTop._open_ ._toggleSpan2_ {
+        display: none !important; }
+      .greenBanner .greenBannerTop._open_ > div:nth-child(2) {
+
+        opacity: 0; }
+      .greenBanner .greenBannerTop._open_ > div:last-child {
+        opacity: 0; }
+      .greenBanner .greenBannerTop._open_ > div {
+        -webkit-transition: all 0.2s linear;
+           -moz-transition: all 0.2s linear;
+             -o-transition: all 0.2s linear;
+                transition: all 0.2s linear; }
+    .greenBanner .greenBannerTop > div {
+      display: table-cell;
+      vertical-align: middle;
+      word-wrap: break-word;
+      -webkit-transition: all 0.2s linear;
+         -moz-transition: all 0.2s linear;
+           -o-transition: all 0.2s linear;
+              transition: all 0.2s linear; }
+    .greenBanner .greenBannerTop > div:first-child {
+      width: 29%;
+      font-size: 12px; }
+      .greenBanner .greenBannerTop > div:first-child img._toggleImage1_ {
+        width: 11px;
+        height: 5px;
+        margin-left: 30px;
+        margin-right: 7px;
+        display: inline-block;
+        vertical-align: middle; }
+      .greenBanner .greenBannerTop > div:first-child img._toggleImage2_ {
+        width: 18px;
+        height: 22px;
+        margin-left: 30px;
+        margin-right: 7px;
+        display: inline-block;
+        vertical-align: middle; }
+      .greenBanner .greenBannerTop > div:first-child a {
+        color: #181e25; }
+    .greenBanner .greenBannerTop > div:nth-child(2) {
+      width: 45%;
+      text-align: center; }
+    .greenBanner .greenBannerTop > div:last-child {
+      width: 30%;
+      text-align: right;
+      font-size: 12px;
+      color: white; }
+      .greenBanner .greenBannerTop > div:last-child img {
+        width: 33px;
+        height: 34px;
+        margin-right: 16px;
+        margin-left: 10px;
+        display: inline-block;
+        vertical-align: middle; }
+      .greenBanner .greenBannerTop > div:last-child > div {
+        display: inline-block;
+        vertical-align: middle;
+        text-align: left; }
+        .greenBanner .greenBannerTop > div:last-child > div a {
+          color: white !important; }
+  .greenBanner h2 {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    color: black;
+    font-size: 18px;
+    line-height: 18px;
+    font-weight: 500; }
+    .greenBanner h2 a, .greenBanner h2 a:hover, .greenBanner h2 a:focus, .greenBanner h2 a:active {
+      color: black;
+      font-weight: normal; }
+  .greenBanner .greenBannerInlineBlock {
+    display: inline-block; }
+  .greenBanner .greenBannerOpen {
+    display: table;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 25px;
+    -webkit-transition: all 0.6s linear;
+       -moz-transition: all 0.6s linear;
+         -o-transition: all 0.6s linear;
+            transition: all 0.6s linear;
+    margin-top: -250px; }
+    .greenBanner .greenBannerOpen._open_ {
+      margin-top: 0px;
+      -webkit-transition: all 0.6s linear;
+         -moz-transition: all 0.6s linear;
+           -o-transition: all 0.6s linear;
+              transition: all 0.6s linear; }
+    .greenBanner .greenBannerOpen > div {
+      display: table-cell;
+      vertical-align: middle;
+      word-wrap: break-word;
+      width: 50%; }
+    .greenBanner .greenBannerOpen > div:first-child {
+      padding-left: 30px;
+      border-right: 2px solid #eaeaea; }
+      .greenBanner .greenBannerOpen > div:first-child ul {
+        margin: 0;
+        padding: 0; }
+        .greenBanner .greenBannerOpen > div:first-child ul li {
+          list-style: none;
+          color: black;
+          font-size: 15px;
+          line-height: auto;
+          margin-bottom: 8px; }
+      .greenBanner .greenBannerOpen > div:first-child ul:first-child {
+        margin-bottom: 55px; }
+    .greenBanner .greenBannerOpen > div:last-child {
+      padding-left: 30px;
+      font-size: 13px; }
+      .greenBanner .greenBannerOpen > div:last-child table {
+        margin-bottom: 30px; }
+        .greenBanner .greenBannerOpen > div:last-child table td {
+          padding-top: 5px;
+          padding-bottom: 5px;
+          word-wrap: break-word; }
+      .greenBanner .greenBannerOpen > div:last-child ._inputContainer {
+        margin-top: 7px;
+        clear: both; }
+      .greenBanner .greenBannerOpen > div:last-child input[type='submit'] {
+        font-size: 14px;
+        color: white;
+        border: 1px solid #34adac;
+        background: #34adac;
+        outline: none;
+        -webkit-border-radius: 6px;
+           -moz-border-radius: 6px;
+                border-radius: 6px;
+        line-height: 20px;
+        -webkit-transition: all 0.2s linear;
+           -moz-transition: all 0.2s linear;
+             -o-transition: all 0.2s linear;
+                transition: all 0.2s linear;
+        cursor: pointer; }
+        .greenBanner .greenBannerOpen > div:last-child input[type='submit']:hover {
+          background: #288685; }
+        .greenBanner .greenBannerOpen > div:last-child input[type='submit']._redBackground_ {
+          background: #eb212e; }
+          .greenBanner .greenBannerOpen > div:last-child input[type='submit']._redBackground_:hover {
+            background: #c7121e; }
+      .greenBanner .greenBannerOpen > div:last-child .mt44 {
+        margin-top: 44px; }
+      .greenBanner .greenBannerOpen > div:last-child input[type="text"] {
+        width: 230px !important;
+        outline: none;
+        border: 2px solid #c3c3c3;
+        padding: 0px 0px 0px 5px;
+        margin: 0;
+        line-height: 22px;
+        font-size: 13px; }
+        .greenBanner .greenBannerOpen > div:last-child input[type="text"]::-webkit-input-placeholder {
+          font-size: 13px;
+          color: #817e7e; }
+        .greenBanner .greenBannerOpen > div:last-child input[type="text"]:-moz-placeholder {
+          font-size: 13px;
+          color: #817e7e; }
+        .greenBanner .greenBannerOpen > div:last-child input[type="text"]::-moz-placeholder {
+          font-size: 13px;
+          color: #817e7e; }
+        .greenBanner .greenBannerOpen > div:last-child input[type="text"]:-ms-input-placeholder {
+          font-size: 13px;
+          color: #817e7e; }
+        .greenBanner .greenBannerOpen > div:last-child input[type="text"]::placeholder {
+          font-size: 13px;
+          color: #817e7e; }
+      .greenBanner .greenBannerOpen > div:last-child img {
+        width: 47px;
+        height: 47px;
+        float: left;
+        margin-right: 6px;
+        margin-top: 1px; }
+        .greenBanner .greenBannerOpen > div:last-child img + label {
+          display: inline;
+          vertical-align: middle;
+          font-size: 13px;
+          line-height: 13px; }
+  .greenBanner ._blueColor_ {
+    color: #48a9a8; }
+  .greenBanner ._greenColor_ {
+    color: #60b13a; }
+  .greenBanner ._underline_ {
+    text-decoration: underline; }
+  .greenBanner ._bold_ {
+    font-weight: bold; }
+  .greenBanner ._redColor_ {
+    color: #eb212e; }
+  .greenBanner ._normal_ {
+    font-weight: normal; }
+  .greenBanner ._hidden_ {
+    display: none; }
+  .greenBanner ._errorMessage_ {
+    color: #eb212e;
+    margin-top: 4px; }
