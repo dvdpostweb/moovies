@@ -79,13 +79,16 @@ gem 'chosen-rails'
 gem "hash_to_hidden_fields"
 gem "rest-client"
 gem "jbuilder"
+
 gem 'annotate'
+
 gem 'gon'
 
 gem 'omniauth-facebook'
 gem "figaro"
 
-gem 'thin'
+gem 'puma', '~> 3.6'
+
 gem 'rails-footnotes', '~> 4.0'
 
 gem 'paypal-express', '~> 0.8.1'
