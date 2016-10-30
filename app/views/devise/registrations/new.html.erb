@@ -50,12 +50,46 @@
     padding-left: 5px;
 }
 </style>
-<% content_for :view_specific_css do %>
-  <%= stylesheet_link_tag "step2" %>
-<% end %>
+<% if params[:freetrial_action].present? && params[:freetrial_action] == "FREETRIAL" %>
+<style>
+#freetrial {
+	width: 725px;
+	margin-left: 4px;
+	background-color: #fff;
+	text-align: left;
+	padding-left: 25%;
+	padding-top: 50px;
+}
+#fth3 {
+	color: #76c71e;
+	padding-bottom: 5px;
+	font-family: Open Sans Condensed;
+	font-size: 27px;
+}
+.step2 {
+	padding-top: 10px;
+}
+#fth3q {
+	color: #000;
+	font-size: 19px;
+	padding-bottom: 3px;
+	font-family: Open Sans Condensed;
+}
+</style>
+  <div id="freetrial">
+		<h1 id="fth3"><%= t('freetrial_login_1') %></h1>
+		<ul>
+	    <li id="fth3q">- <%= t('freetrial_login_2') %> <strong><%= params[:films] %> <%= t('freetrial_login_3') %></strong> <%= t('freetrial_login_4') %></li>
+	    <li id="fth3q">- <%= t('freetrial_login_5') %> <strong>€ <%= params[:films] %>/<%= t('freetrial_login_6') %></strong></li>
+	    <li id="fth3q">- <%= t('freetrial_login_7') %></li>
+	  </ul>
+	</div>
 <div class="step2">
-<%= link_to root_path do %>
-  <%= image_tag "plush_logo_fixed.jpg", height: '71', width: '129' %>
+<% else %>
+<div class="step2">
+	<%= link_to root_path do %>
+		<%= image_tag "plush_logo_fixed.jpg", height: '71', width: '129' %>
+	<% end %>
 <% end %>
 <% if params[:activation].blank? %>
 <a href="/auth/facebook?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>"><button id="fb_connect_login" class="face-button"><%= t('.social.network.fbconnect') %></button></a>
