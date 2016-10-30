@@ -11,6 +11,7 @@ Moovies::Application.routes.draw do
       match "promotion_code_activation" => "validator#check_and_validate_public_promotions_activation_codes"
       match "express_checkout" => "paypal#express_checkout"
       match "express_checkout_return" => "paypal#express_checkout_return"
+      match "virement" => "virement#accept_virement_payment"
     end
   end
 end

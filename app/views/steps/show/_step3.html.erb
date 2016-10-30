@@ -94,11 +94,12 @@
           <a href="#"><%= t('promotion.newstep3.paymentoption3').html_safe %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= image_tag "step3/virement.png", height: '26', width: '64' %></a>
         </h1>
         <div id="vir">
-          <form id="virman">
-            <input type="text" name="first_name" placeholder="<%= t('promotion.newstep3.first_name') %>" class="text-field" />
-            <input type="text" name="last_name" placeholder="<%= t('promotion.newstep3.last_name') %>" class="text-field" />
+          <form id="virman" action="<%= api_v1_virement_path %>">
+            <input type="text" name="first_name" placeholder="<%= t('promotion.newstep3.first_name') %>" class="text-field" id="first_name" />
+            <input type="text" name="last_name" placeholder="<%= t('promotion.newstep3.last_name') %>" class="text-field" id="last_name" />
             <input type="submit" name="submit" value="Check out" class="button-connenct" />
           <form>
+            <div class="errorTxt"></div>
         </div>
       </section>
     </div>
@@ -119,4 +120,51 @@
       e.preventDefault();
     });
   });
+</script>
+
+<script>
+
+  $(document).ready(function() {
+    $("#virman").validate({
+      rules: {
+        'first_name': {
+          required: true
+        },
+        'last_name': {
+          required: true
+        }
+      },
+      messages: {
+        'first_nam': {
+          required: first_name_message()
+        },
+        'last_name': {
+          required: last_name_message()
+        }
+      },
+      errorElement : 'div',
+      errorLabelContainer: '.errorTxt'
+    });
+  });
+
+  function first_name_message() {
+    if (gon.locale == "fr") {
+      return "Prénom est nécessaire."
+    } else if (gon.locale == "nl") {
+      return "Voornaam is verplicht."
+    } else if (gon.locale == "en") {
+      return "First name is required."
+    }
+  }
+
+  function last_name_message() {
+    if (gon.locale == "fr") {
+      return "Nom de famille est nécessaire."
+    } else if (gon.locale == "nl") {
+      return "Achternaam is verplicht."
+    } else if (gon.locale == "en") {
+      return "Surname  is required."
+    }
+  }
+
 </script>
