@@ -7,16 +7,16 @@
         <div class="alacarte_1">
 
       <div class="header-nav">
-        <label>Essayez Plush gratuitment pendant 1 mois</label>
+        <label><%= t('info.alacarte.info.index.price_public.1') %></label>
       </div>
 
       <ul id="fft">
-        <li>- Sans engagement, votre abonnement est annuablle a tout moment</li>
-        <li>- Aucun frais ne vous sera facture avant la fin de votre assai gratuit, le <%= 1.month.from_now.strftime("%d/%m/%Y") %></li>
-        <li>- Nous vous enverrons un email de rappel 3 jours avant la fin de votre essai gratuit</li>
+        <li>- <%= t('info.alacarte.info.index.price_public.2') %></li>
+        <li>- <%= t('info.alacarte.info.index.price_public.3') %> <%= 1.month.from_now.strftime("%d/%m/%Y") %></li>
+        <li>- <%= t('info.alacarte.info.index.price_public.4') %></li>
       </ul>
       </br>
-      <h2 id="fft1">Choisissez votre formule</h2>
+      <h2 id="fft1"><%= t('info.alacarte.info.index.price_public.5') %></h2>
       </br>
       <div class="film-block">
         <div id="alacarte-2-films" class="film-box" target="alacarte-subscribe">
