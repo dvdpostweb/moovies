@@ -72,7 +72,7 @@
           <td>
             <form id="green_banner_form_alacarte">
               <div class="_inputContainer">
-                <input type="text" name="promotion" id="promotion" placeholder="<%= t('info.alacarte.info.index.price_public.promotion_code').capitalize %>">
+                <input type="text" name="promotion" id="promotion_alacarte" placeholder="<%= t('info.alacarte.info.index.price_public.promotion_code').capitalize %>">
                 <input type="submit"  value='<%= t('info.alacarte.info.index.price_public.validate').capitalize %>'>
                 <div id="promotion_response_message_alacarte" class="_errorMessage_">
                 </div>
@@ -251,7 +251,7 @@ $(document).ready(function() {
         method: 'POST',
         url: '/api/v1/promotion_code_activation',
         data: {
-          'promotion': $("#promotion").val()
+          'promotion': $.trim($("#promotion_alacarte").val())
         },
         dataType: 'json',
           success: function (response) {
