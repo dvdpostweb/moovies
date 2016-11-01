@@ -12,6 +12,7 @@ Moovies::Application.routes.draw do
       match "express_checkout" => "paypal#express_checkout"
       match "express_checkout_return" => "paypal#express_checkout_return"
       match "virement" => "virement#accept_virement_payment"
+      match "subscriptions" => "subscriptions#for_logedin_customers"
     end
   end
 end
