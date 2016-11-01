@@ -5,6 +5,10 @@ class HalloweenController < ApplicationController
       @body_class = 'reload'
       @countries = ProductCountry.visible.ordered
       @leftMenu = Leftmenu.paginate(:page => params[:page], :per_page => 20)
+      respond_to do |format|
+        format.html
+        format.js
+      end
     else
       raise ActionController::RoutingError.new('Not Found')
     end
