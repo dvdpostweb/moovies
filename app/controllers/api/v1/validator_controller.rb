@@ -73,8 +73,8 @@ class Api::V1::ValidatorController < API::V1::BaseController
             render :json => { :status => 0 }
           end
         end
-      elsif params[:discount_code].present? && params[:subscription_action].present?
-        if (params[:subscription_action].present? && params[:subscription_action] == "subscription_change")
+      elsif params[:discount_code].present? && params[:subscription_action].present? && params[:subscription_action] == "subscription_change"
+        #if (params[:subscription_action].present? && params[:subscription_action] == "subscription_change")
           discount = Discount.find_by_discount_code(params[:discount_code])
           customer = current_customer
           if current_customer.customers_locked__for_reconduction == 1
@@ -93,7 +93,7 @@ class Api::V1::ValidatorController < API::V1::BaseController
                 render :json => { :status => 3 }
               end
             end
-          end
+          #end
         end
       end
     else
