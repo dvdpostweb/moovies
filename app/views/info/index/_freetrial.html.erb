@@ -1,11 +1,23 @@
 <% content_for :view_specific_css do %>
     <%= stylesheet_link_tag "alacarte" %>
   <% end %>
+
+  <!-- <%= t('info.index.price_public.choose_tvod_tvod').html_safe %> -->
+
         <div class="alacarte_1">
 
       <div class="header-nav">
-        <label><%= t('info.index.price_public.choose_tvod_tvod').html_safe %></label>
+        <label><%= t('info.alacarte.info.index.price_public.1') %></label>
       </div>
+
+      <ul id="fft">
+        <li>- <%= t('info.alacarte.info.index.price_public.2') %></li>
+        <li>- <%= t('info.alacarte.info.index.price_public.3') %> <%= 1.month.from_now.strftime("%d/%m/%Y") %></li>
+        <li>- <%= t('info.alacarte.info.index.price_public.4') %></li>
+      </ul>
+      </br>
+      <h2 id="fft1"><%= t('info.alacarte.info.index.price_public.5') %></h2>
+      </br>
       <div class="film-block">
         <div id="alacarte-2-films" class="film-box" target="alacarte-subscribe">
           <p id="alacarte-kvadrat"><%= t('info.index.price_public.choose_tvod_plan_one').html_safe %></p>
@@ -169,15 +181,15 @@
                          <%= t('info.index.price_public.tvod_explanation_2').html_safe %>
         </div>
         <button id="alacarte-button-default" class="ALBTN" target="top"><%= t('info.index.price_public.choose_tvod_button').html_safe %></button>
-        <a href="/fr/mon-compte/connectez-vous?code=2FILMSFREE"><button id="alacarte-button-CF4FILMS-FR" class="ALBTN"><%= t('info.index.price_public.tvod_button').html_safe %></button></a>
-        <a href="/nl/mijn-account/log-in?code=2FILMSFREE"><button id="alacarte-button-CF4FILMS-NL" class="ALBTN"><%= t('info.index.price_public.tvod_button').html_safe %></button></a>
-        <a href="/en/my-account/log-in?code=2FILMSFREE"><button id="alacarte-button-CF4FILMS-EN" class="ALBTN"><%= t('info.index.price_public.tvod_button').html_safe %></button></a>
-        <a href="/fr/mon-compte/connectez-vous?code=4FILMSFREE"><button id="alacarte-button-CF6FILMS-FR" class="ALBTN"><%= t('info.index.price_public.tvod_button').html_safe %></button></a>
-        <a href="/nl/mijn-account/log-in?code=4FILMSFREE"><button id="alacarte-button-CF6FILMS-NL" class="ALBTN"><%= t('info.index.price_public.tvod_button').html_safe %></button></a>
-        <a href="/en/my-account/log-in?code=4FILMSFREE"><button id="alacarte-button-CF6FILMS-EN" class="ALBTN"><%= t('info.index.price_public.tvod_button').html_safe %></button></a>
-        <a href="/fr/mon-compte/connectez-vous?code=6FILMSFREE"><button id="alacarte-button-CF8FILMS-FR" class="ALBTN"><%= t('info.index.price_public.tvod_button').html_safe %></button></a>
-        <a href="/nl/mijn-account/log-in?code=6FILMSFREE"><button id="alacarte-button-CF8FILMS-NL" class="ALBTN"><%= t('info.index.price_public.tvod_button').html_safe %></button></a>
-        <a href="/en/my-account/log-in?code=6FILMSFREE"><button id="alacarte-button-CF8FILMS-EN" class="ALBTN"><%= t('info.index.price_public.tvod_button').html_safe %></button></a>
+        <a href="/fr/mon-compte/connectez-vous?code=2FILMSFREE;freetrial_action=FREETRIAL;films=2;price=3,99"><button id="alacarte-button-CF4FILMS-FR" class="ALBTN"><%= t('info.index.price_public.tvod_button').html_safe %></button></a>
+        <a href="/nl/mijn-account/log-in?code=2FILMSFREE;freetrial_action=FREETRIAL;films=2;price=3,99"><button id="alacarte-button-CF4FILMS-NL" class="ALBTN"><%= t('info.index.price_public.tvod_button').html_safe %></button></a>
+        <a href="/en/my-account/log-in?code=2FILMSFREE;freetrial_action=FREETRIAL;films=2;price=3,99"><button id="alacarte-button-CF4FILMS-EN" class="ALBTN"><%= t('info.index.price_public.tvod_button').html_safe %></button></a>
+        <a href="/fr/mon-compte/connectez-vous?code=4FILMSFREE;freetrial_action=FREETRIAL;films=4;price=7,99"><button id="alacarte-button-CF6FILMS-FR" class="ALBTN"><%= t('info.index.price_public.tvod_button').html_safe %></button></a>
+        <a href="/nl/mijn-account/log-in?code=4FILMSFREE;freetrial_action=FREETRIAL;films=4;price=7,99"><button id="alacarte-button-CF6FILMS-NL" class="ALBTN"><%= t('info.index.price_public.tvod_button').html_safe %></button></a>
+        <a href="/en/my-account/log-in?code=4FILMSFREE;freetrial_action=FREETRIAL;films=4;price=7,99"><button id="alacarte-button-CF6FILMS-EN" class="ALBTN"><%= t('info.index.price_public.tvod_button').html_safe %></button></a>
+        <a href="/fr/mon-compte/connectez-vous?code=6FILMSFREE;freetrial_action=FREETRIAL;films=6;price=11,99"><button id="alacarte-button-CF8FILMS-FR" class="ALBTN"><%= t('info.index.price_public.tvod_button').html_safe %></button></a>
+        <a href="/nl/mijn-account/log-in?code=6FILMSFREE;freetrial_action=FREETRIAL;films=6;price=11,99"><button id="alacarte-button-CF8FILMS-NL" class="ALBTN"><%= t('info.index.price_public.tvod_button').html_safe %></button></a>
+        <a href="/en/my-account/log-in?code=6FILMSFREE;freetrial_action=FREETRIAL;films=6;price=11,99"><button id="alacarte-button-CF8FILMS-EN" class="ALBTN"><%= t('info.index.price_public.tvod_button').html_safe %></button></a>
         <div class="description-block description-block-main"><%= t('info.index.price_public.choose_tvod_support_info').html_safe %></div>
         <div class="description-block"><%= link_to t('info.index.price_public.tvod_conditions').html_safe, info_path(:page_name => t('routes.infos.params.conditions')) %></div>
       </div>

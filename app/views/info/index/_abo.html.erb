@@ -6,6 +6,44 @@
      font-family: Open Sans Condensed;
      font-size: 18px;
    }
+   .header-nav {
+     height: 130px;
+   }
+   input[type='submit'] {
+     font-size: 14px;
+     color: white;
+     border: 1px solid #34adac;
+     background: #34adac;
+     outline: none;
+     -webkit-border-radius: 6px;
+        -moz-border-radius: 6px;
+             border-radius: 6px;
+     line-height: 20px;
+     -webkit-transition: all 0.2s linear;
+        -moz-transition: all 0.2s linear;
+          -o-transition: all 0.2s linear;
+             transition: all 0.2s linear;
+     cursor: pointer; }
+     input[type='submit']:hover {
+       background: #288685; }
+       input[type='submit']._redBackground_ {
+         background: #eb212e; }
+         input[type='submit']._redBackground_:hover {
+           background: #c7121e; }
+     input[type="text"] {
+       width: 230px !important;
+       outline: none;
+       border: 2px solid #c3c3c3;
+       padding: 0px 0px 0px 5px;
+       margin: 0;
+       line-height: 22px;
+       font-size: 13px; }
+       #ft {
+         color: #000;
+       }
+       ._errorMessage_ {
+         color: #eb212e;
+        }
    </style>
         <div class="alacarte_1">
 
@@ -28,6 +66,21 @@
           </li>
         </ul>
       </br>
+      <table style="width:75%">
+        <tr>
+          <td><strong><h3  id="ft"><%= t('info.alacarte.info.index.price_public.discount_code').capitalize %></h3></strong></td>
+          <td>
+            <form id="green_banner_form_alacarte">
+              <div class="_inputContainer">
+                <input type="text" name="promotion" id="promotion_alacarte" placeholder="<%= t('info.alacarte.info.index.price_public.promotion_code').capitalize %>">
+                <input type="submit"  value='<%= t('info.alacarte.info.index.price_public.validate').capitalize %>'>
+                <div id="promotion_response_message_alacarte" class="_errorMessage_">
+                </div>
+              </div>
+            </form>
+          </td>
+        </tr>
+      </table>
       </br>
       <% if I18n.locale == :fr %>
         <h3><p>Vous pouvez louer films à la piéce directement à partir du <u><%= link_to "catalogue", products_short_path() %></u>, ou prendre un abonnement pour bénéficier de prix avantageux (<strong>1,99€</strong> au lieu de 2,99€ pour la plupart des films, et <strong>3,99€</strong> au lieu de 4,99€ pour les derniéres sorties).</p></h3>
@@ -186,4 +239,30 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script>
 document.body.className = document.body.className.replace("adult","");
+</script>
+
+<script>
+
+$(document).ready(function() {
+
+    $("#green_banner_form_alacarte").submit(function(event) {
+      event.preventDefault();
+      $.ajax({
+        method: 'POST',
+        url: '/api/v1/promotion_code_activation',
+        data: {
+          'promotion': $.trim($("#promotion_alacarte").val())
+        },
+        dataType: 'json',
+          success: function (response) {
+          if (1 === response.status) {
+            $("#promotion_response_message_alacarte").html(response.message);
+          } else if (2 === response.status) {
+            window.location.href = response.message;
+          }
+        }
+      });
+    });
+});
+
 </script>

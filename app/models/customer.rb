@@ -190,7 +190,7 @@ class Customer < ActiveRecord::Base
   end
 
   def have_freetrial_codes?
-    (activation_discount_code_id == 263 || activation_discount_code_id == 264 || activation_discount_code_id == 264)
+    (activation_discount_code_id == 263 || activation_discount_code_id == 264 || activation_discount_code_id == 265)
   end
 
   def dont_have_credits?

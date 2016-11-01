@@ -13,6 +13,7 @@
          <% elsif I18n.locale == :en %>
            <% @halloweenMovies = ProductDescription.where(products_id: product_id.products_id).where(language_id: 3) %>
          <% end %>
+         <div id="pag">
          <% @halloweenMovies.each do |product| %>
            <% product = Product.find(product.products_id) %>
            <% data = product.description_data(true) %>
@@ -163,7 +164,9 @@
                        <% end %>
                			</div>
                      <% end %>
+
                    <% end %>
+                 </div>
                  </div>
                </div>
            </div>
@@ -171,9 +174,20 @@
 
          <% end %>
        <% end %>
-
-       <%= will_paginate @leftMenu %>
     </div>
+      <%= paginate @leftMenu %>
   </div>
 </div>
 <%= render :partial => 'products/index/filters_online', :locals => { :countries => @countries} %>
+<script   src="https://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>
+<script>
+
+$(document).ready(function() {
+  $("#pag").infinitescroll({
+    navSelector: "nav.pagination",
+    nextSelector: "nav.pagination a[rel=next]",
+    itemSelector: "#pag"
+  });
+});
+
+</script>
