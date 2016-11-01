@@ -1,7 +1,1 @@
-$('.tvod').append('<%= j render @leftMenu %>');
-<% if @leftMenu.next_page %>
-  $('.pagination').replaceWith('<%= j will_paginate @posts %>');
-<% else %>
-  $(window).off('scroll');
-  $('.pagination').remove();
-<% end %>
+$("#pag").append(<%= escape_javascript(render(@leftMenu)) %>);

@@ -92,3 +92,5 @@ gem 'puma', '~> 3.6'
 gem 'rails-footnotes', '~> 4.0'
 
 gem 'paypal-express', '~> 0.8.1'
+
+gem 'kaminari'
