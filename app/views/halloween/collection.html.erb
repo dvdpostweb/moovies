@@ -171,9 +171,24 @@
 
          <% end %>
        <% end %>
-
-       <%= will_paginate @leftMenu %>
     </div>
+    <div id="infinite-scrolling">
+      <%= will_paginate @leftMenu %>
+   </div>
   </div>
 </div>
 <%= render :partial => 'products/index/filters_online', :locals => { :countries => @countries} %>
+<script   src="https://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>
+<script>
+  jQuery(function() {});
+  if ($('#infinite-scrolling').size() > 0) {
+    $(window).on('scroll', function() {
+      var more_halloween_movies_url;
+      more_halloween_movies_url = $('.pagination .next_page a').attr('href');
+      if (more_halloween_movies_url && $(window).scrollTop() > $(document).height() - $(window).height() - 60) {
+        $('.pagination').html('<img src="/assets/ajax-loader.gif" alt="Loading..." title="Loading..." />');
+        $.getScript(more_posts_url);
+      }
+    });
+  }
+</script>
