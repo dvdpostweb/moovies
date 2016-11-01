@@ -44,9 +44,15 @@ class Api::V1::PaypalController < ApplicationController
       customer.customers_registration_step = 100
       customers_abo = 1
       customer.paypal_agreement_id = response.billing_agreement.identifier
-      customer.customers_abo_validityto = Time.now
-      customer.customers_locked__for_reconduction = 1
-      customer.credits_already_recieved = 1
+
+      if customer.have_freetrial_codes?
+        customer.customers_abo_validityto = Time.now + 1.month
+      else
+        customer.customers_abo_validityto = Time.now
+        customer.customers_locked__for_reconduction = 1
+        customer.credits_already_recieved = 1
+      end
+
       if customer.save(validate: false)
         redirect_to step_path(:id => 'step4')
 	    end
