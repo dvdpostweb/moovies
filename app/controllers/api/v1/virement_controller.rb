@@ -20,7 +20,16 @@ class Api::V1::VirementController < ApplicationController
         customer.credits_already_recieved = 1
       end
       if customer.save(validate: false)
-        redirect_to step_path(:id => 'step4')
+        discount = Discount.find_by_discount_code(customer.activation_discount_code_id)
+        if customer.have_freetrial_codes?
+          if customer.abo_history(12, customer.abo_type_id, discount.to_param)
+            redirect_to step_path(:id => 'step4')
+          end
+        else
+          if customer.abo_history(6, customer.abo_type_id, discount.to_param)
+            redirect_to step_path(:id => 'step4')
+          end
+        end
 	    end
     end
   end
