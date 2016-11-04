@@ -95,9 +95,28 @@
         </h1>
         <div id="vir">
           <form id="virman" action="<%= api_v1_virement_path %>">
-            <input type="text" name="first_name" placeholder="<%= t('promotion.newstep3.first_name') %>" class="text-field" id="first_name" />
-            <input type="text" name="last_name" placeholder="<%= t('promotion.newstep3.last_name') %>" class="text-field" id="last_name" />
-            <input type="submit" name="submit" value="Check out" class="button-connenct" />
+              <div class="grid grid-pad">
+                  <div class="col-1-4">
+                     <div class="content">
+                       <input type="text" name="first_name" placeholder="<%= t('promotion.newstep3.first_name') %>" class="text-field" id="first_name" />
+                     </div>
+                  </div>
+                  <div class="col-1-4">
+                     <div class="content">
+                       <input type="text" name="last_name" placeholder="<%= t('promotion.newstep3.last_name') %>" class="text-field" id="last_name" />
+                     </div>
+                  </div>
+                  <div class="col-1-4">
+                     <div class="content">
+                       <input type="text" name="telephone" placeholder="<%= t('promotion.newstep3.telephone') %>" class="text-field" id="telephone" />
+                     </div>
+                  </div>
+                  <div class="col-1-4">
+                     <div class="content">
+                         <input type="submit" name="submit" value="Check out" class="button-connenct" />
+                     </div>
+                  </div>
+              </div>
           <form>
             <div class="errorTxt"></div>
         </div>
@@ -132,6 +151,9 @@
         },
         'last_name': {
           required: true
+        },
+        'telephone': {
+          required: true
         }
       },
       messages: {
@@ -140,6 +162,9 @@
         },
         'last_name': {
           required: last_name_message()
+        },
+        'last_name': {
+          required: telephone_message()
         }
       },
       errorElement : 'div',
@@ -164,6 +189,16 @@
       return "Achternaam is verplicht."
     } else if (gon.locale == "en") {
       return "Surname  is required."
+    }
+  }
+
+  function telephone_message() {
+    if (gon.locale == "fr") {
+      return "Téléphone est nécessaire."
+    } else if (gon.locale == "nl") {
+      return "Telefoon is verplicht."
+    } else if (gon.locale == "en") {
+      return "Telephone is required."
     }
   }
 
