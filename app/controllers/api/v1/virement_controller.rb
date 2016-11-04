@@ -5,10 +5,11 @@ class Api::V1::VirementController < ApplicationController
   protect_from_forgery except: [:accept_virement_payment]
 
   def accept_virement_payment
-    if params[:first_name].present? && params[:last_name].present?
+    if params[:first_name].present? && params[:last_name].present? && params[:telephone].present?
       customer = current_customer
       customer.customers_firstname = params[:first_name]
       customer.customers_lastname = params[:last_name]
+      customer.customers_telephone = params[:telephone]
       customer.customers_abo_payment_method = 3
       customer.customers_registration_step = 100
       customers_abo = 1
