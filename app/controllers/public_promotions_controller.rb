@@ -13,7 +13,7 @@ class PublicPromotionsController < ApplicationController
         if !activation.present?
           careefour = Activation.where(:activation_code => params[:promotion]).where(:customers_id => 0).where(:activation_group => 21).first
           if careefour.present?
-            render :text => carrefour_path(:carrefour_activation_code => params[:promotion]); 
+            render :text => carrefour_path(:carrefour_activation_code => params[:promotion]);
           else
             render :text => t('session.error_alreadyused_code')
           end
@@ -40,6 +40,8 @@ class PublicPromotionsController < ApplicationController
       if params[:promotion] === "PHOTOBOX"
         render :text => photobox_path(:code => params[:promotion]);
       elsif params[:promotion] === "FREETRIAL"
+        render :text => info_path(:page_name => "freetrial");
+      elsif params[:promotion] === "NOVFREETRIAL"
         render :text => info_path(:page_name => "freetrial");
       elsif params[:promotion] === "CARREFOUR"
         render :text => carrefourbonus_path(:code => params[:promotion]);
