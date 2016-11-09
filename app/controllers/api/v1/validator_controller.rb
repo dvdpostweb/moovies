@@ -137,7 +137,7 @@ class Api::V1::ValidatorController < API::V1::BaseController
         activation = Activation.by_name(params[:promotion]).available.first
         if params[:promotion] === "PHOTOBOX"
           render :json => { :status => 2, :message => photobox_path(:code => params[:promotion]) }
-        elsif params[:promotion] === "FREETRIAL"
+        elsif params[:promotion] === "FREETRIAL" || params[:promotion] === "NOVFREETRIAL"
           render :json => { :status => 2, :message => info_path(:page_name => "freetrial") }
         elsif params[:promotion] === "CARREFOUR"
           render :json => { :status => 2, :message => carrefourbonus_path(:code => params[:promotion]) }
