@@ -100,7 +100,7 @@ class PaymentMethodsController < ApplicationController
       list = {
         "Account.PSPID" => ENV["OGONE_PSPID"],
         "Alias.AliasId" => @alias,
-        "Alias.OrderId" => @order_id,
+        "Alias.orderID" => @order_id,
         "Alias.StorePermanently" => "Y",
         "Card.Brand" => @brand.upcase,
         "Card.PaymentMethod" => @pm,
