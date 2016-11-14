@@ -30,7 +30,7 @@ staging:
   OGONE_PSPID: dvdpostogonetest
   OGONE_PASSWORD: KILLBILL1$metropolis
   OGONE_URL: https://ogone.test.v-psp.com/Tokenization/HostedPage
-  OGONE_PARAMETERS_ACCEPTURL:  http://staging.plush.be/ogone
+  OGONE_PARAMETERS_ACCEPTURL:  http://staging.plush.be/api/v1/ogone_parameters_accepturl
   OGONE_PARAMETERS_EXCEPTIONURL: http://staging.plush.be/en/steps/step3
 
 production:
