@@ -12,14 +12,14 @@
 
 <% if current_customer.have_freetrial_codes? %>
   <form name="checkout_confirmation" id="checkout_confirmation" method="post" action="<%= ENV["OGONE_URL"] %>">
-    <input type="hidden" name="Account.PSPID" value="<%= ENV["OGONE_PSPID"] %>">
-    <input type="hidden" name="Alias.AliasId" value="<%= @alias %>">
-    <input type="hidden" name="Alias.OrderId" value="<%= @order_id %>">
-    <input type="hidden" name="Alias.StorePermanently" value="Y">
-    <input type="hidden" name="Card.Brand" value="<%= @brand.upcase %>">
-    <input type="hidden" name="Card.PaymentMethod" value="">
-    <input type="hidden" name="Parameters.AcceptUrl" value="https://staging.plush.be/ogone">
-    <input type="hidden" name="Parameters.ExceptionUrl" value="<%= @url_back %>">
+    <input type="hidden" name="ACCOUNT.PSPID" value="<%= ENV["OGONE_PSPID"] %>">
+    <input type="hidden" name="ALIAS.ALIASID" value="<%= @alias %>">
+    <input type="hidden" name="ALIAS.ORDERID" value="<%= @order_id %>">
+    <input type="hidden" name="ALIAS.STOREPERMANENTLY" value="Y">
+    <input type="hidden" name="CARD.BRAND" value="<%= @brand.upcase %>">
+    <input type="hidden" name="CARD.PAYMENTMETHOD" value="">
+    <input type="hidden" name="PARAMETERS.ACCEPTURL" value="https://staging.plush.be/ogone">
+    <input type="hidden" name="PARAMETERS.EXCECPTIONURL" value="<%= @url_back %>">
   </form>
 <% else %>
   <form name="checkout_confirmation" id="checkout_confirmation" method="post" action="https://secure.ogone.com/ncol/<%= Moovies.ogone_url[Rails.env] %>/orderstandard_utf8.asp">
