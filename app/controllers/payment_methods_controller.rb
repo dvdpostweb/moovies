@@ -89,14 +89,8 @@ class PaymentMethodsController < ApplicationController
           'DirectEbankingBE'
         when 'DirectEbankingNL'
           'DirectEbankingNL'
-        when 'visa'
-          'visa'.upcase
-        when 'mastercard'
-          'mastercard'.upcase
-        when 'american Express'
-          'american Express'.upcase
         else
-        'CreditCard'
+          'CreditCard'
       end
     end
 
