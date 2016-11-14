@@ -90,11 +90,11 @@ class PaymentMethodsController < ApplicationController
         when 'DirectEbankingNL'
           'DirectEbankingNL'
         when 'visa'
-          'visa'
+          'visa'.upcase
         when 'mastercard'
-          'mastercard'
+          'mastercard'.upcase
         when 'american Express'
-          'american Express'
+          'american Express'.upcase
         else
         'CreditCard'
       end
@@ -103,8 +103,17 @@ class PaymentMethodsController < ApplicationController
     @alias = "p#{current_customer.to_param}"
 
     if current_customer.have_freetrial_codes?
-      list = { "Account.PSPID" => ENV["OGONE_PSPID"], "Alias.AliasId" => @alias, "Alias.OrderId" => @order_id, "Alias.StorePermanently" => "Y", "Card.Brand" => @brand.upcase, "Card.PaymentMethod" => @pm, "Parameters.AcceptUrl" => "https://staging.plush.be/ogone", "Parameters.ExceptionUrl" => "https://staging.plush.be/fr/steps/step3" } 
-      #list = list.merge("Card.PaymentMethod" => @pm, "Card.Brand" => @brand.upcase) if !@brand.nil?
+      list = {
+        "Account.PSPID" => ENV["OGONE_PSPID"],
+        "Alias.AliasId" => @alias,
+        "Alias.OrderId" => @order_id,
+        "Alias.StorePermanently" => "Y",
+        "Card.Brand" => @brand.upcase,
+        "Card.PaymentMethod" => @pm,
+        "Layout.Language" => @ogone_language
+        "Parameters.AcceptUrl" => "https://staging.plush.be/ogone",
+        "Parameters.ExceptionUrl" => "https://staging.plush.be/fr/steps/step3"
+      }
       list = list.sort
       s = list.map { |k,v| "#{k.to_s.upcase}=#{v}#{ENV["OGONE_PASSWORD"]}" }.join()
       Rails.logger.debug s.inspect
