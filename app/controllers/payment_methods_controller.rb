@@ -105,8 +105,8 @@ class PaymentMethodsController < ApplicationController
         "Card.Brand" => @brand.upcase,
         "Card.PaymentMethod" => @pm,
         "Layout.Language" => @ogone_language,
-        "Parameters.AcceptUrl" => "https://staging.plush.be/ogone",
-        "Parameters.ExceptionUrl" => "https://staging.plush.be/fr/steps/step3"
+        "Parameters.AcceptUrl" => ENV["OGONE_PARAMETERS_ACCEPTURL"],
+        "Parameters.ExceptionUrl" => ENV["OGONE_PARAMETERS_EXCEPTIONURL"]
       }
       list = list.sort
       s = list.map { |k,v| "#{k.to_s.upcase}=#{v}#{ENV["OGONE_PASSWORD"]}" }.join()
