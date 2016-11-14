@@ -103,7 +103,7 @@ class PaymentMethodsController < ApplicationController
     @alias = "p#{current_customer.to_param}"
 
     if current_customer.have_freetrial_codes?
-      list = { "Account.PSPID" => ENV["OGONE_PSPID"], "Alias.AliasId" => @alias, "Alias.OrderId" => @order_id, "Alias.StorePermanently" => "Y", "Parameters.AcceptUrl" => "https://staging.plush.be/ogone", "Parameters.ExceptionUrl" => @url_back, "Card.Brand" => @brand.upcase, "Card.PaymentMethod" => "" } 
+      list = { "Account.PSPID".upcase => ENV["OGONE_PSPID"], "Alias.AliasId".upcase => @alias, "Alias.OrderId".upcase => @order_id, "Alias.StorePermanently".upcase => "Y", "Parameters.AcceptUrl".upcase => "https://staging.plush.be/ogone", "Parameters.ExceptionUrl".upcase => @url_back, "Card.Brand".upcase => @brand.upcase, "Card.PaymentMethod".upcase => "" } 
       #list = list.merge("Card.PaymentMethod" => @pm, "Card.Brand" => @brand.upcase) if !@brand.nil?
       list = list.sort
       s = list.map { |k,v| "#{k.to_s.upcase}=#{v}#{ENV["OGONE_PASSWORD"]}" }.join()
