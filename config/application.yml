@@ -9,7 +9,12 @@ development:
   WEB_CONCURRENCY: 2
   MAX_THREADS: 5
   PORT: 3000
-  RACK_ENV: development 
+  RACK_ENV: development
+  OGONE_PSPID: dvdpostogonetest
+  OGONE_PASSWORD: KILLBILL1$metropolis
+  OGONE_URL: https://ogone.test.v-psp.com/Tokenization/HostedPage
+  OGONE_PARAMETERS_ACCEPTURL:  http://localhost:3000/ogone
+  OGONE_PARAMETERS_EXCEPTIONURL: http://localhost:3000/en/steps/step3
 
 staging:
   FACEBOOK_APP_ID: 820120514798274
@@ -22,6 +27,11 @@ staging:
   MAX_THREADS: 5
   PORT: 3000
   RACK_ENV: staging
+  OGONE_PSPID: dvdpostogonetest
+  OGONE_PASSWORD: KILLBILL1$metropolis
+  OGONE_URL: https://ogone.test.v-psp.com/Tokenization/HostedPage
+  OGONE_PARAMETERS_ACCEPTURL:  http://staging.plush.be/ogone
+  OGONE_PARAMETERS_EXCEPTIONURL: http://staging.plush.be/en/steps/step3
 
 production:
   FACEBOOK_APP_ID: 246953642340322
@@ -34,3 +44,8 @@ production:
   MAX_THREADS: 5
   PORT: 3000
   RACK_ENV: production
+  OGONE_PSPID: dvdpost
+  OGONE_PASSWORD: KILLBILL
+  OGONE_URL: https://secure.ogone.com/Tokenization/HostedPage
+  OGONE_PARAMETERS_ACCEPTURL: http://www.plush.be/api/v1/ogone_parameters_accepturl
+  OGONE_PARAMETERS_EXCEPTIONURL: http://www.plush.be/api/v1/ogone_parameters_exceptionurl
