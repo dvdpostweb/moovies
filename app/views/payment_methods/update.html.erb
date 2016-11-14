@@ -17,7 +17,7 @@
     <input type="hidden" name="Alias.OrderId" value="<%= @order_id %>">
     <input type="hidden" name="Alias.StorePermanently" value="Y">
     <input type="hidden" name="Card.Brand" value="<%= @brand.upcase %>">
-    <input type="hidden" name="Card.PaymentMethod" value="">
+    <input type="hidden" name="Card.PaymentMethod" value="<%= @pm %>">
     <input type="hidden" name="Parameters.AcceptUrl" value="https://staging.plush.be/ogone">
     <input type="hidden" name="Parameters.ExceptionUrl" value="https://staging.plush.be/fr/steps/step3">
     <input type="hidden" name="ShaSignature.ShaSign" value="<%= @hash %>">
