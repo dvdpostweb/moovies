@@ -19,7 +19,7 @@
     <input type="hidden" name="Card.Brand" value="<%= @brand.upcase %>">
     <input type="hidden" name="Card.PaymentMethod" value=""
     <input type="hidden" name="Parameters.AcceptUrl" value="<%= ENV["OGONE_PARAMETERS_ACCEPTURL"] %>">
-    <input type="hidden" name="Parameters.ExceptionUrl" value="<%= ENV["OGONE_PARAMETERS_EXCEPTIONURL"] %>">
+    <input type="hidden" name="Parameters.ExceptionUrl" value="<%= @url_back %>">
   </form>
 <% else %>
   <form name="checkout_confirmation" id="checkout_confirmation" method="post" action="https://secure.ogone.com/ncol/<%= Moovies.ogone_url[Rails.env] %>/orderstandard_utf8.asp">
