@@ -99,8 +99,8 @@ class PaymentMethodsController < ApplicationController
     if current_customer.have_freetrial_codes?
       list = {
         "Account.PSPID" => ENV["OGONE_PSPID"],
-        "Alias.AliasId" => ENV["ALIAS_ID"],
-        "Alias.OrderId" => ENV["ALIAS_ID"],
+        "Alias.AliasId" => @alias,
+        "Alias.OrderId" => @order_id,
         "Alias.StorePermanently" => "Y",
         "Card.Brand" => @brand.upcase,
         "Card.PaymentMethod" => @pm,
