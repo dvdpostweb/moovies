@@ -50,3 +50,4 @@ production:
   OGONE_URL: https://secure.ogone.com/Tokenization/HostedPage
   OGONE_PARAMETERS_ACCEPTURL: http://www.dvdpost.be/ogone_process.php
   OGONE_PARAMETERS_EXCEPTIONURL: http://www.dvdpost.be/step3b.php
+  ALIAS_ID: p70727
