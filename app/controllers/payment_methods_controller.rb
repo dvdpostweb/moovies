@@ -89,6 +89,8 @@ class PaymentMethodsController < ApplicationController
           'DirectEbankingBE'
         when 'DirectEbankingNL'
           'DirectEbankingNL'
+        when 'visa'
+          'VISA'
         else
         'CreditCard'
       end
