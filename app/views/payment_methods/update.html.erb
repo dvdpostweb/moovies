@@ -2,7 +2,7 @@
   <div class="overlay-content">
     <div id="promo_logo">
       <%= image_tag "step2/logo.png", height: '100', width: '100' %>
-    </div> 
+    </div>
     </br>
     <a id="redirection_text"><%= t '.redirection' %></a>
     </br>
@@ -10,29 +10,46 @@
   </div>
 </div>
 
+<% if current_customer.have_freetrial_codes? %>
+  <form name="checkout_confirmation" id="checkout_confirmation" method="post" action="<%= ENV["OGONE_URL"] %>">
+    <input type="hidden" name="Account.PSPID" value="<%= ENV["OGONE_PSPID"] %>">
+    <input type="hidden" name="Alias.AliasId" value="<%= @alias %>">
+    <input type="hidden" name="Alias.OrderId" value="<%= @order_id %>">
+    <input type="hidden" name="Alias.StorePermanently" value="Y">
+    <!--
+    <input type="hidden" name="ShaSignature.ShaSign" value="<%= @hash %>">
+    -->
+    <% if !@brand.nil? %>
+    <input type="hidden" name="Card.PaymentMethod" value="<%= @pm.nil? ? 'CreditCard' : @pm %>">
+    <input type="hidden" name="Card.Brand" value="<%= @brand %>">
+    <% end %>
+    <input type="hidden" name="Parameters.AcceptUrl" value="<%= ENV["OGONE_PARAMETERS_ACCEPTURL"] %>">
+    <input type="hidden" name="Parameters.ExceptionUrl" value="<%= ENV["OGONE_PARAMETERS_EXCEPTIONURL"] %>">
+  </form>
+<% else %>
+  <form name="checkout_confirmation" id="checkout_confirmation" method="post" action="https://secure.ogone.com/ncol/<%= Moovies.ogone_url[Rails.env] %>/orderstandard_utf8.asp">
+  <input type="hidden" name="prod" value="">
+  <input type="hidden" name="orderID" value="<%= @order_id %>">
+  <input type="hidden" name="pspid" value="<%= Moovies.ogone_pspid[Rails.env] %>">
+  <input type="hidden" name="RL" value="ncol-2.0">
+  <input type="hidden" name="currency" value="EUR">
+  <input type="hidden" name="language" value="<%= @ogone_language %>">
+  <input type="hidden" name="amount" value="<%= (@price*100).round() %>">
+  <input type="hidden" name="ALIAS" value="<%= @alias %>">
+  <input type="hidden" name="SHASign" value="<%= @hash %>">
+  <input type="hidden" name="CN" value="<%= current_customer.name_without_accent %>">
+  <input type="hidden" name="COM" value="<%= @com %>">
+  <input type="hidden" name="ALIASUSAGE" value=".">
+  <input type="hidden" name="declineurl" value="<%= @url_back %>">
+  <input type="hidden" name="exceptionurl" value="<%= @url_back %>">
+  <input type="hidden" name="cancelurl" value="<%= @url_back %>">
+  <input type="hidden" name="catalogurl" value="<%= @url_back %>">
+  <input type="hidden" name="accepturl" value="<%= @url_ok %>">
+  <input type="hidden" name="TP" value="<%= @template_ogone %>">
 
-<form name="checkout_confirmation" id="checkout_confirmation" method="post" action="https://secure.ogone.com/ncol/<%= Moovies.ogone_url[Rails.env] %>/orderstandard_utf8.asp">
-<input type="hidden" name="prod" value="">
-<input type="hidden" name="orderID" value="<%= @order_id %>">
-<input type="hidden" name="pspid" value="<%= Moovies.ogone_pspid[Rails.env] %>">
-<input type="hidden" name="RL" value="ncol-2.0">
-<input type="hidden" name="currency" value="EUR">
-<input type="hidden" name="language" value="<%= @ogone_language %>">
-<input type="hidden" name="amount" value="<%= (@price*100).round() %>">
-<input type="hidden" name="ALIAS" value="<%= @alias %>">
-<input type="hidden" name="SHASign" value="<%= @hash %>">
-<input type="hidden" name="CN" value="<%= current_customer.name_without_accent %>">
-<input type="hidden" name="COM" value="<%= @com %>">
-<input type="hidden" name="ALIASUSAGE" value=".">
-<input type="hidden" name="declineurl" value="<%= @url_back %>">
-<input type="hidden" name="exceptionurl" value="<%= @url_back %>">
-<input type="hidden" name="cancelurl" value="<%= @url_back %>">
-<input type="hidden" name="catalogurl" value="<%= @url_back %>">
-<input type="hidden" name="accepturl" value="<%= @url_ok %>">
-<input type="hidden" name="TP" value="<%= @template_ogone %>">
-
-<% if !@brand.nil? %>
-<input type="hidden" name="PM" value="<%= @pm.nil? ? 'CreditCard' : @pm %>">
-<input type="hidden" name="BRAND" value="<%= @brand %>">
+  <% if !@brand.nil? %>
+  <input type="hidden" name="PM" value="<%= @pm.nil? ? 'CreditCard' : @pm %>">
+  <input type="hidden" name="BRAND" value="<%= @brand %>">
+  <% end %>
+  </form>
 <% end %>
-</form>

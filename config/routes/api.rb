@@ -13,6 +13,8 @@ Moovies::Application.routes.draw do
       match "express_checkout_return" => "paypal#express_checkout_return"
       match "virement" => "virement#accept_virement_payment"
       match "subscriptions" => "subscriptions#for_logedin_customers"
+      match "ogone_parameters_accepturl" => "ogone_tokenization#ogone_parameters_accepturl"
+      match "ogone_parameters_exceptionurl" => "ogone_tokenization#ogone_parameters_exceptionurl"
     end
   end
 end
