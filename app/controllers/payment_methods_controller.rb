@@ -104,7 +104,7 @@ class PaymentMethodsController < ApplicationController
         "Alias.StorePermanently" => "Y",
         "Card.Brand" => @brand.upcase,
         "Card.PaymentMethod" => @pm,
-        "Layout.Language" => @ogone_language
+        "Layout.Language" => @ogone_language,
         "Parameters.AcceptUrl" => "https://staging.plush.be/ogone",
         "Parameters.ExceptionUrl" => "https://staging.plush.be/fr/steps/step3"
       }
