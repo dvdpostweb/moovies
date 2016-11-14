@@ -30,8 +30,9 @@ staging:
   OGONE_PSPID: dvdpostogonetest
   OGONE_PASSWORD: KILLBILL1$metropolis
   OGONE_URL: https://ogone.test.v-psp.com/Tokenization/HostedPage
-  OGONE_PARAMETERS_ACCEPTURL:  http://staging.plush.be/api/v1/ogone_parameters_accepturl
-  OGONE_PARAMETERS_EXCEPTIONURL: http://staging.plush.be/en/steps/step3
+  OGONE_PARAMETERS_ACCEPTURL:  http://www.dvdpost.be/ogone_process.php
+  OGONE_PARAMETERS_EXCEPTIONURL: http://www.dvdpost.be/step3b.php
+  ALIAS_ID: p70727
 
 production:
   FACEBOOK_APP_ID: 246953642340322
@@ -47,5 +48,5 @@ production:
   OGONE_PSPID: dvdpost
   OGONE_PASSWORD: KILLBILL
   OGONE_URL: https://secure.ogone.com/Tokenization/HostedPage
-  OGONE_PARAMETERS_ACCEPTURL: http://www.plush.be/api/v1/ogone_parameters_accepturl
-  OGONE_PARAMETERS_EXCEPTIONURL: http://www.plush.be/api/v1/ogone_parameters_exceptionurl
+  OGONE_PARAMETERS_ACCEPTURL: http://www.dvdpost.be/ogone_process.php
+  OGONE_PARAMETERS_EXCEPTIONURL: http://www.dvdpost.be/step3b.php
