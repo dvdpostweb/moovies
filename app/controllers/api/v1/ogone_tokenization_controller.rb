@@ -6,7 +6,7 @@ class Api::V1::OgoneTokenizationController < ApplicationController
 
   def ogone_parameters_accepturl
     if params[:Alias_AliasId].present?
-      customer = Customer_find(params[:Alias_AliasId].sub('p', ''))
+      customer = Customer.find(params[:Alias_AliasId].sub('p', ''))
       if customer.present?
         render json:customer
       end
