@@ -5,7 +5,9 @@ class Api::V1::OgoneTokenizationController < ApplicationController
   protect_from_forgery except: [:ogone_parameters_accepturl, :ogone_parameters_exceptionurl]
 
   def ogone_parameters_accepturl
-    render json: params
+    if params[:Alias_AliasId].present?
+      render json: params[:Alias_AliasId]
+    end
   end
 
   def ogone_parameters_exceptionurl
