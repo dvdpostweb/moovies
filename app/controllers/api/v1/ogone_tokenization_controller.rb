@@ -6,7 +6,7 @@ class Api::V1::OgoneTokenizationController < ApplicationController
 
   def ogone_parameters_accepturl
     if params[:Alias_AliasId].present?
-      render json: params[:Alias_AliasId].slice!(0)
+      render json: params[:Alias_AliasId].sub('p', '')
     end
   end
 
