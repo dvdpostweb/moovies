@@ -51,7 +51,7 @@ class Api::V1::LoginController < API::V1::BaseController
 
   def discount_code_account_activation(discount, resource, password, activation = nil)
     activation = Activation.by_name(activation).available.first
-    if !resource.discount_reuse?(discount.month_before_reuse) && discount.bypass_discountuse == 0
+    if !resource.discount_reuse?(discount.month_before_reuse) && discount.bypass_discountuse == 0 || resource.have_freetrial_codes?
       invalid_discount_code_message
     else
       resource.tvod_free = resource.tvod_free + discount.tvod_free

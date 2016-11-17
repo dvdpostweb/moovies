@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2 text">
+    <%= link_to root_localize_path do %>
+      <%= image_tag "plush_logo_fixed.jpg", height: '71', width: '129' %>
+    <% end %>
+    <h1><%= t('freetrial_login_1') %></h1>
+    <div class="description">
+      <p>- <%= t('freetrial_login_2') %> <mark><%= params[:films] %> <%= t('freetrial_login_3') %></mark> <%= t('freetrial_login_4') %></p>
+      <p>- <%= t('freetrial_login_5') %> <mark>€ <%= params[:price] %>/<%= t('freetrial_login_6') %></mark></p>
+      <p>- <%= t('freetrial_login_7') %></p>
+    </div>
+  </div>
+</div>
