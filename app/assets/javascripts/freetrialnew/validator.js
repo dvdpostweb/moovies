@@ -123,11 +123,6 @@ function validateFreeTrialRegister() {
       "FreeTrialLoginEmailPassword": {
         required: true,
         minlength: 8
-      },
-      "FreeTrialLoginEmailPasswordConfirmation": {
-        required: true,
-        minlength: 8,
-        equalTo: "#FreeTrialLoginEmailPassword"
       }
     },
     messages: {
@@ -139,11 +134,6 @@ function validateFreeTrialRegister() {
       "FreeTrialLoginEmailPassword": {
         required: required_message_password(),
         minlength: min_characters()
-      },
-      "FreeTrialLoginEmailPasswordConfirmation": {
-        required: required_message_password_confirmation(),
-        minlength: min_characters(),
-        equalTo: equalToMessage()
       }
     },
     highlight: function(element) {
@@ -168,7 +158,6 @@ function validateFreeTrialRegister() {
         data: {
           'email': $.trim($("#FreeTrialLoginEmailAddress").val()),
           'password': $.trim($("#FreeTrialLoginEmailPassword").val()),
-          'password_confirmation': $.trim($("#FreeTrialLoginEmailPasswordConfirmation").val()),
           'code': $.trim(gon.code)
           //'customers_newsletter': customers_newsletter,
           //'customers_newsletterpartner': customers_newsletterpartner
