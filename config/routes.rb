@@ -1,4 +1,5 @@
 Moovies::Application.routes.draw do
+
   devise_scope :customer do
     get 'logout_via_javascript' => 'devise/sessions#destroy'
   end

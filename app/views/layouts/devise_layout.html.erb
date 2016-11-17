@@ -17,7 +17,9 @@
   <%= render :partial => 'layouts/apple' %>
 </head>
 <body>
-
+  <% if params[:error_freetrial_discount_code_already_used].present? %>
+    <div id="display-error"><h2><%= t("PLUSH_DISCOUNT_CODE_RESTRICTION") %></h2></div>
+  <% end %>
   <div id="header_login">
     <ul id="lang">
       <li> <%= link_to t('.home').upcase, root_localize_path %> </li>
@@ -320,6 +322,8 @@
   }
 
 </script>
-
+<% if params[:error_freetrial_discount_code_already_used].present? %>
+  <div id="display-error"><h2><%= t("PLUSH_DISCOUNT_CODE_RESTRICTION") %></h2></div>
+<% end %>
 </body>
 </html>
