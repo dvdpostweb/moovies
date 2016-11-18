@@ -15,6 +15,9 @@ development:
   OGONE_URL: https://ogone.test.v-psp.com/Tokenization/HostedPage
   OGONE_PARAMETERS_ACCEPTURL:  http://localhost:3000/ogone
   OGONE_PARAMETERS_EXCEPTIONURL: http://localhost:3000/en/steps/step3
+  FREETRIAL_REFERRER_FR: http://localhost:3000/fr/information/freetrial
+  FREETRIAL_REFERRER_NL: http://localhost:3000/nl/informatie/freetrial
+  FREETRIAL_REFERRER_EN: http://localhost:3000/en/information/freetrial
 
 staging:
   FACEBOOK_APP_ID: 820120514798274
@@ -32,7 +35,9 @@ staging:
   OGONE_URL: https://ogone.test.v-psp.com/Tokenization/HostedPage
   OGONE_PARAMETERS_ACCEPTURL:  http://www.dvdpost.be/ogone_process.php
   OGONE_PARAMETERS_EXCEPTIONURL: http://www.dvdpost.be/step3b.php
-  ALIAS_ID: p70727
+  FREETRIAL_REFERRER_FR: http://staging.plush.be/fr/information/freetrial
+  FREETRIAL_REFERRER_NL: http://staging.plush.be/nl/informatie/freetrial
+  FREETRIAL_REFERRER_EN: http://staging.plush.be/en/information/freetrial
 
 production:
   FACEBOOK_APP_ID: 246953642340322
@@ -50,4 +55,6 @@ production:
   OGONE_URL: https://secure.ogone.com/Tokenization/HostedPage
   OGONE_PARAMETERS_ACCEPTURL: http://www.dvdpost.be/ogone_process.php
   OGONE_PARAMETERS_EXCEPTIONURL: http://www.dvdpost.be/step3b.php
-  ALIAS_ID: p70727
+  FREETRIAL_REFERRER_FR: http://www.plush.be/fr/information/freetrial
+  FREETRIAL_REFERRER_NL: http://www.plush.be/nl/informatie/freetrial
+  FREETRIAL_REFERRER_EN: http://www.plush.be/en/information/freetrial

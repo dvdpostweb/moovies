@@ -292,6 +292,44 @@ class Customer < ActiveRecord::Base
     end
   end
 
+  def registration_code_freetrialR=(code)
+    @code = code
+    @discount = Discount.by_name(code).available.first
+    if @discount
+      self.promo_type = 'D'
+      self.promo_id = @discount.id
+      self.abo_type_id = @discount.abo_type_id
+      self.next_abo_type_id = @discount.next_abo_type_id
+      self.group_id = @discount.group_id
+      self.step = @discount.goto_step
+      self.tvod_free = @discount.tvod_free
+      self.customers_abo = 1
+      self.customers_abo_validityto = Time.now + 1.month
+      self.step = 33
+    end
+  end
+
+  def registration_code_freetrialL(code, credits)
+    @code = code
+    @discount = Discount.by_name(code).available.first
+    if @discount
+      self.promo_type = 'D'
+      self.promo_id = @discount.id
+      self.abo_type_id = @discount.abo_type_id
+      self.next_abo_type_id = @discount.next_abo_type_id
+      self.group_id = @discount.group_id
+      self.step = @discount.goto_step
+      self.tvod_free = @discount.tvod_free + credits
+      self.customers_abo = 1
+      self.customers_abo_validityto = Time.now + 1.month
+      if self.payable?
+        self.step = 100
+      else
+        self.step = 33
+      end
+    end
+  end
+
   def email_change
     if self.email != self.new_email
       self.is_email_valid = 1

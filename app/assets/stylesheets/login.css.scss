@@ -701,3 +701,23 @@ h1 {
         right: 35px;
     }
 }
+
+#display-error
+{
+   width: 100%;
+   border: 1px solid #D8D8D8;
+   padding: 5px;
+   border-radius: 5px;
+   font-family: Arial;
+   font-size: 11px;
+   text-transform: uppercase;
+   color: #fff;
+   text-align: center;
+	 /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#a90329+0,8f0222+44,6d0019+100;Brown+Red+3D */
+   background: #a90329; /* Old browsers */
+   background: -moz-linear-gradient(top,  #a90329 0%, #8f0222 44%, #6d0019 100%); /* FF3.6-15 */
+   background: -webkit-linear-gradient(top,  #a90329 0%,#8f0222 44%,#6d0019 100%); /* Chrome10-25,Safari5.1-6 */
+   background: linear-gradient(to bottom,  #a90329 0%,#8f0222 44%,#6d0019 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a90329', endColorstr='#6d0019',GradientType=0 ); /* IE6-9 */
+
+}
