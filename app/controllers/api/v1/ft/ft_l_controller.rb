@@ -5,10 +5,8 @@ class Api::V1::Ft::FtLController < API::V1::BaseController
       if URI(request.referer).path == "/#{I18n.locale}/freetrial_action" && params[:email].present? && params[:password].present? && params[:code].present?
         resource = Customer.find_for_database_authentication(email: params[:email])
         discount = Discount.find_by_discount_code(params[:code])
-        if resource.have_freetrial_codes?
+        if !resource.discount_reuse?(discount.month_before_reuse) && discount.bypass_discountuse == 0
           render json: { status: 0, message: t("ft_error_page.Forbidden.Register.FTERROR") }
-        elsif !resource.discount_reuse?(discount.month_before_reuse) && discount.bypass_discountuse == 0
-          render json: { status: 3, message: new_customer_session_path(:error_freetrial_discount_code_already_used => "PLUSH_DISCOUNT_CODE_RESTRICTION") }
         else
           if resource.valid_password?(params[:password])
             sign_in :customer, resource
