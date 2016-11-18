@@ -18,7 +18,8 @@ class Api::V1::OgoneTokenizationController < ApplicationController
         customer.ogone_owner = params[:Card_CardHolderName] if params[:Card_CardHolderName].present?
         if customer.save(validate: false)
           if customer.abo_history(17, customer.abo_type_id, "FREE")
-            redirect_to step_path(:id => 'step4')
+            locale = customer.locale || :fr
+            redirect_to step_path(:id => 'step4', :locale => locale)
           end
         end
       end
