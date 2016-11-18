@@ -77,8 +77,6 @@ function validateFreeTrialLogin() {
             $("#FreeTrialLoginError").append(response.message);
           } else if (1 === response.status) {
             window.location.href = response.message
-          } else if (3 === response.status) {
-            window.location.href = response.message
           }
         },
         error: function (response) {
@@ -125,6 +123,11 @@ function validateFreeTrialRegister() {
       "FreeTrialRegisterPassword": {
         required: true,
         minlength: 8
+      },
+      "FreeTrialRegisterPasswordConfirmation": {
+        required: true,
+        minlength: 8,
+        equalTo: "#FreeTrialRegisterPassword"
       }
     },
     messages: {
@@ -136,6 +139,11 @@ function validateFreeTrialRegister() {
       "FreeTrialRegisterPassword": {
         required: required_message_password(),
         minlength: min_characters()
+      },
+      "FreeTrialRegisterPasswordConfirmation": {
+        required: required_message_password_confirmation(),
+        minlength: min_characters(),
+        equalTo: equalToMessage()
       }
     },
     highlight: function(element) {
@@ -160,9 +168,10 @@ function validateFreeTrialRegister() {
         data: {
           'email': $.trim($("#FreeTrialRegisterEmailAddress").val()),
           'password': $.trim($("#FreeTrialRegisterPassword").val()),
-          'code': gon.code
-          //'customers_newsletter': customers_newsletter,
-          //'customers_newsletterpartner': customers_newsletterpartner
+          'password_confirmation': $.trim($("#FreeTrialRegisterPasswordConfirmation").val()),
+          'code': gon.code,
+          'customers_newsletter': customers_newsletter,
+          'customers_newsletterpartner': customers_newsletterpartner
         },
         dataType: 'json',
         success: function (response) {
