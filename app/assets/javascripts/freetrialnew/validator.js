@@ -2,6 +2,8 @@ if (window.location.pathname === "/" + gon.locale + "/freetrial_action") {
 
   $(document).ready(function() {
 
+    $(this).closest('form').find("input[type=text]").val("");
+
     validateFreeTrialLogin();
 
     validateFreeTrialRegister();
@@ -63,9 +65,9 @@ function validateFreeTrialLogin() {
         method: 'POST',
         url: '/api/v1/ft/login',
         data: {
-          'email': $.trim($("#FreeTrialLoginEmailAddress").val()),
-          'password': $.trim($("#FreeTrialLoginEmailPassword").val()),
-          'code': $.trim(gon.code)
+          'email': $("#FreeTrialLoginEmailAddress").val(),
+          'password': $("#FreeTrialLoginEmailPassword").val(),
+          'code': gon.code
         },
         dataType: 'json',
         success: function (response) {
@@ -156,9 +158,9 @@ function validateFreeTrialRegister() {
         method: 'POST',
         url: '/api/v1/ft/register',
         data: {
-          'email': $.trim($("#FreeTrialLoginEmailAddress").val()),
-          'password': $.trim($("#FreeTrialLoginEmailPassword").val()),
-          'code': $.trim(gon.code)
+          'email': $("#FreeTrialLoginEmailAddress").val(),
+          'password': $("#FreeTrialLoginEmailPassword").val(),
+          'code': gon.code
           //'customers_newsletter': customers_newsletter,
           //'customers_newsletterpartner': customers_newsletterpartner
         },
