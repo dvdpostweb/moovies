@@ -9,8 +9,6 @@ class Api::V1::OgoneTokenizationController < ApplicationController
       customer = Customer.find(params[:Alias_AliasId].sub('p', ''))
       if customer.present?
         customer.step = 100
-        customer.customers_abo = 1
-        customer.customers_abo_validityto = Time.now + 1.month
         customer.customers_abo_payment_method = 1
         customer.ogone_card_type = params[:Card_Brand] if params[:Card_Brand].present?
         customer.ogone_card_no = params[:Card_CardNumber] if params[:Card_CardNumber].present?

@@ -11,11 +11,7 @@ class Api::V1::Ft::FtLController < API::V1::BaseController
           if resource.valid_password?(params[:password])
             sign_in :customer, resource
             customer = current_customer
-            customer.tvod_free = customer.tvod_free + discount.tvod_free
-            customer.code = params[:code]
-            customer.step = 100
-            customer.customers_abo = 1
-            customer.customers_abo_validityto = Time.now + 1.month
+            customer.registration_code_freetrialL(params[:code], discount.tvod_free)
             if customer.save(validate: false)
               if customer.abo_history(17, customer.abo_type_id, "FREE")
                 render json: { status: 1, message: root_localize_path }

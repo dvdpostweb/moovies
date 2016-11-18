@@ -9,8 +9,7 @@ class Api::V1::Ft::FtRController < API::V1::BaseController
         customer.password_confirmation = params[:password]
         customer.customers_newsletter = params[:customers_newsletter] if params[:customers_newsletter].present?
         customer.customers_newsletterpartner = params[:customers_newsletterpartner] if params[:customers_newsletterpartner].present?
-        customer.step = 33
-        customer.registration_code_freetrial = params[:code]
+        customer.registration_code_freetrialR = params[:code]
         if customer.save(validate: false)
           sign_in :customer, customer
           discount = Discount.find_by_discount_code(params[:code])
