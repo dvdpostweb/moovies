@@ -15,9 +15,9 @@ class Api::V1::Ft::FtVController < API::V1::BaseController
 
   def l_p_v
     if request.xhr?
-      if params[:FreeTrialLoginEmailAddress].present? && params[:FreeTrialLoginEmailPassword].present?
+      if params[:FreeTrialLoginEmailAddress].present? && params[:FreeTrialLoginPassword].present?
         resource = Customer.find_for_database_authentication(email: params[:FreeTrialLoginEmailAddress])
-        if resource.valid_password?(params[:FreeTrialLoginEmailPassword])
+        if resource.valid_password?(params[:FreeTrialLoginPassword])
           render json: TRUE
         else
           render json: FALSE
@@ -30,7 +30,7 @@ class Api::V1::Ft::FtVController < API::V1::BaseController
 
   def r_v
     if request.xhr?
-      email = Customer.find_by_email(params[:FreeTrialLoginEmailAddress])
+      email = Customer.find_by_email(params[:FreeTrialRegisterEmailAddress])
       if email.present?
         render json: FALSE
       else
