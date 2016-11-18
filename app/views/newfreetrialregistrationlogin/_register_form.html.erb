@@ -1,0 +1,24 @@
+<div class="form-bottom">
+  <form class="registration-form" id="FreeTrialRegister">
+    <div class="form-group">
+      <input type="text" onfocus="this.removeAttribute('readonly');" readonly name="FreeTrialRegisterEmailAddress" placeholder="<%= t("ft_error_page.Forbidden.Login.3") %>" class="form-control" id="FreeTrialRegisterEmailAddress">
+    </div>
+    <div class="form-group">
+      <input type="password" onfocus="this.removeAttribute('readonly');" readonly name="FreeTrialRegisterPassword" placeholder="<%= t("ft_error_page.Forbidden.Login.4") %>" class="form-control" id="FreeTrialRegisterPassword">
+    </div>
+    <div class="form-group">
+      <input type="password" onfocus="this.removeAttribute('readonly');" readonly name="FreeTrialRegisterPasswordConfirmation" placeholder="<%= t("ft_error_page.Forbidden.Register.2") %>" class="form-control" id="FreeTrialRegisterPasswordConfirmation">
+    </div>
+    <hr>
+    <div class="checkbox">
+    <label>
+      <input type="checkbox" id="customer_newsletter" checked> <%= t('ft_newsletter') %>
+    </label>
+    <div class="checkbox">
+    <label>
+      <input type="checkbox" id="customer_newsletter_parnter" checked> <%= t('ft_newsletter_partner') %>
+    </label>
+    <hr>
+    <button type="submit" class="btn"><%= t("ft_error_page.Forbidden.Register.3") %></button>
+  </form>
+</div>

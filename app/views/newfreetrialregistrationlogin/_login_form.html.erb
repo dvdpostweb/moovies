@@ -1,0 +1,12 @@
+<div class="form-bottom">
+  <form role="form" class="login-form" id="FreeTrialLogin">
+    <div class="alert alert-danger" role="alert" id="FreeTrialLoginError">...</div>
+    <div class="form-group">
+      <input type="text" onfocus="this.removeAttribute('readonly');" readonly name="FreeTrialLoginEmailAddress" placeholder="<%= t("ft_error_page.Forbidden.Login.3") %>" class="form-control" id="FreeTrialLoginEmailAddress">
+    </div>
+    <div class="form-group">
+      <input type="password" onfocus="this.removeAttribute('readonly');" readonly name="FreeTrialLoginPassword" placeholder="<%= t("ft_error_page.Forbidden.Login.4") %>" class="form-control" id="FreeTrialLoginPassword">
+    </div>
+    <button type="submit" class="btn"><%= t("ft_error_page.Forbidden.Login.5") %></button>
+  </form>
+</div>

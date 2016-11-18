@@ -1,6 +1,12 @@
 #encoding: utf-8
 module ApplicationHelper
 
+  def arleady_used_code_messages_helper
+    return "Le code est pas valide" if I18n.locale == :fr
+    return "De code is niet geldig" if I18n.locale == :nl
+    return "The code is not valid" if I18n.locale == :en
+  end
+
   def customer_plan_translator(l, c)
     p = ProductAbo.find_by_products_id(c)
     if l == :fr
