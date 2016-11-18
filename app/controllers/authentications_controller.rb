@@ -50,23 +50,33 @@ class AuthenticationsController < ApplicationController
         end
 
         if dresold.present?
-          dresold.each do |r|
-            user.customers_registration_step = r["goto_step"]
-            user.activation_discount_code_type = 'D'
-            user.activation_discount_code_id = r["discount_code_id"]
-            user.customers_abo_type = r["listing_products_allowed"]
-            user.customers_next_abo_type = r["next_abo_type"]
-            user.group_id = r["group_id"]
-            user.tvod_free = user.tvod_free + r["tvod_free"]
-            user.customers_abo = 1
-            if user.save(:validate => false)
-              user.abo_history(6, user.abo_type_id, r["discount_code_id"])
-              DiscountUse.create(:discount_code_id => r["discount_code_id"], :customer_id => user.to_param, :discount_use_date => Time.now)
-              sign_in(:customer, authentication.customer)
-              redirect_to root_localize_path
-            else
-              flash[:error] = "Error while creating a user account. Please try again."
-              redirect_to root_url
+          discount = Discount.find_by_discount_code(code)
+
+          if !authentication.customer.discount_reuse?(discount.month_before_reuse) && discount.bypass_discountuse == 0
+            if params["ACTION_TYPE"].present? && params["ACTION_TYPE"] == "FREETRIAL"
+              redirect_to freetrial_action_path(:code => code, :freetrial_action => params["freetrial_action"], :films => params["films"], :price => params["price"], :FT_CODE_RESTRICTION => "FTC_ERROR")
+            elsif params["ACTION_TYPE"].present? && params["ACTION_TYPE"] == "NORMAL"
+              redirect_to "#{params["ORG_URL"]};DS_CODE_RESTRICTION_ERROR=DISCOUNT_CODE_LIMIT_AUTH_ERROR"
+            end
+          else
+            dresold.each do |r|
+              user.customers_registration_step = r["goto_step"]
+              user.activation_discount_code_type = 'D'
+              user.activation_discount_code_id = r["discount_code_id"]
+              user.customers_abo_type = r["listing_products_allowed"]
+              user.customers_next_abo_type = r["next_abo_type"]
+              user.group_id = r["group_id"]
+              user.tvod_free = user.tvod_free + r["tvod_free"]
+              user.customers_abo = 1
+              if user.save(:validate => false)
+                user.abo_history(6, user.abo_type_id, r["discount_code_id"])
+                DiscountUse.create(:discount_code_id => r["discount_code_id"], :customer_id => user.to_param, :discount_use_date => Time.now)
+                sign_in(:customer, authentication.customer)
+                redirect_to root_localize_path
+              else
+                flash[:error] = "Error while creating a user account. Please try again."
+                redirect_to root_url
+              end
             end
           end
         end
@@ -143,25 +153,34 @@ class AuthenticationsController < ApplicationController
 			        end
 
 			        if dresold.present?
-			          dresold.each do |r|
-			            user.customers_registration_step = r["goto_step"]
-			            user.activation_discount_code_type = 'D'
-			            user.activation_discount_code_id = r["discount_code_id"]
-			            user.customers_abo_type = r["listing_products_allowed"]
-			            user.customers_next_abo_type = r["next_abo_type"]
-			            user.group_id = r["group_id"]
-			            user.tvod_free = user.tvod_free + r["tvod_free"]
-                  user.customers_abo = 1
-			            if user.save(:validate => false)
-                    user.abo_history(6, user.abo_type_id, r["discount_code_id"])
-			              DiscountUse.create(:discount_code_id => r["discount_code_id"], :customer_id => user.to_param, :discount_use_date => Time.now)
-			              sign_in(:customer, auth.customer)
-                    redirect_to root_localize_path
-			            else
-			              flash[:error] = "Error while creating a user account. Please try again."
-			              redirect_to root_url
-			            end
-			          end
+                discount = Discount.find_by_discount_code(code)
+                if !auth.customer.discount_reuse?(discount.month_before_reuse) && discount.bypass_discountuse == 0
+                  if params["ACTION_TYPE"].present? && params["ACTION_TYPE"] == "FREETRIAL"
+                    redirect_to freetrial_action_path(:code => code, :freetrial_action => params["freetrial_action"], :films => params["films"], :price => params["price"], :FT_CODE_RESTRICTION => "FTC_ERROR")
+                  elsif params["ACTION_TYPE"].present? && params["ACTION_TYPE"] == "NORMAL"
+                    redirect_to "#{params["ORG_URL"]};DS_CODE_RESTRICTION_ERROR=DISCOUNT_CODE_LIMIT_AUTH_ERROR"
+                  end
+                else
+  			          dresold.each do |r|
+  			            user.customers_registration_step = r["goto_step"]
+  			            user.activation_discount_code_type = 'D'
+  			            user.activation_discount_code_id = r["discount_code_id"]
+  			            user.customers_abo_type = r["listing_products_allowed"]
+  			            user.customers_next_abo_type = r["next_abo_type"]
+  			            user.group_id = r["group_id"]
+  			            user.tvod_free = user.tvod_free + r["tvod_free"]
+                    user.customers_abo = 1
+  			            if user.save(:validate => false)
+                      user.abo_history(6, user.abo_type_id, r["discount_code_id"])
+  			              DiscountUse.create(:discount_code_id => r["discount_code_id"], :customer_id => user.to_param, :discount_use_date => Time.now)
+  			              sign_in(:customer, auth.customer)
+                      redirect_to root_localize_path
+  			            else
+  			              flash[:error] = "Error while creating a user account. Please try again."
+  			              redirect_to root_url
+  			            end
+  			          end
+                end
 			        end
 
 			      else
@@ -226,23 +245,30 @@ class AuthenticationsController < ApplicationController
           end
 
           if dres.present?
-            dres.each do |r|
-              customer.customers_registration_step = r["goto_step"]
-              customer.activation_discount_code_type = 'D'
-              customer.activation_discount_code_id = r["discount_code_id"]
-              customer.customers_abo_type = r["listing_products_allowed"]
-              customer.customers_next_abo_type = r["next_abo_type"]
-              customer.group_id = r["group_id"]
-              customer.tvod_free = r["tvod_free"]
-              customer.customers_abo = 1
-              if customer.save(:validate => false)
-                customer.abo_history(6, customer.abo_type_id, r["discount_code_id"])
-                DiscountUse.create(:discount_code_id => r["discount_code_id"], :customer_id => customer.to_param, :discount_use_date => Time.now)
-                sign_in(:customer, customer)
-                redirect_to root_localize_path
-              else
-                flash[:error] = "Error while creating a user account. Please try again."
-                redirect_to root_url
+            discount = Discount.find_by_discount_code(code)
+            if !customer.discount_reuse?(discount.month_before_reuse) && discount.bypass_discountuse == 0
+              redirect_to freetrial_action_path(:code => code, :freetrial_action => params["freetrial_action"], :films => params["films"], :price => params["price"], :FT_CODE_RESTRICTION => "FTC_ERROR")
+            elsif params["ACTION_TYPE"].present? && params["ACTION_TYPE"] == "NORMAL"
+              redirect_to "#{params["ORG_URL"]};DS_CODE_RESTRICTION_ERROR=DISCOUNT_CODE_LIMIT_AUTH_ERROR"
+            else
+              dres.each do |r|
+                customer.customers_registration_step = r["goto_step"]
+                customer.activation_discount_code_type = 'D'
+                customer.activation_discount_code_id = r["discount_code_id"]
+                customer.customers_abo_type = r["listing_products_allowed"]
+                customer.customers_next_abo_type = r["next_abo_type"]
+                customer.group_id = r["group_id"]
+                customer.tvod_free = r["tvod_free"]
+                customer.customers_abo = 1
+                if customer.save(:validate => false)
+                  customer.abo_history(6, customer.abo_type_id, r["discount_code_id"])
+                  DiscountUse.create(:discount_code_id => r["discount_code_id"], :customer_id => customer.to_param, :discount_use_date => Time.now)
+                  sign_in(:customer, customer)
+                  redirect_to root_localize_path
+                else
+                  flash[:error] = "Error while creating a user account. Please try again."
+                  redirect_to root_url
+                end
               end
             end
           end
