@@ -21,7 +21,7 @@ function validateFreeTrialLogin() {
         email: true,
         remote: "/api/v1/ft/l_v"
       },
-      "FreeTrialLoginEmailPassword": {
+      "FreeTrialLoginPassword": {
         required: true,
         remote: {
           url:"/api/v1/ft/l_p_v",
@@ -40,7 +40,7 @@ function validateFreeTrialLogin() {
         email: email_message(),
         remote: remote_message()
       },
-      "FreeTrialLoginEmailPassword": {
+      "FreeTrialLoginPassword": {
         required: login_password(),
         remote: incorect_password()
       }
@@ -65,8 +65,8 @@ function validateFreeTrialLogin() {
         method: 'POST',
         url: '/api/v1/ft/login',
         data: {
-          'email': $("#FreeTrialLoginEmailAddress").val(),
-          'password': $("#FreeTrialLoginEmailPassword").val(),
+          'email': $.trim($("#FreeTrialLoginEmailAddress").val()),
+          'password': $.trim($("#FreeTrialLoginPassword").val()),
           'code': gon.code
         },
         dataType: 'json',
@@ -117,23 +117,23 @@ function validateFreeTrialRegister() {
 
   $("#FreeTrialRegister").validate({
     rules: {
-      "FreeTrialLoginEmailAddress": {
+      "FreeTrialRegisterEmailAddress": {
         required: true,
         email: true,
         remote: "/api/v1/ft/r_v"
       },
-      "FreeTrialLoginEmailPassword": {
+      "FreeTrialRegisterPassword": {
         required: true,
         minlength: 8
       }
     },
     messages: {
-      "FreeTrialLoginEmailAddress": {
+      "FreeTrialRegisterEmailAddress": {
         required: required_message(),
         email: email_message(),
         remote: remote_message_register()
       },
-      "FreeTrialLoginEmailPassword": {
+      "FreeTrialRegisterPassword": {
         required: required_message_password(),
         minlength: min_characters()
       }
@@ -158,8 +158,8 @@ function validateFreeTrialRegister() {
         method: 'POST',
         url: '/api/v1/ft/register',
         data: {
-          'email': $("#FreeTrialLoginEmailAddress").val(),
-          'password': $("#FreeTrialLoginEmailPassword").val(),
+          'email': $.trim($("#FreeTrialRegisterEmailAddress").val()),
+          'password': $.trim($("#FreeTrialRegisterPassword").val()),
           'code': gon.code
           //'customers_newsletter': customers_newsletter,
           //'customers_newsletterpartner': customers_newsletterpartner

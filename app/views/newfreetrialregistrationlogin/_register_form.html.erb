@@ -1,13 +1,11 @@
 <div class="form-bottom">
-  <form autocomplete="false" role="form" action="" method="post" class="registration-form" id="FreeTrialRegister">
+  <form class="registration-form" id="FreeTrialRegister">
     <div class="form-group">
-      <input type="text" name="prevent_autofill" id="prevent_autofill" value="" style="display:none;" />
-      <input autocomplete="off" type="text" name="FreeTrialLoginEmailAddress" placeholder="<%= t("ft_error_page.Forbidden.Login.3") %>" class="FreeTrialLoginEmailAddress form-control" id="FreeTrialLoginEmailAddress">
+      <input type="text" onfocus="this.removeAttribute('readonly');" readonly name="FreeTrialRegisterEmailAddress" placeholder="<%= t("ft_error_page.Forbidden.Login.3") %>" class="form-control" id="FreeTrialRegisterEmailAddress">
     </div>
     <div class="form-group">
-      <input type="password" name="password_fake" id="password_fake" value="" style="display:none;" />
-      <input autocomplete="off" type="password" name="FreeTrialLoginEmailPassword" placeholder="<%= t("ft_error_page.Forbidden.Login.4") %>" class="FreeTrialLoginEmailPassword form-control" id="FreeTrialLoginEmailPassword">
+      <input type="password" onfocus="this.removeAttribute('readonly');" readonly name="FreeTrialRegisterPassword" placeholder="<%= t("ft_error_page.Forbidden.Login.4") %>" class="form-control" id="FreeTrialRegisterPassword">
     </div>
-    <button type="submit" class="btn"><%= t("ft_error_page.Forbidden.Register.2") %></button>
+    <button type="submit" class="btn"><%= t("ft_error_page.Forbidden.Register.3") %></button>
   </form>
 </div>

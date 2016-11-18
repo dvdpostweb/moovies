@@ -2,12 +2,10 @@
   <form role="form" class="login-form" id="FreeTrialLogin">
     <div class="alert alert-danger" role="alert" id="FreeTrialLoginError">...</div>
     <div class="form-group">
-      <label class="sr-only" for="FreeTrialLoginEmailAddress">Email Address</label>
-      <input type="text" name="FreeTrialLoginEmailAddress" placeholder="<%= t("ft_error_page.Forbidden.Login.3") %>" class="FreeTrialLoginEmailAddress form-control" id="FreeTrialLoginEmailAddress">
+      <input type="text" onfocus="this.removeAttribute('readonly');" readonly name="FreeTrialLoginEmailAddress" placeholder="<%= t("ft_error_page.Forbidden.Login.3") %>" class="form-control" id="FreeTrialLoginEmailAddress">
     </div>
     <div class="form-group">
-      <label class="sr-only" for="FreeTrialLoginEmailPassword">Password</label>
-      <input type="password" name="FreeTrialLoginEmailPassword" placeholder="<%= t("ft_error_page.Forbidden.Login.4") %>" class="FreeTrialLoginEmailPassword form-control" id="FreeTrialLoginEmailPassword">
+      <input type="password" onfocus="this.removeAttribute('readonly');" readonly name="FreeTrialLoginPassword" placeholder="<%= t("ft_error_page.Forbidden.Login.4") %>" class="form-control" id="FreeTrialLoginPassword">
     </div>
     <button type="submit" class="btn"><%= t("ft_error_page.Forbidden.Login.5") %></button>
   </form>
