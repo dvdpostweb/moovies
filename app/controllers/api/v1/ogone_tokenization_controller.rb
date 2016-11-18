@@ -18,7 +18,7 @@ class Api::V1::OgoneTokenizationController < ApplicationController
         customer.ogone_owner = params[:Card_CardHolderName] if params[:Card_CardHolderName].present?
         if customer.save(validate: false)
           if customer.abo_history(17, customer.abo_type_id, "FREE")
-            if  cookies[:locale] == "fr"
+            if cookies[:locale] == "fr"
               redirect_to step_path(:id => 'step4', :locale => "fr")
             elsif cookies[:locale] == "nl"
               redirect_to redirect_to step_path(:id => 'step4', :locale => "nl")

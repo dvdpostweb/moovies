@@ -15,8 +15,7 @@ class Api::V1::Ft::FtRController < API::V1::BaseController
           sign_in :customer, customer
           discount = Discount.find_by_discount_code(params[:code])
           if DiscountUse.create(:discount_code_id => discount.id, :customer_id => customer.to_param, :discount_use_date => Time.now)
-            locale = customer.locale || :fr
-            render json: { status: 1, message: step_path(:id => 'step3', :locale => locale) }
+            render json: { status: 1, message: step_path(:id => 'step3', :locale => cookies[:locale]) }
           end
         end
       end
