@@ -4,13 +4,13 @@ class Api::V1::Ft::FtRController < API::V1::BaseController
     if request.xhr?
       if URI(request.referer).path == "/#{I18n.locale}/freetrial_action" && params[:email].present? && params[:password].present? && params[:password_confirmation] && params[:code].present?
         customer = Customer.new
-        customer.email = params[:email] if params[:email].present?
-        customer.password = params[:password] if params[:password].present?
-        customer.password_confirmation = params[:password] if params[:password].present?
+        customer.email = params[:email]
+        customer.password = params[:password]
+        customer.password_confirmation = params[:password]
         customer.customers_newsletter = params[:customers_newsletter] if params[:customers_newsletter].present?
         customer.customers_newsletterpartner = params[:customers_newsletterpartner] if params[:customers_newsletterpartner].present?
         customer.step = 33
-        customer.code = params[:code] if params[:code].present?
+        customer.registration_code_freetrial = params[:code]
         if customer.save(validate: false)
           sign_in :customer, customer
           discount = Discount.find_by_discount_code(params[:code])
