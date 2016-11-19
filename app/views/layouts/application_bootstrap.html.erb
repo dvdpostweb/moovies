@@ -11,7 +11,7 @@
     <% Gon.global.current_customer = current_customer if !customer_signed_in? %>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
     <link rel="stylesheet" href="http://pftcdn.codepop.biz/assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://pftcdn.codepop.biz/assets/font-awesome/css/font-awesome.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="http://pftcdn.codepop.biz/assets/css/form-elements.css">
     <link rel="stylesheet" href="http://pftcdn.codepop.biz/assets/css/style.css">
 
@@ -24,19 +24,20 @@
 
     <!-- Favicon and touch icons -->
     <link rel="shortcut icon" href="http://pftcdn.codepop.biz/assets/ico/favicon.png">
-    <link rel="http://pftcdn.codepop.biz/assets/apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="http://pftcdn.codepop.biz/assets/apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="http://pftcdn.codepop.biz/assets/apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="http://pftcdn.codepop.biz/assets/apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://pftcdn.codepop.biz/assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://pftcdn.codepop.biz/assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://pftcdn.codepop.biz/assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="http://pftcdn.codepop.biz/assets/ico/apple-touch-icon-57-precomposed.png">
   </head>
   <body>
     <%= yield %>
     <!-- Javascript -->
-    <script src="http://pftcdn.codepop.biz/assets/js/jquery-1.11.1.min.js"></script>
-    <script src="http://pftcdn.codepop.biz/assetss/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
     <!--[if lt IE 10]>
-        <script src="assets/js/placeholder.js"></script>
+        <script src="http://pftcdn.codepop.biz/assets/js/placeholder.js"></script>
     <![endif]-->
+    <%= javascript_include_tag "application" %>
   </body>
 </html>
