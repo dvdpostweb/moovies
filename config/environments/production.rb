@@ -64,7 +64,8 @@ Moovies::Application.configure do
   alacarte.js
   tvod_only_payment_step.css
   halloween/halloween.css
-  jquery_ujs
+  application_bootstrap.css.scss
+  application_bootstrap.js
   twitter/bootstrap
   jquery.validate
   freetrialnew/validator
