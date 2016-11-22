@@ -193,6 +193,19 @@ class Customer < ActiveRecord::Base
     (activation_discount_code_id == 263 || activation_discount_code_id == 264 || activation_discount_code_id == 265)
   end
 
+  def set_privilegies?
+    if self.have_freetrial_codes? && self.update_attribute(:customers_abo_validityto , Time.now + 1.month)
+      logger.info "Processing the request..."
+      logger.info "#####################################################################################################"
+      logger.info "#####################################################################################################"
+      logger.info "#####################################################################################################"
+      logger.info "#___________ CUSTOMERS_ABO_VADILITYTO IS SET TO #{self.customers_abo_validityto}____________________#".capitalize
+      logger.info "#####################################################################################################"
+      logger.info "#####################################################################################################"
+      logger.info "#####################################################################################################"
+    end
+  end
+
   def dont_have_credits?
     tvod_free == 0
   end
@@ -304,12 +317,11 @@ class Customer < ActiveRecord::Base
       self.step = @discount.goto_step
       self.tvod_free = @discount.tvod_free
       self.customers_abo = 1
-      self.customers_abo_validityto = Time.now + 1.month
       self.step = 33
     end
   end
 
-  def registration_code_freetrialL(code, credits)
+  def registration_code_freetrialL=(code)
     @code = code
     @discount = Discount.by_name(code).available.first
     if @discount
@@ -321,7 +333,6 @@ class Customer < ActiveRecord::Base
       self.step = @discount.goto_step
       self.tvod_free = @discount.tvod_free + credits
       self.customers_abo = 1
-      self.customers_abo_validityto = Time.now + 1.month
       if self.payable?
         self.step = 100
       else
