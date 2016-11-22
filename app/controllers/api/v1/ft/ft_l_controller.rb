@@ -11,10 +11,13 @@ class Api::V1::Ft::FtLController < API::V1::BaseController
           if resource.valid_password?(params[:password])
             sign_in :customer, resource
             customer = current_customer
-            customer.registration_code_freetrialL(params[:code], discount.tvod_free)
+            customer.tvod_free = discount.tvod_free + customer.tvod_free
+            customer.registration_code_freetrialL = params[:code]
             if customer.save(validate: false)
-              if customer.abo_history(17, customer.abo_type_id, "FREE")
-                render json: { status: 1, message: root_localize_path }
+              if customer.set_privilegies?
+                if customer.abo_history(17, customer.abo_type_id, "FREE")
+                  render json: { status: 1, message: root_localize_path }
+                end
               end
             end
           end
