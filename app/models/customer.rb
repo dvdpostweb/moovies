@@ -194,8 +194,48 @@ class Customer < ActiveRecord::Base
   end
 
   def set_privilegies?
-    if self.have_freetrial_codes? && self.update_attribute(:customers_abo_validityto , Time.now + 1.month)
-      logger.info "Processing the request..."
+    if self.unlimted_subscriber? && self.update_attributes(:customers_abo_validityto => Time.now, :customers_locked__for_reconduction => 1, :credits_already_recieved => 1)
+      logger.info "Processing the request... !!!!!!!!!!!!!!!!! FOR UNLIMITED SUBSCRIBER !!!!!!!!!!!_____________________"
+      logger.info "#####################################################################################################"
+      logger.info "#####################################################################################################"
+      logger.info "#####################################################################################################"
+      logger.info "#_____CUSTOMERS_ABO_VADILITYTO IS SET TO #{self.customers_abo_validityto}_______________#".capitalize
+      logger.info "#_____________________CUSTOMERS_TVOD_FREE IS SET TO #{self.tvod_free}___________________#".capitalize
+      logger.info "#####################################################################################################"
+      logger.info "#####################################################################################################"
+      logger.info "#####################################################################################################"
+    elsif self.plush_la_carte_subscriber? && self.update_attributes(:customers_abo_validityto => Time.now, :customers_locked__for_reconduction => 1, :credits_already_recieved => 1)
+      logger.info "Processing the request... !!!!!!!!!!!!!!!! FOR PLUSH A LA CARTE CUSTOMER !!!!!!!!!!!!________________"
+      logger.info "#####################################################################################################"
+      logger.info "#####################################################################################################"
+      logger.info "#####################################################################################################"
+      logger.info "#_____CUSTOMERS_ABO_VADILITYTO IS SET TO #{self.customers_abo_validityto}_______________#".capitalize
+      logger.info "#_____________________CUSTOMERS_TVOD_FREE IS SET TO #{self.tvod_free}___________________#".capitalize
+      logger.info "#####################################################################################################"
+      logger.info "#####################################################################################################"
+      logger.info "#####################################################################################################"
+    elsif self.abo_subscriber? && self.update_attribute(:customers_abo_validityto , nil)
+      logger.info "Processing the request... !!!!!!!!!!!!!!!! FOR ABO CUSTOMER !!!!!!!!!!!!_____________________________"
+      logger.info "#####################################################################################################"
+      logger.info "#####################################################################################################"
+      logger.info "#####################################################################################################"
+      logger.info "#_____CUSTOMERS_ABO_VADILITYTO IS SET TO #{self.customers_abo_validityto}_______________#".capitalize
+      logger.info "#_____________________CUSTOMERS_TVOD_FREE IS SET TO #{self.tvod_free}___________________#".capitalize
+      logger.info "#####################################################################################################"
+      logger.info "#####################################################################################################"
+      logger.info "#####################################################################################################"
+    elsif self.mobistar_subscriber? && self.update_attribute(:customers_abo_validityto , nil)
+      logger.info "Processing the request... !!!!!!!!!!!!!!!! FOR MOBISTAR CUSTOMER !!!!!!!!!!!!________________________"
+      logger.info "#####################################################################################################"
+      logger.info "#####################################################################################################"
+      logger.info "#####################################################################################################"
+      logger.info "#_____CUSTOMERS_ABO_VADILITYTO IS SET TO #{self.customers_abo_validityto}_______________#".capitalize
+      logger.info "#_____________________CUSTOMERS_TVOD_FREE IS SET TO #{self.tvod_free}___________________#".capitalize
+      logger.info "#####################################################################################################"
+      logger.info "#####################################################################################################"
+      logger.info "#####################################################################################################"
+    elsif self.have_freetrial_codes? && self.update_attribute(:customers_abo_validityto , Time.now + 1.month)
+      logger.info "Processing the request... !!!!!!!!!!!!!!!!!! FOR FRETRIAL CUSTOMER !!!!!!!!!!________________________"
       logger.info "#####################################################################################################"
       logger.info "#####################################################################################################"
       logger.info "#####################################################################################################"
