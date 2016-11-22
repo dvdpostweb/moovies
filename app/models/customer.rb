@@ -199,7 +199,8 @@ class Customer < ActiveRecord::Base
       logger.info "#####################################################################################################"
       logger.info "#####################################################################################################"
       logger.info "#####################################################################################################"
-      logger.info "#___________ CUSTOMERS_ABO_VADILITYTO IS SET TO #{self.customers_abo_validityto}____________________#".capitalize
+      logger.info "#_____CUSTOMERS_ABO_VADILITYTO IS SET TO #{self.customers_abo_validityto}_______________#".capitalize
+      logger.info "#_____________________CUSTOMERS_TVOD_FREE IS SET TO #{self.tvod_free}___________________#".capitalize
       logger.info "#####################################################################################################"
       logger.info "#####################################################################################################"
       logger.info "#####################################################################################################"
@@ -331,7 +332,6 @@ class Customer < ActiveRecord::Base
       self.next_abo_type_id = @discount.next_abo_type_id
       self.group_id = @discount.group_id
       self.step = @discount.goto_step
-      self.tvod_free = @discount.tvod_free + credits
       self.customers_abo = 1
       if self.payable?
         self.step = 100
