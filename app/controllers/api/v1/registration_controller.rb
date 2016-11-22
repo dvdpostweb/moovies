@@ -21,9 +21,11 @@ class Api::V1::RegistrationController < API::V1::BaseController
           customer.customers_abo_validityto = nil
           customer.preselected_registration_moovie_id = product.to_param
           if customer.save(validate: false)
-            sign_in :customer, customer
-            redirect_to_product_path = edit_customer_payment_methods_path(:customer_id => customer.to_param, :type => :credit_card_tvod, :product_id => product.id, :source => 0)
-            render json: { status: 9, message: redirect_to_product_path }
+            if customer.set_privilegies?
+              sign_in :customer, customer
+              redirect_to_product_path = edit_customer_payment_methods_path(:customer_id => customer.to_param, :type => :credit_card_tvod, :product_id => product.id, :source => 0)
+              render json: { status: 9, message: redirect_to_product_path }
+            end
           end
         end
       elsif !params[:activation].present? && params[:code].present?
@@ -53,11 +55,13 @@ class Api::V1::RegistrationController < API::V1::BaseController
             customer.customers_next_discount_code = r["next_discount"]
             customer.tvod_free = r["tvod_free"]
             if customer.save(:validate => false)
-              sign_in :customer, customer
-              activation = Activation.find_by_activation_code(params[:code])
-              activation.update_attributes(:customers_id => customer.to_param, :created_at => Time.now.localtime)
-              redirect_to_root_path = root_localize_path
-              render json: { status: 9, message: redirect_to_root_path }
+              if customer.set_privilegies?
+                sign_in :customer, customer
+                activation = Activation.find_by_activation_code(params[:code])
+                activation.update_attributes(:customers_id => customer.to_param, :created_at => Time.now.localtime)
+                redirect_to_root_path = root_localize_path
+                render json: { status: 9, message: redirect_to_root_path }
+              end
             else
               flash[:error] = "Error while creating a user account. Please try again."
               redirect_to root_url
@@ -75,10 +79,12 @@ class Api::V1::RegistrationController < API::V1::BaseController
             customer.group_id = r["group_id"]
             customer.tvod_free = r["tvod_free"]
             if customer.save(:validate => false)
-              sign_in :customer, customer
-              DiscountUse.create(:discount_code_id => r["discount_code_id"], :customer_id => customer.to_param, :discount_use_date => Time.now)
-              redirect_to_root_path = root_localize_path
-              render json: { status: 9, message: redirect_to_root_path }
+              if customer.set_privilegies?
+                sign_in :customer, customer
+                DiscountUse.create(:discount_code_id => r["discount_code_id"], :customer_id => customer.to_param, :discount_use_date => Time.now)
+                redirect_to_root_path = root_localize_path
+                render json: { status: 9, message: redirect_to_root_path }
+              end
             else
               flash[:error] = "Error while creating a user account. Please try again."
               redirect_to root_url
@@ -91,11 +97,13 @@ class Api::V1::RegistrationController < API::V1::BaseController
         activation = Activation.by_name(params[:activation]).available.first
         customer.registration_code = params[:code]
         if customer.save(validate: false)
-          sign_in :customer, customer
-          DiscountUse.create(:discount_code_id => discount.id, :customer_id => current_customer.to_param, :discount_use_date => Time.now)
-          activation.update_attributes(:customers_id => current_customer.to_param, :created_at => Time.now.localtime)
-          redirect_to_root_path = root_localize_path
-          render json: { status: 9, message: redirect_to_root_path }
+          if customer.set_privilegies?
+            sign_in :customer, customer
+            DiscountUse.create(:discount_code_id => discount.id, :customer_id => current_customer.to_param, :discount_use_date => Time.now)
+            activation.update_attributes(:customers_id => current_customer.to_param, :created_at => Time.now.localtime)
+            redirect_to_root_path = root_localize_path
+            render json: { status: 9, message: redirect_to_root_path }
+          end
         end
       elsif !params[:activation].present? && !params[:code].present? && !params[:moovie_id].present?
         customer.step = 100
@@ -103,9 +111,11 @@ class Api::V1::RegistrationController < API::V1::BaseController
         customer.customers_next_abo_type = 6
         customer.customers_abo_validityto = nil
         if customer.save(validate: false)
-          sign_in :customer, customer
-          redirect_to_home_path = root_localize_path
-          render json: { status: 9, message: redirect_to_home_path }
+          if customer.set_privilegies?
+            sign_in :customer, customer
+            redirect_to_home_path = root_localize_path
+            render json: { status: 9, message: redirect_to_home_path }
+          end
         end
       end
     else

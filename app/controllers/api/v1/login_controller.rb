@@ -33,7 +33,7 @@ class Api::V1::LoginController < API::V1::BaseController
     resource.customers_next_abo_type = activation.next_abo_type
     resource.group_id = activation.activation_group
     resource.customers_next_discount_code = activation.next_discount
-    if resource.save(validate: false)
+    if resource.save(validate: false) && resource.set_privilegies?
       resource.tvod_free = resource.tvod_free + activation.tvod_free
       if resource.save(validate: false)
         if activation.update_attributes(:customers_id => resource.to_param, :created_at => Time.now.localtime)
@@ -59,7 +59,7 @@ class Api::V1::LoginController < API::V1::BaseController
       resource.code = params[:code]
       resource.step = discount.goto_step
       resource.customers_abo = 1
-      if resource.save!
+      if resource.save! && resource.set_privilegies?
         if DiscountUse.create(:discount_code_id => discount.id, :customer_id => resource.to_param, :discount_use_date => Time.now)
           if resource.valid_password?(password)
             sign_in :customer, resource
@@ -81,13 +81,15 @@ class Api::V1::LoginController < API::V1::BaseController
         customer = current_customer
         customer.preselected_registration_moovie_id = moovie_id
         if customer.save(validate: false)
-          product = Product.where(:products_id => current_customer.preselected_registration_moovie_id).first
-          if ((current_customer.customers_abo_payment_method == 0 && current_customer.customers_abo_type != 6) || (current_customer.tvod_free == 0 && current_customer.customers_abo_type == 6) || (current_customer.customers_abo_payment_method == 0 && current_customer.unlimted_subscriber?) || (current_customer.customers_abo_payment_method == 0 && current_customer.plush_la_carte_subscriber?))
-            redirect_to_payment_path = edit_customer_payment_methods_path(:customer_id => customer.to_param, :type => :credit_card_tvod, :product_id => product.id, :source => 0)
-            render json: { status: 1, message: redirect_to_payment_path }
-          else
-            redirect_to_product_path = product_path(:id => product.to_param)
-            render json: { status: 1, message: redirect_to_product_path }
+          if customer.set_privilegies?
+            product = Product.where(:products_id => current_customer.preselected_registration_moovie_id).first
+            if ((current_customer.customers_abo_payment_method == 0 && current_customer.customers_abo_type != 6) || (current_customer.tvod_free == 0 && current_customer.customers_abo_type == 6) || (current_customer.customers_abo_payment_method == 0 && current_customer.unlimted_subscriber?) || (current_customer.customers_abo_payment_method == 0 && current_customer.plush_la_carte_subscriber?))
+              redirect_to_payment_path = edit_customer_payment_methods_path(:customer_id => customer.to_param, :type => :credit_card_tvod, :product_id => product.id, :source => 0)
+              render json: { status: 1, message: redirect_to_payment_path }
+            else
+              redirect_to_product_path = product_path(:id => product.to_param)
+              render json: { status: 1, message: redirect_to_product_path }
+            end
           end
         end
       elsif samsung.present?
