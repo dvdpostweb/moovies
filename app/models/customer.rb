@@ -359,6 +359,7 @@ class Customer < ActiveRecord::Base
       self.tvod_free = @discount.tvod_free
       self.customers_abo = 1
       self.step = 33
+      self.customers_abo_validityto = Time.now + 1.month
     end
   end
 
@@ -373,6 +374,7 @@ class Customer < ActiveRecord::Base
       self.group_id = @discount.group_id
       self.step = @discount.goto_step
       self.customers_abo = 1
+      self.customers_abo_validityto = Time.now + 1.month
       if self.payable?
         self.step = 100
       else
