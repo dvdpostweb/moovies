@@ -44,4 +44,22 @@ class Api::V1::SubscriptionsController < API::V1::BaseController
     end
   end
 
+  def for_logedin_mobistar_customers_freetrial_subscription
+    if params[:sfmc].present?
+      discount = Discount.find_by_discount_code(params[:sfmc])
+      customer = current_customer
+      customer.tvod_free = discount.tvod_free + customer.tvod_free
+      customer.registration_code_freetrialL = params[:sfmc]
+      if customer.save(validate: false)
+        if customer.abo_history(6, customer.abo_type_id, discount.to_param)
+          if customer.set_privilegies?
+            if DiscountUse.create(:discount_code_id => discount.id, :customer_id => customer.to_param, :discount_use_date => Time.now)
+              redirect_to step_path(:id => 'step3')
+            end
+          end
+        end
+      end
+    end
+  end
+
 end
