@@ -11,13 +11,11 @@ class Api::V1::Ft::FtRController < API::V1::BaseController
         customer.customers_newsletterpartner = params[:customers_newsletterpartner] if params[:customers_newsletterpartner].present?
         customer.registration_code_freetrialR = params[:code]
         if customer.save(validate: false)
-        #  if customer.set_privilegies?
-            sign_in :customer, customer
-            discount = Discount.find_by_discount_code(params[:code])
-            if DiscountUse.create(:discount_code_id => discount.id, :customer_id => customer.to_param, :discount_use_date => Time.now)
-              render json: { status: 1, message: step_path(:id => 'step3', :locale => cookies[:locale]) }
-            end
-        #  end
+          sign_in :customer, customer
+          discount = Discount.find_by_discount_code(params[:code])
+          if DiscountUse.create(:discount_code_id => discount.id, :customer_id => customer.to_param, :discount_use_date => Time.now)
+            render json: { status: 1, message: step_path(:id => 'step3', :locale => cookies[:locale]) }
+          end
         end
       end
     else

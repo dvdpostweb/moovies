@@ -15,9 +15,7 @@ class Api::V1::SubscriptionsController < API::V1::BaseController
         customer.tvod_free = discount.tvod_free
         if customer.save(validate: false)
           if customer.abo_history(6, customer.abo_type_id, discount.to_param)
-            if customer.set_privilegies?
-              redirect_to step_path(:id => 'step3')
-            end
+            redirect_to step_path(:id => 'step3')
           end
         end
       else
@@ -29,14 +27,12 @@ class Api::V1::SubscriptionsController < API::V1::BaseController
           customer.step = 100
           customer.customers_abo = 1
           customer.tvod_free = customer.tvod_free + discount.tvod_free
-#          customer.customers_abo_validityto = Time.now
-#          customer.customers_locked__for_reconduction = 1
-#          customer.credits_already_recieved = 1
+          customer.customers_abo_validityto = Time.now
+          customer.customers_locked__for_reconduction = 1
+          customer.credits_already_recieved = 1
           if customer.save(validate: false)
             if customer.abo_history(6, customer.abo_type_id, discount.to_param)
-              if customer.set_privilegies?
-                redirect_to root_localize_path
-              end
+              redirect_to root_localize_path
             end
           end
         end
@@ -52,10 +48,8 @@ class Api::V1::SubscriptionsController < API::V1::BaseController
       customer.registration_code_freetrialL = params[:sfmc]
       if customer.save(validate: false)
         if customer.abo_history(6, customer.abo_type_id, discount.to_param)
-          if customer.set_privilegies?
-            if DiscountUse.create(:discount_code_id => discount.id, :customer_id => customer.to_param, :discount_use_date => Time.now)
-              redirect_to step_path(:id => 'step3')
-            end
+          if DiscountUse.create(:discount_code_id => discount.id, :customer_id => customer.to_param, :discount_use_date => Time.now)
+            redirect_to step_path(:id => 'step3')
           end
         end
       end
