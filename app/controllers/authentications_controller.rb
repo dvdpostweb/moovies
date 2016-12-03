@@ -43,7 +43,7 @@ class AuthenticationsController < ApplicationController
       elsif discount.present? && !params["code"].blank?
         if !customer.discount_reuse?(discount.month_before_reuse) && discount.bypass_discountuse == 0
           if params["ACTION_TYPE"].present? && params["ACTION_TYPE"] == "FREETRIAL"
-            redirect_to freetrial_action_path(:code => code, :freetrial_action => params["freetrial_action"], :films => params["films"], :price => params["price"], :FT_CODE_RESTRICTION => "FTC_ERROR")
+            redirect_to freetrial_action_path(:code => params["code"], :freetrial_action => params["freetrial_action"], :films => params["films"], :price => params["price"], :FT_CODE_RESTRICTION => "FTC_ERROR")
           elsif params["ACTION_TYPE"].present? && params["ACTION_TYPE"] == "NORMAL"
             redirect_to "#{params["ORG_URL"]};DS_CODE_RESTRICTION_ERROR=DISCOUNT_CODE_LIMIT_AUTH_ERROR"
           end
