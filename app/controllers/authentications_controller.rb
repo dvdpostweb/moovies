@@ -25,7 +25,7 @@ class AuthenticationsController < ApplicationController
         SQL
         dresold = ActiveRecord::Base.connection.exec_query(dqueryold)
 
-        if aresold.present?
+        if aresold.present? && !dresold.present?
           aresold.each do |r|
             user.customers_registration_step = 100
             user.activation_discount_code_type = 'A'
@@ -51,7 +51,7 @@ class AuthenticationsController < ApplicationController
           end
         end
 
-        if dresold.present?
+        if dresold.present? && !aresold.present?
           discount = Discount.find_by_discount_code(code)
 
           if !authentication.customer.discount_reuse?(discount.month_before_reuse) && discount.bypass_discountuse == 0
@@ -132,7 +132,7 @@ class AuthenticationsController < ApplicationController
 			        SQL
 			        dresold = ActiveRecord::Base.connection.exec_query(dqueryold)
 
-			        if aresold.present?
+			        if aresold.present? && !dresold.present?
 			          aresold.each do |r|
 			            user.customers_registration_step = 100
 			            user.activation_discount_code_type = 'A'
@@ -158,7 +158,7 @@ class AuthenticationsController < ApplicationController
 			          end
 			        end
 
-			        if dresold.present?
+			        if dresold.present? && !aresold.present?
                 discount = Discount.find_by_discount_code(code)
                 if !auth.customer.discount_reuse?(discount.month_before_reuse) && discount.bypass_discountuse == 0
                   if params["ACTION_TYPE"].present? && params["ACTION_TYPE"] == "FREETRIAL"
@@ -228,7 +228,7 @@ class AuthenticationsController < ApplicationController
           SQL
           dres = ActiveRecord::Base.connection.exec_query(dquery)
 
-          if ares.present?
+          if ares.present? && !dres.present?
             ares.each do |r|
               customer.customers_registration_step = 100
               customer.activation_discount_code_type = 'A'
@@ -254,7 +254,7 @@ class AuthenticationsController < ApplicationController
             end
           end
 
-          if dres.present?
+          if dres.present? && !ares.present?
             discount = Discount.find_by_discount_code(code)
             if !customer.discount_reuse?(discount.month_before_reuse) && discount.bypass_discountuse == 0
               redirect_to freetrial_action_path(:code => code, :freetrial_action => params["freetrial_action"], :films => params["films"], :price => params["price"], :FT_CODE_RESTRICTION => "FTC_ERROR")
