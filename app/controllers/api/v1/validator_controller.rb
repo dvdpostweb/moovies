@@ -89,11 +89,10 @@ class Api::V1::ValidatorController < API::V1::BaseController
             customer.customers_locked__for_reconduction = 1
             customer.credits_already_recieved = 1
             if customer.save(validate: false)
-              if customer.set_privilegies?
                 if DiscountUse.create(:discount_code_id => current_customer.activation_discount_code_id, :customer_id => current_customer.id, :discount_use_date => Time.now.localtime)
                   render :json => { :status => 3 }
                 end
-              end
+
             end
           #end
         end
@@ -124,11 +123,10 @@ class Api::V1::ValidatorController < API::V1::BaseController
             customer.step = 100
             customer.customers_abo = 1
             if customer.save!
-              if customer.set_privilegies?
                 current_customer.abo_history(38, current_customer.abo_type_id, activation.to_param)
                 activation.update_attributes(:customers_id => current_customer.to_param, :created_at => Time.now.localtime)
                 render :json => { :status => 2, :message => root_localize_path }
-              end
+              
             end
           end
         elsif !params[:promotion].present?
