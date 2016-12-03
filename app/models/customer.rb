@@ -171,7 +171,7 @@ class Customer < ActiveRecord::Base
   has_many :authentications, :dependent => :delete_all
   has_one :mobistar
 
-  #scope :freetrial_used_codes, :conditions=>['activation_discount_code_id = 263 OR activation_discount_code_id = 264 OR activation_discount_code_id = 264']
+  #after_save :setup_abt_6_null
 
   def unlimted_subscriber?
     (customers_abo_type == 1 || customers_abo_type == 2 || customers_abo_type == 3 || customers_abo_type == 4 || customers_abo_type == 5)
@@ -740,8 +740,8 @@ class Customer < ActiveRecord::Base
     !persisted? || !password.nil? || !password_confirmation.nil?
   end
 
-  def setup_step
-    self.update_attribute(:customers_registration_step, 33) if self.promo_type == 'D' && self.social_network_tag != "facebook"
+  def setup_abt_6_null
+    self.update_attribute(:customers_abo_validityto, nil) if self.customers_abo_type  == 6
   end
 
 end
