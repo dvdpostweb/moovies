@@ -14,6 +14,7 @@ class Api::V1::OgoneTokenizationController < ApplicationController
         customer.ogone_card_no = params[:Card_CardNumber] if params[:Card_CardNumber].present?
         customer.ogone_exp_date = params[:Card_ExpiryDate] if params[:Card_ExpiryDate].present?
         customer.ogone_owner = params[:Card_CardHolderName] if params[:Card_CardHolderName].present?
+        customer.customers_abo_validityto = Time.now + 1.month
         if customer.save(validate: false)
           if customer.abo_history(17, customer.abo_type_id, "FREE")
             redirect_to step_path(:id => 'step4', :locale => cookies[:locale])

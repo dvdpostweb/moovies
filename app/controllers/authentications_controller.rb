@@ -95,10 +95,8 @@ class AuthenticationsController < ApplicationController
         customer.activation_discount_code_type = "D"
         customer.preselected_registration_moovie_id = product.to_param
         if customer.save(:validate => false)
-          if customer.set_privilegies?
             sign_in(:customer, customer)
             redirect_to edit_customer_payment_methods_path(:customer_id => customer.to_param, :type => :credit_card_tvod, :product_id => product.id, :source => 0)
-          end
         end
       elsif discount.present? && !params["code"].blank?
         customer = Customer.new
@@ -111,7 +109,7 @@ class AuthenticationsController < ApplicationController
         customer.group_id = discount.group_id
         customer.step = discount.goto_step
         customer.customers_abo = 1
-        if customer.save(validate: false) && customer.set_privilegies? && customer.abo_history(38, customer.abo_type_id, discount.to_param)
+        if customer.save(validate: false) && customer.abo_history(38, customer.abo_type_id, discount.to_param)
           if DiscountUse.create(:discount_code_id => discount.id, :customer_id => customer.to_param, :discount_use_date => Time.now)
             sign_in :customer, customer
             if activation
@@ -157,7 +155,7 @@ class AuthenticationsController < ApplicationController
         customer.customers_next_abo_type = activation.next_abo_type
         customer.group_id = activation.activation_group
         customer.customers_next_discount_code = activation.next_discount
-        if customer.save(validate: false) && customer.set_privilegies?
+        if customer.save(validate: false)
           customer.tvod_free = activation.tvod_free
           if customer.save(validate: false)
             if activation.update_attributes(:customers_id => customer.to_param, :created_at => Time.now.localtime)
@@ -205,10 +203,9 @@ class AuthenticationsController < ApplicationController
         customer.customers_abo_validityto = nil
         customer.activation_discount_code_type = "D"
         if customer.save(:validate => false)
-          if customer.set_privilegies?
             sign_in(:customer, customer)
             redirect_to root_localize_path
-          end
+
         end
       end
 
@@ -226,7 +223,7 @@ class AuthenticationsController < ApplicationController
     customer.customers_next_abo_type = activation.next_abo_type
     customer.group_id = activation.activation_group
     customer.customers_next_discount_code = activation.next_discount
-    if customer.save(validate: false) && customer.set_privilegies?
+    if customer.save(validate: false)
       customer.tvod_free = customer.tvod_free + activation.tvod_free
       if customer.save(validate: false)
         if activation.update_attributes(:customers_id => customer.to_param, :created_at => Time.now.localtime)
@@ -275,7 +272,7 @@ class AuthenticationsController < ApplicationController
     customer.group_id = discount.group_id
     customer.step = discount.goto_step
     customer.customers_abo = 1
-    if customer.save! && customer.set_privilegies? && customer.abo_history(38, customer.abo_type_id, discount.to_param)
+    if customer.save(validate: false) && customer.abo_history(38, customer.abo_type_id, discount.to_param)
       if DiscountUse.create(:discount_code_id => discount.id, :customer_id => customer.to_param, :discount_use_date => Time.now)
         sign_in :customer, customer
         if activation
