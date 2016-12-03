@@ -104,7 +104,11 @@ class AuthenticationsController < ApplicationController
         customer = Customer.new
         customer.apply_omniauth(auth)
         customer.tvod_free = discount.tvod_free
-        customer.code = params[:code]
+        customer.promo_type = 'D'
+        customer.promo_id = discount.id
+        customer.abo_type_id = discount.abo_type_id
+        customer.next_abo_type_id = discount.next_abo_type_id
+        customer.group_id = discount.group_id
         customer.step = discount.goto_step
         customer.customers_abo = 1
         if customer.save(validate: false) && customer.set_privilegies? && customer.abo_history(38, customer.abo_type_id, discount.to_param)
@@ -264,7 +268,11 @@ class AuthenticationsController < ApplicationController
 
   def discount_code_account_activation_facebook(discount, customer, activation = nil)
     customer.tvod_free = customer.tvod_free + discount.tvod_free
-    customer.code = params[:code]
+    customer.promo_type = 'D'
+    customer.promo_id = discount.id
+    customer.abo_type_id = discount.abo_type_id
+    customer.next_abo_type_id = discount.next_abo_type_id
+    customer.group_id = discount.group_id
     customer.step = discount.goto_step
     customer.customers_abo = 1
     if customer.save! && customer.set_privilegies? && customer.abo_history(38, customer.abo_type_id, discount.to_param)
