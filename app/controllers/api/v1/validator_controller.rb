@@ -123,10 +123,9 @@ class Api::V1::ValidatorController < API::V1::BaseController
             customer.step = 100
             customer.customers_abo = 1
             if customer.save!
-                current_customer.abo_history(38, current_customer.abo_type_id, activation.to_param)
-                activation.update_attributes(:customers_id => current_customer.to_param, :created_at => Time.now.localtime)
-                render :json => { :status => 2, :message => root_localize_path }
-              
+              current_customer.abo_history(38, current_customer.abo_type_id, activation.to_param)
+              activation.update_attributes(:customers_id => current_customer.to_param, :created_at => Time.now.localtime)
+              render :json => { :status => 2, :message => root_localize_path }
             end
           end
         elsif !params[:promotion].present?
