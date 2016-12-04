@@ -1,0 +1,18 @@
+<style>
+#fb_connect_login {
+  display: none;
+}
+</style>
+<a href="/auth/facebook"><button id="fb_connect_login" class="face-button"><%= t('.social.network.fbconnect') %></button></a>
+<script
+  src="https://code.jquery.com/jquery-1.12.4.min.js"
+  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+  crossorigin="anonymous"></script>
+
+<script>
+
+  $(document).ready(function() {
+    $( "#fb_connect_login" ).trigger( "click" );
+  });
+
+</script>

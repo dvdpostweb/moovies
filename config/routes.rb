@@ -7,6 +7,7 @@ Moovies::Application.routes.draw do
   match "renew_monthly_credits_for_a_la_carte" => "renew_monthly_subscription#renew_monthly_credits_for_a_la_carte"
   match "social_activation" => "social_activation#activate"
   match '/auth/:provider/callback' => 'authentications#create'
+  match 'canvas' => 'authentications#canvas'
 
   concern :productable do
     resources :products, :only => :index
