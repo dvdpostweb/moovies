@@ -1,5 +1,9 @@
 class AuthenticationsController < ApplicationController
 
+  def canvas
+    render :layout => false
+  end
+
   def create
     auth = request.env["omniauth.auth"]
     params = request.env["omniauth.params"]
