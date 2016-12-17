@@ -2,7 +2,7 @@
   <div id="title">
     <strong><%= t '.title' %></strong>
   </div>
-  
+
   <div id="content_droite">
     <table cellpadding="1" cellspacing="0" border="0" width="380">
       <tr>
@@ -36,7 +36,7 @@
       </tr>
       <tr>
         <td colspan='2'>
-          <% if customer.actived? && !customer.tvod_only? %>
+          <% if customer.actived?# && !customer.tvod_only? %>
             <ul>
               <li class='link_payment'>
                 <% if current_customer.payment_method == 1 %>
@@ -44,14 +44,14 @@
                 <% else %>
                   <%= link_to t('.payment_method_change'), edit_customer_payment_methods_path(:customer_id => current_customer.to_param, :type => :credit_card) %>
                 <% end %>
-                
+
               </li>
             </ul>
           <% end %>
-        </td>  
+        </td>
       </tr>
-     
-     
+
+
       <!--<%= render :partial => 'customers/show/new_pricing' %>
         <tr>
         <td colspan="2" align="left">
@@ -61,14 +61,14 @@
                 <% if 1 == 0 %>
                   <strong><%= link_to t('.modify_abo'), edit_customer_subscription_path(:customer_id => current_customer.to_param), :class => 'renew' %></strong>
                 <% end %>
-                
+
               </li>
             </ul>
           <% end %>
         </td>
       </tr>
       -->
-      <% if current_customer.abo_active? && !current_customer.tvod_only? %>
+      <% if current_customer.abo_active? #&& !current_customer.tvod_only? %>
       <tr>
         <td align="right"><strong><%= current_customer.auto_stop == 0 || (current_customer.auto_stop == 1 && current_customer.recurring_until && current_customer.recurring_until > Date.today) ? t('.date_end_abo') : t('.date_end') %></strong></td>
         <td align="left">
@@ -88,7 +88,7 @@
      <!-- <tr>
         <td align="right"><strong><%= t '.type_abo' %></strong></td>
         <td align="left"><%= t(".#{customer.subscription_payment_method.name.downcase}") if customer.subscription_payment_method %></td>
-      </tr>--> 
+      </tr>-->
     </table>
   </div>
   <p align="center"> <%= image_tag "#{I18n.locale}/info_tel.jpg" %></p>
@@ -97,5 +97,3 @@
 <div style="display:none" id="rotation"><%= t '.rotation' %></div>
 <div style="display:none" id="only_vod_confirm"><%= t '.only_vod_confirm' %></div>
 <div style="display:none" id="remove_only_vod_confirm"><%= t '.remove_only_vod_confirm' %></div>
-
-
