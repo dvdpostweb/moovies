@@ -1,0 +1,150 @@
+<style>
+    /* FONTS
+    	- OpenSuns CondensedBold, sans-serif;
+    	- Arial,Helvetica, sans-serif;
+
+    */
+
+    body{
+    	background-color: #212a31;
+    	font-family: Arial,Helvetica, sans-serif;
+    }
+
+    ul{
+    	list-style: none;
+    	padding: 0;
+    	margin: 0;
+    }
+
+    h2, h3{
+    	margin: 0;
+    }
+
+    h2{
+    	font-size: 20px;
+    	font-weight: bold;
+    }
+
+    h3{
+    	font-size: 16px;
+    	font-weight: normal;
+    }
+
+    label {
+    	font-family: Arial,Helvetica, sans-serif;
+    	font-weight: bold;
+    	font-size: 24px;
+    	color: #5da50e;
+    }
+
+    .bnppf {
+    	width: 790px;
+    	height: auto;
+    	margin: 0 auto;
+    	padding: 40px 90px 100px;
+    	background-color: #fff;
+    	text-align: left;
+    }
+
+    .bnppf img {
+    	display: block;
+    }
+
+    .bnppf .header-label {
+    	display: block;
+    	color: #000;
+    	margin: 20px 0 15px 0;
+    }
+
+    .bnppf .page-text {
+    	display: block;
+    	color: #000;
+    	margin-bottom: 15px;
+    	font-size: 16px;
+    	font-weight: normal;
+    }
+
+    .bnppf .text-field {
+    	width: 340px;
+    	height: 40px;
+    	margin-bottom: 25px;
+    	padding: 0 20px;
+    	border: 2px solid #000;
+    	color: #bdbaba;
+    	font-size: 19pt;
+    }
+
+    .bnppf .text-field:focus {
+    	border: 2px solid #0e774c;
+    	outline: none;
+    }
+
+    .bnppf .button-connenct {
+    	height: 40px;
+    	margin: 0;
+    	padding: 0 7px;
+    	border-radius: 5px;
+    	background-color: #0e774c;
+    	border: 0;
+    	color: #fff;
+    	font-size: 19pt;
+    	font-weight: bold;
+    	float: none;
+    	cursor: pointer;
+    	box-shadow: 0 0 2px 1px #239490;
+    }
+
+    .bnppf .button-connenct.button-lm {
+    	margin-left: 10px;
+    }
+
+    .bnppf .button-connenct.button-tm {
+    	margin-top: 10px;
+    }
+
+    .bnppf .info-label {
+    	width: 225px;
+    	margin-bottom: 10px;
+    	display: inline-block;
+    	color: #000;
+    	font-size: 16px;
+    	font-weight: normal;
+    }
+
+</style>
+
+<!--
+<div id="header">
+  <h1>
+      <%= link_to root_path do %>
+    		<%= image_tag "plush_logo_fixed.jpg", height: '71', width: '129' %>
+    	<% end %>
+    </h1>
+      <h2>
+        <%= image_tag("hello-bank logo.png", height: '50', width: '50') %>
+      </h2>
+  </div>
+-->
+
+		<div class="bnppf">
+    <%= link_to image_tag("bnppf.png"), "https://group.bnpparibas/en/", target: "_blank" %>
+		<label class="header-label">Profitez de 4 films grace a BNP Paribas Fortis</label>
+		<label class="page-text">Introduisez ci-dessous le code promotion que vous avez recu et regardez jusqu'a 4 films</label>
+
+		<input type="text" class="text-field" placeholder="Votre code promotion" />
+		<button class="button-connenct button-lm">Valider</button>
+
+		<div>
+			<label class="info-label">Vous code vous donne droit a:</label>
+			<label class="info-label"><b>4 credits films</b></label>
+		</div>
+		<div>
+			<label class="info-label">Valeur:</label>
+			<label class="info-label"><b>10€</b></label>
+		</div>
+		<div>
+			<label class="info-label">Valables jusqu'au:</label>
+			<label class="info-label"><b>31/12/2017</b></label>
+		</div>
+
+		<button class="button-connenct button-tm">Terminez votre enregistrement sur Plush</button>
