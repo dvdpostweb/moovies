@@ -29,7 +29,7 @@
 }
 
 *+html #one-col #maincontent .end {
-  position: relative; 
+  position: relative;
   margin: 0 0 -18px -15px;
 }
 
@@ -78,14 +78,14 @@
   padding-left:40px;
 }
 
-.modif, .modification_account, .modification_address { 
+.modif, .modification_account, .modification_address {
   color:  #A3C41B;
   font-size:14px;
   font-weight:bold;
   font-family:'Open Sans Condensed', sans-serif;
 }
 
-.suppendre { 
+.suppendre {
   font-family:Arial, Helvetica, sans-serif;
   color:#acacac;
   float:right;
@@ -93,7 +93,7 @@
 
 ul, ol, dl, dt, dd {
   list-style:none outside none;
-}	
+}
 
 li.links a.modification_account, li.links a.modification_address{
   text-decoration: underline;
@@ -115,12 +115,12 @@ li.links a {
   padding:3px;
    background-color: #A3C41B!important;
 	color:#FFFFFF;
-  
+
 }
 .adult .rotation {
     background-color: #BD1F83!important;
 	color:#FFFFFF;
-   
+
 }
 .adulte_text {
   color:  #BD1F83
@@ -336,7 +336,7 @@ a.renew{
 .change_pass h2
 {
   margin-bottom: 15px;
-}  
+}
 .change_pass input
 {
   margin-bottom: 10px;
@@ -349,4 +349,8 @@ a.renew{
 {
   color: #900;
   margin: 0 0 5px 0;
+}
+
+#cc_message {
+  display: none;
 }
