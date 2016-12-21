@@ -1,150 +1,271 @@
 <style>
-    /* FONTS
-    	- OpenSuns CondensedBold, sans-serif;
-    	- Arial,Helvetica, sans-serif;
+body{
+  background-color: #212a31;
+  font-family: Arial,Helvetica, sans-serif;
+}
 
-    */
+ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
-    body{
-    	background-color: #212a31;
-    	font-family: Arial,Helvetica, sans-serif;
-    }
+h2, h3{
+  margin: 0;
+}
 
-    ul{
-    	list-style: none;
-    	padding: 0;
-    	margin: 0;
-    }
+h2{
+  font-size: 20px;
+  font-weight: bold;
+}
 
-    h2, h3{
-    	margin: 0;
-    }
+h3{
+  font-size: 16px;
+  font-weight: normal;
+}
 
-    h2{
-    	font-size: 20px;
-    	font-weight: bold;
-    }
+label {
+  font-family: Arial,Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 24px;
+  color: #5da50e;
+}
 
-    h3{
-    	font-size: 16px;
-    	font-weight: normal;
-    }
+.bnppf {
+  width: 790px;
+  height: auto;
+  margin: 0 auto;
+  padding: 40px 90px 100px;
+  background-color: #fff;
+  text-align: left;
+}
 
-    label {
-    	font-family: Arial,Helvetica, sans-serif;
-    	font-weight: bold;
-    	font-size: 24px;
-    	color: #5da50e;
-    }
+.bnppf img {
+  display: block;
+}
 
-    .bnppf {
-    	width: 790px;
-    	height: auto;
-    	margin: 0 auto;
-    	padding: 40px 90px 100px;
-    	background-color: #fff;
-    	text-align: left;
-    }
+.bnppf .header-label {
+  display: block;
+  color: #000;
+  margin: 20px 0 15px 0;
+}
 
-    .bnppf img {
-    	display: block;
-    }
+.bnppf .page-text {
+  display: block;
+  color: #000;
+  margin-bottom: 15px;
+  font-size: 16px;
+  font-weight: normal;
+}
 
-    .bnppf .header-label {
-    	display: block;
-    	color: #000;
-    	margin: 20px 0 15px 0;
-    }
+.bnppf .text-field {
+  width: 340px;
+  height: 40px;
+  margin-bottom: 25px;
+  padding: 0 20px;
+  border: 2px solid #000;
+  color: #bdbaba;
+  font-size: 19pt;
+}
 
-    .bnppf .page-text {
-    	display: block;
-    	color: #000;
-    	margin-bottom: 15px;
-    	font-size: 16px;
-    	font-weight: normal;
-    }
+.bnppf .text-field:focus {
+  border: 2px solid #0e774c;
+  outline: none;
+}
 
-    .bnppf .text-field {
-    	width: 340px;
-    	height: 40px;
-    	margin-bottom: 25px;
-    	padding: 0 20px;
-    	border: 2px solid #000;
-    	color: #bdbaba;
-    	font-size: 19pt;
-    }
+.bnppf .button-connenct {
+  height: 40px;
+  margin: 0;
+  padding: 0 7px;
+  border-radius: 5px;
+  background-color: #0e774c;
+  border: 0;
+  color: #fff;
+  font-size: 19pt;
+  font-weight: bold;
+  float: none;
+  cursor: pointer;
+  box-shadow: 0 0 2px 1px #239490;
+}
 
-    .bnppf .text-field:focus {
-    	border: 2px solid #0e774c;
-    	outline: none;
-    }
+.bnppf .button-connenct.button-lm {
+  margin-left: 10px;
+}
 
-    .bnppf .button-connenct {
-    	height: 40px;
-    	margin: 0;
-    	padding: 0 7px;
-    	border-radius: 5px;
-    	background-color: #0e774c;
-    	border: 0;
-    	color: #fff;
-    	font-size: 19pt;
-    	font-weight: bold;
-    	float: none;
-    	cursor: pointer;
-    	box-shadow: 0 0 2px 1px #239490;
-    }
+.bnppf .button-connenct.button-tm {
+  margin-top: 10px;
+}
 
-    .bnppf .button-connenct.button-lm {
-    	margin-left: 10px;
-    }
+.bnppf .info-label {
+  width: 225px;
+	margin-bottom: 10px;
+  display: inline-block;
+  color: #000;
+  font-size: 16px;
+  font-weight: normal;
+}
 
-    .bnppf .button-connenct.button-tm {
-    	margin-top: 10px;
-    }
+.error {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#006e2e+0,006e2e+100;Green+Flat+%233 */
+background: #006e2e; /* Old browsers */
+background: -moz-linear-gradient(top,  #006e2e 0%, #006e2e 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #006e2e 0%,#006e2e 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #006e2e 0%,#006e2e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#006e2e', endColorstr='#006e2e',GradientType=0 ); /* IE6-9 */
 
-    .bnppf .info-label {
-    	width: 225px;
-    	margin-bottom: 10px;
-    	display: inline-block;
-    	color: #000;
-    	font-size: 16px;
-    	font-weight: normal;
-    }
+}
+
+.error {
+  color: #fff;
+}
+
+#bnppf_activation_code-error {
+  display: block;
+  margin-left: 0%;
+  margin-right: 37%;
+}
+
+#bnppf_activation_code-error_ajax {
+  display: none;
+  margin-left: 0%;
+  margin-right: 37%;
+}
 
 </style>
 
-<!--
+
 <div id="header">
-  <h1>
-      <%= link_to root_path do %>
-    		<%= image_tag "plush_logo_fixed.jpg", height: '71', width: '129' %>
-    	<% end %>
-    </h1>
-      <h2>
-        <%= image_tag("hello-bank logo.png", height: '50', width: '50') %>
-      </h2>
+  <h1><%= link_to root_path do %>
+    <%= image_tag "plush_logo_fixed.jpg", height: '71', width: '129' %>
+    <% end %>
+  </h1>
+  <h1><%= image_tag("hello-bank logo.png", height: '75', width: '75') %></h1>
+</div>
+<div class="bnppf">
+  <%= link_to image_tag("bnppf.png"), "https://group.bnpparibas/en/", target: "_blank" %>
+  <label class="header-label"><%= t("bnppf.1") %></label>
+  <label class="page-text"><%= t("bnppf.2") %></label>
+  <form id="bnppf_activation_form">
+    <input type="text" name="bnppf_activation_code" id="bnppf_activation_code" class="text-field" placeholder="<%= t("bnppf.3") %>" />
+    <button id="bnppf_click" class="button-connenct button-lm"><%= t("bnppf.4") %></button>
+  </form>
+  <div id="bnppf_validations_errors">
+    <div id="bnppf_validations_message">
+
+    </div>
   </div>
--->
 
-		<div class="bnppf">
-    <%= link_to image_tag("bnppf.png"), "https://group.bnpparibas/en/", target: "_blank" %>
-		<label class="header-label">Profitez de 4 films grace a BNP Paribas Fortis</label>
-		<label class="page-text">Introduisez ci-dessous le code promotion que vous avez recu et regardez jusqu'a 4 films</label>
+  <label id="bnppf_activation_code-error_ajax" class="error" for="bnppf_activation_code">Activation code is required.</label>
 
-		<input type="text" class="text-field" placeholder="Votre code promotion" />
-		<button class="button-connenct button-lm">Valider</button>
 
-		<div>
-			<label class="info-label">Vous code vous donne droit a:</label>
-			<label class="info-label"><b>4 credits films</b></label>
-		</div>
-		<div>
-			<label class="info-label">Valeur:</label>
-			<label class="info-label"><b>10€</b></label>
-		</div>
-		<div>
-			<label class="info-label">Valables jusqu'au:</label>
-			<label class="info-label"><b>31/12/2017</b></label>
+		<div id="promotion_result_paribas">
 		</div>
 
-		<button class="button-connenct button-tm">Terminez votre enregistrement sur Plush</button>
+</div>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.js"></script>
+
+    <script>
+      $(document).ready(function () {
+
+          $("#bnppf_activation_form").validate({
+            onkeyup: false,
+            onfocusout: false,
+            rules: {
+              'bnppf_activation_code': {
+                required: true
+              }
+            },
+            messages: {
+              'bnppf_activation_code': {
+                required: required_message()
+              }
+            },
+            errorLabelContainer: "#bnppf_validations_errors",
+            submitHandler: function (form) {
+
+              $.ajax({
+                method: 'POST',
+                url: '/api/v1/check_presence_of_activation_code_bnppf',
+                data: {
+                  'bnppf_activation_code': $.trim($("#bnppf_activation_code").val())
+                },
+                dataType: 'json',
+                success: function (response) {
+
+                  if (0 === response.status) {
+
+                    $("#bnppf_activation_code-error_ajax").show().text("").append(response.message).fadeOut(3000);
+
+                  } else if (1 === response.status) {
+
+                    var d = response.message.activation_code_validto_date.slice(0, 10).split('-');
+
+                    if (gon.locale == "fr") {
+
+                      var link = "/fr/mon-compte/connectez-vous?code=" + response.message.activation_code + "";
+
+                    } else if (gon.locale == "nl") {
+
+                      var link = "/nl/mijn-account/log-in?code=" + response.message.activation_code + "";
+
+                    } else if (gon.locale == "en") {
+
+                      var link = "/en/my-account/log-in?code=" + response.message.activation_code + "";
+
+                    }
+
+                    var success_message_paribas = "<div>" +
+                        "<label class=\"info-label\">" + response.bnppf_6 + "</label>" +
+                        "<label class=\"info-label\"><b>" + response.message.tvod_free + " " + response.bnppf_7 + "</b></label>" +
+                        "</div>" +
+                        "<div>" +
+                        "<label class=\"info-label\">" + response.bnppf_8 + "</label>" +
+                        "<label class=\"info-label\"><b>" + float2int(response.message.activation_value) + " €</b></label>" +
+                        "</div>" +
+                        "<div>" +
+                        "<label class=\"info-label\">" + response.bnppf_9 + "</label>" +
+                        "<label class=\"info-label\"><b>" + d[1] +'/'+ d[2] +'/'+ d[0] + "</b></label>" +
+                        "<div>" +
+                        "<a href=" + link + " class=\"button-connenct button-tm\">" + response.bnppf_10 + "</a>";
+
+                    $("#promotion_result_paribas").html("").append(success_message_paribas)
+
+                  }
+
+                },
+                error: function (response) {
+                  console.log('PARIBAS SYSTEM ERROR!!!');
+                }
+              });
+
+            }
+          });
+
+      });
+
+      function required_message() {
+        if (gon.locale == "fr") {
+          return "Code d'activation est nécessaire."
+        } else if (gon.locale == "nl") {
+          return "Activatie code is verplicht."
+        } else if (gon.locale == "en") {
+          return "Activation code is required."
+        }
+      }
+
+      function float2int(value) {
+        return value | 0;
+      }
+
+      function getFormattedDate(date) {
+        var year = date.getFullYear();
+        var month = (1 + date.getMonth()).toString();
+        month = month.length > 1 ? month : '0' + month;
+        var day = date.getDate().toString();
+        day = day.length > 1 ? day : '0' + day;
+        return month + '/' + day + '/' + year;
+      }
+
+    </script>
