@@ -80,11 +80,11 @@ class Api::V1::ValidatorController < API::V1::BaseController
     if customer_signed_in?
       if request.xhr?
         if params[:promotion].present?
-          activation = Activation.where(:activation_code => params[:promotion]).where(:customers_id => 0).orange.first
+          activation = Activation.by_name(params[:promotion]).available.first
           if params[:promotion] === "FREETRIAL" || params[:promotion] === "NOVFREETRIAL"
             render :json => { :status => 2, :message => info_path(:page_name => "freetrial") }
           elsif !activation.present?
-            careefour = Activation.where(:activation_code => params[:promotion]).where(:customers_id => 0).where(:activation_group => 21).first
+            activation = Activation.by_name(params[:promotion]).available.first
             if careefour.present?
               render :json => { :status => 2, :message => carrefour_path(:carrefour_activation_code => params[:promotion]) }
             else
