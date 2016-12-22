@@ -30,11 +30,30 @@ class Api::V1::PaypalController < ApplicationController
     redirect_to response.redirect_uri
   end
 
-  def express_checkout_return
+  def express_checkout_payment_method_change_to_paypal
+    request = Paypal::Express::Request.new(
+      :username   => API_USERNAME,
+      :password   => API_PASSWORD,
+      :signature  => API_SIGNATURE
+    )
+    payment_request = Paypal::Payment::Request.new(
+      :billing_type  => :MerchantInitiatedBilling,
+      :billing_agreement_description => BILLING_AGREEMENT_DESCRIPTION
+    )
+    response = request.setup(
+      payment_request,
+      RETURN_URL,
+      CANCEL_RETURL_URL,
+      payment_method_change_to_paypal: "payment_method_change_to_paypal"
+    )
+    redirect_to response.redirect_uri
+  end
+
+  def express_checkout_return_payment_method_change_to_paypal
     render json: params
   end
 
-  def express_checkout_return_1
+  def express_checkout_return_
     if params[:token].present?
       request = Paypal::Express::Request.new(
         :username   => API_USERNAME,
