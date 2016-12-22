@@ -15,6 +15,8 @@ Moovies::Application.routes.draw do
       match "subscriptions" => "subscriptions#for_logedin_customers"
       match "subscriptions_freetrial_mobistar_customers" => "subscriptions#for_logedin_mobistar_customers_freetrial_subscription"
       match "ogone_parameters_accepturl" => "ogone_tokenization#ogone_parameters_accepturl"
+
+      match "express_checkout_payment_method_change_to_paypal" => "paypal#express_checkout_payment_method_change_to_paypal"
     end
   end
 end
