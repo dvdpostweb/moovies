@@ -110,11 +110,11 @@ class Api::V1::PaypalController < ApplicationController
         discount = Discount.find_by_discount_code(customer.activation_discount_code_id)
         if customer.have_freetrial_codes?
           if customer.abo_history(12, customer.abo_type_id, discount.to_param)
-            redirect_to step_path(:id => 'step4')
+            redirect_to edit_customer_payment_methods_path(:customer_id => current_customer.to_param, :type => :paypal_modification_finish)
           end
         else
           if customer.abo_history(6, customer.abo_type_id, discount.to_param)
-            redirect_to step_path(:id => 'step4')
+            redirect_to edit_customer_payment_methods_path(:customer_id => current_customer.to_param, :type => :paypal_modification_finish)
           end
         end
 	    end
