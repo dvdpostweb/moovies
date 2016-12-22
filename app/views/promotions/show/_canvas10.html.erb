@@ -133,16 +133,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#006e2e', end
 
 </style>
 
-
-<div id="header">
-  <h1><%= link_to root_path do %>
-    <%= image_tag "plush_logo_fixed.jpg", height: '71', width: '129' %>
-    <% end %>
-  </h1>
-  <h1><%= image_tag("hello-bank logo.png", height: '75', width: '75') %></h1>
-</div>
 <div class="bnppf">
-  <%= link_to image_tag("bnppf.png"), "https://group.bnpparibas/en/", target: "_blank" %>
+  <table style="width:30%">
+    <tr>
+      <td><%= link_to image_tag("bnppf.png"), "https://group.bnpparibas/en/", target: "_blank" %></td>
+      <td><%= image_tag("hello-bank logo.png", height: '75', width: '75') %></td>
+    </tr>
+  </table>
   <label class="header-label"><%= t("bnppf.1") %></label>
   <label class="page-text"><%= t("bnppf.2") %></label>
   <form id="bnppf_activation_form">
@@ -220,10 +217,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#006e2e', end
                         "<label class=\"info-label\">" + response.bnppf_6 + "</label>" +
                         "<label class=\"info-label\"><b>" + response.message.tvod_free + " " + response.bnppf_7 + "</b></label>" +
                         "</div>" +
-                        "<div>" +
-                        "<label class=\"info-label\">" + response.bnppf_8 + "</label>" +
-                        "<label class=\"info-label\"><b>" + float2int(response.message.activation_value) + " €</b></label>" +
-                        "</div>" +
+                        //"<div>" +
+                        //"<label class=\"info-label\">" + response.bnppf_8 + "</label>" +
+                        //"<label class=\"info-label\"><b>" + float2int(response.message.activation_value) + " €</b></label>" +
+                        //"</div>" +
                         "<div>" +
                         "<label class=\"info-label\">" + response.bnppf_9 + "</label>" +
                         "<label class=\"info-label\"><b>" + d[1] +'/'+ d[2] +'/'+ d[0] + "</b></label>" +
