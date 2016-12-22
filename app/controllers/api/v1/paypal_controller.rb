@@ -38,13 +38,13 @@ class Api::V1::PaypalController < ApplicationController
     )
     payment_request = Paypal::Payment::Request.new(
       :billing_type  => :MerchantInitiatedBilling,
-      :billing_agreement_description => BILLING_AGREEMENT_DESCRIPTION
+      :billing_agreement_description => BILLING_AGREEMENT_DESCRIPTION,
+      payment_method_change_to_paypal: "payment_method_change_to_paypal"
     )
     response = request.setup(
       payment_request,
       RETURN_URL,
-      CANCEL_RETURL_URL,
-      payment_method_change_to_paypal: "payment_method_change_to_paypal"
+      CANCEL_RETURL_URL
     )
     redirect_to response.redirect_uri
   end
