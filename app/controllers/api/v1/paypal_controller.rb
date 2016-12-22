@@ -31,6 +31,10 @@ class Api::V1::PaypalController < ApplicationController
   end
 
   def express_checkout_return
+    render json: params
+  end
+
+  def express_checkout_return_1
     if params[:token].present?
       request = Paypal::Express::Request.new(
         :username   => API_USERNAME,
