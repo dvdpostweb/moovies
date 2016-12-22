@@ -90,17 +90,17 @@
               <div class="grid grid-pad">
                   <div class="col-1-4">
                      <div class="content">
-                       <input type="text" name="first_name" placeholder="<%= current_customer.customers_firstname.present? ? current_customer.customers_firstname : t('promotion.newstep3.first_name') %>" class="text-field" id="first_name" />
+                       <input type="text" name="first_name" placeholder="<%= current_customer.customers_firstname.present? ? current_customer.customers_firstname : t('promotion.newstep3.first_name') %>" class="text-field" id="first_name" value="<%= current_customer.customers_firstname.present? ? current_customer.customers_firstname : "" %>" />
                      </div>
                   </div>
                   <div class="col-1-4">
                      <div class="content">
-                       <input type="text" name="last_name" placeholder="<%= current_customer.customers_lastname.present? ? current_customer.customers_lastname : t('promotion.newstep3.last_name') %>" class="text-field" id="last_name" />
+                       <input type="text" name="last_name" placeholder="<%= current_customer.customers_lastname.present? ? current_customer.customers_lastname : t('promotion.newstep3.last_name') %>" class="text-field" id="last_name" value="<%= current_customer.customers_lastname.present? ? current_customer.customers_lastname : "" %>" />
                      </div>
                   </div>
                   <div class="col-1-4">
                      <div class="content">
-                       <input type="text" name="telephone" placeholder="<%= current_customer.customers_telephone? ? current_customer.customers_telephone : t('promotion.newstep3.telephone') %>" class="text-field" id="telephone" />
+                       <input type="text" name="telephone" placeholder="<%= current_customer.customers_telephone? ? current_customer.customers_telephone : t('promotion.newstep3.telephone') %>" class="text-field" id="telephone" value="<%= current_customer.customers_telephone? ? current_customer.customers_telephone : "" %>" />
                      </div>
                   </div>
                   <div class="col-1-4">
