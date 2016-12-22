@@ -99,24 +99,11 @@ class Api::V1::PaypalController < ApplicationController
       customer.customers_registration_step = 100
       customers_abo = 1
       customer.paypal_agreement_id = response.billing_agreement.identifier
-      if customer.have_freetrial_codes?
-        customer.customers_abo_validityto = Time.now + 1.month
-      else
-        customer.customers_abo_validityto = Time.now
-        customer.customers_locked__for_reconduction = 1
-        customer.credits_already_recieved = 1
-      end
+      customer.customers_abo_validityto = Time.now
+      customer.customers_locked__for_reconduction = 1
+      customer.credits_already_recieved = 1
       if customer.save(validate: false)
-        discount = Discount.find_by_discount_code(customer.activation_discount_code_id)
-        if customer.have_freetrial_codes?
-          if customer.abo_history(12, customer.abo_type_id, discount.to_param)
-            redirect_to edit_customer_payment_methods_path(:customer_id => current_customer.to_param, :type => :paypal_modification_finish)
-          end
-        else
-          if customer.abo_history(6, customer.abo_type_id, discount.to_param)
-            redirect_to edit_customer_payment_methods_path(:customer_id => current_customer.to_param, :type => :paypal_modification_finish)
-          end
-        end
+        redirect_to edit_customer_payment_methods_path(:customer_id => current_customer.to_param, :type => :paypal_modification_finish)
 	    end
     end
   end
