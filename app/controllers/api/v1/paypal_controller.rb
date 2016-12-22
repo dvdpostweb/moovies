@@ -49,11 +49,11 @@ class Api::V1::PaypalController < ApplicationController
     redirect_to response.redirect_uri
   end
 
-  def express_checkout_return_payment_method_change_to_paypal
+  def express_checkout_return
     render json: params
   end
 
-  def express_checkout_return_
+  def express_checkout_return_1
     if params[:token].present?
       request = Paypal::Express::Request.new(
         :username   => API_USERNAME,
