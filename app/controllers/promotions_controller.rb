@@ -209,4 +209,5 @@ class PromotionsController < ApplicationController
       @prospect = nil
     end
   end
+
 end

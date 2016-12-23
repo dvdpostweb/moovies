@@ -26,32 +26,6 @@ class Api::V1::ValidatorController < API::V1::BaseController
     end
   end
 
-  def check_activation_code_presence
-    if request.xhr?
-      code = Activation.where(:activation_code => params[:code]).where(:customers_id => 0).orange.first
-      if code.present?
-        render json: TRUE
-      else
-        render json: FALSE
-      end
-    else
-      raise ActionController::RoutingError.new('Not Found')
-    end
-  end
-
-  def check_activation_code_presence_carrefour
-    if request.xhr?
-      code = Activation.where(:activation_code => params[:carrefour_code]).where(:customers_id => 0).where(:activation_group => 21).first
-      if code.present?
-        render json: TRUE
-      else
-        render json: FALSE
-      end
-    else
-      raise ActionController::RoutingError.new('Not Found')
-    end
-  end
-
   def set_plan
     if request.xhr?
       if params[:discount_code].present? && !params[:subscription_action].present?
@@ -106,11 +80,11 @@ class Api::V1::ValidatorController < API::V1::BaseController
     if customer_signed_in?
       if request.xhr?
         if params[:promotion].present?
-          activation = Activation.where(:activation_code => params[:promotion]).where(:customers_id => 0).orange.first
+          activation = Activation.by_name(params[:promotion]).available.first
           if params[:promotion] === "FREETRIAL" || params[:promotion] === "NOVFREETRIAL"
             render :json => { :status => 2, :message => info_path(:page_name => "freetrial") }
           elsif !activation.present?
-            careefour = Activation.where(:activation_code => params[:promotion]).where(:customers_id => 0).where(:activation_group => 21).first
+            activation = Activation.by_name(params[:promotion]).available.first
             if careefour.present?
               render :json => { :status => 2, :message => carrefour_path(:carrefour_activation_code => params[:promotion]) }
             else
@@ -158,6 +132,54 @@ class Api::V1::ValidatorController < API::V1::BaseController
       else
         raise ActionController::RoutingError.new('Not Found')
       end
+    end
+  end
+
+  def check_activation_code_presence_orange
+    if request.xhr?
+      code = Activation.by_name(params[:code]).available.orange.first
+      if code.present?
+        render json: TRUE
+      else
+        render json: FALSE
+      end
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
+
+  def check_activation_code_presence_carrefour
+    if request.xhr?
+      code = Activation.where(:activation_code => params[:carrefour_code]).where(:customers_id => 0).where(:activation_group => 21).first
+        code = Activation.by_name(params[:carrefour_code]).available.carrefour.first
+      if code.present?
+        render json: TRUE
+      else
+        render json: FALSE
+      end
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
+
+  def check_activation_code_presence_bnppf
+    if request.xhr?
+      code = Activation.by_name(params[:bnppf_activation_code]).available.bnppf.first
+      if code.present?
+        render json: {
+          status: 1,
+          message: code,
+          bnppf_6: t("bnppf.6"),
+          bnppf_7: t("bnppf.7"),
+          bnppf_8: t("bnppf.8"),
+          bnppf_9: t("bnppf.9"),
+          bnppf_10: t("bnppf.10")
+         }
+      else
+        render json: { status: 0, message: t("bnppf.5") }
+      end
+    else
+      raise ActionController::RoutingError.new('Not Found')
     end
   end
 
