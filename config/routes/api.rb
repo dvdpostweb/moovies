@@ -9,8 +9,6 @@ Moovies::Application.routes.draw do
       match "login" => "login#login"
       match "register" => "registration#register"
       match "promotion_code_activation" => "validator#check_and_validate_public_promotions_activation_codes"
-      match "express_checkout" => "paypal#express_checkout"
-      match "express_checkout_return" => "paypal#express_checkout_return"
       match "virement" => "virement#accept_virement_payment"
       match "subscriptions" => "subscriptions#for_logedin_customers"
       match "subscriptions_freetrial_mobistar_customers" => "subscriptions#for_logedin_mobistar_customers_freetrial_subscription"

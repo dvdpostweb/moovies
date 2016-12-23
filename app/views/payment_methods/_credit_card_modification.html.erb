@@ -1,49 +1,196 @@
-<div class="switch_dom" id="switch_dom">
-  <div id="title"><%= t '.title' %></div>
-  <div style="margin-left: 20px; width: 800px;">
-    <%= form_for(:customer, :url => customer_payment_methods_path(:customer_id => current_customer.to_param), :html => { :method => :put, :id => :payment_methods }) do |f| %>
-    <%= hidden_field_tag(:type, 'credit_card_modification')  %>
-    <div style="width: 800px; height:80px" > 
-      <%= image_tag 'card.png', :class => :img_card %>
-      <p><%= t('.credit_card_redirect').html_safe %></p>
+<% content_for :view_specific_css do %>
+    <%= stylesheet_link_tag "ccm" %>
+<% end %>
+
+<div class="step">
+
+  <div class="main-block">
+
+    <div class="switch_dom" id="switch_dom">
+      <div id="title"><%= t 'cc.ogone_payment_method_change' %></div>
     </div>
-    <div align="right" style="padding-right: 8px;">
-      <div class="choice">
-        <table>
-          <tr>
-            <td>	
-              <input type="radio" value="visa" name="brand" id="visa">
-            </td>
-            <td align="center" valign="middle">
-              <%= image_tag "visa_icon.png" %><p>Visa</p>
-            </td>
-            <td><input type="radio" value="mastercard" name="brand" id="master"></td>
-            <td align="center" valign="middle">
-              <%= image_tag "master_card_icon.png" %>
-              <p>Master Card </p>
-            </td>
-            <td>
-              <input type="radio" value="american Express" name="brand" id="amex">
-            </td>
-            <td align="center" valign="middle">
-              <%= image_tag "american-express_icon.png" %>
-              <p>American Express</p>
-            </td>
-          </tr>
-        </table>
-        <table cellspacing="0" cellpadding="0">
-          <tr>
-            <td align="left"><img width="130" height="66" align="left" style="padding-right: 25px;" src="http://www.dvdpost.be/images/www3/languages/french/images/buttons/canvas/logo_ogone_big.gif"></td>
-            <td style="padding-top: 15px; padding-left: 10px;">
-              <button type="submit" class="button_confirm_switch"><%= t'.follow' %></button>
-            </td>
-          </tr>
-        </table>
+
+    <div class="lock-block">
+      <div class="lock-img"></div>
+      <div class="secure">
+        <label class="server"><%= t('promotion.newstep3.serversecure1').html_safe %></label>
+        <label class="plus"><a href="https://payment-services.ingenico.com/be/en/online-payment-services-solutions/e-commerce" target="blank" id="secure_payment_link"><%= t('promotion.newstep3.serversecure2').html_safe %></a></label>
       </div>
     </div>
-  <% end %>
+
+    <div id="accordion">
+      <section id="item1">
+        <p class="pointer">&#9654;</p>
+        <h1><a href=""><%= t('promotion.newstep3.paymentoption1').html_safe %></a></h1>
+        <div class="switch_dom" id="switch_dom">
+          <div style="margin-left: 100px; width: 100%;">
+            <%= form_for(:customer, :url => customer_payment_methods_path(:customer_id => current_customer.to_param), :html => { :method => :put, :id => :payment_methods }) do |f| %>
+            <%= hidden_field_tag(:type, 'credit_card_modification')  %>
+            <div align="right" style="padding-right: 8px;">
+              <div class="choice">
+                <table>
+                  <tr>
+                    <td>
+                      <input type="radio" value="visa" name="brand" id="visa">
+                    </td>
+                    <td align="center" valign="middle">
+                      <%= image_tag "visa_icon.png" %><p>Visa</p>
+                    </td>
+                    <td><input type="radio" value="mastercard" name="brand" id="master"></td>
+                    <td align="center" valign="middle">
+                      <%= image_tag "master_card_icon.png" %>
+                      <p>Master Card </p>
+                    </td>
+                    <td>
+                      <input type="radio" value="american Express" name="brand" id="amex">
+                    </td>
+                    <td align="center" valign="middle">
+                      <%= image_tag "american-express_icon.png" %>
+                      <p>American Express</p>
+                    </td>
+                  </tr>
+                </table>
+                <table cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td align="left"><img width="130" height="66" align="left" style="padding-right: 25px;" src="http://www.dvdpost.be/images/www3/languages/french/images/buttons/canvas/logo_ogone_big.gif"></td>
+                    <td style="padding-top: 15px; padding-left: 10px;">
+                      <button type="submit" class="button_confirm_switch"><%= t'.follow' %></button>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <% end %>
+          </div>
+
+        </div>
+      </section>
+
+      <section id="item2" class="ac_hidden">
+        <p class="pointer">&#9654;</p>
+        <h1><a href="#"><%= t('promotion.newstep3.paymentoption2').html_safe %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= image_tag "step3/paypal.png" %></a>
+        </h1>
+        <div class="grid grid-pad">
+            <div class="col-1-4">
+               <div class="content">
+                 <%= link_to(image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"), api_v1_express_checkout_payment_method_change_to_paypal_path	) %>
+               </div>
+            </div>
+        </div>
+      </section>
+
+      <section id="item3" class="ac_hidden">
+        <p class="pointer">&#9654;</p>
+        <h1>
+          <a href="#"><%= t('promotion.newstep3.paymentoption3').html_safe %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= image_tag "step3/virement.png", height: '26', width: '64' %></a>
+        </h1>
+        <div id="vir">
+          <form id="virman" action="<%= api_v1_virement_path %>">
+            <input type="hidden" name="payment_method_change_to_virement" value="payment_method_change_to_virement">
+              <div class="grid grid-pad">
+                  <div class="col-1-4">
+                     <div class="content">
+                       <input type="text" name="first_name" placeholder="<%= current_customer.customers_firstname.present? ? current_customer.customers_firstname : t('promotion.newstep3.first_name') %>" class="text-field" id="first_name" value="<%= current_customer.customers_firstname.present? ? current_customer.customers_firstname : "" %>" />
+                     </div>
+                  </div>
+                  <div class="col-1-4">
+                     <div class="content">
+                       <input type="text" name="last_name" placeholder="<%= current_customer.customers_lastname.present? ? current_customer.customers_lastname : t('promotion.newstep3.last_name') %>" class="text-field" id="last_name" value="<%= current_customer.customers_lastname.present? ? current_customer.customers_lastname : "" %>" />
+                     </div>
+                  </div>
+                  <div class="col-1-4">
+                     <div class="content">
+                       <input type="text" name="telephone" placeholder="<%= current_customer.customers_telephone? ? current_customer.customers_telephone : t('promotion.newstep3.telephone') %>" class="text-field" id="telephone" value="<%= current_customer.customers_telephone? ? current_customer.customers_telephone : "" %>" />
+                     </div>
+                  </div>
+                  <div class="col-1-4">
+                     <div class="content">
+                         <input type="submit" name="submit" value="Check out" class="button-connenct" />
+                     </div>
+                  </div>
+              </div>
+          <form>
+            <div class="errorTxt"></div>
+        </div>
+      </section>
+    </div>
+
+    <label class="phone-number"><%= t('promotion.newstep3.supportinfo').html_safe %></label>
+    <%= link_to t('promotion.newstep3.conditions').html_safe, info_path(:page_name => t('routes.infos.params.conditions')), class: "conditions-d-utilisation" %>
   </div>
-</div>  
-<div id='alert_cc' style="display:none">
-  <%= t('.alert_cc') %>
 </div>
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script>
+  $(document).ready(function () {
+    $("#accordion section h1").click(function (e) {
+      $(this).parents().siblings("section").addClass("ac_hidden");
+      $(this).parents("section").removeClass("ac_hidden");
+      e.preventDefault();
+    });
+  });
+</script>
+
+<script>
+
+  $(document).ready(function() {
+    $("#virman").validate({
+      rules: {
+        'first_name': {
+          required: true
+        },
+        'last_name': {
+          required: true
+        },
+        'telephone': {
+          required: true
+        }
+      },
+      messages: {
+        'first_nam': {
+          required: first_name_message()
+        },
+        'last_name': {
+          required: last_name_message()
+        },
+        'last_name': {
+          required: telephone_message()
+        }
+      },
+      errorElement : 'div',
+      errorLabelContainer: '.errorTxt'
+    });
+  });
+
+  function first_name_message() {
+    if (gon.locale == "fr") {
+      return "Prénom est nécessaire."
+    } else if (gon.locale == "nl") {
+      return "Voornaam is verplicht."
+    } else if (gon.locale == "en") {
+      return "First name is required."
+    }
+  }
+
+  function last_name_message() {
+    if (gon.locale == "fr") {
+      return "Nom de famille est nécessaire."
+    } else if (gon.locale == "nl") {
+      return "Achternaam is verplicht."
+    } else if (gon.locale == "en") {
+      return "Surname  is required."
+    }
+  }
+
+  function telephone_message() {
+    if (gon.locale == "fr") {
+      return "Téléphone est nécessaire."
+    } else if (gon.locale == "nl") {
+      return "Telefoon is verplicht."
+    } else if (gon.locale == "en") {
+      return "Telephone is required."
+    }
+  }
+
+</script>
