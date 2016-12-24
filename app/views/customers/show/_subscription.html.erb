@@ -65,7 +65,7 @@
           <% if customer.actived? && !customer.tvod_only? %>
             <ul>
               <li class='link_payment'>
-                  <%= link_to t('cc.change my subscription'), info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change") %>
+                  <%= link_to t('cc.change_my_subscription'), info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change") %>
               </li>
             </ul>
           <% end %>
