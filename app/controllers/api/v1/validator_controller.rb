@@ -150,7 +150,6 @@ class Api::V1::ValidatorController < API::V1::BaseController
 
   def check_activation_code_presence_carrefour
     if request.xhr?
-      code = Activation.where(:activation_code => params[:carrefour_code]).where(:customers_id => 0).where(:activation_group => 21).first
         code = Activation.by_name(params[:carrefour_code]).available.carrefour.first
       if code.present?
         render json: TRUE
