@@ -78,7 +78,7 @@
         </ul>
       <% end %>
 
-      <% if current_customer.abo_subscriber? %>
+      <% if current_customer.abo_subscriber? || current_customer.bnppf_subscriber? %>
         <ul>
           <li><a href="#" class='_blueColor_ _underline_ abo_subscriber'>Plush à la Carte</a></li>
           <li><%= t('.top_part_2').capitalize %>: <%= current_customer.tvod_free %></li>
