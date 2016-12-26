@@ -190,7 +190,7 @@ class Customer < ActiveRecord::Base
   end
 
   def bnppf_subscriber?
-    (customers_abo_type == 6 && self.activation_discount_code_type == "A" && Activation.find_by_activation_id(self.activation_discount_code_id).bnppf)
+    (customers_abo_type == 6 && self.activation_discount_code_type == "A" && Activation.where(:activation_id => self.activation_discount_code_id).where(:activation_group => 22))
   end
 
   def have_freetrial_codes?
