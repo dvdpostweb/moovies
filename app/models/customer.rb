@@ -189,6 +189,10 @@ class Customer < ActiveRecord::Base
     (customers_abo_type == 6 && self.activation_discount_code_type == "A" && Mobistar.find_by_activation_id(self.activation_discount_code_id))
   end
 
+  def bnppf_subscriber?
+    (customers_abo_type == 6 && self.activation_discount_code_type == "A" && Activation.find_by_activation_id(self.activation_discount_code_id).bnppf)
+  end
+
   def have_freetrial_codes?
     (activation_discount_code_id == 263 || activation_discount_code_id == 264 || activation_discount_code_id == 265)
   end
