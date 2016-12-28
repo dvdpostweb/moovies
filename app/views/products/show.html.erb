@@ -114,7 +114,11 @@
           <% @recommendations.each do |r| %>
           <div class="ca-item ca-item-1" style="position: absolute; left: 0px;">
             <div class="content">
-              <a href="<%= product_path(:id => r[ "imdb_id" ]) %>" class="cover"><img src="<%= "http://www.dvdpost.be/images/#{r[ "image" ]}" %>" alt="Smiley face" height="217" width="145"></a>
+              <% if params[:kind].present? && params[:kind] == :adult %>
+                <a href="<%= product_path(:id => r[ "imdb_id" ]) %>" class="cover"><img src="<%= "http://www.dvdpost.be/imagesx/#{r[ "image" ]}" %>" alt="Smiley face" height="217" width="145"></a>
+              <% else %>
+                <a href="<%= product_path(:id => r[ "imdb_id" ]) %>" class="cover"><img src="<%= "http://www.dvdpost.be/images/#{r[ "image" ]}" %>" alt="Smiley face" height="217" width="145"></a>
+              <% end %>
             </div>
           </div>
           <% end %>
