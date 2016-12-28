@@ -102,9 +102,26 @@
       <% else %>
         <%= render :partial => 'products/show/formats', :locals => {:product => @product, :svod_date => @svod_date}%>
       <% end %>
-      <!--
-      <#%= render :partial => 'products/index/single_movie_normal', :locals => {:data => @recommendations, :title => :recommendations, :type => :none, :view_mode => :none, :source => 4, :belgium => nil} if @recommendations.size > 0 %>
-    -->
+
+      <% @recommendations = ActiveRecord::Base.connection.exec_query %Q{CALL sp_movie_to_movie(#{0}, #{@product.imdb_id})} %>
+      <% ActiveRecord::Base.clear_active_connections! %>
+
+      <div id="ca-container" class="ca-container">
+        <div class="title">
+          <h1>Recommendations</h1>
+        </div>
+        <div class="ca-wrapper" style="overflow: hidden;">
+          <% @recommendations.each do |r| %>
+          <div class="ca-item ca-item-1" style="position: absolute; left: 0px;">
+            <div class="content">
+              <a href="<%= product_path(:id => r[ "imdb_id" ]) %>" class="cover"><img src="<%= "http://www.dvdpost.be/images/#{r[ "image" ]}" %>" alt="Smiley face" height="217" width="145"></a>
+            </div>
+          </div>
+          <% end %>
+
+        </div>
+      </div>
+    
       <div id="thumbs-wrap">
         <h3><%= t '.photo' %></h3>
         <div>
