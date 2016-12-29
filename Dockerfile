@@ -1,1 +1,0 @@
-FROM dvdpost/dvdpost-docker-rails:moovies
