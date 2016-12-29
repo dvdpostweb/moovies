@@ -111,9 +111,10 @@
       <% ActiveRecord::Base.clear_active_connections! %>
       
       <% if @recommendations.any? %>
+      <hr>
       <div id="ca-container" class="ca-container">
         <div class="title">
-          <h1>Recommendations</h1>
+          <h1 style="text-align: left"><%= t("recommendations_show") %></h1>
         </div>
         <div class="ca-wrapper" style="overflow: hidden;">
           <% @recommendations.each do |r| %>
