@@ -17,6 +17,7 @@
     <% if !current_customer %>
       <%= link_to t('.login'), new_customer_session_path, :id => :login %>
       <%= link_to t('.social.network.fbconnect'), '/auth/facebook/', :class => 'btn-auth btn-facebook', :id => :login_fb %>
+      <%= link_to t('.social.network.google'), '/auth/google_oauth2/', :class => 'loginBtn loginBtn--google', :id => :login_fb %>
     <% end %>
   </li>
 </ul>
