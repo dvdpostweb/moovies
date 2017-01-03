@@ -82,6 +82,7 @@ gem "jbuilder"
 gem 'annotate'
 gem 'gon'
 gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2', '~> 0.3.1'
 gem "figaro"
 gem 'puma', '~> 3.6'
 gem 'rails-footnotes', '~> 4.0'
