@@ -122,7 +122,7 @@
 	<% end %>
 <% end %>
 <% if params[:activation].blank? %>
-<a href="/auth/facebook?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>;ACTION_TYPE=NORMAL;ORG_URL=<%= request.fullpath %>"><button id="fb_connect_login" class="face-button"><%= t('devise.registrations.new.fb.register') %></button></a>
+<a href="/auth/facebook?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>;ACTION_TYPE=NORMAL;ORG_URL=<%= request.fullpath %>"><button id="fb_connect_login" class="face-button"><%= t('devise.registrations.new.social.network.facebook') %></button></a>
 <a href="/auth/facebook?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>;ACTION_TYPE=NORMAL;ORG_URL=<%= request.fullpath %>"><button id="fb_connect_login" class="face-button" style="background: #DD4B39; margin-top: 0px;"><%= t('devise.registrations.new.google.register') %></button></a>
 <div class="separator-part">
 	<div class="separator-line"></div>
