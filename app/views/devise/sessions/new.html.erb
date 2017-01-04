@@ -89,7 +89,7 @@
 	<% end %>
 <% end %>
 <a href="/auth/facebook?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>;ACTION_TYPE=NORMAL;ORG_URL=<%= request.fullpath %>"><button id="fb_connect_login" class="face-button"><%= t('.social.network.fbconnect') %></button></a>
-<a href="/auth/facebook?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>;ACTION_TYPE=NORMAL;ORG_URL=<%= request.fullpath %>"><button id="fb_connect_login" class="face-button" style="background: #DD4B39; margin-top: 0px;"><%= t('.social.network.google') %></button></a>
+<a href="/auth/google_oauth2?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>;ACTION_TYPE=NORMAL;ORG_URL=<%= request.fullpath %>"><button id="fb_connect_login" class="face-button" style="background: #DD4B39; margin-top: 0px;"><%= t('.social.network.google') %></button></a>
 <div class="separator-part">
 	<div class="separator-line"></div>
 	<label class="separator-label"><%= t('promotions.show.or') %></label>
