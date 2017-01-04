@@ -83,6 +83,8 @@ gem 'annotate'
 gem 'gon'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2', '~> 0.3.1'
+gem 'omniauth-instagram', '~> 1.0', '>= 1.0.2'
+gem 'omniauth-windowslive', '~> 0.0.11'
 gem "figaro"
 gem 'puma', '~> 3.6'
 gem 'rails-footnotes', '~> 4.0'
