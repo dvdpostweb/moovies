@@ -1,4 +1,9 @@
-<a href="/auth/facebook?code=<%= params[:code] %>;freetrial_action=<%= params[:freetrial_action] %>;films=<%= params[:films] %>;price=<%= params[:price] %>;ACTION_TYPE=FREETRIAL" class="btn-lg btn-block btn-social btn-facebook" <span class="fa fa-facebook"></span> <%= t("FT_FB_SI") %></a>
+<a class="btn btn-block btn-lg btn-social btn-facebook" href="/auth/facebook?code=<%= params[:code] %>;freetrial_action=<%= params[:freetrial_action] %>;films=<%= params[:films] %>;price=<%= params[:price] %>;ACTION_TYPE=FREETRIAL">
+	<i class="fa fa-facebook"></i> <%= t("FT_FB_SI") %>
+</a>
+<a class="btn btn-block btn-lg btn-social btn-google" href="/auth/google_oauth2?code=<%= params[:code] %>;freetrial_action=<%= params[:freetrial_action] %>;films=<%= params[:films] %>;price=<%= params[:price] %>;ACTION_TYPE=FREETRIAL">
+      <i class="fa fa-google"></i> <%= t("FT_GOOGLE_SI") %>
+    </a>
 <div class="form-top-left">
   <h3><%= t("ft_error_page.Forbidden.Login.1") %></h3>
   <p><%= t("ft_error_page.Forbidden.Login.2") %></p>

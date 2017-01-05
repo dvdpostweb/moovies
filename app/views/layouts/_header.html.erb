@@ -16,8 +16,17 @@
   <li class="wrap">
     <% if !current_customer %>
       <%= link_to t('.login'), new_customer_session_path, :id => :login %>
-      <%= link_to t('.social.network.fbconnect'), '/auth/facebook/', :class => 'btn-auth btn-facebook', :id => :login_fb %>
+      <%= link_to t('.social.network.fbconnect'), '/auth/facebook/', :class => 'loginBtn loginBtn--facebook', :id => :login_fb %>
+      <%= link_to t('.social.network.google'), '/auth/google_oauth2/', :class => 'loginBtn loginBtn--google', :id => :login_fb %>
+
+<!--
+      <#% if Rails.env.development? || Rails.env.staging? %>
+        <#%= link_to t('INSTAGRAM'), '/auth/instagram/', :class => 'sb linkedin' %>
+        <#%= link_to t('WINDOWSLIVE'), '/auth/windowslive/', :class => 'sb linkedin' %>
+       <#% end %>
+-->
     <% end %>
+
   </li>
 </ul>
 <div id="wrap">
