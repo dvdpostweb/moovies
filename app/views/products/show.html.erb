@@ -103,6 +103,13 @@
         <%= render :partial => 'products/show/formats', :locals => {:product => @product, :svod_date => @svod_date}%>
       <% end %>
 
+      <div id="thumbs-wrap">
+        <h3><%= t '.photo' %></h3>
+        <div>
+          <%= render :partial => 'products/show/preview', :locals => {:product => @product, :type => params[:kind], :source => @source, :response_id => @response_id} %>
+        </div>
+      </div>
+
       <% if customer_signed_in? %>
         <% @recommendations = ActiveRecord::Base.connection.exec_query %Q{CALL sp_movie_to_movie(#{current_customer.to_param}, #{@product.imdb_id})} %>
       <% else %>
@@ -133,12 +140,6 @@
       </div>
       <% end %>
 
-      <div id="thumbs-wrap">
-        <h3><%= t '.photo' %></h3>
-        <div>
-          <%= render :partial => 'products/show/preview', :locals => {:product => @product, :type => params[:kind], :source => @source, :response_id => @response_id} %>
-        </div>
-      </div>
       <%= render :partial => 'products/show/critics', :locals => {:product => @product, :reviews_count => @reviews_count, :reviews => @reviews, :review_sort => @review_sort, :product_title => @product_title, :source => @source, :response_id => @response_id} %>
     </div><!-- #film-info -->
   </div>
