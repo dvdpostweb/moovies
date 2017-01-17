@@ -1,3 +1,2 @@
 thinking-sphinx: bundle exec rake ts:run_in_foreground
-moovies: bundle exec rails s -p 3003
-lt: lt --port 3003 --subdomain plush
+moovies: bundle exec rails s -p 5000
