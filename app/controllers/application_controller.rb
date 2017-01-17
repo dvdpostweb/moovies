@@ -13,17 +13,10 @@ class ApplicationController < ActionController::Base
 
   layout :layout_by_resource
 
-  def redirect_with_locale_if_is_mobile
-    if ((request.user_agent =~ /Mobile|webOS/) && (Rails.env.staging? || Rails.env.production?)) 
-      redirect_to "#{request.host}/#{I18n.default_locale}"
-    end
-  end
-
   def set_gon
     gon.current_customer = current_customer
     gon.locale = I18n.locale
     gon.root_localize_path = root_localize_path
-    gon.request.host = request.host
   end
 
   def handle_unverified_request
