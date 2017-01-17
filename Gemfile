@@ -38,7 +38,7 @@ end
 group :assets do
   gem 'coffee-rails'
   gem 'uglifier'
-  gem 'execjs'
+  gem 'execjs', '~> 2.2'
   gem 'therubyracer'
 end
 
@@ -90,3 +90,4 @@ gem 'puma', '~> 3.6'
 gem 'rails-footnotes', '~> 4.0'
 gem 'paypal-express', '~> 0.8.1'
 gem 'kaminari'
+gem 'twitter-bootstrap-rails', '~> 3.2', '>= 3.2.2'
