@@ -11,6 +11,8 @@ class ApplicationController < ActionController::Base
 
   #before_filter :set_cache_buster
 
+  before_filter :check_if_is_mobile_devise?
+
   layout :layout_by_resource
 
   def set_gon
@@ -148,6 +150,10 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def check_if_is_mobile_devise?
+    redirect_to "#{root_path}/#{I18n.default_locale}" if request.user_agent =~ /Mobile|webOS/
+  end
 
   def check_request?
     request.ssl? ? @dynamic_link = 'https://yandex.st/swfobject/2.2/swfobject.min.js' : @dynamic_link = 'http://yandex.st/swfobject/2.2/swfobject.min.js'
