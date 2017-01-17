@@ -1,35 +1,43 @@
+<% if request.user_agent =~ /Mobile|webOS/ %>
+
+
+
+<% else %>
 
   <% if params[:kind] != :adult && @carousels && @carousels.size > 0 %>
-  <div id="movies_banners<%= @carousels.size %>">
-    <% @carousels.each do |carousel| %>
-      <% if params[:kind] == :normal %>
-        <% cache("normal_carousel_top_#{I18n.locale}", :expires_in => 1.hour) do %>
-          <%= link_to image_tag(carousel.image, :alt => carousel.title(I18n.locale)), carousel_path(carousel) %>
-        <% end %>
-      <% elsif params[:kind] == :adult %>
-        <% cache("adult_carousel_top_#{I18n.locale}", :expires_in => 1.hour) do %>
-          <%= link_to image_tag(carousel.image, :alt => carousel.title(I18n.locale)), carousel_path(carousel) %>
+    <div id="movies_banners<%= @carousels.size %>">
+      <% @carousels.each do |carousel| %>
+        <% if params[:kind] == :normal %>
+          <% cache("normal_carousel_top_#{I18n.locale}", :expires_in => 1.hour) do %>
+            <%= link_to image_tag(carousel.image, :alt => carousel.title(I18n.locale)), carousel_path(carousel) %>
+          <% end %>
+        <% elsif params[:kind] == :adult %>
+          <% cache("adult_carousel_top_#{I18n.locale}", :expires_in => 1.hour) do %>
+            <%= link_to image_tag(carousel.image, :alt => carousel.title(I18n.locale)), carousel_path(carousel) %>
+          <% end %>
         <% end %>
       <% end %>
-    <% end %>
-  </div>
-  <% end %>
-  <!--   ==============   MAIN CONTENT   ==============   -->
-  <% if params[:package].nil? && params[:concerns] != :productable && params[:belgium].blank? %>
-  <div id="all">
-      <%= render :partial => 'products/index/hp' %>
-    <div class="clear"></div>
-    <div id="subscribe-wrap">
-      <%= link_to image_tag("promotions/#{I18n.locale}/bannerpromo-playstation.jpg", :size => '942x188' ), info_path(:page_name => t('routes.infos.params.playstation')) %>
     </div>
-    <div id='ps'><%= t('home.index.lists.playstation').html_safe %></div>
-
-  </div>
-  <% else %>
-  <div id="all">
-      <%= render :partial => 'products/index/all' %>
-  </div>
-
-  <div id="toTop"><%= t('.back') %></div>
   <% end %>
-  <!--   ==============   END MAIN CONTENT   ==============   -->
+
+  <% if params[:package].nil? && params[:concerns] != :productable && params[:belgium].blank? %>
+
+    <div id="all">
+      <%= render :partial => 'products/index/hp' %>
+      <div class="clear"></div>
+      <div id="subscribe-wrap">
+        <%= link_to image_tag("promotions/#{I18n.locale}/bannerpromo-playstation.jpg", :size => '942x188' ), info_path(:page_name => t('routes.infos.params.playstation')) %>
+      </div>
+    <div id='ps'><%= t('home.index.lists.playstation').html_safe %></div>
+  </div>
+
+  <% else %>
+
+    <div id="all">
+      <%= render :partial => 'products/index/all' %>
+    </div>
+
+    <div id="toTop"><%= t('.back') %></div>
+  <% end %>
+
+<% end %>

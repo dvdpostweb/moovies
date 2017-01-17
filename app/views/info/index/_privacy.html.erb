@@ -1,4 +1,11 @@
-<div id="content_info">
-  <div id="title"><strong><%= t '.title' %></strong> </div>
-  <%= t('.info').html_safe %>
-</div>
+<% if request.user_agent =~ /Mobile|webOS/ %>
+  <div class="panel panel-default">
+    <div class="panel-heading"><%= t '.title' %></div>
+    <div class="panel-body"><%= t('.info').html_safe %></div>
+  </div>
+<% else %>
+  <div id="content_info">
+    <div id="title"><strong><%= t '.title' %></strong> </div>
+    <%= t('.info').html_safe %>
+  </div>
+<% end %>
