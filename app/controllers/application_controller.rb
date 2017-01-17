@@ -11,14 +11,19 @@ class ApplicationController < ActionController::Base
 
   #before_filter :set_cache_buster
 
-  before_filter :check_if_is_mobile_devise?
-
   layout :layout_by_resource
+
+  def redirect_with_locale_if_is_mobile
+    if ((request.user_agent =~ /Mobile|webOS/) && (Rails.env.staging? || Rails.env.production?)) 
+      redirect_to "#{request.host}/#{I18n.default_locale}"
+    end
+  end
 
   def set_gon
     gon.current_customer = current_customer
     gon.locale = I18n.locale
     gon.root_localize_path = root_localize_path
+    gon.request.host = request.host
   end
 
   def handle_unverified_request
@@ -150,10 +155,6 @@ class ApplicationController < ActionController::Base
   end
 
   private
-
-  def check_if_is_mobile_devise?
-    redirect_to "#{root_path}/#{I18n.default_locale}" if request.user_agent =~ /Mobile|webOS/
-  end
 
   def check_request?
     request.ssl? ? @dynamic_link = 'https://yandex.st/swfobject/2.2/swfobject.min.js' : @dynamic_link = 'http://yandex.st/swfobject/2.2/swfobject.min.js'
