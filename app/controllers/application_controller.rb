@@ -78,10 +78,8 @@ class ApplicationController < ActionController::Base
       'promo'
     elsif params[:controller] == 'errors'
       'errors'
-    elsif request.user_agent =~ /Mobile|webOS/ && params[:locale].present?
+    elsif request.user_agent =~ /Mobile|webOS/
       'mobile/mobile'
-    elsif !params[:locale].present?
-      'circle'
     else
       "application"
     end
