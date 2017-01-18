@@ -110,35 +110,39 @@
         </div>
       </div>
 
-      <% if customer_signed_in? %>
-        <% @recommendations = ActiveRecord::Base.connection.exec_query %Q{CALL sp_movie_to_movie(#{current_customer.to_param}, #{@product.imdb_id})} %>
-      <% else %>
-        <% @recommendations = ActiveRecord::Base.connection.exec_query %Q{CALL sp_movie_to_movie(#{0}, #{@product.imdb_id})} %>
-      <% end %>
-      <% ActiveRecord::Base.clear_active_connections! %>
-      
-      <% if @recommendations.any? %>
-      <hr>
-      <div id="ca-container" class="ca-container">
-        <div class="title">
-          <h1 style="text-align: left"><%= t("recommendations_show") %></h1>
-        </div>
-        <div class="ca-wrapper" style="overflow: hidden;">
-          <% @recommendations.each do |r| %>
-          <div class="ca-item ca-item-1" style="position: absolute; left: 0px;">
-            <div class="content">
-              <% if params[:kind].present? && params[:kind] == :adult %>
-                <a href="<%= product_path(:id => r[ "products_id" ]) %>" class="cover"><img src="<%= "http://www.dvdpost.be/imagesx/#{r[ "image" ]}" %>" alt="Smiley face" height="217" width="145"></a>
-              <% else %>
-                <a href="<%= product_path(:id => r[ "products_id" ]) %>" class="cover"><img src="<%= "http://www.dvdpost.be/images/#{r[ "image" ]}" %>" alt="Smiley face" height="217" width="145"></a>
-              <% end %>
-            </div>
-          </div>
-          <% end %>
+      <% unless Rails.env.development? %>
 
+        <% if customer_signed_in? %>
+          <% @recommendations = ActiveRecord::Base.connection.exec_query %Q{CALL sp_movie_to_movie(#{current_customer.to_param}, #{@product.imdb_id})} %>
+        <% else %>
+          <% @recommendations = ActiveRecord::Base.connection.exec_query %Q{CALL sp_movie_to_movie(#{0}, #{@product.imdb_id})} %>
+        <% end %>
+        <% ActiveRecord::Base.clear_active_connections! %>
+
+        <% if @recommendations.any? %>
+        <hr>
+        <div id="ca-container" class="ca-container">
+          <div class="title">
+            <h1 style="text-align: left"><%= t("recommendations_show") %></h1>
+          </div>
+          <div class="ca-wrapper" style="overflow: hidden;">
+            <% @recommendations.each do |r| %>
+            <div class="ca-item ca-item-1" style="position: absolute; left: 0px;">
+              <div class="content">
+                <% if params[:kind].present? && params[:kind] == :adult %>
+                  <a href="<%= product_path(:id => r[ "products_id" ]) %>" class="cover"><img src="<%= "http://www.dvdpost.be/imagesx/#{r[ "image" ]}" %>" alt="Smiley face" height="217" width="145"></a>
+                <% else %>
+                  <a href="<%= product_path(:id => r[ "products_id" ]) %>" class="cover"><img src="<%= "http://www.dvdpost.be/images/#{r[ "image" ]}" %>" alt="Smiley face" height="217" width="145"></a>
+                <% end %>
+              </div>
+            </div>
+            <% end %>
+
+          </div>
         </div>
-      </div>
-      <hr>
+        <hr>
+        <% end %>
+
       <% end %>
 
       <%= render :partial => 'products/show/critics', :locals => {:product => @product, :reviews_count => @reviews_count, :reviews => @reviews, :review_sort => @review_sort, :product_title => @product_title, :source => @source, :response_id => @response_id} %>

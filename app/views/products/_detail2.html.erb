@@ -1,153 +1,178 @@
-<% product = detail2 %>
-<% data = product.description_data(true) %>
-<% product_title = data[:title] %>
-<% product_image = data[:image] %>
-<% div_id = "#{product.id}#{Random.rand(1000)}"%>
-<% if product.vod_online_be.size != 0 || view_mode == view_mode%>
-<div class="ca-item ca-item-<%= detail2_counter + 1 %>">
-  <div class="content">
-    <% cache(product.id, :expires_in => 2.hour) do %>
-      <%= "<span class='hd'></span>".html_safe if product.hd?(session[:country_id]) %>
-    <% end %>
-    <% image = image_tag(product.image, :width => 145, :height => 217) rescue "<p>No image</p>" %>
-    <%= link_to image, product_path(:id => product.to_param, :source => source), 'data-url' => product_data_path(:product_id => product.id, :source => source, :response_id => @response_id, :div_id => div_id), :class => :cover %>
-    <div class="tooltips" style="display:none">
-      <% if customer_signed_in? && (current_customer) %>
-        <% unless (current_customer.unlimted_subscriber? || current_customer.dont_have_credits?) %>
-          <div class=<%= params[:kind] == :adult ? ("footer-pink-header") : ("footer-green-header") %>>
-            <% if current_customer.abo_type_id == 6 && current_customer.activation_discount_code_type == "A" && Mobistar.find_by_activation_id(current_customer.activation_discount_code_id) %>
-              <% if current_customer.tvod_free == 9 %>
-                <label><%= t('products.show.product.header_mb_1').html_safe %> (<u><%= link_to t('products.show.product.popup4').html_safe, info_path(:page_name => t('routes.infos.params.alacarte')) %></u>)</label>
-              <% elsif current_customer.tvod_free == 6 %>
-                <label><%= t('products.show.product.header_mb_2').html_safe %> (<u><%= link_to t('products.show.product.popup4').html_safe, info_path(:page_name => t('routes.infos.params.alacarte')) %></u>)</label>
-              <% elsif current_customer.tvod_free == 3 %>
-                <label><%= t('products.show.product.header_mb_3').html_safe %> (<u><%= link_to t('products.show.product.popup4').html_safe, info_path(:page_name => t('routes.infos.params.alacarte')) %></u>)</label>
-              <% elsif current_customer.tvod_free > 9 %>
-                <% if I18n.locale == :fr %>
-                  <label><%= "Vous avez encore <strong>#{current_customer.tvod_free / 3} film(s)</strong> à la Carte offert(s)".html_safe %> (<%= link_to t('products.show.product.popup4').html_safe, info_path(:page_name => t('routes.infos.params.alacarte')) %>)</label>
-                <% elsif I18n.locale == :nl %>
-                  <label><%= "U kan nog <strong>#{current_customer.tvod_free / 3} à la carte film(s)</strong> gratis bekijken".html_safe %> (<%= link_to t('products.show.product.popup4').html_safe, info_path(:page_name => t('routes.infos.params.alacarte')) %>)</label>
-                <% elsif I18n.locale == :en %>
-                  <label><%= "You can still watch <strong>#{current_customer.tvod_free / 3} movie(s)</strong> for free".html_safe %> (<%= link_to t('products.show.product.popup4').html_safe, info_path(:page_name => t('routes.infos.params.alacarte')) %>)</label>
-                <% end %>
-              <% end %>
-            <% else %>
-              <label><%= t('products.show.product.tvod_free', :tvod_free => current_customer.tvod_free).html_safe %>
-                <% unless current_customer.unlimted_subscriber? %>
-                  <% if current_customer.tvod_only? %>
-                    <%= link_to info_path(:page_name => t('routes.infos.params.alacarte')) do %>
-                    (<label><%= t('products.show.product.popup4').html_safe %></label>)
-                    <% end %>
-                  <% elsif current_customer.plush_la_carte_subscriber? %>
-                    (<label onclick='jQuery.facebox("<%= escape_javascript(render(:partial => 'products/tvod_credits_only', :locals => {:product => product, :season_id => product.season_id, :episode_id => product.episode_id, :source => @source})) %>");'><%= t('products.show.product.popup4').html_safe %></label>)
-                  <% end %>
-                <% end %>
-            <% end %>
-          </div>
-        <% end %>
-      <% end %>
-      <div class="main-part">
-        <p class="tooltips_title head-title"><%= product.smart_title %> (<%= product.year %>)</p>
-        <p class="tooltips_rating stars">
-          <% cache("products_detail2_#{product.id}", :expires_in => 1.hour) do %>
-            <%= render :partial => 'products/rating', :locals => {:product => product, :background => @rating_color, :size => :long, :source => @source, :response_id => @response_id} %>
-          <% end %>
-        </p>
-        <% if customer_signed_in? %>
-          <% if current_customer.unlimted_subscriber? %>
-            <% if product.tvod? %>
-              <% if product.streaming_products.any? %>
-                <% if current_customer.tvod_free > 0 %>
-                  <p class="tooltips_title currency"><%= product.streaming_products.first.tvod_credits %> credits</p>
-                <% else %>
-                  <p class="tooltips_title currency"><%= product.streaming_products.first.ppv_price %>€</p>
-                <% end %>
-              <% end %>
-            <% end %>
-          <% elsif current_customer.plush_la_carte_subscriber? || current_customer.customers_abo_type == 6 %>
-            <% unless ((current_customer.abo_type_id == 6 && current_customer.activation_discount_code_type == "A" && Mobistar.find_by_activation_id(current_customer.activation_discount_code_id)  && current_customer.tvod_free > 0) || (current_customer.unlimted_subscriber? && product.svod?)) %>
-              <% if product.streaming_products.any? %>
-                <% if current_customer.customers_abo_type == 6 && current_customer.tvod_free == 0 %>
-                  <p class="tooltips_title currency"><%= product.streaming_products.first.tvod_price %>€</p>
-                <% elsif current_customer.customers_abo_type == 6 && current_customer.tvod_free > 0 %>
-                  <p class="tooltips_title currency"><%= product.streaming_products.first.tvod_credits %> credits</p>
-                <% elsif current_customer.plush_la_carte_subscriber? %>
-                  <p class="tooltips_title currency"><%= product.streaming_products.first.tvod_credits %> credits</p>
-                <% end %>
-              <% end %>
-            <% end %>
-          <% end %>
-        <% else %>
-          <% if product.streaming_products.any? %>
-            <p class="tooltips_title currency"><%= product.streaming_products.first.tvod_price %>€</p>
-          <% else %>
-            </br>
-          <% end %>
-        <% end %>
-        <% unless customer_signed_in? %>
-          <% if product.streaming_products.any? %>
-            <p class="tooltips_title sub-title"><%= t('products.show.product.popup_chose')%> <%= product.streaming_products.first.ppv_price %>€ <%= t('products.show.product.popup_via') %> <u><%= link_to t('products.show.product.popup2'), info_path(:page_name => t('routes.infos.params.alacarte')) %></u></p>
-          <% end %>
-        <% end %>
-        <% if customer_signed_in? %>
-          <% unless current_customer.abo_type_id == 6 && current_customer.activation_discount_code_type == "A" && Mobistar.find_by_activation_id(current_customer.activation_discount_code_id)  && current_customer.tvod_free > 0 %>
-            <% if product.streaming_products.any? %>
-              <% unless current_customer.unlimted_subscriber? || current_customer.plush_la_carte_subscriber? %>
-                <p class="tooltips_title sub-title"><%= t('products.show.product.popup_chose')%> <%= product.streaming_products.first.ppv_price %>€ <%= t('products.show.product.popup_via') %> <u><%= link_to t('products.show.product.popup2'), info_path(:page_name => t('routes.infos.params.alacarte')) %></u></p>
-              <% end %>
-            <% end %>
-          <% end %>
-        <% end %>
-        <%= render :partial => 'products/streaming',  :locals => {:product => product, :source => @source, :popup => false} %>
-        <p class="tooltips_description"><%= truncate_html((data[:description].text rescue '...'), :length => 500) %></p>
-        <div class="tooltips_other" id='<%= div_id %>'>loading</div>
+<% if request.user_agent =~ /Mobile|webOS/ %>
+
+  <% product = detail2 %>
+  <% data = product.description_data(true) %>
+  <% product_title = data[:title] %>
+  <% product_image = data[:image] %>
+
+  <div class="row">
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+        <!--<img src="..." alt="...">-->
+        <%= image_tag(product.image, :alt => product.smart_title, :width => 145, :height => 217) rescue "<p>No image</p>" %>
+        <div class="caption">
+          <h4><strong><%= product.smart_title %> (<%= product.year %>)</strong></h4>
+          <p><%= truncate_html((data[:description].text rescue '...'), :length => 150) %></p>
+          <p><button type="button" class="btn btn-success btn-block">Button 1</button></p>
+        </div>
       </div>
-      <% unless (customer_signed_in? && current_customer.unlimted_subscriber?) %>
-        <% if product.streaming_products.any? %>
-        <div class=<%= params[:kind] == :adult ? ("footer-pink") : ("footer-green") %>>
-          <% if customer_signed_in? %>
-            <% if current_customer.tvod_only? %>
-              <% if (current_customer.abo_type_id == 6 && current_customer.activation_discount_code_type == "A" && Mobistar.find_by_activation_id(current_customer.activation_discount_code_id)  && current_customer.tvod_free > 0) %>
-                <%= link_to info_path(:page_name => t('routes.infos.params.alacarte')) do %>
-                  <label><u><%= t('products.show.product.popup4').html_safe %></u></label>
+    </div>
+  </div>
+
+<% else %>
+
+  <% product = detail2 %>
+  <% data = product.description_data(true) %>
+  <% product_title = data[:title] %>
+  <% product_image = data[:image] %>
+  <% div_id = "#{product.id}#{Random.rand(1000)}"%>
+  <% if product.vod_online_be.size != 0 || view_mode == view_mode%>
+  <div class="ca-item ca-item-<%= detail2_counter + 1 %>">
+    <div class="content">
+      <% cache(product.id, :expires_in => 2.hour) do %>
+        <%= "<span class='hd'></span>".html_safe if product.hd?(session[:country_id]) %>
+      <% end %>
+      <% image = image_tag(product.image, :width => 145, :height => 217) rescue "<p>No image</p>" %>
+      <%= link_to image, product_path(:id => product.to_param, :source => source), 'data-url' => product_data_path(:product_id => product.id, :source => source, :response_id => @response_id, :div_id => div_id), :class => :cover %>
+      <div class="tooltips" style="display:none">
+        <% if customer_signed_in? && (current_customer) %>
+          <% unless (current_customer.unlimted_subscriber? || current_customer.dont_have_credits?) %>
+            <div class=<%= params[:kind] == :adult ? ("footer-pink-header") : ("footer-green-header") %>>
+              <% if current_customer.abo_type_id == 6 && current_customer.activation_discount_code_type == "A" && Mobistar.find_by_activation_id(current_customer.activation_discount_code_id) %>
+                <% if current_customer.tvod_free == 9 %>
+                  <label><%= t('products.show.product.header_mb_1').html_safe %> (<u><%= link_to t('products.show.product.popup4').html_safe, info_path(:page_name => t('routes.infos.params.alacarte')) %></u>)</label>
+                <% elsif current_customer.tvod_free == 6 %>
+                  <label><%= t('products.show.product.header_mb_2').html_safe %> (<u><%= link_to t('products.show.product.popup4').html_safe, info_path(:page_name => t('routes.infos.params.alacarte')) %></u>)</label>
+                <% elsif current_customer.tvod_free == 3 %>
+                  <label><%= t('products.show.product.header_mb_3').html_safe %> (<u><%= link_to t('products.show.product.popup4').html_safe, info_path(:page_name => t('routes.infos.params.alacarte')) %></u>)</label>
+                <% elsif current_customer.tvod_free > 9 %>
+                  <% if I18n.locale == :fr %>
+                    <label><%= "Vous avez encore <strong>#{current_customer.tvod_free / 3} film(s)</strong> à la Carte offert(s)".html_safe %> (<%= link_to t('products.show.product.popup4').html_safe, info_path(:page_name => t('routes.infos.params.alacarte')) %>)</label>
+                  <% elsif I18n.locale == :nl %>
+                    <label><%= "U kan nog <strong>#{current_customer.tvod_free / 3} à la carte film(s)</strong> gratis bekijken".html_safe %> (<%= link_to t('products.show.product.popup4').html_safe, info_path(:page_name => t('routes.infos.params.alacarte')) %>)</label>
+                  <% elsif I18n.locale == :en %>
+                    <label><%= "You can still watch <strong>#{current_customer.tvod_free / 3} movie(s)</strong> for free".html_safe %> (<%= link_to t('products.show.product.popup4').html_safe, info_path(:page_name => t('routes.infos.params.alacarte')) %>)</label>
+                  <% end %>
                 <% end %>
               <% else %>
-                <% if product.svod? %>
-                  <%= link_to info_path(:page_name => t('routes.infos.params.unlimited')) do %>
-                    <label><u><%= t('products.show.product.popup9').html_safe %></u></label>
+                <label><%= t('products.show.product.tvod_free', :tvod_free => current_customer.tvod_free).html_safe %>
+                  <% unless current_customer.unlimted_subscriber? %>
+                    <% if current_customer.tvod_only? %>
+                      <%= link_to info_path(:page_name => t('routes.infos.params.alacarte')) do %>
+                      (<label><%= t('products.show.product.popup4').html_safe %></label>)
+                      <% end %>
+                    <% elsif current_customer.plush_la_carte_subscriber? %>
+                      (<label onclick='jQuery.facebox("<%= escape_javascript(render(:partial => 'products/tvod_credits_only', :locals => {:product => product, :season_id => product.season_id, :episode_id => product.episode_id, :source => @source})) %>");'><%= t('products.show.product.popup4').html_safe %></label>)
+                    <% end %>
                   <% end %>
-                  <label><%= t('products.show.product.popup10').html_safe %></label>
-                <% end %>
-                <% if product.tvod? %>
-                  <%= link_to info_path(:page_name => t('routes.infos.params.alacarte')) do %>
-                    <label><u><%= t('products.show.product.popup6').html_safe %></u></label>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+        <div class="main-part">
+          <p class="tooltips_title head-title"><%= product.smart_title %> (<%= product.year %>)</p>
+          <p class="tooltips_rating stars">
+            <% cache("products_detail2_#{product.id}", :expires_in => 1.hour) do %>
+              <%= render :partial => 'products/rating', :locals => {:product => product, :background => @rating_color, :size => :long, :source => @source, :response_id => @response_id} %>
+            <% end %>
+          </p>
+          <% if customer_signed_in? %>
+            <% if current_customer.unlimted_subscriber? %>
+              <% if product.tvod? %>
+                <% if product.streaming_products.any? %>
+                  <% if current_customer.tvod_free > 0 %>
+                    <p class="tooltips_title currency"><%= product.streaming_products.first.tvod_credits %> credits</p>
+                  <% else %>
+                    <p class="tooltips_title currency"><%= product.streaming_products.first.ppv_price %>€</p>
                   <% end %>
-                  <label><%= t('products.show.product.popup7').html_safe %> <b><%= product.streaming_products.first.ppv_price %>€</b></label>
                 <% end %>
               <% end %>
-            <% elsif current_customer.plush_la_carte_subscriber? %>
-              <label onclick='jQuery.facebox("<%= escape_javascript(render(:partial => 'products/tvod_credits_only', :locals => {:product => product, :season_id => product.season_id, :episode_id => product.episode_id, :source => @source})) %>");'><%= t('products.show.product.popup4').html_safe %></label>
+            <% elsif current_customer.plush_la_carte_subscriber? || current_customer.customers_abo_type == 6 %>
+              <% unless ((current_customer.abo_type_id == 6 && current_customer.activation_discount_code_type == "A" && Mobistar.find_by_activation_id(current_customer.activation_discount_code_id)  && current_customer.tvod_free > 0) || (current_customer.unlimted_subscriber? && product.svod?)) %>
+                <% if product.streaming_products.any? %>
+                  <% if current_customer.customers_abo_type == 6 && current_customer.tvod_free == 0 %>
+                    <p class="tooltips_title currency"><%= product.streaming_products.first.tvod_price %>€</p>
+                  <% elsif current_customer.customers_abo_type == 6 && current_customer.tvod_free > 0 %>
+                    <p class="tooltips_title currency"><%= product.streaming_products.first.tvod_credits %> credits</p>
+                  <% elsif current_customer.plush_la_carte_subscriber? %>
+                    <p class="tooltips_title currency"><%= product.streaming_products.first.tvod_credits %> credits</p>
+                  <% end %>
+                <% end %>
+              <% end %>
             <% end %>
           <% else %>
-            <% if product.svod? %>
-              <%= link_to info_path(:page_name => t('routes.infos.params.unlimited')) do %>
-                <label><u><%= t('products.show.product.popup9').html_safe %></u></label>
-              <% end %>
-              <label><%= t('products.show.product.popup10').html_safe %></label>
-            <% end %>
-            <% if product.tvod? %>
-              <%= link_to info_path(:page_name => t('routes.infos.params.alacarte')) do %>
-                <label><u><%= t('products.show.product.popup6').html_safe %></u></label>
-              <% end %>
-              <label><%= t('products.show.product.popup7').html_safe %> <b><%= product.streaming_products.first.ppv_price %>€</b></label>
+            <% if product.streaming_products.any? %>
+              <p class="tooltips_title currency"><%= product.streaming_products.first.tvod_price %>€</p>
+            <% else %>
+              </br>
             <% end %>
           <% end %>
-  			</div>
+          <% unless customer_signed_in? %>
+            <% if product.streaming_products.any? %>
+              <p class="tooltips_title sub-title"><%= t('products.show.product.popup_chose')%> <%= product.streaming_products.first.ppv_price %>€ <%= t('products.show.product.popup_via') %> <u><%= link_to t('products.show.product.popup2'), info_path(:page_name => t('routes.infos.params.alacarte')) %></u></p>
+            <% end %>
+          <% end %>
+          <% if customer_signed_in? %>
+            <% unless current_customer.abo_type_id == 6 && current_customer.activation_discount_code_type == "A" && Mobistar.find_by_activation_id(current_customer.activation_discount_code_id)  && current_customer.tvod_free > 0 %>
+              <% if product.streaming_products.any? %>
+                <% unless current_customer.unlimted_subscriber? || current_customer.plush_la_carte_subscriber? %>
+                  <p class="tooltips_title sub-title"><%= t('products.show.product.popup_chose')%> <%= product.streaming_products.first.ppv_price %>€ <%= t('products.show.product.popup_via') %> <u><%= link_to t('products.show.product.popup2'), info_path(:page_name => t('routes.infos.params.alacarte')) %></u></p>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+          <%= render :partial => 'products/streaming',  :locals => {:product => product, :source => @source, :popup => false} %>
+          <p class="tooltips_description"><%= truncate_html((data[:description].text rescue '...'), :length => 500) %></p>
+          <div class="tooltips_other" id='<%= div_id %>'>loading</div>
+        </div>
+        <% unless (customer_signed_in? && current_customer.unlimted_subscriber?) %>
+          <% if product.streaming_products.any? %>
+          <div class=<%= params[:kind] == :adult ? ("footer-pink") : ("footer-green") %>>
+            <% if customer_signed_in? %>
+              <% if current_customer.tvod_only? %>
+                <% if (current_customer.abo_type_id == 6 && current_customer.activation_discount_code_type == "A" && Mobistar.find_by_activation_id(current_customer.activation_discount_code_id)  && current_customer.tvod_free > 0) %>
+                  <%= link_to info_path(:page_name => t('routes.infos.params.alacarte')) do %>
+                    <label><u><%= t('products.show.product.popup4').html_safe %></u></label>
+                  <% end %>
+                <% else %>
+                  <% if product.svod? %>
+                    <%= link_to info_path(:page_name => t('routes.infos.params.unlimited')) do %>
+                      <label><u><%= t('products.show.product.popup9').html_safe %></u></label>
+                    <% end %>
+                    <label><%= t('products.show.product.popup10').html_safe %></label>
+                  <% end %>
+                  <% if product.tvod? %>
+                    <%= link_to info_path(:page_name => t('routes.infos.params.alacarte')) do %>
+                      <label><u><%= t('products.show.product.popup6').html_safe %></u></label>
+                    <% end %>
+                    <label><%= t('products.show.product.popup7').html_safe %> <b><%= product.streaming_products.first.ppv_price %>€</b></label>
+                  <% end %>
+                <% end %>
+              <% elsif current_customer.plush_la_carte_subscriber? %>
+                <label onclick='jQuery.facebox("<%= escape_javascript(render(:partial => 'products/tvod_credits_only', :locals => {:product => product, :season_id => product.season_id, :episode_id => product.episode_id, :source => @source})) %>");'><%= t('products.show.product.popup4').html_safe %></label>
+              <% end %>
+            <% else %>
+              <% if product.svod? %>
+                <%= link_to info_path(:page_name => t('routes.infos.params.unlimited')) do %>
+                  <label><u><%= t('products.show.product.popup9').html_safe %></u></label>
+                <% end %>
+                <label><%= t('products.show.product.popup10').html_safe %></label>
+              <% end %>
+              <% if product.tvod? %>
+                <%= link_to info_path(:page_name => t('routes.infos.params.alacarte')) do %>
+                  <label><u><%= t('products.show.product.popup6').html_safe %></u></label>
+                <% end %>
+                <label><%= t('products.show.product.popup7').html_safe %> <b><%= product.streaming_products.first.ppv_price %>€</b></label>
+              <% end %>
+            <% end %>
+    			</div>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
+
     </div>
 
   </div>
+  <% end %>
 
-</div>
 <% end %>
