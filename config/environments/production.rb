@@ -64,6 +64,9 @@ Moovies::Application.configure do
   alacarte.js
   tvod_only_payment_step.css
   halloween/halloween.css
+  mobile.js
+  mobile.css
+  bootstrap_and_overrides.css
   )
   #config.assets.precompile += %w( photobox.css )
 
