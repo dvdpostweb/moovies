@@ -1,5 +1,11 @@
 <% if request.user_agent =~ /Mobile|webOS/ %>
 
+  <% if Rails.env.development? %>
+
+    <h1>!!!!!!!!!!!!!!!!!!!!!!</h1>
+
+  <% end %>
+
 
 
 <% else %>
