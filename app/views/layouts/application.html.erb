@@ -48,6 +48,7 @@
 
   </head>
   <body id="<%= @body_id %>" class="<%= params[:kind] %> <%= current_customer ? :private : :public %> <%= I18n.locale %> <%= @body_class %>">
+    <!--<div class="se-pre-con"></div>-->
     <% cache("layouts_google_analytics", :expires_in => 1.hour) do %>
       <%= render :partial => 'layouts/google_analytics' %>
     <% end %>
