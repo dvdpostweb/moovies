@@ -40,7 +40,8 @@
 
 $(function() {
 
-  if (gon && gon.env == "staging" && window.location.pathname === "/") {
+  if (window.location.pathname === "/") {
+    $('body').hide();
     window.location.href = "/" + gon.locale;
   }
 
