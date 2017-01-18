@@ -1,6 +1,6 @@
 <% if request.user_agent =~ /Mobile|webOS/ %>
 
-  <% if Rails.env.development? || Rails.env.staging? %>
+  <% if Rails.env.production? %>
 
   <div class="jumbotron">
     <% if I18n.locale == :en %>
