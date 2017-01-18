@@ -1,14 +1,18 @@
-<div id="contact-wrap">
-  <%= render :partial => 'messages/menu', :locals => {:active_menu => 'contact'} if current_customer %>
-  <%= '<div id="tabs-content" class="private">'.html_safe if current_customer %>
-    <h3><%= t '.title' %></h3>
+<% if request.user_agent =~ /Mobile|webOS/ %>
 
-    <div id="tabs-content" class="public">
-    	<div id="contact">
-    		<%= render :partial => 'phone_requests/new/info' %>
-    		<%= render :partial => 'phone_requests/new/form', :locals => {:phone_request => @phone_request} %>
-    		<div class="clear"></div>
-    	</div>
-    </div>
-  <%= '</div>'.html_safe if current_customer %>
-</div>
+<% else %>
+  <div id="contact-wrap">
+    <%= render :partial => 'messages/menu', :locals => {:active_menu => 'contact'} if current_customer %>
+    <%= '<div id="tabs-content" class="private">'.html_safe if current_customer %>
+      <h3><%= t '.title' %></h3>
+
+      <div id="tabs-content" class="public">
+      	<div id="contact">
+      		<%= render :partial => 'phone_requests/new/info' %>
+      		<%= render :partial => 'phone_requests/new/form', :locals => {:phone_request => @phone_request} %>
+      		<div class="clear"></div>
+      	</div>
+      </div>
+    <%= '</div>'.html_safe if current_customer %>
+  </div>
+<% end %>

@@ -1,29 +1,50 @@
-<div id="faq">
-  <ul id="faq-nav">
-    <% @faqs.each do |faq| %>
-      <li>
-        <a href="#" class='menu_faq'>
-         <%= t(".cat_#{faq.to_param}") %>
-        </a>
-        <ul style='display:none'>
-            <% faq.nb_questions.times do |i| %>          
-              <li>
-                <a href="#" class="q" id="<%= "q#{faq.to_param}_#{(i+1)}" %>"><%= t(".q#{faq.to_param}_#{(i+1)}") %></a>
-              </li>
-            <% end %>
-        </ul>
-      </li>
-    <% end %>
-  </ul>
+<% if request.user_agent =~ /Mobile|webOS/ %>
+<!--
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
   <% @faqs.each do |faq| %>
-    <% faq.nb_questions.times do |i| %>
-      <div class="faq-answer" id ="<%= "r#{faq.to_param}_#{(i+1)}" %>" style="display:none">
-        <h3><%= t(".q#{faq.to_param}_#{(i+1)}") %></h3>
-        <div class="box">
-          <%= t(".r#{faq.to_param}_#{(i+1)}").html_safe %>
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="<%= t(".cat_#{faq.to_param}") %>">
+        <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#<%= t(".cat_#{faq.to_param}") %>" aria-expanded="true" aria-controls="<%= t(".cat_#{faq.to_param}") %>"><%= t(".cat_#{faq.to_param}") %></a></h4>
+      </div>
+      <div id="<%= t(".cat_#{faq.to_param}") %>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="<%= t(".cat_#{faq.to_param}") %>">
+        <div class="panel-body">
+          <% faq.nb_questions.times do |i| %>
+            <%= "q#{faq.to_param}_#{(i+1)}" %>"><%= t(".q#{faq.to_param}_#{(i+1)}") %>
+          <% end %>
         </div>
       </div>
-    <% end %>
+    </div>
   <% end %>
-  <div class="clear"></div>
 </div>
+-->
+<% else %>
+  <div id="faq">
+    <ul id="faq-nav">
+      <% @faqs.each do |faq| %>
+        <li>
+          <a href="#" class='menu_faq'>
+           <%= t(".cat_#{faq.to_param}") %>
+          </a>
+          <ul style='display:none'>
+              <% faq.nb_questions.times do |i| %>
+                <li>
+                  <a href="#" class="q" id="<%= "q#{faq.to_param}_#{(i+1)}" %>"><%= t(".q#{faq.to_param}_#{(i+1)}") %></a>
+                </li>
+              <% end %>
+          </ul>
+        </li>
+      <% end %>
+    </ul>
+    <% @faqs.each do |faq| %>
+      <% faq.nb_questions.times do |i| %>
+        <div class="faq-answer" id ="<%= "r#{faq.to_param}_#{(i+1)}" %>" style="display:none">
+          <h3><%= t(".q#{faq.to_param}_#{(i+1)}") %></h3>
+          <div class="box">
+            <%= t(".r#{faq.to_param}_#{(i+1)}").html_safe %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+    <div class="clear"></div>
+  </div>
+<% end %>

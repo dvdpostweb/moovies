@@ -1,35 +1,60 @@
+<% if request.user_agent =~ /Mobile|webOS/ %>
+
+  <% if Rails.env.development? || Rails.env.staging? %>
+
+  <div class="jumbotron">
+    <% if I18n.locale == :en %>
+      <h1>Hello</h1>
+      <p>Mobile version of the app is in active development, so asks you please to then use the old version. Thank you. Sincerely Plush development team.</p>
+    <% elsif I18n.locale == :nl %>
+      <h1>Hallo</h1>
+      <p>Mobiele versie van de app is in actieve ontwikkeling, dus vraagt u behagen dan gebruik maken van de oude versie. Dank je. Met vriendelijke groet Plus development team.</p>
+    <% elsif I18n.locale == :fr %>
+      <h1>Bonjour</h1>
+      <p>La version mobile de l'application est en développement actif, donc vous demande s'il vous plaît d'utiliser l'ancienne version. Je vous remercie. Sincerely Plus équipe de développement.</p>
+    <% end %>
+ </div>
+
+  <% end %>
+
+
+
+<% else %>
 
   <% if params[:kind] != :adult && @carousels && @carousels.size > 0 %>
-  <div id="movies_banners<%= @carousels.size %>">
-    <% @carousels.each do |carousel| %>
-      <% if params[:kind] == :normal %>
-        <% cache("normal_carousel_top_#{I18n.locale}", :expires_in => 1.hour) do %>
-          <%= link_to image_tag(carousel.image, :alt => carousel.title(I18n.locale)), carousel_path(carousel) %>
-        <% end %>
-      <% elsif params[:kind] == :adult %>
-        <% cache("adult_carousel_top_#{I18n.locale}", :expires_in => 1.hour) do %>
-          <%= link_to image_tag(carousel.image, :alt => carousel.title(I18n.locale)), carousel_path(carousel) %>
+    <div id="movies_banners<%= @carousels.size %>">
+      <% @carousels.each do |carousel| %>
+        <% if params[:kind] == :normal %>
+          <% cache("normal_carousel_top_#{I18n.locale}", :expires_in => 1.hour) do %>
+            <%= link_to image_tag(carousel.image, :alt => carousel.title(I18n.locale)), carousel_path(carousel) %>
+          <% end %>
+        <% elsif params[:kind] == :adult %>
+          <% cache("adult_carousel_top_#{I18n.locale}", :expires_in => 1.hour) do %>
+            <%= link_to image_tag(carousel.image, :alt => carousel.title(I18n.locale)), carousel_path(carousel) %>
+          <% end %>
         <% end %>
       <% end %>
-    <% end %>
-  </div>
-  <% end %>
-  <!--   ==============   MAIN CONTENT   ==============   -->
-  <% if params[:package].nil? && params[:concerns] != :productable && params[:belgium].blank? %>
-  <div id="all">
-      <%= render :partial => 'products/index/hp' %>
-    <div class="clear"></div>
-    <div id="subscribe-wrap">
-      <%= link_to image_tag("promotions/#{I18n.locale}/bannerpromo-playstation.jpg", :size => '942x188' ), info_path(:page_name => t('routes.infos.params.playstation')) %>
     </div>
-    <div id='ps'><%= t('home.index.lists.playstation').html_safe %></div>
-
-  </div>
-  <% else %>
-  <div id="all">
-      <%= render :partial => 'products/index/all' %>
-  </div>
-
-  <div id="toTop"><%= t('.back') %></div>
   <% end %>
-  <!--   ==============   END MAIN CONTENT   ==============   -->
+
+  <% if params[:package].nil? && params[:concerns] != :productable && params[:belgium].blank? %>
+
+    <div id="all">
+      <%= render :partial => 'products/index/hp' %>
+      <div class="clear"></div>
+      <div id="subscribe-wrap">
+        <%= link_to image_tag("promotions/#{I18n.locale}/bannerpromo-playstation.jpg", :size => '942x188' ), info_path(:page_name => t('routes.infos.params.playstation')) %>
+      </div>
+    <div id='ps'><%= t('home.index.lists.playstation').html_safe %></div>
+  </div>
+
+  <% else %>
+
+    <div id="all">
+      <%= render :partial => 'products/index/all' %>
+    </div>
+
+    <div id="toTop"><%= t('.back') %></div>
+  <% end %>
+
+<% end %>
