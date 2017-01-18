@@ -1,6 +1,6 @@
 <% if request.user_agent =~ /Mobile|webOS/ %>
 
-  <% if Rails.env.development? %>
+  <% if Rails.env.development? || Rails.env.staging? %>
 
   <div class="jumbotron">
     <h1>Hello, world!</h1>
