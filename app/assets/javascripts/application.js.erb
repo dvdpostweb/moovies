@@ -38,13 +38,15 @@
 //= require green_banner
 //= require jquery.infinitescroll
 
-$(function() {
+//$(function() {
+$(window).load(function(){
 
   if (window.location.pathname === "/") {
-    //$("#wrap, #footer, #lang").remove();
-    //window.location.href = "/" + gon.locale;
-    document.write('<script type="text/undefined">');
     window.location.href = "/" + gon.locale;
+  }
+
+  if (gon && gon.locale && window.location.pathname !== "/") {
+    $('body').show();
   }
 
     var options_norm = {
