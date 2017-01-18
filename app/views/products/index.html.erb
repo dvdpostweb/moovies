@@ -3,9 +3,16 @@
   <% if Rails.env.development? || Rails.env.staging? %>
 
   <div class="jumbotron">
-    <h1>Hello, world!</h1>
-    <p>...</p>
-    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+    <% if I18n.locale == :en %>
+      <h1>Hello</h1>
+      <p>Mobile version of the app is in active development, so asks you please to then use the old version. Thank you. Sincerely Plush development team.</p>
+    <% elsif I18n.locale == :nl %>
+      <h1>Hallo</h1>
+      <p>Mobiele versie van de app is in actieve ontwikkeling, dus vraagt u behagen dan gebruik maken van de oude versie. Dank je. Met vriendelijke groet Plus development team.</p>
+    <% elsif I18n.locale == :fr %>
+      <h1>Bonjour</h1>
+      <p>La version mobile de l'application est en développement actif, donc vous demande s'il vous plaît d'utiliser l'ancienne version. Je vous remercie. Sincerely Plus équipe de développement.</p>
+    <% end %>
  </div>
 
   <% end %>
