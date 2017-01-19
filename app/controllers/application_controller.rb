@@ -73,7 +73,7 @@ class ApplicationController < ActionController::Base
 
   def layout_by_resource
     if devise_controller? and params[:controller] != 'customers/registrations'
-      if request.user_agent =~ /Mobile|webOS/
+      if ((request.user_agent =~ /Mobile|webOS/) || (request.user_agent =~ /Mobile|webOS/ && params[:controller] == 'customers/registrations'))
         'mobile/mobile'
       else
         "devise_layout"
