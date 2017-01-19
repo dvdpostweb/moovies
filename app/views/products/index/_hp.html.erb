@@ -1,50 +1,109 @@
 <% if request.user_agent =~ /Mobile|webOS/ %>
 
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingOne">
-      <h4 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><%= t('.alacarte') %></a>
-      </h4>
-    </div>
-    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-      <div class="panel-body">
-        <!--<#% cache("normal_products_index_hp_list_top_mobile_#{I18n.locale}", :expires_in => 15.minutes) do %>-->
-          <%= render :partial => 'products/index/hp_list', :locals => {:data => @top, :title => :top, :type => nil, :view_mode => nil, :source => 64, :belgium => nil} if @top.size > 5 && params[:kind] != :adult%>
-        <!--<#% end %>-->
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= t('.alacarte') %></h3>
+  </div>
+  <div class="panel-body">
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingOne">
+          <h4 class="panel-title">
+            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              Must See movies
+            </a>
+          </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body" data-spy="scroll">
+            <% cache("normal_products_index_hp_list_top_mobile_#{I18n.locale}", :expires_in => 15.minutes) do %>
+              <%= render :partial => 'products/index/hp_list', :locals => {:data => @top, :title => :top, :type => nil, :view_mode => nil, :source => 64, :belgium => nil} if @top.size > 5 && params[:kind] != :adult%>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingTwo">
+          <h4 class="panel-title">
+            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              Coming soon
+            </a>
+          </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            <% cache("normal_products_index_hp_list_tvod_soon_mobile_#{I18n.locale}", :expires_in => 15.minutes) do %>
+              <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_soon, :title => :tvod_soon, :type => :tvod, :view_mode => :soon, :source => 14, :belgium => nil} if @tvod_soon.size > 5 %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingThree">
+          <h4 class="panel-title">
+            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              Last added
+            </a>
+          </h4>
+        </div>
+        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            <% cache("normal_products_index_hp_list_tvod_last_mobile_#{I18n.locale}", :expires_in => 15.minutes) do %>
+              <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_last, :title => :tvod_last, :type => :tvod, :view_mode => :last_added, :source => 65, :belgium => nil} if @tvod_last.size > 5 %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingFour">
+          <h4 class="panel-title">
+            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+              Best rated
+            </a>
+          </h4>
+        </div>
+        <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+          <div class="panel-body">
+            <% cache("normal_nproducts_index_hp_list_tvod_best_rating_mobile_#{I18n.locale}", :expires_in => 15.minutes) do %>
+              <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_best_rating, :title => :tvod_best_rating, :type => :tvod, :view_mode => :best_rated, :source => 66, :belgium => nil} if @tvod_best_rating.size > 5 %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingFive">
+          <h4 class="panel-title">
+            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+              The most watched
+            </a>
+          </h4>
+        </div>
+        <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+          <div class="panel-body">
+            <% cache("normal_products_index_hp_list_tvod_most_view_mobile_#{I18n.locale}", :expires_in => 15.minutes) do %>
+              <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_most_view, :title => :tvod_most_view, :type => :tvod, :view_mode => :most_viewed, :source => 67, :belgium => nil} if @tvod_most_view.size > 5 %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingSix">
+          <h4 class="panel-title">
+            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+              Last chance
+            </a>
+          </h4>
+        </div>
+        <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+          <div class="panel-body">
+            <% cache("normal_products_index_hp_list_tvod_last_chance_mobile_#{I18n.locale}", :expires_in => 15.minutes) do %>
+              <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_last_chance, :title => :tvod_last_chance, :type => :tvod, :view_mode => :last_chance, :source => 68, :belgium => nil} if @tvod_last_chance.size > 5 %>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-
-<div class="panel panel-default">
-  <div class="panel-heading" role="tab" id="headingTwo">
-    <h4 class="panel-title">
-      <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-        Collapsible Group Item #2
-      </a>
-    </h4>
-  </div>
-  <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-    <div class="panel-body">
-      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-    </div>
-  </div>
-</div>
-<div class="panel panel-default">
-  <div class="panel-heading" role="tab" id="headingThree">
-    <h4 class="panel-title">
-      <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-        Collapsible Group Item #3
-      </a>
-    </h4>
-  </div>
-  <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-    <div class="panel-body">
-      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-    </div>
-  </div>
-</div>
 </div>
 
 <% else %>

@@ -73,7 +73,11 @@ class ApplicationController < ActionController::Base
 
   def layout_by_resource
     if devise_controller? and params[:controller] != 'customers/registrations'
-      "devise_layout"
+      if request.user_agent =~ /Mobile|webOS/
+        'mobile/mobile'
+      else
+        "devise_layout"
+      end
     elsif params[:controller] == 'promotions'
       'promo'
     elsif params[:controller] == 'errors'
