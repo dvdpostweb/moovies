@@ -1,4 +1,5 @@
 <% if request.user_agent =~ /Mobile|webOS/ %>
+<!--
   <% if Rails.env.production? %>
     <div class="jumbotron">
       <% if I18n.locale == :en %>
@@ -12,9 +13,9 @@
         <p>La version mobile de l'application est en développement actif, donc vous demande s'il vous plaît d'utiliser l'ancienne version. Je vous remercie. Sincerely Plus équipe de développement.</p>
       <% end %>
    </div>
- <% else %>
+ <% else %>-->
    <%= render :partial => 'products/index/hp' %>
- <% end %>
+ <!--<% end %>-->
 <% else %>
   <% if params[:kind] != :adult && @carousels && @carousels.size > 0 %>
     <div id="movies_banners<%= @carousels.size %>">
