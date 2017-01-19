@@ -15,7 +15,7 @@
           </h4>
         </div>
         <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-          <div class="panel-body" data-spy="scroll">
+          <div class="panel-body">
             <% cache("normal_products_index_hp_list_top_mobile_#{I18n.locale}", :expires_in => 15.minutes) do %>
               <%= render :partial => 'products/index/hp_list', :locals => {:data => @top, :title => :top, :type => nil, :view_mode => nil, :source => 64, :belgium => nil} if @top.size > 5 && params[:kind] != :adult%>
             <% end %>
