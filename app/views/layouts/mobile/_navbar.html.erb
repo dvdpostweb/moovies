@@ -17,7 +17,7 @@
 
         <li class="<%= "active" if params[:controller] == 'products' %>"><%= link_to t('.catalogue'), products_short_path() %></li>
         <% if current_customer %>
-          <li><%= link_to "#{t('.logout')} #{current_customer.email}", destroy_customer_session_path(:id => :logout, :method => :delete) %></li>
+          <li><%= link_to "Logout #{current_customer.email}", destroy_customer_session_path(:id => :logout, :method => :delete) %></li>
         <% end %>
         <!--<li><a href="#about">About</a></li>
         <li><a href="#contact">Contact</a></li>-->
