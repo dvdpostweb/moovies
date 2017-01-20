@@ -35,9 +35,11 @@
       </div>
       <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
         <div class="panel-body">
-          <ol class="breadcrumb">
-            <%= @product.categories.active(params[:kind]).collect{|category| "<li>#{link_to(category.name, category_products_path(:category_id => category))}</li>"}.join(', ').html_safe %>
-          </ol>
+          <ul class="list-group">
+            <%  @product.categories.each do |category| %>
+              <li class="list-group-item"><%= category.name %></li>
+            <% end %>
+          </ul>
         </div>
       </div>
     </div>
@@ -51,9 +53,11 @@
       </div>
       <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
         <div class="panel-body">
-          <ol class="breadcrumb">
-            <%= @product.actors.collect{|actor| "<li>#{link_to actor.name, actor_products_path(:actor_id => actor.to_param)}<li>"}.join(', ').html_safe %>
-          </ol>
+          <ul class="list-group">
+            <%= @product.actors.each do |actor| %>
+              <li class="list-group-item"><%= "#{actor.name}".html_safe %></li>
+            <% end %>
+          </ul>
         </div>
       </div>
     </div>
