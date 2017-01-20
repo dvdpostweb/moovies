@@ -28,5 +28,9 @@
   <% end %>
 </div>
 <% else %>
-  <%= link_to t('.add'), product_log_path(:product_id => product.id, :media => 'vod'), :class => "streaming_btn streaming_soon_btn facebox add" %>
+  <% if request.user_agent =~ /Mobile|webOS/ %>
+    <a href="<%= product_log_path(:product_id => product.id, :media => 'vod') %>"><button type="button" class="streaming_btn streaming_soon_btn facebox add btn btn-success btn-lg btn-block"><%= t('mobile.add_to_watchlist') %></button></a>
+  <% else %>
+    <%= link_to t('.add'), product_log_path(:product_id => product.id, :media => 'vod'), :class => "streaming_btn streaming_soon_btn facebox add" %>
+  <% end %>
 <% end %>
