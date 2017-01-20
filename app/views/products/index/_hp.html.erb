@@ -106,6 +106,66 @@
   </div>
 </div>
 
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= t('.unlimited') %></h3>
+  </div>
+  <div class="panel-body">
+
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingSeven">
+          <h4 class="panel-title">
+            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+              Last added
+            </a>
+          </h4>
+        </div>
+        <div id="collapseSeven" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingSeven">
+          <div class="panel-body">
+            <% cache("normal_products_index_hp_list_svod_last_mobile_#{I18n.locale}", :expires_in => 15.minutes) do %>
+              <%= render :partial => 'products/index/hp_list', :locals => {:data => @svod_last, :title => :svod_last, :type => :svod, :view_mode => :last_added, :source => 65, :belgium => nil} if @svod_last.size > 5 %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingEight">
+          <h4 class="panel-title">
+            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+              Best rated
+            </a>
+          </h4>
+        </div>
+        <div id="collapseEight" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingEight">
+          <div class="panel-body">
+            <% cache("normal_products_index_hp_list_svod_best_rating_mobile_#{I18n.locale}", :expires_in => 15.minutes) do %>
+              <%= render :partial => 'products/index/hp_list', :locals => {:data => @svod_best_rating, :title => :svod_best_rating, :type => :tvod, :view_mode => :best_rated, :source => 66, :belgium => nil} if @svod_best_rating.size > 5%>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingNine">
+          <h4 class="panel-title">
+            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+              The most watched
+            </a>
+          </h4>
+        </div>
+        <div id="collapseNine" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingNine">
+          <div class="panel-body">
+            <% cache("normal_products_index_hp_list_svod_most_view_mobile_#{I18n.locale}", :expires_in => 15.minutes) do %>
+              <%= render :partial => 'products/index/hp_list', :locals => {:data => @svod_most_view, :title => :svod_most_view, :type => :svod, :view_mode => :most_viewed, :source => 67, :belgium => nil} if @svod_most_view.size > 5 %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <% else %>
 
   <div class="loading_bar" style="display:none"><%= image_tag 'loading.gif' %></div>
