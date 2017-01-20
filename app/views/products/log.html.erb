@@ -1,1 +1,17 @@
-<%= render :partial => 'products/log' %>
+<% if request.user_agent =~ /Mobile|webOS/ %>
+<div class="well well-lg">
+  <div class="row">
+    <div class="col-sm-4 social-buttons">
+
+      <a href="/auth/facebook?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>;ACTION_TYPE=NORMAL;ORG_URL=<%= request.fullpath %>" class="btn btn-block btn-social btn-facebook">
+        <span class="fa fa-facebook"></span> <%= t('.social.network.fbconnect') %>
+      </a>
+      <a href="/auth/google_oauth2?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>;ACTION_TYPE=NORMAL;ORG_URL=<%= request.fullpath %>" class="btn btn-block btn-social btn-google">
+        <span class="fa fa-google"></span> <%= t('.social.network.google') %>
+      </a>
+    </div>
+  </div>
+</div>
+<% else %>
+  <%= render :partial => 'products/log' %>
+<% end %>
