@@ -54,9 +54,7 @@
       <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
         <div class="panel-body">
           <ul class="list-group">
-            <%= @product.actors.each do |actor| %>
-              <li class="list-group-item"><%= "#{actor.name}".html_safe %></li>
-            <% end %>
+            <li class="list-group-item"><%= @product.actors.collect{|actor| link_to actor.name, actor_products_path(:actor_id => actor.to_param) }.join(', ').html_safe %></li>
           </ul>
         </div>
       </div>
