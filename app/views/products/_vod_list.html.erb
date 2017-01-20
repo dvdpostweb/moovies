@@ -9,8 +9,11 @@
       <%= f.hidden_field :submit_id, :value => "vod_list_#{product.to_param}" %>
       <%= hidden_field_tag :source, source %>
       <%= hidden_field_tag :response_id, response_id %>
-
-      <%= submit_tag t('.drop'), :class => 'btn_remove_form streaming_remove_list add', :style => 'border:0px;cursor:pointer;text-align:center;' %>
+      <% if request.user_agent =~ /Mobile|webOS/ %>
+        <%= submit_tag t('.drop'), :class => 'btn_remove_form streaming_remove_list add btn btn-warning btn-lg btn-block' %>
+      <% else %>
+        <%= submit_tag t('.drop'), :class => 'btn_remove_form streaming_remove_list add', :style => 'border:0px;cursor:pointer;text-align:center;' %>
+      <% end %>
     <% end %>
   <% else %>
     <%= form_for :vod_wishlist, :url => vod_wishlists_path() do |f| %>
@@ -23,7 +26,11 @@
       <%= hidden_field_tag :response_id, response_id %>
       <% text = t('.add')  %>
       <% class_name = 'streaming_soon_btn' %>
-      <%= submit_tag text, :class => "#{class_name} streaming_add_list add", :style => 'border:0px;cursor:pointer;text-align:center;' %>
+      <% if request.user_agent =~ /Mobile|webOS/ %>
+        <%= submit_tag text, :class => "#{class_name} streaming_add_list add btn btn-success btn-lg btn-block" %>
+      <% else %>
+        <%= submit_tag text, :class => "#{class_name} streaming_add_list add", :style => 'border:0px;cursor:pointer;text-align:center;' %>
+      <% end %>
     <% end %>
   <% end %>
 </div>
