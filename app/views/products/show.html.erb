@@ -1,62 +1,20 @@
 <% if request.user_agent =~ /Mobile|webOS/ %>
 
-  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-    <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="headingOne">
-        <h4 class="panel-title">
-          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            <%= @product_title %> <small>(<%= @product.year %>)</small>
-          </a>
-        </h4>
-      </div>
-      <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-sm-6 col-md-4">
-              <div class="thumbnail">
-                <%= product_image_tag @product_image, :width => 145, :height => 217, :alt => "#{@product_title} (#{@product.year})" %>
-                <div class="caption">
-                  <h5><%= @product_title %> <small>(<%= @product.year %>)</small></h5>
-                  <h6><%= render :partial => 'products/rating', :locals => {:product => @product, :background => @rating_color, :size => :long, :source => @source, :response_id => @response_id} %> <span class="label label-default"><%= "(#{@product.rating_count} #{t('.count')})".html_safe %></span></h6>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
+
+  <div class="row">
+    <div class="page-header">
+      <h3><%= @product_title %> <small>(<%= @product.year %>)</small></h3>
     </div>
-    <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="headingTwo">
-        <h4 class="panel-title">
-          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-            Categories:
-          </a>
-        </h4>
-      </div>
-      <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-        <div class="panel-body">
-          <ul class="list-group">
-            <%  @product.categories.each do |category| %>
-              <li class="list-group-item"><%= category.name %></li>
-            <% end %>
-          </ul>
-        </div>
-      </div>
+    <div class="well well-sm">
+      <%= render :partial => 'products/rating', :locals => {:product => @product, :background => @rating_color, :size => :long, :source => @source, :response_id => @response_id} %> <span class="label label-default"><%= "(#{@product.rating_count} #{t('.count')})".html_safe %>
     </div>
-    <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="headingThree">
-        <h4 class="panel-title">
-          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-            <%= t '.actors' %>
-          </a>
-        </h4>
-      </div>
-      <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-        <div class="panel-body">
-          <ul class="list-group">
-            <li class="list-group-item"><%= @product.actors.collect{|actor| actor.name }.join(', ').html_safe %></li>
-          </ul>
-        </div>
+    <div class="thumbnail">
+      <%= product_image_tag @product_image, :width => 145, :height => 217, :alt => "#{@product_title} (#{@product.year})" %>
+      <div class="caption">
+        <h3><%= @product_title %> <small>(<%= @product.year %>)</small></h3>
+        <p><%= @product_description.text.to_s.html_safe %></p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
       </div>
     </div>
   </div>
