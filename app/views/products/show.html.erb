@@ -1,23 +1,28 @@
 <% if request.user_agent =~ /Mobile|webOS/ %>
 
+  <div class="page-header">
+    <h3><%= @product_title %> <small>(<%= @product.year %>)</small></h3>
 
-
-  <div class="row">
-    <div class="page-header">
-      <h3><%= @product_title %> <small>(<%= @product.year %>)</small></h3>
-    </div>
     <div class="well well-sm">
       <%= render :partial => 'products/rating', :locals => {:product => @product, :background => @rating_color, :size => :long, :source => @source, :response_id => @response_id} %> <span class="label label-default"><%= "(#{@product.rating_count} #{t('.count')})".html_safe %>
-    </div>
-    <div class="thumbnail">
-      <%= product_image_tag @product_image, :width => 145, :height => 217, :alt => "#{@product_title} (#{@product.year})" %>
-      <div class="caption">
-        <h3><%= @product_title %> <small>(<%= @product.year %>)</small></h3>
-        <p><%= @product_description.text.to_s.html_safe %></p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+    </div
+  </div>
+
+  <div class="row">
+
+    <div class="col-sm-6 col-md-12">
+      <div class="thumbnail">
+        <%= product_image_tag @product_image, :width => 145, :height => 217, :alt => "#{@product_title} (#{@product.year})" %>
+        <div class="caption">
+          <h3><%= @product_title %> <small>(<%= @product.year %>)</small></h3>
+          <p><%= @product_description.text.to_s.html_safe %></p>
+          <p><button type="button" class="btn btn-success btn-lg btn-block">Watch</button></p>
+        </div>
       </div>
     </div>
   </div>
+
+  <button type="button" class="btn btn-success btn-lg btn-block">Watch</button>
 
   <%= render :partial => 'products/vod_list',  :locals => {:product => @product, :source => @source, :response_id => @response_id} %>
 
