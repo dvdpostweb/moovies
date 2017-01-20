@@ -16,15 +16,11 @@
         <div class="caption">
           <h3><%= @product_title %> <small>(<%= @product.year %>)</small></h3>
           <p><%= @product_description.text.to_s.html_safe %></p>
-          <p><button type="button" class="btn btn-success btn-lg btn-block">Watch</button></p>
+          <p><%= render :partial => 'products/vod_list',  :locals => {:product => @product, :source => @source, :response_id => @response_id} %></p>
         </div>
       </div>
     </div>
   </div>
-
-  <button type="button" class="btn btn-success btn-lg btn-block">Watch</button>
-
-  <%= render :partial => 'products/vod_list',  :locals => {:product => @product, :source => @source, :response_id => @response_id} %>
 
 <% else %>
 
