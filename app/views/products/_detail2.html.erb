@@ -13,11 +13,7 @@
         <div class="caption">
           <h4><strong><%= product.smart_title %> (<%= product.year %>)</strong></h4>
           <p><%= truncate_html((data[:description].text rescue '...'), :length => 150) %></p>
-          <% if customer_signed_in? %>
-            <p><a href="<%= product_path(id: product.to_param, source: source) %>"><button type="button" class="btn btn-success btn-lg btn-block"><%= t("products.streaming.watch_svod") %></button></a></p>
-          <% else %>
-            <p><a href="<%= new_customer_session_path %>"><button type="button" class="btn btn-success btn-lg btn-block"><%= t("products.streaming.watch_svod") %></button></a></p>
-          <% end %>
+          <p><a href="<%= product_path(id: product.to_param, source: source) %>"><button type="button" class="btn btn-success btn-lg btn-block"><%= t("products.streaming.watch_svod") %></button></a></p>
         </div>
       </div>
     </div>
