@@ -3,7 +3,7 @@ require 'bundler/capistrano'
 require 'thinking_sphinx/capistrano'
 require './config/boot'
 require 'capistrano/slack'
-require 'capistrano/notifier/mail'
+#require 'capistrano/notifier/mail'
 
 set :stages, %w(staging production)
 set :default_stage, "staging"
@@ -16,29 +16,29 @@ set :deployer do
   name
 end
 
-set :application, "Plush"
+#set :application, "Plush"
 set :slack_webhook_url, 'https://hooks.slack.com/services/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' # comes from inbound webhook integration
 set :slack_room, 'general'
 set :slack_subdomain, 'dvdpost'
 set :slack_emoji, ':shipit:'
 set :slack_deploy_defaults, false # Provided tasks are weird, and hooks are quite absurd. Let's do it ourselves.
 
-set :notifier_mail_options, {
-  :method => :smtp,
-  :from   => 'capistrano@plush.be',
-  :to     => ['aleksandar.popovic@dvdpost.be', 'pk@dvdpost.be'],
-  :subject => "Successfully deployed #{application.titleize} application to #{default_stage}",
-  :github => 'DVDPost/Moovies',
-  :smtp_settings => {
-    address: "smtp.gmail.com",
-    port: 587,
-    domain: "gmail.com",
-    authentication: "plain",
-    enable_starttls_auto: true,
-    user_name: "aleksandar.popovic@dvdpost.be",
-    password: "l24popac"
-  }
-}
+#set :notifier_mail_options, {
+#  :method => :smtp,
+#  :from   => 'capistrano@plush.be',
+#  :to     => ['aleksandar.popovic@dvdpost.be', 'pk@dvdpost.be'],
+#  :subject => "Successfully deployed #{application.titleize} application to #{default_stage}",
+#  :github => 'DVDPost/Moovies',
+#  :smtp_settings => {
+#    address: "smtp.gmail.com",
+#    port: 587,
+#    domain: "gmail.com",
+#    authentication: "plain",
+#    enable_starttls_auto: true,
+#    user_name: "aleksandar.popovic@dvdpost.be",
+#    password: "l24popac"
+#  }
+#}
 
 #set :notifier_mail_options, {
 #  :method  => :test, # :smtp, :sendmail, or any other valid ActionMailer delivery method
