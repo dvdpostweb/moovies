@@ -41,4 +41,4 @@ end
 Dir["config/deploy/extras/*.rb"].each { |file| load file }
 
 set :notify_emails, ["aleksandar.popovic@dvdpost.be"]
-after "deploy", "deploy:notify
+after "deploy", "deploy:notify"
