@@ -3,6 +3,7 @@ require 'bundler/capistrano'
 require 'thinking_sphinx/capistrano'
 require './config/boot'
 require 'capistrano/slack'
+require 'capistrano/notifier/mail'
 
 set :stages, %w(staging production)
 set :default_stage, "staging"
@@ -21,6 +22,14 @@ set :slack_subdomain, 'dvdpost'
 set :slack_emoji, ':shipit:'
 set :slack_deploy_defaults, false # Provided tasks are weird, and hooks are quite absurd. Let's do it ourselves.
 
+set :notifier_mail_options, {
+  :method  => :test, # :smtp, :sendmail, or any other valid ActionMailer delivery method
+  :from    => 'capistrano@plush.be',
+  :to      => ['aleksandar.popovic@dvdpost.be', 'pk@dvdpost.be'],
+  :subject => "Successfully deployed #{application.titleize} to #{stage}", # OPTIONAL
+  :github  => 'https://github.com/dvdpost/moovies'
+}
+
 namespace :slack do
   task :starting do
     slack_connect "#{fetch(:deployer)} *started* deploying Plush branch #{fetch(:branch)} to *#{fetch(:stage)}*. :rocket:"
@@ -37,8 +46,3 @@ after 'deploy:restart', 'slack:finished'
 after 'deploy:create_symlink' do
   run "ln -nfs /data/geoip/GeoIP.dat #{current_path}/GeoIP.dat"
 end
-
-Dir["config/deploy/extras/*.rb"].each { |file| load file }
-
-set :notify_emails, ["aleksandar.popovic@dvdpost.be"]
-after "deploy", "deploy:notify"
