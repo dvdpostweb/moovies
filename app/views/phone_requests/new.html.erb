@@ -1,6 +1,4 @@
-<% if request.user_agent =~ /Mobile|webOS/ %>
 
-<% else %>
   <div id="contact-wrap">
     <%= render :partial => 'messages/menu', :locals => {:active_menu => 'contact'} if current_customer %>
     <%= '<div id="tabs-content" class="private">'.html_safe if current_customer %>
@@ -15,4 +13,3 @@
       </div>
     <%= '</div>'.html_safe if current_customer %>
   </div>
-<% end %>
