@@ -24,12 +24,29 @@ set :slack_emoji, ':shipit:'
 set :slack_deploy_defaults, false # Provided tasks are weird, and hooks are quite absurd. Let's do it ourselves.
 
 set :notifier_mail_options, {
-  :method  => :test, # :smtp, :sendmail, or any other valid ActionMailer delivery method
-  :from    => 'capistrano@plush.be',
-  :to      => ['aleksandar.popovic@dvdpost.be', 'pk@dvdpost.be'],
-  :subject => "Successfully deployed #{application.titleize} to #{default_stage}", # OPTIONAL
-  :github  => 'DVDPost/Moovies'
+  :method => :smtp,
+  :from   => 'capistrano@plush.be',
+  :to     => ['aleksandar.popovic@dvdpost.be', 'pk@dvdpost.be'],
+  :subject => "Successfully deployed #{application.titleize} application to #{default_stage}",
+  :github => 'DVDPost/Moovies',
+  :smtp_settings => {
+    address: "smtp.gmail.com",
+    port: 587,
+    domain: "gmail.com",
+    authentication: "plain",
+    enable_starttls_auto: true,
+    user_name: "aleksandar.popovic@dvdpost.be",
+    password: "l24popac"
+  }
 }
+
+#set :notifier_mail_options, {
+#  :method  => :test, # :smtp, :sendmail, or any other valid ActionMailer delivery method
+#  :from    => 'capistrano@plush.be',
+#  :to      => ['aleksandar.popovic@dvdpost.be', 'pk@dvdpost.be'],
+#  :subject => "Successfully deployed #{application.titleize} to #{default_stage}", # OPTIONAL
+#  :github  => 'DVDPost/Moovies'
+#}
 
 namespace :slack do
   task :starting do
