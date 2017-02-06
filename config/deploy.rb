@@ -16,6 +16,7 @@ set :deployer do
   name
 end
 
+set :application, "Plush"
 set :slack_webhook_url, 'https://hooks.slack.com/services/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' # comes from inbound webhook integration
 set :slack_room, 'general'
 set :slack_subdomain, 'dvdpost'
@@ -26,8 +27,8 @@ set :notifier_mail_options, {
   :method  => :test, # :smtp, :sendmail, or any other valid ActionMailer delivery method
   :from    => 'capistrano@plush.be',
   :to      => ['aleksandar.popovic@dvdpost.be', 'pk@dvdpost.be'],
-  :subject => "Successfully deployed #{application.titleize} to #{stage}", # OPTIONAL
-  :github  => 'https://github.com/dvdpost/moovies'
+  :subject => "Successfully deployed #{application.titleize} to #{default_stage}", # OPTIONAL
+  :github  => 'DVDPost/Moovies'
 }
 
 namespace :slack do
