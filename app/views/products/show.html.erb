@@ -1,28 +1,4 @@
-<% if request.user_agent =~ /Mobile|webOS/ %>
 
-  <div class="page-header">
-    <h3><%= @product_title %> <small>(<%= @product.year %>)</small></h3>
-
-    <div class="well well-sm">
-      <%= render :partial => 'products/rating', :locals => {:product => @product, :background => @rating_color, :size => :long, :source => @source, :response_id => @response_id} %> <span class="label label-default"><%= "(#{@product.rating_count} #{t('.count')})".html_safe %>
-    </div
-  </div>
-
-  <div class="row">
-
-    <div class="col-sm-6 col-md-12">
-      <div class="thumbnail">
-        <%= product_image_tag @product_image, :width => 145, :height => 217, :alt => "#{@product_title} (#{@product.year})" %>
-        <div class="caption">
-          <h3><%= @product_title %> <small>(<%= @product.year %>)</small></h3>
-          <p><%= @product_description.text.to_s.html_safe %></p>
-          <p><%= render :partial => 'products/vod_list',  :locals => {:product => @product, :source => @source, :response_id => @response_id} %></p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-<% else %>
 
   <% if params[:halloween_action].present? && params[:halloween_action] == "activated" %>
     <% content_for :view_specific_css do %>
@@ -188,4 +164,4 @@
     <div id='rating' style='display:none' class='action_face'><%= product_trailer_path(:product_id => @product.to_param, :source => @source, :response_id => @response_id) %></div>
     <% end %>
 
-  <% end %>
+

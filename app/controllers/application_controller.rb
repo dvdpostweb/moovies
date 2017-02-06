@@ -78,8 +78,6 @@ class ApplicationController < ActionController::Base
       'promo'
     elsif params[:controller] == 'errors'
       'errors'
-    elsif request.user_agent =~ /Mobile|webOS/
-      'mobile/mobile'
     else
       "application"
     end

@@ -1,23 +1,4 @@
-<% if request.user_agent =~ /Mobile|webOS/ %>
-<!--
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-  <% @faqs.each do |faq| %>
-    <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="<%= t(".cat_#{faq.to_param}") %>">
-        <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#<%= t(".cat_#{faq.to_param}") %>" aria-expanded="true" aria-controls="<%= t(".cat_#{faq.to_param}") %>"><%= t(".cat_#{faq.to_param}") %></a></h4>
-      </div>
-      <div id="<%= t(".cat_#{faq.to_param}") %>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="<%= t(".cat_#{faq.to_param}") %>">
-        <div class="panel-body">
-          <% faq.nb_questions.times do |i| %>
-            <%= "q#{faq.to_param}_#{(i+1)}" %>"><%= t(".q#{faq.to_param}_#{(i+1)}") %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  <% end %>
-</div>
--->
-<% else %>
+
   <div id="faq">
     <ul id="faq-nav">
       <% @faqs.each do |faq| %>
@@ -47,4 +28,3 @@
     <% end %>
     <div class="clear"></div>
   </div>
-<% end %>

@@ -1,6 +1,4 @@
-<% if request.user_agent =~ /Mobile|webOS/ %>
-  <%= render :partial => 'products/detail2', :collection => data, :locals => {:source => source, :view_mode  => view_mode } %>
-<% else %>
+
 
   <% package_id = type == :svod ? (params[:kind] == :adult ? 4 : 1) : (params[:kind] == :adult ? 5 : 2) %>
   <div id="ca-container" class="ca-container">
@@ -13,5 +11,3 @@
       <%= render :partial => 'products/detail2', :collection => data, :locals => {:source => source, :view_mode  => view_mode } %>
     </div>
   </div>
-
-<% end %>
