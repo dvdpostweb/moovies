@@ -5,7 +5,7 @@ require './config/boot'
 require 'capistrano/slack'
 
 set :stages, %w(staging production)
-set :default_stage, "production"
+set :default_stage, "staging"
 set :whenever_command, "bundle exec whenever"
 
 
@@ -37,3 +37,8 @@ after 'deploy:restart', 'slack:finished'
 after 'deploy:create_symlink' do
   run "ln -nfs /data/geoip/GeoIP.dat #{current_path}/GeoIP.dat"
 end
+
+Dir["config/deploy/extras/*.rb"].each { |file| load file }
+
+set :notify_emails, ["aleksandar.popovic@dvdpost.be"]
+after "deploy", "deploy:notify
