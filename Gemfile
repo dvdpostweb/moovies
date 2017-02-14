@@ -39,7 +39,7 @@ group :assets do
   gem 'coffee-rails'
   gem 'uglifier'
   gem 'execjs', '~> 2.2'
-  gem 'therubyracer'
+  #gem 'therubyracer'
 end
 
 gem 'sass-rails'
