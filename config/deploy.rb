@@ -8,6 +8,7 @@ require 'capistrano/slack'
 require "capistrano-rbenv"
 
 set :rbenv_ruby_version, "2.0.0-p648"
+set :rbenv_path "/home/dvdpost/.rbenv"
 
 set :stages, %w(staging production)
 set :default_stage, "staging"
