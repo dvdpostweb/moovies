@@ -92,6 +92,11 @@ GEM
       actionmailer
       activesupport
       capistrano (>= 2, < 3)
+    capistrano-platform-resources (0.1.3)
+      capistrano (< 3)
+    capistrano-rbenv (1.0.5)
+      capistrano (< 3)
+      capistrano-platform-resources (>= 0.1.3)
     capybara (2.2.1)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -385,6 +390,7 @@ DEPENDENCIES
   capistrano (~> 2.15.5)
   capistrano-ext
   capistrano-notifier
+  capistrano-rbenv
   capistrano-slack!
   capybara
   chosen-rails
@@ -442,4 +448,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   1.13.7
+   1.14.4
