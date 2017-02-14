@@ -30,3 +30,4 @@ rerun.txt
 GeoIP.dat
 #config/database.yml
 .sass-cache
+.generators
