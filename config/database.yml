@@ -1,13 +1,4 @@
-# MySQL.  Versions 4.1 and 5.0 are recommended.
-#
-# Install the MYSQL driver
-#   gem install mysql2
-#
-# Ensure the MySQL gem is defined in your Gemfile
-#   gem 'mysql2'
-#
-# And be sure to use new-style password hashing:
-#   http://dev.mysql.com/doc/refman/5.0/en/old-client.html
+########################################################################################################################
 
 development:
   adapter: mysql2
@@ -17,7 +8,6 @@ development:
   password: root
   host: localhost
   port: 3306
-  #socket: /opt/lampp/var/mysql/mysql.sock
 
 common_development:
   adapter: mysql2
@@ -28,9 +18,8 @@ common_development:
   host: localhost
   port: 3306
 
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
+########################################################################################################################
+
 staging:
   adapter: mysql2
   encoding: utf8
@@ -39,6 +28,7 @@ staging:
   password: 3gallfir-
   host: 192.168.100.204
   port: 3306
+
 common_staging:
   adapter: mysql2
   encoding: utf8
@@ -47,6 +37,9 @@ common_staging:
   password: 3gallfir-
   host: matadi
   port: 3306
+
+########################################################################################################################
+
 test:
   adapter: mysql2
   encoding: utf8
@@ -56,6 +49,7 @@ test:
   username: root
   password: matrix
   host: 127.0.0.1
+
 common_test:
   adapter: mysql2
   encoding: utf8
@@ -63,6 +57,8 @@ common_test:
   username: root
   password: matrix
   host: 127.0.0.1
+
+########################################################################################################################
 
 production:
   adapter: mysql2
@@ -73,6 +69,7 @@ production:
   username: webuser
   password: 3gallfir-
   host: 192.168.100.204
+
 common_production:
   adapter: mysql2
   encoding: utf8
@@ -81,3 +78,5 @@ common_production:
   password: 3gallfir-
   host: matadi
   port: 3306
+
+########################################################################################################################
