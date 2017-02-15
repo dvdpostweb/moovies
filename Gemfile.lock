@@ -327,6 +327,7 @@ DEPENDENCIES
   omniauth-facebook
   omniauth-google-oauth2 (~> 0.3.1)
   omniauth-instagram (~> 1.0, >= 1.0.2)
+  omniauth-oauth2 (~> 1.4)
   omniauth-windowslive (~> 0.0.11)
   orderedhash
   paypal-express (~> 0.8.1)
