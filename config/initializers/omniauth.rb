@@ -5,5 +5,5 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   provider :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"]
   provider :instagram, ENV['INSTAGRAM_ID'], ENV['INSTAGRAM_SECRET']
   provider :windowslive, ENV['WINDOWSLIVE_CLIENT_ID'], ENV['WINDOWSLIVE_SECRET'], :scope => 'wl.basic'
-  provider :orange, ENV['ORANGE_CILENT_ID'], ENV['ORANGE_CILENT_SECRET']#, :scope => 'openid'
+  provider :orange, ENV['ORANGE_CILENT_ID'], ENV['ORANGE_CILENT_SECRET'], :scope => 'openid'
 end
