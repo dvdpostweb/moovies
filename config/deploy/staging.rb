@@ -1,8 +1,8 @@
 set :default_environment, {
-    'PATH' => "/home/dvdpost/.rbenv/versions/2.0.0-p648/bin",
-    'GEM_HOME' => '/home/dvdpost/.rbenv/versions/2.0.0-p648/lib/ruby/gems/2.0.0',
-    'GEM_PATH' => '/home/dvdpost/.rbenv/versions/2.0.0-p648/lib/ruby/gems/2.0.0',
-    'BUNDLE_PATH' => '/home/dvdpost/.rbenv/versions/2.0.0-p648/lib/ruby/gems/2.0.0/gems'
+    'PATH' => "/opt/ruby-1.9.3-p448/bin:/opt/ruby/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/opt/ruby/bin::/opt/ruby/bin:",
+    'GEM_HOME' => '/opt/ruby-1.9.3-p448/lib/ruby/gems/1.9.1',
+    'GEM_PATH' => '/opt/ruby-1.9.3-p448/lib/ruby/gems/1.9.1',
+    'BUNDLE_PATH' => '/opt/ruby-1.9.3-p448/lib/ruby/gems/1.9.1/gems'
 }
 
 #############################################################
