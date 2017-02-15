@@ -2,9 +2,6 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.2.14'
 
-# Bundle edge Rails instead:
-# gem 'rails',     :git => 'git://github.com/rails/rails.git'
-
 gem 'mysql2', '~> 0.3.21'
 gem 'json'
 gem 'will_paginate'
@@ -23,18 +20,14 @@ group :development do
   gem 'capistrano-slack', :git => 'https://github.com/j-mcnally/capistrano-slack.git'
 end
 
-gem 'cucumber-rails', :require => false
-
 group  :development, :test do
-  gem 'factory_girl_rails'
-  gem 'faker'
-  gem 'capybara'
-  gem 'launchy'
-  gem 'selenium-webdriver'
-  gem 'brakeman', :require => false
+
 end
-# Gems used only for assets and not required
-# in production environments by default.
+
+group :test do
+
+end
+
 group :assets do
   gem 'coffee-rails'
   gem 'uglifier'
@@ -45,21 +38,11 @@ end
 gem 'sass-rails'
 gem 'compass-rails'
 
-
-# Use unicorn as the web server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'ruby-debug'
 gem "devise"
 gem "airbrake", "~> 4"
 gem "jquery-rails"
 gem 'jquery-ui-rails'
 gem 'dynamic_form'
-gem "rspec-rails", ">= 2.0.1", :group => [:development, :test]
 gem "friendly_id", "~> 4.0.9"
 gem "routing_concerns", "~> 0.1.0"
 gem 'jquery-form-rails'
@@ -91,5 +74,3 @@ gem 'rails-footnotes', '~> 4.0'
 gem 'paypal-express', '~> 0.8.1'
 gem 'kaminari'
 gem 'twitter-bootstrap-rails', '~> 3.2', '>= 3.2.2'
-gem 'capistrano-notifier'
-gem 'capistrano-rbenv'
