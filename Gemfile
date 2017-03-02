@@ -75,3 +75,5 @@ gem 'paypal-express', '~> 0.8.1'
 gem 'kaminari'
 gem 'twitter-bootstrap-rails', '~> 3.2', '>= 3.2.2'
 gem 'omniauth-oauth2', '~> 1.4'
+
+#
