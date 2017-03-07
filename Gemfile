@@ -18,6 +18,7 @@ group :development do
   gem 'spring'
   gem 'sextant'
   gem 'capistrano-slack', :git => 'https://github.com/j-mcnally/capistrano-slack.git'
+  gem 'rack-mini-profiler'
 end
 
 group  :development, :test do

@@ -29,7 +29,11 @@
     </h1>
     <% if @promo.params[:brand_logo] %>
       <h2>
-        <%= !@promo.params[:brand_url] ? '' : link_to(@promo.params[:brand_url], @promo.params[:brand_url], :class => 'f-btn', :target => '_blank') %>
+        <% if request.host == ENV["REQUEST_HOST_BE"] %>
+          <a href="http://www.mobistar.be/" class="f-btn" target="_blank">http://www.mobistar.be/</a>
+        <% elsif request.host == ENV["REQUEST_HOST_LU"] %>
+          <a href="https://www.orange.lu/fr" class="f-btn" target="_blank">https://www.orange.lu/fr</a>
+        <% end %>
       </h2>
     <% end %>
     <% if !@promo.params[:until_at].nil? %>
