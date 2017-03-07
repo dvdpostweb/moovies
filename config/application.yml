@@ -74,5 +74,5 @@ production:
   FREETRIAL_REFERRER_FR: http://www.plush.be/fr/information/freetrial
   FREETRIAL_REFERRER_NL: http://www.plush.be/nl/informatie/freetrial
   FREETRIAL_REFERRER_EN: http://www.plush.be/en/information/freetrial
-  REQUEST_HOST_BE: plush.be
-  REQUEST_HOST_NL: plush.lu
+  REQUEST_HOST_BE: www.plush.be
+  REQUEST_HOST_NL: www.plush.lu
