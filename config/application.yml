@@ -24,6 +24,8 @@ development:
   FREETRIAL_REFERRER_FR: http://localhost:3000/fr/information/freetrial
   FREETRIAL_REFERRER_NL: http://localhost:3000/nl/informatie/freetrial
   FREETRIAL_REFERRER_EN: http://localhost:3000/en/information/freetrial
+  REQUEST_HOST_BE: plush.devbe
+  REQUEST_HOST_NL: plush.devlu
 
 staging:
   FACEBOOK_APP_ID: 820120514798274
@@ -48,6 +50,8 @@ staging:
   FREETRIAL_REFERRER_FR: http://staging.plush.be/fr/information/freetrial
   FREETRIAL_REFERRER_NL: http://staging.plush.be/nl/informatie/freetrial
   FREETRIAL_REFERRER_EN: http://staging.plush.be/en/information/freetrial
+  REQUEST_HOST_BE: staging.plush.be
+  REQUEST_HOST_NL: staging.plush.lu
 
 production:
   FACEBOOK_APP_ID: 246953642340322
@@ -70,3 +74,5 @@ production:
   FREETRIAL_REFERRER_FR: http://www.plush.be/fr/information/freetrial
   FREETRIAL_REFERRER_NL: http://www.plush.be/nl/informatie/freetrial
   FREETRIAL_REFERRER_EN: http://www.plush.be/en/information/freetrial
+  REQUEST_HOST_BE: plush.be
+  REQUEST_HOST_NL: plush.lu

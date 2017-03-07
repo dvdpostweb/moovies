@@ -17,6 +17,7 @@ class ApplicationController < ActionController::Base
     gon.current_customer = current_customer
     gon.locale = I18n.locale
     gon.root_localize_path = root_localize_path
+    gon.request_host = request.host
   end
 
   def handle_unverified_request
