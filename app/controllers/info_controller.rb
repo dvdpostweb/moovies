@@ -1,5 +1,7 @@
 class InfoController < ApplicationController
 
+  layout "responsive"
+
   def index
 
     #if customer_signed_in? && current_customer.facebook_activation == 0

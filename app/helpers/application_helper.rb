@@ -1,6 +1,32 @@
 #encoding: utf-8
 module ApplicationHelper
 
+  def configure_content_div_html_class(params)
+    if params[:controller].present? && params[:controller] == "products"
+      "block100"
+    elsif params[:controller].present? && params[:controller] == "customers/sessions"
+        "block100 login-sign"
+    elsif params[:controller].present? && params[:controller] == "customers/registrations"
+      "block100 login-sign"
+    elsif params[:controller].present? && params[:controller] == "devise/passwords"
+      "block100 login-sign"
+    elsif params[:page_name].present? && params[:page_name] == "alacarte"
+      "price-chart price-chart-green three-column"
+    elsif params[:page_name].present? && params[:page_name] == "unlimited"
+      "price-chart price-chart-blue one-column"
+    elsif params[:page_name].present? && params[:page_name] == "adult"
+      "price-chart price-chart-violet one-column"
+    end
+  end
+
+  def render_promo_image_partial(controller)
+    case controller
+      when "products" then render "layouts/promo_image"
+      else
+        ""
+    end
+  end
+
   def arleady_used_code_messages_helper
     return "Le code est pas valide" if I18n.locale == :fr
     return "De code is niet geldig" if I18n.locale == :nl
@@ -221,7 +247,7 @@ module ApplicationHelper
       src_norm = "#{I18n.locale}/banner-promo-hp_tvod#{params[:kind] == :adult ? '_adult' : ''}.jpg"
       src_norm = "http://www.dvdpost.be/images/plush_banner_public/test.php?img=1&lang=#{I18n.locale}&kind=#{params[:kind]}"
 
-      image = FileTest.exist?("/images/#{src}") ? image_tag(src, :size => '942x188', :alt => t(products_alt_banner)) : image_tag(src_norm, :size => '942x188', :alt => t(products_alt_banner))
+      image = FileTest.exist?("/images/#{src}") ? image_tag(src, :size => '930x200', :alt => t(products_alt_banner)) : image_tag(src_norm, :size => '930x200', :alt => t(products_alt_banner))
 
     end
 

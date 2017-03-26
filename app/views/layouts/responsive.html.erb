@@ -1,0 +1,45 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" CONTENT="index, follow">
+  <meta http-equiv="content-language" content="<%= I18n.locale %>"/>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+  <meta name="description" content="<%= @meta_description.blank? ? '' : @meta_description %>"/>
+  <title><%= h @meta_title.blank? ? t('.title') : @meta_title %></title>
+  <%= include_gon(namespace: 'Plush') %>
+  <%= Gon::Base.render_data %>
+  <% Gon.global.current_customer = current_customer if !customer_signed_in? %>
+  <%= stylesheet_link_tag "responsive", :media => "all" %>
+  <link rel="icon" type="image/x-icon" href="<%= asset_path("template/favicon.ico") %>">
+  <link rel="icon" type="image/png" href="<%= asset_path("template/favicon.ico") %>">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<%= asset_path("template/favicon114x114.png") %>">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<%= asset_path("template/favicon72x72.png") %>">
+  <link rel="apple-touch-icon-precomposed" href="<%= asset_path("template/favicon57x57.png") %>">
+</head>
+<body>
+<div class="canavas" id="">
+  <div id="overlay"></div>
+  <div id="on-top" class="pad10 radius4 dark-gray-bck">
+    <i class="fa fa-angle-up f30 light-gray"></i>
+  </div>
+  <div class="side-menu box-shadow">
+    <div class="side-menu-close f33"></div>
+    <div class="side-menu-login mart10 block100"></div>
+    <div class="side-menu-nav mart15 block100"></div>
+    <div class="side-menu-search mart15"></div>
+  </div>
+  <div class="wrap">
+    <%= render "layouts/header" %>
+    <div id="content" class="<%= configure_content_div_html_class(params) %>">
+      <%= render_promo_image_partial(params[:controller]) %>
+      <%= yield %>
+    </div>
+    <%= render "layouts/footer" %>
+  </div>
+</div>
+<%= javascript_include_tag "responsive" %>
+<%= javascript_include_tag *webpack_asset_paths("application") %>
+</body>
+</html>

@@ -18,6 +18,7 @@ class ApplicationController < ActionController::Base
     gon.locale = I18n.locale
     gon.root_localize_path = root_localize_path
     gon.request_host = request.host
+    gon.params = params
   end
 
   def handle_unverified_request
@@ -74,7 +75,7 @@ class ApplicationController < ActionController::Base
 
   def layout_by_resource
     if devise_controller? and params[:controller] != 'customers/registrations'
-      "devise_layout"
+      "responsive"
     elsif params[:controller] == 'promotions'
       'promo'
     elsif params[:controller] == 'errors'

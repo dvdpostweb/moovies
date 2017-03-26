@@ -1,0 +1,11 @@
+<% if !current_customer && (!(params[:controller] == 'home' && params[:action] =='validation') && params[:controller] != 'customers/registrations' && params[:controller] != 'steps' && params[:page_name] != 'abo' && params[:page_name] != 'price_public') && !(params[:controller] == 'promotions' && params[:id] == 'smarttv') && !(params[:controller] == 'info' && params[:page_name] == 'playstation') && !(params[:controller] == 'customers' && (params[:action] == 'reactive' || params[:action] == 'promotion')) && params[:action] != 'carrefour' && params[:controller] != 'photobox' && params[:controller] != 'freetrial' && params[:controller] != 'carrefourbonus' && params[:controller] != 'info' && params[:controller] != 'halloween' %>
+    <div class="container white-bck">
+      <div class="promo-image rwd-bck display-block">
+        <%= landing_img(@code, @promotion, params, products_alt_banner, @discount_top) %>
+      </div>
+    </div>
+<% elsif params[:kind] == :adult && current_customer && (params[:controller] != 'home' && params[:controller] != 'customers/registrations' && params[:controller] != 'steps' && params[:page_name] != 'abo') and !(params[:controller] == 'promotions' and params[:id] == 'smarttv') && current_customer.no_adult? %>
+    <div id="subscribe-wrap">
+      <%= link_to image_tag("#{I18n.locale}/banner_promo_hp_adult_customer.jpg", :size => '942x188', :alt => t(products_alt_banner)), info_path(:page_name => t('routes.infos.params.alacarte')) %>
+    </div>
+<% end %>
