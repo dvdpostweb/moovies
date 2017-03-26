@@ -28,7 +28,7 @@ set :keep_releases, 5
 #	Servers
 #############################################################
 
-set :user, "plush"
+set :user, "orange"
 set :domain,  "217.112.190.50"
 set :port, 23051
 role :app, domain

@@ -1,124 +1,41 @@
-<style>
-.text-field {
-	width: calc(100% - 44px);
-	height: 40px;
-	margin-bottom: 15px;
-	padding: 5px 20px;
-	border: 2px solid #e1e1e1;
-	color: #bdbaba;
-	font-family: Arial,Helvetica, sans-serif;
-	font-size: 19px;
-}
-
-.text-field:focus {
-	border: 2px solid #76c71e;
-	outline: none;
-}
-
-.info, .success, .warning, .errornl, .validation {
-    border: 1px solid;
-    margin: 10px 0px;
-    padding:20px 10px 20px 50px;
-    background-repeat: no-repeat;
-    background-position: 10px center;
-}
-.info {
-    color: #00529B;
-    background-color: #BDE5F8;
-}
-.success {
-    color: #4F8A10;
-    background-color: #DFF2BF;
-}
-.warning {
-    color: #9F6000;
-    background-color: #FEEFB3;
-}
-.errornl {
-    color: #D8000C;
-    background-color: #FFBABA;
-		text-align: center;
-}
-
-</style>
-
-
-<% if params[:freetrial_action].present? && params[:freetrial_action] == "FREETRIAL" %>
-<style>
-#freetrial {
-	width: 725px;
-	margin-left: 4px;
-	background-color: #fff;
-	text-align: left;
-	padding-left: 25%;
-	padding-top: 50px;
-}
-#fth3 {
-	color: #76c71e;
-	padding-bottom: 5px;
-	font-family: Open Sans Condensed;
-	font-size: 27px;
-}
-.step2 {
-	padding-top: 10px;
-}
-#fth3q {
-	color: #000;
-	font-size: 19px;
-	padding-bottom: 3px;
-	font-family: Open Sans Condensed;
-}
-
-</style>
-  <div id="freetrial">
-		<h1 id="fth3"><%= t('freetrial_login_1') %></h1>
-		<ul>
-	    <li id="fth3q">- <%= t('freetrial_login_2') %> <strong><%= params[:films] %> <%= t('freetrial_login_3') %></strong> <%= t('freetrial_login_4') %></li>
-	    <li id="fth3q">- <%= t('freetrial_login_5') %> <strong>€ <%= params[:price] %>/<%= t('freetrial_login_6') %></strong></li>
-	    <li id="fth3q">- <%= t('freetrial_login_7') %></li>
-	  </ul>
-	</div>
-<div class="step2">
-<% else %>
-<div class="step2">
-	<%= link_to root_path do %>
-		<%= image_tag "plush_logo_fixed.jpg", height: '71', width: '129' %>
-	<% end %>
-	<% if params[:DS_CODE_RESTRICTION_ERROR].present? && params[:DS_CODE_RESTRICTION_ERROR] == "DISCOUNT_CODE_LIMIT_AUTH_ERROR" %>
-	  <div class="errornl"><%= arleady_used_code_messages_helper %></div>
-	<% end %>
-<% end %>
-<a href="/auth/facebook?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>;ACTION_TYPE=NORMAL;ORG_URL=<%= request.fullpath %>"><button id="fb_connect_login" class="face-button"><%= t('.social.network.fbconnect') %></button></a>
-<a href="/auth/google_oauth2?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>;ACTION_TYPE=NORMAL;ORG_URL=<%= request.fullpath %>"><button id="fb_connect_login" class="face-button" style="background: #DD4B39; margin-top: 0px;"><%= t('.social.network.google') %></button></a>
-<!--<a href="/auth/orange_oauth2?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>;ACTION_TYPE=NORMAL;ORG_URL=<%= request.fullpath %>"><button id="fb_connect_login" class="face-button" style="background: #DD4B39; margin-top: 0px;"><%= t('ORANGE') %></button></a>-->
-<div class="separator-part">
-	<div class="separator-line"></div>
-	<label class="separator-label"><%= t('promotions.show.or') %></label>
-	<div class="separator-line"></div>
-</div>
-</br>
-</br>
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-<% if alert && !alert.empty?%>
-  <%= alert %>
-<% end %>
-<div id="code_info"><div id="code_message"></div></div>
-<%= f.text_field :email, :class => 'text-field', :tye => 'text', :placeholder => t('.email_label'), autocomplete: "off" %>
-<%= f.password_field :password, :class => 'text-field', :maxlength => '40', :placeholder => t('.pass_label'), autocomplete: "off" %>
-<div id="password_info"><div id="password_message"></div></div>
-</br>
-<% if devise_mapping.rememberable? -%>
-    <div class="customer_remember_me hvr-grow">
-      <%= f.check_box :remember_me, :checked => true %>
-      <label for="customer_remember_me">
-        <span></span>
-      </label>
+<div class="container white-bck padb30">
+  <div class="center-block thin-holder ">
+    <div class="block100 cred-buttons">
+      <a href="/auth/facebook?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>;ACTION_TYPE=NORMAL;ORG_URL=<%= request.fullpath %>" class="btn center-block f16 blue-facebook-bck uppercase radius4 padtb15"><i class="fa fa-facebook marr5 f16"></i> <%= t('.social.network.fbconnect') %></a>
+      <a href="/auth/google_oauth2?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>;ACTION_TYPE=NORMAL;ORG_URL=<%= request.fullpath %>" class="btn center-block f16 red-google-bck uppercase radius4 padtb15 mart15"><i class="fa fa-google-plus marr5 f16"></i> <%= t('.social.network.google') %></a>
+      <a href="index.php%3Fpage=login.html#" class="btn center-block f16 orange-bck uppercase radius4 padtb15 mart15">Register with Orange</a>
     </div>
-    <label class="customer_remember_me_label"><%= t('.remember_me') %></label>
-<% end -%>
-<%= f.submit t('.connect'), :id => 'submit_button', :class => "button-connenct" %>
-<% end %>
-</div>
-<div class="links">
-  <%= render "devise/shared/links" %>
+
+    <div class="hr-with-words mart30 block100">
+      <span class="Arial f20 dark-blue">OR</span>
+    </div>
+
+    <div class="block100 mart30">
+      <input type="text" name="login-email" class="f20" placeholder="Email Address">
+    </div>
+
+    <div class="block100 mart30">
+      <input type="password" name="login-password" class="f20" placeholder="Password">
+    </div>
+
+    <div class="block100 mart30">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padt15">
+        <input type="checkbox" class="icheckbox" name="login-remember-me" value="1"/>
+        <label class="Arial f18 normal marl10">Remember Me</label>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
+        <a href="index.php%3Fpage=login.html#" class="btn btn-green-gradient padlr40 padtb15 white f16 normal">Login</a>
+      </div>
+    </div>
+
+    <div class="block100 mart60 text-center">
+      <%= link_to t('.forget_password'), new_password_path(resource_name, :code => params[:code], :activation => params[:activation]), class: "f20" %>
+    </div>
+    <div class="block100 mart15">
+      <span class="green f20 block100 text-center">You do not have an account?</span>
+    </div>
+    <div class="block100 mart5 text-center">
+      <%= link_to t('.sign_up'), new_customer_registration_path(:moovie_id => params[:moovie_id], :code => params[:code], :activation => params[:activation]), class: "f20" %>
+    </div>
+  </div>
 </div>
