@@ -350,10 +350,10 @@ jQuery.fn.extend({
     function resetFiltersForm() {
         $('input.tags').tagit('removeAll');
         $('.iradio').iCheck('uncheck');
-        listingSlider.reset();
-        rangeSlider.reset();
-        $('.dropdown-select').val("");
-        $('.dropdown-select').selectmenu("refresh");
+        //listingSlider.reset();
+        //rangeSlider.reset();
+        //$('.dropdown-select').val("");
+        //$('.dropdown-select').selectmenu("refresh");
     }
 
     resetFiltersForm();
