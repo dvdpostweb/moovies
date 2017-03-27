@@ -18,7 +18,7 @@
   <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<%= asset_path("template/favicon72x72.png") %>">
   <link rel="apple-touch-icon-precomposed" href="<%= asset_path("template/favicon57x57.png") %>">
 </head>
-<body>
+<body id="<%= @body_id %>" class="<%= params[:kind] %> <%= current_customer ? :private : :public %> <%= I18n.locale %> <%= @body_class %>">
 <div class="canavas" id="">
   <div id="overlay"></div>
   <div id="on-top" class="pad10 radius4 dark-gray-bck">
