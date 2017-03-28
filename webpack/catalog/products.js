@@ -223,11 +223,16 @@ $(document).ready(function () {
             return false;
         });
 
-        $('#products_index, #film-details, #categories, #studios').delegate(".links", "change", function () {
+        //$(".iradio_minimal-grey").click(function(e) {
+        //    e.preventDefault();
+        //    console.log("checked");
+        //});
+
+        $('#products_index, #film-details, #categories, #studios').delegate(".iradio", "ifChecked", function () {
             submit_online()
         });
 
-        $('#products_index, #film-details, #categories, #studios').delegate(".links a", "click", function () {
+        $('#products_index, #film-details, #categories, #studios').delegate(".iradio a", "click", function () {
             url = $(this).attr('href');
             html_item = $(this).parent()
             content = html_item.html()
@@ -380,6 +385,7 @@ function ajax_pagination(path) {
 function goToByScroll(id) {
     $('html,body').animate({scrollTop: $("#" + id).offset().top}, 'slow');
 }
+
 function endscroll() {
     $('#toTop').on('click', function () {
         goToByScroll('top')
@@ -426,6 +432,21 @@ function load_form() {
     $('.chosen-select').chosen({allow_single_deselect: true}).change(function () {
         submit_online()
     });
+
+    //$("#online #ratings-slider-rang").ionRangeSlider({
+    //    grid: true,
+    //    from: 0,
+    //    values: [
+    //        1, 2, 3, 4, 5
+    //    ],
+    //    onChange: function (event, ui) {
+            //$("#online #filters_rating_min").val(ui.values[0]);
+            //$("#online #filters_rating_max").val(ui.values[1]);
+            //submit_online();
+    //        console.log(event);
+    //    }
+    //});
+
     $("#online #ratings-slider-range").slider({
         range: true,
         min: 1,
