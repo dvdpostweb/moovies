@@ -3,6 +3,11 @@ require("catalog/products");
 
 $(document).ready(function () {
 
+    //$("input[type='checkbox'], input[type='radio']").iCheck({
+    //    checkboxClass: 'icheckbox_square',
+    //    radioClass: 'iradio_minimal-grey'
+    //});
+
     // popover
     var originalLeave = $.fn.popover.Constructor.prototype.leave;
     $.fn.popover.Constructor.prototype.leave = function (obj) {
