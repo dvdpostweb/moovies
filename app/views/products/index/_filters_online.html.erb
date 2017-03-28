@@ -24,43 +24,43 @@
                     <%= t('products.left_column.svod_last_added') %>
                   </div>
                   <div class="col-md-1 col-sm-1 col-xs-1 mart5">
-                    <%= radio_button_tag('filters[view_mode]', "last_added", params[:filters] && params[:filters][:view_mode] == 'last_added' ? true : false, class: "iradio") %>
+                    <%= radio_button_tag('filters[view_mode]', "last_added", params[:filters] && params[:filters][:view_mode] == 'last_added' ? true : false, class: "links") %>
                   </div>
                   <div class="col-md-11 col-sm-11 col-xs-11 f12 mart5 text-left">
                     <%= t('products.left_column.svod_most_viewed') %>
                   </div>
                   <div class="col-md-1 col-sm-1 col-xs-1 mart5">
-                    <%= radio_button_tag('filters[view_mode]', "most_viewed", params[:filters] && params[:filters][:view_mode] == 'most_viewed' ? true : false, class: "iradio") %>
+                    <%= radio_button_tag('filters[view_mode]', "most_viewed", params[:filters] && params[:filters][:view_mode] == 'most_viewed' ? true : false, class: "links") %>
                   </div>
                   <div class="col-md-11 col-sm-11 col-xs-11 f12 mart5 text-left">
                     <%= t('products.left_column.svod_last_chance') %>
                   </div>
                   <div class="col-md-1 col-sm-1 col-xs-1 mart5">
-                    <%= radio_button_tag('filters[view_mode]', "last_chance", params[:filters] && params[:filters][:view_mode] == 'last_chance' ? true : false, class: "iradio") %>
+                    <%= radio_button_tag('filters[view_mode]', "last_chance", params[:filters] && params[:filters][:view_mode] == 'last_chance' ? true : false, class: "links") %>
                   </div>
                   <div class="col-md-11 col-sm-11 col-xs-11 f12 mart5 text-left">
                     <%= t('products.left_column.svod_best_rated') %>
                   </div>
                   <div class="col-md-1 col-sm-1 col-xs-1 mart5">
-                    <%= radio_button_tag('filters[view_mode]', "best_rated", params[:filters] && params[:filters][:view_mode] == 'best_rated' ? true : false, class: "iradio") %>
+                    <%= radio_button_tag('filters[view_mode]', "best_rated", params[:filters] && params[:filters][:view_mode] == 'best_rated' ? true : false, class: "links") %>
                   </div>
                   <div class="col-md-11 col-sm-11 col-xs-11 f12 mart5 text-left">
                     <%= t('products.left_column.svod_soon') %>
                   </div>
                   <div class="col-md-1 col-sm-1 col-xs-1 mart5">
-                    <%= radio_button_tag('filters[view_mode]', "soon", params[:filters] && params[:filters][:view_mode] == 'soon' ? true : false, class: "iradio") %>
+                    <%= radio_button_tag('filters[view_mode]', "soon", params[:filters] && params[:filters][:view_mode] == 'soon' ? true : false, class: "links") %>
                   </div>
                   <div class="col-md-11 col-sm-11 col-xs-11 f12 mart5 text-left">
                     <%= t('products.left_column.svod_new') %>
                   </div>
                   <div class="col-md-1 col-sm-1 col-xs-1 mart5">
-                    <%= radio_button_tag('filters[view_mode]', "new", params[:filters] && params[:filters][:view_mode] == 'new' ? true : false, class: "iradio") %>
+                    <%= radio_button_tag('filters[view_mode]', "new", params[:filters] && params[:filters][:view_mode] == 'new' ? true : false, class: "links") %>
                   </div>
                   <div class="col-md-11 col-sm-11 col-xs-11 f12 mart5 text-left">
                     <%= t('products.left_column.svod_hd') %>
                   </div>
                   <div class="col-md-1 col-sm-1 col-xs-1 mart5">
-                    <%= radio_button_tag('filters[view_mode]', "hd", params[:filters] && params[:filters][:view_mode] == 'hd' ? true : false, class: "iradio") %>
+                    <%= radio_button_tag('filters[view_mode]', "hd", params[:filters] && params[:filters][:view_mode] == 'hd' ? true : false, class: "links") %>
                   </div>
                   <div class="col-md-12 col-sm-121 col-xs-12 f12 text-left mart10">
                     <%= link_to t('.belgium'), belgium_path, :id => :belgium_link, :class => params[:belgium].present? ? 'no-underline' : '' %>
@@ -136,3 +136,182 @@
   <% end %>
   </div>
 </div>
+
+
+
+
+
+<!--<div id="filters">
+  <div id="filters-inner">
+    <div class="left-item filters-top-buttons">
+      <a href="index.html#" class="btn lightergray-bck dark-blue OpenSansCondensed f23 block100 mart0"
+         id="left-promo-code-trigger">Code Promo <i class="fa fa-caret-down white marl5 f17"></i> </a>
+      <div class="block100 left-promo-code text-center overflow-hidden">
+        <form>
+          <h4 class="dark-blue">Introduisez votre code promo ci-dessous</h4>
+          <div class="block100 padlr10">
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+              <input type="text" name="promo-code" placeholder="Code">
+            </div>
+            <input type="submit" class="btn green-bck col-lg-2 col-md-2 col-sm-2 col-xs-2"
+                   name="promo-code-submit" value="GO!">
+          </div>
+        </form>
+      </div>
+      <a href="index.html#" class="btn light-blue-bck OpenSansCondensed f23 block100"
+         id="button-la-carte">Plush à la Carte</a>
+      <a href="index.html#" class="btn OpenSansCondensed f23 block100" id="button-la-unlmited">Plush
+        Unlimited</a>
+      <a href="index.html#" class="btn violet OpenSansCondensed f23 block100"
+         id="button-18-plus">18+</a>
+    </div>
+    <form name="filters-form" id="filters-form" method="POST">
+      <div class="left-item mart15" id="categories">
+        <label class="OpenSansCondensed f20">Catégories</label>
+        <div class="col-md-11 col-sm-11 col-xs-11 f12 mart5 text-left">
+          Derniers ajouts
+        </div>
+        <div class="col-md-1 col-sm-1 col-xs-1 mart5">
+          <input type="radio" class="iradio" name="categories[]" value="derniers-ajouts"/>
+        </div>
+        <div class="col-md-11 col-sm-11 col-xs-11 f12 text-left mart10">
+          Les plus populaires
+        </div>
+        <div class="col-md-1 col-sm-1 col-xs-1 mart10">
+          <input type="radio" class="iradio" name="categories[]" value="les-plus-populaires"/>
+        </div>
+        <div class="col-md-11 col-sm-11 col-xs-11 f12 text-left mart10">
+          Dernière chance
+        </div>
+        <div class="col-md-1 col-sm-1 col-xs-1 mart10">
+          <input type="radio" class="iradio" name="categories[]" value="derniere-chance "/>
+        </div>
+        <div class="col-md-11 col-sm-11 col-xs-11 f12 text-left mart10">
+          Les mieux côtés
+        </div>
+        <div class="col-md-1 col-sm-1 col-xs-1 mart10">
+          <input type="radio" class="iradio" name="categories[]" value="Les-mieux-cotes"/>
+        </div>
+        <div class="col-md-11 col-sm-11 col-xs-11 f12 text-left mart10">
+          Les mieux côtés
+        </div>
+        <div class="col-md-1 col-sm-1 col-xs-1 mart10">
+          <input type="radio" class="iradio" name="categories[]" value="recruitment-user-type"/>
+        </div>
+        <div class="col-md-11 col-sm-11 col-xs-11 f12 text-left mart10">
+          Bientôt disponible
+        </div>
+        <div class="col-md-1 col-sm-1 col-xs-1 mart10">
+          <input type="radio" class="iradio" name="categories[]" value="bientot-disponible"/>
+        </div>
+        <div class="col-md-11 col-sm-11 col-xs-11 f12 text-left mart10">
+          Nouveautés
+        </div>
+        <div class="col-md-1 col-sm-1 col-xs-1 mart10">
+          <input type="radio" class="iradio" name="categories[]" value="recruitment-user-type"/>
+        </div>
+        <div class="col-md-11 col-sm-11 col-xs-11 f12 text-left mart10">
+          Haute Définition
+        </div>
+        <div class="col-md-1 col-sm-1 col-xs-1 mart10">
+          <input type="radio" class="iradio" name="categories[]" value="haute-definition"/>
+        </div>
+        <hr>
+        <div class="col-md-12 col-sm-121 col-xs-12 f12 text-left mart10">
+          <a href="index.html#" class="no-underline">Belgium selection/Vike</a>
+        </div>
+      </div>
+      <div class="left-item" id="audio-tags">
+        <label class="OpenSansCondensed f20">Audio</label>
+        <input type="text" class="tags" name="audio-autocomplete-tags"
+               id="audio-autocomplete-tags"/>
+        <div class="tags-autocomplete-holder block100"></div>
+      </div>
+      <div class="left-item" id="subtitles-tags">
+        <label class="OpenSansCondensed f20">Sous-titres</label>
+        <input type="text" class="tags" name="subtitles-autocomplete-tags"
+               id="subtitles-autocomplete-tags"/>
+        <div class="tags-autocomplete-holder block100"></div>
+      </div>
+      <div class="left-item" id="listing-range-slider">
+        <label class="OpenSansCondensed f20">Cotations</label>
+        <input type="text" id="listing-range" name="public-range" value=""/>
+      </div>
+      <div class="left-item" id="from-to">
+        <label class="OpenSansCondensed f20 block100">Année</label>
+        <div class="col-md-5 col-sm-5 col-xs-5 position-relative">
+          <select class="dropdown-select" id="from-dropdown" name="from">
+            <option selected="selected">From</option>
+            <option value="1920">1920</option>
+            <option value="1925">1925</option>
+            <option value="1930">1930</option>
+            <option value="1945">1945</option>
+            <option value="1955">1955</option>
+            <option value="1980">1980</option>
+            <option value="1990">1990</option>
+            <option value="2000">2000</option>
+            <option value="2010">2010</option>
+            <option value="2017">2017</option>
+          </select>
+        </div>
+        <div class="col-md-2 col-sm-2 col-xs-2 text-center padt10">-</div>
+        <div class="col-md-5 col-sm-5 col-xs-5 position-relative">
+          <select class="dropdown-select" id="to-dropdown" name="to">
+            <option selected="selected">To</option>
+            <option value="1920">1920</option>
+            <option value="1925">1925</option>
+            <option value="1930">1930</option>
+            <option value="1945">1945</option>
+            <option value="1955">1955</option>
+            <option value="1980">1980</option>
+            <option value="1990">1990</option>
+            <option value="2000">2000</option>
+            <option value="2010">2010</option>
+            <option value="2017">2017</option>
+            <option value="2018">2018</option>
+          </select>
+        </div>
+      </div>
+      <div class="left-item" id="public-range-slider">
+        <label class="OpenSansCondensed f20">Public</label>
+        <input type="text" id="public-range" name="public-range" value=""/>
+      </div>
+      <div class="left-item" id="pays-tags">
+        <label class="OpenSansCondensed f20">Pays</label>
+        <input type="text" class="tags" name="pays-autocomplete-tags" id="pays-autocomplete-tags"/>
+        <div class="tags-autocomplete-holder block100"></div>
+      </div>
+      <div class="left-item" id="genres">
+        <label class="OpenSansCondensed f20">Genres</label>
+        <select class="dropdown-select" id="genres-dropdown" name="genres">
+          <option selected="selected">Select..</option>
+          <option value="Action">Action</option>
+          <option value="Animation">Animation</option>
+          <option value="Cineclub">Cineclub</option>
+          <option value="Court-métrage">Court-métrage</option>
+          <option value="Crime">Crime</option>
+          <option value="Documentaires">Documentaires</option>
+          <option value="Erotiques">Erotiques</option>
+          <option value="Histoire & Culture">Histoire & Culture</option>
+          <option value="Humour">Humour</option>
+          <option value="Science-fiction">Science-fiction</option>
+          <option value="Voyage & Découverte">Voyage & Découverte</option>
+        </select>
+        <div class="tags-autocomplete-holder block100"></div>
+      </div>
+
+      <input type="hidden" name="view_movies" value="">
+    </form>
+
+  </div>
+</div>-->
+
+
+
+
+
+
+
+
+
+

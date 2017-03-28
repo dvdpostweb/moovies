@@ -2,8 +2,6 @@ class ProductsController < ApplicationController
 
   before_filter :find_product, :except => [:index, :drop_cached]
 
-  layout "responsive"
-
   def index
     if params[:category_id] && params[:filters].nil? || (params[:filters] && params[:filters][:category_id].nil?)
       params[:filters] = Hash.new if params[:filters].nil?

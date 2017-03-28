@@ -4,8 +4,6 @@
 <% product_image = data[:image] %>
 <div>
 
-
-
   <a href="<%= product_path(:id => product.to_param, :source => source) %>" class="popper"><%= image_tag(product_image, :class => "img-responsive") %>
     <% if product.hd?(session[:country_id]) %>
         <span class="hd position-absolute black white-bck radius2 bold italic">HD</span>

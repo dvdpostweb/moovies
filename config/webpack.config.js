@@ -66,7 +66,14 @@ var config = {
             chunks: false,
             modules: false,
             assets: true
-        })]
+        })//,
+
+        //new webpack.ProvidePlugin({
+        //    $: "jquery",
+        //    jQuery: "jquery"
+        //})
+
+    ]
 };
 
 if (production) {
