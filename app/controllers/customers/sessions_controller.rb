@@ -1,7 +1,5 @@
 class Customers::SessionsController < Devise::SessionsController
 
-  layout "responsive"
-
   def new
     gon.code = params[:code]
     gon.moovie_id = params[:moovie_id]

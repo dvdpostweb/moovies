@@ -1,31 +1,86 @@
-  <div class="loading_bar" style="display:none"><%= image_tag 'loading.gif' %></div>
-  <div id="maincontent" >
-  <div id='filter_layout'>
-  <%= render :partial => 'layouts/filters_online', :locals => {:selected_countries => @selected_countries, :languages => @languages, :subtitles => @subtitles }%>
-  </div>
-  <h1 class="ttl">&nbsp;</h1>
-  <%= render :partial => 'products/index/image', :locals => {:people => @people} if @people %>
-  <% if cookies[:display] == 'list' %>
-    <div class="selected-Expanded"  >list</div> <%= link_to t('.jacket'), params.merge(:display => 'jacket', :kind => (params[:kind] == :normal ? nil : params[:kind]), :page => nil), :class => 'Grid' %>
-  <% else %>
-    <%= link_to t('.list'), params.merge(:display => 'list', :kind => (params[:kind] == :normal ? nil : params[:kind]), :page => nil), :class => 'Expanded' %> <div class="selected-Grid">jacket</div>
-  <% end %>
-  <!--   ==============   MOVIES   ==============   -->
-  <% if cookies[:endless] == 'deactive' %>
-    <%= link_to t('products.index.endless_active'), params.merge(:endless => 'active', :kind => (params[:kind] == :normal ? nil : params[:kind]), :page => nil), :class => "endless" %>
-  <% else %>
-    <%= link_to t('products.index.endless_deactive'), params.merge(:endless => 'deactive', :kind => (params[:kind] == :normal ? nil : params[:kind]), :page => nil), :class => "endless" %>
-  <% end %>
-  <div id="products">
-    <%= render :partial => 'products/index/sorting' %>
-    <%= render :partial => cookies[:display] == 'list' ? 'products/index/movie_details' : 'products/index/movie_details_jacket', :collection => @products, :locals => {:target => @target} %>
-  </div>
-  <div id='pagination_content'>
-      <%= render :partial => 'products/index/pagination', :locals => {:item => @products} %>
-  </div>
-  <%= t(products_index_description, :link_abo => info_path(:page_name => t('routes.infos.params.vod')), :link_svod => (params[:kind] == :adult ? products_short_path(:package => Moovies.packages.invert[4]) : products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}"))), :link_tvod => (params[:kind] ==  :adult ? products_short_path(:package => Moovies.packages.invert[5]) : products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[2]}")))).html_safe %>
+<% if cookies[:display] == "list" %>
+    <div id="list-view">
+      <%= render :partial => "products/index/movie_details", :collection => @products, :locals => {:target => @target} %>
+      <div class="block100 mart30 pagin-bar">
+        <ul>
+          <li>
+            <a href="index.html">1</a>
+          </li>
+          <li>
+            <a href="index.html">2</a>
+          </li>
+          <li>
+            <a href="index.html">3</a>
+          </li>
+          <li>
+            <a href="index.html">4</a>
+          </li>
+          <li>
+            <a href="index.html">5</a>
+          </li>
+          <li>
+            <a href="index.html">6</a>
+          </li>
+          <li>
+            <a href="index.html">7</a>
+          </li>
+          <li>
+            <a href="index.html">8</a>
+          </li>
+          <li>
+            <a href="index.html">9</a>
+          </li>
+          <li>
+            <a href="index.html">10</a>
+          </li>
+          <li>
+            <a href="index.html">11</a>
+          </li>
+          <li>
+            <a href="index.html">12</a>
+          </li>
+          <li>
+            <a href="index.html">13</a>
+          </li>
+          <li>
+            <a href="index.html">14</a>
+          </li>
+          <li>
+            <a href="index.html">15</a>
+          </li>
+        </ul>
 
-  <!--   ==============   END MOVIES   ==============   -->
-  </div>
-<%= render :partial => 'products/index/filters_online', :locals => { :countries => @countries} %>  
+      </div>
+      <!--/PAGINATION-->
 
+      <!--DISCLAIMER-->
+      <div class="block100 mart15 line-height-20">
+        Plush ne met pas seulement à votre disposition un catalogue de VOD illimitée mais vous ouvre également les
+        portes à un catalogue de films en pay per view. Ce catalogue qui
+        contient plus de 1700 films, vous donne la possibilité de louer des films en ligne quand vous en avez envie. De
+        plus, ces films video on demand sont accessibles depuis
+        plusieurs appareils ce qui donnera une nouvelle dimension à votre expérience cinéma.
+      </div>
+    </div>
+<% else %>
+    <div id="grid-view">
+      <%= render :partial => "products/index/movie_details_jacket", :collection => @products, :locals => {:target => @target} %>
+    </div>
+    <script>
+        jQuery(document).ready(function($) {
+            $('.popper').popover({
+                placement: "left",
+                trigger: "hover",
+                container: 'body',
+                html: true,
+                delay: {
+                    show: 300,
+                    hide: 100
+                },
+                content: function () {
+                    return $(this).next('.synopsys-content').html();
+                }
+            })
+        });
+    </script>
+<% end %>

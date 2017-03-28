@@ -1,5 +1,5 @@
 <% if params[:package].nil? && params[:concerns] != :productable && params[:belgium].blank? %>
-   $('#all').html("<%= escape_javascript(render(:partial => 'products/index/hp', :formats => [:html])) %>");
+   $('#content').html("<%= escape_javascript(render(:partial => 'products/index/hp', :formats => [:html])) %>");
   $('.loading_bar').hide();
   endscroll()
   load_form()
@@ -14,7 +14,7 @@
       $('#pagination_content').html('');
     <% end %>
   <% else %>
-    $('#all').html("<%= escape_javascript(render(:partial => 'products/index/all', :formats => [:html])) %>");
+    $('#main-content').html("<%= escape_javascript(render(:partial => 'products/index/all', :formats => [:html])) %>");
     load_form()
   <% end %>
   $('.loading_bar').hide();

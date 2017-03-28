@@ -1,7 +1,9 @@
-require("pricing/alacarte.js");
+require("pricing/alacarte");
+require("catalog/products");
 
 $(document).ready(function () {
 
+    // popover
     var originalLeave = $.fn.popover.Constructor.prototype.leave;
     $.fn.popover.Constructor.prototype.leave = function (obj) {
         var self = obj instanceof this.constructor ? obj : $(obj.currentTarget)[this.type](this.getDelegateOptions()).data('bs.' + this.type);
@@ -33,7 +35,7 @@ $(document).ready(function () {
         })
     };
 
-    // full-movie slider
+    // home slider
     $('.responsive-carousel').slick({
         dots: false,
         infinite: false,
@@ -88,11 +90,9 @@ $(document).ready(function () {
     function checkModernizr() {
         if (Modernizr.mq('(min-width: 981px)')) {
             popoverTrig();
-            fancyboxBinder();
         }
         if (Modernizr.mq('(max-width: 980px)')) {
             $('.popper').popover('destroy');
-            fancyboxUnBinder();
         }
     }
 
@@ -138,85 +138,4 @@ $(document).ready(function () {
         $('.embed-responsive-16by9').append('<div id="modal-trailer-video" class="modal-trailer-video"></div>');
     });
 
-    // fancybox
-    function fancyboxBinder() {
-        $(".fancybox").unbind('click')
-        $("a.fancybox").fancybox({
-            padding: 5,
-            helpers: {
-                overlay: {
-                    locked: false,
-                    overlayShow: true
-                }
-            },
-        })
-    }
-
-    function fancyboxUnBinder() {
-        $.fancybox.close();
-        $(".fancybox").bind('click', function (e) {
-            e.preventDefault();
-        })
-        $(document).unbind('click.fb-start');
-    }
-
 });
-
-
-var coreJS = require('core-js');
-var zoneJS = require('zone.js');
-var reflectMetadata = require('reflect-metadata');
-var ng = {
-    core: require("@angular/core"),
-    common: require("@angular/common"),
-    compiler: require("@angular/compiler"),
-    forms: require("@angular/forms"),
-    platformBrowser: require("@angular/platform-browser"),
-    platformBrowserDynamic: require("@angular/platform-browser-dynamic"),
-    router: require("@angular/router")
-};
-
-var AngularTestComponent = ng.core.Component({
-    selector: "shine-angular-test",
-    template: '\
-<h2 *ngIf="salutation">Hello {{salutation}}!</h2> \
-<form> \
-<div class="form-group"> \
-<label for="name">Name</label> \
-<input type="text" id="name" class="form-control" \
-name="name" bindon-ngModel="salutation"> \
-</div> \
-</form> \
-'
-}).Class({
-    constructor: function () {
-        this.salutation = null;
-    }
-});
-
-var AngularTestAppModule = ng.core.NgModule({
-    imports: [ng.platformBrowser.BrowserModule, ng.forms.FormsModule],
-    declarations: [AngularTestComponent],
-    bootstrap: [AngularTestComponent]
-})
-    .Class({
-        constructor: function () {
-        }
-    });
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    var shouldBootstrap = document.getElementById("angular-test");
-    if (shouldBootstrap) {
-        ng.platformBrowserDynamic.
-        platformBrowserDynamic().
-        bootstrapModule(AngularTestAppModule);
-    }
-});
-
-
-
-
-
-
-

@@ -373,7 +373,7 @@ module ProductsHelper
     |product|
       lang = product.language.by_language(I18n.locale).first
       if lang && lang.short
-        content += content_tag(:li, lang.short.upcase, :class => "left red osc", :alt => lang.name, :title => lang.name) 
+        content += content_tag(:li, lang.short.upcase, :class => "ballon", :alt => lang.name, :title => lang.name)
       end
     }
     content
@@ -394,7 +394,7 @@ module ProductsHelper
         else
           class_undertitle = class_bubble(short, :classic)
         end
-        content += content_tag(:li, short.upcase, :class => "left gray osc #{class_undertitle}", :alt => name, :title => name)
+        content += content_tag(:li, short.upcase, :class => "baloon-trans #{class_undertitle}", :alt => name, :title => name)
       end
     }
     content

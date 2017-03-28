@@ -18,7 +18,7 @@ group :development do
   gem 'spring'
   gem 'sextant'
   gem 'capistrano-slack', :git => 'https://github.com/j-mcnally/capistrano-slack.git'
-  gem 'rack-mini-profiler'
+  #gem 'rack-mini-profiler'
 end
 
 group  :development, :test do
@@ -78,3 +78,4 @@ gem 'twitter-bootstrap-rails', '~> 3.2', '>= 3.2.2'
 gem 'omniauth-oauth2', '~> 1.4'
 gem 'webpack-rails'
 gem 'bootstrap-chosen-rails'
+gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.1'
