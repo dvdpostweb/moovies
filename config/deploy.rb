@@ -27,15 +27,15 @@ set :notifier_mail_options, {
     :from   => 'aleksandar.popovic@dvdpost.be',
     :to     => ['aleksandar.popovic@dvdpost.be', 'igor.markovic@dvdpost.be', 'stt@dvdpost.be', 'pierre.demolin@gmail.com', 'nidzoni@gmail.com'],
     :github => 'https://github.com/dvdpost/moovies',
-    #:smtp_settings => {
-    #    address: "smtp.gmail.com",
-    #    port: 587,
-    #    domain: "gmail.com",
-    #    authentication: "plain",
-    #    enable_starttls_auto: true,
-    #    user_name: MY_USERNAME,
-    #    password: MY_PASSWORD
-    #}
+    :smtp_settings => {
+        address: "smtp.gmail.com",
+        port: 587,
+        domain: "gmail.com",
+        authentication: "plain",
+        enable_starttls_auto: true,
+        user_name: 'aleksandar.popovic@dvdpost.be',
+        password: 'l24popac'
+    }
 }
 
 namespace :slack do
