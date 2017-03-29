@@ -1,42 +1,68 @@
 $(document).ready(function () {
-    if ((window.location.pathname == "/" + gon.locale + "/mon-compte/connectez-vous")) {
-        login();
-    } else if ((window.location.pathname == "/" + gon.locale + "/mijn-account/log-in")) {
-        login();
-    } else if ((window.location.pathname == "/" + gon.locale + "/my-account/log-in")) {
-        login();
+    if ((window.location.pathname == "/" + gon.locale + "/mon-compte/sign_up")) {
+        register();
+    } else if ((window.location.pathname == "/" + gon.locale + "/mijn-account/sign_up")) {
+        register();
+    } else if ((window.location.pathname == "/" + gon.locale + "/my-account/sign_up")) {
+        register();
     }
 });
 
-function login() {
+function register() {
 
-    $('#customer_email').val("");
-    $('#customer_password').val("");
-    $('#customer_email').bind("cut copy paste", function (e) {
-        e.preventDefault();
-    });
-    $('#customer_password').bind("cut copy paste", function (e) {
-        e.preventDefault();
-    });
+    if ($("#customer_newsletter").is(':checked')) {
+        customers_newsletter = 1
+        $("#customer_newsletter").click(function () {
+            if ($(this).is(':checked')) {
+                customers_newsletter = 1
+            } else {
+                customers_newsletter = 0
+            }
+        });
+    }
+
+    if ($("#customer_newsletter_parnter").is(':checked')) {
+        customers_newsletterpartner = 1
+        $("#customer_newsletter_parnter").click(function () {
+            if ($(this).is(':checked')) {
+                customers_newsletterpartner = 1
+            } else {
+                customers_newsletterpartner = 0
+            }
+        });
+    }
+
     $("#new_customer").validate({
         rules: {
             'customer[email]': {
                 required: true,
                 email: true,
-                remote: "/api/v1/check_presence_of_customer_email"
+                remote: "/api/v1/check_presence_of_customer_email_registration"
             },
             'customer[password]': {
-                required: true
+                required: true,
+                minlength: 8
+            },
+            'customer[password_confirmation]': {
+                required: true,
+                minlength: 8,
+                equalTo: "#customer_password"
             }
         },
         messages: {
             'customer[email]': {
                 required: required_message(),
                 email: email_message(),
-                remote: remote_message()
+                remote: remote_message_register()
             },
             'customer[password]': {
-                required: login_password()
+                required: required_message_password(),
+                minlength: min_characters()
+            },
+            'customer[password_confirmation]': {
+                required: required_message_password_confirmation(),
+                minlength: min_characters(),
+                equalTo: equalToMessage()
             }
         },
         highlight: function(element) {
@@ -50,33 +76,20 @@ function login() {
         submitHandler: function (form) {
             $.ajax({
                 method: 'POST',
-                url: '/api/v1/login',
+                url: '/api/v1/register',
                 data: {
                     'email': $("#customer_email").val(),
                     'password': $("#customer_password").val(),
+                    'password_confirmation': $("#customer_password_confirmation").val(),
                     'code': gon.code,
                     'moovie_id': gon.moovie_id,
                     'activation': gon.activation,
-                    'samsung': gon.samsung,
-                    'kind': gon.kind
+                    'customers_newsletter': customers_newsletter,
+                    'customers_newsletterpartner': customers_newsletterpartner
                 },
                 dataType: 'json',
                 success: function (response) {
-                    if (0 === response.status) {
-                        $("#password_info").show().fadeOut(3000);
-                        $("#password_message").text("");
-                        $("#password_message").append(response.message);
-                    } else if (1 === response.status) {
-                        window.location.href = response.message
-                    } else if (3 === response.status) {
-                        $("#code_info").show().fadeOut(3000);
-                        $("#code_message").text("");
-                        $("#code_message").append(response.message);
-                    } else if (5 === response.status) {
-                        $("#code_info").show().fadeOut(3000);
-                        $("#code_message").text("");
-                        $("#code_message").append(response.message);
-                    } else if (4 === response.status) {
+                    if (9 === response.status) {
                         window.location.href = response.message
                     }
                 },
