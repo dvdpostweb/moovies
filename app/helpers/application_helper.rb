@@ -234,9 +234,9 @@ module ApplicationHelper
   end
   def landing_img(code, promotion, params, products_alt_banner, discount_top)
     if params[:kind] == :adult
-      path = info_path(:page_name => t('routes.infos.params.abo')) #code ? promotion_path(:id => :mobistar2) : new_customer_registration_path(:code => get_code(discount_top.name))
+      path = info_path(:page_name => t('routes.infos.params.alacarte')) #code ? promotion_path(:id => :mobistar2) : new_customer_registration_path(:code => get_code(discount_top.name))
     else
-      path = info_path(:page_name => t('routes.infos.params.abo')) #new_customer_registration_path(:code => get_code(discount_top.name))
+      path = info_path(:page_name => t('routes.infos.params.alacarte')) #new_customer_registration_path(:code => get_code(discount_top.name))
     end
     if promotion && promotion.banner.present?
       src = "http://www.dvdpost.be/images/#{I18n.locale}/#{promotion.banner}"
