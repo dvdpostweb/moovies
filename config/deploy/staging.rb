@@ -28,7 +28,7 @@ set :keep_releases, 5
 #	Servers
 #############################################################
 
-set :user, "orange"
+set :user, "plush"
 set :domain,  "217.112.190.50"
 set :port, 23051
 role :app, domain
@@ -41,7 +41,7 @@ role :db, domain,  :primary => true
 #############################################################
 
 set :scm, :git
-set :branch, "master"
+set :branch, "orange"
 set :scm_user, 'it@dvdpost.be'
 set :scm_passphrase, "[y'|\E7U158]9*"
 set :repository, "git@github.com:dvdpost/moovies.git"
