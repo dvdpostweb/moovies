@@ -35,11 +35,11 @@
           et regardez ce film pour seulement <strong>1.99€</strong>
         </p>
       </div>
-      <a href="index.html#" class="synopsys-adaptive-close"></a>
+      <a href="<%= product_path(:id => product.to_param, :source => source) %>" class="synopsys-adaptive-close"></a>
     </div>
   </div>
   <!--/synopsys-->
-  <a href="index.html#" class="position-absolute white-bck pad10 radius2 synopsys-adaptive-open f17 green uppercase no-underline"><i class="fa fa-search-plus f25 marr5"></i>Details
+  <a href="<%= product_path(:id => product.to_param, :source => source) %>" class="position-absolute white-bck pad10 radius2 synopsys-adaptive-open f17 green uppercase no-underline"><i class="fa fa-search-plus f25 marr5"></i>Details
   </a>
 </div>
 

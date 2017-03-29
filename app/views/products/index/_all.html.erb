@@ -66,21 +66,24 @@
     <div id="grid-view">
       <%= render :partial => "products/index/movie_details_jacket", :collection => @products, :locals => {:target => @target} %>
     </div>
+    <% unless request.user_agent =~ /Mobile|webOS/ %>
     <script>
-        $(document).ready(function() {
-            $('.popper').popover({
-                placement: "left",
-                trigger: "hover",
-                container: 'body',
-                html: true,
-                delay: {
-                    show: 300,
-                    hide: 100
-                },
-                content: function () {
-                    return $(this).next('.synopsys-content').html();
-                }
-            })
-        });
+      console.log("MOBILE!!!");
+        //$(document).ready(function() {
+        //    $('.popper').popover({
+        //        placement: "left",
+        //        trigger: "hover",
+        //        container: 'body',
+        //        html: true,
+        //        delay: {
+        //            show: 300,
+        //            hide: 100
+        //        },
+        //        content: function () {
+        //            return $(this).next('.synopsys-content').html();
+        //        }
+        //    })
+        //});
     </script>
+    <% end %>
 <% end %>

@@ -68,6 +68,19 @@
                 </div>
               </li>
               <li>
+
+                <div class="left-item" id="audio-tags">
+                  <label class="OpenSansCondensed f20">Audio</label>
+                  <input type="text" class="tags" name="audio-autocomplete-tags"
+                         id="audio-autocomplete-tags"/>
+                  <div class="tags-autocomplete-holder block100"></div>
+                </div>
+
+                <div class="left-item" id="listing-range-slider">
+                  <label class="OpenSansCondensed f20">Cotations</label>
+                  <input type="text" id="listing-range" name="public-range" value=""/>
+                </div>
+
                 <div class="left-item mart15">
                   <label class="OpenSansCondensed f20"><%= t('products.index.filters.audio', :default => 'audio') %></label>
                   <%= collection_select(:filters, :audio, Language.by_language(I18n.locale), :id, :name, {:selected => params[:filters] && params[:filters][:audio] ? params[:filters][:audio] : nil, :include_blank => true}, {:multiple => true, :class => 'chosen-select box-shadow', 'data-placeholder' => "audio...", 'data-no_results_text' => t('products.index.filters.not_found')}) %>
