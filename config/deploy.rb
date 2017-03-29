@@ -34,7 +34,7 @@ set :notifier_mail_options, {
         authentication: "plain",
         enable_starttls_auto: true,
         user_name: 'aleksandar.popovic@dvdpost.be',
-        password: 'l24popac'
+        password: 'popacdvdpost'
     }
 }
 
