@@ -2,6 +2,7 @@ require("pricing/alacarte");
 require("catalog/products");
 require("devise/login");
 require("devise/registration");
+require("devise/password");
 
 
 $(document).ready(function () {

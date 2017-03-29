@@ -1,23 +1,25 @@
 <div class="container white-bck padb30">
   <div class="center-block thin-holder ">
     <div class="block100 cred-buttons">
-      <a href="index.php%3Fpage=sign-up.html#" class="btn center-block f16 blue-facebook-bck uppercase radius4 padtb15"><i class="fa fa-facebook marr5 f16"></i> Register with Facebook</a>
-      <a href="index.php%3Fpage=sign-up.html#" class="btn center-block f16 red-google-bck uppercase radius4 padtb15 mart15"><i class="fa fa-google-plus marr5 f16"></i> Register with Google</a>
-      <a href="index.php%3Fpage=sign-up.html#" class="btn center-block f16 orange-bck uppercase radius4 padtb15 mart15">Register with Orange</a>
+      <a href="/auth/facebook?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>;ACTION_TYPE=NORMAL;ORG_URL=<%= request.fullpath %>" class="btn center-block f16 blue-facebook-bck uppercase radius4 padtb15"><i class="fa fa-facebook marr5 f16"></i> <%= t('.social.network.fbconnect') %>
+      </a>
+      <a href="/auth/google_oauth2?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>;ACTION_TYPE=NORMAL;ORG_URL=<%= request.fullpath %>" class="btn center-block f16 red-google-bck uppercase radius4 padtb15 mart15"><i class="fa fa-google-plus marr5 f16"></i> <%= t('.social.network.google') %>
+      </a>
+      <a href="index.php%3Fpage=sign-up.html#" class="btn center-block f16 orange-bck uppercase radius4 padtb15 mart15">Register
+        with Orange</a>
     </div>
-
     <div class="hr-with-words mart30 block100">
-      <span class="Arial f20 dark-blue">OR</span>
+      <span class="Arial f20 dark-blue"><%= t('promotions.show.or') %></span>
     </div>
-
-    <div class="block100 mart30">
-      <input type="text" name="sign-email" class="f20" placeholder="Email Address">
-    </div>
-
-    <div class="block100 text-center mart30">
-      <a href="index.php%3Fpage=sign-up.html#" class="btn block100 btn-green-gradient padlr40 padtb15 white f16 normal">Submit</a>
-    </div>
-
+    <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => {:method => :post}) do |f| %>
+        <div class="col-xs-12" style="height:20px;"></div>
+        <div class="form-group input-group-lg">
+          <%= f.email_field :email, :class => 'form-control f20', :placeholder => t('.email') %>
+        </div>
+        <div class="block100 text-center mart30">
+          <%= f.submit t('.sent'), :id => :submit_button, :class => "btn block100 btn-green-gradient padlr40 padtb15 white f16 normal" %>
+        </div>
+    <% end %>
     <div class="block100 mart30 text-center">
       <%= link_to t('.sign_in'), new_session_path(resource_name, :code => params[:code], :activation => params[:activation]), class: "f20" %>
     </div>
