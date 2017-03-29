@@ -14,6 +14,7 @@
       <% end %>
     </div>
     <div class="block100 mart20">
+      <h3>↓ Question for this text is logicl to be on this page??? ↓</h3>
       Vous pouvez louer films à la piéce directement à partir du catalogue, ou prendre un abonnement pour bénéficier de prix avantageux (1,99€ au lieu de 2,99€ pour la plupart des films, et
       3,99€ au lieu de 4,99€ pour les derniéres sorties).
     </div>
@@ -30,7 +31,7 @@
         <div class="cell selected pt-header-with-border">
           <div>
             <div class="selborder">
-              <div class="cellContent" data-box-order="3">200 films X Illimité</div>
+              <div class="cellContent" data-box-order="3"><%= t('info.index.price_public.choose_adult_plan_one').html_safe %></div>
             </div>
             <div class="arrow"></div>
           </div>
@@ -44,29 +45,29 @@
 
     <!--TABLE OPTIONS-->
     <div class="planTable planTableOptions">
-      <div class="alt">Tarif mensuel (21/04/2017)</div>
+      <div class="alt"><%= t('info.index.price_public.adult_line_one').html_safe %> (<%= 1.month.from_now.strftime("%d/%m/%Y") %>)</div>
       <div class="row">
-        <div class="columnHeader">Tarif mensuel (21/04/2017)</div>
-        <div class="cell bodyCell selected">EUR9.99</div>
+        <div class="columnHeader"><%= t('info.index.price_public.adult_line_one').html_safe %> (<%= 1.month.from_now.strftime("%d/%m/%Y") %>)</div>
+        <div class="cell bodyCell selected">EUR 9.99</div>
       </div>
-      <div class="alt">200 films adultes en accès Illimité</div>
+      <div class="alt"><%= t('info.index.price_public.adult_line_two').html_safe %></div>
       <div class="row">
-        <div class="columnHeader">4200 films adultes en accès Illimité</div>
+        <div class="columnHeader"><%= t('info.index.price_public.adult_line_two').html_safe %></div>
         <div class="cell bodyCell icon-plainCheck selected"></div>
       </div>
-      <div class="alt">Accès sur ordinateur, smartphone, TV, Playstation</div>
+      <div class="alt"><%= t('info.index.price_public.adult_access_devices').html_safe %></div>
       <div class="row">
-        <div class="columnHeader">Accès sur ordinateur, smartphone, TV, Playstation</div>
+        <div class="columnHeader"><%= t('info.index.price_public.adult_access_devices').html_safe %></div>
         <div class="cell bodyCell icon-plainCheck selected"></div>
       </div>
-      <div class="alt">Nombre d’utilisateurs simultanés</div>
+      <div class="alt"><%= t('info.index.price_public.adult_simultaneus').html_safe %></div>
       <div class="row">
-        <div class="columnHeader">Nombre d’utilisateurs simultanés</div>
-        <div class="cell bodyCell selected">illimité</div>
+        <div class="columnHeader"><%= t('info.index.price_public.adult_simultaneus').html_safe %></div>
+        <div class="cell bodyCell selected"><%= t('customers.show.old_pricing.unlimited') %></div>
       </div>
-      <div class="alt">Annulable à tout moment</div>
+      <div class="alt"><%= t('info.index.price_public.adult_cancellable').html_safe %></div>
       <div class="row">
-        <div class="columnHeader">Annulable à tout moment</div>
+        <div class="columnHeader"><%= t('info.index.price_public.adult_cancellable').html_safe %></div>
         <div class="cell bodyCell icon-plainCheck selected"></div>
       </div>
 
@@ -75,21 +76,18 @@
 
     <!--DISCLAIMER-->
     <div class="block100 padlr10 normal mart15 f14">
-      Pour connaître les supports sur lesquels Plush est disponible, cliquez ici. Tous les contenus ne sont pas disponibles en HD.
+      <%= t('info.index.price_public.adult_explanation_1').html_safe %>, <strong><%= link_to t('info.index.price_public.adult_explanation_link').html_safe, info_path(:page_name => t('routes.infos.params.vod')), :id => :multi %></strong>. <%= t('info.index.price_public.adult_explanation_2').html_safe %>.
     </div>
-    <!--/DISCLAIMER-->
 
     <!--BUTTON-->
     <div class="block100 mart15 padlr15">
-      <form>
-        <input type="hidden" name="package" value=""> <input type="submit" class="btn pad10 f20 violet-bck" id="continue-package" value="Continuer">
-      </form>
+      <%= link_to(t('info.index.price_public.adult_button').html_safe, new_customer_session_path( :code => "SVOD_ADULT" ), :class => "btn pad10 f20 violet-bck", :id => "continue-package") %>
     </div>
     <!--/BUTTON-->
 
-    <div class="block100 padlr15">Des questions? Appelez le 0800/26371</div>
+    <div class="block100 padlr15"><%= t('info.index.price_public.adult_support_info').html_safe %></div>
     <div class="block100 padlr15 mart15 marb30">
-      <a href="index.php%3Fpage=charts-18.html#">Conditions d’utilisation</a>
+      <%= link_to t('info.index.price_public.adult_conditions').html_safe, info_path(:page_name => t('routes.infos.params.conditions')) %>
     </div>
 
   </div>
