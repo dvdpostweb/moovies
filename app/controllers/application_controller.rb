@@ -21,9 +21,9 @@ class ApplicationController < ActionController::Base
     gon.params = params
   end
 
-  def handle_unverified_request
-    raise ActionController::InvalidAuthenticityToken
-  end
+  #def handle_unverified_request
+  #  raise ActionController::InvalidAuthenticityToken
+  #end
 
   def default_url_options
     if params[:kind] == :normal
