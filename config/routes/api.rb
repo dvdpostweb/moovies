@@ -16,4 +16,13 @@ Moovies::Application.routes.draw do
       match "ogone_parameters_accepturl" => "ogone_tokenization#ogone_parameters_accepturl"
     end
   end
+  namespace :orange do
+    namespace :lu do
+      namespace :auth do
+        scope "/:locale", locale: /#{I18n.available_locales.join("|")}/ do
+          get "sms/authorization"
+        end
+      end
+    end
+  end
 end
