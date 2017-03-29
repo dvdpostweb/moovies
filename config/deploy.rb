@@ -3,7 +3,7 @@ require 'bundler/capistrano'
 require 'thinking_sphinx/capistrano'
 require './config/boot'
 require 'capistrano/slack'
-require 'capistrano/notifier/mail'
+#require 'capistrano/notifier/mail'
 
 set :stages, %w(staging production)
 set :default_stage, "staging"
@@ -22,21 +22,21 @@ set :slack_subdomain, 'dvdpost'
 set :slack_emoji, ':shipit:'
 set :slack_deploy_defaults, false # Provided tasks are weird, and hooks are quite absurd. Let's do it ourselves.
 
-set :notifier_mail_options, {
-    :method => :smtp,
-    :from   => 'aleksandar.popovic@dvdpost.be',
-    :to     => ['aleksandar.popovic@dvdpost.be', 'igor.markovic@dvdpost.be', 'stt@dvdpost.be', 'pierre.demolin@gmail.com', 'nidzoni@gmail.com'],
-    :github => 'https://github.com/dvdpost/moovies',
-    :smtp_settings => {
-        address: "smtp.gmail.com",
-        port: 587,
-        domain: "gmail.com",
-        authentication: "plain",
-        enable_starttls_auto: true,
-        user_name: 'aleksandar.popovic@dvdpost.be',
-        password: 'popacdvdpost'
-    }
-}
+#set :notifier_mail_options, {
+#    :method => :smtp,
+#    :from   => 'aleksandar.popovic@dvdpost.be',
+#    :to     => ['aleksandar.popovic@dvdpost.be', 'igor.markovic@dvdpost.be', 'stt@dvdpost.be', 'pierre.demolin@gmail.com', 'nidzoni@gmail.com'],
+#    :github => 'https://github.com/dvdpost/moovies',
+#    :smtp_settings => {
+#        address: "smtp.gmail.com",
+#        port: 587,
+#        domain: "gmail.com",
+#        authentication: "plain",
+#        enable_starttls_auto: true,
+#        user_name: 'aleksandar.popovic@dvdpost.be',
+#        password: 'popacdvdpost'
+#    }
+#}
 
 namespace :slack do
   task :starting do
