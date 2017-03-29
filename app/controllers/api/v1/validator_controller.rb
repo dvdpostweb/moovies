@@ -91,6 +91,14 @@ class Api::V1::ValidatorController < API::V1::BaseController
     end
   end
 
+  def check_activation_code_validity
+    if request.xhr?
+      render json: params
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
+
   def check_and_validate_public_promotions_activation_codes
     if customer_signed_in?
       if request.xhr?

@@ -20,22 +20,10 @@
 </head>
 <body id="<%= @body_id %>" class="<%= params[:kind] %> <%= current_customer ? :private : :public %> <%= I18n.locale %> <%= @body_class %>">
 <div class="canavas" id="">
-  <div id="filters-open-adaptive" class="green">
-    <div>
-      <span class="f15 display-block">FILTER</span>
-      <i class="fa fa-arrow-down f20 display-block" aria-hidden="true"></i>
-    </div>
-  </div>
-  <div id="overlay"></div>
-  <div id="on-top" class="pad10 radius4 dark-gray-bck">
-    <i class="fa fa-angle-up f30 light-gray"></i>
-  </div>
-  <div class="side-menu box-shadow">
-    <div class="side-menu-close f33"></div>
-    <div class="side-menu-login mart10 block100"></div>
-    <div class="side-menu-nav mart15 block100"></div>
-    <div class="side-menu-search mart15"></div>
-  </div>
+  <% if params[:controller] == "products" %>
+      <%= render "layouts/application/filters_open_adaptive" %>
+  <% end %>
+  <%= render "layouts/application/side_menu_box_shadov" %>
   <div class="wrap">
     <%= render "layouts/header" %>
     <div id="content" class="<%= configure_content_div_html_class(params) %>">
