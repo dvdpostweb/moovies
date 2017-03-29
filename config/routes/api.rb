@@ -2,6 +2,7 @@ Moovies::Application.routes.draw do
   namespace :api do
     namespace :v1 do
       match "check_presence_of_customer_email" => "validator#check_presence_of_customer_email"
+      match "validate_login_password" => "validator#validate_login_password"
       match "check_presence_of_customer_email_registration" => "validator#check_presence_of_customer_email_registration"
       match "check_presence_of_activation_code" => "validator#check_activation_code_presence"
       match "check_presence_of_activation_code_carrefour" => "validator#check_activation_code_presence_carrefour"
