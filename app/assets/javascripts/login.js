@@ -26,7 +26,16 @@ function login() {
                 remote: "/api/v1/check_presence_of_customer_email"
             },
             'customer[password]': {
-                required: true
+                required: true,
+                remote: {
+                    url:"/api/v1/validate_login_password",
+                    data: {
+                        "customer[email]": function(){
+                            return $.trim($("#customer_email").val())
+                        }
+                    },
+                    async: false
+                }
             }
         },
         messages: {
