@@ -1,33 +1,46 @@
 <div class="container white-bck padb30">
   <div class="center-block thin-holder ">
     <div class="block100 cred-buttons">
-      <a href="/auth/facebook?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>;ACTION_TYPE=NORMAL;ORG_URL=<%= request.fullpath %>" class="btn center-block f16 blue-facebook-bck uppercase radius4 padtb15"><i class="fa fa-facebook marr5 f16"></i> <%= t('.social.network.fbconnect') %></a>
-      <a href="/auth/google_oauth2?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>;ACTION_TYPE=NORMAL;ORG_URL=<%= request.fullpath %>" class="btn center-block f16 red-google-bck uppercase radius4 padtb15 mart15"><i class="fa fa-google-plus marr5 f16"></i> <%= t('.social.network.google') %></a>
-      <a href="index.php%3Fpage=login.html#" class="btn center-block f16 orange-bck uppercase radius4 padtb15 mart15">Register with Orange</a>
+      <a href="/auth/facebook?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>;ACTION_TYPE=NORMAL;ORG_URL=<%= request.fullpath %>" class="btn center-block f16 blue-facebook-bck uppercase radius4 padtb15"><i class="fa fa-facebook marr5 f16"></i> <%= t('.social.network.fbconnect') %>
+      </a>
+      <a href="/auth/google_oauth2?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>;ACTION_TYPE=NORMAL;ORG_URL=<%= request.fullpath %>" class="btn center-block f16 red-google-bck uppercase radius4 padtb15 mart15"><i class="fa fa-google-plus marr5 f16"></i> <%= t('.social.network.google') %>
+      </a>
+      <a href="index.php%3Fpage=login.html#" class="btn center-block f16 orange-bck uppercase radius4 padtb15 mart15">Register
+        with Orange</a>
     </div>
 
     <div class="hr-with-words mart30 block100">
-      <span class="Arial f20 dark-blue">OR</span>
+      <span class="Arial f20 dark-blue"><%= t('promotions.show.or') %></span>
     </div>
+    <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+        <% if alert && !alert.empty? %>
+            <%= alert %>
+        <% end %>
+        <div class="col-xs-12" style="height:20px;"></div>
+        <!--<div id="code_info"><div id="code_message"></div></div>-->
+        <div class="form-group input-group-lg">
+          <%= f.text_field :email, :class => 'form-control f20', :tye => 'text', :placeholder => t('.email_label'), autocomplete: "off" %>
+        </div>
+        <div class="col-xs-12" style="height:20px;"></div>
+        <div class="form-group input-group-lg">
+          <%= f.password_field :password, :class => 'form-control f20', :maxlength => '40', :placeholder => t('.pass_label'), autocomplete: "off" %>
+        </div>
+        <!--
+        <div id="password_info"><div id="password_message"></div></div>
+        </br>-->
+        <% if devise_mapping.rememberable? -%>
+            <div class="block100 mart30">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padt15">
+                <%= f.check_box :remember_me, :checked => true, class: "icheckbox" %>
+                <label class="Arial f18 normal marl10"><%= t('.remember_me') %></label>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
+                <%= f.submit t('.connect'), :id => 'submit_button', :class => "btn btn-green-gradient padlr40 padtb15 white f16 normal" %>
+              </div>
+            </div>
+        <% end -%>
 
-    <div class="block100 mart30">
-      <input type="text" name="login-email" class="f20" placeholder="Email Address">
-    </div>
-
-    <div class="block100 mart30">
-      <input type="password" name="login-password" class="f20" placeholder="Password">
-    </div>
-
-    <div class="block100 mart30">
-      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padt15">
-        <input type="checkbox" class="icheckbox" name="login-remember-me" value="1"/>
-        <label class="Arial f18 normal marl10">Remember Me</label>
-      </div>
-      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
-        <a href="index.php%3Fpage=login.html#" class="btn btn-green-gradient padlr40 padtb15 white f16 normal">Login</a>
-      </div>
-    </div>
-
+    <% end %>
     <div class="block100 mart60 text-center">
       <%= link_to t('.forget_password'), new_password_path(resource_name, :code => params[:code], :activation => params[:activation]), class: "f20" %>
     </div>

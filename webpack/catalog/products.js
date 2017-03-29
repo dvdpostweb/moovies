@@ -1,3 +1,19 @@
+function filtersPanelState(state) {
+    $('.content-left #filters-open-adaptive .fa').toggleClass("fa-arrow-up fa-arrow-down");
+    switch (state) {
+        case 'on':
+            $('#filters-open-adaptive').addClass('on');
+            $('.content-left').addClass('on');
+            $("#overlay").addClass('on');
+            break;
+        case 'off':
+            $('#filters-open-adaptive').removeClass('on');
+            $('.content-left').removeClass('on');
+            $("#overlay").removeClass('on');
+            break;
+    }
+}
+
 $(document).ready(function () {
 
     History = window.History;
@@ -220,6 +236,7 @@ $(document).ready(function () {
             $('.packages').removeClass('current');
             $(this).addClass('current');
             submit_online();
+            filtersPanelState('off');
             return false;
         });
 
@@ -229,7 +246,8 @@ $(document).ready(function () {
         //});
 
         $('#products_index, #film-details, #categories, #studios').delegate(".iradio", "ifChecked", function () {
-            submit_online()
+            submit_online();
+            filtersPanelState('off');
         });
 
         $('#products_index, #film-details, #categories, #studios').delegate(".iradio a", "click", function () {
