@@ -10,7 +10,7 @@ set :default_environment, {
 #	Application
 #############################################################
 
-set :application, "dvdpost"
+set :application, "moovies"
 set :deploy_to, "/home/webapps/plush/staging"
 
 #############################################################
