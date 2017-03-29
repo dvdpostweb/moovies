@@ -9,6 +9,7 @@ Moovies::Application.routes.draw do
       match "activate_new_plan" => "validator#set_plan"
       match "login" => "login#login"
       match "register" => "registration#register"
+      match "check_activation_code_validity" => "validator#check_activation_code_validity"
       match "promotion_code_activation" => "validator#check_and_validate_public_promotions_activation_codes"
       match "virement" => "virement#accept_virement_payment"
       match "subscriptions" => "subscriptions#for_logedin_customers"

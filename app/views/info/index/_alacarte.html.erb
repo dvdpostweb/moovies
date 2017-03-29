@@ -1,14 +1,14 @@
 <div class="container white-bck">
-  <h1 class="green">Plush à la Carte</h1>
+  <h1 class="green"><%= t('info.index.price_public.choose_tvod_tvod').html_safe %></h1>
   <div class="block100 marb20 padt20 charts-top">
     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 left-promo-code">
-      <form>
-        <h4 class="dark-blue">Introduisez votre code promo ci-dessous</h4>
+      <form id="alacarte_activation_code_validation">
+        <h4 class="dark-blue"><%= t('info.alacarte.info.index.price_public.discount_code').capitalize %></h4>
         <div class="block100">
-          <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-            <input type="text" name="promo-code" placeholder="Code">
+          <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 form-group">
+            <input type="text" name="activation_promo_code_alacarte" placeholder="<%= t('info.alacarte.info.index.price_public.promotion_code').capitalize %>" class="form-control">
           </div>
-          <input type="submit" class="btn green-bck col-lg-2 col-md-2 col-sm-2 col-xs-2" name="promo-code-submit" value="GO!">
+          <input type="submit" class="btn green-bck col-lg-2 col-md-2 col-sm-2 col-xs-2" name="promo-code-submit" value="<%= t('info.alacarte.info.index.price_public.validate').capitalize %>">
         </div>
       </form>
     </div>
