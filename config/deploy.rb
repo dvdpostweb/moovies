@@ -28,13 +28,13 @@ set :notifier_mail_options, {
     :to     => ['aleksandar.popovic@dvdpost.be', 'igor.markovic@dvdpost.be', 'stt@dvdpost.be', 'pierre.demolin@gmail.com', 'nidzoni@gmail.com'],
     :github => 'https://github.com/dvdpost/moovies',
     :smtp_settings => {
-        address: "smtp.gmail.com",
-        port: 587,
-        domain: "gmail.com",
-        authentication: "plain",
-        enable_starttls_auto: true,
-        user_name: 'aleksandar.popovic@dvdpost.be',
-        password: 'l24popac'
+        :address              => "email-smtp.eu-west-1.amazonaws.com",
+        :port                 => 465,
+        :domain               => "plush.be",
+        :authentication       => "login",
+        :user_name            => "AKIAICQS7KIVA5N62SKQ",
+        :password             => "Au/ZyAC8yBAZGGSPdGDNEz00v2biQZPjUnxpd+qLl3Xn",
+        :enable_starttls_auto => true
     }
 }
 
