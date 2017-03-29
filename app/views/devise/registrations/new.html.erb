@@ -5,7 +5,7 @@
         <%= t('devise.registrations.new.social.network.facebook') %></a>
       <a href="/auth/google_oauth2?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>;ACTION_TYPE=NORMAL;ORG_URL=<%= request.fullpath %>" class="btn center-block f16 red-google-bck uppercase radius4 padtb15 mart15"><i class="fa fa-google-plus marr5 f16"></i>
         <%= t('devise.registrations.new.google.register') %></a>
-      <a href="index.php%3Fpage=sign-up.html#" class="btn center-block f16 orange-bck uppercase radius4 padtb15 mart15">Register
+      <a href="<%= orange_lu_auth_sms_authorization_path %>" class="btn center-block f16 orange-bck uppercase radius4 padtb15 mart15">Register
         with Orange</a>
     </div>
 
