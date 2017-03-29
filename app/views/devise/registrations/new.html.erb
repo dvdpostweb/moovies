@@ -1,49 +1,65 @@
 <div class="container white-bck padb30">
   <div class="center-block thin-holder ">
     <div class="block100 cred-buttons">
-      <a href="index.php%3Fpage=sign-up.html#" class="btn center-block f16 blue-facebook-bck uppercase radius4 padtb15"><i class="fa fa-facebook marr5 f16"></i> Register with Facebook</a>
-      <a href="index.php%3Fpage=sign-up.html#" class="btn center-block f16 red-google-bck uppercase radius4 padtb15 mart15"><i class="fa fa-google-plus marr5 f16"></i> Register with Google</a>
-      <a href="index.php%3Fpage=sign-up.html#" class="btn center-block f16 orange-bck uppercase radius4 padtb15 mart15">Register with Orange</a>
+      <a href="/auth/facebook?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>;ACTION_TYPE=NORMAL;ORG_URL=<%= request.fullpath %>" class="btn center-block f16 blue-facebook-bck uppercase radius4 padtb15"><i class="fa fa-facebook marr5 f16"></i>
+        <%= t('devise.registrations.new.social.network.facebook') %></a>
+      <a href="/auth/google_oauth2?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>;ACTION_TYPE=NORMAL;ORG_URL=<%= request.fullpath %>" class="btn center-block f16 red-google-bck uppercase radius4 padtb15 mart15"><i class="fa fa-google-plus marr5 f16"></i>
+        <%= t('devise.registrations.new.google.register') %></a>
+      <a href="index.php%3Fpage=sign-up.html#" class="btn center-block f16 orange-bck uppercase radius4 padtb15 mart15">Register
+        with Orange</a>
     </div>
 
     <div class="hr-with-words mart30 block100">
-      <span class="Arial f20 dark-blue">OR</span>
+      <span class="Arial f20 dark-blue"><%= t('promotions.show.or') %></span>
     </div>
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+        <% if @samsung %>
+            <%= f.hidden_field(:samsung, :value => @samsung) %>
+        <% else %>
+            <%= cookies[:code] ? f.hidden_field(:code, :value => cookies[:code]) : f.hidden_field(:code, :value => @default_code) %>
+        <% end %>
+        <%= f.hidden_field :abo, :value => params[:abo] %>
+        <%= f.hidden_field :language, :value => Moovies.customer_languages[I18n.locale] %>
+        <div class="col-xs-12" style="height:20px;"></div>
+        <div class="form-group input-group-lg">
+          <%= f.email_field :email, :class => 'form-control f20', :placeholder => t('.email') %>
+        </div>
+        <div class="col-xs-12" style="height:20px;"></div>
+        <div class="form-group input-group-lg">
+          <%= f.password_field :password, :class => 'form-control f20', :placeholder => t('.password') %>
+        </div>
+        <div class="col-xs-12" style="height:20px;"></div>
+        <div class="form-group input-group-lg">
+          <%= f.password_field :password_confirmation, :class => 'form-control f20', :placeholder => t('.confirmation_pass') %>
+        </div>
 
-    <div class="block100 mart30">
-      <input type="text" name="sign-email" class="f20" placeholder="Email Address">
-    </div>
+        <div class="block100 mart30">
 
-    <div class="block100 mart30">
-      <input type="password" name="sign-password" class="f20" placeholder="Password">
-    </div>
+          <div class="col-md-1 col-sm-1 col-xs-1 padt5">
+            <%= f.check_box :newsletter, :checked => true, class: "icheckbox" %></div>
+          <div class="col-md-11 col-sm-11 col-xs-11">
+            <label class="Arial f18 normal marl10"><%= t('.newsletter') %></label>
+          </div>
+        </div>
 
-    <div class="block100 mart30">
-      <input type="password" name="sign-re-password" class="f20" placeholder="Retype Password">
-    </div>
+        <div class="block100 mart10">
+          <div class="col-md-1 col-sm-1 col-xs-1 padt5">
+            <%= f.check_box :newsletter_parnter, :checked => true, class: "icheckbox" %></div>
+          <div class="col-md-11 col-sm-11 col-xs-11">
+            <label class="Arial f18 normal marl10"><%= t('.newsletter_parnter') %></label>
+          </div>
+        </div>
 
-    <div class="block100 mart30">
+        <div class="block100 text-center mart30">
+          <%= f.submit t('.sign_up', :default => "Sign up"), :class => "btn block100 btn-green-gradient padlr40 padtb15 white f16 normal" %>
+        </div>
 
-      <div class="col-md-1 col-sm-1 col-xs-1 padt5"><input type="checkbox" class="icheckbox" name="sign-apprised-news" value="1"/></div>
-      <div class="col-md-11 col-sm-11 col-xs-11">
-        <label class="Arial f18 normal marl10">I wish to be kept apprised of news and promotions from Plush</label>
-      </div>
-    </div>
-
-    <div class="block100 mart10">
-      <div class="col-md-1 col-sm-1 col-xs-1 padt5"><input type="checkbox" class="icheckbox" name="sign-apprised-promotions" value="1"/></div>
-      <div class="col-md-11 col-sm-11 col-xs-11"><label class="Arial f18 normal marl10">I wish to be kept apprised of promotions from Plush partners</label></div>
-    </div>
-
-    <div class="block100 text-center mart30">
-      <a href="index.php%3Fpage=sign-up.html#" class="btn block100 btn-green-gradient padlr40 padtb15 white f16 normal">Submit</a>
-    </div>
-
-    <div class="block100 mart30 text-center">
-      <%= link_to t('.forget_password'), new_password_path(resource_name, :code => params[:code], :activation => params[:activation]), class: "f20" %>
-    </div>
-    <div class="block100 mart5 text-center">
-      <%= link_to t('.sign_in'), new_session_path(resource_name, :code => params[:code], :activation => params[:activation]), class: "f20" %>
-    </div>
+        <div class="block100 mart30 text-center">
+          <%= link_to t('.forget_password'), new_password_path(resource_name, :code => params[:code], :activation => params[:activation]), class: "f20" %>
+        </div>
+        <div class="block100 mart5 text-center">
+          <%= link_to t('.sign_in'), new_session_path(resource_name, :code => params[:code], :activation => params[:activation]), class: "f20" %>
+        </div>
+    <% end %>
   </div>
 </div>

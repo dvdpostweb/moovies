@@ -1,6 +1,7 @@
 require("pricing/alacarte");
 require("catalog/products");
 require("devise/login");
+require("devise/registration");
 
 
 $(document).ready(function () {
