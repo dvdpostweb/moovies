@@ -23,14 +23,13 @@
   <% if params[:controller] == "products" %>
       <%= render "layouts/application/filters_open_adaptive" %>
   <% end %>
-  <% request.user_agent =~ /Mobile|webOS/ %>
   <%= render "layouts/application/side_menu_box_shadov" %>
   <div class="wrap">
-    <% unless request.user_agent =~ /Mobile|webOS/ %>
-        <%= render "layouts/header" %>
-    <% end %>
+    <%= render "layouts/header" %>
     <div id="content" class="<%= configure_content_div_html_class(params) %>">
-      <%= render_promo_image_partial(params[:controller]) %>
+      <% unless request.user_agent =~ /Mobile|webOS/ %>
+          <%= render_promo_image_partial(params[:controller]) %>
+      <% end %>
       <%= yield %>
     </div>
     <%= render "layouts/footer" %>
