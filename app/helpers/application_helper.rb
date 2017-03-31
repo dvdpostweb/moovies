@@ -240,14 +240,14 @@ module ApplicationHelper
     end
     if promotion && promotion.banner.present?
       src = "http://www.dvdpost.be/images/#{I18n.locale}/#{promotion.banner}"
-      image = image_tag(src, :size => '942x188')
+      image = image_tag(src, :size => '930x400', :class => "img-responsive")
 
     else
       src = "#{I18n.locale}/banner-promo-hp_tvod#{code ? "_#{code.activation_group_id}" : ''}#{params[:kind] == :adult ? '_adult' : ''}.jpg"
       src_norm = "#{I18n.locale}/banner-promo-hp_tvod#{params[:kind] == :adult ? '_adult' : ''}.jpg"
       src_norm = "http://www.dvdpost.be/images/plush_banner_public/test.php?img=1&lang=#{I18n.locale}&kind=#{params[:kind]}"
 
-      image = FileTest.exist?("/images/#{src}") ? image_tag(src, :size => '930x200', :alt => t(products_alt_banner)) : image_tag(src_norm, :size => '930x200', :alt => t(products_alt_banner))
+      image = FileTest.exist?("/images/#{src}") ? image_tag(src, :size => '930x200', :alt => t(products_alt_banner), :class => "img-responsive") : image_tag(src_norm, :size => '930x200', :alt => t(products_alt_banner), :class => "img-responsive")
 
     end
 
