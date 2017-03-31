@@ -7,7 +7,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
       wcf_service_response = HTTParty.get("https://www.plush.be:2355/WcfService/http/OrangeIseligable?customers_id=#{customers_id}&mobileNumber=#{params[:sms_number]}&SMSCodeMessage=%22dsgfdag%22&products_id=1758468")
       if wcf_service_response.body = 0
         render json: { status: 0, message: "Success message that SMS CODE IS SENT" }
-      elsif wcf_service_response.body == 1
+      elsif wcf_service_response.body = 1
         render json: { status: 1, message: "Error" }
       end
     else
@@ -21,7 +21,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
       wcf_service_response = HTTParty.get("https://www.plush.be:2355/WcfService/http/OrangePurchase?customers_id=#{customers_id}&mobileNumber=#{params[:sms_code]}&price=4.99&products_id=1")
       if wcf_service_response.body = 0
         render json: { status: 0, message: "Success message that SMS CODE IS VALID" }
-      elsif wcf_service_response.body == 1
+      elsif wcf_service_response.body = 1
         render json: { status: 1, message: "Error" }
       end
     else
