@@ -4,31 +4,33 @@
     <div class="center-block thin-holder border radius4 thinrgray-bck pad20 mart20 overflow-hidden">
       <div class="block100 text-center">
         <%= image_tag("template/orange-logo.png", :class => "center-block") %>
+        <div class="col-xs-12" style="height:40px;"></div>
       </div>
+      <form id="is_eligable">
+        <div class="form-group input-group-lg">
+          <input type="text" name="phone-number" class="form-control" placeholder="Please enter ORANGE phone number">
+        </div>
 
-      <div class="block100 mart30">
-        <input type="text" name="phone-number" class="f20" placeholder="Please enter ORANGE phone number">
-      </div>
-
-      <div class="block100 text-center mart20">
-        <a href="index.php%3Fpage=sms-auth.html#" class="btn block100 orange-bck padlr40 padtb15 white f16 normal">Send</a>
-      </div>
+        <div class="block100 text-center mart20">
+          <input type="submit" class="btn block100 orange-bck padlr40 padtb15 white f16 normal" value="Send" >
+        </div>
+      </form>
     </div>
+    <!--
+        <div class="center-block thin-holder border radius4 thinrgray-bck pad20 mart30 overflow-hidden">
+          <div class="block100 text-center">
+            <#%= image_tag("template/orange-logo.png", :class => "center-block") %>
+          </div>
 
-    <div class="center-block thin-holder border radius4 thinrgray-bck pad20 mart30 overflow-hidden">
-      <div class="block100 text-center">
-        <%= image_tag("template/orange-logo.png", :class => "center-block") %>
-      </div>
+          <div class="block100 mart30">
+            <input type="text" name="phone-number" class="f20" placeholder="Please enter ORANGE SMS code">
+          </div>
 
-      <div class="block100 mart30">
-        <input type="text" name="phone-number" class="f20" placeholder="Please enter ORANGE SMS code">
-      </div>
-
-      <div class="block100 text-center mart20">
-        <a href="index.php%3Fpage=sms-auth.html#" class="btn block100 orange-bck padlr40 padtb15 white f16 normal">Send</a>
-      </div>
-    </div>
-
+          <div class="block100 text-center mart20">
+            <a href="index.php%3Fpage=sms-auth.html#" class="btn block100 orange-bck padlr40 padtb15 white f16 normal">Send</a>
+          </div>
+        </div>
+    -->
 
   </div>
 </div>
