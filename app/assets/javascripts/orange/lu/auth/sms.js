@@ -33,7 +33,8 @@ function isEligable() {
                 method: 'POST',
                 url: '/orange/lu/api/is_eligable',
                 data: {
-                    'sms_number': $.trim($("#sms_number").val())
+                    'sms_number': $.trim($("#sms_number").val()),
+                    'products_id': gon.products_id
                 },
                 dataType: 'json',
                 success: function (response) {
@@ -87,7 +88,8 @@ function orangePurchase() {
                 method: 'POST',
                 url: '/orange/lu/api/orange_purchase',
                 data: {
-                    'sms_code': $.trim($("#sms_code").val())
+                    'sms_code': $.trim($("#sms_code").val()),
+                    'products_id': gon.products_id
                 },
                 dataType: 'json',
                 success: function (response) {
