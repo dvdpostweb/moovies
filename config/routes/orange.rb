@@ -10,6 +10,7 @@ Moovies::Application.routes.draw do
         match "is_eligable" => "webservice#is_eligable"
         match "orange_purchase" => "webservice#orange_purchase"
         match "check_sms_activation_code" => "webservice#check_sms_activation_code"
+        match "automatic_login" => "webservice#automatic_login"
       end
     end
   end
