@@ -9,6 +9,7 @@ Moovies::Application.routes.draw do
       namespace :api do
         match "is_eligable" => "webservice#is_eligable"
         match "orange_purchase" => "webservice#orange_purchase"
+        match "check_sms_activation_code" => "webservice#check_sms_activation_code"
       end
     end
   end

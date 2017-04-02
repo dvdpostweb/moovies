@@ -44,6 +44,7 @@ function isEligable() {
                         $("#info1").html(successMessage).fadeOut(3000);
                         $("#is_eligable").hide();
                         $("#orange_purchase").show();
+                        $("#sms_code").val(response.sms_code);
                     } else if (1 === response.status) {
                         $("#info1").append(errorMessage(response.message));
                     }
