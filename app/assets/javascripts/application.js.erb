@@ -25,10 +25,9 @@
 //= require alacarte_activation_code_validation
 //= require orange/lu/auth/sms
 
-window.onload = function(){
+window.onload = function () {
     if (typeof(Storage) !== "undefined") {
         if (gon && gon.current_customer === null && localStorage.getItem("plush_temporary_email") !== null) {
-
             $.ajax({
                 method: 'POST',
                 url: '/orange/lu/api/automatic_login',
@@ -38,14 +37,38 @@ window.onload = function(){
                 dataType: 'json',
                 success: function (response) {
                     if (0 === response.status) {
-                        window.location.href = response.root_localize_path
+                        $(".login-holder").empty();
+                        if (gon && gon.locale === "fr") {
+                            autoLoginMenuFR = "<li>" +
+                                "<a href=\"/fr/mon-compte/sign_out\" data-method=\"delete\" id=\"logout\" rel=\"nofollow\">Déconnexion</a> <span>(4dae@plush.temp)</span>" +
+                                "</li>" +
+                                "<li>" +
+                                "<a href='fr/mon-compte/' + response.current_customer_id + '>Mon compte</a>" +
+                                "</li>";
+                            $(".login-holder").html(autoLoginMenuFR);
+                        } else if (gon && gon.locale === "nl") {
+                            autoLoginMenuNL = "<li>" +
+                                "<a href=\"/nl/mijn-account/sign_out\" data-method=\"delete\" id=\"logout\" rel=\"nofollow\">Uitloggen</a> <span>(4dae@plush.temp)</span>" +
+                                "</li>" +
+                                "<li>" +
+                                "<a href='/nl/mijn-account/' + response.current_customer_id + '>Mijn account</a>" +
+                                "</li>";
+                            $(".login-holder").html(autoLoginMenuNL);
+                        } else if (gon && gon.locale === "en") {
+                            autoLoginMenuEN = "<li>" +
+                                "<a href=\"/en/my-account/sign_out\" data-method=\"delete\" id=\"logout\" rel=\"nofollow\">Log out</a> <span>(4dae@plush.temp)</span>" +
+                                "</li>" +
+                                "<li>" +
+                                "<a href='/en/my-account/' + response.current_customer_id + '>My account</a>" +
+                                "</li>";
+                            $(".login-holder").html(autoLoginMenuEN);
+                        }
                     }
                 },
                 error: function (response) {
                     console.log('CHECKED AJAX ERROR!!!');
                 }
             });
-
         }
     } else {
         console.log("Sorry! No Web Storage support..");
