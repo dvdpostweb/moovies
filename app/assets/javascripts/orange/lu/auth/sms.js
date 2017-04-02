@@ -46,6 +46,15 @@ function isEligable() {
                         $("#is_eligable").hide();
                         $("#orange_purchase").show();
                         $("#sms_code").val(response.sms_code);
+
+                        if (typeof(Storage) !== "undefined") {
+                            localStorage.setItem("plush_temporary_email", response.temporary_email);
+                            //localStorage.getItem("plush_temporary_email");
+                            //localStorage.removeItem("plush_temporary_email");
+                        } else {
+                            console.log("Sorry! No Web Storage support..");
+                        }
+
                     } else if (1 === response.status) {
                         $("#info1").append(errorMessage(response.message));
                     }
@@ -89,16 +98,18 @@ function orangePurchase() {
                 url: '/orange/lu/api/orange_purchase',
                 data: {
                     'sms_code': $.trim($("#sms_code").val()),
-                    'products_id': gon.products_id
+                    'products_id': gon.products_id,
+                    'temporary_email': localStorage.getItem("plush_temporary_email")
                 },
                 dataType: 'json',
                 success: function (response) {
                     if (0 === response.status) {
-                        successMessage = "<div class=\"alert alert-success\">" +
-                            "<strong>" + response.message + "</strong>" +
-                            "</div>";
-                        $("#info2").html(successMessage).fadeOut(3000);
+                        //successMessage = "<div class=\"alert alert-success\">" +
+                        //    "<strong>" + response.message + "</strong>" +
+                        //    "</div>";
+                        //$("#info2").html(successMessage).fadeOut(3000);
                         //$("#sms_form").empty();//.html(orangePurchaseForm());
+                        window.location.href = response.root_localize_path
                     } else if (1 === response.status) {
                         $("#info2").append(errorMessage(response.message));
                     }

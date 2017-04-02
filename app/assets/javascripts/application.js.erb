@@ -25,6 +25,33 @@
 //= require alacarte_activation_code_validation
 //= require orange/lu/auth/sms
 
+window.onload = function(){
+    if (typeof(Storage) !== "undefined") {
+        if (gon && gon.current_customer === null && localStorage.getItem("plush_temporary_email") !== null) {
+
+            $.ajax({
+                method: 'POST',
+                url: '/orange/lu/api/automatic_login',
+                data: {
+                    'temporary_email': localStorage.getItem("plush_temporary_email")
+                },
+                dataType: 'json',
+                success: function (response) {
+                    if (0 === response.status) {
+                        window.location.href = response.root_localize_path
+                    }
+                },
+                error: function (response) {
+                    console.log('CHECKED AJAX ERROR!!!');
+                }
+            });
+
+        }
+    } else {
+        console.log("Sorry! No Web Storage support..");
+    }
+};
+
 $(document).ready(function () {
 
     //$("input[type='checkbox'], input[type='radio']").iCheck({

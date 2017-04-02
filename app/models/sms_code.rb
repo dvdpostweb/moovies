@@ -1,5 +1,5 @@
 class SmsCode < ActiveRecord::Base
-  attr_accessible :code, :phone_number
+  attr_accessible :code, :phone_number, :temporary_email
   validates :phone_number, presence: true
   validates_uniqueness_of :code
   before_create :create_unique_code
