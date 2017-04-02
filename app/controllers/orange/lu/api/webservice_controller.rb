@@ -34,7 +34,16 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
   end
 
   def check_sms_activation_code
-    render json: "check code!!!"
+    if request.xhr? && URI(request.referer).path == "/orange/lu/auth/#{I18n.locale}/sms/authorization" && params["sms-code"].present?
+      sms_code = SmsCode.find_by_code(params["sms-code"])
+      if sms_code.present?
+        render json: TRUE
+      else
+        render json: FALSE
+      end
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
   end
 
 end

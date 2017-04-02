@@ -62,12 +62,16 @@ function orangePurchase() {
     $("#orange_purchase").validate({
         rules: {
             "sms-code": {
-                required: true
+                required: true,
+                remote: {
+                    url:"/orange/lu/api/check_sms_activation_code"
+                }
             }
         },
         messages: {
             "sms-code": {
-                required: orangePurchaseMessage()
+                required: orangePurchaseMessage(),
+                remote: orangePurchaseMessageSmsCodeValidation()
             }
         },
         highlight: function (element) {
@@ -123,5 +127,15 @@ function orangePurchaseMessage() {
         return "SMS code is vereist."
     } else if (gon.locale == "en") {
         return "SMS code is required."
+    }
+}
+
+function orangePurchaseMessageSmsCodeValidation() {
+    if (gon.locale == "fr") {
+        return "Le code SMS n'est pas correct."
+    } else if (gon.locale == "nl") {
+        return "SMS code is niet juist."
+    } else if (gon.locale == "en") {
+        return "SMS code is not correct."
     }
 }
