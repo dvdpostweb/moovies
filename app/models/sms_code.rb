@@ -1,10 +1,7 @@
 class SmsCode < ActiveRecord::Base
   attr_accessible :code, :phone_number
-
-  #validates :code, presence: true
   validates :phone_number, presence: true
   validates_uniqueness_of :code
-
   before_create :create_unique_code
 
   def code=(val)

@@ -9,7 +9,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
       if sms_code.save!
         wsr = HTTParty.get("https://www.plush.be:2355/WcfService/http/OrangeIseligable?customers_id=#{customers_id}&mobileNumber=#{params[:sms_number]}&SMSCodeMessage=#{puts t("orange.sms_code.message")}#{sms_code.code}&products_id=1758468")
         if wsr.body = 0
-          render json: { status: 0, message: "Success message that SMS CODE IS SENT" }
+          render json: { status: 0, message: "Success message that SMS CODE IS SENT", sms_code: sms_code.code }
         elsif wsr.body = 1
           render json: { status: 1, message: "Error" }
         end
@@ -31,6 +31,10 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
     else
       raise ActionController::RoutingError.new('Not Found')
     end
+  end
+
+  def check_sms_activation_code
+    render json: "check code!!!"
   end
 
 end
