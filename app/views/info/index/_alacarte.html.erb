@@ -42,7 +42,7 @@
         <div class="cell pt-header-with-border">
           <div>
             <div class="selborder">
-              <div class="cellContent" data-box-order="1">2 film-crédits</div>
+              <div id="2_film_credits" class="cellContent" data-box-order="1">2 film-crédits</div>
             </div>
             <div class="arrow"></div>
           </div>
@@ -50,7 +50,7 @@
         <div class="cell pt-header-with-border">
           <div>
             <div class="selborder">
-              <div class="cellContent" data-box-order="2">4 film-crédits</div>
+              <div id="4_film_credits" class="cellContent" data-box-order="2">4 film-crédits</div>
             </div>
             <div class="arrow"></div>
           </div>
@@ -58,7 +58,7 @@
         <div class="cell selected pt-header-with-border">
           <div>
             <div class="selborder">
-              <div class="cellContent" data-box-order="3">6 film-crédits</div>
+              <div id="6_film_credits" class="cellContent" data-box-order="3">6 film-crédits</div>
             </div>
             <div class="arrow"></div>
           </div>
@@ -134,7 +134,12 @@
     <div class="block100 mart15 padlr15">
       <form>
         <input type="hidden" name="package" value="">
-        <input type="submit" class="btn pad10 f20 green-bck" id="continue-package" value="Continuer">
+
+        <%= link_to(t('info.index.price_public.svod_button').html_safe, new_customer_session_path( :code => "2FILMS" ), :class => "btn pad10 f20 green-bck film_credits_btn_2", :id => "continue-package") %>
+
+        <%= link_to(t('info.index.price_public.svod_button').html_safe, new_customer_session_path( :code => "4FILMS" ), :class => "btn pad10 f20 green-bck film_credits_btn_4", :id => "continue-package") %>
+
+        <%= link_to(t('info.index.price_public.svod_button').html_safe, new_customer_session_path( :code => "6FILMS" ), :class => "btn pad10 f20 green-bck film_credits_btn_6", :id => "continue-package") %>
       </form>
     </div>
     <!--BUTTON-->
