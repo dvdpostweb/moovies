@@ -62,7 +62,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
     if request.xhr? #&& params["temporary_email"].present?
       customer = Customer.find_by_email(params["temporary_email"])
       if customer.present? && sign_in(customer, bypass: true)
-        render json: {status: 0, root_localize_path: root_localize_path}
+        render json: {status: 0, current_customer_id: customer.customers_id}
       end
     else
       raise ActionController::RoutingError.new('Not Found')
