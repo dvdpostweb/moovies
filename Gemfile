@@ -65,7 +65,7 @@ gem "rest-client"
 gem "jbuilder"
 gem 'annotate'
 gem 'gon'
-gem 'omniauth-facebook', '~> 4.0'
+gem 'omniauth-facebook', '4.0', :git => 'https://github.com/dvdpost/omniauth-facebook'
 gem 'omniauth-google-oauth2', '~> 0.3.1'
 gem 'omniauth-instagram', '~> 1.0', '>= 1.0.2'
 gem 'omniauth-windowslive', '~> 0.0.11'
