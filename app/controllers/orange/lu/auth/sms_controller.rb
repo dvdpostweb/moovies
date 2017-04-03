@@ -14,6 +14,7 @@ class Orange::Lu::Auth::SmsController < ApplicationController
     elsif params[:moovie_id].present?
       gon.products_id = params[:moovie_id]
     end
+    redirect_to(info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action_registration => "select_your_package")) unless params[:code].present?
   end
 
 end

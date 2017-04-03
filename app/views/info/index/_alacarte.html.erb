@@ -1,5 +1,10 @@
 <div class="container white-bck">
   <h1 class="green"><%= t('info.index.price_public.choose_tvod_tvod').html_safe %></h1>
+  <% if params[:subscription_action_registration].present? %>
+      <div class="alert alert-warning">
+        <strong><%= t('orange.finish_registration_proces_message') %></strong>
+      </div>
+  <% end %>
   <div class="block100 marb20 padt20 charts-top">
     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 left-promo-code">
       <form id="alacarte_activation_code_validation">
@@ -135,11 +140,11 @@
       <form>
         <input type="hidden" name="package" value="">
 
-        <%= link_to(t('info.index.price_public.svod_button').html_safe, new_customer_session_path( :code => "2FILMS" ), :class => "btn pad10 f20 green-bck film_credits_btn_2", :id => "continue-package") %>
+        <%= link_to(t('info.index.price_public.svod_button').html_safe, new_customer_session_path(:code => "2FILMS"), :class => "btn pad10 f20 green-bck film_credits_btn_2", :id => "continue-package") %>
 
-        <%= link_to(t('info.index.price_public.svod_button').html_safe, new_customer_session_path( :code => "4FILMS" ), :class => "btn pad10 f20 green-bck film_credits_btn_4", :id => "continue-package") %>
+        <%= link_to(t('info.index.price_public.svod_button').html_safe, new_customer_session_path(:code => "4FILMS"), :class => "btn pad10 f20 green-bck film_credits_btn_4", :id => "continue-package") %>
 
-        <%= link_to(t('info.index.price_public.svod_button').html_safe, new_customer_session_path( :code => "6FILMS" ), :class => "btn pad10 f20 green-bck film_credits_btn_6", :id => "continue-package") %>
+        <%= link_to(t('info.index.price_public.svod_button').html_safe, new_customer_session_path(:code => "6FILMS"), :class => "btn pad10 f20 green-bck film_credits_btn_6", :id => "continue-package") %>
       </form>
     </div>
     <!--BUTTON-->
