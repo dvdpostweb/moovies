@@ -59,4 +59,57 @@ $(document).ready(function () {
         $(".film_credits_btn_6").show();
     });
 
+    if ((window.location.pathname == "/" + gon.locale + "/information/alacarte")) {
+        validateActivationCodeFromAlacartePricingPage();
+    } else if ((window.location.pathname == "/" + gon.locale + "/informatie/alacarte")) {
+        validateActivationCodeFromAlacartePricingPage();
+    } else if ((window.location.pathname == "/" + gon.locale + "/information/alacarte")) {
+        validateActivationCodeFromAlacartePricingPage();
+    }
+
 });
+
+
+function validateActivationCodeFromAlacartePricingPage() {
+    $("#alacarte_activation_code_validation").validate({
+        rules: {
+            'promotion': {
+                required: true,
+                remote: "/api/v1/check_activation_code_validity"
+            }
+        },
+        messages: {
+            'promotion': {
+                required: required_message_alacarte_promo_code(),
+                remote: gon.promotion_code_message
+            }
+        },
+        highlight: function(element) {
+            $(element).closest('.form-group').addClass('has-error');
+        },
+        unhighlight: function(element) {
+            $(element).closest('.form-group').removeClass('has-error');
+        },
+        errorElement: 'span',
+        errorClass: 'help-block',
+        submitHandler: function (form) {
+            if (gon.locale === "fr") {
+                window.location.href = "/fr/mon-compte/connectez-vous?code=" + $(".form-control").val();
+            } else if (gon.locale === "nl") {
+                window.location.href = "/nl/mijn-account/log-in?code=" + $(".form-control").val();
+            } else if (gon.locale === "en") {
+                window.location.href = "/en/my-account/log-in?code=" + $(".form-control").val();
+            }
+        }
+    });
+}
+
+function required_message_alacarte_promo_code() {
+    if (gon.locale == "fr") {
+        return "Code promotion est nécessaire."
+    } else if (gon.locale == "nl") {
+        return "Promotioncode is verplicht."
+    } else if (gon.locale == "en") {
+        return "Promotion code is required."
+    }
+}

@@ -19,6 +19,7 @@ class InfoController < ApplicationController
     #elsif params[:page_name] == t('routes.infos.params.freetrial')
     #  gon.freetrial = "freetrial"
     elsif params[:page_name] == t('routes.infos.params.alacarte')
+      gon.promotion_code_message = t('session.error_alreadyused_code')
       gon.alacarte = "alacarte_not_signed_in"
     elsif params[:page_name] == t('routes.infos.params.abo')
       gon.abo = "abo_not_signed_in"

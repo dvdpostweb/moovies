@@ -93,7 +93,13 @@ class Api::V1::ValidatorController < API::V1::BaseController
 
   def check_activation_code_validity
     if request.xhr?
-      render json: params
+      discount = Discount.by_name(params[:promotion]).available.first
+      activation = Activation.by_name(params[:promotion]).available.first
+      if discount.present? || activation.present?
+        render json: TRUE
+      else
+        render json: FALSE
+      end
     else
       raise ActionController::RoutingError.new('Not Found')
     end
