@@ -138,9 +138,11 @@ jQuery.fn.extend({
                 type: "GET",
                 url: $(audioInputField).attr('href'),
                 data: data_form,
-                success: function (response) {;
+                success: function (response) {
 
+                    window.history.pushState('', '', data_form);
 
+                    //history.pushState('', data_form, window.location.pathname);
 
                     //$("#content").html(response);
                     //console.log(data_form);
@@ -159,7 +161,7 @@ jQuery.fn.extend({
     });
 
     $('.iradio').on('ifChecked', function (e) {
-        //ajaxFilters();
+        ajaxFilters();
     });
 
     // audio autocomplete tags
@@ -188,10 +190,10 @@ jQuery.fn.extend({
             }
         },
         onTagAdded: function () {
-            //ajaxFilters();
+            ajaxFilters();
         },
         onTagRemoved: function () {
-            //ajaxFilters();
+            ajaxFilters();
         }
     });
 
@@ -222,10 +224,10 @@ jQuery.fn.extend({
             }
         },
         onTagAdded: function () {
-            //ajaxFilters();
+            ajaxFilters();
         },
         onTagRemoved: function () {
-            //ajaxFilters();
+            ajaxFilters();
         }
     });
 
@@ -256,23 +258,23 @@ jQuery.fn.extend({
             }
         },
         onTagAdded: function () {
-            //ajaxFilters();
+            ajaxFilters();
         },
         onTagRemoved: function () {
-            //ajaxFilters();
+            ajaxFilters();
         }
     });
 
-    //$("#ratings-slider-range").ionRangeSlider({
-    //    grid: true,
-    //    from: 0,
-    //    values: [
-    //        1, 2, 3, 4, 5
-    //    ],
-    //    onChange: function (event, ui) {
-    //        submit_online();
-    //    }
-    //});
+    $("#ratings-slider-range").ionRangeSlider({
+        grid: true,
+        from: 0,
+        values: [
+            1, 2, 3, 4, 5
+        ],
+        onChange: function (event, ui) {
+            ajaxFilters();
+        }
+    });
 
     // listing range slider
     $("#listing-range").ionRangeSlider({
@@ -282,7 +284,7 @@ jQuery.fn.extend({
             1, 2, 3, 4, 5
         ],
         onChange: function (event, ui) {
-            //ajaxFilters();
+            ajaxFilters();
         }
 
     });
@@ -295,7 +297,7 @@ jQuery.fn.extend({
             'ALL', -10, -12, -16, -18
         ],
         onChange: function (event, ui) {
-            //ajaxFilters();
+            ajaxFilters();
         }
     });
 
@@ -318,60 +320,64 @@ jQuery.fn.extend({
     $("#sort-dropdown").selectmenu();
 
     $('.dropdown-select').on('selectmenuchange', function () {
-        //ajaxFilters();
+        ajaxFilters();
     });
 
     // applied filters
     $('[data-input-element=listing-range-slider] a.filter-close').on('click', function () {
         var form_element = $(this).closest('.applied-filter-tag').attr('data-input-element');
         $('#' + form_element).find('#listing-range').data("ionRangeSlider").reset();
-    })
+    });
+
     $('[data-input-element=public-range-slider] a.filter-close').on('click', function () {
         var form_element = $(this).closest('.applied-filter-tag').attr('data-input-element');
         $('#' + form_element).find('#public-range').data("ionRangeSlider").reset();
-    })
-    //$(document).on('click', '.filter-close', function (e) {
-    //    var form_element = $(this).closest('.applied-filter-tag').attr('data-input-element');
-    //    $('#' + form_element + ' .iradio').iCheck('uncheck');
-    //    $('#' + form_element + ' input.tags').tagit('removeAll');
-    //    $('#' + form_element + ' .dropdown-select').val("").selectmenu("refresh");
-    //    $('div[data-input-element=' + form_element + ']').fadeOut(200, function () {
-    //        $(this).remove();
-    //    });
-    //})
-    //$(document).on('click', '.reset-applied-filters', function (e) {
-    //    $('.applied-filter-panel').fadeOut(200, function() {
-    //        $(this).remove();
-            //resetFiltersForm();
-    //    })
-    //    e.preventDefault();
-    //});
+    });
+
+    $(document).on('click', '.filter-close', function (e) {
+        var form_element = $(this).closest('.applied-filter-tag').attr('data-input-element');
+        $('#' + form_element + ' .iradio').iCheck('uncheck');
+        $('#' + form_element + ' input.tags').tagit('removeAll');
+        $('#' + form_element + ' .dropdown-select').val("").selectmenu("refresh");
+        $('div[data-input-element=' + form_element + ']').fadeOut(200, function () {
+            $(this).remove();
+        });
+    });
+
+    $(document).on('click', '.reset-applied-filters', function (e) {
+        $('.applied-filter-panel').fadeOut(200, function() {
+            $(this).remove();
+            resetFiltersForm();
+        });
+        e.preventDefault();
+    });
 
     // switch movies view
-    //$(document).on('click', '#grid-view-switch', function (e) {
-    //    $('input[name=view_movies]').val('grid');
-    //    $('.content-right').attr('id', 'grid');
-        //ajaxFilters();
-    //    return false;
-    //})
-    //$(document).on('click', '#list-view-switch', function (e) {
-    //    $('input[name=view_movies]').val('list');
-    //    $('.content-right').attr('id', 'list');
-        //ajaxFilters();
-    //    return false;
-    //})
+    $(document).on('click', '#grid-view-switch', function (e) {
+        $('input[name=view_movies]').val('grid');
+        $('.content-right').attr('id', 'grid');
+        ajaxFilters();
+        return false;
+    });
+
+    $(document).on('click', '#list-view-switch', function (e) {
+        $('input[name=view_movies]').val('list');
+        $('.content-right').attr('id', 'list');
+        ajaxFilters();
+        return false;
+    });
 
     // reset all filters form elements on page-load
     function resetFiltersForm() {
         $('input.tags').tagit('removeAll');
         $('.iradio').iCheck('uncheck');
-        //listingSlider.reset();
-        //rangeSlider.reset();
+        listingSlider.reset();
+        rangeSlider.reset();
         $('.dropdown-select').val("");
         $('.dropdown-select').selectmenu("refresh");
     }
 
-    //resetFiltersForm();
+    resetFiltersForm();
 
 
 })(jQuery);
