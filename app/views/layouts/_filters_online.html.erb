@@ -8,7 +8,7 @@
       <div class="block100">
         <h4 class="dark-blue bold"><%= t 'layouts.filters.active' %></h4>
 
-        <%= link_to products_short_path(), :class => "btn reset-applied-filters f11 mart10 dark-blue uppercase" do %>
+        <%= link_to products_short_path(), :remote => true, :class => "btn reset-applied-filters f11 mart10 dark-blue uppercase" do %>
             <i class="fa fa-times marr5 f12"></i>Reset all
         <% end %>
       </div>
@@ -26,7 +26,7 @@
       <% if params[:belgium].present? %>
           <div class="applied-filter-tag" data-input-element="audio-tags">
             <a class="filter-close">
-              <span class="ui-icon ui-icon-close"></span>
+              <span id="close_belgium" class="ui-icon ui-icon-close"></span>
             </a>
             <p class="applied-filter-label uppercase bold"><%= t 'products.index.belgium' %></p>
             <span class="applied-filter-node f10"><%= t("products.left_column.belgium_#{params[:belgium]}") %></span>
@@ -36,7 +36,7 @@
       <% if !params[:view_mode].nil? %>
           <div class="applied-filter-tag" data-input-element="subtitles-tags">
             <a class="filter-close">
-              <span class="ui-icon ui-icon-close"></span>
+              <span id="close_view_mode" class="ui-icon ui-icon-close"></span>
             </a>
             <p class="applied-filter-label uppercase bold"><%= t 'products.index.view_mode' %></p>
             <span class="applied-filter-node f10"><%= t("products.left_column.#{params[:view_mode]}") %></span>
@@ -46,7 +46,7 @@
       <% if Product.audience?(params[:filters][:audience_min], params[:filters][:audience_max]) && params[:kind] == :normal %>
           <div class="applied-filter-tag" data-input-element="listing-range-slider">
             <a class="filter-close">
-              <span class="ui-icon ui-icon-close"></span>
+              <span id="close_audience" class="ui-icon ui-icon-close"></span>
             </a>
             <p class="applied-filter-label uppercase bold"><%= t 'products.index.public' %></p>
             <span class="applied-filter-node f10"><%= "#{t('.from')} #{params[:filters][:audience_min]} #{t('.to')} #{params[:filters][:audience_max]}".html_safe %></span>
@@ -56,7 +56,7 @@
       <% if Product.countries?(params[:filters][:country_id]) %>
           <div class="applied-filter-tag" data-input-element="from-to">
             <a class="filter-close">
-              <span class="ui-icon ui-icon-close"></span>
+              <span id="close_country" class="ui-icon ui-icon-close"></span>
             </a>
             <p class="applied-filter-label uppercase bold"><%= t 'products.index.country' %></p>
             <span class="applied-filter-node f10"><%= selected_countries.collect(&:name).join(', ') %></span>
@@ -66,7 +66,7 @@
       <% if params[:date] && Product.year?(params[:date][:filters][:year_min], params[:date][:filters][:year_max]) %>
           <div class="applied-filter-tag" data-input-element="public-range-slider">
             <a class="filter-close">
-              <span class="ui-icon ui-icon-close"></span>
+              <span id="close_year" class="ui-icon ui-icon-close"></span>
             </a>
             <p class="applied-filter-label uppercase bold"><%= t 'products.index.year' %> </p>
             <span class="applied-filter-node f10"><%= "#{t('.from')}  #{params[:date][:filters][:year_min]} #{t('.to')}  #{params[:date][:filters][:year_max]}".html_safe %></span>
@@ -74,17 +74,9 @@
       <% end %>
 
       <% if Product.rating?(params[:filters][:rating_min], params[:filters][:rating_max]) %>
-          <li>
-            <span class='close' id="close_ratings"></span>
-            <strong><%= t 'products.index.ratings' %></strong>
-            <%= "#{t('.from')} #{params[:filters][:rating_min]} #{t('.to')} #{params[:filters][:rating_max]}".html_safe %>
-          </li>
-      <% end %>
-
-      <% if Product.rating?(params[:filters][:rating_min], params[:filters][:rating_max]) %>
           <div class="applied-filter-tag" data-input-element="pays-tags">
             <a class="filter-close">
-              <span class="ui-icon ui-icon-close"></span>
+              <span id="close_ratings" class="ui-icon ui-icon-close"></span>
             </a>
             <p class="applied-filter-label uppercase bold"><%= t 'products.index.ratings' %></p>
             <span class="applied-filter-node f10"><%= "#{t('.from')} #{params[:filters][:rating_min]} #{t('.to')} #{params[:filters][:rating_max]}".html_safe %></span>
@@ -94,7 +86,7 @@
       <% if languages %>
           <div class="applied-filter-tag" data-input-element="genres">
             <a class="filter-close">
-              <span class="ui-icon ui-icon-close"></span>
+              <span id="close_audios" class="ui-icon ui-icon-close"></span>
             </a>
             <p class="applied-filter-label uppercase bold"><%= t 'products.index.audio' %></p>
             <span class="applied-filter-node f10"><%= languages %></span>
@@ -104,7 +96,7 @@
       <% if subtitles %>
           <div class="applied-filter-tag" data-input-element="genres">
             <a class="filter-close">
-              <span class="ui-icon ui-icon-close"></span>
+              <span id="close_subtitles" class="ui-icon ui-icon-close"></span>
             </a>
             <p class="applied-filter-label uppercase bold"><%= t 'products.index.subtitles' %></p>
             <span class="applied-filter-node f10"><%= subtitles %></span>
@@ -114,7 +106,7 @@
       <% if !params[:filters][:category_id].nil? && !params[:filters][:category_id].empty? %>
           <div class="applied-filter-tag" data-input-element="categories">
             <a class="filter-close">
-              <span class="ui-icon ui-icon-close"></span>
+              <span id="close_category" class="ui-icon ui-icon-close"></span>
             </a>
             <p class="applied-filter-label uppercase bold"><%= t 'products.index.category' %></p>
             <span class="applied-filter-node f10"><%= Category.find(params[:filters][:category_id]).name %></span>
@@ -124,7 +116,7 @@
       <% if params[:actor_id] %>
           <div class="applied-filter-tag" data-input-element="categories">
             <a class="filter-close">
-              <span class="ui-icon ui-icon-close"></span>
+              <span id="close_actor" class="ui-icon ui-icon-close"></span>
             </a>
             <p class="applied-filter-label uppercase bold"><%= t 'products.index.actor' %></p>
             <span class="applied-filter-node f10"><%= t 'products.index.actor' %></span>
@@ -134,7 +126,7 @@
       <% if params[:director_id] %>
           <div class="applied-filter-tag" data-input-element="categories">
             <a class="filter-close">
-              <span class="ui-icon ui-icon-close"></span>
+              <span id="close_director" class="ui-icon ui-icon-close"></span>
             </a>
             <p class="applied-filter-label uppercase bold"><%= t 'products.index.director' %></p>
             <span class="applied-filter-node f10"><%= @people.name %></span>

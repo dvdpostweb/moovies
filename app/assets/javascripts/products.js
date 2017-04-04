@@ -317,13 +317,14 @@ $(document).ready(function () {
         });
 
         $('#products_index').delegate("#close_director", "click", function () {
-            $('#filter_online_form').attr('action', $(this).attr('url'))
-            submit_online()
+            $('#filter_online_form').attr('action', $(this).attr('url'));
+            submit_online();
         });
 
         $('#products_index').delegate("#close_view_mode", "click", function () {
             $('.links').prop('checked', false);
-            submit_online()
+            submit_online();
+            //console.log("!!!!!!11");
         });
 
         $('#products_index').delegate("#close_belgium", "click", function () {
