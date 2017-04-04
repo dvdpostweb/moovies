@@ -16,10 +16,11 @@
               <li>
                 <div class="left-item mart15">
                   <label class="OpenSansCondensed f20"><%= t('products.index.filters.link') %></label>
-                  <% if General.where(CodeType: "LEFTMENU_ITEM_SHOW").where(CodeValue: 1).first %>
-                      <%= link_to "Halloween", halloween_path, :id => :belgium_link, class: :halloween_link %>
+                  <!--
+                  <#% if General.where(CodeType: "LEFTMENU_ITEM_SHOW").where(CodeValue: 1).first %>
+                      <#%= link_to "Halloween", halloween_path, :id => :belgium_link, class: :halloween_link %>
                       <br/>
-                  <% end %>
+                  <#% end %>-->
                   <div class="col-md-11 col-sm-11 col-xs-11 f12 mart5 text-left">
                     <%= t('products.left_column.svod_last_added') %>
                   </div>
