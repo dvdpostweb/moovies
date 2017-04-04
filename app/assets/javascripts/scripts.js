@@ -339,13 +339,13 @@ jQuery.fn.extend({
             $(this).remove();
         });
     })
-    $(document).on('click', '.reset-applied-filters', function (e) {
-        $('.applied-filter-panel').fadeOut(200, function() {
-            $(this).remove();
+    //$(document).on('click', '.reset-applied-filters', function (e) {
+    //    $('.applied-filter-panel').fadeOut(200, function() {
+    //        $(this).remove();
             //resetFiltersForm();
-        })
-        e.preventDefault();
-    });
+    //    })
+    //    e.preventDefault();
+    //});
 
     // switch movies view
     $(document).on('click', '#grid-view-switch', function (e) {
