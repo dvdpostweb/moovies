@@ -30,24 +30,24 @@
       <% end %>
     </div>
     <div class="block100 mart20">
-      Vous pouvez louer films à la piéce directement à partir du catalogue, ou prendre un abonnement pour bénéficier de
-      prix avantageux (1,99€ au lieu de 2,99€ pour la plupart des films, et
-      3,99€ au lieu de 4,99€ pour les derniéres sorties).
+      <% if I18n.locale == :fr %>
+          Vous pouvez louer films à la piéce directement à partir du <u><%= link_to "catalogue", products_short_path() %></u>, ou prendre un abonnement pour bénéficier de prix avantageux (<strong>1,99€</strong> au lieu de 2,99€ pour la plupart des films, et <strong>3,99€</strong> au lieu de 4,99€ pour les derniéres sorties).
+      <% elsif I18n.locale == :nl %>
+          U kunt uw films één per één rechtstreeks uit de <u><%= link_to "catalogus", products_short_path() %></u> huren, of een abonnement nemen om te genieten van uiterst voordelige prijzen (<strong>€ 1,99</strong> in plaats van € 2,99 voor de meeste films, en <strong>€ 3,99</strong> in plaats van € 4,99 voor de recente blockbusters).
+      <% elsif I18n.locale == :en %>
+          You can rent movie one by one directly from the <u><%= link_to "catalogue", products_short_path() %></u>, or subscribe to one of our plans and benefit from much lower prices (<strong>1,99€</strong> instead of 2,99€ for most of the titles, and <strong>3,99€</strong> instead of 4,99€ for latest blockbusters).
+      <% end %>
     </div>
   </div>
 
   <div class="planSelectionContainer">
-
-    <!--TABLE HEADER-->
     <div class="planTable">
-
-      <!--header row full-->
       <div class="headerRow show" id="header-chart">
         <div class="columnHeader"></div>
         <div class="cell pt-header-with-border">
           <div>
             <div class="selborder">
-              <div id="2_film_credits" class="cellContent" data-box-order="1">2 film-crédits</div>
+              <div id="2_film_credits" class="cellContent" data-box-order="1"><%= t('info.index.price_public.choose_tvod_plan_one').html_safe %></div>
             </div>
             <div class="arrow"></div>
           </div>
@@ -55,7 +55,7 @@
         <div class="cell pt-header-with-border">
           <div>
             <div class="selborder">
-              <div id="4_film_credits" class="cellContent" data-box-order="2">4 film-crédits</div>
+              <div id="4_film_credits" class="cellContent" data-box-order="2"><%= t('info.index.price_public.choose_tvod_plan_two').html_safe %></div>
             </div>
             <div class="arrow"></div>
           </div>
@@ -63,61 +63,56 @@
         <div class="cell selected pt-header-with-border">
           <div>
             <div class="selborder">
-              <div id="6_film_credits" class="cellContent" data-box-order="3">6 film-crédits</div>
+              <div id="6_film_credits" class="cellContent" data-box-order="3"><%= t('info.index.price_public.choose_tvod_plan_three').html_safe %></div>
             </div>
             <div class="arrow"></div>
           </div>
         </div>
       </div>
-      <!--/header row full-->
-
     </div>
-    <!--/TABLE HEADER-->
-
-
-    <!--TABLE OPTIONS-->
     <div class="planTable planTableOptions">
-      <div class="alt">Tarif mensuel (21/04/2017)</div>
+      <div class="alt"><%= t('info.index.price_public.tvod_plan_price').html_safe %> (<%= 1.month.from_now.strftime("%d/%m/%Y") %>)</div>
       <div class="row">
-        <div class="columnHeader">Tarif mensuel (21/04/2017)</div>
-        <div class="cell bodyCell">EUR7.99</div>
-        <div class="cell bodyCell">EUR9.99</div>
-        <div class="cell bodyCell selected">EUR11.99</div>
+        <div class="columnHeader"><%= t('info.index.price_public.tvod_plan_price').html_safe %> (<%= 1.month.from_now.strftime("%d/%m/%Y") %>)</div>
+        <div class="cell bodyCell">EUR 7.99</div>
+        <div class="cell bodyCell">EUR 9.99</div>
+        <div class="cell bodyCell selected">EUR 11.99</div>
       </div>
-      <div class="alt">HD</div>
+      <div class="alt"><%= t('info.index.price_public.tvod_hd').html_safe %></div>
       <div class="row">
-        <div class="columnHeader">HD</div>
+        <div class="columnHeader"><%= t('info.index.price_public.tvod_hd').html_safe %></div>
         <div class="cell bodyCell icon-plainCheck"></div>
         <div class="cell bodyCell icon-plainCheck"></div>
         <div class="cell bodyCell icon-plainCheck selected"></div>
       </div>
-      <div class="alt">Accès sur ordinateur, smartphone, TV, Playstation</div>
+      <div class="alt"><%= t('info.index.price_public.tvod_access_devices').html_safe %></div>
       <div class="row">
-        <div class="columnHeader">Accès sur ordinateur, smartphone, TV, Playstation</div>
+        <div class="columnHeader"><%= t('info.index.price_public.tvod_access_devices').html_safe %></div>
         <div class="cell bodyCell icon-plainCheck"></div>
         <div class="cell bodyCell icon-plainCheck"></div>
         <div class="cell bodyCell icon-plainCheck selected"></div>
       </div>
-      <div class="alt">Nombre d’utilisateurs simultanés</div>
+      <div class="alt"><%= t('info.index.price_public.tvod_simultaneus').html_safe %></div>
       <div class="row">
-        <div class="columnHeader">Nombre d’utilisateurs simultanés</div>
-        <div class="cell bodyCell">illimité</div>
-        <div class="cell bodyCell">illimité</div>
-        <div class="cell bodyCell selected">illimité</div>
+        <div class="columnHeader"><%= t('info.index.price_public.tvod_simultaneus').html_safe %></div>
+        <div class="cell bodyCell"><%= t('customers.show.old_pricing.unlimited') %></div>
+        <div class="cell bodyCell"><%= t('customers.show.old_pricing.unlimited') %></div>
+        <div class="cell bodyCell selected"><%= t('customers.show.old_pricing.unlimited') %></div>
       </div>
-      <div class="alt">Annulable à tout moment</div>
+      <div class="alt"><%= t('info.index.price_public.tvod_cancellable').html_safe %></div>
       <div class="row">
-        <div class="columnHeader">Annulable à tout moment</div>
+        <div class="columnHeader"><%= t('info.index.price_public.tvod_cancellable').html_safe %></div>
         <div class="cell bodyCell icon-plainCheck"></div>
         <div class="cell bodyCell icon-plainCheck"></div>
         <div class="cell bodyCell icon-plainCheck selected"></div>
       </div>
-      <div class="alt">Accès au catalogue
+      <div class="alt"><%= t('info.index.price_public.tvod_access_illimitie').html_safe %>
         <a href="index.php%3Fpage=charts-la-carde.html#" class="light-blue">Plush Illimité</a>
+        <%= link_to t('info.index.price_public.choose_svod_svod').html_safe, info_path(:page_name => "unlimited"), :class => "light-blue" %>
       </div>
       <div class="row">
-        <div class="columnHeader">Accès au catalogue
-          <a href="index.php%3Fpage=charts-la-carde.html#">Plush Illimité</a>
+        <div class="columnHeader"><%= t('info.index.price_public.tvod_access_illimitie').html_safe %>
+          <%= link_to t('info.index.price_public.choose_svod_svod').html_safe, info_path(:page_name => "unlimited"), :class => "light-blue" %>
         </div>
         <div class="cell bodyCell icon-plainX"></div>
         <div class="cell bodyCell icon-plainX"></div>
@@ -125,33 +120,21 @@
       </div>
 
     </div>
-    <!--/TABLE OPTIONS-->
-
-    <!--DISCLAIMER-->
     <div class="block100 padlr10 normal mart15 f14">
-      Un crédit film est nécessaire pour regarder un film. Les derniers blockbusters nécessitent deux crédits film Pour
-      connaître les supports sur lesquels Plush est disponible, cliquez ici.
-      Tous les contenus ne sont pas disponibles en HD.
+      <%= t('info.index.price_public.tvod_explanation_1').html_safe %> <%= link_to t('info.index.price_public.tvod_explanation_link').html_safe, info_path(:page_name => t('routes.infos.params.vod')), :id => :multi %>
+      <%= t('info.index.price_public.tvod_explanation_2').html_safe %>
     </div>
-    <!--/DISCLAIMER-->
-
-    <!--BUTTON-->
     <div class="block100 mart15 padlr15">
       <form>
-        <input type="hidden" name="package" value="">
-
         <%= link_to(t('info.index.price_public.svod_button').html_safe, new_customer_session_path(:code => "2FILMS"), :class => "btn pad10 f20 green-bck film_credits_btn_2", :id => "continue-package") %>
-
         <%= link_to(t('info.index.price_public.svod_button').html_safe, new_customer_session_path(:code => "4FILMS"), :class => "btn pad10 f20 green-bck film_credits_btn_4", :id => "continue-package") %>
-
         <%= link_to(t('info.index.price_public.svod_button').html_safe, new_customer_session_path(:code => "6FILMS"), :class => "btn pad10 f20 green-bck film_credits_btn_6", :id => "continue-package") %>
       </form>
     </div>
-    <!--BUTTON-->
 
-    <div class="block100 padlr15">Des questions? Appelez le 0800/26371</div>
+    <div class="block100 padlr15"><%= t('info.index.price_public.tvod_support_info').html_safe %></div>
     <div class="block100 padlr15 mart15 marb30">
-      <a href="index.php%3Fpage=charts-la-carde.html#">Conditions d’utilisation</a>
+      <a href="index.php%3Fpage=charts-la-carde.html#"><%= link_to t('info.index.price_public.tvod_conditions').html_safe, info_path(:page_name => t('routes.infos.params.conditions')) %></a>
     </div>
 
   </div>
