@@ -2,8 +2,12 @@
 
 <div class="block100 thinrgray-bck radius2 padlr10 switch-view-panel">
   <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-    <a href="index.html#" id="grid-view-switch" class="dark-blue radius2" title="Grid View"><i class="fa fa-th-large f15"></i></a>
-    <a href="index.html#" id="list-view-switch" class="dark-blue radius2 marl10" title="List View"><i class="fa fa-list f15"></i></a>
+    <%= link_to params.merge(:display => 'jacket', :kind => (params[:kind] == :normal ? nil : params[:kind]), :page => nil), :remote => true, :class => 'Grid dark-blue radius2', :title => "Grid View" do  %>
+        <i class="fa fa-th-large f15"></i>
+    <% end %>
+    <%= link_to params.merge(:display => 'list', :kind => (params[:kind] == :normal ? nil : params[:kind]), :page => nil), :remote => true, :class => 'Expanded dark-blue radius2 marl10', :title => "List View" do %>
+        <i class="fa fa-list f15"></i>
+    <% end %>
     <a href="index.html#" id="activate" class="btn marl10 f11 dark-blue-bck white">Activer la pagination automatique</a>
   </div>
 
@@ -20,6 +24,10 @@
     </select>
   </div>
 </div>
+
+<%= link_to t('.jacket'), params.merge(:display => 'jacket', :kind => (params[:kind] == :normal ? nil : params[:kind]), :page => nil), :remote => true, :class => 'Grid' %>
+
+<%= link_to t('.list'), params.merge(:display => 'list', :kind => (params[:kind] == :normal ? nil : params[:kind]), :page => nil), :remote => true, :class => 'Expanded' %>
 
 <% if cookies[:display] == "list" %>
     <div id="list-view">
