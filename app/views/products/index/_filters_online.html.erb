@@ -71,7 +71,7 @@
               <li>
                 <div class="left-item mart15">
                   <label class="OpenSansCondensed f20"><%= t('products.index.filters.audio', :default => 'audio') %></label>
-                  <%= collection_select(:filters, :audio, Language.by_language(I18n.locale), :id, :name, {:selected => params[:filters] && params[:filters][:audio] ? params[:filters][:audio] : nil, :include_blank => true}, {:multiple => true, :class => 'chosen-select box-shadow', 'data-placeholder' => "audio...", 'data-no_results_text' => t('products.index.filters.not_found')}) %>
+                  <%= collection_select(:filters, :audio, Language.by_language(I18n.locale), :id, :name, {:selected => params[:filters] && params[:filters][:audio] ? params[:filters][:audio] : nil, :include_blank => true}, {:multiple => true, :class => 'chosen-select', 'data-placeholder' => "audio...", 'data-no_results_text' => t('products.index.filters.not_found')}) %>
                 </div>
               </li>
               <li>
@@ -87,15 +87,6 @@
                   <%= hidden_field_tag "filters[rating_max]", params[:filters] && params[:filters][:rating_max] ? params[:filters][:rating_max] : 5 %>
                   <div id="ratings-slider-range"></div>
                 </div>
-                <!--<div id="ratings-slider">-->
-
-                <!--<ul id="ratings_labels">
-                  <#% ['1', '2', '3', '4', '5'].collect do |rating| %>
-                      <li><#%= rating %></li>
-                  <#% end %>
-                </ul>-->
-                <!--</div>-->
-                <!--<div id="ratings-slider-range"></div>-->
               </li>
               <li>
                 <div class="left-item mart15">
@@ -121,11 +112,6 @@
                   <label class="OpenSansCondensed f20"><%= t('products.index.filters.public', :default => 'public') %></label>
                   <%= hidden_field_tag "filters[audience_min]", params[:filters] && params[:filters][:audience_min] ? params[:filters][:audience_min] : 0 %>
                   <%= hidden_field_tag "filters[audience_max]", params[:filters] && params[:filters][:audience_max] ? params[:filters][:audience_max] : 18 %>
-                  <!--<ul id="audience_labels">
-                    <#% ['ALL', '-10', '-12', '-16', '-18'].collect do |p| %>
-                        <li><#%= p %></li>
-                    <#% end %>
-                  </ul>-->
                   <div id="audience-slider-range"></div>
                 </div>
               </li>

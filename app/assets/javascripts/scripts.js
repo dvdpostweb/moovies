@@ -21,6 +21,26 @@ jQuery.fn.extend({
 (function ($) {
     "use strict"; // Start of use strict
 
+    //History = window.History;
+
+ //   function submit_online() {
+ //       if ($('.not_reload').length > 0) {
+ //           $('.loading_bar').show();
+ //           /*$('#filter_online_form').ajaxSubmit({dataType: 'script'});*/
+ //           if ($('#filter_online_form').attr('action').indexOf('?') > 0) {
+ //               history_url = $('#filter_online_form').attr('action') + "&" + $('#filter_online_form').serialize()
+ //           }
+ //           else {
+ //               history_url = $('#filter_online_form').attr('action') + "?" + $('#filter_online_form').serialize()
+ //           }
+
+//            History.pushState(null, null, history_url);
+//        }
+//        else {
+//            $('#filter_online_form').submit();
+//        }
+//    }
+
     function mainSidemenuState(state) {
         switch (state) {
             case 'on':
@@ -140,7 +160,9 @@ jQuery.fn.extend({
                 data: data_form,
                 success: function (response) {
 
-                    window.history.pushState('', '', data_form);
+                    //submit_online();
+
+                    //window.history.pushState('', '', data_form);
 
                     //history.pushState('', data_form, window.location.pathname);
 
@@ -161,7 +183,7 @@ jQuery.fn.extend({
     });
 
     $('.iradio').on('ifChecked', function (e) {
-        ajaxFilters();
+        //ajaxFilters();
     });
 
     // audio autocomplete tags
@@ -190,10 +212,12 @@ jQuery.fn.extend({
             }
         },
         onTagAdded: function () {
-            ajaxFilters();
+            //ajaxFilters();
+            submit_online();
         },
         onTagRemoved: function () {
-            ajaxFilters();
+            //ajaxFilters();
+            submit_online();
         }
     });
 
@@ -265,7 +289,7 @@ jQuery.fn.extend({
         }
     });
 
-    $("#ratings-slider-range").ionRangeSlider({
+    $("#ratings-slider-rang").ionRangeSlider({
         grid: true,
         from: 0,
         values: [
