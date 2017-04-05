@@ -345,10 +345,10 @@ jQuery.fn.extend({
     });
 
     $(document).on('click', '.reset-applied-filters', function (e) {
-        $('.applied-filter-panel').fadeOut(200, function() {
-            $(this).remove();
-            resetFiltersForm();
-        });
+        //$('.applied-filter-panel').fadeOut(200, function() {
+        //    $(this).remove();
+        //    resetFiltersForm();
+        //});
         e.preventDefault();
     });
 
@@ -371,8 +371,8 @@ jQuery.fn.extend({
     function resetFiltersForm() {
         $('input.tags').tagit('removeAll');
         $('.iradio').iCheck('uncheck');
-        listingSlider.reset();
-        rangeSlider.reset();
+        //listingSlider.reset();
+        //rangeSlider.reset();
         $('.dropdown-select').val("");
         $('.dropdown-select').selectmenu("refresh");
     }

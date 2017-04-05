@@ -2,7 +2,7 @@
 
   $('#main-content').html("<%= escape_javascript(render(:partial => 'products/index/hp', :formats => [:html])) %>");
 
-  $( "a" ).removeClass( "current" );
+  //$( "a" ).removeClass( "current" );
 
   history.pushState('', document.title, window.location.pathname);
 
