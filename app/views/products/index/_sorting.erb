@@ -1,7 +1,7 @@
 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 pull-right">
   <% var = params[:sort] ? params[:sort].to_sym : :normal %>
-  <%= form_for(:product, :url => request.fullpath, :remote => true, :html => { :method => :get, :id => :sort_form  } ) do |f| %>
+  <%= form_for(:product, :url => request.fullpath, :remote => true, :html => {:method => :get, :id => :sort_form}) do |f| %>
       <%= hash_to_hidden_fields(params.merge(:page => nil, :sort => nil)) %>
-      <%= select_tag(:sort, options_for_select(sort_collection_for_select, var), { :onchange => '$("#sort_form").submit()', :class => "dropdown-select"}) %>
+      <%= select_tag :sort, options_for_select(sort_collection_for_select, :selected => var), {:class => "ui-selectmenu-button ui-widget ui-state-default ui-corner-all", :onchange => '$("#sort_form").submit();'} %>
   <% end %>
 </div>
