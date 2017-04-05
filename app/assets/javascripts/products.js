@@ -334,7 +334,6 @@ $(document).ready(function () {
         $('#products_index').delegate("#close_view_mode", "click", function () {
             $('.links').prop('checked', false);
             submit_online();
-            //console.log("!!!!!!11");
         });
 
         $('#products_index').delegate("#close_belgium", "click", function () {
@@ -462,20 +461,6 @@ function load_form() {
         submit_online()
     });
 
-    //$("#online #ratings-slider-rang").ionRangeSlider({
-    //    grid: true,
-    //    from: 0,
-    //    values: [
-    //        1, 2, 3, 4, 5
-    //    ],
-    //    onChange: function (event, ui) {
-            //$("#online #filters_rating_min").val(ui.values[0]);
-            //$("#online #filters_rating_max").val(ui.values[1]);
-            //submit_online();
-    //        console.log(event);
-    //    }
-    //});
-
     $("#online #ratings-slider-range").slider({
         range: true,
         min: 1,
@@ -488,7 +473,9 @@ function load_form() {
             submit_online()
         }
     });
+
     audience_slider_values = {'0': 0, '10': 1, '12': 2, '16': 3, '18': 4};
+
     $("#online #audience-slider-range").slider({
         range: true,
         min: 0,
