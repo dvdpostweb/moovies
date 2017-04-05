@@ -1,193 +1,151 @@
-<div id="filters">
-  <!--FILTERS INNER-->
-  <div id="filters-inner">
+<div id="online">
+  <%= form_tag products_short_path(:package => params[:package].nil? ? Moovies.packages.invert[(params[:kind] == :adult ? 5 : 2)] : params[:package], :list_id => params[:list_id], :category_id => params[:category_id], :actor_id => params[:actor_id], :director_id => params[:director_id], :studio_id => params[:studio_id]), method: 'get', id: 'filter_online_form' do %>
+      <div id="filters">
+        <div id="filters-inner">
+          <fieldset>
+            <ul id="main">
+              <li class="package open">
+                <div class="left-item filters-top-buttons">
+                  <%= hidden_field_tag :sort, params[:sort] %>
+                  <%= hidden_field_tag :belgium, params[:belgium] %>
+                  <%= link_to t("products.left_column.#{Moovies.packages.invert[(params[:kind] == :adult ? 5 : 2)]}"), products_short_path(:package => Moovies.packages.invert[(params[:kind] == :adult ? 5 : 2)]), :id => "button-la-carte", :class => "tvod packages #{params[:package] == Moovies.packages.invert[(params[:kind] == :adult ? 5 : 2)] ? 'current' : ''} btn light-blue-bck OpenSansCondensed f23 block100" %>
+                  <%= link_to t("products.left_column.#{Moovies.packages.invert[(params[:kind] == :adult ? 4 : 1)]}"), products_short_path(:package => Moovies.packages.invert[(params[:kind] == :adult ? 4 : 1)]), :id => "button-la-unlmited", :class => "svod packages #{params[:package] == Moovies.packages.invert[(params[:kind] == :adult ? 4 : 1)] ? 'current' : ''} btn OpenSansCondensed f23 block100" %>
+                  <%= link_to t("products.left_column.adult"), products_short_path(:kind => :adult), :id => "button-18-plus", :class => "adult packages btn violet OpenSansCondensed f23 block100" if params[:kind] != :adult %>
+                </div>
+              </li>
+              <li>
+                <div class="left-item mart15">
+                  <label class="OpenSansCondensed f20"><%= t('products.index.filters.link') %></label>
+                  <!--
+                  <#% if General.where(CodeType: "LEFTMENU_ITEM_SHOW").where(CodeValue: 1).first %>
+                      <#%= link_to "Halloween", halloween_path, :id => :belgium_link, class: :halloween_link %>
+                      <br/>
+                  <#% end %>-->
+                  <div class="col-md-11 col-sm-11 col-xs-11 f12 mart5 text-left">
+                    <%= t('products.left_column.svod_last_added') %>
+                  </div>
+                  <div class="col-md-1 col-sm-1 col-xs-1 mart5">
+                    <%= radio_button_tag('filters[view_mode]', "last_added", params[:filters] && params[:filters][:view_mode] == 'last_added' ? true : false, class: "iradio") %>
+                  </div>
+                  <div class="col-md-11 col-sm-11 col-xs-11 f12 mart5 text-left">
+                    <%= t('products.left_column.svod_most_viewed') %>
+                  </div>
+                  <div class="col-md-1 col-sm-1 col-xs-1 mart5">
+                    <%= radio_button_tag('filters[view_mode]', "most_viewed", params[:filters] && params[:filters][:view_mode] == 'most_viewed' ? true : false, class: "iradio") %>
+                  </div>
+                  <div class="col-md-11 col-sm-11 col-xs-11 f12 mart5 text-left">
+                    <%= t('products.left_column.svod_last_chance') %>
+                  </div>
+                  <div class="col-md-1 col-sm-1 col-xs-1 mart5">
+                    <%= radio_button_tag('filters[view_mode]', "last_chance", params[:filters] && params[:filters][:view_mode] == 'last_chance' ? true : false, class: "iradio") %>
+                  </div>
+                  <div class="col-md-11 col-sm-11 col-xs-11 f12 mart5 text-left">
+                    <%= t('products.left_column.svod_best_rated') %>
+                  </div>
+                  <div class="col-md-1 col-sm-1 col-xs-1 mart5">
+                    <%= radio_button_tag('filters[view_mode]', "best_rated", params[:filters] && params[:filters][:view_mode] == 'best_rated' ? true : false, class: "iradio") %>
+                  </div>
+                  <div class="col-md-11 col-sm-11 col-xs-11 f12 mart5 text-left">
+                    <%= t('products.left_column.svod_soon') %>
+                  </div>
+                  <div class="col-md-1 col-sm-1 col-xs-1 mart5">
+                    <%= radio_button_tag('filters[view_mode]', "soon", params[:filters] && params[:filters][:view_mode] == 'soon' ? true : false, class: "iradio") %>
+                  </div>
+                  <div class="col-md-11 col-sm-11 col-xs-11 f12 mart5 text-left">
+                    <%= t('products.left_column.svod_new') %>
+                  </div>
+                  <div class="col-md-1 col-sm-1 col-xs-1 mart5">
+                    <%= radio_button_tag('filters[view_mode]', "new", params[:filters] && params[:filters][:view_mode] == 'new' ? true : false, class: "iradio") %>
+                  </div>
+                  <div class="col-md-11 col-sm-11 col-xs-11 f12 mart5 text-left">
+                    <%= t('products.left_column.svod_hd') %>
+                  </div>
+                  <div class="col-md-1 col-sm-1 col-xs-1 mart5">
+                    <%= radio_button_tag('filters[view_mode]', "hd", params[:filters] && params[:filters][:view_mode] == 'hd' ? true : false, class: "iradio") %>
+                  </div>
+                  <div class="col-md-12 col-sm-121 col-xs-12 f12 text-left mart10">
+                    <%= link_to t('.belgium'), belgium_path, :id => :belgium_link, :class => params[:belgium].present? ? 'no-underline' : '' %>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="left-item mart15">
+                  <label class="OpenSansCondensed f20"><%= t('products.index.filters.audio', :default => 'audio') %></label>
+                  <%= collection_select(:filters, :audio, Language.by_language(I18n.locale), :id, :name, {:selected => params[:filters] && params[:filters][:audio] ? params[:filters][:audio] : nil, :include_blank => true}, {:multiple => true, :class => 'chosen-select box-shadow', 'data-placeholder' => "audio...", 'data-no_results_text' => t('products.index.filters.not_found')}) %>
+                </div>
+              </li>
+              <li>
+                <div class="left-item mart15">
+                  <label class="OpenSansCondensed f20"><%= t('products.index.filters.subtitles', :default => 'subtitles') %></label>
+                  <%= collection_select(:filters, :subtitles, Subtitle.by_language(I18n.locale), :id, :name, {:selected => params[:filters] && params[:filters][:subtitles] ? params[:filters][:subtitles] : nil, :include_blank => true}, {:multiple => true, :class => 'chosen-select', 'data-placeholder' => "#{t('products.index.filters.subtitles')}...", 'data-no_results_text' => t('products.index.filters.not_found')}) %>
+                </div>
+              </li>
+              <li>
+                <div class="left-item mart15">
+                  <label class="OpenSansCondensed f20"><%= t('products.index.filters.ratings', :default => 'ratings') %></label>
+                  <%= hidden_field_tag "filters[rating_min]", params[:filters] && params[:filters][:rating_min] ? params[:filters][:rating_min] : 1 %>
+                  <%= hidden_field_tag "filters[rating_max]", params[:filters] && params[:filters][:rating_max] ? params[:filters][:rating_max] : 5 %>
+                  <div id="ratings-slider-range"></div>
+                </div>
+                <!--<div id="ratings-slider">-->
 
-    <!--BUTTONS-->
-    <div class="left-item filters-top-buttons">
-      <a href="index.html#" class="btn lightergray-bck dark-blue OpenSansCondensed f23 block100 mart0" id="left-promo-code-trigger">Code Promo <i class="fa fa-caret-down white marl5 f17"></i> </a>
-      <div class="block100 left-promo-code text-center overflow-hidden">
-        <form>
-          <h4 class="dark-blue">Introduisez votre code promo ci-dessous</h4>
-          <div class="block100 padlr10">
-            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-              <input type="text" name="promo-code" placeholder="Code">
-            </div>
-            <input type="submit" class="btn green-bck col-lg-2 col-md-2 col-sm-2 col-xs-2" name="promo-code-submit" value="GO!">
-          </div>
-        </form>
-      </div>
-      <a href="index.html#" class="btn light-blue-bck OpenSansCondensed f23 block100" id="button-la-carte">Plush à la Carte</a>
-      <a href="index.html#" class="btn OpenSansCondensed f23 block100" id="button-la-unlmited">Plush Unlimited</a>
-      <a href="index.html#" class="btn violet OpenSansCondensed f23 block100" id="button-18-plus">18+</a>
-    </div>
-    <!--/BUTTONS-->
+                <!--<ul id="ratings_labels">
+                  <#% ['1', '2', '3', '4', '5'].collect do |rating| %>
+                      <li><#%= rating %></li>
+                  <#% end %>
+                </ul>-->
+                <!--</div>-->
+                <!--<div id="ratings-slider-range"></div>-->
+              </li>
+              <li>
+                <div class="left-item mart15">
+                  <label class="OpenSansCondensed f20 block100"><%= t('products.index.filters.year', :default => 'year') %></label>
+                  <% max = Time.now.year + 1 %>
+                  <% max_year = params[:date] && params[:date][:filters] && params[:date][:filters][:year_max] && params[:date][:filters][:year_max].to_i <= max ? params[:date][:filters][:year_max].to_i : max %>
 
-    <!--FORM FILTERS-->
-    <!--<form name="filters-form" id="filters-form" method="GET">-->
-      <%= form_tag products_short_path(:package => params[:package].nil? ? Moovies.packages.invert[(params[:kind] == :adult ? 5 : 2)] : params[:package], :list_id => params[:list_id], :category_id => params[:category_id], :actor_id => params[:actor_id], :director_id => params[:director_id], :studio_id => params[:studio_id]), method: 'get', id: 'filters-form' do %>
+                  <div class="col-md-5 col-sm-5 col-xs-5 position-relative">
+                    <label class="OpenSansCondensed f20"><%= t '.from', :default => 'from' %></label>
+                    <%= select_year (params[:date] && params[:date][:filters] && params[:date][:filters][:year_min] ? params[:date][:filters][:year_min].to_i : 1910), :field_name => 'filters[year_min]', :start_year => 1910, :end_year => max %>
+                  </div>
+                  <div class="col-md-2 col-sm-2 col-xs-2 text-center padt10">-</div>
+                  <div class="col-md-5 col-sm-5 col-xs-5 position-relative">
+                    <label class="OpenSansCondensed f20"><%= t '.to', :default => 'to' %></label>
+                    <%= select_year max_year, :field_name => 'filters[year_max]', :start_year => 1910, :end_year => max %>
+                  </div>
 
-      <!--CATEGORIES-->
-      <div class="left-item mart15" id="categories">
-        <label class="OpenSansCondensed f20">Catégories</label>
-        <div class="col-md-11 col-sm-11 col-xs-11 f12 mart5 text-left">
-          Derniers ajouts
-        </div>
-        <div class="col-md-1 col-sm-1 col-xs-1 mart5">
-          <input type="radio" class="iradio" name="categories[]" value="derniers-ajouts"/>
-        </div>
-        <div class="col-md-11 col-sm-11 col-xs-11 f12 text-left mart10">
-          Les plus populaires
-        </div>
-        <div class="col-md-1 col-sm-1 col-xs-1 mart10">
-          <input type="radio" class="iradio" name="categories[]" value="les-plus-populaires"/>
-        </div>
-        <div class="col-md-11 col-sm-11 col-xs-11 f12 text-left mart10">
-          Dernière chance
-        </div>
-        <div class="col-md-1 col-sm-1 col-xs-1 mart10">
-          <input type="radio" class="iradio" name="categories[]" value="derniere-chance "/>
-        </div>
-        <div class="col-md-11 col-sm-11 col-xs-11 f12 text-left mart10">
-          Les mieux côtés
-        </div>
-        <div class="col-md-1 col-sm-1 col-xs-1 mart10">
-          <input type="radio" class="iradio" name="categories[]" value="Les-mieux-cotes"/>
-        </div>
-        <div class="col-md-11 col-sm-11 col-xs-11 f12 text-left mart10">
-          Les mieux côtés
-        </div>
-        <div class="col-md-1 col-sm-1 col-xs-1 mart10">
-          <input type="radio" class="iradio" name="categories[]" value="recruitment-user-type"/>
-        </div>
-        <div class="col-md-11 col-sm-11 col-xs-11 f12 text-left mart10">
-          Bientôt disponible
-        </div>
-        <div class="col-md-1 col-sm-1 col-xs-1 mart10">
-          <input type="radio" class="iradio" name="categories[]" value="bientot-disponible"/>
-        </div>
-        <div class="col-md-11 col-sm-11 col-xs-11 f12 text-left mart10">
-          Nouveautés
-        </div>
-        <div class="col-md-1 col-sm-1 col-xs-1 mart10">
-          <input type="radio" class="iradio" name="categories[]" value="recruitment-user-type"/>
-        </div>
-        <div class="col-md-11 col-sm-11 col-xs-11 f12 text-left mart10">
-          Haute Définition
-        </div>
-        <div class="col-md-1 col-sm-1 col-xs-1 mart10">
-          <input type="radio" class="iradio" name="categories[]" value="haute-definition"/>
-        </div>
-        <hr>
-        <div class="col-md-12 col-sm-121 col-xs-12 f12 text-left mart10">
-          <a href="index.html#" class="no-underline">Belgium selection/Vike</a>
-        </div>
-      </div>
-      <!--/CATEGORIES-->
+                </div>
+              </li>
 
-      <!--AUDIO AUTOCOMPLETE TAGS-->
-      <div class="left-item" id="audio-tags">
-        <label class="OpenSansCondensed f20">Audio</label>
-        <input type="text" class="tags" name="audio-autocomplete-tags" id="audio-autocomplete-tags"/>
-        <div class="tags-autocomplete-holder block100"></div>
-      </div>
-      <!--/AUDIO AUTOCOMPLETE TAGS-->
-
-      <!--SUBTITLES AUTOCOMPLETE TAGS-->
-      <div class="left-item" id="subtitles-tags">
-        <label class="OpenSansCondensed f20">Sous-titres</label>
-        <input type="text" class="tags" name="subtitles-autocomplete-tags" id="subtitles-autocomplete-tags"/>
-        <div class="tags-autocomplete-holder block100"></div>
-      </div>
-      <!--/SUBTITLES AUTOCOMPLETE TAGS-->
-
-      <!--LISTING SLIDER-->
-      <div class="left-item" id="listing-range-slider">
-        <label class="OpenSansCondensed f20">Cotations</label>
-        <input type="text" id="listing-range" name="public-range" value=""/>
-      </div>
-      <!--/LISTING SLIDER-->
-
-      <!--FROM-TO DROPDOWNS-->
-      <div class="left-item" id="from-to">
-        <label class="OpenSansCondensed f20 block100">Année</label>
-        <div class="col-md-5 col-sm-5 col-xs-5 position-relative">
-          <select class="dropdown-select" id="from-dropdown" name="from">
-            <option selected="selected">From</option>
-            <option value="1920">1920</option>
-            <option value="1925">1925</option>
-            <option value="1930">1930</option>
-            <option value="1945">1945</option>
-            <option value="1955">1955</option>
-            <option value="1980">1980</option>
-            <option value="1990">1990</option>
-            <option value="2000">2000</option>
-            <option value="2010">2010</option>
-            <option value="2017">2017</option>
-          </select>
+              <li>
+                <div class="left-item mart15">
+                  <label class="OpenSansCondensed f20"><%= t('products.index.filters.public', :default => 'public') %></label>
+                  <%= hidden_field_tag "filters[audience_min]", params[:filters] && params[:filters][:audience_min] ? params[:filters][:audience_min] : 0 %>
+                  <%= hidden_field_tag "filters[audience_max]", params[:filters] && params[:filters][:audience_max] ? params[:filters][:audience_max] : 18 %>
+                  <!--<ul id="audience_labels">
+                    <#% ['ALL', '-10', '-12', '-16', '-18'].collect do |p| %>
+                        <li><#%= p %></li>
+                    <#% end %>
+                  </ul>-->
+                  <div id="audience-slider-range"></div>
+                </div>
+              </li>
+              <li>
+                <div class="left-item mart15">
+                  <label class="OpenSansCondensed f20"><%= t('products.index.filters.countries', :default => 'country') %></label>
+                  <%= collection_select(:filters, :country_id, @countries, :id, :name, {:selected => params[:filters] && params[:filters][:country_id] ? params[:filters][:country_id] : nil, :include_blank => true}, {:multiple => true, :class => 'chosen-select', 'data-placeholder' => "#{t('products.index.filters.countries')}...", 'data-no_results_text' => t('products.index.filters.not_found')}) %>
+                </div>
+              </li>
+              <li>
+                <div class="left-item mart15">
+                  <label class="OpenSansCondensed f20"><%= t('products.index.filters.category', :default => 'category') %></label>
+                  <%= collection_select(:filters, :category_id, Category.by_kind(params[:kind]).joins("descriptions_#{I18n.locale}".to_sym).includes("descriptions_#{I18n.locale}").roots.movies.vod.alphabetic_orderd, :id, :name, {:selected => params[:filters] && params[:filters][:category_id] ? params[:filters][:category_id] : nil, :include_blank => true}, {:class => 'chosen-select', 'data-placeholder' => "#{t('products.index.filters.category')}...", 'data-no_results_text' => t('products.index.filters.not_found')}) %>
+                </div>
+              </li>
+            </ul>
+          </fieldset>
         </div>
-        <div class="col-md-2 col-sm-2 col-xs-2 text-center padt10">-</div>
-        <div class="col-md-5 col-sm-5 col-xs-5 position-relative">
-          <select class="dropdown-select" id="to-dropdown" name="to">
-            <option selected="selected">To</option>
-            <option value="1920">1920</option>
-            <option value="1925">1925</option>
-            <option value="1930">1930</option>
-            <option value="1945">1945</option>
-            <option value="1955">1955</option>
-            <option value="1980">1980</option>
-            <option value="1990">1990</option>
-            <option value="2000">2000</option>
-            <option value="2010">2010</option>
-            <option value="2017">2017</option>
-            <option value="2018">2018</option>
-          </select>
-        </div>
-      </div>
-      <!--/FROM-TO DROPDOWNS-->
-
-      <!--PUBLIC SLIDER-->
-      <div class="left-item" id="public-range-slider">
-        <label class="OpenSansCondensed f20">Public</label>
-        <input type="text" id="public-range" name="public-range" value=""/>
-      </div>
-      <!--/PUBLIC SLIDER-->
-
-      <!--PAYS AUTOCOMPLETE TAGS-->
-      <div class="left-item" id="pays-tags">
-        <label class="OpenSansCondensed f20">Pays</label>
-        <input type="text" class="tags" name="pays-autocomplete-tags" id="pays-autocomplete-tags"/>
-        <div class="tags-autocomplete-holder block100"></div>
-      </div>
-      <!--/PAYS AUTOCOMPLETE TAGS-->
-
-      <!--GENRES DROPDOWN-->
-      <div class="left-item" id="genres">
-        <label class="OpenSansCondensed f20">Genres</label>
-        <select class="dropdown-select" id="genres-dropdown" name="genres">
-          <option selected="selected">Select..</option>
-          <option value="Action">Action</option>
-          <option value="Animation">Animation</option>
-          <option value="Cineclub">Cineclub</option>
-          <option value="Court-métrage">Court-métrage</option>
-          <option value="Crime">Crime</option>
-          <option value="Documentaires">Documentaires</option>
-          <option value="Erotiques">Erotiques</option>
-          <option value="Histoire & Culture">Histoire & Culture</option>
-          <option value="Humour">Humour</option>
-          <option value="Science-fiction">Science-fiction</option>
-          <option value="Voyage & Découverte">Voyage & Découverte</option>
-        </select>
-        <div class="tags-autocomplete-holder block100"></div>
-      </div>
-      <!--/GENRES DROPDOWN-->
-
-      <input type="hidden" name="view_movies" value="">
-        <% end %>
-    <!--</form>-->
-    <!--/FORM FILTERS-->
-
+  <% end %>
   </div>
-  <!--/FILTERS INNER-->
 </div>
 
 

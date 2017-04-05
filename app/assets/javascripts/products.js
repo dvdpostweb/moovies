@@ -240,6 +240,16 @@ $(document).ready(function () {
             return false;
         });
 
+//        $("#button-la-carte").click(function(e) {
+//            e.preventDefault();
+//            $('#filter_online_form').attr('action', $(this).attr('href'));
+            //$('.packages').removeClass('current');
+            //$(this).addClass('current');
+//            submit_online();
+            //filtersPanelState('off');
+            //return false;
+//        });
+
         //$(".iradio_minimal-grey").click(function(e) {
         //    e.preventDefault();
         //    console.log("checked");
