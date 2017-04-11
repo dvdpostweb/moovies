@@ -30,7 +30,7 @@ group :test do
 end
 
 group :assets do
-  gem 'coffee-rails'
+  #gem 'coffee-rails'
   gem 'uglifier'
   gem 'execjs', '~> 2.2'
   gem 'therubyracer', '~> 0.12.3'

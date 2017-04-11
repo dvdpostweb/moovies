@@ -18,7 +18,6 @@
 //= require facebox
 
 //= require alacarte
-//= require products
 //= require login
 //= require registration
 //= require password
@@ -76,12 +75,6 @@ window.onload = function () {
 
 $(document).ready(function () {
 
-    //$("input[type='checkbox'], input[type='radio']").iCheck({
-    //    checkboxClass: 'icheckbox_square',
-    //    radioClass: 'iradio_minimal-grey'
-    //});
-
-    // popover
     var originalLeave = $.fn.popover.Constructor.prototype.leave;
     $.fn.popover.Constructor.prototype.leave = function (obj) {
         var self = obj instanceof this.constructor ? obj : $(obj.currentTarget)[this.type](this.getDelegateOptions()).data('bs.' + this.type);

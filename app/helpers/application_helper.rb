@@ -2,19 +2,21 @@
 module ApplicationHelper
 
   def configure_content_div_html_class(params)
-    if params[:controller].present? && params[:controller] == "products"
+    if params[:controller].present? && params[:controller] == "products" then
       "block100"
-    elsif params[:controller].present? && params[:controller] == "customers/sessions"
-        "block100 login-sign"
-    elsif params[:controller].present? && params[:controller] == "customers/registrations"
+    elsif params[:controller].present? && params[:controller] == "customers/sessions" then
       "block100 login-sign"
-    elsif params[:controller].present? && params[:controller] == "devise/passwords"
+    elsif params[:controller].present? && params[:controller] == "customers/registrations" then
       "block100 login-sign"
-    elsif params[:page_name].present? && params[:page_name] == "alacarte"
+    elsif params[:controller].present? && params[:controller] == "devise/passwords" then
+      "block100 login-sign"
+    elsif params[:controller].present? && params[:controller] == "customers" && params[:action].present? && params[:action] == "show" then
+      "mon-compte"
+    elsif params[:page_name].present? && params[:page_name] == "alacarte" then
       "price-chart price-chart-green three-column"
-    elsif params[:page_name].present? && params[:page_name] == "unlimited"
+    elsif params[:page_name].present? && params[:page_name] == "unlimited" then
       "price-chart price-chart-blue one-column"
-    elsif params[:page_name].present? && params[:page_name] == "adult"
+    elsif params[:page_name].present? && params[:page_name] == "adult" then
       "price-chart price-chart-violet one-column"
     end
   end

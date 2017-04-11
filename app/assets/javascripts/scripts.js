@@ -167,7 +167,7 @@ jQuery.fn.extend({
                     //history.pushState('', data_form, window.location.pathname);
 
                     //$("#content").html(response);
-                    //console.log(data_form);
+                    console.log(data_form);
                     //location.href = 'http://' + hostname + '/index.php?page=home&' + data_form;
                     // $('.movies').empty().html(data_form + '<br><br>GUruuu, ovde ti ide ajax respond..:)');
                     //$('.movies').prepend("<strong class='block100 red-bck white padlr20 padtb5 radius4 mart10'>AJAX Filter is triggered</strong>");
