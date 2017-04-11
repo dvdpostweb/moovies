@@ -314,7 +314,6 @@ DEPENDENCIES
   capistrano-slack!
   chosen-rails
   client_side_validations (~> 3.2.6)
-  coffee-rails
   compass-rails
   composite_primary_keys (~> 5.0.13)
   date_validator
