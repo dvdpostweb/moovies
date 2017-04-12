@@ -65,7 +65,7 @@ class CustomersController < ApplicationController
         updated_customer.last_name = params[:customer][:last_name]
         updated_customer.email = params[:customer][:new_email]
         updated_customer.phone = params[:customer][:phone]
-        updated_customer.birthday = params[:customer][:birthday]
+        updated_customer.birthday = DateTime.strptime(params[:customer][:birthday], '%m/%d/%Y')
 
         if updated_customer.save(validate: false)
 

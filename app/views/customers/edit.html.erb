@@ -41,7 +41,7 @@
 
       <div class="form-group block100">
         <label class="bold"><%= t '.birthday' %>:</label>
-        <%= f.text_field :birthday, :value => @customer.birthday %>
+        <%= f.text_field :birthday, :value => @customer.birthday.strftime("%m/%d/%Y") if @customer.birthday != nil  %>
       </div>
 
       <div class="form-group block100">
