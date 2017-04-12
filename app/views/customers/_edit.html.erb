@@ -46,7 +46,7 @@
 
       <div class="form-group block100">
         <label class="bold"><%= t '.birthday' %>:</label>
-        <%= f.text_field :birthday, :value => @customer.birthday %>
+          <%= f.text_field :birthday, :value => @customer.birthday.strftime("%m/%d/%Y") %>
       </div>
 
       <div class="form-group block100">
@@ -71,6 +71,10 @@
 <script>
 
     $(document).ready(function () {
+
+        //var element = jQuery('.clone_birthday').clone();
+
+        //element.appendTo('.append_birthday_clone');
 
         var date_input = $('input[name="customer[birthday]"]'); //our date input has the name "date"
 
