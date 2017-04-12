@@ -1,1 +1,54 @@
-<p>POPAC</p>
+<!--<h3 class="dark-gray pad0 mar0 marb10">Adresse</h3> -->
+<h3 class="dark-gray pad0 mar0 marb10"><%= t '.title' %></h3>
+<%= form_for(:customer, :url => customer_path, :id => :form_account, :html => {:method => :put}) do |f| %>
+
+    <div class="form-group block100">
+      <div class="col-md-4 col-sm-4 col-xs-4" style="margin-left: 27%">
+        <div class="col-md-2 col-sm-2 col-xs-3">
+          <%= f.radio_button :gender, 'f', class: "iradio" %>
+        </div>
+        <div class="col-md-10 col-sm-10 col-xs-9">
+          <%= t '.miss' %>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-sm-4 col-xs-4">
+        <div class="col-md-2 col-sm-2 col-xs-3">
+          <%= f.radio_button :gender, 'm', class: "iradio" %>
+        </div>
+        <div class="col-md-10 col-sm-10 col-xs-9">
+          <%= t '.mister' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group block100">
+      <label class="bold"><%= t '.firstname' %>:</label>
+      <%= f.text_field :first_name %>
+    </div>
+
+    <div class="form-group block100">
+      <label class="bold"><%= t '.lastname' %>:</label>
+      <%= f.text_field :last_name %>
+    </div>
+
+    <div class="form-group block100">
+      <label class="bold"><%= t '.email' %>:</label>
+      <%= f.text_field :email %>
+      <%= f.hidden_field :new_email, :value => @customer.email %>
+    </div>
+
+    <div class="form-group block100">
+      <label class="bold"><%= t '.birthday' %>:</label>
+      <div class="col-xs-3">
+        <%= select_day @customer.birthday %>
+      </div>
+      <div class="col-xs-3">
+        <%= select_month @customer.birthday, :use_month_numbers => true %>
+      </div>
+      <div class="col-xs-3">
+        <%= select_year @customer.birthday, :start_year => 100.years.ago.year, :end_year => 18.years.ago.year %>
+      </div>
+    </div>
+
+<% end %>
