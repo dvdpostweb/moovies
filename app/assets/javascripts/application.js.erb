@@ -2,6 +2,7 @@
 //= require jquery_ujs
 //= require jquery.form
 //= require jquery.validate
+//= require facebox-bootstrap
 //= require chosen.jquery.min
 //= require bootstrap.min
 //= require jquery-ui.min
@@ -15,7 +16,6 @@
 //= require icheck.min
 //= require scripts
 //= require history
-//= require facebox
 
 //= require alacarte
 //= require login
@@ -74,6 +74,8 @@ window.onload = function () {
 };
 
 $(document).ready(function () {
+
+    $('a[rel*=facebox]').facebox();
 
     var originalLeave = $.fn.popover.Constructor.prototype.leave;
     $.fn.popover.Constructor.prototype.leave = function (obj) {
