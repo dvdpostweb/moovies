@@ -1,6 +1,11 @@
 <div id="mon_compte">
   <!--<h3 class="dark-gray pad0 mar0 marb10">Adresse</h3> -->
   <h3 class="dark-gray pad0 mar0 marb10"><%= t '.title' %></h3>
+
+  <div class="alert alert-success">
+    <strong><%= t('orange.mon_compte.account_modication') %></strong>
+  </div>
+
   <%= form_for(:customer, :url => customer_path, :id => :form_account, :html => {:method => :put}, :remote => true) do |f| %>
 
       <div class="form-group block100">
@@ -62,7 +67,6 @@
 
   <% end %>
 </div>
-
 
 <script>
 

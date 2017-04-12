@@ -21,7 +21,7 @@
 </div>
 
 <%= link_to t('.customer_edit'), edit_customer_path(), :class => 'btn green-bck OpenSansCondensed f23 mart20', rel: "facebox" %>
-<a href="index.php%3Fpage=mon-compte.html#" class="btn light-blue-bck OpenSansCondensed f23 mart20" data-toggle="modal" data-target="#adresse-modal">Modifier mon adresse</a>
+<%= link_to t('.address_edit'), edit_customer_addresses_path(:customer_id => current_customer), :class => 'btn light-blue-bck OpenSansCondensed f23 mart20', rel: "facebox" %>
 
 <div class="form-group lightergray-bck mart20">
   <span class="bold">Mes cotations:</span>

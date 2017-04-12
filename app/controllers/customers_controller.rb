@@ -10,6 +10,8 @@ class CustomersController < ApplicationController
   def show
     @body_id = 'moncompte'
     @customer = current_customer
+    gon.customer = current_customer.customers_id
+    gon.customer_birthday = current_customer.customers_dob
     #env = Rails.env == 'staging' || Rails.env == 'development' ? 'staging' :  Rails.env
     @review_count = current_customer.reviews.approved.joins("INNER JOIN plush_#{Rails.env}.products ON `products`.`imdb_id` = `reviews`.`imdb_id`").where(:products => {:products_type => Moovies.product_kinds[params[:kind]], :products_status => [-2,0,1]}).count
     @classic_count = current_customer.vod_wishlists.joins(:products, :streaming_products).where("streaming_products.available = 1 and products_status != -1 and products_type = :type and country = :country", {:type => Moovies.product_kinds[:normal], :country => Product.country_short_name(session[:country_id])}).count(:imdb_id, :distinct => true)
@@ -20,6 +22,7 @@ class CustomersController < ApplicationController
     @customer = current_customer
     if request.xhr?
       render :layout => false
+      #render json: params
     end
   end
 
@@ -40,14 +43,39 @@ class CustomersController < ApplicationController
         current_customer.update_column(:customers_registration_step, current_customer.samsung_codes.unvalidated.empty? ? 33 : 32)
       end
       if request.xhr?
-        render :layout => false
+        #render :layout => false
+        #render json: params
+
+        respond_to do |format|
+          format.js
+          format.html
+        end
+
       else
         redirect_after_registration(customer_path)
       end
     else
       @countries = Country.all
       if request.xhr?
-        render :action => :edit, :layout => false
+
+        updated_customer = current_customer
+
+        updated_customer.gender = params[:customer][:gender]
+        updated_customer.first_name = params[:customer][:first_name]
+        updated_customer.last_name = params[:customer][:last_name]
+        updated_customer.email = params[:customer][:new_email]
+        updated_customer.phone = params[:customer][:phone]
+        updated_customer.birthday = params[:customer][:birthday]
+
+        if updated_customer.save(validate: false)
+
+          respond_to do |format|
+            format.js
+            format.html
+          end
+
+        end
+
       else
         if current_customer.step == 31
           @step_id = 'step2'
