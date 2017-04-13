@@ -1393,7 +1393,7 @@ body.modal-open {
   position: absolute;
   top: 30px;
   right: 9%;
-  background: url("http://superentals.codepop.biz/images/feed/close2.png") no-repeat 0 0;
+  background: image-url("template/close-modal.png") no-repeat 0 0;
   font-weight: normal;
   text-shadow: none;
   opacity: 1;
@@ -1461,7 +1461,7 @@ body.modal-open {
 }
 
 .ui-state-default .ui-icon-triangle-1-s {
-  background-image: url(../images/template/arrow-light-grey-bg.png) !important;
+  background-image: image-url("template/arrow-light-grey-bg.png") !important;
   background-repeat: no-repeat;
 }
 
@@ -1524,8 +1524,3 @@ body.modal-open {
 .irs-grid-text {
   color: #999;
 }
-
-/*ENDRANGE SLIDER*/
-/*END GENERAL*/
-
-/*# sourceMappingURL=general.css.map */
