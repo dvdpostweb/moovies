@@ -60,6 +60,7 @@ class CustomersController < ApplicationController
 
         updated_customer = current_customer
 
+        updated_customer.nickname = params[:customer][:nickname]
         updated_customer.gender = params[:customer][:gender]
         updated_customer.first_name = params[:customer][:first_name]
         updated_customer.last_name = params[:customer][:last_name]
