@@ -1,58 +1,77 @@
 <div id="mon_compte">
-  <!--<h3 class="dark-gray pad0 mar0 marb10">Adresse</h3> -->
-  <h3 class="dark-gray pad0 mar0 marb10"><%= t '.title' %></h3>
+
+  <% if params[:type].present? && params[:type] == "nickname" %>
+
+      <!-- <h3 class="dark-gray pad0 mar0 marb10">Changer de pseudo</h3> -->
+      <h3 class="dark-gray pad0 mar0 marb10">Changer de pseudo</h3>
+
+  <% else %>
+
+      <!--<h3 class="dark-gray pad0 mar0 marb10">Adresse</h3> -->
+      <h3 class="dark-gray pad0 mar0 marb10"><%= t '.title' %></h3>
+
+  <% end %>
   <%= form_for(:customer, :url => customer_path, :id => :form_account, :html => {:method => :put}, :remote => true) do |f| %>
 
-      <div class="form-group block100">
-        <div class="col-md-4 col-sm-4 col-xs-4" style="margin-left: 27%">
-          <div class="col-md-2 col-sm-2 col-xs-3">
-            <%= f.radio_button :gender, 'f', class: "iradio" %>
+      <% if params[:type].present? && params[:type] == "nickname" %>
+          <div class="form-group block100">
+            <label class="bold"><%= t '.nickname' %>:</label>
+            <input type="text" name="pseudo" value="">
           </div>
-          <div class="col-md-10 col-sm-10 col-xs-9">
-            <%= t '.miss' %>
+
+      <% else %>
+          <div class="form-group block100">
+            <div class="col-md-4 col-sm-4 col-xs-4" style="margin-left: 27%">
+              <div class="col-md-2 col-sm-2 col-xs-3">
+                <%= f.radio_button :gender, 'f', class: "iradio" %>
+              </div>
+              <div class="col-md-10 col-sm-10 col-xs-9">
+                <%= t '.miss' %>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-sm-4 col-xs-4">
+              <div class="col-md-2 col-sm-2 col-xs-3">
+                <%= f.radio_button :gender, 'm', class: "iradio" %>
+              </div>
+              <div class="col-md-10 col-sm-10 col-xs-9">
+                <%= t '.mister' %>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div class="col-md-4 col-sm-4 col-xs-4">
-          <div class="col-md-2 col-sm-2 col-xs-3">
-            <%= f.radio_button :gender, 'm', class: "iradio" %>
+          <div class="form-group block100">
+            <label class="bold"><%= t '.firstname' %>:</label>
+            <%= f.text_field :first_name %>
           </div>
-          <div class="col-md-10 col-sm-10 col-xs-9">
-            <%= t '.mister' %>
+
+          <div class="form-group block100">
+            <label class="bold"><%= t '.lastname' %>:</label>
+            <%= f.text_field :last_name %>
           </div>
-        </div>
-      </div>
 
-      <div class="form-group block100">
-        <label class="bold"><%= t '.firstname' %>:</label>
-        <%= f.text_field :first_name %>
-      </div>
+          <div class="form-group block100">
+            <label class="bold"><%= t '.email' %>:</label>
+            <%= f.text_field :email %>
+            <%= f.hidden_field :new_email, :value => @customer.email %>
+          </div>
 
-      <div class="form-group block100">
-        <label class="bold"><%= t '.lastname' %>:</label>
-        <%= f.text_field :last_name %>
-      </div>
+          <div class="form-group block100">
+            <label class="bold"><%= t '.birthday' %>:</label>
+            <%= f.text_field :birthday, :value => @customer.birthday.strftime("%m/%d/%Y") if @customer.birthday != nil %>
+          </div>
 
-      <div class="form-group block100">
-        <label class="bold"><%= t '.email' %>:</label>
-        <%= f.text_field :email %>
-        <%= f.hidden_field :new_email, :value => @customer.email %>
-      </div>
+          <div class="form-group block100">
+            <label class="bold"><%= t '.phone' %>:</label>
+            <%= f.text_field :phone, :value => @customer.phone %>
+          </div>
 
-      <div class="form-group block100">
-        <label class="bold"><%= t '.birthday' %>:</label>
-        <%= f.text_field :birthday, :value => @customer.birthday.strftime("%m/%d/%Y") if @customer.birthday != nil  %>
-      </div>
+          <div class="form-group block100">
+            <label class="bold">Mot de passe:</label>
+            <span class="display-inline pull-left padt10" style="margin-left: 2%">****** <%= link_to t('.change_password'), edit_customer_registration_path, :class => "f13" %> </span>
+          </div>
 
-      <div class="form-group block100">
-        <label class="bold"><%= t '.phone' %>:</label>
-        <%= f.text_field :phone, :value => @customer.phone %>
-      </div>
-
-      <div class="form-group block100">
-        <label class="bold">Mot de passe:</label>
-        <span class="display-inline pull-left padt10" style="margin-left: 2%">****** <%= link_to t('.change_password'), edit_customer_registration_path, :class => "f13" %> </span>
-      </div>
+      <% end %>
 
       <div class="form-group block100">
         <%= button_tag class: "btn pad5 blue-bck white pull-left radius4", id: "mon-compte-submit-modal" do %>
