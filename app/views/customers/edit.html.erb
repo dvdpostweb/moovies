@@ -16,7 +16,7 @@
       <% if params[:type].present? && params[:type] == "nickname" %>
           <div class="form-group block100">
             <label class="bold"><%= t '.nickname' %>:</label>
-            <input type="text" name="pseudo" value="">
+            <%= f.text_field :nickname %>
           </div>
 
       <% else %>
@@ -51,6 +51,11 @@
           </div>
 
           <div class="form-group block100">
+            <label class="bold"><%= t '.nickname' %>:</label>
+            <%= f.text_field :nickname %>
+          </div>
+
+          <div class="form-group block100">
             <label class="bold"><%= t '.email' %>:</label>
             <%= f.text_field :email %>
             <%= f.hidden_field :new_email, :value => @customer.email %>
@@ -75,7 +80,7 @@
 
       <div class="form-group block100">
         <%= button_tag class: "btn pad5 blue-bck white pull-left radius4", id: "mon-compte-submit-modal" do %>
-            <i class="fa fa-check"></i> <%= t('submit') %>
+            <i class="fa fa-check"></i> <%= t('.create') %>
         <% end %>
       </div>
 
