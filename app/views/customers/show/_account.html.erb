@@ -24,19 +24,18 @@
 <%= link_to t('.address_edit'), edit_customer_addresses_path(:customer_id => current_customer), :class => 'btn light-blue-bck OpenSansCondensed f23 mart20', rel: "facebox" %>
 
 <div class="form-group lightergray-bck mart20">
-  <span class="bold">Mes cotations:</span>
-  0
+  <span class="bold"><%= t '.cotations' %></span>
+  <%= customer.ratings.count %>
 </div>
 <div class="form-group">
-  <span class="bold">Mes critiques:</span>
-  0
-</div>
-<div class="form-group lightergray-bck">
-  <span class="bold">Mon pseudo:</span>
-  -
+  <span class="bold"><%= t '.critiques' %></span>
+  <%= @review_count %>
+  <% if @review_count > 0 %>
+      (<%= link_to t('.see_all'), customer_reviews_path(:customer_id => current_customer.to_param), :class => :modif %>)
+  <% end %>
 </div>
 
-<a href="index.php%3Fpage=mon-compte.html#" class="btn green-bck OpenSansCondensed f23 mart20" data-toggle="modal" data-target="#pseudo-modal">Changer de pseudo</a>
+<%= render :partial => 'customers/show/nickname', :locals => { :customer => customer } %>
 
 <div class="form-group lightergray-bck block100 mart20" id="newsletter-infos-form">
   <span class="bold pull-left">Newsletters infos Plush:</span>
