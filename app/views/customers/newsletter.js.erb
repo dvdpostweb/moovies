@@ -1,0 +1,13 @@
+<% #escape_javascript(
+
+@customer = current_customer
+@customer.newsletter!(params[:type], params[:value])
+if params[:type] == 'newsletter'
+data = @customer.newsletter
+else
+data = @customer.newsletter_parnter
+end
+#)
+%>
+
+$('#activate_suspend').html("<%= escape_javascript(render(:partial => 'customers/show/active', :locals => {:active => data, :type => params[:type]}, :formats => [:html])) %>");

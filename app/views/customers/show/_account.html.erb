@@ -19,10 +19,8 @@
   <span class="bold"><%= t '.phone' %> :</span>
   <%= customer.phone %>
 </div>
-
 <%= link_to t('.customer_edit'), edit_customer_path(), :class => 'btn green-bck OpenSansCondensed f23 mart20', rel: "facebox" %>
 <%= link_to t('.address_edit'), edit_customer_addresses_path(:customer_id => current_customer), :class => 'btn light-blue-bck OpenSansCondensed f23 mart20', rel: "facebox" %>
-
 <div class="form-group lightergray-bck mart20">
   <span class="bold"><%= t '.cotations' %></span>
   <%= customer.ratings.count %>
@@ -34,33 +32,6 @@
       (<%= link_to t('.see_all'), customer_reviews_path(:customer_id => current_customer.to_param), :class => :modif %>)
   <% end %>
 </div>
-
 <%= render :partial => 'customers/show/nickname', :locals => { :customer => customer } %>
 
-<div class="form-group lightergray-bck block100 mart20" id="newsletter-infos-form">
-  <span class="bold pull-left">Newsletters infos Plush:</span>
-  <div class="col-md-3 col-sm-3">
-    <input type="radio" class="iradio" name="newsletter-infos" value="1" checked/> Activé
-  </div>
-  <div class="col-md-3 col-sm-3">
-    <input type="radio" class="iradio" name="newsletter-infos" value="0"/> Deactivé
-  </div>
-</div>
-<div class="form-group block100" id="newsletter-partenaires-form">
-  <span class="bold pull-left">Newsletters partenaires:</span>
-  <div class="col-md-3 col-sm-3">
-    <input type="radio" class="iradio" name="newsletter-partenaires" value="1"/> Activé
-  </div>
-  <div class="col-md-3 col-sm-3">
-    <input type="radio" class="iradio" name="newsletter-partenaires" value="0" checked/> Deactivé
-  </div>
-</div>
-<div class="form-group lightergray-bck block100" id="newsletter-adulte-form">
-  <span class="bold pull-left">Newsletter adulte:</span>
-  <div class="col-md-3 col-sm-3">
-    <input type="radio" class="iradio" name="newsletter-adulte" value="1" checked/> Activé
-  </div>
-  <div class="col-md-3 col-sm-3">
-    <input type="radio" class="iradio" name="newsletter-adulte" value="0"/> Deactivé
-  </div>
-</div>
+
