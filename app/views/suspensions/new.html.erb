@@ -1,3 +1,31 @@
+<!-- <h3 class="dark-gray pad0 mar0 marb10"><%= t('.title') %></h3> -->
+<h3 class="dark-gray pad0 mar0 marb10"><%= t('.title') %></h3>
+<strong>Vous partez en vacances et désirez suspendre momentanément votre abonnement?</strong> <br><br> C'est tout à fait possible ! <br><br> Juste avant votre départ, <strong>choisissez
+  la durée de suspension</strong> et cliquez sur le bouton pour confirmer. Cette suspension prendra cours immédiatement et votre prochaine date de paiement est repoussée de la durée
+chosie. <br><br> Vous pouvez utiliser cette fonctionnalité <strong>jusqu'à 3 fois par année d'abonnement</strong> sans aucun frais.
+<div class="alert-success block100 pad5 mart10">
+  <h4 class="dark-gray">Durée de suspension</h4>
+
+  <select class="modal-select pull-left" name="suspendre-option">
+    <option value="1">1 semaine</option>
+    <option value="2">2 semaine</option>
+    <option value="3">3 semaine</option>
+    <option value="4">1 mois</option>
+  </select>
+  <a href="index.php%3Fpage=mon-compte.html#" class="btn red-google-bck white pull-left radius4" id="suspendre-submit-modal"><i class="fa fa-check"></i> Confirmer</a>
+  <div class="modal-drop-holder"></div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!--
 <div id="suspend-abonament">
   <h3><%= t('.title') %></h3>
   <% if @already_suspended %>

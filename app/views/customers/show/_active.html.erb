@@ -1,9 +1,25 @@
-<% if active == 1 %>
-<%= t '.active_status' %>
-<span><%= image_tag 'delimiter.gif' %></span>
-<%= link_to t('.deactive_status_actif'), customer_newsletter_path(:customer_id => current_customer, :value => 0, :type => type), :class => "suppendre_#{type} customer_button" %>
-<% else %>
-<%= t '.deactive_status' %>
-<span><%= image_tag 'delimiter.gif' %></span>
-<%= link_to t('.active_status_actif'), customer_newsletter_path(:customer_id => current_customer, :value => 1, :type => type), :class => "suppendre_#{type} customer_button" %>
-<% end %>
+<div id="activate_suspend">
+  <% if active == 1 %>
+      <div class="col-md-6 col-sm-3">
+        <div class="table-responsive">
+          <table class="table">
+            <tr>
+              <td><%= t '.active_status' %></td>
+              <td><%= link_to t('.deactive_status_actif'), customer_newsletter_path(:customer_id => current_customer, :value => 0, :type => type), :remote => true, :class => "pad5 blue-bck white marl5 pull-left" %></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+  <% else %>
+      <div class="col-md-6 col-sm-3">
+        <div class="table-responsive">
+          <table class="table">
+            <tr>
+              <td><%= t '.deactive_status' %></td>
+              <td><%= link_to t('.active_status_actif'), customer_newsletter_path(:customer_id => current_customer, :value => 1, :type => type), :remote => true, :class => "pad5 blue-bck white marl5 pull-left" %></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+  <% end %>
+</div>

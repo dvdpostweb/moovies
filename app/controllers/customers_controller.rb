@@ -112,7 +112,13 @@ class CustomersController < ApplicationController
       data = @customer.newsletter_parnter
     end
     if request.xhr?
-      render :partial => 'customers/show/active', :locals => {:active => data, :type => params[:type]}
+      #render :partial => 'customers/show/active', :locals => {:active => data, :type => params[:type]}
+
+      respond_to do |format|
+        format.js
+        format.html
+      end
+
     else
       redirect_to customer_path(:id => current_customer.to_param)
     end
