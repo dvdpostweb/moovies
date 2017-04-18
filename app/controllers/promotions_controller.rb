@@ -1,5 +1,6 @@
 class PromotionsController < ApplicationController
   before_filter :get_data
+  layout :chose_layout
   def show
     if @promo && @promo.canva_id == 3
       @checked = true
@@ -178,7 +179,7 @@ class PromotionsController < ApplicationController
 
     @promo = Promotion.find_by_name(id)
     if @promo
-      @partial = 'canvas'
+      params[:id] == 'orange' ? @partial = 'orange' : @partial = 'canvas'
       @body_class = "canvas#{@promo.canva_id}"
       @canvas = @body_class
       @canvas += "_#{params[:format]}" if params[:format] && @promo.params[:choose]
@@ -208,6 +209,12 @@ class PromotionsController < ApplicationController
     else
       @prospect = nil
     end
+  end
+
+  private
+
+  def chose_layout
+    params[:id] == 'orange' ? 'promotion_orange' : 'promo'
   end
 
 end

@@ -74,9 +74,9 @@ class ApplicationController < ActionController::Base
   end
 
   def layout_by_resource
-    if params[:controller] == 'promotions'
-      'promo'
-    elsif params[:controller] == 'errors'
+    #if params[:controller] == 'promotions'
+    #  'promo'
+    if params[:controller] == 'errors'
       'errors'
     else
       "application"
