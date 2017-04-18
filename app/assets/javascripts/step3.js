@@ -4,6 +4,8 @@ $(document).ready(function () {
 
     step3.validateVirmanForm();
 
+    step3.validateBancCard();
+
 });
 
 var step3 = {
@@ -141,6 +143,21 @@ var step3 = {
             return "Telephone is required."
 
         }
+
+    },
+    validateBancCard: function() {
+
+        $("#form_step3").submit(function() {
+
+            if (!$("input[name='brand']").is(":checked")) {
+
+                $("#banc_card_error").empty().html("<div class=\"alert alert-danger\" role=\"alert\">" + gon.banc_card_error_message + "</div>");
+
+                return false;
+
+            }
+
+        });
 
     }
 
