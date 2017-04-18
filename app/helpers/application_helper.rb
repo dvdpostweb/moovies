@@ -14,6 +14,8 @@ module ApplicationHelper
       "mon-compte"
     elsif params[:controller].present? && params[:controller] == "steps" && params[:action].present? && params[:action] == "show" && params[:id].present? && params[:id] == "step3" then
       "step3"
+    elsif params[:controller].present? && params[:controller] == "payment_methods" && params[:action].present? && params[:action] == "update" then
+      "step3"
     elsif params[:page_name].present? && params[:page_name] == "alacarte" then
       "price-chart price-chart-green three-column"
     elsif params[:page_name].present? && params[:page_name] == "unlimited" then
