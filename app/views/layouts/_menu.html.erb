@@ -33,7 +33,7 @@
             <a href="index.html" class="violet">18+</a>
           </li>
           <li>
-            <a href="index.html">Contact</a>
+            <%= link_to t('.contact'), current_customer ? messages_path : new_phone_request_path, :id => :message %>
           </li>
         </ul>
       </div>
