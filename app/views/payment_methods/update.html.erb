@@ -1,9 +1,5 @@
 <div class="container white-bck dark-gray padb20" xmlns="http://www.w3.org/1999/html">
-
-  <div class="page-header">
-    <h1 class="OpenSansCondensed f30 mar0 pad0"><%= t '.redirection' %></h1>
-  </div>
-
+  <h1 class="OpenSansCondensed f30 mar0 pad0"><%= t '.redirection' %></h1>
   <div class="row">
     <div align="center">
       <div class="loader">
@@ -11,17 +7,6 @@
       </div>
     </div>
   </div>
-
-  <div class="page-header">
-
-  </div>
-
-  <div class="row">
-    <div align="center">
-      <%= image_tag "ogone.jpg", class: "img-responsive" %>
-    </div>
-  </div>
-
   <% if current_customer.have_freetrial_codes? %>
       <form name="checkout_confirmation" id="checkout_confirmation" method="post" action="<%= ENV["OGONE_URL"] %>">
         <input type="hidden" name="Account.PSPID" value="<%= ENV["OGONE_PSPID"] %>">
