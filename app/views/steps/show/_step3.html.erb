@@ -4,32 +4,43 @@
   <p><%= t('promotion.newstep3.line5').html_safe %></p>
   <div id="accordion" class="mart30">
     <h3>Carte bancaire</h3>
-    <div>
-      <form id="card-confirm-form">
-        <ul id="card-list">
-          <li>
-            <div class="card-image"><%= image_tag"template/card-visa.png",  class: "img-responsive" %></div>
-            <div class="card-radio"><input type="radio" name="card-list" value="visa" class="iradio"></div>
-          </li>
-          <li>
-            <div class="card-image"><%= image_tag "template/card-master.png", class: "img-responsive" %></div>
-            <div class="card-radio"><input type="radio" name="card-list" value="master" class="iradio"></div>
-          </li>
-          <li>
-            <div class="card-image"><%= image_tag "template/card-american-express.png", class: "img-responsive" %></div>
-            <div class="card-radio"><input type="radio" name="card-list" value="american" class="iradio"></div>
-          </li>
-        </ul>
-      </form>
-      <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mart20">
-        <a href="index.php%3Fpage=step3.html#" class="btn block100 btn-green-gradient padlr40 padtb5 white f17 normal" id="confirm-card-form">Confirmer</a>
-      </div>
-    </div>
-
-
+    <%= form_for(:customer, :url => customer_payment_methods_path(:customer_id => current_customer.to_param), :html => {:method => :put, :id => "form_step3"}) do |f| %>
+        <div>
+          <div id="banc_card_error"></div>
+          <ul id="card-list">
+            <li>
+              <div class="card-image">
+                <%= image_tag "template/card-visa.png", class: "img-responsive" %>
+              </div>
+              <div class="card-radio">
+                <input type="radio" value="visa" name="brand" id="visa" class="iradio">
+              </div>
+            </li>
+            <li>
+              <div class="card-image">
+                <%= image_tag "template/card-master.png", class: "img-responsive" %>
+              </div>
+              <div class="card-radio">
+                <input type="radio" value="mastercard" name="brand" id="master" class="iradio">
+              </div>
+            </li>
+            <li>
+              <div class="card-image">
+                <%= image_tag "template/card-american-express.png", class: "img-responsive" %>
+              </div>
+              <div class="card-radio">
+                <input type="radio" value="american Express" name="brand" id="amex" class="iradio">
+              </div>
+            </li>
+          </ul>
+          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mart20">
+            <input type="submit" name="submit" class="btn block100 btn-green-gradient padlr40 padtb5 white f17 normal" id="confirm-card-form" value="<%= t '.confirm' %>"></input>
+          </div>
+        </div>
+    <% end %>
     <h3>PayPal</h3>
     <div>
-      <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mart10"><%= image_tag "template/paypal.png",  class: "img-responsive" %></div>
+      <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mart10"><%= image_tag "template/paypal.png", class: "img-responsive" %></div>
       <div class="block100 mart20">
         <%= link_to(image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"), api_v1_express_checkout_path) %>
       </div>
@@ -48,18 +59,12 @@
             <input type="text" name="telephone" placeholder="<%= t('promotion.newstep3.telephone') %>" id="telephone" class="form-control">
           </div>
         </div>
-
-      <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mart20">
-        <input type="submit" name="submit" class="btn block100 btn-green-gradient padlr40 padtb5 white f17 normal" id="confirm-personal-form" value="Check out"></input>
-      </div>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mart20">
+          <input type="submit" name="submit" class="btn block100 btn-green-gradient padlr40 padtb5 white f17 normal" id="confirm-personal-form" value="<%= t '.confirm' %>"></input>
+        </div>
       </form>
-
-      <div class="errorTxt"></div>
-
     </div>
   </div>
-
   <p class="mart30"><%= t('promotion.newstep3.supportinfo').html_safe %></p>
   <p><%= link_to t('promotion.newstep3.conditions').html_safe, info_path(:page_name => t('routes.infos.params.conditions')), class: "conditions-d-utilisation" %></p>
-
 </div>
