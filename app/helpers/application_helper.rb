@@ -12,6 +12,8 @@ module ApplicationHelper
       "block100 login-sign"
     elsif params[:controller].present? && params[:controller] == "customers" && params[:action].present? && params[:action] == "show" then
       "mon-compte"
+    elsif params[:controller].present? && params[:controller] == "steps" && params[:action].present? && params[:action] == "show" && params[:id].present? && params[:id] == "step3" then
+      "step3"
     elsif params[:page_name].present? && params[:page_name] == "alacarte" then
       "price-chart price-chart-green three-column"
     elsif params[:page_name].present? && params[:page_name] == "unlimited" then
