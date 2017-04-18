@@ -1,203 +1,68 @@
-<div class="container white-bck">
-  <div class="page-header">
-    <h1><%= t '.title' %></h1>
-  </div>
-  <div class="well well-lg">
-    <div class="row">
-      <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="page-header">
-              <h1><%= t '.pc' %></h1>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <%= t('.pc.text').html_safe %>
-            <%= link_to(t('.pc.link'), streaming_products_sample_path, :class => "btn green-bck OpenSansCondensed f23 block100", :id => "button-la-carte") %>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <%= image_tag("vod/mac_pc_vod.jpg") %>
-          </div>
-        </div>
-      </div>
+<div class="container white-bck dark-gray padb20 platforms-holder">
+  <h1 class="OpenSansCondensed text-center pad0"><%= t '.title' %></h1>
+  <div class="block100 padtb20">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+      <h2 class="OpenSansCondensed f25 text-center mar0 pad0"><%= t '.pc' %></h2>
+      <%= image_tag "template/platform-pc-mac.jpeg", class: "display-block img-responsive" %>
+    </div>
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 padlr20 padt20">
+      <%= t('.pc.text').html_safe %>
+      <%= link_to(t('.pc.link'), streaming_products_sample_path, :class => "btn green-bck OpenSansCondensed f23 block100", :id => "button-la-carte") %>
     </div>
   </div>
-
-  <div class="well well-lg">
-    <div class="row">
-      <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="page-header">
-              <h1>Consoles</h1>
-            </div>
-            <%= image_tag 'vod/logo_ps3.jpg' %>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title"><%= t('.ps3_title').html_safe %></h3>
-          </div>
-          <div class="panel-body">
-            <%= t('.ps3_desc').html_safe %>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <%= image_tag("vod/ps3.jpg") %>
-          </div>
-        </div>
-      </div>
+  <div class="block100 padtb20">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+      <h2 class="OpenSansCondensed f25 text-center mar0 pad0">Console PS-3</h2>
+      <%= image_tag "template/platform-ps-3.jpeg", class: "display-block img-responsive" %>
     </div>
-    <div class="row">
-      <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="page-header">
-              <%= image_tag 'vod/logo_ps4.jpg' %>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title"><%= t('.ps4_title').html_safe %></h3>
-          </div>
-          <div class="panel-body">
-            <%= t('.ps4_desc').html_safe %>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <%= image_tag("vod/ps4.jpg") %>
-          </div>
-        </div>
-      </div>
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 padlr20 padt20">
+      <strong><%= t('.ps3_title').html_safe %></strong><br> <%= t('.ps3_desc').html_safe %>
     </div>
   </div>
-
-  <div class="well well-lg">
-    <div class="row">
-      <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="page-header">
-              <h1><%= t '.tablet' %></h1>
-            </div>
-            <%= image_tag("vod/apple_logo_vod.jpg") %>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <%= t('.tablet.apple').html_safe %>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <%= image_tag("vod/apple_vod.jpg") %>
-          </div>
-        </div>
-      </div>
+  <div class="block100 padtb20">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+      <h2 class="OpenSansCondensed f25 text-center mar0 pad0">Console PS-4</h2>
+      <%= image_tag "template/platform-ps-4.jpeg", class: "display-block img-responsive" %>
     </div>
-    <div class="row">
-      <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="page-header">
-              <%= image_tag("vod/android_logo_vod.jpg") %>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <%= t('.tablet.android').html_safe %>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <%= image_tag("vod/android_vod.jpg") %>
-          </div>
-        </div>
-      </div>
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 padlr20 padt20">
+      <strong><%= t('.ps4_title').html_safe %></strong><br> <%= t('.ps4_desc').html_safe %>
     </div>
   </div>
-
-  <div class="well well-lg">
-    <div class="row">
-      <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="page-header">
-              <h1><%= t '.smart' %></h1>
-            </div>
-            <%= image_tag("vod/smarttv_logo_vod.jpg") %>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <%= t('.smart.text').html_safe %>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <%= image_tag("vod/smarttv_vod.jpg") %>
-          </div>
-        </div>
-      </div>
+  <div class="block100 padtb20">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+      <h2 class="OpenSansCondensed f25 text-center mar0 pad0"><%= t '.tablet' %></h2>
+      <%= image_tag "template/platform-smart.jpeg", class: "display-block img-responsive" %>
+    </div>
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 padlr20 padt20">
+      <%= t('.tablet.apple').html_safe %>
     </div>
   </div>
-
-  <div class="well well-lg">
-    <div class="row">
-      <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="page-header">
-              <h1><%= t '.tv' %></h1>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <%= t('.tv.text').html_safe %>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <%= image_tag("vod/tv_vod_apple.jpg") %>
-          </div>
-        </div>
-      </div>
+  <div class="block100 padtb20">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+      <h2 class="OpenSansCondensed f25 text-center mar0 pad0">Android</h2>
+      <%= image_tag "template/platform-android.jpeg", class: "display-block img-responsive" %>
+    </div>
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 padlr20 padt20">
+      <%= t('.tablet.android').html_safe %>
+      <%= link_to(t('.pc.link'), streaming_products_sample_path, :class => "btn green-bck OpenSansCondensed f23 block100", :id => "button-la-carte") %>
     </div>
   </div>
+  <div class="block100 padtb20">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+      <h2 class="OpenSansCondensed f25 text-center mar0 pad0"><%= t '.smart' %></h2>
+      <%= image_tag "template/platform-smart-tv.jpeg", class: "display-block img-responsive" %>
+    </div>
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 padlr20 padt20">
+      <%= t('.smart.text').html_safe %>
+    </div>
+  </div>
+  <div class="block100 padtb20">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+      <h2 class="OpenSansCondensed f25 text-center mar0 pad0"><%= t '.tv' %></h2>
+      <%= image_tag "template/platform-tv.jpeg", class: "display-block img-responsive" %>
+    </div>
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 padlr20 padt20">
+      <%= t('.tv.text').html_safe %>
+    </div>
+  </div>
+</div>
