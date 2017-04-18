@@ -246,6 +246,14 @@ article {
   background-color: #d2e8b6 !important;
 }
 
+.thin-green2 {
+  color: #DFF0D8;
+}
+
+.thin-green2-bck {
+  background-color: #DFF0D8 !important;
+}
+
 .violet {
   color: #993399 !important;
 }
@@ -263,7 +271,7 @@ article {
 }
 
 .green {
-  color: #94C951;
+  color: #94C951 !important;
 }
 
 .green-bck {
@@ -1194,7 +1202,7 @@ section.page {
 }
 
 .display-block {
-  display: block;
+  display: block !important;
 }
 
 .display-inline {
@@ -1362,7 +1370,7 @@ body.modal-open {
 }
 
 .modal-dialog {
-  margin-top: 50px;
+  margin-top: 75px;
   padding: 10px;
   background-color: white;
   border-radius: 10px;
@@ -1392,8 +1400,7 @@ body.modal-open {
 .modal button.close {
   position: absolute;
   top: 30px;
-  right: 9%;
-  background: image-url("template/close-modal.png") no-repeat 0 0;
+  right: 5%;
   font-weight: normal;
   text-shadow: none;
   opacity: 1;
@@ -1404,6 +1411,12 @@ body.modal-open {
   opacity: 1;
   width: 45px;
   height: 45px;
+  background: url("../images/template/close-modal.png") no-repeat;
+}
+@media (max-width: 767px) {
+  .modal button.close {
+    right: -1%;
+  }
 }
 
 .modal-footer .close {
@@ -1461,7 +1474,7 @@ body.modal-open {
 }
 
 .ui-state-default .ui-icon-triangle-1-s {
-  background-image: image-url("template/arrow-light-grey-bg.png") !important;
+  background-image: url(../images/template/arrow-light-grey-bg.png) !important;
   background-repeat: no-repeat;
 }
 
@@ -1524,3 +1537,8 @@ body.modal-open {
 .irs-grid-text {
   color: #999;
 }
+
+/*ENDRANGE SLIDER*/
+/*END GENERAL*/
+
+/*# sourceMappingURL=general.css.map */
