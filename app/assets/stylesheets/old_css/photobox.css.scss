@@ -22,7 +22,7 @@ h3{
 	margin: auto;
 	padding: 60px 30px;
 	background-color: #fff;
-	background-image: url("photobox/baner.png");
+	background-image: image-url("old_images/photobox/baner.png");
 	background-position: top right;
 	background-repeat: no-repeat;
 }
@@ -120,7 +120,7 @@ h3{
 	color: #fff;
 	font-size: 10px;
 	text-align: center;
-	background-image: url("photobox/badge.png");
+	background-image: image-url("old_images/photobox/badge.png");
 	background-position: center center;
 	background-repeat: no-repeat;
 }
@@ -183,11 +183,11 @@ input[type="radio"] + label span {
     height:15px;
     margin:-1px 4px 0 0;
     vertical-align:middle;
-    background:url(photobox/check-white.png) left top no-repeat;
+    background:url(old_images/photobox/check-white.png) left top no-repeat;
     cursor:pointer;
 }
 input[type="radio"]:checked + label span {
-    background:url(photobox/check-checked.png) left top no-repeat;
+    background:url(old_images/photobox/check-checked.png) left top no-repeat;
 }
 
 .vertical-line{
