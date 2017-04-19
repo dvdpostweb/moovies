@@ -95,10 +95,10 @@
         <h3><%= t('.illimite') %></h3>
         <table cellpadding="0" cellspacing="0" border="0">
           <tr id="vod">
-            <td><img src="<%= image_path "/assets/promotions/#{I18n.locale}/vod.jpg" %>" style="padding-left:20px;"/></td>
-            <td><img src="<%= image_path "/assets/promotions/#{I18n.locale}/streamingbutton.jpg" %>" style="padding-top:50px;"  /></td>
-            <td><img src="<%= image_path "/assets/promotions/#{I18n.locale}/icon_subtitles.gif" %>" style="padding-top:30px; padding-left:40px;" /></td>
-            <td><img src="<%= image_path "/assets/promotions/tv_vod.jpg" %>"  style="padding-top:14px;" /></td>
+            <td><img src="<%= image_path "/assets/old_images/promotions/#{I18n.locale}/vod.jpg" %>" style="padding-left:20px;"/></td>
+            <td><img src="<%= image_path "/assets/old_images/promotions/#{I18n.locale}/streamingbutton.jpg" %>" style="padding-top:50px;"  /></td>
+            <td><img src="<%= image_path "/assets/old_images/promotions/#{I18n.locale}/icon_subtitles.gif" %>" style="padding-top:30px; padding-left:40px;" /></td>
+            <td><img src="<%= image_path "/assets/old_images/promotions/tv_vod.jpg" %>"  style="padding-top:14px;" /></td>
           </tr>
           <tr id="vod">
             <td class="step1"><%= t('.istep1').html_safe %></td>
@@ -111,10 +111,10 @@
         <h3><%= t('.carte') %></h3>
         <table cellpadding="0" cellspacing="0" border="0">
           <tr id="dvd">
-            <td><img src="<%= image_path "/assets/promotions/#{I18n.locale}/vodppv.jpg" %>"style="padding-left:20px;"/></td>
-            <td><img src="<%= image_path "/assets/promotions/#{I18n.locale}/payperviewbutton#{@promo.params[:streaming_button_free] == true ? '_free' : ''}.jpg" %>" style="padding-top:28px;" /></td>
-            <td><img src="<%= image_path "/assets/promotions/#{I18n.locale}/icon_subtitles.gif" %>" style="padding-top:30px; padding-left:40px;" /></td>
-            <td><img src="<%= image_path "/assets/promotions/tv_vodppv.jpg" %>" style="padding-top:14px;"/></td>
+            <td><img src="<%= image_path "/assets/old_images/promotions/#{I18n.locale}/vodppv.jpg" %>"style="padding-left:20px;"/></td>
+            <td><img src="<%= image_path "/assets/old_images/promotions/#{I18n.locale}/payperviewbutton#{@promo.params[:streaming_button_free] == true ? '_free' : ''}.jpg" %>" style="padding-top:28px;" /></td>
+            <td><img src="<%= image_path "/assets/old_images/promotions/#{I18n.locale}/icon_subtitles.gif" %>" style="padding-top:30px; padding-left:40px;" /></td>
+            <td><img src="<%= image_path "/assets/old_images/promotions/tv_vodppv.jpg" %>" style="padding-top:14px;"/></td>
           </tr>
           <tr id="dvd">
             <td class="step1"><%= t('.astep1').html_safe %></td>
@@ -140,7 +140,7 @@
       </div>
       <% end %>
       <% end %>
-      <p align="center"><%= image_tag "#{I18n.locale}/info_tel.jpg" %></p>
+      <p align="center"><%= image_tag "old_images/#{I18n.locale}/info_tel.jpg" %></p>
       <!--
       <div id="promo_footer"><%= t2('.conditions', @promo.params[:key]).html_safe %></div>
     -->
