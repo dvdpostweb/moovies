@@ -55,3 +55,7 @@
   <% end %>
 
 </div>
+
+<% content_for :run_specific_javascript do %>
+    <%= javascript_include_tag "payment_methods/redirect_to_ogone" %>
+<% end %>
