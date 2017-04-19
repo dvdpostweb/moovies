@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<head>
+  <%= favicon_link_tag "favicon.ico" %>
+  <title>
+    <%= h @meta_title.blank? ? t('layouts.application.title') : @meta_title %>
+  </title>
+  <%= include_gon(namespace: 'Plush') %>
+  <%= Gon::Base.render_data %>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+  <meta name="description" content="<%= @meta_description.blank? ? '' : @meta_description %>">
+  <%= stylesheet_link_tag :login %>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700' rel='stylesheet' type='text/css'/>
+  <% if false %><%= javascript_include_tag :defaults %>
+  <% end %>
+  <%= csrf_meta_tag %>
+  <%= render :partial => 'layouts/google_analytics' %>
+  <%= render :partial => 'layouts/apple' %>
+</head>
+<body>
+  <% if params[:error_freetrial_discount_code_already_used].present? %>
+    <div id="display-error"><h2><%= t("PLUSH_DISCOUNT_CODE_RESTRICTION") %></h2></div>
+  <% end %>
+  <div id="header_login">
+    <ul id="lang">
+      <li> <%= link_to t('.home').upcase, root_localize_path %> </li>
+      <li><%= switch_locale_link(params) %></li>
+    </ul>
+  </div>
+
+  <div id="content">
+    <% if flash[:notice] %>
+        <%= flash[:notice] %>
+    <% end %>
+
+    <% if flash[:error] %>
+        <%= flash[:error] %>
+    <% end %>
+    <%= yield %>
+
+  </div>
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.js"></script>
+
+<script>
+  $(document).ready(function () {
+
+    if ((window.location.pathname == "/fr/mon-compte/password/nouveau") || (window.location.pathname == "/nl/mijn-account/password/nieuw") || (window.location.pathname == "/en/my-account/password/new") || (window.location.pathname == "/fr/adult/mon-compte/password/nouveau") || (window.location.pathname == "/nl/adult/mijn-account/password/nieuw") || (window.location.pathname == "/en/adult/my-account/password/new")) {
+
+      $("#new_customer").validate({
+        rules: {
+          'customer[email]': {
+            required: true,
+            email: true,
+            remote: "/api/v1/check_presence_of_customer_email"
+          }
+        },
+        messages: {
+          'customer[email]': {
+            required: required_message(),
+            email: email_message(),
+            remote: remote_message()
+          }
+        }
+      });
+
+    } else if ((window.location.pathname == "/fr/mon-compte/connectez-vous") || (window.location.pathname == "/nl/mijn-account/log-in") || (window.location.pathname == "/en/my-account/log-in") || (window.location.pathname == "/fr/adult/mon-compte/connectez-vous") || (window.location.pathname == "/nl/adult/mijn-account/log-in") || (window.location.pathname == "/en/adult/my-account/log-in")) {
+
+      $('#customer_email').val("");
+      $('#customer_password').val("");
+
+      $('#customer_email').bind("cut copy paste",function(e) {
+          e.preventDefault();
+      });
+
+      $('#customer_password').bind("cut copy paste",function(e) {
+          e.preventDefault();
+      });
+
+      $("#new_customer").validate({
+        rules: {
+          'customer[email]': {
+            required: true,
+            email: true,
+            remote: "/api/v1/check_presence_of_customer_email"
+          },
+          'customer[password]': {
+            required: true
+          }
+        },
+        messages: {
+          'customer[email]': {
+            required: required_message(),
+            email: email_message(),
+            remote: remote_message()
+          },
+          'customer[password]': {
+            required: login_password()
+          }
+        },
+        submitHandler: function (form) {
+
+          $.ajax({
+            method: 'POST',
+            url: '/api/v1/login',
+            data: {
+              'email': $("#customer_email").val(),
+              'password': $("#customer_password").val(),
+              'code': gon.code,
+              'moovie_id': gon.moovie_id,
+              'activation': gon.activation,
+              'samsung': gon.samsung,
+              'kind': gon.kind
+            },
+            dataType: 'json',
+            success: function (response) {
+              if (0 === response.status) {
+                $("#password_info").show().fadeOut(3000);
+                $("#password_message").text("");
+                $("#password_message").append(response.message);
+              } else if (1 === response.status) {
+                  window.location.href = response.message
+              } else if (3 === response.status) {
+                $("#code_info").show().fadeOut(3000);
+                $("#code_message").text("");
+                $("#code_message").append(response.message);
+              } else if (5 === response.status) {
+                $("#code_info").show().fadeOut(3000);
+                $("#code_message").text("");
+                $("#code_message").append(response.message);
+              } else if (4 === response.status) {
+                window.location.href = response.message
+              }
+            },
+            error: function (response) {
+              console.log('CHECKED AJAX ERROR!!!');
+            }
+          });
+
+        }
+      });
+
+    } else if ((window.location.pathname == "/fr/mon-compte/sign_up") || (window.location.pathname == "/nl/mijn-account/sign_up") || (window.location.pathname == "/en/my-account/sign_up") || (window.location.pathname == "/fr/adult/mon-compte/sign_up") || (window.location.pathname == "/nl/adult/mijn-account/sign_up") || (window.location.pathname == "/en/adult/my-account/sign_up")) {
+
+      if ($("#customer_newsletter").is(':checked')) {
+        customers_newsletter = 1
+        $("#customer_newsletter").click(function() {
+          if ($(this).is(':checked')) {
+            customers_newsletter = 1
+          } else {
+            customers_newsletter = 0
+          }
+        });
+      }
+
+      if ($("#customer_newsletter_parnter").is(':checked')) {
+        customers_newsletterpartner = 1
+        $("#customer_newsletter_parnter").click(function() {
+          if ($(this).is(':checked')) {
+            customers_newsletterpartner = 1
+          } else {
+            customers_newsletterpartner = 0
+          }
+        });
+      }
+
+      $("#new_customer").validate({
+        rules: {
+          'customer[email]': {
+            required: true,
+            email: true,
+            remote: "/api/v1/check_presence_of_customer_email_registration"
+          },
+          'customer[password]': {
+            required: true,
+            minlength: 8
+          },
+          'customer[password_confirmation]': {
+            required: true,
+            minlength: 8,
+            equalTo: "#customer_password"
+          }
+        },
+        messages: {
+          'customer[email]': {
+            required: required_message(),
+            email: email_message(),
+            remote: remote_message_register()
+          },
+          'customer[password]': {
+            required: required_message_password(),
+            minlength: min_characters()
+          },
+          'customer[password_confirmation]': {
+            required: required_message_password_confirmation(),
+            minlength: min_characters(),
+            equalTo: equalToMessage()
+          }
+        },
+        submitHandler: function (form) {
+
+          $.ajax({
+            method: 'POST',
+            url: '/api/v1/register',
+            data: {
+              'email': $("#customer_email").val(),
+              'password': $("#customer_password").val(),
+              'password_confirmation': $("#customer_password_confirmation").val(),
+              'code': gon.code,
+              'moovie_id': gon.moovie_id,
+              'activation': gon.activation,
+              'customers_newsletter': customers_newsletter,
+              'customers_newsletterpartner': customers_newsletterpartner
+            },
+            dataType: 'json',
+            success: function (response) {
+              if (9 === response.status) {
+                window.location.href = response.message
+              }
+            },
+            error: function (response) {
+              console.log('CHECKED AJAX ERROR!!!');
+            }
+          });
+
+        }
+      });
+
+    }
+
+  });
+
+  function min_characters() {
+    if (gon.locale == "fr") {
+      return "S'il vous plaît entrer au moins 8 caractères."
+    } else if (gon.locale == "nl") {
+      return "Voer ten minste 8 tekens."
+    } else if (gon.locale == "en") {
+      return "Please enter at least 8 characters."
+    }
+  }
+
+  function equalToMessage() {
+    if (gon.locale == "fr") {
+      return "Entrez à nouveau la même valeur s'il vous plait."
+    } else if (gon.locale == "nl") {
+      return "Vul dezelfde waarde opnieuw."
+    } else if (gon.locale == "en") {
+      return "Please enter the same value again."
+    }
+  }
+
+  function required_message() {
+    if (gon.locale == "fr") {
+      return "Adresse e-mail est nécessaire."
+    } else if (gon.locale == "nl") {
+      return "E-mailadres is verplicht."
+    } else if (gon.locale == "en") {
+      return "Email address is required."
+    }
+  }
+
+  function required_message_password() {
+    if (gon.locale == "fr") {
+      return "Mot de passe requis."
+    } else if (gon.locale == "nl") {
+      return "Een wachtwoord is verplicht."
+    } else if (gon.locale == "en") {
+      return "Password is required."
+    }
+  }
+
+  function required_message_password_confirmation() {
+    if (gon.locale == "fr") {
+      return "Confirmation mot de passe est nécessaire."
+    } else if (gon.locale == "nl") {
+      return "Wachtwoord bevestiging nodig is."
+    } else if (gon.locale == "en") {
+      return "Password confirmation is required."
+    }
+  }
+
+  function email_message() {
+    if (gon.locale == "fr") {
+      return "Format votre adresse email doit être correcte."
+    } else if (gon.locale == "nl") {
+      return "Formatteren uw e-mail adres moet correct zijn."
+    } else if (gon.locale == "en") {
+      return "Format your email address must be correct."
+    }
+  }
+
+  function remote_message() {
+    if (gon.locale == "fr") {
+      return "Adresse e-mail ne se trouve pas dans le système."
+    } else if (gon.locale == "nl") {
+      return "E-mail adres is niet gevonden in het systeem."
+    } else if (gon.locale == "en") {
+      return "Email address is not found in the system."
+    }
+  }
+
+  function remote_message_register() {
+    if (gon.locale == "fr") {
+      return "Adresse e-mail existe dans le système."
+    } else if (gon.locale == "nl") {
+      return "E-mailadres bestaat in het systeem."
+    } else if (gon.locale == "en") {
+      return "Email address exists in the system."
+    }
+  }
+
+  function login_password() {
+    if (gon.locale == "fr") {
+      return "Champ Mot de passe est nécessaire."
+    } else if (gon.locale == "nl") {
+      return "Password veld is verplicht."
+    } else if (gon.locale == "en") {
+      return "Password field is required."
+    }
+  }
+
+</script>
+<% if params[:error_freetrial_discount_code_already_used].present? %>
+  <div id="display-error"><h2><%= t("PLUSH_DISCOUNT_CODE_RESTRICTION") %></h2></div>
+<% end %>
+</body>
+</html>

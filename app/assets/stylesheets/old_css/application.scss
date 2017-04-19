@@ -2,37 +2,35 @@
  * This is a manifest file that'll automatically include all the stylesheets available in this directory
  * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
  * the top of the compiled file, but it's generally better to create a new file per style scope.
- //= require reset
- //= require main
- //= require messages
- //= require facebox
- //= require home
- //= require featurelist
- //= require jquery.ui.datepicker
- //= require jquery.ui.slider
- //= require steps
- //= require products
- //= require etabs-film
- //= require watchlists
- //= require reviews
- //= require actors
- //= require customers
- //= require studios
- //= require categories
- //= require info
- //= require streaming_products
- //= require payment_methods
- //= require suspension
- //= require circular.css
- //= require search.css
- //= require photobox
- //= require simplegrid
- //= require ns-default
- //= require ns-style-bar
- //= require jquery.toast
- //= require pink_banner
- //= require green_banner
- //= require social-buttons
+ //= require old_css/reset
+ //= require old_css/main
+ //= require old_css/messages
+ //= require old_css/facebox
+ //= require old_css/home
+ //= require old_css/featurelist
+ //= require old_css/steps
+ //= require old_css/products
+ //= require old_css/etabs-film
+ //= require old_css/watchlists
+ //= require old_css/reviews
+ //= require old_css/actors
+ //= require old_css/customers
+ //= require old_css/studios
+ //= require old_css/categories
+ //= require old_css/info
+ //= require old_css/streaming_products
+ //= require old_css/payment_methods
+ //= require old_css/suspension
+ //= require old_css/circular.css
+ //= require old_css/search.css
+ //= require old_css/photobox
+ //= require old_css/simplegrid
+ //= require old_css/ns-default
+ //= require old_css/ns-style-bar
+ //= require old_css/jquery.toast
+ //= require old_css/pink_banner
+ //= require old_css/green_banner
+ //= require old_css/social-buttons
  *= require chosen
 */
 
