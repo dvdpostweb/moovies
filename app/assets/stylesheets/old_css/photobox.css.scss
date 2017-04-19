@@ -183,11 +183,11 @@ input[type="radio"] + label span {
     height:15px;
     margin:-1px 4px 0 0;
     vertical-align:middle;
-    background:url(old_images/photobox/check-white.png) left top no-repeat;
+    background: url(image_path('old_images/photobox/check-white.png')) left top no-repeat;
     cursor:pointer;
 }
 input[type="radio"]:checked + label span {
-    background:url(old_images/photobox/check-checked.png) left top no-repeat;
+    background: url(image_path('old_images/photobox/check-checked.png')) left top no-repeat;
 }
 
 .vertical-line{
