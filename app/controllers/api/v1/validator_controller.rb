@@ -28,6 +28,21 @@ class Api::V1::ValidatorController < API::V1::BaseController
     end
   end
 
+  def validate_login_password_on_update
+    if request.xhr?
+      if params[:customer][:email].present? && params[:customer][:current_password].present?
+        resource = Customer.find_for_database_authentication(email: params[:customer][:email])
+        if resource.valid_password?(params[:customer][:current_password])
+          render json: TRUE
+        else
+          render json: FALSE
+        end
+      end
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
+
   def check_presence_of_customer_email_registration
     if request.xhr?
       email = Customer.find_by_email(params[:customer][:email])

@@ -68,3 +68,7 @@
   <p class="mart30"><%= t('promotion.newstep3.supportinfo').html_safe %></p>
   <p><%= link_to t('promotion.newstep3.conditions').html_safe, info_path(:page_name => t('routes.infos.params.conditions')), class: "conditions-d-utilisation" %></p>
 </div>
+
+<% content_for :run_specific_javascript do %>
+    <%= javascript_include_tag "steps/step3" %>
+<% end %>

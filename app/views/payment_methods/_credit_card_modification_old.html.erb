@@ -1,0 +1,492 @@
+<style>
+body{
+	font-family: Arial,Helvetica, sans-serif;
+}
+
+ul{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+h2, h3{
+	margin: 0;
+}
+
+h2{
+	font-size: 20px;
+	font-weight: bold;
+}
+
+h3{
+	font-size: 16px;
+	font-weight: normal;
+}
+
+label {
+	font-family: Arial,Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 26px;
+}
+
+.step {
+	height: auto;
+	margin: 0 auto;
+	padding: 45px 60px 20px 55px;
+	background: #fff;
+}
+
+.logo-page {
+	width: 129px;
+	height: 71px;
+	margin-bottom: 25px;
+	display: inline-block;
+}
+
+.log-out {
+	font-family: Arial,Helvetica, sans-serif;
+	font-size: 16px;
+	margin-top: 50px;
+	font-weight: bold;
+	display: inline-block;
+	float: right;
+	color: #5da50e;
+}
+
+.main-block {
+	width: calc(100% - 80px);
+	padding: 40px 40px 80px 40px;
+	background-color: #f3f3f3;
+}
+
+.main-block .main-caption {
+	margin-bottom: 20px;
+	font-weight: normal;
+	display: block;
+	color: #000;
+	font-family: Arial,Helvetica, sans-serif;
+	font-size: 20px;
+	font-weight: normal;
+}
+
+.main-block .main-text {
+	margin-bottom: 25px;
+	font-weight: bold;
+	display: block;
+	color: #000;
+	font-family: Arial,Helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.main-list {
+	margin-bottom: 20px;
+}
+
+.main-list li {
+	font-family: Arial,Helvetica, sans-serif;
+	font-size: 15px;
+	font-weight: normal;
+	color: #000;
+	margin-bottom: 5px;
+}
+
+.lock-block {
+	height: 45px;
+	display: block;
+}
+
+.lock-img {
+	width: 29px;
+	height: 41px;
+	background-image: url(step3/lock.png);
+	display: inline-block;
+	float: right;
+}
+
+.secure {
+	margin-right: 15px;
+	display: inline-block;
+	float: right;
+}
+
+.secure .server {
+	display: block;
+	font-size: 15px;
+	color: #000;
+}
+
+.secure .plus {
+	color: #0a4df8;
+	display: block;
+	font-size: 15px;
+	font-weight: normal;
+	float: right;
+}
+
+.button-role {
+	width: calc(100% - 100px);
+	height: 20px;
+	line-height: 24px;
+	padding: 20px 50px;
+	background-color: #fff;
+	background-image: url(step3/arrow.png);
+	background-position: 20px center;
+	background-repeat: no-repeat;
+	border: 2px solid #c2c2c2;
+	margin-bottom: 20px;
+	font-size: 28px;
+}
+
+.button-role.virement {
+	height: 35px;
+	line-height: 35px;
+	padding: 12px 50px;
+}
+
+.button-role img {
+	vertical-align: bottom;
+	margin-left: 25px;
+}
+
+.phone-number,
+.conditions-d-utilisation {
+	margin-top: 25px;
+	display: block;
+	font-size: 16px;
+	font-weight: normal;
+	color: #837f7f;
+}
+
+.conditions-d-utilisation {
+	text-decoration: underline;
+}
+
+#accordion h1 a {
+	color: #000;
+	font-family: Arial,Helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: normal;
+}
+
+#accordion section, #accordion .pointer, #accordion h1, #accordion p {
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+#accordion {
+  margin-bottom:30px;
+
+}
+#accordion h1 {
+  line-height:1.2;
+  font-size:28px;
+  background-color: #fff;
+  margin:0;
+  padding: 20px 50px;
+}
+
+#accordion h1 a {
+  color:black;
+}
+#accordion section {
+  overflow:hidden;
+  height:250px;
+  border: 2px solid #c2c2c2;
+  margin-bottom: 20px;
+}
+#accordion p {
+  padding:0 10px;
+  color:black;
+}
+#accordion section.ac_hidden p:not(.pointer) {
+  color:#fff;
+}
+
+#accordion section.ac_hidden {
+  height:63px;
+}
+#accordion .pointer {
+  padding:0;
+  margin:25px 0 0 25px;
+  line-height:20px;
+  width:13px;
+  position:absolute;
+}
+#accordion section:not(.ac_hidden) h1 {
+  background-color: #fff;
+}
+
+#accordion section:not(.ac_hidden) .pointer {
+  display:block;
+  -webkit-transform:rotate(90deg);
+  -moz-transform:rotate(90deg);
+  -o-transform:rotate(90deg);
+  transform:rotate(90deg);
+  padding:0;
+}
+
+#secure_payment_link {
+	color: #0000CD;
+}
+
+#lang {
+	font-size:15px;
+}
+
+.text-field {
+	width: 80%;
+	height: 40px;
+	margin-bottom: 15px;
+	padding: 5px 20px;
+	border: 2px solid #e1e1e1;
+	color: #bdbaba;
+	font-family: Arial,Helvetica, sans-serif;
+	font-size: 19px;
+}
+
+.text-field:focus {
+	border: 2px solid #76c71e;
+	outline: none;
+}
+
+.button-connenct {
+	height: 40px;
+	margin: 20px 0 35px 0;
+	padding: 0 40px;
+	border-radius: 5px;
+	background-color: #76c71e;
+	border: 0;
+	color: #fff;
+	font-size: 17px;
+	font-weight: bold;
+	float: right;
+	cursor: pointer;
+}
+
+.button-connenct:focus {
+	outline: none;
+}
+
+.button-connenct-large {
+	height: 40px;
+	width: 100%;
+	margin: 20px 0 35px 0;
+	padding: 0 40px;
+	border-radius: 5px;
+	background-color: #76c71e;
+	border: 0;
+	color: #fff;
+	font-size: 17px;
+	font-weight: bold;
+	float: right;
+	cursor: pointer;
+}
+
+.button-connenct-large:focus {
+	outline: none;
+}
+
+#vir {
+	margin: 10px;
+}
+
+.errorTxt {
+	color: #FF0000;
+}
+
+</style>
+
+<div class="step">
+
+  <div class="main-block">
+
+    <div class="switch_dom" id="switch_dom">
+      <div id="title"><%= t 'cc.ogone_payment_method_change' %></div>
+    </div>
+
+    <div class="lock-block">
+      <div class="lock-img"></div>
+      <div class="secure">
+        <label class="server"><%= t('promotion.newstep3.serversecure1').html_safe %></label>
+        <label class="plus"><a href="https://payment-services.ingenico.com/be/en/online-payment-services-solutions/e-commerce" target="blank" id="secure_payment_link"><%= t('promotion.newstep3.serversecure2').html_safe %></a></label>
+      </div>
+    </div>
+
+    <div id="accordion">
+      <section id="item1">
+        <p class="pointer">&#9654;</p>
+        <h1><a href=""><%= t('promotion.newstep3.paymentoption1').html_safe %></a></h1>
+        <div class="switch_dom" id="switch_dom">
+          <div style="margin-left: 100px; width: 100%;">
+            <%= form_for(:customer, :url => customer_payment_methods_path(:customer_id => current_customer.to_param), :html => { :method => :put, :id => :payment_methods }) do |f| %>
+            <%= hidden_field_tag(:type, 'credit_card_modification')  %>
+            <div align="right" style="padding-right: 8px;">
+              <div class="choice">
+                <table>
+                  <tr>
+                    <td>
+                      <input type="radio" value="visa" name="brand" id="visa">
+                    </td>
+                    <td align="center" valign="middle">
+                      <%= image_tag "visa_icon.png" %><p>Visa</p>
+                    </td>
+                    <td><input type="radio" value="mastercard" name="brand" id="master"></td>
+                    <td align="center" valign="middle">
+                      <%= image_tag "master_card_icon.png" %>
+                      <p>Master Card </p>
+                    </td>
+                    <td>
+                      <input type="radio" value="american Express" name="brand" id="amex">
+                    </td>
+                    <td align="center" valign="middle">
+                      <%= image_tag "american-express_icon.png" %>
+                      <p>American Express</p>
+                    </td>
+                  </tr>
+                </table>
+                <table cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td align="left"><img width="130" height="66" align="left" style="padding-right: 25px;" src="http://www.dvdpost.be/images/www3/languages/french/images/buttons/canvas/logo_ogone_big.gif"></td>
+                    <td style="padding-top: 15px; padding-left: 10px;">
+                      <button type="submit" class="button_confirm_switch"><%= t'.follow' %></button>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <% end %>
+          </div>
+
+        </div>
+      </section>
+
+      <section id="item2" class="ac_hidden">
+        <p class="pointer">&#9654;</p>
+        <h1><a href="#"><%= t('promotion.newstep3.paymentoption2').html_safe %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= image_tag "step3/paypal.png" %></a>
+        </h1>
+        <div class="grid grid-pad">
+            <div class="col-1-4">
+               <div class="content">
+                 <%= link_to(image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"), api_v1_express_checkout_payment_method_change_to_paypal_path	) %>
+               </div>
+            </div>
+        </div>
+      </section>
+
+      <section id="item3" class="ac_hidden">
+        <p class="pointer">&#9654;</p>
+        <h1>
+          <a href="#"><%= t('promotion.newstep3.paymentoption3').html_safe %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= image_tag "step3/virement.png", height: '26', width: '64' %></a>
+        </h1>
+        <div id="vir">
+          <form id="virman" action="<%= api_v1_virement_path %>">
+            <input type="hidden" name="payment_method_change_to_virement" value="payment_method_change_to_virement">
+              <div class="grid grid-pad">
+                  <div class="col-1-4">
+                     <div class="content">
+                       <input type="text" name="first_name" placeholder="<%= current_customer.customers_firstname.present? ? current_customer.customers_firstname : t('promotion.newstep3.first_name') %>" class="text-field" id="first_name" value="<%= current_customer.customers_firstname.present? ? current_customer.customers_firstname : "" %>" />
+                     </div>
+                  </div>
+                  <div class="col-1-4">
+                     <div class="content">
+                       <input type="text" name="last_name" placeholder="<%= current_customer.customers_lastname.present? ? current_customer.customers_lastname : t('promotion.newstep3.last_name') %>" class="text-field" id="last_name" value="<%= current_customer.customers_lastname.present? ? current_customer.customers_lastname : "" %>" />
+                     </div>
+                  </div>
+                  <div class="col-1-4">
+                     <div class="content">
+                       <input type="text" name="telephone" placeholder="<%= current_customer.customers_telephone? ? current_customer.customers_telephone : t('promotion.newstep3.telephone') %>" class="text-field" id="telephone" value="<%= current_customer.customers_telephone? ? current_customer.customers_telephone : "" %>" />
+                     </div>
+                  </div>
+                  <div class="col-1-4">
+                     <div class="content">
+                         <input type="submit" name="submit" value="Check out" class="button-connenct" />
+                     </div>
+                  </div>
+              </div>
+          <form>
+            <div class="errorTxt"></div>
+        </div>
+      </section>
+    </div>
+
+    <label class="phone-number"><%= t('promotion.newstep3.supportinfo').html_safe %></label>
+    <%= link_to t('promotion.newstep3.conditions').html_safe, info_path(:page_name => t('routes.infos.params.conditions')), class: "conditions-d-utilisation" %>
+  </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script>
+  $(document).ready(function () {
+    $("#accordion section h1").click(function (e) {
+      $(this).parents().siblings("section").addClass("ac_hidden");
+      $(this).parents("section").removeClass("ac_hidden");
+      e.preventDefault();
+    });
+  });
+</script>
+
+<script>
+
+  $(document).ready(function() {
+    $("#virman").validate({
+      rules: {
+        'first_name': {
+          required: true
+        },
+        'last_name': {
+          required: true
+        },
+        'telephone': {
+          required: true
+        }
+      },
+      messages: {
+        'first_nam': {
+          required: first_name_message()
+        },
+        'last_name': {
+          required: last_name_message()
+        },
+        'last_name': {
+          required: telephone_message()
+        }
+      },
+      errorElement : 'div',
+      errorLabelContainer: '.errorTxt'
+    });
+  });
+
+  function first_name_message() {
+    if (gon.locale == "fr") {
+      return "Prénom est nécessaire."
+    } else if (gon.locale == "nl") {
+      return "Voornaam is verplicht."
+    } else if (gon.locale == "en") {
+      return "First name is required."
+    }
+  }
+
+  function last_name_message() {
+    if (gon.locale == "fr") {
+      return "Nom de famille est nécessaire."
+    } else if (gon.locale == "nl") {
+      return "Achternaam is verplicht."
+    } else if (gon.locale == "en") {
+      return "Surname  is required."
+    }
+  }
+
+  function telephone_message() {
+    if (gon.locale == "fr") {
+      return "Téléphone est nécessaire."
+    } else if (gon.locale == "nl") {
+      return "Telefoon is verplicht."
+    } else if (gon.locale == "en") {
+      return "Telephone is required."
+    }
+  }
+
+</script>

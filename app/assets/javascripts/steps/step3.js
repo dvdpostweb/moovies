@@ -2,6 +2,8 @@ $(document).ready(function () {
 
     step3.urlValidator();
 
+    step3.paymentMethodChangeUrlValidator();
+
     step3.validateVirmanForm();
 
     step3.validateBancCard();
@@ -13,6 +15,15 @@ var step3 = {
     urlValidator: function () {
 
         if (window.location.pathname == "/" + gon.locale + "/steps/step3") {
+
+            this.initializeAcordion();
+
+        }
+
+    },
+    paymentMethodChangeUrlValidator: function() {
+
+        if (window.location.pathname == "/" + gon.locale + "/mon-compte/" + gon.current_customer.customers_id + "/payment_methods/edit?type=credit_card_modification") {
 
             this.initializeAcordion();
 
