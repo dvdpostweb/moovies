@@ -9,7 +9,7 @@ class PromotionsController < ApplicationController
       @checked = true
       @checked_partners = true
       streaming_code = StreamingCode.where('name like ?', "#{@promo.params[:code]}%").email.available.order('rand()').limit(1)
-      @internal_code = streaming_code.first.name
+      #@internal_code = streaming_code.first.name
       @meta_image = @promo.params[:image]
     end
     @meta_title = t("promotions.title_#{@promo.id}", :default => '') if @promo

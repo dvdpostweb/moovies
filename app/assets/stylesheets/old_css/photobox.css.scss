@@ -1,0 +1,297 @@
+ul{
+	list-style: none;
+}
+
+h2, h3{
+	
+	font-family: Arial,Helvetica, sans-serif;
+	margin: 0;
+}
+
+h2{
+	font-size: 20px;
+	font-weight: bold;
+}
+
+h3{
+	font-size: 16px;
+	font-weight: normal;
+}
+
+.photobox-page{
+	margin: auto;
+	padding: 60px 30px;
+	background-color: #fff;
+	background-image: url("photobox/baner.png");
+	background-position: top right;
+	background-repeat: no-repeat;
+}
+
+.special{
+	margin-bottom: 22px;
+}
+
+.special-offer{
+	display: inline-block;
+	vertical-align: bottom;
+}
+
+.special-offer span {
+	color: #92c13c;
+	font-weight: bold;
+}
+
+.special-offer-headline{
+	margin-right: 10px;
+	line-height: 40px;
+	font-size: 23px;
+	font-weight: bold;
+	font-family: 'Open Sans Condensed', sans-serif;
+	display: inline-block;
+	vertical-align: super;
+}
+
+
+
+
+.special-freetrial{
+	margin-bottom: 10px;
+}
+
+.special-offer-freetrial{
+	display: freetrialinline-block;
+	vertical-align: bottom;
+	margin-top: -10px;
+}
+
+.special-offer-freetria span {
+	color: #92c13c;
+	font-weight: bold;
+}
+
+.special-offer-headline-freetria{
+	margin-right: 10px;
+	line-height: 20px;
+	font-size: 23px;
+	font-weight: bold;
+	font-family: 'Open Sans Condensed', sans-serif;
+	display: inline-block;
+	vertical-align: super;
+}
+
+.photobox-page-image{
+	display: inline-block;
+}
+
+/* ------------------------ */
+
+.headline{
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.choise-offer-select{
+	width: 470px;
+	height: 230px;
+	border: 1px solid #464646;
+	box-shadow: 2px 2px 14px #d7d7d7;
+}
+
+.offer-film{
+	position: relative;
+	width: 156px;
+	height: 230px;
+	float: left;
+	display: inline-block;
+	background-color: #fff;
+}
+
+.offer-film-checked{
+	background-color: #bcdff4;
+}
+
+.badge{
+	display: none;
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 70px;
+	height: 67px;
+	color: #fff;
+	font-size: 10px;
+	text-align: center;
+	background-image: url("photobox/badge.png");
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+
+.badge.active{
+	display: block;
+}
+
+.offer-film-number,
+.first-month{
+	margin: 50px auto 0;
+	color: #1f5fa5;
+	font-size: 22px;
+	font-weight: bold;
+	font-family: Arial,Helvetica, sans-serif;
+	text-align: center;
+}
+
+.first-month{
+	margin-top: 20px;
+	color: #92c13c;
+}
+
+.first-month-text,
+.next-month-text{
+	margin-bottom: 10px;
+	color: #000;
+	font-size: 15px;
+	font-family: Arial,Helvetica, sans-serif;
+	text-align: center;
+}
+
+.next-month-text{
+	font-size: 13px;
+}
+
+.next-month-text span {
+	font-weight: bold;
+}
+
+.badge .badge-text{
+	padding-top: 15px;
+	font-weight: normal;
+}
+
+.offer-film-checkbox{
+	width:15px;
+    height:15px;
+	margin: 25px auto 0;
+	box-shadow: 4px 4px 1.96px 0.04px rgba(139, 137, 137, 0.45);
+}
+
+#select-offer-2, #select-offer-4, #select-offer-6 {
+    display:none;
+}
+
+input[type="radio"] + label span {
+    display:inline-block;
+    width:15px;
+    height:15px;
+    margin:-1px 4px 0 0;
+    vertical-align:middle;
+    background:url(photobox/check-white.png) left top no-repeat;
+    cursor:pointer;
+}
+input[type="radio"]:checked + label span {
+    background:url(photobox/check-checked.png) left top no-repeat;
+}
+
+.vertical-line{
+	background-color: #707070;
+	width: 1px;
+	height:170px;
+	margin: 40px 0 20px 0;
+	float: left;
+	display: inline-block;
+}
+
+.choise-offer-list{
+	width: 100%;
+	vertical-align: top;
+}
+
+.choise-offer-list ul{
+	margin: 30px 0 50px;
+	padding-left: 20px;
+}
+
+.choise-offer-list ul li{
+	margin-bottom: 15px;
+	font-size: 15px;
+	font-family: Arial,Helvetica, sans-serif;
+}
+
+.list-style-blue{
+	width: 8px;
+	height: 8px;
+	margin: 0 5px 2px 0;
+	background-color: #1f5fa5;
+	display: inline-block;
+    font-size: small;
+}
+
+.choise-offer-list-style{
+  width: 450px;
+  height: 230px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* ----------------- */
+
+.code-button{
+	width: 180px;
+	height: 40px;
+	margin: 20px 80px 20px 75px;
+	color: #fff;
+	font-size: 18px;
+	font-weight: bold;
+	font-family: Arial,Helvetica, sans-serif;
+	border: 1px solid #482d27;
+	background: linear-gradient(to bottom, #f46e4c 0%,#e74017 100%);
+	box-shadow: 6px 6px 14.72px 1.28px rgba(139, 137, 137, 0.45);
+	text-shadow: 3px 3px 2.82px rgba(120, 109, 109, 0.45);
+	cursor: pointer;
+}
+
+/* ------------------ */
+
+.cards{
+	border-top: 1px solid #464646;
+	padding: 0 115px;
+}
+
+.cards-bottom-text{
+	width: 100%;
+	font-size: 12px;
+	font-family: Arial,Helvetica, sans-serif;
+}
+
+.photobox-error {
+	border: 1px solid;
+	margin: 10px 0px;
+	padding:15px 10px 15px 50px;
+	background-repeat: no-repeat;
+	background-position: 10px center;
+	color: #D8000C;
+	background-color: #FFBABA;
+	display: none;
+}
+
+.carrefourbonus-error {
+	width: 25%;
+	border: 1px solid;
+	margin: 10px 0px;
+	padding:15px 10px 15px 50px;
+	background-repeat: no-repeat;
+	background-position: 10px center;
+	color: #D8000C;
+	background-color: #FFBABA;
+}
+
+.list-left {
+  float: left;
+}
+
+.list-right {
+  float: left;
+  font-size: xx-small;
+}
+
+.choise-offer-list-style.button-box { width: 325px; }
+
+.choise-offer-list-style.list-box { width: 580px; }
