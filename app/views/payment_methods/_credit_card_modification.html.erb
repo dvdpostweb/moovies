@@ -1,10 +1,8 @@
 <div class="container white-bck dark-gray padb20" xmlns="http://www.w3.org/1999/html">
-  <h1 class="OpenSansCondensed f30 mar0 pad0"><%= t('promotion.newstep3.line1').html_safe %></h1>
-  <p class="mart15"><%= t('promotion.newstep3.line4').html_safe %></p>
-  <p><%= t('promotion.newstep3.line5').html_safe %></p>
+  <h1 class="OpenSansCondensed f30 mar0 pad0"><%= t 'cc.ogone_payment_method_change' %></h1>
   <div id="accordion" class="mart30">
-    <h3>Carte bancaire</h3>
-    <%= form_for(:customer, :url => customer_payment_methods_path(:customer_id => current_customer.to_param), :html => {:method => :put, :id => "form_step3"}) do |f| %>
+    <h3><%= t('promotion.newstep3.paymentoption1').html_safe %></h3>
+    <%= form_for(:customer, :url => customer_payment_methods_path(:customer_id => current_customer.to_param), :html => { :method => :put, :id => :payment_methods }) do |f| %>
         <div>
           <div id="banc_card_error"></div>
           <ul id="card-list">
@@ -34,15 +32,15 @@
             </li>
           </ul>
           <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mart20">
-            <input type="submit" name="submit" class="btn block100 btn-green-gradient padlr40 padtb5 white f17 normal" id="confirm-card-form" value="<%= t '.confirm' %>"></input>
+            <input type="submit" name="submit" class="btn block100 btn-green-gradient padlr40 padtb5 white f17 normal" id="confirm-card-form" value="<%= t'.follow' %>"></input>
           </div>
         </div>
     <% end %>
-    <h3>PayPal</h3>
+    <h3><%= t('promotion.newstep3.paymentoption2').html_safe %></h3>
     <div>
       <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mart10"><%= image_tag "template/paypal.png", class: "img-responsive" %></div>
       <div class="block100 mart20">
-        <%= link_to(image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"), api_v1_express_checkout_path) %>
+        <%= link_to(image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"), api_v1_express_checkout_payment_method_change_to_paypal_path) %>
       </div>
     </div>
     <h3>Virement</h3>
@@ -60,7 +58,7 @@
           </div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mart20">
-          <input type="submit" name="submit" class="btn block100 btn-green-gradient padlr40 padtb5 white f17 normal" id="confirm-personal-form" value="<%= t '.confirm' %>"></input>
+          <input type="submit" name="submit" class="btn block100 btn-green-gradient padlr40 padtb5 white f17 normal" id="confirm-personal-form" value="Check out"></input>
         </div>
       </form>
     </div>
@@ -68,3 +66,7 @@
   <p class="mart30"><%= t('promotion.newstep3.supportinfo').html_safe %></p>
   <p><%= link_to t('promotion.newstep3.conditions').html_safe, info_path(:page_name => t('routes.infos.params.conditions')), class: "conditions-d-utilisation" %></p>
 </div>
+
+<% content_for :run_specific_javascript do %>
+    <%= javascript_include_tag "customers/credit_card_modification" %>
+<% end %>
