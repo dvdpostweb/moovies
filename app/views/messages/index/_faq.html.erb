@@ -1,30 +1,30 @@
+<div id="accordion" class="mart30 block100">
+  <% @faqs.each do |faq| %>
+    <h3><%= t(".cat_#{faq.to_param}") %></h3>
+      <div>
+        <ul>
+          <% faq.nb_questions.times do |i| %>
+            <li><a href="#" data-toggle="modal" data-target="#faq-modal" data-modal="<%= t(".r#{faq.to_param}_#{(i+1)}") %>" id="<%= "q#{faq.to_param}_#{(i+1)}" %>"><%= t(".q#{faq.to_param}_#{(i+1)}") %></a></li>
+          <% end %>
+        </ul>
+      </div>
+  <% end %>
+</div>
 
-  <div id="faq">
-    <ul id="faq-nav">
-      <% @faqs.each do |faq| %>
-        <li>
-          <a href="#" class='menu_faq'>
-           <%= t(".cat_#{faq.to_param}") %>
-          </a>
-          <ul style='display:none'>
-              <% faq.nb_questions.times do |i| %>
-                <li>
-                  <a href="#" class="q" id="<%= "q#{faq.to_param}_#{(i+1)}" %>"><%= t(".q#{faq.to_param}_#{(i+1)}") %></a>
-                </li>
-              <% end %>
-          </ul>
-        </li>
-      <% end %>
-    </ul>
-    <% @faqs.each do |faq| %>
-      <% faq.nb_questions.times do |i| %>
-        <div class="faq-answer" id ="<%= "r#{faq.to_param}_#{(i+1)}" %>" style="display:none">
-          <h3><%= t(".q#{faq.to_param}_#{(i+1)}") %></h3>
-          <div class="box">
-            <%= t(".r#{faq.to_param}_#{(i+1)}").html_safe %>
-          </div>
+<div id="faq-modal" class="modal fade" role="dialog" tabindex="-1">
+    <button type="button" class="close" data-dismiss="modal">&nbsp;</button>
+
+    <div class="modal-dialog thinrgray-bck">
+        <div class="modal-content padtb10 padlr5 block100">
+            <h3 class="dark-gray pad0 mar0 marb10 title-modal-load"></h3>
+            <div class="block100 mart5 content-modal-load">
+
+            </div>
         </div>
-      <% end %>
-    <% end %>
-    <div class="clear"></div>
-  </div>
+        <div class="modal-footer dark-gray">
+            <div class="text-right">
+                <a href="index.php%3Fpage=contact-faq.html#" class="dark-blue close normal f14 mart10" data-dismiss="modal"><%= t('bootstrap.modal.close') %> X</a>
+            </div>
+        </div>
+    </div>
+</div>

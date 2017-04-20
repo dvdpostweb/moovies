@@ -22,11 +22,11 @@
             <%= link_to t('.multi'), info_path(:page_name => t('routes.infos.params.vod')), :id => :multi, :class => params[:page_name] == 'vod' ? "active-nav-tab" : :inactive %>
           </li>
           <li class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle notifications-drop"> Mon
+            <a href="<%= current_customer ? customer_path(:id => current_customer) : customers_path %>" data-toggle="dropdown" class="dropdown-toggle notifications-drop"> Mon
               Compte<i class="fa fa-caret-down f11 marl5"></i> </a>
             <ul class="dropdown-menu padb5">
-              <li><a href="index.html#">Ma Sélection</a></li>
-              <li><a href="index.html#">Mes informations</a></li>
+              <li><%= link_to t('.watchlist', :default => 'Ma playlist'), vod_wishlists_path, :class => params[:controller] == 'watchlists' ? :active : :inactive %></li>
+              <li><%= link_to t('.infos'), current_customer ? customer_path(:id => current_customer) : customers_path, :class => params[:controller] == 'customers' ? :active : :inactive %></li>
             </ul>
           </li>
           <li>

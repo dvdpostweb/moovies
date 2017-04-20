@@ -19,6 +19,7 @@ class ApplicationController < ActionController::Base
     gon.root_localize_path = root_localize_path
     gon.request_host = request.host if Rails.env.development?
     gon.params = params if Rails.env.development?
+    gon.modal_close_button_text = t('bootstrap.modal.close')
   end
 
   #def handle_unverified_request
