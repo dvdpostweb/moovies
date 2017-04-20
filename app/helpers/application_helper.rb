@@ -20,6 +20,8 @@ module ApplicationHelper
       "step3"
     elsif params[:controller].present? && params[:controller] == "messages" && params[:action].present? && params[:action] == "faq" then
       "contact-faq"
+    elsif params[:controller].present? && params[:controller] == "phone_requests" && params[:action].present? && params[:action] == "new" then
+      "contact"
     elsif params[:page_name].present? && params[:page_name] == "alacarte" then
       "price-chart price-chart-green three-column"
     elsif params[:page_name].present? && params[:page_name] == "unlimited" then
