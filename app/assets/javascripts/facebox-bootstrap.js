@@ -34,7 +34,7 @@
         </div> \
         <div class="modal-footer dark-gray"> \
           <div class="text-right"> \
-            <a href="index.php%3Fpage=mon-compte.html#" class="dark-blue close normal f14 mart10" data-dismiss="modal">FERMER X</a> \
+            <a href="index.php%3Fpage=mon-compte.html#" class="dark-blue close normal f14 mart10" data-dismiss="modal">' + gon.modal_close_button_text +' X</a> \
           </div> \
         </div> \
       </div> \
