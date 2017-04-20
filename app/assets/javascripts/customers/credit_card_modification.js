@@ -1,6 +1,8 @@
 $(document).ready(function () {
 
-    step3.urlValidator();
+    $("#accordion").accordion({
+    	heightStyle: "content"
+    });
 
     step3.validateVirmanForm();
 
@@ -10,24 +12,6 @@ $(document).ready(function () {
 
 var step3 = {
 
-    urlValidator: function () {
-
-        if (window.location.pathname == "/" + gon.locale + "/steps/step3") {
-
-            this.initializeAcordion();
-
-        }
-
-    },
-    initializeAcordion: function () {
-
-        $("#accordion").accordion({
-
-            heightStyle: "content"
-
-        });
-
-    },
     validateVirmanForm: function () {
 
         $("#virman").validate({
@@ -147,7 +131,7 @@ var step3 = {
     },
     validateBancCard: function() {
 
-        $("#form_step3").submit(function() {
+        $("#payment_methods").submit(function() {
 
             if (!$("input[name='brand']").is(":checked")) {
 

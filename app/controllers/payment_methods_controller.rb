@@ -5,6 +5,7 @@ class PaymentMethodsController < ApplicationController
     @body_id = @choose_partial
   end
   def edit
+    gon.banc_card_error_message = t('orange.step3.banc_card_error_message')
     if params[:product_id]
       @product = Product.find(params[:product_id])
       if @product.svod?
