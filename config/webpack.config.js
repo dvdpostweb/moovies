@@ -10,6 +10,7 @@ var devServerPort = 3808;
 
 // set TARGET=production on the environment to add asset fingerprints
 var production = process.env.TARGET === 'production';
+var staging = process.env.TARGET === 'staging';
 
 var config = {
     entry: {
@@ -57,17 +58,25 @@ if (production) {
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.OccurenceOrderPlugin()
     );
+} else if (staging) {
+    config.plugins.push(
+        new webpack.NoErrorsPlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+            compressor: {warnings: false},
+            sourceMap: false
+        }),
+        new webpack.DefinePlugin({
+            'process.env': {NODE_ENV: JSON.stringify('production')}
+        }),
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.OccurenceOrderPlugin()
+    );
 } else {
     config.devServer = {
         port: devServerPort,
         headers: {'Access-Control-Allow-Origin': '*'}
     };
-    if (gon.locale = "staging") {
-        config.output.publicPath = '//http://staging.plush.lu/' + gon.locale + '/webpack/';
-    }
-    else {
-        config.output.publicPath = '//localhost:' + devServerPort + '/webpack/';
-    }
+    config.output.publicPath = '//localhost:' + devServerPort + '/webpack/';
     // Source maps
     config.devtool = 'cheap-module-eval-source-map';
 }
