@@ -79,12 +79,6 @@ GEM
       capistrano (>= 1.0.0)
     capistrano-log_with_awesome (0.0.2)
       capistrano (>= 2.5.14)
-    capistrano-notifier (0.4.1)
-      actionmailer
-      activesupport
-      capistrano (>= 2, < 3)
-    capistrano-npm (0.0.2)
-      capistrano (>= 2.5.5)
     choice (0.2.0)
     chosen-rails (1.0.1)
       coffee-rails (>= 3.2)
@@ -313,8 +307,6 @@ DEPENDENCIES
   browserify-rails
   capistrano (~> 2.15.5)
   capistrano-ext
-  capistrano-notifier
-  capistrano-npm
   capistrano-slack!
   chosen-rails
   client_side_validations (~> 3.2.6)

@@ -76,7 +76,5 @@ gem 'twitter-bootstrap-rails', '~> 3.2', '>= 3.2.2'
 gem 'bootstrap-chosen-rails'
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.1'
 gem 'rack-cors', '~> 0.4.1'
-gem 'capistrano-notifier'
 gem 'httparty', '~> 0.14.0'
 gem "browserify-rails"
-gem 'capistrano-npm'
