@@ -23,7 +23,7 @@ group :development do
 end
 
 group  :development, :test do
-
+  gem 'capistrano-npm'
 end
 
 group :test do
