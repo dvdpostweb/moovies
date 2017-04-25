@@ -25,7 +25,7 @@ module ApplicationHelper
     elsif params[:controller].present? && params[:controller] == "messages" && params[:action].present? && params[:action] == "index" then
       "contact-messages"
     elsif params[:controller].present? && params[:controller] == "streaming_products" && params[:action].present? && params[:action] == "sample" then
-      "block100"
+      "video-stream block100"
     elsif params[:page_name].present? && params[:page_name] == "alacarte" then
       "price-chart price-chart-green three-column"
     elsif params[:page_name].present? && params[:page_name] == "unlimited" then

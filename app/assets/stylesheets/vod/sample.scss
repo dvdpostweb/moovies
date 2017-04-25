@@ -1,0 +1,19 @@
+/*VIDEO STREAM*/
+.video-stream .container {
+  min-height: 700px;
+}
+
+@media (max-width: 980px) {
+  .video-stream .container h1 {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+}
+
+ul.video-lg-buttons li {
+  display: inline-block;
+  width: auto;
+  margin-left: 10px;
+}
+
+/*END VIDEO STREAM*/
