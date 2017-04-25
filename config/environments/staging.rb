@@ -1,7 +1,5 @@
 Moovies::Application.configure do
 
-  config.webpack.dev_server.enabled
-
   config.action_controller.asset_host = "http://staging.plush.be"
 
   # Settings specified here will take precedence over those in config/application.rb
