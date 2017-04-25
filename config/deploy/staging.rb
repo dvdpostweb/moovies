@@ -64,6 +64,17 @@ namespace :deploy do
     task t, :roles => :app do ; end
   end
 
+  desc "Webpack compile"
+  task :webpack_compile do
+    on roles(:app) do
+      within current_path do
+        execute :bundle, :exec, "rake webpack:compile"
+      end
+    end
+  end
+
+  after :finishing, 'deploy:webpack_compile'
+
 end
 
 after "deploy:restart", "deploy:cleanup"

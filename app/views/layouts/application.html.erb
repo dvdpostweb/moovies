@@ -37,6 +37,7 @@
   </div>
 </div>
 <%= javascript_include_tag "application" %>
+<%= javascript_include_tag *webpack_asset_paths("application") %>
 <%= yield :run_specific_javascript %>
 </body>
 </html>
