@@ -1,5 +1,25 @@
-<div class="container white-bck padb30">
-  <button type="button" class="btn btn-primary" id="click">Primary</button>
+<% content_for :view_specific_css do %>
+    <%= stylesheet_link_tag "vod/sample" %>
+<% end %>
+<div class="container white-bck">
+  <h1 class=" pad0 mart10 f30 OpenSansCondensed block100"> VOD SAMPLE - The Impossible</h1>
+  <div class="block100">
+    <%= image_tag "template/movie-trailer-image.jpeg", class: "img-responsive" %>
+  </div>
+
+  <div class="block100 thin-gray text-center padlr15 marb15">
+    <h2 class="f19 black">Choose film version</h2>
+    <p class="block100 mart5 black">Which language would you like to watch this film in?</p>
+    <ul class="video-lg-buttons text-center block100 padtb20">
+      <li>
+        <a href="index.php%3Fpage=video-stream.html#" class="btn dark-gray-bck pull-left uppercase"><i class="fa fa-language marr5"></i>French</a>
+      </li>
+      <li>
+        <a href="index.php%3Fpage=video-stream.html#" class="btn dark-gray-bck pull-left uppercase"><i class="fa fa-language marr5"></i>English</a>
+      </li>
+    </ul>
+  </div>
+
 </div>
 
 <% content_for :run_specific_javascript do %>
