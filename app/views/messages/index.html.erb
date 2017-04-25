@@ -1,16 +1,76 @@
-<div id="contact-wrap">
+<div class="container white-bck dark-gray padb20">
   <%= render :partial => 'messages/menu' %>
-  <div id="tabs-content">
-    <%= link_to t('.new_message'), new_message_path(), :class => 'btn_new_message facebox', :id => :new_message %>
-    <% if params[:filter] == Ticket.filter[:archive] %>
-        <%= link_to t('.current'), messages_path(), :class => :filter %>
-    <% else %>
-        <%= link_to t('.archive'), messages_path(:filter => Ticket.filter[:archive]), :class => :filter %>
-    <% end %>
-    <%= render :partial => 'messages/index/messages', :locals => {:messages => @messages} %>
-  </div>
-  <div style='display:none' id='error_cat'>
-    <%= t '.subject_empty' %>
-  </div>
-</div>
 
+
+
+
+
+  <%= render :partial => 'messages/index/messages', :locals => {:messages => @messages} %>
+
+  <!--TABLE INBOX-->
+  <div class="block100 table-holder">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>Mail</th>
+        <th>
+          <select id="order-dropdown">
+            <option disabled selected>Trier par</option>
+            <option value="Date de réponse">Date de réponse</option>
+            <option value="Date de création">Date de création</option>
+          </select>
+          <div class="drop-holder"></div>
+        </th>
+        <th><i class="fa fa-trash f20"></i></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th scope="row">137034</th>
+        <td><i class="fa fa-envelope-open marr5"></i>
+          <a href="index.php%3Fpage=contact-messages.html#">Mail read</a>
+        </td>
+        <td>12/04/2017</td>
+        <td>
+          <a href="index.php%3Fpage=contact-messages.html#" class="delete-mail" id="delete1"><i class="fa fa-close f18"></i></a>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">137012</th>
+        <td><i class="fa fa-envelope marr5"></i>
+          <a href="index.php%3Fpage=contact-messages.html">Unread mail title</a>
+        </td>
+        <td>09/04/2017</td>
+        <td>
+          <a href="index.php%3Fpage=contact-messages.html#" class="delete-mail" id="delete2"><i class="fa fa-close f18"></i></a>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">137009</th>
+        <td><i class="fa fa-envelope marr5"></i>
+          <a href="index.php%3Fpage=contact-messages.html">Lorem ipsum</a>
+        </td>
+        <td>20/03/2017</td>
+        <td>
+          <a href="index.php%3Fpage=contact-messages.html#" class="delete-mail" id="delete3"><i class="fa fa-close f18"></i></a>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">137005</th>
+        <td><i class="fa fa-envelope-open marr5"></i>
+          <a href="index.php%3Fpage=contact-messages.html#">You've got a mail lorerm ipsum dolor</a>
+        </td>
+        <td>10/02/2017</td>
+        <td>
+          <a href="index.php%3Fpage=contact-messages.html#" class="delete-mail" id="delete4"><i class="fa fa-close f18"></i></a>
+        </td>
+      </tr>
+
+      </tbody>
+    </table>
+  </div>
+  <!-- /TABLE INBOX-->
+
+
+</div>

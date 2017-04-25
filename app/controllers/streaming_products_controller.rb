@@ -262,10 +262,10 @@ class StreamingProductsController < ApplicationController
     @streaming_prefered = StreamingProduct.group_by_language.available.find_all_by_imdb_id(params[:id], I18n.locale)
     @token_name = Moovies.token_sample[params[:kind]]
 
-    if request.xhr?
-      @streaming = StreamingProduct.find_by_id(params[:streaming_product_id])
-      render :layout => false
-    end
+    #if request.xhr?
+      @streaming = StreamingProduct.find_by_id(6766)
+      #render json: @streaming
+    #end
   end
 
   def show_error(error, code)

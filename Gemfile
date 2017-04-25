@@ -19,6 +19,7 @@ group :development do
   gem 'sextant'
   gem 'capistrano-slack', :git => 'https://github.com/j-mcnally/capistrano-slack.git'
   #gem 'rack-mini-profiler'
+  gem "rails-erd"
 end
 
 group  :development, :test do
@@ -77,3 +78,4 @@ gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.1'
 gem 'rack-cors', '~> 0.4.1'
 gem 'capistrano-notifier'
 gem 'httparty', '~> 0.14.0'
+gem "browserify-rails"

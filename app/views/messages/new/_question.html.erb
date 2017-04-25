@@ -1,14 +1,37 @@
-<form id="send-mail-modal-form">
+<!-- <h3 class="dark-gray pad0 mar0 marb10">Nouveau message</h3> -->
+<h3 class="dark-gray pad0 mar0 marb10"><%= t('.new_message') %></h3>
+<%= form_for message, :url => messages_path do |f| %>
+    <div class="form-group block100 mart5">
+      <strong class="clearfix"><%= t('.subject') %>:</strong>
 
-    <h3 class="dark-gray pad0 mar0 marb10">Nouveau message</h3>
-    <div class="block100 mart5">
-      <strong class="clearfix">Sujet:</strong> <input type="radio" class="iradio" name="sujet" value="1"/> Service technique <input type="radio" class="iradio" name="sujet" value="2"/>
-      Service facturation <input type="radio" class="iradio" name="sujet" value="3"/> Service administratif
+      <div class="block100 mart10">
+        <strong class="clearfix">Message:</strong> <textarea class="pad5" name="message" placeholder="Text message.."></textarea>
+      </div>
+
+      <!--SUBMIT-->
+      <div class="block100 mart20">
+        <a href="index.php%3Fpage=contact.html#" class="btn light-blue-bck OpenSansCondensed f18" id="send-mail-submit-modal">Envoyer</a>
+      </div>
     </div>
-    <div class="block100 mart10">
-      <strong class="clearfix">Message:</strong> <textarea class="pad5" name="message" placeholder="Text message.."></textarea>
-    </div>
-    <div class="form-group block100 mart20">
-      <a href="index.php%3Fpage=contact.html#" class="btn light-blue-bck OpenSansCondensed f18" id="send-mail-submit-modal">Envoyer</a>
-    </div>
-</form>
+<% end %>
+
+<!-- <#%= f.label "category_ticket_id_#{code}", t("phone_requests.new.form.reason_label_#{code}"), :class => :reason_label %>
+
+<label class="radio-inline">
+        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> 1
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 2
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> 3
+      </label>
+
+<#% PhoneRequest.reason_codes.each do |key, code| %>
+    <#%= f.radio_button :category_ticket_id, code, :checked => (code == 5 || code == category_ticket_id)%>
+    <#%= f.label "category_ticket_id_#{code}", t("phone_requests.new.form.reason_label_#{code}"), :class => :reason_label %>
+<#% end %>
+<label class="radio-inline">
+          <#%= f.radio_button :category_ticket_id, code, :checked => (code == 5 || code == category_ticket_id) %>&nbsp;&nbsp;
+<#%= f.label "category_ticket_id_#{code}", t("phone_requests.new.form.reason_label_#{code}") %>
+          </label>
