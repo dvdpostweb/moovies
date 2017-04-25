@@ -20,6 +20,8 @@ end
 module Moovies
   class Application < Rails::Application
 
+    config.browserify_rails.commandline_options = "-t [ babelify --presets [ es2015 ] --extensions .es6 ]"
+
     config.middleware.insert_before 0, "Rack::Cors" do
       allow do
         origins '*'
