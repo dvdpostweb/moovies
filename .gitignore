@@ -31,3 +31,4 @@ GeoIP.dat
 #config/database.yml
 .sass-cache
 .generators
+node_modules
