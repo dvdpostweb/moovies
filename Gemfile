@@ -77,3 +77,4 @@ gem 'bootstrap-chosen-rails'
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.1'
 gem 'rack-cors', '~> 0.4.1'
 gem 'httparty', '~> 0.14.0'
+gem "browserify-rails"

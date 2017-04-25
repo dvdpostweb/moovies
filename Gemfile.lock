@@ -66,6 +66,8 @@ GEM
       debug_inspector (>= 0.0.1)
     bootstrap-chosen-rails (0.0.4)
     browser (0.2.0)
+    browserify-rails (0.9.3)
+      sprockets (~> 2.2)
     builder (3.0.4)
     capistrano (2.15.5)
       highline
@@ -302,6 +304,7 @@ DEPENDENCIES
   binding_of_caller
   bootstrap-chosen-rails
   browser (~> 0.2.0)
+  browserify-rails
   capistrano (~> 2.15.5)
   capistrano-ext
   capistrano-slack!
