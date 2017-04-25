@@ -53,6 +53,11 @@ set :deploy_via, :remote_cache
 
 namespace :deploy do
 
+  desc "Install node modules non-globally"
+  task :npm_install do
+    run "cd #{current_path} && npm install"
+  end
+
   # Restart passenger on deploy
   desc "Restarting mod_rails with restart.txt"
   task :restart, :roles => :app, :except => {:no_release => true} do
