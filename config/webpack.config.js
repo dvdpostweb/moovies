@@ -58,19 +58,6 @@ if (production) {
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.OccurenceOrderPlugin()
     );
-} else if (staging) {
-    config.plugins.push(
-        new webpack.NoErrorsPlugin(),
-        new webpack.optimize.UglifyJsPlugin({
-            compressor: {warnings: false},
-            sourceMap: false
-        }),
-        new webpack.DefinePlugin({
-            'process.env': {NODE_ENV: JSON.stringify('production')}
-        }),
-        new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.OccurenceOrderPlugin()
-    );
 } else {
     config.devServer = {
         port: devServerPort,
