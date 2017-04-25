@@ -3,6 +3,7 @@ require 'bundler/capistrano'
 require 'thinking_sphinx/capistrano'
 require './config/boot'
 require 'capistrano/slack'
+require 'capistrano/npm'
 
 set :stages, %w(staging production)
 set :default_stage, "staging"
@@ -37,3 +38,5 @@ after 'deploy:restart', 'slack:finished'
 after 'deploy:create_symlink' do
   run "ln -nfs /data/geoip/GeoIP.dat #{current_path}/GeoIP.dat"
 end
+
+after 'deploy:finalize_update', 'npm:install'
