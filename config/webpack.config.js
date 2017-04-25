@@ -63,10 +63,10 @@ if (production) {
         headers: {'Access-Control-Allow-Origin': '*'}
     };
     if (gon.locale = "staging") {
-        config.output.publicPath = '//localhost:' + devServerPort + '/webpack/';
+        config.output.publicPath = '//http://staging.plush.lu/' + gon.locale + '/webpack/';
     }
     else {
-        config.output.publicPath = '//http://staging.plush.lu/' + gon.locale + '/webpack/';
+        config.output.publicPath = '//localhost:' + devServerPort + '/webpack/';
     }
     // Source maps
     config.devtool = 'cheap-module-eval-source-map';
