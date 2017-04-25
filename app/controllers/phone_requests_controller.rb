@@ -3,6 +3,7 @@ class PhoneRequestsController < ApplicationController
     redirect_to new_phone_request_path
   end
   def new
+
     @meta_title = t("phone_request.new.meta_title", :default => '')
     @meta_description = t("phone_request.new.meta_description", :default => '')
     unless current_customer

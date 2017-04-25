@@ -20,6 +20,12 @@ end
 module Moovies
   class Application < Rails::Application
 
+    # Configure Browserify to use babelify to compile ES6
+    config.browserify_rails.commandline_options = "-t [ babelify --presets [ es2015 ] ]"
+
+    # Run on all javascript files
+    config.browserify_rails.force = true
+
     config.middleware.insert_before 0, "Rack::Cors" do
       allow do
         origins '*'

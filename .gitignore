@@ -31,5 +31,4 @@ GeoIP.dat
 #config/database.yml
 .sass-cache
 .generators
-# Added by webpack-rails
 /node_modules
