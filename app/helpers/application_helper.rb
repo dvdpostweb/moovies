@@ -28,6 +28,10 @@ module ApplicationHelper
       "video-stream block100"
     elsif params[:controller].present? && params[:controller] == "info" && params[:action].present? && params[:action] == "index" && params[:page_name].present? && params[:page_name] == "conditions" then
       "conditions"
+    elsif params[:controller].present? && params[:controller] == "info" && params[:action].present? && params[:action] == "index" && params[:page_name].present? && params[:page_name] == "privacy" then
+      "conditions"
+    elsif params[:controller].present? && params[:controller] == "info" && params[:action].present? && params[:action] == "index" && params[:page_name].present? && params[:page_name] == "whoweare" then
+      "conditions"
     elsif params[:page_name].present? && params[:page_name] == "alacarte" then
       "price-chart price-chart-green three-column"
     elsif params[:page_name].present? && params[:page_name] == "unlimited" then
