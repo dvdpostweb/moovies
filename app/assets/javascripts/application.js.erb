@@ -21,6 +21,10 @@
 //= require scripts
 //= require history
 
+//= require jwplayer/jwplayer
+
+jwplayer.key="WZ+cT8/nZvFyEphWP4u6WrOZdtH3tYvQHXuI9U6BkVBdUw6vQ4LiEDTMeqE="
+
 window.onload = function () {
     if (typeof(Storage) !== "undefined") {
         if (gon && gon.current_customer === null && localStorage.getItem("plush_temporary_email") !== null) {
