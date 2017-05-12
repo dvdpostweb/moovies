@@ -1,0 +1,5 @@
+<% if trailer.class.name == 'StreamingTrailer' %>
+jQuery.facebox('<%= escape_javascript(render :partial => 'products/trailer', :locals => { :trailer => trailer, :trailers => trailers }, :formats => [:html]) %>');
+<% elsif trailers.first %>
+jQuery.facebox('<%= escape_javascript(render :partial => 'products/trailer', :locals => { :trailer => trailers.first, :trailers => trailers }, :formats => [:html]) %>');
+<% end %>

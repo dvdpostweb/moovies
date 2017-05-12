@@ -179,34 +179,34 @@ $(document).ready(function () {
     })
 
     //youtube api trigg
-    var player;
+    //var player;
 
-    function onYouTubeIframeAPIReady(videoID) {
-        player = new YT.Player('modal-trailer-video', {
-            videoId: videoID,
-        });
-    }
+    //function onYouTubeIframeAPIReady(videoID) {
+    //    player = new YT.Player('modal-trailer-video', {
+    //        videoId: videoID,
+    //    });
+    //}
 
-    function youtubeVideoID(url) {
-        var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
-        var match = url.match(regExp);
-        return (match && match[7].length == 11) ? match[7] : false;
-    }
+    //function youtubeVideoID(url) {
+    //    var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+    //    var match = url.match(regExp);
+    //    return (match && match[7].length == 11) ? match[7] : false;
+    //}
 
     //load youtube url
-    $(document).on('click', '.btn-trailer', function (e) {
-        var youTubeLink = $(this).attr('data-src');
-        var videoID = youtubeVideoID(youTubeLink);
-        onYouTubeIframeAPIReady(videoID);
+    //$(document).on('click', '.btn-trailer', function (e) {
+    //    var youTubeLink = $(this).attr('data-src');
+    //    var videoID = youtubeVideoID(youTubeLink);
+    //    onYouTubeIframeAPIReady(videoID);
 
-    })
+    //})
 
     //trailer modal close event
-    $('#trailer-modal').on('hidden.bs.modal', function () {
-        //stops trailer video on modal close
-        $('iframe').attr('src', $('iframe').attr('src'));
-        $('iframe#modal-trailer-video').remove();
-        $('.embed-responsive-16by9').append('<div id="modal-trailer-video" class="modal-trailer-video"></div>');
-    });
+    //$('#trailer-modal').on('hidden.bs.modal', function () {
+    //    //stops trailer video on modal close
+    //    $('iframe').attr('src', $('iframe').attr('src'));
+    //    $('iframe#modal-trailer-video').remove();
+    //    $('.embed-responsive-16by9').append('<div id="modal-trailer-video" class="modal-trailer-video"></div>');
+    //});
 
 });
