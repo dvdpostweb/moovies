@@ -1,10 +1,18 @@
 <% content_for :view_specific_css do %>
     <%= stylesheet_link_tag "vod/sample" %>
+    <%= stylesheet_link_tag "videojs/video-js" %>
 <% end %>
 <div class="container white-bck">
   <h1 class=" pad0 mart10 f30 OpenSansCondensed block100"> JW PLAYER TESTING</h1>
   <div class="block100">
-    <div id="myElement">Loading the player...</div>
+        <%= jwplayer(@streaming.filename, @streaming.source, @streaming, @token_name, @browser) %>
+
+          <div id="player">Loading the player...</div>
+          <script>
+              jwplayer('player').setup({
+                  file: movieUrl
+              });
+          </script>
   </div>
 
   <div class="block100 thin-gray text-center padlr15 marb15">
@@ -21,7 +29,3 @@
   </div>
 
 </div>
-
-<% content_for :run_specific_javascript do %>
-    <%= javascript_include_tag "vod/sample" %>
-<% end %>

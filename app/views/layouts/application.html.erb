@@ -18,6 +18,7 @@
   <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<%= asset_path("template/favicon114x114.png") %>">
   <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<%= asset_path("template/favicon72x72.png") %>">
   <link rel="apple-touch-icon-precomposed" href="<%= asset_path("template/favicon57x57.png") %>">
+  <script src="https://content.jwplatform.com/libraries/D6L08XhR.js"></script>
 </head>
 <body id="<%= @body_id %>" class="<%= params[:kind] %> <%= current_customer ? :private : :public %> <%= I18n.locale %> <%= @body_class %>">
 <div class="canavas" id="">
@@ -38,7 +39,5 @@
 </div>
 <%= javascript_include_tag "application" %>
 <%= yield :run_specific_javascript %>
-<script src="https://content.jwplatform.com/libraries/AIiTHvtC.js"></script>
-<script>jwplayer.key="WZ+cT8/nZvFyEphWP4u6WrOZdtH3tYvQHXuI9U6BkVBdUw6vQ4LiEDTMeqE=";</script>
 </body>
 </html>
