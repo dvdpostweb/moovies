@@ -157,7 +157,7 @@ $(function () {
             $(this).next('.nav').show('fast')
         }
     });
-    if ($('#online #filters-inner').html()) {
+    if ($('#online #filters').html()) {
         $('#products_index').delegate('.cover', 'mouseenter', function () {
             if ($("#ca-container").length > 0) {
                 $(this).parent().find('.tooltips').css('margin-top', -193 - $(window).scrollTop());
