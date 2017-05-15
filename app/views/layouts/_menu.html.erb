@@ -9,7 +9,11 @@
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav OpenSansCondensed">
           <li>
-            <%= link_to t('.catalogue'), products_short_path(), :id => 'catalogue_menu', :class => params[:controller] == 'products' ? "active-nav-tab" : :inactive %>
+            <% if params[:controller] == "products" %>
+              <%= link_to t('.catalogue'), products_short_path(), :id => 'catalogue_menu', :class => params[:controller] == 'products' ? "active-nav-tab" : :inactive, :remote => true %>
+            <% else %>
+                <%= link_to t('.catalogue'), products_short_path(), :id => 'catalogue_menu', :class => params[:controller] == 'products' ? "active-nav-tab" : :inactive %>
+            <% end %>
           </li>
           <li>
             <% if customer_signed_in? %>
