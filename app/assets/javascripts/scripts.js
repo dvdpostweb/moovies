@@ -177,49 +177,49 @@ jQuery.fn.extend({
     }
 
     // checkbox
-    $(".icheckbox,.iradio").iCheck({
-        checkboxClass: 'icheckbox_minimal-grey',
-        radioClass: 'iradio_minimal-grey'
-    });
+    //$(".icheckbox,.iradio").iCheck({
+    //    checkboxClass: 'icheckbox_minimal-grey',
+    //    radioClass: 'iradio_minimal-grey'
+    //});
 
-    $('.iradio').on('ifChecked', function (e) {
+    //$('.iradio').on('ifChecked', function (e) {
         //ajaxFilters();
-    });
+    //});
 
     // audio autocomplete tags
-    var audioTags = ['Français', 'Néerlandais', 'Anglais', 'Flamand', 'Google', 'Allemand', 'Espagnol', 'Portugais', 'Italien', 'Hongrois', 'Japonais', 'Mongol', 'Bambara', 'Ladakhi', 'Slovaque', 'Tagalog', 'Géorgien'];
-    var audioInputField = $('#audio-autocomplete-tags');
+    //var audioTags = ['Français', 'Néerlandais', 'Anglais', 'Flamand', 'Google', 'Allemand', 'Espagnol', 'Portugais', 'Italien', 'Hongrois', 'Japonais', 'Mongol', 'Bambara', 'Ladakhi', 'Slovaque', 'Tagalog', 'Géorgien'];
+    //var audioInputField = $('#audio-autocomplete-tags');
 
-    audioInputField.tagit({
-        availableTags: audioTags,
-        placeholderText: 'Search audio',
-        showAutocompleteOnFocus: true,
-        onlyAvailableTags: true,
-        autocomplete: {
-            minLength: 0,
-            appendTo: audioInputField.next('.tags-autocomplete-holder'),
-            open: function () {
-                $(this).closest('ul.tagit').addClass('box-shadow');
-            },
-            close: function () {
-                $(this).closest('ul.tagit').removeClass('box-shadow');
-            }
-        },
-        beforeTagAdded: function (event, ui) { // only available tags allowed
-            if ($.inArray(ui.tagLabel, audioTags) == -1) {
-                $('.ui-autocomplete-input').val('');
-                return false;
-            }
-        },
-        onTagAdded: function () {
-            //ajaxFilters();
-            submit_online();
-        },
-        onTagRemoved: function () {
-            //ajaxFilters();
-            submit_online();
-        }
-    });
+    //audioInputField.tagit({
+    //    availableTags: audioTags,
+    //    placeholderText: 'Search audio',
+    //    showAutocompleteOnFocus: true,
+    //    onlyAvailableTags: true,
+    //    autocomplete: {
+    //        minLength: 0,
+    //        appendTo: audioInputField.next('.tags-autocomplete-holder'),
+    //        open: function () {
+    //            $(this).closest('ul.tagit').addClass('box-shadow');
+    //        },
+    //        close: function () {
+    //            $(this).closest('ul.tagit').removeClass('box-shadow');
+    //        }
+    //    },
+    //    beforeTagAdded: function (event, ui) { // only available tags allowed
+    //        if ($.inArray(ui.tagLabel, audioTags) == -1) {
+    //            $('.ui-autocomplete-input').val('');
+    //            return false;
+    //        }
+    //    },
+    //    onTagAdded: function () {
+    //        //ajaxFilters();
+    //        submit_online();
+    //    },
+    //    onTagRemoved: function () {
+    //        //ajaxFilters();
+    //        submit_online();
+    //    }
+    //});
 
     // subtitles autocomplete tags
     var subtitlesTags = ['Français', 'Néerlandais', 'Allemand pour malentendants', 'Arabe', 'Corse', 'Italien', 'Roumain', 'Veca', 'Suédois', 'Turc', 'Veca', 'Russe', 'Néerlandais pour Malentendants'];
