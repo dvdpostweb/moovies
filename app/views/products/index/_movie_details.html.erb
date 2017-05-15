@@ -52,27 +52,22 @@
         <li class="circle-num"><%= product.public.name if product.public %></li>
         <%= bubbles(product).html_safe %>
       </ul>
-      <% unless product.series? %>
-          <%= render :partial => 'products/streaming',  :locals => {:product => product, :source => @source, :popup => true} %>
-      <% end %>
-
-      <% if product.trailer? %>
-          <li>
-            <%= link_to(t('.trailer'), product_trailer_path(:product_id => product.to_param, :source => @source, :response_id => @response_id), :class => 'trailer', :target => :_blank) %>
-          </li>
-      <% end %>
 
       <div class="block100">
-        <a href="index.html#" class="btn btn-green-gradient center-block bold padlr25 white f15"><i class="fa fa-play marr5"></i> Regarder</a>
+        <% unless product.series? %>
+            <%= render :partial => 'products/streaming',  :locals => {:product => product, :source => @source, :popup => true} %>
+        <% end %>
       </div>
       <div class="block100">
         <a href="index.html#" class="btn gray-bck center-block btn-selection"><i class="fa fa-plus marr5"></i>Selection</a>
       </div>
       <% if product.trailer? %>
       <div class="block100">
-        <a href="index.html#" class="btn white center-block dark-gray-bck btn-trailer" data-src="https://www.youtube.com/watch?v=_03DBXL3Srw" data-toggle="modal" data-target="#trailer-modal">
-          <i class="fa fa-film marr5"></i><%= t('.trailer') %>
-        </a>
+
+        <%= link_to(product_trailer_path(:product_id => product.to_param, :source => @source, :response_id => @response_id), :class => 'btn white center-block dark-gray-bck btn-trailer', remote: true) do %>
+            <i class="fa fa-film marr5"></i><%= t('.trailer') %>
+        <% end %>
+
       </div>
       <% end %>
     </div>

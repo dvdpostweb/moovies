@@ -19,8 +19,7 @@
         <a href="http://superentals.codepop.biz/fr/information/alacarte" class="dark-gray underline">abonnement</a>
       </div>
       <div class="block100 slide-content mart15 text-center">
-        <a href="index.html#" class="btn btn-green-gradient bold padlr25 white f17"><i class="fa fa-play marr5"></i>
-          Regarder</a>
+        <%= render :partial => 'products/streaming',  :locals => {:product => product, :source => @source, :popup => true} %>
       </div>
       <div class="block100 slide-content mart15"><%= truncate_html((data[:description].text rescue '...'), :length => 500) %></div>
       <div class="block100 slide-buttons mart15">
