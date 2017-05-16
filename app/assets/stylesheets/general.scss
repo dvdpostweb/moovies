@@ -1,10 +1,7 @@
-/*COLORS*/
-/*COLORS*/
-/*MEASURES*/
-/*END MEASURES*/
-/*BREAKPOINTS*/
-/*MIXINS*/
-/*END MIXINS*/
+@font-face {
+  font-family: 'OpenSansCondensed';
+  src: url("fonts/OpenSansCondensed/OpenSans-CondLight.ttf");
+}
 /*GENERAL*/
 * {
   box-sizing: border-box;
@@ -1082,6 +1079,10 @@ hr.hr-small {
   text-decoration: none !important;
 }
 
+.overlined {
+  text-decoration: line-through;
+}
+
 .justify {
   text-align: justify;
 }
@@ -1119,7 +1120,7 @@ a.active {
 section.page {
   position: relative;
   float: left;
-  min-width: 100%;
+  max-width: 100%;
 }
 
 .block100 {
@@ -1302,6 +1303,10 @@ section.page {
   border: 1px solid #ccc;
 }
 
+.border-bottom {
+  border-bottom: 1px solid #DAE0E2;
+}
+
 .affix {
   position: relative;
 }
@@ -1474,7 +1479,7 @@ body.modal-open {
 }
 
 .ui-state-default .ui-icon-triangle-1-s {
-  background-image: url(image-path('template/arrow-light-grey-bg.png')) !important;
+  background-image: image-url("template/arrow-light-grey-bg.png") !important;
   background-repeat: no-repeat;
 }
 

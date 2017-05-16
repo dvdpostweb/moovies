@@ -6,10 +6,6 @@
 /*BREAKPOINTS*/
 /*MIXINS*/
 /*END MIXINS*/
-@font-face {
-  font-family: 'OpenSansCondensed';
-  src: url("fonts/OpenSansCondensed/OpenSans-CondLight.ttf");
-}
 /*BASE CONSTRUCTION*/
 body {
   background: transparent image-url("template/bg.png") repeat 0 0;
@@ -448,12 +444,12 @@ h3, h4, h5 {
   height: 99%;
   padding-top: 2px;
   border: none;
-  /*  usage example:
- .jobs-applications .jobs-blue-top input {
-      @include placeholderStyle {
-          ..style definition goes here..
-      }
-  }*/
+ /*  usage example:
+.jobs-applications .jobs-blue-top input {
+     @include placeholderStyle {
+         ..style definition goes here..
+     }
+ }*/
 }
 .top-search-holder input[type=text]::-webkit-input-placeholder {
   color: #212a31;
@@ -1303,7 +1299,9 @@ a.btn#activate {
   width: 20px;
 }
 
-.btn-green-gradient {
+.btn-green-gradient,
+.btn-green-gradient:focus,
+.btn-green-gradient:active {
   margin: 0 auto;
   background: #94C951;
   background: -webkit-linear-gradient(top, #94C951 0%, #70A008 100%);
@@ -1771,12 +1769,12 @@ ul.movie-gallery li:nth-child(3n) {
 .login-sign input[type=password] {
   padding: 10px 5px;
   color: #455766;
-  /*  usage example:
- .jobs-applications .jobs-blue-top input {
-      @include placeholderStyle {
-          ..style definition goes here..
-      }
-  }*/
+ /*  usage example:
+.jobs-applications .jobs-blue-top input {
+     @include placeholderStyle {
+         ..style definition goes here..
+     }
+ }*/
 }
 .login-sign input[type=text]::-webkit-input-placeholder,
 .login-sign input[type=password]::-webkit-input-placeholder {
@@ -2877,7 +2875,7 @@ ul#card-list li .card-radio {
 }
 
 .orange-promotion-catalogue li .desc-cat div:last-child {
-  width: calc(100% - 27px);
+  width: calc(100% - 35px);
   position: relative;
   top: 50%;
   -webkit-transform: translateY(-50%);
@@ -2917,6 +2915,320 @@ ul#card-list li .card-radio {
 }
 
 /*END ORANGE PROMOTION*/
+/*CHANGED PAYMENT*/
+.changed-payment .container {
+  min-height: 700px;
+}
+
+.changed-payment .img-holder {
+  width: 40%;
+}
+@media (max-width: 767px) {
+  .changed-payment .img-holder {
+    width: 90%;
+  }
+}
+
+/*END CHANGED PAYMENT*/
+/*OFFERS CARREFOUR*/
+@media (max-width: 980px) {
+  .carrefour .container {
+    padding: 0 20px;
+  }
+}
+
+.carrefour-bullet {
+  margin-top: 10px;
+  background: image-url("template/carrefour-bullet.png") no-repeat 0 0;
+  line-height: 15px;
+  padding: 2px 0 5px 35px;
+}
+
+.carrefour ul.carrefour-list li {
+  float: left;
+  width: 18.4%;
+  margin-right: 2%;
+  font-size: 17px;
+  padding: 20px 0;
+  margin-top: 20px;
+  border: 1px solid #DAE0E2;
+}
+.carrefour ul.carrefour-list li:nth-child(n) {
+  margin-right: 2%;
+}
+.carrefour ul.carrefour-list li:nth-child(5n) {
+  margin-right: 0;
+}
+@media (max-width: 767px) {
+  .carrefour ul.carrefour-list li {
+    float: left;
+    width: 32%;
+    margin-right: 2%;
+  }
+  .carrefour ul.carrefour-list li:nth-child(n) {
+    margin-right: 2%;
+  }
+  .carrefour ul.carrefour-list li:nth-child(3n) {
+    margin-right: 0;
+  }
+}
+@media (max-width: 479px) {
+  .carrefour ul.carrefour-list li {
+    float: left;
+    width: 49%;
+    margin-right: 2%;
+  }
+  .carrefour ul.carrefour-list li:nth-child(n) {
+    margin-right: 2%;
+  }
+  .carrefour ul.carrefour-list li:nth-child(2n) {
+    margin-right: 0;
+  }
+}
+
+.carrefour ul.carrefour-list li.most-popular {
+  background: #EBF9FE image-url("template/most-popular.png") no-repeat right 5px;
+}
+
+.carrefour ul.carrefour-list li h3 {
+  color: #3B5998;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.carrefour .carrefour-card-section {
+  margin-top: 30px;
+}
+
+.carrefour .cl-list li {
+  list-style: square;
+  margin: 10px 0 0 20px;
+  font-size: 15px;
+}
+
+.carrefour input {
+  padding: 10px;
+  width: 40%;
+}
+@media (max-width: 479px) {
+  .carrefour input {
+    width: 48.5%;
+  }
+}
+
+.carrefour ul.payment-cards {
+  border-top: 1px solid #DAE0E2;
+  margin-top: 35px;
+  padding-top: 20px;
+}
+
+.carrefour ul.payment-cards li {
+  float: left;
+  margin: 10px 5px 0 0;
+}
+
+/*END OFFERS CARREFOUR*/
+/*CONDITIONS*/
+@media (max-width: 980px) {
+  .conditions .container {
+    padding: 0 20px;
+  }
+}
+
+/*END CONDITIONS*/
+/*STEP 4*/
+.step4 .container {
+  min-height: 800px;
+}
+@media (max-width: 980px) {
+  .step4 .container {
+    padding: 20px 20px 0;
+  }
+}
+
+.step4 .hr-with-words {
+  margin: 20px 0 30px;
+}
+
+.step4 .hd {
+  bottom: auto;
+  top: 58%;
+}
+
+.step4 .home-carousel-holder .btn {
+  width: 90% !important;
+  height: 30px;
+}
+
+.step4 .home-carousel-holder .slick-slide img.spinner {
+  width: 16px;
+  margin: 2px auto 0;
+}
+
+/*END STEP 4*/
+/*VIDEO STREAM*/
+.video-stream .container {
+  min-height: 700px;
+}
+
+@media (max-width: 980px) {
+  .video-stream .container h1 {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+}
+
+ul.video-lg-buttons li {
+  display: inline-block;
+  width: auto;
+  margin-left: 10px;
+}
+
+/*END VIDEO STREAM*/
+/*VIDEO STREAM WIZARD*/
+@media (max-width: 980px) {
+  .video-stream-wizard .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+@media (max-width: 980px) {
+  .video-stream-wizard h1 {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+}
+
+@media (max-width: 479px) {
+  .video-stream-wizard ul.video-lg-buttons li {
+    margin: 10px auto 0;
+    overflow: hidden;
+    text-align: center;
+    width: 100%;
+  }
+}
+
+@media (max-width: 479px) {
+  .video-stream-wizard ul.video-lg-buttons li a {
+    margin: 0 auto;
+    width: 80%;
+    float: none !important;
+  }
+}
+
+.video-stream-wizard .btn:hover,
+.video-stream-wizard .btn:focus,
+.video-stream-wizard .btn.focus {
+  color: white;
+}
+
+.video-stream-wizard #play {
+  width: 180px;
+  margin: 0 auto;
+}
+
+.video-stream-wizard .slick-slide:not(.slick-current) {
+  visibility: hidden;
+}
+
+.available-versions {
+  height: 0;
+  transition: all 0.5s ease-in-out 0s;
+}
+
+.available-versions.on {
+  height: 135px;
+}
+@media (max-width: 479px) {
+  .available-versions.on {
+    height: 180px;
+  }
+}
+
+@media (max-width: 479px) {
+  .available-versions .btn {
+    margin: 0 auto !important;
+    width: 80%;
+    display: block;
+    float: none !important;
+  }
+}
+
+ul.video-stream-links,
+ul.video-stream-links li {
+  list-style: none;
+  list-style-type: none;
+}
+
+@media (max-width: 980px) {
+  .video-stream-wizard .alert-danger {
+    margin: 15px auto 0;
+    text-align: center;
+  }
+}
+
+.video-stream-wizard .alert-danger .fa-warning {
+  vertical-align: middle;
+}
+@media (max-width: 980px) {
+  .video-stream-wizard .alert-danger .fa-warning {
+    margin: 0 auto !important;
+    width: 30px;
+    display: block;
+    float: none !important;
+  }
+}
+
+/*END VIDEO STREAM WIZARD*/
+/*GET CONNECTED*/
+@media (max-width: 980px) {
+  .get-connected .container {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+  }
+}
+
+.get-connected .orange-promotion-catalogue li {
+  float: left;
+  width: 31.33333%;
+  margin-right: 3%;
+}
+.get-connected .orange-promotion-catalogue li:nth-child(n) {
+  margin-right: 3%;
+}
+.get-connected .orange-promotion-catalogue li:nth-child(3n) {
+  margin-right: 0;
+}
+@media (max-width: 767px) {
+  .get-connected .orange-promotion-catalogue li {
+    float: left;
+    width: 48.5%;
+    margin-right: 3%;
+  }
+  .get-connected .orange-promotion-catalogue li:nth-child(n) {
+    margin-right: 3%;
+  }
+  .get-connected .orange-promotion-catalogue li:nth-child(2n) {
+    margin-right: 0;
+  }
+}
+@media (max-width: 479px) {
+  .get-connected .orange-promotion-catalogue li {
+    float: left;
+    width: 100%;
+    margin-right: 0;
+  }
+  .get-connected .orange-promotion-catalogue li:nth-child(n) {
+    margin-right: 0;
+  }
+  .get-connected .orange-promotion-catalogue li:nth-child(1n) {
+    margin-right: 0;
+  }
+}
+
+/*END GET CONNECTED*/
 /*FOOTER*/
 #footer {
   margin: 0 auto;

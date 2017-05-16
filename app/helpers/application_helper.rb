@@ -38,6 +38,8 @@ module ApplicationHelper
       "price-chart price-chart-blue one-column"
     elsif params[:page_name].present? && params[:page_name] == "adult" then
       "price-chart price-chart-violet one-column"
+    elsif params[:controller].present? && params[:controller] == "streaming_products" && params[:action].present? && params[:action] == "show" then
+      "video-stream-wizard block100"
     end
   end
 
