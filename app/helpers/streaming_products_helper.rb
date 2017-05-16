@@ -1,18 +1,5 @@
 module StreamingProductsHelper
 
-  def videojsplayer(source_file, source, streaming, token_name, browser, code = nil, season_id ='0', episode_id = '0')
-    audio = streaming.languages.by_language(:fr).first.short_alpha
-    sub = streaming.subtitles.count > 0 ? streaming.subtitles.by_language(:fr).first.short_alpha : 'non'
-    hd = streaming.hd? ? true : false
-    url = Moovies.akamai_hls_url(streaming.imdb_id, audio, sub, hd, streaming.videoland, streaming.akamai_folder, season_id , episode_id)
-
-    script = <<-script
-    console.log("#{url}");
-    script
-
-    javascript_tag script
-  end
-
   def jwplayer(source_file, source, streaming, token_name, browser, code = nil, season_id ='0', episode_id = '0')
     audio = streaming.languages.by_language(:fr).first.short_alpha
     sub = streaming.subtitles.count > 0 ? streaming.subtitles.by_language(:fr).first.short_alpha : 'non'
