@@ -4,7 +4,7 @@ class StreamingProductsController < ApplicationController
     params[:episode_id] = params[:episode_id] || 0
     @product = Product.both_available.where(:imdb_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id]).first
     if @product && current_customer
-      @token = current_customer.get_token(@product.imdb_id,  @product.season_id, @product.episode_id)
+      @token = current_customer.get_token(@product.imdb_id, @product.season_id, @product.episode_id)
     end
     @token_valid = @token.nil? ? false : @token.validate?(request.remote_ip)
     if @token_valid == false
@@ -12,8 +12,13 @@ class StreamingProductsController < ApplicationController
       @streaming_prefered = StreamingProduct.available.group_by_language.country(Product.country_short_name(session[:country_id])).where(:imdb_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id])
       @streaming_not_prefered = nil
     elsif @token_valid == true
-      @streaming = StreamingProduct.available_token.country(Product.country_short_name(session[:country_id])).where(:imdb_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id]).first
-      @streaming_prefered = StreamingProduct.available_token.group_by_language.country(Product.country_short_name(session[:country_id])).where(:imdb_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id])
+      if Rails.env? == "development"
+        @streaming = StreamingProduct.available_token.where(:imdb_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id]).first
+        @streaming_prefered = StreamingProduct.available_token.group_by_language.where(:imdb_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id])
+      else
+        @streaming = StreamingProduct.available_token.country(Product.country_short_name(session[:country_id])).where(:imdb_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id]).first
+        @streaming_prefered = StreamingProduct.available_token.group_by_language.country(Product.country_short_name(session[:country_id])).where(:imdb_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id])
+      end
       @streaming_not_prefered = nil
     else
       @streaming = StreamingProduct.available_beta.country(Product.country_short_name(session[:country_id])).alpha.where(:imdb_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id]).first
@@ -25,7 +30,7 @@ class StreamingProductsController < ApplicationController
       if @token.create_token_code(params[:id], params[:kind])
       else
         flash[:error] = t('streaming_products.tvod_no_token')
-      redirect_to root_localize_path and return
+        redirect_to root_localize_path and return
       end
     end
     unless Rails.env.development?
@@ -48,37 +53,37 @@ class StreamingProductsController < ApplicationController
       end
     else
       @body_id = 'streaming'
-      @vod_create_token = "1"#General.find_by_CodeType('VOD_CREATE_TOKEN').value
+      @vod_create_token = "1" #General.find_by_CodeType('VOD_CREATE_TOKEN').value
       @vod_disable = "1" #General.find_by_CodeType('VOD_ONLINE').value
 
       if !request.xhr?
         if @product
           if @vod_disable == "1"
             #if view_context.streaming_access?
-              #if (current_customer.actived? && !current_customer.suspended? && (current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s) || @streaming.prepaid_all?) && (@product.svod? || (@product.tvod? && current_customer.payable?) || @token_valid || current_customer.tvod_free >= @streaming.tvod_credits))
-                #if !@streaming_prefered.blank? || !@streaming_not_prefered.blank?
-                  if @token_valid == false && @vod_create_token == "0" && Rails.env != "pre_production"
-                    error = t('streaming_products.not_available.offline')
-                    show_error(error)
-                  else
-                    render :action => :show
-                  end
-                #else
-                #  error = t('streaming_products.not_available.not_available')
-                #  show_error(error)
-                #end
-              #else
-              #  error = t('streaming_products.no_access.problem')
-              #  show_error(error)
-              #end
+            #if (current_customer.actived? && !current_customer.suspended? && (current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s) || @streaming.prepaid_all?) && (@product.svod? || (@product.tvod? && current_customer.payable?) || @token_valid || current_customer.tvod_free >= @streaming.tvod_credits))
+            #if !@streaming_prefered.blank? || !@streaming_not_prefered.blank?
+            if @token_valid == false && @vod_create_token == "0" && Rails.env != "pre_production"
+              error = t('streaming_products.not_available.offline')
+              show_error(error)
             else
-               error = t('streaming_products.no_access.no_access')
-               show_error(error)
+              render :action => :show
             end
+            #else
+            #  error = t('streaming_products.not_available.not_available')
+            #  show_error(error)
+            #end
+            #else
+            #  error = t('streaming_products.no_access.problem')
+            #  show_error(error)
+            #end
           else
-            error = t('streaming_products.not_available.offline')
+            error = t('streaming_products.no_access.no_access')
             show_error(error)
           end
+        else
+          error = t('streaming_products.not_available.offline')
+          show_error(error)
+        end
         #else
         #  error = t('streaming_products.not_available.not_available')
         #  show_error(error)
@@ -87,13 +92,13 @@ class StreamingProductsController < ApplicationController
         if view_context.streaming_access?
           streaming_version = StreamingProduct.find_by_id(params[:streaming_product_id])
           if ((!current_customer.suspended? && !Token.dvdpost_ip?(request.remote_ip) && !(/^192(.*)/.match(request.remote_ip)) && current_customer.actived? && (current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s) || @streaming.prepaid_all?) && (@product.svod? || (!@product.svod? && current_customer.payable?) || current_customer.tvod_free >= @streaming.tvod_credits)))
-          #if 1==1
+            #if 1==1
             status = @token.nil? ? nil : @token.current_status(request.remote_ip)
             streaming_version = StreamingProduct.find_by_id(params[:streaming_product_id])
             if !@token || status == Token.status[:expired]
               #if current_customer
-                creation = Token.create_token(params[:id], @product, request.remote_ip, params[:streaming_product_id], params[:season_id], params[:episode_id], params[:kind], current_customer, params[:source])
-                #send_mail = true
+              creation = Token.create_token(params[:id], @product, request.remote_ip, params[:streaming_product_id], params[:season_id], params[:episode_id], params[:kind], current_customer, params[:source])
+              #send_mail = true
               #else
               #  creation = nil
               #  send_mail = false
@@ -128,40 +133,40 @@ class StreamingProductsController < ApplicationController
                       studio_name = ''
                       studio_id = ''
                     end
-                     options =
-                     {
-                        "\\$\\$\\$customers_name\\$\\$\\$" => "#{current_customer.first_name.capitalize} #{current_customer.last_name.capitalize}",
-                        "\\$\\$\\$gender_simple\\$\\$\\$" => gender,
-                        "\\$\\$\\$product_id\\$\\$\\$" => product_id,
-                        "\\$\\$\\$imdb_id\\$\\$\\$" => imdb_id,
-                        "\\$\\$\\$actors\\$\\$\\$" => view_context.actors_list(@product),
-                        "\\$\\$\\$image1\\$\\$\\$" => stars[0],
-                        "\\$\\$\\$image2\\$\\$\\$" => stars[1],
-                        "\\$\\$\\$image3\\$\\$\\$" => stars[2],
-                        "\\$\\$\\$image4\\$\\$\\$" => stars[3],
-                        "\\$\\$\\$image5\\$\\$\\$" => stars[4],
-                        "\\$\\$\\$name\\$\\$\\$" => @product.title,
-                        "\\$\\$\\$year\\$\\$\\$" => @product.year,
-                        "\\$\\$\\$image\\$\\$\\$" => image,
-                        "\\$\\$\\$description\\$\\$\\$" => description,
-                      }
+                    options =
+                        {
+                            "\\$\\$\\$customers_name\\$\\$\\$" => "#{current_customer.first_name.capitalize} #{current_customer.last_name.capitalize}",
+                            "\\$\\$\\$gender_simple\\$\\$\\$" => gender,
+                            "\\$\\$\\$product_id\\$\\$\\$" => product_id,
+                            "\\$\\$\\$imdb_id\\$\\$\\$" => imdb_id,
+                            "\\$\\$\\$actors\\$\\$\\$" => view_context.actors_list(@product),
+                            "\\$\\$\\$image1\\$\\$\\$" => stars[0],
+                            "\\$\\$\\$image2\\$\\$\\$" => stars[1],
+                            "\\$\\$\\$image3\\$\\$\\$" => stars[2],
+                            "\\$\\$\\$image4\\$\\$\\$" => stars[3],
+                            "\\$\\$\\$image5\\$\\$\\$" => stars[4],
+                            "\\$\\$\\$name\\$\\$\\$" => @product.title,
+                            "\\$\\$\\$year\\$\\$\\$" => @product.year,
+                            "\\$\\$\\$image\\$\\$\\$" => image,
+                            "\\$\\$\\$description\\$\\$\\$" => description,
+                        }
                     options = options.merge("\\$\\$\\$studio_name\\$\\$\\$" => studio_name, "\\$\\$\\$studio_slug\\$\\$\\$" => studio_id)
                   else
                     options =
-                    {
-                      "\\$\\$\\$customers_name\\$\\$\\$" => "#{current_customer.first_name.capitalize} #{current_customer.last_name.capitalize}",
-                      "\\$\\$\\$gender_simple\\$\\$\\$" => gender,
-                      "\\$\\$\\$products_id\\$\\$\\$" => product_id,
-                      "\\$\\$\\$imdb_id\\$\\$\\$" => imdb_id,
-                      "\\$\\$\\$image1\\$\\$\\$" => stars[0],
-                      "\\$\\$\\$image2\\$\\$\\$" => stars[1],
-                      "\\$\\$\\$image3\\$\\$\\$" => stars[2],
-                      "\\$\\$\\$image4\\$\\$\\$" => stars[3],
-                      "\\$\\$\\$image5\\$\\$\\$" => stars[4],
-                      "\\$\\$\\$products_name\\$\\$\\$" => !@product.series? ? @product.title : @product.episode_title,
-                      "\\$\\$\\$products_year\\$\\$\\$" => @product.year,
-                      "\\$\\$\\$products_image\\$\\$\\$" => image,
-                    }
+                        {
+                            "\\$\\$\\$customers_name\\$\\$\\$" => "#{current_customer.first_name.capitalize} #{current_customer.last_name.capitalize}",
+                            "\\$\\$\\$gender_simple\\$\\$\\$" => gender,
+                            "\\$\\$\\$products_id\\$\\$\\$" => product_id,
+                            "\\$\\$\\$imdb_id\\$\\$\\$" => imdb_id,
+                            "\\$\\$\\$image1\\$\\$\\$" => stars[0],
+                            "\\$\\$\\$image2\\$\\$\\$" => stars[1],
+                            "\\$\\$\\$image3\\$\\$\\$" => stars[2],
+                            "\\$\\$\\$image4\\$\\$\\$" => stars[3],
+                            "\\$\\$\\$image5\\$\\$\\$" => stars[4],
+                            "\\$\\$\\$products_name\\$\\$\\$" => !@product.series? ? @product.title : @product.episode_title,
+                            "\\$\\$\\$products_year\\$\\$\\$" => @product.year,
+                            "\\$\\$\\$products_image\\$\\$\\$" => image,
+                        }
                     top = Product.joins(:lists).includes("descriptions_#{I18n.locale}", 'vod_online_be').where("lists.#{I18n.locale} = 1").order("lists.id desc").limit(20)
                     index = 0
                     top.each do |top|
@@ -191,9 +196,9 @@ class StreamingProductsController < ApplicationController
           if @token
             current_customer.remove_product_from_wishlist(params[:id], params[:season_id], params[:episode_id], request.remote_ip) if current_customer
             StreamingViewingHistory.create(:streaming_product_id => params[:streaming_product_id], :token_id => @token.to_param, :ip => request.remote_ip)
-            render :partial => 'streaming_products/player', :locals => {:token => @token, :filename => streaming_version.filename, :source => streaming_version.source, :streaming => streaming_version, :browser => @browser, :season_id => params[:season_id], :episode_id => params[:episode_id] }, :layout => false
+            render :partial => 'streaming_products/player', :locals => {:token => @token, :filename => streaming_version.filename, :source => streaming_version.source, :streaming => streaming_version, :browser => @browser, :season_id => params[:season_id], :episode_id => params[:episode_id]}, :layout => false
           elsif Token.dvdpost_ip?(request.remote_ip) || (current_customer && current_customer.super_user?) || (/^192(.*)/.match(request.remote_ip))
-            render :partial => 'streaming_products/player', :locals => {:token => @token, :filename => streaming_version.filename, :source => streaming_version.source, :streaming => streaming_version, :browser => @browser, :season_id => params[:season_id], :episode_id => params[:episode_id] }, :layout => false
+            render :partial => 'streaming_products/player', :locals => {:token => @token, :filename => streaming_version.filename, :source => streaming_version.source, :streaming => streaming_version, :browser => @browser, :season_id => params[:season_id], :episode_id => params[:episode_id]}, :layout => false
           else
             render :partial => 'streaming_products/no_player', :locals => {:token => @token, :error => error}, :layout => false
           end
@@ -249,7 +254,7 @@ class StreamingProductsController < ApplicationController
     else
       @streaming_prefered = StreamingProduct.available_beta.country(Product.country_short_name(session[:country_id])).alpha.where(:imdb_id => params[:streaming_product_id], :season_id => params[:season_id], :episode_id => params[:episode_id])
     end
-    render :partial => 'streaming_products/show/versions', :locals => {:version => @streaming_prefered, :source => params[:source],  :response_id => params[:response_id]}
+    render :partial => 'streaming_products/show/versions', :locals => {:version => @streaming_prefered, :source => params[:source], :response_id => params[:response_id]}
   end
 
   def sample
@@ -263,8 +268,8 @@ class StreamingProductsController < ApplicationController
     #@token_name = Moovies.token_sample[params[:kind]]
 
     #if request.xhr?
-      @streaming = StreamingProduct.first
-      #render json: @streaming
+    @streaming = StreamingProduct.first
+    #render json: @streaming
     #end
 
     #render json: @streaming

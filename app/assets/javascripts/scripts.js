@@ -358,50 +358,50 @@ jQuery.fn.extend({
         $('#' + form_element).find('#public-range').data("ionRangeSlider").reset();
     });
 
-    $(document).on('click', '.filter-close', function (e) {
-        var form_element = $(this).closest('.applied-filter-tag').attr('data-input-element');
-        $('#' + form_element + ' .iradio').iCheck('uncheck');
-        $('#' + form_element + ' input.tags').tagit('removeAll');
-        $('#' + form_element + ' .dropdown-select').val("").selectmenu("refresh");
-        $('div[data-input-element=' + form_element + ']').fadeOut(200, function () {
-            $(this).remove();
-        });
-    });
+    //$(document).on('click', '.filter-close', function (e) {
+    //    var form_element = $(this).closest('.applied-filter-tag').attr('data-input-element');
+    //    $('#' + form_element + ' .iradio').iCheck('uncheck');
+    //    $('#' + form_element + ' input.tags').tagit('removeAll');
+    //    $('#' + form_element + ' .dropdown-select').val("").selectmenu("refresh");
+    //    $('div[data-input-element=' + form_element + ']').fadeOut(200, function () {
+    //        $(this).remove();
+    //    });
+    //});
 
-    $(document).on('click', '.reset-applied-filters', function (e) {
-        //$('.applied-filter-panel').fadeOut(200, function() {
-        //    $(this).remove();
-        //    resetFiltersForm();
-        //});
-        e.preventDefault();
-    });
+    //$(document).on('click', '.reset-applied-filters', function (e) {
+    //    //$('.applied-filter-panel').fadeOut(200, function() {
+    //    //    $(this).remove();
+    //    //    resetFiltersForm();
+    //    //});
+    //    e.preventDefault();
+    //});
 
     // switch movies view
-    $(document).on('click', '#grid-view-switch', function (e) {
-        $('input[name=view_movies]').val('grid');
-        $('.content-right').attr('id', 'grid');
-        ajaxFilters();
-        return false;
-    });
+    //$(document).on('click', '#grid-view-switch', function (e) {
+    //    $('input[name=view_movies]').val('grid');
+    //    $('.content-right').attr('id', 'grid');
+    //    ajaxFilters();
+    //    return false;
+    //});
 
-    $(document).on('click', '#list-view-switch', function (e) {
-        $('input[name=view_movies]').val('list');
-        $('.content-right').attr('id', 'list');
-        ajaxFilters();
-        return false;
-    });
+    //$(document).on('click', '#list-view-switch', function (e) {
+    //    $('input[name=view_movies]').val('list');
+    //    $('.content-right').attr('id', 'list');
+    //    ajaxFilters();
+    //    return false;
+    //});
 
     // reset all filters form elements on page-load
-    function resetFiltersForm() {
-        $('input.tags').tagit('removeAll');
-        $('.iradio').iCheck('uncheck');
-        //listingSlider.reset();
-        //rangeSlider.reset();
-        $('.dropdown-select').val("");
-        $('.dropdown-select').selectmenu("refresh");
-    }
+    //function resetFiltersForm() {
+    //    $('input.tags').tagit('removeAll');
+    //    $('.iradio').iCheck('uncheck');
+    //    //listingSlider.reset();
+    //    //rangeSlider.reset();
+    //    $('.dropdown-select').val("");
+    //    $('.dropdown-select').selectmenu("refresh");
+    //}
 
-    resetFiltersForm();
+    //resetFiltersForm();
 
 
 })(jQuery);

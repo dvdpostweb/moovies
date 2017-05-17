@@ -79,3 +79,4 @@ gem 'rack-cors', '~> 0.4.1'
 gem 'httparty', '~> 0.14.0'
 gem "browserify-rails"
 gem 'react-rails'
+gem 'will_paginate-bootstrap'

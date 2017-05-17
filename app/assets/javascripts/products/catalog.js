@@ -245,6 +245,63 @@ $(function () {
             submit_online();
         });
 
+        $(document).on('click', '.filter-close', function (e) {
+            var form_element = $(this).closest('.applied-filter-tag').attr('data-input-element');
+            //$('#' + form_element + ' .iradio').iCheck('uncheck');
+            //$('#' + form_element + ' input.tags').tagit('removeAll');
+            //$('#' + form_element + ' .dropdown-select').val("").selectmenu("refresh");
+            //$('div[data-input-element=' + form_element + ']').fadeOut(200, function () {
+            //    $(this).remove();
+            //});
+
+            if (form_element === "Plush à la Carte") {
+
+                $(".reset-applied-filters").trigger("click");
+
+            } else if (form_element === "Plush Unlimited") {
+
+                $(".reset-applied-filters").trigger("click");
+
+            } else if (form_element === "Derniers ajouts" || form_element === "Laatste aanwinsten" || form_element === "Newly added") {
+
+                $('.iradio').iCheck('uncheck');
+                submit_online();
+
+            } else if (form_element === "Les plus populaires" || form_element === "Meest bekeken" || form_element === "Most viewed") {
+
+                $('.iradio').iCheck('uncheck');
+                submit_online();
+
+            } else if (form_element === "Dernière chance" || form_element === "Laatste kans" || form_element === "Last chance") {
+
+                $('.iradio').iCheck('uncheck');
+                submit_online();
+
+            } else if (form_element === "Les mieux côtés" || form_element === "Beste beoordeeld" || form_element === "Best rated") {
+
+                $('.iradio').iCheck('uncheck');
+                submit_online();
+
+            } else if (form_element === "Bientôt disponible" || form_element === "Binnenkort beschikbaar" || form_element === "Coming soon") {
+
+                $('.iradio').iCheck('uncheck');
+                submit_online();
+
+            } else if (form_element === "Nouveautés" || form_element === "Nieuwe films" || form_element === "New movies") {
+
+                $('.iradio').iCheck('uncheck');
+                submit_online();
+
+            } else if (form_element === "Haute Définition" || form_element === "High Definition") {
+
+                $('.iradio').iCheck('uncheck');
+                submit_online();
+
+            }
+
+            console.log(form_element);
+        });
+
         // CATEGORIES END !!!
 
         // AUDIO START !!!
