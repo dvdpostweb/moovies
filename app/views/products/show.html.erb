@@ -82,9 +82,9 @@
         <h3 class="OpenSansCondensed f25 dark-blue pad0 padl5"><%= t '.synopsis' %></h3>
         <span class="light-gray f13"><%= @product_description.text.to_s.html_safe %></span>
         <div class="block100 mart5">
-          <a href="index.php%3Fpage=movie-full.html#" class="btn white center-block dark-gray-bck btn-trailer" data-src="https://www.youtube.com/watch?v=_03DBXL3Srw" data-toggle="modal" data-target="#trailer-modal">
-            <i class="fa fa-film marr5"></i>Trailer
-          </a>
+          <%= link_to(product_trailer_path(:product_id => @product.to_param, :source => @source, :response_id => @response_id), :class => 'btn white center-block dark-gray-bck btn-trailer', remote: true) do %>
+              <i class="fa fa-film marr5"></i><%= t('.trailer') %>
+          <% end %>
         </div>
       </div>
       <!--/SYNOPSIS-->
