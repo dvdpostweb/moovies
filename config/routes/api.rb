@@ -16,6 +16,8 @@ Moovies::Application.routes.draw do
       match "subscriptions" => "subscriptions#for_logedin_customers"
       match "subscriptions_freetrial_mobistar_customers" => "subscriptions#for_logedin_mobistar_customers_freetrial_subscription"
       match "ogone_parameters_accepturl" => "ogone_tokenization#ogone_parameters_accepturl"
+
+      match "language_by_language" => "validator#language_by_language"
     end
   end
 end
