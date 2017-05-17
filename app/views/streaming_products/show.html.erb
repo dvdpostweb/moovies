@@ -10,10 +10,118 @@
                 (<%= @product.year %>)</h1>
 
               <div class="block100">
-
                 <%= render :partial => "streaming_products/player" %>
-
               </div>
+
+              <!--FILM VERSION-->
+              <h2 class="f19 black mart20 text-center block100"><%= t('.version_title') %></h2>
+              <section class="page responsive-carousel slider" id="steps-wizard">
+                <div>
+                  <ul class="video-lg-buttons text-center block100 padt20">
+                    <%= render :partial => 'streaming_products/show/audios', :locals => {:streaming => @streaming_prefered, :sample => nil, :source => params[:source], :response_id => params[:response_id]} %>
+                  </ul>
+                </div>
+
+                <!--STEP2-->
+                <div>
+                  <p class="block100 mart5 black">Audio :
+                    <span class="selected-audio"></span>
+                    |
+                    <a href="index.php%3Fpage=video-stream-wizard.html#" class="slick-back">Change</a>
+                  </p>
+                  <p class="block100 mart5 black">Which subtitles would you like for this film??</p>
+                  <ul class="video-lg-buttons text-center block100 padt20">
+                    <li>
+                      <a href="index.php%3Fpage=video-stream-wizard.html#"
+                         class="btn dark-gray-bck pull-left uppercase slick-next" data-switch="subs-button"
+                         data-button="no-subs"><i class="fa fa-language marr5"></i>Witohout subtitles</a>
+                    </li>
+                    <li>
+                      <a href="index.php%3Fpage=video-stream-wizard.html#"
+                         class="btn dark-gray-bck pull-left uppercase slick-next" data-switch="subs-button"
+                         data-button="Duch"><i class="fa fa-language marr5"></i>Duch</a>
+                    </li>
+                  </ul>
+                </div>
+                <!--/STEP2-->
+
+                <!--STEP3-->
+                <div>
+                  <p class="block100 mart5 black">Audio :
+                    <span class="selected-audio"></span>
+                    |
+                    <a href="index.php%3Fpage=video-stream-wizard.html#" class="slick-back-first">Change</a>
+                  </p>
+                  <p class="block100 mart5 black">Subtitle :
+                    <span class="selected-sub"></span>
+                    |
+                    <a href="index.php%3Fpage=video-stream-wizard.html#" class="slick-back">Change</a>
+                  </p>
+
+                  <p class="block100 mart5 black text-center">
+                    <a href="index.php%3Fpage=video-stream-wizard.html#"
+                       class="btn btn-green-gradient center-block bold padlr25 white f15" id="play"><i
+                    class="fa fa-play marr5"></i> Start Film</a>
+                  </p>
+
+                </div>
+                <!--/STEP3-->
+
+
+              </section>
+              <!--/FILM VERSION-->
+
+              <!--AVAILABLE VERSION-->
+              <div class="block100 text-center">
+                <a href="index.php%3Fpage=video-stream-wizard.html#"
+                   class="center-block display-block available-trigger">See all available versions <i
+                class="fa fa-caret-down"></i></a>
+                <div class="available-versions mart5 block100 overflow-hidden thinrgray-bck black">
+                  <h3 class="f20">LANGUAGES AND SUBTITLES AVAILABLE</h3>
+                  <p class="block100">
+                    Audio <i class="fa fa-file-audio-o"></i> : French | Subtitles <i class="fa fa-language"></i>
+                    : Without subtitles
+                    <a href="index.php%3Fpage=video-stream-wizard.html#"
+                       class="btn btn-green-gradient bold padlr25 white f12 marl5" id="play"><i
+                    class="fa fa-play marr5"></i> Start Film</a>
+                  </p>
+                  <p class="block100">
+                    Audio <i class="fa fa-file-audio-o"></i> : French | Subtitles <i class="fa fa-language"></i>
+                    : Dutch
+                    <a href="index.php%3Fpage=video-stream-wizard.html#"
+                       class="btn btn-green-gradient bold padlr25 white f12 marl5" id="play"><i
+                    class="fa fa-play marr5"></i> Start Film</a>
+                  </p>
+                </div>
+              </div>
+              <!--/AVAILABLE VERSION-->
+
+              <!--VIEWABLE NOTIF-->
+              <div class="block100 text-center mart20">
+                This movie will be viewable during 48hrs, you can watch it as many times as you wish and decide on
+                its version.
+              </div>
+              <!--/VIEWABLE NOTIF-->
+
+              <!--VIDEO STREAM LINKS BOX-->
+              <div class="block100 martb20">
+                <ul class="video-stream-links">
+                  <li>
+                    <a href="index.php%3Fpage=video-stream-wizard.html#"><i class="fa fa-television marr10"></i>
+                      How to connect your PC to your television?</a>
+                  </li>
+                  <li class="mart10">
+                    <a href="index.php%3Fpage=video-stream-wizard.html#"><i
+                    class="fa fa-info-circle  marr10"></i> All info concerning our VOD system</a>
+                  </li>
+                  <li class="mart10">
+                    <a href="index.php%3Fpage=video-stream-wizard.html#"><i class="fa fa-wrench  marr10"></i>
+                      Inform us if you have a problem viewing this</a>
+                  </li>
+                </ul>
+              </div>
+
+
 
           <% end %>
 

@@ -1,1 +1,1 @@
-<%= will_paginate item, :class => "products-pagination osc #{cookies[:endless] == 'deactive' ? 'deactive' : 'active'}", :id => :pagination, :previous_label => '«', :next_label => '»', :params => {:kind => params[:kind] == :normal ? nil : params[:kind]} %>
+<%= will_paginate item, :class => "#{cookies[:endless] == 'deactive' ? 'deactive' : 'active'}", :id => :pagination, :previous_label => '«', :next_label => '»', :params => {:kind => params[:kind] == :normal ? nil : params[:kind]} %>

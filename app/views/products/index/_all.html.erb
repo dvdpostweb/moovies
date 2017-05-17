@@ -1,3 +1,5 @@
+<%= render :partial => 'layouts/filters_online', :locals => {:selected_countries => @selected_countries, :languages => @languages, :subtitles => @subtitles }%>
+
 <div class="block100 thinrgray-bck radius2 padlr10 switch-view-panel">
   <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 
@@ -53,5 +55,13 @@
     </div>
 
 <% end %>
+
+<div class="block100 mart30 pagin-bar">
+    <%= render :partial => 'products/index/pagination', :locals => {:item => @products} %>
+</div>
+
+<div class="block100 mart15 line-height-20">
+  <%= t(products_index_description, :link_abo => info_path(:page_name => t('routes.infos.params.vod')), :link_svod => (params[:kind] == :adult ? products_short_path(:package => Moovies.packages.invert[4]) : products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}"))), :link_tvod => (params[:kind] ==  :adult ? products_short_path(:package => Moovies.packages.invert[5]) : products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[2]}")))).html_safe %>
+</div>
 
 
