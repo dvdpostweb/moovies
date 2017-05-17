@@ -226,4 +226,8 @@ class Api::V1::ValidatorController < API::V1::BaseController
     end
   end
 
+  def language_by_language
+    render json: Language.by_language(I18n.locale)
+  end
+
 end
