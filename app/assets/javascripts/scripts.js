@@ -186,8 +186,6 @@ jQuery.fn.extend({
         //ajaxFilters();
     });
 
-    // audio autocomplete tags
-
 
     // subtitles autocomplete tags
     var subtitlesTags = ['Français', 'Néerlandais', 'Allemand pour malentendants', 'Arabe', 'Corse', 'Italien', 'Roumain', 'Veca', 'Suédois', 'Turc', 'Veca', 'Russe', 'Néerlandais pour Malentendants'];
