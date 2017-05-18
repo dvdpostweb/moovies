@@ -78,48 +78,11 @@
             </div>
           </div>
 
-          <div class="left-item">
-            <label class="OpenSansCondensed f20"><%= t('products.index.filters.audio', :default => 'audio') %></label>
-            <%= collection_select(:filters, :audio, Language.by_language(I18n.locale), :id, :name, {:selected => params[:filters] && params[:filters][:audio] ? params[:filters][:audio] : nil, :include_blank => true}, {:multiple => true, :class => 'chosen-select', 'data-placeholder' =>"Audio...", 'data-no_results_text' => t('products.index.filters.not_found')}) %>
-          </div>
-
-          <div class="left-item" id="subtitles-tags">
-            <label class="OpenSansCondensed f20"><%= t('products.index.filters.subtitles', :default => 'subtitles') %></label>
-            <%= collection_select(:filters, :subtitles, Subtitle.by_language(I18n.locale), :id, :name, {:selected => params[:filters] && params[:filters][:subtitles] ? params[:filters][:subtitles] : nil, :include_blank => true}, {:multiple => true, :class => 'chosen-select', 'data-placeholder' =>"#{t('products.index.filters.subtitles')}...", 'data-no_results_text' => t('products.index.filters.not_found')}) %>
-          </div>
-
-          <!--<div class="left-item" id="listing-range-slider">
-            <label class="OpenSansCondensed f20">Cotations</label>
-            <input type="text" id="listing-range" name="public-range" value=""/>
-          </div>
-
-          <div class="left-item yeardate" id="from-to">
-            <label class="OpenSansCondensed f20 block100"><#%= t('products.index.filters.year' , :default => 'year') %></label>
-            <#% max = Time.now.year + 1 %>
-            <#% max_year = params[:date] && params[:date][:filters] && params[:date][:filters][:year_max] && params[:date][:filters][:year_max].to_i <= max ? params[:date][:filters][:year_max].to_i : max %>
-            <div class="col-md-5 col-sm-5 col-xs-5 position-relative">
-              <#%= select_year (params[:date] && params[:date][:filters] && params[:date][:filters][:year_min] ? params[:date][:filters][:year_min].to_i : 1910 ), :field_name => 'filters[year_min]', :start_year => 1910, :end_year => max %>
-            </div>
-            <div class="col-md-2 col-sm-2 col-xs-2 text-center padt10">-</div>
-            <div class="col-md-5 col-sm-5 col-xs-5 position-relative">
-              <#%= select_year max_year , :field_name => 'filters[year_max]', :start_year => 1910, :end_year => max %>
-            </div>
-          </div>
-
-        <div class="left-item" id="public-range-slider">
-            <label class="OpenSansCondensed f20">Public</label>
-            <input type="text" id="public-range" name="public-range" value=""/>
-          </div>-->
-
-          <div class="left-item" id="pays-tags">
-            <label class="OpenSansCondensed f20"><%= t('products.index.filters.countries', :default => 'country') %></label>
-            <%= collection_select(:filters, :country_id, @countries, :id, :name, {:selected => params[:filters] && params[:filters][:country_id] ? params[:filters][:country_id] : nil, :include_blank => true}, {:multiple => true, :class => 'chosen-select', 'data-placeholder' =>"#{t('products.index.filters.countries')}...", 'data-no_results_text' => t('products.index.filters.not_found')}) %>
-          </div>
-
-          <div class="left-item" id="genres">
-            <label class="OpenSansCondensed f20"><%= t('products.index.filters.category', :default => 'category') %></label>
-            <%= collection_select(:filters, :category_id, Category.by_kind(params[:kind]).joins("descriptions_#{I18n.locale}".to_sym).includes("descriptions_#{I18n.locale}").roots.movies.vod.alphabetic_orderd, :id, :name, {:selected => params[:filters] && params[:filters][:category_id] ? params[:filters][:category_id] : nil, :include_blank => true}, {:class => 'chosen-select', 'data-placeholder' =>"#{t('products.index.filters.category')}...", 'data-no_results_text' => t('products.index.filters.not_found')}) %>
-          </div>
+        <div class="left-item" id="audio-tags">
+          <label class="OpenSansCondensed f20">Audio</label>
+          <input type="text" class="tags" name="audio-autocomplete-tags" id="audio-autocomplete-tags"/>
+          <div class="tags-autocomplete-holder block100"></div>
+        </div>
 
       </div>
   <% end %>
