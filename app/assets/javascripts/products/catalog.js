@@ -1,18 +1,12 @@
 $(function () {
 
-    History = window.History // Note: We are using a capital H instead of a lower h
+    History = window.History;
+
     $('#film-details').delegate('.season .details, .season .arrow', 'click', function () {
         $(this).parent().children('.episodes').toggle('slow')
         $(this).parent().children('.arrow').toggleClass('arrow-down arrow-right')
 
     });
-    //$('.ca-container').contentcarousel({
-    //    sliderSpeed: 500,
-    //    sliderEasing: 'easeOutExpo',
-    //    itemSpeed: 500,
-    //    itemEasing: 'easeOutExpo',
-    //    scroll: 5
-    //});
 
     $("body").delegate("#c-members #pagination a", "click", function () {
         html_item = $(this).parent();
@@ -302,52 +296,6 @@ $(function () {
             console.log(form_element);
         });
 
-        var audioInputField = $('#audio-autocomplete-tags');
-
-        if (audioInputField.length) {
-            audioInputField.tagit({
-                //availableTags: audioTags,
-                tagSource: function (request, response) {
-                    $.ajax({
-                        url: "/api/v1/language_by_language",
-                        dataType: "json",
-                        success: function (data) {
-                            response($.map(data, function (category) {
-                                return {
-                                    label: category.languages_description,
-                                    value: category.languages_description
-                                };
-                            }));
-                        }
-                    })
-                },
-                placeholderText: 'Search audio',
-                showAutocompleteOnFocus: true,
-                onlyAvailableTags: true,
-                autocomplete: {
-                    minLength: 0,
-                    appendTo: audioInputField.next('.tags-autocomplete-holder'),
-                    open: function () {
-                        $(this).closest('ul.tagit').addClass('box-shadow');
-                    },
-                    close: function () {
-                        $(this).closest('ul.tagit').removeClass('box-shadow');
-                    }
-                },
-                onTagAdded: function () {
-
-                    submit_online_audio();
-
-                },
-                onTagRemoved: function () {
-
-                    //submit_online();
-
-
-                }
-            });
-        }
-
         $('#products_index, #film-details, #categories, #studios').delegate("#close_audience", "click", function () {
             $("#online #audience-slider-range").slider("values", [0, 4])
         });
@@ -362,10 +310,6 @@ $(function () {
             $("#online #date_filters_year_max").val($("#online #date_filters_year_min option:last").val());
             submit_online()
         });
-        /*$('#products_index').delegate(".links", "click", function() {
-         $('#filters_view_mode').val($(this).attr('data'))
-         submit_online()
-         })*/
 
         $('#products_index').delegate("#close_ratings", "click", function () {
             $("#online #ratings-slider-range").slider("values", [0, 18])
