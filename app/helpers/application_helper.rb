@@ -18,6 +18,8 @@ module ApplicationHelper
       "step3"
     elsif params[:controller].present? && params[:controller] == "payment_methods" && params[:action].present? && params[:action] == "edit" then
       "step3"
+    elsif params[:controller].present? && params[:controller] == "steps" && params[:action].present? && params[:action] == "show" && params[:id].present? && params[:id] == "step4" then
+      "step4"
     elsif params[:controller].present? && params[:controller] == "messages" && params[:action].present? && params[:action] == "faq" then
       "contact-faq"
     elsif params[:controller].present? && params[:controller] == "phone_requests" && params[:action].present? && params[:action] == "new" then
