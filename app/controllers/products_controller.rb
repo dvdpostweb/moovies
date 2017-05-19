@@ -275,6 +275,7 @@ class ProductsController < ApplicationController
   end
 
 private
+
   def find_product
     if !params[:recommendation].nil?
       @source = params[:recommendation]

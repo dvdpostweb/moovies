@@ -302,318 +302,25 @@ $(function () {
             console.log(form_element);
         });
 
-        if (gon.locale === "fr") {
-            var audioTags = [
-                "Français",
-                "Néerlandais",
-                "Anglais",
-                "Flamand",
-                "Allemand",
-                "Espagnol",
-                "Portugais",
-                "Italien",
-                "Hongrois",
-                "Japonais",
-                "Polonais",
-                "Tchèque",
-                "Grec",
-                "Arabe",
-                "Mandarin",
-                "Russe",
-                "Hébreu",
-                "Danois",
-                "Norvégien",
-                "Suédois",
-                "Islandais",
-                "Turc",
-                "Coréen",
-                "Vietnamien",
-                "Serbo-Croate",
-                "Cantonais",
-                "Iranien",
-                "Arménien",
-                "Thaï",
-                "Philippin",
-                "Burkinabé",
-                "Zoulou",
-                "Afrikaans",
-                "Khalkha",
-                "Wolof",
-                "Persan",
-                "Tibetain",
-                "Maya",
-                "Mongol",
-                "Hindi",
-                "Khmer",
-                "Bambara",
-                "Roumain",
-                "Dari",
-                "Ladakhi",
-                "Haitien",
-                "Plautdietsch",
-                "Farsi",
-                "Urdu",
-                "Slovaque",
-                "Bosniaque",
-                "Kazakh",
-                "Araméen",
-                "Macédonien",
-                "Frise",
-                "Kurde",
-                "Cinghalais",
-                "Taiwanais",
-                "Tamacheq",
-                "Dzonkha",
-                "Xhosa",
-                "Guarani",
-                "Basque",
-                "Inuit",
-                "Musique",
-                "Sinhala",
-                "Tamil",
-                "Tagalog",
-                "Tchétchène",
-                "Kirghiz",
-                "Quechua",
-                "Bengali",
-                "Géorgien",
-                "Finois",
-                "International",
-                "Bulgare",
-                "Indonesien",
-                "Malgache",
-                "Swahili",
-                "Langue des bébés",
-                "Berbère",
-                "Tedaga",
-                "Haussa",
-                "Pashtune",
-                "Perse",
-                "Lingala",
-                "Albanais",
-                "massaï",
-                "Lituanien",
-                "kinyarouanda",
-                "Créole",
-                "Serbe",
-                "Audiovision en Français",
-                "Audiovision en Anglais",
-                "Slovène",
-                "Croate",
-                "créoles et pidgins portugais",
-                "Chinois",
-                "Éthiopien",
-            ];
-        } else if (gon.locale === "nl") {
-            var audioTags = [
-                "Frans",
-                "Nederlands",
-                "Engels",
-                "Vlaams",
-                "Duits",
-                "Spaans",
-                "Portugees",
-                "Italiaans",
-                "Hongaars",
-                "Japans",
-                "Pools",
-                "Tsjechisch",
-                "Grieks",
-                "Arabisch",
-                "Mandarin",
-                "Rrussisch",
-                "Hebreeuws",
-                "Deens",
-                "Noors",
-                "Sweeds",
-                "Ijslands",
-                "Turks",
-                "Koreaans" ,
-                "Vietnamees",
-                "Kroatisch/Servisch",
-                "Cantonees",
-                "Iranees",
-                "Armeens",
-                "Thais",
-                "Filipijn",
-                "Burkinees",
-                "Zoeloe",
-                "Afrikaans",
-                "Mongolees",
-                "Wolof",
-                "Perzisch",
-                "Tibetaan",
-                "Maya",
-                "Mongools",
-                "Indisch",
-                "Khmer",
-                "Bambara",
-                "Roemeens",
-                "Dari",
-                "Ladakhi",
-                "Haïtiaans",
-                "Plautdietsch",
-                "Farsi",
-                "Urdu",
-                "Slowakisch",
-                "Bosnisch",
-                "Kazakh",
-                "Aramaisch",
-                "Macedoniaans",
-                "Frisian",
-                "Kurdish",
-                "Cinghali",
-                "Tamashek",
-                "Dzonkha",
-                "Xhosa",
-                "Guarani",
-                "Baskisch",
-                "Inuktitut",
-                "Muziek",
-                "Sinhala",
-                "Tamil",
-                "Tagalog",
-                "Tchétchène",
-                "Kyrgyz",
-                "Quechua",
-                "Bengali",
-                "Georgiaan",
-                "Finnisch",
-                "Internationaal",
-                "Bulgaars",
-                "Indonesisch",
-                "Malgasy",
-                "Swahili",
-                "Babies language",
-                "Berber",
-                "Tedaga",
-                "Haussa",
-                "Pashtu",
-                "Persian",
-                "Lingala",
-                "Albanees",
-                "massaï",
-                "Litouws",
-                "kinyarouanda",
-                "Creole",
-                "Serbian",
-                "Frans Beschrijvend",
-                "Engels Beschrijvend",
-                "Slovenian",
-                "Kroatisch",
-                "Creoles and Pidgins Portuguese",
-                "Chinese",
-                "Ethiopiër"
-            ];
-        } else if (gon.locale === "en") {
-            var audioTags = [
-                "French",
-                "Dutch",
-                "English",
-                "Flamish",
-                "German",
-                "Spanish",
-                "Portuguese",
-                "Italian",
-                "Hungarian",
-                "Japanese",
-                "Polish",
-                "Czech",
-                "Greek",
-                "Arabic",
-                "Mandarin",
-                "Russian",
-                "Hebrew",
-                "Danish",
-                "Norwegian",
-                "Swedish",
-                "Icelandic",
-                "Turkish",
-                "Korean",
-                "Vietnamese",
-                "Serbo-Croat",
-                "Cantonese",
-                "Iranian",
-                "Armenian",
-                "Thai",
-                "Filipins",
-                "Burkinese",
-                "Zulu",
-                "Afrikaans",
-                "Mongolian",
-                "Wolof",
-                "Persian",
-                "Tibetan",
-                "Maya",
-                "Mongolian",
-                "Hindi",
-                "Khmer",
-                "Bambara",
-                "Romanian",
-                "Dari",
-                "Ladakhi",
-                "Haitian",
-                "Plautdietsch",
-                "Farsi",
-                "Urdu",
-                "Slovak",
-                "Bosnian",
-                "Kazakh",
-                "Aramaic",
-                "Macedonian",
-                "Frisian",
-                "Kurdish",
-                "Cinghali",
-                "Cinghali",
-                "Tamashek",
-                "Dzonkha",
-                "Xhosa",
-                "Guarani",
-                "Basque",
-                "Inuktitut",
-                "Music",
-                "Sinhala",
-                "Tamil",
-                "Tagalog",
-                "Tchétchène",
-                "Kyrgyz",
-                "Quechua",
-                "Bengali",
-                "Georgian",
-                "Finnish",
-                "International",
-                "Bulgarian",
-                "Indonesian",
-                "Madagascan",
-                "Swahili",
-                "Babies language",
-                "Berber",
-                "Tedaga",
-                "Haussa",
-                "Pashtu",
-                "Persian",
-                "Lingala",
-                "Albanian",
-                "massaï",
-                "Lithuanian",
-                "kinyarouanda",
-                "Creole",
-                "Serbian",
-                "French Audiovision",
-                "English Audiovision",
-                "Slovenian",
-                "Croatian",
-                "Creoles and Pidgins Portuguese",
-                "Chinese",
-                "Ethiopian"
-            ];
-        }
-
         var audioInputField = $('#audio-autocomplete-tags');
 
         if (audioInputField.length) {
             audioInputField.tagit({
-                availableTags: audioTags,
+                //availableTags: audioTags,
+                tagSource: function (request, response) {
+                    $.ajax({
+                        url: "/api/v1/language_by_language",
+                        dataType: "json",
+                        success: function (data) {
+                            response($.map(data, function (category) {
+                                return {
+                                    label: category.languages_description,
+                                    value: category.languages_description
+                                };
+                            }));
+                        }
+                    })
+                },
                 placeholderText: 'Search audio',
                 showAutocompleteOnFocus: true,
                 onlyAvailableTags: true,
@@ -627,16 +334,15 @@ $(function () {
                         $(this).closest('ul.tagit').removeClass('box-shadow');
                     }
                 },
-                beforeTagAdded: function (event, ui) { // only available tags allowed
-                    if ($.inArray(ui.tagLabel, audioTags) == -1) {
-                        $('.ui-autocomplete-input').val('');
-                        return false;
-                    }
-                },
                 onTagAdded: function () {
+
+                    submit_online_audio();
 
                 },
                 onTagRemoved: function () {
+
+                    //submit_online();
+
 
                 }
             });
@@ -761,16 +467,20 @@ $(function () {
 });
 
 function ajax_pagination(path) {
-    /*$('#products').html("<div style='height:22px'><img src='/assets/ajax-loader.gif'/></div>");*/
+
     $('.loading_bar').show()
     $.ajax({url: path, dataType: 'script'});
     History.pushState(null, null, path);
+
 }
 
 
 function goToByScroll(id) {
+
     $('html,body').animate({scrollTop: $("#" + id).offset().top}, 'slow');
+
 }
+
 function endscroll() {
     $('#toTop').on('click', function () {
         goToByScroll('top')
@@ -796,21 +506,59 @@ function endscroll() {
 }
 
 function submit_online() {
+
     if ($('.not_reload').length > 0) {
-        //$('.loading_bar').show();
-        /*$('#filter_online_form').ajaxSubmit({dataType: 'script'});*/
+
         if ($('#filter_online_form').attr('action').indexOf('?') > 0) {
+
             history_url = $('#filter_online_form').attr('action') + "&" + $('#filter_online_form').serialize()
+
         }
+
         else {
+
             history_url = $('#filter_online_form').attr('action') + "?" + $('#filter_online_form').serialize()
+
         }
 
         History.pushState(null, null, history_url);
+
     }
+
     else {
+
         $('#filter_online_form').submit();
+
     }
+
+}
+
+function submit_online_audio() {
+
+    if ($('.not_reload').length > 0) {
+
+        if ($('#filter_online_form').attr('action').indexOf('?') > 0) {
+
+            history_url = $('#filter_online_form').attr('action') + "&" + $('#filter_online_form').serialize()
+
+        }
+
+        else {
+
+            history_url = $('#filter_online_form').attr('action') + "?" + $('#filter_online_form').serialize()
+
+        }
+
+        History.pushState(null, null, history_url);
+
+    }
+
+    else {
+
+        $('#filter_online_form').submit();
+
+    }
+
 }
 
 function load_form() {
