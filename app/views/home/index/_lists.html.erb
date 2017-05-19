@@ -1,30 +1,15 @@
-<!-- #services-wrap -->
-<div class="container clearfix" >
-  <!--   ==============   MAIN CONTENT   ==============   -->
-  <div id="maincontent" >
-    <div id="new-alacarte-wrap">
-      <h2><%= params[:kind] == :adult ? t('home.index.tvod_adult_new').html_safe : t('home.index.tvod_new').html_safe %></h2>
-      <div class="tab-container">
-        <ul>
-          <%= render :partial => 'products/detail', :collection => @new_tvod, :locals => {:source => type = 'subscription' ? @wishlist_source[:subscription] : @wishlist_source[:hp_list]} %>
-        </ul>
-      </div>
-      <div class="clear"></div>
-      <div class="more_movies" align="right">
-        <%= link_to t('home.index.all'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[params[:kind] == :adult ? 5 : 2]}"), :tag => 3) %>
-      </div>
+<div id="slider-view" class="block100">
+  <div class="home-carousel-holder center-block">
+    <div class="hr-with-words">
+      <span class="Arial f30 light-blue"><%= params[:kind] == :adult ? t('home.index.tvod_adult_new').html_safe : t('home.index.tvod_new').html_safe %></span>
     </div>
-
-    <div class="clear"></div>
-
-
-    <% unless current_customer %>
-
-    <div id="subscribe-wrap">
-      <%= link_to image_tag("#{I18n.locale}/#{t('home.index.banner_img')}#{params[:kind]==:adult ? '-adult' : ''}.jpg", :size => '942x188', :alt => t('home.index.banner_alt')), new_customer_session_path(:code => get_code(@discount_bottom.name)) %>
-    </div>
-    <% end %>
-    <%= t('home.index.descritpion', :link_abo => info_path(:page_name => t('routes.infos.params.vod')), :link_svod => (params[:kind] == :adult ? products_short_path(:package => Moovies.packages.invert[4]) : products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}"), :tag => 5)), :link_tvod => (params[:kind] ==  :adult ? products_short_path(:package => Moovies.packages.invert[5]) : products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[2]}"), :tag => 5))).html_safe if params[:controller] == 'home' %>
-    <div class="clear"></div>
+    <section class="responsive-carousel slider">
+      <%= render :partial => 'products/detail', :collection => @new_tvod, :locals => {:source => type = 'subscription' ? @wishlist_source[:subscription] : @wishlist_source[:hp_list]} %>
+    </section>
   </div>
+</div>
+<div class="block100 text-center mart40">
+  <%= link_to products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[params[:kind] == :adult ? 5 : 2]}"), :tag => 3), :class => "f25" do %>
+      <i class="fa fa-play f15"></i> <%= t('home.index.all') %>
+  <% end %>
 </div>

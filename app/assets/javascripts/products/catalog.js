@@ -429,7 +429,7 @@ function endscroll() {
     $('#toTop').on('click', function () {
         goToByScroll('top')
     });
-    if ($('#products_index #pagination.active').length) {
+    //if ($('#products_index #pagination.active').length) {
         $(window).scroll(function () {
             var path;
             path = $('#products_index #pagination .next_page').attr('href');
@@ -446,38 +446,10 @@ function endscroll() {
                 return $.ajax({url: path, dataType: 'script'});
             }
         });
-    }
+    //}
 }
 
 function submit_online() {
-
-    if ($('.not_reload').length > 0) {
-
-        if ($('#filter_online_form').attr('action').indexOf('?') > 0) {
-
-            history_url = $('#filter_online_form').attr('action') + "&" + $('#filter_online_form').serialize()
-
-        }
-
-        else {
-
-            history_url = $('#filter_online_form').attr('action') + "?" + $('#filter_online_form').serialize()
-
-        }
-
-        History.pushState(null, null, history_url);
-
-    }
-
-    else {
-
-        $('#filter_online_form').submit();
-
-    }
-
-}
-
-function submit_online_audio() {
 
     if ($('.not_reload').length > 0) {
 
