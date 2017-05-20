@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.14'
+gem 'rails', '~> 3.2', '>= 3.2.22.5'
 
 gem 'mysql2', '~> 0.3.21'
 gem 'json'
@@ -42,7 +42,7 @@ end
 gem 'sass-rails'
 gem 'compass-rails'
 
-gem "devise"
+gem 'devise', '~> 2.2', '>= 2.2.8'
 gem "airbrake", "~> 4"
 gem "jquery-rails"
 gem 'jquery-ui-rails'

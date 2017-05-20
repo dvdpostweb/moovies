@@ -3,10 +3,7 @@
 <% product_title = data[:title] %>
 <% product_image = data[:image] %>
 <% path = product_path(:id => product.to_param, :source => @source, :response_id => @response_id) %>
-
-
 <div class="grid-slide">
-
   <a href="<%= path %>" class="popper"><%= image_tag(product_image, :class => "img-responsive") %>
     <% if product.hd?(session[:country_id]) %>
         <span class="hd position-absolute black white-bck radius2 bold italic">HD</span>
@@ -17,12 +14,59 @@
       <h6 class="dark-gray mart20 marb0 bold text-center uppercase f25"><%= product.smart_title %> (<%= product.year %>
         )</h6>
       <div class="block100 slide-score green text-center mart5 f20" data-score="<%= product.rating_count %>"></div>
-      <div class="block100 slide-price f20 line-height-10 dark-gray text-center bold">2.99€</div>
-      <div class="block100 slide-discount text-center mart5">ou 1.99€ via
-        <a href="http://superentals.codepop.biz/fr/information/alacarte" class="dark-gray underline">abonnement</a>
-      </div>
+      <% if customer_signed_in? %>
+          <% if current_customer.unlimted_subscriber? %>
+              <% if product.tvod? %>
+                  <% if product.streaming_products.any? %>
+                      <% if current_customer.tvod_free > 0 %>
+                          <div class="block100 slide-price f20 line-height-10 dark-gray text-center bold">
+                            <%= product.streaming_products.first.tvod_credits %> credits
+                          </div>
+                      <% else %>
+                          <div class="block100 slide-price f20 line-height-10 dark-gray text-center bold">
+                            <%= product.streaming_products.first.ppv_price %> €
+                          </div>
+                      <% end %>
+                  <% end %>
+              <% end %>
+          <% elsif current_customer.plush_la_carte_subscriber? || current_customer.customers_abo_type == 6 %>
+              <% unless ((current_customer.abo_type_id == 6 && current_customer.activation_discount_code_type == "A" && Mobistar.find_by_activation_id(current_customer.activation_discount_code_id) && current_customer.tvod_free > 0) || (current_customer.unlimted_subscriber? && product.svod?)) %>
+                  <% if product.streaming_products.any? %>
+                      <% if current_customer.customers_abo_type == 6 && current_customer.tvod_free == 0 %>
+                          <div class="block100 slide-price f20 line-height-10 dark-gray text-center bold">
+                            <%= product.streaming_products.first.tvod_price %> €
+                          </div>
+                      <% elsif current_customer.customers_abo_type == 6 && current_customer.tvod_free > 0 %>
+                          <div class="block100 slide-price f20 line-height-10 dark-gray text-center bold">
+                            <%= product.streaming_products.first.tvod_credits %> credits
+                          </div>
+                      <% elsif current_customer.plush_la_carte_subscriber? %>
+                          <div class="block100 slide-price f20 line-height-10 dark-gray text-center bold">
+                            <%= product.streaming_products.first.tvod_credits %> credits
+                          </div>
+                      <% end %>
+                  <% end %>
+              <% end %>
+          <% end %>
+      <% else %>
+          <% if product.streaming_products.any? %>
+              <div class="block100 slide-price f20 line-height-10 dark-gray text-center bold"><%= product.streaming_products.first.tvod_price %>
+                €
+              </div>
+          <% end %>
+      <% end %>
+
+      <% unless customer_signed_in? %>
+          <% if product.streaming_products.any? %>
+              <div class="block100 slide-discount text-center mart5"><%= t('products.show.product.popup_chose') %> <%= product.streaming_products.first.ppv_price %>
+                € <%= t('products.show.product.popup_via') %>
+                <a href="http://superentals.codepop.biz/fr/information/alacarte" class="dark-gray underline">abonnement</a>
+                <%= link_to t('products.show.product.popup2'), info_path(:page_name => t('routes.infos.params.alacarte')), :class => "dark-gray underline" %>
+              </div>
+          <% end %>
+      <% end %>
       <div class="block100 slide-content mart15 text-center">
-        <%= render :partial => 'products/streaming',  :locals => {:product => product, :source => @source, :popup => false} %>
+        <%= render :partial => 'products/streaming', :locals => {:product => product, :source => @source, :popup => false} %>
       </div>
       <div class="block100 slide-content mart15"><%= truncate_html((data[:description].text rescue '...'), :length => 500) %></div>
       <div class="block100 slide-buttons mart15">
@@ -31,49 +75,58 @@
         <% end %>
         <a href="index.html#" class="btn gray-bck pull-right btn-selection"><i class="fa fa-plus marr5"></i>Selection</a>
       </div>
-
-      <div class="block100 slide-footer green-bck padtb15 mart10 text-center">
-
-        <% unless (customer_signed_in? && current_customer.unlimted_subscriber?) %>
-            <% if product.streaming_products.any? %>
-                <!--<div class=<#%= params[:kind] == :adult ? ("footer-pink") : ("footer-green") %>-->
-                <% if customer_signed_in? %>
-                    <% if current_customer.tvod_only? %>
-                        <% if (current_customer.abo_type_id == 6 && current_customer.activation_discount_code_type == "A") %> <!--#&& Mobistar.find_by_activation_id(current_customer.activation_discount_code_id)  && current_customer.tvod_free > 0) %>-->
+      <% unless (customer_signed_in? && current_customer.unlimted_subscriber?) %>
+          <% if product.streaming_products.any? %>
+              <!--<div class=<#%= params[:kind] == :adult ? ("footer-pink") : ("footer-green") %>-->
+              <% if customer_signed_in? %>
+                  <% if current_customer.tvod_only? %>
+                      <% if (current_customer.abo_type_id == 6 && current_customer.activation_discount_code_type == "A") && (Mobistar.find_by_activation_id(current_customer.activation_discount_code_id) && current_customer.tvod_free > 0) %>
+                          <div class="block100 slide-footer green-bck padtb15 mart10 text-center">
                             <%= link_to info_path(:page_name => t('routes.infos.params.alacarte')), :class => "underline f18 dark-gray" do %>
                                 <%= t('products.show.product.popup4').html_safe %>
                             <% end %>
-                        <% else %>
-                            <% if product.svod? %>
+                          </div>
+                      <% else %>
+                          <% if product.svod? %>
+                              <div class="block100 slide-footer green-bck padtb15 mart10 text-center">
                                 <%= link_to info_path(:page_name => t('routes.infos.params.unlimited')), :class => "underline f18 dark-gray" do %>
                                     <%= t('products.show.product.popup9').html_safe %>
                                 <% end %>
                                 <p class="block100 mart5 text-center dark-gray f15">
                                   <%= t('products.show.product.popup10').html_safe %>
                                 </p>
-                            <% end %>
-                            <% if product.tvod? %>
+                              </div>
+                          <% end %>
+                          <% if product.tvod? %>
+                              <div class="block100 slide-footer green-bck padtb15 mart10 text-center">
                                 <%= link_to info_path(:page_name => t('routes.infos.params.alacarte')), :class => "underline f18 dark-gray" do %>
                                     <%= t('products.show.product.popup6').html_safe %>
                                 <% end %>
                                 <p class="block100 mart5 text-center dark-gray f15">
-                                  <%= t('products.show.product.popup7').html_safe %> <strong><%= product.streaming_products.first.ppv_price %>€</strong>
+                                  <%= t('products.show.product.popup7').html_safe %>
+                                  <strong><%= product.streaming_products.first.ppv_price %>€</strong>
                                 </p>
-                            <% end %>
-                        <% end %>
-                    <% elsif current_customer.plush_la_carte_subscriber? %>
+                              </div>
+                          <% end %>
+                      <% end %>
+                  <% elsif current_customer.plush_la_carte_subscriber? %>
+                      <div class="block100 slide-footer green-bck padtb15 mart10 text-center">
                         <a class="underline f18 dark-gray" onclick='jQuery.facebox("<%= escape_javascript(render(:partial => 'products/tvod_credits_only', :locals => {:product => product, :season_id => product.season_id, :episode_id => product.episode_id, :source => @source})) %>");'><%= t('products.show.product.popup4').html_safe %></a>
-                    <% end %>
-                <% else %>
-                    <% if product.svod? %>
+                      </div>
+                  <% end %>
+              <% else %>
+                  <% if product.svod? %>
+                      <div class="block100 slide-footer green-bck padtb15 mart10 text-center">
                         <%= link_to info_path(:page_name => t('routes.infos.params.unlimited')), :class => "underline f18 dark-gray" do %>
                             <%= t('products.show.product.popup9').html_safe %>
                         <% end %>
                         <p class="block100 mart5 text-center dark-gray f15">
                           <%= t('products.show.product.popup10').html_safe %>
                         </p>
-                    <% end %>
-                    <% if product.tvod? %>
+                      </div>
+                  <% end %>
+                  <% if product.tvod? %>
+                      <div class="block100 slide-footer green-bck padtb15 mart10 text-center">
                         <%= link_to info_path(:page_name => t('routes.infos.params.alacarte')), :class => "underline f18 dark-gray" do %>
                             <%= t('products.show.product.popup6').html_safe %></u></label>
                         <% end %>
@@ -81,21 +134,14 @@
                           <%= t('products.show.product.popup7').html_safe %>
                           <strong><%= product.streaming_products.first.ppv_price %>€</strong>
                         </p>
-                    <% end %>
-                <% end %>
-                <!--</div>-->
-            <% end %>
-        <% end %>
-
-        <!--<a href="http://superentals.codepop.biz/fr/information/alacarte" class="underline f18 dark-gray">Abonnez-vous</a>
-        <p class="block100 mart5 text-center dark-gray f15">
-          et regardez ce film pour seulement <strong>1.99€</strong>
-        </p>-->
-      </div>
-      <!--<a href="index.html#" class="synopsys-adaptive-close"></a>-->
+                      </div>
+                  <% end %>
+              <% end %>
+              <!--</div>-->
+          <% end %>
+      <% end %>
     </div>
   </div>
-
 </div>
 
 
