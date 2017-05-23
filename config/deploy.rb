@@ -4,6 +4,9 @@ require 'thinking_sphinx/capistrano'
 require './config/boot'
 require 'capistrano/slack'
 require 'capistrano/npm'
+require "capistrano-rbenv"
+
+set :rbenv_ruby_version, "2.3.3p222"
 
 set :stages, %w(staging production)
 set :default_stage, "staging"

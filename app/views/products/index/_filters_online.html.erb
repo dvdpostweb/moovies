@@ -88,6 +88,15 @@
           <%= collection_select(:filters, :subtitles, Subtitle.by_language(I18n.locale), :id, :name, {:selected => params[:filters] && params[:filters][:subtitles] ? params[:filters][:subtitles] : nil, :include_blank => true}, {:multiple => true, :class => 'chosen-select', 'data-placeholder' =>"#{t('products.index.filters.subtitles')}...", 'data-no_results_text' => t('products.index.filters.not_found')}) %>
         </div>
 
+        <!--<div class="left-item">
+          <label class="OpenSansCondensed f20"><#%= t('products.index.filters.ratings', :default => 'ratings') %></label>
+          <div id="ratings-slider">
+            <%#= hidden_field_tag "filters[rating_min]", params[:filters] && params[:filters][:rating_min] ? params[:filters][:rating_min] : 1 %>
+            <%#= hidden_field_tag "filters[rating_max]", params[:filters] && params[:filters][:rating_max] ? params[:filters][:rating_max] : 5 %>
+          </div>
+          <div id="ratings-slider-range"></div>
+        </div>-->
+
         <div class="left-item" id="from-to">
           <label class="OpenSansCondensed f20 block100"> <%= t('products.index.filters.year' , :default => 'year') %></label>
           <% max = Time.now.year + 1 %>
