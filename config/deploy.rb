@@ -7,6 +7,7 @@ require 'capistrano/npm'
 require "capistrano-rbenv"
 
 set :rbenv_ruby_version, "2.3.3p222"
+set :rbenv_path, '$HOME/.rbenv'
 
 set :stages, %w(staging production)
 set :default_stage, "staging"
