@@ -12,7 +12,6 @@
 
 set :application, "moovies"
 set :deploy_to, "/home/webapps/plush/staging"
-set :rbenv_path, '/home/webapps/plush/.rbenv/'
 
 #############################################################
 #	Settings
