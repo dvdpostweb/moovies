@@ -125,29 +125,6 @@ $(function () {
         set_page(url)
     }
 
-    /***trailer ***/
-    //$('body').delegate("#content_trailer .linkallversions a", "click", function () {
-    //    html_item = $(this);
-    //    content = html_item.html();
-    //    html_item.html("Loading...");
-    //    root_item = $('#content_trailer');
-    //
-    //    set_page(html_item.attr('href'))
-    //    $.ajax({
-    //        dataType: 'html',
-    //        url: html_item.attr('href'),
-    //        type: 'GET',
-    //        data: {},
-    //        success: function (data) {
-    //            root_item.html(data);
-    //        },
-    //        error: function () {
-    //            html_item.html(content);
-    //        }
-    //    });
-    //    return false;
-    //});
-
     $('body').delegate('.streaming_add_list, .streaming_remove_list', "click", function () {
         $(this).parent().ajaxSubmit({dataType: 'script'});
         $(this).parent().html("<div class='load2'><img src='/assets/ajax-loader.gif' /></div>")
@@ -241,12 +218,6 @@ $(function () {
 
         $(document).on('click', '.filter-close', function (e) {
             var form_element = $(this).closest('.applied-filter-tag').attr('data-input-element');
-            //$('#' + form_element + ' .iradio').iCheck('uncheck');
-            //$('#' + form_element + ' input.tags').tagit('removeAll');
-            //$('#' + form_element + ' .dropdown-select').val("").selectmenu("refresh");
-            //$('div[data-input-element=' + form_element + ']').fadeOut(200, function () {
-            //    $(this).remove();
-            //});
 
             if (form_element === "Plush à la Carte") {
 
@@ -312,7 +283,13 @@ $(function () {
         });
 
         $('#products_index').delegate("#close_ratings", "click", function () {
-            $("#online #ratings-slider-range").slider("values", [0, 18])
+            $("#ratings-slider-range").slider("values", [0, 18])
+
+
+
+
+
+
         });
 
         $('#products_index').delegate("#close_audios", "click", function () {
@@ -483,32 +460,32 @@ function load_form() {
         submit_online();
     });
 
-    //$("#online #ratings-slider-range").slider({
-    //    range: true,
-    //    min: 1,
-    //    max: 5,
-    //    values: [$("#filters_rating_min").val(), $("#filters_rating_max").val()],
-    //    step: 1,
-    //    change: function (event, ui) {
-    //        $("#online #filters_rating_min").val(ui.values[0]);
-    //        $("#online #filters_rating_max").val(ui.values[1]);
-    //        submit_online()
-    //    }
-    //});
-    //audience_slider_values = {'0': 0, '10': 1, '12': 2, '16': 3, '18': 4};
-    //$("#online #audience-slider-range").slider({
-    //    range: true,
-    //    min: 0,
-    //    max: 4,
-    //    values: [audience_slider_values[$("#online #filters_audience_min").val()], audience_slider_values[$("#online #filters_audience_max").val()]],
-    //    step: 1,
-    //    change: function (event, ui) {
-    //        actual_audience_values = {'0': 0, '1': 10, '2': 12, '3': 16, '4': 18};
-    //        $("#online #filters_audience_min").val(actual_audience_values[ui.values[0]]);
-    //        $("#online #filters_audience_max").val(actual_audience_values[ui.values[1]]);
-    //        submit_online()
-    //    }
-    //});
+    $("#online #ratings-slider-range").slider({
+        range: true,
+        min: 1,
+        max: 5,
+        values: [$("#filters_rating_min").val(), $("#filters_rating_max").val()],
+        step: 1,
+        change: function (event, ui) {
+            $("#online #filters_rating_min").val(ui.values[0]);
+            $("#online #filters_rating_max").val(ui.values[1]);
+            submit_online()
+        }
+    });
+    audience_slider_values = {'0': 0, '10': 1, '12': 2, '16': 3, '18': 4};
+    $("#online #audience-slider-range").slider({
+        range: true,
+        min: 0,
+        max: 4,
+        values: [audience_slider_values[$("#online #filters_audience_min").val()], audience_slider_values[$("#online #filters_audience_max").val()]],
+        step: 1,
+        change: function (event, ui) {
+            actual_audience_values = {'0': 0, '1': 10, '2': 12, '3': 16, '4': 18};
+            $("#online #filters_audience_min").val(actual_audience_values[ui.values[0]]);
+            $("#online #filters_audience_max").val(actual_audience_values[ui.values[1]]);
+            submit_online()
+        }
+    });
 }
 
 $(window).scroll(function () {
