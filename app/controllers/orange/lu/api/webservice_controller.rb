@@ -1,6 +1,19 @@
 class Orange::Lu::Api::WebserviceController < ApplicationController
   require 'json'
 
+  def eligibility_service
+    if request.xhr?
+      wpr = HTTParty.get("https://dev.iostreamproxy.orange.lu:8733/ToolBox/IOStreamProxy/Store/Store_Service?wsdl=wsdl0/partner_IsEligibleWithSMS?login=#{ENV["OLU_PLUSH_VOD_LOGIN"]}&password=#{ENV["OLU_PLUSH_VOD_LOGIN"]}&msisdn=#{params[:sms_number]}&sms=#{"1234"}")
+      render json: wpr #OluPlushVod.eligibility_service(params[:sms_number], "1234")
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
+
+  def purchase_service
+
+  end
+
   def is_eligable
     if request.xhr? #&& URI(request.referer).path == "/orange/lu/auth/#{I18n.locale}/sms/authorization" && params[:sms_number].present? && params[:products_id].present?
       customers_id = customer_signed_in? ? current_customer : 0
