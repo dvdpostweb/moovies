@@ -1,13 +1,13 @@
 $(document).ready(function () {
 
     if ((window.location.pathname == "/orange/lu/auth/" + gon.locale + "/sms/authorization")) {
-        isEligable();
+        eligibilityService();
         orangePurchase();
     }
 
 });
 
-function isEligable() {
+function eligibilityService() {
 
     $("#is_eligable").validate({
         rules: {
@@ -31,7 +31,7 @@ function isEligable() {
         submitHandler: function (form) {
             $.ajax({
                 method: 'POST',
-                url: '/orange/lu/api/is_eligable',
+                url: '/orange/lu/api/eligibility_service',
                 data: {
                     'sms_number': $.trim($("#sms_number").val()),
                     'products_id': gon.products_id
