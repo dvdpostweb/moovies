@@ -4,7 +4,7 @@
         <button type="button" class="navbar-toggle">
           <i class="fa fa-bars f25 normal"></i>
         </button>
-        <%= link_to(image_tag("template/plush-logo.png", :alt => "Plush"), root_localize_path, :class => "navbar-brand") %>
+        <%= params[:kind] == :adult ? link_to(image_tag("template/plush-logo-adult.png", :alt => "Plush"), root_localize_path, :class => "navbar-brand") : link_to(image_tag("template/plush-logo.png", :alt => "Plush"), root_localize_path, :class => "navbar-brand") %>
       </div>
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav OpenSansCondensed">
@@ -22,7 +22,8 @@
             <%= link_to t('.multi'), info_path(:page_name => t('routes.infos.params.vod')), :id => :multi, :class => params[:page_name] == 'vod' ? "active-nav-tab" : :inactive %>
           </li>
           <li class="dropdown">
-            <a href="<%= current_customer ? customer_path(:id => current_customer) : customers_path %>" data-toggle="dropdown" class="dropdown-toggle notifications-drop"> Mon
+            <a href="<%= current_customer ? customer_path(:id => current_customer) : customers_path %>" data-toggle="dropdown" class="dropdown-toggle notifications-drop">
+              Mon
               Compte<i class="fa fa-caret-down f11 marl5"></i> </a>
             <ul class="dropdown-menu padb5">
               <li><%= link_to t('.watchlist', :default => 'Ma playlist'), vod_wishlists_path, :class => params[:controller] == 'watchlists' ? :active : :inactive %></li>

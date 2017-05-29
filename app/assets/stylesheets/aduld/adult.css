@@ -1,0 +1,40 @@
+/*ADULT*/
+.adult .container {
+    min-height: 750px;
+}
+
+.adult .cred-buttons {
+    width: 55%;
+    text-align: center;
+}
+@media (max-width: 767px) {
+    .adult .cred-buttons {
+        width: 80%;
+    }
+}
+@media (max-width: 479px) {
+    .adult .cred-buttons {
+        width: 95%;
+    }
+}
+
+.fa-stack {
+    display: inline-block;
+    height: 2em;
+    line-height: 2em;
+    position: relative;
+    vertical-align: middle;
+    width: 2em;
+}
+
+.fa-plus18 {
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.fa-plus18:before {
+    content: "18+";
+}
+
+/*END ADULT*/

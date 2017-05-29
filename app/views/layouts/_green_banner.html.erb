@@ -1,5 +1,4 @@
-<!--GREEN TOP BLOCK-->
-<div class="container top-green-status green-bck black position-relative">
+<div class="container top-green-status <%= params[:kind] == :adult ? "violet-bck" : "green-bck" %> black position-relative">
   <div class="position-absolute" id="user-status-switch">
     <i class="fa fa-copy"></i> <a href="index.html#" class="no-decoration">(voir tout)</a>
   </div>
@@ -7,27 +6,24 @@
     <span class="hidden-xs">Vous n'avez pas de crédits disponibles</span>
   </div>
 </div>
-<!--/GREEN TOP BLOCK-->
-
-<!--PROMO CODE DROP-->
 <div class="container pad0">
   <div class="white-bck panel-enter-code block100">
     <div class="col-md-6 col-sm-6 col-xs-12 padr10 padtb20 mart15">
-      <span><a class="blue underline" href="index.html">Plush à la Carte</a></span>
+      <span><a class="<%= params[:kind] == :adult ? "violet" : "blue" %> underline" href="index.html">Plush à la Carte</a></span>
       <span class="black mart5">crédits disponibles: 0</span>
-      <span class="black mart5"> Votre abonnement: pas <strong>d’abonnement actif</strong> <a href="index.html" class="blue underline">(souscrire)</a></span>
+      <span class="black mart5"> Votre abonnement: pas <strong>d’abonnement actif</strong> <a href="index.html" class="<%= params[:kind] == :adult ? "violet" : "blue" %> underline">(souscrire)</a></span>
 
 
-      <span class="mart25"><a class="green underline" href="index.html">Plush Unlimited</a></span>
-      <span class="black mart5">Votre abonnement: pas d’abonnement actif <a href="index.html" class="blue">(souscrire)</a></span>
+      <span class="mart25"><a class="<%= params[:kind] == :adult ? "violet" : "green" %> underline" href="index.html">Plush Unlimited</a></span>
+      <span class="black mart5">Votre abonnement: pas d’abonnement actif <a href="index.html" class="<%= params[:kind] == :adult ? "violet" : "green" %> underline">(souscrire)</a></span>
 
     </div>
     <div class="col-md-6 col-sm-6 col-xs-12 padtb20 mart15">
       <span class="bold">Vous avez un code promo ?</span> <span>
                         <input type="text" name="code" placeholder="Code" class="black pad5 pull-left">
-                        <input type="submit" name="submit-code" value="Valider" class="pad5 blue-bck white marl5 pull-left">
+                        <input type="submit" name="submit-code" value="Valider" class="pad5 <%= params[:kind] == :adult ? "violet-bck" : "blue-bck" %> white marl5 pull-left">
                     </span>
     </div>
   </div>
 </div>
-<!--/PROMO CODE DROP-->
+

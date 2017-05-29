@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
 
-  layout "application_old"
+  #layout "application_old"
 
   def index
     @body_id = 'home'
