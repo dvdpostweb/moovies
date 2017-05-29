@@ -1,50 +1,89 @@
 <% path = @display_vod == 0 ? 'watchlists/index/item' : 'watchlists/index/item_gallery' %>
 <% class_name = @display_vod == 0 ? '' : ' gallery clearfix' %>
-<div id="maincontent" >
-  <ul id="on-way-nav">
-    <li class="first">
-      <% if params[:transit_or_history] == 'history' %>
-        <%= link_to t('.see_out'), vod_wishlists_path(:transit_or_history => 'transit'), :class => 'transit_or_history2' %>
-      <% else %>
-        <%= link_to t('.see_history'), vod_wishlists_path(:transit_or_history => 'history'), :class => 'transit_or_history2' %>
-      <% end %>
-    </li>
+<div class="container white-bck dark-gray padb20">
+  <% if params[:transit_or_history] == 'history' %>
+      <%= link_to t('.see_out'), vod_wishlists_path(:transit_or_history => 'transit'), :class => 'display-block mart20' %>
+  <% else %>
+      <%= link_to t('.see_history'), vod_wishlists_path(:transit_or_history => 'history'), :class => 'display-block mart20' %>
+  <% end %>
 
-  </ul>
-<% if params[:transit_or_history] == 'history' %>
-  <h2><%= t '.history_list' %></h2>    	
-  <div class="box<%= class_name %>" id="in-progress">
-    <% render :partial => 'watchlists/index/display', :locals => {:display_vod => @display_vod} %>
-    <%= render :partial => path, :collection => @history_list, :locals => {:display_vod => @display_vod, :type => :history, :series => []} %>
-  </div>
-  <%= will_paginate @history_list, :class => 'products-pagination2', :previous_label => '&nbsp;', :next_label => '&nbsp;' %>
-<% else %>
-  <% if @token_list.count == 0 && @list.count == 0 && @soon_list.count == 0 %>
-      <div id="faq-content-wrap">
-        <div id="faq-intro-wrap" class="<%= I18n.locale %>">
-          <%= t '.intro' %>
+  <div id="accordion" class="mart30">
+
+    <!--CURRENT RENTALS-->
+    <h3><%= t '.history_list' %> (5)</h3>
+    <div>
+      <!--item-->
+      <div class="item block100">
+        <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
+          Lorem ipsum dolor
+        </div>
+        <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
+          <a href="index.php%3Fpage=watchlist.html#" class="btn light-blue-bck bold padlr10 white"><i class="fa fa-play marr5"></i> Regarder</a>
+          <a href="index.php%3Fpage=watchlist.html#" class="btn btn-green-gradient bold padlr10 white"><i class="fa fa-play marr5"></i> Regarder</a>
+          <a href="index.php%3Fpage=watchlist.html#" class="btn"><i class="fa fa-trash f17"></i></a>
         </div>
       </div>
-  <% end %>
-  <h2><%= t '.token_list' %> (<%= @token_list.size %>)</h2>    	
-  <div class="box<%= class_name %>" id="in-progress">
-    <% render :partial => 'watchlists/index/display', :locals => {:display_vod => @display_vod} %>
-    <%= render :partial => path, :collection => @token_list, :locals => {:display_vod => @display_vod, :type => :token, :series => []} %>
+      <!--item-->
+    </div>
+    <!--/CURRENT RENTALS-->
+
+    <!--MY WATCHLIST-->
+    <h3 class="mart10"><%= t '.list' %> (<%= @list.count('distinct vod_wishlists.id').size %>)</h3>
+    <div>
+      <div>
+
+        <% render :partial => 'watchlists/index/display', :locals => {:display_vod => @display_vod} %>
+        <%= render :partial => path, :collection => @list, :locals => {:display_vod => @display_vod, :type => :list, :series => []} %>
+
+        <!--item-->
+        <div class="item block100">
+          <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
+            Movie to watch 1
+          </div>
+          <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
+            <a href="index.php%3Fpage=watchlist.html#" class="btn light-blue-bck bold padlr10 white"><i class="fa fa-play marr5"></i> Regarder</a>
+            <a href="index.php%3Fpage=watchlist.html#" class="btn btn-green-gradient bold padlr10 white"><i class="fa fa-play marr5"></i> Regarder</a>
+            <a href="index.php%3Fpage=watchlist.html#" class="btn"><i class="fa fa-trash f17"></i></a>
+          </div>
+        </div>
+        <!--item-->
+
+        <!--item-->
+        <div class="item block100">
+          <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
+            Movie to watch 2
+          </div>
+          <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
+            <a href="index.php%3Fpage=watchlist.html#" class="btn light-blue-bck bold padlr10 white"><i class="fa fa-play marr5"></i> Regarder</a>
+            <a href="index.php%3Fpage=watchlist.html#" class="btn btn-green-gradient bold padlr10 white"><i class="fa fa-play marr5"></i> Regarder</a>
+            <a href="index.php%3Fpage=watchlist.html#" class="btn"><i class="fa fa-trash f17"></i></a>
+          </div>
+        </div>
+        <!--item-->
+
+        <!--item-->
+        <div class="item block100">
+          <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
+            Movie to watch 3
+          </div>
+          <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
+            <a href="index.php%3Fpage=watchlist.html#" class="btn light-blue-bck bold padlr10 white"><i class="fa fa-play marr5"></i> Regarder</a>
+            <a href="index.php%3Fpage=watchlist.html#" class="btn btn-green-gradient bold padlr10 white"><i class="fa fa-play marr5"></i> Regarder</a>
+            <a href="index.php%3Fpage=watchlist.html#" class="btn"><i class="fa fa-trash f17"></i></a>
+          </div>
+        </div>
+        <!--item-->
+
+      </div>
+    </div>
+    <!--/MY WATCHLIST-->
+
   </div>
+
+
+</div>
+
+
+<% content_for :run_specific_javascript do %>
+    <%= javascript_include_tag "watchlist/watchlist" %>
 <% end %>
-<h2><%= t '.list' %> (<%= @list.count('distinct vod_wishlists.id').size %>)</h2>    	
-<div class="box<%= class_name %>" id="ready">
-  <% render :partial => 'watchlists/index/display', :locals => {:display_vod => @display_vod} %>
-  <%= render :partial => path, :collection => @list, :locals => {:display_vod => @display_vod, :type => :list, :series => []} %>
-</div>
-<% if !@soon_list.empty? %>
-<h2><%= t '.soon_list' %> (<%= @soon_list.count('distinct vod_wishlists.id').size %>)</h2>    	
-<div class="box<%= class_name %>" id="coming">
-  <% render :partial => 'watchlists/index/display', :locals => {:display_vod => @display_vod} %>
-  <%= render :partial => path, :collection => @soon_list, :locals => {:display_vod => @display_vod, :type => :soon, :series => []} %>
-</div>
-<% end %>
-<span id ='confirm' style="display:none"><%= t '.confirm' %></span>
-<div id='locale' style='display:none'><%= I18n.locale %></div>
-<div id='error_delete' style='display:none'><%= t('.product_not_delete') %></div>
-</div>

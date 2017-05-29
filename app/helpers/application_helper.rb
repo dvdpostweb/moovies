@@ -42,6 +42,10 @@ module ApplicationHelper
       "price-chart price-chart-violet one-column"
     elsif params[:controller].present? && params[:controller] == "streaming_products" && params[:action].present? && params[:action] == "show" then
       "video-stream-wizard block100"
+    elsif params[:controller].present? && params[:controller] == "watchlists" && params[:action].present? && params[:action] == "index" then
+      "watchlist"
+    elsif params[:controller].present? && params[:controller] == "home" && params[:action].present? && params[:action] == "validation" then
+      "adult"
     end
   end
 

@@ -2,6 +2,8 @@
     <% params[:filters] = {} %>
 <% end %>
 
+<%= params[:package] %>
+
 <div class="block100 marb15 thinrgray-bck radius2 padlr10 applied-filter-panel">
 
   <div class="block100">
@@ -11,9 +13,8 @@
         <i class="fa fa-times marr5 f12"></i>Reset all
     <% end %>
   </div>
-
   <% if params[:package] %>
-      <div class="applied-filter-tag" data-input-element="<%= t("products.left_column.#{params[:package]}") %>">
+      <div class="<%= params[:kind] == :adult ? "#{params[:package] == "adult_tvod" ? "applied-filter-tag-adult-tvod" : "applied-filter-tag-adult-unlimited" }" : "#{params[:package] == "tvod" ? "applied-filter-tag-tvod" : "applied-filter-tag-unlimited" }" %>" data-input-element="<%= t("products.left_column.#{params[:package]}") %>">
         <a class="filter-close">
           <span class="ui-icon ui-icon-close"></span>
         </a>
@@ -23,7 +24,7 @@
   <% end %>
 
   <% if params[:belgium].present? %>
-      <div class="applied-filter-tag" data-input-element="<%= t("products.left_column.belgium_#{params[:belgium]}") %>">
+      <div class="<%= params[:kind] == :adult ? "#{params[:package] == "adult_tvod" ? "applied-filter-tag-adult-tvod" : "applied-filter-tag-adult-unlimited" }" : "#{params[:package] == "tvod" ? "applied-filter-tag-tvod" : "applied-filter-tag-unlimited" }" %>" data-input-element="<%= t("products.left_column.belgium_#{params[:belgium]}") %>">
         <a class="filter-close">
           <span id="close_belgium" class="ui-icon ui-icon-close"></span>
         </a>
@@ -33,7 +34,7 @@
   <% end %>
 
   <% if !params[:view_mode].nil? %>
-      <div class="applied-filter-tag" data-input-element="<%= t("products.left_column.#{params[:view_mode]}") %>">
+      <div class="<%= params[:kind] == :adult ? "#{params[:package] == "adult_tvod" ? "applied-filter-tag-adult-tvod" : "applied-filter-tag-adult-unlimited" }" : "#{params[:package] == "tvod" ? "applied-filter-tag-tvod" : "applied-filter-tag-unlimited" }" %>" data-input-element="<%= t("products.left_column.#{params[:view_mode]}") %>">
         <a class="filter-close">
           <span id="close_view_mode" class="ui-icon ui-icon-close"></span>
         </a>
@@ -43,7 +44,7 @@
   <% end %>
 
   <% if Product.audience?(params[:filters][:audience_min], params[:filters][:audience_max]) && params[:kind] == :normal %>
-      <div class="applied-filter-tag" data-input-element="<%= "#{t('.from')} #{params[:filters][:audience_min]} #{t('.to')} #{params[:filters][:audience_max]}".html_safe %>">
+      <div class="<%= params[:kind] == :adult ? "#{params[:package] == "adult_tvod" ? "applied-filter-tag-adult-tvod" : "applied-filter-tag-adult-unlimited" }" : "#{params[:package] == "tvod" ? "applied-filter-tag-tvod" : "applied-filter-tag-unlimited" }" %>" data-input-element="<%= "#{t('.from')} #{params[:filters][:audience_min]} #{t('.to')} #{params[:filters][:audience_max]}".html_safe %>">
         <a class="filter-close">
           <span id="close_audience" class="ui-icon ui-icon-close"></span>
         </a>
@@ -53,7 +54,7 @@
   <% end %>
 
   <% if Product.countries?(params[:filters][:country_id]) %>
-      <div class="applied-filter-tag" data-input-element="<%= selected_countries.collect(&:name).join(', ') %>">
+      <div class="<%= params[:kind] == :adult ? "applied-filter-tag-adult" : "applied-filter-tag" %>" data-input-element="<%= selected_countries.collect(&:name).join(', ') %>">
         <a class="filter-close">
           <span id="close_country" class="ui-icon ui-icon-close"></span>
         </a>
@@ -63,7 +64,7 @@
   <% end %>
 
   <% if params[:date] && Product.year?(params[:date][:filters][:year_min], params[:date][:filters][:year_max]) %>
-      <div class="applied-filter-tag" data-input-element="<%= "#{t('.from')}  #{params[:date][:filters][:year_min]} #{t('.to')}  #{params[:date][:filters][:year_max]}".html_safe %>">
+      <div class="<%= params[:kind] == :adult ? "#{params[:package] == "adult_tvod" ? "applied-filter-tag-adult-tvod" : "applied-filter-tag-adult-unlimited" }" : "#{params[:package] == "tvod" ? "applied-filter-tag-tvod" : "applied-filter-tag-unlimited" }" %>" data-input-element="<%= "#{t('.from')}  #{params[:date][:filters][:year_min]} #{t('.to')}  #{params[:date][:filters][:year_max]}".html_safe %>">
         <a class="filter-close">
           <span id="close_year" class="ui-icon ui-icon-close"></span>
         </a>
@@ -73,7 +74,7 @@
   <% end %>
 
   <% if Product.rating?(params[:filters][:rating_min], params[:filters][:rating_max]) %>
-      <div class="applied-filter-tag" data-input-element="<%= "#{t('.from')} #{params[:filters][:rating_min]} #{t('.to')} #{params[:filters][:rating_max]}".html_safe %>">
+      <div class="<%= params[:kind] == :adult ? "#{params[:package] == "adult_tvod" ? "applied-filter-tag-adult-tvod" : "applied-filter-tag-adult-unlimited" }" : "#{params[:package] == "tvod" ? "applied-filter-tag-tvod" : "applied-filter-tag-unlimited" }" %>" data-input-element="<%= "#{t('.from')} #{params[:filters][:rating_min]} #{t('.to')} #{params[:filters][:rating_max]}".html_safe %>">
         <a class="filter-close">
           <span id="close_ratings" class="ui-icon ui-icon-close"></span>
         </a>
@@ -83,7 +84,7 @@
   <% end %>
 
   <% if languages %>
-      <div class="applied-filter-tag" data-input-element="<%= t 'products.index.audio' %>">
+      <div class="<%= params[:kind] == :adult ? "#{params[:package] == "adult_tvod" ? "applied-filter-tag-adult-tvod" : "applied-filter-tag-adult-unlimited" }" : "#{params[:package] == "tvod" ? "applied-filter-tag-tvod" : "applied-filter-tag-unlimited" }" %>" data-input-element="<%= t 'products.index.audio' %>">
         <a class="filter-close">
           <span id="close_audios" class="ui-icon ui-icon-close"></span>
         </a>
@@ -93,7 +94,7 @@
   <% end %>
 
   <% if subtitles %>
-      <div class="applied-filter-tag" data-input-element="<%= t 'products.index.subtitles' %>">
+      <div class="<%= params[:kind] == :adult ? "#{params[:package] == "adult_tvod" ? "applied-filter-tag-adult-tvod" : "applied-filter-tag-adult-unlimited" }" : "#{params[:package] == "tvod" ? "applied-filter-tag-tvod" : "applied-filter-tag-unlimited" }" %>" data-input-element="<%= t 'products.index.subtitles' %>">
         <a class="filter-close">
           <span id="close_subtitles" class="ui-icon ui-icon-close"></span>
         </a>
@@ -103,7 +104,7 @@
   <% end %>
 
   <% if !params[:filters][:category_id].nil? && !params[:filters][:category_id].empty? %>
-      <div class="applied-filter-tag" data-input-element="<%= Category.find(params[:filters][:category_id]).name %>">
+      <div class="<%= params[:kind] == :adult ? "#{params[:package] == "adult_tvod" ? "applied-filter-tag-adult-tvod" : "applied-filter-tag-adult-unlimited" }" : "#{params[:package] == "tvod" ? "applied-filter-tag-tvod" : "applied-filter-tag-unlimited" }" %>" data-input-element="<%= Category.find(params[:filters][:category_id]).name %>">
         <a class="filter-close">
           <span id="close_category" class="ui-icon ui-icon-close"></span>
         </a>
@@ -113,7 +114,7 @@
   <% end %>
 
   <% if params[:actor_id] %>
-      <div class="applied-filter-tag" data-input-element="<%= t 'products.index.actor' %>">
+      <div class="<%= params[:kind] == :adult ? "#{params[:package] == "adult_tvod" ? "applied-filter-tag-adult-tvod" : "applied-filter-tag-adult-unlimited" }" : "#{params[:package] == "tvod" ? "applied-filter-tag-tvod" : "applied-filter-tag-unlimited" }" %>" data-input-element="<%= t 'products.index.actor' %>">
         <a class="filter-close">
           <span id="close_actor" class="ui-icon ui-icon-close"></span>
         </a>
@@ -123,7 +124,7 @@
   <% end %>
 
   <% if params[:director_id] %>
-      <div class="applied-filter-tag" data-input-element="<%= t 'products.index.director' %>">
+      <div class="<%= params[:kind] == :adult ? "#{params[:package] == "adult_tvod" ? "applied-filter-tag-adult-tvod" : "applied-filter-tag-adult-unlimited" }" : "#{params[:package] == "tvod" ? "applied-filter-tag-tvod" : "applied-filter-tag-unlimited" }" %>" data-input-element="<%= t 'products.index.director' %>">
         <a class="filter-close">
           <span id="close_director" class="ui-icon ui-icon-close"></span>
         </a>

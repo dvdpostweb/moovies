@@ -1,13 +1,7 @@
 <div id="slider-view">
   <div class="home-carousel-holder center-block">
-    <% if request.user_agent =~ /Mobile|webOS/ %>
-        <div class="col-xs-12" style="height:15px;"></div>
-    <% end %>
     <div class="hr-with-words">
-      <span class="Arial f30 light-blue"><%= t('.alacarte') %></span>
-      <% if request.user_agent =~ /Mobile|webOS/ %>
-          <div class="col-xs-12" style="height:5px;"></div>
-      <% end %>
+      <span class="Arial f30 <%= params[:kind] == :adult ? "light-violet" : "light-blue" %>"><%= t('.alacarte') %></span>
     </div>
     <% if params[:kind] == :normal %>
         <!--<#% cache("normal_products_index_hp_list_top_#{I18n.locale}", :expires_in => 15.minutes) do %>-->
@@ -61,7 +55,7 @@
 
   <div class="home-carousel-holder center-block">
     <div class="hr-with-words">
-      <span class="Arial f30 light-green"><%= t('.unlimited') %></span>
+      <span class="Arial f30 <%= params[:kind] == :adult ? "light-violet" : "light-green" %>"><%= t('.unlimited') %></span>
     </div>
     <% if params[:kind] == :normal %>
         <!--<#% cache("normal_products_index_hp_list_svod_last_#{I18n.locale}", :expires_in => 15.minutes) do %>-->

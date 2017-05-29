@@ -1,50 +1,52 @@
 <% expire = item.streaming_products.available.first.expire_at if item.streaming_products.available.count > 0 %>
 <% product = item.product %>
 <% if product %>
-  <% image_tag(product.image)+"<br />" if display_vod == 1 %>
-  <% product_title = product.title %> 
-  <% expire if expire && 2.weeks.from_now.localtime > expire %>
-  <% if (type != :token && type != :history) && product.series? &&  !series.include?(product.serie_id) %>
-    <div class="vod clearfix" id = "<%= "div_serie_id#{product.serie_id}" %>">
-      <div class="title"><%= product.serie_title %></div>
-    </div>
-    <% series.push product.serie_id %>
-  <% end %>
-  <div class="vod clearfix <%= product.series? ? 'serie' : '' %>" id = "<%= "div_#{item.to_param}" %>">
-  	<div class="title">
-  	  <% if !product.series? %>
-        <%= link_to product_title, product_path(:id => product.to_param, :source => @wishlist_source[:wishlist_vod])%>
-      <% elsif type == :token || type == :history %>
-        <%= link_to product.episode_title, product_path(:id => product.to_param, :source => @wishlist_source[:wishlist_vod]) %>
-      <% else %>
-        <%= link_to "* #{product.episode_title(false)}", product_path(:id => product.to_param, :source => @wishlist_source[:wishlist_vod]) %>
-      <% end %>
-  	</div>
-  	<!--<span class="pay-per-view">pay per view</span>
-  	<a href="" class="rent">louer 4,99€</a>-->
-  	<div class="status">
-  	  <% if type == :token %>
-        <%= render :partial => 'products/streaming', :locals => {:product => product, :text => :short, :source => @wishlist_source[:wishlist_vod], :popup => true, :hide_price => true} %>
-  		<% elsif type == :list %>
-        <%= render :partial => 'products/streaming', :locals => {:product => product, :text => :short, :source => @wishlist_source[:wishlist_vod], :popup => true} %>
-  		<% end %>
-  	  <% if type == :history %>
-  	    <div class="status">
-          <%= "#{t('.history_see')} #{item.created_at.strftime("%d/%m/%Y")}"%> 
+    <% image_tag(product.image)+"<br />" if display_vod == 1 %>
+    <% product_title = product.title %>
+    <% expire if expire && 2.weeks.from_now.localtime > expire %>
+    <% if (type != :token && type != :history) && product.series? && !series.include?(product.serie_id) %>
+        <div class="vod clearfix" id="<%= "div_serie_id#{product.serie_id}" %>">
+          <div class="title"><%= product.serie_title %></div>
         </div>
-      <% end %>
-  	  <% if type != :token && type != :history %>
-  	    <span class="trash">
-          <%= form_for(:vod_wishlists, :url => vod_wishlist_path(:id => item.to_param), :html => {:method => :delete, :id => "form_#{item.to_param}", :class => 'remvove_from_wishlist_form'}) do |f|%>
-          <%= hidden_field_tag :list, 2 %>
-          <%= hidden_field_tag :div, "div_#{item.to_param}" %>
-          <%= hidden_field_tag :source,  @wishlist_source[:wishlist_vod] %>
-          <span id ="<%= "p_#{item.to_param}" %>">
-            <%= submit_tag "trash: #{product_title}", :id => "sub_#{item.to_param}", :class => 'remvove_from_wishlist wishlist_remove' %>
-          </span>
-          <% end %>
-        </span>
-      <% end %>
+        <% series.push product.serie_id %>
+    <% end %>
+    <div class="item block100 vod clearfix <%= product.series? ? 'serie' : '' %>" id="<%= "div_#{item.to_param}" %>">
+      <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
+        <% if !product.series? %>
+            <%= link_to product_title, product_path(:id => product.to_param, :source => @wishlist_source[:wishlist_vod]) %>
+        <% elsif type == :token || type == :history %>
+            <%= link_to product.episode_title, product_path(:id => product.to_param, :source => @wishlist_source[:wishlist_vod]) %>
+        <% else %>
+            <%= link_to "* #{product.episode_title(false)}", product_path(:id => product.to_param, :source => @wishlist_source[:wishlist_vod]) %>
+        <% end %>
+      </div>
+      <!--<span class="pay-per-view">pay per view</span>
+      <a href="" class="rent">louer 4,99€</a>-->
+      <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
+        <% if type == :token %>
+            <%= render :partial => 'products/streaming', :locals => {:product => product, :text => :short, :source => @wishlist_source[:wishlist_vod], :popup => true, :hide_price => true} %>
+        <% elsif type == :list %>
+            <%= render :partial => 'products/streaming', :locals => {:product => product, :text => :short, :source => @wishlist_source[:wishlist_vod], :popup => true} %>
+        <% end %>
+        <% if type == :history %>
+            <div class="status">
+              <%= "#{t('.history_see')} #{item.created_at.strftime("%d/%m/%Y")}" %>
+            </div>
+        <% end %>
+        <% if type != :token && type != :history %>
+            <%= form_for(:vod_wishlists, :url => vod_wishlist_path(:id => item.to_param), :html => {:method => :delete, :id => "form_#{item.to_param}", :class => 'remvove_from_wishlist_form'}) do |f| %>
+                <%= hidden_field_tag :list, 2 %>
+                <%= hidden_field_tag :div, "div_#{item.to_param}" %>
+                <%= hidden_field_tag :source, @wishlist_source[:wishlist_vod] %>
+                <%= submit_tag "trash: #{product_title}", :id => "sub_#{item.to_param}", :class => 'btn' do %>
+                    <i class="fa fa-trash f17"></i>
+                <% end %>
+
+                <%= submit_tag(class: "btn", tabindex: "4") do %>
+                    <i class="fa fa-trash f17"></i>
+                <% end %>
+            <% end %>
+        <% end %>
+      </div>
     </div>
-  </div>
 <% end %>
