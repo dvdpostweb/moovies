@@ -41,19 +41,19 @@ $(document).ready(function () {
     $(".film_credits_btn_2").hide();
     $(".film_credits_btn_4").hide();
 
-    $("#2_film_credits").click(function() {
+    $(".2_film_credits").click(function() {
         $(".film_credits_btn_4").hide();
         $(".film_credits_btn_6").hide();
         $(".film_credits_btn_2").show();
     });
 
-    $("#4_film_credits").click(function() {
+    $(".4_film_credits").click(function() {
         $(".film_credits_btn_2").hide();
         $(".film_credits_btn_6").hide();
         $(".film_credits_btn_4").show();
     });
 
-    $("#6_film_credits").click(function() {
+    $(".6_film_credits").click(function() {
         $(".film_credits_btn_2").hide();
         $(".film_credits_btn_4").hide();
         $(".film_credits_btn_6").show();
@@ -74,14 +74,12 @@ function validateActivationCodeFromAlacartePricingPage() {
     $("#alacarte_activation_code_validation").validate({
         rules: {
             'promotion': {
-                required: true,
-                remote: "/api/v1/check_activation_code_validity"
+                required: true
             }
         },
         messages: {
             'promotion': {
-                required: required_message_alacarte_promo_code(),
-                remote: gon.promotion_code_message
+                required: required_message_alacarte_promo_code()
             }
         },
         highlight: function(element) {
@@ -93,13 +91,23 @@ function validateActivationCodeFromAlacartePricingPage() {
         errorElement: 'span',
         errorClass: 'help-block',
         submitHandler: function (form) {
-            if (gon.locale === "fr") {
-                window.location.href = "/fr/mon-compte/connectez-vous?code=" + $(".form-control").val();
-            } else if (gon.locale === "nl") {
-                window.location.href = "/nl/mijn-account/log-in?code=" + $(".form-control").val();
-            } else if (gon.locale === "en") {
-                window.location.href = "/en/my-account/log-in?code=" + $(".form-control").val();
-            }
+            $.ajax({
+                method: 'POST',
+                url: '/api/v1/promotion_code_activation',
+                data: {
+                    'promotion': document.getElementById('promo_code').value
+                },
+                dataType: 'json',
+                success: function (response) {
+                    if (1 === response.status) {
+                        jQuery.facebox("<div class=\"alert alert-danger\">" +
+                            "<strong>" + response.message + "</strong>" +
+                            "</div>");
+                    } else if (2 === response.status) {
+                        window.location.href = response.message;
+                    }
+                }
+            });
         }
     });
 }

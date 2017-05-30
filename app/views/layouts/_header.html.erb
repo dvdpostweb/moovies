@@ -4,9 +4,7 @@
       <% cache("conditions_#{I18n.locale}", :expires_in => 15.minutes) do %>
       <li><%= link_to t('.conditions'), info_path(:page_name => t('routes.infos.params.privacy')) unless current_customer %></li>
       <% end %>
-      <% cache("switch_locale_link_#{I18n.locale}", :expires_in => 15.minutes) do %>
       <%= switch_locale_link(params) %>
-      <% end %>
     </ul>
     <% if customer_signed_in? %>
         <ul class="login-holder col-md-8 f12">

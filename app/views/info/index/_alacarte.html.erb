@@ -11,7 +11,7 @@
         <h4 class="dark-blue"><%= t('info.alacarte.info.index.price_public.discount_code').capitalize %></h4>
         <div class="block100">
           <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 form-group">
-            <input type="text" name="promotion" placeholder="<%= t('info.alacarte.info.index.price_public.promotion_code').capitalize %>" class="form-control">
+            <input type="text" name="promotion" id="promo_code" placeholder="<%= t('info.alacarte.info.index.price_public.promotion_code').capitalize %>" class="form-control">
           </div>
           <input type="submit" class="btn green-bck col-lg-2 col-md-2 col-sm-2 col-xs-2" name="promo-code-submit" value="<%= t('info.alacarte.info.index.price_public.validate').capitalize %>">
         </div>
@@ -51,7 +51,7 @@
     <div class="planTable">
       <div class="headerRow show" id="header-chart">
         <div class="columnHeader"></div>
-        <div class="cell pt-header-with-border">
+        <div class="cell pt-header-with-border 2_film_credits">
           <div>
             <div class="selborder">
               <div id="2_film_credits" class="cellContent" data-box-order="1"><%= t('info.index.price_public.choose_tvod_plan_one').html_safe %></div>
@@ -59,7 +59,7 @@
             <div class="arrow"></div>
           </div>
         </div>
-        <div class="cell pt-header-with-border">
+        <div class="cell pt-header-with-border 4_film_credits">
           <div>
             <div class="selborder">
               <div id="4_film_credits" class="cellContent" data-box-order="2"><%= t('info.index.price_public.choose_tvod_plan_two').html_safe %></div>
@@ -67,7 +67,7 @@
             <div class="arrow"></div>
           </div>
         </div>
-        <div class="cell selected pt-header-with-border">
+        <div class="cell selected pt-header-with-border 6_film_credits">
           <div>
             <div class="selborder">
               <div id="6_film_credits" class="cellContent" data-box-order="3"><%= t('info.index.price_public.choose_tvod_plan_three').html_safe %></div>

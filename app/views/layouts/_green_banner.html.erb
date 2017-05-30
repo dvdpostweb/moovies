@@ -16,29 +16,45 @@
         <div class="col-md-6 col-sm-6 col-xs-12 padr10 padtb20 mart15">
           <% if current_customer.unlimted_subscriber? %>
               <span class="mart25"><a class="<%= params[:kind] == :adult ? "violet" : "blue" %> underline" href="<%= products_short_path(:package => Moovies.packages.invert[(params[:kind] == :adult ? 5 : 2)]) %>">Plush à la Carte</a></span>
-              <span class="black mart5"><%= t('.subscription') %>: <%= t('.subscription_info') %> <a href="<%= info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change") %>" class="<%= params[:kind] == :adult ? "violet" : "blue" %> underline">(<%= t('.subscribe') %>)</a></span>
+              <span class="black mart5"><%= t('.subscription') %>: <%= t('.subscription_info') %>
+                <a href="<%= info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change") %>" class="<%= params[:kind] == :adult ? "violet" : "blue" %> underline">(<%= t('.subscribe') %>
+                  )</a></span>
               <span><a class="<%= params[:kind] == :adult ? "violet" : "green" %> underline" href="<%= products_short_path(:package => Moovies.packages.invert[(params[:kind] == :adult ? 5 : 2)]) %>">Plush Unlimited</a></span>
               <span class="black mart5"><%= t('.top_part_2').capitalize %>: <%= current_customer.tvod_free %></span>
-              <span class="black mart5"> <%= t('.subscription') %>: <strong><%= customer_plan_translator(I18n.locale, current_customer.customers_abo_type) %></strong> <a href="<%= info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change") %>" class="<%= params[:kind] == :adult ? "violet" : "green" %> underline">(<%= t('.change_plan') %>)</a></span>
-              <span class="black mart5"><%= t('.valid_untill') %>: <%= current_customer.customers_abo_validityto.strftime("%d/%m/%Y") if current_customer.customers_abo_validityto.present? %> <a href="<%= info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change") %>" class="<%= params[:kind] == :adult ? "violet" : "green" %> underline">(<%= t('.change_plan') %>)</a></span>
+              <span class="black mart5"> <%= t('.subscription') %>
+                : <strong><%= customer_plan_translator(I18n.locale, current_customer.customers_abo_type) %></strong> <a href="<%= info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change") %>" class="<%= params[:kind] == :adult ? "violet" : "green" %> underline">(<%= t('.change_plan') %>
+                )</a></span>
+              <span class="black mart5"><%= t('.valid_untill') %>
+                : <%= current_customer.customers_abo_validityto.strftime("%d/%m/%Y") if current_customer.customers_abo_validityto.present? %>
+                <a href="<%= info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change") %>" class="<%= params[:kind] == :adult ? "violet" : "green" %> underline">(<%= t('.change_plan') %>
+                  )</a></span>
           <% end %>
           <% if current_customer.plush_la_carte_subscriber? %>
               <span><a class="<%= params[:kind] == :adult ? "violet" : "blue" %> underline" href="<%= products_short_path(:package => Moovies.packages.invert[(params[:kind] == :adult ? 5 : 2)]) %>">Plush à la Carte</a></span>
               <span class="black mart5"><%= t('.top_part_2').capitalize %>: <%= current_customer.tvod_free %></span>
               <span class="black mart5"> <%= t('.subscription') %>
-                : <strong><%= customer_plan_translator(I18n.locale, current_customer.customers_abo_type) %></strong> <a href="<%= info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change") %>" class="<%= params[:kind] == :adult ? "violet" : "blue" %> underline">(<%= t('.change_plan') %>)</a></span>
-              <span class="black mart5"><%= t('.valid_untill') %>: <%= current_customer.customers_abo_validityto.strftime("%d/%m/%Y") if current_customer.customers_abo_validityto.present? %> <a href="<%= info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change") %>" class="<%= params[:kind] == :adult ? "violet" : "blue" %> underline">(<%= t('.change_plan') %>)</a></span>
+                : <strong><%= customer_plan_translator(I18n.locale, current_customer.customers_abo_type) %></strong> <a href="<%= info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change") %>" class="<%= params[:kind] == :adult ? "violet" : "blue" %> underline">(<%= t('.change_plan') %>
+                )</a></span>
+              <span class="black mart5"><%= t('.valid_untill') %>
+                : <%= current_customer.customers_abo_validityto.strftime("%d/%m/%Y") if current_customer.customers_abo_validityto.present? %>
+                <a href="<%= info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change") %>" class="<%= params[:kind] == :adult ? "violet" : "blue" %> underline">(<%= t('.change_plan') %>
+                  )</a></span>
               <span class="mart25"><a class="<%= params[:kind] == :adult ? "violet" : "green" %> underline" href="<%= products_short_path(:package => Moovies.packages.invert[(params[:kind] == :adult ? 4 : 1)]) %>">Plush Unlimited</a></span>
-              <span class="black mart5"><%= t('.subscription') %>: <%= t('.subscription_info') %> <a href="<%= info_path(:page_name => t('routes.infos.params.unlimited'), :subscription_action => "subscription_change") %>" class="<%= params[:kind] == :adult ? "violet" : "green" %> underline">(<%= t('.renew_now') %>)</a></span>
+              <span class="black mart5"><%= t('.subscription') %>: <%= t('.subscription_info') %>
+                <a href="<%= info_path(:page_name => t('routes.infos.params.unlimited'), :subscription_action => "subscription_change") %>" class="<%= params[:kind] == :adult ? "violet" : "green" %> underline">(<%= t('.renew_now') %>
+                  )</a></span>
           <% end %>
           <% if current_customer.mobistar_subscriber? %>
               <span><a class="<%= params[:kind] == :adult ? "violet" : "blue" %> underline" href="<%= products_short_path(:package => Moovies.packages.invert[(params[:kind] == :adult ? 5 : 2)]) %>">Plush à la Carte</a></span>
-              <span class="black mart5"><%= t('.top_part_2_6').capitalize %>: <%= current_customer.tvod_free / 3 %></span>
+              <span class="black mart5"><%= t('.top_part_2_6').capitalize %>
+                : <%= current_customer.tvod_free / 3 %></span>
               <span class="black mart5"> <%= t('.subscription') %>
                 : <strong><%= customer_plan_translator(I18n.locale, current_customer.customers_abo_type) %></strong> <a href="<%= info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change") %>" class="<%= params[:kind] == :adult ? "violet" : "blue" %> underline">(<%= t('.change_plan') %>
                 )</a></span>
               <span class="mart25"><a class="<%= params[:kind] == :adult ? "violet" : "green" %> underline" href="<%= products_short_path(:package => Moovies.packages.invert[(params[:kind] == :adult ? 4 : 1)]) %>">Plush Unlimited</a></span>
-              <span class="black mart5"><%= t('.subscription') %>: <%= t('.subscription_info') %> <a href="<%= info_path(:page_name => t('routes.infos.params.unlimited'), :subscription_action => "subscription_change") %>" class="<%= params[:kind] == :adult ? "violet" : "green" %> underline">(<%= t('.subscribe') %>)</a></span>
+              <span class="black mart5"><%= t('.subscription') %>: <%= t('.subscription_info') %>
+                <a href="<%= info_path(:page_name => t('routes.infos.params.unlimited'), :subscription_action => "subscription_change") %>" class="<%= params[:kind] == :adult ? "violet" : "green" %> underline">(<%= t('.subscribe') %>
+                  )</a></span>
           <% end %>
           <% if current_customer.abo_subscriber? || current_customer.bnppf_subscriber? %>
               <span><a class="<%= params[:kind] == :adult ? "violet" : "blue" %> underline" href="<%= products_short_path(:package => Moovies.packages.invert[(params[:kind] == :adult ? 5 : 2)]) %>">Plush à la Carte</a></span>
@@ -47,7 +63,9 @@
                 : <strong><%= customer_plan_translator(I18n.locale, current_customer.customers_abo_type) %></strong> <a href="<%= info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change") %>" class="<%= params[:kind] == :adult ? "violet" : "blue" %> underline">(<%= t('.change_plan') %>
                 )</a></span>
               <span class="mart25"><a class="<%= params[:kind] == :adult ? "violet" : "green" %> underline" href="<%= products_short_path(:package => Moovies.packages.invert[(params[:kind] == :adult ? 4 : 1)]) %>">Plush Unlimited</a></span>
-              <span class="black mart5"><%= t('.subscription') %>: <%= t('.subscription_info') %> <a href="<%= info_path(:page_name => t('routes.infos.params.unlimited'), :subscription_action => "subscription_change") %>" class="<%= params[:kind] == :adult ? "violet" : "green" %> underline">(<%= t('.subscribe') %>)</a></span>
+              <span class="black mart5"><%= t('.subscription') %>: <%= t('.subscription_info') %>
+                <a href="<%= info_path(:page_name => t('routes.infos.params.unlimited'), :subscription_action => "subscription_change") %>" class="<%= params[:kind] == :adult ? "violet" : "green" %> underline">(<%= t('.subscribe') %>
+                  )</a></span>
           <% end %>
         </div>
         <div class="col-md-6 col-sm-6 col-xs-12 padtb20 mart15">
@@ -81,13 +99,20 @@
             )</a></span>
         </div>
         <div class="col-md-6 col-sm-6 col-xs-12 padtb20 mart15">
-          <span class="bold">Vous avez un code promo ?</span> <span>
-                        <input type="text" name="code" placeholder="Code" class="black pad5 pull-left">
-                        <input type="submit" name="submit-code" value="Valider" class="pad5 <%= params[:kind] == :adult ? "violet-bck" : "blue-bck" %> white marl5 pull-left">
+          <span class="bold"><%= t('.discount_code').capitalize %></span> <span>
+          <form id="green_banner_form">
+                        <input type="text" name="code" id="promotion" placeholder="<%= t('.promotion_code').capitalize %>" class="black pad5 pull-left">
+                        <input type="submit" name="submit-code" value="<%= t('.validate').capitalize %>" class="pad5 <%= params[:kind] == :adult ? "violet-bck" : "blue-bck" %> white marl5 pull-left">
+            </form>
                     </span>
         </div>
+
       </div>
     </div>
+<% end %>
+
+<% content_for :run_specific_javascript do %>
+    <%= javascript_include_tag "top_banner/validation" %>
 <% end %>
 
 

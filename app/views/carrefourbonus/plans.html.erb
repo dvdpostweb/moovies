@@ -1,138 +1,134 @@
-<div class="landing-page">
-      <div class="special">
-        <div class="special-offer">
-          <div class="special-offer-headline"><%= t('.offer') %></div>
-          <div class="special-offer-image">
-            <%= image_tag('old_images/carrefour/carrefour.png') %>
-          </div>
-          <h3><%= t('home.carrefourbonus.customer').html_safe %></h3>
-          <ul>
-            <li>
-              <%= image_tag('old_images/carrefour/list-logo.png') %>
-              <p><%= t('home.carrefourbonus.4loc').html_safe %></p>
-            </li>
-            <li>
-              <%= image_tag('old_images/carrefour/list-logo.png') %>
-              <p><%= t('home.carrefourbonus.first').html_safe %></p>
-            </li>
-          </ul>
-        </div>
-        <div class="logo-card"></div>
-      </div>
-      <%= form_tag carrefourbonus_path(), :id => 'form_carrefour' do %>
-      <div class="choise">
-        <div class="headline"><h2><%= t('home.carrefourbonus.choose_formula') %></h2></div>
-        <% if @error_abo %>
-          <div class='error'>
-            <%= t('home.carrefourbonus.abo_error') %>
-          </div>
-        <% end %>
-        <div class="choise-offer">
-          <div class="choise-offer-select">
-            <div class="offer-film">
-              <div class="offer-film-number">2 <%= t('home.carrefourbonus.films') %><div class="badge"><div class="badge-text"><%= t('.most_popular') %></div></div></div>
-              <div class="first-month">0€</div>
-              <div class="first-month-text"><%= t('home.carrefourbonus.first_month') %></div>
-              <div class="next-month">3,99€</div>
-              <div class="next-month-text"><%= t('home.carrefourbonus.next_month') %></div>
-              <div class="offer-film-checkbox">
-                <input type="radio" id="carrefour-select-offer-2" name="abo" value='CFB2FILMS' <%= "checked='checked'" if params[:abo]== "CFB2FILMS" %>/>
-                <label for="carrefour-select-offer-2">
-                  <span></span>
-                </label>
-              </div>
-            </div>
-              <div class="vertical-line"></div>
-            <div class="offer-film offer-film-checked">  <!-- Class offer-film-checked add through javascript, when checkbox is checked, so the background becomes blue -->
-              <div class="offer-film-number">
-                4 <%= t('home.carrefourbonus.films') %>
-                <div class="badge active"> <!-- Class active add through javascript when special offere exists -->
-                  <div class="badge-text"><%= t('home.carrefourbonus.most_popular') %></div>
-                </div>
-              </div>
-              <div class="first-month">3,99€</div>
-              <div class="first-month-text"><%= t('home.carrefourbonus.first_month') %></div>
-              <div class="next-month">7,99€</div>
-              <div class="next-month-text"><%= t('home.carrefourbonus.next_month') %></div>
-              <div class="offer-film-checkbox">
-                <input type="radio" id="carrefour-select-offer-4" name="abo" value = 'CFB4FILMS' <%= "checked='checked'" if params[:abo]== "CFB4FILMS" %>/>
-                <label for="carrefour-select-offer-4">
-                  <span></span>
-                </label>
-              </div>
-            </div>
-            <div class="vertical-line"></div>
-            <div class="offer-film">
-              <div class="offer-film-number">6 <%= t('home.carrefourbonus.films') %><div class="badge"><div class="badge-text"><%= t('home.carrefourbonus.most_popular') %></div></div></div>
-              <div class="first-month">7,99€</div>
-              <div class="first-month-text"><%= t('home.carrefourbonus.first_month') %></div>
-              <div class="next-month">11,99€</div>
-              <div class="next-month-text"><%= t('home.carrefourbonus.next_month') %></div>
-              <div class="offer-film-checkbox">
-                <input type="radio" id="carrefour-select-offer-6" name="abo" value = 'CFB6FILMS' <%= "checked='checked'" if params[:abo] == "CFB6FILMS" %>/>
-                <label for="carrefour-select-offer-6">
-                  <span></span>
-                </label>
-              </div>
-            </div>
-            <div class="vertical-line"></div>
-            <div class="offer-film">
-              <div class="offer-film-number">8 <%= t('home.carrefourbonus.films') %><div class="badge"><div class="badge-text"><%= t('home.carrefourbonus.most_popular') %></div></div></div>
-              <div class="first-month">10,99€</div>
-              <div class="first-month-text"><%= t('home.carrefourbonus.first_month') %></div>
-              <div class="next-month">14,99€</div>
-              <div class="next-month-text"><%= t('home.carrefourbonus.next_month') %></div>
-              <div class="offer-film-checkbox">
-                <input type="radio" id="carrefour-select-offer-8" name="abo" value = 'CFB8FILMS' <%= "checked='checked'" if params[:abo] == "CFB8FILMS" %>/>
-                <label for="carrefour-select-offer-8">
-                  <span></span>
-                </label>
-              </div>
-            </div>
-            <div class="vertical-line"></div>
-            <div class="offer-film">
-              <div class="offer-film-number">10 <%= t('home.carrefourbonus.films') %><div class="badge"><div class="badge-text"><%= t('home.carrefourbonus.most_popular') %></div></div></div>
-              <div class="first-month">13,99€</div>
-              <div class="first-month-text"><%= t('home.carrefourbonus.first_month') %></div>
-              <div class="next-month">17,99€</div>
-              <div class="next-month-text"><%= t('home.carrefourbonus.next_month') %></div>
-              <div class="offer-film-checkbox">
-                <input type="radio" id="carrefour-select-offer-10" name="abo" value = 'CFB10FILM' <%= "checked='checked'" if params[:abo] == "CFB10FILMS" %>/>
-                <label for="carrefour-select-offer-10">
-                  <span></span>
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="choise-offer-list">
-            <ul>
-              <li><div class="list-style-blue"></div><%= t('home.carrefourbonus.catalog').html_safe %></li>
-              <li><div class="list-style-blue"></div><%= t('home.carrefourbonus.free').html_safe %></li>
-              <li><div class="list-style-blue"></div><%= t('home.carrefourbonus.increase').html_safe %></li>
-              <li><div class="list-style-blue"></div><%= t('home.carrefourbonus.2_credits').html_safe %></li>
-            </ul>
-          </div>
-        </div>
-      </div>
+<div class="container white-bck dark-gray padb20">
+  <h1 class="OpenSansCondensed f30 green pad0 mar0 mart10"><%= t('.offer') %></h1>
+  <%= image_tag("template/carrefour-logo.png", class: "mart20") %>
 
-      <div class="code">
-        <div class="headline"><h2><%= t('home.carrefourbonus.fill_in_code') %></h2></div>
-        <% if @error_abo %>
-          <div class='carrefourbonus-error'><%= t('home.carrefourbonus.error') %></div>
-        <% end %>
-        <button class="code-button"><%= t('home.carrefourbonus.valid') %></button>
-      </div>
-      <% end %>
-      <div class="cards">
-        <ul>
-          <li><%= image_tag('old_images/carrefour/mastercard.png') %></li>
-          <li><%= image_tag('old_images/carrefour/visa.png') %></li>
-          <li><%= image_tag('old_images/carrefour/amex.png') %></li>
-          <li><%= image_tag('old_images/carrefour/atos.png') %></li>
-          <li><%= image_tag('old_images/carrefour/paypal.png') %></li>
-          <li><%= image_tag('old_images/carrefour/norton.png') %></li>
-          <li><%= image_tag('old_images/carrefour/verisign.png') %></li>
-        </ul>
-        <center><span class="cards-bottom-text">Secured online transactions managed by Ingenico</span></center>
-      </div>
+  <p class="block100 martb20"><%= t('home.carrefourbonus.customer').html_safe %></p>
+  <p class="block100 carrefour-bullet"><%= t('home.carrefourbonus.4loc').html_safe %></p>
+  <p class="block100 carrefour-bullet"><%= t('home.carrefourbonus.first').html_safe %></p>
+    <h2 class="mart30 f20 bold block100"><%= t('home.carrefourbonus.choose_formula') %></h2>
+    <ul class="carrefour-list">
+      <li class="text-center radius4">
+        <h3 class="Arial">2 <%= t('home.carrefourbonus.films') %></h3>
+        <div class="carrefour-card-section block100">
+          <span class="orange bold block100">0€</span>
+          <%= t('home.carrefourbonus.first_month') %>
+        </div>
+
+        <div class="carrefour-card-section block100">
+          <span class="block100">3,99€</span>
+          <span class="block100 f15"><%= t('home.carrefourbonus.next_month') %></span>
+        </div>
+
+        <div class="carrefour-card-section block100">
+          <input type="radio" class="iradio" id="carrefour-select-offer-2" name="abo" value='CFB2FILMS' <%= "checked='checked'" if params[:abo]== "CFB2FILMS" %>/>
+          <label for="carrefour-select-offer-2">
+            <span></span>
+          </label>
+        </div>
+      </li>
+
+      <li class="text-center radius4">
+        <h3 class="Arial">4 <%= t('home.carrefourbonus.films') %></h3>
+        <div class="carrefour-card-section block100">
+          <span class="orange bold block100">3,99€</span>
+          <%= t('home.carrefourbonus.first_month') %>
+        </div>
+
+        <div class="carrefour-card-section block100">
+          <span class="block100">7,99€</span>
+          <span class="block100 f15"><%= t('home.carrefourbonus.next_month') %></span>
+        </div>
+
+        <div class="carrefour-card-section block100">
+          <input type="radio" class="iradio" id="carrefour-select-offer-4" name="abo" value = 'CFB4FILMS' <%= "checked='checked'" if params[:abo]== "CFB4FILMS" %>/>
+          <label for="carrefour-select-offer-4">
+            <span></span>
+          </label>
+        </div>
+      </li>
+      <li class="text-center radius4">
+        <h3 class="Arial">6 <%= t('home.carrefourbonus.films') %></h3>
+        <div class="carrefour-card-section block100">
+          <span class="orange bold block100">7,99€</span>
+          <%= t('home.carrefourbonus.first_month') %>
+        </div>
+
+        <div class="carrefour-card-section block100">
+          <span class="block100">11,99€</span>
+          <span class="block100 f15"><%= t('home.carrefourbonus.next_month') %></span>
+        </div>
+
+        <div class="carrefour-card-section block100">
+          <input type="radio" class="iradio" id="carrefour-select-offer-6" name="abo" value = 'CFB6FILMS' <%= "checked='checked'" if params[:abo] == "CFB6FILMS" %>/>
+          <label for="carrefour-select-offer-6">
+            <span></span>
+          </label>
+        </div>
+      </li>
+      <li class="text-center radius4 most-popular">
+        <h3 class="Arial">8 <%= t('home.carrefourbonus.films') %></h3>
+        <div class="carrefour-card-section block100">
+          <span class="orange bold block100">10,99€</span>
+          <%= t('home.carrefourbonus.first_month') %>
+        </div>
+
+        <div class="carrefour-card-section block100">
+          <span class="block100">14,99€</span>
+          <span class="block100 f15"><%= t('home.carrefourbonus.next_month') %></span>
+        </div>
+
+        <div class="carrefour-card-section block100">
+          <input type="radio" class="iradio" id="carrefour-select-offer-8" name="abo" value = 'CFB8FILMS' <%= "checked='checked'" if params[:abo] == "CFB8FILMS" %>/>
+          <label for="carrefour-select-offer-8">
+            <span></span>
+          </label>
+        </div>
+      </li>
+      <li class="text-center radius4">
+        <h3 class="Arial">10 <%= t('home.carrefourbonus.films') %></h3>
+        <div class="carrefour-card-section block100">
+          <span class="orange bold block100">13,99€</span>
+          <%= t('home.carrefourbonus.first_month') %>
+        </div>
+
+        <div class="carrefour-card-section block100">
+          <span class="block100">17,99€</span>
+          <span class="block100 f15"><%= t('home.carrefourbonus.next_month') %></span>
+        </div>
+
+        <div class="carrefour-card-section block100">
+          <input type="radio" class="iradio" id="carrefour-select-offer-10" name="abo" value = 'CFB10FILM' <%= "checked='checked'" if params[:abo] == "CFB10FILMS" %>/>
+          <label for="carrefour-select-offer-10">
+            <span></span>
+          </label>
+        </div>
+      </li>
+    </ul>
+
+    <ul class="cl-list block100 mart30">
+      <li>Access to the full catalog (3000 films, new titles included)</li>
+      <li>There is no commitment, You can cancel at any time with no cost</li>
+      <li>You can upgrade or downgrade your plan as often as you want</li>
+      <li>Some movies (the latest blockbusters) require 2 film credits (or 3,99€) to be watched. This is mandatory from the Studios</li>
+    </ul>
+    <div class="block100">
+      <input type="submit" id="carrefourbonus-btn" class="btn green-bck white pad10 padlr25" value="<%= t('home.carrefourbonus.valid') %>">
+
+      <ul class="payment-cards">
+        <li><%= image_tag("template/card-american-express-small.png") %></li>
+        <li><%= image_tag("template/card-visa-small.png") %></li>
+        <li><%= image_tag("template/card-master-small.png") %></li>
+        <li><%= image_tag("template/card-atos-small.png") %></li>
+        <li><%= image_tag("template/card-paypal-small.png") %></li>
+        <li><%= image_tag("template/card-version-secured-small.png") %></li>
+        <li><%= image_tag("template/card-norton-small.png") %></li>
+      </ul>
+      <p class="block100 text-left f13 mart15">Secured online transactions managed by Ingenico</p>
     </div>
+
+
+</div>
+
+<% content_for :run_specific_javascript do %>
+    <%= javascript_include_tag "carrefourbonus/validation" %>
+<% end %>
