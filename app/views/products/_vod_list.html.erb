@@ -1,5 +1,7 @@
 <div id="vod_list_<%= product.to_param %>" class="block100 slide-buttons mart15 <%= product.series? ? "serie_list" : "vod_list" %>">
-
+  <%= link_to(product_trailer_path(:product_id => product.to_param, :source => @source, :response_id => @response_id), :class => 'btn white pull-left dark-gray-bck btn-trailer', remote: true) do %>
+      <i class="fa fa-film marr5"></i><%= t('.trailer') %>
+  <% end %>
   <% if current_customer %>
       <% if @vod_wishlist && @vod_wishlist.include?(product.id) || @vod_wishlist.nil? %>
           <% item = current_customer.vod_wishlists.where(imdb_id: product.imdb_id, season_id: product.season_id, episode_id: product.episode_id).first %>

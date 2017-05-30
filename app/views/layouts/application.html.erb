@@ -34,7 +34,9 @@
       <% end %>
       <%= yield %>
     </div>
-    <%= render "layouts/footer" %>
+    <% cache("layouts_footer_#{I18n.locale}", :expires_in => 15.minutes) do %>
+        <%= render "layouts/footer" %>
+    <% end %>
   </div>
 </div>
 <%= javascript_include_tag "application" %>
