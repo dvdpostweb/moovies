@@ -23,23 +23,30 @@
           </li>
           <li class="dropdown">
             <a href="<%= current_customer ? customer_path(:id => current_customer) : customers_path %>" data-toggle="dropdown" class="dropdown-toggle notifications-drop">
-              Mon
-              Compte<i class="fa fa-caret-down f11 marl5"></i> </a>
+              <%= t('.my_account') %><i class="fa fa-caret-down f11 marl5"></i> </a>
             <ul class="dropdown-menu padb5">
               <li><%= link_to t('.watchlist', :default => 'Ma playlist'), vod_wishlists_path, :class => params[:controller] == 'watchlists' ? :active : :inactive %></li>
               <li><%= link_to t('.infos'), current_customer ? customer_path(:id => current_customer) : customers_path, :class => params[:controller] == 'customers' ? :active : :inactive %></li>
             </ul>
           </li>
-          <li>
-            <a href="index.html" class="violet">18+</a>
-          </li>
+          <% if params[:kind] == :adult %>
+              <li><%= link_to t('.classic'), root_localize_path(:kind => nil), :id => :home, :class => "green" %></li>
+          <% else %>
+              <% if cookies[:adult_hide] != "1" %>
+                  <li><%= link_to t('.+18'), root_localize_path(:kind => :adult), :id => :adult, :class => "violet" %></li>
+              <% end %>
+          <% end %>
           <li>
             <%= link_to t('.contact'), current_customer ? messages_path : new_phone_request_path, :id => :message %>
           </li>
         </ul>
       </div>
       <div class="top-search-holder pad5">
-        <input type="text" placeholder="Rechercher"> <input type="submit" name="submit-search" value="search">
+        <%= form_for :search, {:url => search_path(), :html => {:id => 'search', :method => :get}} do |f| %>
+            <%= text_field_tag :search, (params[:search] || t('.search')), {:id => 'search-field', :class => "search-field"} %>
+            <%= submit_tag 'search', :id => 'search-btn' %>
+        <% end %>
       </div>
+
     </nav>
 <% end %>

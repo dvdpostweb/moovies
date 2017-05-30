@@ -8,7 +8,7 @@
   <h4 class="block100">
     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 dark-gray"><%= link_to product.smart_title, path, :target => target %> (<%= product.year %>)</div>
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-      <div class="block100 slide-score green mart5 f20" data-score="3"></div>
+      <div class="block100 slide-score <%= params[:kind] == :adult ? "violet" : "#{product.tvod? ? "blue" : "green"}" %> mart5 f20" data-score="<%= product.rating_count %>"></div>
     </div>
   </h4>
   <!--/TITLE OF LIST-->
@@ -59,7 +59,7 @@
         <% end %>
       </div>
       <div class="block100">
-        <a href="index.html#" class="btn gray-bck center-block btn-selection"><i class="fa fa-plus marr5"></i>Selection</a>
+        <%= render :partial => 'products/vod_list',  :locals => {:product => product, :source => @source, :response_id => @response_id} %>
       </div>
       <% if product.trailer? %>
       <div class="block100">

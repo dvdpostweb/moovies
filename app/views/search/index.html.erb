@@ -1,28 +1,19 @@
-<div id="maincontent" >
-  <h2 class="ttl"><%= t('.search') %></h2>
-  <%= render :partial => 'layouts/filters', :locals => {:filter => @filter }%>
-  <ul class="etabs osc content-tabs">
-    <%= "<li class='tab'>#{link_to t('.films'), url_for(params.merge(:type => nil, :page => nil, :kind => (params[:kind] == :normal ? nil : params[:kind]))), :class => (@active == 'products' ? 'active' : '')}</li>".html_safe if @products.count > 0 || (@exact_products && @exact_products.size > 0) %>
-    <%= "<li class='tab'>#{link_to t('.directors'), url_for(params.merge(:type => 'directors', :page => nil, :kind => (params[:kind] == :normal ? nil : params[:kind]))), :class => (@active == 'directors' ? 'active' : '')}</li>".html_safe if @directors != 0 && @directors.count > 0 %> 
-    <%= "<li class='tab'>#{link_to t('.actors'),    url_for(params.merge(:type => 'actors', :page => nil, :kind => (params[:kind] == :normal ? nil : params[:kind]))), :class => (@active == 'actors' ? 'br active' : 'br')}</li>".html_safe if @actors.count > 0 %> 
-  </ul>
-  <% if cookies[:endless] == 'deactive' %>
-    <%= link_to t('.endless_active'), params.merge(:endless => 'active', :kind => (params[:kind] == :normal ? nil : params[:kind])), :class => "endless" %>
-  <% else %>
-    <%= link_to t('.endless_deactive'), params.merge(:endless => 'deactive', :kind => (params[:kind] == :normal ? nil : params[:kind])), :class => "endless" %>
-  <% end %>
+<div class="container white-bck">
+  <div class="block100 thinrgray-bck radius2 padlr10 switch-view-panel">
+    <!--<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+      <a href="index.php%3Fpage=search-results.html#" id="activate" class="btn marl10 f11 dark-blue-bck white">Activer la pagination automatique</a>
+    </div>-->
 
-  <div id="products">
-    <%= render :partial => 'products/index/sorting' if @active == 'products' %>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 pull-right">
+      <% var = params[:sort] ? params[:sort].to_sym : :normal %>
+      <%= form_for(:product, :url => request.fullpath, :html => {:method => :get, :id => :sort_form}) do |f| %>
+          <%= hash_to_hidden_fields(params.merge(:page => nil, :sort => nil)) %>
+          <%= select_tag :sort, options_for_select(sort_collection_for_select, :selected => var), {:class => "ui-selectmenu-button ui-widget ui-state-default ui-corner-all", :onchange => '$("#sort_form").submit();'} %>
+      <% end %>
+    </div>
+  </div>
+  <div class="movie-block block100 mart15">
     <%= render :partial => 'products/index/movie_details', :collection => @products, :locals => {:target => @target} if @active == 'products' %>
-    <%= render :partial => 'products/index/peoples', :locals => {:people => @actors} if @active == 'actors'  %>
-    <%= render :partial => 'products/index/peoples', :locals => {:people => @directors} if @active == 'directors'  %>
-    <%= 'empty' if @active.nil? %>
   </div>
-  <%= @active == 'products' && @products.size == 0 ? "<div class='not_found'>#{t('.not_found')}</div>".html_safe : '' %>
-  <div id='pagination_content'>
-      <%= render :partial => 'products/index/pagination', :locals => {:item => @item} if @active == 'products' %>
-  </div>
-  <!--   ==============   END MOVIES   ==============   -->
+  <%= render :partial => 'products/index/pagination', :locals => {:item => @item} if @active == 'products' %>
 </div>
-<div id="toTop"><%= t('.back') %></div>
