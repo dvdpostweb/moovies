@@ -1,8 +1,3 @@
-/*ADULT*/
-.adult .container {
-    min-height: 750px;
-}
-
 .adult .cred-buttons {
     width: 55%;
     text-align: center;
@@ -36,5 +31,3 @@
 .fa-plus18:before {
     content: "18+";
 }
-
-/*END ADULT*/
