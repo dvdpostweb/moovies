@@ -29,17 +29,19 @@
   <div class="wrap">
     <%= render "layouts/header" %>
     <div id="content" class="<%= configure_content_div_html_class(params) %>">
-      <% unless customer_signed_in? || params[:controller] == "search" %>
-          <div class="container white-bck">
-            <div href="#" class="promo-image rwd-bck display-block" style="background-image: url('/assets/template/promo-image.jpg')">
-              <div class="promo-image-overlay">
-                <div class="promo-image-overlay-inner white bold">
-                  <span>Vivez avec nous les plus grands moments du cinéma</span>
-                  <button>Découvrez nos formules</button>
+      <% unless customer_signed_in? %>
+          <% if params[:controller] == "products" %>
+              <div class="container white-bck">
+                <div href="#" class="promo-image rwd-bck display-block" style="background-image: url('/assets/template/promo-image.jpg')">
+                  <div class="promo-image-overlay">
+                    <div class="promo-image-overlay-inner white bold">
+                      <span>Vivez avec nous les plus grands moments du cinéma</span>
+                      <button>Découvrez nos formules</button>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
+          <% end %>
       <% end %>
       <%= yield %>
     </div>
