@@ -1,8 +1,12 @@
 <div class="container top-header hidden-sm hidden-xs">
   <div class="block100 padtb10">
     <ul class="lng-holder col-md-4">
+      <% cache("conditions_#{I18n.locale}", :expires_in => 15.minutes) do %>
       <li><%= link_to t('.conditions'), info_path(:page_name => t('routes.infos.params.privacy')) unless current_customer %></li>
+      <% end %>
+      <% cache("switch_locale_link_#{I18n.locale}", :expires_in => 15.minutes) do %>
       <%= switch_locale_link(params) %>
+      <% end %>
     </ul>
     <% if customer_signed_in? %>
         <ul class="login-holder col-md-8 f12">
@@ -10,6 +14,7 @@
           <li><%= link_to t('.compte'), customer_path(:id => current_customer) %></li>
         </ul>
     <% else %>
+        <% cache("login-holder_#{I18n.locale}", :expires_in => 15.minutes) do %>
         <ul class="login-holder col-md-8 f12">
           <li>
             <%= link_to('/auth/google_oauth2/', :class => 'loginBtn loginBtn--google', :id => :login_fb, :class => "uppercase red-google-bck") do %>
@@ -27,6 +32,7 @@
             <% end %>
           </li>
         </ul>
+        <% end %>
     <% end %>
   </div>
 </div>
