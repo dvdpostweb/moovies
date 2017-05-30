@@ -36,6 +36,8 @@ module ApplicationHelper
       "conditions"
     elsif params[:page_name].present? && params[:page_name] == "alacarte" then
       "price-chart price-chart-green three-column"
+    elsif params[:page_name].present? && params[:page_name] == "freetrial" then
+      "price-chart price-chart-green three-column"
     elsif params[:page_name].present? && params[:page_name] == "unlimited" then
       "price-chart price-chart-blue one-column"
     elsif params[:page_name].present? && params[:page_name] == "adult" then
@@ -48,6 +50,10 @@ module ApplicationHelper
       "adult"
     elsif params[:controller].present? && params[:controller] == "search" && params[:action].present? && params[:action] == "index" then
       "movie-full search-results block100"
+    elsif params[:controller].present? && params[:controller] == "photobox" && params[:action].present? && params[:action] == "plans" then
+      "carrefour"
+    elsif params[:controller].present? && params[:controller] == "carrefourbonus" && params[:action].present? && params[:action] == "plans" then
+      "carrefour"
     end
   end
 
