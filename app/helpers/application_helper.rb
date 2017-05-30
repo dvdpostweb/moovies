@@ -46,6 +46,8 @@ module ApplicationHelper
       "watchlist"
     elsif params[:controller].present? && params[:controller] == "home" && params[:action].present? && params[:action] == "validation" then
       "adult"
+    elsif params[:controller].present? && params[:controller] == "search" && params[:action].present? && params[:action] == "index" then
+      "movie-full search-results block100"
     end
   end
 

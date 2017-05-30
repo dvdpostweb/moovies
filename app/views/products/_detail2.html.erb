@@ -10,9 +10,8 @@
   </a>
   <div class="synopsys-content">
     <div class="position-relative pull-left">
-      <h4 class="dark-gray mart20 marb0 bold text-center uppercase f25">FARGO(2014)</h4>
+      <h6 class="dark-gray mart20 marb0 bold text-center uppercase f25"><%= product.smart_title %> (<%= product.year %>)</h6>
       <div class="block100 slide-score <%= params[:kind] == :adult ? "violet" : "#{product.tvod? ? "blue" : "green"}" %> text-center mart5 f20" data-score="<%= product.rating_count %>"></div>
-
       <% if customer_signed_in? %>
           <% if current_customer.unlimted_subscriber? %>
               <% if product.tvod? %>
@@ -56,14 +55,12 @@
           <% end %>
       <% end %>
       <div class="block100 slide-content mart15 text-center">
-        <% cache("products_streaming_#{I18n.locale}", :expires_in => 15.minutes) do %>
-            <%= render :partial => 'products/streaming', :locals => {:product => product, :source => @source, :popup => true} %>
-        <% end %>
+        <%= render :partial => 'products/streaming', :locals => {:product => product, :source => @source, :popup => true} %>
       </div>
       <div class="block100 slide-content mart15">
         <%= truncate_html((data[:description].text rescue '...'), :length => 500) %>
       </div>
-          <%= render :partial => 'products/vod_list', :locals => {:product => product, :source => source, :response_id => @response_id} %>
+      <%= render :partial => 'products/vod_list', :locals => {:product => product, :source => source, :response_id => @response_id} %>
       <% unless (customer_signed_in? && current_customer.unlimted_subscriber?) %>
           <% if product.streaming_products.any? %>
               <% if customer_signed_in? %>
