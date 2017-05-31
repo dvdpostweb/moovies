@@ -36,7 +36,7 @@
                 <%= hidden_field_tag :list, 2 %>
                 <%= hidden_field_tag :div, "div_#{item.to_param}" %>
                 <%= hidden_field_tag :source, @wishlist_source[:wishlist_vod] %>
-                <%= button_tag(class: "btn", tabindex: "4") do %>
+                <%= button_tag do %>
                     <i class="fa fa-trash f17"></i>
                 <% end %>
             <% end %>
