@@ -3,7 +3,6 @@
       <% t = i + 1 %>
   <li>
     <a href="<%= product.preview_image(t, type) %>" class="fancybox" rel="movie-gallery">
-      <!--<img src="images/template/_movie_photo1.jpg" class="img-responsive">-->
       <%= image_tag product.preview_image(t, type), :class => "img-responsive" %>
     </a>
   </li>

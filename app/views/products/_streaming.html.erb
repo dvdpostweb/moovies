@@ -2,7 +2,7 @@
 <% if !product.get_vod_online(session[:country_id]).empty? %>
     <% if product.svod? %>
         <% title = t('.watch_svod') %>
-        <% class_name = params[:kind] == :adult ? "btn btn-adult-tvod-gradient bold padlr25 white f17" : "btn btn-green-gradient bold padlr25 white f17" %>
+        <% class_name = params[:kind] == :adult ? "btn btn-adult-tvod-gradient bold padlr25 white f17" : "#{params[:controller] == "watchlists" ? "btn btn-green-gradient bold padlr10 white" : "btn btn-green-gradient bold padlr25 white f17"}" %>
     <% else %>
         <% if (customer_signed_in? && current_customer.tvod_credits?) || hide_price %>
             <% key = '.watch_tvod_free' %>
@@ -11,7 +11,7 @@
             <% key = '.watch_tvod' %>
         <% end %>
         <% title = t('.watch_svod') %>
-        <% class_name = params[:kind] == :adult ? "btn btn-adult-tvod-gradient bold padlr25 white f17" : "btn btn-blue-gradient bold padlr25 white f17" %>
+        <% class_name = params[:kind] == :adult ? "btn btn-adult-tvod-gradient bold padlr25 white f17" : "#{params[:controller] == "watchlists" ? "btn light-blue-bck bold padlr10 white" : "btn btn-green-gradient bold padlr25 white f17"}" %>
     <% end %>
     <!--<#% if current_customer && current_customer.tvod_only? && !product.svod? && popup == true %>
         <span class="infotvod"></span>

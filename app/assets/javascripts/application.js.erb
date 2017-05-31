@@ -161,9 +161,11 @@ $(document).ready(function () {
     function checkModernizr() {
         if (Modernizr.mq('(min-width: 981px)')) {
             popoverTrig();
+            //fancyboxBinder();
         }
         if (Modernizr.mq('(max-width: 980px)')) {
             $('.popper').popover('destroy');
+            //fancyboxUnBinder();
         }
     }
 
@@ -176,37 +178,27 @@ $(document).ready(function () {
 
     $('.tags-autocomplete-holder li.ui-menu-item').on('click', function (e) {
         e.preventDefault();
-    })
+    });
 
-    //youtube api trigg
-    //var player;
+    function fancyboxBinder() {
+        $(".fancybox").unbind('click')
+        $("a.fancybox").fancybox({
+            padding: 5,
+            helpers: {
+                overlay: {
+                    locked: false,
+                    overlayShow: true
+                }
+            },
+        })
+    }
 
-    //function onYouTubeIframeAPIReady(videoID) {
-    //    player = new YT.Player('modal-trailer-video', {
-    //        videoId: videoID,
-    //    });
-    //}
-
-    //function youtubeVideoID(url) {
-    //    var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
-    //    var match = url.match(regExp);
-    //    return (match && match[7].length == 11) ? match[7] : false;
-    //}
-
-    //load youtube url
-    //$(document).on('click', '.btn-trailer', function (e) {
-    //    var youTubeLink = $(this).attr('data-src');
-    //    var videoID = youtubeVideoID(youTubeLink);
-    //    onYouTubeIframeAPIReady(videoID);
-
-    //})
-
-    //trailer modal close event
-    //$('#trailer-modal').on('hidden.bs.modal', function () {
-    //    //stops trailer video on modal close
-    //    $('iframe').attr('src', $('iframe').attr('src'));
-    //    $('iframe#modal-trailer-video').remove();
-    //    $('.embed-responsive-16by9').append('<div id="modal-trailer-video" class="modal-trailer-video"></div>');
-    //});
+    function fancyboxUnBinder() {
+        $.fancybox.close();
+        $(".fancybox").bind('click', function (e) {
+            e.preventDefault();
+        })
+        $(document).unbind('click.fb-start');
+    }
 
 });
