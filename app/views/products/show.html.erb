@@ -74,6 +74,13 @@
           <h5 class="display-inline f16 mart0 bold marb5"><%= t '.sound' %></h5>
           <span class="marl5 light-gray f13">-</span>
         </div>
+
+        <% if !@product_description.products_awards.empty? %>
+            <div id="festival">
+              <h5 class="display-inline f16 mart0 bold marb5"><%= t('.awards') %></h5>
+              <%= render :partial => 'products/show/awards', :locals => {:product => @product , :size => 'small'} %>
+            </div>
+        <% end %>
       </div>
       <!--/TEXT-->
 
@@ -89,36 +96,19 @@
       </div>
       <!--/SYNOPSIS-->
 
-      <!--VERSIONS DATA-->
-      <div class="block100">
-        <h3 class="OpenSansCondensed f25 dark-blue pad0 padl5">Version(s) disponible(s)</h3>
-        <table class="dark-blue OpenSansCondensed movie-versions-table">
-          <tr>
-            <td class="movie-versions-label">AUDIO</td>
-            <td class="movie-versions-data">International</td>
-          </tr>
-          <tr>
-            <td class="movie-versions-label">Sous-titres</td>
-            <td class="movie-versions-data">Néerlandais</td>
-          </tr>
-          <tr>
-            <td class="movie-versions-label">Price</td>
-            <td class="movie-versions-data">4.99€</td>
-          </tr>
-        </table>
-        <div class="block100 mart5">
-          <!--<a href="index.php%3Fpage=movie-full.html#" class="btn btn-green-gradient bold padlr25 white f13"><i class="fa fa-play marr5"></i>
-            Regarder</a>-->
-        </div>
-      </div>
-      <!--/VERSIONS DATA-->
+      <% if @product.series? %>
+          <%= render :partial => 'products/show/serie_formats', :locals => {:product => @product, :svod_date => @svod_date} %>
+      <% else %>
+          <%= render :partial => 'products/show/formats', :locals => {:product => @product, :svod_date => @svod_date}%>
+      <% end %>
 
-      <!--PHOTOS-->
       <div class="block100">
-        <h3 class="OpenSansCondensed f25 dark-blue pad0 padl5"><%= t '.photo' %></h3>
+        <h3 class="OpenSansCondensed f25 dark-blue pad0 padl5">Photos du film</h3>
         <%= render :partial => 'products/show/preview', :locals => {:product => @product, :type => params[:kind], :source => @source, :response_id => @response_id} %>
       </div>
-      <!--/PHOTOS-->
+
+
+
 
     </div>
     <!--/MOVIE DETALIS BLOCK-->

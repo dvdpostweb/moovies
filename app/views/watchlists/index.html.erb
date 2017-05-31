@@ -1,89 +1,20 @@
 <% path = @display_vod == 0 ? 'watchlists/index/item' : 'watchlists/index/item_gallery' %>
 <% class_name = @display_vod == 0 ? '' : ' gallery clearfix' %>
 <div class="container white-bck dark-gray padb20">
-  <% if params[:transit_or_history] == 'history' %>
-      <%= link_to t('.see_out'), vod_wishlists_path(:transit_or_history => 'transit'), :class => 'display-block mart20' %>
-  <% else %>
-      <%= link_to t('.see_history'), vod_wishlists_path(:transit_or_history => 'history'), :class => 'display-block mart20' %>
-  <% end %>
-
+  <!--<#% if params[:transit_or_history] == 'history' %>
+      <#%= link_to t('.see_out'), vod_wishlists_path(:transit_or_history => 'transit'), :class => 'display-block mart20' %>
+  <#% else %>
+      <#%= link_to t('.see_history'), vod_wishlists_path(:transit_or_history => 'history'), :class => 'display-block mart20' %>
+  <#% end %>-->
   <div id="accordion" class="mart30">
-
-    <!--CURRENT RENTALS-->
-    <h3><%= t '.history_list' %> (5)</h3>
-    <div>
-      <!--item-->
-      <div class="item block100">
-        <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
-          Lorem ipsum dolor
-        </div>
-        <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
-          <a href="index.php%3Fpage=watchlist.html#" class="btn light-blue-bck bold padlr10 white"><i class="fa fa-play marr5"></i> Regarder</a>
-          <a href="index.php%3Fpage=watchlist.html#" class="btn btn-green-gradient bold padlr10 white"><i class="fa fa-play marr5"></i> Regarder</a>
-          <a href="index.php%3Fpage=watchlist.html#" class="btn"><i class="fa fa-trash f17"></i></a>
-        </div>
-      </div>
-      <!--item-->
-    </div>
-    <!--/CURRENT RENTALS-->
-
-    <!--MY WATCHLIST-->
     <h3 class="mart10"><%= t '.list' %> (<%= @list.count('distinct vod_wishlists.id').size %>)</h3>
     <div>
       <div>
-
-        <% render :partial => 'watchlists/index/display', :locals => {:display_vod => @display_vod} %>
         <%= render :partial => path, :collection => @list, :locals => {:display_vod => @display_vod, :type => :list, :series => []} %>
-
-        <!--item-->
-        <div class="item block100">
-          <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
-            Movie to watch 1
-          </div>
-          <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
-            <a href="index.php%3Fpage=watchlist.html#" class="btn light-blue-bck bold padlr10 white"><i class="fa fa-play marr5"></i> Regarder</a>
-            <a href="index.php%3Fpage=watchlist.html#" class="btn btn-green-gradient bold padlr10 white"><i class="fa fa-play marr5"></i> Regarder</a>
-            <a href="index.php%3Fpage=watchlist.html#" class="btn"><i class="fa fa-trash f17"></i></a>
-          </div>
-        </div>
-        <!--item-->
-
-        <!--item-->
-        <div class="item block100">
-          <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
-            Movie to watch 2
-          </div>
-          <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
-            <a href="index.php%3Fpage=watchlist.html#" class="btn light-blue-bck bold padlr10 white"><i class="fa fa-play marr5"></i> Regarder</a>
-            <a href="index.php%3Fpage=watchlist.html#" class="btn btn-green-gradient bold padlr10 white"><i class="fa fa-play marr5"></i> Regarder</a>
-            <a href="index.php%3Fpage=watchlist.html#" class="btn"><i class="fa fa-trash f17"></i></a>
-          </div>
-        </div>
-        <!--item-->
-
-        <!--item-->
-        <div class="item block100">
-          <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
-            Movie to watch 3
-          </div>
-          <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
-            <a href="index.php%3Fpage=watchlist.html#" class="btn light-blue-bck bold padlr10 white"><i class="fa fa-play marr5"></i> Regarder</a>
-            <a href="index.php%3Fpage=watchlist.html#" class="btn btn-green-gradient bold padlr10 white"><i class="fa fa-play marr5"></i> Regarder</a>
-            <a href="index.php%3Fpage=watchlist.html#" class="btn"><i class="fa fa-trash f17"></i></a>
-          </div>
-        </div>
-        <!--item-->
-
       </div>
     </div>
-    <!--/MY WATCHLIST-->
-
   </div>
-
-
 </div>
-
-
 <% content_for :run_specific_javascript do %>
     <%= javascript_include_tag "watchlist/watchlist" %>
 <% end %>
