@@ -412,6 +412,11 @@ class Product < ActiveRecord::Base
     File.join(path, size, "#{imdb_id}_#{id}.jpg")
   end
 
+  def preview_image_big(id, kind, size='big')
+    path = kind == :adult ? Moovies.imagesx_preview_path : Moovies.images_preview_path
+    File.join(path, size, "#{imdb_id}_#{id}.jpg")
+  end
+
   def trailer_image(kind)
     path = kind == :adult ? Moovies.imagesx_trailer_path : Moovies.images_trailer_path
     File.join(path, "#{id}.jpg")
