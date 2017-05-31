@@ -161,11 +161,11 @@ $(document).ready(function () {
     function checkModernizr() {
         if (Modernizr.mq('(min-width: 981px)')) {
             popoverTrig();
-            //fancyboxBinder();
+            fancyboxBinder();
         }
         if (Modernizr.mq('(max-width: 980px)')) {
             $('.popper').popover('destroy');
-            //fancyboxUnBinder();
+            fancyboxUnBinder();
         }
     }
 
