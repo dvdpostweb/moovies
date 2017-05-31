@@ -5,7 +5,7 @@
 #  abo_id             :integer          not null, primary key
 #  customerid         :integer          default(0), not null
 #  Action             :integer          default(0), not null
-#  code_id            :integer
+#  code_id            :integer          default(-1)
 #  Date               :datetime         not null
 #  product_id         :integer          default(0), not null
 #  payment_method     :string(255)      default("ogone"), not null

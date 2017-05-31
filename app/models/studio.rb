@@ -14,8 +14,8 @@
 #  minimum_back_catalogue      :float
 #  minimum_global              :float
 #  billing_reporting           :integer          default(0), not null
-#  vod_lux                     :boolean          default(FALSE)
-#  vod_nl                      :boolean          default(FALSE)
+#  vod_lux                     :boolean          default(FALSE), not null
+#  vod_nl                      :boolean          default(FALSE), not null
 #  plush_price_new             :float
 #  plush_price_back_catalogue  :float
 #  svod_fee_new_vod            :float
