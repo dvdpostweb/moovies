@@ -59,17 +59,10 @@
 #  welcomecall_day                           :date
 #  tvod_free                                 :integer          default(0)
 #  credits_already_recieved                  :integer          default(0)
-#  5151515151                                :string(255)
-#  uid                                       :integer
-#  515151                                    :integer
-#  expires_at                                :datetime
-#  provider                                  :string(255)
-#  social_network_tag                        :string(255)
+#  social_network_tag                        :string(45)
 #  facebook_activation                       :integer
 #  preselected_registration_moovie_id        :integer
-#  paypal_agreement_id                       :string(255)
-#  subscription_changed_at                   :datetime
-#  next_subscription_change_posibile_at      :datetime
+#  paypal_agreement_id                       :string(50)
 #
 
 class Customer < ActiveRecord::Base
@@ -170,6 +163,8 @@ class Customer < ActiveRecord::Base
 
   has_many :authentications, :dependent => :delete_all
   has_one :mobistar
+
+  has_many :orange_sms_activation_codes
 
   #after_save :setup_abt_6_null
 

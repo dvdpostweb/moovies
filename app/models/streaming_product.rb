@@ -19,12 +19,12 @@
 #  quality                      :string(5)        default("SD")
 #  source                       :string(13)       default("SOFTLAYER")
 #  vod_support_id               :integer          default(1), not null
-#  is_ppv                       :boolean
-#  ppv_price                    :float
+#  is_ppv                       :boolean          default(FALSE)
+#  ppv_price                    :float(5)         default(0.0), not null
 #  country                      :string(2)        default("BE")
 #  package_id                   :integer
 #  drm                          :boolean          default(FALSE), not null
-#  tvod_price                   :float
+#  tvod_price                   :float(5)         default(0.0), not null
 #  season_id                    :integer          default(0), not null
 #  episode_id                   :integer          default(0), not null
 #  videoland                    :boolean          default(FALSE)

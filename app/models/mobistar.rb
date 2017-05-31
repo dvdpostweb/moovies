@@ -2,7 +2,7 @@
 #
 # Table name: mobistars
 #
-#  activation_id :integer          default(0), not null
+#  activation_id :integer          default(0), not null, primary key
 #
 
 class Mobistar < ActiveRecord::Base

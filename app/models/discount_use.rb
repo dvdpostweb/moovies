@@ -2,11 +2,10 @@
 #
 # Table name: discount_use
 #
-#  discount_use_id    :integer          not null, primary key
-#  discount_code_id   :integer          default(0), not null
-#  discount_use_date  :datetime         not null
-#  customers_id       :integer          default(0), not null
-#  bypass_discountuse :integer
+#  discount_use_id   :integer          not null, primary key
+#  discount_code_id  :integer          default(0), not null
+#  discount_use_date :datetime         not null
+#  customers_id      :integer          default(0), not null
 #
 
 class DiscountUse < ActiveRecord::Base

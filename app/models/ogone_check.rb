@@ -17,7 +17,7 @@
 #  sponsoring_email   :string(255)      default(""), not null
 #  belgiqueloisirs_id :string(255)      default(""), not null
 #  site               :integer          default(0), not null
-#  language_id        :integer
+#  language_id        :integer          default(1)
 #  imdb_id            :integer
 #  season_id          :integer          default(0), not null
 #  episode_id         :integer          default(0), not null

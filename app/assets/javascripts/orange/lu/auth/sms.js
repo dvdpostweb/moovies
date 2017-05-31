@@ -9,10 +9,17 @@ $(document).ready(function () {
 
 function eligibilityService() {
 
+    jQuery.validator.addMethod("phone", function (phone_number, element) {
+        phone_number = phone_number.replace(/\s+/g, "");
+        return this.optional(element) || phone_number.length > 9 &&
+            phone_number.match(/^[0-9-+]+$/);
+    }, "Invalid phone number");
+
     $("#is_eligable").validate({
         rules: {
             "phone-number": {
-                required: true
+                required: true,
+                phone: true
             }
         },
         messages: {
@@ -31,36 +38,37 @@ function eligibilityService() {
         submitHandler: function (form) {
             $.ajax({
                 method: 'POST',
-                url: '/orange/lu/api/eligibility_service',
+                url: '/orange/lu/api/orange_is_eligable',
                 data: {
                     'sms_number': $.trim($("#sms_number").val()),
                     'products_id': gon.products_id
                 },
                 dataType: 'json',
                 success: function (response) {
-                    if (0 === response.status) {
-                        successMessage = "<div class=\"alert alert-success\">" +
-                            "<strong>" + response.message + "</strong>" +
-                            "</div>";
-                        $("#info1").html(successMessage).fadeOut(3000);
-                        $("#is_eligable").hide();
-                        $("#orange_purchase").show();
-                        $("#sms_code").val(response.sms_code);
-
+                    if ("True" === response.status) {
                         if (typeof(Storage) !== "undefined") {
-                            localStorage.setItem("plush_temporary_email", response.temporary_email);
-                            //localStorage.getItem("plush_temporary_email");
-                            //localStorage.removeItem("plush_temporary_email");
+                            localStorage.setItem("plush_phone_number", response.phone_number);
+                            $("#is_eligable").hide();
+                            $("#orange_purchase").show();
+                            jQuery.facebox("<div class=\"alert alert-danger\">" +
+                                "<strong>" + response.sms_code + "</strong>" +
+                                "</div>");
                         } else {
-                            console.log("Sorry! No Web Storage support..");
+                            jQuery.facebox("<div class=\"alert alert-danger\">" +
+                                "<strong>" + "Sorry! No Web Storage support.." + "</strong>" +
+                                "</div>");
                         }
 
-                    } else if (1 === response.status) {
-                        $("#info1").append(errorMessage(response.message));
+                    } else if ("Subscriber is not eligible for the service" === response.status) {
+                        jQuery.facebox("<div class=\"alert alert-danger\">" +
+                            "<strong>" + response.status + "</strong>" +
+                            "</div>");
                     }
                 },
                 error: function (response) {
-                    console.log('CHECKED AJAX ERROR!!!');
+                    jQuery.facebox("<div class=\"alert alert-danger\">" +
+                        "<strong>" + "SYSTEM ERROR!!!" + "</strong>" +
+                        "</div>");
                 }
             });
         }
@@ -99,20 +107,39 @@ function orangePurchase() {
                 data: {
                     'sms_code': $.trim($("#sms_code").val()),
                     'products_id': gon.products_id,
-                    'temporary_email': localStorage.getItem("plush_temporary_email")
+                    'plush_phone_number': localStorage.getItem("plush_phone_number"),
+                    'code': gon.code
                 },
                 dataType: 'json',
                 success: function (response) {
-                    if (0 === response.status) {
-                        //successMessage = "<div class=\"alert alert-success\">" +
-                        //    "<strong>" + response.message + "</strong>" +
-                        //    "</div>";
-                        //$("#info2").html(successMessage).fadeOut(3000);
-                        //$("#sms_form").empty();//.html(orangePurchaseForm());
-                        window.location.href = response.root_localize_path
-                    } else if (1 === response.status) {
-                        $("#info2").append(errorMessage(response.message));
+
+                    if ("True" === response.status) {
+
+
+                        $.ajax({
+                            method: 'POST',
+                            url: '/orange/lu/api/automatic_login',
+                            data: {
+                                'plush_phone_number': localStorage.getItem("plush_phone_number")
+                            },
+                            dataType: 'json',
+                            success: function (response) {
+                                if (0 === response.status) {
+                                    console.log("SUCCESS");
+                                }
+                            },
+                            error: function (response) {
+                                console.log('CHECKED AJAX ERROR!!!');
+                            }
+                        });
+
+
+                    } else if ("Subscriber is not eligible for the service" === response.status) {
+                        jQuery.facebox("<div class=\"alert alert-danger\">" +
+                            "<strong>" + response.status + "</strong>" +
+                            "</div>");
                     }
+
                 },
                 error: function (response) {
                     console.log('CHECKED AJAX ERROR!!!');

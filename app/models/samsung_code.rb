@@ -8,7 +8,7 @@
 #  used_at      :datetime
 #  created_at   :datetime
 #  promotion    :string(255)      default("SMSPSH")
-#  invoice      :binary(214748364
+#  invoice      :binary(16777215)
 #  validated_at :datetime
 #  model        :string(40)
 #
