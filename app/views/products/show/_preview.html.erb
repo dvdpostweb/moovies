@@ -2,7 +2,7 @@
   <% 6.times do |i| %>
       <% t = i + 1 %>
   <li>
-    <a href="<%= product.preview_image(t, type) %>" class="fancybox" rel="movie-gallery">
+    <a href="<%= product.preview_image_big(t, type) %>" class="fancybox" rel="movie-gallery">
       <%= image_tag product.preview_image(t, type), :class => "img-responsive" %>
     </a>
   </li>

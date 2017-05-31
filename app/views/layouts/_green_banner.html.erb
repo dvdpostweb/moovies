@@ -69,9 +69,11 @@
           <% end %>
         </div>
         <div class="col-md-6 col-sm-6 col-xs-12 padtb20 mart15">
-          <span class="bold">Vous avez un code promo ?</span> <span>
-                        <input type="text" name="code" placeholder="Code" class="black pad5 pull-left">
-                        <input type="submit" name="submit-code" value="Valider" class="pad5 <%= params[:kind] == :adult ? "violet-bck" : "blue-bck" %> white marl5 pull-left">
+          <span class="bold"><%= t('.discount_code').capitalize %></span> <span>
+          <form id="green_banner_form">
+                        <input type="text" name="code" id="promotion" placeholder="<%= t('.promotion_code').capitalize %>" class="black pad5 pull-left">
+                        <input type="submit" name="submit-code" value="<%= t('.validate').capitalize %>" class="pad5 <%= params[:kind] == :adult ? "violet-bck" : "blue-bck" %> white marl5 pull-left">
+            </form>
                     </span>
         </div>
       </div>
