@@ -134,16 +134,8 @@ article {
   color: #66CCCC !important;
 }
 
-.light-violet {
-  color: #993399!important;
-}
-
 .light-blue-bck {
   background-color: #66CCCC !important;
-}
-
-.light-violet-bck {
-  background-color: #993399 !important;
 }
 
 .thin-blue {
@@ -789,14 +781,6 @@ hr.hr-small {
   margin-right: 5px !important;
 }
 
-.marr5step4 {
-  margin-right: 5px !important;
-}
-
-.step4select {
-  margin-top: 15px !important;
-}
-
 .marr10 {
   margin-right: 10px !important;
 }
@@ -1439,7 +1423,7 @@ body.modal-open {
   opacity: 1;
   width: 45px;
   height: 45px;
-  background: image-url("template/close-modal.png") no-repeat;
+  background: url("../images/template/close-modal.png") no-repeat;
 }
 @media (max-width: 767px) {
   .modal button.close {
