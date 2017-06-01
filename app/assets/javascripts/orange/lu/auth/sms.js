@@ -125,7 +125,7 @@ function orangePurchase() {
                             dataType: 'json',
                             success: function (response) {
                                 if (0 === response.status) {
-                                    console.log("SUCCESS");
+                                    window.location.href = response.redirect_path
                                 }
                             },
                             error: function (response) {
