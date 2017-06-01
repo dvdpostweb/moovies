@@ -89,7 +89,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
     if request.xhr?
       customer = Customer.find_for_database_authentication(customers_telephone: params[:plush_phone_number])
       if customer.present? && sign_in(customer, bypass: true)
-        render json: {status: 0, current_customer_id: customer.customers_id}
+        render json: {status: 0, current_customer_id: customer.customers_id, redirect_path: step_path(:id => 'step4') }
       end
     else
       raise ActionController::RoutingError.new('Not Found')

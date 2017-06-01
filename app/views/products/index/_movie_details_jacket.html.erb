@@ -62,7 +62,7 @@
       <div class="block100 slide-content mart15">
         <%= truncate_html((data[:description].text rescue '...'), :length => 500) %>
       </div>
-      <%= render :partial => 'products/vod_list', :locals => {:product => product, :source => @source, :response_id => @response_id} %>
+      <%= render :partial => 'products/vod_list_jacket', :locals => {:product => product, :source => @source, :response_id => @response_id} %>
       <% unless (customer_signed_in? && current_customer.unlimted_subscriber?) %>
           <% if product.streaming_products.any? %>
               <% if customer_signed_in? %>
