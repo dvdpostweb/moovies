@@ -1,0 +1,12 @@
+<% if !product.get_vod_online(session[:country_id]).empty? %>
+    <% if product.svod? %>
+        <% title = t('orange_step4_watch_button') %>
+        <% class_name = "btn btn-green-gradient bold padlr10 white" %>
+    <% else %>
+        <% title = t('orange_step4_watch_button') %>
+        <% class_name = "btn light-blue-bck bold padlr10 white" %>
+    <% end %>
+    <%= link_to product_action_path(:product_id => product.to_param, :origin => :products, :source => source), :class => class_name, :remote => true do %>
+        <i class="fa fa-play marr5"></i><%= title %>
+    <% end %>
+<% end %>
