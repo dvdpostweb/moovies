@@ -13,5 +13,11 @@ Moovies::Application.routes.draw do
         match "automatic_login" => "webservice#automatic_login"
       end
     end
+    namespace :wha do
+      namespace :callbacks do
+        get "wha/success"
+        get "wha/cancel"
+      end
+    end
   end
 end
