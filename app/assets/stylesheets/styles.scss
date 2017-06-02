@@ -1645,6 +1645,15 @@ ul.lg-list-view li.baloon-trans {
   }
 }
 
+.payment-methods .movie-block h1 div:last-child span {
+  float: right;
+}
+@media (max-width: 479px) {
+  .payment-methods .movie-block h1 div:last-child span {
+    float: left;
+  }
+}
+
 .movie-full h3 {
   margin-left: -5px;
   line-height: 30px;
@@ -2380,16 +2389,24 @@ ul.movie-gallery li:nth-child(3n) {
 }
 
 .step3 .ui-state-default,
-.watchlist .ui-state-default {
+.watchlist .ui-state-default,
+.payment-methods .ui-state-default {
   border: none;
   font-family: OpenSansCondensed;
   font-size: 20px;
 }
 @media (max-width: 980px) {
   .step3 .ui-state-default,
-  .watchlist .ui-state-default {
+  .watchlist .ui-state-default,
+  .payment-methods .ui-state-default {
     border-radius: 0;
   }
+}
+
+.step3 section.page,
+.watchlist section.page,
+.payment-methods section.page {
+  width: 100%;
 }
 
 .step3 .ui-state-active {
@@ -2406,39 +2423,40 @@ ul.movie-gallery li:nth-child(3n) {
   background: image-url("template/arrow-right-grey.png") no-repeat 4px 1px !important;
 }
 
-ul#card-list li {
+ul.card-list li {
   float: left;
   width: 30%;
   margin-right: 5%;
   background: #f5f5f5;
   padding: 10px;
 }
-ul#card-list li:nth-child(n) {
+ul.card-list li:nth-child(n) {
   margin-right: 5%;
 }
-ul#card-list li:nth-child(3n) {
+ul.card-list li:nth-child(3n) {
   margin-right: 0;
 }
 @media (max-width: 479px) {
-  ul#card-list li {
+  ul.card-list li {
     float: left;
     width: 100%;
     margin-right: 0;
+    margin-top: 20px;
   }
-  ul#card-list li:nth-child(n) {
+  ul.card-list li:nth-child(n) {
     margin-right: 0;
   }
-  ul#card-list li:nth-child(1n) {
+  ul.card-list li:nth-child(1n) {
     margin-right: 0;
   }
 }
 
-ul#card-list li .card-image {
+ul.card-list li .card-image {
   float: left;
   width: 100%;
 }
 
-ul#card-list li .card-radio {
+ul.card-list li .card-radio {
   float: left;
   width: 100%;
   text-align: center;
@@ -3068,6 +3086,11 @@ ul#card-list li .card-radio {
 
 .step4 .hr-with-words {
   margin: 20px 0 30px;
+}
+@media (max-width: 479px) {
+  .step4 .hr-with-words {
+    height: auto;
+  }
 }
 
 .step4 .hd {
