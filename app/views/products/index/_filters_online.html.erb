@@ -80,16 +80,12 @@
 
         <div class="left-item">
           <label class="OpenSansCondensed f20"><%= t('products.index.filters.audio', :default => 'audio') %></label>
-          <% cache("products_index_filters_audio_#{I18n.locale}", :expires_in => 15.minutes) do %>
               <%= collection_select(:filters, :audio, Language.by_language(I18n.locale), :id, :name, {:selected => params[:filters] && params[:filters][:audio] ? params[:filters][:audio] : nil, :include_blank => true}, {:multiple => true, :class => 'chosen-select', 'data-placeholder' => "audio...", 'data-no_results_text' => t('products.index.filters.not_found')}) %>
-          <% end %>
         </div>
 
         <div class="left-item">
           <label class="OpenSansCondensed f20"><%= t('products.index.filters.subtitles', :default => 'subtitles') %></label>
-          <% cache("products_index_filters_subtitles_#{I18n.locale}", :expires_in => 15.minutes) do %>
               <%= collection_select(:filters, :subtitles, Subtitle.by_language(I18n.locale), :id, :name, {:selected => params[:filters] && params[:filters][:subtitles] ? params[:filters][:subtitles] : nil, :include_blank => true}, {:multiple => true, :class => 'chosen-select', 'data-placeholder' => "#{t('products.index.filters.subtitles')}...", 'data-no_results_text' => t('products.index.filters.not_found')}) %>
-          <% end %>
         </div>
 
         <!--<div class="left-item">
@@ -116,16 +112,14 @@
 
         <div class="left-item">
           <label class="OpenSansCondensed f20"><%= t('products.index.filters.countries', :default => 'country') %></label>
-          <% cache("products_index_filters_countries_#{I18n.locale}", :expires_in => 15.minutes) do %>
               <%= collection_select(:filters, :country_id, @countries, :id, :name, {:selected => params[:filters] && params[:filters][:country_id] ? params[:filters][:country_id] : nil, :include_blank => true}, {:multiple => true, :class => 'chosen-select', 'data-placeholder' => "#{t('products.index.filters.countries')}...", 'data-no_results_text' => t('products.index.filters.not_found')}) %>
-          <% end %>
+
         </div>
 
         <div class="left-item">
           <label class="OpenSansCondensed f20"><%= t('products.index.filters.category', :default => 'category') %></label>
-          <% cache("products_index_filters_category_#{I18n.locale}", :expires_in => 15.minutes) do %>
               <%= collection_select(:filters, :category_id, Category.by_kind(params[:kind]).joins("descriptions_#{I18n.locale}".to_sym).includes("descriptions_#{I18n.locale}").roots.movies.vod.alphabetic_orderd, :id, :name, {:selected => params[:filters] && params[:filters][:category_id] ? params[:filters][:category_id] : nil, :include_blank => true}, {:class => 'chosen-select', 'data-placeholder' => "#{t('products.index.filters.category')}...", 'data-no_results_text' => t('products.index.filters.not_found')}) %>
-          <% end %>
+
         </div>
 
 
