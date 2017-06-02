@@ -55,59 +55,54 @@
       </div>
     </div>
   </div>
-
-
-  <!--ACCORDION-->
   <section class="page">
     <div id="accordion" class="mart30">
-
-      <!--Carte bancaire-->
-      <h3>Carte bancaire</h3>
+      <h3><%= t('promotion.newstep3.paymentoption1').html_safe %></h3>
       <div>
         <ul class="card-list">
           <li>
             <a href="index.php%3Fpage=payment-methods.html">
               <div class="card-image">
-                <%= image_tag "template/card-visa.png", class: "img-responsive radius4" %>
+                <%= link_to(image_tag("template/card-visa.png", class: "img-responsive radius4"), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'visa', :source => params[:source]
+                ), :method => :put) %>
               </div>
             </a>
           </li>
           <li>
             <a href="index.php%3Fpage=payment-methods.html">
               <div class="card-image">
-                <%= image_tag "template/card-master.png", class: "img-responsive radius4" %>
+                <%= link_to(image_tag("template/card-master.png", class: "img-responsive radius4"), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'mastercard', :source => params[:source]
+                ), :method => :put) %>
               </div>
             </a>
           </li>
           <li>
             <a href="index.php%3Fpage=payment-methods.html">
               <div class="card-image">
-                <%= image_tag "template/card-american-express.png", class: "img-responsive radius4" %>
+                <%= link_to(image_tag("template/card-american-express.png", class: "img-responsive radius4"), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'american Express', :source => params[:source]
+                ), :method => :put) %>
               </div>
             </a>
           </li>
         </ul>
       </div>
-
-      <!--payPal-->
-      <h3>PayPal</h3>
+      <h3><%= t('promotion.newstep3.paymentoption2').html_safe %></h3>
       <div>
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mart10">
           <%= image_tag "template/paypal.png", class: "img-responsive radius4" %>
         </div>
         <div class="block100 mart20">
-          <a href="http://plush-rwd.tritacke.org/api/v1/express_checkout?locale=fr">
-            <img alt="Btn_xpresscheckout" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif">
-          </a>
+          <%= link_to(image_tag('https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'PAYPAL', :source => params[:source]
+          ), :method => :put) %>
+
         </div>
       </div>
-
-      <!--mrcash-->
       <h3>Mister Cash</h3>
       <div>
         <a href="index.php%3Fpage=payment-methods.html">
           <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mart10">
-            <%= image_tag "template/mistercash.png", class: "img-responsive radius4" %>
+            <%= link_to(image_tag("template/mistercash.png", class: "img-responsive radius4"), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'Bancontact/Mister Cash', :source => params[:source]
+            ), :method => :put) %>
           </div>
         </a>
       </div>

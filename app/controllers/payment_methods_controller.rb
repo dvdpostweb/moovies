@@ -17,7 +17,7 @@ class PaymentMethodsController < ApplicationController
   end
 
   def update
-    gon.current_customer_id = current_customer.id
+    gon.current_customer_id = current_customer.to_param
     if params[:type] == 'credit_card' || params[:type] == 'credit_card_modification'
       internal_com = params[:type]
       @price = 0
