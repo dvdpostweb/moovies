@@ -11,6 +11,7 @@
   <%= include_gon(namespace: 'Plush') %>
   <%= Gon::Base.render_data %>
   <% Gon.global.current_customer = current_customer if !customer_signed_in? %>
+  <!--<#%= csrf_meta_tags %>-->
   <%= stylesheet_link_tag "application", :media => "all" %>
   <%= yield :view_specific_css %>
   <link rel="icon" type="image/x-icon" href="<%= asset_path("template/favicon.ico") %>">

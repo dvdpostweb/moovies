@@ -7,7 +7,7 @@
     <%= form_for(:customer, :url => customer_payment_methods_path(:customer_id => current_customer.to_param), :html => {:method => :put, :id => "form_step3"}) do |f| %>
         <div>
           <div id="banc_card_error"></div>
-          <ul id="card-list">
+          <ul class="card-list">
             <li>
               <div class="card-image">
                 <%= image_tag "template/card-visa.png", class: "img-responsive" %>
