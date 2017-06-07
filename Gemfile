@@ -66,7 +66,7 @@ gem "rest-client"
 gem "jbuilder"
 gem 'annotate'
 gem 'gon'
-gem 'omniauth-facebook'
+gem 'omniauth-facebook', '4.0', :git => 'https://github.com/dvdpost/omniauth-facebook'
 gem 'omniauth-google-oauth2', '~> 0.3.1'
 gem "figaro"
 gem 'puma', '~> 3.6'
