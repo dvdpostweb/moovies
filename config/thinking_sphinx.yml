@@ -1,4 +1,5 @@
 development:
+  mysql41: 9306
   utf8: true
   searchd_log_file: "log/searchd.log"
   query_log_file: "log/searchd_query.log"

@@ -1,11 +1,5 @@
 Moovies::Application.routes.draw do
 
-  #devise_scope :customer do
-  #  get 'mobile_logout' => 'devise/sessions#destroy'
-  #end
-
-  get "html5/testing"
-
   match "renew_monthly_credits_for_a_la_carte" => "renew_monthly_subscription#renew_monthly_credits_for_a_la_carte"
   match "social_activation" => "social_activation#activate"
   match '/auth/:provider/callback' => 'authentications#create'
