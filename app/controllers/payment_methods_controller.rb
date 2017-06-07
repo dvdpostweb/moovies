@@ -1,10 +1,15 @@
 class PaymentMethodsController < ApplicationController
+
   before_filter :authenticate_customer!
+  skip_before_filter :verify_authenticity_token
+
   def show
     @choose_partial = params[:type] || 'index'
     @body_id = @choose_partial
   end
+
   def edit
+    gon.banc_card_error_message = t('orange.step3.banc_card_error_message')
     if params[:product_id]
       @product = Product.find(params[:product_id])
       if @product.svod?
@@ -16,6 +21,7 @@ class PaymentMethodsController < ApplicationController
   end
 
   def update
+    gon.current_customer_id = current_customer.to_param
     if params[:type] == 'credit_card' || params[:type] == 'credit_card_modification'
       internal_com = params[:type]
       @price = 0
@@ -41,6 +47,24 @@ class PaymentMethodsController < ApplicationController
       imdb_id = @product.imdb_id
       season_id = @product.season_id
       episode_id = @product.episode_id
+    elsif params[:type] == 'ppv'
+      internal_com = 'tvod'
+      @product = Product.find(params[:product_id])
+      #if @product.svod?
+      #  redirect_to root_localize_path() and return
+      #end
+      @product = Product.find(params[:product_id])
+      @url_back = product_url(:id => @product.id)
+      @url_ok = streaming_product_url(:id => @product.imdb_id, :season_id => @product.season_id, :episode_id => @product.episode_id)
+      @price = @product.get_vod_online(session[:country_id]).first.tvod_price
+      @com = t 'payment_methods.tvod', :default => 'payment plush tvod'
+      product_id = @product.imdb_id
+      imdb_id = @product.imdb_id
+      season_id = @product.season_id
+      episode_id = @product.episode_id
+      if params[:brand] == "Orange"
+        redirect_to "http://www.plush.be/wha/pos-bundle?action=purchaseListOffer&pid=103291&lg=fr&AdditionalParameters=abc_4"
+      end
     else
       @com= t 'payment_methods.ogone'
       if current_customer.promo_type == 'D'

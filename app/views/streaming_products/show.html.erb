@@ -1,85 +1,208 @@
-  <div  <%= @code && @code.white_label ? 'id="maincontent_no_border"' : 'id="maincontent"' %> >
-    <div id="vod-wrap">
-        <h2>
-          <span id="vod_title"><%= h !@product.series? ? @product.description.title : @product.episode_title %> (<%= @product.year %>)<span>
-        </h2>
-        <%=  "<h3 class='vl'>Powered by</h3>".html_safe if @streaming.videoland? %>
-        <% if @token && @token_valid && @product.tvod? && @code.nil? %>
-          <div id='time'><div id="vodtime"><%= t '.time_left' %> : <strong><%= time_left(@token, params[:kind]) %></strong></div></div>
-        <% end %>
-        <div class="clear"></div>
-        <div id="presentation">
-          <div id = 'image_vod'><%= product_image_tag @product.image, :alt => "#{@product.title} (#{@product.year})" %></div>
-        </div>
-        <div id='flow'>
-        </div>
-        <div id='player' class='normal'></div>
-        <% if @code || !current_customer.suspended? %>
-          <% if @code || (@token && @token_valid) || (current_customer && current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s)) || (current_customer.tvod_only? && @streaming.prepaid_all?) %>
-            <% if !@streaming_prefered.empty? || (@streaming_not_prefered && !@streaming_not_prefered.empty?) %>
-              <div class="choice_language">
-                
-                <h3><%= t('.version_title') %></h3>
-                <div id="choice_new">
-                  <div id="step1" class="step" style="width:696px;height:120px">
-                    <%= render :partial => 'streaming_products/show/audios', :locals => {:streaming => @streaming_prefered, :sample => nil, :source => params[:source], :response_id => params[:response_id]} %>
-                  </div>
-                  <div id="step2" class="step">
-                  </div>
-                  <div id="step3" class="step">
-                  </div>
-                </div>
-                <p  class="info_vod" >
-                  <%= link_to t('.all_versions'), streaming_product_versions_path(:streaming_product_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id], :streaming_code => params[:streaming_code], :email => params[:email], :source => params[:source], :response_id => params[:response_id]), :id => :all_versions %>
-                  <br /><br />
+<div class="container white-bck">
 
-                </p>
-            </div>
-            <p class="intro_vod">
-              <% unless @product.svod? %>
-                <%= t 'streaming_products.show.kinds_alpha.reminder', :hours => 48 %>
-              <% end %>
-            </p>
-            <% end %>
-          <% else %>
-            wrong package
+  <% if @code || !current_customer.suspended? %>
+
+      <% if @code || (@token && @token_valid) || (current_customer && current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s)) || (current_customer.tvod_only? && @streaming.prepaid_all?) %>
+
+          <% if !@streaming_prefered.empty? || (@streaming_not_prefered && !@streaming_not_prefered.empty?) %>
+
+              <h1 class=" pad0 mart10 f30 green OpenSansCondensed block100 marb15"><%= h !@product.series? ? @product.description.title : @product.episode_title %>
+                (<%= @product.year %>)</h1>
+
+              <div class="block100">
+                <%= render :partial => "streaming_products/player" %>
+              </div>
+
+              <!--FILM VERSION-->
+              <h2 class="f19 black mart20 text-center block100"><%= t('.version_title') %></h2>
+              <section class="page responsive-carousel slider" id="steps-wizard">
+                <div>
+                  <ul class="video-lg-buttons text-center block100 padt20">
+                    <%= render :partial => 'streaming_products/show/audios', :locals => {:streaming => @streaming_prefered, :sample => nil, :source => params[:source], :response_id => params[:response_id]} %>
+                  </ul>
+                </div>
+
+                <!--STEP2-->
+                <div>
+                  <p class="block100 mart5 black">Audio :
+                    <span class="selected-audio"></span>
+                    |
+                    <a href="index.php%3Fpage=video-stream-wizard.html#" class="slick-back">Change</a>
+                  </p>
+                  <p class="block100 mart5 black">Which subtitles would you like for this film??</p>
+                  <ul class="video-lg-buttons text-center block100 padt20">
+                    <li>
+                      <a href="index.php%3Fpage=video-stream-wizard.html#"
+                         class="btn dark-gray-bck pull-left uppercase slick-next" data-switch="subs-button"
+                         data-button="no-subs"><i class="fa fa-language marr5"></i>Witohout subtitles</a>
+                    </li>
+                    <li>
+                      <a href="index.php%3Fpage=video-stream-wizard.html#"
+                         class="btn dark-gray-bck pull-left uppercase slick-next" data-switch="subs-button"
+                         data-button="Duch"><i class="fa fa-language marr5"></i>Duch</a>
+                    </li>
+                  </ul>
+                </div>
+                <!--/STEP2-->
+
+                <!--STEP3-->
+                <div>
+                  <p class="block100 mart5 black">Audio :
+                    <span class="selected-audio"></span>
+                    |
+                    <a href="index.php%3Fpage=video-stream-wizard.html#" class="slick-back-first">Change</a>
+                  </p>
+                  <p class="block100 mart5 black">Subtitle :
+                    <span class="selected-sub"></span>
+                    |
+                    <a href="index.php%3Fpage=video-stream-wizard.html#" class="slick-back">Change</a>
+                  </p>
+
+                  <p class="block100 mart5 black text-center">
+                    <a href="index.php%3Fpage=video-stream-wizard.html#"
+                       class="btn btn-green-gradient center-block bold padlr25 white f15" id="play"><i
+                    class="fa fa-play marr5"></i> Start Film</a>
+                  </p>
+
+                </div>
+                <!--/STEP3-->
+
+
+              </section>
+              <!--/FILM VERSION-->
+
+              <!--AVAILABLE VERSION-->
+              <div class="block100 text-center">
+                <a href="index.php%3Fpage=video-stream-wizard.html#"
+                   class="center-block display-block available-trigger">See all available versions <i
+                class="fa fa-caret-down"></i></a>
+                <div class="available-versions mart5 block100 overflow-hidden thinrgray-bck black">
+                  <h3 class="f20">LANGUAGES AND SUBTITLES AVAILABLE</h3>
+                  <p class="block100">
+                    Audio <i class="fa fa-file-audio-o"></i> : French | Subtitles <i class="fa fa-language"></i>
+                    : Without subtitles
+                    <a href="index.php%3Fpage=video-stream-wizard.html#"
+                       class="btn btn-green-gradient bold padlr25 white f12 marl5" id="play"><i
+                    class="fa fa-play marr5"></i> Start Film</a>
+                  </p>
+                  <p class="block100">
+                    Audio <i class="fa fa-file-audio-o"></i> : French | Subtitles <i class="fa fa-language"></i>
+                    : Dutch
+                    <a href="index.php%3Fpage=video-stream-wizard.html#"
+                       class="btn btn-green-gradient bold padlr25 white f12 marl5" id="play"><i
+                    class="fa fa-play marr5"></i> Start Film</a>
+                  </p>
+                </div>
+              </div>
+              <!--/AVAILABLE VERSION-->
+
+              <!--VIEWABLE NOTIF-->
+              <div class="block100 text-center mart20">
+                This movie will be viewable during 48hrs, you can watch it as many times as you wish and decide on
+                its version.
+              </div>
+              <!--/VIEWABLE NOTIF-->
+
+              <!--VIDEO STREAM LINKS BOX-->
+              <div class="block100 martb20">
+                <ul class="video-stream-links">
+                  <li>
+                    <a href="index.php%3Fpage=video-stream-wizard.html#"><i class="fa fa-television marr10"></i>
+                      How to connect your PC to your television?</a>
+                  </li>
+                  <li class="mart10">
+                    <a href="index.php%3Fpage=video-stream-wizard.html#"><i
+                    class="fa fa-info-circle  marr10"></i> All info concerning our VOD system</a>
+                  </li>
+                  <li class="mart10">
+                    <a href="index.php%3Fpage=video-stream-wizard.html#"><i class="fa fa-wrench  marr10"></i>
+                      Inform us if you have a problem viewing this</a>
+                  </li>
+                </ul>
+              </div>
+
+
+
           <% end %>
-        <% else %>
-          suspension
-        <% end %>
-        <%= render partial: 'streaming_products/show/error', :locals => {:error => @error} if @error %>
-        <div id="all_versions_data">
-        
-        </div>
-        <div class="linkpc">
-          <div class="icon_left">
-            <%= image_tag 'icon_tv.gif', :align => :absmiddle, :alt => 'icon tv' %>
-            <%= link_to t('.connected'), info_path(:page_name => t('routes.infos.params.get_connected')), :class => 'connect_linkpc' %><br />
-            <%= image_tag 'icon_infos.gif', :align => :absmiddle, :alt => 'icon info' %>
-            <%= link_to t('.info'), info_path(:page_name => t('routes.infos.params.vod')), :class => 'connect_linkpc' %>
-          </div>
-          <div class="icon_right">
-              <%= image_tag 'icon_problem.gif', :align => :absmiddle, :alt => 'icon problem' %>
-              <%= link_to t('.alert'), new_phone_request_path(:reason => 5), :class => :connect_linkpc %>   
-          </div>
-          <div class="clear"></div>
-        </div>
-      </div>
-    </div>
-    <div class="end"></div>
-  </div>
-  <div style="display:none" id="returnStatus"></div>
-  <div style="display:none" id ="product_id"><%= @product.id %></div>
-  <div style="display:none" id ="drm">0</div>
-    <% if params[:warning].to_i == 1 && (@token.nil? || !@token_valid )  %>
-      <div id='warning' style='display:none'><%= product_action_path(:product_id => @product.to_param, :origin => 'streaming', :hide_btn => 1) %></div>
-    <% end %>
-<% if @code %>
-  <% if @code.name.match(/^TEXP/) %>
-    <iframe src="http://www.plush.be/trade/conversion.html?campaignID=12814&productID=24087&conversionType=lead&https={https}&transactionID=<%= @code.id %>&transactionAmount={transactionAmount}&email=<%= params[:email] %>&descrMerchant={descrMerchant}&descrAffiliate={descrAffiliate}&currency={currency}" frameborder="0" scrolling="0" marginwidth="0" marginheight="0" width="1" height="1"></iframe>
-  <% elsif @code.name.match(/^PEXP/) %>
-    <img style="display: none" border="0" height="0" width="0" src="http://fr.ptg.be/aimg/plush.gif" alt="" />
+
+      <% else %>
+
+          wrong package
+
+      <% end %>
+
+  <% else %>
+
+      suspension
+
   <% end %>
 
-  <img style="display: none" border="0" height="0" width="0" src="//fbm.mysocialpixel.com/tracking/<%= @code.id %>/10/1385045453" alt="" /> 
-<% end %>
+</div>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+
+<script>
+
+    $(document).ready(function () {
+
+        // full-movie slider
+        $('.responsive-carousel').slick({
+            dots: false,
+            infinite: false,
+            draggable: false,
+            swipe: false,
+            speed: 200,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+        });
+
+
+        $('a.slick-next').click(function (e) {
+            $("#steps-wizard").slick('slickNext');
+            e.preventDefault();
+        });
+
+        $('a.slick-back').click(function (e) {
+            $("#steps-wizard").slick('slickPrev');
+            e.preventDefault();
+        });
+
+        $('a.slick-back-first').click(function (e) {
+            $("#steps-wizard").slick("slickGoTo", 0);
+//            alert('test');
+            return false;
+        });
+
+
+        $('.slick-next').click(function (e) {
+            var button_switch = $(this).attr('data-switch');
+            var button_data = $(this).attr('data-button');
+            switch (button_switch) {
+                case "audio-button":
+                    var button_value = $(this).attr('data-button');
+                    $('.selected-audio').text(button_value);
+                    //moze ajax dalje.. okinuta vrednost je u promenljivoj button_data
+                    break;
+                case "subs-button":
+                    var button_value2 = $(this).attr('data-button');
+                    $('.selected-sub').text(button_value2);
+                    //moze ajax dalje.. okinuta vrednost je u promenljivoj button_data
+                    break;
+                default :
+                    alert('Defaut');
+                    break;
+            }
+            e.preventDefault();
+        });
+
+
+        //promo code left/filter panel
+        $('.available-trigger').on('click', function (e) {
+            $('.available-versions').toggleClass("on");
+            e.preventDefault();
+        });
+
+
+    });
+</script>

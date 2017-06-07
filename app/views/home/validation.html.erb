@@ -1,16 +1,17 @@
-<div style="position:relative !important; margin: 20px auto;width:400px">
-  <div class="popup validation">
-    <div class="content">
-              <div id="addwishlist_title" ><%= t('.title') %></div>
-             
-              <p align="center"><%= link_to t('.over18'), validation_path(:valid => 1), :id => :yes, :class => I18n.locale %></p>
-              <p align="center"><%= link_to t('.under18'), root_localize_path(:kind => nil), :id => :no %></p>
-      
-                <div id="movix_explain">
-                  <%= t('.warning').html_safe %>
-                </div>
-           
-            </div>
-           
+<% content_for :view_specific_css do %>
+    <%= stylesheet_link_tag "adult/adult" %>
+<% end %>
+<div class="container white-bck dark-gray padb20">
+  <h1 class="OpenSansCondensed f30 dark-gray pad0 text-center"><%= t('.title') %></h1>
+  <div class="block100 cred-buttons center-block">
+    <%= link_to validation_path(:valid => 1), :id => :yes, :class => "#{I18n.locale} btn center-block f16 violet-bck uppercase radius4 padtb15" do %>
+        <div class="fa-stack">
+          <i class="fa fa-circle-thin fa-stack-2x"></i>
+          <span class="fa fa-stack-1x fa-inverse fa-plus18"></span>
+        </div>
+        <%= t('.over18') %>
+    <% end %>
+    <%= link_to t('.under18'), root_localize_path(:kind => nil), :id => :no, class: "btn center-block f16 thinrgray-bck gray uppercase radius4 padtb15 mart15" %>
+    <p class="block100 mart5 text-left"><%= t('.warning').html_safe %></p>
   </div>
 </div>

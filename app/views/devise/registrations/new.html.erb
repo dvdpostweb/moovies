@@ -1,163 +1,69 @@
-<style>
-.step2 {
-  width: 470px;
-  height: 750px;
-  margin: 0 auto;
-  padding: 50px 250px 95px 250px;
-  background-color: #fff;
-  text-align: center;
-}
-.customer_newsletter {
-    width: 30px;
-    height: 30px;
-    margin: 23px 0 0 0;
-    display: inline-block;
-    float: left;
-    /*margin: 25px auto 0;*/
-}
+<div class="container white-bck padb30">
+  <div class="center-block thin-holder ">
+    <div class="block100 cred-buttons">
+      <a href="/auth/facebook?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>;ACTION_TYPE=NORMAL;ORG_URL=<%= request.fullpath %>" class="btn center-block f16 blue-facebook-bck uppercase radius4 padtb15"><i class="fa fa-facebook marr5 f16"></i>
+        <%= t('devise.registrations.new.social.network.facebook') %></a>
+      <a href="/auth/google_oauth2?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>;ACTION_TYPE=NORMAL;ORG_URL=<%= request.fullpath %>" class="btn center-block f16 red-google-bck uppercase radius4 padtb15 mart15"><i class="fa fa-google-plus marr5 f16"></i>
+        <%= t('devise.registrations.new.google.register') %></a>
+      <a href="<%= orange_lu_auth_sms_authorization_path(:moovie_id => params[:moovie_id], :code => params[:code], :activation => params[:activation]) %>" class="btn center-block f16 orange-bck uppercase radius4 padtb15 mart15">Register
+        with Orange</a>
+    </div>
 
-.customer_newsletter-label {
-    width: 430px;
-    text-align: left;
-    margin: 25px 0 0 5px;
-    color: #7e7e7e;
-		font-family: Arial,Helvetica, sans-serif;
-		font-size: 16px;
-		font-weight: normal;
-    float: left;
-    text-align: left;
-    padding-left: 5px;
-}
+    <div class="hr-with-words mart30 block100">
+      <span class="Arial f20 dark-blue"><%= t('promotions.show.or') %></span>
+    </div>
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+        <% if @samsung %>
+            <%= f.hidden_field(:samsung, :value => @samsung) %>
+        <% else %>
+            <%= cookies[:code] ? f.hidden_field(:code, :value => cookies[:code]) : f.hidden_field(:code, :value => @default_code) %>
+        <% end %>
+        <%= f.hidden_field :abo, :value => params[:abo] %>
+        <%= f.hidden_field :language, :value => Moovies.customer_languages[I18n.locale] %>
+        <div class="col-xs-12" style="height:20px;"></div>
+        <div class="form-group input-group-lg">
+          <%= f.email_field :email, :class => 'form-control f20', :placeholder => t('.email') %>
+        </div>
+        <div class="col-xs-12" style="height:20px;"></div>
+        <div class="form-group input-group-lg">
+          <%= f.password_field :password, :class => 'form-control f20', :placeholder => t('.password') %>
+        </div>
+        <div class="col-xs-12" style="height:20px;"></div>
+        <div class="form-group input-group-lg">
+          <%= f.password_field :password_confirmation, :class => 'form-control f20', :placeholder => t('.confirmation_pass') %>
+        </div>
 
-.customer_newsletter_parnter {
-    width: 30px;
-    height: 30px;
-    margin: 23px 0 0 0;
-    display: inline-block;
-    float: left;
-    /*margin: 25px auto 0;*/
-}
+        <div class="block100 mart30">
 
-.customer_newsletter_parnter-label {
-    width: 430px;
-    margin: 25px 0 0 5px;
-    color: #7e7e7e;
-		font-family: Arial,Helvetica, sans-serif;
-		font-size: 16px;
-    font-weight: normal;
-    float: left;
-    text-align: left;
-    padding-left: 5px;
+          <div class="col-md-1 col-sm-1 col-xs-1 padt5">
+            <%= f.check_box :newsletter, :checked => true, class: "icheckbox" %></div>
+          <div class="col-md-11 col-sm-11 col-xs-11">
+            <label class="Arial f18 normal marl10"><%= t('.newsletter') %></label>
+          </div>
+        </div>
 
-}
+        <div class="block100 mart10">
+          <div class="col-md-1 col-sm-1 col-xs-1 padt5">
+            <%= f.check_box :newsletter_parnter, :checked => true, class: "icheckbox" %></div>
+          <div class="col-md-11 col-sm-11 col-xs-11">
+            <label class="Arial f18 normal marl10"><%= t('.newsletter_parnter') %></label>
+          </div>
+        </div>
 
-.info, .success, .warning, .errornr, .validation {
-    border: 1px solid;
-    margin: 10px 0px;
-    padding:20px 10px 20px 50px;
-    background-repeat: no-repeat;
-    background-position: 10px center;
-}
-.info {
-    color: #00529B;
-    background-color: #BDE5F8;
-}
-.success {
-    color: #4F8A10;
-    background-color: #DFF2BF;
-}
-.warning {
-    color: #9F6000;
-    background-color: #FEEFB3;
-}
-.errornr {
-    color: #D8000C;
-    background-color: #FFBABA;
-		text-align: center;
-}
-}
-</style>
-<% if params[:freetrial_action].present? && params[:freetrial_action] == "FREETRIAL" %>
-<style>
-#freetrial {
-	width: 725px;
-	margin-left: 4px;
-	background-color: #fff;
-	text-align: left;
-	padding-left: 25%;
-	padding-top: 50px;
-}
-#fth3 {
-	color: #76c71e;
-	padding-bottom: 5px;
-	font-family: Open Sans Condensed;
-	font-size: 27px;
-}
-.step2 {
-	padding-top: 10px;
-}
-#fth3q {
-	color: #000;
-	font-size: 19px;
-	padding-bottom: 3px;
-	font-family: Open Sans Condensed;
-}
-</style>
-  <div id="freetrial">
-		<h1 id="fth3"><%= t('freetrial_login_1') %></h1>
-		<ul>
-	    <li id="fth3q">- <%= t('freetrial_login_2') %> <strong><%= params[:films] %> <%= t('freetrial_login_3') %></strong> <%= t('freetrial_login_4') %></li>
-	    <li id="fth3q">- <%= t('freetrial_login_5') %> <strong>€ <%= params[:price] %>/<%= t('freetrial_login_6') %></strong></li>
-	    <li id="fth3q">- <%= t('freetrial_login_7') %></li>
-	  </ul>
-	</div>
-<div class="step2">
-<% else %>
-<div class="step2">
-	<%= link_to root_path do %>
-		<%= image_tag "plush_logo_fixed.jpg", height: '71', width: '129' %>
-	<% end %>
-  <% if params[:DS_CODE_RESTRICTION_ERROR].present? && params[:DS_CODE_RESTRICTION_ERROR] == "DISCOUNT_CODE_LIMIT_AUTH_ERROR" %>
-	  <div class="errornr"><%= arleady_used_code_messages_helper %></div>
-	<% end %>
-<% end %>
-<% if params[:activation].blank? %>
-<a href="/auth/facebook?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>;ACTION_TYPE=NORMAL;ORG_URL=<%= request.fullpath %>"><button id="fb_connect_login" class="face-button"><%= t('devise.registrations.new.social.network.facebook') %></button></a>
-<a href="/auth/google_oauth2?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>;ACTION_TYPE=NORMAL;ORG_URL=<%= request.fullpath %>"><button id="fb_connect_login" class="face-button" style="background: #DD4B39; margin-top: 0px;"><%= t('devise.registrations.new.google.register') %></button></a>
-<div class="separator-part">
-	<div class="separator-line"></div>
-	<label class="separator-label"><%= t('promotions.show.or') %></label>
-	<div class="separator-line"></div>
-</div>
-<% end %>
-</br>
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-<% if @samsung %>
-  <%= f.hidden_field(:samsung, :value => @samsung) %>
-<% else %>
-  <%= cookies[:code] ? f.hidden_field(:code, :value => cookies[:code]) : f.hidden_field(:code, :value => @default_code) %>
-<% end %>
-<%= f.hidden_field :abo, :value => params[:abo] %>
-<%= f.hidden_field :language, :value => Moovies.customer_languages[I18n.locale] %>
-<%= f.email_field :email, :class => 'text-field', :placeholder => t('.email') %>
-<%= f.password_field :password, :class => 'text-field', :placeholder => t('.password') %>
-<%= f.password_field :password_confirmation, :class => 'text-field', :placeholder => t('.confirmation_pass') %>
-<%= f.submit t('.sign_up', :default => "Sign up"), :class => "button-connenct-large" %>
-  <%= render "devise/shared/links" %>
+        <div class="block100 text-center mart30">
+          <%= f.submit t('.sign_up', :default => "Sign up"), :class => "btn block100 btn-green-gradient padlr40 padtb15 white f16 normal" %>
+        </div>
 
-<div class="customer_newsletter">
-    <%= f.check_box :newsletter, :checked => true %>
-    <label for="customer_newsletter">
-      <span></span>
-    </label>
+        <div class="block100 mart30 text-center">
+          <%= link_to t('.forget_password'), new_password_path(resource_name, :code => params[:code], :activation => params[:activation]), class: "f20" %>
+        </div>
+        <div class="block100 mart5 text-center">
+          <%= link_to t('.sign_in'), new_session_path(resource_name, :code => params[:code], :activation => params[:activation]), class: "f20" %>
+        </div>
+    <% end %>
   </div>
-  <label class="customer_newsletter-label"><%= t('.newsletter') %></label>
-<div class="customer_newsletter_parnter">
-    <%= f.check_box :newsletter_parnter, :checked => true %>
-    <label for="customer_newsletter_parnter">
-      <span></span>
-    </label>
-  </div>
-  <label class="customer_newsletter_parnter-label"><%= t('.newsletter_parnter') %></label>
 </div>
+
+<% content_for :run_specific_javascript do %>
+    <%= javascript_include_tag "devise/registration" %>
 <% end %>

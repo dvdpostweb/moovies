@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
 
+  #layout "application_old"
+
   def index
     @body_id = 'home'
     @meta_title = t("home.index.meta_title", :default => '')

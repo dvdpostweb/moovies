@@ -1,64 +1,38 @@
-<div id="top" class="<%= "promo" if !current_customer && cookies['url_promo'] %>">
-  <div class="wrap jcl">
-    <% if current_customer %>
-      <% unless params[:controller] == "steps" %>
-        <%= link_to t('.compte'), customer_path(:id => current_customer) %>
-        <%= "#{link_to t('.logout'), destroy_customer_session_path, :id => :logout, :method => :delete} <span>(#{current_customer.email})</span>".html_safe %>
+<div class="container top-header hidden-sm hidden-xs">
+  <div class="block100 padtb10">
+    <ul class="lng-holder col-md-4">
+      <% cache("conditions_#{I18n.locale}", :expires_in => 15.minutes) do %>
+      <li><%= link_to t('.conditions'), info_path(:page_name => t('routes.infos.params.privacy')) unless current_customer %></li>
       <% end %>
+      <%= switch_locale_link(params) %>
+    </ul>
+    <% if customer_signed_in? %>
+        <ul class="login-holder col-md-8 f12">
+          <li><%= "#{link_to t('.logout'), destroy_customer_session_path, :id => :logout, :method => :delete} <span>(#{current_customer.email})</span>".html_safe %></li>
+          <li><%= link_to t('.compte'), customer_path(:id => current_customer) %></li>
+        </ul>
     <% else %>
-    &nbsp;
+        <% cache("login-holder_#{I18n.locale}", :expires_in => 15.minutes) do %>
+        <ul class="login-holder col-md-8 f12">
+          <li>
+            <%= link_to('/auth/google_oauth2/', :class => 'loginBtn loginBtn--google', :id => :login_fb, :class => "uppercase red-google-bck") do %>
+                <i class="fa fa-google-plus white"></i><%= t('.social.network.google') %>
+            <% end %>
+          </li>
+          <li class="marr10">
+            <%= link_to('/auth/facebook/', :class => 'loginBtn loginBtn--facebook', :id => :login_fb, :class => "uppercase blue-facebook-bck") do %>
+                <i class="fa fa-facebook white"></i><%= t('.social.network.fbconnect') %>
+            <% end %>
+          </li>
+          <li class="marr10">
+            <%= link_to(new_customer_session_path, :id => :login, :class => "uppercase #{params[:kind] == :adult ? "violet-bck" : "green-bck"}") do %>
+                <i class="fa fa-lock black"></i><%= t('.login') %>
+            <% end %>
+          </li>
+        </ul>
+        <% end %>
     <% end %>
   </div>
 </div>
-<ul id="lang">
-  <li><%= link_to t('.conditions'), info_path(:page_name => t('routes.infos.params.privacy')) unless current_customer %></li>
-  <%= switch_locale_link(params) %>
-  <li class="wrap">
-    <% if !current_customer %>
-      <%= link_to t('.login'), new_customer_session_path, :id => :login %>
-      <%= link_to t('.social.network.fbconnect'), '/auth/facebook/', :class => 'loginBtn loginBtn--facebook', :id => :login_fb %>
-      <%= link_to t('.social.network.google'), '/auth/google_oauth2/', :class => 'loginBtn loginBtn--google', :id => :login_fb %>
-
-<!--
-      <#% if Rails.env.development? || Rails.env.staging? %>
-        <#%= link_to t('INSTAGRAM'), '/auth/instagram/', :class => 'sb linkedin' %>
-        <#%= link_to t('WINDOWSLIVE'), '/auth/windowslive/', :class => 'sb linkedin' %>
-       <#% end %>
--->
-    <% end %>
-
-  </li>
-</ul>
-<div id="wrap">
-
-    <% if flash[:notice] %>
-  	<div class='flash_message'>
-      <div class="notice">
-        <%= flash[:notice] %>
-      </div>
-  	</div>
-    <% end %>
-    <% if flash[:error] || flash[:alert]%>
-  	<div class='flash_message'>
-      <div class="flash_error">
-        <%= flash[:error] %><%= flash[:alert] %>
-      </div>
-  	</div>
-    <% end %>
-
-    <div id="reconduction_div" class="flash_message">
-      <div id="reconduction_message" class="flash_error">
-
-      </div>
-    </div>
-
-<% unless params[:controller] == "steps" %>
-  <%= render partial: "layouts/green_banner" %>
-<% end %>
-
-  <!--   ==============   HEADER   ==============   -->
-  <div id="header" >
-    <div><%= link_to t('.tagline'), root_localize_path, :class => 'f-btn' %></div>
-    <%= render :partial => 'layouts/menu' %>
-  </div>
-  <!--   ==============   END HEADER   ==============   -->
+<%= render partial: "layouts/green_banner" %>
+<%= render :partial => 'layouts/menu' %>

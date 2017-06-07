@@ -1,65 +1,52 @@
-<% if product.get_vod(session[:country]).empty? %>
-  <%= render :partial => 'products/vod_list',  :locals => {:product => product, :source => @source, :response_id => @response_id} %>
-<% else %>
-<div id="formats">
-  <% if product.get_vod(session[:country]).first && product.get_vod(session[:country]).first.drm == true %>
-    <div class="verimatrix">
-      <%= t('.drm_warning', :link => info_path(:page_name => :viewright)).html_safe %>
-    </div>
-  <% end %>
-  <h3><%= t '.format_available' %></h3>
+<div class="block100">
+  <h3 class="OpenSansCondensed f25 dark-blue pad0 padl5"><%= t '.format_available' %></h3>
 
-  <table border="0" cellpadding="0" cellspacing="0">
-    <tr>
-      <thead>
-        <th width="90"><%= t'.audio' %></th>
-        <th width="90"><%= t '.subtitles' %></th>
-      <thead>
-    </tr>
-    <tr>
-      <td colspan="5"><div class="lineformat"></div></td>
-    </tr>
-    <% product.get_vod(session[:country]).each do |vod| %>
-    <tr>
-      <tbody>
-        <td><%= vod.language.by_language(I18n.locale).first.name %></td>
-        <td><%= vod.subtitle.by_language(I18n.locale).first ? vod.subtitle.by_language(I18n.locale).first.name : t('.no_subtitle') %></td>
+  <% product.get_vod(session[:country]).each do |vod| %>
+    <table class="dark-blue OpenSansCondensed movie-versions-table">
+      <tr>
+        <td class="movie-versions-label"><%= t'.audio' %></td>
+        <td class="movie-versions-data"><%= vod.language.by_language(I18n.locale).first.name %></td>
+      </tr>
+      <tr>
+        <td class="movie-versions-label"><%= t '.subtitles' %></td>
+        <td class="movie-versions-data"><%= vod.subtitle.by_language(I18n.locale).first ? vod.subtitle.by_language(I18n.locale).first.name : t('.no_subtitle') %></td>
+      </tr>
+      <tr>
+        <td class="movie-versions-label">Price</td>
         <% if customer_signed_in? %>
-          <% unless ((current_customer.abo_type_id == 6 && current_customer.activation_discount_code_type == "A" && Mobistar.find_by_activation_id(current_customer.activation_discount_code_id) && current_customer.tvod_free > 0) || (current_customer.unlimted_subscriber? && product.svod?)) %>
-            <td align="center">
-              <% if current_customer.unlimted_subscriber? %>
-                <% if current_customer.tvod_free > 0 %>
-                  <p class="tooltips_title currency"><%= product.streaming_products.first.tvod_credits %> credits</p>
-                <% else %>
-                  <p class="tooltips_title currency"><%= product.streaming_products.first.ppv_price %>€</p>
-                <% end %>
-              <% elsif current_customer.plush_la_carte_subscriber? || current_customer.customers_abo_type == 6 %>
-                <% if current_customer.customers_abo_type == 6 && current_customer.tvod_free == 0 %>
-                  <p class="tooltips_title currency"><%= product.streaming_products.first.tvod_price %>€</p>
-                <% elsif current_customer.customers_abo_type == 6 && current_customer.tvod_free > 0 %>
-                  <p class="tooltips_title currency"><%= product.streaming_products.first.tvod_credits %> credits</p>
-                <% elsif current_customer.customers_abo_type == 6 && current_customer.tvod_free == 0 && Mobistar.find_by_activation_id(current_customer.activation_discount_code_id) %>
-                  <p class="tooltips_title currency"><%= product.streaming_products.first.tvod_price %>€</p>
-                <% elsif current_customer.plush_la_carte_subscriber? %>
-                  <p class="tooltips_title currency"><%= product.streaming_products.first.tvod_credits %> credits</p>
-                <% end %>
+            <% unless ((current_customer.abo_type_id == 6 && current_customer.activation_discount_code_type == "A" && Mobistar.find_by_activation_id(current_customer.activation_discount_code_id) && current_customer.tvod_free > 0) || (current_customer.unlimted_subscriber? && product.svod?)) %>
+                <td class="movie-versions-data">
+                  <% if current_customer.unlimted_subscriber? %>
+                      <% if current_customer.tvod_free > 0 %>
+                          <%= product.streaming_products.first.tvod_credits %> credits
+                      <% else %>
+                          <%= product.streaming_products.first.ppv_price %>€
+                      <% end %>
+                  <% elsif current_customer.plush_la_carte_subscriber? || current_customer.customers_abo_type == 6 %>
+                      <% if current_customer.customers_abo_type == 6 && current_customer.tvod_free == 0 %>
+                          <%= product.streaming_products.first.tvod_price %>€
+                      <% elsif current_customer.customers_abo_type == 6 && current_customer.tvod_free > 0 %>
+                          <%= product.streaming_products.first.tvod_credits %> credits
+                      <% elsif current_customer.customers_abo_type == 6 && current_customer.tvod_free == 0 && Mobistar.find_by_activation_id(current_customer.activation_discount_code_id) %>
+                          <%= product.streaming_products.first.tvod_price %>€
+                      <% elsif current_customer.plush_la_carte_subscriber? %>
+                          <%= product.streaming_products.first.tvod_credits %> credits
+                      <% end %>
+                  <% end %>
+                </td>
+            <% end %>
+        <% else %>
+            <td class="movie-versions-data">
+              <% if product.streaming_products.any? %>
+                  <%= product.streaming_products.first.tvod_price %>€
               <% end %>
             </td>
-          <% end %>
-        <% else %>
-          <td align="center">
-            <% if product.streaming_products.any? %>
-              <%= product.streaming_products.first.tvod_price %>€
-            <% end %>
-          </td>
         <% end %>
-        <td>
-          <%= render :partial => 'products/streaming',  :locals => {:product => product, :source => @source, :popup => false, :max_price => true} if vod.available? %>
-        </td>
-      </tbody>
+      </tr>
+    </table>
+    <div class="block100 mart5">
+      <%= render :partial => 'products/streaming',  :locals => {:product => product, :source => @source, :popup => false, :max_price => true} if vod.available? %>
+    </div>
       <%= get_vod_message(vod, svod_date, params[:kind].to_s, Moovies.packages.invert[product.package_id]) %>
-    </tr>
-    <% end %>
-  </table>
-</div><!-- #formats -->
-<% end %>
+  <% end %>
+</div>

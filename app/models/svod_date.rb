@@ -8,7 +8,7 @@
 #  end_on           :date
 #  created_at       :datetime
 #  updated_at       :datetime
-#  kind             :string(12)       default("NORMAL")
+#  kind             :string(12)       default("NORMAL"), not null
 #  prepaid_start_on :date
 #  prepaid_end_on   :date
 #

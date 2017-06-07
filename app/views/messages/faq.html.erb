@@ -1,6 +1,9 @@
-<div id="contact-wrap">
+<div class="container white-bck dark-gray padb20">
   <%= render :partial => 'messages/menu', :locals => {:active_menu => 'faq'} if current_customer %>
-  <div id="tabs-content">
-    <%= render :partial => 'messages/index/faq' %>
-  </div>
+  <%= render :partial => 'messages/index/faq' %>
 </div>
+
+<% content_for :run_specific_javascript do %>
+    <%= javascript_include_tag "faq/public_faq" %>
+<% end %>
+

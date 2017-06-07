@@ -1,2 +1,2 @@
-<% title = "<strong>#{audio.language.by_language(I18n.locale).first.name}</strong>".html_safe %>
-<%= link_to title, streaming_product_language_path(:streaming_product_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id], :language_id => audio.language_id, :streaming_code => params[:streaming_code], :email => params[:email], :sample => sample, :source => params[:source], :response_id => params[:response_id]), :class => "btn language_btn" %>
+<% title = audio.language.by_language(I18n.locale).first.name %>
+<%= link_to title, streaming_product_language_path(:streaming_product_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id], :language_id => audio.language_id, :streaming_code => params[:streaming_code], :email => params[:email], :sample => sample, :source => params[:source], :response_id => params[:response_id]), :class => "" %>

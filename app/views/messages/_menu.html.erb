@@ -1,6 +1,37 @@
-<% active_menu ||= 'index' %>
-<ul id="tabs">
-  <li><%= link_to t('.messages'), messages_path, :class => tab_item_class('index', active_menu), :id => :messages_link %></li>
-  <li><%= link_to t('.contact'), new_phone_request_path, :class => tab_item_class('contact', active_menu), :id => :contact_link %></li>
-  <li><%= link_to t('.faq'), faq_path, :class => tab_item_class('faq', active_menu), :id => :faq_link %></li>
-</ul>
+<div class="contact-sub-menu">
+  <ul>
+    <% if params[:action] == "index" %>
+        <li class="selected">
+          <%= link_to messages_path, :id => :messages_link do %>
+              <%= t('.messages') %> <i class="fa fa-check marlr10"></i>
+          <% end %>
+        </li>
+    <% else %>
+        <li>
+          <%= link_to t('.messages'), messages_path, :id => :messages_link %>
+        </li>
+    <% end %>
+    <% if params[:action] == "new" %>
+        <li class="selected">
+          <%= link_to new_phone_request_path, :id => :contact_link do %>
+              <%= t('.contact') %> <i class="fa fa-check marlr10"></i>
+          <% end %>
+        </li>
+    <% else %>
+        <li>
+          <%= link_to t('.contact'), new_phone_request_path, :id => :contact_link %>
+        </li>
+    <% end %>
+    <% if params[:action] == "faq" %>
+        <li class="selected">
+          <%= link_to faq_path, :id => :faq_link do %>
+              <%= t('.faq') %> <i class="fa fa-check marlr10"></i>
+          <% end %>
+        </li>
+    <% else %>
+        <li>
+          <%= link_to t('.faq'), faq_path, :id => :faq_link %>
+        </li>
+    <% end %>
+  </ul>
+</div>

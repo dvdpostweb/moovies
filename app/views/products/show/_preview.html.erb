@@ -1,9 +1,10 @@
-<div id="preview">
+<ul class="movie-gallery">
   <% 6.times do |i| %>
-    <% t = i + 1 %>
-    <div class="preview_box" >
-    <%= image_tag product.preview_image(t, type), :class => "preview_item", :alt => "", :id => "image_#{i}" %>
-    </div>
+      <% t = i + 1 %>
+  <li>
+    <a href="<%= product.preview_image_big(t, type) %>" class="fancybox" rel="movie-gallery">
+      <%= image_tag product.preview_image(t, type), :class => "img-responsive" %>
+    </a>
+  </li>
   <% end %>
-  <div style="clear:both"></div>
-</div>
+</ul>

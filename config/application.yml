@@ -26,6 +26,8 @@ development:
   FREETRIAL_REFERRER_EN: http://localhost:3000/en/information/freetrial
   REQUEST_HOST_BE: plush.devbe
   REQUEST_HOST_LU: plush.devlu
+  OLU_PLUSH_VOD_LOGIN: PLUSHVOD
+  OLU_PLUSH_VOD_PASSWORD: 6bifJPwxSg
 
 staging:
   FACEBOOK_APP_ID: 820120514798274
@@ -52,6 +54,8 @@ staging:
   FREETRIAL_REFERRER_EN: http://staging.plush.be/en/information/freetrial
   REQUEST_HOST_BE: staging.plush.be
   REQUEST_HOST_LU: staging.plush.lu
+  OLU_PLUSH_VOD_LOGIN: PLUSHVOD
+  OLU_PLUSH_VOD_PASSWORD: 6bifJPwxSg
 
 production:
   FACEBOOK_APP_ID: 657758261082235
@@ -76,3 +80,5 @@ production:
   FREETRIAL_REFERRER_EN: http://www.plush.be/en/information/freetrial
   REQUEST_HOST_BE: www.plush.be
   REQUEST_HOST_LU: www.plush.lu
+  OLU_PLUSH_VOD_LOGIN: PLUSHVOD
+  OLU_PLUSH_VOD_PASSWORD: 6bifJPwxSg

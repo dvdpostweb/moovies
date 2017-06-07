@@ -1,5 +1,7 @@
 Moovies::Application.configure do
 
+  config.react.variant = :development
+
   # Settings specified here will take precedence over those in config/application.rb
 
   # In the development environment your application's code is reloaded on
@@ -13,8 +15,10 @@ Moovies::Application.configure do
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = true
-  config.cache_store = :mem_cache_store, '127.0.0.1:11211'
-  config.i18n_cache_store = ActiveSupport::Cache.lookup_store(:mem_cache_store, '127.0.0.1:11211', :namespace => "development")
+  #config.cache_store = :mem_cache_store, '127.0.0.1:11211'
+  #config.i18n_cache_store = ActiveSupport::Cache.lookup_store(:mem_cache_store, '127.0.0.1:11211', :namespace => "development")
+  config.cache_store = :redis_store, "redis://localhost:6379/0/cache"
+  config.i18n_cache_store = ActiveSupport::Cache.lookup_store(:redis_store, "redis://localhost:6379/0/cache", :namespace => "development")
   config.i18n.enforce_available_locales = false
   I18n.config.enforce_available_locales = false
   # Don't care if the mailer can't send

@@ -1,26 +1,48 @@
-<div id='content_info' class="change_pass">
-  <h2><%= t('.title') %></h2>
+<div class="container white-bck padb30">
+  <div class="center-block thin-holder ">
+    <div align="center">
+      <h1 class="OpenSansCondensed f30 mar0 pad0"><%= t('.title') %></h1>
+    </div>
 
-  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
-    <%= devise_error_messages! %>
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:method => :put}) do |f| %>
+        <%= devise_error_messages! %>
+        &nbsp;
+        <div class="form-group input-group-lg">
+          <%= f.email_field :email, :class => 'form-control f20', :placeholder => t('.email'),:readonly => true %>
+        </div>
 
-    <div><%= f.label :email, t('.email') %><br />
-    <%= f.email_field :email, :autofocus => true %></div>
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <div><%= t('.waiting', :default => 'Currently waiting confirmation for:') %> <%= resource.unconfirmed_email %></div>
+        <% end %>
+        <div class="form-group input-group-lg">
+          <%= f.label :current_password, t('.current_pass') %>
+          <i><%= t '.warning_current_pass', :default => "(we need your current password to confirm your changes)" %></i><br/>
+          <%= f.password_field :current_password, :class => 'form-control f20', :placeholder => t('.current_pass') %>
+        </div>
 
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <div><%= t('.waiting', :default => 'Currently waiting confirmation for:') %> <%= resource.unconfirmed_email %></div>
+        <div class="form-group input-group-lg">
+          <%= f.label :password, t('.pass') %>
+          <i><%= t '.warning_new_pass', :default => "(leave blank if you don't want to change it)" %></i><br/>
+          <%= f.password_field :password, :autocomplete => "off", :class => 'form-control f20', :placeholder => t('.pass') %>
+        </div>
+
+        <div class="form-group input-group-lg">
+          <%= f.label :password_confirmation, t('.confirmation') %><br/>
+          <%= f.password_field :password_confirmation, :class => 'form-control f20', :placeholder => t('.confirmation') %>
+        </div>
+
+        <div class="block100 text-center mart30">
+          <%= f.submit t('.update'), :default => 'Update', :class => "btn block100 btn-green-gradient padlr40 padtb15 white f16 normal" %>
+        </div>
     <% end %>
-    <div><%= f.label :current_password, t('.current_pass') %> <i><%= t '.warning_current_pass', :default => "(we need your current password to confirm your changes)" %></i><br />
-    <%= f.password_field :current_password %></div>
-
-    <div><%= f.label :password, t('.pass') %> <i><%= t '.warning_new_pass', :default => "(leave blank if you don't want to change it)" %></i><br />
-    <%= f.password_field :password, :autocomplete => "off" %></div>
-
-    <div><%= f.label :password_confirmation, t('.confirmation') %><br />
-    <%= f.password_field :password_confirmation %></div>
-
-    <div><%= f.submit t('.update'), :default => 'Update' %></div>
-  <% end %>
-
-  <%= link_to t('.back'), :back %>
+    <div class="block100 mart30">
+      <div class="block100 mart30 text-center">
+        <%= link_to t('.back'), :back, class: "f20" %>
+      </div>
+    </div>
+  </div>
 </div>
+
+<% content_for :run_specific_javascript do %>
+    <%= javascript_include_tag "devise/change_password" %>
+<% end %>

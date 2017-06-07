@@ -204,9 +204,13 @@ class ProductsController < ApplicationController
     end
     if request.xhr?
       if trailer.class.name == 'StreamingTrailer'
-        render :partial => 'products/trailer', :locals => {:trailer => trailer, :trailers => trailers}
+        respond_to do |format|
+          format.js { render "trailer", :locals => { :trailer => trailer, :trailers => trailers } }
+        end
       elsif trailers.first
-        render :partial => 'products/trailer', :locals => {:trailer => trailers.first, :trailers => trailers}
+        respond_to do |format|
+          format.js { render "trailer", :locals => {:trailer => trailers.first, :trailers => trailers} }
+        end
       else
         render :text => 'error'
       end
@@ -271,6 +275,7 @@ class ProductsController < ApplicationController
   end
 
 private
+
   def find_product
     if !params[:recommendation].nil?
       @source = params[:recommendation]

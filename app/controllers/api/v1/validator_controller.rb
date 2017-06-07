@@ -13,6 +13,36 @@ class Api::V1::ValidatorController < API::V1::BaseController
     end
   end
 
+  def validate_login_password
+    if request.xhr?
+      if params[:customer][:email].present? && params[:customer][:password].present?
+        resource = Customer.find_for_database_authentication(email: params[:customer][:email])
+        if resource.valid_password?(params[:customer][:password])
+          render json: TRUE
+        else
+          render json: FALSE
+        end
+      end
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
+
+  def validate_login_password_on_update
+    if request.xhr?
+      if params[:customer][:email].present? && params[:customer][:current_password].present?
+        resource = Customer.find_for_database_authentication(email: params[:customer][:email])
+        if resource.valid_password?(params[:customer][:current_password])
+          render json: TRUE
+        else
+          render json: FALSE
+        end
+      end
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
+
   def check_presence_of_customer_email_registration
     if request.xhr?
       email = Customer.find_by_email(params[:customer][:email])
@@ -70,6 +100,20 @@ class Api::V1::ValidatorController < API::V1::BaseController
             end
           #end
         end
+      end
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
+
+  def check_activation_code_validity
+    if request.xhr?
+      discount = Discount.by_name(params[:promotion]).available.first
+      activation = Activation.by_name(params[:promotion]).available.first
+      if discount.present? || activation.present?
+        render json: TRUE
+      else
+        render json: FALSE
       end
     else
       raise ActionController::RoutingError.new('Not Found')
@@ -180,6 +224,10 @@ class Api::V1::ValidatorController < API::V1::BaseController
     else
       raise ActionController::RoutingError.new('Not Found')
     end
+  end
+
+  def language_by_language
+    render json: Language.by_language(I18n.locale)
   end
 
 end

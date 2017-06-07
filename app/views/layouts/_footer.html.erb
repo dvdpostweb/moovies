@@ -1,39 +1,43 @@
-<!--   ==============   FOOTER   ==============   -->
-<div id="footer" >
-  <div class="wrap">
+<div id="footer">
+  <div class="footer-block">
+    <h4><%= t '.explore' %></h4>
     <ul>
-      <li><h4><%= t '.explore' %></h4></li>
       <li><%= link_to t('layouts.header.home'), root_localize_path %></li>
       <li><%= link_to t('layouts.header.svod'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[params[:kind] == :normal ? 1 : 4]}"), :tag => 4) %></li>
       <li><%= link_to t('layouts.header.tvod'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[params[:kind] == :normal ? 2 : 5]}"), :tag => 4) %></li>
-      <li><%= link_to t('layouts.header.price'), info_path(:page_name => t('routes.infos.params.abo')) %></li>
+      <li><%= link_to t('layouts.header.price'), info_path(:page_name => t('routes.infos.params.alacarte')) %></li>
       <% if current_customer %>
-        <li><%= link_to t('layouts.header.wishlist'), vod_wishlists_path %></li>
-        <li><%= link_to t('layouts.menu.contact'), messages_path %></li>
+          <li><%= link_to t('layouts.header.wishlist'), vod_wishlists_path %></li>
+          <li><%= link_to t('layouts.menu.contact'), messages_path %></li>
       <% else %>
-        <li><%= link_to t('layouts.menu.contact'), new_phone_request_path() %></li>
+          <li><%= link_to t('layouts.menu.contact'), new_phone_request_path() %></li>
       <% end %>
     </ul>
-    <% if I18n.locale != :en %>
+  </div>
+  <% if I18n.locale != :en %>
+      <div class="footer-block">
+        <h4>FOLLOW</h4>
+        <ul>
+          <li><%= link_to "Facebook", Moovies.fb_url[I18n.locale], :target => "_blank" %></li>
+          <li><%= link_to "Google+", Moovies.google_url[I18n.locale], :target => "_blank", :rel => "publisher" %></li>
+          <li><%= link_to "Twitter", Moovies.twitter_url[I18n.locale], :target => "_blank" %></li>
+        </ul>
+      </div>
+  <% end %>
+  <div class="footer-block">
+    <h4><%= t '.how' %></h4>
     <ul>
-      <li><h4><%= t '.follow' %></h4></li>
-      <li><%= link_to "Facebook", Moovies.fb_url[I18n.locale], :target => "_blank" %></li>
-      <li><%= link_to "Google+", Moovies.google_url[I18n.locale], :target => "_blank", :rel => "publisher" %></li>
-      <li><%= link_to "Twitter", Moovies.twitter_url[I18n.locale], :target => "_blank" %></li>
-    </ul>
-    <% end %>
-    <ul>
-      <li><h4><%= t '.how' %></h4></li>
       <li><%= link_to t('.contact'), new_phone_request_path %></li>
       <li><%= link_to t('.vod'), info_path(:page_name => t('routes.infos.params.vod')) %></li>
       <li><%= link_to t('.faq'), faq_path %></li>
     </ul>
+  </div>
+  <div class="footer-block">
+    <h4><%= t '.about' %></h4>
     <ul>
-      <li><h4><%= t '.about' %></h4></li>
       <li><%= link_to t('.who'), info_path(:page_name => t('routes.infos.params.whoweare')) %></li>
       <li><%= link_to t('.privacy'), info_path(:page_name => t('routes.infos.params.privacy')) %></li>
       <li><%= link_to t('.conditions'), info_path(:page_name => t('routes.infos.params.conditions')) %></li>
     </ul>
   </div>
 </div>
-<!--   ==============   END FOOTER   ==============   -->

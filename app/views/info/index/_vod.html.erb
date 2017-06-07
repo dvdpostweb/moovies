@@ -1,94 +1,68 @@
-<div id="content_info">
-  <h1><%= t '.title' %></h1>
-  <div class="section one">
-    <div class="device_title">
-      <h3><%= t '.pc' %></h3>
+<div class="container white-bck dark-gray padb20 platforms-holder">
+  <h1 class="OpenSansCondensed text-center pad0"><%= t '.title' %></h1>
+  <div class="block100 padtb20">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+      <h2 class="OpenSansCondensed f25 text-center mar0 pad0"><%= t '.pc' %></h2>
+      <%= image_tag "template/platform-pc-mac.jpeg", class: "display-block img-responsive" %>
     </div>
-    <div class="device_infos">
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 padlr20 padt20">
       <%= t('.pc.text').html_safe %>
-      <p><%= link_to t('.pc.link'), streaming_products_sample_path %></p>
+      <%= link_to(t('.pc.link'), streaming_products_sample_path, :class => "btn green-bck OpenSansCondensed f23 block100", :id => "button-la-carte") %>
     </div>
-    <div class="clear"></div>
   </div>
-  <div class="section six" style="">
-    <div id="apple">
-      <div class="device_title">
-        <h3>Consoles</h3>
-      </div>
-      <div class="clear"></div>
+  <div class="block100 padtb20">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+      <h2 class="OpenSansCondensed f25 text-center mar0 pad0">Console PS-3</h2>
+      <%= image_tag "template/platform-ps-3.jpeg", class: "display-block img-responsive" %>
     </div>
-    <div id="ps3">
-      <div class="device_title"> 
-        <%= image_tag 'logo_ps3.jpg' %>
-      </div>
-      <div class="device_infos">
-        <div class="ps_title"> <%= t('.ps3_title').html_safe %> </div>
-        <%= t('.ps3_desc').html_safe %>
-      </div>
-      <div class="clear"></div>
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 padlr20 padt20">
+      <strong><%= t('.ps3_title').html_safe %></strong><br> <%= t('.ps3_desc').html_safe %>
     </div>
-     <div id="ps4">
-    
-    <div class="device_title">
-      <%= image_tag 'logo_ps4.jpg' %>
-    </div>
-    <div class="device_infos">
-    
-      <div class="ps_title"> <%= t('.ps4_title').html_safe %></div>
-      <%= t('.ps4_desc').html_safe %>
-    </div>
-    <div class="clear"></div>
   </div>
-    <div class="clear"></div>
+  <div class="block100 padtb20">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+      <h2 class="OpenSansCondensed f25 text-center mar0 pad0">Console PS-4</h2>
+      <%= image_tag "template/platform-ps-4.jpeg", class: "display-block img-responsive" %>
+    </div>
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 padlr20 padt20">
+      <strong><%= t('.ps4_title').html_safe %></strong><br> <%= t('.ps4_desc').html_safe %>
+    </div>
   </div>
-  <div class="section three">
-    <div id="apple">
-      <div class="device_title">
-        <h3><%= t '.tablet' %></h3>
-        
-        <img src="<%= image_path "apple_logo_vod.jpg" %>" />
-      </div>
-      <div class="device_infos">
+  <div class="block100 padtb20">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+      <h2 class="OpenSansCondensed f25 text-center mar0 pad0"><%= t '.tablet' %></h2>
+      <%= image_tag "template/platform-smart.jpeg", class: "display-block img-responsive" %>
+    </div>
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 padlr20 padt20">
       <%= t('.tablet.apple').html_safe %>
-      </div>
-      <div class="clear"></div>
     </div>
-    <div id="android">
-      <div class="device_title">
-  
-        <img src="<%= image_path "android_logo_vod.jpg" %>" />
-      </div>
-      <div class="device_infos">
+  </div>
+  <div class="block100 padtb20">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+      <h2 class="OpenSansCondensed f25 text-center mar0 pad0">Android</h2>
+      <%= image_tag "template/platform-android.jpeg", class: "display-block img-responsive" %>
+    </div>
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 padlr20 padt20">
       <%= t('.tablet.android').html_safe %>
-       
-        <p><%= link_to t('.tablet.android.link'),url_for, :id => 'vod_more' %></p>
-        <div id="more_info_android" style="display:none">
-          <%= t('.tablet.android.more').html_safe %>
-        </div>
-        <%= t('.tablet.android.app').html_safe %>
-      </div>
-      <div class="clear"></div>
+      <%= link_to(t('.pc.link'), streaming_products_sample_path, :class => "btn green-bck OpenSansCondensed f23 block100", :id => "button-la-carte") %>
     </div>
   </div>
-  <div class="section two">
-    <div class="device_title">
-      <h3><%= t '.smart' %></h3>
-      <img src="<%= image_path "smarttv_logo_vod.jpg" %>" />
+  <div class="block100 padtb20">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+      <h2 class="OpenSansCondensed f25 text-center mar0 pad0"><%= t '.smart' %></h2>
+      <%= image_tag "template/platform-smart-tv.jpeg", class: "display-block img-responsive" %>
     </div>
-    <div class="device_infos">
-    <%= t('.smart.text').html_safe %>
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 padlr20 padt20">
+      <%= t('.smart.text').html_safe %>
     </div>
   </div>
-  
-  <div class="section five">
-    <div class="device_title">
-      <h3><%= t '.tv', :link => info_path(:page_name => t('routes.infos.params.get_connected')) %></h3>
+  <div class="block100 padtb20">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+      <h2 class="OpenSansCondensed f25 text-center mar0 pad0"><%= t '.tv' %></h2>
+      <%= image_tag "template/platform-tv.jpeg", class: "display-block img-responsive" %>
     </div>
-    <div class="device_infos">
-    <%= t('.tv.text').html_safe %>
-      
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 padlr20 padt20">
+      <%= t('.tv.text').html_safe %>
     </div>
-    <div class="clear"></div>
   </div>
-
 </div>

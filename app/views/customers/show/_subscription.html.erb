@@ -1,120 +1,38 @@
-<div id="droite">
-  <div id="title">
-    <strong><%= t '.title' %></strong>
-  </div>
-
-  <div id="content_droite">
-    <table cellpadding="1" cellspacing="0" border="0" width="380">
-      <tr>
-        <td width="250" align="right"><strong><%= t('.your_account') %>:</strong></td>
-        <td align="left"><%= customer.subscription_description %></td>
-      </tr>
-      <% if customer.subscription_type.id != customer.next_subscription_type %>
-      <tr>
-        <td width="250" align="right"><strong><%= t('.your_next_account') %>:</strong></td>
-        <td align="left"><%= customer.next_subscription_description %></td>
-      </tr>
-      <% end %>
-      <% if customer.actived? %>
-      <tr>
-        <td align="right" valign="top" id="modif" colspan="2">
-          <ul>
-            <li class="links">
-              <%= link_to t('.suspend_abo'), new_customer_suspension_path(:customer_id => current_customer.to_param), :class => 'modification_address facebox' if current_customer.suspension_status == 0 && !current_customer.tvod_only?%>
-            </li>
-          </ul>
-        </td>
-      </tr>
-      <tr>
-        <td align="right" valign="top" id="modif" colspan="2">
-          <ul>
-            <li class="links">
-              <%= link_to t('stop_my_subscription'), stop_my_subscription_path, :class => 'modification_address facebox' if current_customer.suspension_status == 0 && !current_customer.tvod_only? %>
-            </li>
-          </ul>
-        </td>
-      </tr>
-      <% end %>
-      <tr>
-        <td align="right"><strong><%= t('.count_classic') %> :</strong></td>
-        <td align="left"><%= @classic_count %> </td>
-      </tr>
-      <tr>
-        <td align="right"><strong><%= t('.count_adult')%> :</strong></td>
-        <td align="left"><%= @adult_count%></td>
-      </tr>
-      <tr>
-        <td align="right" colspan='2'>
-          <% if customer.actived? && !customer.tvod_only? %>
-            <ul>
-              <li class='link_payment'>
-                <% if current_customer.payment_method != 0 %>
-                  <%= link_to t('cc.ogone_payment_method_change'), edit_customer_payment_methods_path(:customer_id => current_customer.to_param, :type => :credit_card_modification) %>
-                <% else %>
-                  <%= link_to t('.payment_method_change'), edit_customer_payment_methods_path(:customer_id => current_customer.to_param, :type => :credit_card) %>
-                <% end %>
-
-              </li>
-            </ul>
-          <% end %>
-        </td>
-      </tr>
-
-      <tr>
-        <td align="right" colspan='2'>
-          <% if customer.actived? && !customer.tvod_only? %>
-            <ul>
-              <li class='link_payment'>
-                  <%= link_to t('cc.change_my_subscription'), info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change") %>
-              </li>
-            </ul>
-          <% end %>
-        </td>
-      </tr>
-
-
-      <!--<%= render :partial => 'customers/show/new_pricing' %>
-        <tr>
-        <td colspan="2" align="left">
-          <% if customer.actived? && customer.subscription %>
-            <ul>
-              <li class="links">
-                <% if 1 == 0 %>
-                  <strong><%= link_to t('.modify_abo'), edit_customer_subscription_path(:customer_id => current_customer.to_param), :class => 'renew' %></strong>
-                <% end %>
-
-              </li>
-            </ul>
-          <% end %>
-        </td>
-      </tr>
-      -->
-      <% if current_customer.abo_active? && !current_customer.tvod_only? %>
-      <tr>
-        <td align="right"><strong><%= current_customer.auto_stop == 0 || (current_customer.auto_stop == 1 && current_customer.recurring_until && current_customer.recurring_until > Date.today) ? t('.date_end_abo') : t('.date_end') %></strong></td>
-        <td align="left">
-          <%= customer.subscription_expiration_date.strftime("%d/%m/%Y") if customer.subscription_expiration_date %>
-        </td>
-      </tr>
-      <% end %>
-      <!--
-      <tr>
-                <td width="360" align="right"><strong>Films dans votre liste cinéma :</strong></td>
-        <td width="258" align="left">22</td>
-      </tr>
-      <tr>
-                <td width="360" align="right"><strong>Films dans votre liste Adulte :</strong></td>
-        <td width="258" align="left">22</td>
-      </tr>
-     <!-- <tr>
-        <td align="right"><strong><%= t '.type_abo' %></strong></td>
-        <td align="left"><%= t(".#{customer.subscription_payment_method.name.downcase}") if customer.subscription_payment_method %></td>
-      </tr>-->
-    </table>
-  </div>
-  <p align="center"> <%= image_tag "#{I18n.locale}/info_tel.jpg" %></p>
+<h2 class="OpenSansCondensed f30 dark-gray"><%= t '.title' %></h2>
+<div class="form-group">
+  <span class="bold"><%= t('.your_account') %>:</span>
+  <%= customer.subscription_description %>
 </div>
-<div class="end"></div>
-<div style="display:none" id="rotation"><%= t '.rotation' %></div>
-<div style="display:none" id="only_vod_confirm"><%= t '.only_vod_confirm' %></div>
-<div style="display:none" id="remove_only_vod_confirm"><%= t '.remove_only_vod_confirm' %></div>
+<% if customer.subscription_type.id != customer.next_subscription_type %>
+<div class="form-group lightergray-bck">
+  <span class="bold"><%= t('.your_next_account') %>:</span>
+  <%= customer.next_subscription_description %>
+</div>
+<% end %>
+<%= link_to t('.suspend_abo'), new_customer_suspension_path(:customer_id => current_customer.to_param), :class => 'btn green-bck OpenSansCondensed f23 mart20', rel: "facebox" if current_customer.suspension_status == 0 && !current_customer.tvod_only? %>
+<%= link_to t('stop_my_subscription'), stop_my_subscription_path, :class => 'btn light-blue-bck OpenSansCondensed f23 mart20', rel: "facebox" if current_customer.suspension_status == 0 && !current_customer.tvod_only? %>
+
+<div class="form-group mart20">
+  <span class="bold"><%= t('.count_classic') %>:</span>
+  <%= @classic_count %>
+</div>
+<div class="form-group lightergray-bck">
+  <span class="bold"><%= t('.count_adult')%>:</span>
+  <%= @adult_count%>
+</div>
+<% if customer.actived? && !customer.tvod_only? %>
+    <% if current_customer.payment_method != 0 %>
+        <%= link_to t('cc.ogone_payment_method_change'), edit_customer_payment_methods_path(:customer_id => current_customer.to_param, :type => :credit_card_modification), :class => "btn green-bck OpenSansCondensed f23 mart20" %>
+    <% else %>
+        <%= link_to t('.payment_method_change'), edit_customer_payment_methods_path(:customer_id => current_customer.to_param, :type => :credit_card), :class => "btn green-bck OpenSansCondensed f23 mart20" %>
+    <% end %>
+<% end %>
+<% if customer.actived? && !customer.tvod_only? %>
+    <%= link_to t('cc.change_my_subscription'), info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change"), :class => "btn light-blue-bck OpenSansCondensed f23 mart20" %>
+<% end %>
+<% if current_customer.abo_active? && !current_customer.tvod_only? %>
+<div class="form-group mart20">
+  <span class="bold"><%= current_customer.auto_stop == 0 || (current_customer.auto_stop == 1 && current_customer.recurring_until && current_customer.recurring_until > Date.today) ? t('.date_end_abo') : t('.date_end') %>:</span>
+  <%= customer.subscription_expiration_date.strftime("%d/%m/%Y") if customer.subscription_expiration_date %>
+</div>
+<% end %>

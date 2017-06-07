@@ -1,8 +1,8 @@
 Moovies::Application.routes.draw do
 
-  devise_scope :customer do
-    get 'mobile_logout' => 'devise/sessions#destroy'
-  end
+  #devise_scope :customer do
+  #  get 'mobile_logout' => 'devise/sessions#destroy'
+  #end
 
   get "html5/testing"
 

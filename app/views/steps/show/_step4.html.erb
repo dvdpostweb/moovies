@@ -1,84 +1,12 @@
-<div class="container clearfix">
-  <div id="step_wrap">
-    <div class="step_form">
-      <h3><strong><%= t('.congrats') %></strong></h3>
-      <p id='step4_desc'><%= t('.congrats_desc').html_safe %></p>
-    <div class="clearfix"></div>
-  </div>
+<% content_for :view_specific_css do %>
+    <%= stylesheet_link_tag "steps/step4" %>
+<% end %>
+<div class="container white-bck">
+  <h1 class="green pad0 mart10 f30 OpenSansCondensed block100"><%= t('.congrats') %></h1>
+  <p class="block100"><%= t('.congrats_desc').html_safe %> </p>
   <%= render :partial => 'home/index/lists', :locale => {:type => 'subscription'} %>
 </div>
-<% if Rails.env == "production" %>
-  <% if [127].include?(current_customer.promo_id) %>
-    <!-- ptg -->
-    <img src='http://fr.ptg.be/aimg/plush.gif' />
-  <% end %>
-  <% if [139].include?(current_customer.promo_id) %>
 
-    <!-- Begin Addiliate Tracking code with image-->
-    <img src="http://www.addiliate.com/report.html?cp=<%= I18n.locale == :nl ? 'A3434599' : '43DHR5NP' %>&rId=<%= current_customer.id %>&orderId=[]&amount=[]" width="1" height="1" alt="" />
-    <!-- End Addiliate Tracking code with image-->
-  <% end %>
-   <% if [193].include?(current_customer.promo_id) %>
-    <img src="http://www.plush.be/trade/conversion.html?campaignID=12814&productID=24084&conversionType=lead&https={https}&transactionID=<%= current_customer.id %>&transactionAmount={transactionAmount}&email=<%= current_customer.email %>&descrMerchant={descrMerchant}&descrAffiliate={descrAffiliate}&currency={currency}" width="1" height="1" border="0" alt="" />
-  <% end %>
-  <% if [59,60,61,62,65].include?(current_customer.promo_id) %>
-    <!-- tradetracker -->
-    <iframe src="/trade/conversion.html?campaignID=12814&productID=<%= I18n.locale == :fr ? 15272 : 4211 %>&conversionType=lead&https=0&transactionID=<%= current_customer.id %>&transactionAmount=0&email=<%= current_customer.email %>&descrMerchant=plush&descrAffiliate=plush" frameborder="0" scrolling="0" marginwidth="0" marginheight="0" width="1" height="1"></iframe>
-    <!-- tradetracker -->
-  <% elsif Rails.env == "production" && [99].include?(current_customer.promo_id) %>
-    <!-- tradetracker -->
-    <iframe src="/trade/conversion.html?campaignID=14220&productID=<%= I18n.locale == :fr ? 21137 : 21136 %>&conversionType=lead&https=0&transactionID=<%= current_customer.id %>&transactionAmount=0&email=<%= current_customer.email %>&descrMerchant=plush&descrAffiliate=plush" frameborder="0" scrolling="0" marginwidth="0" marginheight="0" width="1" height="1"></iframe>
-    <!-- tradetracker -->
-  <% end %>
-<% end %>
-<% begin %>
-<% sub = current_customer.subscriptions.first %>
-    <% price = sub.action == 6 ? Discount.find_by_discount_code_id(sub.code_id).promo_price() :  Activation.find_by_activation_id(sub.code_id).promo_price  %>
-<% rescue %>
-  <% price = 0 %>
-<% end %>
-<script>
-    dataLayer = [{
-      'revenue': '<%= price %>'
-    }];
-</script>
-<!-- Google Code for Plush - Conversion Conversion Page svod -->
-<% if current_customer.tvod_only? %>
-<!-- Google Code for Plush - TVOD Conversion Page -->
-<script type="text/javascript">
-/* <![CDATA[ */
-var google_conversion_id = 1033549176;
-var google_conversion_language = "en";
-var google_conversion_format = "2";
-var google_conversion_color = "ffffff";
-var google_conversion_label = "mwNZCKjx2wgQ-Orq7AM";
-var google_remarketing_only = false;
-/* ]]> */
-</script>
-<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-</script>
-<noscript>
-<div style="display:inline;">
-<img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/1033549176/?label=mwNZCKjx2wgQ-Orq7AM&amp;guid=ON&amp;script=0"/>
-</div>
-</noscript>
-<% else %>
-<script type="text/javascript">
-/* <![CDATA[ */
-var google_conversion_id = 1033549176;
-var google_conversion_language = "en";
-var google_conversion_format = "3";
-var google_conversion_color = "ffffff";
-var google_conversion_label = "mW-yCIDZywYQ-Orq7AM";
-var google_conversion_value = 0;
-var google_remarketing_only = false;
-/* ]]> */
-</script>
-<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-</script>
-<noscript>
-<div style="display:inline;">
-<img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/1033549176/?value=0&amp;label=mW-yCIDZywYQ-Orq7AM&amp;guid=ON&amp;script=0"/>
-</div>
-</noscript>
+<% content_for :run_specific_javascript do %>
+    <%= javascript_include_tag "steps/step4" %>
 <% end %>

@@ -5,8 +5,8 @@
 #  activation_id                   :integer          not null, primary key
 #  activation_code                 :string(50)       default(""), not null
 #  activation_group                :integer          default(0), not null
-#  activation_type                 :integer          default(0), not null
-#  activation_value                :decimal(6, 2)    default(0.0), not null
+#  activation_type                 :integer
+#  activation_value                :decimal(6, 2)
 #  campaign_id                     :integer          not null
 #  activation_group_id             :integer          default(0), not null
 #  activation_pack                 :integer          default(0), not null

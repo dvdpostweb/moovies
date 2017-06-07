@@ -1,30 +1,31 @@
-<% if @streaming %>
-<div>
-  <%= flowplayer(@streaming.filename, @streaming.source, @streaming, @token_name, @browser) %>
-</div>
-<% else %>
-<div id="maincontent">
-  <div id='vod-wrap'>
-    <h2>
-      <span id="vod_title"><%= t('.title') %> - <%= link_to @product.title, product_path(:id => @product.to_param), :id => :vod_title_id %><span>
-    </h2>
-    <div class="error"></div>
-    <div id="presentation">
-      <%= image_tag "extrait-vod#{params[:kind] == :adult ? '_adult' : ''}.jpg",:width => '696px', :height => '389px' %>
-    </div>
-    <div id="flow"></div>
-    <div id="player"></div>
-    <div class="choice_language">
-      <h3><%= t('.version_title') %></h3>
-      <div id="choice_new">
-        <div id="step1" class="step" style="width:696px;height:120px">
-          <%= render :partial => 'streaming_products/show/audios', :locals => {:streaming => @streaming_prefered, :sample => true, :source => nil, :response_id => nil} %>
-        </div>
-        <div id="step2" class="step"></div>
-        <div id="step3" class="step"></div>
-      </div>
-    </div>
-  </div>
-</div>
-<br />
+<% content_for :view_specific_css do %>
+    <%= stylesheet_link_tag "vod/sample" %>
+    <%= stylesheet_link_tag "videojs/video-js" %>
 <% end %>
+<div class="container white-bck">
+  <h1 class=" pad0 mart10 f30 OpenSansCondensed block100"> JW PLAYER TESTING</h1>
+  <div class="block100">
+        <%= jwplayer(@streaming.filename, @streaming.source, @streaming, @token_name, @browser) %>
+
+          <div id="player">Loading the player...</div>
+          <script>
+              jwplayer('player').setup({
+                  file: movieUrl
+              });
+          </script>
+  </div>
+
+  <div class="block100 thin-gray text-center padlr15 marb15">
+    <h2 class="f19 black">Choose film version</h2>
+    <p class="block100 mart5 black">Which language would you like to watch this film in?</p>
+    <ul class="video-lg-buttons text-center block100 padtb20">
+      <li>
+        <a href="index.php%3Fpage=video-stream.html#" class="btn dark-gray-bck pull-left uppercase"><i class="fa fa-language marr5"></i>French</a>
+      </li>
+      <li>
+        <a href="index.php%3Fpage=video-stream.html#" class="btn dark-gray-bck pull-left uppercase"><i class="fa fa-language marr5"></i>English</a>
+      </li>
+    </ul>
+  </div>
+
+</div>

@@ -10,8 +10,8 @@
 #  gender               :string(1)        default("I")
 #  newsletters          :boolean          default(TRUE), not null
 #  newsletters_partners :boolean          default(TRUE), not null
-#  created_at           :date
-#  updated_at           :date
+#  created_at           :datetime
+#  updated_at           :datetime
 #  birth_at             :date
 #  zip                  :integer
 #

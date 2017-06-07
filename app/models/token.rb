@@ -18,7 +18,7 @@
 #  kind         :string(10)       default("NORMAL")
 #  season_id    :integer          default(0), not null
 #  episode_id   :integer          default(0), not null
-#  payment_kind :string(8)
+#  payment_kind :string(12)
 #  videoland    :boolean          default(FALSE)
 #
 

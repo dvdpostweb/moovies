@@ -373,7 +373,7 @@ module ProductsHelper
     |product|
       lang = product.language.by_language(I18n.locale).first
       if lang && lang.short
-        content += content_tag(:li, lang.short.upcase, :class => "left red osc", :alt => lang.name, :title => lang.name) 
+        content += content_tag(:li, lang.short.upcase, :class => "ballon", :alt => lang.name, :title => lang.name)
       end
     }
     content
@@ -394,7 +394,7 @@ module ProductsHelper
         else
           class_undertitle = class_bubble(short, :classic)
         end
-        content += content_tag(:li, short.upcase, :class => "left gray osc #{class_undertitle}", :alt => name, :title => name)
+        content += content_tag(:li, short.upcase, :class => "baloon-trans #{class_undertitle}", :alt => name, :title => name)
       end
     }
     content
@@ -526,23 +526,23 @@ module ProductsHelper
     if vod && vod.available?
       
       if svod_date && svod_date.start_on > Date.today && svod_date.start_on < Date.today+30.days
-        "<td class='goinfinite'>#{t('products.show.formats.soon_in_svod_' + kind, :days => (svod_date.start_on - Date.today).to_i).html_safe}</td>".html_safe
+        "<div class='alert alert-warning'>#{t('products.show.formats.soon_in_svod_' + kind, :days => (svod_date.start_on - Date.today).to_i).html_safe}</div>".html_safe
       elsif svod_date && svod_date.end_on > Date.today && svod_date.end_on < Date.today+30.days && vod.expire_at && vod.expire_at > Date.today
-        "<td class='goalacarte'>#{t('products.show.formats.soon_in_tvod', :days => (svod_date.end_on - Date.today).to_i).html_safe}</td>".html_safe
+        "<div class='alert alert-warning'>#{t('products.show.formats.soon_in_tvod', :days => (svod_date.end_on - Date.today).to_i).html_safe}</div>".html_safe
       elsif svod_date && svod_date.end_on > Date.today && svod_date.end_on < Date.today+30.days && vod.expire_backcatalogue_at && vod.expire_backcatalogue_at > Date.today
-        "<td class='goalacarte'>#{t('products.show.formats.soon_in_tvod', :days => (svod_date.end_on - Date.today).to_i).html_safe}</td>".html_safe
+        "<div class='alert alert-warning'>#{t('products.show.formats.soon_in_tvod', :days => (svod_date.end_on - Date.today).to_i).html_safe}</div>".html_safe
       elsif svod_date && svod_date.end_on == Date.today
-        "<td class='goalacarte'>#{t('products.show.formats.tomorrow_in_tvod')}</td>".html_safe
+        "<div class='alert alert-warning'>#{t('products.show.formats.tomorrow_in_tvod')}</div>".html_safe
       elsif vod.expire_at && vod.expire_at > Date.today && vod.expire_at < Date.today+30.days && vod.expire_at != vod.available_backcatalogue_from
-        "<td class='noavailable'>#{t('products.show.formats.last_chance', :days => (vod.expire_at - Date.today).to_i).html_safe}</td>".html_safe
+        "<div class='alert alert-warning'>#{t('products.show.formats.last_chance', :days => (vod.expire_at - Date.today).to_i).html_safe}</div>".html_safe
       elsif vod.expire_at && vod.expire_at == Date.today
-        "<td class='noavailable'>#{t('products.show.formats.last_chance_today').html_safe}</td>".html_safe
+        "<div class='alert alert-warning'>#{t('products.show.formats.last_chance_today').html_safe}</div>".html_safe
       elsif vod.expire_backcatalogue_at && vod.expire_backcatalogue_at > Date.today && vod.expire_backcatalogue_at < Date.today+30.days
-        "<td class='noavailable'>#{t('products.show.formats.last_chance', :days => (vod.expire_backcatalogue_at - Date.today).to_i).html_safe}</td>".html_safe
+        "<div class='alert alert-warning'>#{t('products.show.formats.last_chance', :days => (vod.expire_backcatalogue_at - Date.today).to_i).html_safe}</div>".html_safe
       elsif vod.expire_backcatalogue_at && vod.expire_backcatalogue_at == Date.today
-        "<td class='noavailable'>#{t('products.show.formats.last_chance_today').html_safe}</td>".html_safe
+        "<div class='alert alert-warning'>#{t('products.show.formats.last_chance_today').html_safe}</div>".html_safe
       else
-        "<td></td>".html_safe
+        "".html_safe
       end
     else
       if vod.available_from && vod.available_from > Date.today

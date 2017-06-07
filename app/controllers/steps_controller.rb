@@ -11,6 +11,7 @@ class StepsController < ApplicationController
     elsif params[:id] == 'step3'
       @hide_footer = true
       @hide_menu = true
+      gon.banc_card_error_message = t('orange.step3.banc_card_error_message')
     elsif params[:id] == 'step4'
       @new_tvod = Product.joins(:lists).includes("descriptions_#{I18n.locale}", 'vod_online_be').where("lists.#{I18n.locale} = 1").order("lists.id desc").limit(6)
     elsif params[:id] == 'old'

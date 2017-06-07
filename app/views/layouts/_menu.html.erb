@@ -1,52 +1,52 @@
 <% unless @hide_menu %>
-  <ul id="nav" class="osc">
-  	<li>
-  	  <%= link_to t('.catalogue'), products_short_path(), :id => 'catalogue_menu', :class => params[:controller] == 'products' ? :active : :inactive %>
-  		<ul id="catalogue" class="dropdown" style="display:none">
-  			<li><%= link_to t('.infinite'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}"), :kind => nil, :tag => 1), :class => params[:package] == Moovies.packages.invert[1] ? :active : :inactive %></li>
-  			<li><%= link_to t('.tvod'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[2]}"), :kind => nil, :tag => 1), :class => params[:package] == Moovies.packages.invert[2] ? :active : :inactive %></li>
-  			<% if @kid_visible %>
-  			<li><%= link_to t('.kid'), products_short_path(:package => Moovies.packages.invert[3], :kind => nil), :class => params[:package] == Moovies.packages.invert[3] ? :active : :inactive %></li>
-  			<% end %>
-  			<% if params[:kind] == :adult %>
-  			<li><%= link_to t('.adult_infinite'), products_short_path(:package => Moovies.packages.invert[4]), :class => params[:package] == Moovies.packages.invert[4] ? :active : :inactive %></li>
-  			<li><%= link_to t('.adult_tvod'), products_short_path(:package => Moovies.packages.invert[5]), :class => params[:package] == Moovies.packages.invert[5] ? :active : :inactive %></li>
-  			<% end %>
-  		</ul>
-  	</li>
-  	<li>
-    <% if customer_signed_in? %>
-      <%= link_to t('.abo'), info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change"), :id => 'alacarte', :class => params[:page_name] == 'alacarte' ? :active : :inactive %>
-    <% else %>
-      <%= link_to t('.abo'), info_path(:page_name => t('routes.infos.params.alacarte')), :id => 'alacarte', :class => params[:page_name] == 'alacarte' ? :active : :inactive %>
-    <% end %>
-   </li>
-    <li><%= link_to t('.multi'), info_path(:page_name => t('routes.infos.params.vod')), :id => :multi %></li>
-  	<li id='menu_account_li'><%= link_to t('.my_account'), current_customer ? customer_path(:id => current_customer) : customers_path, :id => 'account_menu', :class => params[:controller] == 'customers' || params[:controller] == 'watchlists' ? :active : :inactive %>
-  		<ul id="account" class="dropdown" style="display:none">
-  		<li><%= link_to t('.watchlist', :default => 'Ma playlist'), vod_wishlists_path, :class => params[:controller] == 'watchlists' ? :active : :inactive %></li>
-  		<li><%= link_to t('.infos'), current_customer ? customer_path(:id => current_customer) : customers_path, :class => params[:controller] == 'customers' ? :active : :inactive %></li>
-  		</ul>
-  	</li>
-  	<% if params[:kind] == :adult %>
-  	  <li><%= link_to t('.classic'), root_localize_path(:kind => nil), :id => :home %></li>
-  	<% else %>
-  	  <% if cookies[:adult_hide] != "1" %>
-  	    <li><%= link_to t('.+18'), root_localize_path(:kind => :adult), :id => :adult %></li>
-  	  <% end %>
-  	<% end %>
-  	<li><%= link_to t('.contact'), current_customer ? messages_path : new_phone_request_path, :id => :message %></li>
-  </ul>
-  <%= form_for :search, {:url => search_path(), :html => {:id => 'search', :method => :get}} do |f| %>
-    <div align='center' class='search'>
-      <div style='display:none' id='search_init'><%= t 'layouts.menu.search' %></div>
-      <%= text_field_tag :search, (params[:search] || t('.search')), {:id => 'search-field', :class => "search-field"} %>
-      <%= submit_tag 'search', :id => 'search-btn' %>
-    </div>
-    <!--
-    <% if customer_signed_in? %>
-      <a align='right' class="mcp" href="<%= edit_public_promotion_path() %>" id="codePromo"><%= t('layouts.menu.code_promo_mobistar')%></a>
-    <% end %>
-  -->
-  <% end %>
+    <nav id="mainNav" class="navbar navbar-default dark-gray-bck">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle">
+          <i class="fa fa-bars f25 normal"></i>
+        </button>
+        <%= params[:kind] == :adult ? link_to(image_tag("template/plush-logo-adult.png", :alt => "Plush"), root_localize_path, :class => "navbar-brand") : link_to(image_tag("template/plush-logo.png", :alt => "Plush"), root_localize_path, :class => "navbar-brand") %>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav OpenSansCondensed">
+          <li>
+            <%= link_to t('.catalogue'), products_short_path(), :id => 'catalogue_menu', :class => params[:controller] == 'products' ? "active-nav-tab" : :inactive %>
+          </li>
+          <li>
+            <% if customer_signed_in? %>
+                <%= link_to t('.abo'), info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change"), :id => 'alacarte', :class => params[:page_name] == 'alacarte' ? "active-nav-tab" : :inactive %>
+            <% else %>
+                <%= link_to t('.abo'), info_path(:page_name => t('routes.infos.params.alacarte')), :id => 'alacarte', :class => params[:page_name] == 'alacarte' ? "active-nav-tab" : :inactive %>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to t('.multi'), info_path(:page_name => t('routes.infos.params.vod')), :id => :multi, :class => params[:page_name] == 'vod' ? "active-nav-tab" : :inactive %>
+          </li>
+          <li class="dropdown">
+            <a href="<%= current_customer ? customer_path(:id => current_customer) : customers_path %>" data-toggle="dropdown" class="dropdown-toggle notifications-drop">
+              <%= t('.my_account') %><i class="fa fa-caret-down f11 marl5"></i> </a>
+            <ul class="dropdown-menu padb5">
+              <li><%= link_to t('.watchlist', :default => 'Ma playlist'), vod_wishlists_path, :class => params[:controller] == 'watchlists' ? :active : :inactive %></li>
+              <li><%= link_to t('.infos'), current_customer ? customer_path(:id => current_customer) : customers_path, :class => params[:controller] == 'customers' ? :active : :inactive %></li>
+            </ul>
+          </li>
+          <% if params[:kind] == :adult %>
+              <li><%= link_to t('.classic'), root_localize_path(:kind => nil), :id => :home, :class => "green" %></li>
+          <% else %>
+              <% if cookies[:adult_hide] != "1" %>
+                  <li><%= link_to t('.+18'), root_localize_path(:kind => :adult), :id => :adult, :class => "violet" %></li>
+              <% end %>
+          <% end %>
+          <li>
+            <%= link_to t('.contact'), current_customer ? messages_path : new_phone_request_path, :id => :message %>
+          </li>
+        </ul>
+      </div>
+      <div class="top-search-holder pad5">
+        <%= form_for :search, {:url => search_path(), :html => {:id => 'search', :method => :get}} do |f| %>
+            <%= text_field_tag :search, (params[:search] || t('.search')), {:id => 'search-field', :class => "search-field"} %>
+            <%= submit_tag 'search', :id => 'search-btn' %>
+        <% end %>
+      </div>
+
+    </nav>
 <% end %>

@@ -1,0 +1,40 @@
+<div id="vod_list_<%= product.to_param %>" class="block100 slide-buttons mart15 <%= product.series? ? "serie_list" : "vod_list" %>">
+  <% unless cookies[:display] == "list" || params[:controller] == "search" %>
+      <%= link_to(product_trailer_path(:product_id => product.to_param, :source => @source, :response_id => @response_id), :class => 'btn white pull-left dark-gray-bck btn-trailer', remote: true) do %>
+          <i class="fa fa-film marr5"></i><%= t('.trailer') %>
+      <% end %>
+  <% end %>
+  <% if current_customer %>
+      <% if @vod_wishlist && @vod_wishlist.include?(product.id) || @vod_wishlist.nil? %>
+          <% item = current_customer.vod_wishlists.where(imdb_id: product.imdb_id, season_id: product.season_id, episode_id: product.episode_id).first %>
+      <% end %>
+      <% if item %>
+          <%= form_for(:vod_wishlist, :url => vod_wishlist_path(:id => item.to_param), :html => {:method => :delete}, :remote => true) do |f| %>
+              <%= f.hidden_field :product_id, :value => product.to_param %>
+              <%= f.hidden_field :submit_id, :value => "vod_list_#{product.to_param}" %>
+              <%= hidden_field_tag :source, source %>
+              <%= hidden_field_tag :response_id, response_id %>
+              <%= button_tag(class: "btn gray-bck pull-right btn-selection") do %>
+                  <i class="fa fa-plus marr5"></i><%= t('.drop') %>
+              <% end %>
+          <% end %>
+      <% else %>
+          <%= form_for :vod_wishlist, :url => vod_wishlists_path(), :remote => true do |f| %>
+              <%= f.hidden_field :imdb_id, :value => product.imdb_id %>
+              <%= f.hidden_field :season_id, :value => product.season_id %>
+              <%= f.hidden_field :episode_id, :value => product.episode_id %>
+              <%= f.hidden_field :product_id, :value => product.to_param %>
+              <%= f.hidden_field :submit_id, :value => "vod_list_#{product.to_param}" %>
+              <%= hidden_field_tag :source, source %>
+              <%= hidden_field_tag :response_id, response_id %>
+              <%= button_tag(class: "btn gray-bck pull-righ btn-selection") do %>
+                  <i class="fa fa-plus marr5"></i><%= t('.add') %>
+              <% end %>
+          <% end %>
+      <% end %>
+  <% else %>
+      <%= link_to new_session_path(resource_name, :moovie_id => product.products_id), :class => "btn gray-bck pull-right btn-selection" do %>
+          <i class="fa fa-plus marr5"></i><%= t('.add') %>
+      <% end %>
+  <% end %>
+</div>

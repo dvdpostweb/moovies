@@ -1,22 +1,10 @@
 class Customers::RegistrationsController < Devise::RegistrationsController
 
-  layout :resolve_layout
-
   def new
     gon.code = params[:code]
     gon.moovie_id = params[:moovie_id]
     gon.activation = params[:activation]
-  end
-
-  private
-
-  def resolve_layout
-    case action_name
-    when "new"
-      "devise_layout"
-    else
-      "application"
-    end
+    redirect_to(info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action_registration => "select_your_package")) unless params[:code].present? || params[:moovie_id].present?
   end
 
 end

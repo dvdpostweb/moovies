@@ -1,117 +1,95 @@
-  <% content_for :view_specific_css do %>
-    <%= stylesheet_link_tag "adult" %>
-  <% end %>
-  <% if customer_signed_in? %>
-  <div class="alacarte">
-	<div class="header-nav">
-		<label id="plush-a-la-carte"><%= t('info.index.price_public.choose_adult_adult').html_safe %></label>
-		<ul>
-      <li class="plush">
+<div class="container white-bck">
+  <h1 class="violet">Catalogue 18+</h1>
+  <div class="block100 marb20 padt20 charts-top">
+    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 charts-buttons left-promo-code">
       <% if params[:subscription_action].present? && params[:subscription_action] == "subscription_change" %>
-        <li class="plush"><%= link_to t('info.index.price_public.choose_svod_svod').html_safe, info_path(:page_name => "unlimited", :subscription_action => "subscription_change") %></li>
+          <%= link_to t('info.index.price_public.choose_svod_tvod').html_safe, info_path(:page_name => "alacarte", :subscription_action => "subscription_change"), :class => "btn green-bck OpenSansCondensed f23 block100", :id => "button-la-carte" %>
       <% else %>
-        <li class="plush"><%= link_to t('info.index.price_public.choose_svod_svod').html_safe, info_path(:page_name => "unlimited") %></li>
+          <%= link_to t('info.index.price_public.choose_svod_tvod').html_safe, info_path(:page_name => "alacarte"), :class => "btn green-bck OpenSansCondensed f23 block100", :id => "button-la-carte" %>
       <% end %>
-      </li>
-      <li class="eighteen">
-        <% if params[:subscription_action].present? && params[:subscription_action] == "subscription_change" %>
-          <a href=""><%= link_to t('info.index.price_public.choose_svod_tvod').html_safe, info_path(:page_name => "alacarte", :subscription_action => "subscription_change"), id: "adult" %></a>
-        <% else %>
-          <a href=""><%= link_to t('info.index.price_public.choose_svod_tvod').html_safe, info_path(:page_name => "alacarte"), id: "adult" %></a>
-        <% end %>
-      </li>
-		</ul>
-	</div>
-	<div class="film-block">
-		<div class="film-box">
-			<p id="alacarte-kvadrat"><%= t('info.index.price_public.choose_adult_plan_one').html_safe %></p>
-		</div>
-	</div>
-	<div class="list-block">
-		<ul>
-			<li>
-				<label class="list-text"><%= t('info.index.price_public.adult_line_one').html_safe %> (<%= 1.month.from_now.strftime("%d/%m/%Y") %>)</label>
-				<label class="list-number">19,99€</label>
-			</li>
-			<li class="">
-				<label class="list-text"><%= t('info.index.price_public.adult_line_two').html_safe %></label>
-				<label class="list-number"><%= image_tag "adult/ok-violet.png" %></label>
-			</li>
-			<li class="">
-				<label class="list-text"><%= t('info.index.price_public.adult_access_devices').html_safe %></label>
-				<label class="list-number list-number-align"><%= image_tag "adult/ok-violet.png" %></label>
-			</li>
-			<li class="">
-				<label class="list-text"><%= t('info.index.price_public.adult_simultaneus').html_safe %></label>
-				<label class="list-number"><%= t('customers.show.old_pricing.unlimited') %></label>
-			</li>
-			<li class="">
-				<label class="list-text"><%= t('info.index.price_public.adult_cancellable').html_safe %></label>
-				<label class="list-number"><%= image_tag "adult/ok-violet.png" %></label>
-			</li>
-		</ul>
-	</div>
-
-	<div class="footer-block">
-		<div class="description-block"><%= t('info.index.price_public.adult_explanation_1').html_safe %>, <%= link_to t('info.index.price_public.adult_explanation_link').html_safe, info_path(:page_name => t('routes.infos.params.vod')), :id => :multi %>.
-									   <%= t('info.index.price_public.adult_explanation_2').html_safe %>.
-		</div>
-		<button id="svod_adult"><%= t('info.index.price_public.adult_button').html_safe %></button>
-		<div class="description-block description-block-main questions"><%= t('info.index.price_public.adult_support_info').html_safe %></div>
-		<div class="description-block conditions"><%= link_to t('info.index.price_public.adult_conditions').html_safe, info_path(:page_name => t('routes.infos.params.conditions')) %></div>
-	</div>
+      <% if params[:subscription_action].present? && params[:subscription_action] == "subscription_change" %>
+          <%= link_to t('info.index.price_public.choose_svod_svod').html_safe, info_path(:page_name => "unlimited", :subscription_action => "subscription_change"), :class => "btn OpenSansCondensed f23 block100", :id =>"button-la-unlmited" %>
+      <% else %>
+          <%= link_to t('info.index.price_public.choose_svod_svod').html_safe, info_path(:page_name => "unlimited"), :class => "btn OpenSansCondensed f23 block100", :id =>"button-la-unlmited" %>
+      <% end %>
+    </div>
+    <div class="block100 mart20">
+      <h3>↓ Question for this text is logicl to be on this page??? ↓</h3>
+      Vous pouvez louer films à la piéce directement à partir du catalogue, ou prendre un abonnement pour bénéficier de prix avantageux (1,99€ au lieu de 2,99€ pour la plupart des films, et
+      3,99€ au lieu de 4,99€ pour les derniéres sorties).
+    </div>
   </div>
-<% else %>
-<div class="alacarte">
-<div class="header-nav">
-  <label id="plush-a-la-carte"><%= t('info.index.price_public.choose_adult_adult').html_safe %></label>
-  <ul>
-    <li class="plush"><%= link_to t('info.index.price_public.choose_adult_tvod').html_safe, info_path(:page_name => t('routes.infos.params.alacarte')) %></li>
-    <li class="eighteen"><%= link_to t('info.index.price_public.choose_adult_svod').html_safe, info_path(:page_name => "unlimited") %></li>
-  </ul>
-</div>
-<div class="film-block">
-  <div class="film-box">
-    <p id="alacarte-kvadrat"><%= t('info.index.price_public.choose_adult_plan_one').html_safe %></p>
-  </div>
-</div>
-<div class="list-block">
-  <ul>
-    <li>
-      <label class="list-text"><%= t('info.index.price_public.adult_line_one').html_safe %> (<%= 1.month.from_now.strftime("%d/%m/%Y") %>)</label>
-      <label class="list-number">19,99€</label>
-    </li>
-    <li class="">
-      <label class="list-text"><%= t('info.index.price_public.adult_line_two').html_safe %></label>
-      <label class="list-number"><%= image_tag "adult/ok-violet.png" %></label>
-    </li>
-    <li class="">
-      <label class="list-text"><%= t('info.index.price_public.adult_access_devices').html_safe %></label>
-      <label class="list-number list-number-align"><%= image_tag "adult/ok-violet.png" %></label>
-    </li>
-    <li class="">
-      <label class="list-text"><%= t('info.index.price_public.adult_simultaneus').html_safe %></label>
-      <label class="list-number"><%= t('customers.show.old_pricing.unlimited') %></label>
-    </li>
-    <li class="">
-      <label class="list-text"><%= t('info.index.price_public.adult_cancellable').html_safe %></label>
-      <label class="list-number"><%= image_tag "adult/ok-violet.png" %></label>
-    </li>
-  </ul>
-</div>
 
-<div class="footer-block">
-  <div class="description-block"><%= t('info.index.price_public.adult_explanation_1').html_safe %>, <%= link_to t('info.index.price_public.adult_explanation_link').html_safe, info_path(:page_name => t('routes.infos.params.vod')), :id => :multi %>.
-                   <%= t('info.index.price_public.adult_explanation_2').html_safe %>.
-  </div>
-  <button><%= link_to t('info.index.price_public.adult_button').html_safe, new_customer_session_path( :code => "SVOD_ADULT" ) %></button>
-  <div class="description-block description-block-main questions"><%= t('info.index.price_public.adult_support_info').html_safe %></div>
-  <div class="description-block conditions"><%= link_to t('info.index.price_public.adult_conditions').html_safe, info_path(:page_name => t('routes.infos.params.conditions')) %></div>
-</div>
-</div>
-<% end %>
+  <div class="planSelectionContainer">
 
-<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
-<script>
-document.body.className = document.body.className.replace("adult","");
-</script>
+    <!--TABLE HEADER-->
+    <div class="planTable">
+
+      <!--header row full-->
+      <div class="headerRow show" id="header-chart">
+        <div class="columnHeader"></div>
+        <div class="cell selected pt-header-with-border">
+          <div>
+            <div class="selborder">
+              <div class="cellContent" data-box-order="3"><%= t('info.index.price_public.choose_adult_plan_one').html_safe %></div>
+            </div>
+            <div class="arrow"></div>
+          </div>
+        </div>
+      </div>
+      <!--/header row full-->
+
+    </div>
+    <!--/TABLE HEADER-->
+
+
+    <!--TABLE OPTIONS-->
+    <div class="planTable planTableOptions">
+      <div class="alt"><%= t('info.index.price_public.adult_line_one').html_safe %> (<%= 1.month.from_now.strftime("%d/%m/%Y") %>)</div>
+      <div class="row">
+        <div class="columnHeader"><%= t('info.index.price_public.adult_line_one').html_safe %> (<%= 1.month.from_now.strftime("%d/%m/%Y") %>)</div>
+        <div class="cell bodyCell selected">EUR 9.99</div>
+      </div>
+      <div class="alt"><%= t('info.index.price_public.adult_line_two').html_safe %></div>
+      <div class="row">
+        <div class="columnHeader"><%= t('info.index.price_public.adult_line_two').html_safe %></div>
+        <div class="cell bodyCell icon-plainCheck selected"></div>
+      </div>
+      <div class="alt"><%= t('info.index.price_public.adult_access_devices').html_safe %></div>
+      <div class="row">
+        <div class="columnHeader"><%= t('info.index.price_public.adult_access_devices').html_safe %></div>
+        <div class="cell bodyCell icon-plainCheck selected"></div>
+      </div>
+      <div class="alt"><%= t('info.index.price_public.adult_simultaneus').html_safe %></div>
+      <div class="row">
+        <div class="columnHeader"><%= t('info.index.price_public.adult_simultaneus').html_safe %></div>
+        <div class="cell bodyCell selected"><%= t('customers.show.old_pricing.unlimited') %></div>
+      </div>
+      <div class="alt"><%= t('info.index.price_public.adult_cancellable').html_safe %></div>
+      <div class="row">
+        <div class="columnHeader"><%= t('info.index.price_public.adult_cancellable').html_safe %></div>
+        <div class="cell bodyCell icon-plainCheck selected"></div>
+      </div>
+
+    </div>
+    <!--/TABLE OPTIONS-->
+
+    <!--DISCLAIMER-->
+    <div class="block100 padlr10 normal mart15 f14">
+      <%= t('info.index.price_public.adult_explanation_1').html_safe %>, <strong><%= link_to t('info.index.price_public.adult_explanation_link').html_safe, info_path(:page_name => t('routes.infos.params.vod')), :id => :multi %></strong>. <%= t('info.index.price_public.adult_explanation_2').html_safe %>.
+    </div>
+
+    <!--BUTTON-->
+    <div class="block100 mart15 padlr15">
+      <%= link_to(t('info.index.price_public.adult_button').html_safe, new_customer_session_path( :code => "SVOD_ADULT" ), :class => "btn pad10 f20 violet-bck", :id => "continue-package") %>
+    </div>
+    <!--/BUTTON-->
+
+    <div class="block100 padlr15"><%= t('info.index.price_public.adult_support_info').html_safe %></div>
+    <div class="block100 padlr15 mart15 marb30">
+      <%= link_to t('info.index.price_public.adult_conditions').html_safe, info_path(:page_name => t('routes.infos.params.conditions')) %>
+    </div>
+
+  </div>
+
+</div>

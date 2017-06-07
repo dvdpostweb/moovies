@@ -1,0 +1,34 @@
+<div id="content" class="block100 login-sign">
+  <div class="container white-bck padb30">
+    <div id="sms_auth" class="center-block thin-holder border radius4 thinrgray-bck pad20 mart20 overflow-hidden">
+      <div id="info1"></div>
+      <div id="info2"></div>
+      <div class="block100 text-center">
+        <%= image_tag("template/orange-logo.png", :class => "center-block") %>
+        <div class="col-xs-12" style="height:40px;"></div>
+      </div>
+      <div id="sms_form">
+        <form id="is_eligable">
+          <div class="form-group input-group-lg">
+            <input type="text" name="phone-number" id="sms_number" class="form-control" placeholder="Please enter ORANGE phone number">
+          </div>
+          <div class="block100 text-center mart20">
+            <input type="submit" class="btn block100 orange-bck padlr40 padtb15 white f16 normal" value="Send">
+          </div>
+        </form>
+        <form id="orange_purchase">
+          <div class="form-group input-group-lg">
+            <input type="text" name="sms-code" id="sms_code" class="form-control" placeholder="Please enter ORANGE SMS code">
+          </div>
+          <div class="block100 text-center mart20">
+            <input type="submit" class="btn block100 orange-bck padlr40 padtb15 white f16 normal" value="Send">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% content_for :run_specific_javascript do %>
+    <%= javascript_include_tag "orange/lu/auth/sms" %>
+<% end %>

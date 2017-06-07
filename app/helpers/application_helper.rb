@@ -1,6 +1,72 @@
 #encoding: utf-8
 module ApplicationHelper
 
+  def configure_content_div_html_class(params)
+    if params[:controller].present? && params[:controller] == "products" then
+      "block100"
+    elsif params[:controller].present? && params[:controller] == "customers/sessions" then
+      "block100 login-sign"
+    elsif params[:controller].present? && params[:controller] == "customers/registrations" then
+      "block100 login-sign"
+    elsif params[:controller].present? && params[:controller] == "devise/passwords" then
+      "block100 login-sign"
+    elsif params[:controller].present? && params[:controller] == "customers" && params[:action].present? && params[:action] == "show" then
+      "mon-compte"
+    elsif params[:controller].present? && params[:controller] == "steps" && params[:action].present? && params[:action] == "show" && params[:id].present? && params[:id] == "step3" then
+      "step3"
+    elsif params[:controller].present? && params[:controller] == "payment_methods" && params[:action].present? && params[:action] == "update" then
+      "step3"
+    elsif params[:controller].present? && params[:controller] == "payment_methods" && params[:action].present? && params[:action] == "edit" then
+      "step3"
+    elsif params[:controller].present? && params[:controller] == "steps" && params[:action].present? && params[:action] == "show" && params[:id].present? && params[:id] == "step4" then
+      "step4"
+    elsif params[:controller].present? && params[:controller] == "messages" && params[:action].present? && params[:action] == "faq" then
+      "contact-faq"
+    elsif params[:controller].present? && params[:controller] == "phone_requests" && params[:action].present? && params[:action] == "new" then
+      "contact"
+    elsif params[:controller].present? && params[:controller] == "messages" && params[:action].present? && params[:action] == "index" then
+      "contact-messages"
+    elsif params[:controller].present? && params[:controller] == "streaming_products" && params[:action].present? && params[:action] == "sample" then
+      "video-stream block100"
+    elsif params[:controller].present? && params[:controller] == "info" && params[:action].present? && params[:action] == "index" && params[:page_name].present? && params[:page_name] == "conditions" then
+      "conditions"
+    elsif params[:controller].present? && params[:controller] == "info" && params[:action].present? && params[:action] == "index" && params[:page_name].present? && params[:page_name] == "privacy" then
+      "conditions"
+    elsif params[:controller].present? && params[:controller] == "info" && params[:action].present? && params[:action] == "index" && params[:page_name].present? && params[:page_name] == "whoweare" then
+      "conditions"
+    elsif params[:page_name].present? && params[:page_name] == "alacarte" then
+      "price-chart price-chart-green three-column"
+    elsif params[:page_name].present? && params[:page_name] == "freetrial" then
+      "price-chart price-chart-green three-column"
+    elsif params[:page_name].present? && params[:page_name] == "unlimited" then
+      "price-chart price-chart-blue one-column"
+    elsif params[:page_name].present? && params[:page_name] == "adult" then
+      "price-chart price-chart-violet one-column"
+    elsif params[:controller].present? && params[:controller] == "streaming_products" && params[:action].present? && params[:action] == "show" then
+      "video-stream-wizard block100"
+    elsif params[:controller].present? && params[:controller] == "watchlists" && params[:action].present? && params[:action] == "index" then
+      "watchlist"
+    elsif params[:controller].present? && params[:controller] == "home" && params[:action].present? && params[:action] == "validation" then
+      "adult"
+    elsif params[:controller].present? && params[:controller] == "search" && params[:action].present? && params[:action] == "index" then
+      "movie-full search-results block100"
+    elsif params[:controller].present? && params[:controller] == "photobox" && params[:action].present? && params[:action] == "plans" then
+      "carrefour"
+    elsif params[:controller].present? && params[:controller] == "carrefourbonus" && params[:action].present? && params[:action] == "plans" then
+      "carrefour"
+    elsif params[:controller].present? && params[:controller] == "payment_methods" && params[:action].present? && params[:action] == "edit" && params[:type].present? && params[:type] == "credit_card_tvod" then
+      "payment-methods"
+    end
+  end
+
+  def render_promo_image_partial(controller)
+    case controller
+      when "products" then render "layouts/promo_image"
+      else
+        ""
+    end
+  end
+
   def arleady_used_code_messages_helper
     return "Le code est pas valide" if I18n.locale == :fr
     return "De code is niet geldig" if I18n.locale == :nl
@@ -208,20 +274,20 @@ module ApplicationHelper
   end
   def landing_img(code, promotion, params, products_alt_banner, discount_top)
     if params[:kind] == :adult
-      path = info_path(:page_name => t('routes.infos.params.abo')) #code ? promotion_path(:id => :mobistar2) : new_customer_registration_path(:code => get_code(discount_top.name))
+      path = info_path(:page_name => t('routes.infos.params.alacarte')) #code ? promotion_path(:id => :mobistar2) : new_customer_registration_path(:code => get_code(discount_top.name))
     else
-      path = info_path(:page_name => t('routes.infos.params.abo')) #new_customer_registration_path(:code => get_code(discount_top.name))
+      path = info_path(:page_name => t('routes.infos.params.alacarte')) #new_customer_registration_path(:code => get_code(discount_top.name))
     end
     if promotion && promotion.banner.present?
       src = "http://www.dvdpost.be/images/#{I18n.locale}/#{promotion.banner}"
-      image = image_tag(src, :size => '942x188')
+      image = image_tag(src, :size => '930x400', :class => "img-responsive")
 
     else
       src = "#{I18n.locale}/banner-promo-hp_tvod#{code ? "_#{code.activation_group_id}" : ''}#{params[:kind] == :adult ? '_adult' : ''}.jpg"
       src_norm = "#{I18n.locale}/banner-promo-hp_tvod#{params[:kind] == :adult ? '_adult' : ''}.jpg"
       src_norm = "http://www.dvdpost.be/images/plush_banner_public/test.php?img=1&lang=#{I18n.locale}&kind=#{params[:kind]}"
 
-      image = FileTest.exist?("/images/#{src}") ? image_tag(src, :size => '942x188', :alt => t(products_alt_banner)) : image_tag(src_norm, :size => '942x188', :alt => t(products_alt_banner))
+      image = FileTest.exist?("/images/#{src}") ? image_tag(src, :size => '930x200', :alt => t(products_alt_banner), :class => "img-responsive") : image_tag(src_norm, :size => '930x200', :alt => t(products_alt_banner), :class => "img-responsive")
 
     end
 

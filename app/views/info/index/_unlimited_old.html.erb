@@ -1,0 +1,126 @@
+<% content_for :view_specific_css do %>
+    <%= stylesheet_link_tag "unlimited" %>
+<% end %>
+<% if customer_signed_in? %>
+    <div class="alacarte">
+      <div class="header-nav">
+        <label id="plush-a-la-carte"><%= t('info.index.price_public.choose_svod_svod').html_safe %></label>
+        <ul>
+          <li class="plush">
+            <% if params[:subscription_action].present? && params[:subscription_action] == "subscription_change" %>
+                <%= link_to t('info.index.price_public.choose_svod_tvod').html_safe, info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change") %>
+            <% else %>
+                <%= link_to t('info.index.price_public.choose_svod_tvod').html_safe, info_path(:page_name => t('routes.infos.params.alacarte')) %>
+            <% end %>
+          </li>
+          <li class="eighteen">
+            <% if params[:subscription_action].present? && params[:subscription_action] == "subscription_change" %>
+                <a href=""><%= link_to t('info.index.price_public.choose_svod_adult').html_safe, info_path(:page_name => "adult", :subscription_action => "subscription_change"), id: "adult" %></a>
+            <% else %>
+                <a href=""><%= link_to t('info.index.price_public.choose_svod_adult').html_safe, info_path(:page_name => "adult"), id: "adult" %></a>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+      <div class="film-block">
+        <div class="film-box">
+          <p id="alacarte-kvadrat"><%= t('info.index.price_public.choose_svod_plan_one').html_safe %></p>
+        </div>
+      </div>
+      <div class="list-block">
+        <ul>
+          <li>
+            <label class="list-text"><%= t('info.index.price_public.svod_line_one').html_safe %> (<%= 1.month.from_now.strftime("%d/%m/%Y") %>)</label>
+            <label class="list-number">9,99€</label>
+          </li>
+          <li class="">
+            <label class="list-text"><%= t('info.index.price_public.svod_line_two').html_safe %></label>
+            <label class="list-number"><%= image_tag "unlimited/ok-blue.png" %></label>
+          </li>
+          <li class="">
+            <label class="list-text"><%= t('info.index.price_public.svod_access_devices').html_safe %></label>
+            <label class="list-number list-number-align"><%= image_tag "unlimited/ok-blue.png" %></label>
+          </li>
+          <li class="">
+            <label class="list-text"><%= t('info.index.price_public.svod_simultaneus').html_safe %></label>
+            <label class="list-number"><%= t('customers.show.old_pricing.unlimited') %></label>
+          </li>
+          <li class="">
+            <label class="list-text"><%= t('info.index.price_public.svod_cancellable').html_safe %></label>
+            <label class="list-number"><%= image_tag "unlimited/ok-blue.png" %></label>
+          </li>
+          <li class="">
+            <label class="list-text"><%= t('info.index.price_public.svod_access_alacarte_text').html_safe %> <%= link_to t('info.index.price_public.svod_access_alacarte_link').html_safe, info_path(:page_name => t('routes.infos.params.abo')), :id => 'abo', :class => params[:page_name] == 'abo' ? :active : :inactive %></label>
+            <label class="list-number red-color">X</label>
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer-block">
+        <div class="description-block"><%= t('info.index.price_public.svod_explanation_1').html_safe %>, <%= link_to t('info.index.price_public.choose_svod_explanation_link').html_safe, info_path(:page_name => t('routes.infos.params.vod')), :id => :multi %>.
+          <%= t('info.index.price_public.svod_explanation_2').html_safe %>.
+        </div>
+        <button id="svod"><%= t('info.index.price_public.svod_button').html_safe %></button>
+        <div class="description-block description-block-main questions"><%= t('info.index.price_public.svod_support_info').html_safe %></div>
+        <div class="description-block conditions"><%= link_to t('info.index.price_public.svod_conditions').html_safe, info_path(:page_name => t('routes.infos.params.conditions')) %></div>
+      </div>
+    </div>
+
+<% else %>
+    <div class="alacarte">
+      <div class="header-nav">
+        <label id="plush-a-la-carte"><%= t('info.index.price_public.choose_svod_svod').html_safe %></label>
+        <ul>
+          <li class="plush"><%= link_to t('info.index.price_public.choose_svod_tvod').html_safe, info_path(:page_name => t('routes.infos.params.alacarte')), :id => 'abo', :class => params[:page_name] == 'abo' ? :active : :inactive %></li>
+          <li class="eighteen"><a href=""><%= link_to t('info.index.price_public.choose_svod_adult').html_safe, info_path(:page_name => "adult"), :id => 'adult', :class => params[:page_name] == 'adult' ? :active : :inactive %></a></li>
+        </ul>
+      </div>
+      <div class="film-block">
+        <div class="film-box">
+          <p id="alacarte-kvadrat"><%= t('info.index.price_public.choose_svod_plan_one').html_safe %></p>
+        </div>
+      </div>
+      <div class="list-block">
+        <ul>
+          <li>
+            <label class="list-text"><%= t('info.index.price_public.svod_line_one').html_safe %> (<%= 1.month.from_now.strftime("%d/%m/%Y") %>)</label>
+            <label class="list-number">9,99€</label>
+          </li>
+          <li class="">
+            <label class="list-text"><%= t('info.index.price_public.svod_line_two').html_safe %></label>
+            <label class="list-number"><%= image_tag "unlimited/ok-blue.png" %></label>
+          </li>
+          <li class="">
+            <label class="list-text"><%= t('info.index.price_public.svod_access_devices').html_safe %></label>
+            <label class="list-number list-number-align"><%= image_tag "unlimited/ok-blue.png" %></label>
+          </li>
+          <li class="">
+            <label class="list-text"><%= t('info.index.price_public.svod_simultaneus').html_safe %></label>
+            <label class="list-number"><%= t('customers.show.old_pricing.unlimited') %></label>
+          </li>
+          <li class="">
+            <label class="list-text"><%= t('info.index.price_public.svod_cancellable').html_safe %></label>
+            <label class="list-number"><%= image_tag "unlimited/ok-blue.png" %></label>
+          </li>
+          <li class="">
+            <label class="list-text"><%= t('info.index.price_public.svod_access_alacarte_text').html_safe %> <%= link_to t('info.index.price_public.svod_access_alacarte_link').html_safe, info_path(:page_name => t('routes.infos.params.abo')), :id => 'abo', :class => params[:page_name] == 'abo' ? :active : :inactive %></label>
+            <label class="list-number red-color">X</label>
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer-block">
+        <div class="description-block"><%= t('info.index.price_public.svod_explanation_1').html_safe %>, <%= link_to t('info.index.price_public.choose_svod_explanation_link').html_safe, info_path(:page_name => t('routes.infos.params.vod')), :id => :multi %>.
+          <%= t('info.index.price_public.svod_explanation_2').html_safe %>.
+        </div>
+        <button><%= link_to t('info.index.price_public.svod_button').html_safe, new_customer_session_path( :code => "SVOD" ) %></button>
+        <div class="description-block description-block-main questions"><%= t('info.index.price_public.svod_support_info').html_safe %></div>
+        <div class="description-block conditions"><%= link_to t('info.index.price_public.svod_conditions').html_safe, info_path(:page_name => t('routes.infos.params.conditions')) %></div>
+      </div>
+    </div>
+<% end %>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script>
+    document.body.className = document.body.className.replace("adult","");
+</script>

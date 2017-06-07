@@ -1,68 +1,38 @@
-<div id="addwishlist_title"><%= t '.title' %></div>
-<%= form_for(:address, :url => customer_addresses_path) do |f| %>
-<table class="champ_compte" align="center" cellpadding="0" cellspacing="8" width="450">
-  <tr>
-    <td colspan="3">
-      <%= error_messages_for :address %>
-    </td>
-  </tr>
-  <tr>
-    <td align="right">
-      <span class="explain_text"><strong><%= t '.firstname' %> :</strong></span>							
-    </td>
-    <td align="left">
-      <span align="right">
+<div id="customer_address">
+  <!-- <h3 class="dark-gray pad0 mar0 marb10">Adresse</h3> -->
+  <h3 class="dark-gray pad0 mar0 marb10"><%= t '.title' %></h3>
+  <%= form_for(:address, :url => customer_addresses_path, :remote => true) do |f| %>
+
+      <div class="form-group block100">
+        <label class="bold"><%= t '.firstname' %>:</label>
         <%= f.text_field :first_name, :value => @address.first_name %>
-      </span>
-    </td>
-  </tr>
-  <tr>
-    <td align="right">
-      <span class="explain_text"><strong><%= t '.lastname' %> :</strong></span>
-    </td>
-    <td>
-      <span align="left">
+      </div>
+
+      <div class="form-group block100">
+        <label class="bold"><%= t '.lastname' %>:</label>
         <%= f.text_field :last_name, :value => @address.last_name %>
-      </span>
-      
-    </td>
-  </tr>
-  <tr>
-		<td align="right">
-			<strong>
-			  <span class="explain_text"><%= t '.street' %> :</span>
-	    </strong>
-	  </td>
-    <td align="left">
-			<%= f.text_field :street, :value => @address.street %>
-		</td>
-	</tr>                
- 	<tr>
-   	<td align="right">
-   		<strong>
-   		  <span class="explain_text"><%= t '.postal_code' %> :</span>
-   		</strong>
-   	</td>
-    <td align="left">
-			<%= f.text_field :postal_code, :value => @address.postal_code %>
-		</td>
-	</tr>
-  <tr>
-		<td align="right">
-	    <strong><span class="explain_text"><%= t '.city' %> :</span></strong>
-	  </td>
-    <td>
-		  <span align="left">
-		    <%= f.text_field :city, :value => @address.city %>
-		  </span>
-		</td>
-	</tr>
-  <tr>
-    <td colspan="3">  
-      <p class="bouton_probleme" align="right">
-        <%= submit_tag t('.create'), :id => "submit_address", :class => "form_ajax" %>
-      </p>
-    </td>
-  </tr>               
-</table>
-<% end %>
+      </div>
+
+      <div class="form-group block100">
+        <label class="bold"><%= t '.street' %>:</label>
+        <%= f.text_field :street, :value => @address.street %>
+      </div>
+
+      <div class="form-group block100">
+        <label class="bold"><%= t '.postal_code' %>:</label>
+        <%= f.text_field :postal_code, :value => @address.postal_code %>
+      </div>
+
+      <div class="form-group block100">
+        <label class="bold"><%= t '.city' %>:</label>
+        <%= f.text_field :city, :value => @address.city %>
+      </div>
+
+      <div class="form-group block100">
+        <%= button_tag class: "btn pad5 blue-bck white pull-left radius4", id: "submit_address" do %>
+            <i class="fa fa-check"></i> <%= t('.create') %>
+        <% end %>
+      </div>
+
+  <% end %>
+</div>

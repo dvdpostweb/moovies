@@ -1,5 +1,21 @@
-<p class="list-show-by">
-	<%= t('.title') %>: 
-	<%= link_to 'list', display_vod_path(:value => 0, :transit_or_history => params[:transit_or_history]), :class => "list#{display_vod == 0 ? " selected":""}" %>
-  <%= link_to 'gallery', display_vod_path(:value => 1, :transit_or_history => params[:transit_or_history]), :class => "gallery#{display_vod == 1 ? " selected":""}" %>
-</p>
+<!--<p class="list-show-by">
+	<#%= t('.title') %>:
+	<#%= link_to 'list', display_vod_path(:value => 0, :transit_or_history => params[:transit_or_history]), :class => "list#{display_vod == 0 ? " selected":""}" %>
+  <#%= link_to 'gallery', display_vod_path(:value => 1, :transit_or_history => params[:transit_or_history]), :class => "gallery#{display_vod == 1 ? " selected":""}" %>
+</p>-->
+
+
+
+
+
+
+<div class="item block100">
+  <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
+    <%= t('.title') %>
+  </div>
+  <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
+    <a href="index.php%3Fpage=watchlist.html#" class="btn light-blue-bck bold padlr10 white"><i class="fa fa-play marr5"></i> Regarder</a>
+    <a href="index.php%3Fpage=watchlist.html#" class="btn btn-green-gradient bold padlr10 white"><i class="fa fa-play marr5"></i> Regarder</a>
+    <a href="index.php%3Fpage=watchlist.html#" class="btn"><i class="fa fa-trash f17"></i></a>
+  </div>
+</div>
