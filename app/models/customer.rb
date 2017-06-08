@@ -181,7 +181,7 @@ class Customer < ActiveRecord::Base
   end
 
   def mobistar_subscriber?
-    (customers_abo_type == 6 && self.activation_discount_code_type == "A" && Mobistar.find_by_activation_id(self.activation_discount_code_id))
+    (customers_abo_type == 6 && self.activation_discount_code_type == "A" && Mobistar.find_by_activation_id(self.activation_discount_code_id) || customers_abo_type == 6 && Product.find(self.preselected_registration_moovie_id))
   end
 
   def bnppf_subscriber?

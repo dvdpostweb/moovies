@@ -6,6 +6,6 @@ class CreateOrangeSmsActivationCodes < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :orange_sms_activation_codes, :customers_id_id
+    add_index :orange_sms_activation_codes, :customers_id
   end
 end

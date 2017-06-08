@@ -120,7 +120,8 @@ function orangePurchase() {
                             method: 'POST',
                             url: '/orange/lu/api/automatic_login',
                             data: {
-                                'plush_phone_number': localStorage.getItem("plush_phone_number")
+                                'plush_phone_number': localStorage.getItem("plush_phone_number"),
+                                'products_id': gon.products_id,
                             },
                             dataType: 'json',
                             success: function (response) {

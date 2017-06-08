@@ -1,4 +1,5 @@
 <% if customer_signed_in? %>
+<% product = Product.find_by_products_id(current_customer.preselected_registration_moovie_id) %>
     <div class="container top-green-status <%= params[:kind] == :adult ? "violet-bck" : "green-bck" %> black position-relative">
       <div class="position-absolute" id="user-status-switch">
         <i class="fa fa-copy"></i> <a href="index.html#" class="no-decoration">(<%= t('orange_open_banner') %>)</a>
@@ -7,7 +8,7 @@
         <% if current_customer.plush_la_carte_subscriber? || current_customer.abo_subscriber? || current_customer.unlimted_subscriber? || current_customer.bnppf_subscriber? %>
             <span class="hidden-xs"><%= t('.top_part_1') %> <%= current_customer.tvod_free %>  <%= t('.top_part_2') %></span>
         <% elsif current_customer.mobistar_subscriber? %>
-            <span class="hidden-xs"><%= t('.top_part_1') %> <%= current_customer.tvod_free / 3 %>  <%= t('.top_part_2_6') %></span>
+            <span class="hidden-xs"><%= t('.top_part_1') %> <%= product.present? ? current_customer.tvod_free : current_customer.tvod_free / 3 %>  <%= t('.top_part_2_6') %></span>
         <% end %>
       </div>
     </div>
@@ -47,7 +48,7 @@
           <% if current_customer.mobistar_subscriber? %>
               <span><a class="<%= params[:kind] == :adult ? "violet" : "blue" %> underline" href="<%= products_short_path(:package => Moovies.packages.invert[(params[:kind] == :adult ? 5 : 2)]) %>">Plush à la Carte</a></span>
               <span class="black mart5"><%= t('.top_part_2_6').capitalize %>
-                : <%= current_customer.tvod_free / 3 %></span>
+                : <%= product.present? ? current_customer.tvod_free : current_customer.tvod_free / 3 %></span>
               <span class="black mart5"> <%= t('.subscription') %>
                 : <strong><%= customer_plan_translator(I18n.locale, current_customer.customers_abo_type) %></strong> <a href="<%= info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change") %>" class="<%= params[:kind] == :adult ? "violet" : "blue" %> underline">(<%= t('.change_plan') %>
                 )</a></span>
