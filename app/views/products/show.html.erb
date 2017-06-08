@@ -84,6 +84,7 @@
         <h3 class="OpenSansCondensed f25 dark-blue pad0 padl5"><%= t '.photo' %></h3>
         <%= render :partial => 'products/show/preview', :locals => {:product => @product, :type => params[:kind], :source => @source, :response_id => @response_id} %>
       </div>
+      <% unless Rails.env.development? %>
       <% if customer_signed_in? %>
           <% @recommendations = ActiveRecord::Base.connection.exec_query %Q{CALL sp_movie_to_movie(#{current_customer.to_param}, #{@product.imdb_id})} %>
       <% else %>
@@ -241,6 +242,7 @@
               </section>
             </div>
           </div>
+      <% end %>
       <% end %>
 
 
