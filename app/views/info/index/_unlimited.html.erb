@@ -78,7 +78,7 @@
       <% if params[:subscription_action].present? && params[:subscription_action] == "subscription_change" %>
         <%= link_to(t('info.index.price_public.svod_button').html_safe, api_v1_subscriptions_path( :code => "SVOD" ), :class => "btn pad10 f20 light-blue-bck", :id => "continue-package") %>
       <% else %>
-      <%= link_to(t('info.index.price_public.svod_button').html_safe, new_customer_session_path( :code => "SVOD" ), :class => "btn pad10 f20 light-blue-bck", :id => "continue-package") %>
+        <%= link_to(t('info.index.price_public.svod_button').html_safe, new_customer_session_path( :code => "SVOD" ), :class => "btn pad10 f20 light-blue-bck", :id => "continue-package") %>
       <% end %>
 
     </div>
