@@ -1,7 +1,7 @@
 <% if customer_signed_in? %>
     <div class="container top-green-status <%= params[:kind] == :adult ? "violet-bck" : "green-bck" %> black position-relative">
       <div class="position-absolute" id="user-status-switch">
-        <i class="fa fa-copy"></i> <a href="index.html#" class="no-decoration">(voir tout)</a>
+        <i class="fa fa-copy"></i> <a href="index.html#" class="no-decoration">(<%= t('orange_open_banner') %>)</a>
       </div>
       <div class="text-center" id="promo-details">
         <% if current_customer.plush_la_carte_subscriber? || current_customer.abo_subscriber? || current_customer.unlimted_subscriber? || current_customer.bnppf_subscriber? %>
@@ -81,7 +81,7 @@
 <% else %>
     <div class="container top-green-status <%= params[:kind] == :adult ? "violet-bck" : "green-bck" %> black position-relative">
       <div class="position-absolute" id="user-status-switch">
-        <i class="fa fa-copy"></i> <a href="index.html#" class="no-decoration">(voir tout)</a>
+        <i class="fa fa-copy"></i> <a href="index.html#" class="no-decoration">(<%= t('orange_open_banner') %>)</a>
       </div>
       <div class="text-center" id="promo-details">
         <span class="hidden-xs"><%= t('.top_part_1_1') %> <%= t('.visitor_no_credits') %>  <%= t('.top_part_2') %></span>
@@ -116,5 +116,3 @@
 <% content_for :run_specific_javascript do %>
     <%= javascript_include_tag "top_banner/validation" %>
 <% end %>
-
-

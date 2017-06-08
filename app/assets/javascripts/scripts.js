@@ -100,7 +100,7 @@ jQuery.fn.extend({
     $('#user-status-switch').on('click', function () {
         $('.panel-enter-code, .top-green-status').toggleClass('on');
         return false;
-    }).toggleText('<i class="fa fa-copy marr5"></i><a href="#" id="promo-code-open" class="no-decoration">(voir tout)</a>', '<i class="fa fa-minus marr5"></i><a href="#" id="promo-code-open" class="no-decoration"> (minimiser)</a>');
+    }).toggleText('<i class="fa fa-copy marr5"></i><a href="#" id="promo-code-open" class="no-decoration">(' + gon.open_banner +')</a>', '<i class="fa fa-minus marr5"></i><a href="#" id="promo-code-open" class="no-decoration"> (' + gon.close_banner + ')</a>');
 
     //promo code left/filter panel
     $('#left-promo-code-trigger').on('click', function (e) {
