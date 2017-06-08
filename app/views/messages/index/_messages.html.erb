@@ -1,41 +1,32 @@
-<div id="messages">
+<div class="block100 table-holder">
   <div id="header_messages">
     <h3> <%= params[:filter] == Ticket.filter[:archive] ? t('.archive') : t('.recipient') %> </h3>
   </div>
-    <table cellspacing="0" cellpadding="0" border="0" id ='table_message'>
-      <colgroup>
-        <col id="ids" />
-        <col id="cats" />
-        <col id="date" />
-        <% unless params[:filter] == Ticket.filter[:archive] %>
-        <col id="delete" />
-        <% end %>
-      </colgroup>
-    <tbody>
-      <tr>
-        <th width="50" align="left">ID</th>
-        <th width="559"></th>
-        <th width="220" align="left"> 
-          <div id="bysort">
-            <div class="bysort_message"><%= t '.sort' %> : </div>
-            <form action='<%= messages_path() %>' id='sort_form'>
-              <input type='hidden' name='filter' value='<%= params[:filter] %>'>
-              <select name="sort" id="sort_combo">
-                <option  value="normal" value=''><%= t '.by_answer' %></option>
-                <option <%= params[:sort] && params[:sort].to_sym == :ticket ? 'selected="selected"' : '' %> value="ticket"><%= t '.by_ticket' %></option>
-              </select>
-            </form>
-          <div style="clear: both;"></div>
-        </div>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Mail</th>
+      <th>
+        <form action='<%= messages_path() %>' id='sort_form'>
+          <input type='hidden' name='filter' value='<%= params[:filter] %>'>
+          <select name="sort" id="sort_combo">
+            <option  value="normal" value=''><%= t '.by_answer' %></option>
+            <option <%= params[:sort] && params[:sort].to_sym == :ticket ? 'selected="selected"' : '' %> value="ticket"><%= t '.by_ticket' %></option>
+          </select>
+        </form>
+        <div class="drop-holder"></div>
       </th>
       <% unless params[:filter] == Ticket.filter[:archive] %>
-      <th class="center" width="41">
-        <%= image_tag 'icon_archive.gif', :size => '25x25', :alt => 'Archive' %>
-      </th>
+      <th><i class="fa fa-trash f20"></i></th>
       <% end %>
     </tr>
-    <%= render :partial => 'messages/index/message', :collection => messages %>
+    </thead>
+    <tbody>
+      <%= render :partial => 'messages/index/message', :collection => messages %>
     </tbody>
   </table>
-  <%= will_paginate messages, :class => 'products-pagination', :previous_label => '&nbsp;', :next_label => '&nbsp;' %>
+  <div class="block100 mart30 pagin-bar">
+    <%= will_paginate messages, renderer: BootstrapPagination::Rails, :class => 'products-pagination', :previous_label => '&nbsp;', :next_label => '&nbsp;' %>
+  </div>
 </div>

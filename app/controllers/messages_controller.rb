@@ -1,12 +1,13 @@
 class MessagesController < ApplicationController
   before_filter :authenticate_customer!, :unless => :faq?
+  skip_before_filter :verify_authenticity_token
 
   def show
     @message = current_customer.tickets.find(params[:id])
     @message.message_tickets.custer.collect do |message|
       message.update_attribute(:is_read, true)
     end
-    
+
     if request.xhr?
       render :layout => false
     end
@@ -37,11 +38,11 @@ class MessagesController < ApplicationController
       if params[:add_on]
         variable += params[:add_on]
       end
-      
+
       @message = MessageTicket.new(:ticket => @ticket, :mail_id => Moovies.email[:message_free], :data => variable)
       if @message.save
         flash[:notice] = t 'message.create.message_sent' #"Message sent successfully"
-      
+
         respond_to do |format|
           format.html { redirect_to messages_path }
           format.js {@error = false}
@@ -55,7 +56,7 @@ class MessagesController < ApplicationController
       end
     else
       flash[:error] = t 'message.create.message_not_sent' # "Message not sent successfully"
-      
+
       respond_to do |format|
         format.html {redirect_to messages_path}
         format.js {@error = true}

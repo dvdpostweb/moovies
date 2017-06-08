@@ -1,23 +1,22 @@
 <% if message.message_tickets.first %>
 <% unread = !message.message_tickets.first.user_id.nil? && message.message_tickets.first.is_read == false %>
-<tr class="<%= unread ? 'close' : 'open' %>">
-  <td><%= message.id %> </td>
-  <td align="left">
-    <%= image_tag "enveloppe_#{ unread  ? 'close' : 'open'}.gif", :align => :absmiddle %>
+<tr>
+  <th scope="row"><%= message.id %></th>
+  <td>
     <%= link_to message_path(:id => message.to_param), :class => 'show' do %>
       <% if message.title %>
-        <%= h message.title %>
+        <i class="<%= unread  ? "fa fa-envelope marr5" : "fa fa-envelope-open marr5" %>"></i> <%= h message.title %>
       <% else %>
-        <%= h (t("message.show.category_#{message.category_ticket_id}")) if message.category_ticket %>
+        <i class="<%= unread  ? "fa fa-envelope marr5" : "fa fa-envelope-open marr5" %>"></i> <%= h (t("message.show.category_#{message.category_ticket_id}")) if message.category_ticket %>
       <% end %>
     <% end %>
   </td>
-  <td> <%= message.created_at.strftime("%d/%m/%Y") %> </td>
+  <td><%= message.created_at.strftime("%d/%m/%Y") %></td>
   <% unless params[:filter] == Ticket.filter[:archive] %>
-  <td class="center">
-    <label>
-      <%= link_to image_tag('trash-icon.png'),  message_path(:id => message.to_param), :data => { :confirm => t('.are_you_sure', :default => 'are you sure?') }, :method => :delete %>
-    </label>
+  <td>
+    <%= link_to message_path(:id => message.to_param), :data => { :confirm => t('.are_you_sure', :default => 'are you sure?') }, :method => :delete do %>
+    <i class="fa fa-close f18"></i>
+    <% end %>
   </td>
   <% end %>
 </tr>
