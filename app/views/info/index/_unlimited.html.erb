@@ -1,4 +1,9 @@
 <div class="container white-bck">
+  <% if params[:renew_subscription_error].present? && params[:renew_subscription_error] == "true" %>
+  <div class="alert alert-danger">
+    <strong><%= t('streaming_products.renew_subscription_error') %></strong>
+  </div>
+  <% end %>
   <h1 class="light-blue">Plush Illimité</h1>
   <div class="block100 marb20 padt20 charts-top">
     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 charts-buttons left-promo-code">
@@ -13,12 +18,6 @@
       <% else %>
           <%= link_to t('info.index.price_public.choose_svod_adult').html_safe, info_path(:page_name => "adult"), :class => "btn violet OpenSansCondensed f23 block100", :id => "button-18-plus" %>
       <% end %>
-    </div>
-    <div class="block100 mart20">
-      <h3>↓ Question for this text is logicl to be on this page??? ↓</h3>
-      Vous pouvez louer films à la piéce directement à partir du catalogue, ou prendre un abonnement pour bénéficier de
-      prix avantageux (1,99€ au lieu de 2,99€ pour la plupart des films, et
-      3,99€ au lieu de 4,99€ pour les derniéres sorties).
     </div>
   </div>
   <div class="planSelectionContainer">
@@ -75,7 +74,13 @@
       <%= t('info.index.price_public.svod_explanation_1').html_safe %>, <strong><%= link_to t('info.index.price_public.choose_svod_explanation_link').html_safe, info_path(:page_name => t('routes.infos.params.vod')), :id => :multi %></strong>. <%= t('info.index.price_public.svod_explanation_2').html_safe %>.
     </div>
     <div class="block100 mart15 padlr15">
+
+      <% if params[:subscription_action].present? && params[:subscription_action] == "subscription_change" %>
+        <%= link_to(t('info.index.price_public.svod_button').html_safe, api_v1_subscriptions_path( :code => "SVOD" ), :class => "btn pad10 f20 light-blue-bck", :id => "continue-package") %>
+      <% else %>
       <%= link_to(t('info.index.price_public.svod_button').html_safe, new_customer_session_path( :code => "SVOD" ), :class => "btn pad10 f20 light-blue-bck", :id => "continue-package") %>
+      <% end %>
+
     </div>
     <div class="block100 padlr15"><%= t('info.index.price_public.svod_support_info').html_safe %></div>
     <div class="block100 padlr15 mart15 marb30">
