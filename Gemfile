@@ -12,28 +12,16 @@ gem "memcache-client", "~> 1.8.5"
 gem 'orderedhash'
 
 group :development do
-  gem 'better_errors'
-  gem 'binding_of_caller'
   gem 'quiet_assets'
   gem 'spring'
   gem 'sextant'
-  #gem 'rack-mini-profiler'
   gem "rails-erd"
-  gem 'capistrano-slack', :git => 'https://github.com/j-mcnally/capistrano-slack.git'
-  gem 'capistrano-npm', require: false
+  gem 'net-ssh', '~> 2.9', '>= 2.9.1'
   gem "capistrano", "~> 2.15.5"
   gem "capistrano-ext"
 end
 
-group  :development, :test do
-end
-
-group :test do
-
-end
-
 group :assets do
-  #gem 'coffee-rails'
   gem 'uglifier'
   gem 'execjs', '~> 2.2'
   gem 'therubyracer', '~> 0.12.3'
@@ -62,23 +50,18 @@ gem "browser", '~> 0.2.0'
 gem 'route_translator', :git => 'git://github.com/NielsKSchjoedt/route_translator.git'
 gem 'chosen-rails'
 gem "hash_to_hidden_fields"
-gem "rest-client"
+gem 'rest-client', '~> 1.8'
 gem "jbuilder"
 gem 'annotate'
 gem 'gon'
-#gem 'omniauth-facebook', '~> 4.0'
+gem 'omniauth-facebook', '~> 4.0'
 gem 'omniauth-google-oauth2', '~> 0.3.1'
 gem "figaro"
 gem 'puma', '~> 3.6'
-gem 'rails-footnotes', '~> 4.0'
 gem 'paypal-express', '~> 0.8.1'
 gem 'twitter-bootstrap-rails', '~> 3.2', '>= 3.2.2'
 gem 'bootstrap-chosen-rails'
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.1'
 gem 'rack-cors', '~> 0.4.1'
 gem 'httparty', '~> 0.14.0'
-gem "browserify-rails"
-gem 'react-rails'
 gem 'will_paginate-bootstrap'
-#gem 'capistrano-rbenv'
-gem 'redis-rails'
