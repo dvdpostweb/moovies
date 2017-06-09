@@ -110,15 +110,15 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
       customer = Customer.find_for_database_authentication(customers_telephone: params[:plush_phone_number])
       if customer.present?
         if params[:products_id] == "1" || params[:products_id] == "5" || params[:products_id] == "7" || params[:products_id] == "8" || params[:products_id] == "9"
-          sign_in(customer, bypass: true)
+          sign_in(customer)
           render json: {status: 0, current_customer_id: customer.customers_id, redirect_path: step_path(:id => 'step4') }
         else
           product = Product.find_by_products_id(params[:products_id])
           if product.present?
-            sign_in(customer, bypass: true)
+            sign_in(customer)
             render json: {status: 0, current_customer_id: customer.customers_id, redirect_path: product_path(:id => product.to_param) }
           else
-            sign_in(customer, bypass: true)
+            sign_in(customer)
             render json: {status: 0, current_customer_id: customer.customers_id, redirect_path: root_localize_path }
           end
         end
