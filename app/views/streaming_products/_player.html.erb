@@ -9,8 +9,14 @@
 <%= jwplayer(@streaming.filename, @streaming.source, @streaming, token_code, @browser) %>
 
 <div id="player">Loading the player...</div>
+<scropt>
+</script>
 <script>
     jwplayer('player').setup({
-        file: movieUrl
+        file: movieUrl,
+        'image': 'http://www.dvdpost.be/images/screenshots/big/5975354_2.jpg'
     });
 </script>
+
+
+<%= @streaming.id %>
