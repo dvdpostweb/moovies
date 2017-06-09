@@ -33,8 +33,8 @@ module Moovies
     config.to_prepare do
       ActionMailer::Base.helper "application"
     end
-    if Rails.env.development?
-      config.session_store :redis_store, servers: ["redis://localhost:6379/0/session"]
-    end
+    #if Rails.env.development?
+    #  config.session_store :redis_store, servers: ["redis://localhost:6379/0/session"]
+    #end
   end
 end
