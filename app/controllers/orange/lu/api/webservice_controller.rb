@@ -116,7 +116,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
           if product.present?
             render json: {status: 0, current_customer_id: customer.customers_id, redirect_path: product_path(:id => product.to_param) }
           else
-            render json: {status: 0, current_customer_id: customer.customers_id, redirect_path: info_path(:page_name => "alacarte", :subscription_action => "subscription_change") }
+            render json: {status: 0, current_customer_id: customer.customers_id, redirect_path: root_localize_path }
           end
         end
       end
