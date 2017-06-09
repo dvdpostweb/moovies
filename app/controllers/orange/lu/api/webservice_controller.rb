@@ -68,7 +68,14 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
           resource.preselected_registration_moovie_id = product.to_param
           resource.tvod_free = streaming.tvod_credits
         else
-          resource.step = 90
+          #resource.step = 90
+          resource.step = 100
+          resource.customers_abo = 1
+          resource.customers_abo_type = 6
+          resource.customers_next_abo_type = 6
+          resource.customers_abo_validityto = Date.today + 1.month
+          #resource.preselected_registration_moovie_id = product.to_param
+          resource.tvod_free = 3 #streaming.tvod_credits
         end
         if resource.save(validate: false)
           sms_authentification_code = OrangeSmsActivationCode.find_by_sms_authentification_code(params[:sms_code])
