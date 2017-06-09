@@ -54,18 +54,37 @@ function eligibilityServiceOnlyLogin() {
                           }, 5000);
 
                   } else if ("True" === response.status) {
-                    if (typeof(Storage) !== "undefined") {
-                      localStorage.setItem("plush_phone_number", response.phone_number);
-                      $("#is_eligable").hide();
-                      $("#orange_purchase").show();
-                      jQuery.facebox("<div class=\"alert alert-danger\">" +
-                      "<strong>" + response.sms_code + "</strong>" +
-                      "</div>");
-                    } else {
-                      jQuery.facebox("<div class=\"alert alert-danger\">" +
-                      "<strong>" + "Sorry! No Web Storage support.." + "</strong>" +
-                      "</div>");
-                    }
+                    //if (typeof(Storage) !== "undefined") {
+                    //  localStorage.setItem("plush_phone_number", response.phone_number);
+                    //  $("#is_eligable").hide();
+                    //  $("#orange_purchase").show();
+                    //  jQuery.facebox("<div class=\"alert alert-danger\">" +
+                    //  "<strong>" + response.sms_code + "</strong>" +
+                    //  "</div>");
+                    //} else {
+                    //  jQuery.facebox("<div class=\"alert alert-danger\">" +
+                    //  "<strong>" + "Sorry! No Web Storage support.." + "</strong>" +
+                    //  "</div>");
+                    //}
+
+                    $.ajax({
+                        method: 'POST',
+                        url: '/orange/lu/api/automatic_login',
+                        data: {
+                            'plush_phone_number': localStorage.getItem("plush_phone_number"),
+                            'products_id': gon.products_id,
+                        },
+                        dataType: 'json',
+                        success: function (response) {
+                            if (0 === response.status) {
+                                window.location.href = response.redirect_path
+                            }
+                        },
+                        error: function (response) {
+                            console.log('CHECKED AJAX ERROR!!!');
+                        }
+                    });
+
                   }
                 },
                 error: function (response) {
