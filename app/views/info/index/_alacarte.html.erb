@@ -9,6 +9,11 @@
         <strong><%= t('orange.finish_registration_proces_message') %></strong>
       </div>
   <% end %>
+  <% if params[:subscription_action_orange].present? %>
+      <div class="alert alert-warning">
+        <strong>Please select subscription plan to register phone number<p id="orange_phone_number"></p></strong>
+      </div>
+  <% end %>
   <h1 class="green"><%= t('info.index.price_public.choose_tvod_tvod').html_safe %></h1>
   <div class="block100 marb20 padt20 charts-top">
     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 left-promo-code">
@@ -145,6 +150,10 @@
           <%= link_to(t('info.index.price_public.svod_button').html_safe, api_v1_subscriptions_path(:code => "2FILMS"), :class => "btn pad10 f20 green-bck film_credits_btn_2", :id => "continue-package") %>
           <%= link_to(t('info.index.price_public.svod_button').html_safe, api_v1_subscriptions_path(:code => "4FILMS"), :class => "btn pad10 f20 green-bck film_credits_btn_4", :id => "continue-package") %>
           <%= link_to(t('info.index.price_public.svod_button').html_safe, api_v1_subscriptions_path(:code => "6FILMS"), :class => "btn pad10 f20 green-bck film_credits_btn_6", :id => "continue-package") %>
+        <% elsif params[:subscription_action_orange].present? && params[:subscription_action_orange] == "orange_subscription" %>
+          <%= link_to(t('info.index.price_public.svod_button').html_safe, orange_lu_auth_sms_registration_path(:code => "2FILMS"), :class => "btn pad10 f20 green-bck film_credits_btn_2", :id => "continue-package") %>
+          <%= link_to(t('info.index.price_public.svod_button').html_safe, orange_lu_auth_sms_registration_path(:code => "4FILMS"), :class => "btn pad10 f20 green-bck film_credits_btn_4", :id => "continue-package") %>
+          <%= link_to(t('info.index.price_public.svod_button').html_safe, orange_lu_auth_sms_registration_path(:code => "6FILMS"), :class => "btn pad10 f20 green-bck film_credits_btn_6", :id => "continue-package") %>
         <% else %>
           <% if params[:subscription_action_registration].present? %>
               <%= link_to(t('info.index.price_public.svod_button').html_safe, new_customer_registration_path(:code => "2FILMS"), :class => "btn pad10 f20 green-bck film_credits_btn_2", :id => "continue-package") %>

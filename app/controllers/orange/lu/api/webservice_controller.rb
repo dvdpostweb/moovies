@@ -15,7 +15,11 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
           render json: {status: orange_is_eligable_wcf_service, sms_code: "#{t("orange.sms_code.message")} #{orange_sms_activation_code.sms_authentification_code}", phone_number: orange_sms_activation_code.phone_number}
         end
       else
-        render json: { status: 0 }
+        if product_id_from_params == 0
+          render json: {status: 0, sms_number: params[:sms_number]}
+        else
+          render json: {status: 1, sms_number: params[:sms_number]}
+        end
       end
     else
       raise ActionController::RoutingError.new('Not Found')
@@ -29,10 +33,10 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
       if sms_code.present?
         customer = Customer.find(sms_code.customers_id)
         if customer.present?
-        render json: { status: "True" }
+          render json: {status: "True"}
         end
       else
-        render json: { status: 0 }
+        render json: {status: 0}
       end
     else
       raise ActionController::RoutingError.new('Not Found')
@@ -43,8 +47,9 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
     if request.xhr?
       product_id_from_params = params[:products_id].blank? ? 0 : params[:products_id]
       customer = Customer.new
-      customer.email = "#{SecureRandom.hex(2)}@plush.temp"
+      customer.email = "#{params[:sms_number]}@orange.lu"
       customer.customers_telephone = params[:sms_number]
+      customer.step = 33
       if customer.save(validate: false)
         activation_code = OrangeSmsActivationCode.new
         activation_code.customers_id = customer.customers_id
@@ -62,43 +67,47 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
 
   def orange_purchase
     if request.xhr?
-      resource = Customer.find_for_database_authentication(customers_telephone: params[:plush_phone_number])
       product_id_from_params = params[:products_id].blank? ? 0 : params[:products_id]
-      if resource.present?
-        discount = Discount.by_name(params[:code]).available.first
-        product = Product.find_by_products_id(params[:products_id])
-        if discount
-          resource.customers_registration_step = 100
-          resource.activation_discount_code_type = 'D'
-          resource.customers_abo = 1
-          resource.customers_abo_type = discount.listing_products_allowed
-          resource.customers_next_abo_type = discount.next_abo_type
-          resource.group_id = discount.group_id
-          resource.tvod_free = discount.tvod_free
-        elsif product
-          streaming = StreamingProduct.find_by_imdb_id(product.imdb_id)
-          resource.step = 100
-          resource.customers_abo = 1
-          resource.customers_abo_type = 6
-          resource.customers_next_abo_type = 6
-          resource.customers_abo_validityto = Date.today + 1.month
-          resource.preselected_registration_moovie_id = product.to_param
-          resource.tvod_free = streaming.tvod_credits
-        else
-          #resource.step = 90
-          resource.step = 100
-          resource.customers_abo = 1
-          resource.customers_abo_type = 6
-          resource.customers_next_abo_type = 6
-          resource.customers_abo_validityto = Date.today + 1.month
-          #resource.preselected_registration_moovie_id = product.to_param
-          resource.tvod_free = 3 #streaming.tvod_credits
-        end
-        if resource.save(validate: false)
-          sms_authentification_code = OrangeSmsActivationCode.find_by_sms_authentification_code(params[:sms_code])
-          if sms_authentification_code.present?
-            orange_purchase_wcf_service = HTTParty.get("https://www.plush.be:2355/wcfservice/http/OrangePurchase?customers_id=#{resource.customers_id}&mobileNumber=#{params[:plush_phone_number]}&price=4&products_id=#{product_id_from_params}&message=testCODE2&payment_id=10000")
-            render json: {status: orange_purchase_wcf_service}
+      sms_code = OrangeSmsActivationCode.find_by_sms_authentification_code(params[:sms_code])
+      discount = Discount.by_name(params[:code]).available.first
+      product = Product.find_by_products_id(params[:products_id])
+      streaming = StreamingProduct.find_by_imdb_id(product.imdb_id)
+      if sms_code.present?
+        customer = Customer.find(sms_code.customers_id)
+        if customer.present?
+          orange_purchase_wcf_service = HTTParty.get("https://www.plush.be:2355/wcfservice/http/OrangePurchase?customers_id=#{customer.customers_id}&mobileNumber=#{params[:plush_phone_number]}&price=4&products_id=#{product_id_from_params}&message=testCODE2&payment_id=10000")
+          if orange_purchase_wcf_service.parsed_response == "Not enough credit" # OVDE TREBA U STVARI DA VRATI True
+            if discount.present?
+              customer.customers_registration_step = 100
+              customer.activation_discount_code_type = 'D'
+              customer.customers_abo = 1
+              customer.customers_abo_type = discount.listing_products_allowed
+              customer.customers_next_abo_type = discount.next_abo_type
+              customer.group_id = discount.group_id
+              customer.tvod_free = discount.tvod_free
+              customer.customers_abo_validityto = Date.today + 1.month
+              customer.customers_abo_payment_method = 5
+              customer.activation_discount_code_id = discount.discount_code_id
+              if customer.save(validate: false)
+                if customer.abo_history(6, customer.customers_abo_type, discount.to_param)
+                  render json: {status: "True"}
+                end
+              end
+            elsif streaming.present?
+              customer.customers_registration_step = 100
+              customer.activation_discount_code_type = 'D'
+              customer.customers_abo = 1
+              customer.customers_abo_type = 6
+              customer.customers_next_abo_type = 6
+              customer.tvod_free = 0
+              customer.customers_abo_payment_method = 5
+              customer.activation_discount_code_id = 0
+              if customer.save(validate: false)
+                if customer.abo_history(6, customer.customers_abo_type, streaming.to_param)
+                  render json: {status: "True"}
+                end
+              end
+            end
           end
         end
       else
@@ -122,21 +131,22 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
     end
   end
 
+  # ORANGE LOGIN STRANA
   def automatic_login
     if request.xhr?
       customer = Customer.find_for_database_authentication(customers_telephone: params[:plush_phone_number])
       if customer.present?
         if params[:products_id] == "1" || params[:products_id] == "5" || params[:products_id] == "7" || params[:products_id] == "8" || params[:products_id] == "9"
           sign_in(customer)
-          render json: {status: 0, current_customer_id: customer.customers_id, redirect_path: info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change") }
+          render json: {status: 0, current_customer_id: customer.customers_id, redirect_path: info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change")}
         else
           product = Product.find_by_products_id(params[:products_id])
           if product.present?
             sign_in(customer)
-            render json: {status: 0, current_customer_id: customer.customers_id, redirect_path: product_path(:id => product.to_param) }
+            render json: {status: 0, current_customer_id: customer.customers_id, redirect_path: product_path(:id => product.to_param)}
           else
             sign_in(customer)
-            render json: {status: 0, current_customer_id: customer.customers_id, redirect_path: root_localize_path }
+            render json: {status: 0, current_customer_id: customer.customers_id, redirect_path: root_localize_path}
           end
         end
       end
@@ -145,21 +155,22 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
     end
   end
 
+  # ORANGE REGISTER STRANA
   def automatic_register
     if request.xhr?
       customer = Customer.find_for_database_authentication(customers_telephone: params[:plush_phone_number])
       if customer.present?
         if params[:products_id] == "1" || params[:products_id] == "5" || params[:products_id] == "7" || params[:products_id] == "8" || params[:products_id] == "9"
           sign_in(customer)
-          render json: {status: 0, current_customer_id: customer.customers_id, redirect_path: step_path(:id => 'step4') }
+          render json: {status: 0, current_customer_id: customer.customers_id, redirect_path: step_path(:id => 'step4')}
         else
           product = Product.find_by_products_id(params[:products_id])
           if product.present?
             sign_in(customer)
-            render json: {status: 0, current_customer_id: customer.customers_id, redirect_path: product_path(:id => product.to_param) }
+            render json: {status: 0, current_customer_id: customer.customers_id, redirect_path: streaming_product_path(:id => product.imdb_id, :season_id => product.season_id, :episode_id => product.episode_id)}
           else
             sign_in(customer)
-            render json: {status: 0, current_customer_id: customer.customers_id, redirect_path: root_localize_path }
+            render json: {status: 0, current_customer_id: customer.customers_id, redirect_path: root_localize_path}
           end
         end
       end

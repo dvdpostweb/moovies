@@ -1,9 +1,10 @@
 $(document).ready(function () {
 
-        eligibilityServiceOnlyLogin();
-        eligibilityServiceOnlyRegister()
-        orangePurchase();
-        loginAuth();
+    eligibilityServiceOnlyLogin();
+    eligibilityServiceOnlyRegister()
+    orangePurchase();
+    loginAuth();
+    $("#sms_number_register").val(localStorage.getItem("plush_phone_number"));
 
 });
 
@@ -45,61 +46,40 @@ function eligibilityServiceOnlyLogin() {
                 },
                 dataType: 'json',
                 success: function (response) {
-                  if (0 === response.status) {
-                    jQuery.facebox("<div class=\"alert alert-danger\">" +
-                        "<strong>Account with your phone number does not exist !!! You will be redirected to the Orange registration page for 5 seconds</strong>" +
-                        "</div>");
+                    if (0 === response.status) {
+                        localStorage.setItem("plush_phone_number", response.sms_number);
+                        jQuery.facebox("<div class=\"alert alert-danger\">" +
+                            "<strong>Account with your phone number does not exist !!! Please select your subscription plan</strong>" +
+                            "</div>");
                         setTimeout(
-                          function() {
-                            window.location.href = "/orange/lu/auth/" + gon.locale + "/sms/registration?phone_number=" + $.trim($("#sms_number").val()) + ""
-                          }, 5000);
-
-                  } else if ("True" === response.status) {
-                    //if (typeof(Storage) !== "undefined") {
-                    //  localStorage.setItem("plush_phone_number", response.phone_number);
-                    //  $("#is_eligable").hide();
-                    //  $("#orange_purchase").show();
-                    //  jQuery.facebox("<div class=\"alert alert-danger\">" +
-                    //  "<strong>" + response.sms_code + "</strong>" +
-                    //  "</div>");
-                    //} else {
-                    //  jQuery.facebox("<div class=\"alert alert-danger\">" +
-                    //  "<strong>" + "Sorry! No Web Storage support.." + "</strong>" +
-                    //  "</div>");
-                    //}
-
-                    //$.ajax({
-                    //    method: 'POST',
-                    //    url: '/orange/lu/api/automatic_login',
-                    //    data: {
-                    //        'plush_phone_number': localStorage.getItem("plush_phone_number"),
-                    //        'products_id': gon.products_id,
-                    //    },
-                    //    dataType: 'json',
-                    //    success: function (response) {
-                    //        if (0 === response.status) {
-                    //            window.location.href = response.redirect_path
-                    //        }
-                    //    },
-                    //    error: function (response) {
-                    //        console.log('CHECKED AJAX ERROR!!!');
-                    //    }
-                    //});
-
-                    if (typeof(Storage) !== "undefined") {
-                        localStorage.setItem("plush_phone_number", response.phone_number);
-                        $("#is_eligable").hide();
-                        $("#orange_purchase").show();
+                            function () {
+                                window.location.href = gon.orange_subscription_action; //"/orange/lu/auth/" + gon.locale + "/sms/registration?phone_number=" + $.trim($("#sms_number").val()) + ""
+                            }, 2000);
+                    } else if (1 === response.status) {
+                        localStorage.setItem("plush_phone_number", response.sms_number);
                         jQuery.facebox("<div class=\"alert alert-danger\">" +
-                            "<strong>" + response.sms_code + "</strong>" +
+                            "<strong>Account with your phone number does not exist !!! Please register</strong>" +
                             "</div>");
-                    } else {
-                        jQuery.facebox("<div class=\"alert alert-danger\">" +
-                            "<strong>" + "Sorry! No Web Storage support.." + "</strong>" +
-                            "</div>");
+                        setTimeout(
+                            function () {
+                                window.location.href = gon.orange_subscription_action + gon.url_code; //"/orange/lu/auth/" + gon.locale + "/sms/registration?phone_number=" + $.trim($("#sms_number").val()) + ""
+                            }, 2000);
+                        //window.location.href = gon.orange_subscription_action + gon.url_code;
+                    } else if ("True" === response.status) {
+                        if (typeof(Storage) !== "undefined") {
+                            localStorage.setItem("plush_phone_number", response.phone_number);
+                            $("#is_eligable").hide();
+                            $("#orange_purchase").show();
+                            jQuery.facebox("<div class=\"alert alert-danger\">" +
+                                "<strong>" + response.sms_code + "</strong>" +
+                                "</div>");
+                        } else {
+                            jQuery.facebox("<div class=\"alert alert-danger\">" +
+                                "<strong>" + "Sorry! No Web Storage support.." + "</strong>" +
+                                "</div>");
+                        }
+
                     }
-
-                  }
                 },
                 error: function (response) {
                     jQuery.facebox("<div class=\"alert alert-danger\">" +
@@ -112,7 +92,7 @@ function eligibilityServiceOnlyLogin() {
 }
 
 function eligibilityServiceOnlyRegister() {
-  $("#sms_number").val(gon.phone_number);
+    $("#sms_number").val(gon.phone_number);
     jQuery.validator.addMethod("phone", function (phone_number, element) {
         phone_number = phone_number.replace(/\s+/g, "");
         return this.optional(element) || phone_number.length > 9 &&
@@ -144,7 +124,7 @@ function eligibilityServiceOnlyRegister() {
                 method: 'POST',
                 url: '/orange/lu/api/orange_register',
                 data: {
-                    'sms_number': $.trim($("#sms_number").val()),
+                    'sms_number': $.trim($("#sms_number_register").val()),
                     'products_id': gon.products_id
                 },
                 dataType: 'json',
@@ -153,7 +133,7 @@ function eligibilityServiceOnlyRegister() {
                         if (typeof(Storage) !== "undefined") {
                             localStorage.setItem("plush_phone_number", response.phone_number);
                             $("#is_eligable_registration").hide();
-                            $("#orange_purchase").show();
+                            $("#orange_purchase_register").show();
                             jQuery.facebox("<div class=\"alert alert-danger\">" +
                                 "<strong>" + response.sms_code + "</strong>" +
                                 "</div>");
@@ -185,7 +165,7 @@ function orangePurchase() {
             "sms-code": {
                 required: true,
                 remote: {
-                    url:"/orange/lu/api/check_sms_activation_code"
+                    url: "/orange/lu/api/check_sms_activation_code"
                 }
             }
         },
@@ -221,7 +201,7 @@ function orangePurchase() {
 
                         $.ajax({
                             method: 'POST',
-                            url: '/orange/lu/api/automatic_login',
+                            url: '/orange/lu/api/automatic_register',
                             data: {
                                 'plush_phone_number': localStorage.getItem("plush_phone_number"),
                                 'products_id': gon.products_id,
@@ -238,10 +218,12 @@ function orangePurchase() {
                         });
 
 
-                    } else if ("Subscriber is not eligible for the service" === response.status) {
+                    } else if ("Max purchase threshold reached" === response.status) {
                         jQuery.facebox("<div class=\"alert alert-danger\">" +
                             "<strong>" + response.status + "</strong>" +
                             "</div>");
+                    } else {
+                        console.log(response);
                     }
 
                 },
@@ -261,7 +243,7 @@ function loginAuth() {
             "sms-code": {
                 required: true,
                 remote: {
-                    url:"/orange/lu/api/check_sms_activation_code"
+                    url: "/orange/lu/api/check_sms_activation_code"
                 }
             }
         },

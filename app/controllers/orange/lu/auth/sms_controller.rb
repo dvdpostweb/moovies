@@ -3,19 +3,32 @@ class Orange::Lu::Auth::SmsController < ApplicationController
   def authorization
     if params[:code].present? && params[:code] == "2FILMS"
       gon.products_id = 7
+      gon.orange_subscription_action = orange_lu_auth_sms_registration_path(:orange => "new_customer")
+      gon.url_code = "&code=2FILMS"
     elsif params[:code].present? && params[:code] == "4FILMS"
       gon.products_id = 8
+      gon.orange_subscription_action = orange_lu_auth_sms_registration_path(:orange => "new_customer")
+      gon.url_code = "&code=4FILMS"
     elsif params[:code].present? && params[:code] == "6FILMS"
       gon.products_id = 9
+      gon.orange_subscription_action = orange_lu_auth_sms_registration_path(:orange => "new_customer")
+      gon.url_code = "&code=6FILMS"
     elsif params[:code].present? && params[:code] == "SVOD"
       gon.products_id = 1
+      gon.orange_subscription_action = orange_lu_auth_sms_registration_path(:orange => "new_customer")
+      gon.url_code = "&code=SVOD"
     elsif params[:code].present? && params[:code] == "SVOD_ADULT"
       gon.products_id = 5
+      gon.orange_subscription_action = orange_lu_auth_sms_registration_path(:orange => "new_customer")
+      gon.url_code = "&code=SVOD_ADULT"
     elsif params[:moovie_id].present?
       gon.products_id = params[:moovie_id]
+      gon.orange_subscription_action = orange_lu_auth_sms_registration_path(:orange => "new_customer")
+      gon.url_code = "&moovie_id=#{params[:moovie_id]}"
+    else
+      gon.orange_subscription_action = info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action_orange => "orange_subscription")
     end
     gon.code = params[:code]
-    gon.orange_registration_path = orange_lu_auth_sms_registration_path(:orange => "new_customer")
   end
 
   def registration

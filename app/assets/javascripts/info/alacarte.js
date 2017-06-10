@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+  $("#orange_phone_number").html(localStorage.getItem("plush_phone_number"));
+
 
     $(window).resize(function () {
         stickyHeaderChart();
