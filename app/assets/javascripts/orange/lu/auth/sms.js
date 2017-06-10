@@ -3,6 +3,7 @@ $(document).ready(function () {
         eligibilityServiceOnlyLogin();
         eligibilityServiceOnlyRegister()
         orangePurchase();
+        loginAuth();
 
 });
 
@@ -67,23 +68,36 @@ function eligibilityServiceOnlyLogin() {
                     //  "</div>");
                     //}
 
-                    $.ajax({
-                        method: 'POST',
-                        url: '/orange/lu/api/automatic_login',
-                        data: {
-                            'plush_phone_number': localStorage.getItem("plush_phone_number"),
-                            'products_id': gon.products_id,
-                        },
-                        dataType: 'json',
-                        success: function (response) {
-                            if (0 === response.status) {
-                                window.location.href = response.redirect_path
-                            }
-                        },
-                        error: function (response) {
-                            console.log('CHECKED AJAX ERROR!!!');
-                        }
-                    });
+                    //$.ajax({
+                    //    method: 'POST',
+                    //    url: '/orange/lu/api/automatic_login',
+                    //    data: {
+                    //        'plush_phone_number': localStorage.getItem("plush_phone_number"),
+                    //        'products_id': gon.products_id,
+                    //    },
+                    //    dataType: 'json',
+                    //    success: function (response) {
+                    //        if (0 === response.status) {
+                    //            window.location.href = response.redirect_path
+                    //        }
+                    //    },
+                    //    error: function (response) {
+                    //        console.log('CHECKED AJAX ERROR!!!');
+                    //    }
+                    //});
+
+                    if (typeof(Storage) !== "undefined") {
+                        localStorage.setItem("plush_phone_number", response.phone_number);
+                        $("#is_eligable").hide();
+                        $("#orange_purchase").show();
+                        jQuery.facebox("<div class=\"alert alert-danger\">" +
+                            "<strong>" + response.sms_code + "</strong>" +
+                            "</div>");
+                    } else {
+                        jQuery.facebox("<div class=\"alert alert-danger\">" +
+                            "<strong>" + "Sorry! No Web Storage support.." + "</strong>" +
+                            "</div>");
+                    }
 
                   }
                 },
@@ -166,7 +180,7 @@ function eligibilityServiceOnlyRegister() {
 
 function orangePurchase() {
 
-    $("#orange_purchase").validate({
+    $("#orange_purchase_register").validate({
         rules: {
             "sms-code": {
                 required: true,
@@ -193,6 +207,82 @@ function orangePurchase() {
             $.ajax({
                 method: 'POST',
                 url: '/orange/lu/api/orange_purchase',
+                data: {
+                    'sms_code': $.trim($("#sms_code").val()),
+                    'products_id': gon.products_id,
+                    'plush_phone_number': localStorage.getItem("plush_phone_number"),
+                    'code': gon.code
+                },
+                dataType: 'json',
+                success: function (response) {
+
+                    if ("True" === response.status) {
+
+
+                        $.ajax({
+                            method: 'POST',
+                            url: '/orange/lu/api/automatic_login',
+                            data: {
+                                'plush_phone_number': localStorage.getItem("plush_phone_number"),
+                                'products_id': gon.products_id,
+                            },
+                            dataType: 'json',
+                            success: function (response) {
+                                if (0 === response.status) {
+                                    window.location.href = response.redirect_path
+                                }
+                            },
+                            error: function (response) {
+                                console.log('CHECKED AJAX ERROR!!!');
+                            }
+                        });
+
+
+                    } else if ("Subscriber is not eligible for the service" === response.status) {
+                        jQuery.facebox("<div class=\"alert alert-danger\">" +
+                            "<strong>" + response.status + "</strong>" +
+                            "</div>");
+                    }
+
+                },
+                error: function (response) {
+                    console.log('CHECKED AJAX ERROR!!!');
+                }
+            });
+        }
+    });
+
+}
+
+function loginAuth() {
+
+    $("#orange_purchase").validate({
+        rules: {
+            "sms-code": {
+                required: true,
+                remote: {
+                    url:"/orange/lu/api/check_sms_activation_code"
+                }
+            }
+        },
+        messages: {
+            "sms-code": {
+                required: orangePurchaseMessage(),
+                remote: orangePurchaseMessageSmsCodeValidation()
+            }
+        },
+        highlight: function (element) {
+            $(element).closest('.form-group').addClass('has-error');
+        },
+        unhighlight: function (element) {
+            $(element).closest('.form-group').removeClass('has-error');
+        },
+        errorElement: 'span',
+        errorClass: 'help-block',
+        submitHandler: function (form) {
+            $.ajax({
+                method: 'POST',
+                url: '/orange/lu/api/orange_login',
                 data: {
                     'sms_code': $.trim($("#sms_code").val()),
                     'products_id': gon.products_id,

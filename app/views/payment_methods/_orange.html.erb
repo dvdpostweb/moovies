@@ -1,0 +1,138 @@
+<div class="container white-bck dark-gray padb20">
+  <div class="movie-block block100">
+    
+  </div>
+  <section class="page">
+    <div id="accordion" class="mart30">
+      <h3><%= t('promotion.newstep3.paymentoption1').html_safe %></h3>
+      <div>
+        <ul class="card-list">
+          <li>
+            <a href="index.php%3Fpage=payment-methods.html">
+              <div class="card-image">
+                <%= link_to(image_tag("template/card-visa.png", class: "img-responsive radius4"), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'ppv', :brand => 'visa', :source => params[:source]
+                ), :method => :put) %>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="index.php%3Fpage=payment-methods.html">
+              <div class="card-image">
+                <%= link_to(image_tag("template/card-master.png", class: "img-responsive radius4"), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'ppv', :brand => 'mastercard', :source => params[:source]
+                ), :method => :put) %>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="index.php%3Fpage=payment-methods.html">
+              <div class="card-image">
+                <%= link_to(image_tag("template/card-american-express.png", class: "img-responsive radius4"), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'ppv', :brand => 'american Express', :source => params[:source]
+                ), :method => :put) %>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <h3><%= t('promotion.newstep3.paymentoption2').html_safe %></h3>
+      <div>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mart10">
+          <%= image_tag "template/paypal.png", class: "img-responsive radius4" %>
+        </div>
+        <div class="block100 mart20">
+          <%= link_to(image_tag('https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif'), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'ppv', :brand => 'PAYPAL', :source => params[:source]
+          ), :method => :put) %>
+
+        </div>
+      </div>
+      <h3>Mister Cash</h3>
+      <div>
+        <a href="index.php%3Fpage=payment-methods.html">
+          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mart10">
+            <%= link_to(image_tag("template/mistercash.png", class: "img-responsive radius4"), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'ppv', :brand => 'Bancontact/Mister Cash', :source => params[:source]
+            ), :method => :put) %>
+          </div>
+        </a>
+      </div>
+
+      <!--Web Banking-->
+      <h3>Web Banking</h3>
+      <div>
+        <ul class="card-list">
+          <li>
+            <a href="index.php%3Fpage=payment-methods.html">
+              <div class="card-image">
+                <%= link_to(image_tag("template/iDeal.png", class: "img-responsive radius4"), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'ppv', :brand => 'iDEAL', :source => params[:source]
+                ), :method => :put) %>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="index.php%3Fpage=payment-methods.html">
+              <div class="card-image">
+                <%= link_to(image_tag("template/belfius.png", class: "img-responsive radius4"), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'Belfius Direct Net', :source => params[:source]
+                ), :method => :put) %>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="index.php%3Fpage=payment-methods.html">
+              <div class="card-image">
+                <%= link_to(image_tag("template/ingHomePay.png", class: "img-responsive radius4"), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'ING HomePay', :source => params[:source]
+                ), :method => :put) %>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!--Web Banking via Sofort-->
+      <h3>Web Banking via Sofort</h3>
+      <div>
+        <ul class="card-list">
+          <li>
+            <a href="index.php%3Fpage=payment-methods.html">
+              <div class="card-image">
+                <%= link_to(image_tag("template/sofortLogoBel.png", class: "img-responsive radius4"), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'DirectEbankingBE', :source => params[:source]
+                ), :method => :put) %>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="index.php%3Fpage=payment-methods.html">
+              <div class="card-image">
+                <%= link_to(image_tag("template/sofortLogoNed.png", class: "img-responsive radius4"), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'tvod', :brand => 'DirectEbankingNL', :source => params[:source]
+                ), :method => :put) %>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <h3>Paiement sur votre prochaine facture Orange</h3>
+      <div>
+        <ul class="card-list">
+          <li>
+            <a href="index.php%3Fpage=payment-methods.html">
+              <div class="card-image">
+                <%= link_to(image_tag("template/orange-logo.png", class: "img-responsive radius4"), customer_payment_methods_path(:customer_id => current_customer.to_param, :product_id => params[:product_id], :type => 'ppv', :brand => 'Orange', :source => params[:source]
+                ), :method => :put) %>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+  <!--/ACCORDION-->
+
+  <p class="mart30 block100"><%= t('promotion.newstep3.supportinfo').html_safe %></p>
+  <p>
+    <%= link_to t('promotion.newstep3.conditions').html_safe, info_path(:page_name => t('routes.infos.params.conditions')), class: "conditions-d-utilisation", target: "blank" %>
+  </p>
+
+</div>
+
+<% content_for :run_specific_javascript do %>
+    <%= javascript_include_tag "payment_methods/credit_card_tvod" %>
+<% end %>
