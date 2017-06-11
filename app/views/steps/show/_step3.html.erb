@@ -64,6 +64,45 @@
         </div>
       </form>
     </div>
+    <h3>Pay with Orange SMS Confirmation Code</h3>
+    <div>
+      <div id="sms_auth" class="center-block thin-holder border radius4 thinrgray-bck pad20 mart20 overflow-hidden">
+        <div class="block100 text-center">
+          <%= image_tag("orange_logo.jpg", width: "70", height: "70") %>
+          <div class="col-xs-12" style="height:40px;"></div>
+        </div>
+        <div id="sms_form">
+          <form id="is_eligable_subscriber">
+            <div class="form-group input-group-lg">
+              <input type="text" name="phone-number" id="sms_number" class="form-control" placeholder="Please enter ORANGE phone number" value="<%= current_customer.customers_telephone %>">
+            </div>
+            <div class="block100 text-center mart20">
+              <input type="submit" class="btn block100 orange-bck padlr40 padtb15 white f16 normal" value="Send">
+            </div>
+          </form>
+          <form id="orange_purchase_subscriber">
+            <div class="form-group input-group-lg">
+              <input type="text" name="sms-code" id="sms_code" class="form-control" placeholder="Please enter ORANGE SMS code">
+            </div>
+            <div class="block100 text-center mart20">
+              <input type="submit" class="btn block100 orange-bck padlr40 padtb15 white f16 normal" value="Send">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <h3>Orange Currier Billing</h3>
+    <div>
+      <ul class="card-list">
+        <li>
+          <a href="http://www.plush.be/wha/pos-bundle?action=purchaseListOffer&pid=<%= current_customer.customers_abo_type %>&lg=<%= I18n.locale %>&AdditionalParameters=streamingurl_step4">
+            <div class="card-image">
+              <%= image_tag("orange_logo.jpg", class: "img-responsive radius4") %>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
   <p class="mart30"><%= t('promotion.newstep3.supportinfo').html_safe %></p>
   <p><%= link_to t('promotion.newstep3.conditions').html_safe, info_path(:page_name => t('routes.infos.params.conditions')), class: "conditions-d-utilisation" %></p>

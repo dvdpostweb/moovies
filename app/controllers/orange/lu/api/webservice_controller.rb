@@ -76,7 +76,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
         customer = Customer.find(sms_code.customers_id)
         if customer.present?
           orange_purchase_wcf_service = HTTParty.get("https://www.plush.be:2355/wcfservice/http/OrangePurchase?customers_id=#{customer.customers_id}&mobileNumber=#{params[:plush_phone_number]}&price=0&products_id=#{product_id_from_params}&message=subscription&payment_id=0")
-          if orange_purchase_wcf_service.parsed_response == "Not enough credit" # OVDE TREBA U STVARI DA VRATI True
+          if orange_purchase_wcf_service.parsed_response == "TRUE"
             if discount.present?
               customer.customers_registration_step = 100
               customer.activation_discount_code_type = 'D'
@@ -89,7 +89,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
               customer.customers_abo_payment_method = 5
               customer.activation_discount_code_id = discount.discount_code_id
               if customer.save(validate: false)
-                if customer.abo_history(6, customer.customers_abo_type, discount.to_param)
+                if customer.abo_history(7, customer.customers_abo_type, product_id_from_params) && customer.abo_history(6, customer.customers_abo_type, discount.to_param)
                   render json: {status: "True"}
                 end
               end
@@ -128,10 +128,37 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
         customer = Customer.find(sms_code.customers_id)
         if customer.present?
           orange_purchase_wcf_service = HTTParty.get("https://www.plush.be:2355/wcfservice/http/OrangePurchase?customers_id=#{customer.customers_id}&mobileNumber=#{params[:plush_phone_number]}&price=0&products_id=#{product_id_from_params}&message=ppv2&payment_id=0")
-          if orange_purchase_wcf_service.parsed_response == "Payment Refused" # OVDE TREBA U STVARI DA VRATI True
+          if orange_purchase_wcf_service.parsed_response == "TRUE"
             if streaming.present?
               render json: {status: "True"}
             end
+          end
+        end
+      else
+        render json: {status: "mobile_number_format_error"}
+      end
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
+
+  def orange_purchase_step3
+    if request.xhr?
+      sms_code = OrangeSmsActivationCode.find_by_sms_authentification_code(params[:sms_code])
+      if sms_code.present?
+        customer = Customer.find(sms_code.customers_id)
+        if customer.present?
+          orange_purchase_wcf_service = HTTParty.get("https://www.plush.be:2355/wcfservice/http/OrangePurchase?customers_id=#{customer.customers_id}&mobileNumber=#{params[:plush_phone_number]}&price=0&products_id=#{customer.customers_abo_type}&message=ppv2&payment_id=0")
+          if orange_purchase_wcf_service.parsed_response == "TRUE"
+              customer.customers_registration_step = 100
+              customer.customers_abo = 1
+              customer.customers_abo_validityto = Date.today + 1.month
+              customer.customers_abo_payment_method = 5
+              if customer.save(validate: false)
+                if customer.abo_history(7, customer.customers_abo_type, customer.customers_abo_payment_method) # !!!
+                  render json: {status: "True"}
+                end
+              end
           end
         end
       else
