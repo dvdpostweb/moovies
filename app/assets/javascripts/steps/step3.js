@@ -86,7 +86,8 @@ var step3 = {
                     url: '/orange/lu/api/orange_is_eligable',
                     data: {
                         'sms_number': $.trim($("#sms_number").val()),
-                        'products_id': gon.products_id
+                        'products_id': gon.products_id,
+                        'current_customer': gon.current_customer.customers_id
                     },
                     dataType: 'json',
                     success: function (response) {
@@ -123,13 +124,15 @@ var step3 = {
                                     "</div>");
                             }
 
+                        } else {
+                            console.log(response);
                         }
-                    },
-                    error: function (response) {
-                        jQuery.facebox("<div class=\"alert alert-danger\">" +
-                            "<strong>" + "SYSTEM ERROR!!!" + "</strong>" +
-                            "</div>");
-                    }
+                    }//,
+                    //error: function (response) {
+                    //    jQuery.facebox("<div class=\"alert alert-danger\">" +
+                    //        "<strong>" + "SYSTEM ERROR!!!" + "</strong>" +
+                    //        "</div>");
+                    //}
                 });
             }
         });
@@ -165,7 +168,8 @@ var step3 = {
                     data: {
                         'sms_code': $.trim($("#sms_code").val()),
                         'products_id': gon.products_id,
-                        'plush_phone_number': localStorage.getItem("plush_phone_number")
+                        'plush_phone_number': localStorage.getItem("plush_phone_number"),
+                        'current_customer': gon.current_customer.customers_id
                     },
                     dataType: 'json',
                     success: function (response) {
