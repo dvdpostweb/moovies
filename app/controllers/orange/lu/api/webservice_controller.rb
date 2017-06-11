@@ -156,6 +156,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
               customer.customers_abo_payment_method = 5
               if customer.save(validate: false)
                 if customer.abo_history(7, customer.customers_abo_type, customer.customers_abo_payment_method) # !!!
+                  sign_in(customer)
                   render json: {status: "True"}
                 end
               end

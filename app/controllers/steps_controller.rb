@@ -1,6 +1,7 @@
 class StepsController < ApplicationController
   before_filter :authenticate_customer!, :unless => :confirmation?
   before_filter :promo
+  skip_before_filter :verify_authenticity_token
   def show
     @body_id = params[:id]
     if params[:id] == 'step2'
@@ -10,6 +11,7 @@ class StepsController < ApplicationController
       @hide_menu = true
     elsif params[:id] == 'step3'
       gon.products_id = current_customer.customers_abo_type
+      gon.step4 = step_path(:id => 'step4')
       gon.banc_card_error_message = t('orange.step3.banc_card_error_message')
     elsif params[:id] == 'step4'
       @new_tvod = Product.joins(:lists).includes("descriptions_#{I18n.locale}", 'vod_online_be').where("lists.#{I18n.locale} = 1").order("lists.id desc").limit(6)

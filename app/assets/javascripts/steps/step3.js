@@ -171,27 +171,7 @@ var step3 = {
                     success: function (response) {
 
                         if ("True" === response.status) {
-
-
-                            $.ajax({
-                                method: 'POST',
-                                url: '/orange/lu/api/automatic_register',
-                                data: {
-                                    'plush_phone_number': localStorage.getItem("plush_phone_number"),
-                                    'products_id': gon.products_id,
-                                },
-                                dataType: 'json',
-                                success: function (response) {
-                                    if (0 === response.status) {
-                                        window.location.href = response.redirect_path
-                                    }
-                                },
-                                error: function (response) {
-                                    console.log('CHECKED AJAX ERROR!!!');
-                                }
-                            });
-
-
+                            window.location.href = gon.step4;
                         } else if ("Max purchase threshold reached" === response.status) {
                             jQuery.facebox("<div class=\"alert alert-danger\">" +
                                 "<strong>" + response.status + "</strong>" +
