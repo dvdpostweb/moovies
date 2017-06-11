@@ -18,6 +18,10 @@ class PaymentMethodsController < ApplicationController
     end
     @choose_partial = params[:type] || 'index'
     @body_id = @choose_partial
+
+    if params[:product_id].present?
+      gon.products_id = params[:product_id]
+    end
   end
 
   def update

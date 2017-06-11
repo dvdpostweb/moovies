@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     eligibilityServiceOnlyLogin();
-    eligibilityServiceOnlyRegister()
+    eligibilityServiceOnlyRegister();
     orangePurchase();
     loginAuth();
     $("#sms_number_register").val(localStorage.getItem("plush_phone_number"));

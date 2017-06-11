@@ -75,7 +75,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
       if sms_code.present?
         customer = Customer.find(sms_code.customers_id)
         if customer.present?
-          orange_purchase_wcf_service = HTTParty.get("https://www.plush.be:2355/wcfservice/http/OrangePurchase?customers_id=#{customer.customers_id}&mobileNumber=#{params[:plush_phone_number]}&price=4&products_id=#{product_id_from_params}&message=testCODE2&payment_id=10000")
+          orange_purchase_wcf_service = HTTParty.get("https://www.plush.be:2355/wcfservice/http/OrangePurchase?customers_id=#{customer.customers_id}&mobileNumber=#{params[:plush_phone_number]}&price=0&products_id=#{product_id_from_params}&message=subscription&payment_id=0")
           if orange_purchase_wcf_service.parsed_response == "Not enough credit" # OVDE TREBA U STVARI DA VRATI True
             if discount.present?
               customer.customers_registration_step = 100
@@ -107,6 +107,30 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
                   render json: {status: "True"}
                 end
               end
+            end
+          end
+        end
+      else
+        render json: {status: "mobile_number_format_error"}
+      end
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
+
+  def orange_purchase_ppv
+    if request.xhr?
+      product_id_from_params = params[:products_id].blank? ? 0 : params[:products_id]
+      sms_code = OrangeSmsActivationCode.find_by_sms_authentification_code(params[:sms_code])
+      product = Product.find_by_products_id(params[:products_id])
+      streaming = StreamingProduct.find_by_imdb_id(product.imdb_id)
+      if sms_code.present?
+        customer = Customer.find(sms_code.customers_id)
+        if customer.present?
+          orange_purchase_wcf_service = HTTParty.get("https://www.plush.be:2355/wcfservice/http/OrangePurchase?customers_id=#{customer.customers_id}&mobileNumber=#{params[:plush_phone_number]}&price=0&products_id=#{product_id_from_params}&message=ppv2&payment_id=0")
+          if orange_purchase_wcf_service.parsed_response == "Payment Refused" # OVDE TREBA U STVARI DA VRATI True
+            if streaming.present?
+              render json: {status: "True"}
             end
           end
         end

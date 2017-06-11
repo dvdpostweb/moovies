@@ -18,7 +18,8 @@
       <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
         <span class="Arial f20 red-google-bck white radius4 mart5 normal text-right bold padtb5 padlr10"><%= t('.price') %> <%= current_customer && current_customer.tvod_only? ? @product.get_vod_online(session[:country_id]).first.tvod_price : @product.get_vod_online(session[:country_id]).first.ppv_price %> &euro;</span>
       </div>
-      <% actors = @product.actors.collect { |actor| link_to(actor.name, actor_products_path(:actor_id => actor.to_param), :class => "f13") }.join(', ').html_safe %>
+      <hr>
+      <% actors = @product.actors.collect {|actor| link_to(actor.name, actor_products_path(:actor_id => actor.to_param), :class => "f13")}.join(', ').html_safe %>
       <% if actors.size > 0 %>
           <div class="block100">
             <h5 class="block100 f16 mart0 bold marb5"><%= t '.actors' %></h5>
@@ -151,17 +152,251 @@
           </li>
         </ul>
       </div>
-
+      <h3>Pay with Orange SMS Confirmation Code</h3>
+      <div>
+        <div id="sms_auth" class="center-block thin-holder border radius4 thinrgray-bck pad20 mart20 overflow-hidden">
+          <div class="block100 text-center">
+            <%= image_tag("orange_logo.jpg", width: "70", height: "70") %>
+            <div class="col-xs-12" style="height:40px;"></div>
+          </div>
+          <div id="sms_form">
+            <form id="is_eligable_ppv">
+              <div class="form-group input-group-lg">
+                <input type="text" name="phone-number" id="sms_number" class="form-control" placeholder="Please enter ORANGE phone number" value="<%= current_customer.customers_telephone %>">
+              </div>
+              <div class="block100 text-center mart20">
+                <input type="submit" class="btn block100 orange-bck padlr40 padtb15 white f16 normal" value="Send">
+              </div>
+            </form>
+            <form id="orange_purchase_ppv">
+              <div class="form-group input-group-lg">
+                <input type="text" name="sms-code" id="sms_code" class="form-control" placeholder="Please enter ORANGE SMS code">
+              </div>
+              <div class="block100 text-center mart20">
+                <input type="submit" class="btn block100 orange-bck padlr40 padtb15 white f16 normal" value="Send">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <h3>Orange Currier Billing</h3>
+      <% if @product.get_vod_online(session[:country_id]).first.tvod_price == 2.99 %>
+      <% wha_product = 103291 %>
+          <% elsif @product.get_vod_online(session[:country_id]).first.tvod_price == 3.99 %>
+          <% wha_product = 103292 %>
+      <% elsif @product.get_vod_online(session[:country_id]).first.tvod_price == 4.99 %>
+          <% wha_product = 103293 %>
+      <% elsif @product.get_vod_online(session[:country_id]).first.tvod_price == 5.99 %>
+          <% wha_product = 103294 %>
+      <% end %>
+      <div>
+        <ul class="card-list">
+          <li>
+            <a href="http://www.plush.be/wha/pos-bundle?action=purchaseListOffer&pid=<%= wha_product %>&lg=<%= I18n.locale %>&AdditionalParameters=streamingurl_<%= streaming_product_path(:id => @product.imdb_id, :season_id => @product.season_id, :episode_id => @product.episode_id) %>">
+              <div class="card-image">
+                <%= image_tag("orange_logo.jpg", width: "80", height: "80", class: "img-responsive radius4") %>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
   </section>
-
-  <p class="mart30 block100">Des questions? Appelez le 0800/26371</p>
+  <p class="mart30 block100"><%= t('promotion.newstep3.supportinfo').html_safe %></p>
   <p>
-    <a href="index.php%3Fpage=payment-methods.html#">Conditions d’utilisation</a>
+    <%= link_to t('promotion.newstep3.conditions').html_safe, info_path(:page_name => t('routes.infos.params.conditions')), class: "conditions-d-utilisation" %>
   </p>
-
 </div>
-
 <% content_for :run_specific_javascript do %>
     <%= javascript_include_tag "payment_methods/credit_card_tvod" %>
 <% end %>
+<script
+src="https://code.jquery.com/jquery-1.12.4.min.js"
+integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.js"></script>
+<script>
+    jQuery.validator.addMethod("phone", function (phone_number, element) {
+        phone_number = phone_number.replace(/\s+/g, "");
+        return this.optional(element) || phone_number.length > 9 &&
+            phone_number.match(/^[0-9-+]+$/);
+    }, "Invalid phone number");
+
+    $("#is_eligable_ppv").validate({
+        rules: {
+            "phone-number": {
+                required: true,
+                phone: true
+            }
+        },
+        messages: {
+            "phone-number": {
+                required: isEligableValidationMessage()
+            }
+        },
+        highlight: function (element) {
+            $(element).closest('.form-group').addClass('has-error');
+        },
+        unhighlight: function (element) {
+            $(element).closest('.form-group').removeClass('has-error');
+        },
+        errorElement: 'span',
+        errorClass: 'help-block',
+        submitHandler: function (form) {
+            $.ajax({
+                method: 'POST',
+                url: '/orange/lu/api/orange_is_eligable',
+                data: {
+                    'sms_number': $.trim($("#sms_number").val()),
+                    'products_id': gon.products_id
+                },
+                dataType: 'json',
+                success: function (response) {
+                    if (0 === response.status) {
+                        localStorage.setItem("plush_phone_number", response.sms_number);
+                        jQuery.facebox("<div class=\"alert alert-danger\">" +
+                            "<strong>Account with your phone number does not exist !!! Please select your subscription plan</strong>" +
+                            "</div>");
+                        setTimeout(
+                            function () {
+                                window.location.href = gon.orange_subscription_action; //"/orange/lu/auth/" + gon.locale + "/sms/registration?phone_number=" + $.trim($("#sms_number").val()) + ""
+                            }, 2000);
+                    } else if (1 === response.status) {
+                        localStorage.setItem("plush_phone_number", response.sms_number);
+                        jQuery.facebox("<div class=\"alert alert-danger\">" +
+                            "<strong>Account with your phone number does not exist !!! Please register</strong>" +
+                            "</div>");
+                        setTimeout(
+                            function () {
+                                window.location.href = gon.orange_subscription_action + gon.url_code; //"/orange/lu/auth/" + gon.locale + "/sms/registration?phone_number=" + $.trim($("#sms_number").val()) + ""
+                            }, 2000);
+                        //window.location.href = gon.orange_subscription_action + gon.url_code;
+                    } else if ("True" === response.status) {
+                        if (typeof(Storage) !== "undefined") {
+                            localStorage.setItem("plush_phone_number", response.phone_number);
+                            $("#is_eligable_ppv").hide();
+                            $("#orange_purchase_ppv").show();
+                            jQuery.facebox("<div class=\"alert alert-danger\">" +
+                                "<strong>" + response.sms_code + "</strong>" +
+                                "</div>");
+                        } else {
+                            jQuery.facebox("<div class=\"alert alert-danger\">" +
+                                "<strong>" + "Sorry! No Web Storage support.." + "</strong>" +
+                                "</div>");
+                        }
+
+                    }
+                },
+                error: function (response) {
+                    jQuery.facebox("<div class=\"alert alert-danger\">" +
+                        "<strong>" + "SYSTEM ERROR!!!" + "</strong>" +
+                        "</div>");
+                }
+            });
+        }
+    });
+
+
+    $("#orange_purchase_ppv").validate({
+        rules: {
+            "sms-code": {
+                required: true,
+                remote: {
+                    url: "/orange/lu/api/check_sms_activation_code"
+                }
+            }
+        },
+        messages: {
+            "sms-code": {
+                required: orangePurchaseMessage()//,
+                //remote: orangePurchaseMessageSmsCodeValidation()
+            }
+        },
+        highlight: function (element) {
+            $(element).closest('.form-group').addClass('has-error');
+        },
+        unhighlight: function (element) {
+            $(element).closest('.form-group').removeClass('has-error');
+        },
+        errorElement: 'span',
+        errorClass: 'help-block',
+        submitHandler: function (form) {
+            $.ajax({
+                method: 'POST',
+                url: '/orange/lu/api/orange_purchase_ppv',
+                data: {
+                    'sms_code': $.trim($("#sms_code").val()),
+                    'products_id': gon.products_id,
+                    'plush_phone_number': localStorage.getItem("plush_phone_number")
+                },
+                dataType: 'json',
+                success: function (response) {
+
+                    if ("True" === response.status) {
+
+
+                        $.ajax({
+                            method: 'POST',
+                            url: '/orange/lu/api/automatic_register',
+                            data: {
+                                'plush_phone_number': localStorage.getItem("plush_phone_number"),
+                                'products_id': gon.products_id,
+                            },
+                            dataType: 'json',
+                            success: function (response) {
+                                if (0 === response.status) {
+                                    window.location.href = response.redirect_path
+                                }
+                            },
+                            error: function (response) {
+                                console.log('CHECKED AJAX ERROR!!!');
+                            }
+                        });
+
+
+                    } else if ("Max purchase threshold reached" === response.status) {
+                        jQuery.facebox("<div class=\"alert alert-danger\">" +
+                            "<strong>" + response.status + "</strong>" +
+                            "</div>");
+                    } else {
+                        console.log(response);
+                    }
+
+                },
+                error: function (response) {
+                    console.log('CHECKED AJAX ERROR!!!');
+                }
+            });
+        }
+    });
+
+    function isEligableValidationMessage() {
+        if (gon.locale == "fr") {
+            return "Numéro de téléphone est nécessaire."
+        } else if (gon.locale == "nl") {
+            return "Telefoonnummer is vereist."
+        } else if (gon.locale == "en") {
+            return "Phone number is required."
+        }
+    }
+    function orangePurchaseMessage() {
+        if (gon.locale == "fr") {
+            return "SMS code est nécessaire."
+        } else if (gon.locale == "nl") {
+            return "SMS code is vereist."
+        } else if (gon.locale == "en") {
+            return "SMS code is required."
+        }
+    }
+
+    function orangePurchaseMessageSmsCodeValidation() {
+        if (gon.locale == "fr") {
+            return "Le code SMS n'est pas correct."
+        } else if (gon.locale == "nl") {
+            return "SMS code is niet juist."
+        } else if (gon.locale == "en") {
+            return "SMS code is not correct."
+        }
+    }
+</script>
+

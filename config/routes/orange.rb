@@ -12,6 +12,7 @@ Moovies::Application.routes.draw do
         match "orange_register" => "webservice#orange_register"
         match "orange_login" => "webservice#orange_login"
         match "orange_purchase" => "webservice#orange_purchase"
+        match "orange_purchase_ppv" => "webservice#orange_purchase_ppv"
         match "check_sms_activation_code" => "webservice#check_sms_activation_code"
         match "automatic_login" => "webservice#automatic_login"
         match "automatic_register" => "webservice#automatic_register"
