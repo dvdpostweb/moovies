@@ -1,6 +1,24 @@
 <% if sub = subtitle.subtitles.by_language(I18n.locale).first %>
-  <% title = "<strong>#{sub.name}</strong>".html_safe %>
+  <% title = sub.name %>
 <% else %>
-  <% title = "<strong>#{t('streaming_products.show.kind.without_subtitle')}</strong>".html_safe %>
+  <% title = t('streaming_products.show.kind.without_subtitle') %>
 <% end %>
-<%= link_to title, streaming_product_subtitle_path(:streaming_product_id => params[:streaming_product_id], :id => subtitle.to_param, :season_id => params[:season_id], :episode_id => params[:episode_id], :streaming_code => params[:streaming_code], :email => params[:email], :sample => params[:sample], :source => params[:source], :response_id => params[:response_id]), :class => "btn language_btn" %>
+<li>
+  <a href="<%= streaming_product_subtitle_path(:streaming_product_id => params[:streaming_product_id], :id => subtitle.to_param, :season_id => params[:season_id], :episode_id => params[:episode_id], :streaming_code => params[:streaming_code], :email => params[:email], :sample => params[:sample], :source => params[:source], :response_id => params[:response_id]) %>" id="subtitle_btn" class="btn dark-gray-bck pull-left uppercase slide-next" data-target="#myCarousel" data-slide-to="2" data-switch="subs-button" data-button="no-subs"><i class="fa fa-language marr5"></i><%= title%></a>
+</li>
+
+<script>
+    $('#subtitle_btn').click(function(e) {
+        e.preventDefault();
+        $.ajax({
+            dataType: 'html',
+            url: $(this).attr('href'),
+            type: 'GET',
+            data: {},
+            success: function(data) {
+                $('#step_3').html(data);
+            }
+
+        });
+    });
+</script>

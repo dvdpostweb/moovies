@@ -1,15 +1,42 @@
 <% audio_title = streaming.language.by_language(I18n.locale).first.name %>
 <% if sub = streaming.subtitles.by_language(I18n.locale).first %>
-  <% sub_title = "<strong>#{sub.name}</strong>".html_safe %>
+    <% sub_title = sub.name %>
 <% else %>
-  <% sub_title = "<strong>#{t('streaming_products.show.kind.without_subtitle')}</strong>".html_safe %>
-<% end%>
-<p class="choice_valided"><%= t 'streaming_products.show.kinds_alpha.audio_title' %> : <span class="selected"><%= audio_title %></span> | <%= link_to t('.change'), streaming_product_path(:id => streaming.imdb_id), :id => 'change_step2' %> </p>
-<p class="choice_valided"><%= t 'streaming_products.show.kinds_alpha.sub_title' %> : <span class="selected"><%= sub_title %></span> | <%= link_to t('.change'), streaming_product_path(:id => streaming.imdb_id), :id => 'change_step3' %> </p>
-<p class='audios'>
-  <% if params[:sample] %>
-    <%= link_to "<strong>#{t('.launch')}</strong>".html_safe, streaming_products_sample_path(:streaming_product_id => streaming.to_param), :class => 'btn_play  qualityvod' %>
-  <% else %>
-    <%= link_to "<strong>#{t('.launch')}</strong>".html_safe, streaming_product_path(:id => @streaming.imdb_id, :streaming_product_id => streaming.to_param, :streaming_code => params[:streaming_code], :source => params[:source], :response_id => params[:response_id], :email => params[:email], :season_id => params[:season_id], :episode_id => params[:episode_id]), :class => 'btn_play  qualityvod' %>
-  <% end%>
+    <% sub_title = t('streaming_products.show.kind.without_subtitle') %>
+<% end %>
+<p class="block100 mart5 black text-center"><%= t 'streaming_products.show.kinds_alpha.audio_title' %>
+  : <%= audio_title %>
+  <span class="selected-audio"></span>
+  |
+  <a href="#" class="slick-back-first" data-target="#myCarousel" data-slide-to="0">Change</a>
 </p>
+<p class="block100 mart5 black text-center"><%= t 'streaming_products.show.kinds_alpha.sub_title' %> : <%= sub_title %>
+  <span class="selected-sub"></span>
+  |
+  <a href="#" class="slick-back" data-target="#myCarousel" data-slide-to="1">Change</a>
+</p>
+
+<p class="block100 mart5 black text-center">
+  <% if params[:sample] %>
+      <a href="<%= streaming_products_sample_path(:streaming_product_id => streaming.to_param) %>" class="qualityvod btn btn-green-gradient center-block bold padlr25 white f15" id="play"><i class="fa fa-play marr5"></i> <%= t('.launch') %>
+      </a>
+  <% else %>
+      <a href="<%= streaming_product_path(:id => @streaming.imdb_id, :streaming_product_id => streaming.to_param, :streaming_code => params[:streaming_code], :source => params[:source], :response_id => params[:response_id], :email => params[:email], :season_id => params[:season_id], :episode_id => params[:episode_id]) %>" class="qualityvod btn btn-green-gradient center-block bold padlr25 white f15" id="play"><i class="fa fa-play marr5"></i> <%= t('.launch') %>
+      </a>
+  <% end %>
+</p>
+<script>
+    $('.qualityvod').click(function (e) {
+        e.preventDefault();
+        $.ajax({
+            dataType: 'html',
+            url: $(this).attr('href'),
+            type: 'GET',
+            data: {},
+            success: function (data) {
+                $('#stream_movie').html(data);
+            }
+
+        });
+    });
+</script>

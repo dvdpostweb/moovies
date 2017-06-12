@@ -1,22 +1,18 @@
-<!--<#% if @token %>
-    <#% token_code = token.token %>
-<#% else %>
-    <#% if Token.dvdpost_ip?(request.remote_ip) || (current_customer && current_customer.super_user?) || (/^192(.*)/.match(request.remote_ip)) %>
-        <#% token_code = "#{@streaming.hd? ? '4' : '3'}/i/" + @streaming.imdb_id.to_s %>
-    <#% end %>
-<#% end %>-->
-
-<% if Token.dvdpost_ip?(request.remote_ip) || (current_customer && current_customer.super_user?) || (/^192(.*)/.match(request.remote_ip)) %>
-    <% token_code = "#{@streaming.hd? ? '4' : '3'}/i/" + @streaming.imdb_id.to_s %>
+<% if @token %>
+    <% token_code = token.token %>
+<% else %>
+    <% if Token.dvdpost_ip?(request.remote_ip) || (current_customer && current_customer.super_user?) || (/^192(.*)/.match(request.remote_ip)) %>
+        <% token_code = "#{streaming.hd? ? '4' : '3'}/i/" + streaming.imdb_id.to_s %>
+    <% end %>
 <% end %>
 
-<%= jwplayer(@streaming.filename, @streaming.source, @streaming, token_code, @browser) %>
 
-<div id="player">Loading the player...</div>
+<%= jwplayer(filename, source, streaming, token_code, browser, code = nil, season_id, episode_id) %>
+
 <script>
-    jwplayer('player').setup({
-        file: movieUrl,
-        'image': 'http://www.dvdpost.be/images/screenshots/big/5975354_2.jpg'
-    });
-    console.log(movieUrl);
+$('#stream_movie').html("<div id='player'>Loading the player...</div>");
+$('#stream_movie').append("<script>" +
+"jwplayer('player').setup({file: movieUrl})" +
+"<script>" +
+"console.log(movieUrl)");
 </script>

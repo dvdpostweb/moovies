@@ -1,5 +1,12 @@
 module StreamingProductsHelper
 
+  def test_player
+    script = <<-script
+      console.log("test_player");
+    script
+    javascript_tag script
+  end
+
   def jwplayer(source_file, source, streaming, token_name, browser, code = nil, season_id ='0', episode_id = '0')
     audio = streaming.languages.by_language(:fr).first.short_alpha
     sub = streaming.subtitles.count > 0 ? streaming.subtitles.by_language(:fr).first.short_alpha : 'non'
