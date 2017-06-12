@@ -13,7 +13,7 @@ class StreamingProductsController < ApplicationController
       @streaming_prefered = StreamingProduct.available.group_by_language.country(Product.country_short_name(session[:country_id])).where(:imdb_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id])
       @streaming_not_prefered = nil
     elsif @token_valid == true
-      if Rails.env? == "development"
+      if Rails.env.development?
         @streaming = StreamingProduct.available_token.where(:imdb_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id]).first
         @streaming_prefered = StreamingProduct.available_token.group_by_language.where(:imdb_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id])
       else
