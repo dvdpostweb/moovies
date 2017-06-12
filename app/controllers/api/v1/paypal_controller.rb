@@ -61,7 +61,7 @@ class Api::V1::PaypalController < ApplicationController
       customer = current_customer
       customer.customers_abo_payment_method = 4
       customer.customers_registration_step = 100
-      customers_abo = 1
+      customer.customers_abo = 1
       customer.paypal_agreement_id = response.billing_agreement.identifier
       if customer.have_freetrial_codes?
         customer.customers_abo_validityto = Time.now + 1.month
@@ -97,7 +97,7 @@ class Api::V1::PaypalController < ApplicationController
       customer = current_customer
       customer.customers_abo_payment_method = 4
       customer.customers_registration_step = 100
-      customers_abo = 1
+      customer.customers_abo = 1
       customer.paypal_agreement_id = response.billing_agreement.identifier
       customer.customers_abo_validityto = Time.now
       customer.customers_locked__for_reconduction = 1

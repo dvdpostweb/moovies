@@ -1,4 +1,5 @@
 class StreamingProductsController < ApplicationController
+
   def show
     params[:season_id] = params[:season_id] || 0
     params[:episode_id] = params[:episode_id] || 0
@@ -287,6 +288,7 @@ class StreamingProductsController < ApplicationController
   end
 
   private
+
   def notify_country_error(customer_id, country_id, imdb_id, error)
     begin
       Airbrake.notify(:error_message => "customer have a problem with VOD customer_id : #{customer_id} country_id: #{country_id} imdb_id: #{imdb_id}, error #{error} ip #{session[:my_ip]} forwarded: #{request.env["HTTP_X_FORWARDED_FOR"]} remote: #{request.remote_ip}", :backtrace => $@, :environment_name => ENV['RAILS_ENV'])
@@ -295,4 +297,5 @@ class StreamingProductsController < ApplicationController
       logger.error(e.backtrace)
     end
   end
+
 end
