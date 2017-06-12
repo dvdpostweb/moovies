@@ -6,6 +6,10 @@
     <#% end %>
 <#% end %>-->
 
+<% if Token.dvdpost_ip?(request.remote_ip) || (current_customer && current_customer.super_user?) || (/^192(.*)/.match(request.remote_ip)) %>
+    <% token_code = "#{@streaming.hd? ? '4' : '3'}/i/" + @streaming.imdb_id.to_s %>
+<% end %>
+
 <%= jwplayer(@streaming.filename, @streaming.source, @streaming, token_code, @browser) %>
 
 <div id="player">Loading the player...</div>
