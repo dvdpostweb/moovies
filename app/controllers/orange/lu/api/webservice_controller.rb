@@ -76,7 +76,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
       if sms_code.present?
         customer = Customer.find(sms_code.customers_id)
         if customer.present?
-          orange_purchase_wcf_service = HTTParty.get("https://www.plush.be:2355/wcfservice/http/OrangePurchase?customers_id=#{customer.customers_id}&mobileNumber=#{params[:plush_phone_number]}&price=0&products_id=#{product_id_from_params}&message=subscription&payment_id=0")
+          orange_purchase_wcf_service = HTTParty.get("https://www.plush.be:2355/wcfservice/http/OrangePurchase?customersId=#{customer.customers_id}&mobileNumber=#{params[:plush_phone_number]}&price=0&products_id=#{product_id_from_params}&message=subscription&payment_id=0")
           if orange_purchase_wcf_service.parsed_response == "TRUE"
             if discount.present?
               customer.customers_registration_step = 100
@@ -128,7 +128,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
       if sms_code.present?
         customer = Customer.find(sms_code.customers_id)
         if customer.present?
-          orange_purchase_wcf_service = HTTParty.get("https://www.plush.be:2355/wcfservice/http/OrangePurchase?customers_id=#{customer.customers_id}&mobileNumber=#{params[:plush_phone_number]}&price=0&products_id=#{product_id_from_params}&message=ppv2&payment_id=0")
+          orange_purchase_wcf_service = HTTParty.get("https://www.plush.be:2355/wcfservice/http/OrangePurchase?customersId=#{customer.customers_id}&mobileNumber=#{params[:plush_phone_number]}&price=0&products_id=#{product_id_from_params}&message=ppv2&payment_id=0")
           if orange_purchase_wcf_service.parsed_response == "TRUE"
             if streaming.present?
               render json: {status: "True"}
@@ -149,7 +149,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
       if sms_code.present?
         customer =  Customer.find(params[:current_customer])
         if customer.present?
-          orange_purchase_wcf_service = HTTParty.get("https://www.plush.be:2355/wcfservice/http/OrangePurchase?customers_id=#{customer.customers_id}&mobileNumber=#{params[:plush_phone_number]}&price=0&products_id=#{customer.customers_abo_type}&message=ppv2&payment_id=0")
+          orange_purchase_wcf_service = HTTParty.get("https://www.plush.be:2355/wcfservice/http/OrangePurchase?customersId=#{customer.customers_id}&mobileNumber=#{params[:plush_phone_number]}&price=0&products_id=#{customer.customers_abo_type}&message=ppv2&payment_id=0")
           if orange_purchase_wcf_service.parsed_response == "TRUE"
               customer.customers_registration_step = 100
               customer.customers_abo = 1
