@@ -6,7 +6,7 @@
   <div class="block100">
     <img src="http://www.dvdpost.be/images/screenshots/big/<%= @product.imdb_id %>_1.jpg" class="img-responsive">
   </div>
-
+  <h2 class="f19 black mart20 text-center block100"><%= t('.version_title') %></h2>
 
   <h2 class="f19 black mart20 text-center block100">Choose film version</h2>
   <section class="page responsive-carousel slider" id="steps-wizard">
@@ -67,48 +67,12 @@
   </section>
 
   <div class="block100 text-center">
-      <a href="#" class="center-block display-block available-trigger">See all available versions <i class="fa fa-caret-down"></i></a>
+      <a href="index.php%3Fpage=video-stream-wizard.html#" class="center-block display-block available-trigger"><%= t('.all_versions') %> <i class="fa fa-caret-down"></i></a>
       <div class="available-versions mart5 block100 overflow-hidden thinrgray-bck black">
-          <h3 class="f20">LANGUAGES AND SUBTITLES AVAILABLE</h3>
-          <p class="block100">
-              Audio <i class="fa fa-file-audio-o"></i> : French | Subtitles <i class="fa fa-language"></i> : Without subtitles
-              <a href="index.php%3Fpage=video-stream-wizard.html#" class="btn btn-green-gradient bold padlr25 white f12 marl5" id="play"><i class="fa fa-play marr5"></i> Start Film</a>
-          </p>
-          <p class="block100">
-              Audio <i class="fa fa-file-audio-o"></i> : French | Subtitles <i class="fa fa-language"></i> : Dutch
-              <a href="index.php%3Fpage=video-stream-wizard.html#" class="btn btn-green-gradient bold padlr25 white f12 marl5" id="play"><i class="fa fa-play marr5"></i> Start Film</a>
-          </p>
+        <%= render :partial => 'streaming_products/show/versions', :locals => {:version => @streaming_prefered, :source => params[:source], :response_id => params[:response_id]} %>
       </div>
   </div>
-  <!--/AVAILABLE VERSION-->
-
-  <% if @token && @token_valid && @product.tvod? && @code.nil? %>
-    <div id='time'><div id="vodtime"><%= t '.time_left' %> : <strong><%= time_left(@token, params[:kind]) %></strong></div></div>
-  <% end %>
-  <!--VIEWABLE NOTIF-->
-  <div class="block100 text-center mart20">
-      This movie will be viewable during 48hrs, you can watch it as many times as you wish and decide on its version.
-  </div>
-  <!--/VIEWABLE NOTIF-->
-
-  <!--VIDEO STREAM LINKS BOX-->
-  <div class="block100 martb20">
-      <ul class="video-stream-links">
-          <li>
-              <a href="index.php%3Fpage=video-stream-wizard.html#"><i class="fa fa-television marr10"></i> How to connect your PC to your television?</a>
-          </li>
-          <li class="mart10">
-              <a href="index.php%3Fpage=video-stream-wizard.html#"><i class="fa fa-info-circle  marr10"></i> All info concerning our VOD system</a>
-          </li>
-          <li class="mart10">
-              <a href="index.php%3Fpage=video-stream-wizard.html#"><i class="fa fa-wrench  marr10"></i> Inform us if you have a problem viewing this</a>
-          </li>
-      </ul>
-  </div>
-
 </div>
-
-
 <% content_for :run_specific_javascript do %>
     <%= javascript_include_tag "streaming_product/streaming" %>
 <% end %>

@@ -1,16 +1,16 @@
 $(document).ready(function () {
 
     // full-movie slider
-    //$('.responsive-carousel').slick({
-    //    dots: false,
-    //    infinite: false,
-    //    draggable: false,
-    //    swipe: false,
-    //    speed: 200,
-    //    slidesToShow: 1,
-    //    slidesToScroll: 1,
-    //    arrows: false,
-    //});
+    $('.responsive-carousel').slick({
+        dots: false,
+        infinite: false,
+        draggable: false,
+        swipe: false,
+        speed: 200,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+    });
 
 
     $('a.slick-next').click(function (e) {
