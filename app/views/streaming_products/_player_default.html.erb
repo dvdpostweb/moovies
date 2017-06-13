@@ -4,22 +4,21 @@
   }
 </style>
 
+<script>
+    productImage = "<%= @product.image %>";
+</script>
+
 <%= jwplayer(@streaming.filename, @streaming.source, @streaming, "321456987", @browser) %>
 
-<div id="player">Loading the player...</div>
+<div id="player_default">Loading the player...</div>
 <div class="alert alert-warning">
   <strong>Dear customer please!</strong> Chose your favorite movie version.
 </div>
 <script>
-    jwplayer('player').setup({
+    jwplayer('player_default').setup({
         file: movieUrl,
-        autostart: true,
-        controls: false
-    });
-    jwplayer('player').onTime(function(event) {
-        if (event.position > 20 && event.position < 20.4) {
-            jwplayer('player').stop();
-            $(".alert").show();
-        }
+        autostart: false,
+        controls: false,
+        image: productImage
     });
 </script>

@@ -35,7 +35,7 @@ class StreamingProductsController < ApplicationController
         redirect_to root_localize_path and return
       end
     end
-    unless current_customer.customers_abo_payment_method == 5
+    unless current_customer.customers_abo_payment_method == 5 || current_customer.customers_abo_payment_method == 6
       if current_customer && current_customer.tvod_only? && !(@token_valid == true || @streaming.prepaid_all? || current_customer.tvod_free >= @streaming.tvod_credits)
         flash[:error] = t('streaming_products.tvod_no_token')
         redirect_to root_localize_path and return

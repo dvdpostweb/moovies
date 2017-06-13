@@ -3,7 +3,6 @@
   <h1 class="pad0 mart10 f30 green OpenSansCondensed block100 marb15"><%= h !@product.series? ? @product.description.title : @product.episode_title %>
     (<%= @product.year %>)</h1>
   <div id="stream_movie" class="block100">
-    <!--<img src="http://www.dvdpost.be/images/screenshots/big/<@%= @product.imdb_id %>_1.jpg" class="img-responsive">-->
     <%= render :partial => "streaming_products/player_default" %>
   </div>
   <% if @code || !current_customer.suspended? %>
