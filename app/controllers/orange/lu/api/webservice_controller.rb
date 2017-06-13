@@ -131,6 +131,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
           orange_purchase_wcf_service = HTTParty.get("https://www.plush.be:2355/wcfservice/http/OrangePurchase?customersId=#{customer.customers_id}&mobileNumber=#{params[:plush_phone_number]}&price=0&products_id=#{product_id_from_params}&message=ppv2&payment_id=0")
           if orange_purchase_wcf_service.parsed_response == "TRUE"
             if streaming.present?
+              sign_in(customer)
               render json: {status: "True"}
             end
           end
