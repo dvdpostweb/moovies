@@ -194,9 +194,11 @@ class Token < ActiveRecord::Base
   end
 
   private
+
   def generate_token
     if token.nil?
       update_attribute(:token, Digest::SHA1.hexdigest((created_at.to_s) + (97 * created_at.to_i).to_s))
     end
   end
+
 end

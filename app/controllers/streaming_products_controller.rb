@@ -6,6 +6,7 @@ class StreamingProductsController < ApplicationController
     @product = Product.both_available.where(:imdb_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id]).first
     if @product && current_customer
       @token = current_customer.get_token(@product.imdb_id, @product.season_id, @product.episode_id)
+      gon.token = @token
     end
     @token_valid = @token.nil? ? false : @token.validate?(request.remote_ip)
     if @token_valid == false
@@ -34,7 +35,7 @@ class StreamingProductsController < ApplicationController
         redirect_to root_localize_path and return
       end
     end
-    #unless Rails.env.development?
+    unless current_customer.customers_abo_payment_method == 5
       if current_customer && current_customer.tvod_only? && !(@token_valid == true || @streaming.prepaid_all? || current_customer.tvod_free >= @streaming.tvod_credits)
         flash[:error] = t('streaming_products.tvod_no_token')
         redirect_to root_localize_path and return
@@ -43,7 +44,7 @@ class StreamingProductsController < ApplicationController
         flash[:error] = t('streaming_products.tvod_no_token')
         redirect_to root_localize_path and return
       end
-    #end
+    end
 
     if !current_customer
       if request.xhr?

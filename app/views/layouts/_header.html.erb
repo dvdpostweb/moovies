@@ -1,3 +1,21 @@
+<% if flash[:notice] %>
+    <div class="container top-header hidden-sm hidden-xs">
+      <div class="block100 padtb10">
+        <div class="alert alert-warning">
+          <strong><%= flash[:notice] %></strong>
+        </div>
+      </div>
+    </div>
+<% end %>
+<% if flash[:error] || flash[:alert] %>
+    <div class="container top-header hidden-sm hidden-xs">
+      <div class="block100 padtb10">
+        <div class="alert alert-danger">
+          <strong><%= flash[:error] %></strong> <%= flash[:alert] %>
+        </div>
+      </div>
+    </div>
+<% end %>
 <div class="container top-header hidden-sm hidden-xs">
   <div class="block100 padtb10">
     <ul class="lng-holder col-md-4">
