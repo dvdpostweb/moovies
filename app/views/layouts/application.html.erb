@@ -28,6 +28,20 @@
   <% end %>
   <%= render "layouts/application/side_menu_box_shadov" %>
   <div class="wrap">
+    <% if flash[:notice] %>
+        <div class='flash_message'>
+          <div class="notice">
+            <%= flash[:notice] %>
+          </div>
+        </div>
+    <% end %>
+    <% if flash[:error] || flash[:alert]%>
+        <div class='flash_message'>
+          <div class="flash_error">
+            <%= flash[:error] %><%= flash[:alert] %>
+          </div>
+        </div>
+    <% end %>
     <%= render "layouts/header" %>
     <div id="content" class="<%= configure_content_div_html_class(params) %>">
       <% unless customer_signed_in? %>
