@@ -1,19 +1,8 @@
-<style>
-  .alert {
-    display: none;
-  }
-</style>
-
 <script>
     productImage = "<%= @product.image %>";
 </script>
-
 <%= jwplayer(@streaming.filename, @streaming.source, @streaming, "321456987", @browser) %>
-
 <div id="player_default">Loading the player...</div>
-<div class="alert alert-warning">
-  <strong>Dear customer please!</strong> Chose your favorite movie version.
-</div>
 <script>
     jwplayer('player_default').setup({
         file: movieUrl,
