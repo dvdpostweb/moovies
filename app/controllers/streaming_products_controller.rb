@@ -34,7 +34,7 @@ class StreamingProductsController < ApplicationController
         redirect_to root_localize_path and return
       end
     end
-    unless Rails.env.development?
+    #unless Rails.env.development?
       if current_customer && current_customer.tvod_only? && !(@token_valid == true || @streaming.prepaid_all? || current_customer.tvod_free >= @streaming.tvod_credits)
         flash[:error] = t('streaming_products.tvod_no_token')
         redirect_to root_localize_path and return
@@ -43,7 +43,7 @@ class StreamingProductsController < ApplicationController
         flash[:error] = t('streaming_products.tvod_no_token')
         redirect_to root_localize_path and return
       end
-    end
+    #end
 
     if !current_customer
       if request.xhr?

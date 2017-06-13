@@ -1,19 +1,19 @@
-<% if @token %>
-    <% token_code = token.token %>
-<% else %>
-    <% if Token.dvdpost_ip?(request.remote_ip) || (current_customer && current_customer.super_user?) || (/^192(.*)/.match(request.remote_ip)) %>
-        <% token_code = "#{@streaming.hd? ? '4' : '3'}/i/" + @streaming.imdb_id.to_s %>
-    <% end %>
-<% end %>
+<!--<#% if @token %>
+    <#% token_code = token.token %>
+<#% else %>
+    <#% if Token.dvdpost_ip?(request.remote_ip) || (current_customer && current_customer.super_user?) || (/^192(.*)/.match(request.remote_ip)) %>
+        <#% token_code = "#{@streaming.hd? ? '4' : '3'}/i/" + @streaming.imdb_id.to_s %>
+    <#% end %>
+<#% end %>-->
 
-<%= jwplayer(@streaming.filename, @streaming.source, @streaming, token_code, @browser) %>
+<%= jwplayer(@streaming.filename, @streaming.source, @streaming, "321456987", @browser) %>
 
 <div id="player">Loading the player...</div>
 <script>
     jwplayer('player').setup({
         file: movieUrl,
-        autostart: false,
+        //autostart: false,
         controls: false
     });
-    jwplayer().getPlugin("display").hide();
+    //jwplayer().getPlugin("display").hide();
 </script>
