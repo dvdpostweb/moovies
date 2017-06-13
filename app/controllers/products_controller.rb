@@ -80,7 +80,7 @@ class ProductsController < ApplicationController
         new_params = new_params.merge(:hetero => 1) if session[:sexuality] == 0
         @products = Product.filter_online(nil, new_params)
         if params[:filters]
-          @selected_countries = ProductCountry.where(:countries_id => params[:filters][:country_id].to_i)
+          @selected_countries = ProductCountry.where(:countries_id => params[:filters][:country_id])
           @languages = Language.by_language(I18n.locale).find(params[:filters][:audio].reject(&:empty?)).collect(&:name).join(', ') if Product.audio?(params[:filters][:audio])
           @subtitles = Subtitle.by_language(I18n.locale).find(params[:filters][:subtitles].reject(&:empty?)).collect(&:name).join(', ') if Product.subtitle?(params[:filters][:subtitles])
         end
