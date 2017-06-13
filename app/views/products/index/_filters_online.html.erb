@@ -77,17 +77,15 @@
             <%= link_to t('.belgium'), belgium_path, :id => :belgium_link, :class => params[:kind] == :adult ? "violet underline" : "green underline" %>
           </div>
         </div>
+          <div class="left-item">
+            <label class="OpenSansCondensed f20"><%= t('products.index.filters.audio', :default => 'audio') %></label>
+                <%= collection_select(:filters, :audio, Language.by_language(I18n.locale), :id, :name, {:selected => params[:filters] && params[:filters][:audio] ? params[:filters][:audio] : nil, :include_blank => true}, {:multiple => true, :class => 'chosen-select', 'data-placeholder' => "audio...", 'data-no_results_text' => t('products.index.filters.not_found')}) %>
+          </div>
 
-        <div class="left-item">
-          <label class="OpenSansCondensed f20"><%= t('products.index.filters.audio', :default => 'audio') %></label>
-              <%= collection_select(:filters, :audio, Language.by_language(I18n.locale), :id, :name, {:selected => params[:filters] && params[:filters][:audio] ? params[:filters][:audio] : nil, :include_blank => true}, {:multiple => true, :class => 'chosen-select', 'data-placeholder' => "audio...", 'data-no_results_text' => t('products.index.filters.not_found')}) %>
-        </div>
-
-        <div class="left-item">
-          <label class="OpenSansCondensed f20"><%= t('products.index.filters.subtitles', :default => 'subtitles') %></label>
-              <%= collection_select(:filters, :subtitles, Subtitle.by_language(I18n.locale), :id, :name, {:selected => params[:filters] && params[:filters][:subtitles] ? params[:filters][:subtitles] : nil, :include_blank => true}, {:multiple => true, :class => 'chosen-select', 'data-placeholder' => "#{t('products.index.filters.subtitles')}...", 'data-no_results_text' => t('products.index.filters.not_found')}) %>
-        </div>
-
+          <div class="left-item">
+            <label class="OpenSansCondensed f20"><%= t('products.index.filters.subtitles', :default => 'subtitles') %></label>
+                <%= collection_select(:filters, :subtitles, Subtitle.by_language(I18n.locale), :id, :name, {:selected => params[:filters] && params[:filters][:subtitles] ? params[:filters][:subtitles] : nil, :include_blank => true}, {:multiple => true, :class => 'chosen-select', 'data-placeholder' => "#{t('products.index.filters.subtitles')}...", 'data-no_results_text' => t('products.index.filters.not_found')}) %>
+          </div>
         <!--<div class="left-item">
           <label class="OpenSansCondensed f20"><#%= t('products.index.filters.ratings', :default => 'ratings') %></label>
           <div id="ratings-slider">
@@ -130,12 +128,3 @@
 <% content_for :run_specific_javascript do %>
     <%= javascript_include_tag "products/catalog" %>
 <% end %>
-
-
-
-
-
-
-
-
-
