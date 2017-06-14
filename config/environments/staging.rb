@@ -3,6 +3,25 @@ Moovies::Application.configure do
   config.action_controller.asset_host = "http://staging.plush.be"
 
   config.assets.precompile += %w(
+  jquery.validate.js
+  facebox-bootstrap.js
+  chosen.jquery.min.js
+  bootstrap.min.js
+  bootstrap-datepicker.js
+  jquery-ui.min.js
+  slick.min.js
+  jquery.raty-fa.js
+  modernizr.js
+  jquery.waitforimages.js
+  tag-it.min.js
+  ion.rangeSlider.min.js
+  fancybox.js
+  icheck.min.js
+  scripts.js
+  history.js
+  react.js
+  react_ujs.js
+  components.js
   carrefourbonus/validation.js
   contact/questions.js
   customers/credit_card_modification.js
@@ -26,26 +45,6 @@ Moovies::Application.configure do
   top_banner/validation.js
   vod/sample.js
   watchlist/watchlist.js
-  bootstrap-datepicker.js
-  bootstrap.min.js
-  chosen.jquery.min.js
-  components.js
-  customers.js
-  facebox-bootstrap.js
-  facebox.js
-  fancybox.js
-  history.js
-  icheck.min.js
-
-  jquery.raty-fa.js
-  jquery.validate.js
-  jquery.waitforimages.js
-  modernizr.js
-  scripts.js
-  server-rendering.js
-  slick.min.js
-  tag-it.min.js
-  react.js
   )
 
   # Settings specified here will take precedence over those in config/application.rb
