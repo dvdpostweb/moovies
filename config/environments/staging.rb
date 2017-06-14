@@ -1,6 +1,6 @@
 Moovies::Application.configure do
 
-  config.action_controller.asset_host = "http://staging.plush.be"
+  config.action_controller.asset_host = "http://staging.plush.be/#{I18n.locale}"
 
   # Settings specified here will take precedence over those in config/application.rb
 
