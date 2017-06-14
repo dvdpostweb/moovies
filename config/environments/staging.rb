@@ -26,6 +26,26 @@ Moovies::Application.configure do
   top_banner/validation.js
   vod/sample.js
   watchlist/watchlist.js
+  bootstrap-datepicker.js
+  bootstrap.min.js
+  chosen.jquery.min.js
+  components.js
+  customers.js
+  facebox-bootstrap.js
+  facebox.js
+  fancybox.js
+  history.js
+  icheck.min.js
+
+  jquery.raty-fa.js
+  jquery.validate.js
+  jquery.waitforimages.js
+  modernizr.js
+  scripts.js
+  server-rendering.js
+  slick.min.js
+  tag-it.min.js
+  react.js
   )
 
   # Settings specified here will take precedence over those in config/application.rb
