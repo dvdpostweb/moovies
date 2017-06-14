@@ -1,6 +1,32 @@
 Moovies::Application.configure do
 
-  config.action_controller.asset_host = "http://staging.plush.be/#{I18n.locale}"
+  config.action_controller.asset_host = "http://staging.plush.be"
+
+  config.assets.precompile += %w(
+  carrefourbonus/validation.js
+  contact/questions.js
+  customers/credit_card_modification.js
+  customers/mon_compte.js
+  devise/change_password.js
+  devise/login.js
+  devise/password.js
+  devise/registration.js
+  faq/public_faq.js
+  info/alacarte.js
+  info/freetrial.js
+  messages/messages.js
+  orange/lu/auth/sms.js
+  payment_methods/credit_card_tvod.js
+  payment_methods/redirect_to_ogone.js
+  photobox/validation.js
+  products/catalog.js
+  steps/step3.js
+  steps/step4.js
+  streaming_products/streaming.js
+  top_banner/validation.js
+  vod/sample.js
+  watchlist/watchlist.js
+  )
 
   # Settings specified here will take precedence over those in config/application.rb
 
