@@ -23,6 +23,7 @@ group :development do
   gem 'capistrano-rbenv', '~> 2.1'
   gem 'capistrano3-puma', '~> 1.2', '>= 1.2.1'
   gem 'capistrano-rake', '~> 0.1.0'
+  gem 'capistrano-npm', '~> 1.0', '>= 1.0.2'
 end
 
 gem 'net-ssh', '~> 2.9', '>= 2.9.4'
@@ -83,3 +84,4 @@ gem 'httparty', '~> 0.14.0'
 gem 'will_paginate-bootstrap'
 gem 'redis-rails'
 gem 'react-rails', '~> 2.2'
+gem 'webpack-rails', '~> 0.9.10'

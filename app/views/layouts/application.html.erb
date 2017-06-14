@@ -11,8 +11,9 @@
   <%= include_gon(namespace: 'Plush') %>
   <%= Gon::Base.render_data %>
   <% Gon.global.current_customer = current_customer if !customer_signed_in? %>
+  <%= stylesheet_link_tag *webpack_asset_paths('application', extension: 'css') %>
   <!--<#%= csrf_meta_tags %>-->
-  <%= stylesheet_link_tag "application", :media => "all" %>
+  <!--<%= stylesheet_link_tag "application", :media => "all" %>-->
   <%= yield :view_specific_css %>
   <link rel="icon" type="image/x-icon" href="<%= asset_path("template/favicon.ico") %>">
   <link rel="icon" type="image/png" href="<%= asset_path("template/favicon.ico") %>">
@@ -51,7 +52,8 @@
     <% end %>
   </div>
 </div>
-<%= javascript_include_tag "application" %>
+<%= javascript_include_tag *webpack_asset_paths('application', extension: 'js') %>
+<!--<%= javascript_include_tag "application" %>-->
 <%= yield :run_specific_javascript %>
 </body>
 </html>
