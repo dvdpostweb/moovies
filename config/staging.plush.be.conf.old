@@ -1,0 +1,24 @@
+server {
+        listen                  8888;
+        server_name             staging.plush.be;
+
+        access_log              /opt/nginx-ruby/logs/staging.plush.be.access.log main;
+        error_log               /opt/nginx-ruby/logs/staging.plush.be.error.log;
+
+        passenger_enabled       on;
+        rails_env               staging;
+        root                    /home/webapps/plush/staging/current/public;     # <--- be sure to point to 'public'!
+
+        error_page              503 @maintenance;
+
+        rewrite ^/pri/(.*)$ /fr/products/$1 permanent;
+
+        if (-f $document_root/system/maintenance.html) {
+                return  503;
+        }
+
+        location @maintenance {
+                rewrite         ^(.*)$  /system/maintenance.html last;
+                break;
+        }
+}
