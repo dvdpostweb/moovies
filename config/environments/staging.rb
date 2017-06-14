@@ -11,6 +11,14 @@ Moovies::Application.configure do
 
   Rails.application.config.assets.precompile = (javascripts + css + scss)
 
+  config.assets.precompile += %w(
+  font-awesome.css
+  styles.css
+  assets/jquery.js
+  jquery.form.js
+  jquery_ujs.js 
+  )
+
   # #carrefourbonus/validation.js
   # contact/questions.js
   # customers/credit_card_modification.js
