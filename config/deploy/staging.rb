@@ -63,6 +63,10 @@ namespace :deploy do
     end
   end
 
+  after "bundle:install" do
+    run "cd /home/webapps/plush/staging/current/; RAILS_ENV=staging bundle exec rake assets:precompile"
+  end
+
   before :starting, :check_revision
   after :finishing, :compile_assets
   after :finishing, :cleanup
