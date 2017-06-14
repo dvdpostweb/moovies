@@ -14,9 +14,9 @@ Moovies::Application.configure do
   config.assets.precompile += %w(
   font-awesome.css
   styles.css
-  assets/jquery.js
+  jquery.js
   jquery.form.js
-  jquery_ujs.js 
+  jquery_ujs.js
   )
 
   # #carrefourbonus/validation.js
