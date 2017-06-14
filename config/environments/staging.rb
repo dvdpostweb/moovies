@@ -2,27 +2,7 @@ Moovies::Application.configure do
 
   config.action_controller.asset_host = "http://staging.plush.be"
 
-  config.assets.precompile += %w(
-  jquery.validate.js
-  facebox-bootstrap.js
-  chosen.jquery.min.js
-  bootstrap.min.js
-  bootstrap-datepicker.js
-  jquery-ui.min.js
-  slick.min.js
-  jquery.raty-fa.js
-  modernizr.js
-  jquery.waitforimages.js
-  tag-it.min.js
-  ion.rangeSlider.min.js
-  fancybox.js
-  icheck.min.js
-  scripts.js
-  history.js
-  react.js
-  react_ujs.js
-  components.js
-  )
+  config.assets.precompile = ['*.js', '*.css', '**/*.js', '**/*.css']
 
   # #carrefourbonus/validation.js
   # contact/questions.js
