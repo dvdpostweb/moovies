@@ -7,4 +7,3 @@ require "capistrano/rbenv"
 require "capistrano/bundler"
 require "capistrano/rails/assets"
 require 'capistrano/puma'
-require 'capistrano/rake'
