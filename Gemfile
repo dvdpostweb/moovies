@@ -1,7 +1,7 @@
 
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.14'
+gem 'rails', '~> 3.2', '>= 3.2.22.5'
 
 gem 'mysql2', '~> 0.3.21'
 gem 'json'
@@ -46,7 +46,7 @@ gem 'dynamic_form'
 gem "friendly_id", "~> 4.0.9"
 gem "routing_concerns", "~> 0.1.0"
 gem 'jquery-form-rails'
-gem 'thinking-sphinx', '3.0.6'
+gem 'thinking-sphinx', '~> 3.3'
 gem "composite_primary_keys", "~> 5.0.13"
 gem "truncate_html", "~> 0.9.2"
 gem "capistrano", "~> 2.15.5"

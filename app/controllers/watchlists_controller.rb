@@ -33,7 +33,7 @@ class WatchlistsController < ApplicationController
     unless item
       current_customer.vod_wishlists.create(:imdb_id => params[:vod_wishlist][:imdb_id], :source_id => params[:source], :season_id => params[:vod_wishlist][:season_id], :episode_id => params[:vod_wishlist][:episode_id])
     end
-    
+
     respond_to do |format|
       format.html {redirect_back_or vod_wishlists_path}
       format.js   do
@@ -42,7 +42,7 @@ class WatchlistsController < ApplicationController
   end
 
   def display_vod
-    value = params[:value] 
+    value = params[:value]
     current_customer.display_vod(value)
     redirect_to vod_wishlists_path(:transit_or_history => params[:transit_or_history])
   end

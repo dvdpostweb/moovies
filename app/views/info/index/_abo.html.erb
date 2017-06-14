@@ -1,278 +1,179 @@
-  <% content_for :view_specific_css do %>
-    <%= stylesheet_link_tag "alacarte" %>
+<div class="container white-bck">
+  <% if params[:renew_subscription_error].present? && params[:renew_subscription_error] == "true" %>
+  <div class="alert alert-danger">
+    <strong><%= t('streaming_products.renew_subscription_error') %></strong>
+  </div>
   <% end %>
-  <style>
-   h3 {
-     font-family: Open Sans Condensed;
-     font-size: 18px;
-   }
-   .header-nav {
-     height: 130px;
-   }
-   input[type='submit'] {
-     font-size: 14px;
-     color: white;
-     border: 1px solid #34adac;
-     background: #34adac;
-     outline: none;
-     -webkit-border-radius: 6px;
-        -moz-border-radius: 6px;
-             border-radius: 6px;
-     line-height: 20px;
-     -webkit-transition: all 0.2s linear;
-        -moz-transition: all 0.2s linear;
-          -o-transition: all 0.2s linear;
-             transition: all 0.2s linear;
-     cursor: pointer; }
-     input[type='submit']:hover {
-       background: #288685; }
-       input[type='submit']._redBackground_ {
-         background: #eb212e; }
-         input[type='submit']._redBackground_:hover {
-           background: #c7121e; }
-     input[type="text"] {
-       width: 230px !important;
-       outline: none;
-       border: 2px solid #c3c3c3;
-       padding: 0px 0px 0px 5px;
-       margin: 0;
-       line-height: 22px;
-       font-size: 13px; }
-       #ft {
-         color: #000;
-       }
-       ._errorMessage_ {
-         color: #eb212e;
-        }
-
-        #hr_inv {
-          border:none;
-        back-ground-color: #ADD8e6;
-        color: #ADD8E6;
-        height: 1px;
-        width: 80%;
-
-        }
-   </style>
-        <div class="alacarte_1">
-
-      <div class="header-nav">
-        <label><%= t('info.index.price_public.choose_tvod_tvod').html_safe %></label>
-        <ul>
-          <li class="plush">
-          <% if params[:subscription_action].present? && params[:subscription_action] == "subscription_change" %>
-            <li class="plush"><%= link_to t('info.index.price_public.choose_svod_svod').html_safe, info_path(:page_name => "unlimited", :subscription_action => "subscription_change") %></li>
-          <% else %>
-            <li class="plush"><%= link_to t('info.index.price_public.choose_svod_svod').html_safe, info_path(:page_name => "unlimited") %></li>
-          <% end %>
-          </li>
-					<li class="eighteen">
-            <% if params[:subscription_action].present? && params[:subscription_action] == "subscription_change" %>
-              <a href=""><%= link_to t('info.index.price_public.choose_svod_adult').html_safe, info_path(:page_name => "adult", :subscription_action => "subscription_change"), id: "adult" %></a>
-            <% else %>
-              <a href=""><%= link_to t('info.index.price_public.choose_svod_adult').html_safe, info_path(:page_name => "adult"), id: "adult" %></a>
-            <% end %>
-          </li>
-        </ul>
-      </br>
-      <table style="width:75%">
-        <tr>
-          <td><strong><h3  id="ft"><%= t('info.alacarte.info.index.price_public.discount_code').capitalize %></h3></strong></td>
-          <td>
-            <form id="green_banner_form_alacarte">
-              <div class="_inputContainer">
-                <input type="text" name="promotion" id="promotion_alacarte" placeholder="<%= t('info.alacarte.info.index.price_public.promotion_code').capitalize %>">
-                <input type="submit"  value='<%= t('info.alacarte.info.index.price_public.validate').capitalize %>'>
-                <div id="promotion_response_message_alacarte" class="_errorMessage_">
-                </div>
-              </div>
-            </form>
-          </td>
-        </tr>
-      </table>
-      </br>
-      <% if I18n.locale == :fr %>
-        <h3><p>Vous pouvez louer films à la piéce directement à partir du <u><%= link_to "catalogue", products_short_path() %></u>, ou prendre un abonnement pour bénéficier de prix avantageux (<strong>1,99€</strong> au lieu de 2,99€ pour la plupart des films, et <strong>3,99€</strong> au lieu de 4,99€ pour les derniéres sorties).</p></h3>
-      <% elsif I18n.locale == :nl %>
-        <h3>U kunt uw films één per één rechtstreeks uit de <u><%= link_to "catalogus", products_short_path() %></u> huren, of een abonnement nemen om te genieten van uiterst voordelige prijzen (<strong>€ 1,99</strong> in plaats van € 2,99 voor de meeste films, en <strong>€ 3,99</strong> in plaats van € 4,99 voor de recente blockbusters).</h3>
-      <% elsif I18n.locale == :en %>
-        <h3>You can rent movie one by one directly from the <u><%= link_to "catalogue", products_short_path() %></u>, or subscribe to one of our plans and benefit from much lower prices (<strong>1,99€</strong> instead of 2,99€ for most of the titles, and <strong>3,99€</strong> instead of 4,99€ for latest blockbusters).</h3>
+  <% if params[:subscription_action_registration].present? %>
+      <div class="alert alert-warning">
+        <strong><%= t('orange.finish_registration_proces_message') %></strong>
+      </div>
+  <% end %>
+  <% if params[:subscription_action_orange].present? %>
+      <div class="alert alert-warning">
+        <strong>Please select subscription plan to register phone number<p id="orange_phone_number"></p></strong>
+      </div>
+  <% end %>
+  <h1 class="green"><%= t('info.index.price_public.choose_tvod_tvod').html_safe %></h1>
+  <div class="block100 marb20 padt20 charts-top">
+    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 left-promo-code">
+      <form id="alacarte_activation_code_validation">
+        <h4 class="dark-blue"><%= t('info.alacarte.info.index.price_public.discount_code').capitalize %></h4>
+        <div class="block100">
+          <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 form-group">
+            <input type="text" name="promotion" id="promo_code" placeholder="<%= t('info.alacarte.info.index.price_public.promotion_code').capitalize %>" class="form-control">
+          </div>
+          <input type="submit" class="btn green-bck col-lg-2 col-md-2 col-sm-2 col-xs-2" name="promo-code-submit" value="<%= t('info.alacarte.info.index.price_public.validate').capitalize %>">
+        </div>
+      </form>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 charts-buttons">
+      <% if params[:subscription_action].present? && params[:subscription_action] == "subscription_change" %>
+          <%= link_to t('info.index.price_public.choose_svod_svod').html_safe, info_path(:page_name => "unlimited", :subscription_action => "subscription_change"), :class => "btn OpenSansCondensed f23 block100", :id => "button-la-unlmited" %>
+      <% else %>
+          <%= link_to t('info.index.price_public.choose_svod_svod').html_safe, info_path(:page_name => "unlimited"), :class => "btn OpenSansCondensed f23 block100", :id => "button-la-unlmited" %>
+      <% end %>
+      <% if params[:subscription_action].present? && params[:subscription_action] == "subscription_change" %>
+          <%= link_to t('info.index.price_public.choose_svod_adult').html_safe, info_path(:page_name => "adult", :subscription_action => "subscription_change"), :class => "btn violet OpenSansCondensed f23 block100", :id => "button-18-plus" %>
+      <% else %>
+          <%= link_to t('info.index.price_public.choose_svod_adult').html_safe, info_path(:page_name => "adult"), :class => "btn violet OpenSansCondensed f23 block100", :id => "button-18-plus" %>
       <% end %>
     </div>
-    <hr id="hr_inv">
-    </br>
-    </br>
-      <div class="film-block">
-        <div id="alacarte-2-films" class="film-box hvr-grow" target="alacarte-subscribe">
-          <p id="alacarte-kvadrat"><%= t('info.index.price_public.choose_tvod_plan_one').html_safe %></p>
+    <div class="block100 mart20">
+      <% if I18n.locale == :fr %>
+          Vous pouvez louer films à la piéce directement à partir du
+          <u><%= link_to "catalogue", products_short_path() %></u>, ou prendre un abonnement pour bénéficier de prix
+          avantageux (<strong>1,99€</strong> au lieu de 2,99€ pour la plupart des films, et <strong>3,99€</strong> au
+          lieu de 4,99€ pour les derniéres sorties).
+      <% elsif I18n.locale == :nl %>
+          U kunt uw films één per één rechtstreeks uit de <u><%= link_to "catalogus", products_short_path() %></u>
+          huren, of een abonnement nemen om te genieten van uiterst voordelige prijzen (<strong>€ 1,99</strong> in
+          plaats van € 2,99 voor de meeste films, en <strong>€ 3,99</strong> in plaats van € 4,99 voor de recente
+          blockbusters).
+      <% elsif I18n.locale == :en %>
+          You can rent movie one by one directly from the <u><%= link_to "catalogue", products_short_path() %></u>, or
+          subscribe to one of our plans and benefit from much lower prices (<strong>1,99€</strong> instead of 2,99€ for
+          most of the titles, and <strong>3,99€</strong> instead of 4,99€ for latest blockbusters).
+      <% end %>
+    </div>
+  </div>
+  <div class="planSelectionContainer">
+    <div class="planTable">
+      <div class="headerRow show" id="header-chart">
+        <div class="columnHeader"></div>
+        <div class="cell pt-header-with-border 2_film_credits">
+          <div>
+            <div class="selborder">
+              <div id="2_film_credits" class="cellContent" data-box-order="1"><%= t('info.index.price_public.choose_tvod_plan_one').html_safe %></div>
+            </div>
+            <div class="arrow"></div>
+          </div>
         </div>
-        <div id="alacarte-4-films" class="film-box hvr-grow" target="alacarte-subscribe">
-          <p id="alacarte-kvadrat"><%= t('info.index.price_public.choose_tvod_plan_two').html_safe %></p>
+        <div class="cell pt-header-with-border 4_film_credits">
+          <div>
+            <div class="selborder">
+              <div id="4_film_credits" class="cellContent" data-box-order="2"><%= t('info.index.price_public.choose_tvod_plan_two').html_safe %></div>
+            </div>
+            <div class="arrow"></div>
+          </div>
         </div>
-        <div id="alacarte-6-films" class="film-box hvr-grow" target="alacarte-subscribe">
-          <p id="alacarte-kvadrat"><%= t('info.index.price_public.choose_tvod_plan_three').html_safe %></p>
+        <div class="cell selected pt-header-with-border 6_film_credits">
+          <div>
+            <div class="selborder">
+              <div id="6_film_credits" class="cellContent" data-box-order="3"><%= t('info.index.price_public.choose_tvod_plan_three').html_safe %></div>
+            </div>
+            <div class="arrow"></div>
+          </div>
         </div>
-      </div>
-      </br>
-      <div id="alacarte-subscribe" class="list-block">
-        <ul>
-          <li>
-            <label class="list-text"><%= t('info.index.price_public.tvod_plan_price').html_safe %> (<%= 1.month.from_now.strftime("%d/%m/%Y") %>)</label>
-            <label class="list-number"><div id="3euro"><%= t('info.index.price_public.tvod_plan_price_3').html_safe %></div></label>
-            <label class="list-number"><div id="7euro"><%= t('info.index.price_public.tvod_plan_price_7').html_safe %></div></label>
-            <label class="list-number"><div id="11euro"><%= t('info.index.price_public.tvod_plan_price_9').html_safe %></div></label>
-          </li>
-          <li class="">
-            <label class="list-text"><%= t('info.index.price_public.tvod_hd').html_safe %></label>
-            <label class="list-number">
-              <div id="default-3-1">
-                <%= image_tag "alacarte/ok-grey.png" %>
-              </div>
-              <div id="green-3-1">
-                <%= image_tag "alacarte/ok-green.png" %>
-              </div>
-            </label>
-            <label class="list-number">
-              <div id="default-7-1">
-                <%= image_tag "alacarte/ok-grey.png" %>
-              </div>
-              <div id="green-7-1">
-                <%= image_tag "alacarte/ok-green.png" %>
-              </div>
-            </label>
-            <label class="list-number">
-              <div id="default-11-1">
-                <%= image_tag "alacarte/ok-grey.png" %>
-              </div>
-              <div id="green-11-1">
-                <%= image_tag "alacarte/ok-green.png" %>
-              </div>
-            </label>
-          </li>
-          <li class="">
-            <label class="list-text"><%= t('info.index.price_public.tvod_access_devices').html_safe %></label>
-            <label class="list-number">
-              <div id="default-3-2">
-                <%= image_tag "alacarte/ok-grey.png" %>
-              </div>
-              <div id="green-3-2">
-                <%= image_tag "alacarte/ok-green.png" %>
-              </div>
-            </label>
-            <label class="list-number">
-              <div id="default-7-2">
-                <%= image_tag "alacarte/ok-grey.png" %>
-              </div>
-              <div id="green-7-2">
-                <%= image_tag "alacarte/ok-green.png" %>
-              </div>
-            </label>
-            <label class="list-number">
-              <div id="default-11-2">
-                <%= image_tag "alacarte/ok-grey.png" %>
-              </div>
-              <div id="green-11-2">
-                <%= image_tag "alacarte/ok-green.png" %>
-              </div>
-            </label>
-          </li>
-          <li class="">
-            <label class="list-text"><%= t('info.index.price_public.tvod_simultaneus').html_safe %></label>
-            <label class="list-number"><div id="3euroil"><%= t('customers.show.old_pricing.unlimited') %></div></label>
-            <label class="list-number"><div id="7euroil"><%= t('customers.show.old_pricing.unlimited') %></div></label>
-            <label class="list-number"><div id="11euroil"><%= t('customers.show.old_pricing.unlimited') %></div></label>
-          </li>
-          <li class="">
-            <label class="list-text"><%= t('info.index.price_public.tvod_cancellable').html_safe %></label>
-            <label class="list-number">
-              <div id="default-3-3">
-                <%= image_tag "alacarte/ok-grey.png" %>
-              </div>
-              <div id="green-3-3">
-                <%= image_tag "alacarte/ok-green.png" %>
-              </div>
-            </label>
-            <label class="list-number">
-              <div id="default-7-3">
-                <%= image_tag "alacarte/ok-grey.png" %>
-              </div>
-              <div id="green-7-3">
-                <%= image_tag "alacarte/ok-green.png" %>
-              </div>
-            </label>
-            <label class="list-number">
-              <div id="default-11-3">
-                <%= image_tag "alacarte/ok-grey.png" %>
-              </div>
-              <div id="green-11-3">
-                <%= image_tag "alacarte/ok-green.png" %>
-              </div>
-            </label>
-          </li>
-          <li class="">
-            <label class="list-text"><%= t('info.index.price_public.tvod_access_illimitie').html_safe %> <%= link_to t('info.index.price_public.choose_svod_svod').html_safe, info_path(:page_name => "unlimited"), :id => 'unlimited', :class => params[:page_name] == 'unlimited' ? :active : :inactive %></label>
-            <label class="list-number">
-              <div id="default-3-5">X</div>
-              <div id="red-3-5">X</div>
-            </label>
-            <label class="list-number">
-              <div id="default-7-5">X</div>
-              <div id="red-7-5">X</div>
-            </label>
-            <label class="list-number">
-              <div id="default-11-5">X</div>
-              <div id="red-11-5">X</div
-            </label>
-          </li>
-        </ul>
-      </div>
-
-      <div class="footer-block">
-        <div class="description-block"><%= t('info.index.price_public.tvod_explanation_1').html_safe %> <%= link_to t('info.index.price_public.tvod_explanation_link').html_safe, info_path(:page_name => t('routes.infos.params.vod')), :id => :multi %>
-                         <%= t('info.index.price_public.tvod_explanation_2').html_safe %>
-        </div>
-        <button id="alacarte-button-default" class="ALBTN hvr-grow" target="top"><%= t('info.index.price_public.tvod_button').html_safe %></button>
-        <a href="/fr/mon-compte/connectez-vous?code=2FILMS"><button id="alacarte-button-CF4FILMS-FR" class="ALBTN hvr-grow"><%= t('info.index.price_public.tvod_button').html_safe %></button></a>
-        <a href="/nl/mijn-account/log-in?code=2FILMS"><button id="alacarte-button-CF4FILMS-NL" class="ALBTN hvr-grow"><%= t('info.index.price_public.tvod_button').html_safe %></button></a>
-        <a href="/en/my-account/log-in?code=2FILMS"><button id="alacarte-button-CF4FILMS-EN" class="ALBTN hvr-grow"><%= t('info.index.price_public.tvod_button').html_safe %></button></a>
-        <a href="/fr/mon-compte/connectez-vous?code=4FILMS"><button id="alacarte-button-CF6FILMS-FR" class="ALBTN hvr-grow"><%= t('info.index.price_public.tvod_button').html_safe %></button></a>
-        <a href="/nl/mijn-account/log-in?code=4FILMS"><button id="alacarte-button-CF6FILMS-NL" class="ALBTN hvr-grow"><%= t('info.index.price_public.tvod_button').html_safe %></button></a>
-        <a href="/en/my-account/log-in?code=4FILMS"><button id="alacarte-button-CF6FILMS-EN" class="ALBTN hvr-grow"><%= t('info.index.price_public.tvod_button').html_safe %></button></a>
-        <a href="/fr/mon-compte/connectez-vous?code=6FILMS"><button id="alacarte-button-CF8FILMS-FR" class="ALBTN hvr-grow"><%= t('info.index.price_public.tvod_button').html_safe %></button></a>
-        <a href="/nl/mijn-account/log-in?code=6FILMS"><button id="alacarte-button-CF8FILMS-NL" class="ALBTN hvr-grow"><%= t('info.index.price_public.tvod_button').html_safe %></button></a>
-        <a href="/en/my-account/log-in?code=6FILMS"><button id="alacarte-button-CF8FILMS-EN" class="ALBTN hvr-grow"><%= t('info.index.price_public.tvod_button').html_safe %></button></a>
-        <div class="description-block description-block-main"><%= t('info.index.price_public.tvod_support_info').html_safe %></div>
-        <div class="description-block"><%= link_to t('info.index.price_public.tvod_conditions').html_safe, info_path(:page_name => t('routes.infos.params.conditions')) %></div>
       </div>
     </div>
+    <div class="planTable planTableOptions">
+      <div class="alt"><%= t('info.index.price_public.tvod_plan_price').html_safe %>
+        (<%= 1.month.from_now.strftime("%d/%m/%Y") %>)
+      </div>
+      <div class="row">
+        <div class="columnHeader"><%= t('info.index.price_public.tvod_plan_price').html_safe %>
+          (<%= 1.month.from_now.strftime("%d/%m/%Y") %>)
+        </div>
+        <div class="cell bodyCell">EUR 7.99</div>
+        <div class="cell bodyCell">EUR 9.99</div>
+        <div class="cell bodyCell selected">EUR 11.99</div>
+      </div>
+      <div class="alt"><%= t('info.index.price_public.tvod_hd').html_safe %></div>
+      <div class="row">
+        <div class="columnHeader"><%= t('info.index.price_public.tvod_hd').html_safe %></div>
+        <div class="cell bodyCell icon-plainCheck"></div>
+        <div class="cell bodyCell icon-plainCheck"></div>
+        <div class="cell bodyCell icon-plainCheck selected"></div>
+      </div>
+      <div class="alt"><%= t('info.index.price_public.tvod_access_devices').html_safe %></div>
+      <div class="row">
+        <div class="columnHeader"><%= t('info.index.price_public.tvod_access_devices').html_safe %></div>
+        <div class="cell bodyCell icon-plainCheck"></div>
+        <div class="cell bodyCell icon-plainCheck"></div>
+        <div class="cell bodyCell icon-plainCheck selected"></div>
+      </div>
+      <div class="alt"><%= t('info.index.price_public.tvod_simultaneus').html_safe %></div>
+      <div class="row">
+        <div class="columnHeader"><%= t('info.index.price_public.tvod_simultaneus').html_safe %></div>
+        <div class="cell bodyCell"><%= t('customers.show.old_pricing.unlimited') %></div>
+        <div class="cell bodyCell"><%= t('customers.show.old_pricing.unlimited') %></div>
+        <div class="cell bodyCell selected"><%= t('customers.show.old_pricing.unlimited') %></div>
+      </div>
+      <div class="alt"><%= t('info.index.price_public.tvod_cancellable').html_safe %></div>
+      <div class="row">
+        <div class="columnHeader"><%= t('info.index.price_public.tvod_cancellable').html_safe %></div>
+        <div class="cell bodyCell icon-plainCheck"></div>
+        <div class="cell bodyCell icon-plainCheck"></div>
+        <div class="cell bodyCell icon-plainCheck selected"></div>
+      </div>
+      <div class="alt"><%= t('info.index.price_public.tvod_access_illimitie').html_safe %>
+        <a href="index.php%3Fpage=charts-la-carde.html#" class="light-blue">Plush Illimité</a>
+        <%= link_to t('info.index.price_public.choose_svod_svod').html_safe, info_path(:page_name => "unlimited"), :class => "light-blue" %>
+      </div>
+      <div class="row">
+        <div class="columnHeader"><%= t('info.index.price_public.tvod_access_illimitie').html_safe %>
+          <%= link_to t('info.index.price_public.choose_svod_svod').html_safe, info_path(:page_name => "unlimited"), :class => "light-blue" %>
+        </div>
+        <div class="cell bodyCell icon-plainX"></div>
+        <div class="cell bodyCell icon-plainX"></div>
+        <div class="cell bodyCell selected icon-plainX"></div>
+      </div>
+    </div>
+    <div class="block100 padlr10 normal mart15 f14">
+      <%= t('info.index.price_public.tvod_explanation_1').html_safe %> <%= link_to t('info.index.price_public.tvod_explanation_link').html_safe, info_path(:page_name => t('routes.infos.params.vod')), :id => :multi %>
+      <%= t('info.index.price_public.tvod_explanation_2').html_safe %>
+    </div>
+    <div class="block100 mart15 padlr15">
+      <form>
+        <% if params[:subscription_action].present? && params[:subscription_action] == "subscription_change" %>
+          <%= link_to(t('info.index.price_public.svod_button').html_safe, api_v1_subscriptions_path(:code => "2FILMS"), :class => "btn pad10 f20 green-bck film_credits_btn_2", :id => "continue-package") %>
+          <%= link_to(t('info.index.price_public.svod_button').html_safe, api_v1_subscriptions_path(:code => "4FILMS"), :class => "btn pad10 f20 green-bck film_credits_btn_4", :id => "continue-package") %>
+          <%= link_to(t('info.index.price_public.svod_button').html_safe, api_v1_subscriptions_path(:code => "6FILMS"), :class => "btn pad10 f20 green-bck film_credits_btn_6", :id => "continue-package") %>
+        <% elsif params[:subscription_action_orange].present? && params[:subscription_action_orange] == "orange_subscription" %>
+          <%= link_to(t('info.index.price_public.svod_button').html_safe, orange_lu_auth_sms_registration_path(:code => "2FILMS"), :class => "btn pad10 f20 green-bck film_credits_btn_2", :id => "continue-package") %>
+          <%= link_to(t('info.index.price_public.svod_button').html_safe, orange_lu_auth_sms_registration_path(:code => "4FILMS"), :class => "btn pad10 f20 green-bck film_credits_btn_4", :id => "continue-package") %>
+          <%= link_to(t('info.index.price_public.svod_button').html_safe, orange_lu_auth_sms_registration_path(:code => "6FILMS"), :class => "btn pad10 f20 green-bck film_credits_btn_6", :id => "continue-package") %>
+        <% else %>
+          <% if params[:subscription_action_registration].present? %>
+              <%= link_to(t('info.index.price_public.svod_button').html_safe, new_customer_registration_path(:code => "2FILMS"), :class => "btn pad10 f20 green-bck film_credits_btn_2", :id => "continue-package") %>
+              <%= link_to(t('info.index.price_public.svod_button').html_safe, new_customer_registration_path(:code => "4FILMS"), :class => "btn pad10 f20 green-bck film_credits_btn_4", :id => "continue-package") %>
+              <%= link_to(t('info.index.price_public.svod_button').html_safe, new_customer_registration_path(:code => "6FILMS"), :class => "btn pad10 f20 green-bck film_credits_btn_6", :id => "continue-package") %>
+          <% else %>
+              <%= link_to(t('info.index.price_public.svod_button').html_safe, new_customer_session_path(:code => "2FILMS"), :class => "btn pad10 f20 green-bck film_credits_btn_2", :id => "continue-package") %>
+              <%= link_to(t('info.index.price_public.svod_button').html_safe, new_customer_session_path(:code => "4FILMS"), :class => "btn pad10 f20 green-bck film_credits_btn_4", :id => "continue-package") %>
+              <%= link_to(t('info.index.price_public.svod_button').html_safe, new_customer_session_path(:code => "6FILMS"), :class => "btn pad10 f20 green-bck film_credits_btn_6", :id => "continue-package") %>
+          <% end %>
+        <% end %>
+      </form>
+    </div>
+    <div class="block100 padlr15"><%= t('info.index.price_public.tvod_support_info').html_safe %></div>
+    <div class="block100 padlr15 mart15 marb30">
+      <%= link_to t('info.index.price_public.tvod_conditions').html_safe, info_path(:page_name => t('routes.infos.params.conditions')) %>
+    </div>
+  </div>
+</div>
 
-<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
-<script>
-document.body.className = document.body.className.replace("adult","");
-</script>
-
-<script>
-
-$(document).ready(function() {
-
-    $("#green_banner_form_alacarte").submit(function(event) {
-      event.preventDefault();
-      $.ajax({
-        method: 'POST',
-        url: '/api/v1/promotion_code_activation',
-        data: {
-          'promotion': $.trim($("#promotion_alacarte").val())
-        },
-        dataType: 'json',
-          success: function (response) {
-          if (1 === response.status) {
-            $("#promotion_response_message_alacarte").html(response.message);
-          } else if (2 === response.status) {
-            window.location.href = response.message;
-          }
-        }
-      });
-    });
-});
-
-</script>
+<% content_for :run_specific_javascript do %>
+    <%= javascript_include_tag "info/alacarte" %>
+<% end %>

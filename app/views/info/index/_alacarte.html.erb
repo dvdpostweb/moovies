@@ -169,7 +169,7 @@
     </div>
     <div class="block100 padlr15"><%= t('info.index.price_public.tvod_support_info').html_safe %></div>
     <div class="block100 padlr15 mart15 marb30">
-      <a href="index.php%3Fpage=charts-la-carde.html#"><%= link_to t('info.index.price_public.tvod_conditions').html_safe, info_path(:page_name => t('routes.infos.params.conditions')) %></a>
+      <%= link_to t('info.index.price_public.tvod_conditions').html_safe, info_path(:page_name => t('routes.infos.params.conditions')) %>
     </div>
   </div>
 </div>
