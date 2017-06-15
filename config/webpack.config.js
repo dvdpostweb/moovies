@@ -16,7 +16,7 @@ var config = {
     // Sources are expected to live in $app_root/webpack
     'application': './webpack/application.js'
   },
-
+  
   output: {
     // Build assets directly in to public/webpack/, let webpack know
     // that all webpacked assets start with webpack/
