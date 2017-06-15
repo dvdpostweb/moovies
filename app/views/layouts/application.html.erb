@@ -20,6 +20,7 @@
   <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<%= asset_path("template/favicon72x72.png") %>">
   <link rel="apple-touch-icon-precomposed" href="<%= asset_path("template/favicon57x57.png") %>">
   <script src="https://content.jwplatform.com/libraries/D6L08XhR.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/history.js/1.8/bundled-uncompressed/html4+html5/dojo.history.js" integrity="sha256-iRfZ+94mVilP3KS7heX1YlwM03Aagrd0c8M9MAR7pbI=" crossorigin="anonymous"></script>
 </head>
 <body id="<%= @body_id %>" class="<%= params[:kind] %> <%= current_customer ? :private : :public %> <%= I18n.locale %> <%= @body_class %>">
 <div class="canavas" id="">
