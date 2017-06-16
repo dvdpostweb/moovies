@@ -7,7 +7,7 @@
     <% end %>
     <div class="block100 text-center mart10">
       <%= render :partial => 'products/streaming_step4',  :locals => {:product => product, :source => source, :popup => true} %>
-      <%= render :partial => 'products/vod_list_step4',  :locals => {:product => product, :source => source, :response_id => @response_id} %>
+      <%= render :partial => 'products/vod_list',  :locals => {:product => product, :source => source, :response_id => @response_id} %>
     </div>
   </a>
 
