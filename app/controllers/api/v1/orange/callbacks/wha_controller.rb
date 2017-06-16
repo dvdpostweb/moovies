@@ -40,21 +40,21 @@ class Api::V1::Orange::Callbacks::WhaController < ApplicationController
             end
           end
         elsif step == "movie"
-          movie_url = "#{ap[2].gsub!('movieurl_','')}"
-          payment = Payment.new
-            payment.payment_method = 6
-            payment.date_added = Time.now
-            payment.customers_id = cn
-            payment.abo_id = abo.abo_id
-            payment.amount =
-            payment.last_modified = Time.now
-            payment.payment_status = 2
-            payment.user_modified = cn
-            if payment.save(validate: false)
-              sign_in(customer)
-              redirect_to movie_url
-            end
-        else
+          #movie_url = "#{ap[2].gsub!('movieurl_','')}"
+          #payment = Payment.new
+          #  payment.payment_method = 6
+          #  payment.date_added = Time.now
+          #  payment.customers_id = cn
+          #  payment.abo_id = abo.abo_id
+          #  payment.amount =
+          #  payment.last_modified = Time.now
+          #  payment.payment_status = 2
+          #  payment.user_modified = cn
+          #  if payment.save(validate: false)
+          #    sign_in(customer)
+          #    redirect_to movie_url
+          #  end
+          render json: params
         end
       end
     elsif 'v=3:{c=PurchaseTypeCancel'.in?(niz)
