@@ -196,7 +196,7 @@ function orangePurchase() {
                 dataType: 'json',
                 success: function (response) {
 
-                    if ("True" === response.status) {
+                    if ("TRUE" === response.status) {
 
 
                         $.ajax({
@@ -220,7 +220,7 @@ function orangePurchase() {
 
                     } else {
                       jQuery.facebox("<div class=\"alert alert-danger\">" +
-                          "<strong>" + response.status + "</strong>" +
+                          "<strong>"+response.status+"</strong>" +
                           "</div>");
                     }
 

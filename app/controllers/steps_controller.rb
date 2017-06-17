@@ -1,6 +1,6 @@
 class StepsController < ApplicationController
   before_filter :authenticate_customer!, :unless => :confirmation?
-  before_filter :promo
+  #before_filter :promo
   skip_before_filter :verify_authenticity_token
   def show
     @body_id = params[:id]

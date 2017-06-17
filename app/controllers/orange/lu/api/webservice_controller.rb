@@ -135,7 +135,8 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
               customer.activation_discount_code_id = discount.discount_code_id
               if customer.save(validate: false)
                 if customer.abo_history(7, customer.customers_abo_type, product_id_from_params) && customer.abo_history(6, customer.customers_abo_type, discount.to_param)
-                  render json: {status: "True"}
+                  #sign_in(customer)
+                  render json: {status: "TRUE"}
                 end
               end
             elsif streaming.present?
@@ -149,12 +150,14 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
               customer.activation_discount_code_id = 0
               if customer.save(validate: false)
                 if customer.abo_history(6, customer.customers_abo_type, streaming.to_param)
-                  render json: {status: "True"}
+                  #sign_in(customer)
+                  render json: {status: "TRUE"}
                 end
               end
             end
           else
-            render json: orange_purchase_wcf_service.parsed_response
+            #sign_in(customer)
+            render json: {status: orange_purchase_wcf_service.parsed_response}
           end
         end
       else
