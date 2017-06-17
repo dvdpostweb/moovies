@@ -1,18 +1,18 @@
 class Api::V1::Orange::Callbacks::WhaController < ApplicationController
 
-  def success3
-    niz = params[:m].split(/;/).to_a
-    if 'v=3:{c=PurchaseTypeSuccess'.in?(niz)
-      niz = params[:m].split(/;/).to_a
-    elsif 'v=3:{c=PurchaseTypeCancel'.in?(niz)
-      render json: "Neuspesno"
-    end
-  end
+  #def success3
+  #  niz = params[:m].split(/;/).to_a
+  #  if 'v=3:{c=PurchaseTypeSuccess'.in?(niz)
+  #    niz = params[:m].split(/;/).to_a
+  #  elsif 'v=3:{c=PurchaseTypeCancel'.in?(niz)
+  #    render json: "Neuspesno"
+  #  end
+  #end
 
-  def success1
-     niz = params[:m].split(/;/).to_a
-     render json: niz
-  end
+  #def success1
+  #   niz = params[:m].split(/;/).to_a
+  #   render json: niz
+  #end
 
   def success
     niz = params[:m].split(/;/).to_a
@@ -99,6 +99,6 @@ class Api::V1::Orange::Callbacks::WhaController < ApplicationController
   end
 
   def cancel
-    render json: params
+    redirect_to root_localize_path
   end
 end
