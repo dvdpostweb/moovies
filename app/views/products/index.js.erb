@@ -1,113 +1,22 @@
 <% if params[:package].nil? && params[:concerns] != :productable && params[:belgium].blank? %>
-
-  $('#main-content').html("<%= escape_javascript(render(:partial => 'products/index/hp', :formats => [:html])) %>");
-
-  //$( "a" ).removeClass( "current" );
-
-  history.pushState('', document.title, window.location.pathname);
-
-
-
-    $('.popper').popover({
-        placement: "left",
-        trigger: "hover",
-        container: 'body',
-        html: true,
-        delay: {
-            show: 300,
-            hide: 100
-        },
-        content: function () {
-            return $(this).next('.synopsys-content').html();
-        }
-    })
-
-// home slider
-$('.responsive-carousel').slick({
-    dots: false,
-    infinite: false,
-    speed: 200,
-    slidesToShow: 5,
-    slidesToScroll: 2,
-    responsive: [
-        {
-            breakpoint: 980,
-            settings: {
-                slidesToShow: 3,
-                slidesToScroll: 2,
-            }
-        },
-        {
-            breakpoint: 600,
-            settings: {
-                slidesToShow: 2,
-                slidesToScroll: 1
-            }
-        }
-    ]
-});
-
-//raty stars
-$('.slide-score').raty({
-    readOnly: true,
-    score: function () {
-        return $(this).attr('data-score');
-    }
-});
-
-// synopsis adaptive trigg open
-$('.synopsys-adaptive-open').on('click', function () {
-    $('.synopsys-adaptive-open').removeClass('hidden');
-    $(this).addClass('hidden');
-    $('.synopsys-content').removeClass('on');
-    $(this).prev('.synopsys-content').addClass('on');
-    return false;
-});
-
-// synopsis adaptive trigg close
-$('.synopsys-adaptive-close').on('click', function () {
-    $(this).closest('.slick-slide').children('.synopsys-adaptive-open').removeClass('hidden');
-    $(this).closest('.grid-slide').children('.synopsys-adaptive-open').removeClass('hidden');
-    $(this).closest('.synopsys-content').removeClass('on');
-
-    return false;
-});
-
-
-
-
-
-//$('.loading_bar').hide();
-//endscroll();
-load_form();
-//$('.ca-container').contentcarousel({sliderSpeed: 500,sliderEasing: 'easeOutExpo',itemSpeed: 500,itemEasing: 'easeOutExpo', scroll: 6});
-
+   //$('#all').html("<%= escape_javascript(render(:partial => 'products/index/hp', :formats => [:html])) %>");
+   //$('.loading_bar').hide();
+   //endscroll()
+   //load_form()
+   //$('.ca-container').contentcarousel({sliderSpeed: 500,sliderEasing: 'easeOutExpo',itemSpeed: 500,itemEasing: 'easeOutExpo', scroll: 6});
 <% else %>
-<% if !params[:page].nil? && cookies[:endless] != 'deactive' %>
-$('#main-content').append("<%= escape_javascript(render(:partial => cookies[:display] == 'list' ? 'products/index/movie_details' : 'products/index/movie_details_jacket', :collection => @products, :locals => {:target => @target}, :formats => [:html])) %>");
-<% if (params[:type] == 'directors' && @directors.next_page) || (params[:type] == 'actors' && @actors.next_page) || ((params[:type] == 'products' || params[:type] == nil) && @products.next_page) %>
-$('#pagination_content').html('<%= escape_javascript(render(:partial => 'products/index/pagination', :locals => {:item => @products})) %>');
-<% else %>
-$('#pagination_content').html('');
-<% end %>
-<% else %>
-$('#main-content').html("<%= escape_javascript(render(:partial => 'products/index/all', :formats => [:html])) %>");
-load_form();
-$('.popper').popover({
-    placement: "left",
-    trigger: "hover",
-    container: 'body',
-    html: true,
-    delay: {
-        show: 300,
-        hide: 100
-    },
-    content: function () {
-        return $(this).next('.synopsys-content').html();
-    }
-})
-<% end %>
-$('.loading_bar').hide();
-//endscroll();
+  <% if !params[:page].nil? && cookies[:endless] != 'deactive' %>
+    $('#products').append("<%= escape_javascript(render(:partial => cookies[:display] == 'list' ? 'products/index/movie_details' : 'products/index/movie_details_jacket', :collection => @products, :locals => {:target => @target}, :formats => [:html])) %>");
+    <% if (params[:type] == 'directors' && @directors.next_page) || (params[:type] == 'actors' && @actors.next_page) || ((params[:type] == 'products' || params[:type] == nil) && @products.next_page) %>
+      $('#pagination_content').html('<%= escape_javascript(render(:partial => 'products/index/pagination', :locals => {:item => @products})) %>');
+    <% else %>
+      $('#pagination_content').html('');
+    <% end %>
+  <% else %>
+    $('#all').html("<%= escape_javascript(render(:partial => 'products/index/all', :formats => [:html])) %>");
+    load_form()
+  <% end %>
+  //$('.loading_bar').hide();
+  endscroll()
 <% end %>
 ga('send', 'pageview');

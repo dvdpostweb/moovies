@@ -1,34 +1,64 @@
 <%= render :partial => 'layouts/filters_online', :locals => {:selected_countries => @selected_countries, :languages => @languages, :subtitles => @subtitles }%>
+
 <div class="block100 thinrgray-bck radius2 padlr10 switch-view-panel">
   <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+
+    <!--<#% if cookies[:display] == 'list' %>-->
+
     <%= link_to params.merge(:display => 'jacket', :kind => (params[:kind] == :normal ? nil : params[:kind]), :page => nil), :class => 'dark-blue radius2', :remote => true do %>
+
         <i class="fa fa-th-large f15"></i>
+
     <% end %>
+
+    <!--<#% else %>-->
+
     <%= link_to params.merge(:display => 'list', :kind => (params[:kind] == :normal ? nil : params[:kind]), :page => nil), :class => 'dark-blue radius2 marl10' , :remote => true do %>
+
         <i class="fa fa-list f15"></i>
+
     <% end %>
+
+    <!--<#% end %>-->
+
     <% if cookies[:endless] == 'deactive' %>
-        <%= link_to t('products.index.endless_active'), params.merge(:endless => 'active', :kind => (params[:kind] == :normal ? nil : params[:kind]), :page => nil), :class => "btn marl10 f11 dark-blue-bck white", remote: true %>
+
+        <%= link_to t('products.index.endless_active'), params.merge(:endless => 'active', :kind => (params[:kind] == :normal ? nil : params[:kind]), :page => nil), :class => "btn marl10 f11 dark-blue-bck white" %>
+
     <% else %>
-        <%= link_to t('products.index.endless_deactive'), params.merge(:endless => 'deactive', :kind => (params[:kind] == :normal ? nil : params[:kind]), :page => nil), :class => "btn marl10 f11 dark-blue-bck white", remote: true %>
+
+        <%= link_to t('products.index.endless_deactive'), params.merge(:endless => 'deactive', :kind => (params[:kind] == :normal ? nil : params[:kind]), :page => nil), :class => "btn marl10 f11 dark-blue-bck white" %>
+
     <% end %>
+
   </div>
+
   <%= render :partial => 'products/index/sorting' %>
+
+
 </div>
+
 <% if cookies[:display] == 'list' %>
-    <div id="list-view">
+
+    <div id="list-view" class="prd">
+
         <%= render :partial => 'products/index/movie_details', :collection => @products, :locals => {:target => @target} %>
+
     </div>
+
 <% else %>
-    <div id="grid-view">
+
+    <div id="grid-view" class="prd">
+
          <%= render :partial => 'products/index/movie_details_jacket', :collection => @products, :locals => {:target => @target} %>
+
     </div>
+
 <% end %>
-<!--<#% unless cookies[:endless] == 'deactive' %>-->
-  <div id="pag" class="block100 mart30 pagin-bar">
-      <%= render :partial => 'products/index/pagination', :locals => {:item => @products} %>
-  </div>
-  <div id="desc" class="block100 mart15 line-height-20">
-    <%= t(products_index_description, :link_abo => info_path(:page_name => t('routes.infos.params.vod')), :link_svod => (params[:kind] == :adult ? products_short_path(:package => Moovies.packages.invert[4]) : products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}"))), :link_tvod => (params[:kind] ==  :adult ? products_short_path(:package => Moovies.packages.invert[5]) : products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[2]}")))).html_safe %>
-  </div>
-<!--<#% end %>-->
+
+<div class="block100 mart30 pagin-bar">
+    <%= render :partial => 'products/index/pagination', :locals => {:item => @products} %>
+</div>
+
+<div class="block100 mart15 line-height-20">
+  <%= t(products_index_description, :link_abo => info_path(:page_name => t('routes.infos.params.vod')), :link_svod => (params[:kind] == :adult ? products_short_path(:package => Moovies.packages.invert[4]) : products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}"))), :link_tvod => (params[:kind] ==  :adult ? products_short_path(:package => Moovies.packages.invert[5]) : products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[2]}")))).html_safe %>

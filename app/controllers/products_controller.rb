@@ -97,6 +97,7 @@ class ProductsController < ApplicationController
     if params[:endless]
       cookies.permanent[:endless] = params[:endless]
       cookies.permanent[:pagin] = "pagin"
+      gon.pagin = "pagin"
     end
     if params[:display]
       cookies.permanent[:display] = params[:display]
