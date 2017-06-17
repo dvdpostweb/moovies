@@ -153,6 +153,8 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
                 end
               end
             end
+          else
+            render json: orange_purchase_wcf_service.parsed_response
           end
         end
       else

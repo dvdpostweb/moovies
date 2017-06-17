@@ -218,12 +218,10 @@ function orangePurchase() {
                         });
 
 
-                    } else if ("Max purchase threshold reached" === response.status) {
-                        jQuery.facebox("<div class=\"alert alert-danger\">" +
-                            "<strong>" + response.status + "</strong>" +
-                            "</div>");
                     } else {
-                        console.log(response);
+                      jQuery.facebox("<div class=\"alert alert-danger\">" +
+                          "<strong>" + response.status + "</strong>" +
+                          "</div>");
                     }
 
                 },

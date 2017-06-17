@@ -17,7 +17,9 @@ $(function () {
             url: this.href,
             dataType: 'html',
             type: 'GET',
-            data: {},
+            data: {
+              'pagination': 1
+            },
             success: function (data) {
                 $('#c-members').html(data);
             },
@@ -131,7 +133,9 @@ $(function () {
         return false; // prevent default behaviour
     });
 
-    endscroll();
+    //endscroll();
+
+
 
     $('.menu').on('click', function () {
         if (!$(this).next('.nav').is(':visible')) {
@@ -284,12 +288,6 @@ $(function () {
 
         $('#products_index').delegate("#close_ratings", "click", function () {
             $("#ratings-slider-range").slider("values", [0, 18])
-
-
-
-
-
-
         });
 
         $('#products_index').delegate("#close_audios", "click", function () {
@@ -387,44 +385,44 @@ $(function () {
     })
 });
 
-function ajax_pagination(path) {
+//function ajax_pagination(path) {
+//
+//    $('.loading_bar').show()
+//    $.ajax({url: path, dataType: 'script'});
+//    History.pushState(null, null, path);
+//
+//}
 
-    $('.loading_bar').show()
-    $.ajax({url: path, dataType: 'script'});
-    History.pushState(null, null, path);
 
-}
+//function goToByScroll(id) {
+//
+//    $('html,body').animate({scrollTop: $("#" + id).offset().top}, 'slow');
+//
+//}
 
-
-function goToByScroll(id) {
-
-    $('html,body').animate({scrollTop: $("#" + id).offset().top}, 'slow');
-
-}
-
-function endscroll() {
-    $('#toTop').on('click', function () {
-        goToByScroll('top')
-    });
-    //if ($('#products_index #pagination.active').length) {
-        $(window).scroll(function () {
-            var path;
-            path = $('#products_index #pagination .next_page').attr('href');
-
-            if ($(window).scrollTop() < 500) {
-                $('#toTop').fadeOut('slow')
-            }
-            else {
-                $('#toTop').fadeIn('slow')
-            }
-            if (path && $(window).scrollTop() > $(document).height() - $(window).height() - 1200) {
-                set_page(path)
-                $('#pagination').html("<img src='/assets/loading.gif' />");
-                return $.ajax({url: path, dataType: 'script'});
-            }
-        });
-    //}
-}
+// //function endscroll() {
+//     $('#toTop').on('click', function () {
+//         goToByScroll('top')
+//     });
+//     if ($('#products_index #pagination.active').length) {
+//         $(window).scroll(function () {
+//             var path;
+//             path = $('#products_index #pagination .next_page').attr('href');
+//
+//             if ($(window).scrollTop() < 500) {
+//                 $('#toTop').fadeOut('slow')
+//             }
+//             else {
+//                 $('#toTop').fadeIn('slow')
+//             }
+//             if (path && $(window).scrollTop() > $(document).height() - $(window).height() - 1200) {
+//                 set_page(path)
+//                 $('#pagination').html("<img src='/assets/loading.gif' />");
+//                 return $.ajax({url: path, dataType: 'script'});
+//             }
+//         });
+//     }
+// }
 
 function submit_online() {
 
@@ -453,6 +451,27 @@ function submit_online() {
     }
 
 }
+
+$(window).scroll(function () {
+  if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+    //alert('OKINI AJAX!!!');
+    $("#pag, #desc").hide();
+    //console.log($('.next_page').attr('href'));
+    $.ajax({
+        url: $('.next_page').attr('href'),
+        dataType: 'html',
+        type: 'GET',
+        data: {},
+        success: function (data) {
+            //$('#main-content').append(data);
+            $("#list-view").append(data);
+        },
+        error: function () {
+            html_item.html(content);
+        }
+    });
+  }
+});
 
 function load_form() {
 
@@ -493,28 +512,3 @@ $(window).scroll(function () {
     $('.ca-wrapper .tooltips:visible').css('margin-top', -193 - $this.scrollTop());
     /*$('#box2').css('left', 20 - $this.scrollLeft());*/
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
