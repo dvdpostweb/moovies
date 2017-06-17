@@ -81,12 +81,13 @@ class Api::V1::Orange::Callbacks::WhaController < ApplicationController
       end
     elsif 'v=3:{c=PurchaseTypeCancel'.in?(niz)
       flash[:error] = t('orange_wha_cancel')
-      redirect_to root_localize_path
+      redirect_to root_localize_path and return
     end
   end
 
-  def
+  def cancel
     flash[:error] = t('orange_wha_cancel')
-    redirect_to root_localize_path
+    redirect_to root_localize_path and return
   end
+
 end
