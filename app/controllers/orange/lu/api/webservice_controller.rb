@@ -27,6 +27,50 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
     end
   end
 
+  def orange_is_eligable_ppv
+    if request.xhr?
+      customer = Customer.find(params[:customers_id])
+      product_id_from_params = params[:products_id].blank? ? 0 : params[:products_id]
+      if customer.present?
+        customer.customers_telephone = params[:sms_number]
+        if customer.save(validate: false)
+          orange_sms_activation_code = OrangeSmsActivationCode.new
+          orange_sms_activation_code.customers_id = customer.customers_id
+          orange_sms_activation_code.phone_number = params[:sms_number]
+          orange_sms_activation_code.sms_authentification_code = SecureRandom.hex(2)
+          if orange_sms_activation_code.save
+            orange_is_eligable_wcf_service = HTTParty.get("https://www.plush.be:2355/WcfService/http/OrangeIsEligable?customersId=#{customer.customers_id}&mobileNumber=#{params[:sms_number]}&SMSCodeMessage=#{puts t("orange.sms_code.message")}#{orange_sms_activation_code.sms_authentification_code}&products_id=#{product_id_from_params}")
+            render json: {status: orange_is_eligable_wcf_service, sms_code: "#{t("orange.sms_code.message")} #{orange_sms_activation_code.sms_authentification_code}", phone_number: orange_sms_activation_code.phone_number}
+          end
+        end
+      end
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
+
+  def orange_is_eligable_step3
+    if request.xhr?
+      customer = Customer.find(params[:customers_id])
+      product_id_from_params = params[:products_id].blank? ? 0 : params[:products_id]
+      if customer.present?
+        customer.customers_telephone = params[:sms_number]
+        if customer.save(validate: false)
+          orange_sms_activation_code = OrangeSmsActivationCode.new
+          orange_sms_activation_code.customers_id = customer.customers_id
+          orange_sms_activation_code.phone_number = params[:sms_number]
+          orange_sms_activation_code.sms_authentification_code = SecureRandom.hex(2)
+          if orange_sms_activation_code.save
+            orange_is_eligable_wcf_service = HTTParty.get("https://www.plush.be:2355/WcfService/http/OrangeIsEligable?customersId=#{customer.customers_id}&mobileNumber=#{params[:sms_number]}&SMSCodeMessage=#{puts t("orange.sms_code.message")}#{orange_sms_activation_code.sms_authentification_code}&products_id=#{product_id_from_params}")
+            render json: {status: orange_is_eligable_wcf_service, sms_code: "#{t("orange.sms_code.message")} #{orange_sms_activation_code.sms_authentification_code}", phone_number: orange_sms_activation_code.phone_number}
+          end
+        end
+      end
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
+
   def orange_login
     if request.xhr?
       #product_id_from_params = params[:products_id].blank? ? 0 : params[:products_id]
@@ -128,15 +172,16 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
       if sms_code.present?
         customer = Customer.find(sms_code.customers_id)
         if customer.present?
-          #if Token.create(customer.customers_id, product.imdb_id)
             orange_purchase_wcf_service = HTTParty.get("https://www.plush.be:2355/wcfservice/http/OrangePurchase?customersId=#{customer.customers_id}&mobileNumber=#{params[:plush_phone_number]}&price=0&products_id=#{product_id_from_params}&message=ppv2&payment_id=0")
             if orange_purchase_wcf_service.parsed_response == "TRUE"
               if streaming.present?
                 sign_in(customer)
                 render json: {status: "True"}
               end
+            else
+              sign_in(customer)
+              render json: {status: orange_purchase_wcf_service}
             end
-          #end
         end
       else
         render json: {status: "mobile_number_format_error"}
@@ -164,6 +209,9 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
                   render json: {status: "True"}
                 end
               end
+          else
+            sign_in(customer)
+            render json: {status: orange_purchase_wcf_service}
           end
         end
       else

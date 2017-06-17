@@ -9,6 +9,8 @@ Moovies::Application.routes.draw do
       end
       namespace :api do
         match "orange_is_eligable" => "webservice#orange_is_eligable"
+        match "orange_is_eligable_ppv" => "webservice#orange_is_eligable_ppv"
+        match "orange_is_eligable_step3" => "webservice#orange_is_eligable_step3"
         match "orange_register" => "webservice#orange_register"
         match "orange_login" => "webservice#orange_login"
         match "orange_purchase" => "webservice#orange_purchase"

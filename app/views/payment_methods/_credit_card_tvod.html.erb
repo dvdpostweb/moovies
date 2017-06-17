@@ -252,10 +252,11 @@ crossorigin="anonymous"></script>
         submitHandler: function (form) {
             $.ajax({
                 method: 'POST',
-                url: '/orange/lu/api/orange_is_eligable',
+                url: '/orange/lu/api/orange_is_eligable_ppv',
                 data: {
                     'sms_number': $.trim($("#sms_number").val()),
-                    'products_id': gon.products_id
+                    'products_id': gon.products_id,
+                    'customers_id': gon.current_customer.customers_id
                 },
                 dataType: 'json',
                 success: function (response) {
@@ -361,12 +362,10 @@ crossorigin="anonymous"></script>
                         });
 
 
-                    } else if ("Max purchase threshold reached" === response.status) {
-                        jQuery.facebox("<div class=\"alert alert-danger\">" +
-                            "<strong>" + response.status + "</strong>" +
-                            "</div>");
                     } else {
-                        console.log(response);
+                      jQuery.facebox("<div class=\"alert alert-danger\">" +
+                          "<strong>" + response.status + "</strong>" +
+                          "</div>");
                     }
 
                 },

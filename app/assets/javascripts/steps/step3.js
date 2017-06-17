@@ -83,34 +83,15 @@ var step3 = {
             submitHandler: function (form) {
                 $.ajax({
                     method: 'POST',
-                    url: '/orange/lu/api/orange_is_eligable',
+                    url: '/orange/lu/api/orange_is_eligable_step3',
                     data: {
                         'sms_number': $.trim($("#sms_number").val()),
                         'products_id': gon.products_id,
-                        'current_customer': gon.current_customer.customers_id
+                        'customers_id': gon.current_customer.customers_id
                     },
                     dataType: 'json',
                     success: function (response) {
-                        if (0 === response.status) {
-                            localStorage.setItem("plush_phone_number", response.sms_number);
-                            jQuery.facebox("<div class=\"alert alert-danger\">" +
-                                "<strong>Account with your phone number does not exist !!! Please select your subscription plan</strong>" +
-                                "</div>");
-                            setTimeout(
-                                function () {
-                                    window.location.href = gon.orange_subscription_action; //"/orange/lu/auth/" + gon.locale + "/sms/registration?phone_number=" + $.trim($("#sms_number").val()) + ""
-                                }, 2000);
-                        } else if (1 === response.status) {
-                            localStorage.setItem("plush_phone_number", response.sms_number);
-                            jQuery.facebox("<div class=\"alert alert-danger\">" +
-                                "<strong>Account with your phone number does not exist !!! Please register</strong>" +
-                                "</div>");
-                            setTimeout(
-                                function () {
-                                    window.location.href = gon.orange_subscription_action + gon.url_code; //"/orange/lu/auth/" + gon.locale + "/sms/registration?phone_number=" + $.trim($("#sms_number").val()) + ""
-                                }, 2000);
-                            //window.location.href = gon.orange_subscription_action + gon.url_code;
-                        } else if ("True" === response.status) {
+                        if ("True" === response.status) {
                             if (typeof(Storage) !== "undefined") {
                                 localStorage.setItem("plush_phone_number", response.phone_number);
                                 $("#is_eligable_subscriber").hide();
@@ -176,12 +157,10 @@ var step3 = {
 
                         if ("True" === response.status) {
                             window.location.href = gon.step4;
-                        } else if ("Max purchase threshold reached" === response.status) {
-                            jQuery.facebox("<div class=\"alert alert-danger\">" +
-                                "<strong>" + response.status + "</strong>" +
-                                "</div>");
                         } else {
-                            console.log(response);
+                          jQuery.facebox("<div class=\"alert alert-danger\">" +
+                              "<strong>" + response.status + "</strong>" +
+                              "</div>");
                         }
 
                     },
