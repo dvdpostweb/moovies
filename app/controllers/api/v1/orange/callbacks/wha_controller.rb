@@ -94,7 +94,7 @@ class Api::V1::Orange::Callbacks::WhaController < ApplicationController
           end
       end
     elsif 'v=3:{c=PurchaseTypeCancel'.in?(niz)
-      render json: "Neuspesno"
+      redirect_to root_localize_path
     end
   end
 
