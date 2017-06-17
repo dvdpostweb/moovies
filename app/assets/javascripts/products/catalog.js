@@ -144,6 +144,8 @@ $(function () {
         }
     });
 
+    //endscroll();
+
     if ($('#online #filters').html()) {
         $('#products_index').delegate('.cover', 'mouseenter', function () {
             if ($("#ca-container").length > 0) {
@@ -396,13 +398,15 @@ function ajax_pagination(path) {
 
 function endscroll()
 {
-  $('#toTop').on('click', function(){
-     goToByScroll('top')
-   });
-  if ($('#pagination.active').length) {
+  //$('#toTop').on('click', function(){
+  //   goToByScroll('top')
+  // });
+  if ($('.products-pagination.active').length) {
     $(window).scroll(function() {
        var path;
-       path = $('#pagination .next_page').attr('href');
+       path = $('.next_page').attr('href');
+
+       //console.log($('.next_page').attr('href'))
 
        //if ($(window).scrollTop() < 500)
        //{
@@ -412,10 +416,13 @@ function endscroll()
        //{
         // $('#toTop').fadeIn('slow')
       // }
-       if (path && $(window).scrollTop() > $(document).height() - $(window).height() - 1200) {
-         set_page(path)
+       if (path && $(window).scrollTop() + $(window).height() >= $(document).height()) {
+         //set_page(path)
          //$('#pagination').html("<img src='/assets/loading.gif' />");
-         return $.ajax({url: path, dataType: 'script'});
+         //return $.ajax({url: path, dataType: 'script'});
+         var paramsString = "page"
+         var searchParams = new URLSearchParams(paramsString);
+         console.log(searchParams);
        }
     });
   }
@@ -453,26 +460,19 @@ function submit_online() {
 
 }
 
-// //$(window).scroll(function () {
+//$(window).scroll(function () {
 //   if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-//     //alert('OKINI AJAX!!!');
-//     $("#pag, #desc").hide();
-//     //console.log($('.next_page').attr('href'));
+     //alert('OKINI AJAX!!!');
+     //$("#pag, #desc").hide();
+     //console.log($('.next_page').attr('href'));
 //     $.ajax({
 //         url: $('.next_page').attr('href'),
-//         dataType: 'html',
-//         type: 'GET',
-//         data: {},
-//         success: function (data) {
-//             //$('#main-content').append(data);
-//             //$("#list-view").append(data);
-//         },
-//         error: function () {
-//             html_item.html(content);
-//         }
+//         dataType: 'script'
 //     });
+
+     //$.ajax({url: path, dataType: 'script'});
 //   }
-// });
+//});
 
 function load_form() {
 

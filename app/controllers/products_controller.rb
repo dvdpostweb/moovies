@@ -94,14 +94,14 @@ class ProductsController < ApplicationController
     @target = cookies[:endless] == 'deactive' ?  '_self' : '_blank'
     @carousels = Landing.hit.by_language(I18n.locale).not_expirated
 
-    if params[:endless]
-      cookies.permanent[:endless] = params[:endless]
-      cookies.permanent[:pagin] = "pagin"
-      gon.pagin = "pagin"
-    end
-    if params[:display]
-      cookies.permanent[:display] = params[:display]
-    end
+    #if params[:endless]
+    #  cookies.permanent[:endless] = params[:endless]
+    #  cookies.permanent[:pagin] = "pagin"
+    #  gon.pagin = "pagin"
+    #end
+    #if params[:display]
+    #  cookies.permanent[:display] = params[:display]
+    #end
     @rating_color = params[:kind] == :adult ? :pink : :white
     if request.xhr?
       render :layout => false
