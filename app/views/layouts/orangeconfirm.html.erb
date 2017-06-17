@@ -1,0 +1,247 @@
+<html lang="en">
+<head>
+    <!--META TAGS-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" CONTENT="noindex, nofollow">
+    <!--/META TAGS-->
+
+    <!--TITLE-->
+    <title>Plush -  Orange Landing</title>
+    <!--/TITLE-->
+
+    <!--CSS-->
+    <%= stylesheet_link_tag "application", :media => "all" %>
+
+    <link rel="icon" type="image/x-icon" href="<%= asset_path("template/favicon.ico") %>">
+    <link rel="icon" type="image/png" href="<%= asset_path("template/favicon.ico") %>">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<%= asset_path("template/favicon114x114.png") %>">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<%= asset_path("template/favicon72x72.png") %>">
+    <link rel="apple-touch-icon-precomposed" href="<%= asset_path("template/favicon57x57.png") %>">
+
+    <%= include_gon(namespace: 'Plush') %>
+    <%= Gon::Base.render_data %>
+    <!--/FAVICON-->
+</head><body>
+<!--/PAGE CANAVAS-->
+<div class="canavas" id="">
+
+
+    <!--OVERLAY MASK-->
+    <div id="overlay"></div>
+    <!--/OVERLAY MASK-->
+
+    <!--SLIDE PAGE ON TOP-->
+    <div id="on-top" class="pad10 radius4 dark-gray-bck">
+        <i class="fa fa-angle-up f30 light-gray"></i>
+    </div>
+    <!--/SLIDE PAGE ONTOP-->
+
+    <!--ADAPTIVE SLIDE MAIN MENU-->
+    <div class="side-menu box-shadow">
+        <div class="side-menu-close f33"></div>
+        <div class="side-menu-login mart10 block100"></div>
+        <div class="side-menu-nav mart15 block100"></div>
+        <div class="side-menu-search mart15"></div>
+    </div>
+    <!--/ADAPTIVE SLIDE MAIN MENU-->
+
+    <!--WRAP-->
+    <div class="wrap">
+        <!--MAIN NAVIGATION-->
+<nav id="mainNav" class="navbar navbar-default white-bck promotion-top">
+    <!--LOGO-->
+    <div class="navbar-header block100 padr20">
+        <a class="navbar-brand" href="index.html"><%= image_tag "template/plush-logo-trans.png" %></a>
+        <a class="navbar-brand pull-right" href="http://www.mobistar.be/" target="_blank"><%= image_tag "template/orange-logo.png" %></a>
+    </div>
+    <!--/LOGO-->
+</nav>
+<!--/MAIN NAVIGATION--><!--CONTACT MESSAGES CONTETNT -->
+<div id="content" class="promotion landing orange">
+
+    <!--CONTAINER-->
+    <div class="container white-bck dark-gray padb20">
+        <!--LANGUAGES-->
+        <div class="block100">
+            <ul class="landing-languages">
+                <li>
+                    <a href="index.php%3Fpage=orange-landing-v2.html">
+                      <%= image_tag "template/flag-netherlands.png", class: "img-responsive" %>
+                    </a>
+                </li>
+                <li>
+                    <a href="index.php%3Fpage=orange-landing-v2.html">
+                      <%= image_tag "template/flag-uk.png", class: "img-responsive" %>
+                    </a>
+                </li>
+                <li>
+                    <a href="index.php%3Fpage=orange-landing-v2.html">
+                      <%= image_tag "template/flag-france.png", class: "img-responsive" %>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!--/LANGUAGES-->
+
+        <h1 class="OpenSansCondensed text-center pad0 padtb50 block100"><strong>Bienvenue sur votre plateforme VOD</strong></h1>
+
+
+        <!--CODEBOX-->
+        <div class="promotion-codebox white-bck overflow-hidden center-block mart60">
+          <form id="form">
+            <div class="block100 text-center codebox-img-holder center-block">
+                <%= image_tag "template/orange-logo.png",  class:"center-block img-responsive" %>
+            </div>
+            <div class="block100 mart30">
+                <input id="telyes" type="radio" class="iradio" name="client-orange" value="1  <form>"/>&nbsp;&nbsp;Client Orange, entrez votre numéro de téléphone
+            </div>
+            <div class="block100 mart15 text-center">
+                <input type="text" value="" name="promo-code" id="promo-code" class="text-center" placeholder="Téléphone">
+            </div>
+
+            <div class="block100 mart15">
+                <input id="telno" type="radio" class="iradio" name="client-orange" value="1"/>&nbsp;&nbsp;Passez cette étape
+            </div>
+
+            <div class="block100 mart20">
+                <button class="btn block100 orange-bck padlr40 padtb10 white f16 normal pull-right" id="continue-btn">Continuer</button>
+            </div>
+          </form>
+        </div>
+        <!--/CODEBOX-->
+
+    </div>
+    <!--/CONTAINER-->
+
+    <!--CONTAINER-->
+    <div class="container promotion-catalogue white-bck dark-gray padtb20">
+        <h2 class="OpenSansCondensed pad0 mar0">Plush vous offre:</h2>
+        <p class="f16"><i class="fa fa-square green marr5"></i> Un catalogue à la carte</p>
+        <ul>
+            <li>
+                <div class="img-cat">
+                    <%= image_tag "template/orange-cat1.jpeg" %>
+                </div>
+
+                <div class="desc-cat f13">  <form>
+                    <div class="fa-stack display-inline">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <span class="fa fa-stack-1x fa-inverse fa-plus18"></span>
+                    </div>
+                    <div class="pull-right line-height-15 display-inline">
+                        Faites votre choix parmi plus de 2400 films à la carte
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="img-cat">
+                    <%= image_tag "template/orange-cat2.jpeg" %>
+                </div>
+
+                <div class="desc-cat f13">
+                    <div class="fa-stack display-inline">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <span class="fa fa-stack-1x fa-inverse fa-plus18"></span>
+                    </div>
+                    <div class="pull-right line-height-15 display-inline">
+                        Cliquez sur Regarder.
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="img-cat">
+                    <%= image_tag "template/orange-cat3.gif" %>
+                </div>
+
+                <div class="desc-cat f13">
+                    <div class="fa-stack display-inline">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <span class="fa fa-stack-1x fa-inverse fa-plus18"></span>
+                    </div>  <form>
+                    <div class="pull-right line-height-15 display-inline">
+                        Sélectionnez la langue du film et les sous-titres
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="img-cat">
+                    <%= image_tag "template/orange-cat4.jpeg" %>
+                </div>
+
+                <div class="desc-cat f13">
+                    <div class="fa-stack display-inline">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <span class="fa fa-stack-1x fa-inverse fa-plus18"></span>
+                    </div>
+                    <div class="pull-right line-height-15 display-inline">  <form>
+                        Profitez pendant 48h de votre film !
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!--/CONTAINER-->
+
+    <!--CONTAINER-->
+    <div class="container bottom padtb15 text-center">
+        <%= image_tag "template/bottom-banner.jpeg", class: "center-block" %>
+    </div>
+    <!--/CONTAINER-->
+
+    <!--CONTAINER-->
+    <div class="container bottom padtb15 white-bck dark-gray text-center">
+        Vous avez une question liée à votre identification ou à l’accès au Service ? <a href="index.php%3Fpage=orange-landing-v2.html#" class="mart5">Cliquez ici</a>
+        <br>
+        En cliquant sur ce bouton, je reconnais avoir lu et accepter les <a href="index.php%3Fpage=orange-landing-v2.html#" class="mart5">conditions générales de vente</a>
+    </div>
+    <!--/CONTAINER-->
+
+</div><!--/CONTACT MESSAGES CONTETNT -->
+
+<%= javascript_include_tag "application" %>
+<script>
+
+    $(document).ready(function () {
+      jQuery.validator.addMethod("phone", function (phone_number, element) {
+          phone_number = phone_number.replace(/\s+/g, "");
+          return this.optional(element) || phone_number.length > 9 &&
+              phone_number.match(/^[0-9-+]+$/);
+      }, "Invalid phone number");
+      $("#form").validate({
+          rules: {
+              "promo-code": {
+                  required: true,
+                  phone: true
+              }
+          },
+          highlight: function (element) {
+              $(element).closest('.form-group').addClass('has-error');
+          },
+          unhighlight: function (element) {
+              $(element).closest('.form-group').removeClass('has-error');
+          },
+          errorElement: 'span',
+          errorClass: 'help-block',
+          submitHandler: function (form) {
+            if($('#telyes').is(':checked')) {
+              localStorage.setItem("plush_phone_number", $("#promo-code").val());
+              window.location.href = gon.root_localize_path;
+            } else if ($('#telno').is(':checked')) {
+              localStorage.removeItem("plush_phone_number";
+              window.location.href = gon.root_localize_path;
+            } else {
+              jQuery.facebox("<div class=\"alert alert-danger\">" +
+              "<strong>Please chose one option</strong>" +
+              "</div>");
+            }
+          }
+      });
+    });
+</script><!--SCRIPTS-->    </div>
+    <!--WRAP-->
+</div>
+<!--/PAGE CANAVAS-->
+</body>
+</html>

@@ -219,4 +219,8 @@ class HomeController < ApplicationController
     end
   end
 
+  def orangesmsconfirm
+    
+  end
+
 end

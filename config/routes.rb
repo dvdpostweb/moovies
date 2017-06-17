@@ -63,6 +63,7 @@ Moovies::Application.routes.draw do
   root_path = 'products#index'
 
   scope ':locale/(:kind)', :locale => /en|fr|nl/, :kind => /normal|adult/ do
+    match 'orangesmsconfirm' => 'orangeconfirm#promotion'
   	match "carrefourbonus" => "carrefourbonus#plans"
     match "freetrial" => "freetrial#plans"
     match "photobox" => "photobox#plans"
