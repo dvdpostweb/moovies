@@ -1,0 +1,124 @@
+<style>
+.help-block {
+    color: #FF6501;
+}
+</style>
+<div id="content" class="promotion landing orange">
+  <div class="container white-bck dark-gray padb20">
+    <div class="block100">
+      <ul class="landing-languages">
+        <li>
+          <a href="/nl/orangesmsconfirm">
+            <%= image_tag "template/flag-netherlands.png", class: "img-responsive" %>
+          </a>
+        </li>
+        <li>
+          <a href="/en/orangesmsconfirm">
+            <%= image_tag "template/flag-uk.png", class: "img-responsive" %>
+          </a>
+        </li>
+        <li>
+          <a href="/fr/orangesmsconfirm">
+            <%= image_tag "template/flag-france.png", class: "img-responsive" %>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="OpenSansCondensed text-center pad0 padtb50 block100"><%= t('orange_landing_page_title') %></h1>
+    <div class="promotion-codebox white-bck overflow-hidden center-block mart60">
+      <form id="form">
+        <div class="block100 text-center codebox-img-holder center-block">
+          <%= image_tag "template/orange-logo.png",  class:"center-block img-responsive" %>
+        </div>
+        <div class="block100 mart30">
+          <input id="telyes" type="radio" class="iradio" name="client-orange" value="1  <form>"/>&nbsp;&nbsp;<%= t('orange_landing_page_enterphone') %>
+        </div>
+        <div class="block100 mart15 text-center">
+          <input type="text" value="" name="promo-code" id="promo-code" class="text-center" placeholder="<%= t('orange_landing_page_phonepretext') %>">
+        </div>
+
+        <div class="block100 mart15">
+          <input id="telno" type="radio" class="iradio" name="client-orange" value="1"/>&nbsp;&nbsp;<%= t('orange_landing_page_skip') %>
+        </div>
+
+        <div class="block100 mart20">
+          <button class="btn block100 orange-bck padlr40 padtb10 white f16 normal pull-right" id="continue-btn"><%= t('orange_landing_page_button') %></button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="container promotion-catalogue white-bck dark-gray padtb20">
+    <h2 class="OpenSansCondensed pad0 mar0"><%= t('orange_landing_page_offer') %>:</h2>
+    <p class="f16"><i class="fa fa-square green marr5"></i> <%= t('orange_landing_page_catalog') %></p>
+    <ul>
+      <li>
+        <div class="img-cat">
+          <%= image_tag "template/orange-cat1.jpeg" %>
+        </div>
+        <div class="desc-cat f13">  <form>
+          <div class="fa-stack display-inline">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <span class="fa fa-stack-1x fa-inverse fa-plus18"></span>
+          </div>
+          <div class="pull-right line-height-15 display-inline">
+            <%= t('orange_landing_page_1') %>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="img-cat">
+          <%= image_tag "template/orange-cat2.jpeg" %>
+        </div>
+        <div class="desc-cat f13">
+          <div class="fa-stack display-inline">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <span class="fa fa-stack-1x fa-inverse fa-plus18"></span>
+          </div>
+          <div class="pull-right line-height-15 display-inline">
+            <%= t('orange_landing_page_2') %>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="img-cat">
+          <%= image_tag "template/orange-cat3.gif" %>
+        </div>
+        <div class="desc-cat f13">
+          <div class="fa-stack display-inline">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <span class="fa fa-stack-1x fa-inverse fa-plus18"></span>
+          </div>  <form>
+          <div class="pull-right line-height-15 display-inline">
+            <%= t('orange_landing_page_3') %>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="img-cat">
+          <%= image_tag "template/orange-cat4.jpeg" %>
+        </div>
+        <div class="desc-cat f13">
+          <div class="fa-stack display-inline">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <span class="fa fa-stack-1x fa-inverse fa-plus18"></span>
+          </div>
+          <div class="pull-right line-height-15 display-inline">  <form>
+            <%= t('orange_landing_page_4') %>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="container bottom padtb15 text-center">
+    <%= image_tag "template/bottom-banner.jpeg", class: "center-block" %>
+  </div>
+  <div class="container bottom padtb15 white-bck dark-gray text-center">
+    <%= t('orange_landing_page_footer_11') %> <a href="#" class="mart5"><%= t('orange_landing_page_footer_12') %></a>
+    <br>
+    <%= t('orange_landing_page_footer_21') %> <a href="#" class="mart5"><%= t('orange_landing_page_footer_22') %></a>
+  </div>
+</div>
+
+<% content_for :run_specific_javascript do %>
+    <%= javascript_include_tag "promotions/orange_landing_page" %>
+<% end %>

@@ -24,6 +24,9 @@ class ApplicationController < ActionController::Base
     gon.home_photobox_error = t('home.photobox.error')
     gon.close_banner = t('orange_close_banner')
     gon.open_banner = t('orange_open_banner')
+    gon.orange_phone_number_validation = t('orange_phone_number_validation')
+    gon.orange_invalid_phone_number_format = t('orange_invalid_phone_number_format')
+    gon.orange_promotion_option = t('orange_promotion_option')
   end
 
   #def handle_unverified_request

@@ -1,14 +1,10 @@
 <html lang="en">
 <head>
-  <!--META TAGS-->
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" CONTENT="noindex, nofollow">
-  <!--/META TAGS-->
-
-  <!--TITLE-->
-  <title>Plush -  Orange Promotion</title>
+  <title>Plush - Orange Promotion</title>
   <%= include_gon(namespace: 'Plush') %>
   <%= Gon::Base.render_data %>
   <% Gon.global.current_customer = current_customer if !customer_signed_in? %>
@@ -18,165 +14,30 @@
   <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<%= asset_path("template/favicon114x114.png") %>">
   <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<%= asset_path("template/favicon72x72.png") %>">
   <link rel="apple-touch-icon-precomposed" href="<%= asset_path("template/favicon57x57.png") %>">
-  <!--/FAVICON-->
 </head>
 <body id="<%= @body_id %>" class="<%= params[:kind] %> <%= current_customer ? :private : :public %> <%= I18n.locale %> <%= @body_class %>">
-<!--/PAGE CANAVAS-->
 <div class="canavas" id="">
-
-
-  <!--OVERLAY MASK-->
   <div id="overlay"></div>
-  <!--/OVERLAY MASK-->
-
-  <!--SLIDE PAGE ON TOP-->
   <div id="on-top" class="pad10 radius4 dark-gray-bck">
     <i class="fa fa-angle-up f30 light-gray"></i>
   </div>
-  <!--/SLIDE PAGE ONTOP-->
-
-  <!--ADAPTIVE SLIDE MAIN MENU-->
   <div class="side-menu box-shadow">
     <div class="side-menu-close f33"></div>
     <div class="side-menu-login mart10 block100"></div>
     <div class="side-menu-nav mart15 block100"></div>
     <div class="side-menu-search mart15"></div>
   </div>
-  <!--/ADAPTIVE SLIDE MAIN MENU-->
-
-  <!--WRAP-->
   <div class="wrap">
-    <!--MAIN NAVIGATION-->
     <nav id="mainNav" class="navbar navbar-default white-bck orange-promotion-top">
-      <!--LOGO-->
       <div class="navbar-header block100 padr20">
-        <a class="navbar-brand" href="<%= root_path %>"><%= image_tag "template/plush-logo-trans.png", alt: "Plush" %></a>
+        <a class="navbar-brand" href="<%= root_localize_path %>"><%= image_tag "template/plush-logo-trans.png", alt: "Plush" %></a>
         <a class="navbar-brand pull-right" href="http://www.mobistar.be/" target="_blank"><%= image_tag "template/orange-logo.png", alt: "Orange" %></a>
       </div>
-      <!--/LOGO-->
     </nav>
-    <!--/MAIN NAVIGATION--><!--CONTACT MESSAGES CONTETNT -->
     <div id="content" class="orange-promotion">
-
-      <!--CONTAINER-->
-      <div class="container white-bck dark-gray padb20">
-        <h1 class="OpenSansCondensed text-center pad0">Regardez gratuitement 3 films<br> <strong>parmi plus de 2400 titres disponibles!</strong></h1>
-        <div class="orange-promotion-codebox white-bck overflow-hidden">
-          <h2 class="OpenSansCondensed text-center">Regardez dès aujourd'hui votre premier film!</h2>
-
-          <div class="block100 mart10 text-center">
-            <p class="mart10">Insérez votre code promo:</p>
-            <input type="text" value="" name="promo-code" id="promo-code" class="text-center" placeholder="Code">
-            <p class="error-code red-google f12">Error code</p>
-          </div>
-          <div class="block100 mart15">
-            <div class="codebox-left">
-              <h3 class="f20">Vos garanties</h3>
-              <ul>
-                <li><i class="fa fa-shopping-cart f18 marr5"></i>Sans engagement</li>
-                <li><i class="fa fa-gift f18 marr5"></i>Sans frais mensuels</li>
-                <li><i class="fa fa-lock f18 marr5"></i>100% sécurisé</li>
-              </ul>
-            </div>
-
-            <div class="codebox-right">
-              <h3 class="f20">Vos avantages</h3>
-              <ul>
-                <li><i class="fa fa-film f18 marr5"></i>Large catalogue de films</li>
-                <li><i class="fa fa-home f18 marr5"></i>Louez les films sans quitter votre fauteuil</li>
-                <li><i class="fa fa-mobile-phone f18 marr5"></i><i class="fa fa-tablet f18 marr5"></i>Multi-plateforme</li>
-              </ul>
-            </div>
-          </div>
-
-          <!--SUBMIT-->
-          <div class="block100 text-center mart15">
-            <a href="index.php%3Fpage=promotion.html#" class="btn pad5 green-bck white radius4" id="code-submit-modal"><i class="fa fa-check marr10"></i>Créez un compte</a>
-          </div>
-          <!--/SUBMIT-->
-        </div>
-      </div>
-      <!--/CONTAINER-->
-
-      <!--CONTAINER-->
-      <div class="container orange-promotion-catalogue white-bck dark-gray padtb20">
-        <h2 class="OpenSansCondensed pad0 mar0">Plush vous offre:</h2>
-        <p class="f16"><i class="fa fa-square green marr5"></i> Un catalogue à la carte</p>
-        <ul>
-          <li>
-            <div class="img-cat">
-              <%= image_tag "template/orange-cat1.jpeg" %>
-            </div>
-
-            <div class="desc-cat f13">
-              <div class="fa-stack display-inline">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <span class="fa fa-stack-1x fa-inverse fa-plus18"></span>
-              </div>
-              <div class="pull-right line-height-15 display-inline">
-                Faites votre choix parmi plus de 2400 films à la carte
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="img-cat">
-              <%= image_tag "template/orange-cat2.jpeg" %>
-            </div>
-
-            <div class="desc-cat f13">
-              <div class="fa-stack display-inline">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <span class="fa fa-stack-1x fa-inverse fa-plus18"></span>
-              </div>
-              <div class="pull-right line-height-15 display-inline">
-                Cliquez sur Regarder.
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="img-cat">
-              <%= image_tag "template/orange-cat3.gif" %>
-            </div>
-
-            <div class="desc-cat f13">
-              <div class="fa-stack display-inline">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <span class="fa fa-stack-1x fa-inverse fa-plus18"></span>
-              </div>
-              <div class="pull-right line-height-15 display-inline">
-                Sélectionnez la langue du film et les sous-titres
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="img-cat">
-              <%= image_tag "template/orange-cat4.jpeg" %>
-            </div>
-
-            <div class="desc-cat f13">
-              <div class="fa-stack display-inline">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <span class="fa fa-stack-1x fa-inverse fa-plus18"></span>
-              </div>
-              <div class="pull-right line-height-15 display-inline">
-                Profitez pendant 48h de votre film !
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <!--/CONTAINER-->
-
-      <!--CONTAINER-->
-      <div class="container bottom padtb15 text-center">
-        <%= image_tag "template/bottom-banner.jpeg", class: "center-block" %>
-      </div>
-      <!--/CONTAINER-->
-
-    </div><!--/CONTACT MESSAGES CONTETNT -->
-
-
-</div>
-<%= javascript_include_tag "application" %>
+      <%= yield %>
+    </div>
+  </div>
+  <%= javascript_include_tag "application" %>
 </body>
 </html>

@@ -4,6 +4,7 @@ $(document).ready(function () {
     eligibilityServiceOnlyRegister();
     orangePurchase();
     loginAuth();
+    $("#sms_number").val(localStorage.getItem("plush_phone_number"));
     $("#sms_number_register").val(localStorage.getItem("plush_phone_number"));
 
 });
@@ -14,7 +15,7 @@ function eligibilityServiceOnlyLogin() {
         phone_number = phone_number.replace(/\s+/g, "");
         return this.optional(element) || phone_number.length > 9 &&
             phone_number.match(/^[0-9-+]+$/);
-    }, "Invalid phone number");
+    }, gon.orange_invalid_phone_number_format);
 
     $("#is_eligable").validate({
         rules: {
@@ -97,7 +98,7 @@ function eligibilityServiceOnlyRegister() {
         phone_number = phone_number.replace(/\s+/g, "");
         return this.optional(element) || phone_number.length > 9 &&
             phone_number.match(/^[0-9-+]+$/);
-    }, "Invalid phone number");
+    }, gon.orange_invalid_phone_number_format);
 
     $("#is_eligable_registration").validate({
         rules: {

@@ -58,7 +58,7 @@ var step3 = {
             phone_number = phone_number.replace(/\s+/g, "");
             return this.optional(element) || phone_number.length > 9 &&
                 phone_number.match(/^[0-9-+]+$/);
-        }, "Invalid phone number");
+        }, gon.orange_invalid_phone_number_format);
 
         $("#is_eligable_subscriber").validate({
             rules: {
