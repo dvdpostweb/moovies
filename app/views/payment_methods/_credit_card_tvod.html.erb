@@ -216,12 +216,9 @@
 </div>
 <% content_for :run_specific_javascript do %>
     <%= javascript_include_tag "payment_methods/credit_card_tvod" %>
+    <%= javascript_include_tag "facebox" %>
 <% end %>
-<script
-src="https://code.jquery.com/jquery-1.12.4.min.js"
-integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
-crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.js"></script>
+
 <script>
     jQuery.validator.addMethod("phone", function (phone_number, element) {
         phone_number = phone_number.replace(/\s+/g, "");
