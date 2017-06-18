@@ -39,6 +39,10 @@
     <%= javascript_include_tag "application" %>
     <script>
 
+    $('#telno').click(function() {
+        window.location.href = gon.root_localize_path;
+    });
+
         $(document).ready(function () {
     jQuery.validator.addMethod("phone", function (phone_number, element) {
         phone_number = phone_number.replace(/\s+/g, "");
@@ -69,9 +73,6 @@
         submitHandler: function (form) {
             if ($('#telyes').is(':checked')) {
                 localStorage.setItem("plush_phone_number", $("#promo-code").val());
-                window.location.href = gon.root_localize_path;
-            } else if ($('#telno').is(':checked')) {
-                //localStorage.removeItem("plush_phone_number";
                 window.location.href = gon.root_localize_path;
             } else {
                 jQuery.facebox("<div class=\"alert alert-danger\">" +
