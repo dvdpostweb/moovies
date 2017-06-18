@@ -1,56 +1,56 @@
+<% url = current_customer ? phone_requests_path(:customer_id => current_customer.to_param) : phone_requests_path() %>
 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 contact-right">
+  <% reason_init = phone_request.reason || :blank %>
+  <% current_phone = current_customer ? current_customer.phone : nil %>
+  <% phone_init = phone_request.phone && !phone_request.phone.empty? ? phone_request.phone : current_phone %>
+  <%= form_for :phone_request, :url => url do |f| %>
   <h3 class="f25 pad0 mart0"><%= t('.title') %></h3>
-  <p class="mart15">Nous vous offrons aussi la possibilité d’être rappelé par notre service clientèle quand vous êtes disponible (le lundi de 10h à 16h et du mardi au vendredi de 9h à 16h).
-    Pour ce faire, il vous suffit de remplir les cases ci-dessous.</p>
+  <p class="mart15">
+    <%= t('.intro') if current_customer %>
+  </p>
   <div class="form-group block100 pad10 thin-green2-bck mart10 radius4">
-    <form id="service">
-      <div class="block100">
-        <input type="radio" class="iradio" name="service" value="1"/> <strong>Service technique</strong>
-        <p class="italic">Questions concernant les problèmes de VOD,... </p>
-      </div>
+    <%= f.error_messages %>
+      <% if current_customer %>
+        <% PhoneRequest.reason_codes.each do |key, code| %>
+          <div class="block100">
+            <%= f.radio_button :reason, code, :checked => (phone_request.reason == code || (!phone_request.reason && params[:reason].to_i == code)) ? true : false, class: "iradio" %> <strong><%= f.label :reason, t(".reason_label_#{code}"), :class => :reason_label %></strong>
+            <p class="italic"><%= t(".reason_description_#{code}") %></p>
+          </div>
+        <% end %>
+      <% else %>
+        <%= f.hidden_field :reason, :value => 4 %>
+      <% end %>
       <div class="block100 mart5">
-        <input type="radio" class="iradio" name="service" value="2"/> <strong>Service facturation</strong>
-        <p class="italic">Questions concernant votre abonnement, votre facturation,... </p>
+      <strong class="clearfix"><%= t('.languages') %></strong>
+        <% PhoneRequest.languages.each do |key, code| %>
+        <%= f.radio_button :language_id, key, :checked => (phone_request.language_id == key || (!phone_request.language_id && I18n.locale == code.to_sym ) ? true : false), class: "iradio" %>
+        <%= f.label "language_id_#{key}", t(".#{code}") %>
+        <% end %>
       </div>
+      <% if !current_customer %>
       <div class="block100 mart5">
-        <input type="radio" class="iradio" name="service" value="3"/> <strong>Service administratif</strong>
-        <p class="italic">Questions concernant les mises à jour du profil (coordonnées, formules d'abonnement...)</p>
+        <strong class="clearfix"><%= f.label :name, t('.name') %></strong>
+        <%= f.text_field :name %>
       </div>
+      <% end %>
       <div class="block100 mart5">
-        <strong class="clearfix">Dans quelle langue désirez-vous être rappelé?</strong> <input type="radio" class="iradio" name="lg" value="1"/> Français
-        <input type="radio" class="iradio" name="lg" value="2"/> Nederlands <input type="radio" class="iradio" name="lg" value="3"/> English
+        <strong class="clearfix"><%= f.label :phone, t('.phone') %></strong>
+        
+        <%= f.text_field :phone, :value => phone_init %>
       </div>
       <div class="block100 mart10">
-        <strong class="clearfix">N° de tel</strong> <input type="text" name="telephone" placeholder="Tel number"/>
+        <strong class="clearfix"><%= t '.call_date' %>/strong> 
+        <%= f.text_field :requested_date, :class => "datepicker fld" %>
       </div>
       <div class="block100 mart10">
-        <strong class="clearfix">Date souhaitée de rappel</strong> <input type="text" name="date" id="date" placeholder="Date"/>
-      </div>
-      <div class="block100 mart10">
-        <strong class="clearfix">Créneaux horaires</strong>
-        <select id="select-drop" name="hours">
-          <option value="9h00 - 9h30">9h00 - 9h30</option>
-          <option value="9h30 - 10h00">9h30 - 10h00</option>
-          <option value="10h00 - 10h30">10h00 - 10h30</option>
-          <option value="10h30 - 11h00">10h30 - 11h00</option>
-          <option value="11h00 - 11h30">11h00 - 11h30</option>
-          <option value="11h30 - 12h00">11h30 - 12h00</option>
-          <option value="12h00 - 12h30">12h00 - 12h30</option>
-          <option value="12h30 - 13h00">12h30 - 13h00</option>
-          <option value="13h00 - 13h30">13h00 - 13h30</option>
-          <option value="13h30 - 14h00">13h30 - 14h00</option>
-          <option value="14h00 - 14h30">14h00 - 14h30</option>
-          <option value="14h30 - 15h00">14h30 - 15h00</option>
-          <option value="15h00 - 15h30">15h00 - 15h30</option>
-          <option value="15h30 - 16h00">15h30 - 16h00</option>
-          <option value="16h00 - 16h30">16h00 - 16h30</option>
-          <option value="16h30 - 17h00">16h30 - 17h00</option>
-        </select>
-        <div class="drop-holder"></div>
+        <strongclass="clearfix">  <%= t '.time_slots' %> </strong>
+        <div><%= f.select :hour, PhoneRequest.time_slots %></div>
       </div>
       <div class="block100 mart20">
-        <a href="index.php%3Fpage=contact.html#" class="btn green-bck OpenSansCondensed f23" id="service-submit-form">Confirmer</a>
+        <button type="submit" class="btn green-bck OpenSansCondensed f23">
+          <%= t '.contact' %>
+        </button>
       </div>
-    </form>
   </div>
+  <% end%>
 </div>
