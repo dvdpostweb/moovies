@@ -22,7 +22,7 @@
           <%= hidden_field_tag :sort, params[:sort] %>
           <%= hidden_field_tag :belgium, params[:belgium] %>
           <%= link_to t("products.left_column.#{Moovies.packages.invert[(params[:kind] == :adult ? 5 : 2)]}"), products_short_path(:package => Moovies.packages.invert[(params[:kind] == :adult ? 5 : 2)]), :id => "button-la-carte", :class => "tvod packages #{params[:package] == Moovies.packages.invert[(params[:kind] == :adult ? 5 : 2)] ? 'current' : ''} btn #{params[:kind] == :adult ? "light-violet-bck" : "light-blue-bck"} OpenSansCondensed f23 block100" %>
-          <%= link_to t("products.left_column.#{Moovies.packages.invert[(params[:kind] == :adult ? 4 : 1)]}"), products_short_path(:package => Moovies.packages.invert[(params[:kind] == :adult ? 4 : 1)]), :id => "#{params[:kind] == :adult ? "button-la-unlmited-adult" : "button-la-unlmited"}", :class => "svod packages #{params[:package] == Moovies.packages.invert[(params[:kind] == :adult ? 4 : 1)] ? 'current' : ''} btn OpenSansCondensed f23 block100" %>
+          <%= link_to t("products.left_column.#{Moovies.packages.invert[(params[:kind] == :adult ? 4 : 1)]}"), products_short_path(:package => Moovies.packages.invert[(params[:kind] == :adult ? 4 : 1)]), :id => "#{params[:kind] == :adult ? "button-18-plus" : "button-la-unlmited"}", :class => "svod packages #{params[:package] == Moovies.packages.invert[(params[:kind] == :adult ? 4 : 1)] ? 'current' : ''} btn OpenSansCondensed f23 block100" %>
           <%= link_to t("products.left_column.adult"), products_short_path(:kind => :adult), :id => "button-18-plus", :class => "adult packages btn violet OpenSansCondensed f23 block100" if params[:kind] != :adult %>
         </div>
 

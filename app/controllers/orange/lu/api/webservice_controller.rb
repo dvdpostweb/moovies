@@ -94,8 +94,6 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
       customer = Customer.new
       customer.email = "#{params[:sms_number]}@orange.lu"
       customer.customers_telephone = params[:sms_number]
-      customer.step = 100
-      customer.customers_abo = 1
       if customer.save(validate: false)
         activation_code = OrangeSmsActivationCode.new
         activation_code.customers_id = customer.customers_id
@@ -178,6 +176,9 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
       if sms_code.present?
         customer = Customer.find(sms_code.customers_id)
         if customer.present?
+          customer.step = 100
+          customer.customers_abo = 1
+          if customer.save(validate: false)
             orange_purchase_wcf_service = HTTParty.get("https://www.plush.be:2355/wcfservice/http/OrangePurchase?customersId=#{customer.customers_id}&mobileNumber=#{params[:plush_phone_number]}&price=0&products_id=#{product_id_from_params}&message=ppv2&payment_id=0")
             if orange_purchase_wcf_service.parsed_response == "TRUE"
               if streaming.present?
@@ -188,6 +189,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
               sign_in(customer)
               render json: {status: orange_purchase_wcf_service}
             end
+          end
         end
       else
         render json: {status: "mobile_number_format_error"}

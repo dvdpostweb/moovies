@@ -1,8 +1,6 @@
 <div class="block100 slide-buttons mart15">
-  <% unless cookies[:display] == "list" || params[:controller] == "search" %>
     <%= link_to(product_trailer_path(:product_id => product.to_param, :source => @source, :response_id => @response_id), :class => 'btn white pull-left dark-gray-bck btn-trailer', remote: true) do %>
         <i class="fa fa-film marr5"></i><%= t('orange_step4_trailer_button') %>
     <% end %>
-  <% end %>
-    <a href="index.html#" class="btn gray-bck pull-right btn-selection"><i class="fa fa-plus marr5"></i>Selection</a>
+    <a href="" class="btn gray-bck pull-right btn-selection"><i class="fa fa-plus marr5"></i>Selection</a>
 </div>

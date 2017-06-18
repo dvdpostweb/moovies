@@ -1,10 +1,4 @@
-/* Ion.RangeSlider, Simple Skin
-// css version 2.0.3
-// © Denis Ineshin, 2014    https://github.com/IonDen
-// ===================================================================================================================*/
 
-/* =====================================================================================================================
-// Skin details */
 
 .irs-line-mid,
 .irs-line-left,
@@ -12,7 +6,6 @@
 .irs-bar,
 .irs-bar-edge,
 .irs-slider {
-    /*background: url(../img/sprite-skin-simple.png) repeat-x;*/
 }
 
 .irs {
