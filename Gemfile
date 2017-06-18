@@ -28,6 +28,7 @@ group :test do
 
 end
 
+
 group :assets do
   gem 'coffee-rails'
   gem 'uglifier'
