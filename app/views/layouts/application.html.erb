@@ -53,8 +53,11 @@
     <% end %>
   </div>
 </div>
+<script
+  src="https://code.jquery.com/jquery-1.12.4.min.js"
+  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+  crossorigin="anonymous"></script>
 <script>
-//// toggle text
 jQuery.fn.extend({
     toggleText: function (a, b) {
         var isClicked = false;
@@ -73,9 +76,24 @@ jQuery.fn.extend({
     }
 });
 
-/// common handlers
+
+
 $(document).ready(function () {
     "use strict"; // Start of use strict
+
+
+    function autoScroll() {
+
+$(window).scroll(function () {
+   if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+     return $.ajax({
+         url: $('.next_page:last').attr('href'),
+         dataType: 'script'
+     });
+   }
+});
+
+}
 
     function mainSidemenuState(state) {
         switch (state) {

@@ -196,19 +196,6 @@ $(document).ready(function () {
 });
 
 
-function autoScroll() {
-
-$(window).scroll(function () {
-   if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-     return $.ajax({
-         url: $('.next_page:last').attr('href'),
-         dataType: 'script'
-     });
-   }
-});
-
-}
-
 function submit_online() {
     if ($('.not_reload').length > 0) {
         if ($('#filter_online_form').attr('action').indexOf('?') > 0) {
