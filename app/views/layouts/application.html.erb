@@ -77,20 +77,6 @@ jQuery.fn.extend({
 $(document).ready(function () {
     "use strict"; // Start of use strict
 
-
-    function autoScroll() {
-
-$(window).scroll(function () {
-   if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-     return $.ajax({
-         url: $('.next_page:last').attr('href'),
-         dataType: 'script'
-     });
-   }
-});
-
-}
-
     function mainSidemenuState(state) {
         switch (state) {
             case 'on':

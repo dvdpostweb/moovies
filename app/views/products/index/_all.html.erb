@@ -27,6 +27,18 @@
 <% end %>
 <% if cookies[:endless] == 'active' %>
 <script>
+  function autoScroll() {
+
+        $(window).scroll(function () {
+        if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+            return $.ajax({
+                url: $('.next_page:last').attr('href'),
+                dataType: 'script'
+            });
+        }
+        });
+
+    }
   autoScroll()
 </script>
 <div id="cat_desc" class="block100 mart15 line-height-20">
