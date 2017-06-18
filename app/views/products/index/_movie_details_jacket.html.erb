@@ -132,3 +132,6 @@
   <a href="" class="position-absolute white-bck pad10 radius2 synopsys-adaptive-open f17 green uppercase no-underline"><i class="fa fa-search-plus f25 marr5"></i>Details
   </a>
 </div>
+<%= render :partial => 'products/index/pagination_scroll', :locals => {:item => @products} %>
+
+<script>$(".products-pagination").hide();</script>

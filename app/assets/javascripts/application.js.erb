@@ -14,13 +14,14 @@
 //= require jquery.form
 //= require jquery.validate
 //= require history
-//= require facebox
+//= require facebox-bootstrap
 //= require fancybox
 
 
 
 
 window.onload = function () {
+    $("#pagination").hide();
     if (typeof(Storage) !== "undefined") {
         if (gon && gon.current_customer === null && localStorage.getItem("plush_temporary_email") !== null) {
             $.ajax({

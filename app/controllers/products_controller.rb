@@ -94,11 +94,14 @@ class ProductsController < ApplicationController
     @target = cookies[:endless] == 'deactive' ?  '_self' : '_blank'
     @carousels = Landing.hit.by_language(I18n.locale).not_expirated
 
-    #if params[:endless]
-    #  cookies.permanent[:endless] = params[:endless]
-    #  cookies.permanent[:pagin] = "pagin"
-    #  gon.pagin = "pagin"
-    #end
+    if cookies[:endless] == 'active'
+      gon.endless = "endless"
+    end
+
+    if params[:endless]
+      cookies.permanent[:endless] = params[:endless]
+      #gon.endless = "endless"
+    end
     if params[:display]
       cookies.permanent[:display] = params[:display]
     end
@@ -202,7 +205,7 @@ class ProductsController < ApplicationController
       trailers = Rails.env == "production" ? @product.streaming_trailers.available : @product.streaming_trailers.available_beta
       trailer = StreamingTrailer.get_best_version(@product.imdb_id, I18n.locale)
     else
-        trailers = @product.trailers.by_language(I18n.locale).paginate(:per_page => 1, :page => params[:trailer_page])
+        #trailers = @product.trailers.by_language(I18n.locale).paginate(:per_page => 1, :page => params[:trailer_page])
     end
     if request.xhr?
       if trailer.class.name == 'StreamingTrailer'

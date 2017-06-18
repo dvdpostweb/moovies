@@ -73,4 +73,8 @@
     </div>
   </div>
 
+  <%= render :partial => 'products/index/pagination_scroll', :locals => {:item => @products} %>
+
+<script>$(".products-pagination").hide();</script>
+
 

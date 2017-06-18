@@ -2,191 +2,7 @@ $(document).ready(function () {
 
     History = window.History;
 
-    //$('#film-details').delegate('.season .details, .season .arrow', 'click', function () {
-    ///    $(this).parent().children('.episodes').toggle('slow')
-    //    $(this).parent().children('.arrow').toggleClass('arrow-down arrow-right')
-    //
-    //});
-
-    //$("body").delegate("#c-members #pagination a", "click", function () {
-    //    html_item = $(this).parent();
-    //    content = html_item.html();
-    //    html_item.html("<div style='height:24px; margin:10px 0 0 0'><img src='/assets/ajax-loader.gif'/></div>");
-    //    set_page(this.href)
-    //    $.ajax({
-    //        url: this.href,
-    //        dataType: 'html',
-    //        type: 'GET',
-    //        data: {
-    //          'pagination': 1
-    //        },
-    //        success: function (data) {
-    //            $('#c-members').html(data);
-    //        },
-    //        error: function () {
-    //            html_item.html(content);
-    //        }
-    //    });
-    //    return false;
-    //});
-
-    //$("body").delegate("#c-members #sort", "change", function () {
-    //    loader = 'ajax-loader.gif';
-    //    $(this).parent().ajaxSubmit({success: show_review, dataType: 'html'});
-    //    html_item = $("#c-members");
-    //    content = html_item.html();
-    //    $(this).parent().html("<div style='height:22px'><img src='/assets/" + loader + "'/></div>");
-    //    return false; // prevent default behaviour
-    //});
-
-    //function show_review(responseText, statusText) {
-    //    if (jQuery.trim(statusText) == "success") {
-    //        $("#c-members").html(responseText);
-    //    }
-    //    else {
-    //        $("#c-members").html(content);
-    //    }
-    //};
-    /* to do */
-    //if (($('#image_5').attr('src') != undefined)) {
-    //    var img = new Image();
-    //    img.onload = function () {
-    //        height_im = this.height
-    //        if (height_im <= 3) {
-    //            $('#thumbs-wrap').hide()
-    //        }
-    //    }
-    //    img.src = $('#image_1').attr('src');
-    //}
-
-    //$('#uninterested a').click(function () {
-    //
-    //});
-
-    //$('.normal .preview_box img').click(function () {
-    //    url = $(this).attr('src')
-    //    url = url.replace('screenshots/small/', 'screenshots/big/')
-    //    open_image(url)
-    //});
-
-    //$(window).keydown(function (e) {
-    //    if ($('#big_image').is(":visible")) {
-    //        switch (e.keyCode) {
-    //            case 37: // flèche gauche
-    //                next_prev('minder')
-    //                break;
-    //            case 39: // flèche droite
-    //                next_prev('plus')
-    //                break;
-    //        }
-    //    }
-    //});
-
-    //$('body').delegate('.next_button, .prev_button', "click", function () {
-    //    if ($(this).hasClass('next_button')) {
-    //        next_prev('plus')
-    //    }
-    //    else {
-    //        next_prev('minder')
-    //    }
-    //});
-
-    //function next_prev(operation) {
-    //    url = $('#big_image').attr('src')
-    //    l = url.length
-    //    ext = url.substr((l - 5), 5)
-    //    n = url.substr((l - 5), 1)
-    //    if (operation == 'plus') {
-    //        n = parseInt(n) + 1
-    //    }
-    //    else {
-    //        n = parseInt(n) - 1
-    //    }
-    //    if (n > 6) {
-    //        n = 1
-    //    }
-    //    if (n < 1) {
-    //        n = 6
-    //    }
-    //    url = url.replace(ext, n + '.jpg')
-    //    open_image(url)
-    //}
-
-    //function open_image(url) {
-    //    var img = new Image();
-    //    img.onload = function () {
-    //        height_im = this.height
-    //        width_im = this.width
-    //        if (height_im > 3) {
-    //            img = "<div style='width:" + width_im + "px; height:" + height_im + "px; text-align:center;position:relative;margin: 0 0 15px;'><div class='prev_button' style='height:" + height_im + "px'><div class='image_prev'></div></div><div class='next_button' style='height:" + height_im + "px'><div class='image_next'></div>     </div>    <img src='" + url + "' id='big_image'/></div>"
-    //            jQuery.facebox(img);
-    //
-    //        }
-    //    }
-    //    img.src = url;
-    //    set_page(url)
-    //}
-
-    //$('body').delegate('.streaming_add_list, .streaming_remove_list', "click", function () {
-    //    $(this).parent().ajaxSubmit({dataType: 'script'});
-    //    $(this).parent().html("<div class='load2'><img src='/assets/ajax-loader.gif' /></div>")
-    //    return false; // prevent default behaviour
-    //});
-
-    //endscroll();
-
-
-
-    //$('.menu').on('click', function () {
-    //    if (!$(this).next('.nav').is(':visible')) {
-    //        $('.nav').hide('fast')
-    //        $(this).next('.nav').show('fast')
-    //    }
-    //});
-
-    //endscroll();
-
     if ($('#online #filters').html()) {
-        //$('#products_index').delegate('.cover', 'mouseenter', function () {
-        //    if ($("#ca-container").length > 0) {
-        //        $(this).parent().find('.tooltips').css('margin-top', -193 - $(window).scrollTop());
-        //    }
-        //    $(this).parent().find('.tooltips').delay(400).fadeIn('fast');
-        //    content = $(this).parent().find('.tooltips_other')
-        //    if (content.html() == 'loading') {
-        //        $.ajax({
-        //            url: $(this).attr('data-url'),
-        //            dataType: 'html',
-        //            type: 'GET',
-        //            data: {},
-        //            success: function (data) {
-        //                res = data.split('|||')
-        //
-        //                $(res[0]).html(res[1]);
-        //            },
-        //            error: function () {
-        //                content.html('error');
-        //            }
-        //        });
-        //    }
-        //});
-
-        //$('#products_index').delegate('.cover', 'mouseleave', function () {
-        //    $(this).parent().find('.tooltips').stop(true, true)
-        //    $(this).parent().find('.tooltips').delay(200).fadeOut(200);
-
-        //});
-
-        //$('#products_index').delegate('.tooltips', 'mouseenter', function () {
-        //    if ($('#ca-container').length > 0) {
-        //        $(this).css('margin-top', -193 - $(window).scrollTop());
-        //    }
-        //    $(this).stop(true, true)
-        //    $(this).fadeIn('fast');
-        //});
-        //$('#products_index').delegate('.tooltips', 'mouseleave', function () {
-        //    $(this).fadeOut(200);
-        //});
 
 
         load_form();
@@ -204,14 +20,6 @@ $(document).ready(function () {
             submit_online();
             return false;
         });
-
-        // MAIN TOP BUTTONS END !!!
-
-        //$('#products_index, #film-details, #categories, #studios').delegate(".links", "change", function () {
-        //    submit_online()
-        //});
-
-        // CATEGORIES START !!!
 
         $(".icheckbox,.iradio").iCheck({
             checkboxClass: 'icheckbox_minimal-grey',
@@ -387,50 +195,19 @@ $(document).ready(function () {
     })
 });
 
-//function ajax_pagination(path) {
-//
-//    $('.loading_bar').show()
-//    $.ajax({url: path, dataType: 'script'});
-//    History.pushState(null, null, path);
-//
-//}
 
+function autoScroll() {
 
-//function endscroll()
-//{
-  //$('#toTop').on('click', function(){
-  //   goToByScroll('top')
-  // });
- // if ($('.products-pagination.active').length) {
- //   $(window).scroll(function() {
- //      var path;
- //      path = $('.next_page').attr('href');
+$(window).scroll(function () {
+   if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+     return $.ajax({
+         url: $('.next_page:last').attr('href'),
+         dataType: 'script'
+     });
+   }
+});
 
-       //console.log($('.next_page').attr('href'))
-
-       //if ($(window).scrollTop() < 500)
-       //{
-        // $('#toTop').fadeOut('slow')
-       //}
-       //else
-       //{
-        // $('#toTop').fadeIn('slow')
-      // }
- //      if (path && $(window).scrollTop() + $(window).height() >= $(document).height()) {
- //        //set_page(path)
-         //$('#pagination').html("<img src='/assets/loading.gif' />");
-         //return $.ajax({url: path, dataType: 'script'});
- //        var paramsString = "page"
- //        var searchParams = new URLSearchParams(paramsString);
- //        console.log(searchParams);
- //      }
- //   });
- // }
-//}
-
-//function set_page(url) {
-//
-//}
+}
 
 function submit_online() {
     if ($('.not_reload').length > 0) {
@@ -446,20 +223,6 @@ function submit_online() {
         $('#filter_online_form').submit();
     }
 }
-
-//$(window).scroll(function () {
-//   if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-     //alert('OKINI AJAX!!!');
-     //$("#pag, #desc").hide();
-     //console.log($('.next_page').attr('href'));
-//     $.ajax({
-//         url: $('.next_page').attr('href'),
-//         dataType: 'script'
-//     });
-
-     //$.ajax({url: path, dataType: 'script'});
-//   }
-//});
 
 function load_form() {
 
@@ -494,9 +257,3 @@ function load_form() {
         }
     });
 }
-
-//$(window).scroll(function () {
-//    var $this = $(this);
-//    $('.ca-wrapper .tooltips:visible').css('margin-top', -193 - $this.scrollTop());
-    /*$('#box2').css('left', 20 - $this.scrollLeft());*/
-//});

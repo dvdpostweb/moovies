@@ -2,10 +2,10 @@
 
 <div class="block100 thinrgray-bck radius2 padlr10 switch-view-panel">
   <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-    <%= link_to params.merge(:display => 'jacket', :kind => (params[:kind] == :normal ? nil : params[:kind]), :page => nil), :class => 'dark-blue radius2', :remote => true do %>
+    <%= link_to params.merge(:display => 'jacket', :kind => (params[:kind] == :normal ? nil : params[:kind]), :page => nil), :class => 'dark-blue radius2' do %>
         <i class="fa fa-th-large f15"></i>
     <% end %>
-    <%= link_to params.merge(:display => 'list', :kind => (params[:kind] == :normal ? nil : params[:kind]), :page => nil), :class => 'dark-blue radius2 marl10' , :remote => true do %>
+    <%= link_to params.merge(:display => 'list', :kind => (params[:kind] == :normal ? nil : params[:kind]), :page => nil), :class => 'dark-blue radius2 marl10' do %>
         <i class="fa fa-list f15"></i>
     <% end %>
     <% if cookies[:endless] == 'deactive' %>
@@ -17,18 +17,28 @@
   <%= render :partial => 'products/index/sorting' %>
 </div>
 <% if cookies[:display] == 'list' %>
-    <div id="list-view">
+    <div id="list-view" class="appended">
         <%= render :partial => 'products/index/movie_details', :collection => @products, :locals => {:target => @target} %>
     </div>
 <% else %>
-    <div id="grid-view">
+    <div id="grid-view" class="appended">
          <%= render :partial => 'products/index/movie_details_jacket', :collection => @products, :locals => {:target => @target} %>
     </div>
-
 <% end %>
-<div class="block100 mart30 pagin-bar">
-    <%= render :partial => 'products/index/pagination', :locals => {:item => @products} %>
-</div>
-<div class="block100 mart15 line-height-20">
+<% if cookies[:endless] == 'active' %>
+<script>
+  autoScroll()
+</script>
+<div id="cat_desc" class="block100 mart15 line-height-20">
   <%= t(products_index_description, :link_abo => info_path(:page_name => t('routes.infos.params.vod')), :link_svod => (params[:kind] == :adult ? products_short_path(:package => Moovies.packages.invert[4]) : products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}"))), :link_tvod => (params[:kind] ==  :adult ? products_short_path(:package => Moovies.packages.invert[5]) : products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[2]}")))).html_safe %>
 </div>
+<% else %>
+<div id="cat_desc" class="block100 mart15 line-height-20">
+  <%= t(products_index_description, :link_abo => info_path(:page_name => t('routes.infos.params.vod')), :link_svod => (params[:kind] == :adult ? products_short_path(:package => Moovies.packages.invert[4]) : products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}"))), :link_tvod => (params[:kind] ==  :adult ? products_short_path(:package => Moovies.packages.invert[5]) : products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[2]}")))).html_safe %>
+</div>
+<div id="pagination_default" class="block100 mart30 pagin-bar">
+    <%= render :partial => 'products/index/pagination', :locals => {:item => @products} %>
+</div>
+<% end %>
+
+
