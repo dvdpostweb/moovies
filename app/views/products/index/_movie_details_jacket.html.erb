@@ -68,14 +68,14 @@
               <% if customer_signed_in? %>
                   <% if current_customer.tvod_only? %>
                       <% if (current_customer.abo_type_id == 6 && current_customer.activation_discount_code_type == "A") && (Mobistar.find_by_activation_id(current_customer.activation_discount_code_id) && current_customer.tvod_free > 0) %>
-                          <div class="block100 slide-footer <%= params[:kind] == :adult ? "violet-bck" : "#{product.svod? ? "green-bck" : "blue-bck"}" %> padtb15 mart10 text-center">
+                          <div class="block100 slide-footer <%= params[:kind] == :adult ? "violet-bck" : "#{product.svod? ? "blue-bck" : "green-bck"}" %> padtb15 mart10 text-center">
                             <%= link_to info_path(:page_name => t('routes.infos.params.alacarte')), :class => "underline f18 dark-gray" do %>
                                 <%= t('products.show.product.popup4').html_safe %>
                             <% end %>
                           </div>
                       <% else %>
                           <% if product.svod? %>
-                              <div class="block100 slide-footer <%= params[:kind] == :adult ? "violet-bck" : "blue-bck" %> padtb15 mart10 text-center">
+                              <div class="block100 slide-footer <%= params[:kind] == :adult ? "violet-bck" : "#{product.svod? ? "blue-bck" : "green-bck"}" %> padtb15 mart10 text-center">
                                 <%= link_to info_path(:page_name => t('routes.infos.params.unlimited')), :class => "underline f18 dark-gray" do %>
                                     <%= t('products.show.product.popup9').html_safe %>
                                 <% end %>
@@ -85,7 +85,7 @@
                               </div>
                           <% end %>
                           <% if product.tvod? %>
-                              <div class="block100 slide-footer <%= params[:kind] == :adult ? "violet-bck" : "green-bck" %> padtb15 mart10 text-center">
+                              <div class="block100 slide-footer <%= params[:kind] == :adult ? "violet-bck" : product.svod? ? "blue-bck" : "green-bck" %> padtb15 mart10 text-center">
                                 <%= link_to info_path(:page_name => t('routes.infos.params.alacarte')), :class => "underline f18 dark-gray" do %>
                                     <%= t('products.show.product.popup6').html_safe %>
                                 <% end %>
@@ -97,7 +97,7 @@
                           <% end %>
                       <% end %>
                   <% elsif current_customer.plush_la_carte_subscriber? %>
-                      <div class="block100 slide-footer <%= params[:kind] == :adult ? "violet-bck" : "#{product.svod? ? "green-bck" : "blue-bck"}" %> padtb15 mart10 text-center">
+                      <div class="block100 slide-footer <%= params[:kind] == :adult ? "violet-bck" : "#{product.svod? ? "blue-bck" : "green-bck"}" %> padtb15 mart10 text-center">
                         <a class="underline f18 dark-gray" onclick='jQuery.facebox("<%= escape_javascript(render(:partial => 'products/tvod_credits_only', :locals => {:product => product, :season_id => product.season_id, :episode_id => product.episode_id, :source => @source})) %>");'><%= t('products.show.product.popup4').html_safe %></a>
                       </div>
                   <% end %>
@@ -113,7 +113,7 @@
                       </div>
                   <% end %>
                   <% if product.tvod? %>
-                      <div class="block100 slide-footer <%= params[:kind] == :adult ? "violet-bck" : "blue-bck" %> padtb15 mart10 text-center">
+                      <div class="block100 slide-footer <%= params[:kind] == :adult ? "violet-bck" : "#{product.svod? ? "blue-bck" : "green-bck"}" %> padtb15 mart10 text-center">
                         <%= link_to info_path(:page_name => t('routes.infos.params.alacarte')), :class => "underline f18 dark-gray" do %>
                             <%= t('products.show.product.popup6').html_safe %></u></label>
                         <% end %>
