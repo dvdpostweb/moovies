@@ -94,6 +94,10 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
       customer = Customer.new
       customer.email = "#{params[:sms_number]}@orange.lu"
       customer.customers_telephone = params[:sms_number]
+      customer.customers_registration_step = 100
+      customer.customers_abo = 1
+      customer.customers_abo_type = 6
+      customer.customers_next_abo_type = 6
       if customer.save(validate: false)
         activation_code = OrangeSmsActivationCode.new
         activation_code.customers_id = customer.customers_id
