@@ -91,31 +91,44 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
   def orange_register
     if request.xhr?
       product_id_from_params = params[:products_id].blank? ? 0 : params[:products_id]
+      discount = Discount.by_name(params[:code]).available.first
+      product = Product.find_by_products_id(params[:products_id])
       customer = Customer.new
       customer.email = "#{params[:sms_number]}@orange.lu"
       customer.customers_telephone = params[:sms_number]
-      if product_id_from_params == 1 || product_id_from_params == 5 || product_id_from_params == 7 || product_id_from_params == 8 || product_id_from_params == 9
+      if discount.present?
         customer.customers_registration_step = 33
 		    customer.customers_abo = 1
-		    customer.customers_abo_type = product_id_from_params
-		    customer.customers_next_abo_type = product_id_from_params
+		    customer.customers_abo_type = discount.listing_products_allowed
+		    customer.customers_next_abo_type = discount.next_abo_type
 		    customer.activation_discount_code_type = 'D'
-      else   
+        if customer.save(validate: false)
+          activation_code = OrangeSmsActivationCode.new
+          activation_code.customers_id = customer.customers_id
+          activation_code.phone_number = params[:sms_number]
+          activation_code.sms_authentification_code = SecureRandom.hex(2)
+          if activation_code.save(validate: false)
+            orange_is_eligable_wcf_service = HTTParty.get("https://www.plush.be:2355/WcfService/http/OrangeIsEligable?customersId=#{customer.customers_id}&mobileNumber=#{params[:sms_number]}&SMSCodeMessage=#{puts t("orange.sms_code.message")}#{activation_code.sms_authentification_code}&products_id=#{product_id_from_params}")
+            render json: {status: orange_is_eligable_wcf_service, sms_code: "#{t("orange.sms_code.message")} #{activation_code.sms_authentification_code}", phone_number: activation_code.phone_number}
+          end
+        end
+      elsif product.present?   
         customer.customers_registration_step = 100
         customer.customers_abo = 1
         customer.customers_abo_type = 6
         customer.customers_next_abo_type = 6
-      end
-      if customer.save(validate: false)
-        activation_code = OrangeSmsActivationCode.new
-        activation_code.customers_id = customer.customers_id
-        activation_code.phone_number = params[:sms_number]
-        activation_code.sms_authentification_code = SecureRandom.hex(2)
-        if activation_code.save(validate: false)
-          orange_is_eligable_wcf_service = HTTParty.get("https://www.plush.be:2355/WcfService/http/OrangeIsEligable?customersId=#{customer.customers_id}&mobileNumber=#{params[:sms_number]}&SMSCodeMessage=#{puts t("orange.sms_code.message")}#{activation_code.sms_authentification_code}&products_id=#{product_id_from_params}")
-          render json: {status: orange_is_eligable_wcf_service, sms_code: "#{t("orange.sms_code.message")} #{activation_code.sms_authentification_code}", phone_number: activation_code.phone_number}
+        if customer.save(validate: false)
+          activation_code = OrangeSmsActivationCode.new
+          activation_code.customers_id = customer.customers_id
+          activation_code.phone_number = params[:sms_number]
+          activation_code.sms_authentification_code = SecureRandom.hex(2)
+          if activation_code.save(validate: false)
+            orange_is_eligable_wcf_service = HTTParty.get("https://www.plush.be:2355/WcfService/http/OrangeIsEligable?customersId=#{customer.customers_id}&mobileNumber=#{params[:sms_number]}&SMSCodeMessage=#{puts t("orange.sms_code.message")}#{activation_code.sms_authentification_code}&products_id=#{product_id_from_params}")
+            render json: {status: orange_is_eligable_wcf_service, sms_code: "#{t("orange.sms_code.message")} #{activation_code.sms_authentification_code}", phone_number: activation_code.phone_number}
+          end
         end
       end
+      
     else
       raise ActionController::RoutingError.new('Not Found')
     end

@@ -43,7 +43,8 @@ function eligibilityServiceOnlyLogin() {
                 url: '/orange/lu/api/orange_is_eligable',
                 data: {
                     'sms_number': $.trim($("#sms_number").val()),
-                    'products_id': gon.products_id
+                    'products_id': gon.products_id,
+                    'code': gon.code
                 },
                 dataType: 'json',
                 success: function (response) {
@@ -126,7 +127,8 @@ function eligibilityServiceOnlyRegister() {
                 url: '/orange/lu/api/orange_register',
                 data: {
                     'sms_number': $.trim($("#sms_number_register").val()),
-                    'products_id': gon.products_id
+                    'products_id': gon.products_id,
+                    'code': gon.code
                 },
                 dataType: 'json',
                 success: function (response) {
