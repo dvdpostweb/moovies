@@ -18,24 +18,18 @@
 <% if cookies[:display] == 'list' %>
     <div id="list-view" class="appended">
         <%= render :partial => 'products/index/movie_details', :collection => @products, :locals => {:target => @target} %>
-        <div id="pagination_default" class="block100 mart30 pagin-bar">
-          <%= render :partial => 'products/index/pagination', :locals => {:item => @products} %>
-        </div>
     </div>
 <% else %>
     <div id="grid-view" class="appended">
          <%= render :partial => 'products/index/movie_details_jacket', :collection => @products, :locals => {:target => @target} %>
     </div>
-    <div id="pagination_default" class="block100 mart30 pagin-bar">
-           <%= render :partial => 'products/index/pagination', :locals => {:item => @products} %>
-        </div>
 <% end %>
 <% if cookies[:endless] == 'active' %>
     <script>
     function autoScroll() {
         $(window).scroll(function () {
             if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-                $("#pagination_default").hide();
+                $("#pagination_default").remove();
                 return $.ajax({
                     url: $('.next_page:last').attr('href'),
                     dataType: 'script'
@@ -46,6 +40,13 @@
         }
     autoScroll()
     </script>
+<% else %>
+  <div id="pagination_default" class="block100 mart30 pagin-bar">
+    <%= render :partial => 'products/index/pagination', :locals => {:item => @products} %>
+  </div>
+  <div class="block100 mart15 line-height-20">
+    <%= t(products_index_description, :link_abo => info_path(:page_name => t('routes.infos.params.vod')), :link_svod => (params[:kind] == :adult ? products_short_path(:package => Moovies.packages.invert[4]) : products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}"))), :link_tvod => (params[:kind] ==  :adult ? products_short_path(:package => Moovies.packages.invert[5]) : products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[2]}")))).html_safe %>
+  </div>
 <% end %>
 
 
