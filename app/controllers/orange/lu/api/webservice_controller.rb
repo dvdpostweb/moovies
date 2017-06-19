@@ -102,6 +102,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
 		    customer.customers_abo_type = discount.listing_products_allowed
 		    customer.customers_next_abo_type = discount.next_abo_type
 		    customer.activation_discount_code_type = 'D'
+        customer.tvod_free = discount.tvod_free
         if customer.save(validate: false)
           activation_code = OrangeSmsActivationCode.new
           activation_code.customers_id = customer.customers_id
