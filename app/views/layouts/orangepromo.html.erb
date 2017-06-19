@@ -1,119 +1,67 @@
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+<meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" CONTENT="noindex, nofollow">
-  <title>Plush - Orange</title>
+  <meta name="robots" CONTENT="index, follow">
+  <meta http-equiv="content-language" content="<%= I18n.locale %>"/>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+  <meta name="description" content="<%= @meta_description.blank? ? '' : @meta_description %>"/>
+  <title>Promo Plush Orange</title>
+  <%= include_gon(namespace: 'Plush') %>
+  <%= Gon::Base.render_data %>
+  <% Gon.global.current_customer = current_customer if !customer_signed_in? %>
   <%= stylesheet_link_tag "application", :media => "all" %>
+  <style>
+  #code-error {
+      color: #94C951;
+  }
+  </style>
   <link rel="icon" type="image/x-icon" href="<%= asset_path("template/favicon.ico") %>">
   <link rel="icon" type="image/png" href="<%= asset_path("template/favicon.ico") %>">
   <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<%= asset_path("template/favicon114x114.png") %>">
   <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<%= asset_path("template/favicon72x72.png") %>">
   <link rel="apple-touch-icon-precomposed" href="<%= asset_path("template/favicon57x57.png") %>">
-  <%= include_gon(namespace: 'Plush') %>
-  <%= Gon::Base.render_data %>
   <%= javascript_include_tag "application" %>
 </head>
 <body>
+<!--/PAGE CANAVAS-->
 <div class="canavas" id="">
-  <div id="overlay"></div>
-  <div id="on-top" class="pad10 radius4 dark-gray-bck">
-    <i class="fa fa-angle-up f30 light-gray"></i>
-  </div>
-  <div class="side-menu box-shadow">
-    <div class="side-menu-close f33"></div>
-    <div class="side-menu-login mart10 block100"></div>
-    <div class="side-menu-nav mart15 block100"></div>
-    <div class="side-menu-search mart15"></div>
-  </div>
-  <div class="wrap">
-    <nav id="mainNav" class="navbar navbar-default white-bck promotion-top">
 
-      <div class="navbar-header block100 padr20">
-        <a class="navbar-brand" href="<%= root_localize_path %>"><%= image_tag "template/plush-logo-trans.png" %></a>
-        <a class="navbar-brand pull-right" href="http://www.mobistar.be/" target="_blank"><%= image_tag "template/orange-logo.png" %></a>
-      </div>
-    </nav>
-    <%= yield %>
-  </div>
-
-</div>
-
-
-
-    <script>
-    $(window).load(function(){
-        $(".icheckbox,.iradio").iCheck({
-          checkboxClass: 'icheckbox_minimal-grey',
-          radioClass: 'iradio_minimal-grey'    
-        });
-    });
     
+    <!--OVERLAY MASK-->
+    <div id="overlay"></div>
+    <!--/OVERLAY MASK-->
 
+    <!--SLIDE PAGE ON TOP-->
+    <div id="on-top" class="pad10 radius4 dark-gray-bck">
+        <i class="fa fa-angle-up f30 light-gray"></i>
+    </div>
+    <!--/SLIDE PAGE ONTOP-->
 
-    $('#telno').click(function() {
-        window.location.href = gon.root_localize_path;
-    });
+    <!--ADAPTIVE SLIDE MAIN MENU-->
+    <div class="side-menu box-shadow">
+        <div class="side-menu-close f33"></div>
+        <div class="side-menu-login mart10 block100"></div>
+        <div class="side-menu-nav mart15 block100"></div>
+        <div class="side-menu-search mart15"></div>
+    </div>
+    <!--/ADAPTIVE SLIDE MAIN MENU-->
 
-        $(document).ready(function () {
-    jQuery.validator.addMethod("phone", function (phone_number, element) {
-        phone_number = phone_number.replace(/\s+/g, "");
-        return this.optional(element) || phone_number.length > 9 &&
-            phone_number.match(/^[0-9-+]+$/);
-    }, gon.orange_invalid_phone_number_format);
-    $("#form").validate({
-        rules: {
-            "promo-code": {
-                required: true,
-                phone: true 
-            },
-            "client-orange-skip": {
-                required: true,
-            }
-        },
-        messages: {
-                "promo-code": {
-                    required: telephoneValidationMessage(),
-                    remote: gon.orange_invalid_phone_number_format
-                },
-                  "client-orange-skip": {
-                  required: "?"
-                }
-            },
-        highlight: function (element) {
-            $(element).closest('.form-group').addClass('has-error');
-        },
-        unhighlight: function (element) {
-            $(element).closest('.form-group').removeClass('has-error');
-        },
-        errorElement: 'span',
-        errorClass: 'help-block',
-        submitHandler: function (form) {
-            if ($('#telyes').is(':checked')) {
-                localStorage.setItem("plush_phone_number", $("#promo-code").val());
-                //window.location.href = gon.root_localize_path;
-                alert("123");
-            } //else {
-              //  jQuery.facebox("<div class=\"alert alert-danger\">" +
-              //      "<strong>"+gon.orange_promotion_option+"</strong>" +
-              //      "</div>");
-            //}
-        }
-    });
-});
-
-function telephoneValidationMessage() {
-    if (gon.locale == "fr") {
-        return "Téléphone est nécessaire."
-    } else if (gon.locale == "nl") {
-        return "Telefoon is verplicht."
-    } else if (gon.locale == "en") {
-        return "Telephone is required."
-    }
-}
-    </script>
-
+    <!--WRAP-->
+    <div class="wrap">
+        <!--MAIN NAVIGATION-->
+<nav id="mainNav" class="navbar navbar-default white-bck promotion-top">
+    <!--LOGO-->
+    <div class="navbar-header block100 padr20">
+        <a class="navbar-brand" href="index.html"><%= image_tag "template/plush-logo-trans.png" %></a>
+        <a class="navbar-brand pull-right" href="http://www.mobistar.be/" target="_blank"><%= image_tag "template/orange-logo.png" %></a>
+    </div>
+    <!--/LOGO-->
+</nav>
+<!--/MAIN NAVIGATION-->
+<%= yield %>
+<!--SCRIPTS-->
 <script>
 jQuery.fn.extend({
     toggleText: function (a, b) {
@@ -408,6 +356,82 @@ $(document).ready(function () {
 
 });
 </script>
+<script>
 
+    $(document).ready(function () {
+        var code = $('input#promo-code');
+
+        function code_check() {
+            setTimeout(function () {
+                var code_val = code.val();
+                $('.error-code').removeClass('display-block');
+                code.removeClass('red-google-bck');
+                if (code.length !== '' && code_val.length < 3) {
+                    code.addClass('red-google-bck');
+                    $('.error-code').addClass('display-block');
+                }
+            }, 650);
+        }
+
+        code.on('blur', function () {
+            $('.error-code').removeClass('display-block');
+            code.removeClass('red-google-bck');
+        });
+        code.on('keyup paste', code_check); // ovde umesto funkcije code_check mozes da roknes ajax koji proverava da li je kod validan
+    });
+</script>
+<script>
+  $(document).ready(function () {
+
+      $("#form_step").validate({
+        rules: {
+          'code': {
+            required: true,
+            remote: "/api/v1/check_presence_of_activation_code_orange"
+          }
+        },
+        messages: {
+          'code': {
+            required: required_message(),
+            remote: remote_message()
+          }
+        },
+        highlight: function (element) {
+            $(element).closest('.form-group').addClass('has-error');
+        },
+        unhighlight: function (element) {
+            $(element).closest('.form-group').removeClass('has-error');
+        },
+        errorElement: 'span',
+        errorClass: 'help-block',
+      });
+
+  });
+
+  function required_message() {
+    if (gon.locale == "fr") {
+      return "Code d'activation est nécessaire."
+    } else if (gon.locale == "nl") {
+      return "Activatie code is verplicht."
+    } else if (gon.locale == "en") {
+      return "Activation code is required."
+    }
+  }
+
+  function remote_message() {
+    if (gon.locale == "fr") {
+      return " Le code a déjà été utilisé."
+    } else if (gon.locale == "nl") {
+      return "De code is al gebruikt."
+    } else if (gon.locale == "en") {
+      return "The code has already been used."
+    }
+  }
+
+</script>
+<!--SCRIPTS-->    </div>
+    <!--WRAP-->
+</div>
+<!--/PAGE CANAVAS-->
 </body>
 </html>

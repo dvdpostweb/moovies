@@ -1,1 +1,108 @@
-<p>sdfsdfsdfsdfsdfsdfsdf</p>
+<div id="content" class="promotion orange">
+    <div class="container white-bck dark-gray padb20">
+        <h1 class="OpenSansCondensed text-center pad0"><%= t('orange_promo_h1').html_safe %></h1>
+        <div class="promotion-codebox white-bck overflow-hidden">
+            <h2 class="OpenSansCondensed text-center"><%= t('orange_promo_title').html_safe %></h2>
+            <%= form_tag promotion_canva_path(:id => params[:id]), :id => 'form_step' do %>
+            <div class="block100 mart10 text-center">
+                <p class="mart10"><%= t('orange_promo_subtitle').html_safe %></p>
+                <%= text_field_tag(:code, @code, :class => 'text-center', placeholder: "Code") %>
+                <p class="error-code red-google f12">Error code</p>
+            </div>
+            <div class="block100 mart15">
+                <div class="codebox-left">
+                    <h3 class="f20"><%= t('orange_promo_1') %></h3>
+                    <ul>
+                        <li><i class="fa fa-shopping-cart f18 marr5"></i><%= t('orange_promo_3') %></li>
+                        <li><i class="fa fa-gift f18 marr5"></i><%= t('orange_promo_4') %></li>
+                        <li><i class="fa fa-lock f18 marr5"></i><%= t('orange_promo_5') %></li>
+                    </ul>
+                </div>
+
+                <div class="codebox-right">
+                    <h3 class="f20"><%= t('orange_promo_2') %></h3>
+                    <ul>
+                        <li><i class="fa fa-film f18 marr5"></i><%= t('orange_promo_6') %></li>
+                        <li><i class="fa fa-home f18 marr5"></i><%= t('orange_promo_7') %></li>
+                        <li><i class="fa fa-mobile-phone f18 marr5"></i><i class="fa fa-tablet f18 marr5"></i><%= t('orange_promo_8') %></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="block100 text-center mart15">
+            <%= button_tag(class: "btn pad5 green-bck white radius4") do %>
+                  <i class="fa fa-check marr10"></i><%= t('orange_promo_9') %>
+            <% end %>
+            </div>
+            <% end %>
+        </div>
+    </div>
+    <div class="container promotion-catalogue white-bck dark-gray padtb20">
+        <h2 class="OpenSansCondensed pad0 mar0"><%= t('orange_promo_10') %></h2>
+        <p class="f16"><i class="fa fa-square green marr5"></i> <%= t('orange_promo_11') %></p>
+        <ul>
+            <li>
+                <div class="img-cat">
+                    <%= image_tag "template/orange-cat1.jpeg" %>
+                </div>
+
+                <div class="desc-cat f13">
+                    <div class="fa-stack display-inline">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <span class="fa fa-stack-1x fa-inverse fa-plus18"></span>
+                    </div>
+                    <div class="pull-right line-height-15 display-inline">
+                        <%= t('orange_promo_12') %>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="img-cat">
+                    <%= image_tag "template/orange-cat2.jpeg" %>
+                </div>
+
+                <div class="desc-cat f13">
+                    <div class="fa-stack display-inline">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <span class="fa fa-stack-1x fa-inverse fa-plus18"></span>
+                    </div>
+                    <div class="pull-right line-height-15 display-inline">
+                        <%= t('orange_promo_13') %>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="img-cat">
+                    <%= image_tag "template/orange-cat3.gif" %>
+                </div>
+
+                <div class="desc-cat f13">
+                    <div class="fa-stack display-inline">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <span class="fa fa-stack-1x fa-inverse fa-plus18"></span>
+                    </div>
+                    <div class="pull-right line-height-15 display-inline">
+                        <%= t('orange_promo_14') %>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="img-cat">
+                    <%= image_tag "template/orange-cat4.jpeg" %>
+                </div>
+
+                <div class="desc-cat f13">
+                    <div class="fa-stack display-inline">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <span class="fa fa-stack-1x fa-inverse fa-plus18"></span>
+                    </div>
+                    <div class="pull-right line-height-15 display-inline">
+                        <%= t('orange_promo_15') %>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="container bottom padtb15 text-center">
+        <%= image_tag "template/bottom-banner.jpeg", class: "center-block" %>
+    </div>
+</div>

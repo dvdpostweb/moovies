@@ -214,7 +214,12 @@ class PromotionsController < ApplicationController
   private
 
   def chose_layout
-    params[:id] == 'orange' ? 'promotion_orange' : 'promo'
+    case params[:id]
+    when 'orange' then 'orangepromo'
+    else
+    'promo'
+    end 
+    
   end
 
 end
