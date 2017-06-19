@@ -1,5 +1,4 @@
 <%= render :partial => 'layouts/filters_online', :locals => {:selected_countries => @selected_countries, :languages => @languages, :subtitles => @subtitles }%>
-
 <div class="block100 thinrgray-bck radius2 padlr10 switch-view-panel">
   <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
     <%= link_to params.merge(:display => 'jacket', :kind => (params[:kind] == :normal ? nil : params[:kind]), :page => nil), :class => 'dark-blue radius2' do %>
@@ -19,38 +18,34 @@
 <% if cookies[:display] == 'list' %>
     <div id="list-view" class="appended">
         <%= render :partial => 'products/index/movie_details', :collection => @products, :locals => {:target => @target} %>
+        <div id="pagination_default" class="block100 mart30 pagin-bar">
+          <%= render :partial => 'products/index/pagination', :locals => {:item => @products} %>
+        </div>
     </div>
 <% else %>
     <div id="grid-view" class="appended">
          <%= render :partial => 'products/index/movie_details_jacket', :collection => @products, :locals => {:target => @target} %>
     </div>
+    <div id="pagination_default" class="block100 mart30 pagin-bar">
+           <%= render :partial => 'products/index/pagination', :locals => {:item => @products} %>
+        </div>
 <% end %>
 <% if cookies[:endless] == 'active' %>
-<script>
-  function autoScroll() {
-
+    <script>
+    function autoScroll() {
         $(window).scroll(function () {
-        if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-            return $.ajax({
-                url: $('.next_page:last').attr('href'),
-                dataType: 'script'
+            if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+                $("#pagination_default").hide();
+                return $.ajax({
+                    url: $('.next_page:last').attr('href'),
+                    dataType: 'script'
+                });
+            }
             });
-        }
-        });
 
-    }
-  autoScroll()
-</script>
-<div id="cat_desc" class="block100 mart15 line-height-20">
-  <%= t(products_index_description, :link_abo => info_path(:page_name => t('routes.infos.params.vod')), :link_svod => (params[:kind] == :adult ? products_short_path(:package => Moovies.packages.invert[4]) : products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}"))), :link_tvod => (params[:kind] ==  :adult ? products_short_path(:package => Moovies.packages.invert[5]) : products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[2]}")))).html_safe %>
-</div>
-<% else %>
-<div id="cat_desc" class="block100 mart15 line-height-20">
-  <%= t(products_index_description, :link_abo => info_path(:page_name => t('routes.infos.params.vod')), :link_svod => (params[:kind] == :adult ? products_short_path(:package => Moovies.packages.invert[4]) : products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[1]}"))), :link_tvod => (params[:kind] ==  :adult ? products_short_path(:package => Moovies.packages.invert[5]) : products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[2]}")))).html_safe %>
-</div>
-<div id="pagination_default" class="block100 mart30 pagin-bar">
-    <%= render :partial => 'products/index/pagination', :locals => {:item => @products} %>
-</div>
+        }
+    autoScroll()
+    </script>
 <% end %>
 
 
