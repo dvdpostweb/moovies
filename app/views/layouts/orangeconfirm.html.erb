@@ -13,6 +13,8 @@
   <link rel="apple-touch-icon-precomposed" href="<%= asset_path("template/favicon57x57.png") %>">
   <%= include_gon(namespace: 'Plush') %>
   <%= Gon::Base.render_data %>
+  <script>
+  </script>
 </head>
 <body>
 <div class="canavas" id="">
@@ -35,9 +37,19 @@
       </div>
     </nav>
     <%= yield %>
+  </div>
 
-    <%= javascript_include_tag "application" %>
+</div>
+<%= javascript_include_tag "application" %>
     <script>
+    $(window).load(function(){
+        $(".icheckbox,.iradio").iCheck({
+          checkboxClass: 'icheckbox_minimal-grey',
+          radioClass: 'iradio_minimal-grey'    
+        });
+    });
+    
+
 
     $('#telno').click(function() {
         window.location.href = gon.root_localize_path;
@@ -93,8 +105,5 @@ function telephoneValidationMessage() {
     }
 }
     </script>
-  </div>
-
-</div>
 </body>
 </html>
