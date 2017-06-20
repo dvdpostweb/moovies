@@ -59,7 +59,7 @@
         $(document).ready(function () {
     jQuery.validator.addMethod("phone", function (phone_number, element) {
         phone_number = phone_number.replace(/\s+/g, "");
-        return this.optional(element) || phone_number.length > 9 &&
+        return this.optional(element) || phone_number.length > 8 &&
             phone_number.match(/^[0-9-+]+$/);
     }, gon.orange_invalid_phone_number_format);
     $("#form").validate({
@@ -86,7 +86,7 @@
           error.appendTo('#errordiv');
         },
         submitHandler: function (form) {
-          localStorage.setItem("plush_phone_number", $("#promo-code").val());
+          localStorage.setItem("plush_phone_number", $(".input-group-addon").html() + $("#promo-code").val());
           window.location.href = gon.root_localize_path;
         }
     });
