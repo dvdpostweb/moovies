@@ -10,7 +10,7 @@
     </div>
     <% if params[:kind] == :normal %>
         <% cache("normal_products_index_hp_list_top_#{I18n.locale}", :expires_in => 15.minutes) do %>
-        <%= render :partial => 'products/index/hp_list', :locals => {:data => @top, :title => :top, :type => nil, :view_mode => nil, :source => 64, :belgium => nil} if @top.size > 5 && params[:kind] != :adult %>
+          <%= render :partial => 'products/index/hp_list', :locals => {:data => @top, :title => :top, :type => nil, :view_mode => nil, :source => 64, :belgium => nil} if @top.size > 5 && params[:kind] != :adult %>-->
         <% end %>
         <% cache("normal_products_index_hp_list_tvod_soon_#{I18n.locale}", :expires_in => 15.minutes) do %>
         <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_soon, :title => :tvod_soon, :type => :tvod, :view_mode => :soon, :source => 14, :belgium => nil} if @tvod_soon.size > 5 %>
