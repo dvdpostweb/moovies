@@ -4,16 +4,19 @@
       <div id="info1"></div>
       <div id="info2"></div>
       <div class="block100 text-center">
-        <%= image_tag("template/orange-logo.png", :class => "center-block") %>
+        <%= image_tag("orange_logo.jpg", :class => "center-block", with: "75", height: "75") %>
         <div class="col-xs-12" style="height:40px;"></div>
       </div>
       <div id="sms_form">
         <form id="is_eligable">
           <div class="form-group input-group-lg">
-            <input type="text" name="phone-number" id="sms_number" class="form-control" placeholder="Please enter ORANGE phone number">
+            <input type="text" name="phone-number" id="sms_number" class="form-control" placeholder="352661999999">
           </div>
           <div class="block100 text-center mart20">
-            <input type="submit" class="btn block100 orange-bck padlr40 padtb15 white f16 normal" value="Send">
+            <input type="submit" class="btn block100 orange-bck padlr40 padtb15 white f16 normal" value="<%= t('orange_send_button') %>">
+          </div>
+          <div class="block100 text-center mart20">
+            <p><%= t('orange_login_explanation_text_1') %></p>
           </div>
         </form>
         <form id="orange_purchase">
@@ -22,6 +25,9 @@
           </div>
           <div class="block100 text-center mart20">
             <input type="submit" class="btn block100 orange-bck padlr40 padtb15 white f16 normal" value="Send">
+          </div>
+          <div class="block100 text-center mart20">
+            <p><%= t('orange.sms_code.message_info') %></p>
           </div>
         </form>
       </div>
