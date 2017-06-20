@@ -1,5 +1,5 @@
 set :stage, :staging
-set :branch, "master"
+set :branch, "cloud_version"
 set :server_name, "staging.plush.be www.staging.plush.be"
 set :full_app_name, "#{fetch(:application)}_#{fetch(:stage)}"
 server '217.112.190.50', user: 'plush', roles: %w{web app db}, port: 23051, primary: true
