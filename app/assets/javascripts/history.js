@@ -583,9 +583,9 @@ if (typeof JSON !== 'object') {
 		History = window.History = window.History||{}; // Public History Object
 
 	// Check Existence
-	if ( typeof History.initHtml4 !== 'undefined' ) {
-		throw new Error('History.js HTML4 Support has already been loaded...');
-	}
+	//if ( typeof History.initHtml4 !== 'undefined' ) {
+	//	throw new Error('History.js HTML4 Support has already been loaded...');
+	//}
 
 
 	// ========================================================================
