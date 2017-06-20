@@ -28,21 +28,27 @@
     <div class="promotion-codebox white-bck overflow-hidden center-block mart60">
       <form id="form">
         <div class="block100 text-center codebox-img-holder center-block">
-          <%= image_tag "template/orange-logo.png",  class:"center-block img-responsive" %>
+          <%= image_tag "orange_logo.jpg", with: "50", height: "50" %>
         </div>
-        <div class="block100 mart30">
-          <input id="telyes" type="radio" class="iradio" name="client-orange" value="1  <form>"/>&nbsp;&nbsp;<%= t('orange_landing_page_enterphone') %>
+        <style>
+        .onaslov, .green-bck {
+          text-align: center;
+        }
+        </style>
+        <div class="block100 mart30 onaslov">
+          <%= t('orange_landing_page_enterphone') %>
+          <div id="errordiv"></div>
         </div>
         <div class="block100 mart15 text-center">
-          <input type="text" value="" name="promo-code" id="promo-code" class="text-center" placeholder="<%= t('orange_landing_page_phonepretext') %>">
-        </div>
-
-        <div class="block100 mart15">
-          <input id="telno" type="radio" class="iradio" name="client-orange-skip" value="1"/>&nbsp;&nbsp;<%= t('orange_landing_page_skip') %>
+          <div class="input-group">
+            <div class="input-group-addon">352</div>
+            <input type="text" value="" name="promo-code" id="promo-code" class="text-center" placeholder="<%= t('orange_landing_page_phonepretext') %>">
+          </div>
         </div>
 
         <div class="block100 mart20">
-          <button class="btn block100 orange-bck padlr40 padtb10 white f16 normal pull-right" id="continue-btn"><%= t('orange_landing_page_button') %></button>
+          <%= link_to(t('orange_landing_page_skip'), root_localize_path, :class => "btn-lg block100 green-bck padlr40 padtb10 white f16 normal pull-left preskoci") %>
+          <button class="btn-lg block100 orange-bck padlr40 padtb10 white f16 normal pull-right" id="continue-btn"><%= t('orange_landing_page_button') %></button>
         </div>
       </form>
     </div>

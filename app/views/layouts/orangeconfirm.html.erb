@@ -32,7 +32,7 @@
 
       <div class="navbar-header block100 padr20">
         <a class="navbar-brand" href="<%= root_localize_path %>"><%= image_tag "template/plush-logo-trans.png" %></a>
-        <a class="navbar-brand pull-right" href="http://www.mobistar.be/" target="_blank"><%= image_tag "template/orange-logo.png" %></a>
+        <a class="navbar-brand pull-right" href="http://www.mobistar.be/" target="_blank"><%= image_tag "orange_logo.jpg", with: "75", height: "75" %></a>
       </div>
     </nav>
     <%= yield %>
@@ -67,18 +67,11 @@
             "promo-code": {
                 required: true,
                 phone: true 
-            },
-            "client-orange-skip": {
-                required: true,
             }
         },
         messages: {
                 "promo-code": {
-                    required: telephoneValidationMessage(),
-                    remote: gon.orange_invalid_phone_number_format
-                },
-                  "client-orange-skip": {
-                  required: "?"
+                    required: telephoneValidationMessage()
                 }
             },
         highlight: function (element) {
@@ -89,16 +82,12 @@
         },
         errorElement: 'span',
         errorClass: 'help-block',
+        errorPlacement: function(error, element) {
+          error.appendTo('#errordiv');
+        },
         submitHandler: function (form) {
-            if ($('#telyes').is(':checked')) {
-                localStorage.setItem("plush_phone_number", $("#promo-code").val());
-                //window.location.href = gon.root_localize_path;
-                alert("123");
-            } //else {
-              //  jQuery.facebox("<div class=\"alert alert-danger\">" +
-              //      "<strong>"+gon.orange_promotion_option+"</strong>" +
-              //      "</div>");
-            //}
+          localStorage.setItem("plush_phone_number", $("#promo-code").val());
+          window.location.href = gon.root_localize_path;
         }
     });
 });
