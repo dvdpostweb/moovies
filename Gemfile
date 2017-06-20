@@ -86,3 +86,4 @@ gem 'will_paginate-bootstrap'
 gem 'redis-rails'
 gem "react-rails"
 gem 'webpack-rails', '~> 0.9.10'
+gem 'scout_apm'

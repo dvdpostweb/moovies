@@ -298,6 +298,7 @@ GEM
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
+    scout_apm (2.1.24)
     sextant (0.2.4)
       rails (>= 3.2)
     spring (1.7.2)
@@ -403,6 +404,7 @@ DEPENDENCIES
   route_translator!
   routing_concerns (~> 0.1.0)
   sass-rails
+  scout_apm
   sextant
   spring
   therubyracer (~> 0.12.3)
