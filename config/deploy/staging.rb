@@ -5,7 +5,7 @@ set :full_app_name, "#{fetch(:application)}_#{fetch(:stage)}"
 server '217.112.190.50', user: 'plush', roles: %w{web app db}, port: 23051, primary: true
 set :deploy_to, "/home/webapps/plush/staging"
 set :rails_env, :staging
-set :enable_ssl, true
+#set :enable_ssl, true
 
 set :puma_threads, [4, 16]
 set :puma_workers, 0
