@@ -118,6 +118,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
         customer.customers_abo = 1
         customer.customers_abo_type = 6
         customer.customers_next_abo_type = 6
+        customer.activation_discount_code_type = 'A'
         if customer.save(validate: false)
           activation_code = OrangeSmsActivationCode.new
           activation_code.customers_id = customer.customers_id

@@ -31,3 +31,6 @@ rerun.txt
 .sass-cache
 .generators
 node_modules
+# Added by webpack-rails
+/node_modules
+/public/webpack
