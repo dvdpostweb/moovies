@@ -21,7 +21,13 @@ end
 gem 'net-ssh', '~> 2.9', '>= 2.9.4'
 
 group  :development, :test do
-
+  gem 'capistrano', '~> 3.7', '>= 3.7.2'
+  gem 'capistrano-rails', '~> 1.2', '>= 1.2.3'
+  gem 'capistrano-bundler', '~> 1.2'
+  gem 'capistrano-rbenv', '~> 2.1'
+  gem 'capistrano3-puma', '~> 1.2', '>= 1.2.1'
+  gem 'capistrano-rake', '~> 0.1.0'
+  #gem 'capistrano-npm', '~> 1.0', '>= 1.0.2'
 end
 
 group :test do
@@ -50,8 +56,8 @@ gem 'jquery-form-rails'
 gem 'thinking-sphinx', '~> 3.3'
 gem "composite_primary_keys", "~> 5.0.13"
 gem "truncate_html", "~> 0.9.2"
-gem "capistrano", "~> 2.15.5"
-gem "capistrano-ext"
+#gem "capistrano", "~> 2.15.5"
+#gem "capistrano-ext"
 gem 'client_side_validations', '~> 3.2.6'
 gem 'date_validator'
 gem 'whenever', "~> 0.9.0", :require => false
