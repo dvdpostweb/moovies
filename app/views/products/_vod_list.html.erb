@@ -1,5 +1,5 @@
 <div id="vod_list_<%= product.to_param %>" class="block100 slide-buttons mart15">
-  <% unless params[:controller] == "search" %>
+  <% unless params[:controller] == "search" || params[:controller] == "steps" %>
       <%= link_to(product_trailer_path(:product_id => product.to_param, :source => @source, :response_id => @response_id), :class => 'btn white pull-left dark-gray-bck btn-trailer lhn', remote: true) do %>
           <i class="fa fa-film marr5"></i><%= t('.trailer') %>
       <% end %>
