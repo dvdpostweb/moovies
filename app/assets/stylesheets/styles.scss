@@ -1459,10 +1459,10 @@ a.btn#activate {
   }
 }
 
-.cover-list-view {
-  position: relative;
-  float: left;
-  width: 25%;
+.cover-list-view {   
+   float: left;   
+   position: relative;    
+   width: 15%; 
 }
 
 .cover-list-view .hd {
@@ -3584,7 +3584,8 @@ ul.video-stream-links li {
 @media (max-width: 479px) {
   .search-results .cover-list-view {
     float: none;
-    width: 100%;
+    width: 80%;
+    margin: 0 auto;
   }
 }
 
