@@ -12,7 +12,3 @@ set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 set :rbenv_roles, :all
 
 set :keep_releases, 5
-
-after 'deploy:create_symlink' do
-  run "ln -nfs /data/geoip/GeoIP.dat #{current_path}/GeoIP.dat"
-end
