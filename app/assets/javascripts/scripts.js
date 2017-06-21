@@ -122,42 +122,42 @@ $(document).ready(function () {
     });
 
     // ajax settings
-    var ajaxTriggDelayTime = 800;
-    var hostname = $(location).attr('hostname');
+    //var ajaxTriggDelayTime = 800;
+    //var hostname = $(location).attr('hostname');
 
-    function ajaxFilters() {
-        var view_movies = $('input[name=view_movies]').val();
-
-        setTimeout(function () {
-            if (view_movies === '') {
-                $('input[name=view_movies]').val('list');
-                $('.content-right').attr('id', 'list');
-            }
-            var form_filters = $('#filters-form');
-            var data_form = form_filters.serialize();
-            $.ajax({
-                type: "POST",
-                url: '/',
-                data: data_form,
-                success: function (response) {
-                    console.log(data_form);
+    //function ajaxFilters() {
+    //    var view_movies = $('input[name=view_movies]').val();
+    //
+    //    setTimeout(function () {
+    //        if (view_movies === '') {
+    //            $('input[name=view_movies]').val('list');
+    //            $('.content-right').attr('id', 'list');
+    //        }
+    //        var form_filters = $('#filters-form');
+    //        var data_form = form_filters.serialize();
+    //        $.ajax({
+    //            type: "POST",
+    //            url: '/',
+    //            data: data_form,
+    //            success: function (response) {
+    //                console.log(data_form);
                     //location.href = 'http://' + hostname + '/index.php?page=home&' + data_form;
                     // $('.movies').empty().html(data_form + '<br><br>GUruuu, ovde ti ide ajax respond..:)');
                     //$('.movies').prepend("<strong class='block100 red-bck white padlr20 padtb5 radius4 mart10'>AJAX Filter is triggered</strong>");
-                }
-            });
-        }, ajaxTriggDelayTime);
-    }
+    //            }
+    //        });
+    //    }, ajaxTriggDelayTime);
+    //}
 
     // checkbox
-    $(".icheckbox,.iradio").iCheck({
-        checkboxClass: 'icheckbox_minimal-grey',
-        radioClass: 'iradio_minimal-grey'
-    });
+    //$(".icheckbox,.iradio").iCheck({
+    //    checkboxClass: 'icheckbox_minimal-grey',
+    //    radioClass: 'iradio_minimal-grey'
+    //});
 
-    $('#filters .iradio').on('ifChecked', function (e) {
-        ajaxFilters();
-    });
+    //$('#filters .iradio').on('ifChecked', function (e) {
+    //    ajaxFilters();
+    //});
 
 
     // cotations range slider

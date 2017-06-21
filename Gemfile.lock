@@ -391,7 +391,7 @@ DEPENDENCIES
   omniauth-google-oauth2 (~> 0.3.1)
   orderedhash
   paypal-express (~> 0.8.1)
-  puma (~> 3.6)
+  puma (~> 3.9, >= 3.9.1)
   quiet_assets
   rack-cors (~> 0.4.1)
   rails (~> 3.2, >= 3.2.22.5)

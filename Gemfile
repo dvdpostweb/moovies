@@ -2,7 +2,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '~> 3.2', '>= 3.2.22.5'
-
+gem 'puma', '~> 3.9', '>= 3.9.1'
 gem 'mysql2', '~> 0.3.21'
 gem 'json'
 gem 'will_paginate'
@@ -74,7 +74,6 @@ gem 'gon'
 gem 'omniauth-facebook', '4.0', :git => 'https://github.com/dvdpost/omniauth-facebook'
 gem 'omniauth-google-oauth2', '~> 0.3.1'
 gem "figaro"
-gem 'puma', '~> 3.6'
 gem 'paypal-express', '~> 0.8.1'
 gem 'kaminari'
 gem 'twitter-bootstrap-rails', '~> 3.2', '>= 3.2.2'

@@ -42,12 +42,12 @@ $(document).ready(function () {
                 $(".reset-applied-filters").trigger("click");
 
             } else if (form_element === "Derniers ajouts" || form_element === "Laatste aanwinsten" || form_element === "Newly added") {
-
+                
                 $('.iradio').iCheck('uncheck');
                 submit_online();
 
             } else if (form_element === "Les plus populaires" || form_element === "Meest bekeken" || form_element === "Most viewed") {
-
+                
                 $('.iradio').iCheck('uncheck');
                 submit_online();
 
