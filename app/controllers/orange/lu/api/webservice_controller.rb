@@ -12,7 +12,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
         orange_sms_activation_code.phone_number = params[:sms_number]
         orange_sms_activation_code.sms_authentification_code = SecureRandom.hex(2)
         if orange_sms_activation_code.save
-          orange_is_eligable_wcf_service = HTTParty.get("https://www.plush.be:2355/WcfService/http/OrangeIsEligable?customersId=#{resource.customers_id}&mobileNumber=#{params[:sms_number]}&SMSCodeMessage=#{puts t("orange.sms_code.message")}#{orange_sms_activation_code.sms_authentification_code}&products_id=#{product_id_from_params}")
+          orange_is_eligable_wcf_service = HTTParty.get("https://www.plush.be:2355/WcfService/http/OrangeIsEligable?customersId=#{resource.customers_id}&mobileNumber=#{params[:sms_number]}&SMSCodeMessage=#{puts t("orange.sms_code.message")}#{orange_sms_activation_code.sms_authentification_code}&products_id=#{product_id_from_params}&locale=#{set_locale(I18n.locale)}")
           render json: {status: orange_is_eligable_wcf_service, sms_code: "#{t("orange.sms_code.message")} #{orange_sms_activation_code.sms_authentification_code}", phone_number: orange_sms_activation_code.phone_number}
         end
       else
@@ -39,7 +39,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
           orange_sms_activation_code.phone_number = params[:sms_number]
           orange_sms_activation_code.sms_authentification_code = SecureRandom.hex(2)
           if orange_sms_activation_code.save
-            orange_is_eligable_wcf_service = HTTParty.get("https://www.plush.be:2355/WcfService/http/OrangeIsEligable?customersId=#{customer.customers_id}&mobileNumber=#{params[:sms_number]}&SMSCodeMessage=#{puts t("orange.sms_code.message")}#{orange_sms_activation_code.sms_authentification_code}&products_id=#{product_id_from_params}")
+            orange_is_eligable_wcf_service = HTTParty.get("https://www.plush.be:2355/WcfService/http/OrangeIsEligable?customersId=#{customer.customers_id}&mobileNumber=#{params[:sms_number]}&SMSCodeMessage=#{puts t("orange.sms_code.message")}#{orange_sms_activation_code.sms_authentification_code}&products_id=#{product_id_from_params}&locale=#{set_locale(I18n.locale)}")
             render json: {status: orange_is_eligable_wcf_service, sms_code: "#{t("orange.sms_code.message")} #{orange_sms_activation_code.sms_authentification_code}", phone_number: orange_sms_activation_code.phone_number}
           end
         end
@@ -61,7 +61,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
           orange_sms_activation_code.phone_number = params[:sms_number]
           orange_sms_activation_code.sms_authentification_code = SecureRandom.hex(2)
           if orange_sms_activation_code.save
-            orange_is_eligable_wcf_service = HTTParty.get("https://www.plush.be:2355/WcfService/http/OrangeIsEligable?customersId=#{customer.customers_id}&mobileNumber=#{params[:sms_number]}&SMSCodeMessage=#{puts t("orange.sms_code.message")}#{orange_sms_activation_code.sms_authentification_code}&products_id=#{product_id_from_params}")
+            orange_is_eligable_wcf_service = HTTParty.get("https://www.plush.be:2355/WcfService/http/OrangeIsEligable?customersId=#{customer.customers_id}&mobileNumber=#{params[:sms_number]}&SMSCodeMessage=#{puts t("orange.sms_code.message")}#{orange_sms_activation_code.sms_authentification_code}&products_id=#{product_id_from_params}&locale=#{set_locale(I18n.locale)}")
             render json: {status: orange_is_eligable_wcf_service, sms_code: "#{t("orange.sms_code.message")} #{orange_sms_activation_code.sms_authentification_code}", phone_number: orange_sms_activation_code.phone_number}
           end
         end
@@ -109,7 +109,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
           activation_code.phone_number = params[:sms_number]
           activation_code.sms_authentification_code = SecureRandom.hex(2)
           if activation_code.save(validate: false)
-            orange_is_eligable_wcf_service = HTTParty.get("https://www.plush.be:2355/WcfService/http/OrangeIsEligable?customersId=#{customer.customers_id}&mobileNumber=#{params[:sms_number]}&SMSCodeMessage=#{puts t("orange.sms_code.message")}#{activation_code.sms_authentification_code}&products_id=#{product_id_from_params}")
+            orange_is_eligable_wcf_service = HTTParty.get("https://www.plush.be:2355/WcfService/http/OrangeIsEligable?customersId=#{customer.customers_id}&mobileNumber=#{params[:sms_number]}&SMSCodeMessage=#{puts t("orange.sms_code.message")}#{activation_code.sms_authentification_code}&products_id=#{product_id_from_params}&locale=#{set_locale(I18n.locale)}")
             render json: {status: orange_is_eligable_wcf_service, sms_code: "#{t("orange.sms_code.message")} #{activation_code.sms_authentification_code}", phone_number: activation_code.phone_number}
           end
         end
@@ -125,7 +125,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
           activation_code.phone_number = params[:sms_number]
           activation_code.sms_authentification_code = SecureRandom.hex(2)
           if activation_code.save(validate: false)
-            orange_is_eligable_wcf_service = HTTParty.get("https://www.plush.be:2355/WcfService/http/OrangeIsEligable?customersId=#{customer.customers_id}&mobileNumber=#{params[:sms_number]}&SMSCodeMessage=#{puts t("orange.sms_code.message")}#{activation_code.sms_authentification_code}&products_id=#{product_id_from_params}")
+            orange_is_eligable_wcf_service = HTTParty.get("https://www.plush.be:2355/WcfService/http/OrangeIsEligable?customersId=#{customer.customers_id}&mobileNumber=#{params[:sms_number]}&SMSCodeMessage=#{puts t("orange.sms_code.message")}#{activation_code.sms_authentification_code}&products_id=#{product_id_from_params}&locale=#{set_locale(I18n.locale)}")
             render json: {status: orange_is_eligable_wcf_service, sms_code: "#{t("orange.sms_code.message")} #{activation_code.sms_authentification_code}", phone_number: activation_code.phone_number}
           end
         end
@@ -146,7 +146,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
       if sms_code.present?
         customer = Customer.find(sms_code.customers_id)
         if customer.present?
-          orange_purchase_wcf_service = HTTParty.get("https://www.plush.be:2355/wcfservice/http/OrangePurchase?customersId=#{customer.customers_id}&mobileNumber=#{params[:plush_phone_number]}&price=0&products_id=#{product_id_from_params}&message=subscription&payment_id=0")
+          orange_purchase_wcf_service = HTTParty.get("https://www.plush.be:2355/wcfservice/http/OrangePurchase?customersId=#{customer.customers_id}&mobileNumber=#{params[:plush_phone_number]}&price=0&products_id=#{product_id_from_params}&message=subscription&payment_id=0&locale=#{set_locale(I18n.locale)}")
           if orange_purchase_wcf_service.parsed_response == "TRUE"
             if discount.present?
               customer.customers_registration_step = 100
@@ -206,7 +206,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
           customer.step = 100
           customer.customers_abo = 1
           if customer.save(validate: false)
-            orange_purchase_wcf_service = HTTParty.get("https://www.plush.be:2355/wcfservice/http/OrangePurchase?customersId=#{customer.customers_id}&mobileNumber=#{params[:plush_phone_number]}&price=0&products_id=#{product_id_from_params}&message=ppv2&payment_id=0")
+            orange_purchase_wcf_service = HTTParty.get("https://www.plush.be:2355/wcfservice/http/OrangePurchase?customersId=#{customer.customers_id}&mobileNumber=#{params[:plush_phone_number]}&price=0&products_id=#{product_id_from_params}&message=ppv2&payment_id=0&locale=#{set_locale(I18n.locale)}")
             if orange_purchase_wcf_service.parsed_response == "TRUE"
               if streaming.present?
                 sign_in(customer)
@@ -232,7 +232,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
       if sms_code.present?
         customer =  Customer.find(params[:current_customer])
         if customer.present?
-          orange_purchase_wcf_service = HTTParty.get("https://www.plush.be:2355/wcfservice/http/OrangePurchase?customersId=#{customer.customers_id}&mobileNumber=#{params[:plush_phone_number]}&price=0&products_id=#{customer.customers_abo_type}&message=ppv2&payment_id=0")
+          orange_purchase_wcf_service = HTTParty.get("https://www.plush.be:2355/wcfservice/http/OrangePurchase?customersId=#{customer.customers_id}&mobileNumber=#{params[:plush_phone_number]}&price=0&products_id=#{customer.customers_abo_type}&message=ppv2&payment_id=0&locale=#{set_locale(I18n.locale)}")
           if orange_purchase_wcf_service.parsed_response == "TRUE"
               customer.customers_registration_step = 100
               customer.customers_abo = 1
