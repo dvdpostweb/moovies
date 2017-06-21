@@ -1,15 +1,19 @@
 <div class="container" id="content-left-right">
   <div class="content-left">
-    <%= render :partial => 'products/index/filters_online', :locals => {:countries => @countries} %>
+    <% cache("products_index_filters_online_#{I18n.locale}", :expires_in => 15.minutes) do %>
+      <%= render :partial => 'products/index/filters_online', :locals => {:countries => @countries} %>
+    <% end %>
   </div>
   <div class="content-right">
     <div id="all" class="block100 movies">
       <% if params[:package].nil? && params[:concerns] != :productable && params[:belgium].blank? %>
-          <%= render :partial => 'products/index/hp' %>
+          <% cache("products_index_hp_#{I18n.locale}", :expires_in => 15.minutes) do %>
+            <%= render :partial => 'products/index/hp' %>
+          <% end %>
       <% else %>
           <%= render :partial => 'products/index/all' %>
       <% end %>
     </div>
   </div>
 </div>
-<%= javascript_include_tag *webpack_asset_paths("application") %>
+

@@ -55,7 +55,9 @@
           <% end %>
       <% end %>
       <div class="block100 slide-content mart15 text-center">
-        <%= render :partial => 'products/streaming', :locals => {:product => product, :source => @source, :popup => true} %>
+        <% cache("products_streaming_#{I18n.locale}_#{product}", :expires_in => 15.minutes) do %>
+          <%= render :partial => 'products/streaming', :locals => {:product => product, :source => @source, :popup => true} %>
+        <% end %>
       </div>
       <div class="block100 slide-content mart15">
         <%= truncate_html((data[:description].text rescue '...'), :length => 500) %>
