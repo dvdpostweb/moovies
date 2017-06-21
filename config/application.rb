@@ -13,7 +13,7 @@ module Moovies
   class Application < Rails::Application
     config.middleware.insert_before 0, "Rack::Cors" do
       allow do
-        origins 'http://staging.plush.lu'
+        origins "http://staging.plush.lu/#{I18n.locale}"
         resource '*', :headers => :any, :methods => [:get, :post, :options]
       end
     end
