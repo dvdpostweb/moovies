@@ -444,12 +444,12 @@ h3, h4, h5 {
   height: 99%;
   padding-top: 2px;
   border: none;
- /*  usage example:
-.jobs-applications .jobs-blue-top input {
-     @include placeholderStyle {
-         ..style definition goes here..
-     }
- }*/
+  /*  usage example:
+ .jobs-applications .jobs-blue-top input {
+      @include placeholderStyle {
+          ..style definition goes here..
+      }
+  }*/
 }
 .top-search-holder input[type=text]::-webkit-input-placeholder {
   color: #212a31;
@@ -1308,24 +1308,6 @@ a.btn#activate {
   background: linear-gradient(to bottom, #94C951 0%, #70A008 100%);
 }
 
-.btn-blue-gradient,
-.btn-blue-gradient:focus,
-.btn-blue-gradient:active {
-  margin: 0 auto;
-  background: #48ABAD;
-  background: -webkit-linear-gradient(top, #48ABAD 0%, #48ABAD 100%);
-  background: linear-gradient(to bottom, #48ABAD 0%, #48ABAD 100%);
-}
-
-.btn-adult-gradient,
-.btn-adult-gradient:focus,
-.btn-adult-gradient:active {
-  margin: 0 auto;
-  background: #993399;
-  background: -webkit-linear-gradient(top, #993399 0%, #993399 100%);
-  background: linear-gradient(to bottom, #993399 0%, #993399 100%);
-}
-
 .popover-content .slide-content,
 .synopsys-content .slide-content {
   color: #212a31;
@@ -1459,10 +1441,10 @@ a.btn#activate {
   }
 }
 
-.cover-list-view {   
-   float: left;   
-   position: relative;    
-   width: 15%; 
+.cover-list-view {
+  position: relative;
+  float: left;
+  width: 25%;
 }
 
 .cover-list-view .hd {
@@ -1817,12 +1799,12 @@ ul.movie-gallery li:nth-child(3n) {
 .login-sign input[type=password] {
   padding: 10px 5px;
   color: #455766;
- /*  usage example:
-.jobs-applications .jobs-blue-top input {
-     @include placeholderStyle {
-         ..style definition goes here..
-     }
- }*/
+  /*  usage example:
+ .jobs-applications .jobs-blue-top input {
+      @include placeholderStyle {
+          ..style definition goes here..
+      }
+  }*/
 }
 .login-sign input[type=text]::-webkit-input-placeholder,
 .login-sign input[type=password]::-webkit-input-placeholder {
@@ -3152,7 +3134,7 @@ ul.card-list li .card-radio {
 }
 
 .landing.orange .promotion-codebox .btn {
-  width: 200px;
+  width: 48%;
 }
 
 .orange-landing-subfooter li {
@@ -3584,8 +3566,7 @@ ul.video-stream-links li {
 @media (max-width: 479px) {
   .search-results .cover-list-view {
     float: none;
-    width: 80%;
-    margin: 0 auto;
+    width: 100%;
   }
 }
 
@@ -3694,5 +3675,3 @@ ul.video-stream-links li {
   color: #999;
   text-decoration: none;
 }
-
-/*END FOOTER*/

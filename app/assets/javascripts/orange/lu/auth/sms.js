@@ -42,7 +42,7 @@ function eligibilityServiceOnlyLogin() {
                 method: 'POST',
                 url: '/orange/lu/api/orange_is_eligable',
                 data: {
-                    'sms_number': $.trim($("#sms_number").val()),
+                    'sms_number': $(".input-group-addon").html() + $.trim($("#sms_number").val()),
                     'products_id': gon.products_id,
                     'code': gon.code
                 },
@@ -126,7 +126,7 @@ function eligibilityServiceOnlyRegister() {
                 method: 'POST',
                 url: '/orange/lu/api/orange_register',
                 data: {
-                    'sms_number': $.trim($("#sms_number_register").val()),
+                    'sms_number': $(".input-group-addon").html() + $.trim($("#sms_number_register").val()),
                     'products_id': gon.products_id,
                     'code': gon.code
                 },
