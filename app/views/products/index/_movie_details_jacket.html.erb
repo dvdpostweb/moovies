@@ -1,11 +1,13 @@
 <style>
-#grid-view .grid-slide:nth-child(5n) {  margin-right: 0;}
+  grid-view .grid-slide:nth-child(4n) {  margin-right: 0;}
 </style>
+
 <% product = movie_details_jacket %>
 <% data = product.description_data(true) %>
 <% product_title = data[:title] %>
 <% product_image = data[:image] %>
 <% path = product_path(:id => product.to_param, :source => @source, :response_id => @response_id) %>
+
 <div class="grid-slide">
   <a href="<%= product_path(:id => product.to_param, :source => @source) %>" class="popper"><%= image_tag(product_image, :class => "img-responsive") %>
     <% if product.hd?(session[:country_id]) %>
@@ -129,12 +131,12 @@
               <% end %>
           <% end %>
       <% end %>
-      <a href="" class="synopsys-adaptive-close"></a>
+      <a href="#" class="synopsys-adaptive-close"></a>
     </div>
   </div>
-  <a href="" class="position-absolute white-bck pad10 radius2 synopsys-adaptive-open f17 green uppercase no-underline"><i class="fa fa-search-plus f25 marr5"></i>Details
+  <a href="#" class="position-absolute white-bck pad10 radius2 synopsys-adaptive-open f17 green uppercase no-underline"><i class="fa fa-search-plus f25 marr5"></i>Details
   </a>
 </div>
-<%= render :partial => 'products/index/pagination_scroll', :locals => {:item => @products} %>
+
 
 <script>$(".products-pagination").hide();</script>

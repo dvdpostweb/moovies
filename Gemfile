@@ -16,6 +16,8 @@ group :development do
   gem 'quiet_assets'
   gem 'spring'
   gem 'sextant'
+  gem "better_errors"
+  gem "binding_of_caller"
 end
 
 gem 'net-ssh', '~> 2.9', '>= 2.9.4'

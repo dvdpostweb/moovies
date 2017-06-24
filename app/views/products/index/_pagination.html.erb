@@ -1,2 +1,2 @@
-<%= will_paginate item, renderer: BootstrapPagination::Rails, :class => "products-pagination #{cookies[:endless] == 'deactive' ? 'deactive' : 'active'}", :id => :pagination, :previous_label => '«', :next_label => '»', :params => {:kind => params[:kind] == :normal ? nil : params[:kind]} %>
+<%= will_paginate item, renderer: BootstrapPagination::Rails, :id => :pagination, :previous_label => '«', :next_label => '»', :params => {:kind => params[:kind] == :normal ? nil : params[:kind]} %>
 

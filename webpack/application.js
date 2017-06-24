@@ -19,6 +19,13 @@ $(document).ready(function () {
             }
         });
     });
+    $("#load_more").click(function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: $('.next_page:last').attr('href'),
+            dataType: 'script'
+        });
+    });
 });
 
 jQuery.fn.extend({

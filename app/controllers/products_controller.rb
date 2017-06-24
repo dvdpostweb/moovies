@@ -94,14 +94,12 @@ class ProductsController < ApplicationController
     @target = cookies[:endless] == 'deactive' ?  '_self' : '_blank'
     @carousels = Landing.hit.by_language(I18n.locale).not_expirated
 
-    if cookies[:endless] == 'active'
-      gon.endless = "endless"
-    end
+    cookies[:endless] == 'active'
 
-    if params[:endless]
-      cookies.permanent[:endless] = params[:endless]
+    #if params[:endless]
+    #  cookies.permanent[:endless] = params[:endless]
       #gon.endless = "endless"
-    end
+    #end
     if params[:display]
       cookies.permanent[:display] = params[:display]
     end

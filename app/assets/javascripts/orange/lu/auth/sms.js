@@ -13,7 +13,7 @@ function eligibilityServiceOnlyLogin() {
 
     jQuery.validator.addMethod("phone", function (phone_number, element) {
         phone_number = phone_number.replace(/\s+/g, "");
-        return this.optional(element) || phone_number.length > 9 &&
+        return this.optional(element) || phone_number.length > 8 &&
             phone_number.match(/^[0-9-+]+$/);
     }, gon.orange_invalid_phone_number_format);
 
@@ -48,26 +48,26 @@ function eligibilityServiceOnlyLogin() {
                 },
                 dataType: 'json',
                 success: function (response) {
-                    if (0 === response.status) {
-                        localStorage.setItem("plush_phone_number", response.sms_number);
-                        jQuery.facebox("<div class=\"alert alert-danger\">" +
-                            "<strong>Account with your phone number does not exist !!! Please select your subscription plan</strong>" +
-                            "</div>");
-                        setTimeout(
-                            function () {
-                                window.location.href = gon.orange_subscription_action; //"/orange/lu/auth/" + gon.locale + "/sms/registration?phone_number=" + $.trim($("#sms_number").val()) + ""
-                            }, 2000);
-                    } else if (1 === response.status) {
-                        localStorage.setItem("plush_phone_number", response.sms_number);
-                        jQuery.facebox("<div class=\"alert alert-danger\">" +
-                            "<strong>Account with your phone number does not exist !!! Please register</strong>" +
-                            "</div>");
-                        setTimeout(
-                            function () {
-                                window.location.href = gon.orange_subscription_action + gon.url_code; //"/orange/lu/auth/" + gon.locale + "/sms/registration?phone_number=" + $.trim($("#sms_number").val()) + ""
-                            }, 2000);
-                        //window.location.href = gon.orange_subscription_action + gon.url_code;
-                    } else if ("True" === response.status) {
+                    //if (0 === response.status) {
+                    //    localStorage.setItem("plush_phone_number", response.sms_number);
+                    //    jQuery.facebox("<div class=\"alert alert-danger\">" +
+                    //        "<strong>Account with your phone number does not exist !!! Please select your subscription plan</strong>" +
+                    //        "</div>");
+                    //    setTimeout(
+                    //        function () {
+                    //            window.location.href = gon.orange_subscription_action; //"/orange/lu/auth/" + gon.locale + "/sms/registration?phone_number=" + $.trim($("#sms_number").val()) + ""
+                    //        }, 2000);
+                    //} else if (1 === response.status) {
+                    //    localStorage.setItem("plush_phone_number", response.sms_number);
+                    //    jQuery.facebox("<div class=\"alert alert-danger\">" +
+                    //        "<strong>Account with your phone number does not exist !!! Please register</strong>" +
+                    //        "</div>");
+                    //    setTimeout(
+                    //        function () {
+                    //            window.location.href = gon.orange_subscription_action + gon.url_code; //"/orange/lu/auth/" + gon.locale + "/sms/registration?phone_number=" + $.trim($("#sms_number").val()) + ""
+                    //        }, 2000);
+                    //    //window.location.href = gon.orange_subscription_action + gon.url_code;
+                    if ("True" === response.status) {
                         if (typeof(Storage) !== "undefined") {
                             localStorage.setItem("plush_phone_number", response.phone_number);
                             $("#is_eligable").hide();
@@ -81,6 +81,10 @@ function eligibilityServiceOnlyLogin() {
                                 "</div>");
                         }
 
+                    } else {
+                        jQuery.facebox("<div class=\"alert alert-danger\">" +
+                            "<strong>"+response.status+"</strong>" +
+                            "</div>");
                     }
                 },
                 error: function (response) {

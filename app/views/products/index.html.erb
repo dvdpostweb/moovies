@@ -1,5 +1,6 @@
 <div class="container" id="content-left-right">
   <div class="content-left">
+    <%= cookies[:endless] %>
     <% cache("products_index_filters_online_#{I18n.locale}", :expires_in => 15.minutes) do %>
       <%= render :partial => 'products/index/filters_online', :locals => {:countries => @countries} %>
     <% end %>
