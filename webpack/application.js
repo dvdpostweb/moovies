@@ -26,6 +26,9 @@ $(document).ready(function () {
             dataType: 'script'
         });
     });
+    $(document).ready(function() {
+        $(".dropdown-toggle").dropdown();
+    });
 });
 
 jQuery.fn.extend({
