@@ -64,7 +64,7 @@ display: none;
         <% end %>
       </div>
       <div class="block100">
-        <%= render :partial => 'products/vod_list',  :locals => {:product => product, :source => @source, :response_id => @response_id} %>
+        <%= render :partial => 'products/movie_details_vod_list',  :locals => {:product => product, :source => @source, :response_id => @response_id} %>
       </div>
       <% if product.trailer? %>
       <div class="block100">
