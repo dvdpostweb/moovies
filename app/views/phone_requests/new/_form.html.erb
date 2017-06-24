@@ -4,51 +4,51 @@
   <% current_phone = current_customer ? current_customer.phone : nil %>
   <% phone_init = phone_request.phone && !phone_request.phone.empty? ? phone_request.phone : current_phone %>
   <%= form_for :phone_request, :url => url do |f| %>
-  <h3 class="f25 pad0 mart0"><%= t('.title') %></h3>
+  <h3 class="f25 pad0 mart0"><%= t('.title').html_safe %></h3>
   <p class="mart15">
-    <%= t('.intro') if current_customer %>
+    <%= t('.intro').html_safe if current_customer %>
   </p>
   <div class="form-group block100 pad10 thin-green2-bck mart10 radius4">
     <%= f.error_messages %>
       <% if current_customer %>
         <% PhoneRequest.reason_codes.each do |key, code| %>
           <div class="block100">
-            <%= f.radio_button :reason, code, :checked => (phone_request.reason == code || (!phone_request.reason && params[:reason].to_i == code)) ? true : false, class: "iradio" %> <strong><%= f.label :reason, t(".reason_label_#{code}"), :class => :reason_label %></strong>
-            <p class="italic"><%= t(".reason_description_#{code}") %></p>
+            <%= f.radio_button :reason, code, :checked => (phone_request.reason == code || (!phone_request.reason && params[:reason].to_i == code)) ? true : false, class: "iradio" %> <strong><%= f.label :reason, t(".reason_label_#{code}").html_safe, :class => :reason_label %></strong>
+            <p class="italic"><%= t(".reason_description_#{code}").html_safe %></p>
           </div>
         <% end %>
       <% else %>
         <%= f.hidden_field :reason, :value => 4 %>
       <% end %>
       <div class="block100 mart5">
-      <strong class="clearfix"><%= t('.languages') %></strong>
+      <strong class="clearfix"><%= t('.languages').html_safe %></strong>
         <% PhoneRequest.languages.each do |key, code| %>
         <%= f.radio_button :language_id, key, :checked => (phone_request.language_id == key || (!phone_request.language_id && I18n.locale == code.to_sym ) ? true : false), class: "iradio" %>
-        <%= f.label "language_id_#{key}", t(".#{code}") %>
+        <%= f.label "language_id_#{key}", t(".#{code}").html_safe %>
         <% end %>
       </div>
       <% if !current_customer %>
       <div class="block100 mart5">
-        <strong class="clearfix"><%= f.label :name, t('.name') %></strong>
+        <strong class="clearfix"><%= f.label :name, t('.name').html_safe %></strong>
         <%= f.text_field :name %>
       </div>
       <% end %>
       <div class="block100 mart5">
-        <strong class="clearfix"><%= f.label :phone, t('.phone') %></strong>
+        <strong class="clearfix"><%= f.label :phone, t('.phone').html_safe %></strong>
         
         <%= f.text_field :phone, :value => phone_init %>
       </div>
       <div class="block100 mart10">
-        <strong class="clearfix"><%= t '.call_date' %>/strong> 
+        <strong class="clearfix"><%= t('.call_date').html_safe %>/strong>
         <%= f.text_field :requested_date, :class => "datepicker fld" %>
       </div>
       <div class="block100 mart10">
-        <strongclass="clearfix">  <%= t '.time_slots' %> </strong>
+        <strongclass="clearfix">  <%= t('.time_slots').html_safe %> </strong>
         <div><%= f.select :hour, PhoneRequest.time_slots %></div>
       </div>
       <div class="block100 mart20">
         <button type="submit" class="btn green-bck OpenSansCondensed f23">
-          <%= t '.contact' %>
+          <%= t('.contact').html_safe %>
         </button>
       </div>
   </div>
