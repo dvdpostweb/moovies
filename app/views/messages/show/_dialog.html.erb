@@ -4,18 +4,9 @@
 <% if product_id %>
   <% product = Product.find(product_id)%>
 <% end %>
-  <div class="<%= config[:class] %>">
-    <% if email.short? %>
-      <div class="avatar_message">
-        <%= image_tag config[:image], :class => :avatar, :width => 54 %>
-      </div>
-      <div class="message_text">
-    <% else %>
-      <div class="message_text_long">
-    <% end %>
-      <p class="who_message"> <span class="who_message_big"><%= "* " if dialog.unread? %><%= t(".#{config[:title]}") %></span> <%= dialog.created_at.strftime("%d/%m/%Y %H:%M") %> <%= product.title if product %></p>
-      <div align="justify">
-      <%= replace_variables(email.body, dialog.data) %></div>
-    </div>
-    <div class="clear"></div>
-  </div>
+<ul class="list-group">
+  <li class="list-group-item"><%= "* " if dialog.unread? %><%= t(".#{config[:title]}") %></li>
+  <li class="list-group-item"><%= dialog.created_at.strftime("%d/%m/%Y %H:%M") %></li>
+  <li class="list-group-item"><%= product.title if product %></li>
+  <li class="list-group-item"><%= replace_variables(email.body, dialog.data) %></li>
+</ul>

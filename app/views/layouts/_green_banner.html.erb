@@ -57,7 +57,7 @@
                 <a href="<%= info_path(:page_name => t('routes.infos.params.unlimited'), :subscription_action => "subscription_change") %>" class="<%= params[:kind] == :adult ? "violet" : "green" %> underline">(<%= t('.subscribe') %>
                   )</a></span>
           <% end %>
-          <% if current_customer.abo_subscriber? %> #|| current_customer.bnppf_subscriber? %>
+          <% if current_customer.abo_subscriber? %> <!--#|| current_customer.bnppf_subscriber? %>-->
               <span><a class="<%= params[:kind] == :adult ? "violet" : "blue" %> underline" href="<%= products_short_path(:package => Moovies.packages.invert[(params[:kind] == :adult ? 5 : 2)]) %>">Plush à la Carte</a></span>
               <span class="black mart5"><%= t('.top_part_2').capitalize %>: <%= current_customer.tvod_free %></span>
               <span class="black mart5"> <%= t('.subscription') %>

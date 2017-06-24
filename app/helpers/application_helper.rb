@@ -26,6 +26,8 @@ module ApplicationHelper
       "contact"
     elsif params[:controller].present? && params[:controller] == "messages" && params[:action].present? && params[:action] == "index" then
       "contact-messages"
+    elsif params[:controller].present? && params[:controller] == "messages" && params[:action].present? && params[:action] == "show" then
+      "contact-messages"
     elsif params[:controller].present? && params[:controller] == "streaming_products" && params[:action].present? && params[:action] == "sample" then
       "video-stream block100"
     elsif params[:controller].present? && params[:controller] == "info" && params[:action].present? && params[:action] == "index" && params[:page_name].present? && params[:page_name] == "conditions" then
