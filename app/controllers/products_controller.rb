@@ -100,9 +100,9 @@ class ProductsController < ApplicationController
     #  cookies.permanent[:endless] = params[:endless]
       #gon.endless = "endless"
     #end
-    #if params[:display]
-    #  cookies.permanent[:display] = params[:display]
-    #end
+    if params[:display]
+      cookies.permanent[:display] = params[:display]
+    end
     @rating_color = params[:kind] == :adult ? :pink : :white
     if request.xhr?
       render :layout => false
