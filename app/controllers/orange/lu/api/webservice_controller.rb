@@ -41,7 +41,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
           if orange_sms_activation_code.save
             orange_is_eligable_wcf_service = HTTParty.get("https://www.plush.be:2355/WcfService/http/OrangeIsEligable?customersId=#{customer.customers_id}&mobileNumber=#{params[:sms_number]}&SMSCodeMessage=#{puts t("orange.sms_code.message")}#{orange_sms_activation_code.sms_authentification_code}&products_id=#{product_id_from_params}&locale=#{I18n.locale}")
             sign_in(customer)
-            render json: {status: orange_is_eligable_wcf_service, sms_code: "#{t("orange.sms_code.message")} #{orange_sms_activation_code.sms_authentification_code}", phone_number: orange_sms_activation_code.phone_number}
+            render json: {status: orange_is_eligable_wcf_service, sms_code: "#{t("orange.sms_code.message_payment")} #{orange_sms_activation_code.sms_authentification_code}", phone_number: orange_sms_activation_code.phone_number}
           end
         end
       end
@@ -63,7 +63,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
           orange_sms_activation_code.sms_authentification_code = SecureRandom.hex(2)
           if orange_sms_activation_code.save
             orange_is_eligable_wcf_service = HTTParty.get("https://www.plush.be:2355/WcfService/http/OrangeIsEligable?customersId=#{customer.customers_id}&mobileNumber=#{params[:sms_number]}&SMSCodeMessage=#{puts t("orange.sms_code.message")}#{orange_sms_activation_code.sms_authentification_code}&products_id=#{product_id_from_params}&locale=#{I18n.locale}")
-            render json: {status: orange_is_eligable_wcf_service, sms_code: "#{t("orange.sms_code.message")} #{orange_sms_activation_code.sms_authentification_code}", phone_number: orange_sms_activation_code.phone_number}
+            render json: {status: orange_is_eligable_wcf_service, sms_code: "#{t("orange.sms_code.message_payment")} #{orange_sms_activation_code.sms_authentification_code}", phone_number: orange_sms_activation_code.phone_number}
           end
         end
       end
@@ -111,7 +111,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
           activation_code.sms_authentification_code = SecureRandom.hex(2)
           if activation_code.save(validate: false)
             orange_is_eligable_wcf_service = HTTParty.get("https://www.plush.be:2355/WcfService/http/OrangeIsEligable?customersId=#{customer.customers_id}&mobileNumber=#{params[:sms_number]}&SMSCodeMessage=#{puts t("orange.sms_code.message")}#{activation_code.sms_authentification_code}&products_id=#{product_id_from_params}&locale=#{I18n.locale}")
-            render json: {status: orange_is_eligable_wcf_service, sms_code: "#{t("orange.sms_code.message")} #{activation_code.sms_authentification_code}", phone_number: activation_code.phone_number}
+            render json: {status: orange_is_eligable_wcf_service, sms_code: "#{t("orange.sms_code.message_payment")} #{activation_code.sms_authentification_code}", phone_number: activation_code.phone_number}
           end
         end
       elsif product.present?   
@@ -127,7 +127,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
           activation_code.sms_authentification_code = SecureRandom.hex(2)
           if activation_code.save(validate: false)
             orange_is_eligable_wcf_service = HTTParty.get("https://www.plush.be:2355/WcfService/http/OrangeIsEligable?customersId=#{customer.customers_id}&mobileNumber=#{params[:sms_number]}&SMSCodeMessage=#{puts t("orange.sms_code.message")}#{activation_code.sms_authentification_code}&products_id=#{product_id_from_params}&locale=#{I18n.locale}")
-            render json: {status: orange_is_eligable_wcf_service, sms_code: "#{t("orange.sms_code.message")} #{activation_code.sms_authentification_code}", phone_number: activation_code.phone_number}
+            render json: {status: orange_is_eligable_wcf_service, sms_code: "#{t("orange.sms_code.message_payment")} #{activation_code.sms_authentification_code}", phone_number: activation_code.phone_number}
           end
         end
       end
