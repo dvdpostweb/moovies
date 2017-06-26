@@ -10,7 +10,9 @@ var config = {
       'orangesmsconfirm': './webpack/promotions/orangesmsconfirm.js',
       'orangelogin': './webpack/orange/login.js',
       'orangeregister': './webpack/orange/register.js',
-      'step3': './webpack/steps/step3.js'
+      'credit_card_tvod': './webpack/payment_methods/credit_card_tvod.js',
+      'redirect_to_ogone': './webpack/payment_methods/redirect_to_ogone.js',
+      'components': './webpack/components/components.js'
   },
 
   output: {

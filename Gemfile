@@ -58,8 +58,6 @@ gem 'jquery-form-rails'
 gem 'thinking-sphinx', '~> 3.3'
 gem "composite_primary_keys", "~> 5.0.13"
 gem "truncate_html", "~> 0.9.2"
-#gem "capistrano", "~> 2.15.5"
-#gem "capistrano-ext"
 gem 'client_side_validations', '~> 3.2.6'
 gem 'date_validator'
 gem 'whenever', "~> 0.9.0", :require => false
@@ -84,6 +82,7 @@ gem 'rack-cors', '~> 0.4.1'
 gem 'httparty', '~> 0.14.0'
 gem 'will_paginate-bootstrap'
 gem 'redis-rails'
+gem "browserify-rails"
 gem "react-rails"
 gem 'webpack-rails', '~> 0.9.10'
 gem 'scout_apm'

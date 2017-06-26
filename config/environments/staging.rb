@@ -1,5 +1,9 @@
 Moovies::Application.configure do
 
+  config.browserify_rails.use_browserifyinc = true
+
+  config.react.variant = :production
+
   config.action_controller.asset_host = "http://staging.plush.be"
 
   # Settings specified here will take precedence over those in config/application.rb

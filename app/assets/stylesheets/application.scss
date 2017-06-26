@@ -13,6 +13,24 @@
  *= require fancybox
 */
 
+.loader {
+  border: 32px solid black;
+  border-top: 32px solid #94C951;
+  border-radius: 50%;
+  width: 240px;
+  height: 240px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .container-ogone {
   display: table;
   vertical-align: middle;
