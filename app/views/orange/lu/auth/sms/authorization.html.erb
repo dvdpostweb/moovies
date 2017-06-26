@@ -10,15 +10,17 @@
       <div id="sms_form">
         <form id="is_eligable">
           <div id="promo-code-error"></div>
+
+          <div class="block100 text-center mart20">
+            <p><%= t('orange_login_explanation_text_login') %></p>
+          </div>
+
           <div class="input-group">
             <div class="input-group-addon">+352</div>
             <input type="text" name="phone-number" id="sms_number" class="form-control" placeholder="<%= t('orange_phone_number') %>">
           </div>
           <div class="block100 text-center mart20">
             <input type="submit" class="btn block100 orange-bck padlr40 padtb15 white f16 normal" value="<%= t('orange_send_button') %>">
-          </div>
-          <div class="block100 text-center mart20">
-            <p><%= t('orange_login_explanation_text_1') %></p>
           </div>
         </form>
         <form id="orange_purchase">

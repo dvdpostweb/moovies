@@ -18,17 +18,17 @@
 <% end %>
 <div class="container top-header hidden-sm hidden-xs">
   <div class="block100 padtb10">
-    <ul class="lng-holder col-md-4">
+    <ul class="lng-holder col-md-3">
       <li><%= link_to t('.conditions'), info_path(:page_name => t('routes.infos.params.privacy')) unless current_customer %></li>
       <%= switch_locale_link(params) %>
     </ul>
     <% if customer_signed_in? %>
-        <ul class="login-holder col-md-8 f12">
+        <ul class="lng-holder col-md-3">
           <li><%= "#{link_to t('.logout'), destroy_customer_session_path, :id => :logout, :method => :delete} <span>(#{current_customer.email})</span>".html_safe %></li>
           <li><%= link_to t('.compte'), customer_path(:id => current_customer) %></li>
         </ul>
     <% else %>
-        <ul class="login-holder col-md-8 f12">
+        <ul class="login-holder col-md-9 f12">
           <li>
             <%= link_to('/auth/google_oauth2/', :class => 'loginBtn loginBtn--google', :id => :login_fb, :class => "uppercase red-google-bck") do %>
                 <i class="fa fa-google-plus white"></i><%= t('.social.network.google') %>
@@ -44,6 +44,7 @@
                 <i class="fa fa-lock black"></i><%= t('.login') %>
             <% end %>
           </li>
+          <li class="marr10"><a href="<%= orange_lu_auth_sms_authorization_path %>" class="uppercase orange-bck"><%= t('login met orange') %></a>
         </ul>
     <% end %>
   </div>
