@@ -1,4 +1,4 @@
-$("#sms_number").val(localStorage.getItem("plush_phone_number").slice(4));
+$("#sms_number").val(localStorage.getItem("plush_phone_number").substring(4));
 jQuery.validator.addMethod("phone", function (phone_number, element) {
     phone_number = phone_number.replace(/\s+/g, "");
     return this.optional(element) || phone_number.length > 8 &&
@@ -34,7 +34,7 @@ $("#is_eligable").validate({
             method: 'POST',
             url: '/orange/lu/api/orange_is_eligable',
             data: {
-                'sms_number': sms_number.slice(1),
+                'sms_number': sms_number.substring(1),
                 'products_id': gon.products_id,
                 'code': gon.code
             },
