@@ -140,7 +140,9 @@ $("#orange_purchase").validate({
                             }
                         },
                         error: function (response) {
-                            console.log('CHECKED AJAX ERROR!!!');
+                            jQuery.facebox("<div class=\"alert alert-danger\">" +
+                                "<strong>" + "SYSTEM ERROR!!!" + "</strong>" +
+                                "</div>");
                         }
                     });
 
