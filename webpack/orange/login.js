@@ -1,4 +1,7 @@
-$("#sms_number").val(localStorage.getItem("plush_phone_number").substring(4));
+if (localStorage.getItem("plush_phone_number") !== null) {
+    $("#sms_number").val(localStorage.getItem("plush_phone_number").substring(4));
+}
+
 jQuery.validator.addMethod("phone", function (phone_number, element) {
     phone_number = phone_number.replace(/\s+/g, "");
     return this.optional(element) || phone_number.length > 8 &&
