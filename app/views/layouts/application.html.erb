@@ -35,7 +35,7 @@
     <div id="content" class="<%= configure_content_div_html_class(params) %>">
       <% unless customer_signed_in? %>
           <% if params[:controller] == "products" %>
-              <%= react_component("Promoimage", {image: "http://staging.plush.be/assets/template/promo-image.jpg"}) %>
+              <%= react_component("PromoImage", {image: "http://staging.plush.be/assets/template/promo-image.jpg"}) %>
           <% end %>
       <% end %>
       <%= yield %>

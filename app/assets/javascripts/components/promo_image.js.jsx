@@ -1,4 +1,4 @@
-window.Promoimage = React.createClass({
+var PromoImage = React.createClass({
     render: function() {
         var image =  {
             "background-image": 'url('+ this.props.image + ')'
@@ -17,3 +17,4 @@ window.Promoimage = React.createClass({
         )
     }
 });
+
