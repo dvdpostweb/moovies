@@ -2,6 +2,7 @@
   <h1 class="OpenSansCondensed f30 mar0 pad0"><%= t('promotion.newstep3.line1').html_safe %></h1>
   <p class="mart15"><%= t('promotion.newstep3.line4').html_safe %></p>
   <p><%= t('promotion.newstep3.line5').html_safe %></p>
+  <button id="convert_to_customer" type="button" class="btn btn-danger btn-block"><%= t('convert_to_customer') %></button>
   <div id="accordion" class="mart30">
     <h3>Carte bancaire</h3>
     <%= form_for(:customer, :url => customer_payment_methods_path(:customer_id => current_customer.to_param), :html => {:method => :put, :id => "form_step3"}) do |f| %>
