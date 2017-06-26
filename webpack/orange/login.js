@@ -110,13 +110,14 @@ $("#orange_purchase").validate({
     errorElement: 'span',
     errorClass: 'help-block',
     submitHandler: function (form) {
+        sms_number = localStorage.getItem("plush_phone_number");
         $.ajax({
             method: 'POST',
             url: '/orange/lu/api/orange_login',
             data: {
                 'sms_code': $.trim($("#sms_code").val()),
                 'products_id': gon.products_id,
-                'plush_phone_number': localStorage.getItem("plush_phone_number").slice(1),
+                'plush_phone_number': sms_number.slice(1),
                 'code': gon.code
             },
             dataType: 'json',
@@ -129,7 +130,7 @@ $("#orange_purchase").validate({
                         method: 'POST',
                         url: '/orange/lu/api/automatic_login',
                         data: {
-                            'plush_phone_number': localStorage.getItem("plush_phone_number").slice(1),
+                            'plush_phone_number': sms_number.slice(1),
                             'products_id': gon.products_id,
                         },
                         dataType: 'json',
