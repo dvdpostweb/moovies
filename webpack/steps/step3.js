@@ -180,7 +180,34 @@ var step3 = {
     convertToCustomer: function() {
         $("#convert_to_customer").click(function(e) {
             e.preventDefault();
-            console.log(1)
+
+
+            $.ajax({
+                method: 'POST',
+                url: '/orange/lu/api/convert_to_customer',
+                data: {
+                    'current_customer': gon.current_customer.customers_id
+                },
+                dataType: 'json',
+                success: function (response) {
+
+                    if ("TRUE" === response.status) {
+                        window.location.href = response.root;
+                    } else {
+                        jQuery.facebox("<div class=\"alert alert-danger\">" +
+                            "<strong>" + response.status + "</strong>" +
+                            "</div>");
+                    }
+
+                },
+                error: function (response) {
+                    jQuery.facebox("<div class=\"alert alert-danger\">" +
+                        "<strong>" + "SYSTEM ERROR!!!" + "</strong>" +
+                        "</div>");
+                }
+            });
+
+
         });
     },
     firstNameValidationMessage: function () {

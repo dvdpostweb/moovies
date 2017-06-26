@@ -319,4 +319,21 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
     end
   end
 
+  def convert_to_customer
+    customer = Customer.find(params[:current_customer])
+    if customer.present?
+      customer.customers_registration_step = 100
+      customer.activation_discount_code_type = 'D'
+      customer.customers_abo = 1
+      customer.customers_abo_type = 6
+      customer.customers_next_abo_type = 6
+      customer.tvod_free = 0
+      customer.activation_discount_code_id = 0
+      if customer.save(validate: false)
+        sign_in(customer)
+        render json: {status: "TRUE", root: root_localize_path}
+      end
+    end
+  end
+
 end

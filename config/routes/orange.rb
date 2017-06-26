@@ -19,6 +19,7 @@ Moovies::Application.routes.draw do
         match "check_sms_activation_code" => "webservice#check_sms_activation_code"
         match "automatic_login" => "webservice#automatic_login"
         match "automatic_register" => "webservice#automatic_register"
+        match "convert_to_customer" => "webservice#convert_to_customer"
       end
     end
   end
