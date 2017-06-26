@@ -70,10 +70,10 @@ $("#is_eligable_registration").validate({
 
 function isEligableValidationMessage() {
     if (gon.locale == "fr") {
-        return "Numéro de téléphone est nécessaire.";
+        "Numéro de téléphone est nécessaire.";
     } else if (gon.locale == "nl") {
-        return "Telefoonnummer is vereist.";
+        "Telefoonnummer is vereist.";
     } else if (gon.locale == "en") {
-        return "Phone number is required.";
+        "Phone number is required.";
     }
 }

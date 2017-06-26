@@ -162,30 +162,30 @@ $("#orange_purchase").validate({
 
 function isEligableValidationMessage() {
     if (gon.locale == "fr") {
-        return "Numéro de téléphone est nécessaire.";
+        "Numéro de téléphone est nécessaire.";
     } else if (gon.locale == "nl") {
-        return "Telefoonnummer is vereist.";
+        "Telefoonnummer is vereist.";
     } else if (gon.locale == "en") {
-        return "Phone number is required.";
+        "Phone number is required.";
     }
 }
 
 function orangePurchaseMessage() {
     if (gon.locale == "fr") {
-        return "SMS code est nécessaire."
+        "SMS code est nécessaire."
     } else if (gon.locale == "nl") {
-        return "SMS code is vereist."
+        "SMS code is vereist."
     } else if (gon.locale == "en") {
-        return "SMS code is required."
+        "SMS code is required."
     }
 }
 
 function orangePurchaseMessageSmsCodeValidation() {
     if (gon.locale == "fr") {
-        return "Le code SMS n'est pas correct."
+        "Le code SMS n'est pas correct."
     } else if (gon.locale == "nl") {
-        return "SMS code is niet juist."
+        "SMS code is niet juist."
     } else if (gon.locale == "en") {
-        return "SMS code is not correct."
+        "SMS code is not correct."
     }
 }

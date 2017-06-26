@@ -178,29 +178,29 @@ var step3 = {
     },
     firstNameValidationMessage: function () {
         if (gon.locale == "fr") {
-            return "Prénom est nécessaire."
+            "Prénom est nécessaire."
         } else if (gon.locale == "nl") {
-            return "Voornaam is verplicht."
+            "Voornaam is verplicht."
         } else if (gon.locale == "en") {
-            return "First name is required."
+            "First name is required."
         }
     },
     lastNameValidationMessage: function () {
         if (gon.locale == "fr") {
-            return "Nom de famille est nécessaire."
+            "Nom de famille est nécessaire."
         } else if (gon.locale == "nl") {
-            return "Achternaam is verplicht."
+            "Achternaam is verplicht."
         } else if (gon.locale == "en") {
-            return "Surname  is required."
+            "Surname  is required."
         }
     },
     telephoneValidationMessage: function () {
         if (gon.locale == "fr") {
-            return "Téléphone est nécessaire."
+            "Téléphone est nécessaire."
         } else if (gon.locale == "nl") {
-            return "Telefoon is verplicht."
+            "Telefoon is verplicht."
         } else if (gon.locale == "en") {
-            return "Telephone is required."
+            "Telephone is required."
         }
     },
     validateBancCard: function () {
@@ -213,29 +213,29 @@ var step3 = {
     },
     isEligableValidationMessage: function () {
         if (gon.locale == "fr") {
-            return "Numéro de téléphone est nécessaire."
+            "Numéro de téléphone est nécessaire."
         } else if (gon.locale == "nl") {
-            return "Telefoonnummer is vereist."
+            "Telefoonnummer is vereist."
         } else if (gon.locale == "en") {
-            return "Phone number is required."
+            "Phone number is required."
         }
     },
     orangePurchaseMessage: function () {
         if (gon.locale == "fr") {
-            return "SMS code est nécessaire."
+            "SMS code est nécessaire."
         } else if (gon.locale == "nl") {
-            return "SMS code is vereist."
+            "SMS code is vereist."
         } else if (gon.locale == "en") {
-            return "SMS code is required."
+            "SMS code is required."
         }
     },
     orangePurchaseMessageSmsCodeValidation: function () {
         if (gon.locale == "fr") {
-            return "Le code SMS n'est pas correct."
+            "Le code SMS n'est pas correct."
         } else if (gon.locale == "nl") {
-            return "SMS code is niet juist."
+            "SMS code is niet juist."
         } else if (gon.locale == "en") {
-            return "SMS code is not correct."
+            "SMS code is not correct."
         }
     }
 
