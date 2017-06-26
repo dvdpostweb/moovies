@@ -95,7 +95,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
       discount = Discount.by_name(params[:code]).available.first
       product = Product.find_by_products_id(params[:products_id])
       customer = Customer.new
-      customer.email = "#{4.times.map{rand(10)}.join}_#{params[:sms_number]}@orange.lu"
+      customer.email = "#{params[:sms_number]}@orange.lu"
       customer.customers_telephone = params[:sms_number]
       if discount.present?
         customer.customers_registration_step = 33

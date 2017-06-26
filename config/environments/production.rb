@@ -1,7 +1,5 @@
 Moovies::Application.configure do
 
-  config.browserify_rails.use_browserifyinc = true
-
   config.react.variant = :production
   # Settings specified here will take precedence over those in config/application.rb
 

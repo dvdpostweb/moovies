@@ -82,7 +82,6 @@ gem 'rack-cors', '~> 0.4.1'
 gem 'httparty', '~> 0.14.0'
 gem 'will_paginate-bootstrap'
 gem 'redis-rails'
-gem "browserify-rails"
 gem "react-rails"
 gem 'webpack-rails', '~> 0.9.10'
 gem 'scout_apm'

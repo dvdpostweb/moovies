@@ -5,7 +5,7 @@ var PromoImage = React.createClass({
         }
         return (
             <div className="container white-bck">
-                <div href={this.props.image} className="promo-image rwd-bck display-block" style={image}  >
+                <div href={this.props.image} className="promo-image rwd-bck display-block" style={image}>
                     <div className="promo-image-overlay">
                         <div className="promo-image-overlay-inner white bold">
                             <span>Vivez avec nous les plus grands moments du cinéma</span>
