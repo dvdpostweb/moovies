@@ -64,7 +64,7 @@
         </div>
       </form>
     </div>
-    <h3>Pay with Orange SMS Confirmation Code</h3>
+    <h3><%= t('use_orange_billing') %></h3>
     <div>
       <div id="sms_auth" class="center-block thin-holder border radius4 thinrgray-bck pad20 mart20 overflow-hidden">
         <div class="block100 text-center">
@@ -73,19 +73,26 @@
         </div>
         <div id="sms_form">
           <form id="is_eligable_subscriber">
-            <div class="form-group input-group-lg">
-              <input type="text" name="phone-number" id="sms_number" class="form-control" placeholder="Please enter ORANGE phone number" value="<%= current_customer.customers_telephone %>">
+            <div class="input-group">
+              <div class="input-group-addon">+352</div>
+              <input type="text" name="phone-number" id="sms_number" class="form-control" placeholder="<%= t('orange_phone_number') %>" value="<%= current_customer.customers_telephone.slice(3..-1) %>">
             </div>
             <div class="block100 text-center mart20">
-              <input type="submit" class="btn block100 orange-bck padlr40 padtb15 white f16 normal" value="Send">
+              <input type="submit" class="btn block100 orange-bck padlr40 padtb15 white f16 normal" value="<%= t('orange_send_button') %>">
+            </div>
+            <div class="block100 text-center mart20">
+              <p><%= t('orange_login_explanation_text_1') %></p>
             </div>
           </form>
           <form id="orange_purchase_subscriber">
-            <div class="form-group input-group-lg">
-              <input type="text" name="sms-code" id="sms_code" class="form-control" placeholder="Please enter ORANGE SMS code">
+            <div class="form-group">
+              <input type="text" name="sms-code" id="sms_code" class="form-control" placeholder="<%= t('orange_sms_code_2') %>">
             </div>
             <div class="block100 text-center mart20">
-              <input type="submit" class="btn block100 orange-bck padlr40 padtb15 white f16 normal" value="Send">
+              <input type="submit" class="btn block100 orange-bck padlr40 padtb15 white f16 normal" value="<%= t('orange_send_button') %>">
+            </div>
+            <div class="block100 text-center mart20">
+              <p><%= t('orange.sms_code.message_info').html_safe %></p>
             </div>
           </form>
         </div>
@@ -115,6 +122,4 @@
   <p><%= link_to t('promotion.newstep3.conditions').html_safe, info_path(:page_name => t('routes.infos.params.conditions')), class: "conditions-d-utilisation" %></p>
 </div>
 
-<% content_for :run_specific_javascript do %>
-    <%= javascript_include_tag "steps/step3" %>
-<% end %>
+<%= javascript_include_tag *webpack_asset_paths("step3") %>

@@ -9,6 +9,7 @@
       </div>
       <div id="sms_form">
         <form id="is_eligable">
+          <div id="promo-code-error"></div>
           <div class="input-group">
             <div class="input-group-addon">+352</div>
             <input type="text" name="phone-number" id="sms_number" class="form-control" placeholder="<%= t('orange_phone_number') %>">
@@ -22,10 +23,10 @@
         </form>
         <form id="orange_purchase">
           <div class="form-group input-group-lg">
-            <input type="text" name="sms-code" id="sms_code" class="form-control" placeholder="Please enter ORANGE SMS code">
+            <input type="text" name="sms-code" id="sms_code" class="form-control" placeholder="<%= t('orange_sms_code_2') %>">
           </div>
           <div class="block100 text-center mart20">
-            <input type="submit" class="btn block100 orange-bck padlr40 padtb15 white f16 normal" value="Send">
+            <input type="submit" class="btn block100 orange-bck padlr40 padtb15 white f16 normal" value="<%= t('orange_send_button') %>">
           </div>
           <div class="block100 text-center mart20">
             <p><%= t('orange.sms_code.message_info').html_safe %></p>
@@ -36,6 +37,4 @@
   </div>
 </div>
 
-<% content_for :run_specific_javascript do %>
-    <%= javascript_include_tag "orange/lu/auth/sms" %>
-<% end %>
+<%= javascript_include_tag *webpack_asset_paths("orangelogin") %>

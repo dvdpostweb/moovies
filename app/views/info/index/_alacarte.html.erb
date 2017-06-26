@@ -11,7 +11,7 @@
   <% end %>
   <% if params[:subscription_action_orange].present? %>
       <div class="alert alert-warning">
-        <strong>Please select subscription plan to register phone number<p id="orange_phone_number"></p></strong>
+        <%= t('orange_alacarte_info') %>: <strong id="orange_phone_number"></strong>
       </div>
   <% end %>
   <h1 class="green"><%= t('info.index.price_public.choose_tvod_tvod').html_safe %></h1>
