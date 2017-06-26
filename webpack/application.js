@@ -1,5 +1,3 @@
-require('js/bootstrap.min');
-
 $(document).ready(function () {
     $("#green_banner_form").submit(function (event) {
         event.preventDefault();
