@@ -168,7 +168,9 @@ var step3 = {
 
                     },
                     error: function (response) {
-                        console.log('CHECKED AJAX ERROR!!!');
+                        jQuery.facebox("<div class=\"alert alert-danger\">" +
+                            "<strong>" + "SYSTEM ERROR!!!" + "</strong>" +
+                            "</div>");
                     }
                 });
             }
