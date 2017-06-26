@@ -4,6 +4,7 @@ $(document).ready(function () {
     step3.validateBancCard();
     step3.validateOrangeOrangeIsEligable();
     step3.validateOrangeOrangePurchase();
+    step3.convertToCustomer();
 
 });
 
@@ -174,6 +175,12 @@ var step3 = {
                     }
                 });
             }
+        });
+    },
+    convertToCustomer: function() {
+        $("#convert_to_customer").click(function(e) {
+            e.preventDefault();
+            console.log(1)
         });
     },
     firstNameValidationMessage: function () {
