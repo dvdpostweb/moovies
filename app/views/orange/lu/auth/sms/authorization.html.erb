@@ -22,16 +22,19 @@
           <div class="block100 text-center mart20">
             <input type="submit" class="btn block100 orange-bck padlr40 padtb15 white f16 normal" value="<%= t('orange_send_button') %>">
           </div>
+          <div class="block100 text-center mart20">
+            <p><%= t('orange_login_explanation_text_1') %></p>
+          </div>
         </form>
         <form id="orange_purchase">
+          <div class="block100 text-center mart20">
+            <p><%= t('orange_p_2') %></p>
+          </div>
           <div class="form-group input-group-lg">
             <input type="text" name="sms-code" id="sms_code" class="form-control" placeholder="<%= t('orange_sms_code_2') %>">
           </div>
           <div class="block100 text-center mart20">
             <input type="submit" class="btn block100 orange-bck padlr40 padtb15 white f16 normal" value="<%= t('orange_send_button') %>">
-          </div>
-          <div class="block100 text-center mart20">
-            <p><%= t('orange.sms_code.message_info').html_safe %></p>
           </div>
         </form>
       </div>
