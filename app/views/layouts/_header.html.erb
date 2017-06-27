@@ -23,7 +23,7 @@
       <%= switch_locale_link(params) %>
     </ul>
     <% if customer_signed_in? %>
-        <ul class="lng-holder col-md-3">
+        <ul class="login-holder col-md-9 f12">
           <li><%= "#{link_to t('.logout'), destroy_customer_session_path, :id => :logout, :method => :delete} <span>(#{current_customer.email})</span>".html_safe %></li>
           <li><%= link_to t('.compte'), customer_path(:id => current_customer) %></li>
         </ul>
