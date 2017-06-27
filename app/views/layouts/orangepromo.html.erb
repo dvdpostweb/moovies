@@ -11,6 +11,7 @@
   <%= include_gon(namespace: 'Plush') %>
   <%= Gon::Base.render_data %>
   <% Gon.global.current_customer = current_customer if !customer_signed_in? %>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
   <%= stylesheet_link_tag "application", :media => "all" %>
   <style>
   #code-error {

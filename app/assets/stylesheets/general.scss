@@ -5,10 +5,6 @@
 /*BREAKPOINTS*/
 /*MIXINS*/
 /*END MIXINS*/
-@font-face {
-  font-family: 'OpenSansCondensed';
-  src: url("fonts/OpenSansCondensed/OpenSans-CondLight.ttf");
-}
 /*GENERAL*/
 * {
   box-sizing: border-box;
@@ -1112,7 +1108,7 @@ hr.hr-small {
 }
 
 .OpenSansCondensed {
-  font-family: OpenSansCondensed;
+  font-family: Open Sans Condensed;
 }
 
 a.active {
