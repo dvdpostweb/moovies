@@ -1,7 +1,7 @@
 var PromoImage = React.createClass({
     render: function() {
         var image =  {
-            "background-image": 'url('+ this.props.image + ')'
+            "backgroundImage": 'url('+ this.props.image + ')'
         }
         return (
             <div className="container white-bck">
