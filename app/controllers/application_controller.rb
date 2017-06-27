@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
     gon.current_customer = current_customer
     gon.locale = I18n.locale
     gon.root_localize_path = root_localize_path
-    gon.request_host = request.host if Rails.env.development?
+    gon.request_host = request.host
     gon.params = params if Rails.env.development?
     gon.modal_close_button_text = t('bootstrap.modal.close')
     gon.language_by_language_locale = Language.by_language(I18n.locale)
