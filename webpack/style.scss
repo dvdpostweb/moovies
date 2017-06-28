@@ -1,3 +1,15 @@
+@import "/styleshets/bootstrap.min.css";
+@import "/styleshets/bootstrap-datepicker.css";
+@import "/styleshets/jquery-ui.min.css";
+@import "/styleshets/slick.css";
+@import "/styleshets/jquery.tagit.css";
+@import "/styleshets/ion.rangeSlider.css";
+@import "/styleshets/ion.rangeSlider.skinSimple.css";
+@import "/styleshets/iCheck.css";
+@import "/styleshets/general.css";
+@import "/styleshets/bootstrap-chosen.css";
+@import "/styleshets/fancybox.css";
+
 @charset "UTF-8";
 /*COLORS*/
 /*COLORS*/
@@ -3428,11 +3440,11 @@ ul.video-lg-buttons li {
 }
 
 .available-versions.on {
-  height: 165px;
+  height: 135px;
 }
 @media (max-width: 479px) {
   .available-versions.on {
-    height: 300px;
+    height: 180px;
   }
 }
 
