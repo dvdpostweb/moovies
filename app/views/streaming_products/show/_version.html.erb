@@ -5,7 +5,7 @@
 <% end %>
 <% audio_title = version.language.by_language(I18n.locale).first.name %>
 <p class="block100">
-    <%= t 'streaming_products.show.kinds_alpha.audio_title' %> <i class="fa fa-file-audio-o"></i> : <%= audio_title %> | <%= t 'streaming_products.show.kinds_alpha.sub_title' %> <i class="fa fa-language"></i> :<%= sub_title.capitalize %>
+    <%= t 'streaming_products.show.kinds_alpha.audio_title' %>  : <%= audio_title %> | <%= t 'streaming_products.show.kinds_alpha.sub_title' %>  :<%= sub_title.capitalize %>
     <%= link_to streaming_product_path({:id => version.imdb_id, :streaming_product_id => version.to_param, :streaming_code => params[:streaming_code], :source => source, :email => params[:email], :response_id => response_id}), :class => 'btn btn-green-gradient bold padlr25 white f12 marl5 qualityvod' do %>
       <i class="fa fa-play marr5"></i> <%= t('.launch') %>
     <% end %>

@@ -10,7 +10,7 @@
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
           <div class="block100 slide-score <%= params[:kind] == :adult ? "violet" : "#{@product.tvod? ? "blue" : "green"}" %> mart5 f20" data-score="<%= @product.rating_count %>"></div>
-          <span class="block100 Arial f16 mart5 normal text-right"><%= t('.count') %> <%= @product.rating_count %></span>
+          <span class="block100 Arial f16 mart5 normal text-right"><%= @product.rating_count %> <%= t('.count') %></span>
         </div>
       </h1>
       <div class="cover-list-view">

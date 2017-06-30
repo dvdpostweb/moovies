@@ -1,4 +1,4 @@
 <% title = audio.language.by_language(I18n.locale).first.name %>
 <li>
-  <a href="<%= streaming_product_language_path(:streaming_product_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id], :language_id => audio.language_id, :streaming_code => params[:streaming_code], :email => params[:email], :sample => sample, :source => params[:source], :response_id => params[:response_id]) %>" class="btn dark-gray-bck pull-left uppercase slide-next" data-target="#myCarousel" data-slide-to="1" data-switch="audio-button" data-button="<%= title %>"><i class="fa fa-file-audio-o marr5"></i><%= title %></a>
+  <a href="<%= streaming_product_language_path(:streaming_product_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id], :language_id => audio.language_id, :streaming_code => params[:streaming_code], :email => params[:email], :sample => sample, :source => params[:source], :response_id => params[:response_id]) %>" class="btn dark-gray-bck pull-left uppercase slide-next" data-target="#myCarousel" data-slide-to="1" data-switch="audio-button" data-button="<%= title %>"><%= title %></a>
 </li>
