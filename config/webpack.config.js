@@ -12,7 +12,6 @@ var config = {
         'orangeregister': './webpack/orange/register.js',
         'credit_card_tvod': './webpack/payment_methods/credit_card_tvod.js',
         'redirect_to_ogone': './webpack/payment_methods/redirect_to_ogone.js',
-        'components': './webpack/components/components.js',
         'step3': './webpack/steps/step3.js',
         'streaming': './webpack/streaming_product/streaming.js'
     },
@@ -24,7 +23,7 @@ var config = {
         filename: production ? '[name]-[chunkhash].js' : '[name].js'
     },
 
-    resolve: {
+    resolve: {extensions: ["", ".js", ".jsx"],
         root: path.join(__dirname, '..', 'webpack')
     },
 

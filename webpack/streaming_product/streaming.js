@@ -60,6 +60,7 @@ $(document).ready(function () {
             url = "plush://cn="+gon.current_customer.customers_id+"&imdb_id="+product+"&disk_id=0&season_id=0&callback=http://staging.plush.be/api/v1/orange/callbacks/orangemobile?cn="+gon.current_customer.customers_id+"&products_id="+pid+"";
             encodedUrl = encodeURIComponent(url);
             window.location = encodedUrl;
+            console.log(encodedUrl);
         //}
         $(".qualityvod").last().trigger("click");
         setTimeout(function() {
