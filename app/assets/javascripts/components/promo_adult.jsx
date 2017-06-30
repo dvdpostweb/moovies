@@ -1,4 +1,4 @@
-window.PromoImageAdult = React.createClass({
+window.PromoAdult = React.createClass({
     render: function () {
         var image = {
             backgroundImage: 'url(' + this.props.image + ')'
