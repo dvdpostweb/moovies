@@ -30,6 +30,8 @@ Moovies::Application.routes.draw do
         namespace :callbacks do
           get "wha/success"
           get "wha/cancel"
+          #get "wha/orangemobile"
+          match "orangemobile" => "ios#orangemobile"
         end
       end
     end
