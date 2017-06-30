@@ -58,6 +58,10 @@ GEM
       rake (>= 10.4, < 13.0)
     arel (3.0.3)
     attr_required (1.0.1)
+    babel-source (5.8.35)
+    babel-transpiler (0.7.0)
+      babel-source (>= 4.0, < 6)
+      execjs (~> 2.0)
     bcrypt (3.1.11)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
@@ -123,6 +127,7 @@ GEM
       sprockets (< 4.0)
     composite_primary_keys (5.0.14)
       activerecord (~> 3.2.0, >= 3.2.9)
+    connection_pool (2.2.1)
     date_validator (0.9.0)
       activemodel
       activesupport
@@ -258,6 +263,12 @@ GEM
       ffi (>= 0.5.0, < 2)
     rdoc (3.12.2)
       json (~> 1.4)
+    react-rails (2.2.0)
+      babel-transpiler (>= 0.7.0)
+      connection_pool
+      execjs
+      railties (>= 3.2)
+      tilt
     redis (3.3.3)
     redis-actionpack (3.2.4)
       actionpack (~> 3.2.0)
@@ -394,6 +405,7 @@ DEPENDENCIES
   quiet_assets
   rack-cors (~> 0.4.1)
   rails (~> 3.2, >= 3.2.22.5)
+  react-rails
   redis-rails
   rest-client (~> 1.8)
   route_translator!
