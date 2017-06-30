@@ -1,6 +1,11 @@
 <div class="block100">
   <h3 class="OpenSansCondensed f25 dark-blue pad0 padl5"><%= t '.format_available' %></h3>
-
+  <div class="block100 mart5">
+    <%= render :partial => 'products/streaming',  :locals => {:product => product, :source => @source, :popup => false, :max_price => true}  %>
+  </div>
+  <br>
+  <br>
+  <br>
   <% product.get_vod(session[:country]).each do |vod| %>
     <table class="dark-blue OpenSansCondensed movie-versions-table">
       <tr>
@@ -44,9 +49,10 @@
         <% end %>
       </tr>
     </table>
-    <div class="block100 mart5">
-      <%= render :partial => 'products/streaming',  :locals => {:product => product, :source => @source, :popup => false, :max_price => true} if vod.available? %>
-    </div>
+      <br>
+    <!--div class="block100 mart5">
+      <!-%= render :partial => 'products/streaming',  :locals => {:product => product, :source => @source, :popup => false, :max_price => true} if vod.available? %-->
+    <!--/div-->
       <%= get_vod_message(vod, svod_date, params[:kind].to_s, Moovies.packages.invert[product.package_id]) %>
   <% end %>
 </div>
