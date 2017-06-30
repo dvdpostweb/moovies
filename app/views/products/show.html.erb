@@ -20,25 +20,26 @@
         <% end %>
       </div>
       <div class="text-list-view dark-gray">
-        <% actors = @product.actors.collect { |actor| link_to(actor.name, actor_products_path(:actor_id => actor.to_param), :class => "f13") }.join(', ').html_safe %>
-        <% if actors.size > 0 %>
+        <!--
+        <#% actors = @product.actors.collect { |actor| link_to(actor.name, actor_products_path(:actor_id => actor.to_param), :class => "f13") }.join(', ').html_safe %>
+        <#% if actors.size > 0 %>
             <div class="block100">
-              <h5 class="block100 f16 mart0 bold marb5"><%= t '.actors' %></h5>
-              <%= actors %>
+              <h5 class="block100 f16 mart0 bold marb5"><#%= t '.actors' %></h5>
+              <#%= actors %>
             </div>
-        <% end %>
-        <% if @product.studio && @product.adult? %>
+        <#% end %>
+        <#% if @product.studio && @product.adult? %>
             <div class="block100 mart5">
               <h5 class="display-inline f16 mart0 bold marb5"><%= t('.studio') %></h5>
-              <%= link_to(@product.studio.name, studio_products_path(:studio_id => @product.studio.to_param), :class => "f13") %>
+              <#%= link_to(@product.studio.name, studio_products_path(:studio_id => @product.studio.to_param), :class => "f13") %>
             </div>
-        <% end %>
-        <% if @product.director && !@product.adult? %>
+        <#% end %>
+        <#% if @product.director && !@product.adult? %>
             <div class="block100 mart5">
               <h5 class="display-inline f16 mart0 bold marb5"><%= t('.directed_by') %></h5>
-              <%= link_to(@product.director.name, director_products_path(:director_id => @product.director.to_param), :class => "f13") %>
+              <#%= link_to(@product.director.name, director_products_path(:director_id => @product.director.to_param), :class => "f13") %>
             </div>
-        <% end %>
+        <#% end %>-->
         <div class="block100 mart5">
           <h5 class="display-inline f16 mart0 bold marb5"><%= t '.country' %></h5>
           <span class="marl5 light-gray f13"><%= @product.country.name if @product.country %></span>
