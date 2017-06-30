@@ -15,7 +15,7 @@
               <p><%= t('orange_p_1') %></p>
             </div>
             <div class="input-group">
-              <div class="input-group-addon">+352</div>
+              <div class="input-group-addon"><%= set_prefix_orange(request.host) %></div>
               <input type="text" name="phone-number" id="sms_number_register" class="form-control" placeholder="<%= t('orange_phone_number') %>">
             </div>
             <div class="block100 text-center mart20">

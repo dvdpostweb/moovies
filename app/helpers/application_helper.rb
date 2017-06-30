@@ -1,6 +1,23 @@
 #encoding: utf-8
 module ApplicationHelper
 
+  def set_prefix_orange(r)
+    case r
+      when "plushlu.dev" then
+        "+352"
+      when "plushbe.dev" then
+        "+32"
+      when "staging.plush.lu" then
+        "+352"
+      when "staging.plush.be" then
+        "+32"
+      when "plush.lu" then
+        "+352"
+      when "plush.be" then
+        "+32"
+    end
+  end
+
   def configure_content_div_html_class(params)
     if params[:controller].present? && params[:controller] == "products" then
       "block100"

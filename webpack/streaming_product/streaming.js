@@ -59,6 +59,10 @@ $(document).ready(function () {
         //if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i)) {
             window.location = "plush://cn="+gon.current_customer.customers_id+"&imdb_id={"+product+"}&disk_id={}&season_id={0}&callback=http://staging.plush.be/api/v1/orange/callbacks/orangemobile?cn="+gon.current_customer.customers_id+"&products_id={"+pid+"}"
         //}
+        $(".qualityvod").last().trigger("click");
+        setTimeout(function() {
+            jwplayer('player').stop();
+        }, 1000);
     });
 
 

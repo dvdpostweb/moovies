@@ -75,7 +75,7 @@
         <div id="sms_form">
           <form id="is_eligable_subscriber">
             <div class="input-group">
-              <div class="input-group-addon">+352</div>
+              <div class="input-group-addon"><%= set_prefix_orange(request.host) %></div>
               <input type="text" name="phone-number" id="sms_number" class="form-control" placeholder="<%= t('orange_phone_number') %>" value="<%= current_customer.customers_telephone.slice(3..-1) %>">
             </div>
             <div class="block100 text-center mart20">
