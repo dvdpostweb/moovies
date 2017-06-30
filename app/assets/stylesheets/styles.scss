@@ -1034,6 +1034,15 @@ a.btn#activate {
   }
 }
 
+.home-carousel-holder:first-child .hr-with-words {
+  margin-top: 0px;
+}
+@media (max-width: 980px) {
+    .home-carousel-holder:first-child .hr-with-words {
+      margin-top: 5px;
+    }
+}
+
 .home-carousel-holder h2 {
   margin: 0;
   padding: 0 0 0 5px;
