@@ -8,8 +8,7 @@ window.PromoImageAdult = React.createClass({
                 <div href={this.props.image} className="promo-image rwd-bck display-block" style={image}>
                     <div className="promo-image-overlay">
                         <div className="promo-image-overlay-inner white bold">
-                            <span>{this.props.btn}</span>
-                            <button>{this.props.btn}</button>
+                            <span>{this.props.text}</span>
                         </div>
                     </div>
                 </div>

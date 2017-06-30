@@ -798,10 +798,11 @@ h3, h4, h5 {
 /*promo image*/
 .promo-image {
   height: 200px;
+  font-family: 'Open Sans Condensed', Arial, sans-serif;
 }
 @media (max-width: 980px) {
   .promo-image {
-    height: 300px;
+    height: 160px;
   }
 }
 
@@ -817,19 +818,18 @@ h3, h4, h5 {
 }
 
 .promo-image .promo-image-overlay-inner {
-  width: 50%;
-  float: left;
-}
-@media (max-width: 479px) {
-  .promo-image .promo-image-overlay-inner {
-    width: 100%;
-  }
+  width: 100%;
 }
 
 .promo-image .promo-image-overlay span {
   text-shadow: 2px 2px 2px #000;
-  font-size: 20px;
+  font-size: 35px;
   color: #E1E4DA;
+}
+@media (max-width: 479px) {
+  .promo-image .promo-image-overlay span {
+    font-size: 25px;
+  }
 }
 
 .promo-image button {

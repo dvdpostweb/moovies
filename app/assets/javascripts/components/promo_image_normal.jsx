@@ -9,7 +9,6 @@ window.PromoImageNormal = React.createClass({
                     <div className="promo-image-overlay">
                         <div className="promo-image-overlay-inner white bold">
                             <span>{this.props.text}</span>
-                            <button>{this.props.btn}</button>
                         </div>
                     </div>
                 </div>
