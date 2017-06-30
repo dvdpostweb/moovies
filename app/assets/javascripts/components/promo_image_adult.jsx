@@ -1,4 +1,4 @@
-window.PromoImage = React.createClass({
+window.PromoImageAdult = React.createClass({
     render: function () {
         var image = {
             backgroundImage: 'url(' + this.props.image + ')'
@@ -8,8 +8,8 @@ window.PromoImage = React.createClass({
                 <div href={this.props.image} className="promo-image rwd-bck display-block" style={image}>
                     <div className="promo-image-overlay">
                         <div className="promo-image-overlay-inner white bold">
-                            <span>Vivez avec nous les plus grands moments du cinéma</span>
-                            <button>Découvrez nos formules</button>
+                            <span>{this.props.btn}</span>
+                            <button>{this.props.btn}</button>
                         </div>
                     </div>
                 </div>
