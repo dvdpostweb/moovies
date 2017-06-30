@@ -22,6 +22,10 @@ Moovies::Application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
 
+  config.assets.precompile += %w(
+  components/promo_image.jsx
+  )
+
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 
