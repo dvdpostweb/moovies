@@ -14,7 +14,7 @@ var config = {
         'redirect_to_ogone': './webpack/payment_methods/redirect_to_ogone.js',
         'components': './webpack/components/components.js',
         'step3': './webpack/steps/step3.js',
-        'streaming': './webpack/streaming_product/step3.js'
+        'streaming': './webpack/streaming_product/streaming.js'
     },
 
     output: {
