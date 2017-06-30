@@ -1,5 +1,9 @@
 if (localStorage.getItem("plush_phone_number") !== null) {
-    $("#sms_number").val(localStorage.getItem("plush_phone_number").substring(4));
+    if(gon.request_host === "staging.plush.be" || gon.request_host === "plush.be") {
+        $("#sms_number").val(localStorage.getItem("plush_phone_number").substring(3));
+    } else {
+        $("#sms_number").val(localStorage.getItem("plush_phone_number").substring(4));
+    }
 }
 
 jQuery.validator.addMethod("phone", function (phone_number, element) {
@@ -139,7 +143,7 @@ $("#orange_purchase").validate({
                         dataType: 'json',
                         success: function (response) {
                             if (0 === response.status) {
-                                window.location.href = response.redirect_path
+                                //window.location.href = response.redirect_path
                             }
                         },
                         error: function (response) {
