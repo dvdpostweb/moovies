@@ -29,27 +29,30 @@
         <!--
         <div id="password_info"><div id="password_message"></div></div>
         </br>-->
+
+
         <% if devise_mapping.rememberable? -%>
-            <div class="block100 mart30">
-              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padt15">
-                <%= f.check_box :remember_me, :checked => true, class: "icheckbox" %>
-                <label class="Arial f18 normal marl10"><%= t('.remember_me') %></label>
+
+
+            <div class="block100 mart20">
+              <%= f.submit t('.connect'), :id => 'submit_button', :class => "btn btn-green-gradient padlr40 padtb15 white f16 normal" %>
+              <div class="center-block">
+              <div class="checkbox">
+                <%= f.check_box :remember_me, :checked => true %>
+                <label><%= t('.remember_me') %></label>
               </div>
-              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
-                <%= f.submit t('.connect'), :id => 'submit_button', :class => "btn btn-green-gradient padlr40 padtb15 white f16 normal" %>
               </div>
             </div>
+
+
         <% end -%>
 
     <% end %>
     <div class="block100 mart60 text-center">
-      <%= link_to t('.forget_password'), new_password_path(resource_name, :code => params[:code], :activation => params[:activation]), class: "f20" %>
+      <%= link_to t('signup.forget.password'), new_password_path(resource_name, :code => params[:code], :activation => params[:activation]), class: "f20" %>
     </div>
-    <div class="block100 mart15">
-      <span class="green f20 block100 text-center">You do not have an account?</span>
-    </div>
-    <div class="block100 mart5 text-center">
-      <%= link_to t('.sign_up'), new_customer_registration_path(:moovie_id => params[:moovie_id], :code => params[:code], :activation => params[:activation]), class: "f20" %>
+    <div class="green f20 block100 text-center">
+      <%= link_to t('signup.signin'), new_customer_registration_path(:moovie_id => params[:moovie_id], :code => params[:code], :activation => params[:activation]), class: "f20" %>
     </div>
   </div>
 </div>

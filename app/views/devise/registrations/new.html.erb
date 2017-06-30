@@ -54,10 +54,10 @@
         </div>
 
         <div class="block100 mart30 text-center">
-          <%= link_to t('.forget_password'), new_password_path(resource_name, :code => params[:code], :activation => params[:activation]), class: "f20" %>
+          <%= link_to t('signin.forget.password'), new_password_path(resource_name, :code => params[:code], :activation => params[:activation]), class: "f20" %>
         </div>
         <div class="block100 mart5 text-center">
-          <%= link_to t('.sign_in'), new_session_path(resource_name, :code => params[:code], :activation => params[:activation]), class: "f20" %>
+          <%= link_to t('signin.no.account'), new_session_path(resource_name, :code => params[:code], :activation => params[:activation]), class: "f20" %>
         </div>
     <% end %>
   </div>
