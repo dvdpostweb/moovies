@@ -33,11 +33,7 @@
   <div class="wrap">
     <%= render "layouts/header" %>
     <div id="content" class="<%= configure_content_div_html_class(params) %>">
-      <% unless customer_signed_in? %>
-          <% if params[:controller] == "products" %>
-              <%= react_component("PromoImage", {image: "http://staging.plush.be/assets/template/promo-image.jpg"}) %>
-          <% end %>
-      <% end %>
+      <%= render "layouts/promo_banner" %>
       <%= yield %>
     </div>
     <% cache("layouts_footer_#{I18n.locale}", :expires_in => 15.minutes) do %>

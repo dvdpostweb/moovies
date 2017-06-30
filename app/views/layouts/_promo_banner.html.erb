@@ -1,0 +1,9 @@
+<% unless customer_signed_in? %>
+    <% if params[:controller] == "products" %>
+        <% if params[:kind] == :normal %>
+            <%= react_component("PromoImage", {image: "http://staging.plush.be/assets/promo_banner/normal1.jpg"}) %>
+        <% else %>
+            <%= react_component("PromoImage", {image: "http://staging.plush.be/assets/promo_banner/adult1.jpg"}) %>
+        <% end %>
+    <% end %>
+<% end %>
