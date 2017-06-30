@@ -1,9 +1,25 @@
 <% unless customer_signed_in? %>
     <% if params[:controller] == "products" %>
         <% if params[:kind] == :normal %>
-            <%= react_component("PromoNormal", {image: "http://staging.plush.be/assets/promo_banner/normal1.jpg", text: t('orange_promo_banner_text_normal')}) %>
+            <div class="container white-bck">
+              <div class="promo-image rwd-bck display-block" style="background-image: url('http://staging.plush.be/assets/promo_banner/normal1.jpg')" }>
+                <div class="promo-image-overlay">
+                  <div class="promo-image-overlay-inner white bold">
+                    <span><%= t('orange_promo_banner_text_normal') %></span>
+                  </div>
+                </div>
+              </div>
+            </div>
         <% else %>
-            <%= react_component("PromoAdult", {image: "http://staging.plush.be/assets/promo_banner/adult2.jpg", text: t('orange_promo_banner_text_adult')}) %>
+            <div class="container white-bck">
+              <div class="promo-image rwd-bck display-block" style="background-image: url('http://staging.plush.be/assets/promo_banner/adult2.jpg')">
+                <div class="promo-image-overlay">
+                  <div class="promo-image-overlay-inner white bold">
+                    <span><%= t('orange_promo_banner_text_adult') %></span>
+                  </div>
+                </div>
+              </div>
+            </div>
         <% end %>
     <% end %>
 <% end %>
