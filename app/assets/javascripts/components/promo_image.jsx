@@ -1,4 +1,4 @@
-var PromoImage = React.createClass({
+window.PromoImage = React.createClass({
     render: function () {
         var image = {
             backgroundImage: 'url(' + this.props.image + ')'
