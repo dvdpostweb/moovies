@@ -1327,6 +1327,15 @@ a.btn#activate {
   background: linear-gradient(to bottom, #94C951 0%, #70A008 100%);
 }
 
+.btn-adult-gradient,
+.btn-adult-gradient:focus,
+.btn-adult-gradient:active {
+  margin: 0 auto;
+  background: #993399;
+  background: -webkit-linear-gradient(top, #993399 0%, #993399 100%);
+  background: linear-gradient(to bottom, #993399 0%, #993399 100%);
+}
+
 .popover-content .slide-content,
 .synopsys-content .slide-content {
   color: #212a31;
