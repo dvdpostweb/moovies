@@ -7,5 +7,3 @@
 ## PRODUCTION DEPLOY <br>
 
 ### cap production deploy && cap production invoke:rake TASK=webpack:compile
-
-

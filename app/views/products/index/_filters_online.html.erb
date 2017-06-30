@@ -30,50 +30,50 @@
         <div class="left-item mart15" id="categories">
 
           <label class="OpenSansCondensed f20"><%= t('products.index.filters.link') %></label>
-          <div class="col-md-11 col-sm-11 col-xs-11 f12 mart5 text-left">
+          <div class="OpenSansCondensed col-md-11 col-sm-11 col-xs-11 f12 mart5 text-left">
             <%= label_tag('filters[view_mode]_last_added', t('products.left_column.svod_last_added')) %>
           </div>
-          <div class="col-md-1 col-sm-1 col-xs-1 mart5">
+          <div class="OpenSansCondensed col-md-1 col-sm-1 col-xs-1 mart5">
             <%= radio_button_tag('filters[view_mode]', "last_added", params[:filters] && params[:filters][:view_mode] == 'last_added' ? true : false, class: "iradio") %>
           </div>
-          <div class="col-md-11 col-sm-11 col-xs-11 f12 text-left mart10">
+          <div class="OpenSansCondensed col-md-11 col-sm-11 col-xs-11 f12 text-left mart10">
             <%= label_tag('filters[view_mode]_most_viewed', t('products.left_column.svod_most_viewed')) %>
           </div>
-          <div class="col-md-1 col-sm-1 col-xs-1 mart10">
+          <div class="OpenSansCondensed col-md-1 col-sm-1 col-xs-1 mart10">
             <%= radio_button_tag('filters[view_mode]', "most_viewed", params[:filters] && params[:filters][:view_mode] == 'most_viewed' ? true : false, class: "iradio") %>
           </div>
-          <div class="col-md-11 col-sm-11 col-xs-11 f12 text-left mart10">
+          <div class="OpenSansCondensed col-md-11 col-sm-11 col-xs-11 f12 text-left mart10">
             <%= label_tag('filters[view_mode]_last_chance', t('products.left_column.svod_last_chance')) %>
           </div>
-          <div class="col-md-1 col-sm-1 col-xs-1 mart10">
+          <div class="OpenSansCondensed col-md-1 col-sm-1 col-xs-1 mart10">
             <%= radio_button_tag('filters[view_mode]', "last_chance", params[:filters] && params[:filters][:view_mode] == 'last_chance' ? true : false, class: "iradio") %>
           </div>
-          <div class="col-md-11 col-sm-11 col-xs-11 f12 text-left mart10">
+          <div class="OpenSansCondensed col-md-11 col-sm-11 col-xs-11 f12 text-left mart10">
             <%= label_tag('filters[view_mode]_best_rated', t('products.left_column.svod_best_rated')) %>
           </div>
-          <div class="col-md-1 col-sm-1 col-xs-1 mart10">
+          <div class="OpenSansCondensed col-md-1 col-sm-1 col-xs-1 mart10">
             <%= radio_button_tag('filters[view_mode]', "best_rated", params[:filters] && params[:filters][:view_mode] == 'best_rated' ? true : false, class: "iradio") %>
           </div>
-          <div class="col-md-11 col-sm-11 col-xs-11 f12 text-left mart10">
+          <div class="OpenSansCondensed col-md-11 col-sm-11 col-xs-11 f12 text-left mart10">
             <%= label_tag('filters[view_mode]_soon', t('products.left_column.svod_soon')) %>
           </div>
-          <div class="col-md-1 col-sm-1 col-xs-1 mart10">
+          <div class="OpenSansCondensed col-md-1 col-sm-1 col-xs-1 mart10">
             <%= radio_button_tag('filters[view_mode]', "soon", params[:filters] && params[:filters][:view_mode] == 'soon' ? true : false, class: "iradio") %>
           </div>
-          <div class="col-md-11 col-sm-11 col-xs-11 f12 text-left mart10">
+          <div class="OpenSansCondensed col-md-11 col-sm-11 col-xs-11 f12 text-left mart10">
             <%= label_tag('filters[view_mode]_new', t('products.left_column.svod_new')) %>
           </div>
-          <div class="col-md-1 col-sm-1 col-xs-1 mart10">
+          <div class="OpenSansCondensed col-md-1 col-sm-1 col-xs-1 mart10">
             <%= radio_button_tag('filters[view_mode]', "new", params[:filters] && params[:filters][:view_mode] == 'new' ? true : false, class: "iradio") %>
           </div>
-          <div class="col-md-11 col-sm-11 col-xs-11 f12 text-left mart10">
+          <div class="OpenSansCondensed col-md-11 col-sm-11 col-xs-11 f12 text-left mart10">
             <%= label_tag('filters[view_mode]_hd', t('products.left_column.svod_hd')) %>
           </div>
-          <div class="col-md-1 col-sm-1 col-xs-1 mart10">
+          <div class="OpenSansCondensed col-md-1 col-sm-1 col-xs-1 mart10">
             <%= radio_button_tag('filters[view_mode]', "hd", params[:filters] && params[:filters][:view_mode] == 'hd' ? true : false, class: "iradio") %>
           </div>
           <hr>
-          <div class="col-md-12 col-sm-121 col-xs-12 f12 text-left mart10">
+          <div class="OpenSansCondensed col-md-12 col-sm-121 col-xs-12 f12 text-left mart10">
             <%= link_to t('.belgium'), belgium_path, :id => :belgium_link, :class => params[:kind] == :adult ? "violet underline" : "green underline" %>
           </div>
         </div>

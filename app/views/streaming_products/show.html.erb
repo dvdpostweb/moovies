@@ -8,7 +8,6 @@
   <% if @code || !current_customer.suspended? %>
       <% if @code || (@token && @token_valid) || (current_customer && current_customer.subscription_type.packages_ids.split(',').include?(@product.package_id.to_s)) || (current_customer.tvod_only? && @streaming.prepaid_all?) %>
           <% if !@streaming_prefered.empty? || (@streaming_not_prefered && !@streaming_not_prefered.empty?) %>
-              <%= @streaming_prefered %>
               <a type="button" id="chromecasting" class="btn btn-primary btn-block"><%= t('orange_chromecast_btn') %></a>
               <h2 class="f19 black mart20 text-center block100"><%= t('.version_title') %></h2>
               <% if @token && @token_valid && @product.tvod? && @code.nil? %>
@@ -20,7 +19,7 @@
                 <a href="index.php%3Fpage=video-stream-wizard.html#" class="center-block display-block available-trigger"><%= t('.all_versions') %>
                   <i class="fa fa-caret-down"></i></a>
                 <div class="available-versions mart5 block100 overflow-hidden thinrgray-bck black">
-                  <%= render :partial => 'streaming_products/show/versions', :locals => {:version => @streaming_prefered, :source => params[:source], :response_id => params[:response_id]} %>
+                  <%= render :partial => 'streaming_products/show/versions', :locals => {:version => @streaming_prefered, :source => params[:source], :response_id => params[:response_id]}, pid: @product.to_param %>
                 </div>
               </div>
               <!--<div id="myCarousel" class="carousel slide block100" data-ride="carousel" style="height: 180px">
@@ -58,9 +57,9 @@
       <% end %>
   <% else %>
       <script>
-      jQuery.facebox("<div class=\"alert alert-danger\">" +
-      "<strong>Suspension</strong>" +
-      "</div>");
+          jQuery.facebox("<div class=\"alert alert-danger\">" +
+              "<strong>Suspension</strong>" +
+              "</div>");
       </script>
   <% end %>
   <%= render partial: 'streaming_products/show/error', :locals => {:error => @error} if @error %>
@@ -84,17 +83,17 @@
 
 
 
-<% if params[:warning].to_i == 1 && (@token.nil? || !@token_valid )  %>
+<% if params[:warning].to_i == 1 && (@token.nil? || !@token_valid) %>
     <div id='warning' style='display:none'><%= product_action_path(:product_id => @product.to_param, :origin => 'streaming', :hide_btn => 1) %></div>
 <% end %>
 <% if @code %>
     <% if @code.name.match(/^TEXP/) %>
         <iframe src="http://www.plush.be/trade/conversion.html?campaignID=12814&productID=24087&conversionType=lead&https={https}&transactionID=<%= @code.id %>&transactionAmount={transactionAmount}&email=<%= params[:email] %>&descrMerchant={descrMerchant}&descrAffiliate={descrAffiliate}&currency={currency}" frameborder="0" scrolling="0" marginwidth="0" marginheight="0" width="1" height="1"></iframe>
     <% elsif @code.name.match(/^PEXP/) %>
-        <img style="display: none" border="0" height="0" width="0" src="http://fr.ptg.be/aimg/plush.gif" alt="" />
+        <img style="display: none" border="0" height="0" width="0" src="http://fr.ptg.be/aimg/plush.gif" alt=""/>
     <% end %>
 
-    <img style="display: none" border="0" height="0" width="0" src="//fbm.mysocialpixel.com/tracking/<%= @code.id %>/10/1385045453" alt="" />
+    <img style="display: none" border="0" height="0" width="0" src="//fbm.mysocialpixel.com/tracking/<%= @code.id %>/10/1385045453" alt=""/>
 <% end %>
 
 
@@ -102,6 +101,6 @@
 <%= javascript_include_tag *webpack_asset_paths("streaming") %>
 
 <script>
-  var product = "<%= @product.imdb_id %>";
-  var pid = "<%= @product.products_id %>";
+    var product = "<%= @product.imdb_id %>";
+    var pid = "<%= @product.products_id %>";
 </script>
