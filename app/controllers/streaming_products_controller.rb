@@ -11,20 +11,20 @@ class StreamingProductsController < ApplicationController
     @token_valid = @token.nil? ? false : @token.validate?(request.remote_ip)
     if @token_valid == false
       @streaming = StreamingProduct.available.country(Product.country_short_name(session[:country_id])).where(:imdb_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id]).first
-      @streaming_prefered = StreamingProduct.available.group_by_language.country(Product.country_short_name(session[:country_id])).where(:imdb_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id])
+      @streaming_prefered = StreamingProduct.available.country(Product.country_short_name(session[:country_id])).where(:imdb_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id])
       @streaming_not_prefered = nil
     elsif @token_valid == true
-      if Rails.env.development?
-        @streaming = StreamingProduct.available_token.where(:imdb_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id]).first
-        @streaming_prefered = StreamingProduct.available_token.group_by_language.where(:imdb_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id])
-      else
+      #if Rails.env.development?
+      #  @streaming = StreamingProduct.available_token.where(:imdb_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id]).first
+      #  @streaming_prefered = StreamingProduct.available_token.group_by_language.where(:imdb_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id])
+      #if
         @streaming = StreamingProduct.available_token.country(Product.country_short_name(session[:country_id])).where(:imdb_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id]).first
-        @streaming_prefered = StreamingProduct.available_token.group_by_language.country(Product.country_short_name(session[:country_id])).where(:imdb_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id])
-      end
+        @streaming_prefered = StreamingProduct.available_token.country(Product.country_short_name(session[:country_id])).where(:imdb_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id])
+      #end
       @streaming_not_prefered = nil
     else
       @streaming = StreamingProduct.available_beta.country(Product.country_short_name(session[:country_id])).alpha.where(:imdb_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id]).first
-      @streaming_prefered = StreamingProduct.alpha.country(Product.country_short_name(session[:country_id])).group_by_language.where(:imdb_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id])
+      @streaming_prefered = StreamingProduct.alpha.country(Product.country_short_name(session[:country_id])).where(:imdb_id => params[:id], :season_id => params[:season_id], :episode_id => params[:episode_id])
       @streaming_not_prefered = nil
     end
 
