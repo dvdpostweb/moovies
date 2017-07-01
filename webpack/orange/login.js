@@ -143,7 +143,7 @@ $("#orange_purchase").validate({
                         dataType: 'json',
                         success: function (response) {
                             if (0 === response.status) {
-                                //window.location.href = response.redirect_path
+                                window.location.href = response.redirect_path
                             }
                         },
                         error: function (response) {
@@ -153,7 +153,33 @@ $("#orange_purchase").validate({
                         }
                     });
 
-
+                } else if (1 === response.status) {
+                    window.location.href = response.redirect_path;
+                } else if (2 === response.status) {
+                    jQuery.facebox("<div class=\"alert alert-danger\">" +
+                        "<strong>" + response.msg + "</strong>" +
+                        "</div>");
+                    setTimeout( function(){
+                        window.location.href = response.redirect_path;
+                    }  , 2000 );
+                } else if (3 === response.status) {
+                    window.location.href = response.redirect_path;
+                } else if (4 === response.status) {
+                    jQuery.facebox("<div class=\"alert alert-danger\">" +
+                        "<strong>" + response.msg + "</strong>" +
+                        "</div>");
+                    setTimeout( function(){
+                        window.location.href = response.redirect_path;
+                    }  , 2000 );
+                } else if (5 === response.status) {
+                    window.location.href = response.redirect_path;
+                } else if (6 === response.status) {
+                    jQuery.facebox("<div class=\"alert alert-danger\">" +
+                        "<strong>" + response.msg + "</strong>" +
+                        "</div>");
+                    setTimeout( function(){
+                        window.location.href = response.redirect_path;
+                    }  , 2000 );
                 } else {
                     jQuery.facebox("<div class=\"alert alert-danger\">" +
                         "<strong>" + response.status + "</strong>" +

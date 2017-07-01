@@ -72,14 +72,104 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
     end
   end
 
+  #def orange_login
+  #  if request.xhr?
+      #product_id_from_params = params[:products_id].blank? ? 0 : params[:products_id]
+  #    sms_code = OrangeSmsActivationCode.find_by_sms_authentification_code(params[:sms_code])
+  #    if sms_code.present?
+  #      customer = Customer.find(sms_code.customers_id)
+  #      if customer.present?
+  #        render json: {status: "True"}
+  #      end
+  #    else
+  #      render json: {status: 0}
+  #    end
+  #  else
+  #    raise ActionController::RoutingError.new('Not Found')
+  #  end
+  #end
+
   def orange_login
     if request.xhr?
-      #product_id_from_params = params[:products_id].blank? ? 0 : params[:products_id]
+      product_id_from_params = params[:products_id].blank? ? 0 : params[:products_id]
       sms_code = OrangeSmsActivationCode.find_by_sms_authentification_code(params[:sms_code])
+
+      discount = Discount.by_name(params[:code]).available.first
+
       if sms_code.present?
         customer = Customer.find(sms_code.customers_id)
+
         if customer.present?
-          render json: {status: "True"}
+          product = Product.find_by_products_id(product_id_from_params)
+          streaming = StreamingProduct.find_by_imdb_id(product.imdb_id)
+
+          if customer.tvod_only? && product_id_from_params.to_i > 10 && customer.tvod_free < streaming.tvod_credits
+            orange_purchase_wcf_service = HTTParty.get("https://www.plush.be:2355/wcfservice/http/OrangePurchase?customersId=#{customer.customers_id}&mobileNumber=#{params[:plush_phone_number]}&price=0&products_id=#{product_id_from_params}&message=subscription&payment_id=0&locale=#{I18n.locale}")
+
+            if orange_purchase_wcf_service.parsed_response == "TRUE"
+
+              if streaming.present?
+                sign_in(customer)
+                render json: {status: 1, redirect_path: streaming_product_path(:id => product.imdb_id, :season_id => product.season_id, :episode_id => product.episode_id)}
+              end
+            else
+              sign_in(customer)
+              render json: {status: 2, msg: orange_purchase_wcf_service, redirect_path: product_path(:id => product.to_param)}
+            end
+          elsif customer.tvod_only? && product_id_from_params.to_i > 10 && customer.tvod_free >= streaming.tvod_credits
+            sign_in(customer)
+            render json: {status: 3, msg: orange_purchase_wcf_service, redirect_path: streaming_product_path(:id => product.imdb_id, :season_id => product.season_id, :episode_id => product.episode_id)}
+          elsif params[:products_id] == "1" || params[:products_id] == "5" || params[:products_id] == "7" || params[:products_id] == "8" || params[:products_id] == "9"
+            if customer.tvod_free > 0
+              sign_in(customer)
+              render json: {status: 4, msg: t('streaming_products.renew_subscription_error_orange_login'), redirect_path: root_localize_path}
+            else
+
+              if discount.present?
+
+                orange_purchase_wcf_service = HTTParty.get("https://www.plush.be:2355/wcfservice/http/OrangePurchase? customersId=#{customer.customers_id}&mobileNumber=#{params[:plush_phone_number]}&price=0&products_id=#{product_id_from_params}&message=subscription&payment_id=0&locale=#{I18n.locale}")
+                if orange_purchase_wcf_service.parsed_response == "TRUE"
+                  customer.customers_registration_step = 100
+                  customer.customers_abo = 1
+                  customer.customers_abo_type = discount.listing_products_allowed
+                  customer.customers_next_abo_type = discount.next_abo_type
+                  customer.activation_discount_code_type = 'D'
+                  customer.tvod_free = discount.tvod_free
+                  customer.customers_abo_payment_method = 5
+
+
+                  if customer.save(validate: false)
+                    if customer.abo_history(7, customer.customers_abo_type, customer.customers_abo_payment_method) # !!!
+                      sign_in(customer)
+                      render json: {status: 5, redirect_path: root_localize_path}
+                    end
+                  end
+                else
+
+                  customer.customers_registration_step = 33
+                  customer.customers_abo = 1
+                  customer.customers_abo_type = discount.listing_products_allowed
+                  customer.customers_next_abo_type = discount.next_abo_type
+                  customer.activation_discount_code_type = 'D'
+                  customer.tvod_free = discount.tvod_free
+                  customer.customers_abo_payment_method = 5
+
+
+                  if customer.save(validate: false)
+                    if customer.abo_history(7, customer.customers_abo_type, customer.customers_abo_payment_method) # !!!
+                      sign_in(customer)
+                      render json: {status: 6, msg: orange_purchase_wcf_service, redirect_path: root_localize_path}
+                    end
+                  end
+
+                end
+
+              end
+
+            end
+          else
+            render json: {status: "True"}
+          end
         end
       else
         render json: {status: 0}
@@ -104,6 +194,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
 		    customer.customers_next_abo_type = discount.next_abo_type
 		    customer.activation_discount_code_type = 'D'
         customer.tvod_free = discount.tvod_free
+        customer.customers_abo_payment_method = 5
         if customer.save(validate: false)
           activation_code = OrangeSmsActivationCode.new
           activation_code.customers_id = customer.customers_id
@@ -120,6 +211,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
         customer.customers_abo_type = 6
         customer.customers_next_abo_type = 6
         customer.activation_discount_code_type = 'A'
+        customer.customers_abo_payment_method = 5
         if customer.save(validate: false)
           activation_code = OrangeSmsActivationCode.new
           activation_code.customers_id = customer.customers_id

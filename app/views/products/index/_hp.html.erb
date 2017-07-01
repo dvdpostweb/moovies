@@ -30,7 +30,7 @@
         <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_soon, :title => :tvod_soon, :type => :tvod, :view_mode => :soon, :source => 14, :belgium => nil} if @tvod_soon.size > 5 %>
         <% end %>
         <% cache("adult_products_index_hp_list_tvod_last_#{I18n.locale}", :expires_in => 15.minutes) do %>
-        <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_last, :title => :tvod_last, :type => :tvod, :view_mode => :last_added, :source => 65, :belgium => nil} if @tvod_last.size > 5 %>
+        <= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_last, :title => :tvod_last, :type => :tvod, :view_mode => :last_added, :source => 65, :belgium => nil} if @tvod_last.size > 5 %>
         <% end %>
         <% cache("adult_products_index_hp_list_tvod_best_rating_#{I18n.locale}", :expires_in => 15.minutes) do %>
         <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_best_rating, :title => :tvod_best_rating, :type => :tvod, :view_mode => :best_rated, :source => 66, :belgium => nil} if @tvod_best_rating.size > 5 %>
