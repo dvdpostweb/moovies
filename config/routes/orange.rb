@@ -20,6 +20,7 @@ Moovies::Application.routes.draw do
         match "automatic_login" => "webservice#automatic_login"
         match "automatic_register" => "webservice#automatic_register"
         match "convert_to_customer" => "webservice#convert_to_customer"
+        match "orange_stop" => "webservice#orange_stop"
       end
     end
   end

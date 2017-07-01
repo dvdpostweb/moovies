@@ -120,7 +120,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
             sign_in(customer)
             render json: {status: 3, msg: orange_purchase_wcf_service, redirect_path: streaming_product_path(:id => product.imdb_id, :season_id => product.season_id, :episode_id => product.episode_id)}
           elsif params[:products_id] == "1" || params[:products_id] == "5" || params[:products_id] == "7" || params[:products_id] == "8" || params[:products_id] == "9"
-            if customer.tvod_free > 0
+            if customer.customers_locked__for_reconduction == 1 || current_customer.tvod_free > 0
               sign_in(customer)
               render json: {status: 4, msg: t('streaming_products.renew_subscription_error_orange_login'), redirect_path: root_localize_path}
             else
@@ -424,6 +424,22 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
       if customer.save(validate: false)
         sign_in(customer)
         render json: {status: "TRUE", root: root_localize_path}
+      end
+    end
+  end
+
+  def orange_stop
+    customer = Customer.find(params[:current_customer])
+    if customer.present?
+      customer.customers_abo_auto_stop_next_reconduction = 1
+      if customer.save(validate: false)
+        sign_in(customer)
+        orange_is_eligable_wcf_service = HTTParty.get("https://www.plush.be:2355/WcfService/http/OrangeIsEligable?customersId=#{customer.customers_id}&mobileNumber=#{customer.customers_telephone}&SMSCodeMessage=#{puts t("orange.stop.subscription.sms")}&products_id=-1&locale=#{I18n.locale}")
+        if orange_is_eligable_wcf_service.parsed_response == "True"
+           render json: {status: "TRUE", msg: "#{t('orange.stop.subscription1')} #{ customer.customers_abo_validityto.strftime("%Y-%m-%d") } #{t('orange.stop.subscription2')}"}
+        else
+          render json: {status: "TRUE", msg: orange_is_eligable_wcf_service}
+        end
       end
     end
   end

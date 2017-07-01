@@ -4,14 +4,14 @@
   <%= customer.subscription_description %>
 </div>
 <% if customer.subscription_type.id != customer.next_subscription_type %>
-<div class="form-group lightergray-bck">
-  <span class="bold"><%= t('.your_next_account') %>:</span>
-  <%= customer.next_subscription_description %>
-</div>
+    <div class="form-group lightergray-bck">
+      <span class="bold"><%= t('.your_next_account') %>:</span>
+      <%= customer.next_subscription_description %>
+    </div>
 <% end %>
 <%= link_to t('.suspend_abo'), new_customer_suspension_path(:customer_id => current_customer.to_param), :class => 'btn green-bck OpenSansCondensed f23 mart20', rel: "facebox" if current_customer.suspension_status == 0 && !current_customer.tvod_only? %>
 <%= link_to t('stop_my_subscription'), stop_my_subscription_path, :class => 'btn light-blue-bck OpenSansCondensed f23 mart20', rel: "facebox" if current_customer.suspension_status == 0 && !current_customer.tvod_only? %>
-
+<a id="orange_stop" href="#" class="btn light-blue-bck OpenSansCondensed f23 mart20"><%= t('stop_my_subscription_orange') %></a>
 <div class="form-group mart20">
   <span class="bold"><%= t('.count_classic') %>:</span>
   <%= @classic_count %>
@@ -31,8 +31,8 @@
     <%= link_to t('cc.change_my_subscription'), info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change"), :class => "btn light-blue-bck OpenSansCondensed f23 mart20" %>
 <% end %>
 <% if current_customer.abo_active? && !current_customer.tvod_only? %>
-<div class="form-group mart20">
-  <span class="bold"><%= current_customer.auto_stop == 0 || (current_customer.auto_stop == 1 && current_customer.recurring_until && current_customer.recurring_until > Date.today) ? t('.date_end_abo') : t('.date_end') %>:</span>
-  <%= customer.subscription_expiration_date.strftime("%d/%m/%Y") if customer.subscription_expiration_date %>
-</div>
+    <div class="form-group mart20">
+      <span class="bold"><%= current_customer.auto_stop == 0 || (current_customer.auto_stop == 1 && current_customer.recurring_until && current_customer.recurring_until > Date.today) ? t('.date_end_abo') : t('.date_end') %>:</span>
+      <%= customer.subscription_expiration_date.strftime("%d/%m/%Y") if customer.subscription_expiration_date %>
+    </div>
 <% end %>
