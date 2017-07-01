@@ -101,7 +101,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
 
         if customer.present?
           product = Product.find_by_products_id(product_id_from_params)
-          streaming = StreamingProduct.find_by_imdb_id(product.imdb_id)
+          streaming = StreamingProduct.find_by_imdb_id(product.imdb_id) if product
 
           if customer.tvod_only? && product_id_from_params.to_i > 10 && customer.tvod_free < streaming.tvod_credits
             orange_purchase_wcf_service = HTTParty.get("https://www.plush.be:2355/wcfservice/http/OrangePurchase?customersId=#{customer.customers_id}&mobileNumber=#{params[:plush_phone_number]}&price=0&products_id=#{product_id_from_params}&message=subscription&payment_id=0&locale=#{I18n.locale}")
@@ -168,11 +168,11 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
 
             end
           else
-            render json: {status: "True"}
+            #render json: {status: "True"}
           end
         end
       else
-        render json: {status: 0}
+        #render json: {status: 0}
       end
     else
       raise ActionController::RoutingError.new('Not Found')
