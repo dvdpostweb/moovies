@@ -52,7 +52,7 @@
       <%= link_to t('signup.forget.password'), new_password_path(resource_name, :code => params[:code], :activation => params[:activation]), class: "f20" %>
     </div>
     <div class="green f20 block100 text-center">
-      <%= link_to t('signup.signin'), new_customer_registration_path(:moovie_id => params[:moovie_id], :code => params[:code], :activation => params[:activation]), class: "f20" %>
+      <%= link_to t('signin.no.account'), new_customer_registration_path(:moovie_id => params[:moovie_id], :code => params[:code], :activation => params[:activation]), class: "f20" %>
     </div>
   </div>
 </div>
