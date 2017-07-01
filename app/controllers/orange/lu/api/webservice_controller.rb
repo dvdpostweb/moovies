@@ -168,11 +168,11 @@ class Orange::Lu::Api::WebserviceController < ApplicationController
 
             end
           else
-            #render json: {status: "True"}
+            render json: {status: "True"}
           end
         end
       else
-        #render json: {status: 0}
+        render json: {status: 0}
       end
     else
       raise ActionController::RoutingError.new('Not Found')
