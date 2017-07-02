@@ -30,6 +30,9 @@
       <li><%= link_to t('.contact'), new_phone_request_path %></li>
       <li><%= link_to t('.vod'), info_path(:page_name => t('routes.infos.params.vod')) %></li>
       <li><%= link_to t('.faq'), faq_path %></li>
+      <li>
+        <%= link_to t('.multi'), info_path(:page_name => t('routes.infos.params.vod')), :id => :multi, :class => params[:page_name] == 'vod' ? "active-nav-tab" : :inactive %>
+      </li>
     </ul>
   </div>
   <div class="footer-block">

@@ -701,6 +701,15 @@ h3, h4, h5 {
   }
 }
 
+#filters .ui-selectmenu-button span.ui-selectmenu-text {
+  font-size: 15px;
+  padding: 1px 15px 5px 5px;
+}
+
+#filters .chosen-container {
+  font-size: 15px;
+}
+
 #filters-inner {
   position: relative;
   height: auto;
@@ -820,8 +829,8 @@ h3, h4, h5 {
    transform: translateY(-50%);
    right: 0;
    color: white;
-   font-family: 'Open Sans Condensed', Arial, sans-serif;
-   font-size: 27px;
+   font-family: 'Raleway', sans-serif;
+   font-size: 21px;
    z-index: 1;
    padding: 20px;
    background: rgba(0, 0, 0, 0.3);
@@ -846,7 +855,7 @@ h3, h4, h5 {
    transform: translateY(-50%);
    right: 0;
    color: white;
-   font-family: 'Open Sans Condensed', Arial, sans-serif;
+   font-family: 'Raleway', sans-serif;
    font-size: 22px;
    z-index: 1;
    padding: 20px;
