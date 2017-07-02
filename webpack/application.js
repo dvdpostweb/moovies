@@ -150,7 +150,7 @@ $(document).ready(function () {
 window.onload = function () {
 
 
-    $("#pagination").hide();
+    //$("#pagination").hide();
     if (typeof(Storage) !== "undefined") {
         if (gon && gon.current_customer === null && localStorage.getItem("plush_temporary_email") !== null) {
             $.ajax({
@@ -330,6 +330,11 @@ $(document).ready(function () {
         $(document).unbind('click.fb-start');
     }
 
+});
+
+$(".icheckbox,.iradio").iCheck({
+    checkboxClass: 'icheckbox_minimal-grey',
+    radioClass: 'iradio_minimal-grey'
 });
 
 

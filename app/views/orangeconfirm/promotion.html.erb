@@ -41,8 +41,9 @@
           }
         </style>
         <div class="block100 mart20">
-          <%= link_to(t('orange_landing_page_skip'), root_localize_path, :class => "btn block100 light-blue-bck-orange-skip padtb10 white f16 normal pull-left") %>
+          <p class="f3"><%= t('orange_landing_page_after_input_text').html_safe %></p>
           <button class="btn block100 orange-bck padtb10 white f16 normal pull-right"><%= t('orange_landing_page_button') %></button>
+          <%= link_to(t('orange_landing_page_skip'), root_localize_path, :class => "btn block100 light-blue-bck-orange-skip padtb10 white f16 normal pull-left") %>
         </div>
       </form>
     </div>

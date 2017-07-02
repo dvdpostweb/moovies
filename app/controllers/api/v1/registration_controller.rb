@@ -22,7 +22,7 @@ class Api::V1::RegistrationController < API::V1::BaseController
           customer.preselected_registration_moovie_id = product.to_param
           if customer.save(validate: false)
             sign_in(customer, bypass: true)
-            redirect_to_product_path = edit_customer_payment_methods_path(:customer_id => customer.to_param, :type => :orange, :product_id => product.id, :source => 0)
+            redirect_to_product_path = edit_customer_payment_methods_path(:customer_id => customer.to_param, :type => :credit_card_tvod, :product_id => product.id, :source => 0)
             render json: { status: 9, message: redirect_to_product_path }
           end
         end

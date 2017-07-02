@@ -2464,7 +2464,7 @@ ul.movie-gallery li:nth-child(3n) {
 
 ul.card-list li {
   float: left;
-  width: 30%;
+  width: 16%;
   margin-right: 5%;
   background: #f5f5f5;
   padding: 10px;
@@ -2472,20 +2472,20 @@ ul.card-list li {
 ul.card-list li:nth-child(n) {
   margin-right: 5%;
 }
-ul.card-list li:nth-child(3n) {
+ul.card-list li:nth-child(5n) {
   margin-right: 0;
 }
 @media (max-width: 479px) {
   ul.card-list li {
     float: left;
-    width: 100%;
-    margin-right: 0;
+    width: 32%;
+    margin-right: 2%;
     margin-top: 20px;
   }
   ul.card-list li:nth-child(n) {
-    margin-right: 0;
+    margin-right: 2%;
   }
-  ul.card-list li:nth-child(1n) {
+  ul.card-list li:nth-child(3n) {
     margin-right: 0;
   }
 }

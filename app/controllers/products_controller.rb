@@ -38,7 +38,7 @@ class ProductsController < ApplicationController
     if params['actor_id']
       params[:filters] = Hash.new if params[:filters].nil?
       @people = Actor.find(params['actor_id'])
-      params['actor_id'].to_i = @people.id
+      params['actor_id'] = @people.id
     end
     if params['director_id']
       params[:filters] = Hash.new if params[:filters].nil?
