@@ -2,24 +2,16 @@
     <% if params[:controller] == "products" %>
         <% if params[:kind] == :normal %>
             <div class="container white-bck">
-              <div class="promo-image rwd-bck display-block" style="background-image: url('http://staging.plush.be/assets/promo_banner/normal1.jpg')" }>
-                <div class="promo-image-overlay">
-                  <div class="OpenSansCondensed promo-image-overlay-inner white bold">
-                    <span><%= t('orange_promo_banner_text_normal') %></span>
-                  </div>
-                </div>
+              <div data-content="<%= t('orange_promo_banner_text_normal').upcase %>" class="promo-image rwd-bck" id="promo-image5" style="background-image: url('http://staging.plush.be/assets/promo_banner/normal1.jpg')">
+                &nbsp;
               </div>
             </div>
         <% else %>
-            <div class="container white-bck">
-              <div class="promo-image rwd-bck display-block" style="background-image: url('http://staging.plush.be/assets/promo_banner/adult2.jpg')">
-                <div class="promo-image-overlay">
-                  <div class="OpenSansCondensed promo-image-overlay-inner white bold">
-                    <span><%= t('orange_promo_banner_text_adult') %></span>
-                  </div>
-                </div>
+          <div class="container white-bck">
+              <div data-content="<%= t('orange_promo_banner_text_adult').upcase %>" class="promo-image rwd-bck" id="promo-image4" style="background-image: url('http://staging.plush.be/assets/promo_banner/adult2.jpg')">
+                  &nbsp;
               </div>
-            </div>
+          </div>
         <% end %>
     <% end %>
 <% end %>
