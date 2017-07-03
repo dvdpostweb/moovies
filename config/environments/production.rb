@@ -43,6 +43,7 @@ Moovies::Application.configure do
   styles.scss
   bootstrap-chosen.css
   fancybox.scss
+  products/catalog.js
   )
 
 
