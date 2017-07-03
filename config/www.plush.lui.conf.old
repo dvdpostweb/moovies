@@ -1,0 +1,38 @@
+server {
+        listen          8888;
+        server_name     www.plush.lu;
+
+        access_log              /opt/nginx-ruby/logs/www.plush.lu.access.log main;
+        error_log               /opt/nginx-ruby/logs/www.plush.lu.error.log;
+
+        passenger_enabled       on;
+        rails_env               production;
+        root                    /home/webapps/plush/production/current/public;  # <--- be sure to point to 'public'!
+
+        error_page      500 /home/webapps/plush/production/current/public/500.html;
+        error_page      503 @maintenance;
+
+        rewrite         ^/pri/(.*)$ /fr/products/$1 permanent;
+
+        if (-f $document_root/system/maintenance.html) {
+                return  503;
+        }
+
+        location ~ ^/(assets)/ {
+                root            /home/webapps/plush/production/current/public;
+                gzip_static     on; # to serve pre-gzipped version
+                expires         max;
+                add_header      Cache-Control public;
+        }
+
+        location @maintenance {
+                rewrite ^(.*)$  /system/maintenance.html last;
+                break;
+        }
+}
+
+server {
+        listen          8888;
+        server_name     plush.lu;
+        rewrite         ^ http://www.plush.lu$request_uri? permanent;
+}
