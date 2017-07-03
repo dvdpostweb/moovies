@@ -81,3 +81,5 @@ gem 'redis-rails'
 gem 'scout_apm'
 gem "react-rails"
 gem "font-awesome-rails"
+
+gem "sentry-raven"

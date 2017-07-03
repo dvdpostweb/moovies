@@ -38,3 +38,7 @@ module Moovies
     #end
   end
 end
+
+Raven.configure do |config|
+  config.dsn = 'https://12b2531adee847049d612fa3f73926bd:85e7fea6a8884d508470694736d023cb@sentry.io/187212'
+end
