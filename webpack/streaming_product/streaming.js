@@ -1,18 +1,18 @@
 $(document).ready(function () {
-  
+
     $('.available-trigger').on('click', function (e) {
         $('.available-versions').toggleClass("on");
         e.preventDefault();
     });
 
-    $('.qualityvod').click(function(e) {
+    $('.qualityvod').click(function (e) {
         e.preventDefault();
         $.ajax({
             dataType: 'html',
             url: $(this).attr('href'),
             type: 'GET',
             data: {},
-            success: function(data) {
+            success: function (data) {
                 $('#stream_movie').html(data);
             }
 
@@ -36,7 +36,7 @@ $(document).ready(function () {
                     url: $(this).attr('href'),
                     type: 'GET',
                     data: {},
-                    success: function(data) {
+                    success: function (data) {
                         $('#step_2').html(data);
                     }
 
@@ -65,11 +65,11 @@ $(document).ready(function () {
             },
             dataType: 'json',
             success: function (response) {
-                var callbackUrl = encodeURIComponent("http://staging.plush.be/api/v1/orange/callbacks/ioscallback?cn="+gon.current_customer.customers_id+"&products_id="+pid+"");
+                var callbackUrl = encodeURIComponent("http://staging.plush.be/api/v1/orange/callbacks/ioscallback?cn=" + gon.current_customer.customers_id + "&products_id=" + pid + "");
                 var audiosubs = encodeURIComponent(response[0]["audsub"]);
                 var poster = encodeURIComponent(response[0]["products_image_big"]);
                 var title = encodeURIComponent(gon.products_title);
-                url = "plush://play?cn="+gon.current_customer.customers_id+"&imdb_id="+product+"&disk_id=0&season_id=0&audiosubs="+audiosubs+"&poster="+poster+"&name="+title+"&callback="+callbackUrl+"";
+                url = "plush://play?cn=" + gon.current_customer.customers_id + "&imdb_id=" + product + "&disk_id=0&season_id=0&audiosubs=" + audiosubs + "&poster=" + poster + "&name=" + title + "&callback=" + callbackUrl + "";
                 window.location = url;
             },
             error: function (response) {
