@@ -1,7 +1,5 @@
 <% product = detail2 %>
 
-<% cache product do %>
-
     <% data = product.description_data(true) %>
     <% product_title = data[:title] %>
     <% product_image = data[:image] %>
@@ -136,5 +134,3 @@
       </div>
       <div class="block100 slide-score <%= params[:kind] == :adult ? "violet" : "#{product.tvod? ? "blue" : "green"}" %> text-center" data-score="<%= product.rating_count %>"></div>
     </div>
-
-<% end %>
