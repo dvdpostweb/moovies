@@ -11,9 +11,9 @@ module ApplicationHelper
         "+352"
       when "staging.plush.be" then
         "+32"
-      when "plush.lu" then
+      when "www.plush.lu" then
         "+352"
-      when "plush.be" then
+      when "www.plush.be" then
         "+32"
     end
   end
