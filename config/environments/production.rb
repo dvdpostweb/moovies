@@ -29,6 +29,23 @@ Moovies::Application.configure do
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
   config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
 
+
+  config.assets.precompile += %w(
+  bootstrap.min.css
+  bootstrap-datepicker.css
+  jquery-ui.min.css.scss
+  slick.css
+  jquery.tagit.css.scss
+  ion.rangeSlider.css
+  ion.rangeSlider.skinSimple.css
+  iCheck.css.scss
+  general.scss
+  styles.scss
+  bootstrap-chosen.css
+  fancybox.scss
+  )
+
+
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
 
