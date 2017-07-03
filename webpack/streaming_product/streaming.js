@@ -65,15 +65,16 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (response) {
 
-                //var userAgent = window.navigator.userAgent;
+                var callbackUrl = encodeURIComponent("http://staging.plush.be/api/v1/orange/callbacks/ioscallback?cn="+gon.current_customer.customers_id+"&products_id="+pid+"");
+                var audiosubs = encodeURIComponent(response[0]["audsub"]);
+                var poster = encodeURIComponent(response[0]["products_image_big"]);
+                var title = encodeURIComponent(gon.products_title);
 
-                url = "plush://play?cn="+gon.current_customer.customers_id+"&imdb_id="+product+"&disk_id=0&season_id=0&audiosubs="+response[0]["audsub"]+"&poster="+response[0]["products_image_big"]+"&callback=http://staging.plush.be/api/v1/orange/callbacks/orangemobile?cn="+gon.current_customer.customers_id+"&products_id="+pid+"";
+                url = "plush://play?cn="+gon.current_customer.customers_id+"&imdb_id="+product+"&disk_id=0&season_id=0&audiosubs="+audiosubs+"&poster="+poster+"&name="+title+"&callback="+callbackUrl+"";
 
-                encodedUrl = encodeURIComponent(url);
+                //window.location = url;
 
-                window.location = encodedUrl;
-
-                //console.log(window.location.href)
+                console.log(url)
 
                 //$(".qualityvod").last().trigger("click");
 

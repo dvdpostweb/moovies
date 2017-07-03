@@ -33,6 +33,7 @@ Moovies::Application.routes.draw do
           get "wha/cancel"
           #get "wha/orangemobile"
           match "orangemobile" => "ios#orangemobile"
+          match "ioscallback" => "ios#ioscallback"
         end
       end
     end

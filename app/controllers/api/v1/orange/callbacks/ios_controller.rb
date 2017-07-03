@@ -7,4 +7,8 @@ class Api::V1::Orange::Callbacks::IosController < API::V1::BaseController
     end
   end
 
+  def ioscallback
+    render json: params
+  end
+
 end

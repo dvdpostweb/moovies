@@ -16,8 +16,8 @@
                   </div>
               <% end %>
               <div class="block100 text-center">
-                <a href="index.php%3Fpage=video-stream-wizard.html#" class="center-block display-block available-trigger"><%= t('.all_versions') %>
-                  <i class="fa fa-caret-down"></i></a>
+                <!--<a href="index.php%3Fpage=video-stream-wizard.html#" class="center-block display-block available-trigger"><%= t('.all_versions') %>
+                  <i class="fa fa-caret-down"></i></a>-->
                 <div class="available-versions mart5 block100 overflow-hidden thinrgray-bck black">
                   <%= render :partial => 'streaming_products/show/versions', :locals => {:version => @streaming_prefered, :source => params[:source], :response_id => params[:response_id]}, pid: @product.to_param %>
                 </div>
