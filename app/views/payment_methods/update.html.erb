@@ -56,6 +56,43 @@
 
 </div>
 
-<% content_for :run_specific_javascript do %>
-    <%= javascript_include_tag "payment_methods/redirect_to_ogone" %>
-<% end %>
+<script>
+
+$(document).ready(function () {
+
+    paymentMethods.validatePaymentMethodsUrl();
+
+});
+
+var paymentMethods = {
+
+    validatePaymentMethodsUrl: function () {
+
+        if (window.location.pathname == "/" + gon.locale + "/mon-compte/" + gon.current_customer_id + "/payment_methods") {
+
+            this.submitOgoneForm();
+
+        } else if (window.location.pathname == "/" + gon.locale + "/mijn-account/" + gon.current_customer_id + "/payment_methods") {
+
+            this.submitOgoneForm();
+
+        } else if (window.location.pathname == "/" + gon.locale + "/my-account/" + gon.current_customer_id + "/payment_methods") {
+
+            this.submitOgoneForm();
+
+        }
+
+    },
+    submitOgoneForm: function() {
+
+        setTimeout(function(){
+
+            $("#checkout_confirmation").submit();
+
+        },5000);
+
+    }
+
+}
+
+</script>

@@ -4,6 +4,33 @@
   <%= render :partial => 'phone_requests/new/info' %>
   <%= render :partial => 'phone_requests/new/form', :locals => {:phone_request => @phone_request} %>
 </div>
-<% content_for :run_specific_javascript do %>
-    <%= javascript_include_tag "contact/question" %>
-<% end %>
+
+<script>
+
+$(document).ready(function () {
+    //datepicker
+    $("#date").datepicker();
+
+    //select dropdown
+    $("#select-drop").selectmenu({
+        appendTo: ".drop-holder"
+    });
+
+    //form trigger
+    var service_form = $("#service");
+    $("#service-submit-form").on('click', function () {
+        var data_service = service_form.serialize();
+        console.log(data_service);
+        return false;
+    });
+
+    //modal form trigger
+    var modal_form = $("#send-mail-modal-form");
+    $("#send-mail-submit-form").on('click', function () {
+        var data_modal_form = modal_form.serialize();
+        console.log(data_modal_form);
+        return false;
+    });
+});
+
+</script>

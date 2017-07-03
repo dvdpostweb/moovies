@@ -3,7 +3,18 @@
   <%= render :partial => 'messages/index/faq' %>
 </div>
 
-<% content_for :run_specific_javascript do %>
-    <%= javascript_include_tag "faq/public_faq" %>
-<% end %>
+<script>
 
+$(document).ready(function () {
+    $("#accordion").accordion({
+    	heightStyle: "content"
+    });
+    $("#accordion a").on('click', function () {
+        var modal_content = $(this).attr('data-modal');
+        var modal_title = $(this).text();
+        $('.content-modal-load').html(modal_content);
+        $('.title-modal-load').html(modal_title);
+    });
+});
+
+</script>
