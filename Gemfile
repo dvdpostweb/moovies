@@ -78,7 +78,6 @@ gem 'rack-cors', '~> 0.4.1'
 gem 'httparty', '~> 0.14.0'
 gem 'will_paginate-bootstrap'
 gem 'redis-rails'
-gem 'webpack-rails', '~> 0.0.1'
 gem 'scout_apm'
 gem "react-rails"
 gem "font-awesome-rails"
