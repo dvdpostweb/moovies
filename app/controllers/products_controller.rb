@@ -83,7 +83,7 @@ class ProductsController < ApplicationController
       @products = Product.filter_online(nil, new_params)
       if params[:filters]
         @selected_countries = ProductCountry.where(:countries_id => params[:filters][:country_id])
-        @languages = Language.by_language(I18n.locale).find(params[:filters][:audio].reject(&:empty?)).collect(&:name).join(', ') if Product.audio?(params[:filters][:audio])
+        @languages = Language.by_language(I18n.locale).find(params[:filters][:audio].reject(&:empty?)).map(&:to_i).collect(&:name).join(', ') if Product.audio?(params[:filters][:audio])
         @subtitles = Subtitle.by_language(I18n.locale).find(params[:filters][:subtitles].reject(&:empty?)).collect(&:name).join(', ') if Product.subtitle?(params[:filters][:subtitles])
       end
     end
