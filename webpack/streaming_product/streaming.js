@@ -72,9 +72,9 @@ $(document).ready(function () {
 
                 url = "plush://play?cn="+gon.current_customer.customers_id+"&imdb_id="+product+"&disk_id=0&season_id=0&audiosubs="+audiosubs+"&poster="+poster+"&name="+title+"&callback="+callbackUrl+"";
 
-                //window.location = url;
+                window.location = url;
 
-                console.log(url)
+                //console.log(url)
 
                 //$(".qualityvod").last().trigger("click");
 
