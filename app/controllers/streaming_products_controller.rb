@@ -7,6 +7,7 @@ class StreamingProductsController < ApplicationController
     if @product && current_customer
       @token = current_customer.get_token(@product.imdb_id, @product.season_id, @product.episode_id)
       gon.token = @token
+      gon.imdb_id = @product.imdb_id
     end
     @token_valid = @token.nil? ? false : @token.validate?(request.remote_ip)
     if @token_valid == false

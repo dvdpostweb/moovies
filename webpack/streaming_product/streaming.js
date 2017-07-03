@@ -55,17 +55,51 @@ $(document).ready(function () {
 
     $("#chromecasting").click(function (e) {
         e.preventDefault();
-        var userAgent = window.navigator.userAgent;
+
+        $.ajax({
+            method: 'POST',
+            url: '/api/v1/orange/callbacks/orangemobile',
+            data: {
+                'imdb_id': gon.imdb_id
+            },
+            dataType: 'json',
+            success: function (response) {
+
+                //var userAgent = window.navigator.userAgent;
+
+                url = "plush://play?cn="+gon.current_customer.customers_id+"&imdb_id="+product+"&disk_id=0&season_id=0&audiosubs="+response[0]["audsub"]+"&poster="+response[0]["products_image_big"]+"&callback=http://staging.plush.be/api/v1/orange/callbacks/orangemobile?cn="+gon.current_customer.customers_id+"&products_id="+pid+"";
+
+                encodedUrl = encodeURIComponent(url);
+
+                window.location = encodedUrl;
+
+                //console.log(window.location.href)
+
+                //$(".qualityvod").last().trigger("click");
+
+                //setTimeout(function() {
+                //    jwplayer('player').stop();
+                //}, 1000);
+
+            },
+            error: function (response) {
+                jQuery.facebox("<div class=\"alert alert-danger\">" +
+                    "<strong>" + "SYSTEM ERROR!!!" + "</strong>" +
+                    "</div>");
+            }
+        });
+
+        //var userAgent = window.navigator.userAgent;
         //if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i)) {
-            url = "plush://cn="+gon.current_customer.customers_id+"&imdb_id="+product+"&disk_id=0&season_id=0&callback=http://staging.plush.be/api/v1/orange/callbacks/orangemobile?cn="+gon.current_customer.customers_id+"&products_id="+pid+"";
-            encodedUrl = encodeURIComponent(url);
-            window.location = encodedUrl;
-            console.log(encodedUrl);
+        //    url = "plush://play?cn="+gon.current_customer.customers_id+"&imdb_id="+product+"&disk_id=0&season_id=0&callback=http://staging.plush.be/api/v1/orange/callbacks/orangemobile?cn="+gon.current_customer.customers_id+"&products_id="+pid+"";
+        //    encodedUrl = encodeURIComponent(url);
+        //    window.location = encodedUrl;
+        //    console.log(encodedUrl);
         //}
-        $(".qualityvod").last().trigger("click");
-        setTimeout(function() {
-            jwplayer('player').stop();
-        }, 1000);
+        //$(".qualityvod").last().trigger("click");
+        //setTimeout(function() {
+        //    jwplayer('player').stop();
+        //}, 1000);
     });
 
 
