@@ -3,7 +3,7 @@
 <div class="container white-bck dark-gray padb20">
   <div id="accordion" class="mart30">
 
-    <h2><%= t '.token_list' %> (<%= @token_list %>)</h2>
+    <h2><%= t '.token_list' %> (<%= @token_list1.count('distinct tokens.id') %>)</h2>
     <div class="box<%= class_name %>" id="in-progress">
       <% render :partial => 'watchlists/index/display', :locals => {:display_vod => @display_vod} %>
       <%= render :partial => path, :collection => @token_list1, :locals => {:display_vod => @display_vod, :type => :token, :series => []} %>

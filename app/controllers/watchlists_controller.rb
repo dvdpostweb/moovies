@@ -6,7 +6,7 @@ class WatchlistsController < ApplicationController
     #if params[:transit_or_history] == "history"
     #  @history_list = current_customer.get_all_tokens(params[:kind], :old, params[:page])
     #else
-      @token_list = Token.where(customer_id: current_customer.customers_id).count #current_customer.get_all_tokens(params[:kind])
+      @token_list = Token.where(customer_id: current_customer.customers_id).created_in_the_last_two_days.count #current_customer.get_all_tokens(params[:kind])
       @token_list1 = current_customer.get_all_tokens(params[:kind])
     #end
     @list = current_customer.vod_wishlists.joins({:product => :descriptions}, :streaming_products).joins('left join series on products.serie_id = series.series_id').order("concat(ifnull(series.name_fr, ''), if(products.serie_id >0,concat(products.season_id, products.episode_id) , ''), products_description.products_name)").where("products_description.language_id = :language and streaming_products.available = 1 and streaming_products.status = 'online_test_ok' and products_status != -1 and products_type = :type and ((available_from <= :now and expire_at >= :now) or (available_backcatalogue_from <= :now and expire_backcatalogue_at >= :now)) and country = :country", {:language => Moovies.languages[I18n.locale], :type => Moovies.product_kinds[params[:kind]], :now => Time.now().localtime.to_s(:db), :country => Product.country_short_name(session[:country_id])}).group('vod_wishlists.id')

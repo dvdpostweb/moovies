@@ -46,6 +46,8 @@ class Token < ActiveRecord::Base
   scope :ordered, :order => 'tokens.created_at asc'
   scope :ordered_old, :order => 'tokens.created_at desc'
 
+  scope :created_in_the_last_two_days, where("created_at > ?", Time.now - 2.days)
+
   def self.regen
     Token.recent(2.days.ago.localtime, Time.now).each do |token|
       filename = token.streaming_products.alpha.first.filename
