@@ -1,18 +1,16 @@
-/*
- *= require bootstrap.min
- *= require bootstrap-datepicker
- *= require jquery-ui.min
- *= require slick
- *= require jquery.tagit
- *= require ion.rangeSlider
- *= require ion.rangeSlider.skinSimple
- *= require iCheck
- *= require general
- *= require styles
- *= require bootstrap-chosen
- *= require fancybox
- *= require font-awesome
-*/
+@import "bootstrap.min";
+@import "bootstrap-datepicker";
+@import "jquery-ui.min";
+@import "slick";
+@import "jquery.tagit";
+@import "ion.rangeSlider";
+@import "ion.rangeSlider.skinSimple";
+@import "iCheck";
+@import "general";
+@import "styles";
+@import "bootstrap-chosen";
+@import "fancybox";
+
 
 .loader {
   border: 32px solid black;
