@@ -53,13 +53,12 @@
         <%= render :partial => 'products/index/hp_list', :locals => {:data => @svod_most_view, :title => :svod_most_view, :type => :svod, :view_mode => :most_viewed, :source => 67, :belgium => nil} if @svod_most_view.size > 5 %>
 
     <% elsif params[:kind] == :adult %>
-
         <%= render :partial => 'products/index/hp_list', :locals => {:data => @svod_last, :title => :svod_last, :type => :svod, :view_mode => :last_added, :source => 65, :belgium => nil} if @svod_last.size > 5 %>
 
-        <% cache("adult_products_index_hp_list_svod_best_rating_#{I18n.locale}", :expires_in => 15.minutes) do %>
+        <%= render :partial => 'products/index/hp_list', :locals => {:data => @svod_best_rating, :title => :svod_best_rating, :type => :tvod, :view_mode => :best_rated, :source => 66, :belgium => nil} if @svod_best_rating.size > 5 %>
 
-        <% cache("adult_products_index_hp_list_svod_most_view_#{I18n.locale}", :expires_in => 15.minutes) do %>
-        
+        <%= render :partial => 'products/index/hp_list', :locals => {:data => @svod_most_view, :title => :svod_most_view, :type => :svod, :view_mode => :most_viewed, :source => 67, :belgium => nil} if @svod_most_view.size > 5 %>
+
     <% end %>
   </div>
 </div>
