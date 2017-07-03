@@ -16,11 +16,6 @@
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <%= stylesheet_link_tag "application", :media => "all" %>
   <%= yield :view_specific_css %>
-  <link rel="icon" type="image/x-icon" href="<%= asset_path("template/favicon.ico") %>">
-  <link rel="icon" type="image/png" href="<%= asset_path("template/favicon.ico") %>">
-  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<%= asset_path("template/favicon114x114.png") %>">
-  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<%= asset_path("template/favicon72x72.png") %>">
-  <link rel="apple-touch-icon-precomposed" href="<%= asset_path("template/favicon57x57.png") %>">
   <script src="https://content.jwplatform.com/libraries/D6L08XhR.js"></script>
   <%= javascript_include_tag "application" %>
   <%= yield :run_specific_javascript %>
