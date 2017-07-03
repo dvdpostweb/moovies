@@ -16,20 +16,16 @@ group :development do
   gem 'quiet_assets'
   gem 'spring'
   gem 'sextant'
-  gem "better_errors"
-  gem "binding_of_caller"
+  #gem "better_errors"
+  #gem "binding_of_caller"
 end
 
 gem 'net-ssh', '~> 2.9', '>= 2.9.4'
 
 group  :development, :test do
-  gem 'capistrano', '~> 3.7', '>= 3.7.2'
-  gem 'capistrano-rails', '~> 1.2', '>= 1.2.3'
-  gem 'capistrano-bundler', '~> 1.2'
-  gem 'capistrano-rbenv', '~> 2.1'
-  gem 'capistrano3-puma', '~> 1.2', '>= 1.2.1'
-  gem 'capistrano-rake', '~> 0.1.0'
-  gem 'capistrano-npm', '~> 1.0', '>= 1.0.2'
+  gem 'capistrano-npm', require: false
+  gem "capistrano", "~> 2.15.5"
+  gem "capistrano-ext"
 end
 
 group :test do
@@ -83,6 +79,6 @@ gem 'rack-cors', '~> 0.4.1'
 gem 'httparty', '~> 0.14.0'
 gem 'will_paginate-bootstrap'
 gem 'redis-rails'
-gem 'webpack-rails', '~> 0.9.10'
+gem 'webpack-rails'
 gem 'scout_apm'
-gem "react-rails"
+#gem "react-rails"
