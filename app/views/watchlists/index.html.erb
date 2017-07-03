@@ -2,27 +2,13 @@
 <% class_name = @display_vod == 0 ? '' : ' gallery clearfix' %>
 <div class="container white-bck dark-gray padb20">
   <div id="accordion" class="mart30">
-    <% if params[:transit_or_history] == 'history' %>
-        <h2></h2>
-        <div class="box<%= class_name %>" id="in-progress">
-          <% render :partial => 'watchlists/index/display', :locals => {:display_vod => @display_vod} %>
-          <%= render :partial => path, :collection => @history_list, :locals => {:display_vod => @display_vod, :type => :history, :series => []} %>
-        </div>
-        <%= will_paginate @history_list, :class => 'products-pagination2', :previous_label => '&nbsp;', :next_label => '&nbsp;' %>
-    <% else %>
-        <% if @token_list.count == 0 && @list.count == 0 && @soon_list.count == 0 %>
-            <div id="faq-content-wrap">
-              <div id="faq-intro-wrap" class="<%= I18n.locale %>">
-                <%= t '.intro' %>
-              </div>
-            </div>
-        <% end %>
-        <h2><%= t '.token_list' %> (<%= @token_list.size %>)</h2>
-        <div class="box<%= class_name %>" id="in-progress">
-          <% render :partial => 'watchlists/index/display', :locals => {:display_vod => @display_vod} %>
-          <%= render :partial => path, :collection => @token_list, :locals => {:display_vod => @display_vod, :type => :token, :series => []} %>
-        </div>
-    <% end %>
+
+    <h2><%= t '.token_list' %> (<%= @token_list %>)</h2>
+    <div class="box<%= class_name %>" id="in-progress">
+      <% render :partial => 'watchlists/index/display', :locals => {:display_vod => @display_vod} %>
+      <%= render :partial => path, :collection => @token_list1, :locals => {:display_vod => @display_vod, :type => :token, :series => []} %>
+    </div>
+
     <h2><%= t '.list' %> (<%= @list.count('distinct vod_wishlists.id').size %>)</h2>
     <div class="box<%= class_name %>" id="ready">
       <% render :partial => 'watchlists/index/display', :locals => {:display_vod => @display_vod} %>
