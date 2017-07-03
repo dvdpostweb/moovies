@@ -72,9 +72,9 @@ $(document).ready(function () {
 
                 url = "plush://play?cn="+gon.current_customer.customers_id+"&imdb_id="+product+"&disk_id=0&season_id=0&audiosubs="+audiosubs+"&poster="+poster+"&name="+title+"&callback="+callbackUrl+"";
 
-                //window.location = url;
+                window.location = url;
 
-                console.log("http://staging.plush.be/api/v1/orange/callbacks/ioscallback?cn="+gon.current_customer.customers_id+"&products_id="+pid+"")
+                //console.log("http://staging.plush.be/api/v1/orange/callbacks/ioscallback?cn="+gon.current_customer.customers_id+"&products_id="+pid+"")
 
                 //$(".qualityvod").last().trigger("click");
 
