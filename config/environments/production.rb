@@ -45,33 +45,6 @@ Moovies::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
   config.action_dispatch.ip_spoofing_check = false
 
-  # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w(
-  jquery.ui.datepicker-fr.js
-  jquery.ui.datepicker-nl.js
-  jquery.ui.datepicker-en.js
-  login.css
-  promotions.css
-  promotions.js
-  errors.css
-  md5.js
-  viewrightplayer.js
-  viewrightplayer_control.js
-  adult.css
-  alacarte.css
-  unlimited.css
-  step2.css
-  step3.css
-  popup.css
-  alacarte.js
-  tvod_only_payment_step.css
-  halloween/halloween.css
-  mobile.js
-  mobile.css
-  bootstrap_and_overrides.css
-  )
-  #config.assets.precompile += %w( photobox.css )
-
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
 
