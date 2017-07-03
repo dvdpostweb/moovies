@@ -23,7 +23,7 @@ end
 gem 'net-ssh', '~> 2.9', '>= 2.9.4'
 
 group  :development, :test do
-  gem 'capistrano-npm', require: false
+  gem 'capistrano-npm'
   gem "capistrano", "~> 2.15.5"
   gem "capistrano-ext"
 end
@@ -79,7 +79,7 @@ gem 'rack-cors', '~> 0.4.1'
 gem 'httparty', '~> 0.14.0'
 gem 'will_paginate-bootstrap'
 gem 'redis-rails'
-#gem 'webpack-rails'
+gem 'webpack-rails'
 gem 'scout_apm'
 gem "react-rails"
 gem "font-awesome-rails"
