@@ -1,10 +1,12 @@
 <% package_id = type == :svod ? (params[:kind] == :adult ? 4 : 1) : (params[:kind] == :adult ? 5 : 2) %>
-<h5 class="OpenSansCondensed f30 black pad0 padl5 mar0 line-height-40"><%= t(".title_#{title}") %>
+<h5 class="OpenSansCondensed f22 dark-gray pad0 padl5 mar0 line-height-20">
+  <%= t(".title_#{title}") %>
   <%= link_to t(".more"), products_short_path(:package => Moovies.packages.invert[package_id], 'filters[view_mode]' => view_mode), :class => :small, :remote => true if !type.nil? %>
   <%= link_to t(".more"), products_short_path('belgium' => belgium, :source => source), :class => :small if !belgium.nil? %>
 </h5>
 <section class="responsive-carousel slider">
   <% cache("products_detail2_#{I18n.locale}", :expires_in => 15.minutes) do %>
-    <%= render :partial => 'products/detail2', :collection => data, :locals => {:source => source, :view_mode => view_mode} %>
+      <%= render :partial => 'products/detail2', :collection => data, :locals => {:source => source, :view_mode => view_mode} %>
   <% end %>
 </section>
+

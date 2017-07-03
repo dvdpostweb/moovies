@@ -240,7 +240,7 @@ $(document).ready(function () {
         dots: false,
         infinite: false,
         speed: 200,
-        slidesToShow: 5,
+        slidesToShow: 4,
         slidesToScroll: 2,
         responsive: [
             {

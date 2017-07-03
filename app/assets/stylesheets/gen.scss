@@ -5,10 +5,7 @@
 /*BREAKPOINTS*/
 /*MIXINS*/
 /*END MIXINS*/
-@font-face {
-  font-family: 'ArticulatCF';
-  src: url("../fonts/Articulat/ArticulatCF.ttf");
-}
+
 /*GENERAL*/
 * {
   box-sizing: border-box;
@@ -138,6 +135,14 @@ article {
   background-color: #66CCCC !important;
 }
 
+.light-blue-bck-orange-skip {
+  background-color: #66CCCC !important;
+}
+
+.light-violet-bck {
+  background-color: #4BB4E6 !important;
+}
+
 .thin-blue {
   color: #EBF9FE !important;
 }
@@ -238,8 +243,9 @@ article {
   color: #a3dd5a;
 }
 
-.light-violet-bck {
-  background-color: #993399 !important;
+.applied-filter-tag-tvod {
+  color: #a3dd5a !important;
+  border-color: #a3dd5a !important;
 }
 
 .light-green-bck {
@@ -260,6 +266,10 @@ article {
 
 .thin-green2-bck {
   background-color: #DFF0D8 !important;
+}
+
+.light-violet-bck {
+  background-color: #993399 !important;
 }
 
 .violet {
@@ -307,7 +317,7 @@ hr.hr-small {
   clear: both;
   height: 1.25em;
   line-height: 2.5em;
-  margin: 1.8em 0 1.25em;
+  margin: 0 0 1.25em;
   overflow: visible;
   position: relative;
   text-align: center;
@@ -1053,6 +1063,14 @@ hr.hr-small {
   font-family: 'Lato';
 }
 
+.RalewayBlack {
+  font-family: 'Raleway'
+ }
+
+ .ArticulatCF {
+   font-family: ArticulatCF;
+ }
+
 .center {
   text-align: center;
 }
@@ -1106,14 +1124,6 @@ hr.hr-small {
   font-family: Open Sans Condensed;
 }
 
-.RalewayBlack {
-  font-family: 'Raleway', sans-serif;
-}
-
-.ArticulatCF {
-  font-family: ArticulatCF;
-}
-
 a.active {
   font-weight: bold;
 }
@@ -1145,28 +1155,6 @@ section.page {
 .block100 {
   width: 100%;
   float: left;
-}
-
-.half-box {
-  float: left;
-  width: 48%;
-}
-@media (max-width: 767px) {
-  .half-box {
-    float: none !important;
-    overflow: hidden;
-    margin: 0 auto;
-    width: 95%;
-  }
-}
-
-.half-box.right {
-  float: right;
-}
-@media (max-width: 767px) {
-  .half-box.right {
-    margin-top: 20px;
-  }
 }
 
 .inline-holder {
@@ -1457,7 +1445,7 @@ body.modal-open {
   opacity: 1;
   width: 45px;
   height: 45px;
-  background: image-url("template/close-modal.png") no-repeat;
+  background: images-url("template/close-modal.png") no-repeat;
 }
 @media (max-width: 767px) {
   .modal button.close {
@@ -1489,7 +1477,7 @@ body.modal-open {
 /*END POPOVER*/
 /*jQUERY UI*/
 .ui-state-default .ui-icon-triangle-1-s {
-  background-image: url(../images/template/arrow-light-grey-bg.png) !important;
+  background-image: image-url('template/arrow-light-grey-bg.png') !important;
   background-repeat: no-repeat;
 }
 
@@ -1573,6 +1561,3 @@ body.modal-open {
 .irs-grid-text {
   color: #999;
 }
-
-/*ENDRANGE SLIDER*/
-/*END GENERAL*/
