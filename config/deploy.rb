@@ -5,7 +5,7 @@ require './config/boot'
 require 'capistrano/npm'
 
 set :stages, %w(staging production)
-set :default_stage, "staging"
+set :default_stage, "production"
 set :whenever_command, "bundle exec whenever"
 
 
