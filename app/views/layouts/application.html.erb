@@ -18,7 +18,6 @@
   <%= yield :view_specific_css %>
   <script src="https://content.jwplatform.com/libraries/D6L08XhR.js"></script>
   <%= javascript_include_tag "application" %>
-  <%= yield :run_specific_javascript %>
 </head>
 <body id="<%= @body_id %>" class="<%= params[:kind] %> <%= current_customer ? :private : :public %> <%= I18n.locale %> <%= @body_class %>">
 <div class="canavas" id="">
@@ -377,5 +376,6 @@
         radioClass: 'iradio_minimal-grey'
     });
 </script>
+<%= yield :run_specific_javascript %>
 </body>
 </html>
