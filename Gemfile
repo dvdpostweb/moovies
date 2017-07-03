@@ -1,7 +1,7 @@
 
 source 'http://rubygems.org'
 
-gem 'rails', '~> 3.2', '>= 3.2.22.5'
+gem 'rails', '3.2.14'
 gem 'puma', '~> 3.9', '>= 3.9.1'
 gem 'mysql2', '~> 0.3.21'
 gem 'json'
