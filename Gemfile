@@ -82,3 +82,4 @@ gem 'redis-rails'
 #gem 'webpack-rails'
 gem 'scout_apm'
 gem "react-rails"
+gem "font-awesome-rails"
