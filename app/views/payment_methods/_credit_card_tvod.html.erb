@@ -183,7 +183,7 @@
         </div>
       </div>
       <% if request.host == "staging.plush.be" %>
-        <h3>Orange Currier Billing</h3>
+        <h3><%= t('wha.carrierbilling') %></h3>
         <% if @product.get_vod_online(session[:country_id]).first.tvod_price == 2.99 %>
             <% wha_product = 103291 %>
         <% elsif @product.get_vod_online(session[:country_id]).first.tvod_price == 3.99 %>

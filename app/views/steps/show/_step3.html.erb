@@ -100,7 +100,7 @@
       </div>
     </div>
     <% if request.host == "staging.plush.be" %>
-      <h3>Orange Currier Billing</h3>
+      <h3><%= t('wha.carrierbilling') %></h3>
       <% if I18n.locale == :en  %>
         <% locale = "fr" %>
       <% elsif I18n.locale == :fr  %>
