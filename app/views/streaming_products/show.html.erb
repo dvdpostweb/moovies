@@ -173,7 +173,7 @@ $(document).ready(function () {
             },
             dataType: 'json',
             success: function (response) {
-                var callbackUrl = encodeURIComponent("http://staging.plush.be/api/v1/orange/callbacks/ioscallback?cn=" + gon.current_customer.customers_id + "&products_id=" + pid + "");
+                var callbackUrl = encodeURIComponent("http://"+gon.request_host+"/api/v1/orange/callbacks/ioscallback?cn=" + gon.current_customer.customers_id + "&products_id=" + pid + "");
                 var audiosubs = encodeURIComponent(response[0]["audsub"]);
                 var poster = encodeURIComponent(response[0]["products_image_big"]);
                 var title = encodeURIComponent(gon.products_title);
