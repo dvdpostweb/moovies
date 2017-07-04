@@ -5,8 +5,5 @@
   <%= link_to t(".more"), products_short_path('belgium' => belgium, :source => source), :class => :small if !belgium.nil? %>
 </h5>
 <section class="responsive-carousel slider">
-  <% cache("products_detail2_#{I18n.locale}", :expires_in => 15.minutes) do %>
-      <%= render :partial => 'products/detail2', :collection => data, :locals => {:source => source, :view_mode => view_mode} %>
-  <% end %>
+  <%= render :partial => 'products/detail2', :collection => data, :locals => {:source => source, :view_mode => view_mode} %>
 </section>
-

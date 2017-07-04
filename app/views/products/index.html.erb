@@ -1,25 +1,16 @@
 <div class="container" id="content-left-right">
   <div class="content-left">
-    <% cache("products_index_filters_online_#{I18n.locale}", :expires_in => 15.minutes) do %>
+    <% cache("products_index_filters_online_#{I18n.locale}_#{params[:kind]}", :expires_in => 15.minutes) do %>
       <%= render :partial => 'products/index/filters_online', :locals => {:countries => @countries} %>
     <% end %>
   </div>
   <div class="content-right">
     <div id="all" class="block100 movies">
       <% if params[:package].nil? && params[:concerns] != :productable && params[:belgium].blank? %>
-          <% cache("products_index_hp_#{I18n.locale}", :expires_in => 15.minutes) do %>
-            <%= render :partial => 'products/index/hp' %>
-          <% end %>
+          <%= render :partial => 'products/index/hp' %>
       <% else %>
           <%= render :partial => 'products/index/all' %>
       <% end %>
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
