@@ -8,9 +8,6 @@
         <% cache("normal_products_index_hp_list_top_#{I18n.locale}", :expires_in => 15.minutes) do %>
           <%= render :partial => 'products/index/hp_list', :locals => {:data => @top, :title => :top, :type => nil, :view_mode => nil, :source => 64, :belgium => nil} if @top.size > 5 && params[:kind] != :adult %>
         <% end %>
-        <% cache("normal_products_index_hp_list_tvod_soon_#{I18n.locale}", :expires_in => 15.minutes) do %>
-        <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_soon, :title => :tvod_soon, :type => :tvod, :view_mode => :soon, :source => 14, :belgium => nil} if @tvod_soon.size > 5 %>
-        <% end %>
         <% cache("normal_products_index_hp_list_tvod_last_#{I18n.locale}", :expires_in => 15.minutes) do %>
         <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_last, :title => :tvod_last, :type => :tvod, :view_mode => :last_added, :source => 65, :belgium => nil} if @tvod_last.size > 5 %>
         <% end %>
@@ -23,12 +20,12 @@
         <% cache("normal_products_index_hp_list_tvod_last_chance_#{I18n.locale}", :expires_in => 15.minutes) do %>
         <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_last_chance, :title => :tvod_last_chance, :type => :tvod, :view_mode => :last_chance, :source => 68, :belgium => nil} if @tvod_last_chance.size > 5 %>
         <% end %>
+        <% cache("normal_products_index_hp_list_tvod_soon_#{I18n.locale}", :expires_in => 15.minutes) do %>
+        <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_soon, :title => :tvod_soon, :type => :tvod, :view_mode => :soon, :source => 14, :belgium => nil} if @tvod_soon.size > 5 %>
+        <% end %>
     <% elsif params[:kind] == :adult %>
         <% cache("adult_products_index_hp_list_top_#{I18n.locale}", :expires_in => 15.minutes) do %>
         <%= render :partial => 'products/index/hp_list', :locals => {:data => @top, :title => :top, :type => nil, :view_mode => nil, :source => 64, :belgium => nil} if @top.size > 5 && params[:kind] != :adult %>
-        <% end %>
-        <% cache("adult_products_index_hp_list_tvod_soon_#{I18n.locale}", :expires_in => 15.minutes) do %>
-        <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_soon, :title => :tvod_soon, :type => :tvod, :view_mode => :soon, :source => 14, :belgium => nil} if @tvod_soon.size > 5 %>
         <% end %>
         <% cache("adult_products_index_hp_list_tvod_last_#{I18n.locale}", :expires_in => 15.minutes) do %>
         <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_last, :title => :tvod_last, :type => :tvod, :view_mode => :last_added, :source => 65, :belgium => nil} if @tvod_last.size > 5 %>
@@ -50,6 +47,9 @@
         <% end %>
         <% cache("adult_products_index_hp_list_tvod_last_chance_#{I18n.locale}", :expires_in => 15.minutes) do %>
         <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_last_chance, :title => :tvod_last_chance, :type => :tvod, :view_mode => :last_chance, :source => 68, :belgium => nil} if @tvod_last_chance.size > 5 %>
+        <% end %>
+        <% cache("adult_products_index_hp_list_tvod_soon_#{I18n.locale}", :expires_in => 15.minutes) do %>
+        <%= render :partial => 'products/index/hp_list', :locals => {:data => @tvod_soon, :title => :tvod_soon, :type => :tvod, :view_mode => :soon, :source => 14, :belgium => nil} if @tvod_soon.size > 5 %>
         <% end %>
     <% end %>
   </div>
