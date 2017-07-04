@@ -1,0 +1,11 @@
+{
+  "name": "Plush Belgium",
+  "short_name": "Plush",
+  "theme_color": "#2196f3",
+  "background_color": "#2196f3",
+  "display": "browser",
+  "Scope": "http://www.plush.be/fr",
+  "start_url": "http://www.plush.be/fr",
+  "icons": null,
+  "splash_pages": null
+}
