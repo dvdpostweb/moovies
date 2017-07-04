@@ -60,15 +60,6 @@
         <div class="columnHeader"><%= t('info.index.price_public.svod_cancellable').html_safe %></div>
         <div class="cell bodyCell icon-plainCheck selected"></div>
       </div>
-      <div class="alt"><%= t('info.index.price_public.svod_access_alacarte_text').html_safe %>
-        <%= link_to t('info.index.price_public.svod_access_alacarte_link').html_safe, info_path(:page_name => t('routes.infos.params.alacarte')), :class => "green" %>
-      </div>
-      <div class="row">
-        <div class="columnHeader"><%= t('info.index.price_public.svod_access_alacarte_text').html_safe %>
-          <%= link_to t('info.index.price_public.svod_access_alacarte_link').html_safe, info_path(:page_name => t('routes.infos.params.alacarte')), :class => "green" %>
-        </div>
-        <div class="cell bodyCell selected icon-plainCheck"></div>
-      </div>
     </div>
     <div class="block100 padlr10 normal mart15 f14">
       <%= t('info.index.price_public.svod_explanation_1').html_safe %>, <strong><%= link_to t('info.index.price_public.choose_svod_explanation_link').html_safe, info_path(:page_name => t('routes.infos.params.vod')), :id => :multi %></strong>. <%= t('info.index.price_public.svod_explanation_2').html_safe %>.
