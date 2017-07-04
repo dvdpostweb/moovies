@@ -1,12 +1,5 @@
-<% content_for :view_specific_css do %>
-    <%= stylesheet_link_tag "steps/step4" %>
-<% end %>
 <div class="container white-bck">
   <h1 class="green pad0 mart10 f30 OpenSansCondensed block100"><%= t('.congrats') %></h1>
   <p class="block100"><%= t('.congrats_desc').html_safe %> </p>
   <%= render :partial => 'home/index/lists', :locale => {:type => 'subscription'} %>
 </div>
-
-<% content_for :run_specific_javascript do %>
-    <%= javascript_include_tag "steps/step4" %>
-<% end %>
