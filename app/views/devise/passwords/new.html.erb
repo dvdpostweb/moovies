@@ -1,11 +1,12 @@
 <div class="container white-bck padb30">
   <div class="center-block thin-holder ">
-    <div class="block100 cred-buttons">
-      <a href="/auth/facebook?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>;ACTION_TYPE=NORMAL;ORG_URL=<%= request.fullpath %>" class="btn center-block f16 blue-facebook-bck uppercase radius4 padtb15"><i class="fa fa-facebook marr5 f16"></i> <%= t('.social.network.fbconnect') %>
+    <div class="block100">
+      <br>
+      <a href="/auth/facebook?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>;ACTION_TYPE=NORMAL;ORG_URL=<%= request.fullpath %>" class="btn btn-block blue-facebook-bck uppercase radius4 padtb15"><i class="fa fa-facebook marr5 f16"></i> <%= t('.social.network.fbconnect') %>
       </a>
-      <a href="/auth/google_oauth2?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>;ACTION_TYPE=NORMAL;ORG_URL=<%= request.fullpath %>" class="btn center-block f16 red-google-bck uppercase radius4 padtb15 mart15"><i class="fa fa-google-plus marr5 f16"></i> <%= t('.social.network.google') %>
+      <a href="/auth/google_oauth2?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>;ACTION_TYPE=NORMAL;ORG_URL=<%= request.fullpath %>" class="btn btn-block red-google-bck uppercase radius4 padtb15"><i class="fa fa-google-plus marr5 f16"></i> <%= t('.social.network.google') %>
       </a>
-      <a href="<%= orange_lu_auth_sms_authorization_path(:moovie_id => params[:moovie_id], :code => params[:code], :activation => params[:activation])  %>" class="btn center-block f16 orange-bck uppercase radius4 padtb15 mart15">Register
+      <a href="<%= orange_lu_auth_sms_authorization_path(:moovie_id => params[:moovie_id], :code => params[:code], :activation => params[:activation])  %>" class="btn btn-block orange-bck uppercase radius4 padtb15">Register
         with Orange</a>
     </div>
     <div class="hr-with-words mart30 block100">

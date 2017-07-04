@@ -2,6 +2,7 @@
   <div class="center-block thin-holder ">
 
     <div class="block100">
+      <br>
       <a href="/auth/facebook?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>;ACTION_TYPE=NORMAL;ORG_URL=<%= request.fullpath %>" class="btn btn-block blue-facebook-bck uppercase radius4 padtb15"><i class="fa fa-facebook marr5 f16"></i> <%= t('.social.network.fbconnect') %>
       </a>
       <a href="/auth/google_oauth2?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>;ACTION_TYPE=NORMAL;ORG_URL=<%= request.fullpath %>" class="btn btn-block red-google-bck uppercase radius4 padtb15"><i class="fa fa-google-plus marr5 f16"></i> <%= t('.social.network.google') %>
