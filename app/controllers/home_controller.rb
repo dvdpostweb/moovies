@@ -38,7 +38,7 @@ class HomeController < ApplicationController
       histo.update_attributes(:mail_opened => histo.mail_opened + 1, :mail_opened_date => Time.now)
       MessageTicket.find_by_mail_history_id(params['mail_id']).update_attributes(:is_read => 1)
     end
-    render :text => open('app/assets/images/blank.gif', "rb").read
+    #render :text => open('app/assets/images/blank.gif', "rb").read
   end
 
   def moodme
@@ -220,7 +220,7 @@ class HomeController < ApplicationController
   end
 
   def orangesmsconfirm
-    
+
   end
 
 end
