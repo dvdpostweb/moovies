@@ -28,9 +28,7 @@
   <div class="wrap">
     <%= render "layouts/header" %>
     <div id="content" class="<%= configure_content_div_html_class(params) %>">
-      <% cache("layouts_promo_banner_#{I18n.locale}_#{params[:kind]}", :expires_in => 15.minutes) do %>
           <%= render "layouts/promo_banner" %>
-      <% end %>
       <%= yield %>
     </div>
     <% cache("layouts_footer_#{I18n.locale}", :expires_in => 15.minutes) do %>
