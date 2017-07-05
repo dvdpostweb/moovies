@@ -138,3 +138,12 @@
   </div>
   <div class="block100 slide-score <%= params[:kind] == :adult ? "violet" : "#{product.tvod? ? "blue" : "green"}" %> text-center" data-score="<%= product.rating_count %>"></div>
 </div>
+
+<script>
+$('.slide-score').raty({
+    readOnly: true,
+    score: function () {
+        return $(this).attr('data-score');
+    }
+});
+</script>
