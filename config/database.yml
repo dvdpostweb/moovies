@@ -53,20 +53,22 @@ common_staging:
 test:
   adapter: mysql2
   encoding: utf8
-  reconnect: false
-  database: plush_test
-  pool: 5
+  database: plush_production
   username: root
-  password: matrix
-  host: 127.0.0.1
+  password: #root
+  host: localhost
+  port: 3306
+  socket: /opt/lampp/var/mysql/mysql.sock
 
 common_test:
   adapter: mysql2
   encoding: utf8
-  database: common_test
+  database: common_production
   username: root
-  password: matrix
-  host: 127.0.0.1
+  password: #root
+  host: localhost
+  port: 3306
+  socket: /opt/lampp/var/mysql/mysql.sock
 
 ################################################################################################################################################################
 
