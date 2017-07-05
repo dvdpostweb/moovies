@@ -191,13 +191,13 @@ class Product < ActiveRecord::Base
     products = products.belgium_land if options[:belgium] == 4
 
     if options[:filters]
-      products = products.by_audience(options[:filters][:audience_min].reject(&:empty?).map(&:to_i), options[:filters][:audience_max].reject(&:empty?).map(&:to_i)) if Product.audience?(options[:filters][:audience_min], options[:filters][:audience_max]) && options[:kind] == :normal
-      products = products.by_countries_id(options[:filters][:country_id].reject(&:empty?).map(&:to_i)) if Product.countries?(options[:filters][:country_id])
-      products = products.by_ratings(options[:filters][:rating_min].to_f, options[:filters][:rating_max].to_f) if Product.rating?(options[:filters][:rating_min], options[:filters][:rating_max])
-      products = products.by_period(options[:date][:filters][:year_min].to_i, options[:date][:filters][:year_max].to_i) if options[:date] && Product.year?(options[:date][:filters][:year_min], options[:date][:filters][:year_max])
-      products = products.with_languages(audio = options[:filters][:audio].reject(&:empty?).map(&:to_i)) if Product.audio?(options[:filters][:audio])
-      products = products.with_subtitles(options[:filters][:subtitles].reject(&:empty?).map(&:to_i)) if Product.subtitle?(options[:filters][:subtitles])
-      products = products.by_category(options[:filters][:category_id].to_i) if !options[:filters][:category_id].nil? && !options[:filters][:category_id].blank?
+      products = products.by_audience(options[:filters][:audience_min].reject(&:empty?), options[:filters][:audience_max].reject(&:empty?).map(&:to_i)) if Product.audience?(options[:filters][:audience_min], options[:filters][:audience_max]) && options[:kind] == :normal
+      products = products.by_countries_id(options[:filters][:country_id].reject(&:empty?)) if Product.countries?(options[:filters][:country_id])
+      products = products.by_ratings(options[:filters][:rating_min], options[:filters][:rating_max]) if Product.rating?(options[:filters][:rating_min], options[:filters][:rating_max])
+      products = products.by_period(options[:date][:filters][:year_min], options[:date][:filters][:year_max]) if options[:date] && Product.year?(options[:date][:filters][:year_min], options[:date][:filters][:year_max])
+      products = products.with_languages(audio = options[:filters][:audio].reject(&:empty?)) if Product.audio?(options[:filters][:audio])
+      products = products.with_subtitles(options[:filters][:subtitles].reject(&:empty?)) if Product.subtitle?(options[:filters][:subtitles])
+      products = products.by_category(options[:filters][:category_id]) if !options[:filters][:category_id].nil? && !options[:filters][:category_id].blank?
     end
     products = products.online.belgium_country if options[:belgium] && options[:belgium].to_i == 1
     products = products.online.belgium_actor if options[:belgium] && options[:belgium].to_i == 2
@@ -218,8 +218,8 @@ class Product < ActiveRecord::Base
     end
     products = Product.available.by_kind(options[:kind])
     products = products.exclude_products_id([exact.collect(&:products_id)]) if exact
-    products = products.by_actor(options[:actor_id]) if options[:actor_id]
-    products = products.by_category(options[:category_id]) if options[:category_id]
+    products = products.by_actor(options[:actor_id]).map(&:to_i) if options[:actor_id]
+    products = products.by_category(options[:category_id]).map(&:to_i) if options[:category_id]
     products = products.hetero if options[:hetero] && (options[:category_id] && (options[:category_id].to_i != 76 && options[:category_id].to_i != 72))
     products = products.by_director(options[:director_id]) if options[:director_id]
     products = products.by_imdb_id(options[:imdb_id]) if options[:imdb_id]

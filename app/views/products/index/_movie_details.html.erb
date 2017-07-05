@@ -30,7 +30,7 @@ display: none;
   <!--TEXT LIST VIEW-->
   <div class="text-list-view">
     <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 dark-gray line-height-15">
-      <!--<% if !product.actors.empty?  %>
+      <% if !product.actors.empty?  %>
       <div class="block100">
         <h5 class="block100 f16 mart0 bold marb5"><%= t '.actors' %></h5>
         <%= product.actors.collect{|actor| link_to actor.name, actor_products_path(:actor_id => actor.to_param), class: "f13"}.join(', ').html_safe %>
@@ -41,7 +41,7 @@ display: none;
         <h5 class="block100 f16 mart0 bold marb5"><%= t '.director' %></h5>
         <%= link_to product.studio.name, studio_products_path(:studio_id => product.studio.to_param), class: "f13" %>
       </div>
-      <% end %>-->
+      <% end %>
       <div class="block100 mart10 f13">
         <%= truncate_html(product_description.text, :length => 300) if product_description %>
       </div>
