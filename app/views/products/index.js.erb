@@ -60,4 +60,11 @@ $("#load_more").click(function(e) {
         dataType: 'script'
     });
 });
+
+$('.slide-score').raty({
+    readOnly: true,
+    score: function () {
+        return $(this).attr('data-score');
+    }
+});
 <% end %>
