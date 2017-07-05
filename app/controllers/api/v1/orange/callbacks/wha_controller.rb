@@ -94,7 +94,7 @@ class Api::V1::Orange::Callbacks::WhaController < API::V1::BaseController
 
   def cancel
     render json: params
-    #WhaCallback.create(created_at: Time.now, callbackurl: params)
+    WhaCallback.create(created_at: Time.now, callbackurl: params)
     #flash[:error] = t('orange_wha_cancel')
     #redirect_to root_localize_path and return
   end
