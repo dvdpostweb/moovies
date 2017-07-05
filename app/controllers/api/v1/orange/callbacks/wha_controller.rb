@@ -1,7 +1,7 @@
-class Api::V1::Orange::Callbacks::WhaController < ApplicationController
+class Api::V1::Orange::Callbacks::WhaController < API::V1::BaseController
 
   def success
-    render json: params 
+    render json: params
   end
 
   def success1
