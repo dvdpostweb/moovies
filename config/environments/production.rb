@@ -4,7 +4,7 @@ Moovies::Application.configure do
   #config.action_controller.asset_host = "http://www.plush.be"
 
   # Code is not reloaded between requests
-  config.cache_classes = true
+  config.cache_classes = false
 
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
