@@ -81,13 +81,14 @@ class Api::V1::Orange::Callbacks::WhaController < ApplicationController
         end
       end
     elsif 'v=3:{c=PurchaseTypeCancel'.in?(niz)
+      WhaCallback.create(created_at: Time.now, callbackurl: params)
       flash[:error] = t('orange_wha_cancel')
       redirect_to root_localize_path and return
     end
   end
 
   def cancel
-    WhaCallback.create(callbackurl: params)
+    WhaCallback.create(created_at: Time.now, callbackurl: params)
     flash[:error] = t('orange_wha_cancel')
     redirect_to root_localize_path and return
   end
