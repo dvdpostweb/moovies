@@ -1,8 +1,6 @@
 <div class="container" id="content-left-right">
   <div class="content-left">
-    <% cache("products_index_filters_online_#{I18n.locale}_#{params[:kind]}", :expires_in => 15.minutes) do %>
-      <%= render :partial => 'products/index/filters_online', :locals => {:countries => @countries} %>
-    <% end %>
+    <%= render :partial => 'products/index/filters_online', :locals => {:countries => @countries} %>
   </div>
   <div class="content-right">
     <div id="all" class="block100 movies">
