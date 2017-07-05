@@ -1,10 +1,10 @@
 class Api::V1::Orange::Callbacks::WhaController < API::V1::BaseController
 
-  def success
-    render json: params
-  end
+  #def success
+  #  render json: params
+  #end
 
-  def success1
+  def success
     WhaCallback.create(created_at: Time.now, callbackurl: params)
     niz = params[:m].split(/;/).to_a
     if 'v=3:{c=PurchaseTypeSuccess'.in?(niz)
@@ -85,18 +85,18 @@ class Api::V1::Orange::Callbacks::WhaController < API::V1::BaseController
         end
       end
     elsif 'v=3:{c=PurchaseTypeCancel'.in?(niz)
-      render json: params
-      #WhaCallback.create(created_at: Time.now, callbackurl: params)
-      #flash[:error] = t('orange_wha_cancel')
-      #redirect_to root_localize_path and return
+      #render json: params
+      WhaCallback.create(created_at: Time.now, callbackurl: params)
+      flash[:error] = t('orange_wha_cancel')
+      redirect_to root_localize_path and return
     end
   end
 
   def cancel
-    render json: params
+    #render json: params
     WhaCallback.create(created_at: Time.now, callbackurl: params)
-    #flash[:error] = t('orange_wha_cancel')
-    #redirect_to root_localize_path and return
+    flash[:error] = t('orange_wha_cancel')
+    redirect_to root_localize_path and return
   end
 
 end
