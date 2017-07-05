@@ -8,15 +8,13 @@
 <% product_image = data[:image] %>
 <% path = product_path(:id => product.to_param, :source => @source, :response_id => @response_id) %>
 
-
-
-
 <div class="grid-slide">
   <a href="<%= product_path(:id => product.to_param, :source => @source) %>" class="popper"><%= image_tag(product_image, :class => "img-responsive") %>
     <% if product.hd?(session[:country_id]) %>
         <span class="hd position-absolute black white-bck radius2 bold italic">HD</span>
     <% end %>
   </a>
+
   <div class="synopsys-content">
     <div class="position-relative pull-left">
       <h6 class="dark-gray mart20 marb0 bold text-center uppercase f20"><%= product.smart_title %> (<%= product.year %>
@@ -48,7 +46,7 @@
                           <div class="block100 slide-price f20 line-height-10 dark-gray text-center bold">
                             <%= product.streaming_products.first.tvod_credits %> credits
                           </div>
-                      <% elsif current_customer.plush_la_carte_subscriber? %>
+                  product_image    <% elsif current_customer.plush_la_carte_subscriber? %>
                           <div class="block100 slide-price f20 line-height-10 dark-gray text-center bold">
                             <%= product.streaming_products.first.tvod_credits %> credits
                           </div>
@@ -137,4 +135,5 @@
     </div>
   </div>
   <div class="block100 slide-score <%= params[:kind] == :adult ? "violet" : "#{product.tvod? ? "blue" : "green"}" %> text-center" data-score="<%= product.rating_count %>"></div>
+
 </div>

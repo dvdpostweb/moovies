@@ -34,6 +34,7 @@ class Rating < ActiveRecord::Base
   scope :by_customer, lambda { |customer| where(:customers_id => customer.to_param) }
 
   private
+  
   def set_defaults
     self.updated_at = Time.now.to_s(:db)
     self.type = product.kind

@@ -65,6 +65,7 @@
         </div>
       </form>
     </div>
+    <% if request.host == "www.plush.lu" || request.host == "staging.plush.lu" %>
     <h3><%= t('use_orange_billing') %></h3>
     <div>
       <div id="sms_auth" class="center-block thin-holder border radius4 thinrgray-bck pad20 mart20 overflow-hidden">
@@ -99,7 +100,7 @@
         </div>
       </div>
     </div>
-    <% if request.host == "www.plush.be" || request.host == "staging.plush.be" %>
+    <% elsif request.host == "www.plush.be" || request.host == "staging.plush.be" %>
       <h3><%= t('wha.carrierbilling') %></h3>
       <% if I18n.locale == :en  %>
         <% locale = "fr" %>

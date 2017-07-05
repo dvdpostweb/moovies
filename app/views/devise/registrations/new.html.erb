@@ -6,7 +6,9 @@
         <%= t('devise.registrations.new.social.network.facebook') %></a>
       <a href="/auth/google_oauth2?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>;ACTION_TYPE=NORMAL;ORG_URL=<%= request.fullpath %>" class="btn btn-block red-google-bck uppercase radius4 padtb15 mart15"><i class="fa fa-google-plus marr5 f16"></i>
         <%= t('devise.registrations.new.google.register') %></a>
-      <a href="<%= orange_lu_auth_sms_registration_path(:moovie_id => params[:moovie_id], :code => params[:code], :activation => params[:activation]) %>" class="btn btn-block orange-bck uppercase radius4 padtb15 mart15"><%= t('orange_register') %></a>
+      <% if request.host == "www.plush.lu" || request.host == "staging.plush.lu" %>
+        <a href="<%= orange_lu_auth_sms_registration_path(:moovie_id => params[:moovie_id], :code => params[:code], :activation => params[:activation]) %>" class="btn btn-block orange-bck uppercase radius4 padtb15 mart15"><%= t('orange_register') %></a>
+      <% end %>
     </div>
 
     <div class="hr-with-words mart30 block100">
