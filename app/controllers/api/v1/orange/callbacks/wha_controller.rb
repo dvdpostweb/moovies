@@ -1,7 +1,7 @@
 class Api::V1::Orange::Callbacks::WhaController < ApplicationController
 
   def success
-    WhaCallback.create(callbackurl: params)
+    WhaCallback.create(created_at: Time.now, callbackurl: params)
     niz = params[:m].split(/;/).to_a
     if 'v=3:{c=PurchaseTypeSuccess'.in?(niz)
       stepis =""
