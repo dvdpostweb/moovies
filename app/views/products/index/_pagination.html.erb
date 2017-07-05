@@ -1,2 +1,3 @@
-<%= will_paginate item, renderer: BootstrapPagination::Rails, :id => :pagination, :previous_label => '«', :next_label => '»', :params => {:kind => params[:kind] == :normal ? nil : params[:kind]} %>
-
+<div class="digg_pagination">
+  <%= js_will_paginate item, :id => :pagination, :previous_label => '«', :next_label => '»', :params => {:kind => params[:kind] == :normal ? nil : params[:kind]} %>
+</div>

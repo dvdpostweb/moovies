@@ -16,7 +16,6 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <%= stylesheet_link_tag "application", :media => "all" %>
-  <%= yield :view_specific_css %>
   <script src="https://content.jwplatform.com/libraries/D6L08XhR.js"></script>
   <%= javascript_include_tag "application" %>
 </head>
@@ -29,7 +28,9 @@
   <div class="wrap">
     <%= render "layouts/header" %>
     <div id="content" class="<%= configure_content_div_html_class(params) %>">
-      <%= render "layouts/promo_banner" %>
+      <% cache("layouts_promo_banner_#{I18n.locale}_#{params[:kind]}", :expires_in => 15.minutes) do %>
+          <%= render "layouts/promo_banner" %>
+      <% end %>
       <%= yield %>
     </div>
     <% cache("layouts_footer_#{I18n.locale}", :expires_in => 15.minutes) do %>
