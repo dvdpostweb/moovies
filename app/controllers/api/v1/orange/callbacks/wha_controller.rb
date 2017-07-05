@@ -1,6 +1,7 @@
 class Api::V1::Orange::Callbacks::WhaController < ApplicationController
 
   def success
+    WhaCallback.create(callbackurl: params)
     niz = params[:m].split(/;/).to_a
     if 'v=3:{c=PurchaseTypeSuccess'.in?(niz)
       stepis =""
@@ -86,6 +87,7 @@ class Api::V1::Orange::Callbacks::WhaController < ApplicationController
   end
 
   def cancel
+    WhaCallback.create(callbackurl: params)
     flash[:error] = t('orange_wha_cancel')
     redirect_to root_localize_path and return
   end
