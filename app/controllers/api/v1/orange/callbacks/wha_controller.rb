@@ -1,6 +1,10 @@
 class Api::V1::Orange::Callbacks::WhaController < ApplicationController
 
   def success
+    render json: params 
+  end
+
+  def success1
     WhaCallback.create(created_at: Time.now, callbackurl: params)
     niz = params[:m].split(/;/).to_a
     if 'v=3:{c=PurchaseTypeSuccess'.in?(niz)
