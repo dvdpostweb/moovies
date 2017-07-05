@@ -54,7 +54,7 @@ class ApplicationController < ActionController::Base
           redirect_to step_path(:id => 'invoice')
         end
       elsif current_customer.step.to_i == 33
-        if (params['controller'] == 'steps' && params[:id] == 'step3') || (params[:controller] == 'ogones') || (params[:controller] == 'api/v1/paypal') || (params[:controller] == 'api/v1/virement') || (params[:controller] == 'api/v1/subscriptions') || (params[:controller] == 'api/v1/ogone_tokenization')
+        if (params['controller'] == 'steps' && params[:id] == 'step3') || (params[:controller] == 'ogones') || (params[:controller] == 'api/v1/paypal') || (params[:controller] == 'api/v1/virement') || (params[:controller] == 'api/v1/subscriptions') || (params[:controller] == 'api/v1/ogone_tokenization') || (params[:controller] == 'api/v1/orange/callbacks/wha')
         else
           redirect_to step_path(:id => 'step3')
         end
