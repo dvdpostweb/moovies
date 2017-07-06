@@ -27,6 +27,7 @@ class ApplicationController < ActionController::Base
     gon.orange_phone_number_validation = t('orange_phone_number_validation')
     gon.orange_invalid_phone_number_format = t('orange_invalid_phone_number_format')
     gon.orange_promotion_option = t('orange_promotion_option')
+    gon.mobile = "MOBILE" if request.user_agent =~ /Mobile|webOS/
   end
 
   #def handle_unverified_request

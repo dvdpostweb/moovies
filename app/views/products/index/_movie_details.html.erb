@@ -9,6 +9,7 @@ display: none;
 <% product_image = data[:image] %>
 <% product_description =  data[:description] %>
 <% path = product_path(:id => product.to_param, :source => @source, :response_id => @response_id) %>
+<%= render :partial => 'products/index/pagination_scroll', :locals => {:item => @products} %>
 
   <h4 class="block100">
     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 dark-gray"><%= link_to product.smart_title, path, :target => target %> (<%= product.year %>)</div>

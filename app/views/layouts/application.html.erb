@@ -38,11 +38,19 @@
 <script>
     $(document).ready(function () {
 
-      $(window).scroll(function() {
-         if($(window).scrollTop() + window.innerHeight == $(document).height()) {
-             console.log("bottom!");
-         }
-      });
+      $("[id=pagination]").hide();
+
+      if (gon && gon.mobile === "MOBILE") {
+
+        $(window).on("scroll", function() {
+        	var scrollHeight = $(document).height();
+        	var scrollPosition = $(window).height() + $(window).scrollTop();
+        	if ((scrollHeight - scrollPosition) / scrollHeight === 0) {
+            $.ajax({url: $('.next_page').last().attr('href'), dataType: 'script'});
+        	}
+        });
+
+      }
 
         $("#green_banner_form").submit(function (event) {
             event.preventDefault();

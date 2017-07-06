@@ -96,7 +96,7 @@ class ProductsController < ApplicationController
     @target = cookies[:endless] == 'deactive' ? '_self' : '_blank'
     @carousels = Landing.hit.by_language(I18n.locale).not_expirated
 
-    #cookies[:endless] == 'active'
+    cookies[:endless] == 'active' if request.user_agent =~ /Mobile|webOS/
 
     #if params[:endless]
     #  cookies.permanent[:endless] = params[:endless]
