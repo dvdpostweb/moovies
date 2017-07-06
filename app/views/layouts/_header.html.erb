@@ -41,7 +41,9 @@
             <#% end %>
           </li>-->
           <% if request.host == "www.plush.lu" || request.host == "staging.plush.lu" %>
-            <li class="marr10"><a href="<%= orange_lu_auth_sms_authorization_path %>" class="uppercase orange-bck"><%= t('login met orange') %></a>
+            <% unless Rails.env.production? %>
+              <li class="marr10"><a href="<%= orange_lu_auth_sms_authorization_path %>" class="uppercase orange-bck"><%= t('login met orange') %></a>
+            <% end %>
           <% end %>
           <li class="marr10">
             <%= link_to(new_customer_session_path, :id => :login, :class => "uppercase #{params[:kind] == :adult ? "violet-bck" : "green-bck"}") do %>

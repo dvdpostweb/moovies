@@ -38,6 +38,13 @@ $('.responsive-carousel').slick({
     ]
 });
 <% else %>
+
+<% if request.user_agent =~ /Mobile|webOS/ %>
+
+
+
+<% end %>
+
 $('#all').html("<%= escape_javascript(render(:partial => 'products/index/all', :formats => [:html])) %>");
 load_form();
 $('.popper').popover({

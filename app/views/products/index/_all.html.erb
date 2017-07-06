@@ -12,15 +12,19 @@
 <% if cookies[:display] == 'list' %>
     <div id="list-view">
       <%= render :partial => 'products/index/movie_details', :collection => @products, :locals => {:target => @target} %>
-      <div class="block100 mart30 pagin-bar">
-        <%= render :partial => 'products/index/pagination', :locals => {:item => @products} %>
-      </div>
+      <% unless request.user_agent =~ /Mobile|webOS/ %>
+        <div class="block100 mart30 pagin-bar">
+          <%= render :partial => 'products/index/pagination', :locals => {:item => @products} %>
+        </div>
+      <% end %>
     </div>
 <% else %>
     <div id="grid-view">
       <%= render :partial => 'products/index/movie_details_jacket', :collection => @products, :locals => {:target => @target} %>
-      <div class="block100 mart30 pagin-bar">
-        <%= render :partial => 'products/index/pagination', :locals => {:item => @products} %>
-      </div>
+      <% unless request.user_agent =~ /Mobile|webOS/ %>
+        <div class="block100 mart30 pagin-bar">
+          <%= render :partial => 'products/index/pagination', :locals => {:item => @products} %>
+        </div>
+      <% end %>
     </div>
 <% end %>
