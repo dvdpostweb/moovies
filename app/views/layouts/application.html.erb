@@ -42,13 +42,11 @@
 
       if (gon && gon.mobile === "MOBILE") {
 
-        $(window).on("scroll", function() {
-        	var scrollHeight = $(document).height();
-        	var scrollPosition = $(window).height() + $(window).scrollTop();
-        	if ((scrollHeight - scrollPosition) / scrollHeight === 0) {
-            $.ajax({url: $('.next_page').last().attr('href'), dataType: 'script'});
-        	}
-        });
+        window.onscroll = function(ev) {
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+              $.ajax({url: $('.next_page').last().attr('href'), dataType: 'script'});
+            }
+        };
 
       }
 
