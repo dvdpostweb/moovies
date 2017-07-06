@@ -17,7 +17,7 @@
   <%= stylesheet_link_tag "application", :media => "all" %>
   <script src="https://content.jwplatform.com/libraries/D6L08XhR.js"></script>
   <%= javascript_include_tag "application" %>
-  <link rel="manifest" href="/manifest.json">
+   <link rel="manifest" href="manifest.json">
 <body id="<%= @body_id %>" class="<%= params[:kind] %> <%= current_customer ? :private : :public %> <%= I18n.locale %> <%= @body_class %>">
 <div class="canavas" id="">
   <% if params[:controller] == "products" %>
