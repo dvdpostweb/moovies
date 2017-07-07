@@ -12,6 +12,8 @@ class Wister::AuthController < API::V1::BaseController
         sign_in(customer)
         redirect_to root_localize_path
       end
+    else
+      render json: "NO ACCESS TOKEN!!!"
     end
   end
 
