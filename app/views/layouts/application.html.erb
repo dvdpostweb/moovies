@@ -19,6 +19,7 @@
   <%= javascript_include_tag "application" %>
    <link rel="manifest" href="manifest.json">
 <body id="<%= @body_id %>" class="<%= params[:kind] %> <%= current_customer ? :private : :public %> <%= I18n.locale %> <%= @body_class %>">
+  <%= render :partial => 'layouts/old_partials/google_analytics' %>
 <div class="canavas" id="">
   <% if params[:controller] == "products" %>
       <%= render "layouts/application/filters_open_adaptive" %>
@@ -37,14 +38,14 @@
 </div>
 <script>
 
-if (gon && gon.mobile === "MOBILE") {
-  var w = $(window), d = $(document);
-  w.scroll(function() {
-     if(w.scrollTop() + w.height() == d.height()) {
-       $.ajax({url: $('.next_page').last().attr('href'), dataType: 'script'});
-     }
-  });
-}
+    if (gon && gon.mobile === "MOBILE") {
+      var w = $(window), d = $(document);
+      w.scroll(function() {
+         if(w.scrollTop() + w.height() == d.height()) {
+           $.ajax({url: $('.next_page').last().attr('href'), dataType: 'script'});
+         }
+      });
+    }
 
     $(document).ready(function () {
 

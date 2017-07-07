@@ -43,6 +43,7 @@
         <div class="block100 mart20">
           <p class="f3"><%= t('orange_landing_page_after_input_text').html_safe %></p>
           <button class="btn block100 orange-bck padtb10 white f16 normal pull-right"><%= t('orange_landing_page_button') %></button>
+          <div class="block100 mart15"><%= t('orange_landing_not_cust') %></div>
           <%= link_to(t('orange_landing_page_skip'), root_localize_path, :class => "btn block100 light-blue-bck-orange-skip padtb10 white f16 normal pull-left") %>
         </div>
       </form>
@@ -95,6 +96,21 @@
         </div>
       </li>
       <li>
+          <div class="img-cat">
+              <%= image_tag "template/orange-cat4a.jpg" %>
+          </div>
+
+          <div class="desc-cat f13">
+              <div class="fa-stack display-inline">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <span class="fa fa-stack-1x fa-inverse fa-plus18"></span>
+              </div>
+              <div class="pull-right line-height-15 display-inline">
+                  <%= t('orange_landing_not_cust_4a').html_safe %>
+              </div>
+          </div>
+      </li>
+      <li>
         <div class="img-cat">
           <%= image_tag "template/orange-cat4.jpeg" %>
         </div>
@@ -119,4 +135,3 @@
     <%= t('orange_landing_page_footer_21') %> <a href="#" class="mart5"><%= t('orange_landing_page_footer_22') %></a>
   </div>
 </div>
-
