@@ -17,4 +17,19 @@ class Wister::AuthController < API::V1::BaseController
     end
   end
 
+  def token_creator
+    if params[:email].present?
+      exp = Time.now.to_i + 4 * 3600
+      payload = {
+        :email => params[:email],
+        :time => exp
+      }
+      hmac_secret = 'WisterAndPlushAreAwesome2017'
+      token = JWT.encode payload, hmac_secret, 'HS256'
+      render json: token
+    else
+      render json: "NO EMAIL!!!"
+    end
+  end
+
 end
