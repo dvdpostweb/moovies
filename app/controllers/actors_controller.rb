@@ -23,7 +23,7 @@ class ActorsController < ApplicationController
         end
       end
     else
-      fragment_name = session[:sexuality] == 1 ?  "actors_x_gay_hash_#{params[:letter]}" : "actors_x_hetero_hash_#{params[:letter]}"
+      fragment_name = session[:sexuality] == 1 ? "actors_x_gay_hash_#{params[:letter]}" : "actors_x_hetero_hash_#{params[:letter]}"
       @actors = Hash.new()
       details = Hash.new()
       if session[:sexuality] == 1
