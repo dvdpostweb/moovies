@@ -54,4 +54,5 @@ class InfoController < ApplicationController
       @discount = Discount.find(Moovies.discount["playstation"])
     end
   end
+
 end

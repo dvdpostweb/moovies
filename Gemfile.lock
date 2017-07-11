@@ -72,8 +72,6 @@ GEM
       net-ssh-gateway (>= 1.1.0)
     capistrano-ext (1.2.1)
       capistrano (>= 1.0.0)
-    capistrano-npm (0.0.2)
-      capistrano (>= 2.5.5)
     chosen-rails (1.5.2)
       coffee-rails (>= 3.2)
       railties (>= 3.0)
@@ -362,7 +360,6 @@ DEPENDENCIES
   browser (~> 0.2.0)
   capistrano (~> 2.15.5)
   capistrano-ext
-  capistrano-npm
   chosen-rails
   client_side_validations (~> 3.2.6)
   coffee-rails

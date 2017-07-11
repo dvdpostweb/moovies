@@ -25,7 +25,6 @@ gem 'net-ssh', '~> 2.9', '>= 2.9.4'
 group  :development, :test do
   gem "capistrano", "~> 2.15.5"
   gem "capistrano-ext"
-  gem 'capistrano-npm', require: false
 end
 
 group :test do
