@@ -131,6 +131,14 @@ module ApplicationHelper
     end
   end
 
+  def customer_plan_translator_wister(locale)
+    case locale
+      when :en then "credits per week"
+      when :nl then "credits per week"
+      when :fr then "crédits par semaine"
+    end
+  end
+
   def send_message(mail_id, options, locale, customer_default = nil)
     customer = customer_default ? customer_default : current_customer
     mail_object = Email.by_language(locale).find(mail_id)

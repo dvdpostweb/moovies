@@ -1,5 +1,6 @@
 <div <%= @code && @code.white_label ? 'id="maincontent_no_border"' : 'id="maincontent"' %> class="container white-bck">
   <%= render partial: 'streaming_products/show/error', :locals => {:error => @error} if @error %>
+  <br>
   <h1 class="pad0 mart10 f30 green OpenSansCondensed block100 marb15"><%= h !@product.series? ? @product.description.title : @product.episode_title %>
     (<%= @product.year %>)</h1>
   <div id="stream_movie" class="block100">
