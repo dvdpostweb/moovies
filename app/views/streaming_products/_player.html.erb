@@ -10,14 +10,5 @@
         <% token_code = "#{streaming.hd? ? '4' : '3'}/i/" + streaming.imdb_id.to_s %>
     <% end %>
 <% end %>
-
-
 <%= jwplayer(filename, source, streaming, token_code, browser, code = nil, season_id, episode_id) %>
-
-<script>
-$('#stream_movie').html("<div id='player'>Loading the player...</div>");
-$('#stream_movie').append("<script>" +
-"jwplayer('player').setup({file: movieUrl})" +
-"<script>" +
-"console.log(movieUrl)");
-</script>
+<div id='player'>Loading the player...</div>

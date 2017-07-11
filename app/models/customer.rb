@@ -192,6 +192,10 @@ class Customer < ActiveRecord::Base
     (activation_discount_code_id == 263 || activation_discount_code_id == 264 || activation_discount_code_id == 265)
   end
 
+  def wister_subscriber?
+    (customers_abo_payment_method  == 7)
+  end
+
   def dont_have_credits?
     tvod_free == 0
   end

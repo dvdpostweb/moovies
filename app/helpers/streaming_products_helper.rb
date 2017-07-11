@@ -15,6 +15,27 @@ module StreamingProductsHelper
 
     script = <<-script
       var movieUrl = '#{url}'
+      jwplayer('player').setup({file: movieUrl});
+    script
+    javascript_tag script
+  end
+
+  def jwplayerdefault(source_file, source, streaming, token_name, browser, code = nil, season_id ='0', episode_id = '0', image)
+    audio = streaming.languages.by_language(:fr).first.short_alpha
+    sub = streaming.subtitles.count > 0 ? streaming.subtitles.by_language(:fr).first.short_alpha : 'non'
+    hd = streaming.hd? ? true : false
+    url = Moovies.akamai_hls_url(streaming.imdb_id, audio, sub, hd, streaming.videoland, streaming.akamai_folder, season_id , episode_id)
+
+    script = <<-script
+      var movieUrl = '#{url}';
+      productImage = '#{image}';
+
+      jwplayer('player_default').setup({
+        file: movieUrl,
+        autostart: false,
+        controls: false,
+        image: productImage
+      });
     script
     javascript_tag script
   end
