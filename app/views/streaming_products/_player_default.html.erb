@@ -6,11 +6,11 @@
 <script>
     productImage = "<%= @product.image %>";
 </script>
-<%= jwplayer(@streaming.filename, @streaming.source, @streaming, "321456987", @browser) %>
-<div id="player_default">Loading the player...</div>
+<%= jwplayerdefault(@streaming.filename, @streaming.source, @streaming, "321456987", @browser) %>
+<div id="playerdefault">Loading the player...</div>
 <script>
-    jwplayer('player_default').setup({
-        file: movieUrl,
+    jwplayer('playerdefault').setup({
+        file: movieUrlDefault,
         autostart: false,
         controls: false,
         image: productImage
