@@ -31,9 +31,7 @@
           <%= render "layouts/promo_banner" %>
       <%= yield %>
     </div>
-    <% cache("layouts_footer_#{I18n.locale}", :expires_in => 15.minutes) do %>
-        <%= render "layouts/footer" %>
-    <% end %>
+    <%= render "layouts/footer" %>
   </div>
 </div>
 <script>

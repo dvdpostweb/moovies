@@ -40,7 +40,11 @@
     <ul>
       <li><%= link_to t('.who'), info_path(:page_name => t('routes.infos.params.whoweare')) %></li>
       <li><%= link_to t('.privacy'), info_path(:page_name => t('routes.infos.params.privacy')) %></li>
-      <li><%= link_to t('.conditions'), info_path(:page_name => t('routes.infos.params.conditions')) %></li>
+      <% if customer_signed_in? && current_customer.customers_abo_payment_method  == 7 %>
+          <li><%= link_to t('.conditions'), wister_info_conditions_path %></li>
+      <% else %>
+        <li><%= link_to t('.conditions'), info_path(:page_name => t('routes.infos.params.conditions')) %></li>
+      <% end %>
     </ul>
   </div>
 </div>
