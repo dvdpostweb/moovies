@@ -13,13 +13,22 @@
           </li>
           <li>
             <% if customer_signed_in? %>
-                <%= link_to t('.abo'), info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change"), :id => 'alacarte', :class => params[:page_name] == 'alacarte' ? "active-nav-tab" : :inactive %>
+                <% unless current_customer.customers_abo_payment_method == 7 %>
+                    <%= link_to t('.abo'), info_path(:page_name => t('routes.infos.params.alacarte'), :subscription_action => "subscription_change"), :id => 'alacarte', :class => params[:page_name] == 'alacarte' ? "active-nav-tab" : :inactive %>
+                <% end %>
             <% else %>
                 <%= link_to t('.abo'), info_path(:page_name => t('routes.infos.params.alacarte')), :id => 'alacarte', :class => params[:page_name] == 'alacarte' ? "active-nav-tab" : :inactive %>
             <% end %>
           </li>
           <li><%= link_to t('.watchlist', :default => 'Ma playlist'), vod_wishlists_path, :class => params[:controller] == 'watchlists' ? :active : :inactive %></li>
-          <li><%= link_to t('.my_account'), current_customer ? customer_path(:id => current_customer) : customers_path, :class => params[:controller] == 'customers' ? :active : :inactive %></li>
+
+          <% if customer_signed_in? && current_customer.customers_abo_payment_method == 7 %>
+              <li>
+                <a href="http://plush.wister.biz/mainstream/?service=PLS01&opco=OFF&Rubrique=res"><%= t('.my_account') %></a>
+              </li>
+          <% else %>
+              <li><%= link_to t('.my_account'), current_customer ? customer_path(:id => current_customer) : customers_path, :class => params[:controller] == 'customers' ? :active : :inactive %></li>
+          <% end %>
 
           <% if params[:kind] == :adult %>
               <li><%= link_to t('.classic'), root_localize_path(:kind => nil), :id => :home, :class => "green" %></li>

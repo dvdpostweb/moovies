@@ -5,7 +5,13 @@
       <li><%= link_to t('layouts.header.home'), root_localize_path %></li>
       <li><%= link_to t('layouts.header.svod'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[params[:kind] == :normal ? 1 : 4]}"), :tag => 4) %></li>
       <li><%= link_to t('layouts.header.tvod'), products_short_path(:package => t("routes.product.params.package.#{Moovies.packages.invert[params[:kind] == :normal ? 2 : 5]}"), :tag => 4) %></li>
-      <li><%= link_to t('layouts.header.price'), info_path(:page_name => t('routes.infos.params.alacarte')) %></li>
+      <% if customer_signed_in? %>
+          <% unless current_customer.customers_abo_payment_method == 7 %>
+              <li><%= link_to t('layouts.header.price'), info_path(:page_name => t('routes.infos.params.alacarte')) %></li>
+          <% end %>
+      <% else %>
+          <li><%= link_to t('layouts.header.price'), info_path(:page_name => t('routes.infos.params.alacarte')) %></li>
+      <% end %>
       <% if current_customer %>
           <li><%= link_to t('layouts.header.wishlist'), vod_wishlists_path %></li>
           <li><%= link_to t('layouts.menu.contact'), messages_path %></li>
@@ -40,10 +46,12 @@
     <ul>
       <li><%= link_to t('.who'), info_path(:page_name => t('routes.infos.params.whoweare')) %></li>
       <li><%= link_to t('.privacy'), info_path(:page_name => t('routes.infos.params.privacy')) %></li>
-      <% if customer_signed_in? && current_customer.customers_abo_payment_method  == 7 %>
-          <li><%= link_to t('.conditions'), wister_info_conditions_path %></li>
+      <% if customer_signed_in? %>
+          <% unless current_customer.customers_abo_payment_method == 7 %>
+            <li><%= link_to t('.conditions'), wister_info_conditions_path %></li>
+          <% end %>
       <% else %>
-        <li><%= link_to t('.conditions'), info_path(:page_name => t('routes.infos.params.conditions')) %></li>
+          <li><%= link_to t('.conditions'), info_path(:page_name => t('routes.infos.params.conditions')) %></li>
       <% end %>
     </ul>
   </div>
