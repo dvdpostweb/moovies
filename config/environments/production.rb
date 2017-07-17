@@ -43,10 +43,6 @@ Moovies::Application.configure do
   bootstrap-chosen.css
   fancybox.scss
   products/catalog.js
-  *.png
-  *.jpg
-  *.jpeg
-  *.gif
   )
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
