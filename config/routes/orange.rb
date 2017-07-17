@@ -28,6 +28,7 @@ Moovies::Application.routes.draw do
   namespace :api do
     namespace :v1 do
       namespace :orange do
+        match "ppv" => "auth#ppv"
         namespace :callbacks do
           get "wha/success"
           get "wha/cancel"

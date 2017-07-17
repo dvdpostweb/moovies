@@ -1,6 +1,83 @@
-<div>
-  <h1 class="OpenSansCondensed f30 green pad0 mar0 mart10">  </h1>
-  <div class="block100 mart20 border-bottom padb10">
-
-  </div>
+<style>
+  #ppv_phone-error {
+    color: #8f0222;
+  }
+</style>
+<h1 class="OpenSansCondensed f30 green pad0 mar0 mart10">Login</h1>
+<div class="block100 mart20 border-bottom padb10">
+  <%= link_to "Login", new_customer_session_path(:moovie_id => @product.products_id), class: "btn btn-success" %>
 </div>
+
+<h1 class="OpenSansCondensed f30 orange pad0 mar0 mart10"><%= t('use_orange_billing') %></h1>
+<div id="errordiv"></div>
+<div class="block100 mart20 border-bottom padb10">
+  <form id="wha_ppv">
+    <div class="input-group">
+      <div class="input-group-addon"><%= set_prefix_orange(request.host) %></div>
+      <input type="text" name="ppv_phone" id="ppv_phone" class="form-control" placeholder="<%= t('orange_phone_number') %>">
+      <span class="input-group-btn">
+        <%= button_tag(class: "btn orange-bck") do %>
+            Go!
+        <% end %>
+      </span>
+    </div>
+  </form>
+</div>
+
+<script>
+
+    $("#wha_ppv").validate({
+        rules: {
+            'ppv_phone': {
+                required: true
+            }
+        },
+        messages: {
+            'ppv_phone': {
+                required: requiredMessagePpvPhone()
+            }
+        },
+        highlight: function(element) {
+            $(element).closest('.form-group').addClass('has-error');
+        },
+        unhighlight: function(element) {
+            $(element).closest('.form-group').removeClass('has-error');
+        },
+        errorElement: 'span',
+        errorClass: 'help-block',
+        errorPlacement: function (error, element) {
+            $('#errordiv').empty();
+            error.appendTo('#errordiv');
+        },
+        submitHandler: function (form) {
+            $.ajax({
+                method: 'POST',
+                url: '/api/v1/promotion_code_activation',
+                data: {
+                    'promotion': document.getElementById('promo_code').value
+                },
+                dataType: 'json',
+                success: function (response) {
+                    if (1 === response.status) {
+                        jQuery.facebox("<div class=\"alert alert-danger\">" +
+                            "<strong>" + response.message + "</strong>" +
+                            "</div>");
+                    } else if (2 === response.status) {
+                        window.location.href = response.message;
+                    }
+                }
+            });
+        }
+    });
+
+    function requiredMessagePpvPhone() {
+        if (gon.locale == "fr") {
+            return "Code promotion est nécessaire."
+        } else if (gon.locale == "nl") {
+            return "Promotioncode is verplicht."
+        } else if (gon.locale == "en") {
+            return "Promotion code is required."
+        }
+    }
+
+</script>
