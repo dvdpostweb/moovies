@@ -1,5 +1,5 @@
 <% hide_price = false unless defined? hide_price %>
-<% if !product.get_vod_online(session[:country_id]).empty? %>
+<!--<#% if !product.get_vod_online(session[:country_id]).empty? %>-->
     <% if product.svod? %>
         <% title = t('.watch_svod') %>
         <% class_name = params[:kind] == :adult ? "btn btn-adult-gradient bold padlr25 white f17" : "btn btn-green-gradient bold padlr25 white f17" %>
@@ -13,7 +13,7 @@
         <% title = t('.watch_svod') %>
         <% class_name = params[:kind] == :adult ? "btn btn-adult-gradient bold padlr25 white f17" : "btn btn-blue-gradient bold padlr25 white f17" %>
     <% end %>
-    <%= link_to product_action_path(:product_id => product.to_param, :origin => :products, :source => source), :class => class_name, :remote => true do %>
+    <%= link_to product_action_path(:product_id => product.to_param, :origin => :products, :source => source), :class => class_name, id: "dbcstop", :remote => true do %>
         <i class="fa fa-play marr5"></i><%= title %>
     <% end %>
-<% end %>
+<!--<#% end %>-->

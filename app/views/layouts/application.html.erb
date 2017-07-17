@@ -36,6 +36,8 @@
 </div>
 <script>
 
+    $('a[rel*=facebox]').facebox();
+
     window.onload = function () {
 
         if (typeof(Storage) !== "undefined") {
@@ -283,7 +285,7 @@
 
     $(document).ready(function () {
 
-        $('a[rel*=facebox]').facebox();
+
 
         var originalLeave = $.fn.popover.Constructor.prototype.leave;
         $.fn.popover.Constructor.prototype.leave = function (obj) {

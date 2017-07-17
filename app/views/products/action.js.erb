@@ -38,7 +38,9 @@
 		jQuery.facebox('<%= escape_javascript(render(:partial => 'products/no_access')) %>')
 	<% end %>
 <% else %>
-  //jQuery.facebox('<#%= escape_javascript(render(:partial => 'products/log')) %>')
-	window.location.href = '<%= new_customer_session_path(:moovie_id => @product.products_id) %>'
-  //jQuery.facebox('<%= escape_javascript(render(:partial => 'products/orangebe', :locals => {:product => @product})) %>')
+  <% if request.host == "www.plush.be" || request.host == "staging.plush.be" || request.host == "plushbe.dev" %>
+    jQuery.facebox('<%= escape_javascript(render(:partial => 'products/orangebe', :locals => {:product => @product})) %>')
+  <% else %>
+    window.location.href = '<%= new_customer_session_path(:moovie_id => @product.products_id) %>'
+  <% end %>
 <% end %>
