@@ -126,8 +126,20 @@
       </li>
     </ul>
   </div>
-  <div class="container bottom padtb15 text-center">
-    <%= image_tag "template/bottom-banner.jpeg", class: "center-block" %>
+  <div class="orange-landing-bottom container bottom padtb15 text-center thin-gray">
+    <div class="orange-landing-bottom-inner position-relative center-block OpenSansCondensed">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-left f25 line-height-40">
+        <i class="fa fa-mobile-phone f48 pull-left"></i>
+        <%= t('orangesmsconfirml1') %>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <ul class="f15 text-left">
+          <li><%= t('orangesmsconfirml2') %></li>
+          <li><%= t('orangesmsconfirml3') %></li>
+          <li><%= t('orangesmsconfirml4') %></li>
+        </ul>
+      </div>
+    </div>
   </div>
   <div class="container bottom padtb15 white-bck dark-gray text-center">
     <%= t('orange_landing_page_footer_11') %> <%= link_to t('orange_landing_page_footer_12'), info_path(:page_name => t('routes.infos.params.privacy')) %>

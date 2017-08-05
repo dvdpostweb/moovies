@@ -166,3 +166,21 @@
     margin-right: 1em; }
   .flickr_pagination .next_page {
     margin-left: 1em; }
+
+.orange-landing-bottom-inner {
+  width: 370px;
+  overflow: hidden;
+}
+@media (max-width: 479px) {
+  .orange-landing-bottom-inner {
+    width: 200px;
+    text-align: center !important;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 479px) {
+  .orange-landing-bottom-inner * {
+    text-align: center !important;
+  }
+}
