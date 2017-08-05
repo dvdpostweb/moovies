@@ -49,4 +49,8 @@ class Orange::Lu::Auth::SmsController < ApplicationController
     gon.phone_number = params[:phone_number]
   end
 
+  def download
+    send_file Rails.root.join('public/orange.pdf'), :type => "application/pdf", :x_sendfile => true
+  end
+
 end

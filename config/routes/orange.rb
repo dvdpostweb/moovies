@@ -6,6 +6,7 @@ Moovies::Application.routes.draw do
           get "sms/authorization"
           get "sms/registration"
         end
+        get "sms/download"
       end
       namespace :api do
         match "orange_is_eligable" => "webservice#orange_is_eligable"

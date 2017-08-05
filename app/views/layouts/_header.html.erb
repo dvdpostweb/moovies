@@ -40,7 +40,7 @@
                 <i class="fa fa-facebook white"></i><#%= t('f_login') %>
             <#% end %>
           </li>-->
-          <% if request.host == "www.plush.lu" || request.host == "staging.plush.lu" %>
+          <% if request.host == "www.plush.lu" || request.host == "staging.plush.lu" || request.host == "plushlu.dev" %>
             <% unless Rails.env.production? %>
               <li class="marr10"><a href="<%= orange_lu_auth_sms_authorization_path %>" class="uppercase orange-bck"><%= t('login met orange') %></a>
             <% end %>
