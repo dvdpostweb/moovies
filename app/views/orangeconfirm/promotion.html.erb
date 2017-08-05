@@ -130,8 +130,8 @@
     <%= image_tag "template/bottom-banner.jpeg", class: "center-block" %>
   </div>
   <div class="container bottom padtb15 white-bck dark-gray text-center">
-    <%= t('orange_landing_page_footer_11') %> <a href="#" class="mart5"><%= t('orange_landing_page_footer_12') %></a>
+    <%= t('orange_landing_page_footer_11') %> <%= link_to t('orange_landing_page_footer_12'), info_path(:page_name => t('routes.infos.params.privacy')) %>
     <br>
-    <%= t('orange_landing_page_footer_21') %> <a href="#" class="mart5"><%= t('orange_landing_page_footer_22') %></a>
+    <%= t('orange_landing_page_footer_21') %> <%= link_to t('orange_landing_page_footer_22'), orange_lu_auth_sms_download_path %>
   </div>
 </div>
