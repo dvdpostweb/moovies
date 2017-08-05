@@ -148,7 +148,7 @@
           </li>
         </ul>
       </div>
-      <% if request.host == "www.plush.lu" || request.host == "staging.plush.lu" %>
+      <% if request.host == "www.plush.lu" || request.host == "staging.plush.lu" || request.host == "plushlu.dev" %>
       <% unless Rails.env.production? %>
       <h3><%= t('use_orange_billing') %></h3>
       <div>
@@ -178,7 +178,13 @@
                 <input type="submit" class="btn block100 orange-bck padlr40 padtb15 white f16 normal" value="<%= t('orange_send_button') %>">
               </div>
               <div class="block100 text-center mart20">
-                <p><%= t('orange.sms_code.message_info').html_safe %></p>
+                <% if I18n.locale == :fr %>
+                    <p>En cliquant sur ce bouton, je reconnais avoir lu et accepté les conditions <%= link_to 'générales de vente', orange_lu_auth_sms_download_path %></p>
+                <% elsif I18n.locale == :nl %>
+                    <p>Door op deze knop te klikken, bevestig ik dat ik de algemene verkoopvoorwaarden heb <%= link_to 'gelezen en geaccepteerd', orange_lu_auth_sms_download_path %></p>
+                <% elsif I18n.locale == :en %>
+                    <p>By clicking this button, I acknowledge having read and accepted the <%= link_to 'general conditions of sale', orange_lu_auth_sms_download_path %></p>
+                <% end %>
               </div>
             </form>
           </div>
