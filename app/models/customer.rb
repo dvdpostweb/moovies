@@ -63,6 +63,7 @@
 #  facebook_activation                       :integer
 #  preselected_registration_moovie_id        :integer
 #  paypal_agreement_id                       :string(50)
+#   wister                                   :integer
 #
 
 class Customer < ActiveRecord::Base
@@ -192,6 +193,9 @@ class Customer < ActiveRecord::Base
     (activation_discount_code_id == 263 || activation_discount_code_id == 264 || activation_discount_code_id == 265)
   end
 
+  def orange_or_wister?
+    (customers_abo_payment_method == 5 || customers_abo_payment_method == 6 || customers_abo_payment_method == 7 || wister == 1)
+  end
 
   def dont_have_credits?
     tvod_free == 0

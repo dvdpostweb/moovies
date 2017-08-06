@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: orange_sms_activation_codes
+#
+#  id                        :integer          not null, primary key
+#  customers_id              :integer
+#  phone_number              :string(255)
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
+#  sms_authentification_code :string(255)
+#
+
 class OrangeSmsActivationCode < ActiveRecord::Base
   before_create :generate_token
   belongs_to :customer
