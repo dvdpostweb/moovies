@@ -1,4 +1,4 @@
-class Orange::Lu::Api::WebserviceController < ApplicationController
+class Orange::Lu::Api::WebserviceController < API::V1::BaseController #ApplicationController
   #skip_before_filter :verify_authenticity_token
   require 'json'
 
