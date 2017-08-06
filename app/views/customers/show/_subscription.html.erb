@@ -9,10 +9,14 @@
       <%= customer.next_subscription_description %>
     </div>
 <% end %>
-<%= link_to t('.suspend_abo'), new_customer_suspension_path(:customer_id => current_customer.to_param), :class => 'btn green-bck OpenSansCondensed f23 mart20', rel: "facebox" if current_customer.suspension_status == 0 && !current_customer.tvod_only? %>
-<%= link_to t('stop_my_subscription'), stop_my_subscription_path, :class => 'btn light-blue-bck OpenSansCondensed f23 mart20', rel: "facebox" if current_customer.suspension_status == 0 && !current_customer.tvod_only? %>
+
 <% if current_customer.orange_customer? %>
     <a id="orange_stop" href="#" class="btn light-blue-bck OpenSansCondensed f23 mart20"><%= t('stop_my_subscription_orange') %></a>
+<% else %>
+
+    <%= link_to t('.suspend_abo'), new_customer_suspension_path(:customer_id => current_customer.to_param), :class => 'btn green-bck OpenSansCondensed f23 mart20', rel: "facebox" if current_customer.suspension_status == 0 && !current_customer.tvod_only? %>
+    <%= link_to t('stop_my_subscription'), stop_my_subscription_path, :class => 'btn light-blue-bck OpenSansCondensed f23 mart20', rel: "facebox" if current_customer.suspension_status == 0 && !current_customer.tvod_only? %>
+
 <% end %>
 <div class="form-group mart20">
   <span class="bold"><%= t('.count_classic') %>:</span>
