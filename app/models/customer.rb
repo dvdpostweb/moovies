@@ -197,6 +197,10 @@ class Customer < ActiveRecord::Base
     (customers_abo_payment_method == 5 || customers_abo_payment_method == 6 || customers_abo_payment_method == 7 || wister == 1)
   end
 
+  def orange_customer?
+    (customers_abo_payment_method == 5 || customers_abo_payment_method == 6 || customers_abo_payment_method == 7)
+  end
+
   def dont_have_credits?
     tvod_free == 0
   end
