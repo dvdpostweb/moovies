@@ -307,16 +307,26 @@ $("#is_eligable_ppv").validate({
 $("#orange_purchase_ppv").validate({
     rules: {
         "sms-code": {
-            required: true,
-            remote: {
-                url: "/orange/lu/api/check_sms_activation_code"
-            }
+            required: true//,
+            //remote: {
+            //    url: "/orange/lu/api/check_sms_activation_code"
+            //}
         }
     },
     messages: {
         "sms-code": {
-            required: orangePurchaseMessage(),
-            remote: orangePurchaseMessageSmsCodeValidation()
+            required: orangePurchaseMessage()//,
+            //remote: function() {
+            //
+            //    if (gon.locale == "fr") {
+            //        return "Le code SMS n'est pas correct."
+            //    } else if (gon.locale == "nl") {
+            //        "SMS code is niet juist."
+            //    } else if (gon.locale == "en") {
+            //        "SMS code is not correct."
+            //    }
+            //
+            //}
         }
     },
     highlight: function (element) {
