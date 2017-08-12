@@ -1,5 +1,4 @@
-
-lock "3.8.1"
+lock "3.9.0"
 
 set :application, "moovies"
 set :deploy_user, 'plush'
