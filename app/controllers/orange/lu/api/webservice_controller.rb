@@ -1,4 +1,5 @@
-class Orange::Lu::Api::WebserviceController < API::V1::BaseController #ApplicationController
+class Orange::Lu::Api::WebserviceController < ApplicationController #API::V1::BaseController #ApplicationController
+  skip_before_filter :authenticate_customer!
   #skip_before_filter :verify_authenticity_token
   require 'json'
 
@@ -281,7 +282,7 @@ class Orange::Lu::Api::WebserviceController < API::V1::BaseController #Applicati
           end
         end
       else
-        render json: {status: "mobile_number_format_error"}
+        render json: {status: activation_code_error_message(I18n.locale)}
       end
     else
       raise ActionController::RoutingError.new('Not Found')
@@ -313,7 +314,7 @@ class Orange::Lu::Api::WebserviceController < API::V1::BaseController #Applicati
           end
         end
       else
-        render json: {status: "mobile_number_format_error"}
+        render json: {status: activation_code_error_message(I18n.locale)}
       end
     else
       raise ActionController::RoutingError.new('Not Found')
@@ -344,7 +345,7 @@ class Orange::Lu::Api::WebserviceController < API::V1::BaseController #Applicati
           end
         end
       else
-        render json: {status: "mobile_number_format_error"}
+        render json: {status: activation_code_error_message(I18n.locale)}
       end
     else
       raise ActionController::RoutingError.new('Not Found')
@@ -443,6 +444,20 @@ class Orange::Lu::Api::WebserviceController < API::V1::BaseController #Applicati
         end
       end
     end
+  end
+
+  private
+
+  def activation_code_error_message(locale)
+
+    if locale == :fr
+      "Le code SMS n'est pas correct."
+    elsif locale == :nl
+      "SMS code is niet juist."
+    elsif locale == :en
+      "SMS code is not correct."
+    end
+
   end
 
 end

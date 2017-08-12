@@ -264,16 +264,16 @@ var step3 = {
         $("#orange_purchase_subscriber").validate({
             rules: {
                 "sms-code": {
-                    required: true,
-                    remote: {
-                        url: "/orange/lu/api/check_sms_activation_code"
-                    }
+                    required: true//,
+                    //remote: {
+                    //    url: "/api/v1/check_sms_activation_code"
+                    //}
                 }
             },
             messages: {
                 "sms-code": {
-                    required: this.orangePurchaseMessage(),
-                    remote: this.orangePurchaseMessageSmsCodeValidation()
+                    required: this.orangePurchaseMessage()//,
+                    //remote: this.orangePurchaseMessageSmsCodeValidation()
                 }
             },
             highlight: function (element) {

@@ -18,6 +18,10 @@ Moovies::Application.routes.draw do
       match "ogone_parameters_accepturl" => "ogone_tokenization#ogone_parameters_accepturl"
 
       match "language_by_language" => "validator#language_by_language"
+
+
+
+      match "check_sms_activation_code" => "validator#check_sms_activation_code"
     end
   end
 end

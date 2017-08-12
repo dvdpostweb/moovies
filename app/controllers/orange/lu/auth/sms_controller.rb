@@ -50,7 +50,7 @@ class Orange::Lu::Auth::SmsController < ApplicationController
   end
 
   def download
-    send_file Rails.root.join('public/orange.pdf'), :type => "application/pdf", :x_sendfile => true
+    send_file Rails.root.join("public/orange_#{I18n.locale}.pdf"), :type => "application/pdf", :x_sendfile => true
   end
 
 end

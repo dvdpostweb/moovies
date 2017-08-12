@@ -230,4 +230,17 @@ class Api::V1::ValidatorController < API::V1::BaseController
     render json: Language.by_language(I18n.locale)
   end
 
+  def check_sms_activation_code
+    if request.xhr?
+      sms_code = OrangeSmsActivationCode.find_by_sms_authentification_code(params["sms-code"])
+      if sms_code.present?
+        render json: TRUE
+      else
+        render json: FALSE
+      end
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
+
 end
