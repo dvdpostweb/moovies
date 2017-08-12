@@ -22,16 +22,22 @@
   <%= render :partial => 'layouts/old_partials/google_analytics' %>
 <div class="canavas" id="">
   <% if params[:controller] == "products" %>
-      <%= render "layouts/application/filters_open_adaptive" %>
+      <% cache("footer_#{I18n.locale}_#{params[:kind]}", :expires_in => 15.minutes) do %>
+        <%= render "layouts/application/filters_open_adaptive" %>
+      <% end %>
   <% end %>
   <%= render "layouts/application/side_menu_box_shadov" %>
   <div class="wrap">
     <%= render "layouts/header" %>
     <div id="content" class="<%= configure_content_div_html_class(params) %>">
+      <% cache("promo_banner_#{I18n.locale}_#{params[:kind]}", :expires_in => 15.minutes) do %>
           <%= render "layouts/promo_banner" %>
+      <% end %>
       <%= yield %>
     </div>
-    <%= render "layouts/footer" %>
+    <% cache("footer_#{I18n.locale}_#{params[:kind]}", :expires_in => 15.minutes) do %>
+      <%= render "layouts/footer" %>
+    <% end %>
   </div>
 </div>
 <script>
