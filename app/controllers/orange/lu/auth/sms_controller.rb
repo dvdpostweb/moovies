@@ -53,4 +53,24 @@ class Orange::Lu::Auth::SmsController < ApplicationController
     send_file Rails.root.join("public/orange_#{I18n.locale}.pdf"), :type => "application/pdf", :x_sendfile => true
   end
 
+  def orange_sms_auto_login
+    if request.xhr?
+      phone = params[:plush_phone_number].to_s
+      customer = Customer.find_by_customers_telephone(phone[1..-1])
+      if customer.present?
+        sign_in(customer)
+        render json: {
+            status: 0,
+            current_customer_id: customer.customers_id
+        }
+      else
+        render json: {
+            status: 1
+        }
+      end
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
+
 end

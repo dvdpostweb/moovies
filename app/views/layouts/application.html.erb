@@ -47,10 +47,10 @@
     window.onload = function () {
 
         if (typeof(Storage) !== "undefined") {
-            if (gon && gon.current_customer === null && localStorage.getItem("plush_temporary_email") !== null) {
+            if (gon && gon.current_customer === null && localStorage.getItem("plush_phone_number") !== null) {
                 $.ajax({
                     method: 'POST',
-                    url: '/orange/lu/api/automatic_login',
+                    url: '/orange/lu/auth/orange_sms_auto_login',
                     data: {
                         'plush_phone_number': localStorage.getItem("plush_phone_number")
                     },
@@ -86,7 +86,7 @@
                         }
                     },
                     error: function (response) {
-                        console.log('CHECKED AJAX ERROR!!!');
+                        console.log('ORANGE AUTO LOGIN SYSTEM ERROR!!!');
                     }
                 });
             }
