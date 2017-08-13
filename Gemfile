@@ -84,5 +84,4 @@ gem 'httparty', '~> 0.14.0'
 gem 'will_paginate-bootstrap'
 gem 'redis-rails'
 gem 'scout_apm'
-gem "react-rails"
 gem "font-awesome-rails"
