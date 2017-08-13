@@ -7,4 +7,4 @@ require "capistrano/bundler"
 require "capistrano/rails/assets"
 require 'capistrano/puma'
 require 'capistrano/rake'
-#require 'capistrano/npm'
+require 'capistrano/npm'

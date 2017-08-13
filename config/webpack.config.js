@@ -13,8 +13,8 @@ var production = process.env.NODE_ENV === 'production';
 
 var config = {
   entry: {
-    // Sources are expected to live in $app_root/webpack
-    'application': './webpack/application.js'
+    'application': './webpack/application.js',
+      'filters': './webpack/filters.js'
   },
 
   output: {
@@ -60,7 +60,8 @@ if (production) {
 } else {
   config.devServer = {
     port: devServerPort,
-    headers: { 'Access-Control-Allow-Origin': '*' }
+    headers: { 'Access-Control-Allow-Origin': '*' },
+    disableHostCheck: true
   };
   config.output.publicPath = '//localhost:' + devServerPort + '/webpack/';
   // Source maps
