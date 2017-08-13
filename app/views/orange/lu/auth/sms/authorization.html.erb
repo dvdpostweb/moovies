@@ -104,6 +104,7 @@ $("#is_eligable").validate({
     errorElement: 'span',
     errorClass: 'help-block',
     errorPlacement: function (error, element) {
+        $("#promo-code-error").empty();
         error.appendTo('#promo-code-error');
     },
     submitHandler: function (form) {

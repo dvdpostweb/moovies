@@ -85,3 +85,5 @@ gem 'will_paginate-bootstrap'
 gem 'redis-rails'
 gem 'scout_apm'
 gem "font-awesome-rails"
+gem 'webpack-rails', '~> 0.9.10'
+gem "foreman"
