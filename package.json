@@ -5,8 +5,8 @@
   "dependencies": {
     "stats-webpack-plugin": "^0.4.3",
     "webpack": "^1.14.0",
-    "webpack-dev-server": "^1.16.2",
-    "@angular/common": "^2.0.0"//,
+    "webpack-dev-server": "^1.16.2"//,
+    //"@angular/common": "^2.0.0"//,
     //"@angular/compiler": "^2.0.0",
     //"@angular/core": "^2.0.0",
     //"@angular/forms": "^2.0.0",
