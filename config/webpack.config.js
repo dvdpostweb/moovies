@@ -12,61 +12,72 @@ var devServerPort = 3808;
 var production = process.env.NODE_ENV === 'production';
 
 var config = {
-  entry: {
-    'application': './webpack/application.js',
-      'filters': './webpack/filters.js',
-      'angular_test': './webpack/angular_test.js'
-  },
+    entry: {
+        'application': './webpack/application.js',
+        'filters': './webpack/filters.js',
+        'angular_test': './webpack/angular_test/angular_test.js',
+        'orange_login': './webpack/orange/login.js',
+        'orange_register': './webpack/orange/register.js'
+    },
 
-  output: {
-    // Build assets directly in to public/webpack/, let webpack know
-    // that all webpacked assets start with webpack/
+    module: {
+        loaders: [
+            {
+                test: /\.html/,
+                loader: 'raw'
+            }
+        ]
+    },
 
-    // must match config.webpack.output_dir
-    path: path.join(__dirname, '..', 'public', 'webpack'),
-    publicPath: '/webpack/',
+    output: {
+        // Build assets directly in to public/webpack/, let webpack know
+        // that all webpacked assets start with webpack/
 
-    filename: production ? '[name]-[chunkhash].js' : '[name].js'
-  },
+        // must match config.webpack.output_dir
+        path: path.join(__dirname, '..', 'public', 'webpack'),
+        publicPath: '/webpack/',
 
-  resolve: {
-    root: path.join(__dirname, '..', 'webpack')
-  },
+        filename: production ? '[name]-[chunkhash].js' : '[name].js'
+    },
 
-  plugins: [
-    // must match config.webpack.manifest_filename
-    new StatsPlugin('manifest.json', {
-      // We only need assetsByChunkName
-      chunkModules: false,
-      source: false,
-      chunks: false,
-      modules: false,
-      assets: true
-    })]
+    resolve: {
+        root: path.join(__dirname, '..', 'webpack')
+    },
+
+    plugins: [
+        // must match config.webpack.manifest_filename
+        new StatsPlugin('manifest.json', {
+            // We only need assetsByChunkName
+            chunkModules: false,
+            source: false,
+            chunks: false,
+            modules: false,
+            assets: true
+        })]
 };
 
 if (production) {
-  config.plugins.push(
-    new webpack.NoErrorsPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      compressor: { warnings: false },
-      sourceMap: false
-    }),
-    new webpack.DefinePlugin({
-      'process.env': { NODE_ENV: JSON.stringify('production') }
-    }),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin()
-  );
+    config.plugins.push(
+        new webpack.NoErrorsPlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+            compressor: {warnings: false},
+            sourceMap: false
+        }),
+        new webpack.DefinePlugin({
+            'process.env': {NODE_ENV: JSON.stringify('production')}
+        }),
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.OccurenceOrderPlugin()
+    );
 } else {
-  config.devServer = {
-    port: devServerPort,
-    headers: { 'Access-Control-Allow-Origin': '*' },
-    disableHostCheck: true
-  };
-  config.output.publicPath = '//localhost:' + devServerPort + '/webpack/';
-  // Source maps
-  config.devtool = 'cheap-module-eval-source-map';
+    config.devServer = {
+        port: devServerPort,
+        headers: {'Access-Control-Allow-Origin': '*'},
+        disableHostCheck: true
+    };
+    config.output.publicPath = '//localhost:' + devServerPort + '/webpack/';
+    // Source maps
+    config.devtool = 'cheap-module-eval-source-map';
 }
 
 module.exports = config;

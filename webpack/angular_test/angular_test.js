@@ -14,15 +14,7 @@ var ng = {
 
 var AngularTestComponent = ng.core.Component({
     selector: "plush-angular-test",
-    template: '\
-    <h2 *ngIf="name">Hello {{name}}!</h2> \
-    <form> \
-      <div class="form-group"> \
-        <label for="name">Name</label> \
-        <input type="text" id="name" class="form-control" name="name" bindon-ngModel="name"> \
-       </div> \
-    </form> \
-   '
+    template: require("./AngularTestComponent.html")
 }).Class({
     constructor: function () {
         this.name = null;
