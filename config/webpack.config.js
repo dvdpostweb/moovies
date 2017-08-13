@@ -14,7 +14,8 @@ var production = process.env.NODE_ENV === 'production';
 var config = {
   entry: {
     'application': './webpack/application.js',
-      'filters': './webpack/filters.js'
+      'filters': './webpack/filters.js',
+      'angular_test': './webpack/angular_test.js'
   },
 
   output: {
