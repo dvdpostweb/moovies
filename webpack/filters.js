@@ -1,5 +1,13 @@
 History = window.History;
 
+$(document).ready(function() {
+
+    $('.iradio').on('ifChecked', function (e) {
+        submit_online();
+    });
+
+});
+
 if ($('#online #filters').html()) {
 
 
@@ -24,9 +32,10 @@ if ($('#online #filters').html()) {
         radioClass: 'iradio_minimal-grey'
     });
 
-    $('.iradio').on('ifChecked', function (e) {
-        submit_online();
-    });
+    //$('.iradio').on('ifChecked', function (e) {
+        //submit_online();
+    //    console.log("?????");
+    //});
 
     $(document).on('click', '.filter-close', function (e) {
         var form_element = $(this).closest('.applied-filter-tag').attr('data-input-element');
@@ -76,7 +85,7 @@ if ($('#online #filters').html()) {
 
         }
 
-        console.log(form_element);
+        //console.log(form_element);
     });
 
     $('#products_index, #film-details, #categories, #studios').delegate("#close_audience", "click", function () {
