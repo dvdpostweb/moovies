@@ -1,4 +1,3 @@
-
 source 'http://rubygems.org'
 
 gem 'rails', '~> 3.2', '>= 3.2.22.5'
@@ -16,13 +15,18 @@ group :development do
   gem 'quiet_assets'
   gem 'spring'
   gem 'sextant'
-  #gem "better_errors"
-  #gem "binding_of_caller"
+  gem "better_errors"
+  gem "binding_of_caller"
 end
 
 gem 'net-ssh', '~> 2.9', '>= 2.9.4'
 
 group  :development, :test do
+  gem 'test-unit', '~> 3.0'
+  gem 'rspec-rails', '~> 3.6', '>= 3.6.1'
+  gem 'factory_girl_rails', '~> 4.8'
+  gem 'guard-rspec', '~> 4.7', '>= 4.7.3'
+  gem 'spring-commands-rspec', '~> 1.0', '>= 1.0.4'
   gem 'capistrano', '~> 3.7', '>= 3.7.2'
   gem 'capistrano-rails', '~> 1.2', '>= 1.2.3'
   gem 'capistrano-bundler', '~> 1.2'
@@ -33,7 +37,11 @@ group  :development, :test do
 end
 
 group :test do
-  gem 'rspec-rails', '~> 3.6'
+  gem 'faker', '~> 1.8', '>= 1.8.4'
+  gem 'capybara', '~> 2.15', '>= 2.15.1'
+  gem 'database_cleaner', '~> 1.6', '>= 1.6.1'
+  gem 'launchy', '~> 2.4', '>= 2.4.3'
+  gem 'selenium-webdriver', '~> 3.5'
   gem 'shoulda-matchers', '~> 2.8'
 end
 

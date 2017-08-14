@@ -63,7 +63,7 @@
 #  facebook_activation                       :integer
 #  preselected_registration_moovie_id        :integer
 #  paypal_agreement_id                       :string(50)
-#   wister                                   :integer
+#  wister                                    :boolean          default(FALSE)
 #
 
 class Customer < ActiveRecord::Base
