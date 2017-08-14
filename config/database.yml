@@ -53,17 +53,17 @@ common_staging:
 test:
   adapter: mysql2
   encoding: utf8
-  database: plush_production
+  database: plush_test
   username: root
-  password: #root
+  password: <%= "root" || "" %>
   host: localhost
   port: 3306
-  socket: /opt/lampp/var/mysql/mysql.sock
+  socket: <%= "/opt/lampp/var/mysql/mysql.sock" || "" %>
 
 common_test:
   adapter: mysql2
   encoding: utf8
-  database: common_production
+  database: common_test
   username: root
   password: #root
   host: localhost
