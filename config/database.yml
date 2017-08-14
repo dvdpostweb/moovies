@@ -50,26 +50,49 @@ common_staging:
 
 ################################################################################################################################################################
 
+<% if ENV["PLUSH"] == "WERCKER" %>
+
 test:
   adapter: mysql2
   encoding: utf8
   database: plush_test
   username: root
-  password: <%= "root" || "" %>
+  password: root
   host: localhost
   port: 3306
-  socket: <%= "/opt/lampp/var/mysql/mysql.sock" || "" %>
 
 common_test:
   adapter: mysql2
   encoding: utf8
   database: common_test
   username: root
-  password: #root
+  password: root
+  host: localhost
+  port: 3306
+
+<% else %>
+
+test:
+  adapter: mysql2
+  encoding: utf8
+  database: plush_test
+  username: root
+  password:
   host: localhost
   port: 3306
   socket: /opt/lampp/var/mysql/mysql.sock
 
+common_test:
+  adapter: mysql2
+  encoding: utf8
+  database: common_test
+  username: root
+  password:
+  host: localhost
+  port: 3306
+  socket: /opt/lampp/var/mysql/mysql.sock
+
+<% end %>
 ################################################################################################################################################################
 
 ################################################################################################################################################################

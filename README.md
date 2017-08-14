@@ -1,5 +1,7 @@
 # Plush
 
+[![wercker status](https://app.wercker.com/status/92bce29162ac58738c941c0bee761c52/s/ "wercker status")](https://app.wercker.com/project/byKey/92bce29162ac58738c941c0bee761c52)
+
 Plush is a cloud-enabled, mobile-ready, application for watching movies.
 
 # What we use?
