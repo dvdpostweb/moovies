@@ -1,4 +1,4 @@
-$('a[rel*=facebox]').facebox();
+//$('a[rel*=facebox]').facebox();
 
 window.onload = function () {
 
