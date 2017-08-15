@@ -13,32 +13,33 @@ window.onload = function () {
                 dataType: 'json',
                 success: function (response) {
                     if (0 === response.status) {
-                        $(".login-holder").empty();
-                        if (gon && gon.locale === "fr") {
-                            autoLoginMenuFR = "<li>" +
-                                "<a href=\"/fr/mon-compte/sign_out\" data-method=\"delete\" id=\"logout\" rel=\"nofollow\">Déconnexion</a> <span>(4dae@plush.temp)</span>" +
-                                "</li>" +
-                                "<li>" +
-                                "<a href='fr/mon-compte/' + response.current_customer_id + '>Mon compte</a>" +
-                                "</li>";
-                            $(".login-holder").html(autoLoginMenuFR);
-                        } else if (gon && gon.locale === "nl") {
-                            autoLoginMenuNL = "<li>" +
-                                "<a href=\"/nl/mijn-account/sign_out\" data-method=\"delete\" id=\"logout\" rel=\"nofollow\">Uitloggen</a> <span>(4dae@plush.temp)</span>" +
-                                "</li>" +
-                                "<li>" +
-                                "<a href='/nl/mijn-account/' + response.current_customer_id + '>Mijn account</a>" +
-                                "</li>";
-                            $(".login-holder").html(autoLoginMenuNL);
-                        } else if (gon && gon.locale === "en") {
-                            autoLoginMenuEN = "<li>" +
-                                "<a href=\"/en/my-account/sign_out\" data-method=\"delete\" id=\"logout\" rel=\"nofollow\">Log out</a> <span>(4dae@plush.temp)</span>" +
-                                "</li>" +
-                                "<li>" +
-                                "<a href='/en/my-account/' + response.current_customer_id + '>My account</a>" +
-                                "</li>";
-                            $(".login-holder").html(autoLoginMenuEN);
-                        }
+                        //$(".login-holder").empty();
+                        //if (gon && gon.locale === "fr") {
+                        //    autoLoginMenuFR = "<li>" +
+                        //        "<a href=\"/fr/mon-compte/sign_out\" data-method=\"delete\" id=\"logout\" rel=\"nofollow\">Déconnexion</a> <span>(4dae@plush.temp)</span>" +
+                        //        "</li>" +
+                        //        "<li>" +
+                        //        "<a href='fr/mon-compte/' + response.current_customer_id + '>Mon compte</a>" +
+                        //        "</li>";
+                        //    $(".login-holder").html(autoLoginMenuFR);
+                        //} else if (gon && gon.locale === "nl") {
+                        //    autoLoginMenuNL = "<li>" +
+                        //        "<a href=\"/nl/mijn-account/sign_out\" data-method=\"delete\" id=\"logout\" rel=\"nofollow\">Uitloggen</a> <span>(4dae@plush.temp)</span>" +
+                        //        "</li>" +
+                        //        "<li>" +
+                        //        "<a href='/nl/mijn-account/' + response.current_customer_id + '>Mijn account</a>" +
+                        //        "</li>";
+                        //    $(".login-holder").html(autoLoginMenuNL);
+                        //} else if (gon && gon.locale === "en") {
+                        //    autoLoginMenuEN = "<li>" +
+                        //        "<a href=\"/en/my-account/sign_out\" data-method=\"delete\" id=\"logout\" rel=\"nofollow\">Log out</a> <span>(4dae@plush.temp)</span>" +
+                        //        "</li>" +
+                        //        "<li>" +
+                        //        "<a href='/en/my-account/' + response.current_customer_id + '>My account</a>" +
+                        //        "</li>";
+                        //    $(".login-holder").html(autoLoginMenuEN);
+                        //}
+                        window.location.reload()
                     }
                 },
                 error: function (response) {
