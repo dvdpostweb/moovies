@@ -263,7 +263,14 @@ class ProductsController < ApplicationController
     @source = params[:source] || 7
     @streaming = StreamingProduct.available.country(Product.country_short_name(session[:country_id])).by_primary(@product.imdb_id, @product.season_id, @product.episode_id).first
     if request.xhr?
-      render :layout => false
+      #render :layout => false
+
+      #render json: "!!!!!!"
+
+      respond_to do |format|
+        format.js # actually means: if the client ask for js -> return file.js
+      end
+
     end
   end
 
