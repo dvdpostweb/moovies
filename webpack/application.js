@@ -1,18 +1,18 @@
 $('a[rel*=facebox]').facebox();
 
-window.onload = function () {
+//window.onload = function () {
 
-    if (typeof(Storage) !== "undefined") {
-        if (gon && gon.current_customer === null && localStorage.getItem("plush_phone_number") !== null) {
-            $.ajax({
-                method: 'POST',
-                url: '/orange/lu/auth/orange_sms_auto_login',
-                data: {
-                    'plush_phone_number': localStorage.getItem("plush_phone_number")
-                },
-                dataType: 'json',
-                success: function (response) {
-                    if (0 === response.status) {
+//    if (typeof(Storage) !== "undefined") {
+//        if (gon && gon.current_customer === null && localStorage.getItem("plush_phone_number") !== null) {
+//            $.ajax({
+//                method: 'POST',
+//                url: '/orange/lu/auth/orange_sms_auto_login',
+//                data: {
+//                    'plush_phone_number': localStorage.getItem("plush_phone_number")
+//                },
+//                dataType: 'json',
+//                success: function (response) {
+//                    if (0 === response.status) {
                         //$(".login-holder").empty();
                         //if (gon && gon.locale === "fr") {
                         //    autoLoginMenuFR = "<li>" +
@@ -40,17 +40,17 @@ window.onload = function () {
                         //    $(".login-holder").html(autoLoginMenuEN);
                         //}
                         //window.location.reload()
-                    }
-                },
-                error: function (response) {
-                    console.log('ORANGE AUTO LOGIN SYSTEM ERROR!!!');
-                }
-            });
-        }
-    } else {
-        console.log("Sorry! No Web Storage support..");
-    }
-};
+//                    }
+//                },
+//                error: function (response) {
+//                    console.log('ORANGE AUTO LOGIN SYSTEM ERROR!!!');
+//                }
+//            });
+//        }
+//    } else {
+//        console.log("Sorry! No Web Storage support..");
+//    }
+//};
 
 if (gon && gon.mobile === "MOBILE") {
     var w = $(window), d = $(document);
