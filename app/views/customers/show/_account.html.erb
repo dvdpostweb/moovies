@@ -19,8 +19,8 @@
   <span class="bold"><%= t '.phone' %> :</span>
   <%= customer.phone %>
 </div>
-<%= link_to t('.customer_edit'), edit_customer_path(), :class => 'btn green-bck OpenSansCondensed f23 mart20', rel: "facebox" %>
-<%= link_to t('.address_edit'), edit_customer_addresses_path(:customer_id => current_customer), :class => 'btn light-blue-bck OpenSansCondensed f23 mart20', rel: "facebox" %>
+<%= link_to t('.customer_edit'), edit_customer_path(), :class => 'btn green-bck OpenSansCondensed f20 mart20', rel: "facebox" %>
+<%= link_to t('.address_edit'), edit_customer_addresses_path(:customer_id => current_customer), :class => 'btn light-blue-bck OpenSansCondensed f20 mart20', rel: "facebox" %>
 <div class="form-group lightergray-bck mart20">
   <span class="bold"><%= t '.cotations' %></span>
   <%= customer.ratings.count %>
