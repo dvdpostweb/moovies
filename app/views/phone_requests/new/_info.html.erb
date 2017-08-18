@@ -9,18 +9,22 @@
   <h3 class="f25 pad0 mart20"><%= t '.phone.title' %></h3>
   <p><%= t('.phone.text').html_safe %></p>
   <br>
-  <% if I18n.locale == :fr %>
-      <p id="reed_txt_phone_request">
-        Le service téléphonique est exceptionnellement fermé. Merci de nous contacter par e-mail.
-      </p>
-  <% elsif I18n.locale == :nl %>
-      <p id="reed_txt_phone_request">
-        We zijn uitzonderlijk niet bereikbaar per telefoon. Gelieve ons via e-mail te contacteren.
-      </p>
-  <% elsif I18n.locale == :en %>
-      <p id="reed_txt_phone_request">
-        Exceptionally we cannot be reached by phone. Please contact us by e-mail.
-      </p>
+
+  <% if @alert %>
+
+      <% if I18n.locale == :fr %>
+          <p id="reed_txt_phone_request">
+            Le service téléphonique est exceptionnellement fermé. Merci de nous contacter par e-mail.
+          </p>
+      <% elsif I18n.locale == :nl %>
+          <p id="reed_txt_phone_request">
+            We zijn uitzonderlijk niet bereikbaar per telefoon. Gelieve ons via e-mail te contacteren.
+          </p>
+      <% elsif I18n.locale == :en %>
+          <p id="reed_txt_phone_request">
+            Exceptionally we cannot be reached by phone. Please contact us by e-mail.
+          </p>
+      <% end %>
   <% end %>
   <h3 class="f25 pad0 mart20"><%= t '.fax.title' %></h3>
   <p><%= t('.fax.text').html_safe %></p>
