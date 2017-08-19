@@ -234,6 +234,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController #API::V1::Ba
         customer.group_id = activation_for_orange_promotion.activation_group
         customer.customers_next_discount_code = activation_for_orange_promotion.next_discount
         customer.tvod_free = activation_for_orange_promotion.tvod_free
+        customer.customers_abo_payment_method = 5
         if customer.save(validate: false)
 
           logger.info "##################################################################################################"
