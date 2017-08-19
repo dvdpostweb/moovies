@@ -29,6 +29,11 @@ class ApplicationController < ActionController::Base
     gon.orange_promotion_option = t('orange_promotion_option')
     gon.mobile = "MOBILE" if request.user_agent =~ /Mobile|webOS/
     gon.orange_no_account_mesage = t('orange_no_account_mesage')
+
+    gon.development = Rails.env.development? if Rails.env.development?
+    gon.staging = Rails.env.staging? if Rails.env.staging?
+    gon.production = Rails.env.production? if Rails.env.production?
+
   end
 
   #def handle_unverified_request

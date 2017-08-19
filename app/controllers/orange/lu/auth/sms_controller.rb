@@ -44,6 +44,8 @@ class Orange::Lu::Auth::SmsController < ApplicationController
       gon.products_id = 5
     elsif params[:moovie_id].present?
       gon.products_id = params[:moovie_id]
+    elsif params[:orange_luxembourg_promo_code].present?
+      gon.orange_luxembourg_promo_code = params[:orange_luxembourg_promo_code]
     end
     gon.code = params[:code]
     gon.phone_number = params[:phone_number]

@@ -107,6 +107,14 @@ $("#green_banner_form").submit(function (event) {
 });
 
 $("#left_sidebar_promotion_form").submit(function (event) {
+
+    //if (gon.development === true || gon.staging === true) {
+    //
+    //    console.log("OMG! Check this window out!");
+    //
+    //}
+
+
     event.preventDefault();
     $.ajax({
         method: 'POST',

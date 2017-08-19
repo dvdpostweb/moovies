@@ -13,14 +13,31 @@ jQuery.validator.addMethod("phone", function (phone_number, element) {
 
 $("#is_eligable_registration").validate({
     rules: {
-        "phone-number": {
+        "phone_number": {
             required: true,
-            phone: true
+            phone: true,
+            remote: "/api/v1/check_presence_of_customer_telephone_number_orange_registration"
         }
     },
     messages: {
-        "phone-number": {
-            required: isEligableValidationMessage()
+        "phone_number": {
+            required: isEligableValidationMessage(),
+            remote: function() {
+
+                if (gon.locale == "fr") {
+
+                    return "Ce numéro de téléphone est déjà enregistré dans le système."
+
+                } else if (gon.locale == "nl") {
+
+                    return "Alles wat je nodig hebt, is een perfecte manier om je te helpen."
+
+                } else if (gon.locale == "en") {
+
+                    return "This phone number is already registered in the system.";
+
+                }
+            }
         }
     },
     highlight: function (element) {
@@ -42,7 +59,8 @@ $("#is_eligable_registration").validate({
             data: {
                 'sms_number': sms_number.slice(1),
                 'products_id': gon.products_id,
-                'code': gon.code
+                'code': gon.code,
+                'orange_luxembourg_promo_code': gon.orange_luxembourg_promo_code
             },
             dataType: 'json',
             success: function (response) {
@@ -106,7 +124,8 @@ $("#orange_purchase_register").validate({
                 'sms_code': $.trim($("#sms_code").val()),
                 'products_id': gon.products_id,
                 'plush_phone_number': sms_number.slice(1),
-                'code': gon.code
+                'code': gon.code,
+                'orange_luxembourg_promo_code': gon.orange_luxembourg_promo_code
             },
             dataType: 'json',
             success: function (response) {

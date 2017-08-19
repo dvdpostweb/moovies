@@ -5,6 +5,7 @@ Moovies::Application.routes.draw do
       match "validate_login_password" => "validator#validate_login_password"
       match "validate_login_password_on_update" => "validator#validate_login_password_on_update"
       match "check_presence_of_customer_email_registration" => "validator#check_presence_of_customer_email_registration"
+      match "check_presence_of_customer_telephone_number_orange_registration" => "validator#check_presence_of_customer_telephone_number_orange_registration"
       match "check_presence_of_activation_code" => "validator#check_activation_code_presence"
       match "check_presence_of_activation_code_carrefour" => "validator#check_activation_code_presence_carrefour"
       match "activate_new_plan" => "validator#set_plan"
@@ -16,11 +17,7 @@ Moovies::Application.routes.draw do
       match "subscriptions" => "subscriptions#for_logedin_customers"
       match "subscriptions_freetrial_mobistar_customers" => "subscriptions#for_logedin_mobistar_customers_freetrial_subscription"
       match "ogone_parameters_accepturl" => "ogone_tokenization#ogone_parameters_accepturl"
-
       match "language_by_language" => "validator#language_by_language"
-
-
-
       match "check_sms_activation_code" => "validator#check_sms_activation_code"
     end
   end

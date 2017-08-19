@@ -56,6 +56,19 @@ class Api::V1::ValidatorController < API::V1::BaseController
     end
   end
 
+  def check_presence_of_customer_telephone_number_orange_registration
+    if request.xhr?
+      phone = Customer.find_by_customers_telephone("352#{params[:phone_number]}")
+      if phone.present?
+        render json: FALSE
+      else
+        render json: TRUE
+      end
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
+
   def set_plan
     if request.xhr?
       if params[:discount_code].present? && !params[:subscription_action].present?
@@ -167,6 +180,8 @@ class Api::V1::ValidatorController < API::V1::BaseController
         elsif activation.present?
           if activation.abo_type_id == 0
             render :json => { :status => 2, :message => carrefour_path(:carrefour_code => params[:promotion]) }
+          elsif activation.activation_group == 23
+            render :json => { :status => 2, :message => orange_lu_auth_sms_registration_path(:orange_luxembourg_promo_code => params[:promotion]) }
           else
             render :json => { :status => 2, :message => new_customer_session_path(:code => params[:promotion]) }
           end
