@@ -227,6 +227,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController #API::V1::Ba
         end
       elsif activation_for_orange_promotion.present?
         customer.customers_registration_step = 100
+        customer.customers_abo = 1
         customer.activation_discount_code_type = 'A'
         customer.activation_discount_code_id = activation_for_orange_promotion.activation_id
         customer.customers_abo_type = activation_for_orange_promotion.activation_products_id
