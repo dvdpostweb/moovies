@@ -35,9 +35,9 @@
       <% end %>
       <%= yield %>
     </div>
-    <% cache("footer_#{I18n.locale}_#{params[:kind]}", :expires_in => 15.minutes) do %>
+    <!--<#% cache("footer_#{I18n.locale}_#{params[:kind]}", :expires_in => 15.minutes) do %>-->
         <%= render "layouts/footer" %>
-    <% end %>
+    <!--<#% end %>-->
   </div>
 </div>
 <%= javascript_include_tag *webpack_asset_paths("application") %>
