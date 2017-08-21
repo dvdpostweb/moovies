@@ -14,3 +14,4 @@
 //= require history
 //= require facebox-bootstrap
 //= require fancybox
+//= require serviceworker-companion

@@ -26,6 +26,7 @@ module Moovies
     config.assets.version = '1.0'
     config.autoload_paths += %W(#{config.root}/lib)
     config.paths["config/routes"] += Dir[Rails.root.join("config/routes/*.rb")]
+    config.assets.precompile += %w[serviceworker.js manifest.json]
     config.to_prepare do
       Devise::Mailer.layout "email"
       Devise::Mailer.helper "application"
