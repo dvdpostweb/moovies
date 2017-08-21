@@ -1622,11 +1622,16 @@ ul.lg-list-view li.baloon-trans {
   transition: all 0.5s ease-in-out;
 }
 #grid-view .grid-slide:nth-child(n) {
-  margin-right: 4%;
+  margin-right: 2%;
 }
-#grid-view .grid-slide:nth-child(4n) {
+
+/*#grid-view .grid-slide:nth-child(5n) {
+  margin-right: 2%;
+}*/
+
+/*#grid-view .grid-slide:nth-child(4n) {
   margin-right: 0;
-}
+}*/
 @media (max-width: 980px) {
   #grid-view .grid-slide {
     float: left;
