@@ -1,4 +1,4 @@
-<% if params[:id] == "playstation-offer" || params[:id] == "playstation" %>
+<!--<#% if params[:id] == "playstation-offer" || params[:id] == "playstation" %>-->
     <nav id="mainNav" class="navbar navbar-default white-bck promotion-top">
       <div class="navbar-header block100 padr20">
         <a class="navbar-brand" href="<%= root_localize_path %>"><%= image_tag "template/plush-logo-trans.png", alt: "Plush" %></a>
@@ -170,7 +170,7 @@
         <%= image_tag "template/bottom-banner.jpeg", class: "center-block" %>
       </div>
     </div>
-<% else %>
+<!--<#% else %>
 
     <style>
       .canvas2 #promo_content {
@@ -234,66 +234,66 @@
         </div>
 
         <div id="commentcamarche_content">
-          <h2><%= t('.plush') %></h2>
-          <% if !@promo.params[:hide_svod] == true %>
-              <h3><%= t('.illimite') %></h3>
+          <h2><3%= t('.plush') %></h2>
+          <3% if !@promo.params[:hide_svod] == true %>
+              <h3><3%= t('.illimite') %></h3>
               <table cellpadding="0" cellspacing="0" border="0">
                 <tr id="vod">
                   <td>
-                    <img src="<%= image_path "/assets/old_images/promotions/#{I18n.locale}/vod.jpg" %>" style="padding-left:20px;"/>
+                    <img src="<3%= image_path "/assets/old_images/promotions/#{I18n.locale}/vod.jpg" %>" style="padding-left:20px;"/>
                   </td>
                   <td>
-                    <img src="<%= image_path "/assets/old_images/promotions/#{I18n.locale}/streamingbutton.jpg" %>" style="padding-top:50px;"/>
+                    <img src="<3%= image_path "/assets/old_images/promotions/#{I18n.locale}/streamingbutton.jpg" %>" style="padding-top:50px;"/>
                   </td>
                   <td>
-                    <img src="<%= image_path "/assets/old_images/promotions/#{I18n.locale}/icon_subtitles.gif" %>" style="padding-top:30px; padding-left:40px;"/>
+                    <img src="<3%= image_path "/assets/old_images/promotions/#{I18n.locale}/icon_subtitles.gif" %>" style="padding-top:30px; padding-left:40px;"/>
                   </td>
                   <td>
-                    <img src="<%= image_path "/assets/old_images/promotions/tv_vod.jpg" %>" style="padding-top:14px;"/>
+                    <img src="<3%= image_path "/assets/old_images/promotions/tv_vod.jpg" %>" style="padding-top:14px;"/>
                   </td>
                 </tr>
                 <tr id="vod">
-                  <td class="step1"><%= t('.istep1').html_safe %></td>
-                  <td class="step2"><%= t('.istep2').html_safe %></td>
-                  <td class="step3"><%= t('.istep3').html_safe %></td>
-                  <td class="step4"><%= t('.istep4').html_safe %></td>
+                  <td class="step1"><3%= t('.istep1').html_safe %></td>
+                  <td class="step2"><3%= t('.istep2').html_safe %></td>
+                  <td class="step3"><3%= t('.istep3').html_safe %></td>
+                  <td class="step4"><3%= t('.istep4').html_safe %></td>
                 </tr>
               </table>
-          <% end %>
-          <% if !@promo.params[:hide_tvod] == true %>
-              <h3 class="carte"><%= t('.carte') %></h3>
+          <3% end %>
+          <3% if !@promo.params[:hide_tvod] == true %>
+              <h3 class="carte"><3%= t('.carte') %></h3>
               <table cellpadding="0" cellspacing="0" border="0">
                 <tr id="dvd">
                   <td>
-                    <img src="<%= image_path "/assets/old_images/promotions/#{I18n.locale}/vodppv.jpg" %>" style="padding-left:20px;"/>
+                    <img src="<#%= image_path "/assets/old_images/promotions/#{I18n.locale}/vodppv.jpg" %>" style="padding-left:20px;"/>
                   </td>
                   <td>
-                    <img src="<%= image_path "/assets/old_images/promotions/#{I18n.locale}/payperviewbutton.jpg" %>" style="padding-top:28px;"/>
+                    <img src="<#%= image_path "/assets/old_images/promotions/#{I18n.locale}/payperviewbutton.jpg" %>" style="padding-top:28px;"/>
                   </td>
                   <td>
-                    <img src="<%= image_path "/assets/old_images/promotions/#{I18n.locale}/icon_subtitles.gif" %>" style="padding-top:30px; padding-left:40px;"/>
+                    <img src="<#%= image_path "/assets/old_images/promotions/#{I18n.locale}/icon_subtitles.gif" %>" style="padding-top:30px; padding-left:40px;"/>
                   </td>
                   <td>
-                    <img src="<%= image_path "/assets/old_images/promotions/tv_vodppv.jpg" %>" style="padding-top:14px;"/>
+                    <img src="<#%= image_path "/assets/old_images/promotions/tv_vodppv.jpg" %>" style="padding-top:14px;"/>
                   </td>
                 </tr>
                 <tr id="dvd">
-                  <td class="step1"><%= t('.astep1').html_safe %></td>
-                  <td class="step2"><%= t('.astep2').html_safe %></td>
-                  <td class="step3"><%= t('.astep3').html_safe %></td>
-                  <td class="step4"><%= t('.astep4').html_safe %></td>
+                  <td class="step1"><#%= t('.astep1').html_safe %></td>
+                  <td class="step2"><#%= t('.astep2').html_safe %></td>
+                  <td class="step3"><#%= t('.astep3').html_safe %></td>
+                  <td class="step4"><#%= t('.astep4').html_safe %></td>
                 </tr>
               </table>
-          <% end %>
+          <#% end %>
         </div>
-        <p align="center"><%= image_tag "old_images/#{I18n.locale}/info_tel.jpg" %></p>
-        <div id="promo_footer"><%= t2('.conditions', @promo.params[:key]).html_safe %></div>
+        <p align="center"><#%= image_tag "old_images/#{I18n.locale}/info_tel.jpg" %></p>
+        <div id="promo_footer"><#%= t2('.conditions', @promo.params[:key]).html_safe %></div>
       </div>
     </div>
     </div>
     </div>
     </div>
-    <div style="display:none" id='text_error_conditions'><%= t('.error_conditions') %></div>
-    <div id="default" style="display:none"><%= t '.default' %></div>
+    <div style="display:none" id='text_error_conditions'><#%= t('.error_conditions') %></div>
+    <div id="default" style="display:none"><#%= t '.default' %></div>
 
-<% end %>
+<#% end %>-->
