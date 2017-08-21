@@ -52,14 +52,14 @@ $('a[rel*=facebox]').facebox();
 //    }
 //};
 
-if (gon && gon.mobile === "MOBILE") {
-    var w = $(window), d = $(document);
-    w.scroll(function () {
-        if (w.scrollTop() + w.height() == d.height()) {
-            $.ajax({url: $('.next_page').last().attr('href'), dataType: 'script'});
-        }
-    });
-}
+//if (gon && gon.mobile === "MOBILE") {
+//    var w = $(window), d = $(document);
+//    w.scroll(function () {
+//        if (w.scrollTop() + w.height() == d.height()) {
+//            $.ajax({url: $('.next_page').last().attr('href'), dataType: 'script'});
+//        }
+//    });
+//}
 
 $("[id=pagination]").hide();
 
