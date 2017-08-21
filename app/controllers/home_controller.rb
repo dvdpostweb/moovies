@@ -48,7 +48,7 @@ class HomeController < ApplicationController
     if customer_signed_in?
       gon.carrefour_activation_code = params[:carrefour_activation_code]
       customer = current_customer
-      @hide_menu = true
+      #@hide_menu = true
       @body_id = 'carrefour'
       @error_abo = false
       @error_code = false
