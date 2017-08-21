@@ -20,7 +20,8 @@ var config = {
         'orange_register': './webpack/orange/register.js',
         'promotion_playstation': './webpack/promotions/promotion_playstation.js',
         'promotion_orange_mobistar': './webpack/promotions/promotion_orange_mobistar.js',
-        'promotion_orange_sms_confirm': './webpack/promotions/promotion_orange_sms_confirm.js'
+        'promotion_orange_sms_confirm': './webpack/promotions/promotion_orange_sms_confirm.js',
+        'promotion_bnppf': './webpack/promotions/promotion_bnppf.js'
     },
 
     module: {

@@ -24,7 +24,6 @@
   <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<%= asset_path("template/favicon114x114.png") %>">
   <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<%= asset_path("template/favicon72x72.png") %>">
   <link rel="apple-touch-icon-precomposed" href="<%= asset_path("template/favicon57x57.png") %>">
-  <%= javascript_include_tag "application" %>
 </head>
 <body>
 <div class="canavas" id="">
@@ -46,6 +45,7 @@
       </div>
     </nav>
     <%= yield %>
+    <%= javascript_include_tag "application" %>
     <%= javascript_include_tag *webpack_asset_paths("application") %>
     <%= javascript_include_tag *webpack_asset_paths("promotion_orange_mobistar") %>
   </div>

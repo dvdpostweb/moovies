@@ -220,6 +220,7 @@ class PromotionsController < ApplicationController
       when 'mobistar' then 'mobistarpromo'
       when 'playstation-offer' then 'playstationpromo'
       when 'playstation' then 'playstationpromo'
+      when 'BNPPF' then 'bnppfpromo'
     else
     'promo'
     end 

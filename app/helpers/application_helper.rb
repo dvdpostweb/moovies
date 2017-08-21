@@ -79,6 +79,8 @@ module ApplicationHelper
       "payment-methods"
     elsif params[:controller].present? && params[:controller] == "home" && params[:action].present? && params[:action] == "carrefour" then
       "carrefour"
+    elsif params[:controller].present? && params[:controller] == "promotions" && params[:id].present? && params[:id] == "BNPPF" then
+      "promotion"
     end
   end
 

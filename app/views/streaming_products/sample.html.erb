@@ -1,4 +1,5 @@
 <div class="container white-bck">
+  <div class="block100 mart30 text-center"></div>
   <h1 class=" pad0 mart10 f30 OpenSansCondensed block100"> <%= t('.title') %> - <%= link_to @product.title, product_path(:id => @product.to_param), :id => :vod_title_id %></h1>
   <div class="block100">
         <%= jwplayer(@streaming.filename, @streaming.source, @streaming, @token_name, @browser) %>

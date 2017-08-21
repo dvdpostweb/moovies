@@ -1,0 +1,44 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" CONTENT="index, follow">
+  <meta http-equiv="content-language" content="<%= I18n.locale %>"/>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+  <meta name="description" content="<%= @meta_description.blank? ? '' : @meta_description %>"/>
+  <title><%= h @meta_title.blank? ? t('.title') : @meta_title %></title>
+  <%= include_gon(namespace: 'Plush') %>
+  <%= Gon::Base.render_data %>
+  <% Gon.global.current_customer = current_customer if !customer_signed_in? %>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <%= stylesheet_link_tag "application", :media => "all" %>
+  <link rel="manifest" href="manifest.json">
+  <script src="https://content.jwplatform.com/libraries/D6L08XhR.js"></script>
+<body id="<%= @body_id %>" class="<%= params[:kind] %> <%= current_customer ? :private : :public %> <%= I18n.locale %> <%= @body_class %>">
+<%= render :partial => 'layouts/old_partials/google_analytics' %>
+<div class="canavas" id="">
+  <% if params[:controller] == "products" %>
+      <% cache("footer_#{I18n.locale}_#{params[:kind]}", :expires_in => 15.minutes) do %>
+          <%= render "layouts/application/filters_open_adaptive" %>
+      <% end %>
+  <% end %>
+  <%= render "layouts/application/side_menu_box_shadov" %>
+  <div class="wrap">
+    <%= render "layouts/header" %>
+    <div id="content" class="<%= configure_content_div_html_class(params) %>">
+      <%= render "layouts/promo_banner" %>
+      <%= yield %>
+    </div>
+    <%= render "layouts/footer" %>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.js"></script>
+<%= javascript_include_tag "application" %>
+<%= javascript_include_tag *webpack_asset_paths("application") %>
+<%= javascript_include_tag *webpack_asset_paths("promotion_bnppf") %>
+</body>
+</html>
