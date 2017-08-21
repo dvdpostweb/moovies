@@ -1,105 +1,299 @@
-<style>
-.canvas2 #promo_content {
-  background: url('http://www.dvdpost.be/images/promotions_plush/<%= @promo.params[:background_locale] ? "#{I18n.locale}/" : '' %><%= @promo.params[:background] %>') no-repeat scroll 0 0 transparent;
-  margin: 0 auto;
-  width: 970px;
-  min-height: 722px;
-}
-<% if @promo.params[:brand_logo] %>
-.canvas2 #header h2,.canvas2 #header h2 a {
-  background: url('http://www.dvdpost.be/images/promotions_plush/<%= @promo.params[:brand_logo] %>') no-repeat scroll 0 0 transparent;
-  height: 64px;
-  width: 224px;
-    position: absolute;
-  display: inline-block;
-}
-<% end %>
-<% if @promo.params[:border_color] %>
-#promo_content #promo_form.light
-{
-  border: <%= @promo.params[:border_color] %> 3px solid;
-}
-<% end %>
-</style>
-<div id="wrap">
-  <div id="header" >
-    <h1>
-      <%= link_to 'plush.be', root_localize_path(), :class => 'f-btn' %>
-    </h1>
-    <% if @promo.params[:brand_logo] %>
-    <h2>
-      <%= !@promo.params[:brand_url] ? '' : link_to(@promo.params[:brand_url], @promo.params[:brand_url], :class => 'f-btn', :target => '_blank') %>
-    </h2>
-    <% end %>
-    <% if !@promo.params[:until_at].nil? %>
-    <ul id="promo_date" class="osc">
-      <li><%= t('promotion.show.until_at') %>
+<% if params[:id] == "playstation-offer" || params[:id] == "playstation" %>
+    <nav id="mainNav" class="navbar navbar-default white-bck promotion-top">
+      <div class="navbar-header block100 padr20">
+        <a class="navbar-brand" href="<%= root_localize_path %>"><%= image_tag "template/plush-logo-trans.png", alt: "Plush" %></a>
+        <a class="navbar-brand pull-right"><%= image_tag "template/playstation-logo.jpeg", alt: "Playstation" %></a>
+      </div>
+    </nav>
+    <div id="content" class="promotion playstation">
+      <div class="container white-bck dark-gray padb20">
+        <h1 class="OpenSansCondensed text-center pad0"><%= t2('.title', @promo.params[:key], {:title_color => @promo.params[:title_color]}).html_safe %> <br>
+          <strong> <%= t2('.title_promo', @promo.params[:key], {:title_color => @promo.params[:title_color]}).html_safe %></strong></h1>
+        <div class="promotion-codebox white-bck overflow-hidden">
+          <h2 class="OpenSansCondensed text-center"><%= t2('.subtitle', @promo.params[:key]).html_safe %></h2>
+          <% if current_customer %>
+              <%= render :partial => 'promotions/show/form_logged' %>
+          <% elsif @prospect %>
+              <%= render :partial => 'promotions/show/form_login' %>
+          <% else %>
+              <%= render :partial => 'promotions/show/form_signup', :locals => {:number => ''} %>
+          <% end %>
+        </div>
+      </div>
+      <div class="container promotion-catalogue white-bck dark-gray padtb20">
+        <h2 class="OpenSansCondensed pad0 mar0"><%= t('.illimite') %></h2>
+        <ul>
+          <li>
+            <div class="img-cat">
+              <%= image_tag "template/orange-cat1.jpeg" %>
+            </div>
+            <div class="desc-cat f13">
+              <div class="fa-stack display-inline">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <span class="fa fa-stack-1x fa-inverse fa-plus18"></span>
+              </div>
+              <div class="pull-right line-height-15 display-inline">
+                <%= t('.istep1').html_safe %>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="img-cat">
+              <%= image_tag "template/orange-cat2a.jpeg" %>
+            </div>
+            <div class="desc-cat f13">
+              <div class="fa-stack display-inline">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <span class="fa fa-stack-1x fa-inverse fa-plus18"></span>
+              </div>
+              <div class="pull-right line-height-15 display-inline">
+                <%= t('.istep2').html_safe %>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="img-cat">
+              <%= image_tag "template/orange-cat3.gif" %>
+            </div>
+            <div class="desc-cat f13">
+              <div class="fa-stack display-inline">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <span class="fa fa-stack-1x fa-inverse fa-plus18"></span>
+              </div>
+              <div class="pull-right line-height-15 display-inline">
+                <%= t('.istep3').html_safe %>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="img-cat">
+              <%= image_tag "template/orange-cat4b.jpeg" %>
+            </div>
+            <div class="desc-cat f13">
+              <div class="fa-stack display-inline">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <span class="fa fa-stack-1x fa-inverse fa-plus18"></span>
+              </div>
+              <div class="pull-right line-height-15 display-inline">
+                <%= t('.istep4').html_safe %>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="container promotion-catalogue white-bck dark-gray padtb20">
+        <h2 class="OpenSansCondensed pad0 mar0"><%= t('.carte') %></h2>
+        <ul>
+          <li>
+            <div class="img-cat">
+              <%= image_tag "template/orange-cat1.jpeg" %>
+            </div>
+            <div class="desc-cat f13">
+              <div class="fa-stack display-inline">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <span class="fa fa-stack-1x fa-inverse fa-plus18"></span>
+              </div>
+              <div class="pull-right line-height-15 display-inline">
+                <%= t('.istep1').html_safe %>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="img-cat">
+              <%= image_tag "template/orange-cat2b.jpeg" %>
+            </div>
+            <div class="desc-cat f13">
+              <div class="fa-stack display-inline">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <span class="fa fa-stack-1x fa-inverse fa-plus18"></span>
+              </div>
+              <div class="pull-right line-height-15 display-inline">
+                <%= t('.istep2').html_safe %>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="img-cat">
+              <%= image_tag "template/orange-cat3.gif" %>
+            </div>
+            <div class="desc-cat f13">
+              <div class="fa-stack display-inline">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <span class="fa fa-stack-1x fa-inverse fa-plus18"></span>
+              </div>
+              <div class="pull-right line-height-15 display-inline">
+                <%= t('.istep3').html_safe %>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="img-cat">
+              <%= image_tag "template/orange-cat4.jpeg" %>
+            </div>
+            <div class="desc-cat f13">
+              <div class="fa-stack display-inline">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <span class="fa fa-stack-1x fa-inverse fa-plus18"></span>
+              </div>
+              <div class="pull-right line-height-15 display-inline">
+                <%= t('.istep4').html_safe %>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <!--
+      <div class="container white-bck padb20">
+        <div class="bottom-promotion-codebox overflow-hidden center-block thinrgray-bck pad20 text-center radius4">
+          <h2 class="OpenSansCondensed text-center dark-gray">Profitez de Plush Unlimited avec une réduction
+            exclusive!*</h2>
 
-<%= @promo.params[:until_at] == true ? 3.days.from_now.localtime.strftime('%d/%m/%Y') : @promo.params[:until_at] %></li>
-    </ul>
-    <% end %>
-  </div>
-  <div class="container clearfix">
-    <div id="promo_content">
-      <h1>
-        <%= t2('.title', @promo.params[:key], {:title_color => @promo.params[:title_color]}).html_safe %><br/>
-        <strong><%= t2('.title_promo', @promo.params[:key], {:title_color => @promo.params[:title_color]}).html_safe %></strong>
-      </h1>
-      <div id="promo_form" class="light">
-        <h2 class="light"><%= t2('.subtitle', @promo.params[:key]).html_safe %></h2>
-        <% if current_customer %>
-          <%= render :partial => 'promotions/show/form_logged' %>          
-        <% elsif @prospect %>
-          <%= render :partial => 'promotions/show/form_login' %>          
-        <% else %>
-          <%= render :partial => 'promotions/show/form_signup', :locals => {:number => ''} %>
-        <% end %>
+          <div class="block100 mart10 text-center">
+            <p class="mart10">Insérez votre code promo:</p>
+            <input type="text" value="" name="promo-code" id="promo-code" class="text-center" placeholder="Code">
+            <p class="error-code red-google f12">Error code</p>
+          </div>
+          <div class="block100 mart20">
+            <div class="col-md-12"><input type="checkbox" class="icheckbox" name="sign-apprised-news" value="1"/>
+              <label class="Arial normal text-left line-height-15">J'accepte les conditions de l'offre situées en-bas de
+                cette page</label>
+            </div>
+          </div>
+          <div class="block100 text-center mart15">
+            <button href="#" class="btn pad5 green-bck white radius4" id="code-submit-modal">
+              <i class="fa fa-check marr10"></i>Abonnez-vous
+            </button>
+          </div>
+        </div>
+      </div>-->
+      <div class="container bottom padtb15 text-center">
+        <%= image_tag "template/bottom-banner.jpeg", class: "center-block" %>
       </div>
     </div>
+<% else %>
 
-      <div id="commentcamarche_content">
-        <h2><%= t('.plush') %></h2>
-        <% if !@promo.params[:hide_svod] == true %>
-        <h3><%= t('.illimite') %></h3>
-        <table cellpadding="0" cellspacing="0" border="0">
-          <tr id="vod">
-            <td><img src="<%= image_path "/assets/old_images/promotions/#{I18n.locale}/vod.jpg" %>" style="padding-left:20px;"/></td>
-            <td><img src="<%= image_path "/assets/old_images/promotions/#{I18n.locale}/streamingbutton.jpg" %>" style="padding-top:50px;"  /></td>
-            <td><img src="<%= image_path "/assets/old_images/promotions/#{I18n.locale}/icon_subtitles.gif" %>" style="padding-top:30px; padding-left:40px;" /></td>
-            <td><img src="<%= image_path "/assets/old_images/promotions/tv_vod.jpg" %>"  style="padding-top:14px;" /></td>
-          </tr>
-          <tr id="vod">
-            <td class="step1"><%= t('.istep1').html_safe %></td>
-            <td class="step2"><%= t('.istep2').html_safe %></td>
-            <td class="step3"><%= t('.istep3').html_safe %></td>
-            <td class="step4"><%= t('.istep4').html_safe %></td>
-          </tr>
-        </table>
+    <style>
+      .canvas2 #promo_content {
+        background: url('http://www.dvdpost.be/images/promotions_plush/<%= @promo.params[:background_locale] ? "#{I18n.locale}/" : '' %><%= @promo.params[:background] %>') no-repeat scroll 0 0 transparent;
+        margin: 0 auto;
+        width: 970px;
+        min-height: 722px;
+      }
+
+      <% if @promo.params[:brand_logo] %>
+      .canvas2 #header h2, .canvas2 #header h2 a {
+        background: url('http://www.dvdpost.be/images/promotions_plush/<%= @promo.params[:brand_logo] %>') no-repeat scroll 0 0 transparent;
+        height: 64px;
+        width: 224px;
+        position: absolute;
+        display: inline-block;
+      }
+
+      <% end %>
+      <% if @promo.params[:border_color] %>
+      #promo_content #promo_form.light {
+        border: <%= @promo.params[:border_color] %> 3px solid;
+      }
+
+      <% end %>
+    </style>
+    <div id="wrap">
+      <div id="header">
+        <h1>
+          <%= link_to 'plush.be', root_localize_path(), :class => 'f-btn' %>
+        </h1>
+        <% if @promo.params[:brand_logo] %>
+            <h2>
+              <%= !@promo.params[:brand_url] ? '' : link_to(@promo.params[:brand_url], @promo.params[:brand_url], :class => 'f-btn', :target => '_blank') %>
+            </h2>
         <% end %>
-        <% if !@promo.params[:hide_tvod] == true %>
-        <h3 class="carte"><%= t('.carte') %></h3>
-        <table cellpadding="0" cellspacing="0" border="0">
-          <tr id="dvd">
-            <td><img src="<%= image_path "/assets/old_images/promotions/#{I18n.locale}/vodppv.jpg" %>"style="padding-left:20px;"/></td>
-            <td><img src="<%= image_path "/assets/old_images/promotions/#{I18n.locale}/payperviewbutton.jpg" %>" style="padding-top:28px;" /></td>
-            <td><img src="<%= image_path "/assets/old_images/promotions/#{I18n.locale}/icon_subtitles.gif" %>" style="padding-top:30px; padding-left:40px;" /></td>
-            <td><img src="<%= image_path "/assets/old_images/promotions/tv_vodppv.jpg" %>" style="padding-top:14px;"/></td>
-          </tr>
-          <tr id="dvd">
-            <td class="step1"><%= t('.astep1').html_safe %></td>
-            <td class="step2"><%= t('.astep2').html_safe %></td>
-            <td class="step3"><%= t('.astep3').html_safe %></td>
-            <td class="step4"><%= t('.astep4').html_safe %></td>
-          </tr>
-        </table>
+        <% if !@promo.params[:until_at].nil? %>
+            <ul id="promo_date" class="osc">
+              <li><%= t('promotion.show.until_at') %>
+
+                <%= @promo.params[:until_at] == true ? 3.days.from_now.localtime.strftime('%d/%m/%Y') : @promo.params[:until_at] %></li>
+            </ul>
         <% end %>
       </div>
-      <p align="center"><%= image_tag "old_images/#{I18n.locale}/info_tel.jpg" %></p>
-      <div id="promo_footer"><%= t2('.conditions', @promo.params[:key]).html_safe %></div>
+      <div class="container clearfix">
+        <div id="promo_content">
+          <h1>
+            <%= t2('.title', @promo.params[:key], {:title_color => @promo.params[:title_color]}).html_safe %><br/>
+            <strong><%= t2('.title_promo', @promo.params[:key], {:title_color => @promo.params[:title_color]}).html_safe %></strong>
+          </h1>
+          <div id="promo_form" class="light">
+            <h2 class="light"><%= t2('.subtitle', @promo.params[:key]).html_safe %></h2>
+            <% if current_customer %>
+                <%= render :partial => 'promotions/show/form_logged' %>
+            <% elsif @prospect %>
+                <%= render :partial => 'promotions/show/form_login' %>
+            <% else %>
+                <%= render :partial => 'promotions/show/form_signup', :locals => {:number => ''} %>
+            <% end %>
+          </div>
+        </div>
+
+        <div id="commentcamarche_content">
+          <h2><%= t('.plush') %></h2>
+          <% if !@promo.params[:hide_svod] == true %>
+              <h3><%= t('.illimite') %></h3>
+              <table cellpadding="0" cellspacing="0" border="0">
+                <tr id="vod">
+                  <td>
+                    <img src="<%= image_path "/assets/old_images/promotions/#{I18n.locale}/vod.jpg" %>" style="padding-left:20px;"/>
+                  </td>
+                  <td>
+                    <img src="<%= image_path "/assets/old_images/promotions/#{I18n.locale}/streamingbutton.jpg" %>" style="padding-top:50px;"/>
+                  </td>
+                  <td>
+                    <img src="<%= image_path "/assets/old_images/promotions/#{I18n.locale}/icon_subtitles.gif" %>" style="padding-top:30px; padding-left:40px;"/>
+                  </td>
+                  <td>
+                    <img src="<%= image_path "/assets/old_images/promotions/tv_vod.jpg" %>" style="padding-top:14px;"/>
+                  </td>
+                </tr>
+                <tr id="vod">
+                  <td class="step1"><%= t('.istep1').html_safe %></td>
+                  <td class="step2"><%= t('.istep2').html_safe %></td>
+                  <td class="step3"><%= t('.istep3').html_safe %></td>
+                  <td class="step4"><%= t('.istep4').html_safe %></td>
+                </tr>
+              </table>
+          <% end %>
+          <% if !@promo.params[:hide_tvod] == true %>
+              <h3 class="carte"><%= t('.carte') %></h3>
+              <table cellpadding="0" cellspacing="0" border="0">
+                <tr id="dvd">
+                  <td>
+                    <img src="<%= image_path "/assets/old_images/promotions/#{I18n.locale}/vodppv.jpg" %>" style="padding-left:20px;"/>
+                  </td>
+                  <td>
+                    <img src="<%= image_path "/assets/old_images/promotions/#{I18n.locale}/payperviewbutton.jpg" %>" style="padding-top:28px;"/>
+                  </td>
+                  <td>
+                    <img src="<%= image_path "/assets/old_images/promotions/#{I18n.locale}/icon_subtitles.gif" %>" style="padding-top:30px; padding-left:40px;"/>
+                  </td>
+                  <td>
+                    <img src="<%= image_path "/assets/old_images/promotions/tv_vodppv.jpg" %>" style="padding-top:14px;"/>
+                  </td>
+                </tr>
+                <tr id="dvd">
+                  <td class="step1"><%= t('.astep1').html_safe %></td>
+                  <td class="step2"><%= t('.astep2').html_safe %></td>
+                  <td class="step3"><%= t('.astep3').html_safe %></td>
+                  <td class="step4"><%= t('.astep4').html_safe %></td>
+                </tr>
+              </table>
+          <% end %>
+        </div>
+        <p align="center"><%= image_tag "old_images/#{I18n.locale}/info_tel.jpg" %></p>
+        <div id="promo_footer"><%= t2('.conditions', @promo.params[:key]).html_safe %></div>
       </div>
     </div>
-</div>
-</div>
-</div>
-<div style="display:none" id='text_error_conditions'><%= t('.error_conditions') %></div>
-<div id="default" style="display:none"><%= t '.default' %></div>
+    </div>
+    </div>
+    </div>
+    <div style="display:none" id='text_error_conditions'><%= t('.error_conditions') %></div>
+    <div id="default" style="display:none"><%= t '.default' %></div>
+
+<% end %>

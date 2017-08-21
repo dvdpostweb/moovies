@@ -2,6 +2,7 @@ class PromotionsController < ApplicationController
   before_filter :get_data
   layout :chose_layout
   def show
+    gon.customer_session_path = customer_session_path
     if @promo && @promo.canva_id == 3
       @checked = true
       @checked_partners = false
@@ -215,7 +216,10 @@ class PromotionsController < ApplicationController
 
   def chose_layout
     case params[:id]
-    when 'orange' then 'orangepromo'
+      when 'orange' then 'orangepromo'
+      when 'mobistar' then 'mobistarpromo'
+      when 'playstation-offer' then 'playstationpromo'
+      when 'playstation' then 'playstationpromo'
     else
     'promo'
     end 

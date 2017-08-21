@@ -69,6 +69,7 @@ class Activation < ActiveRecord::Base
   scope :orange, :conditions=>['activation_group = 8 OR activation_group = 13']
   scope :carrefour, :conditions=>['activation_group = 0 OR activation_group = 21']
   scope :bnppf, :conditions=>['activation_group = 22']
+  scope :playstation, :conditions=>['activation_group = 15']
 
   def tvod_only
     subscription_type && subscription_type.id == 6

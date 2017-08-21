@@ -8,6 +8,7 @@ Moovies::Application.routes.draw do
       match "check_presence_of_customer_telephone_number_orange_registration" => "validator#check_presence_of_customer_telephone_number_orange_registration"
       match "check_presence_of_activation_code" => "validator#check_activation_code_presence"
       match "check_presence_of_activation_code_carrefour" => "validator#check_activation_code_presence_carrefour"
+      match "check_activation_code_presence_playstation" => "validator#check_activation_code_presence_playstation"
       match "activate_new_plan" => "validator#set_plan"
       match "login" => "login#login"
       match "register" => "registration#register"

@@ -17,7 +17,10 @@ var config = {
         'filters': './webpack/filters.js',
         'angular_test': './webpack/angular_test/angular_test.js',
         'orange_login': './webpack/orange/login.js',
-        'orange_register': './webpack/orange/register.js'
+        'orange_register': './webpack/orange/register.js',
+        'promotion_playstation': './webpack/promotions/promotion_playstation.js',
+        'promotion_orange_mobistar': './webpack/promotions/promotion_orange_mobistar.js',
+        'promotion_orange_sms_confirm': './webpack/promotions/promotion_orange_sms_confirm.js'
     },
 
     module: {

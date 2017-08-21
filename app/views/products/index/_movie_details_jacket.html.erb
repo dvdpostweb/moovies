@@ -24,7 +24,7 @@
 <% product_title = data[:title] %>
 <% product_image = data[:image] %>
 <% path = product_path(:id => product.to_param, :source => @source, :response_id => @response_id) %>
-<%= render :partial => 'products/index/pagination_scroll', :locals => {:item => @products} %>
+<!--<#%= render :partial => 'products/index/pagination_scroll', :locals => {:item => @products} %>-->
 
 <div class="grid-slide">
   <a href="<%= product_path(:id => product.to_param, :source => @source) %>" class="popper"><%= image_tag(product_image, :class => "img-responsive") %>

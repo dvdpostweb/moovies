@@ -207,9 +207,22 @@ class Api::V1::ValidatorController < API::V1::BaseController
     end
   end
 
+  def check_activation_code_presence_playstation
+    if request.xhr?
+      code = Activation.by_name(params[:code]).available.playstation.first
+      if code.present?
+        render json: TRUE
+      else
+        render json: FALSE
+      end
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
+
   def check_activation_code_presence_carrefour
     if request.xhr?
-        code = Activation.by_name(params[:carrefour_code]).available.carrefour.first
+      code = Activation.by_name(params[:carrefour_code]).available.carrefour.first
       if code.present?
         render json: TRUE
       else

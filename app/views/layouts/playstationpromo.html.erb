@@ -14,11 +14,6 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
   <%= stylesheet_link_tag "application", :media => "all" %>
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-  <style>
-    #code-error {
-      color: #94C951;
-    }
-  </style>
   <link rel="icon" type="image/x-icon" href="<%= asset_path("template/favicon.ico") %>">
   <link rel="icon" type="image/png" href="<%= asset_path("template/favicon.ico") %>">
   <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<%= asset_path("template/favicon114x114.png") %>">
@@ -39,16 +34,10 @@
     <div class="side-menu-search mart15"></div>
   </div>
   <div class="wrap">
-    <nav id="mainNav" class="navbar navbar-default white-bck promotion-top">
-      <div class="navbar-header block100 padr20">
-        <a class="navbar-brand" href="<%= root_localize_path %>"><%= image_tag "template/plush-logo-trans.png" %></a>
-        <a class="navbar-brand pull-right" href="http://www.mobistar.be/" target="_blank"><%= image_tag "template/orange-logo.png" %></a>
-      </div>
-    </nav>
     <%= yield %>
-    <%= javascript_include_tag *webpack_asset_paths("application") %>
-    <%= javascript_include_tag *webpack_asset_paths("promotion_orange_mobistar") %>
-  </div>
+ </div>
 </div>
+<%= javascript_include_tag *webpack_asset_paths("application") %>
+<%= javascript_include_tag *webpack_asset_paths("promotion_playstation") %>
 </body>
 </html>
