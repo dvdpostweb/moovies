@@ -30,14 +30,10 @@
   <div class="wrap">
     <%= render "layouts/header" %>
     <div id="content" class="<%= configure_content_div_html_class(params) %>">
-      <% cache("promo_banner_#{I18n.locale}_#{params[:kind]}", :expires_in => 15.minutes) do %>
-          <%= render "layouts/promo_banner" %>
-      <% end %>
+      <%= render "layouts/promo_banner" %>
       <%= yield %>
     </div>
-    <!--<#% cache("footer_#{I18n.locale}_#{params[:kind]}", :expires_in => 15.minutes) do %>-->
-        <%= render "layouts/footer" %>
-    <!--<#% end %>-->
+    <%= render "layouts/footer" %>
   </div>
 </div>
 <%= javascript_include_tag *webpack_asset_paths("application") %>
