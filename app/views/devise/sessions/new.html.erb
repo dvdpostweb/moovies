@@ -8,9 +8,9 @@
       <a href="/auth/google_oauth2?code=<%= params[:code] %>;moovie_id=<%= params[:moovie_id] %>;ACTION_TYPE=NORMAL;ORG_URL=<%= request.fullpath %>" class="btn btn-block red-google-bck uppercase radius4 padtb15"><i class="fa fa-google-plus marr5 f16"></i> <%= t('.social.network.google') %>
       </a>
       <% if request.host == "www.plush.lu" || request.host == "staging.plush.lu" || request.host == "plushlu.dev" %>
-        <% unless Rails.env.production? %>
-        <a href="<%= orange_lu_auth_sms_authorization_path(:moovie_id => params[:moovie_id], :code => params[:code], :activation => params[:activation]) %>" class="btn btn-block orange-bck uppercase radius4 padtb15"><%= t('orange_login') %></a>
-      <% end %>
+        <!--<#% unless Rails.env.production? %>-->
+          <a href="<%= orange_lu_auth_sms_authorization_path(:moovie_id => params[:moovie_id], :code => params[:code], :activation => params[:activation]) %>" class="btn btn-block orange-bck uppercase radius4 padtb15"><%= t('orange_login') %></a>
+        <!--<#% end %>-->
       <% end %>
     </div>
 
