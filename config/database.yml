@@ -102,7 +102,7 @@ production:
   encoding: utf8
   reconnect: false
   database: plush_production
-  pool: 40
+  pool: 5
   timeout: 5000
   username: webuser
   password: 3gallfir-

@@ -7,8 +7,8 @@ set :deploy_to, "/home/webapps/plush/production"
 set :rails_env, :production
 set :enable_ssl, true
 
-set :puma_threads, [1, 1]
-set :puma_workers, 0
+set :puma_threads, [1, 2]
+set :puma_workers, 1
 
 set :pty, true
 set :use_sudo, false
