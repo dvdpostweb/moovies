@@ -77,6 +77,8 @@ module ApplicationHelper
       "carrefour"
     elsif params[:controller].present? && params[:controller] == "payment_methods" && params[:action].present? && params[:action] == "edit" && params[:type].present? && params[:type] == "credit_card_tvod" then
       "payment-methods"
+    elsif params[:controller].present? && params[:controller] == "home" && params[:action].present? && params[:action] == "carrefour" then
+      "carrefour"
     end
   end
 
