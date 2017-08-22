@@ -96,3 +96,4 @@ gem "font-awesome-rails"
 gem 'webpack-rails', '~> 0.9.10'
 gem "foreman"
 gem 'serviceworker-rails', '~> 0.5.5'
+gem "rack-timeout"
