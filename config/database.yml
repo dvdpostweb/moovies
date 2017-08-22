@@ -102,8 +102,8 @@ production:
   encoding: utf8
   reconnect: false
   database: plush_production
-  pool: 5
-  timeout: 5000
+  #pool: 5
+  #timeout: 5000
   username: webuser
   password: 3gallfir-
   host: 192.168.100.204
