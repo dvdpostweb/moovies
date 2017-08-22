@@ -21,7 +21,8 @@ var config = {
         'promotion_playstation': './webpack/promotions/promotion_playstation.js',
         'promotion_orange_mobistar': './webpack/promotions/promotion_orange_mobistar.js',
         'promotion_orange_sms_confirm': './webpack/promotions/promotion_orange_sms_confirm.js',
-        'promotion_bnppf': './webpack/promotions/promotion_bnppf.js'
+        'promotion_bnppf': './webpack/promotions/promotion_bnppf.js',
+        'analytic_movie_detail_page': './webpack/analytics/movie_detail_page.js'
     },
 
     module: {

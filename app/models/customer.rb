@@ -167,6 +167,8 @@ class Customer < ActiveRecord::Base
 
   has_many :orange_sms_activation_codes
 
+  #has_many :visits
+
   #after_save :setup_abt_6_null
 
   def unlimted_subscriber?

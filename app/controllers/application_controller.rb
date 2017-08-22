@@ -7,7 +7,9 @@ class ApplicationController < ActionController::Base
   before_filter :redirect_after_registration, :unless => :flag?
   before_filter :get_wishlist_source, :unless => :flag?
   before_filter :validation_adult, :unless => :flag?
-  #before_filter :authenticate, :if => :staging?
+  before_filter :authenticate, :if => :staging?
+  #after_action :track_action
+  after_filter :ahoy_track
 
   #before_filter :set_cache_buster
 
@@ -77,6 +79,10 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+
+  def ahoy_track
+    ahoy.track_visit
+  end
 
   def products?
     params[:controller] == 'products'
@@ -161,6 +167,10 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  #def track_action
+  #  ahoy.track "Processed #{controller_name}##{action_name}", request.filtered_parameters
+  #end
 
   def check_request?
     request.ssl? ? @dynamic_link = 'https://yandex.st/swfobject/2.2/swfobject.min.js' : @dynamic_link = 'http://yandex.st/swfobject/2.2/swfobject.min.js'

@@ -15,3 +15,4 @@
 //= require facebox-bootstrap
 //= require fancybox
 //= require serviceworker-companion
+//= require ahoy

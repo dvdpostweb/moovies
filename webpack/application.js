@@ -1,3 +1,4 @@
+//ahoy.trackAll();
 $('a[rel*=facebox]').facebox();
 
 //window.onload = function () {

@@ -72,7 +72,6 @@ gem 'date_validator'
 gem 'whenever', "~> 0.9.0", :require => false
 gem 'geoip'
 gem 'hpricot', '~> 0.8.6'
-gem "browser", '~> 0.2.0'
 gem 'route_translator', :git => 'git://github.com/NielsKSchjoedt/route_translator.git'
 gem 'chosen-rails'
 gem "hash_to_hidden_fields"
@@ -97,3 +96,4 @@ gem 'webpack-rails', '~> 0.9.10'
 gem "foreman"
 gem 'serviceworker-rails', '~> 0.5.5'
 gem "rack-timeout"
+gem 'ahoy_matey', '~> 1.6'

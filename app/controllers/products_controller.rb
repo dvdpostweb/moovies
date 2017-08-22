@@ -130,6 +130,8 @@ class ProductsController < ApplicationController
       @trailer = @product.trailer?
       data = @product.description_data(true)
       @product_title = @product.series? ? @product.serie.name : data[:title]
+      gon.product_title = @product.series? ? @product.serie.name : data[:title]
+      gon.products_id = @product.products_id
       @product_image = data[:image]
       @product_description = data[:description]
       @categories = @product.categories
