@@ -102,7 +102,7 @@ production:
   encoding: utf8
   reconnect: false
   database: plush_production
-  pool: 32
+  pool: 64
   timeout: 5000
   username: webuser
   password: 3gallfir-
@@ -112,6 +112,8 @@ common_production:
   adapter: mysql2
   encoding: utf8
   database: common_production
+  pool: 64
+  timeout: 5000
   username: webuser
   password: 3gallfir-
   host: matadi
