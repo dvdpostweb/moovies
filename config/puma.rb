@@ -41,13 +41,7 @@ preload_app!
 #
 on_worker_boot do
 
-     ActiveRecord::Base.connection_pool.disconnect!
-
-     ActiveSupport.on_load(:active_record) do
-       config = Rails.application.config.database_configuration[Rails.env]
-       config['pool'] = ENV['RAILS_MAX_THREADS']
-       ActiveRecord::Base.establish_connection(config)
-     end
+  ActiveRecord::Base.establish_connection
 
 end
 
