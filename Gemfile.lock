@@ -418,6 +418,7 @@ GEM
     sshkit (1.14.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
+    stopgap_13632 (1.0.1)
     test-unit (3.2.5)
       power_assert
     therubyracer (0.12.3)
@@ -534,6 +535,7 @@ DEPENDENCIES
   shoulda-matchers (~> 2.8)
   spring
   spring-commands-rspec (~> 1.0, >= 1.0.4)
+  stopgap_13632 (~> 1.0, >= 1.0.1)
   test-unit (~> 3.0)
   therubyracer (~> 0.12.3)
   thinking-sphinx (= 3.0.6)

@@ -97,3 +97,4 @@ gem "foreman"
 gem 'serviceworker-rails', '~> 0.5.5'
 gem "rack-timeout"
 gem 'ahoy_matey', '~> 1.6'
+gem 'stopgap_13632', '~> 1.0', '>= 1.0.1'
