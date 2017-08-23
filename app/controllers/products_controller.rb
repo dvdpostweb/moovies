@@ -127,6 +127,9 @@ class ProductsController < ApplicationController
   end
 
   def show
+
+    gon.pv = Ahoy::Event.where(name: "Viewed Movie Detail Page").where_properties(products_id: @product.products_id).group_by_day_of_week(:time, format: "%a").count
+
     @body_id = "film-details"
     unless current_customer
       if params[:kind] == :adult

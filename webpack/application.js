@@ -1,4 +1,4 @@
-//Chartkick.configure({language: "de"});
+Chartkick.configure({language: "en"});
 
 
 //ahoy.trackAll();
