@@ -17,3 +17,5 @@
 //= require serviceworker-companion
 //= require ahoy
 //= require chartkick
+
+Chartkick.configure({language: "en"});
