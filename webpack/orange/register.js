@@ -69,9 +69,9 @@ $("#is_eligable_registration").validate({
                         localStorage.setItem("plush_phone_number", $(".input-group-addon").html() + $.trim($("#sms_number_register").val()));
                         $("#is_eligable_registration").hide();
                         $("#orange_purchase_register").show();
-                        jQuery.facebox("<div class=\"alert alert-danger\">" +
-                            "<strong>" + response.sms_code + "</strong>" +
-                            "</div>");
+                        //jQuery.facebox("<div class=\"alert alert-danger\">" +
+                        //    "<strong>" + response.sms_code + "</strong>" +
+                        //    "</div>");
                     } else {
                         jQuery.facebox("<div class=\"alert alert-danger\">" +
                             "<strong>" + "Sorry! No Web Storage support.." + "</strong>" +
