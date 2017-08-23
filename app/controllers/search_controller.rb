@@ -1,5 +1,9 @@
 class SearchController < ApplicationController
+
   def index
+
+    ahoy.track "Search", term: params[:search]
+
     @body_id = 'search_index'
     @filter = view_context.get_current_filter({})
     new_params = session[:sexuality] == 0 ? params.merge(:per_page => 15, :country_id => session[:country_id], :hetero => 1) : params.merge(:per_page => 15, :country_id => session[:country_id])
