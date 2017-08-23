@@ -18,6 +18,8 @@ var config = {
         'angular_test': './webpack/angular_test/angular_test.js',
         'orange_login': './webpack/orange/login.js',
         'orange_register': './webpack/orange/register.js',
+        'orange_step3': './webpack/orange/step3.js',
+        'orange_ppv': './webpack/orange/ppv.js',
         'promotion_playstation': './webpack/promotions/promotion_playstation.js',
         'promotion_orange_mobistar': './webpack/promotions/promotion_orange_mobistar.js',
         'promotion_orange_sms_confirm': './webpack/promotions/promotion_orange_sms_confirm.js',
