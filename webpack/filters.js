@@ -1,10 +1,200 @@
 History = window.History;
 
-$(document).ready(function() {
+$(document).ready(function () {
 
-    $('.iradio').on('ifChecked', function (e) {
+    $("#filters_view_mode_last_added").on('ifChecked', function (e) {
+
         submit_online();
+
+        ahoy.track("newly_added_choose_click", {
+
+            event: "click",
+            locale: gon.locale,
+            movie_type: gon.movie_type
+
+        });
+
     });
+
+    $("#filters_view_mode_most_viewed").on('ifChecked', function (e) {
+
+        submit_online();
+
+        ahoy.track("most_viewed_choose_click", {
+
+            event: "click",
+            locale: gon.locale,
+            movie_type: gon.movie_type
+
+        });
+
+    });
+
+    $("#filters_view_mode_last_chance").on('ifChecked', function (e) {
+
+        submit_online();
+
+        ahoy.track("last-chance_choose_click", {
+
+            event: "click",
+            locale: gon.locale,
+            movie_type: gon.movie_type
+
+        });
+
+    });
+
+    $("#filters_view_mode_best_rated").on('ifChecked', function (e) {
+
+        submit_online();
+
+        ahoy.track("best_rated_choose_click", {
+
+            event: "click",
+            locale: gon.locale,
+            movie_type: gon.movie_type
+
+        });
+
+    });
+
+    $("#filters_view_mode_soon").on('ifChecked', function (e) {
+
+        submit_online();
+
+        ahoy.track("coming_soon_choose_click", {
+
+            event: "click",
+            locale: gon.locale,
+            movie_type: gon.movie_type
+
+        });
+
+    });
+
+    $("#filters_view_mode_new").on('ifChecked', function (e) {
+
+        submit_online();
+
+        ahoy.track("new_movies_choose_click", {
+
+            event: "click",
+            locale: gon.locale,
+            movie_type: gon.movie_type
+
+        });
+
+    });
+
+    $("#filters_view_mode_hd").on('ifChecked', function (e) {
+
+        submit_online();
+
+        ahoy.track("high_definition_choose_click", {
+
+            event: "click",
+            locale: gon.locale,
+            movie_type: gon.movie_type
+
+        });
+
+    });
+
+    $("#filters_category_id_chosen").on("click",".active-result",function(){
+
+        var genre = $(this).text();
+
+        ahoy.track("genres_choose_click", {
+
+            event: "click",
+            genre: genre,
+            locale: gon.locale,
+            movie_type: gon.movie_type
+
+        });
+
+    });
+
+    //$("#filters_category_id_chosen").on("click",".chosen-single-with-deselect",function(){
+    //    ahoy.track("genres_close_click", {
+    //        event: "click",
+    //        locale: gon.locale,
+    //        movie_type: gon.movie_type
+    //    });
+    //});
+
+    $("#filters_audio").change(function(){
+        var audiosMultiple =  $(this).find("option:selected").text();
+
+        ahoy.track("audios_choose_click", {
+
+            event: "click",
+            audio: audiosMultiple,
+            locale: gon.locale,
+            movie_type: gon.movie_type
+
+        });
+
+    });
+
+    $("#filters_subtitles").change(function(){
+        var subtitlesMultiple =  $(this).find("option:selected").text();
+
+        ahoy.track("subtitles_choose_click", {
+
+            event: "click",
+            subtitles: subtitlesMultiple,
+            locale: gon.locale,
+            movie_type: gon.movie_type
+
+        });
+
+    });
+
+    $("#date_filters_year_min").change(function(){
+        var yearFrom =  $(this).find("option:selected").text();
+
+        ahoy.track("year_from_choose_click", {
+
+            event: "click",
+            year_from: yearFrom,
+            locale: gon.locale,
+            movie_type: gon.movie_type
+
+        });
+
+    });
+
+    $("#date_filters_year_max").change(function(){
+        var yearMax =  $(this).find("option:selected").text();
+
+        ahoy.track("year_max_choose_click", {
+
+            event: "click",
+            year_max: yearMax,
+            locale: gon.locale,
+            movie_type: gon.movie_type
+
+        });
+
+    });
+
+    $("#filters_country_id").change(function(){
+        var countriesMultiple =  $(this).find("option:selected").text();
+
+        ahoy.track("countries_choose_click", {
+
+            event: "click",
+            countries: countriesMultiple,
+            locale: gon.locale,
+            movie_type: gon.movie_type
+
+        });
+
+    });
+
+
+
 
 });
 
@@ -38,6 +228,7 @@ if ($('#online #filters').html()) {
     //});
 
     $(document).on('click', '.filter-close', function (e) {
+
         var form_element = $(this).closest('.applied-filter-tag').attr('data-input-element');
 
         if (form_element === "Plush à la Carte") {
@@ -51,41 +242,97 @@ if ($('#online #filters').html()) {
         } else if (form_element === "Derniers ajouts" || form_element === "Laatste aanwinsten" || form_element === "Newly added") {
 
             $('.iradio').iCheck('uncheck');
+
             submit_online();
+
+            //ahoy.track("Newly Added Tracking Destroy Event", {
+            //    event: "Newly Added Destroy Clicked",
+            //    locale: gon.locale,
+            //    movie_type: gon.movie_type
+            //
+            //});
 
         } else if (form_element === "Les plus populaires" || form_element === "Meest bekeken" || form_element === "Most viewed") {
 
             $('.iradio').iCheck('uncheck');
+
             submit_online();
+
+            //ahoy.track("Most viewed Tracking Destroy Event", {
+            //    event: "Most viewed Destroy Clicked",
+            //    locale: gon.locale,
+            //    movie_type: gon.movie_type
+            //});
 
         } else if (form_element === "Dernière chance" || form_element === "Laatste kans" || form_element === "Last chance") {
 
             $('.iradio').iCheck('uncheck');
+
             submit_online();
+
+            //ahoy.track("Last chance Tracking Destroy Event", {
+            //    event: "Last chance Destroy Clicked",
+            //    locale: gon.locale,
+            //    movie_type: gon.movie_type
+            //});
 
         } else if (form_element === "Les mieux côtés" || form_element === "Beste beoordeeld" || form_element === "Best rated") {
 
             $('.iradio').iCheck('uncheck');
+
             submit_online();
+
+            //ahoy.track("Best rated Tracking Destroy Event", {
+            //    event: "Best rated Destroy Clicked",
+            //    locale: gon.locale,
+            //    movie_type: gon.movie_type
+            //
+            //});
 
         } else if (form_element === "Bientôt disponible" || form_element === "Binnenkort beschikbaar" || form_element === "Coming soon") {
 
             $('.iradio').iCheck('uncheck');
+
             submit_online();
+
+            //ahoy.track("Coming soon Tracking Destroy Event", {
+            //
+            //    event: "Coming soon Destroy Clicked",
+            //    locale: gon.locale,
+            //    movie_type: gon.movie_type
+            //
+            //});
 
         } else if (form_element === "Nouveautés" || form_element === "Nieuwe films" || form_element === "New movies") {
 
             $('.iradio').iCheck('uncheck');
+
             submit_online();
+
+            //ahoy.track("New movies Tracking Destroy Event", {
+            //
+            //    event: "New movies Destroy Clicked",
+            //    locale: gon.locale,
+            //    movie_type: gon.movie_type
+            //
+            //});
 
         } else if (form_element === "Haute Définition" || form_element === "High Definition") {
 
             $('.iradio').iCheck('uncheck');
+
             submit_online();
+
+            //ahoy.track("High Definition Tracking Destroy Event", {
+            //
+            //    event: "High Definition Destroy Clicked",
+            //    locale: gon.locale,
+            //    movie_type: gon.movie_type
+            //
+            //});
 
         }
 
-        //console.log(form_element);
     });
 
     $('#products_index, #film-details, #categories, #studios').delegate("#close_audience", "click", function () {
@@ -118,8 +365,17 @@ if ($('#online #filters').html()) {
     });
 
     $('#products_index').delegate("#close_category", "click", function () {
+
         $('#online #filters_category_id').val('').trigger('chosen:updated');
+
         submit_online()
+
+        //ahoy.track("Genres Tracking Destroy Event", {
+        //    event: "destroy click",
+        //    locale: gon.locale,
+        //    movie_type: gon.movie_type
+        //});
+
     });
 
     $('#products_index').delegate("#close_actor", "click", function () {

@@ -2,7 +2,9 @@ ahoy.track("Viewed Movie Detail Page", {
     title: gon.product_title,
     url: window.location.href,
     visited: new Date,
-    products_id: gon.products_id
+    products_id: gon.products_id,
+    locale: gon.locale,
+    movie_type: gon.movie_type
 
 
 });

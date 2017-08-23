@@ -36,6 +36,12 @@ class ApplicationController < ActionController::Base
     gon.staging = Rails.env.staging? if Rails.env.staging?
     gon.production = Rails.env.production? if Rails.env.production?
 
+    if params[:kind] == :normal
+      gon.movie_type = "NORMAL"
+    else
+      gon.movie_type = "ADULT"
+    end
+
   end
 
   #def handle_unverified_request

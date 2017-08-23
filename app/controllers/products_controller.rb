@@ -8,6 +8,9 @@ class ProductsController < ApplicationController
     if params[:category_id] && params[:filters].nil? || (params[:filters] && params[:filters][:category_id].nil?)
       params[:filters] = Hash.new if params[:filters].nil?
       params[:filters][:category_id] = params[:category_id]
+
+      ahoy.track "Filters", filters: params[:filters]
+
     end
     if params[:package] == t('routes.product.params.package.unlimited')
       params[:package] = Moovies.packages.invert[1]
@@ -17,6 +20,9 @@ class ProductsController < ApplicationController
     end
     if params[:filters] && params[:filters][:view_mode]
       params[:view_mode] = params[:package] == Moovies.packages.invert[2] || params[:package] == Moovies.packages.invert[5] ? "tvod_#{params[:filters][:view_mode]}" : "svod_#{params[:filters][:view_mode]}"
+
+      #ahoy.track "Filters", filters: params[:view_mode]
+
     end
     if params[:package] and !['unlimited', 'tvod', 'adult_unlimited', 'adult_tvod'].include?(params[:package])
       params[:package] = Moovies.packages.invert[1]
@@ -82,9 +88,16 @@ class ProductsController < ApplicationController
       new_params = new_params.merge(:hetero => 1) if session[:sexuality] == 0
       @products = Product.filter_online(nil, new_params)
       if params[:filters]
+
         @selected_countries = ProductCountry.where(:countries_id => params[:filters][:country_id])
+        #ahoy.track "Filter by Country", countries: ProductCountry.where(:countries_id => params[:filters][:country_id])
+
         @languages = Language.by_language(I18n.locale).find(params[:filters][:audio].reject(&:empty?)).collect(&:name).join(', ') if Product.audio?(params[:filters][:audio])
+        #ahoy.track "Filter by Audio", audios: Language.by_language(I18n.locale).find(params[:filters][:audio].reject(&:empty?)).collect(&:name).join(', ')
+
         @subtitles = Subtitle.by_language(I18n.locale).find(params[:filters][:subtitles].reject(&:empty?)).collect(&:name).join(', ') if Product.subtitle?(params[:filters][:subtitles])
+        #ahoy.track "Filter by Subtitle", subtitles: Subtitle.by_language(I18n.locale).find(params[:filters][:subtitles].reject(&:empty?)).collect(&:name).join(', ')
+
       end
     end
     #else
