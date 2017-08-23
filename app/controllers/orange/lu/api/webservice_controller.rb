@@ -14,7 +14,7 @@ class Orange::Lu::Api::WebserviceController < ApplicationController #API::V1::Ba
         orange_sms_activation_code.sms_authentification_code = SecureRandom.hex(2)
         if orange_sms_activation_code.save
           orange_is_eligable_wcf_service = HTTParty.get("https://www.plush.be:2355/WcfService/http/OrangeIsEligable?customersId=#{resource.customers_id}&mobileNumber=#{params[:sms_number]}&SMSCodeMessage=#{puts t("orange.sms_code.message")}#{orange_sms_activation_code.sms_authentification_code}&products_id=#{product_id_from_params}&locale=#{I18n.locale}")
-          render json: {status: orange_is_eligable_wcf_service, sms_code: "#{t("orange.sms_code.message")} #{orange_sms_activation_code.sms_authentification_code}", phone_number: orange_sms_activation_code.phone_number}
+          render json: { status: orange_is_eligable_wcf_service } #, sms_code: "#{t("orange.sms_code.message")} #{orange_sms_activation_code.sms_authentification_code}", phone_number: orange_sms_activation_code.phone_number}
         end
       else
         if product_id_from_params == 0
