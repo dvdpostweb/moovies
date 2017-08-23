@@ -16,3 +16,4 @@
 //= require fancybox
 //= require serviceworker-companion
 //= require ahoy
+//= require chartkick

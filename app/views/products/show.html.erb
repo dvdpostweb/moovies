@@ -1,4 +1,67 @@
 <div class="container" id="content-left-right">
+  <% if customer_signed_in? && current_customer.charts? %>
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Movie Visits Group By Day Of Week
+              </a>
+            </h4>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+              <%= column_chart Ahoy::Event.where(name: "Viewed Movie Detail Page").where_properties(products_id: @product.products_id).group_by_day_of_week(:time, format: "%a").count %>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingTwo">
+            <h4 class="panel-title">
+              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Movie Visits Group By Hour Of Day && Group By Month Of Year
+              </a>
+            </h4>
+          </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">Movie Visits Group By Hour Of Day</div>
+                    <div class="panel-body">
+                      <%= pie_chart Ahoy::Event.where(name: "Viewed Movie Detail Page").where_properties(products_id: @product.products_id).group_by_hour_of_day(:time, format: "%-l %P").count %>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">Movie Visits Group By Month Of Year</div>
+                    <div class="panel-body">
+                      <%= line_chart Ahoy::Event.where(name: "Viewed Movie Detail Page").where_properties(products_id: @product.products_id).group_by_month_of_year(:time, format: "%mm").count %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingThree">
+            <h4 class="panel-title">
+              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Movie Visits Group By Country
+              </a>
+            </h4>
+          </div>
+          <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+            <div class="panel-body">
+              <%= geo_chart Ahoy::Event.where(name: "Viewed Movie Detail Page").where_properties(products_id: @product.products_id).group(:country).count %>
+            </div>
+          </div>
+        </div>
+      </div>
+  <% end %>
   <div class="content-left">
     <%= render :partial => 'products/index/filters_online', :locals => {:countries => @countries} %>
   </div>
@@ -6,7 +69,7 @@
     <div id="main-content" class="movie-block block100">
       <h1 class="block100 padb10 dark-blue">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12"><%= "#{@product_title} (#{@product.year})" %>
-          <span class="block100 Arial f16 mart5 normal"><%= @product.categories.active(params[:kind]).collect { |category| "#{link_to(category.name, category_products_path(:category_id => category))}" }.join(', ').html_safe %></span>
+          <span class="block100 Arial f16 mart5 normal"><%= @product.categories.active(params[:kind]).collect {|category| "#{link_to(category.name, category_products_path(:category_id => category))}"}.join(', ').html_safe %></span>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
           <div class="block100 slide-score <%= params[:kind] == :adult ? "violet" : "#{@product.tvod? ? "blue" : "green"}" %> mart5 f20" data-score="<%= @product.rating_count %>"></div>
@@ -86,47 +149,42 @@
         <%= render :partial => 'products/show/preview', :locals => {:product => @product, :type => params[:kind], :source => @source, :response_id => @response_id} %>
       </div>
       <% unless Rails.env.development? %>
-      <% if customer_signed_in? %>
-          <% @recommendations = ActiveRecord::Base.connection.exec_query %Q{CALL sp_movie_to_movie(#{current_customer.to_param}, #{@product.imdb_id})} %>
-      <% else %>
-          <% @recommendations = ActiveRecord::Base.connection.exec_query %Q{CALL sp_movie_to_movie(#{0}, #{@product.imdb_id})} %>
-      <% end %>
-      <% ActiveRecord::Base.clear_active_connections! %>
-      <% if @recommendations.any? %>
-          <div id="slider-view" class="block100">
-            <div class="home-carousel-holder center-block">
-              <h3 class="OpenSansCondensed f25 dark-blue pad0 padl5"><%= t("recommendations_show") %></h3>
-              <section class="responsive-carousel slider">
+          <% if customer_signed_in? %>
+              <% @recommendations = ActiveRecord::Base.connection.exec_query %Q{CALL sp_movie_to_movie(#{current_customer.to_param}, #{@product.imdb_id})} %>
+          <% else %>
+              <% @recommendations = ActiveRecord::Base.connection.exec_query %Q{CALL sp_movie_to_movie(#{0}, #{@product.imdb_id})} %>
+          <% end %>
+          <% ActiveRecord::Base.clear_active_connections! %>
+          <% if @recommendations.any? %>
+              <div id="slider-view" class="block100">
+                <div class="home-carousel-holder center-block">
+                  <h3 class="OpenSansCondensed f25 dark-blue pad0 padl5"><%= t("recommendations_show") %></h3>
+                  <section class="responsive-carousel slider">
 
-                <% @recommendations.each do |r| %>
-                    <% product = Product.find(r["products_id"]) %>
-                    <div>
-                      <% if params[:kind].present? && params[:kind] == :adult %>
-                          <a href="<%= product_path(:id => r["products_id"]) %>" class="popper"><img src="<%= "http://www.dvdpost.be/imagesx/#{r["image"]}" %>" class="img-responsive">
-                            <% if product.hd?(session[:country_id]) %>
-                                <span class="hd position-absolute black white-bck radius2 bold italic">HD</span>
-                            <% end %>
-                          </a>
-                      <% else %>
-                          <a href="<%= product_path(:id => r["products_id"]) %>" class="popper"><img src="<%= "http://www.dvdpost.be/images/#{r["image"]}" %>" class="img-responsive">
-                            <% if product.hd?(session[:country_id]) %>
-                                <span class="hd position-absolute black white-bck radius2 bold italic">HD</span>
-                            <% end %>
-                          </a>
-                      <% end %>
-                    </div>
-                <% end %>
-              </section>
-            </div>
-          </div>
+                    <% @recommendations.each do |r| %>
+                        <% product = Product.find(r["products_id"]) %>
+                        <div>
+                          <% if params[:kind].present? && params[:kind] == :adult %>
+                              <a href="<%= product_path(:id => r["products_id"]) %>" class="popper"><img src="<%= "http://www.dvdpost.be/imagesx/#{r["image"]}" %>" class="img-responsive">
+                                <% if product.hd?(session[:country_id]) %>
+                                    <span class="hd position-absolute black white-bck radius2 bold italic">HD</span>
+                                <% end %>
+                              </a>
+                          <% else %>
+                              <a href="<%= product_path(:id => r["products_id"]) %>" class="popper"><img src="<%= "http://www.dvdpost.be/images/#{r["image"]}" %>" class="img-responsive">
+                                <% if product.hd?(session[:country_id]) %>
+                                    <span class="hd position-absolute black white-bck radius2 bold italic">HD</span>
+                                <% end %>
+                              </a>
+                          <% end %>
+                        </div>
+                    <% end %>
+                  </section>
+                </div>
+              </div>
+          <% end %>
       <% end %>
-      <% end %>
-
-
     </div>
-
   </div>
 </div>
-
-
 <%= javascript_include_tag *webpack_asset_paths("analytic_movie_detail_page") %>

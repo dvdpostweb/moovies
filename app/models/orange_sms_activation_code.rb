@@ -3,7 +3,7 @@
 # Table name: orange_sms_activation_codes
 #
 #  id                        :integer          not null, primary key
-#  customers_id              :integer
+#  customers_id              :string(255)
 #  phone_number              :string(255)
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null

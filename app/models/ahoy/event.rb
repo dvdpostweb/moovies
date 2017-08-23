@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: ahoy_events
+#
+#  id         :integer          not null, primary key
+#  visit_id   :integer
+#  user_id    :integer
+#  name       :string(255)
+#  properties :text
+#  time       :datetime
+#  country    :string(255)
+#
+
 module Ahoy
   class Event < ActiveRecord::Base
     include Ahoy::Properties

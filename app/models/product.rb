@@ -37,9 +37,11 @@
 #  season_id               :integer          default(0), not null
 #  episode_id              :integer          default(0), not null
 #  belgium_ids             :string(10)
+#  visit_id                :integer
 #
 
 class Product < ActiveRecord::Base
+  #visitable
   include ThinkingSphinx::Scopes
   cattr_reader :per_page
   self.primary_key = :products_id
@@ -161,6 +163,8 @@ class Product < ActiveRecord::Base
   sphinx_scope(:order) { |order, sort_mode| {:order => order, :sort_mode => sort_mode} }
   sphinx_scope(:group) { |group, sort| {:group_by => group, :group_function => :attr, :group_clause => sort} }
   sphinx_scope(:limit) { |limit| {:limit => limit} }
+
+  #has_many :visits
 
   def self.list_sort
     sort = OrderedHash.new

@@ -98,3 +98,6 @@ gem 'serviceworker-rails', '~> 0.5.5'
 gem "rack-timeout"
 gem 'ahoy_matey', '~> 1.6'
 gem 'stopgap_13632', '~> 1.0', '>= 1.0.1'
+gem 'groupdate', '~> 3.2'
+gem 'chartkick', '~> 2.2', '>= 2.2.4'
+gem 'geocoder', '~> 1.4', '>= 1.4.4'

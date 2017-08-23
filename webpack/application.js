@@ -1,3 +1,6 @@
+//Chartkick.configure({language: "de"});
+
+
 //ahoy.trackAll();
 $('a[rel*=facebox]').facebox();
 

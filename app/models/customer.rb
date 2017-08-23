@@ -167,9 +167,13 @@ class Customer < ActiveRecord::Base
 
   has_many :orange_sms_activation_codes
 
-  #has_many :visits
+  has_many :visits
 
   #after_save :setup_abt_6_null
+
+  def charts?
+    (email == "charts@charts.com" || email == " im@dvdpost.be" || email == "aleksandar.popovic@dvdpost.be")
+  end
 
   def unlimted_subscriber?
     (customers_abo_type == 1 || customers_abo_type == 2 || customers_abo_type == 3 || customers_abo_type == 4 || customers_abo_type == 5)

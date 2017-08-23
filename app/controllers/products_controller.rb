@@ -145,10 +145,12 @@ class ProductsController < ApplicationController
       @product_title = @product.series? ? @product.serie.name : data[:title]
       gon.product_title = @product.series? ? @product.serie.name : data[:title]
       gon.products_id = @product.products_id
+      #gon.visitor_country = request.location.postal_code
       @product_image = data[:image]
       @product_description = data[:description]
       @categories = @product.categories
       @token = current_customer ? current_customer.get_token(@product.imdb_id, @product.season_id, @product.episode_id) : nil
+
     end
 
     @meta_title = t('products.show.meta_title', :name => @product_title, :default => '')

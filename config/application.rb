@@ -18,7 +18,7 @@ module Moovies
       end
     end
     config.time_zone = 'Brussels'
-    config.active_record.default_timezone = :local
+    config.active_record.default_timezone = :utc
     config.exceptions_app = self.routes
     config.encoding = "utf-8"
     config.filter_parameters += [:password]
@@ -37,5 +37,8 @@ module Moovies
     #if Rails.env.development?
     #  config.session_store :redis_store, servers: ["redis://localhost:6379/0/session"]
     #end
+
+    Groupdate.time_zone = "Pacific Time (US & Canada)"
+
   end
 end

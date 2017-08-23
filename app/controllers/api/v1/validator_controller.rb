@@ -1,5 +1,19 @@
 class Api::V1::ValidatorController < API::V1::BaseController
 
+
+  def save_country_for_movie
+    if request.xhr?
+      ah = Ahoy::Event.last
+      ah.country = params[:country]
+      if ah.save(validate: false)
+        render json: ah
+      end
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
+
+
   def check_presence_of_customer_email
     if request.xhr?
       email = Customer.find_by_email(params[:customer][:email])

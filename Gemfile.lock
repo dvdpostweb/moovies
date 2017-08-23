@@ -109,6 +109,7 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    chartkick (2.2.4)
     childprocess (0.7.1)
       ffi (~> 1.0, >= 1.0.11)
     chosen-rails (1.5.2)
@@ -191,6 +192,8 @@ GEM
       json
       multi_json
       request_store (>= 1.0)
+    groupdate (3.2.0)
+      activesupport (>= 3)
     guard (2.14.1)
       formatador (>= 0.2.4)
       listen (>= 2.7, < 4.0)
@@ -480,6 +483,7 @@ DEPENDENCIES
   capistrano-rbenv (~> 2.1)
   capistrano3-puma (~> 1.2, >= 1.2.1)
   capybara (~> 2.15, >= 2.15.1)
+  chartkick (~> 2.2, >= 2.2.4)
   chosen-rails
   client_side_validations (~> 3.2.6)
   coffee-rails
@@ -496,8 +500,10 @@ DEPENDENCIES
   font-awesome-rails
   foreman
   friendly_id (~> 4.0.9)
+  geocoder (~> 1.4, >= 1.4.4)
   geoip
   gon
+  groupdate (~> 3.2)
   guard-rspec (~> 4.7, >= 4.7.3)
   hash_to_hidden_fields
   hpricot (~> 0.8.6)
