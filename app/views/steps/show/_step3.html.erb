@@ -66,68 +66,69 @@
       </form>
     </div>
     <% if request.host == "www.plush.lu" || request.host == "staging.plush.lu" || request.host == "plushlu.dev" %>
-    <% unless Rails.env.production? %>
-    <h3><%= t('use_orange_billing') %></h3>
-    <div>
-      <div id="sms_auth" class="center-block thin-holder border radius4 thinrgray-bck pad20 mart20 overflow-hidden">
-        <div class="block100 text-center">
-          <%= image_tag("orange_logo.jpg", width: "70", height: "70") %>
-          <div class="col-xs-12" style="height:40px;"></div>
+        <h3><%= t('use_orange_billing') %></h3>
+        <div>
+          <div id="sms_auth" class="center-block thin-holder border radius4 thinrgray-bck pad20 mart20 overflow-hidden">
+            <div class="block100 text-center">
+              <%= image_tag("orange_logo.jpg", width: "70", height: "70") %>
+              <div class="col-xs-12" style="height:40px;"></div>
+            </div>
+            <div id="sms_form">
+              <form id="is_eligable_subscriber">
+                <div class="input-group">
+                  <div class="input-group-addon"><%= set_prefix_orange(request.host) %></div>
+                  <input type="text" name="phone-number" id="sms_number" class="form-control" placeholder="<%= t('orange_phone_number') %>" value="<%= current_customer.customers_telephone.slice(3..-1) %>">
+                </div>
+                <div class="block100 text-center mart20">
+                  <input type="submit" class="btn block100 orange-bck padlr40 padtb15 white f16 normal" value="<%= t('orange_send_button') %>">
+                </div>
+                <div class="block100 text-center mart20">
+                  <p><%= t('orange_login_explanation_text_1') %></p>
+                </div>
+              </form>
+              <form id="orange_purchase_subscriber">
+                <div class="form-group">
+                  <input type="text" name="sms-code" id="sms_code" class="form-control" placeholder="<%= t('orange_sms_code_2') %>">
+                </div>
+                <div class="block100 text-center mart20">
+                  <input type="submit" class="btn block100 orange-bck padlr40 padtb15 white f16 normal" value="<%= t('orange_send_button') %>">
+                </div>
+                <div class="block100 text-center mart20">
+                  <% if I18n.locale == :fr %>
+                      <p>En cliquant sur ce bouton, je reconnais avoir lu et accepté les
+                        conditions <%= link_to 'générales de vente', orange_lu_auth_sms_download_path %></p>
+                  <% elsif I18n.locale == :nl %>
+                      <p>Door op deze knop te klikken, bevestig ik dat ik de algemene verkoopvoorwaarden
+                        heb <%= link_to 'gelezen en geaccepteerd', orange_lu_auth_sms_download_path %></p>
+                  <% elsif I18n.locale == :en %>
+                      <p>By clicking this button, I acknowledge having read and accepted
+                        the <%= link_to 'general conditions of sale', orange_lu_auth_sms_download_path %></p>
+                  <% end %>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
-        <div id="sms_form">
-          <form id="is_eligable_subscriber">
-            <div class="input-group">
-              <div class="input-group-addon"><%= set_prefix_orange(request.host) %></div>
-              <input type="text" name="phone-number" id="sms_number" class="form-control" placeholder="<%= t('orange_phone_number') %>" value="<%= current_customer.customers_telephone.slice(3..-1) %>">
-            </div>
-            <div class="block100 text-center mart20">
-              <input type="submit" class="btn block100 orange-bck padlr40 padtb15 white f16 normal" value="<%= t('orange_send_button') %>">
-            </div>
-            <div class="block100 text-center mart20">
-              <p><%= t('orange_login_explanation_text_1') %></p>
-            </div>
-          </form>
-          <form id="orange_purchase_subscriber">
-            <div class="form-group">
-              <input type="text" name="sms-code" id="sms_code" class="form-control" placeholder="<%= t('orange_sms_code_2') %>">
-            </div>
-            <div class="block100 text-center mart20">
-              <input type="submit" class="btn block100 orange-bck padlr40 padtb15 white f16 normal" value="<%= t('orange_send_button') %>">
-            </div>
-            <div class="block100 text-center mart20">
-              <% if I18n.locale == :fr %>
-                  <p>En cliquant sur ce bouton, je reconnais avoir lu et accepté les conditions <%= link_to 'générales de vente', orange_lu_auth_sms_download_path %></p>
-              <% elsif I18n.locale == :nl %>
-                  <p>Door op deze knop te klikken, bevestig ik dat ik de algemene verkoopvoorwaarden heb <%= link_to 'gelezen en geaccepteerd', orange_lu_auth_sms_download_path %></p>
-              <% elsif I18n.locale == :en %>
-                  <p>By clicking this button, I acknowledge having read and accepted the <%= link_to 'general conditions of sale', orange_lu_auth_sms_download_path %></p>
-              <% end %>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-    <% end %>
     <% elsif request.host == "www.plush.be" || request.host == "staging.plush.be" %>
-      <h3><%= t('wha.carrierbilling') %></h3>
-      <% if I18n.locale == :en  %>
-        <% locale = "fr" %>
-      <% elsif I18n.locale == :fr  %>
-        <% locale = "fr" %>
-      <% elsif I18n.locale == :nl  %>
-        <% locale = "nl" %>
-      <% end %>
-      <div>
-        <ul class="card-list">
-          <li>
-            <a href="http://www.plush.be/wha/pos-bundle?mid=10330&action=purchaseListOffer&pid=<%= current_customer.customers_abo_type %>&lg=<%= locale %>&AdditionalParameters=lnk_step4!cn_<%= current_customer.customers_id %>">
-              <div class="card-image">
-                <%= image_tag("orange_logo.jpg", class: "img-responsive radius4") %>
-              </div>
-            </a>
-          </li>
-        </ul>
-      </div>
+        <h3><%= t('wha.carrierbilling') %></h3>
+        <% if I18n.locale == :en %>
+            <% locale = "fr" %>
+        <% elsif I18n.locale == :fr %>
+            <% locale = "fr" %>
+        <% elsif I18n.locale == :nl %>
+            <% locale = "nl" %>
+        <% end %>
+        <div>
+          <ul class="card-list">
+            <li>
+              <a href="http://www.plush.be/wha/pos-bundle?mid=10330&action=purchaseListOffer&pid=<%= current_customer.customers_abo_type %>&lg=<%= locale %>&AdditionalParameters=lnk_step4!cn_<%= current_customer.customers_id %>">
+                <div class="card-image">
+                  <%= image_tag("orange_logo.jpg", class: "img-responsive radius4") %>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
     <% end %>
   </div>
   <p class="mart30"><%= t('promotion.newstep3.supportinfo').html_safe %></p>
