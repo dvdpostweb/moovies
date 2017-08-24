@@ -40,5 +40,7 @@ module Moovies
 
     Groupdate.time_zone = "Pacific Time (US & Canada)"
 
+    config.lograge.enabled = true
+
   end
 end

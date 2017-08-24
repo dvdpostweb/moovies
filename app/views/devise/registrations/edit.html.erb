@@ -1,5 +1,7 @@
 <div class="container white-bck padb30">
   <div class="center-block thin-holder ">
+    <div class="block100 mart30 text-center"></div>
+    <div class="block100 mart30 text-center"></div>
     <div align="center">
       <h1 class="OpenSansCondensed f30 mar0 pad0"><%= t('.title') %></h1>
     </div>
@@ -43,6 +45,4 @@
   </div>
 </div>
 
-<% content_for :run_specific_javascript do %>
-    <%= javascript_include_tag "devise/change_password" %>
-<% end %>
+<%= javascript_include_tag *webpack_asset_paths("devise_change_password") %>

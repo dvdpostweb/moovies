@@ -8,19 +8,7 @@ var changePasswordValidation = {
 
     validatechangePasswordValidationUrl: function () {
 
-        if ((window.location.pathname == "/" + gon.locale + "/mon-compte/edit")) {
-
-            this.formValidation();
-
-        } else if ((window.location.pathname == "/" + gon.locale + "/mijn-account/edit")) {
-
-            this.formValidation();
-
-        } else if ((window.location.pathname == "/" + gon.locale + "/my-account/edit")) {
-
-            this.formValidation();
-
-        }
+        this.formValidation();
 
     },
     formValidation: function () {

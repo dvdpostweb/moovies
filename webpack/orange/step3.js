@@ -98,9 +98,11 @@ var step3 = {
                                 localStorage.setItem("plush_phone_number", response.phone_number);
                                 $("#is_eligable_subscriber").hide();
                                 $("#orange_purchase_subscriber").show();
-                                //jQuery.facebox("<div class=\"alert alert-danger\">" +
-                                //    "<strong>" + response.sms_code + "</strong>" +
-                                //    "</div>");
+                                if (gon && gon.development === true) {
+                                    jQuery.facebox("<div class=\"alert alert-danger\">" +
+                                        "<strong>" + response.sms_code + "</strong>" +
+                                        "</div>");
+                                }
                             } else {
                                 jQuery.facebox("<div class=\"alert alert-danger\">" +
                                     "<strong>" + "Sorry! No Web Storage support.." + "</strong>" +
