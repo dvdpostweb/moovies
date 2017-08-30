@@ -19,7 +19,7 @@ class Api::V1::SubscriptionsController < API::V1::BaseController
           end
         end
       else
-        if customer.customers_locked__for_reconduction == 1 || current_customer.tvod_free > 0
+        if ((customer.customers_locked__for_reconduction == 1 || current_customer.tvod_free > 0) && !customer.orange_customer?)
           referrer_url = URI.parse(request.referrer) rescue URI.parse(some_default_url)
           referrer_url.query = Rack::Utils.parse_nested_query(referrer_url.query).merge({renew_subscription_error: 'true'}).to_query
           redirect_to referrer_url.to_s
