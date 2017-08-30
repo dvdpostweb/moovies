@@ -83,7 +83,7 @@ $("#is_eligable").validate({
                 } else if (1 === response.status) {
                     localStorage.setItem("plush_phone_number", sms_number);
                     jQuery.facebox("<div class=\"alert alert-danger\">" +
-                        "<strong>Account with your phone number does not exist !!! Please register</strong>" +
+                        "<strong>" + gon.orange_no_account_mesage + "</strong>" +
                         "</div>");
                     setTimeout(
                         function () {

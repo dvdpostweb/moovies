@@ -42,6 +42,8 @@ class ApplicationController < ActionController::Base
       gon.movie_type = "ADULT"
     end
 
+    #gon.orange_register_registration_message = 
+
   end
 
   #def handle_unverified_request

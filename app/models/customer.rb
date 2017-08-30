@@ -207,6 +207,10 @@ class Customer < ActiveRecord::Base
     (customers_abo_payment_method == 5 || customers_abo_payment_method == 6 || customers_abo_payment_method == 7)
   end
 
+  def orange_customer_with_minimum_credit?
+    ((customers_abo_payment_method == 5 || customers_abo_payment_method == 6 || customers_abo_payment_method == 7) && tvod_free > 1)
+  end
+
   def dont_have_credits?
     tvod_free == 0
   end
