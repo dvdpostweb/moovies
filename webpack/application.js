@@ -387,3 +387,5 @@ $(".icheckbox,.iradio").iCheck({
     checkboxClass: 'icheckbox_minimal-grey',
     radioClass: 'iradio_minimal-grey'
 });
+
+console.log("puma restart test");
