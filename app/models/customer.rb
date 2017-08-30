@@ -172,7 +172,7 @@ class Customer < ActiveRecord::Base
   #after_save :setup_abt_6_null
 
   def charts?
-    (email == "charts@charts.com" || email == "im@dvdpost.be" || email == "aleksandar.popovic@dvdpost.be")
+    (email == "charts@charts.com" || email == "im@dvdpost.be" || email == "aleksandar.popovic@dvdpost.be" || email == "pierre.demolin@gmail.com")
   end
 
   def unlimted_subscriber?

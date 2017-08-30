@@ -1,49 +1,8 @@
 <div class="container white-bck dark-gray padb20">
-
   <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 compte-left">
-
     <%= render :partial => 'customers/show/account', :locals => {:customer => @customer} %>
-
   </div>
-
   <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 compte-right">
-
     <%= render :partial => 'customers/show/subscription', :locals => {:customer => @customer, :streaming_available => @streaming_available} %>
-
   </div>
-
 </div>
-
-<script>
-
-$(document).ready(function () {
-
-
-    $("#orange_stop").click(function(e) {
-        e.preventDefault();
-
-        $.ajax({
-            method: 'POST',
-            url: '/orange/lu/api/orange_stop',
-            data: {
-                'current_customer': gon.current_customer.customers_id
-            },
-            dataType: 'json',
-            success: function (response) {
-
-                jQuery.facebox("<div class=\"alert alert-danger\">" +
-                    "<strong>" + response.msg + "</strong>" +
-                    "</div>");
-
-            },
-            error: function (response) {
-                console.log('CHECKED AJAX ERROR!!!');
-            }
-        });
-
-    });
-
-
-});
-
-</script>

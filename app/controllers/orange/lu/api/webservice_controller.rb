@@ -813,6 +813,28 @@ class Orange::Lu::Api::WebserviceController < ApplicationController #API::V1::Ba
     end
   end
 
+  def orange_password
+    customer = Customer.find(params[:current_customer])
+    if customer.present?
+      customer.customers_abo_auto_stop_next_reconduction = 1
+      if customer.save(validate: false)
+        sign_in(customer)
+        orange_is_eligable_wcf_service = HTTParty.get("https://www.plush.be:2355/WcfService/http/OrangeIsEligable?customersId=#{customer.customers_id}&mobileNumber=#{customer.customers_telephone}&SMSCodeMessage=#{puts t("orange_password_reset_message_to_customer")}&products_id=-5&locale=#{I18n.locale}")
+        if orange_is_eligable_wcf_service.parsed_response == "True"
+           render json: {
+             status: "TRUE",
+             msg: "#{t('orange_password_reset_message')}"
+           }
+        else
+          render json: {
+            status: "TRUE",
+            msg: orange_is_eligable_wcf_service
+          }
+        end
+      end
+    end
+  end
+
   private
 
   def activation_code_error_message(locale)

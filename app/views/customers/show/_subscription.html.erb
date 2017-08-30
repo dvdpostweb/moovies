@@ -12,6 +12,7 @@
 
 <% if current_customer.orange_customer? %>
     <a id="orange_stop" href="#" class="btn light-blue-bck OpenSansCondensed f20 mart20"><%= t('stop_my_subscription_orange') %></a>
+    <a id="orange_password" href="#" class="btn green-bck OpenSansCondensed f20 mart20"><%= t('orange_password_change') %></a>
 <% else %>
 
     <%= link_to t('.suspend_abo'), new_customer_suspension_path(:customer_id => current_customer.to_param), :class => 'btn green-bck OpenSansCondensed f20 mart20', rel: "facebox" if current_customer.suspension_status == 0 && !current_customer.tvod_only? %>
@@ -42,3 +43,4 @@
       <%= customer.subscription_expiration_date.strftime("%d/%m/%Y") if customer.subscription_expiration_date %>
     </div>
 <% end %>
+<%= javascript_include_tag *webpack_asset_paths("orange_account") %>

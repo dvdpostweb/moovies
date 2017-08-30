@@ -22,7 +22,7 @@ Plush is a cloud-enabled, mobile-ready, application for watching movies.
 
   - staging.plush.be
   - staging.plush.lu
-  
+
 # Deploys
 
   - cap staging deploy && cap staging invoke:rake TASK=webpack:compile
@@ -32,11 +32,11 @@ Plush is a cloud-enabled, mobile-ready, application for watching movies.
 
   - cap staging deploy && cap staging invoke:rake TASK=webpack:compile && cap staging invoke:rake TASK=ts:index
   - cap production deploy && cap production invoke:rake TASK=webpack:compile && cap staging invoke:rake TASK=ts:index
-  
+
 # Db access
 
-  - ssh -i ~/.ssh/id_rsa -L 3307:192.168.100.204:3306 plush@217.112.190.50 -p 23051
+  - ssh -i ~/.ssh/id_rsa_plush -L 3307:192.168.100.204:3306 plush@217.112.190.50 -p 23051
 
 # Filesystem access
 
-  - ssh -i ~/.ssh/id_rsa plush@217.112.190.50 -p 23051
+  - ssh -i ~/.ssh/id_rsa_plush plush@217.112.190.50 -p 23051
