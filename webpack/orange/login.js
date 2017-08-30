@@ -76,19 +76,22 @@ $("#is_eligable").validate({
                     jQuery.facebox("<div class=\"alert alert-danger\">" +
                         "<strong>"+ gon.orange_no_account_mesage +"</strong>" +
                         "</div>");
-                    setTimeout(
-                        function () {
-                            window.location.href = gon.orange_subscription_action;
-                        }, 2000);
+                    //setTimeout(
+                    //    function () {
+                    //        window.location.href = gon.orange_subscription_action;
+                    //    }, 2000);
+                    //$(".dark-blue").click(function() {
+                    //  alert("modal x clicked");
+                    //});
                 } else if (1 === response.status) {
                     localStorage.setItem("plush_phone_number", sms_number);
                     jQuery.facebox("<div class=\"alert alert-danger\">" +
                         "<strong>" + gon.orange_no_account_mesage + "</strong>" +
                         "</div>");
-                    setTimeout(
-                        function () {
-                            window.location.href = gon.orange_subscription_action + gon.url_code;
-                        }, 2000);
+                    //setTimeout(
+                    //    function () {
+                    //        window.location.href = gon.orange_subscription_action + gon.url_code;
+                    //    }, 2000);
                 } else {
                     jQuery.facebox("<div class=\"alert alert-danger\">" +
                         "<strong>" + response.status + "</strong>" +
