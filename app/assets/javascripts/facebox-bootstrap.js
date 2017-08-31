@@ -157,7 +157,7 @@
             $(document).trigger('afterClose.facebox');
             $.facebox.current_modal.remove();
             $.facebox.current_modal = null;
-            if (gon && gon.orange_subscription_action != null) {
+            if (gon && gon.orange_subscription_action != null && gon.url_code == null) {
               window.location.href = gon.orange_subscription_action;
             } else if (gon && gon.orange_subscription_action != null && gon.url_code != null) {
               window.location.href = gon.orange_subscription_action + gon.url_code;
