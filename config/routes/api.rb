@@ -21,6 +21,7 @@ Moovies::Application.routes.draw do
       match "language_by_language" => "validator#language_by_language"
       match "check_sms_activation_code" => "validator#check_sms_activation_code"
       match "save_country_for_movie" => "validator#save_country_for_movie"
+      match "renew" => "renewal#renew"
     end
   end
 end

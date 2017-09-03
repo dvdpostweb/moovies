@@ -11,6 +11,55 @@ jQuery.validator.addMethod("phone", function (phone_number, element) {
         phone_number.match(/^[0-9-+]+$/);
 }, gon.orange_invalid_phone_number_format);
 
+if (gon &&gon.orange_new_customer != null && gon.orange_new_customer === "new_customer" && gon.products_id != null) {
+    //$( "#auto_register" ).trigger( "click" );
+    
+    $("#is_eligable_registration").hide();
+    $("#orange_purchase_register").show();
+
+    sms_number = $(".input-group-addon").html() + $.trim($("#sms_number_register").val());
+    $.ajax({
+        method: 'POST',
+        url: '/orange/lu/api/orange_register',
+        data: {
+            'sms_number': sms_number.slice(1),
+            'products_id': gon.products_id,
+            'code': gon.code,
+            'orange_luxembourg_promo_code': gon.orange_luxembourg_promo_code
+        },
+        dataType: 'json',
+        success: function (response) {
+            if ("True" === response.status) {
+                if (typeof(Storage) !== "undefined") {
+                    localStorage.setItem("plush_phone_number", $(".input-group-addon").html() + $.trim($("#sms_number_register").val()));
+                    //$("#is_eligable_registration").hide();
+                    //$("#orange_purchase_register").show();
+                    if (gon && gon.development === true) {
+                        jQuery.facebox("<div class=\"alert alert-danger\">" +
+                            "<strong>" + response.sms_code + "</strong>" +
+                            "</div>");
+                    }
+                } else {
+                    jQuery.facebox("<div class=\"alert alert-danger\">" +
+                        "<strong>" + "Sorry! No Web Storage support.." + "</strong>" +
+                        "</div>");
+                }
+            } else {
+                jQuery.facebox("<div class=\"alert alert-danger\">" +
+                    "<strong>" + response.status + "</strong>" +
+                    "</div>");
+            }
+        },
+        error: function (response) {
+            jQuery.facebox("<div class=\"alert alert-danger\">" +
+                "<strong>" + "SYSTEM ERROR!!!" + "</strong>" +
+                "</div>");
+        }
+    });
+
+
+}
+
 $("#is_eligable_registration").validate({
     rules: {
         "phone_number": {

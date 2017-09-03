@@ -1,11 +1,18 @@
-<div id="infostvod">
-  <!--
-  <h1><%= t('.title') %></h1>
-  <p>
-    <%= t(".description").html_safe %>
-  </p>
-  -->
-  <% if current_customer.plush_la_carte_subscriber? %>
-      <%= link_to t('products.show.product.credits_reneval'), renew_monthly_credits_for_a_la_carte_path(:product => product.id) , {:class => 'essaigratuit osc bt', :style=>'width:100%;'}, :method => :put %>
-  <% end %>
+<div id="tvod_only_modal">
+
+  <div class="block100 mart20 border-bottom padb10">
+
+  
+    <% if current_customer.orange_customer? %>
+
+      <%= link_to t('products.show.product.credits_reneval').html_safe, info_path(:page_name => "alacarte", :subscription_action => "subscription_change"), :class => "essaigratuit osc bt" %>    
+
+    <% elsif current_customer.plush_la_carte_subscriber? %>
+
+      <%= link_to t('products.show.product.credits_reneval'), renew_monthly_credits_for_a_la_carte_path(:product => product.id) , {:class => 'essaigratuit osc bt', :style=>'width:100%;'}, :method => :put %>    
+
+    <% end %>
+
+  </div>
+
 </div>

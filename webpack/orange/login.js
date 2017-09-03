@@ -73,9 +73,9 @@ $("#is_eligable").validate({
                     }
                 } else if (0 === response.status) {
                     localStorage.setItem("plush_phone_number", sms_number);
-                    jQuery.facebox("<div class=\"alert alert-danger\">" +
-                        "<strong>"+ gon.orange_no_account_mesage +"</strong>" +
-                        "</div>");
+                    //jQuery.facebox("<div class=\"alert alert-danger\">" +
+                    //    "<strong>"+ gon.orange_no_account_mesage +"</strong>" +
+                    //    "</div>");
                     //setTimeout(
                     //    function () {
                     //        window.location.href = gon.orange_subscription_action;
@@ -83,15 +83,27 @@ $("#is_eligable").validate({
                     //$(".dark-blue").click(function() {
                     //  alert("modal x clicked");
                     //});
+                    if (gon && gon.orange_subscription_action != null && gon.url_code == null) {
+                        window.location.href = gon.orange_subscription_action;
+                    } else if (gon && gon.orange_subscription_action != null && gon.url_code != null) {
+                        window.location.href = gon.orange_subscription_action + gon.url_code;
+                    }
                 } else if (1 === response.status) {
                     localStorage.setItem("plush_phone_number", sms_number);
-                    jQuery.facebox("<div class=\"alert alert-danger\">" +
-                        "<strong>" + gon.orange_no_account_mesage + "</strong>" +
-                        "</div>");
+                    //jQuery.facebox("<div class=\"alert alert-danger\">" +
+                    //    "<strong>" + gon.orange_no_account_mesage + "</strong>" +
+                    //    "</div>");
                     //setTimeout(
                     //    function () {
                     //        window.location.href = gon.orange_subscription_action + gon.url_code;
                     //    }, 2000);
+
+                    if (gon && gon.orange_subscription_action != null && gon.url_code == null) {
+                        window.location.href = gon.orange_subscription_action;
+                    } else if (gon && gon.orange_subscription_action != null && gon.url_code != null) {
+                        window.location.href = gon.orange_subscription_action + gon.url_code;
+                    }
+
                 } else {
                     jQuery.facebox("<div class=\"alert alert-danger\">" +
                         "<strong>" + response.status + "</strong>" +

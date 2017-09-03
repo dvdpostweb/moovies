@@ -49,6 +49,9 @@ class Orange::Lu::Auth::SmsController < ApplicationController
     end
     gon.code = params[:code]
     gon.phone_number = params[:phone_number]
+
+    gon.orange_new_customer = params[:orange] if params[:orange].present?
+
   end
 
   def download

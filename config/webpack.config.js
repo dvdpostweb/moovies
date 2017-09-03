@@ -26,7 +26,8 @@ var config = {
         'promotion_orange_sms_confirm': './webpack/promotions/promotion_orange_sms_confirm.js',
         'promotion_bnppf': './webpack/promotions/promotion_bnppf.js',
         'analytic_movie_detail_page': './webpack/analytics/movie_detail_page.js',
-        'devise_change_password': './webpack/devise/change_password.js'
+        'devise_change_password': './webpack/devise/change_password.js',
+        'info_alacarte': './webpack/info/alacarte.js'
     },
 
     module: {
