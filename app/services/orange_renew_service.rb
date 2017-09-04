@@ -4,7 +4,6 @@ class OrangeRenewService
   CUSTOMERS_ABO = 1
   ACTIVATION_DISCOUNT_CODE_TYPE = "D"
   CUSTOMERS_ABO_PAYMENT_METHOD = 5
-  STATUS = "success"
 
   def initialize(params)
     @discount = Discount.by_name(params[:discount]).available.first
@@ -13,7 +12,6 @@ class OrangeRenewService
 
   def perform
     orange_purchase
-    #abo_history
   end
 
   private
@@ -42,9 +40,5 @@ class OrangeRenewService
       false
     end
   end
-
-  #def abo_history
-  #  @customer.abo_history(7, @customer.customers_abo_type, @customer.customers_abo_payment_method)
-  #end
 
 end
