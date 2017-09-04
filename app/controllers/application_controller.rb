@@ -15,6 +15,10 @@ class ApplicationController < ActionController::Base
 
   layout :layout_by_resource
 
+  def mobile_agent?
+    request.user_agent =~ /Mobile|webOS/
+  end
+
   def set_gon
     gon.current_customer = current_customer
     gon.locale = I18n.locale
@@ -42,7 +46,7 @@ class ApplicationController < ActionController::Base
       gon.movie_type = "ADULT"
     end
 
-    #gon.orange_register_registration_message = 
+    #gon.orange_register_registration_message =
 
   end
 

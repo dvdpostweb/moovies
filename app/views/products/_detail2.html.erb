@@ -11,6 +11,8 @@
         <% end %>
       </a>
 
+      <% unless mobile_agent? %>
+
       <div class="synopsys-content">
        <div class="position-relative pull-left">
          <h4 class="dark-gray mart20 marb0 bold text-center uppercase f20"><%= product.smart_title %>
@@ -134,6 +136,7 @@
        </div>
      </div>
 
+      <% end %>
 
       <div class="block100 slide-score <%= params[:kind] == :adult ? "violet" : "#{product.tvod? ? "blue" : "green"}" %> text-center" data-score="<%= product.rating_count %>"></div>
     </div>
