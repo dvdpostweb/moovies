@@ -127,7 +127,9 @@ $(".2_films_orange").click(function(e) {
         },
         dataType: 'json',
         success: function (response) {
-            if (response !== "true") {
+            if (response === "success") {
+              window.location.href = gon.root_localize_path;
+            } else {
               jQuery.facebox("<div class=\"alert alert-danger\">" +
                   "<strong>" + response + "</strong>" +
                   "</div>");
@@ -147,7 +149,9 @@ $(".4_films_orange").click(function(e) {
         },
         dataType: 'json',
         success: function (response) {
-          if (response !== "success") {
+          if (response === "success") {
+            window.location.href = gon.root_localize_path;
+          } else {
             jQuery.facebox("<div class=\"alert alert-danger\">" +
                 "<strong>" + response + "</strong>" +
                 "</div>");
@@ -167,7 +171,9 @@ $(".6_films_orange").click(function(e) {
         },
         dataType: 'json',
         success: function (response) {
-          if (response !== "true") {
+          if (response === "success") {
+            window.location.href = gon.root_localize_path;
+          } else {
             jQuery.facebox("<div class=\"alert alert-danger\">" +
                 "<strong>" + response + "</strong>" +
                 "</div>");
