@@ -1,9 +1,4 @@
-#encoding: utf-8
 module ApplicationHelper
-
-  def mobile_agent?
-    request.user_agent =~ /Mobile|webOS/
-  end
 
   def set_prefix_orange(r)
     case r

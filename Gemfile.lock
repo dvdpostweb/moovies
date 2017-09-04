@@ -475,6 +475,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-chosen-rails
+  browser
   capistrano (~> 3.7, >= 3.7.2)
   capistrano-bundler (~> 1.2)
   capistrano-npm (~> 1.0, >= 1.0.2)

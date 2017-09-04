@@ -4,14 +4,25 @@
     <% product_title = data[:title] %>
     <% product_image = data[:image] %>
 
+<% if browser.platform.android? %>
+
+<div>
+  <a href="<%= product_path(:id => product.to_param, :source => source) %>" class="popper"><%= image_tag(product_image, :class => "img-responsive") %>
+    <% if product.hd?(session[:country_id]) %>
+        <span class="hd position-absolute black white-bck radius2 bold italic">HD</span>
+    <% end %>
+  </a>
+  <div class="block100 slide-score <%= params[:kind] == :adult ? "violet" : "#{product.tvod? ? "blue" : "green"}" %> text-center" data-score="<%= product.rating_count %>"></div>
+</div>
+
+<% else %>
+
     <div>
       <a href="<%= product_path(:id => product.to_param, :source => source) %>" class="popper"><%= image_tag(product_image, :class => "img-responsive") %>
         <% if product.hd?(session[:country_id]) %>
             <span class="hd position-absolute black white-bck radius2 bold italic">HD</span>
         <% end %>
       </a>
-
-      <% unless mobile_agent? %>
 
       <div class="synopsys-content">
        <div class="position-relative pull-left">
@@ -136,7 +147,8 @@
        </div>
      </div>
 
-      <% end %>
-
       <div class="block100 slide-score <%= params[:kind] == :adult ? "violet" : "#{product.tvod? ? "blue" : "green"}" %> text-center" data-score="<%= product.rating_count %>"></div>
     </div>
+
+
+<% end %>
