@@ -97,7 +97,7 @@
         <div class="columnHeader"><%= t('info.index.price_public.tvod_plan_price').html_safe %>
           (<%= 1.month.from_now.strftime("%d/%m/%Y") %>)
         </div>
-        <div class="cell bodyCell">EUR 7.99</div>
+        <div class="cell bodyCell">EUR 3.99</div>
         <div class="cell bodyCell">EUR 9.99</div>
         <div class="cell bodyCell selected">EUR 11.99</div>
       </div>
@@ -151,7 +151,7 @@
       <% if current_customer && current_customer.orange_customer? %>
 
       <% if params[:subscription_action].present? && params[:subscription_action] == "subscription_change" %>
-      
+
       <%= link_to(t('info.index.price_public.svod_button').html_safe, "#", :class => "btn pad10 f20 green-bck film_credits_btn_2 2_films_orange", :id => "continue-package") %>
       <%= link_to(t('info.index.price_public.svod_button').html_safe, "#", :class => "btn pad10 f20 green-bck film_credits_btn_4 4_films_orange", :id => "continue-package") %>
       <%= link_to(t('info.index.price_public.svod_button').html_safe, "#", :class => "btn pad10 f20 green-bck film_credits_btn_6 6_films_orange", :id => "continue-package") %>
@@ -179,7 +179,7 @@
               <%= link_to(t('info.index.price_public.svod_button').html_safe, new_customer_session_path(:code => "6FILMS"), :class => "btn pad10 f20 green-bck film_credits_btn_6", :id => "continue-package") %>
           <% end %>
         <% end %>
-      
+
       <% end %>
 
     </div>
