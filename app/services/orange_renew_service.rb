@@ -36,7 +36,8 @@ class OrangeRenewService
       @customer.activation_discount_code_type = ACTIVATION_DISCOUNT_CODE_TYPE
       @customer.tvod_free = @customer.tvod_free + @discount.tvod_free
       @customer.customers_abo_payment_method = CUSTOMERS_ABO_PAYMENT_METHOD
-      STATUS if @customer.save(validate: false)
+      @customer.customers_abo_validityto = Time.now + 1.month
+      @customer.save(validate: false)
     rescue
       false
     end

@@ -127,13 +127,13 @@ $(".2_films_orange").click(function(e) {
         },
         dataType: 'json',
         success: function (response) {
-            if (response === "success") {
-              window.location.href = gon.root_localize_path;
-            } else {
-              jQuery.facebox("<div class=\"alert alert-danger\">" +
-                  "<strong>" + response + "</strong>" +
-                  "</div>");
-            }
+          if (response != true) {
+            jQuery.facebox("<div class=\"alert alert-danger\">" +
+                "<strong>" + response + "</strong>" +
+                "</div>");
+          } else {
+            window.location.href = gon.root_localize_path;
+          }
         }
     });
 });
@@ -149,12 +149,12 @@ $(".4_films_orange").click(function(e) {
         },
         dataType: 'json',
         success: function (response) {
-          if (response === "success") {
-            window.location.href = gon.root_localize_path;
-          } else {
+          if (response != true) {
             jQuery.facebox("<div class=\"alert alert-danger\">" +
                 "<strong>" + response + "</strong>" +
                 "</div>");
+          } else {
+            window.location.href = gon.root_localize_path;
           }
         }
     });
@@ -171,12 +171,12 @@ $(".6_films_orange").click(function(e) {
         },
         dataType: 'json',
         success: function (response) {
-          if (response === "success") {
-            window.location.href = gon.root_localize_path;
-          } else {
+          if (response != true) {
             jQuery.facebox("<div class=\"alert alert-danger\">" +
                 "<strong>" + response + "</strong>" +
                 "</div>");
+          } else {
+            window.location.href = gon.root_localize_path;
           }
         }
     });
