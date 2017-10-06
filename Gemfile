@@ -34,6 +34,7 @@ group  :development, :test do
   gem 'capistrano3-puma', '~> 1.2', '>= 1.2.1'
   gem 'capistrano-rake', '~> 0.1.0'
   gem 'capistrano-npm', '~> 1.0', '>= 1.0.2'
+  gem 'rails-footnotes', '~> 4.1', '>= 4.1.8'
 end
 
 group :test do

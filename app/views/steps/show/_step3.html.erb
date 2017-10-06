@@ -109,26 +109,27 @@
             </div>
           </div>
         </div>
-    <% elsif request.host == "www.plush.be" || request.host == "staging.plush.be" %>
-        <h3><%= t('wha.carrierbilling') %></h3>
-        <% if I18n.locale == :en %>
-            <% locale = "fr" %>
-        <% elsif I18n.locale == :fr %>
-            <% locale = "fr" %>
-        <% elsif I18n.locale == :nl %>
-            <% locale = "nl" %>
-        <% end %>
+        <!--
+    <#% elsif request.host == "www.plush.be" || request.host == "staging.plush.be" %>
+        <h3><#%= t('wha.carrierbilling') %></h3>
+        <#% if I18n.locale == :en %>
+            <#% locale = "fr" %>
+        <#% elsif I18n.locale == :fr %>
+            <#% locale = "fr" %>
+        <#% elsif I18n.locale == :nl %>
+            <#% locale = "nl" %>
+        <#% end %>
         <div>
           <ul class="card-list">
             <li>
-              <a href="http://www.plush.be/wha/pos-bundle?mid=10330&action=purchaseListOffer&pid=<%= current_customer.customers_abo_type %>&lg=<%= locale %>&AdditionalParameters=lnk_step4!cn_<%= current_customer.customers_id %>">
+              <a href="http://www.plush.be/wha/pos-bundle?mid=10330&action=purchaseListOffer&pid=<#%= current_customer.customers_abo_type %>&lg=<#%= locale %>&AdditionalParameters=lnk_step4!cn_<#%= current_customer.customers_id %>">
                 <div class="card-image">
-                  <%= image_tag("orange_logo.jpg", class: "img-responsive radius4") %>
+                  <#%= image_tag("orange_logo.jpg", class: "img-responsive radius4") %>
                 </div>
               </a>
             </li>
           </ul>
-        </div>
+        </div>-->
     <% end %>
   </div>
   <p class="mart30"><%= t('promotion.newstep3.supportinfo').html_safe %></p>

@@ -192,35 +192,37 @@
               </div>
             </div>
           </div>
-      <% elsif request.host == "www.plush.be" || request.host == "staging.plush.be" %>
-          <h3><%= t('wha.carrierbilling') %></h3>
-          <% if @product.get_vod_online(session[:country_id]).first.tvod_price == 2.99 %>
-              <% wha_product = 103291 %>
-          <% elsif @product.get_vod_online(session[:country_id]).first.tvod_price == 3.99 %>
-              <% wha_product = 103292 %>
-          <% elsif @product.get_vod_online(session[:country_id]).first.tvod_price == 4.99 %>
-              <% wha_product = 103293 %>
-          <% elsif @product.get_vod_online(session[:country_id]).first.tvod_price == 5.99 %>
-              <% wha_product = 103294 %>
-          <% end %>
-          <% if I18n.locale == :en %>
-              <% locale = "fr" %>
-          <% elsif I18n.locale == :fr %>
-              <% locale = "fr" %>
-          <% elsif I18n.locale == :nl %>
-              <% locale = "nl" %>
-          <% end %>
+          <!--
+      <#% elsif request.host == "www.plush.be" || request.host == "staging.plush.be" %>
+          <h3><#%= t('wha.carrierbilling') %></h3>
+          <#% if @product.get_vod_online(session[:country_id]).first.tvod_price == 2.99 %>
+              <#% wha_product = 103291 %>
+          <#% elsif @product.get_vod_online(session[:country_id]).first.tvod_price == 3.99 %>
+              <#% wha_product = 103292 %>
+          <#% elsif @product.get_vod_online(session[:country_id]).first.tvod_price == 4.99 %>
+              <#% wha_product = 103293 %>
+          <#% elsif @product.get_vod_online(session[:country_id]).first.tvod_price == 5.99 %>
+              <#% wha_product = 103294 %>
+          <#% end %>
+          <#% if I18n.locale == :en %>
+              <#% locale = "fr" %>
+          <#% elsif I18n.locale == :fr %>
+              <#% locale = "fr" %>
+          <#% elsif I18n.locale == :nl %>
+              <#% locale = "nl" %>
+          <#% end %>
           <div>
             <ul class="card-list">
               <li>
-                <a href="http://www.plush.be/wha/pos-bundle?action=purchaseListOffer&pid=<%= wha_product %>&lg=<%= locale %>&AdditionalParameters=lnk_movie!cn_<%= current_customer.customers_id %>!movieurl_<%= @product.products_id %>">
+                <a href="http://www.plush.be/wha/pos-bundle?action=purchaseListOffer&pid=<#%= wha_product %>&lg=<#%= locale %>&AdditionalParameters=lnk_movie!cn_<#%= current_customer.customers_id %>!movieurl_<#%= @product.products_id %>">
                   <div class="card-image">
-                    <%= image_tag("orange_logo.jpg", width: "80", height: "80", class: "img-responsive radius4") %>
+                    <#%= image_tag("orange_logo.jpg", width: "80", height: "80", class: "img-responsive radius4") %>
                   </div>
                 </a>
               </li>
             </ul>
           </div>
+            -->
       <% end %>
     </div>
   </section>

@@ -7,10 +7,10 @@ development:
   encoding: utf8
   database: plush_production
   username: root
-  password: #root
+  password: root
   host: localhost
   port: 3306
-  socket: /opt/lampp/var/mysql/mysql.sock
+  #socket: /opt/lampp/var/mysql/mysql.sock
 
 
 common_development:
@@ -18,10 +18,10 @@ common_development:
   encoding: utf8
   database: common_production
   username: root
-  password: #root
+  password: root
   host: localhost
   port: 3306
-  socket: /opt/lampp/var/mysql/mysql.sock
+  #socket: /opt/lampp/var/mysql/mysql.sock
 
 ################################################################################################################################################################
 # staging: common_staging:
