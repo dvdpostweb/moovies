@@ -80,7 +80,7 @@ gem 'rest-client', '~> 1.8'
 gem "jbuilder"
 gem 'annotate'
 gem 'gon'
-gem 'omniauth-facebook', '4.0', :git => 'https://github.com/dvdpost/omniauth-facebook'
+gem 'omniauth-facebook', '~> 4.0'
 gem 'omniauth-google-oauth2', '~> 0.3.1'
 gem "figaro"
 gem 'paypal-express', '~> 0.8.1'
