@@ -31,7 +31,7 @@ Plush is a cloud-enabled, mobile-ready, application for watching movies.
 # Deploys with Sphinx reindex
 
   - cap staging deploy && cap staging invoke:rake TASK=webpack:compile && cap staging invoke:rake TASK=ts:index
-  - cap production deploy && cap production invoke:rake TASK=webpack:compile && cap staging invoke:rake TASK=ts:index
+  - cap production deploy && cap production invoke:rake TASK=webpack:compile && cap production invoke:rake TASK=ts:index
 
 # Db access
 
