@@ -65,7 +65,7 @@ gem 'dynamic_form'
 gem "friendly_id", "~> 4.0.9"
 gem "routing_concerns", "~> 0.1.0"
 gem 'jquery-form-rails'
-gem 'thinking-sphinx', '3.0.6'
+gem 'thinking-sphinx', '~> 3.4', '>= 3.4.2'
 gem "composite_primary_keys", "~> 5.0.13"
 gem "truncate_html", "~> 0.9.2"
 gem 'client_side_validations', '~> 3.2.6'
